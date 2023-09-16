@@ -1924,27 +1924,13 @@ class GameTopSlider extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th></th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[0]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[1]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[2]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[3]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[4]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[5]}</p></Marquee>
-                                                </th>
-                                                <th>
-                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[6]}</p></Marquee>
-                                                </th>
+                                                <th>{gameTitle[0]}</th>
+                                                <th>{gameTitle[1]}</th>
+                                                <th>{gameTitle[2]}</th>
+                                                <th>{gameTitle[3]}</th>
+                                                <th>{gameTitle[4]}</th>
+                                                <th>{gameTitle[5]}</th>
+                                                <th>{gameTitle[6]}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
