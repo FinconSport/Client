@@ -13,28 +13,31 @@
     <div id="websocketDemo">
         <h4>websocket demo</h5>
         <label for="packageSpeed">封包頻率 (每秒)</label>
+        <span>Package Frequency (per second)</span>
         <select id="packageSpeed" name="speedP" onchange="loca()" >
-            <option value=1000 selected>1次</option>
-            <option value=100>10次</option>
-            <option value=10>100次</option>
-            <option value=5>200次</option>
-            <option value=4>250次</option>
-            <option value=1>1000次</option>
+            <option value=1000 selected>1</option>
+            <option value=100>10</option>
+            <option value=10>100</option>
+            <option value=5>200</option>
+            <option value=4>250</option>
+            <option value=1>1000</option>
         </select>
-        <button id="registerBtn" type="button" class="btn btn-primary" disabled>連接中</button>
+        <button id="registerBtn" type="button" class="btn btn-primary" disabled>Connecting</button>
         <br>
         <br>
-        <label for="viewSpeed">畫面更新頻率 : </label>
-        <select id="viewSpeed" name="speedV" onchange="viewTimer()" >
-            <option value=1 selected>每1秒更新一次</option>
-            <option value=2>每2秒更新一次</option>
-            <option value=3>每3秒更新一次</option>
-            <option value=999>按照封包頻率</option>
+        <label for="viewSpeed">View Layer Refresh Rate : </label>
+        <span>Package Frequency (per second)</span>
+        <select id="viewSpeed" name="speedV" onchange="viewTimer()">
+            <option value="1" selected>每1秒更新一次 (Every 1 second)</option>
+            <option value="2">每2秒更新一次 (Every 2 seconds)</option>
+            <option value="3">每3秒更新一次 (Every 3 seconds)</option>
+            <option value="999">按照封包頻率 (According to package frequency)</option>
         </select>
+
         <br>
         <br>
-        <h5>目前最新time: <span id="timeStamp"></span> </h5>
-        <h5>目前Queue筆數: <span id="queueCount"></span> </h5>
+        <h5>目前最新time (Current Latest Time): <span id="timeStamp"></span></h5>
+        <h5>目前Queue筆數 (Current Queue Count): <span id="queueCount"></span></h5>
     </div>
 
     <style>	
@@ -131,7 +134,7 @@
             while( true ) {
                 if(ws.readyState === 1) {
                     $('#registerBtn').removeAttr('disabled')
-                    $('#registerBtn').html('註冊')
+                    $('#registerBtn').html('Register')
                     break;
                 } else {
                     await sleep(2); // check after 2 ms
