@@ -1698,16 +1698,20 @@ class GameTopSlider extends React.Component {
         const awayData = data.teams.find(item => item.index === 2)
         var scorehome = [];
         var scoreaway = [];
+        var gameTitle = []
         
         var baseballData = []
         if (scoresLengths.length < 6) {
             baseballData = [0, 1, 2, 3, 4, 5, 6]
+            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameOne,langText.ResultTitle.gameTwo,langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix]
         }
         if (scoresLengths.length >= 6) {
-            baseballData = [4, 5, 6, 7, 8, 9, 10]
+            baseballData = [0, 4, 5, 6, 7, 8, 9]
+            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine]
         }
         if (scoresLengths.length > 9) {
-            baseballData = [7, 8, 9, 10, 11, 12, 13]
+            baseballData = [0, 7, 8, 9, 10, 11, 12]
+            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven,langText.ResultTitle.gameTwelve]
         }
 
         const sport = parseInt(window.sport)
@@ -1920,13 +1924,27 @@ class GameTopSlider extends React.Component {
                                         <thead>
                                             <tr>
                                                 <th></th>
-                                                <th>{langText.scoreBoardTitle.firstRound}</th>
-                                                <th>{langText.scoreBoardTitle.gameOne}</th>
-                                                <th>{langText.scoreBoardTitle.gameTwo}</th>
-                                                <th>{langText.scoreBoardTitle.gameThree}</th>
-                                                <th>{langText.scoreBoardTitle.gameFour}</th>
-                                                <th>{langText.scoreBoardTitle.gameFive}</th>
-                                                <th>{langText.scoreBoardTitle.gameSix}</th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[0]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[1]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[2]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[3]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[4]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[5]}</p></Marquee>
+                                                </th>
+                                                <th>
+                                                    <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{gameTitle[6]}</p></Marquee>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1936,7 +1954,7 @@ class GameTopSlider extends React.Component {
                                                         {homeData?.team?.logo !== undefined && <img style={teamIconStyle} src={homeData.team.logo} alt={'icon'}  onError={this.handleError} />}
                                                         {   
                                                             homeData?.team?.name !== undefined ?
-                                                            homeData?.team?.name.length > 5 ?
+                                                            homeData?.team?.name.length > 3 ?
                                                             <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{homeData.team.name}[{ langText.scoreBoardTitle.hometag }]</p></Marquee>
                                                             :
                                                             <p className="fs-6 mt-2 mb-0">{homeData.team.name}[{ langText.scoreBoardTitle.hometag }]</p>

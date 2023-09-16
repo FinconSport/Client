@@ -642,6 +642,12 @@ const twTranslation = {
     gameFour:"第四局",
     gameFive:"第五局",
     gameSix:"第六局",
+    gameSeven:"第七局",
+    gameEight:"第八局",
+    gameNine:"第九局",
+    gameTen:"第十局",
+    gameEleven:"第十一局",
+    gameTwelve:"第十二局",
   }
 };
 
