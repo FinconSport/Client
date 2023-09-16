@@ -1703,15 +1703,15 @@ class GameTopSlider extends React.Component {
         var baseballData = []
         if (scoresLengths.length < 6) {
             baseballData = [0, 1, 2, 3, 4, 5, 6]
-            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameOne,langText.ResultTitle.gameTwo,langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix]
+            gameTitle = [langText.scoreBoardTitle.fulltimescore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo,langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix]
         }
         if (scoresLengths.length >= 6) {
-            baseballData = [0, 4, 5, 6, 7, 8, 9]
-            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine]
+            baseballData = [4, 5, 6, 7, 8, 9]
+            gameTitle = [langText.scoreBoardTitle.fulltimescore,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine]
         }
         if (scoresLengths.length > 9) {
-            baseballData = [0, 7, 8, 9, 10, 11, 12]
-            gameTitle = [langText.scoreBoardTitle.firstRound,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven,langText.ResultTitle.gameTwelve]
+            baseballData = [7, 8, 9, 10, 11, 12]
+            gameTitle = [langText.scoreBoardTitle.fulltimescore,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven,langText.ResultTitle.gameTwelve]
         }
 
         const sport = parseInt(window.sport)
@@ -1922,16 +1922,30 @@ class GameTopSlider extends React.Component {
                                 {sport === 3 && 
                                     <table className="table table-bordered">
                                         <thead>
+                                        {scoresLengths.length < 6 && 
                                             <tr>
                                                 <th></th>
-                                                <th>{gameTitle[0]}</th>
-                                                <th>{gameTitle[1]}</th>
-                                                <th>{gameTitle[2]}</th>
-                                                <th>{gameTitle[3]}</th>
-                                                <th>{gameTitle[4]}</th>
-                                                <th>{gameTitle[5]}</th>
-                                                <th>{gameTitle[6]}</th>
+                                                {gameTitle.map((gt) => (
+                                                    <th>{gt}</th>
+                                                ))}
                                             </tr>
+                                        }
+                                        {scoresLengths.length >= 6 && 
+                                            <tr>
+                                                <th></th>
+                                                {gameTitle.map((gt) => (
+                                                    <th>{gt}</th>
+                                                ))}
+                                            </tr>
+                                        }
+                                        {scoresLengths.length > 9 && 
+                                            <tr>
+                                                <th></th>
+                                                {gameTitle.map((gt) => (
+                                                    <th>{gt}</th>
+                                                ))}
+                                            </tr>
+                                        }
                                         </thead>
                                         <tbody>
                                             <tr>

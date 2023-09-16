@@ -626,7 +626,8 @@ const twTranslation = {
   },
   scoreBoardTitle: {
     hometag: "主",
-    fulltimescore: "總分",
+    // fulltimescore: "總分",
+    fullTimeScore:"全場",
 		firsthalfscore: "上半場比分",
 		secondhalfscore: "下半場比分",
 		firsthalfscore: "上半場比分",
