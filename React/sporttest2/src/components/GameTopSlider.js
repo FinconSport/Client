@@ -168,7 +168,29 @@ class GameTopSlider extends React.Component {
         //                         {
         //                             "stage": 2,
         //                             "score": "0"
-        //                         }
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "1"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },{
+        //                             "stage": 1,
+        //                             "score": "1"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },{
+        //                             "stage": 1,
+        //                             "score": "1"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
         //                     ],
         //                     "team": {
         //                         "id": 31179,
@@ -804,7 +826,36 @@ class GameTopSlider extends React.Component {
         //                         {
         //                             "stage": 1,
         //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
         //                         }
+                                
         //                     ],
         //                     "team": {
         //                         "id": 7367,
@@ -819,8 +870,37 @@ class GameTopSlider extends React.Component {
         //                     "scores": [
         //                         {
         //                             "stage": 1,
+        //                             "score": "1"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 1,
+        //                             "score": "0"
+        //                         },
+        //                         {
+        //                             "stage": 2,
         //                             "score": "0"
         //                         }
+                                
         //                     ],
         //                     "team": {
         //                         "id": 308,
@@ -1616,7 +1696,9 @@ class GameTopSlider extends React.Component {
         
         const homeData = data.teams.find(item => item.index === 1)
         const awayData = data.teams.find(item => item.index === 2)
-
+        var scorehome = [];
+        var scoreaway = [];
+        
         var baseballData = []
         if (scoresLengths.length < 6) {
             baseballData = [0, 1, 2, 3, 4, 5, 6]
@@ -1791,18 +1873,15 @@ class GameTopSlider extends React.Component {
                                                         }
                                                     </div>
                                                 </th>
+                                                {homeData !== undefined && (
+                                                    homeData.scores
+                                                    .sort((a, b) => a.stage - b.stage)
+                                                    .forEach((el) => {
+                                                    scorehome.push(el.score);
+                                                    })
+                                                )}  
                                                 {[...Array(5)].map((x, y) =>
-                                                    <th>
-                                                        {   
-                                                            homeData?.team?.scores !== undefined ?
-                                                            homeData?.team?.scores.length > 5 ?
-                                                            <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{homeData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p></Marquee>
-                                                            :
-                                                            <p className="fs-6 mt-2 mb-0">{homeData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p>
-                                                            :
-                                                            null
-                                                        }
-                                                    </th>
+                                                    <th key={y}>{scorehome[y]}</th>
                                                 )}
                                             </tr>
                                             <tr>
@@ -1821,20 +1900,17 @@ class GameTopSlider extends React.Component {
                                                     </div>
 
                                                 </th>
-                                                {[...Array(5)].map((x, y) =>
-                                                <th>
-                                                    {   
-                                                        awayData?.team?.scores !== undefined ?
-                                                        awayData?.team?.scores.length > 5 ?
-                                                        <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{awayData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p></Marquee>
-                                                        :
-                                                        <p className="fs-6 mt-2 mb-0">{awayData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p>
-                                                        :
-                                                        null
-                                                    }
-                                                </th>
-                                                )}
+                                                {awayData !== undefined && (
+                                                    awayData.scores
+                                                    .sort((a, b) => a.stage - b.stage)
+                                                    .forEach((el) => {
+                                                    scoreaway.push(el.score);
+                                                    })
+                                                )}  
 
+                                                {[...Array(5)].map((x, y) =>
+                                                    <th key={y}>{scoreaway[y]}</th>
+                                                )}
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1868,21 +1944,17 @@ class GameTopSlider extends React.Component {
                                                             null
                                                         }
                                                     </div>
-
                                                 </th>
-                                                {baseballData.map((y) =>
-                                                <th>
-                                                    {   
-                                                        homeData?.team?.scores !== undefined ?
-                                                        homeData?.team?.scores.length > 5 ?
-                                                        <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{homeData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p></Marquee>
-                                                        :
-                                                        <p className="fs-6 mt-2 mb-0">{homeData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p>
-                                                        :
-                                                        null
-                                                    }
-                                                </th>
-                                                )}
+                                                {homeData !== undefined && (
+                                                    homeData.scores
+                                                    .sort((a, b) => a.stage - b.stage)
+                                                    .forEach((el) => {
+                                                    scorehome.push(el.score);
+                                                    })
+                                                )}  
+                                                {baseballData.map((y) => (
+                                                    <th key={y}>{scorehome[y]}</th>
+                                                ))}
                                             </tr>
                                             <tr>
                                                 <th style={scoreBoardLogoCon}>
@@ -1899,19 +1971,16 @@ class GameTopSlider extends React.Component {
                                                         }
                                                     </div>
                                                 </th>
-                                                {baseballData.map((y) =>
-                                                <th>
-                                                    {   
-                                                        awayData?.team?.scores !== undefined ?
-                                                        awayData?.team?.scores.length > 5 ?
-                                                        <Marquee speed={20} gradient={false}><p className="fs-6 mt-2 mb-0">{awayData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p></Marquee>
-                                                        :
-                                                        <p className="fs-6 mt-2 mb-0">{awayData.team.scores[y]}[{ langText.scoreBoardTitle.hometag }]</p>
-                                                        :
-                                                        null
-                                                    }
-                                                </th>
-                                                )}
+                                                {awayData !== undefined && (
+                                                    awayData.scores
+                                                    .sort((a, b) => a.stage - b.stage)
+                                                    .forEach((el) => {
+                                                    scoreaway.push(el.score);
+                                                    })
+                                                )}  
+                                                {baseballData.map((y) => (
+                                                    <th key={y}>{scoreaway[y]}</th>
+                                                ))}
                                             </tr>
                                         </tbody>
                                     </table>
