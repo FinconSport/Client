@@ -1,0 +1,15 @@
+.commonFooterOn{
+    background-image: url('../image/footeron.png');
+	background-size: 135% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: none;
+    color: rgb(65, 91, 90)!important;
+}
+.commonFooterOn div:first-child{
+    color: #c79e42!important;
+    background-color: transparent!important;
+}
+.commonFooterOn a{
+    color: rgb(65, 91, 90)!important;
+}

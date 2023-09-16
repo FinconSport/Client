@@ -1,0 +1,95 @@
+/* logo */
+#logo {
+	padding: 0.2rem 0 0 0.2rem;
+	width: 6rem;
+	height: 3rem;
+	margin-right: 0.3rem;
+	float: left;
+}
+
+#navBarContainer {
+	display: flex;
+	padding: 0 0.5rem;
+}
+#navBarContainer div {
+	width: 4rem;
+    height: 3rem;
+    text-align: center;
+    padding: 0;
+	line-height: 3rem;
+	font-weight: 600;
+	float: left;
+}
+#navBarContainer div.on {
+	background-image: url('../image/menuon.png');
+	background-size: 130% 90%;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: rgb(196, 211, 211);
+	transition: none;
+}
+
+.slideMenuIcon {
+	float: right!important;
+	font-size: 1.5rem;
+}
+
+
+
+
+
+.memberInfo {
+	width: 50%;
+	position: fixed;
+	top: 0px;
+	right: -300px;
+	z-index: 3;
+	background-color: white;
+	transition: all .5s ease 0s;
+	-moz-transition: all .5s ease 0s;
+	-webkit-transition: all .5s ease 0s;
+	-o-transition: all .5s ease 0s;
+	-webkit-overflow-scrolling: touch;
+}
+
+
+.mask {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	position: fixed;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.7);
+	transition: all .5s ease 0s;
+	-moz-transition: all .5s ease 0s;
+	-webkit-transition: all .5s ease 0s;
+	-o-transition: all .5s ease 0s;
+}
+
+.mask_div.on, .maskDiv.on {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	position: fixed;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.7);
+	transition: all .5s ease 0s;
+	-moz-transition: all .5s ease 0s;
+	-webkit-transition: all .5s ease 0s;
+	-o-transition: all .5s ease 0s;
+	backdrop-filter: blur(5px);
+}
+
+.on {
+	transition: all .5s ease 0s;
+	-moz-transition: all .5s ease 0s;
+	-webkit-transition: all .5s ease 0s;
+	-o-transition: all .5s ease 0s;
+}
+
+.active {
+	color: red;
+}
+
+
+

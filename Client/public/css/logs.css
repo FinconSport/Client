@@ -1,0 +1,128 @@
+/* 左邊標籤 */
+div[key="logs"] {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+div[key="logs"] > div {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    background-color: rgb(196,211,211);
+    color: rgb(65, 91, 90);
+}
+
+div[key="rule"] > div {
+    border-bottom-right-radius: 15px;
+}
+
+div[key="calculator"] > div {
+    border-top-right-radius: 15px;
+}
+
+div[key="indexSportMenu"],
+div[key="mOrderSportMenu"],
+div[key="matchSportMenu"]{
+    display: none;
+}
+
+#logsContainer {
+    background-color: white;
+    border: 2px solid rgb(65, 91, 90);
+    border-radius: 30px;
+    padding: 1rem 0rem 1rem 1rem;
+    height: calc(100% - 6rem);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    color: rgb(65, 91, 90);
+    padding-right: 1rem;
+    margin-top: 1rem;
+}
+#tableContainer {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 1rem;
+}
+
+.pageInfo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: initial;
+}
+
+
+/* datatable */
+#logsTable_paginate {
+    position: fixed;
+    bottom: 3rem;
+    left: 47.5%;
+}
+
+#logsTable td,
+#logsTable th {
+    border: 2px solid rgb(196,211,211);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+.no-border-left{
+    border-left: none!important;
+}
+.no-border-top td,
+.no-border-top th{
+    border-top: none!important;
+}
+.no-border-right{
+    border-right: none!important;
+}
+.no-border-bottom td {
+    border-bottom: none!important;
+}
+#countTr td{
+    border: none!important;
+}
+
+#noDataTd {
+    height: 30rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgb(65, 91, 90);
+}
+
+#noDataTd i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.logsInfoIndex {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    background-color: rgb(65, 91, 90);
+    color: white;
+}
+
+#logsCountTotal {
+    width: 5rem; 
+    height: 2rem;
+    line-height: 2rem;
+    float: right;
+}
+
+
+/* pagination */
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pagination button,
+#pagination p {
+    margin: 0 5px;
+    /* 可根据需要调整按钮和段落之间的间距 */
+}
+

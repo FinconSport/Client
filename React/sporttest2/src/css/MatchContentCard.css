@@ -1,0 +1,66 @@
+.autoHeight {
+    height: auto !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+div[contentcardid] a {
+    color: black !important
+}
+
+.gametopslider a {
+    color: white !important
+}
+
+/* swiper */
+.swiper-wrapper {
+    padding-bottom: 25px;
+}
+
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 3px !important;
+    border-radius: 0 !important;
+}
+
+
+.matchCardContainer {
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-overflow-scrolling: touch;
+}
+
+.matchCardContainer.hide,
+.matchCardContainer.hide .matchCardSwiper,
+.matchCardContainer.hide .matchCardMarquee {
+    height: 0;
+}
+
+.col-45 {
+    width: 45%;
+    flex: 0 0 auto;
+}
+
+
+.col-55 {
+    width: 55%;
+    flex: 0 0 auto;
+}
+
+
+
+
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+}
+
+.swiper{
+    z-index: 0!important;
+}

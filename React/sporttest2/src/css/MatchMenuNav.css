@@ -1,0 +1,21 @@
+/* MatchNavbar */
+
+.match_li {
+	/* padding: 0px 15px; */
+	text-decoration: none;
+	position: relative;
+	text-align: center;
+}
+
+.match_div {
+	font-size: 22px;
+	display: inherit;
+}
+
+.match_style {
+	position: relative;
+	text-align: center;
+}
+.slick-slider{
+	height: 8%;
+}

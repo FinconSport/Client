@@ -1,0 +1,52 @@
+.swiper-pagination-bullet{
+    background-color: rgb(100,100,100);
+}
+
+.swiper-pagination-bullet-active{
+    background-color: #c79e42 ;
+}
+
+#scoreBoard p{
+    margin: 0px;
+}
+
+#gameTopSlider .swiper-wrapper {
+    padding-bottom: 0px;
+}
+
+#gameTopSlider .swiper-button-next,
+#gameTopSlider .swiper-button-prev {
+   color: #ffffff;
+}
+
+#gameTopSlider .swiper-button-next:after, 
+#gameTopSlider .swiper-button-prev:after {
+    font-size: 1.5rem!important;
+}
+
+#gameTopSlider .swiper-button-next, 
+#gameTopSlider .swiper-rtl .swiper-button-prev {
+    right: var(--swiper-navigation-sides-offset,0px);
+}
+
+#gameTopSlider .swiper-button-prev, 
+#gameTopSlider .swiper-rtl .swiper-button-next {
+    left: var(--swiper-navigation-sides-offset,0px);
+}
+
+#gameTopSlider table {
+    color: #ffffff!important;
+    border-color: #2c3032!important;
+}
+
+#gameTopSlider table thead tr{
+    background-color: #203e4940;
+}
+
+#gameTopSlider table tbody tr{
+    background-color: #ffffff29;
+}
+
+#gameTopSlider .swiper-button-disabled{
+    opacity: 0;
+}

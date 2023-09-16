@@ -1,0 +1,34 @@
+/* 輪播 */
+.slick-dots {
+	bottom: 0.5rem;
+}
+.slick-dots li.slick-active button:before{
+	opacity: 0.6!important;
+}
+.slick-arrow {
+    display: none!important;
+}
+.IndexCarouselGame{
+	background-image: url('../image/banner_bg.png');
+	background-size: 100% 100%;
+	height: 10.5rem;
+	display: flex!important;
+	position: relative;
+}
+.CarouselGameDiv{
+	width: 33.33333%;
+	text-align: center;
+	color: white;
+}
+.CarouselGameDiv img {
+	width: 4rem;
+    height: 4rem;
+    margin-left: 2rem;
+    margin-top: 3rem;
+}
+.CarouselGameDiv.CarouselGameScore {
+	margin-top: 3rem;
+	font-size: 2.5rem;
+}
+
+

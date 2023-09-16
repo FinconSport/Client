@@ -1,0 +1,140 @@
+/* 左邊標籤 */
+div[key="calculator"] {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+div[key="calculator"] > div {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    background-color: rgb(196, 211, 211);
+    color: rgb(65, 91, 90);
+}
+
+div[key="logs"] > div {
+    border-bottom-right-radius: 15px;
+}
+
+div[key="indexSportMenu"],
+div[key="mOrderSportMenu"],
+div[key="matchSportMenu"] {
+    display: none;
+}
+
+#calculatorWrapper {
+    height: calc(100% + 2rem);
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    width: 40%;
+    margin-left: 25%;
+    margin-top: 2rem;
+    border-radius: 15px;
+    padding: 2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+#calculatorWrapper .fa-xmark {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#calculatorWrapper .calMainArea {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem;
+}
+
+/* 小螢幕 */
+@media (max-width: 1600px) {
+    #calculatorWrapper .calMainArea {
+        max-height: 17rem;
+    }
+}
+
+.calTitle > div {
+    background-color: rgb(65, 91, 90);
+    color: white;
+    padding: 0.5rem;
+    width: 10rem;
+    margin: auto;
+}
+
+.indexDiv {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    background-color: rgb(65, 91, 90);
+    color: white;
+    margin: auto;
+    line-height: 1rem;
+}
+
+.subTitile {
+    background-color: rgb(65, 91, 90);
+    color: white;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.calMain {
+    border: 1px solid rgb(65, 91, 90);
+    padding-bottom: 1rem;
+}
+
+.calMainArea .col-2,
+.calMainArea .col-4 {
+    border-right: 1px solid rgb(65, 91, 90);
+}
+
+.calFooter {
+    border-top: 1px solid rgb(65, 91, 90);
+}
+
+.calFooter button {
+    background-color: rgb(65, 91, 90);
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    margin-top: 1rem;
+    width: 10rem;
+}
+
+.rowEach {
+    height: 3rem;
+    padding-top: 0.5rem;
+}
+
+.rowEach input,
+.rowEach select {
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid rgb(65, 91, 90);
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(65, 91, 90);
+}
+
+#calProcess {
+    border-bottom: 1px solid rgb(65, 91, 90);
+    height: 6rem;
+    line-height: 3rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.moneyLabel {
+    padding: 0.5rem;
+    background-color: rgb(65, 91, 90);
+    color: white;
+}
+
+#betMoney,
+#winningMoney {
+    height: 2.2rem;
+    margin-top: -0.5rem;
+    text-align: center;
+}

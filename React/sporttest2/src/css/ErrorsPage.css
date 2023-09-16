@@ -1,0 +1,39 @@
+.error-bg{
+    background-image: url(../image/error_page/APP-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+}
+.error-image-container{
+    align-self: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: 0 auto;
+}
+.error-image-container img{
+    width: 100%;
+    max-width: 250px;
+}
+.error-text{
+    margin-top: 5px;
+    font-size: 4em;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color:#3f5855;
+}
+.error-num{
+    margin-top: -15px;
+    font-size: 6em;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color:#3f5855;
+}
+.ip-error-text{
+    font-size: 2em;
+    margin-top: 10px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color:#3f5855;
+}

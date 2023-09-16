@@ -1,0 +1,43 @@
+.Toastify__toast-theme--colored.Toastify__toast--success{
+    background-color: rgb(184, 214, 212);
+    color: rgb(65, 91, 90);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error{
+    background-color: rgb(254, 182, 183);
+    color: red;
+}
+.Toastify__close-button {
+    line-height: 2rem;
+}
+.Toastify__close-button > svg{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success .Toastify__close-button{
+    color: rgb(65, 91, 90);
+}
+.Toastify__toast-theme--colored.Toastify__toast--error .Toastify__close-button{
+    color: red;
+}
+
+.Toastify__toast-theme--colored {
+    min-height: 2rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+#calInfoCardWrapper::-webkit-scrollbar {
+    width: 5px; /* Adjust the width of the scrollbar */
+}
+
+#calInfoCardWrapper::-webkit-scrollbar-track {
+    background-color: rgb(226, 240, 240);
+}
+
+#calInfoCardWrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(65,91,90,0.5); /* Set the color of the scrollbar thumb */
+    border-radius: 25px; /* Add border-radius for a rounded thumb */
+}

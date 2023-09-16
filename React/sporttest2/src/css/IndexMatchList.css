@@ -1,0 +1,35 @@
+.react-tabs {
+    display: flex;
+    width: 100%;
+}
+
+.react-tabs__tab-list {
+    width: 30%;
+    padding: 0;
+}
+
+.react-tabs__tab {
+    list-style: none;
+}
+
+.react-tabs__tab--selected>div {
+    background: linear-gradient(to bottom, rgb(522, 119, 4), rgb(255, 196, 81));
+    box-shadow: rgb(255, 196, 81) 0px 5px 1px 0px !important;
+    border-bottom: white 1px solid;
+    color: white;
+}
+
+.MatchListRight {
+    animation-duration: 3s infiniti;
+    animation-name: slidein;
+}
+  
+@keyframes slidein {
+    from {
+        margin-top: 100%;
+    }
+  
+    to {
+        margin-top: 0%;
+    }
+}

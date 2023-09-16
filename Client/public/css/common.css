@@ -1,0 +1,631 @@
+/* 基本設定 */
+html,
+body {
+    height: 100% !important;
+    width: 100%;
+    background-color: rgb(196, 211, 211) !important;
+}
+
+#wrap {
+    display: inline-flex;
+    background-image: url(../image/ball-soccer.png),
+        url(../image/ball-baseball.png);
+    background-position: top -13% left -5%, bottom 10% right -5%;
+    background-repeat: no-repeat;
+    background-size: 23%, 25%;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-red {
+    color: red;
+}
+
+.leftArea {
+    width: 15%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.rightArea {
+    width: 85%;
+    padding-left: 1rem;
+    padding-right: 3rem;
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}
+
+.col-30 {
+    width: 30% !important;
+    flex: 0 0 auto;
+}
+
+.col-40 {
+    width: 40% !important;
+    flex: 0 0 auto;
+}
+
+.fs-09 {
+    font-size: 0.9rem;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.bd-t-l-r-25 {
+    border-top-left-radius: 25px;
+}
+
+.bd-b-l-r-25 {
+    border-bottom-left-radius: 25px;
+}
+
+.bd-t-r-r-25 {
+    border-top-right-radius: 25px;
+}
+
+.bd-b-r-r-25 {
+    border-bottom-right-radius: 25px;
+}
+
+/* 通用顏色 */
+.bg-deepgreen {
+    background-color: rgb(65, 91, 90);
+}
+
+.bg-lightgreen {
+    background-color: rgb(196, 211, 211);
+}
+
+/* logo */
+#logoArea {
+    height: 7rem;
+}
+
+#logoArea img {
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+/* 左側選單 */
+#sidenav {
+    height: calc(100% - 7rem);
+    width: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+}
+
+/* #sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+#sidenav a:hover {
+    color: #f1f1f1;
+} */
+
+/* 小螢幕 */
+@media (max-width: 1600px) {
+    .slideMenuTag > i {
+        margin-left: -1rem !important;
+    }
+
+    .slideMenuTag {
+        font-size: 1rem !important;
+    }
+}
+
+#userArea {
+    height: 5%;
+    background-color: rgb(60, 84, 84);
+    padding-top: 0.5rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#userProfile {
+    width: 55%;
+    height: 65%;
+    margin: auto;
+    background-image: url("../image/user.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#gameCategory {
+    height: 95%;
+    background-color: rgb(65, 91, 90);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.slideMenuTag > i {
+    color: #c79e42;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    width: 1rem;
+}
+
+.slideMenuTag {
+    height: auto;
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.slideMenuTag:hover {
+    cursor: pointer;
+}
+
+.on.slideMenuTag {
+    background-color: rgb(196, 211, 211);
+    color: rgb(65, 91, 90) !important;
+}
+
+.slideMenuTag.preIndex {
+    border-bottom-right-radius: 15px;
+}
+
+.slideMenuTag.nextIndex {
+    border-top-right-radius: 15px;
+}
+
+#subMenuContainer {
+    height: calc(100% - 4rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+#subMenuContainer::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, and Opera */
+}
+
+#logoutBtn {
+    width: 70%;
+    margin-left: 15%;
+    border-radius: 25px;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    background-color: rgb(230, 230, 230);
+    border: none;
+    color: #415b5a;
+    font-weight: 600;
+    position: absolute;
+    bottom: 1rem;
+}
+
+#gameCategoryBottomFill {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* 上面頁面標籤 */
+#navMarqueeBar {
+    width: 100%;
+    margin-top: 0.5rem;
+    height: 2rem;
+    display: flex;
+}
+
+.rightNavTag {
+    width: 12rem !important;
+    line-height: 2rem;
+    text-align: right;
+}
+
+/* 跑馬燈 */
+
+#marquee {
+    height: 2rem;
+    width: calc(100% - 12rem);
+    overflow: hidden;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8rem;
+    line-height: 1.7rem;
+}
+
+#marquee a {
+    color: #e2f0f0;
+}
+
+/* 主要內容區 */
+#mainArea {
+    height: calc(100% - 7rem);
+}
+
+/* 搜尋框 */
+#searchArea {
+    background-color: white;
+    box-shadow: 3px 3px 3px rgb(200, 200, 200);
+    border-radius: 30px;
+    padding: 0.5rem;
+    width: 100%;
+    height: 11rem;
+    margin-top: 0.5rem;
+    color: rgb(65, 91, 90);
+}
+
+.userField {
+    display: none !important;
+}
+
+/* 結算 switch */
+.toggle {
+    --width: 7rem;
+    --height: 2.5rem;
+    position: relative;
+    display: inline-block;
+    width: var(--width);
+    height: var(--height);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: var(--height);
+    cursor: pointer;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--height);
+    background-color: #ccc;
+    transition: all 0.4s ease-in-out;
+}
+
+.toggle .slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--height));
+    height: calc(var(--height));
+    border-radius: calc(var(--height) / 2);
+    background-color: #fff;
+    transition: all 0.4s ease-in-out;
+}
+
+.toggle input:checked + .slider {
+    background-color: rgb(65, 91, 90);
+}
+
+.toggle input:checked + .slider::before {
+    transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle .labels {
+    position: absolute;
+    /* left: 0.7rem; */
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    line-height: 2.5rem;
+}
+
+.toggle .labels::after {
+    content: attr(data-off);
+    position: absolute;
+    left: 2.8rem;
+    color: rgb(65, 91, 90);
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+}
+
+.toggle .labels::before {
+    content: attr(data-on);
+    position: absolute;
+    left: -3.5rem;
+    color: #ffffff;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.toggle input:checked ~ .labels::after {
+    opacity: 0;
+    transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle input:checked ~ .labels::before {
+    opacity: 1;
+    transform: translateX(calc(var(--width) - var(--height)));
+}
+
+/* 搜尋按鈕 */
+#searchBtn {
+    background-color: #c79e42;
+    color: white;
+    font-weight: 600;
+    height: 3rem;
+    margin-top: 1.25rem;
+    width: 18%;
+    margin-left: 1%;
+    border-radius: 25px;
+}
+
+#searchBtn:hover {
+    background-color: #e1b348 !important;
+}
+
+/* 日曆 */
+.ui.table td {
+    cursor: pointer;
+}
+
+.ui.table td:hover {
+    background-color: #e0e0e0;
+}
+
+.fa-solid.fa-calendar-days {
+    left: 1rem;
+    position: absolute;
+    top: 1rem;
+}
+
+/* 搜尋條件 */
+#searchCondition {
+    display: inline-block;
+    width: 100%;
+    margin-top: 0.5rem;
+    background: white;
+    padding: 0.5rem 2rem;
+    border-radius: 25px;
+}
+
+#searchCondition div:first-child {
+    float: left;
+    background-color: rgb(65, 91, 90);
+    color: white;
+    border: 1px solid rgb(196, 152, 53);
+}
+
+#searchCondition div:not(:first-child) {
+    float: right;
+    background-color: white;
+    color: rgb(65, 91, 90);
+    border: 1px solid rgb(65, 91, 90);
+}
+
+#searchCondition div {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    height: 2rem;
+    line-height: 1rem;
+}
+
+/* logo */
+.serieslogo {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.teamlogo {
+    width: 2rem;
+    height: 2rem;
+    margin-top: -0.3rem;
+    margin-right: 1rem;
+}
+
+/* 最底頁 */
+#noMoreData {
+    width: 100%;
+    float: left;
+    height: 2rem;
+}
+
+#noMoreData p {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    text-align: center;
+    color: rgb(65, 91, 90);
+}
+
+/* loading */
+#loader {
+    width: 100%;
+    float: left;
+    height: 2rem;
+}
+
+.loading {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    text-align: center;
+    color: rgb(65, 91, 90);
+}
+
+.loading span {
+    display: inline-block;
+    margin: 0 -0.05em;
+}
+
+.loading04 span {
+    animation: loading04 1s infinite;
+}
+
+.loading04 span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loading04 span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.loading04 span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.loading04 span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.loading04 span:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.loading04 span:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.loading04 span:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.loading04 span:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+@keyframes loading04 {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+.remove.icon {
+    position: absolute;
+    right: 2rem;
+}
+
+/* 太長處理 */
+.textOverFlow {
+    /* white-space: nowrap; */
+    /* max-width: 15em; */
+    overflow: auto;
+}
+
+/* 選中 */
+.indexBetCardTable .m_order_on,
+.tabCardContent .m_order_on {
+    background: rgba(65, 91, 90, 0.9);
+    color: white;
+    border: 1px solid rgba(65, 91, 90, 0.9);
+}
+
+/* 左邊menu 體育種類選擇 */
+.menuTypeBtn.on {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+.menuTypeBtn.on .slideMenuTag {
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    background-color: rgb(196, 211, 211);
+    color: rgb(65, 91, 90) !important;
+}
+
+.menuTypeBtn.nextBtn .slideMenuTag {
+    border-top-right-radius: 15px;
+}
+
+.menuTypeBtn.preBtn .slideMenuTag {
+    border-bottom-right-radius: 15px;
+}
+
+.sportSelect {
+    border: 1px solid rgb(65, 91, 90);
+    border-radius: 25px;
+    padding: 0.2rem 1rem 0.2rem 0.5rem;
+    background: rgb(65, 91, 90);
+    color: white;
+    display: block;
+}
+
+.sportSelect {
+    margin: 0.5rem 0;
+}
+
+.sportSelect:hover {
+    color: white;
+}
+
+.sportSelect i {
+    margin-left: 0rem !important;
+    margin-right: 0.5rem;
+}
+
+.sportSelect span:last-child {
+    float: right;
+}
+
+.sportSelect.on {
+    background: white;
+    color: rgb(65, 91, 90);
+}
+
+/* Modal */
+#marqModal {
+    top: -100%;
+    display: none;
+    transition: 0.4s ease all;
+}
+
+#marqModal .modal-content {
+    background-color: #e2f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#marqModal .modal-body {
+    background: #415b5a;
+    border-radius: 20px 20px 0 0;
+    padding-top: 20px;
+}
+
+#marqModal .modal-header img {
+    max-width: 120px;
+    width: 100%;
+}
+
+#marqModal .cdate {
+    font-size: 14px;
+}
+
+#marqModal .card-header {
+    background: #c4d3d3;
+}
+
+#marqModal .card-body {
+    background-color: #e2f0f0;
+}

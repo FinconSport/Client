@@ -1,0 +1,48 @@
+#ResultOuterContainer .autoHeight {
+    height: auto !important;
+}
+
+#ResultOuterContainer a {
+    text-decoration: none;
+}
+
+#ResultOuterContainer div[contentcardid] a {
+    color: black !important
+}
+
+#ResultOuterContainer .gametopslider a {
+    color: white !important
+}
+
+/* swiper */
+#ResultOuterContainer .swiper-wrapper {
+    padding-bottom: 25px;
+}
+
+#ResultOuterContainer .swiper-pagination-bullet {
+    width: 10px !important;
+    height: 3px !important;
+    border-radius: 0 !important;
+}
+
+#ResultOuterContainer .col-45 {
+    width: 45%;
+    flex: 0 0 auto;
+}
+
+
+#ResultOuterContainer .col-55 {
+    width: 55%;
+    flex: 0 0 auto;
+}
+
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+}
+
+#ResultOuterContainer .swiper{
+    z-index: 0!important;
+}
