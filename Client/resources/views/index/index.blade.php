@@ -516,9 +516,19 @@
             2. ajax -> update the globe data
     */
 
+    // ===== 測試 =====
 
-    const matchList = { }
+    // player and sport_id
+    const player = 8
+    const token = 12345
+    const sport_id = 1
 
+    const apiWaitCount = 1 // ready中有幾個api要call
+    const matchList = {}
+    const matchList_baseApi = 'https://sportc.asgame.net/api/v1/match_index'
+   
+
+    // ===== 測試 =====
     
 
 
@@ -527,6 +537,31 @@
 
 
     $(document).ready(function() {
+
+        // ajaxTest
+        $.ajax({
+            url: matchList_baseApi,
+            method: 'POST',
+            data: {
+                token: token,
+                player: player,
+                sport_id: sport_id
+            },
+            success: function(data) {
+                // 在这里处理从API获取的数据
+                console.log(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 处理错误
+                console.error('Ajax error:', textStatus, errorThrown);
+            }
+        });
+
+
+        // ajaxTest
+
+
+
         // 若有滾球  移到最上面
         if ( match_list['living'] !== undefined ) {
             let parentNode = $('#indexContainerLeft')
