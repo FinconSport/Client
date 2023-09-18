@@ -1182,12 +1182,6 @@ class LsportsApiController extends Controller {
 
         /////////////////////////
         // 取得語系
-        $player_id = $input['player'];
-        $this->agent_lang = $this->getAgentLang($player_id);
-        if ($this->agent_lang === false) {
-            $this->error(__CLASS__, __FUNCTION__, "01");
-        }
-        
         $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
@@ -1227,10 +1221,11 @@ class LsportsApiController extends Controller {
 
 
         // form search
-        $AntMatchList = AntMatchList::where("game_id", $sport_id)->where("status", ">=",2);
+        // $AntMatchList = AntMatchList::where("game_id", $sport_id)->where("status", ">=",2);
+        $LsFixture = LsportFixture::where("game_id", $sport_id)->where("status", ">=",2);
 
-        $return = $AntMatchList->skip($skip)->take($page_limit)->orderBy('start_time', 'DESC')->get();
-        $pagination = $AntMatchList->count();
+        $return = $LsFixture->skip($skip)->take($page_limit)->orderBy('start_time', 'DESC')->get();
+        $pagination = $LsFixture->count();
 
         ////////////////////
         $columns = array(
@@ -1251,15 +1246,14 @@ class LsportsApiController extends Controller {
             $series = json_decode($v['series'],true);
             $series_id = $series['id'];
             $game_id = $series['game_id'];
-            $tmp_logo = AntSeriesList::where("series_id", $series_id)->where("game_id", $sport_id)->where("status",1)->first();
+            // $tmp_logo = AntSeriesList::where("series_id", $series_id)->where("game_id", $sport_id)->where("status",1)->first();
+            $tmp_logo = LsportLeague::where("series_id", $series_id)->where("game_id", $sport_id)->where("status",1)->first();
             if ($tmp_logo === false) {
                 $this->_ApiError("01");
             }
             if ($tmp_logo == null) {
                 continue;
             }
-
-            Request $request
 
             $tmp['series_name'] = $tmp_logo[$langCol];
             $tmp['series_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'] . "?v=" . $this->system_config['version'];
@@ -1286,7 +1280,8 @@ class LsportsApiController extends Controller {
 
             foreach ($teams as $key => $value) {
                 $team_id = $value['team']['id'];
-                $tmp_logo = AntTeamList::where("team_id", $team_id)->where("game_id", $sport_id)->first();
+                // $tmp_logo = AntTeamList::where("team_id", $team_id)->where("game_id", $sport_id)->first();
+                $tmp_logo = LsportTeam::where("team_id", $team_id)->where("game_id", $sport_id)->first();
                 if ($tmp_logo === false) {
                     $this->error(__CLASS__, __FUNCTION__, "05");
                 }
@@ -1352,14 +1347,8 @@ class LsportsApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN",true);
         }
 
-            /////////////////////////
-        // 取得語系
-        $player_id = $input['player'];
-        $this->agent_lang = $this->getAgentLang($player_id);
-        if ($this->agent_lang === false) {
-            $this->error(__CLASS__, __FUNCTION__, "02");
-        }
-        
+        /////////////////////////
+        // 語系
         $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
@@ -1407,14 +1396,8 @@ class LsportsApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN",true);
         }
 
-            /////////////////////////
-        // 取得語系
-        $player_id = $input['player'];
-        $this->agent_lang = $this->getAgentLang($player_id);
-        if ($this->agent_lang === false) {
-            $this->error(__CLASS__, __FUNCTION__, "02");
-        }
-        
+        /////////////////////////
+        // 語系
         $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
@@ -1679,14 +1662,8 @@ class LsportsApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN",true);
         }
 
-            /////////////////////////
+        /////////////////////////
         // 取得語系
-        $player_id = $input['player'];
-        $this->agent_lang = $this->getAgentLang($player_id);
-        if ($this->agent_lang === false) {
-            $this->error(__CLASS__, __FUNCTION__, "02");
-        }
-        
         $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
