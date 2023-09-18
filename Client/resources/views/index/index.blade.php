@@ -568,7 +568,7 @@
                     const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
                     json.data = uncompressed
                 }
-                obj = json
+                Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
                 console.log(json)
                 console.log(obj)
 
