@@ -568,10 +568,18 @@
                 }
                 obj = json
                 apiCalledCount++
+
+
+                console.log(obj)
+                console.log(isReady, apiCalledCount, apiWaitCount)
+
                 if(isReady === false && apiCalledCount === apiWaitCount) {
+                    console.log('hide loading')
                     $('#dimmer').dimmer('hide');
                     $('#wrap').removeAttr('hidden');
                     isReady = true;
+                } else {
+                    console.log('still waiting')
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
