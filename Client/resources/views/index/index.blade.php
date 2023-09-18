@@ -526,31 +526,37 @@
     const token = 12345
     const sport_id = 1
 
-    const apiWaitCount = 1 // ready中有幾個api要call
-    const matchList = {}
-    const matchList_baseApi = 'https://sportc.asgame.net/api/v1/match_index'
+    var isReadyInt = null
+
+    
+
+    // 列表
+    var matchList = {}
+    var callMatchListData = { token: token, player: player, sport_id: sport_id }
+    const matchList_api = 'https://sportc.asgame.net/api/v1/match_index'
    
+    // 帳號
+    var account = {}
+    var callAccountData = { token: token, player: player }
+    const account_api = 'https://sportc.asgame.net/api/v1/common_account'
+
+
 
     // ===== 測試 =====
     
 
-
-
     /* ===== DATA LAYER ===== */
 
 
-    $(document).ready(function() {
 
-        // ajaxTest
+    function caller( url, data, obj ) {
+        console.log('caller')
         $.ajax({
-            url: matchList_baseApi,
+            url: url,
             method: 'POST',
-            data: {
-                token: token,
-                player: player,
-                sport_id: sport_id
-            },
+            data: data,
             success: function(data) {
+                console.log(url + ' called success')
                 const json = JSON.parse(data); 
                 // 先判定要不要解壓縮
                 if(json.gzip === 1) {
@@ -562,19 +568,16 @@
                     const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
                     json.data = uncompressed
                 }
-                console.log(json)
+                Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // 处理错误
                 console.error('Ajax error:', textStatus, errorThrown);
             }
         });
+    }
 
-
-        // ajaxTest
-
-
-
+    function viewIni() {
         // 若有滾球  移到最上面
         if ( match_list['living'] !== undefined ) {
             let parentNode = $('#indexContainerLeft')
@@ -582,7 +585,6 @@
             livingNode.prependTo(parentNode);
             $('#indexContainerRightInfo').css("display","none")
             $('#indexContainerRightLiving').css("display","block")
-
         }
 
         // 若數量為0 隱藏
@@ -598,27 +600,16 @@
             }, 500);
         }
 
-        // 右邊 -> 預設第一比賽事
-        $('.indexBetCardInfo').eq(0).click()
         // 判斷status:  -1 hide / 1 open / 2 lock / 4 5 other remove
         rateStatusJudge(0, 1, 0, 1)
         // 判斷局數
         stageJudge()
         // 其他玩法 -> 如果status全部不符合顯示條件 移除按鈕及投注區塊 
         isOtherBetEmpty()
-        // 右邊 -> 如果status全部不符合顯示條件 移除title 
-        // clearUnusedRight() 
         // 文字太長處理
         fixTextOverflow()
-        // tab初始化
-        $('.menu .item').tab();
         // 排版補空
         fillEmpty()
-        
-        // websocket
-        WebSocketDemo(); // 連線
-        setInterval(reconnent, 5000); // 監聽連線狀態
-
         $('.otherbet').each(function() {
             $(this).find('.toggleOtherBtn').each(function(index) {
                 if (index >= otherbetCountLimit) {
@@ -628,11 +619,36 @@
                 }
             });
         });
-
         // 統計
         statistics()
+    }
+   
+
+
+    $(document).ready(function() {
+        // ini data from ajax
+        caller(matchList_api, callMatchListData, matchList) // match_list
+        caller(account_api, callAccountData, account) // account
+        // ini data from ajax
+
+        // websocket
+        WebSocketDemo(); // connect
+        setInterval(reconnent, 5000); // detect connection
+
+        // check if api are all loaded every 500 ms 
+        isReadyInt = setInterval(() => {
+            if(matchList.status === 1 && account.status === 1) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').removeAttr('hidden'); // show the main content
+                clearInterval(isReadyInt); // stop checking
+                setTimeout(() => {
+                    viewIni() // excute all view layer ini function
+                }, 500);
+            }
+        }, 500);
     });
 
+    
     function isOtherBetEmpty() {
         $('.otherBetArea').each(function(){
             let count = $(this).find('.betItemDiv').length

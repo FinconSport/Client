@@ -227,6 +227,9 @@
 
 		$(document).ready(function() {
 
+			// loading page
+			$('#dimmer').dimmer('show');
+
 			// 預設左邊選中樣式
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').addClass('on')
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').prev().addClass('preBtn')
