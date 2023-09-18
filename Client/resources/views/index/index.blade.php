@@ -528,7 +528,6 @@
 
     const apiWaitCount = 2 // ready中有幾個api要call
     var apiCalledCount = 0 // 現在幾個call好了
-    var isReady = false
 
     // 列表
     var matchList = {}
@@ -547,7 +546,7 @@
 
 
 
-    function caller( url, data, obj ) {
+    function caller( url, data, obj, isIni = 0 ) {
         console.log('caller')
         $.ajax({
             url: url,
@@ -569,17 +568,10 @@
                 obj = json
                 apiCalledCount++
 
-
-                console.log(obj)
-                console.log(isReady, apiCalledCount, apiWaitCount)
-
-                if(isReady === false && apiCalledCount === apiWaitCount) {
+                if( isIni === 1 && apiCalledCount === apiWaitCount) {
                     console.log('hide loading')
                     $('#dimmer').dimmer('hide');
                     $('#wrap').removeAttr('hidden');
-                    isReady = true;
-                } else {
-                    console.log('still waiting')
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -595,8 +587,8 @@
 
         // ajaxTest
 
-        caller(matchList_api, callMatchListData, matchList )
-        caller(account_api, callAccountData, account )
+        caller(matchList_api, callMatchListData, matchList, isIni )
+        caller(account_api, callAccountData, account, isIni )
 
         // ajaxTest
 
