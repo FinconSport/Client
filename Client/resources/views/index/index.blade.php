@@ -569,13 +569,6 @@
                     json.data = uncompressed
                 }
                 Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
-                console.log(json)
-                console.log(obj)
-
-                // if( isIni === 1 && apiCalledCount === apiWaitCount ) {
-                //     $('#dimmer').dimmer('hide');
-                //     $('#wrap').removeAttr('hidden');
-                // }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // 处理错误
@@ -615,8 +608,6 @@
         isOtherBetEmpty()
         // 文字太長處理
         fixTextOverflow()
-        // tab初始化
-        $('.menu .item').tab();
         // 排版補空
         fillEmpty()
         $('.otherbet').each(function() {
@@ -628,7 +619,6 @@
                 }
             });
         });
-
         // 統計
         statistics()
     }
@@ -636,32 +626,29 @@
 
 
     $(document).ready(function() {
-
         // ini data from ajax
-        caller(matchList_api, callMatchListData, matchList)
-        caller(account_api, callAccountData, account)
+        caller(matchList_api, callMatchListData, matchList) // match_list
+        caller(account_api, callAccountData, account) // account
         // ini data from ajax
 
         // websocket
-        WebSocketDemo(); // 連線
-        setInterval(reconnent, 5000); // 監聽連線狀態
+        WebSocketDemo(); // connect
+        setInterval(reconnent, 5000); // detect connection
 
-        // 頁面loading完要做的事情 
+        // check if api are all loaded every 500 ms 
         isReadyInt = setInterval(() => {
             if(matchList.status === 1 && account.status === 1) {
-                $('#dimmer').dimmer('hide');
-                $('#wrap').removeAttr('hidden');
-                clearInterval(isReadyInt)
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').removeAttr('hidden'); // show the main content
+                clearInterval(isReadyInt); // stop checking
                 setTimeout(() => {
-                    viewIni()
+                    viewIni() // excute all view layer ini function
                 }, 500);
             }
         }, 500);
     });
 
-
     
-
     function isOtherBetEmpty() {
         $('.otherBetArea').each(function(){
             let count = $(this).find('.betItemDiv').length
