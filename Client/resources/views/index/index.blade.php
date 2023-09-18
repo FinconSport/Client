@@ -546,12 +546,15 @@
     /* ===== DATA LAYER ===== */
 
 
+
     function caller( url, data, obj ) {
+        console.log('caller')
         $.ajax({
             url: url,
             method: 'POST',
             data: data,
             success: function(data) {
+                console.log(url + ' called success')
                 const json = JSON.parse(data); 
                 // 先判定要不要解壓縮
                 if(json.gzip === 1) {
@@ -566,7 +569,7 @@
                 obj = json
                 apiCalledCount++
                 if(isReady === false && apiCalledCount === apiWaitCount) {
-                    $('#dimmer').dimmer('show');
+                    $('#dimmer').dimmer('hide');
                     $('#wrap').removeAttr('hidden');
                     isReady = true;
                 }
@@ -577,6 +580,7 @@
             }
         });
     }
+   
 
 
     $(document).ready(function() {
@@ -586,70 +590,68 @@
         caller(matchList_api, callMatchListData, matchList )
         caller(account_api, callAccountData, account )
 
-       
-
-
         // ajaxTest
 
 
 
-        // 若有滾球  移到最上面
-        if ( match_list['living'] !== undefined ) {
-            let parentNode = $('#indexContainerLeft')
-            let livingNode = $('#toggleContent_living')
-            livingNode.prependTo(parentNode);
-            $('#indexContainerRightInfo').css("display","none")
-            $('#indexContainerRightLiving').css("display","block")
+        // // 若有滾球  移到最上面
+        // if ( match_list['living'] !== undefined ) {
+        //     let parentNode = $('#indexContainerLeft')
+        //     let livingNode = $('#toggleContent_living')
+        //     livingNode.prependTo(parentNode);
+        //     $('#indexContainerRightInfo').css("display","none")
+        //     $('#indexContainerRightLiving').css("display","block")
 
-        }
+        // }
 
-        // 若數量為0 隱藏
-        $('.catWrapperTitle').each(function(){
-            let count = parseInt($(this).find('span[id^="catWrapperContent"]').html())
-            if(count === 0) $(this).hide()
-        })
+        // // 若數量為0 隱藏
+        // $('.catWrapperTitle').each(function(){
+        //     let count = parseInt($(this).find('span[id^="catWrapperContent"]').html())
+        //     if(count === 0) $(this).hide()
+        // })
 
-        // 打開第一個
-        if($('div[id^=toggleContent_]:visible').length > 0) {
-            setTimeout(() => {
-                $('.catWrapperTitle:visible').eq(0).click()
-            }, 500);
-        }
+        // // 打開第一個
+        // if($('div[id^=toggleContent_]:visible').length > 0) {
+        //     setTimeout(() => {
+        //         $('.catWrapperTitle:visible').eq(0).click()
+        //     }, 500);
+        // }
 
-        // 右邊 -> 預設第一比賽事
-        $('.indexBetCardInfo').eq(0).click()
-        // 判斷status:  -1 hide / 1 open / 2 lock / 4 5 other remove
-        rateStatusJudge(0, 1, 0, 1)
-        // 判斷局數
-        stageJudge()
-        // 其他玩法 -> 如果status全部不符合顯示條件 移除按鈕及投注區塊 
-        isOtherBetEmpty()
-        // 右邊 -> 如果status全部不符合顯示條件 移除title 
-        // clearUnusedRight() 
-        // 文字太長處理
-        fixTextOverflow()
-        // tab初始化
-        $('.menu .item').tab();
-        // 排版補空
-        fillEmpty()
+        // // 右邊 -> 預設第一比賽事
+        // $('.indexBetCardInfo').eq(0).click()
+        // // 判斷status:  -1 hide / 1 open / 2 lock / 4 5 other remove
+        // rateStatusJudge(0, 1, 0, 1)
+        // // 判斷局數
+        // stageJudge()
+        // // 其他玩法 -> 如果status全部不符合顯示條件 移除按鈕及投注區塊 
+        // isOtherBetEmpty()
+        // // 文字太長處理
+        // fixTextOverflow()
+        // // tab初始化
+        // $('.menu .item').tab();
+        // // 排版補空
+        // fillEmpty()
         
-        // websocket
-        WebSocketDemo(); // 連線
-        setInterval(reconnent, 5000); // 監聽連線狀態
+        // // websocket
+        // WebSocketDemo(); // 連線
+        // setInterval(reconnent, 5000); // 監聽連線狀態
 
-        $('.otherbet').each(function() {
-            $(this).find('.toggleOtherBtn').each(function(index) {
-                if (index >= otherbetCountLimit) {
-                    let id = $(this).attr('id')
-                    $('#otherBet_' + id).remove()
-                    $(this).remove()
-                }
-            });
-        });
+        // $('.otherbet').each(function() {
+        //     $(this).find('.toggleOtherBtn').each(function(index) {
+        //         if (index >= otherbetCountLimit) {
+        //             let id = $(this).attr('id')
+        //             $('#otherBet_' + id).remove()
+        //             $(this).remove()
+        //         }
+        //     });
+        // });
 
-        // 統計
-        statistics()
+        // // 統計
+        // statistics()
     });
+
+
+    
 
     function isOtherBetEmpty() {
         $('.otherBetArea').each(function(){
