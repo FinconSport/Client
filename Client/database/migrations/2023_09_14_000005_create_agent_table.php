@@ -36,7 +36,7 @@ class CreateAgentTable extends Migration
             $table->decimal('balance', 15, 3)->nullable(false)->default(0.0);    //balance
             $table->dateTime('create_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //create_time
             $table->dateTime('last_login')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //last_login
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

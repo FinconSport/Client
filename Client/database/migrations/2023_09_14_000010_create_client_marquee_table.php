@@ -26,7 +26,7 @@ class CreateClientMarqueeTable extends Migration
             $table->string('marquee',128)->nullable(false);    //marquee
             $table->dateTime('create_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //create_time
             $table->dateTime('last_update')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //last_update
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

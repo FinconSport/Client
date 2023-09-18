@@ -62,7 +62,7 @@ class CreateGameOrderTable extends Migration
             $table->unsignedTinyInteger('is_result')->nullable(false)->default(0);    //is_result
             $table->unsignedTinyInteger('is_retry')->nullable(false)->default(0);    //is_retry
             $table->unsigneSmallInteger('try_count')->nullable(false)->default(0);    //try_count
-            $table->unsigneSmallInteger('status')->nullable(false);    //status
+            $table->smallInteger('status')->nullable(false);    //status
 
             //foreign key constraints
             /*

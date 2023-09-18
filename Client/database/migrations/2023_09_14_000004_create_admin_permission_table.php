@@ -24,7 +24,7 @@ class CreateAdminPermissionTable extends Migration
             $table->increments('id')->primary();  //id
             $table->string('permission_name',32)->nullable(false)->unique();    //permission_name
             $table->text('permission_data')->nullable(false)->default('[]');    //permission_data
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

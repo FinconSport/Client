@@ -26,7 +26,7 @@ class CreateCrawlerScriptTable extends Migration
             $table->string('crawler_url',128)->nullable(false);    //crawler_url
             $table->dateTime('begin_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //begin_time
             $table->dateTime('last_update')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //last_update
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

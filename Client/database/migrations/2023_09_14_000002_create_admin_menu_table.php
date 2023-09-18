@@ -25,7 +25,7 @@ class CreateAdminMenuTable extends Migration
             $table->string('menu_name',32)->nullable(false);    //menu_name
             $table->string('menu_class',32)->nullable(false);    //menu_class
             $table->string('menu_value',32)->nullable(true)->default(null);    //menu_value
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

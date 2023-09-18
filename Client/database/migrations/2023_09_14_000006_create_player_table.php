@@ -31,7 +31,7 @@ class CreatePlayerTable extends Migration
             $table->text('rate_data')->nullable(true);    //rate_data
             $table->dateTime('create_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //create_time
             $table->dateTime('last_update')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //last_update
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
             $table->foreign('agent_id')->references('id')->on('agent')->constrained()->onUpdate('restrict')->onDelete('restrict');

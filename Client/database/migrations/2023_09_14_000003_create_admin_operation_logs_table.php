@@ -27,7 +27,7 @@ class CreateAdminOperationLogsTable extends Migration
             $table->text('before_data')->nullable(true);    //before_data
             $table->text('after_data')->nullable(true);    //after_data
             $table->dateTime('create_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //create_time
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

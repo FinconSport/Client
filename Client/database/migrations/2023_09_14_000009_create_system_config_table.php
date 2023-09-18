@@ -25,7 +25,7 @@ class CreateSystemConfigTable extends Migration
             $table->string('title',32)->nullable(false);    //title
             $table->string('name',32)->nullable(false);    //name
             $table->text('value')->nullable(false);    //value
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
 

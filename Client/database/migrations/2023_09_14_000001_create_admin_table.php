@@ -40,7 +40,7 @@ class CreateAdminTable extends Migration
             $table->unsignedInteger('permission_id')->nullable(false);    //permission_id
             $table->dateTime('create_time')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //create_time
             $table->dateTime('last_login')->nullable(false)->default(DB::raw('CURRENT_TIMESTAMP'));    //last_login
-            $table->unsignedSmallInteger('status')->nullable(false)->default(1);    //status
+            $table->smallInteger('status')->nullable(false)->default(1);    //status
 
             //foreign key constraints
             $table->foreign('permission_id')->references('id')->on('admin_permission')->constrained()->onUpdate('restrict')->onDelete('restrict');
