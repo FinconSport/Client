@@ -435,6 +435,9 @@
 @endSection
 
 @push('main_js')
+
+<!-- 解壓縮 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script> 
 <script>
     // 目前賽事列表
     var match_list = @json($match_list);
@@ -548,8 +551,19 @@
                 sport_id: sport_id
             },
             success: function(data) {
-                // 在这里处理从API获取的数据
-                console.log(data);
+                const json = data; 
+                // 先判定要不要解壓縮
+                if(json.gzip === 1) {
+                    // 解壓縮
+                    const compressedData = "这里放入您的gzip压缩的数据字符串"; // 请将您的数据替换成实际数据
+                    // 将压缩数据字符串解码为Uint8Array
+                    const compressedUint8Array = new TextEncoder().encode(atob(compressedData));
+                    // 解压缩数据
+                    const decompressedUint8Array = pako.ungzip(compressedUint8Array);
+                    // 将解压缩的数据转换为文本
+                    const decompressedData = new TextDecoder().decode(decompressedUint8Array);
+                    console.log(decompressedData);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // 处理错误
