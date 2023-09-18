@@ -587,8 +587,8 @@
 
         // ajaxTest
 
-        caller(matchList_api, callMatchListData, matchList, isIni )
-        caller(account_api, callAccountData, account, isIni )
+        caller(matchList_api, callMatchListData, matchList, 1 )
+        caller(account_api, callAccountData, account, 1 )
 
         // ajaxTest
 
