@@ -526,6 +526,8 @@
     const token = 12345
     const sport_id = 1
 
+    var isReadyInt = null
+
     
 
     // 列表
@@ -539,8 +541,6 @@
     const account_api = 'https://sportc.asgame.net/api/v1/common_account'
 
 
-    // 全部資料
-    var allData = [matchList, account]
 
     // ===== 測試 =====
     
@@ -647,10 +647,16 @@
         setInterval(reconnent, 5000); // 監聽連線狀態
 
         // 頁面loading完要做的事情 
-        // setInterval(() => {
-            
-        // }, 500);
-        // viewIni()
+        isReadyInt = setInterval(() => {
+            if(matchList.status === 1 && account.status === 1) {
+                $('#dimmer').dimmer('hide');
+                $('#wrap').removeAttr('hidden');
+                clearInterval(isReadyInt)
+                setTimeout(() => {
+                    viewIni()
+                }, 500);
+            }
+        }, 500);
     });
 
 
