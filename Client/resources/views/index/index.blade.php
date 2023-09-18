@@ -526,8 +526,7 @@
     const token = 12345
     const sport_id = 1
 
-    const apiWaitCount = 2 // ready中有幾個api要call
-    var apiCalledCount = 0 // 現在幾個call好了
+    
 
     // 列表
     var matchList = {}
@@ -539,6 +538,10 @@
     var callAccountData = { token: token, player: player }
     const account_api = 'https://sportc.asgame.net/api/v1/common_account'
 
+
+    // 全部資料
+    var allData = [matchList, account]
+
     // ===== 測試 =====
     
 
@@ -546,7 +549,7 @@
 
 
 
-    function caller( url, data, obj, isIni = 0 ) {
+    function caller( url, data, obj ) {
         console.log('caller')
         $.ajax({
             url: url,
@@ -566,13 +569,13 @@
                     json.data = uncompressed
                 }
                 obj = json
-                apiCalledCount++
+                console.log(json)
+                console.log(obj)
 
-                if( isIni === 1 && apiCalledCount === apiWaitCount) {
-                    console.log('hide loading')
-                    $('#dimmer').dimmer('hide');
-                    $('#wrap').removeAttr('hidden');
-                }
+                // if( isIni === 1 && apiCalledCount === apiWaitCount ) {
+                //     $('#dimmer').dimmer('hide');
+                //     $('#wrap').removeAttr('hidden');
+                // }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // 处理错误
@@ -580,74 +583,74 @@
             }
         });
     }
+
+    function viewIni() {
+        // 若有滾球  移到最上面
+        if ( match_list['living'] !== undefined ) {
+            let parentNode = $('#indexContainerLeft')
+            let livingNode = $('#toggleContent_living')
+            livingNode.prependTo(parentNode);
+            $('#indexContainerRightInfo').css("display","none")
+            $('#indexContainerRightLiving').css("display","block")
+        }
+
+        // 若數量為0 隱藏
+        $('.catWrapperTitle').each(function(){
+            let count = parseInt($(this).find('span[id^="catWrapperContent"]').html())
+            if(count === 0) $(this).hide()
+        })
+
+        // 打開第一個
+        if($('div[id^=toggleContent_]:visible').length > 0) {
+            setTimeout(() => {
+                $('.catWrapperTitle:visible').eq(0).click()
+            }, 500);
+        }
+
+        // 判斷status:  -1 hide / 1 open / 2 lock / 4 5 other remove
+        rateStatusJudge(0, 1, 0, 1)
+        // 判斷局數
+        stageJudge()
+        // 其他玩法 -> 如果status全部不符合顯示條件 移除按鈕及投注區塊 
+        isOtherBetEmpty()
+        // 文字太長處理
+        fixTextOverflow()
+        // tab初始化
+        $('.menu .item').tab();
+        // 排版補空
+        fillEmpty()
+        $('.otherbet').each(function() {
+            $(this).find('.toggleOtherBtn').each(function(index) {
+                if (index >= otherbetCountLimit) {
+                    let id = $(this).attr('id')
+                    $('#otherBet_' + id).remove()
+                    $(this).remove()
+                }
+            });
+        });
+
+        // 統計
+        statistics()
+    }
    
 
 
     $(document).ready(function() {
 
-        // ajaxTest
+        // ini data from ajax
+        caller(matchList_api, callMatchListData, matchList)
+        caller(account_api, callAccountData, account)
+        // ini data from ajax
 
-        caller(matchList_api, callMatchListData, matchList, 1 )
-        caller(account_api, callAccountData, account, 1 )
+        // websocket
+        WebSocketDemo(); // 連線
+        setInterval(reconnent, 5000); // 監聽連線狀態
 
-        // ajaxTest
-
-
-
-        // // 若有滾球  移到最上面
-        // if ( match_list['living'] !== undefined ) {
-        //     let parentNode = $('#indexContainerLeft')
-        //     let livingNode = $('#toggleContent_living')
-        //     livingNode.prependTo(parentNode);
-        //     $('#indexContainerRightInfo').css("display","none")
-        //     $('#indexContainerRightLiving').css("display","block")
-
-        // }
-
-        // // 若數量為0 隱藏
-        // $('.catWrapperTitle').each(function(){
-        //     let count = parseInt($(this).find('span[id^="catWrapperContent"]').html())
-        //     if(count === 0) $(this).hide()
-        // })
-
-        // // 打開第一個
-        // if($('div[id^=toggleContent_]:visible').length > 0) {
-        //     setTimeout(() => {
-        //         $('.catWrapperTitle:visible').eq(0).click()
-        //     }, 500);
-        // }
-
-        // // 右邊 -> 預設第一比賽事
-        // $('.indexBetCardInfo').eq(0).click()
-        // // 判斷status:  -1 hide / 1 open / 2 lock / 4 5 other remove
-        // rateStatusJudge(0, 1, 0, 1)
-        // // 判斷局數
-        // stageJudge()
-        // // 其他玩法 -> 如果status全部不符合顯示條件 移除按鈕及投注區塊 
-        // isOtherBetEmpty()
-        // // 文字太長處理
-        // fixTextOverflow()
-        // // tab初始化
-        // $('.menu .item').tab();
-        // // 排版補空
-        // fillEmpty()
-        
-        // // websocket
-        // WebSocketDemo(); // 連線
-        // setInterval(reconnent, 5000); // 監聽連線狀態
-
-        // $('.otherbet').each(function() {
-        //     $(this).find('.toggleOtherBtn').each(function(index) {
-        //         if (index >= otherbetCountLimit) {
-        //             let id = $(this).attr('id')
-        //             $('#otherBet_' + id).remove()
-        //             $(this).remove()
-        //         }
-        //     });
-        // });
-
-        // // 統計
-        // statistics()
+        // 頁面loading完要做的事情 
+        // setInterval(() => {
+            
+        // }, 500);
+        // viewIni()
     });
 
 
