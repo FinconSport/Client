@@ -526,22 +526,65 @@
     const token = 12345
     const sport_id = 1
 
-    const apiWaitCount = 1 // ready中有幾個api要call
-    const matchList = {}
-    const matchList_baseApi = 'https://sportc.asgame.net/api/v1/match_index'
+    const apiWaitCount = 2 // ready中有幾個api要call
+    var apiCalledCount = 0 // 現在幾個call好了
+    var isReady = false
+
+    // 列表
+    var matchList = {}
+    var callMatchListData = { token: token, player: player, sport_id: sport_id }
+    const matchList_api = 'https://sportc.asgame.net/api/v1/match_index'
    
+    // 帳號
+    var account = {}
+    var callAccountData = { token: token, player: player }
+    const account_api = 'https://sportc.asgame.net/api/v1/common_account'
 
     // ===== 測試 =====
     
 
-
-
     /* ===== DATA LAYER ===== */
+
+
+    function caller( url, data, obj ) {
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            success: function(data) {
+                const json = JSON.parse(data); 
+                // 先判定要不要解壓縮
+                if(json.gzip === 1) {
+                    // 將字符串轉換成 ArrayBuffer
+                    const str = json.data;
+                    const bytes = atob(str).split('').map(char => char.charCodeAt(0));
+                    const buffer = new Uint8Array(bytes).buffer;
+                    // 解壓縮 ArrayBuffer
+                    const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
+                    json.data = uncompressed
+                }
+                obj = json
+                apiCalledCount++
+                if(isReady === false && apiCalledCount === apiWaitCount) {
+                    $('#dimmer').dimmer('show');
+                    $('#wrap').removeAttr('hidden');
+                    isReady = true;
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 处理错误
+                console.error('Ajax error:', textStatus, errorThrown);
+            }
+        });
+    }
 
 
     $(document).ready(function() {
 
         // ajaxTest
+
+        caller(matchList_baseApi, callMatchListData, matchList )
+
         $.ajax({
             url: matchList_baseApi,
             method: 'POST',
