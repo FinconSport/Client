@@ -423,103 +423,7 @@
         <div id="noMoreData" style="display: none">
             <p class="mb-0">{{ trans('index.mainArea.nomredata') }}</p>
         </div>
-
-</div>
-<div id="indexContainerRight">
-    <div id="indexContainerRightLiving" class="w-100">
-       
-        <div class="card-header d-flex align-items-center">
-            <div class="p-2 bd-highlight seriesName"><p>Series Name</p></div>
-            <div class="ms-auto p-2 bd-highlight seriesDate"><p>Series Time</p></div>
-        </div>
-        <div class="tblDiv">
-        @switch(intval($search['sport']))
-            @case('1')
-                <table class="table table-bordered tblSoccer">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th nowrap>{{trans('index.tableLivingData.fulltimescore')}}</th>
-                            <th nowrap>{{trans('index.tableLivingData.firsthalfscore')}}</th>
-                            <th nowrap>{{trans('index.tableLivingData.secondhalfscore')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            @break
-            @case('2')
-                <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th nowrap>{{trans('index.tableLivingData.fulltimescore')}}</th>
-                        <th nowrap>Q1</th>
-                        <th nowrap>Q2</th>
-                        <th nowrap>Q3</th>
-                        <th nowrap>Q4</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                </table>
-            @break
-            @case('3')
-                <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th nowrap>{{trans('index.tableLivingData.fulltimescore')}}</th>
-                        <th nowrap>1</th>
-                        <th nowrap>2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                </table>
-            @break
-        @endswitch
-        </div>
     </div>
-    <div id="indexContainerRightInfo" class="w-100">
-        <div key='rightInfoSeries' style="font-size: 1.2rem;line-height: 3rem;"></div>
-        <div class="row m-0">
-            @if(empty($match_list))
-                <div class="col-12 fs-4 text-center" style=" line-height: 12rem; ">{{ trans('index.mainArea.nogame') }}</div>
-            @else
-                <div class="col-30">
-                    <img src="" key='rightInfoHome' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'">
-                    <p class="mb-0 mt-3 fs-09" key='rightInfoHomeName'>{{ trans('index.mainArea.homeTeam') }}</p>
-                </div>
-                <div class="col-40 p-0" key='rightInfoStatus'></div>
-                <div class="col-30">
-                    <img src="" key='rightInfoAway' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'">
-                    <p class="mb-0 mt-3 fs-09" key='rightInfoAwayName'>{{ trans('index.mainArea.awayTeam') }}</p>
-                </div>
-            @endif
-        </div>
-    </div>
-    <div class="ui top attached tabular menu m-0 bg-lightgreen">
-        <a class="item active" data-tab="all">{{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.6') }}</a>
-        <a class="item" data-tab="win">{{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.7') }}</a>
-        <a class="item" data-tab="hcap">{{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.8') }}</a>
-        <a class="item" data-tab="size">{{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.9') }}</a>
-    </div>
-    <div class="ui bottom attached tab segment active" data-tab="all">
-        <div class="segmentContainer">
-            <div class="ui active centered inline loader"></div>
-        </div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="win">
-        <div class="segmentContainer"></div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="hcap">
-        <div class="segmentContainer"></div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="size">
-        <div class="segmentContainer"></div>
-    </div>
-</div>
 </div>
 @endsection
 
@@ -591,6 +495,36 @@
     } else {
         otherbetCountLimit = 8
     }
+
+
+    /* ===== DATA LAYER ===== */
+    /*  
+        1. 現在大部份資料都api化，通過call ajax來loading
+        2. 在所有所需的api被call完之前，要添加頁面loading樣式，等全部都call好了才顯示頁面
+        
+            有那些需要call api?
+            1. match_list
+            2. account data
+            3. sport list
+            4. bet limitation?
+
+            有哪些沿用laravel映射?
+            1. player
+    
+        3. 資料接收機制
+            1. ws -> push to queue -> update the globe data
+            2. ajax -> update the globe data
+    */
+
+
+    const matchList = { }
+
+    
+
+
+
+    /* ===== DATA LAYER ===== */
+
 
     $(document).ready(function() {
         // 若有滾球  移到最上面
