@@ -39,10 +39,10 @@
 }
 /* 中間投注 */
 #indexContainerLeft {
-    color: rgb(65, 91, 90);
-    width: 69%;
+    color: #415b5a;
+    width: 100%;
     overflow-y: auto;
-    padding-right: 1rem;
+    padding: 0 5rem;
 }
 /* 右方投注 */
 #indexContainerRight {
