@@ -330,7 +330,7 @@ class LsportApiController extends Controller {
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                         })
                         ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) as count,COUNT(*) as rate_count')
-                        ->where('lsport_market_bet.is_active', '=', 1)
+                        //->where('lsport_market_bet.is_active', '=', 1)
                         ->where('lsport_fixture.status', 2)
                         ->where('lsport_league.status', 1)
                         ->groupBy('lsport_fixture.sport_id')
@@ -373,7 +373,7 @@ class LsportApiController extends Controller {
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                         })
                     ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) as count,COUNT(*) as rate_count')
-                    ->where('lsport_market_bet.is_active', '=', 1)
+                    //->where('lsport_market_bet.is_active', '=', 1)
                     ->where('lsport_fixture.status', 1)
                     ->where('lsport_league.status', 1)
                     ->groupBy('lsport_fixture.sport_id')
@@ -516,7 +516,7 @@ class LsportApiController extends Controller {
                 $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
             })
             ->select('lsport_fixture.*', DB::raw('COUNT(lsport_market_bet.id) as rate_count'))
-            ->where('lsport_market_bet.is_active', '=', 1)
+            //->where('lsport_market_bet.is_active', '=', 1)
             ->where('lsport_league.status', 1)
             ->where('lsport_fixture.status', 1)
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
@@ -554,7 +554,7 @@ class LsportApiController extends Controller {
                     $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                 })
                 ->select('lsport_fixture.*', DB::raw('COUNT(lsport_market_bet.id) as rate_count'))
-                ->where('lsport_market_bet.is_active', '=', 1)
+                //->where('lsport_market_bet.is_active', '=', 1)
                 ->where('lsport_league.status', 1)
                 ->where('lsport_fixture.status', 2)
                 ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
