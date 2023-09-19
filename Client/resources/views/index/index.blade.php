@@ -418,7 +418,7 @@
 <script>
     // 目前賽事列表
     var match_list = @json($match_list);
-    
+
     // websocket用
     const sport = parseInt(searchData.sport)
     var socket_status = false;
@@ -501,10 +501,7 @@
 
     // ===== 測試 =====
 
-    // player and sport_id
-    const player = 8
-    const token = 12345
-    const sport_id = 1
+    
     var isReadyIndexInt = null
     var isReadyIndex = false
 

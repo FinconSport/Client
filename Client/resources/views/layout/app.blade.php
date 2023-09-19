@@ -214,6 +214,11 @@
 
 		// ===== DATA LAYER ======
 
+		// player and sport_id
+		const player = 8
+		const token = 12345
+		const sport_id = 1
+
 		// loading page control
 		var isReadyCommon = false
 		var isReadyCommonInt = null
