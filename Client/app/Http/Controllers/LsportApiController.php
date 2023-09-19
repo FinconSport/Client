@@ -298,7 +298,7 @@ class LsportApiController extends Controller {
         $langCol = "name_{$this->agent_lang}";// 語系
         $sport_type = array();
         foreach ($arrSports as $k => $v) {
-            $sport_type["{$v['id']}"] = $v["{$langCol}"];
+            $sport_type["{$v['sport_id']}"] = $v["{$langCol}"];
         }
         print_r($arrSports);
         print_r($sport_type);
@@ -327,7 +327,7 @@ class LsportApiController extends Controller {
                     // ->having('rate_count', '>', 0)
                     // ->get();
 
-                    $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
+                    $arrFixtures = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
                         ->join('lsport_league', function ($join) {
                             $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
@@ -340,13 +340,13 @@ class LsportApiController extends Controller {
                         ->having('rate_count', '>', 0)
                         ->get();
 
-                    if ($return === false) {
+                    if ($arrFixtures === false) {
                         $this->_ApiError("01");
                     }
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($return as $kk => $vv) {
+                    foreach ($arrFixtures as $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
@@ -370,7 +370,7 @@ class LsportApiController extends Controller {
                     // ->having('rate_count', '>', 0)
                     // ->get();
 
-                    $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
+                    $arrFixtures = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
                         ->join('lsport_league', function ($join) {
                             $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
@@ -383,13 +383,13 @@ class LsportApiController extends Controller {
                     ->having('rate_count', '>', 0)
                     ->get();
 
-                    if ($return === false) {
+                    if ($arrFixtures === false) {
                         $this->_ApiError("01");
                     }
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($return as $kk => $vv) {
+                    foreach ($arrFixtures as $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
