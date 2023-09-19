@@ -215,7 +215,7 @@
 		// player and sport_id
 		const player = 8
 		const token = 12345
-		const sport_id = 1
+		const sport = parseInt(searchData.sport)
 
 		// loading page control
 		var isReadyCommon = false
@@ -288,7 +288,7 @@
 				});
 				link.append(span); // 将<span>添加到<a>中
 				link.wrap('<marquee id="marquee" class="bg-deepgreen" behavior="scroll" direction="left"></marquee>')
-				rightNavTag.before(link) // 添加到頁面中
+				$('.rightNavTag').before(link) // 添加到頁面中
 			});
 
 

@@ -418,10 +418,9 @@
         console.log('WebSocketDemo')
         if ("WebSocket" in window) {
             try {
-                var sport_id = @json($search['sport']);
-                var ws_url = langTrans['sportBetData'][sport]['ws']
-                ws = new WebSocket(ws_url); // websocket 連線
+                let ws_url = langTrans['sportBetData'][sport]['ws']
 
+                ws = new WebSocket(ws_url); // websocket 連線
                 ws.onopen = function() {
                     wsRegisterMatch() // 註冊id
                     socket_status = true; // for reconnection
@@ -429,7 +428,6 @@
                         const heartbeat = {
                             "action": "heartbeat",
                         }
-                        // console.log('前端send msg ->')
                         console.log(heartbeat)
                         ws.send(JSON.stringify(heartbeat));
                     }, 10000);
