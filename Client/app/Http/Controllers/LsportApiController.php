@@ -300,8 +300,6 @@ class LsportApiController extends Controller {
         foreach ($arrSports as $k => $v) {
             $sport_type["{$v['sport_id']}"] = $v["{$langCol}"];
         }
-        print_r($arrSports);
-        print_r($sport_type);
 
         $menu_type = [
             0 => "living",  //走地
@@ -526,7 +524,8 @@ class LsportApiController extends Controller {
             ->where("lsport_fixture.sport_id", $sport_id)
             ->groupBy('lsport_fixture.fixture_id')
             ->having('rate_count', '>', 0)
-            ->orderBy("lsport_league.order_by")->get();
+            ->orderBy("lsport_league.order_by")
+            ->get();
 
         $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
         $data['early'] = $tmp;
