@@ -72,7 +72,7 @@ class LsportApiController extends Controller {
      * If re-login is not required, then return an array that includes the player's account name and account balance.
      *
     * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
-     * @return _ApiSuccess($data = ARRAY{account, balance}) | ApiError
+     * @return ::_ApiSuccess($data = ARRAY{account, balance}) | ApiError
      */
     public function CommonAccount(Request $request) {
       
@@ -109,7 +109,7 @@ class LsportApiController extends Controller {
      * 資料表: GameResult
      *
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
-     * @return _ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
+     * @return ::_ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
      */
     // 輪播
     public function IndexCarousel(Request $request) {
@@ -607,15 +607,23 @@ class LsportApiController extends Controller {
         }
 
         // 取得必要參數
-        $player_id = $input['player'];
-        $fixture_id = $input['bet_match'];
-        $bet_type_id = $input['bet_type'];
-        $bet_type_item_id = $input['bet_type_item'];
-        $player_rate = $input['bet_rate'];
-        $bet_amount = $input['bet_amount'];
-        $is_better_rate = $input['better_rate'];
+        // $player_id = $input['player'];
+        // $fixture_id = $input['bet_match'];
+        // $bet_type_id = $input['bet_type'];
+        // $bet_type_item_id = $input['bet_type_item'];
+        // $player_rate = $input['bet_rate'];
+        // $bet_amount = $input['bet_amount'];
+        // $is_better_rate = $input['better_rate'];
 
-        $sport_id = 1;
+        $player_id = $input['player'];
+        $fixture_id = $input['bet_match'];  //ant_match_list.match_id
+        $bet_type_id = $input['bet_type'];  //ant_rate_list.rate_id
+        $bet_type_item_id = $input['bet_type_item'];  //JSON_DECODE(ant_rate_list.item).id
+        $player_rate = $input['bet_rate'];  //前端傳來的賠率
+        $bet_amount = $input['bet_amount'];  //投注金額
+        $is_better_rate = $input['better_rate'];  //受否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
+
+        $sport_id = 1;  //球種ID
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1885,9 +1893,10 @@ class LsportApiController extends Controller {
             //---------------------------------
             // 取得代理的語系
             //$player_id = $input['player'];
-            $session['player']['id'] = $player_id;
+            //$session['player']['id'] = $player_id;
             $player_id2 = $session['player']['id'];
             $agentlang = $this->getAgentLang($player_id2);
+            // $agentlang = $this->getAgentLang($player_id);
             if ($agentlang === false) {
                 //$this->error(__CLASS__, __FUNCTION__, "02");
                 $agentlang = 'en';

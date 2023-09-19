@@ -446,229 +446,229 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
-
-      //////////////////////////////////////////
-
-      // 取得系統參數
-      $return = SystemConfig::where("name","risk_order")->first();
-      if ($return['value'] > 0) {
-        $default_order_status = 1;
-        $default_approval_time = null;
-      } else {
-        // 預設通過
-        $default_order_status = 2;
-        $default_approval_time = date("Y-m-d H:i:s");
-      }
-
-      // 取得必要參數
-      $player_id = $input['player'];
-      $match_id = $input['bet_match'];
-      $bet_type_id = $input['bet_type'];
-      $bet_type_item_id = $input['bet_type_item'];
-      $player_rate = $input['bet_rate'];
-      $bet_amount = $input['bet_amount'];
-      $is_better_rate = $input['better_rate'];
-
-      $game_id = 1;
-      if (isset($input['game_id'])) {
-        $game_id = $input['game_id'];
-      }
-      
-      $order = array();
-      
-      // 參數檢查 TODO - 初步 隨便弄弄
-      if ($bet_amount <= 0) {
-        $this->ApiError("01");
-      }
-
-      // 取得用戶資料
-      $return = Player::where("id",$player_id)->first();
-      if ($return == false) {
-        $this->ApiError("02");
-      }
-
-      // 如果用戶已停用
-      if ($return['status'] == 0) {
-        $this->ApiError("03");
-      }
-
-      $player_account = $return['account'];
-      $currency_type = $return['currency_type'];
-      $agent_id = $return['agent_id'];
-      $player_balance = $return['balance'];
-
-      // 判斷餘額是否足夠下注
-      if ($player_balance < $bet_amount) {
-        $this->ApiError("04");
-      }
-      
-      //////////////////////////////////////////
-      // order data
-      $order['player_id'] = $player_id;
-      $order['player_name'] = $player_account;
-      $order['currency_type'] = $currency_type;
-      //////////////////////////////////////////
-
-      // 取得商戶資料
-      $return = Agent::where("id",$agent_id)->first();
-      if ($return == false) {
-        $this->ApiError("05");
-      }
-
-      // 如果商戶已停用
-      if ($return['status'] == 0) {
-        $this->ApiError("06");
-      }
-
-      $agent_account = $return['account'];
-
-      //////////////////////////////////////////
-      // order data
-      $order['agent_id'] = $agent_id;
-      $order['agent_name'] = $agent_account;
-      //////////////////////////////////////////
-
-
-      // 取得賽事資料
-      $return = AntMatchList::where("match_id",$match_id)->where("game_id",$game_id)->first();
-      if ($return == false) {
-        $this->ApiError("07");
-      }
-
-      //match status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
-      if ($return['status'] >= 3) {
-        $this->ApiError("08");
-      }
-
-      // decode 聯盟
-      $series_data = json_decode($return['series'],true);
-      //////////////////////////////////////////
-      // order data
-      $order['series_id'] = $series_data['id'];
-      $order['series_name'] = $series_data['name_cn'];
-      $order['match_id'] = $match_id;
-      $order['game_id'] = $return['game_id'];
-      //////////////////////////////////////////
-
-      // decode 隊伍
-      $teams_data = json_decode($return['teams'],true);
-      //////////////////////////////////////////
-      // order data
-      if ($teams_data[0]['index'] == 1) {
-        $order['home_team_id'] = $teams_data[0]['team']['id'];
-        $order['home_team_name'] = $teams_data[0]['team']['name_cn'];
-      } else {
-        $order['away_team_id'] = $teams_data[0]['team']['id'];
-        $order['away_team_name'] = $teams_data[0]['team']['name_cn'];
-      }
-      
-      if ($teams_data[1]['index'] == 1) {
-        $order['home_team_id'] = $teams_data[1]['team']['id'];
-        $order['home_team_name'] = $teams_data[1]['team']['name_cn'];
-      } else {
-        $order['away_team_id'] = $teams_data[1]['team']['id'];
-        $order['away_team_name'] = $teams_data[1]['team']['name_cn'];
-      }
-      //////////////////////////////////////////
-
-      // 取得賠率
-      $return = AntRateList::where("rate_id",$bet_type_id)->where("match_id",$match_id)->first();
-      if ($return == false) {
-        $this->ApiError("09");
-      }
-
-      $rate_status = $return['status'];
-      $type_priority = $return['game_priority'];
-
-      // decode 賠率
-      $rate_data = json_decode($return['items'],true);
-
-      foreach ($rate_data as $k => $v) {
-        if ($v['id'] == $bet_type_item_id) {
-          $rate_data = $v;
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
         }
-      }
-      $current_rate = $rate_data['rate'];
-      $current_rate_status = $rate_data['status'];
 
-      // 非開盤狀態 1开、2锁、4封、5结算、99取消
-      if (($rate_status != 1) || ($current_rate_status != 1)) {
-        $this->ApiError("14");
-      }
+        //////////////////////////////////////////
 
-      //////////////////////////////////////////
-      // order data
-      $order['type_id'] = $bet_type_id;
-      $order['type_item_id'] = $bet_type_item_id;
-      $order['type_name'] = $return['name_cn'];
-      $order['type_item_name'] = $rate_data['name_cn'];
-      $order['type_priority'] = $type_priority;
-      $order['bet_rate'] = $rate_data['rate'];
-      
-      $order['player_rate'] = $player_rate;
-      $order['better_rate'] = $is_better_rate;
-      
-      //////////////////////////////////////////
+        // 取得系統參數
+        $return = SystemConfig::where("name","risk_order")->first();
+        if ($return['value'] > 0) {
+            $default_order_status = 1;
+            $default_approval_time = null;
+        } else {
+            // 預設通過
+            $default_order_status = 2;
+            $default_approval_time = date("Y-m-d H:i:s");
+        }
 
-      // 判斷 is_better_rate
-      if (($is_better_rate == 1) && ($current_rate < $player_rate)) {
-        $this->ApiError("10");
-      }
+        // 取得必要參數
+        $player_id = $input['player'];
+        $match_id = $input['bet_match'];  //ant_match_list.match_id
+        $bet_type_id = $input['bet_type'];  //ant_rate_list.rate_id
+        $bet_type_item_id = $input['bet_type_item'];  //JSON_DECODE(ant_rate_list.item).id
+        $player_rate = $input['bet_rate'];  //前端傳來的賠率
+        $bet_amount = $input['bet_amount'];  //投注金額
+        $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
-      //////////////////////////////////////////
-      // order data
-      $order['bet_amount'] = $bet_amount;
-      $order['status'] = $default_order_status;
-      $order['create_time'] = date("Y-m-d H:i:s");
-      $order['approval_time'] = $default_approval_time;
-      
-      //////////////////////////////////////////
+        $game_id = 1;
+        if (isset($input['game_id'])) {
+            $game_id = $input['game_id'];
+        }
+        
+        $order = array();
+        
+        // 參數檢查 TODO - 初步 隨便弄弄
+        if ($bet_amount <= 0) {
+            $this->ApiError("01");
+        }
 
-      // 新增注單資料
-      $return = GameOrder::insertGetId($order);      
-      if ($return == false) {
-        $this->ApiError("11");
-      }
+        // 取得用戶資料
+        $return = Player::where("id",$player_id)->first();
+        if ($return == false) {
+            $this->ApiError("02");
+        }
 
-      $order_id = $return;
-      // 設定m_id 
-      $return = GameOrder::where("id",$order_id)->update([
-        "m_id" => $order_id
-      ]);      
-      if ($return == false) {
-        $this->ApiError("12");
-      }
-      
-      // 扣款
-      $before_amount = $player_balance;
-      $change_amount = $bet_amount;
-      $after_amount = $before_amount - $change_amount;
+        // 如果用戶已停用
+        if ($return['status'] == 0) {
+            $this->ApiError("03");
+        }
 
-      $return = Player::where("id",$player_id)->update([
-        "balance" => $after_amount
-      ]);      
-      if ($return == false) {
-        $this->ApiError("13");
-      }
-      
-      // 帳變
-      $tmp = array();
-      $tmp['agent_id'] = $agent_id;
-      $tmp['player_id'] = $player_id;
-      $tmp['player'] = $player_account;
-      $tmp['currency_type'] = $currency_type;
-      $tmp['type'] = "game_bet";
-      $tmp['change_balance'] = $change_amount;
-      $tmp['before_balance'] = $before_amount;
-      $tmp['after_balance'] = $after_amount;
-      $tmp['create_time'] = date("Y-m-d H:i:s");
-      PlayerBalanceLogs::insert($tmp);
+        $player_account = $return['account'];
+        $currency_type = $return['currency_type'];
+        $agent_id = $return['agent_id'];
+        $player_balance = $return['balance'];
 
-      $this->ApiSuccess($return,"01");
+        // 判斷餘額是否足夠下注
+        if ($player_balance < $bet_amount) {
+            $this->ApiError("04");
+        }
+        
+        //////////////////////////////////////////
+        // order data
+        $order['player_id'] = $player_id;
+        $order['player_name'] = $player_account;
+        $order['currency_type'] = $currency_type;
+        //////////////////////////////////////////
+
+        // 取得商戶資料
+        $return = Agent::where("id",$agent_id)->first();
+        if ($return == false) {
+            $this->ApiError("05");
+        }
+
+        // 如果商戶已停用
+        if ($return['status'] == 0) {
+            $this->ApiError("06");
+        }
+
+        $agent_account = $return['account'];
+
+        //////////////////////////////////////////
+        // order data
+        $order['agent_id'] = $agent_id;
+        $order['agent_name'] = $agent_account;
+        //////////////////////////////////////////
+
+
+        // 取得賽事資料
+        $return = AntMatchList::where("match_id",$match_id)->where("game_id",$game_id)->first();
+        if ($return == false) {
+            $this->ApiError("07");
+        }
+
+        //match status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
+        if ($return['status'] >= 3) {
+            $this->ApiError("08");
+        }
+
+        // decode 聯盟
+        $series_data = json_decode($return['series'],true);
+        //////////////////////////////////////////
+        // order data
+        $order['series_id'] = $series_data['id'];
+        $order['series_name'] = $series_data['name_cn'];
+        $order['match_id'] = $match_id;
+        $order['game_id'] = $return['game_id'];
+        //////////////////////////////////////////
+
+        // decode 隊伍
+        $teams_data = json_decode($return['teams'],true);
+        //////////////////////////////////////////
+        // order data
+        if ($teams_data[0]['index'] == 1) {
+            $order['home_team_id'] = $teams_data[0]['team']['id'];
+            $order['home_team_name'] = $teams_data[0]['team']['name_cn'];
+        } else {
+            $order['away_team_id'] = $teams_data[0]['team']['id'];
+            $order['away_team_name'] = $teams_data[0]['team']['name_cn'];
+        }
+        
+        if ($teams_data[1]['index'] == 1) {
+            $order['home_team_id'] = $teams_data[1]['team']['id'];
+            $order['home_team_name'] = $teams_data[1]['team']['name_cn'];
+        } else {
+            $order['away_team_id'] = $teams_data[1]['team']['id'];
+            $order['away_team_name'] = $teams_data[1]['team']['name_cn'];
+        }
+        //////////////////////////////////////////
+
+        // 取得賠率
+        $return = AntRateList::where("rate_id",$bet_type_id)->where("match_id",$match_id)->first();
+        if ($return == false) {
+            $this->ApiError("09");
+        }
+
+        $rate_status = $return['status'];
+        $type_priority = $return['game_priority'];
+
+        // decode 賠率
+        $rate_data = json_decode($return['items'],true);
+
+        foreach ($rate_data as $k => $v) {
+            if ($v['id'] == $bet_type_item_id) {
+                $rate_data = $v;
+            }
+        }
+        $current_rate = $rate_data['rate'];
+        $current_rate_status = $rate_data['status'];
+
+        // 非開盤狀態 1开、2锁、4封、5结算、99取消
+        if (($rate_status != 1) || ($current_rate_status != 1)) {
+            $this->ApiError("14");
+        }
+
+        //////////////////////////////////////////
+        // order data
+        $order['type_id'] = $bet_type_id;
+        $order['type_item_id'] = $bet_type_item_id;
+        $order['type_name'] = $return['name_cn'];
+        $order['type_item_name'] = $rate_data['name_cn'];
+        $order['type_priority'] = $type_priority;
+        $order['bet_rate'] = $rate_data['rate'];
+        
+        $order['player_rate'] = $player_rate;
+        $order['better_rate'] = $is_better_rate;
+        
+        //////////////////////////////////////////
+
+        // 判斷 is_better_rate
+        if (($is_better_rate == 1) && ($current_rate < $player_rate)) {
+            $this->ApiError("10");
+        }
+
+        //////////////////////////////////////////
+        // order data
+        $order['bet_amount'] = $bet_amount;
+        $order['status'] = $default_order_status;
+        $order['create_time'] = date("Y-m-d H:i:s");
+        $order['approval_time'] = $default_approval_time;
+        
+        //////////////////////////////////////////
+
+        // 新增注單資料
+        $return = GameOrder::insertGetId($order);      
+        if ($return == false) {
+            $this->ApiError("11");
+        }
+
+        $order_id = $return;
+        // 設定m_id 
+        $return = GameOrder::where("id",$order_id)->update([
+            "m_id" => $order_id
+        ]);      
+        if ($return == false) {
+            $this->ApiError("12");
+        }
+        
+        // 扣款
+        $before_amount = $player_balance;
+        $change_amount = $bet_amount;
+        $after_amount = $before_amount - $change_amount;
+
+        $return = Player::where("id",$player_id)->update([
+            "balance" => $after_amount
+        ]);      
+        if ($return == false) {
+            $this->ApiError("13");
+        }
+        
+        // 帳變
+        $tmp = array();
+        $tmp['agent_id'] = $agent_id;
+        $tmp['player_id'] = $player_id;
+        $tmp['player'] = $player_account;
+        $tmp['currency_type'] = $currency_type;
+        $tmp['type'] = "game_bet";
+        $tmp['change_balance'] = $change_amount;
+        $tmp['before_balance'] = $before_amount;
+        $tmp['after_balance'] = $after_amount;
+        $tmp['create_time'] = date("Y-m-d H:i:s");
+        PlayerBalanceLogs::insert($tmp);
+
+        $this->ApiSuccess($return,"01");
 
     }
 
@@ -1485,58 +1485,58 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-    	/////////////////////////
-      // 取得語系
-      $player_id = $input['player'];
-      $api_lang = $this->getAgentLang($player_id);
-      if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "02");
-      }
-      
-      $name_columns = "name_".$api_lang;
+        /////////////////////////
+        // 取得語系
+        $player_id = $input['player'];
+        $api_lang = $this->getAgentLang($player_id);
+        if ($api_lang === false) {
+            $this->error(__CLASS__, __FUNCTION__, "02");
+        }
+        
+        $name_columns = "name_".$api_lang;
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      if (!isset($input['page'])) {
-        $input['page'] = 1;
-      }
+        if (!isset($input['page'])) {
+            $input['page'] = 1;
+        }
 
-      $page_limit = $this->page_limit;
-      $page = $input['page'];
-      $skip = ($page-1)*$page_limit;
+        $page_limit = $this->page_limit;
+        $page = $input['page'];
+        $skip = ($page-1)*$page_limit;
 
-      // 帳變類型
-      $typeList = trans("pc.BalanceLogs_TypeList");
+        // 帳變類型
+        $typeList = trans("pc.BalanceLogs_TypeList");
 
-      //////////////////////////
+        //////////////////////////
 
-      $return = PlayerBalanceLogs::where("player_id",$player_id)
-      ->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->get();
-      if ($return === false) {
-        $this->error(__CLASS__, __FUNCTION__, "04");
-      }
+        $return = PlayerBalanceLogs::where("player_id",$player_id)
+        ->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->get();
+        if ($return === false) {
+            $this->error(__CLASS__, __FUNCTION__, "04");
+        }
 
-      $list = array();
-      foreach ($return as $k => $v) {
+        $list = array();
+        foreach ($return as $k => $v) {
 
-        $v['type'] = $typeList[$v['type']];
-        $list[] = $v;
+            $v['type'] = $typeList[$v['type']];
+            $list[] = $v;
 
-      } 
+        } 
 
-      $data = array();
-      $data['list'] = $list;
-      ////////////////////////
+        $data = array();
+        $data['list'] = $list;
+        ////////////////////////
 
-      // gzip
-      $data = $this->gzip($data);
+        // gzip
+        $data = $this->gzip($data);
 
-      $this->ApiSuccess($data,"01",true); 
+        $this->ApiSuccess($data,"01",true); 
 
     }
   ////////////// ////////////// ////////////// ////////////// //////////////
