@@ -505,7 +505,6 @@
     // websocket用
     var socket_status = false;
     var ws = null
-    const sport = parseInt(searchData.sport)
 
     // 投注限額
     const limit = JSON.parse(@json(session('player.limit_data')));
