@@ -524,7 +524,7 @@ class LsportApiController extends Controller {
             ->where("lsport_fixture.sport_id", $sport_id)
             ->groupBy('lsport_fixture.fixture_id')
             ->having('rate_count', '>', 0)
-            ->orderBy("lsport_league.order_by")
+            //->orderBy("lsport_league.order_by")
             ->get();
 
         $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
@@ -563,7 +563,8 @@ class LsportApiController extends Controller {
                 ->where("lsport_fixture.sport_id", $sport_id)
                 ->groupBy('lsport_fixture.fixture_id')
                 ->having('rate_count', '>', 0)
-                ->orderBy("lsport_league.order_by")->get();
+                //->orderBy("lsport_league.order_by")
+                ->get();
 
             $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
             $data['living'] = $tmp;
