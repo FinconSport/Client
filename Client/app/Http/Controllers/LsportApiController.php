@@ -1895,7 +1895,8 @@ class LsportApiController extends Controller {
         if ($return) {
             //---------------------------------
             // 取得代理的語系
-            $player_id2 = $session['player']['id'];
+            //$player_id2 = $session['player']['id'];
+            $player_id2 = Session::get('player.id');
             $agentlang = $this->getAgentLang($player_id2);
             if ($agentlang === false) {
                 //$this->error(__CLASS__, __FUNCTION__, "02");
