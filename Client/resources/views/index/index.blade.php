@@ -579,7 +579,7 @@
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
-            if (matchList.status === 1) { isReadyIndex = true; }
+            if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex === true && isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').removeAttr('hidden'); // show the main content
