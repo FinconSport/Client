@@ -364,10 +364,8 @@
 			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1) {
 					isReadyCommon = true
+					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking
-					setTimeout(() => {
-						viewCommonIni() // excute all common view layer ini function
-					}, 500);
 				}
 			}, 500);
 			// view layer
