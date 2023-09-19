@@ -7,17 +7,17 @@
 return [
 	// 前端
 	"main" => [
-		"id" => "交易編號",
-		"logs_type" => "交易類型",
-		"logs_amount" => "交易金額",
-		"logs_before_amount" => "交易前金額",
-		"logs_after_amount" => "交易後金額",
-		"logs_time" => "操作時間",
-		"first_page" => "第一頁",
-		"pre_page" => "上一頁",
-		"next_page" => "下一頁",
-		"last_page" => "最後一頁",
-		"nodata" => "暫無資料",
+		"id" => "Transaction ID", // "交易編號",
+		"logs_type" => "Transaction Type", // "交易類型",
+		"logs_amount" => "Transaction Amount", // "交易金額",
+		"logs_before_amount" => "Pre-transaction Amount", // "交易前金額",
+		"logs_after_amount" => "Post-transaction Amount", // "交易後金額",
+		"logs_time" => "Transaction Time", // "操作時間",
+		"first_page" => " First Page", // "第一頁",
+		"pre_page" => "Previous Page", // "上一頁",
+		"next_page" => "Next Page", // "下一頁",
+		"last_page" => "Last Page", // "最後一頁",
+		"nodata" => " No Data Available", // "暫無資料",
 	],
 
 	// 後端
