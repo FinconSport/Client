@@ -354,7 +354,7 @@
 
     // 列表資料
     var matchListD = {}
-    var callMatchListData = { token: token, player: player, sport_id: sport_id }
+    var callMatchListData = { token: token, player: player, sport_id: sport }
     const matchList_api = 'https://sportc.asgame.net/api/v1/match_index'
 
     // 投注限額資料
