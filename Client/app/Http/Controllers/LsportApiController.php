@@ -296,9 +296,12 @@ class LsportApiController extends Controller {
         }
 
         $langCol = "name_{$this->agent_lang}";// 語系
+        $sport_type = array();
         foreach ($arrSports as $k => $v) {
-            $sport_type[$v['id']] = $v[$langCol];
+            $sport_type["{$v['id']}"] = $v["{$langCol}"];
         }
+        print_r($arrSports);
+        print_r($sport_type);
 
         $menu_type = [
             0 => "living",  //走地
