@@ -321,6 +321,7 @@
     var latestTimeStamp = 0; // data layer
     var socket_status = false;
     var ws = null
+    var heartbeatTimer = null
 
     /* ===== DATA LAYER ===== */
     /*  
@@ -508,7 +509,7 @@
         const wsMsg = {
             "action": "register",
             "channel": 'match',
-            "player": player_id,
+            "player": player,
             "game_id": parseInt(searchData.sport),
             "series": registerId // 要註冊的賽事
         }

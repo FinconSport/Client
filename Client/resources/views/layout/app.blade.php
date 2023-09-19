@@ -275,21 +275,32 @@
 			$('.player').html(accountD.data.account)
 			$('.balance').html(accountD.data.balance)
 
-			// 跑馬燈
+			// 创建一个空的跑马灯容器
+			var marqueeContainer = $('<marquee>', {
+				id: 'marquee',
+				class: 'bg-deepgreen',
+				behavior: 'scroll',
+				direction: 'left'
+			});
+
 			marqueeD.data.forEach(function(item) { 
 				var link = $('<a>', { // 创建<a>元素
 					href: '#',
 					class: 'marqlink'
 				});
-				
+
 				var span = $('<span>', { // 创建<span>元素
 					class: 'marq_context',
 					text: item
 				});
+
 				link.append(span); // 将<span>添加到<a>中
-				link.wrap('<marquee id="marquee" class="bg-deepgreen" behavior="scroll" direction="left"></marquee>')
-				$('.rightNavTag').before(link) // 添加到頁面中
+				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
 			});
+
+			// 将跑马灯容器添加到页面中
+			$('.rightNavTag').before(marqueeContainer);
+
 
 
 			// 預設左邊選中樣式
