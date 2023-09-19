@@ -551,7 +551,7 @@ class LsportApiController extends Controller {
             // ->having('rate_count', '>', 0)
             // ->orderBy("ant_series_list.order_by")->get();
 
-            $return = AntMatchList::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
+            $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
                 ->join('lsport_league', function ($join) {
                     $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                 })
