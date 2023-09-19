@@ -1733,14 +1733,14 @@ class LsportApiController extends Controller {
      */
     protected function gzip($data) {
 
-        $data = json_encode($data, true);
-        // 使用 gzcompress() 函數進行壓縮
-        $compressedData = gzcompress($data);
+        return $data;
 
-        // 使用 base64_encode() 函數進行 base64 編碼
-        $base64Data = base64_encode($compressedData);
+        //除錯後修正!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // $data = json_encode($data, true);
+        // $compressedData = gzcompress($data);  // 使用 gzcompress() 函數進行壓縮
+        // $base64Data = base64_encode($compressedData);  // 使用 base64_encode() 函數進行 base64 編碼
 
-        return $base64Data;
+        // return $base64Data;
     }
 
     /**
@@ -1818,7 +1818,8 @@ class LsportApiController extends Controller {
         $tmp['message'] = $success_code;
         $tmp['gzip'] = 0;
         if ($gzip) {
-            $tmp['gzip'] = 1;
+            //除錯後修正!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //$tmp['gzip'] = 1;
         }
         
         echo json_encode($tmp, true);
