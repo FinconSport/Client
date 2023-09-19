@@ -415,7 +415,18 @@
 <script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <!-- <script src="{{ asset('js/bootstrap.min.js?v=' .$current_time) }}"></script> -->
 <script>
-    var searchData = @json($search);
+    var isReadyRuleInt = null
+    $(document).ready(function() {
+        // check if api are all loaded every 500 ms 
+        isReadyRuleInt = setInterval(() => {
+            if( isReadyCommon ) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').css('opacity', 1); // show the main content
+                clearInterval(isReadyRuleInt); // stop checking
+            }
+        }, 500);
+    });
+
     // 語系
     var langTrans = @json(trans('rule'));
 
