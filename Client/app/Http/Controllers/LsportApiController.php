@@ -106,7 +106,6 @@ class LsportApiController extends Controller {
      * 
      * 取出當前有效的'賽事結果'讓前端顯示。
      * 
-     * 資料表: GameResult
      *
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return ::_ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
@@ -161,7 +160,6 @@ class LsportApiController extends Controller {
      * 
      * 取出當前有效的'Client端跑馬燈'(也就是Client端系統公告)讓前端顯示。
      * 
-     * 資料表: ClientMarquee
      * 
     * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return _ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
@@ -196,7 +194,6 @@ class LsportApiController extends Controller {
      * 
      * 取出各種公告(依系統、各球種...分類)讓前端顯示。
      * 
-     * 資料表: ClientMarquee, --AntNoticeList
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -272,7 +269,6 @@ class LsportApiController extends Controller {
      *
      * 取出賽事列表讓前端顯示。
      * 
-     * 資料表: --AntGameList, --AntMatchList
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -287,6 +283,9 @@ class LsportApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN", true);
         }
 
+        // 取得語系
+        $langCol = "name_{$this->agent_lang}";
+
     	//---------------------------------
         // 取得球種資料
         //$return = AntGameList::where("status", 1)->get();
@@ -295,7 +294,7 @@ class LsportApiController extends Controller {
             $this->_ApiError("01");
         }
 
-        $langCol = "name_{$this->agent_lang}";// 語系
+        $langCol = "{$langCol}";// 語系
         $sport_type = array();
         foreach ($arrSports as $k => $v) {
             $sport_type["{$v['sport_id']}"] = $v["{$langCol}"];
@@ -419,9 +418,8 @@ class LsportApiController extends Controller {
 
 
     /**
-     * func purpose and usage
+     * MatchSport
      *
-     * 資料表:
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -436,6 +434,9 @@ class LsportApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN", true);
         }
 
+        // 取得語系
+        $langCol = "name_{$this->agent_lang}";
+
         //---------------------------------
         // 取得球種資料
         //$return = AntGameList::where("status", 1)->get();
@@ -449,7 +450,7 @@ class LsportApiController extends Controller {
             $tmp = array();
 
             $tmp['id'] = $v['id'];
-            $tmp['name'] = $v['name_cn'];
+            $tmp['name'] = $v["{langCol}"];
 
             $data[] = $tmp;
         }
@@ -461,7 +462,6 @@ class LsportApiController extends Controller {
     /**
      * func purpose and usage
      *
-     * 資料表:
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -476,8 +476,7 @@ class LsportApiController extends Controller {
             $this->_ApiError("PLAYER_RELOGIN", true);
         }
 
-    	/////////////////////////
-        // 語系
+        // 取得語系
         $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
@@ -581,7 +580,6 @@ class LsportApiController extends Controller {
     /**
      * func purpose and usage
      *
-     * 資料表:
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -595,6 +593,9 @@ class LsportApiController extends Controller {
         if ($isPlayerOnline === false) {
             $this->_ApiError("PLAYER_RELOGIN", true);
         }
+
+        // 取得語系
+        $langCol = "name_{$this->agent_lang}";
 
         //////////////////////////////////////////
 
@@ -707,7 +708,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['league_id'] = $series_data['league_id'];
-        $order['league_name'] = $series_data['name_cn'];
+        $order['league_name'] = $series_data["{$langCol}"];
         $order['fixture_id'] = $fixture_id;
         $order['sport_id'] = $arrFixtures['sport_id'];
         //////////////////////////////////////////
@@ -718,18 +719,18 @@ class LsportApiController extends Controller {
         // order data
         if ($teams_data[0]['index'] == 1) {
             $order['home_team_id'] = $teams_data[0]['team']['id'];
-            $order['home_team_name'] = $teams_data[0]['team']['name_cn'];
+            $order['home_team_name'] = $teams_data[0]['team']["$langCol}"];
         } else {
             $order['away_team_id'] = $teams_data[0]['team']['id'];
-            $order['away_team_name'] = $teams_data[0]['team']['name_cn'];
+            $order['away_team_name'] = $teams_data[0]['team']["name_{$this->agent_lang}"];
         }
         
         if ($teams_data[1]['index'] == 1) {
             $order['home_team_id'] = $teams_data[1]['team']['id'];
-            $order['home_team_name'] = $teams_data[1]['team']['name_cn'];
+            $order['home_team_name'] = $teams_data[1]['team']["{$langCol}"];
         } else {
             $order['away_team_id'] = $teams_data[1]['team']['id'];
-            $order['away_team_name'] = $teams_data[1]['team']['name_cn'];
+            $order['away_team_name'] = $teams_data[1]['team']["{$langCol}"];
         }
         //////////////////////////////////////////
 
@@ -763,8 +764,8 @@ class LsportApiController extends Controller {
         // order data
         $order['type_id'] = $bet_type_id;
         $order['type_item_id'] = $bet_type_item_id;
-        $order['type_name'] = $arrOdds['name_cn'];
-        $order['type_item_name'] = $rate_data['name_cn'];
+        $order['type_name'] = $arrOdds['name_cn'];  // "name_{$this->agent_lang}";
+        $order['type_item_name'] = $rate_data['name_cn'];  // "name_{$this->agent_lang}";
         $order['type_priority'] = $type_priority;
         $order['bet_rate'] = $rate_data['rate'];
         
@@ -834,7 +835,6 @@ class LsportApiController extends Controller {
     /**
      * func purpose and usage
      *
-     * 資料表:
      * 
      * @param Request $request: 前端傳入的使用者請求，必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      * @return 
@@ -1032,7 +1032,7 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // order data
             $order['league_id'] = $series_data['league_id'];
-            $order['league_name'] = $series_data['name_cn'];
+            $order['league_name'] = $series_data['name_cn'];    // "name_{$this->agent_lang}";
             $order['fixture_id'] = $fixture_id;
             $order['sport_id'] = $arrFixtures['sport_id'];
             //////////////////////////////////////////
@@ -1044,18 +1044,18 @@ class LsportApiController extends Controller {
             // order data
             if ($teams_data[0]['index'] == 1) {
                 $order['home_team_id'] = $teams_data[0]['team']['id'];
-                $order['home_team_name'] = $teams_data[0]['team']['name_cn'];
+                $order['home_team_name'] = $teams_data[0]['team']['name_cn'];    // "name_{$this->agent_lang}";
             } else {
                 $order['away_team_id'] = $teams_data[0]['team']['id'];
-                $order['away_team_name'] = $teams_data[0]['team']['name_cn'];
+                $order['away_team_name'] = $teams_data[0]['team']['name_cn'];    // "name_{$this->agent_lang}";
             }
             
             if ($teams_data[1]['index'] == 1) {
                 $order['home_team_id'] = $teams_data[1]['team']['id'];
-                $order['home_team_name'] = $teams_data[1]['team']['name_cn'];
+                $order['home_team_name'] = $teams_data[1]['team']['name_cn'];    // "name_{$this->agent_lang}";
             } else {
                 $order['away_team_id'] = $teams_data[1]['team']['id'];
-                $order['away_team_name'] = $teams_data[1]['team']['name_cn'];
+                $order['away_team_name'] = $teams_data[1]['team']['name_cn'];    // "name_{$this->agent_lang}";
             }
             //////////////////////////////////////////
     
@@ -1895,9 +1895,8 @@ class LsportApiController extends Controller {
         if ($return) {
             //---------------------------------
             // 取得代理的語系
-            // $player_id2 = $session['player']['id'];
-            // $agentlang = $this->getAgentLang($player_id2);
-            $agentlang = $this->getAgentLang($player_id);
+            $player_id2 = $session['player']['id'];
+            $agentlang = $this->getAgentLang($player_id2);
             if ($agentlang === false) {
                 //$this->error(__CLASS__, __FUNCTION__, "02");
                 $agentlang = 'en';
