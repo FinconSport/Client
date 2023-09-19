@@ -26,7 +26,7 @@
             <h3>Loading</h3>
         </div>
     </div>
-	<div id='wrap' class="h-100 pb-3 w-100" hidden>
+	<div id='wrap' class="h-100 pb-3 w-100" style="opacity: 0">
 		<div class="leftArea">
 			<div id='logoArea'>
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">

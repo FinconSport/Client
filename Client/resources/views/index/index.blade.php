@@ -391,10 +391,10 @@
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex === true && isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').removeAttr('hidden'); // show the main content
                 clearInterval(isReadyIndexInt); // stop checking
                 setTimeout(() => {
                     viewIni() // excute all view layer ini function
+                    $('#wrap').css('opacity', 1); // show the main content
                 }, 500);
             }
         }, 500);
