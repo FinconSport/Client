@@ -47,11 +47,6 @@ class LsportApiController extends Controller {
 
     protected $agent_lang;  // 玩家的代理的語系. 選擇相對應的DB翻譯欄位時會用到.
 
-    public function __construct() {
-
-        //...
-
-    }
 
     /**
      * index
@@ -74,33 +69,33 @@ class LsportApiController extends Controller {
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return ::_ApiSuccess($data = ARRAY{account, balance}) | ApiError
+     * @return ::ApiSuccess($data = ARRAY{account, balance}) | ApiError
      */
     public function CommonAccount(Request $request) {
       
         $input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-          $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+          $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 獲取用戶資料
         $player_id = $input['player'];
         $return = Player::where("id", $player_id)->first();
         if ($return === false) {
-          $this->_ApiError("01");
+          $this->ApiError("01");
         }
 
         if ($return['status'] != 1) {
-          $this->_ApiError("02");
+          $this->ApiError("02");
         }
 
         $data = array();
         $data['account'] = $return['account'];
         $data['balance'] = $return['balance'];
         
-        $this->_ApiSuccess($data, "01");
+        $this->ApiSuccess($data, "01");
     }
 
     /**
@@ -111,23 +106,23 @@ class LsportApiController extends Controller {
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return ::_ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
+     * @return ::ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
      */
     // 輪播
     public function IndexCarousel(Request $request) {
       
         $input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         //---------------------------------
         // DB取出有效的賽事結果
         $return = GameResult::where("status", 1)->get();
         if ($return === false) {
-          $this->_ApiError("01");
+          $this->ApiError("01");
         }
 
         //欲回傳的賽事結果的欄位
@@ -154,7 +149,7 @@ class LsportApiController extends Controller {
             $data[] = $tmp;
         }
 
-        $this->_ApiSuccess($data, "01");
+        $this->ApiSuccess($data, "01");
 
     }
 
@@ -166,23 +161,23 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
+     * @return ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
      */
     // 首頁跑馬燈
     public function IndexMarquee(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         //---------------------------------
         // 自DB取出有效的Client端跑馬燈(此跑馬燈其實也就是Client端系統公告)
         $return = ClientMarquee::where("status", 1)->get();      
         if ($return === false) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         $data = array();
@@ -190,7 +185,7 @@ class LsportApiController extends Controller {
             $data[] = $v['marquee'];
         }
 
-        $this->_ApiSuccess($data, "01");
+        $this->ApiSuccess($data, "01");
     }
 
     /**
@@ -200,16 +195,16 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ARRAY Client各種公告列表) | ApiError
+     * @return ApiSuccess($data = ARRAY Client各種公告列表) | ApiError
      */
     // 系統公告接口
     public function IndexNotice(Request $request) {
 
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         //---------------------------------
@@ -219,7 +214,7 @@ class LsportApiController extends Controller {
         // 系統公告
         $return = ClientMarquee::where("status", 1)->get();      
         if ($return === false) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         foreach ($return as $k => $v) {
@@ -245,13 +240,13 @@ class LsportApiController extends Controller {
 
         // $return = AntNoticeList::where('create_time', ">=", $previous_day)->orderBy("create_time", "DESC")->get();
         // if ($return === false) {
-        //     $this->_ApiError("02");
+        //     $this->ApiError("02");
         // }
 
-        // foreach ($return as $k => $v) {
+        // foreach ($return as $k => $v) { 
         //     $game_id = $v['game_id'];
-        //     $title = $v["title_{$this->agent_lang}"];
-        //     $context = $v["context_{$this->agent_lang}"];
+        //     $title = $v['title_'.$this->agent_lang];
+        //     $context = $v['context_'.$this->agent_lang];
         //     $create_time = $v['create_time'];
 
         //     $notice_list[$game_id][] = [
@@ -263,9 +258,9 @@ class LsportApiController extends Controller {
         // }
 
         // gzip
-        $notice_list = $this->_gzip($notice_list);
+        $notice_list = $this->gzip($notice_list);
 
-        $this->_ApiSuccess($notice_list, "01", true);
+        $this->ApiSuccess($notice_list, "01", true);
     }
 
     /**
@@ -275,33 +270,32 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ARRAY 賽事列表) | ApiError
+     * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
      */
     // 首頁賽事
     public function IndexMatchList(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
     	//---------------------------------
         // 取得球種資料
         //$return = AntGameList::where("status", 1)->get();
         $arrSports = LsportSport::get();
         if ($arrSports === false) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
-        $langCol = "{$langCol}";// 語系
         $sport_type = array();
         foreach ($arrSports as $k => $v) {
-            $sport_type["{$v['sport_id']}"] = $v["{$langCol}"];
+            $sport_type[$v['sport_id']] = $v[$langCol];
         }
 
         $menu_type = [
@@ -342,7 +336,7 @@ class LsportApiController extends Controller {
                         ->get();
 
                     if ($arrFixtures === false) {
-                        $this->_ApiError("01");
+                        $this->ApiError("01");
                     }
                     
                     $tmp = array();
@@ -385,7 +379,7 @@ class LsportApiController extends Controller {
                     ->get();
 
                     if ($arrFixtures === false) {
-                        $this->_ApiError("01");
+                        $this->ApiError("01");
                     }
                     
                     $tmp = array();
@@ -410,7 +404,7 @@ class LsportApiController extends Controller {
             
         }
 
-        $this->_ApiSuccess($data, "01"); 
+        $this->ApiSuccess($data, "01"); 
     }
 
 
@@ -428,38 +422,38 @@ class LsportApiController extends Controller {
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ARRAY 球種列表) | ApiError
+     * @return ApiSuccess($data = ARRAY 球種列表) | ApiError
      */
     // 賽事列表-分類
     public function MatchSport(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //---------------------------------
         // 取得球種資料
         //$return = AntGameList::where("status", 1)->get();
         $arrLsportSports = LsportSport::get();
         if ($arrLsportSports === false) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         $arrAllSports = array();
         foreach ($arrLsportSports as $k => $v) {
             $arrAllSports[] = array(
                 'id' => $v['id'],
-                'name' => $v["{$langCol}"],
+                'name' => $v[$langCol],
             );
         }
 
-        $this->_ApiSuccess($arrAllSports, "01"); 
+        $this->ApiSuccess($arrAllSports, "01"); 
 
     }
 
@@ -471,24 +465,24 @@ class LsportApiController extends Controller {
      * @param Request $request: 前端傳入的使用者請求，
      *                              # 必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
      *                              # 必須包含sport_id代表球種的ID。Key 'sport_id' is essential, which represents the sport ID.
-     * @return _ApiSuccess($data = ARRAY 該指定球種的含賽事資料(賠率、聯盟等)的賽事列表) | ApiError
+     * @return ApiSuccess($data = ARRAY 該指定球種的含賽事資料(賠率、聯盟等)的賽事列表) | ApiError
      */
     public function MatchIndex(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
 
         if (!isset($input['sport_id'])) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
         
         $sport_id = $input['sport_id'];
@@ -521,18 +515,12 @@ class LsportApiController extends Controller {
             ->join('lsport_league', function ($join) {
                 $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
             })
-            ->select('lsport_fixture.*', DB::raw('COUNT(lsport_market_bet.id) as rate_count'))
-            //->where('lsport_market_bet.is_active', '=', 1)
             ->where('lsport_league.status', 1)
-            ->where('lsport_fixture.status', 1)
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
             ->where("lsport_fixture.sport_id", $sport_id)
             ->groupBy('lsport_fixture.fixture_id')
-            ->having('rate_count', '>', 0)
-            //->orderBy("lsport_league.order_by")
             ->get();
 
-        $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
         $data['early'] = $tmp;
 
         //////////////////////////////
@@ -542,45 +530,16 @@ class LsportApiController extends Controller {
             // 串關不抓滾球賽事
             $data['living'] = array();
         } else {
-            // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-            // ->join('ant_series_list', function ($join) {
-            //         $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-            // })
-            // ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
-            // ->where('ant_rate_list.is_active', '=', 1)
-            // ->where('ant_series_list.status', 1)
-            // ->where('ant_match_list.status', 2)
-            // ->where('ant_match_list.start_time', "<=", $after_tomorrow)
-            // ->where("ant_match_list.game_id", $sport_id)
-            // ->groupBy('ant_match_list.match_id')
-            // ->having('rate_count', '>', 0)
-            // ->orderBy("ant_series_list.order_by")->get();
-
-            $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
-                ->join('lsport_league', function ($join) {
-                    $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
-                })
-                ->select('lsport_fixture.*', DB::raw('COUNT(lsport_market_bet.id) as rate_count'))
-                //->where('lsport_market_bet.is_active', '=', 1)
-                ->where('lsport_league.status', 1)
-                ->where('lsport_fixture.status', 2)
-                ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
-                ->where("lsport_fixture.sport_id", $sport_id)
-                ->groupBy('lsport_fixture.fixture_id')
-                ->having('rate_count', '>', 0)
-                //->orderBy("lsport_league.order_by")
-                ->get();
-
-            $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
             $data['living'] = $tmp;
         }
         
         ///////////////////////////////
 
         // gzip
-        $data = $this->_gzip($data);
+        // $data = $this->gzip($data);
 
-        $this->_ApiSuccess($data, "01", true);
+        // $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01", false);
     }
 
     /**
@@ -590,19 +549,19 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ???) | ApiError
+     * @return ApiSuccess($data = ???) | ApiError
      */
     public function GameBet(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
 
@@ -643,18 +602,18 @@ class LsportApiController extends Controller {
         
         // 參數檢查 TODO - 初步 隨便弄弄
         if ($bet_amount <= 0) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         // 取得用戶資料
         $return = Player::where("id", $player_id)->first();
         if ($return == false) {
-            $this->_ApiError("02");
+            $this->ApiError("02");
         }
 
         // 如果用戶已停用
         if ($return['status'] == 0) {
-            $this->_ApiError("03");
+            $this->ApiError("03");
         }
 
         $player_account = $return['account'];
@@ -664,7 +623,7 @@ class LsportApiController extends Controller {
 
         // 判斷餘額是否足夠下注
         if ($player_balance < $bet_amount) {
-            $this->_ApiError("04");
+            $this->ApiError("04");
         }
         
         //////////////////////////////////////////
@@ -677,12 +636,12 @@ class LsportApiController extends Controller {
         // 取得商戶資料
         $return = Agent::where("id", $agent_id)->first();
         if ($return == false) {
-            $this->_ApiError("05");
+            $this->ApiError("05");
         }
 
         // 如果商戶已停用
         if ($return['status'] == 0) {
-            $this->_ApiError("06");
+            $this->ApiError("06");
         }
 
         $agent_account = $return['account'];
@@ -700,14 +659,14 @@ class LsportApiController extends Controller {
             ->where("sport_id", $sport_id)
             ->first();
         if ($arrFixtures == false) {
-            $this->_ApiError("07");
+            $this->ApiError("07");
         }
 
         //match status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!! 修改 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //以下到結尾有許多欄位都需要修改
         if ($arrFixtures['status'] >= 3) {
-            $this->_ApiError("08");
+            $this->ApiError("08");
         }
 
         // decode 聯盟
@@ -715,7 +674,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['league_id'] = $series_data['league_id'];
-        $order['league_name'] = $series_data["{$langCol}"];
+        $order['league_name'] = $series_data[$langCol];
         $order['fixture_id'] = $fixture_id;
         $order['sport_id'] = $arrFixtures['sport_id'];
         //////////////////////////////////////////
@@ -729,15 +688,15 @@ class LsportApiController extends Controller {
             $order['home_team_name'] = $teams_data[0]['team']["$langCol}"];
         } else {
             $order['away_team_id'] = $teams_data[0]['team']['id'];
-            $order['away_team_name'] = $teams_data[0]['team']["name_{$this->agent_lang}"];
+            $order['away_team_name'] = $teams_data[0]['team']['name_' . $this->agent_lang];
         }
         
         if ($teams_data[1]['index'] == 1) {
             $order['home_team_id'] = $teams_data[1]['team']['id'];
-            $order['home_team_name'] = $teams_data[1]['team']["{$langCol}"];
+            $order['home_team_name'] = $teams_data[1]['team'][$langCol];
         } else {
             $order['away_team_id'] = $teams_data[1]['team']['id'];
-            $order['away_team_name'] = $teams_data[1]['team']["{$langCol}"];
+            $order['away_team_name'] = $teams_data[1]['team'][$langCol];
         }
         //////////////////////////////////////////
 
@@ -745,7 +704,7 @@ class LsportApiController extends Controller {
         // $return = AntRateList::where("rate_id", $bet_type_id)->where("match_id", $match_id)->first();
         $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
         if ($arrOdds == false) {
-            $this->_ApiError("09");
+            $this->ApiError("09");
         }
 
         $rate_status = $arrOdds['status'];
@@ -764,15 +723,15 @@ class LsportApiController extends Controller {
 
         // 非開盤狀態 1开、2锁、4封、5结算、99取消
         if (($rate_status != 1) || ($current_rate_status != 1)) {
-            $this->_ApiError("14");
+            $this->ApiError("14");
         }
 
         //////////////////////////////////////////
         // order data
         $order['type_id'] = $bet_type_id;
         $order['type_item_id'] = $bet_type_item_id;
-        $order['type_name'] = $arrOdds['name_cn'];  // "name_{$this->agent_lang}";
-        $order['type_item_name'] = $rate_data['name_cn'];  // "name_{$this->agent_lang}";
+        $order['type_name'] = $arrOdds['name_cn'];  // 'name_' . $this->agent_lang;
+        $order['type_item_name'] = $rate_data['name_cn'];  // 'name_' . $this->agent_lang;
         $order['type_priority'] = $type_priority;
         $order['bet_rate'] = $rate_data['rate'];
         
@@ -783,7 +742,7 @@ class LsportApiController extends Controller {
 
         // 判斷 is_better_rate
         if (($is_better_rate == 1) && ($current_rate < $player_rate)) {
-            $this->_ApiError("10");
+            $this->ApiError("10");
         }
 
         //////////////////////////////////////////
@@ -798,7 +757,7 @@ class LsportApiController extends Controller {
         // 新增注單資料
         $newOrderId = GameOrder::insertGetId($order);      
         if ($newOrderId == false) {
-            $this->_ApiError("11");
+            $this->ApiError("11");
         }
 
         $order_id = $newOrderId;
@@ -807,7 +766,7 @@ class LsportApiController extends Controller {
             "m_id" => $order_id
         ]);      
         if ($return == false) {
-            $this->_ApiError("12");
+            $this->ApiError("12");
         }
         
         // 扣款
@@ -819,7 +778,7 @@ class LsportApiController extends Controller {
             "balance" => $after_amount
         ]);      
         if ($return == false) {
-            $this->_ApiError("13");
+            $this->ApiError("13");
         }
         
         // 帳變
@@ -835,7 +794,7 @@ class LsportApiController extends Controller {
         $tmp['create_time'] = date("Y-m-d H:i:s");
         PlayerBalanceLogs::insert($tmp);
 
-        $this->_ApiSuccess($return, "01");
+        $this->ApiSuccess($return, "01");
 
     }
 
@@ -846,15 +805,15 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ???) | ApiError
+     * @return ApiSuccess($data = ???) | ApiError
      */
     public function mGameBet(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         //////////////////////////////////////////
@@ -888,18 +847,18 @@ class LsportApiController extends Controller {
         
         // 參數檢查 TODO - 初步 隨便弄弄
         if ($bet_amount <= 0) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         // 取得用戶資料
         $return = Player::where("id", $player_id)->first();
         if ($return == false) {
-            $this->_ApiError("02");
+            $this->ApiError("02");
         }
 
         // 如果用戶已停用
         if ($return['status'] == 0) {
-            $this->_ApiError("03");
+            $this->ApiError("03");
         }
 
         $player_account = $return['account'];
@@ -909,7 +868,7 @@ class LsportApiController extends Controller {
 
         // 判斷餘額是否足夠下注
         if ($player_balance < $bet_amount) {
-            $this->_ApiError("04");
+            $this->ApiError("04");
         }
 
         // 判斷下注額度是否超過限額
@@ -926,12 +885,12 @@ class LsportApiController extends Controller {
         $return = Agent::where("id", $agent_id)
             ->first();
         if ($return == false) {
-            $this->_ApiError("05");
+            $this->ApiError("05");
         }
 
         // 如果商戶已停用
         if ($return['status'] == 0) {
-            $this->_ApiError("06");
+            $this->ApiError("06");
         }
 
         $agent_account = $return['account'];
@@ -963,18 +922,18 @@ class LsportApiController extends Controller {
         
             // 參數檢查 TODO - 初步 隨便弄弄
             if ($bet_amount <= 0) {
-                $this->_ApiError("07");
+                $this->ApiError("07");
             }
     
             // 取得用戶資料
             $return = Player::where("id", $player_id)->first();
             if ($return == false) {
-                $this->_ApiError("08");
+                $this->ApiError("08");
             }
     
             // 如果用戶已停用
             if ($return['status'] == 0) {
-                $this->_ApiError("09");
+                $this->ApiError("09");
             }
     
             $player_account = $return['account'];
@@ -984,7 +943,7 @@ class LsportApiController extends Controller {
     
             // 判斷餘額是否足夠下注
             if ($player_balance < $bet_amount) {
-                $this->_ApiError("10");
+                $this->ApiError("10");
             }
             
             //////////////////////////////////////////
@@ -997,12 +956,12 @@ class LsportApiController extends Controller {
             // 取得商戶資料
             $return = Agent::where("id", $agent_id)->first();
             if ($return == false) {
-                $this->_ApiError("11");
+                $this->ApiError("11");
             }
     
             // 如果商戶已停用
             if ($return['status'] == 0) {
-                $this->_ApiError("12");
+                $this->ApiError("12");
             }
     
             $agent_account = $return['account'];
@@ -1017,7 +976,7 @@ class LsportApiController extends Controller {
             // $return = AntMatchList::where("match_id", $match_id)->where("game_id", $game_id)->first();
             $arrFixtures = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
             if ($arrFixtures == false) {
-                $this->_ApiError("13");
+                $this->ApiError("13");
             }
     
             // 判斷注單 是否為同一game_id
@@ -1025,14 +984,14 @@ class LsportApiController extends Controller {
                 $m_game_id = $arrFixtures['sport_id'];
             } else {
                 if ($m_game_id != $arrFixtures['sport_id']) {
-                    $this->_ApiError("14");
+                    $this->ApiError("14");
                 }
             }
 
             //match status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
             // 串關只能賽前注單
             if ($arrFixtures['status'] != 1) {
-                $this->_ApiError("15");
+                $this->ApiError("15");
             }
     
             // decode 聯盟
@@ -1040,7 +999,7 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // order data
             $order['league_id'] = $series_data['league_id'];
-            $order['league_name'] = $series_data['name_cn'];    // "name_{$this->agent_lang}";
+            $order['league_name'] = $series_data['name_cn'];    // 'name_' . $this->agent_lang;
             $order['fixture_id'] = $fixture_id;
             $order['sport_id'] = $arrFixtures['sport_id'];
             //////////////////////////////////////////
@@ -1052,18 +1011,18 @@ class LsportApiController extends Controller {
             // order data
             if ($teams_data[0]['index'] == 1) {
                 $order['home_team_id'] = $teams_data[0]['team']['id'];
-                $order['home_team_name'] = $teams_data[0]['team']['name_cn'];    // "name_{$this->agent_lang}";
+                $order['home_team_name'] = $teams_data[0]['team']['name_cn'];    // 'name_' . $this->agent_lang;
             } else {
                 $order['away_team_id'] = $teams_data[0]['team']['id'];
-                $order['away_team_name'] = $teams_data[0]['team']['name_cn'];    // "name_{$this->agent_lang}";
+                $order['away_team_name'] = $teams_data[0]['team']['name_cn'];    // 'name_' . $this->agent_lang;
             }
             
             if ($teams_data[1]['index'] == 1) {
                 $order['home_team_id'] = $teams_data[1]['team']['id'];
-                $order['home_team_name'] = $teams_data[1]['team']['name_cn'];    // "name_{$this->agent_lang}";
+                $order['home_team_name'] = $teams_data[1]['team']['name_cn'];    // 'name_' . $this->agent_lang;
             } else {
                 $order['away_team_id'] = $teams_data[1]['team']['id'];
-                $order['away_team_name'] = $teams_data[1]['team']['name_cn'];    // "name_{$this->agent_lang}";
+                $order['away_team_name'] = $teams_data[1]['team']['name_cn'];    // 'name_' . $this->agent_lang;
             }
             //////////////////////////////////////////
     
@@ -1071,7 +1030,7 @@ class LsportApiController extends Controller {
             // $return = AntRateList::where("rate_id", $bet_type_id)->where("match_id", $match_id)->first();
             $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
             if ($arrOdds === false) {
-                $this->_ApiError("16");
+                $this->ApiError("16");
             }
             
             $rate_status = $arrOdds['status'];
@@ -1091,7 +1050,7 @@ class LsportApiController extends Controller {
     
             // 非開盤狀態 1开、2锁、4封、5结算、99取消
             if (($rate_status != 1) || ($current_rate_status != 1)) {
-                $this->_ApiError("21");
+                $this->ApiError("21");
             }
     
             //////////////////////////////////////////
@@ -1114,7 +1073,7 @@ class LsportApiController extends Controller {
     
             // 判斷 is_better_rate
             if (($is_better_rate == 1) && ($current_rate < $player_rate)) {
-                $this->_ApiError("17");
+                $this->ApiError("17");
             }
     
             //////////////////////////////////////////
@@ -1129,7 +1088,7 @@ class LsportApiController extends Controller {
             // 新增注單資料
             $return = GameOrder::insertGetId($order);      
             if ($return == false) {
-                $this->_ApiError("18");
+                $this->ApiError("18");
             }
 
             // 設定串關id , 這是第一筆注單
@@ -1140,7 +1099,7 @@ class LsportApiController extends Controller {
                         "m_id" => $m_order_id
                     ]);      
                 if ($return == false) {
-                    $this->_ApiError("19");
+                    $this->ApiError("19");
                 }
             }
         }
@@ -1156,7 +1115,7 @@ class LsportApiController extends Controller {
             "balance" => $after_amount
         ]);      
         if ($return == false) {
-            $this->_ApiError("20");
+            $this->ApiError("20");
         }
         
         // 帳變
@@ -1172,7 +1131,7 @@ class LsportApiController extends Controller {
         $tmp['create_time'] = date("Y-m-d H:i:s");
         PlayerBalanceLogs::insert($tmp);
 
-        $this->_ApiSuccess($return, "01");
+        $this->ApiSuccess($return, "01");
 
     }
 
@@ -1186,21 +1145,21 @@ class LsportApiController extends Controller {
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
      *                          # sport: 球種的ID，未指定時為1 (足球)。The specified sport ID. Value = 1 (soccer) when not specified.
      *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
-     * @return _ApiSuccess($data = ARRAY 指定球種的賽事狀態列表) | ApiError
+     * @return ApiSuccess($data = ARRAY 指定球種的賽事狀態列表) | ApiError
      */
     // 賽事結果 
     public function ResultIndex(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         /////////////////////////
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
         // 輸入判定
@@ -1275,7 +1234,7 @@ class LsportApiController extends Controller {
                 ->where("status",1)
                 ->first();
             if ($tmp_logo === false) {
-                $this->_ApiError("01");
+                $this->ApiError("01");
             }
             if ($tmp_logo == null) {
                 continue;
@@ -1348,7 +1307,7 @@ class LsportApiController extends Controller {
         }
 
         // gzip
-        $data = $this->_gzip($data);
+        $data = $this->gzip($data);
 
         $this->ajaxSuccess("success_result_index_01", $data);
     }
@@ -1368,21 +1327,21 @@ class LsportApiController extends Controller {
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
      *                          # fixture_id: 指定賽事的ID。The specified fixture ID.
      *                          # sport_id: 指定賽事的球種ID。The sport ID of the specified fixture.
-     * @return _ApiSuccess($data = ARRAY 指定的單場賽事資料) | ApiError
+     * @return ApiSuccess($data = ARRAY 指定的單場賽事資料) | ApiError
      */
     // 遊戲頁
     public function GameIndex(Request $request) {
 
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         /////////////////////////
         // 語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
 
@@ -1390,10 +1349,10 @@ class LsportApiController extends Controller {
         $fixture_id = $input['fixture_id'];
 
         if (($fixture_id+0 != $fixture_id) && ($fixture_id+0 == 0)) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
         if (($sport_id+0 != $sport_id) && ($sport_id+0 == 0)) {
-            $this->_ApiError("02");
+            $this->ApiError("02");
         }
 
         //$return = AntMatchList::where("match_id", $match_id)->where("game_id", $sport_id)->get();
@@ -1401,7 +1360,7 @@ class LsportApiController extends Controller {
             ->where("sport_id", $sport_id)
             ->get();
         if ($return === false) {
-            $this->_ApiError("03");
+            $this->ApiError("03");
         }
         
         $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
@@ -1411,9 +1370,9 @@ class LsportApiController extends Controller {
         /**************************************/
 
         // gzip
-        $data = $this->_gzip($data);
+        $data = $this->gzip($data);
 
-        $this->_ApiSuccess($data, "01", true); 
+        $this->ApiSuccess($data, "01", true); 
     }
 
     /**
@@ -1423,21 +1382,21 @@ class LsportApiController extends Controller {
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ???) | ApiError
+     * @return ApiSuccess($data = ???) | ApiError
      */
     // 下注紀錄
     public function CommonOrder(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         /////////////////////////
         // 語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
 
@@ -1475,7 +1434,7 @@ class LsportApiController extends Controller {
 
         $return = $GameOrder->groupBy('m_id')->skip($skip)->take($page_limit)->orderBy('m_id', 'DESC')->get();
         if ($return === false) {
-            $this->_ApiError("01");
+            $this->ApiError("01");
         }
 
         $status_message = array(0=>"已取消",1=>"等待審核",2=>"等待開獎",3=>"等待派獎",4=>"已開獎");
@@ -1688,32 +1647,35 @@ class LsportApiController extends Controller {
         ////////////////////////
 
         // gzip
-        $data = $this->_gzip($data);
+        $data = $this->gzip($data);
 
-        $this->_ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01", true);
 
     }
 
     /**
-     * func purpose and usage
+     * BalanceLogs
+     * 
+     * 取得當前玩家的帳變紀錄 (balance logs)。
+     * The (balance logs)。
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
-     * @return _ApiSuccess($data = ARRAY 賽事列表) | ApiError
+     *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
+     * @return ApiSuccess($data = ARRAY 列表) | ApiError
      */
-    // 帳變紀錄
     public function BalanceLogs(Request $request) {
       
     	$input = $this->getRequest($request);
 
-        $isPlayerOnline = $this->_isPlayerOnline($input);
-        if ($isPlayerOnline === false) {
-            $this->_ApiError("PLAYER_RELOGIN", true);
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         /////////////////////////
         // 取得語系
-        $langCol = "name_{$this->agent_lang}";
+        $langCol = 'name_' . $this->agent_lang;
 
         //////////////////////////////////////////
 
@@ -1752,16 +1714,16 @@ class LsportApiController extends Controller {
         ////////////////////////
 
         // gzip
-        $data = $this->_gzip($data);
+        $data = $this->gzip($data);
 
-        $this->_ApiSuccess($data, "01", true); 
+        $this->ApiSuccess($data, "01", true); 
 
     }
 
-    //=================== PROTECTED methods ===================
+    //====================================== PROTECTED methods ======================================
 
     /**
-     * _gzip
+     * gzip
      * 
      * 壓縮過大過長的資料以利於傳遞
      * Gzipping long and big data for better transmission efficiency
@@ -1769,7 +1731,7 @@ class LsportApiController extends Controller {
      * @param data - 需要壓縮的陣列資料. Array data to be zipped.
      * @return STR - 已經過gzcompress且base64_encode編碼的資串資料
      */
-    protected function _gzip($data) {
+    protected function gzip($data) {
 
         $data = json_encode($data, true);
         // 使用 gzcompress() 函數進行壓縮
@@ -1804,14 +1766,14 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * _customExplode
+     * customExplode
      * 
      * 依據傳入字串的三種情況:含空白、含+、含，回傳一陣列，分別包含鍵值filter=0或1或2，及鍵值value=已被拆分(explode)為陣列。
      *
      * @param str - 要被拆分的字串
      * @return ARRAY{filter:0或1或2，value:拆分的字串的陣列}
      */
-    protected function _customExplode($str) {
+    protected function customExplode($str) {
 
         $data = array();
         if (strpos($str, ' ') !== false) {  // 字串包含空白，以空白符分割
@@ -1832,7 +1794,7 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * _ApiSuccess
+     * ApiSuccess
      * 
      * 回傳予前端表示後端對前端請求的操作成功，以及所請求的結果。
      *
@@ -1846,7 +1808,7 @@ class LsportApiController extends Controller {
      *      gzip = BOOL: 參數data是否已經過gzip壓縮及base64編碼處理。
      * }
      */
-    protected function _ApiSuccess($data, $message, $gzip = false) {
+    protected function ApiSuccess($data, $message, $gzip = false) {
 
         $success_code = strtoupper("SUCCESS_" . $this->controller . "_" . $this->function . "_" . $message);
 
@@ -1864,7 +1826,7 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * _ApiError
+     * ApiError
      *
      * 回傳予前端表示後端對前端請求的操作失敗，以及失敗訊息。
      *
@@ -1878,7 +1840,7 @@ class LsportApiController extends Controller {
      *      gzip = BOOL: 參數data是否已經過gzip壓縮及base64編碼處理。
      * }
      */
-    protected function _ApiError($message , $is_common = false, $gzip = false) {
+    protected function ApiError($message , $is_common = false, $gzip = false) {
 
         if (! $is_common) {  // CLASS_FUNCTION ONLY
             $error_code = strtoupper("ERROR_" . $this->controller . "_" . $this->function . "_" . $message);
@@ -1900,7 +1862,7 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * _isPlayerOnline
+     * checkToken
      *
      * 檢查玩家是否存在於PlayerOnline DB資料表中。
      * Checks if the player exists in the 'PlayerOnline' DB table.
@@ -1908,26 +1870,25 @@ class LsportApiController extends Controller {
      * @param $input ARRAY 包含玩家ID(key=player)及其token(key=token)的陣列
      * @return BOOL {true | false}
      */
-    protected function _isPlayerOnline($input) {
+    protected function checkToken($input) {
       
         $player_id = $input['player'];
         $token = $input['token'];
         
-        $isPlayerOnline = PlayerOnline::where("player_id", $player_id)
+        $checkToken = PlayerOnline::where("player_id", $player_id)
             ->where("token", $token)
             ->where("status", 1)
             ->count();
 
-        if ($isPlayerOnline) {
+        if ($checkToken) {
             //---------------------------------
             // 取得代理的語系
-            //$player_id2 = Session::get('player.id');
             $agentlang = $this->getAgentLang($player_id);
             if ($agentlang === false) {
                 //$this->error(__CLASS__, __FUNCTION__, "02");
                 $agentlang = 'en';
             }
-            $this->agent_lang = "{$agentlang}";
+            $this->agent_lang = $agentlang;
             //---------------------------------
             return true;
         }
