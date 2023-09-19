@@ -7,60 +7,60 @@
 return [
 	// 前端
 	"left_menu" => [
-		"sport_bet" => "體育投注",
-		"m_bet" => "串關投注",
-		"record" => "注單紀錄",
-		"match" => "賽事結果",
-		"rule" => "競猜規則",
-		"logs" => "帳變紀錄",
-		"calculator" => "串關算法",
-		"notice" => "公告",
-		"logout" => "登出",
+		"sport_bet" => "Sports Betting", // "體育投注"
+		"m_bet" => "Parlay Betting", // "串關投注"
+		"record" => "Betting Record", // "注單紀錄"
+		"match" => "Game or Event Results", // "賽事結果"
+		"rule" => "Betting Rules", // "競猜規則"
+		"logs" => "Account Transaction Record", // "帳變紀錄"
+		"calculator" => "Parlay Algorithm", // "串關算法"
+		"notice" => "Annoucement", // "公告"
+		"logout" => "Log out", // "登出"
 	],
 	'sport_menu' => [
-		'today' => '今日',
-		'living' => '滾球',
-		'early' => '早盤',
+		'today' => 'Today', // "今日"
+		'living' => 'Live Betting', // "滾球"
+		'early' => 'Early Odds', // "早盤"
 	],
 	"search_area" => [
-		'sport' => '體育種類',
-		'order_id' => '訂單編號',
-		'logs_id' => '交易編號',
-		'logsType' => '類型',
-		'gamestatus' => '比賽狀態',
-		'status' => '狀態',
-		'series' => '聯賽名稱',
-		'start_time' => '開始時間',
-		'end_time' => '結束時間',
-		'search' => '搜尋',
-		'total' => '共',
-		'game' => '場',
-		'all' => '全部',
+		'sport' => 'Sports Types', // "體育種類"
+		'order_id' => 'Order ID', // "訂單編號"
+		'logs_id' => 'Transaction ID', // "交易編號"
+		'logsType' => 'Type', // "類型"
+		'gamestatus' => 'Game Status', // "比賽狀態"
+		'status' => 'Status', // "狀態"
+		'series' => 'Tournament Name', // "聯賽名稱"
+		'start_time' => 'Start Time', // "開始時間"
+		'end_time' => 'End Time', // "結束時間"
+		'search' => 'Search', // "搜尋"
+		'total' => 'Total', // "共"
+		'game' => 'Field', // "場"
+		'all' => 'All', // "全部"
 	],
 	'js' => [
-		'loginFirst' => '請先登入!',
-		'sun' => '日',
-		'mon' => '一',
-		'tue' => '二',
-		'wed' => '三',
-		'thu' => '四',
-		'fri' => '五',
-		'sat' => '六',
-		'jan' => '一月',
-		'feb' => '二月',
-		'mar' => '三月',
-		'apr' => '四月',
-		'may' => '五月',
-		'jun' => '六月',
-		'jul' => '七月',
-		'aug' => '八月',
-		'sep' => '九月',
-		'oct' => '十月',
-		'nov' => '十一月',
-		'dec' => '十二月',
-		'today' => '今天',
+		'loginFirst' => 'Please log in first!', // "請先登入!"
+		'sun' => 'Sun', // "日"
+		'mon' => 'One', // "一"
+		'tue' => 'Two', // "二"
+		'wed' => 'Three', // "三"
+		'thu' => 'Four', // "四"
+		'fri' => 'Five', // "五"
+		'sat' => 'Six', // "六"
+		'jan' => 'January', // "一月"
+		'feb' => 'February', // "二月"
+		'mar' => 'March',  // "三月"
+		'apr' => 'April', // "四月"
+		'may' => 'May', // "五月"
+		'jun' => 'June', // "六月"
+		'jul' => 'July', // "七月"
+		'aug' => 'August', // "八月"
+		'sep' => 'September', // "九月"
+		'oct' => 'October', // "十月"
+		'nov' => 'November', // "十一月"
+		'dec' => 'December', // "十二月"
+		'today' => 'Today', // "今天"
 	],
 
 	// 後端
-	'ajax.ERROR_login_01' => '登入驗證失敗,請重試',
+	'ajax.ERROR_login_01' => 'Login verification failed, please retry', // "登入驗證失敗,請重試"
 ];
