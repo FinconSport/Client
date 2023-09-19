@@ -49,16 +49,7 @@ class LsportApiController extends Controller {
 
     public function __construct() {
 
-    	//---------------------------------
-        // 取得代理的語系
-        //$player_id = $input['player'];
-        $player_id = $session['player']['id'];
-        $agentlang = $this->getAgentLang($player_id);
-        if ($agentlang === false) {
-            //$this->error(__CLASS__, __FUNCTION__, "02");
-            $agentlang = 'en';
-        }
-        $this->agent_lang = "{$agentlang}";
+        //...
 
     }
 
@@ -1891,6 +1882,18 @@ class LsportApiController extends Controller {
             ->count();
 
         if ($return) {
+            //---------------------------------
+            // 取得代理的語系
+            //$player_id = $input['player'];
+            $session['player']['id'] = $player_id;
+            $player_id2 = $session['player']['id'];
+            $agentlang = $this->getAgentLang($player_id2);
+            if ($agentlang === false) {
+                //$this->error(__CLASS__, __FUNCTION__, "02");
+                $agentlang = 'en';
+            }
+            $this->agent_lang = "{$agentlang}";
+            //---------------------------------
             return true;
         }
 

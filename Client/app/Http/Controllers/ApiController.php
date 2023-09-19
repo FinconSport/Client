@@ -45,30 +45,30 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      // 獲取用戶資料
-      $player_id = $input['player'];
+        // 獲取用戶資料
+        $player_id = $input['player'];
 
-      $return = Player::where("id",$player_id)->first();
-      if ($return === false) {
-        $this->ApiError("01");
-      }
+        $return = Player::where("id",$player_id)->first();
+        if ($return === false) {
+            $this->ApiError("01");
+        }
 
-      if ($return['status'] != 1) {
-        $this->ApiError("02");
-      }
+        if ($return['status'] != 1) {
+            $this->ApiError("02");
+        }
 
-      $data = array();
-      $data['account'] = $return['account'];
-      $data['balance'] = $return['balance'];
-      
-      $this->ApiSuccess($data,"01");
+        $data = array();
+        $data['account'] = $return['account'];
+        $data['balance'] = $return['balance'];
+        
+        $this->ApiSuccess($data,"01");
     }
 
     // 輪播
@@ -76,33 +76,33 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
-
-      //////////////////////////////////////////
-
-      $return = GameResult::where("status",1)->get();
-      if ($return === false) {
-        $this->ApiError("01");
-      }
-
-      $columns = array("id","home","away","home_score","away_score","sell_status","match_time");
-
-      $data = array();
-      foreach ($return as $k => $v) {
-        $tmp = array();
-        foreach ($columns as $kk => $vv) {
-          $tmp[$vv] = $v[$vv];
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
         }
 
-        // 格式重整
-        $tmp['match_time'] = date('Y-m-d H:i:s', $tmp['match_time']);
-        $data[] = $tmp;
-      }
+        //////////////////////////////////////////
 
-      $this->ApiSuccess($data,"01");
+        $return = GameResult::where("status",1)->get();
+        if ($return === false) {
+            $this->ApiError("01");
+        }
+
+        $columns = array("id","home","away","home_score","away_score","sell_status","match_time");
+
+        $data = array();
+        foreach ($return as $k => $v) {
+            $tmp = array();
+            foreach ($columns as $kk => $vv) {
+            $tmp[$vv] = $v[$vv];
+            }
+
+            // 格式重整
+            $tmp['match_time'] = date('Y-m-d H:i:s', $tmp['match_time']);
+            $data[] = $tmp;
+        }
+
+        $this->ApiSuccess($data,"01");
 
     }
 
@@ -111,24 +111,24 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      $return = ClientMarquee::where("status",1)->get();      
-      if ($return === false) {
-        $this->ApiError("01");
-      }
+        $return = ClientMarquee::where("status",1)->get();
+        if ($return === false) {
+            $this->ApiError("01");
+        }
 
-      $data = array();
-      foreach ($return as $k => $v) {
-        $data[] = $v['marquee'];
-      }
+        $data = array();
+        foreach ($return as $k => $v) {
+            $data[] = $v['marquee'];
+        }
 
-      $this->ApiSuccess($data,"01");
+        $this->ApiSuccess($data,"01");
     }
   
     // 系統公告接口
@@ -136,181 +136,181 @@ class ApiController extends Controller {
 
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-    	/////////////////////////
-      // 取得語系
-      $player_id = $input['player'];
-      $api_lang = $this->getAgentLang($player_id);
-      if ($api_lang === false) {
-        $this->ApiError("01");
-      }
-      
-      //////////////////////////////////////////
+            /////////////////////////
+        // 取得語系
+        $player_id = $input['player'];
+        $api_lang = $this->getAgentLang($player_id);
+        if ($api_lang === false) {
+            $this->ApiError("01");
+        }
+        
+        //////////////////////////////////////////
 
-      $notice_list = array();
+        $notice_list = array();
 
-      // 系統公告
-      $return = ClientMarquee::where("status",1)->get();      
-      if ($return === false) {
-        $this->ApiError("01");
-      }
+        // 系統公告
+        $return = ClientMarquee::where("status",1)->get();      
+        if ($return === false) {
+            $this->ApiError("01");
+        }
 
-      foreach ($return as $k => $v) {
-        $game_id = 0;
-        $title = $v['title'];
-        $context = $v['marquee'];
-        $create_time = $v['create_time'];
+        foreach ($return as $k => $v) {
+            $game_id = 0;
+            $title = $v['title'];
+            $context = $v['marquee'];
+            $create_time = $v['create_time'];
 
-        $notice_list[$game_id][] = [
-          "game_id" => $game_id,
-          "title" => $title,
-          "context" => $context,
-          "create_time" => $create_time,
-        ];
-      }
+            $notice_list[$game_id][] = [
+            "game_id" => $game_id,
+            "title" => $title,
+            "context" => $context,
+            "create_time" => $create_time,
+            ];
+        }
 
-      /////////////////
+        /////////////////
 
-      $timestamp = time() - (1 * 24 * 60 * 60); 
-      $previous_day = date('Y-m-d 00:00:00', $timestamp); 
+        $timestamp = time() - (1 * 24 * 60 * 60); 
+        $previous_day = date('Y-m-d 00:00:00', $timestamp); 
 
-      $return = AntNoticeList::where('create_time',">=", $previous_day)->orderBy("create_time","DESC")->get();
-      if ($return === false) {
-        $this->ApiError("02");
-      }
+        $return = AntNoticeList::where('create_time',">=", $previous_day)->orderBy("create_time","DESC")->get();
+        if ($return === false) {
+            $this->ApiError("02");
+        }
 
-      foreach ($return as $k => $v) {
-        $game_id = $v['game_id'];
-        $title = $v['title_'.$api_lang];
-        $context = $v['context_'.$api_lang];
-        $create_time = $v['create_time'];
+        foreach ($return as $k => $v) {
+            $game_id = $v['game_id'];
+            $title = $v['title_'.$api_lang];
+            $context = $v['context_'.$api_lang];
+            $create_time = $v['create_time'];
 
-        $notice_list[$game_id][] = [
-          "game_id" => $game_id,
-          "title" => $title,
-          "context" => $context,
-          "create_time" => $create_time,
-        ];
-      }
+            $notice_list[$game_id][] = [
+            "game_id" => $game_id,
+            "title" => $title,
+            "context" => $context,
+            "create_time" => $create_time,
+            ];
+        }
 
-      // gzip
-      $notice_list = $this->gzip($notice_list);
+        // gzip
+        $notice_list = $this->gzip($notice_list);
 
-      $this->ApiSuccess($notice_list,"01",true);
+        $this->ApiSuccess($notice_list,"01",true);
     }
     // 首頁賽事
     public function IndexMatchList(Request $request) {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-    	/////////////////////////
-      // 取得語系
-      $player_id = $input['player'];
-      $api_lang = $this->getAgentLang($player_id);
-      if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "02");
-      }
-      
-      $name_columns = "name_".$api_lang;
-      //////////////////////////////////////////
-
-      $menu_type = ["living","early"];
-
-      // 取得GameList 資料
-      $return = AntGameList::where("status",1)->get();
-      if ($return === false) {
-        $this->ApiError("01");
-      }
-
-      foreach ($return as $k => $v) {
-        $sport_type[$v['id']] = $v[$name_columns];
-      }
-
-
-      $data = array();
-      //$total = 0;
-
-      foreach ($menu_type as $k => $v) {
-        switch ($k) {
-          case 0:
-            // 進行中
-            $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-            ->join('ant_series_list', function ($join) {
-              $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
-                  ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-            })
-            ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
-            ->where('ant_rate_list.is_active', '=', 1)
-            ->where('ant_match_list.status', 2)
-            ->where('ant_series_list.status', 1)
-            ->groupBy('ant_match_list.game_id')
-            ->having('rate_count', '>', 0)
-            ->get();
-            if ($return === false) {
-              $this->ApiError("01");
-            }
-            
-            $tmp = array();
-            $total = 0;
-            foreach ($return as $kk => $vv) {
-              $tmp["items"][$vv['game_id']]['name'] = $sport_type[$vv['game_id']];
-              $tmp["items"][$vv['game_id']]['count'] = $vv['count'];
-              $total += $vv['count'];
-            }
-
-            $tmp['total'] = $total;
-            $data[$v] = $tmp;
-          break;
-           // TODO
-          case 1: 
-            // 早盤
-            $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-            ->join('ant_series_list', function ($join) {
-              $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
-                  ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-            })
-            ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
-            ->where('ant_rate_list.is_active', '=', 1)
-            ->where('ant_match_list.status', 1)
-            ->where('ant_series_list.status', 1)
-            ->groupBy('ant_match_list.game_id')
-            ->having('rate_count', '>', 0)
-            ->get();
-            if ($return === false) {
-              $this->ApiError("01");
-            }
-            
-            $tmp = array();
-            $total = 0;
-            foreach ($return as $kk => $vv) {
-              $tmp["items"][$vv['game_id']]['name'] = $sport_type[$vv['game_id']];
-              $tmp["items"][$vv['game_id']]['count'] = $vv['count'];
-              $total += $vv['count'];
-            }
-
-            $tmp['total'] = $total;
-            $data[$v] = $tmp;
-
-          break;
-          default:
+            /////////////////////////
+        // 取得語系
+        $player_id = $input['player'];
+        $api_lang = $this->getAgentLang($player_id);
+        if ($api_lang === false) {
+            $this->error(__CLASS__, __FUNCTION__, "02");
         }
         
-        // 處理加總
-        $total = array_sum($data[$v]);
-        $data[$v]['total'] = $total;
-        
-      }
+        $name_columns = "name_".$api_lang;
+        //////////////////////////////////////////
 
-      $this->ApiSuccess($data,"01"); 
+        $menu_type = ["living","early"];
+
+        // 取得GameList 資料
+        $return = AntGameList::where("status",1)->get();
+        if ($return === false) {
+            $this->ApiError("01");
+        }
+
+        foreach ($return as $k => $v) {
+            $sport_type[$v['id']] = $v[$name_columns];
+        }
+
+
+        $data = array();
+        //$total = 0;
+
+        foreach ($menu_type as $k => $v) {
+            switch ($k) {
+            case 0:
+                // 進行中
+                $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+                ->join('ant_series_list', function ($join) {
+                $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
+                    ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+                })
+                ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
+                ->where('ant_rate_list.is_active', '=', 1)
+                ->where('ant_match_list.status', 2)
+                ->where('ant_series_list.status', 1)
+                ->groupBy('ant_match_list.game_id')
+                ->having('rate_count', '>', 0)
+                ->get();
+                if ($return === false) {
+                $this->ApiError("01");
+                }
+                
+                $tmp = array();
+                $total = 0;
+                foreach ($return as $kk => $vv) {
+                $tmp["items"][$vv['game_id']]['name'] = $sport_type[$vv['game_id']];
+                $tmp["items"][$vv['game_id']]['count'] = $vv['count'];
+                $total += $vv['count'];
+                }
+
+                $tmp['total'] = $total;
+                $data[$v] = $tmp;
+            break;
+            // TODO
+            case 1: 
+                // 早盤
+                $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+                ->join('ant_series_list', function ($join) {
+                $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
+                    ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+                })
+                ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
+                ->where('ant_rate_list.is_active', '=', 1)
+                ->where('ant_match_list.status', 1)
+                ->where('ant_series_list.status', 1)
+                ->groupBy('ant_match_list.game_id')
+                ->having('rate_count', '>', 0)
+                ->get();
+                if ($return === false) {
+                $this->ApiError("01");
+                }
+                
+                $tmp = array();
+                $total = 0;
+                foreach ($return as $kk => $vv) {
+                $tmp["items"][$vv['game_id']]['name'] = $sport_type[$vv['game_id']];
+                $tmp["items"][$vv['game_id']]['count'] = $vv['count'];
+                $total += $vv['count'];
+                }
+
+                $tmp['total'] = $total;
+                $data[$v] = $tmp;
+
+            break;
+            default:
+            }
+            
+            // 處理加總
+            $total = array_sum($data[$v]);
+            $data[$v]['total'] = $total;
+            
+        }
+
+        $this->ApiSuccess($data,"01");
     }
 
 
@@ -326,30 +326,30 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      $return = AntGameList::where("status",1)->get();
-      if ($return === false) {
-        $this->ApiError("01");
-      }
+        $return = AntGameList::where("status",1)->get();
+        if ($return === false) {
+            $this->ApiError("01");
+        }
 
-      $data = array();
-      foreach ($return as $k => $v) {
+        $data = array();
+        foreach ($return as $k => $v) {
 
-        $tmp = array();
+            $tmp = array();
 
-        $tmp['id'] = $v['id'];
-        $tmp['name'] = $v['name_cn'];
+            $tmp['id'] = $v['id'];
+            $tmp['name'] = $v['name_cn'];
 
-        $data[] = $tmp;
-      }
+            $data[] = $tmp;
+        }
 
-      $this->ApiSuccess($data,"01"); 
+        $this->ApiSuccess($data,"01"); 
 
     }
 
@@ -358,63 +358,39 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-    	/////////////////////////
-      // 取得語系
-      $player_id = $input['player'];
-      $api_lang = $this->getAgentLang($player_id);
-      if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "01");
-      }
-      
-      $name_columns = "name_".$api_lang;
+        /////////////////////////
+        // 取得語系
+        $player_id = $input['player'];
+        $api_lang = $this->getAgentLang($player_id);
+        if ($api_lang === false) {
+            $this->error(__CLASS__, __FUNCTION__, "01");
+        }
+        
+        $name_columns = "name_".$api_lang;
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      if (!isset($input['sport_id'])) {
-        $this->ApiError("01");
-      }
-      
-      $sport_id = $input['sport_id'];
+        if (!isset($input['sport_id'])) {
+            $this->ApiError("01");
+        }
+        
+        $sport_id = $input['sport_id'];
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      // 新的LIST
-      $data = array();
-      $today = time();
-      $after_tomorrow = $today + 2 * 24 * 60 * 60; 
-      $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow); 
+        // 新的LIST
+        $data = array();
+        $today = time();
+        $after_tomorrow = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow); 
 
-      //////////////////////////////
-      // 早盤
-      $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-      ->join('ant_series_list', function ($join) {
-              $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-      })
-      ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
-      ->where('ant_rate_list.is_active', '=', 1)
-      ->where('ant_series_list.status', 1)
-      ->where('ant_match_list.status', 1)
-      ->where('ant_match_list.start_time',"<=", $after_tomorrow)
-      ->where("ant_match_list.game_id",$sport_id)
-      ->groupBy('ant_match_list.match_id')
-      ->having('rate_count', '>', 0)
-      ->orderBy("ant_series_list.order_by")->get();
-
-      $tmp = $this->rebuild($return, $api_lang,$sport_id);
-      $data['early'] = $tmp;
-
-      //////////////////////////////
-      // 滾球
-
-      if ($this->controller == "m_order") {
-          // 串關不抓滾球賽事
-          $data['living'] = array();
-      } else {
+        //////////////////////////////
+        // 早盤
         $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
         ->join('ant_series_list', function ($join) {
                 $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
@@ -422,23 +398,47 @@ class ApiController extends Controller {
         ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
         ->where('ant_rate_list.is_active', '=', 1)
         ->where('ant_series_list.status', 1)
-        ->where('ant_match_list.status', 2)
+        ->where('ant_match_list.status', 1)
         ->where('ant_match_list.start_time',"<=", $after_tomorrow)
         ->where("ant_match_list.game_id",$sport_id)
         ->groupBy('ant_match_list.match_id')
         ->having('rate_count', '>', 0)
         ->orderBy("ant_series_list.order_by")->get();
-  
+
         $tmp = $this->rebuild($return, $api_lang,$sport_id);
-        $data['living'] = $tmp;
-      }
-      
-      ///////////////////////////////
+        $data['early'] = $tmp;
 
-      // gzip
-      $data = $this->gzip($data);
+        //////////////////////////////
+        // 滾球
 
-      $this->ApiSuccess($data,"01",true); 
+        if ($this->controller == "m_order") {
+            // 串關不抓滾球賽事
+            $data['living'] = array();
+        } else {
+            $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+            ->join('ant_series_list', function ($join) {
+                    $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+            })
+            ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
+            ->where('ant_rate_list.is_active', '=', 1)
+            ->where('ant_series_list.status', 1)
+            ->where('ant_match_list.status', 2)
+            ->where('ant_match_list.start_time',"<=", $after_tomorrow)
+            ->where("ant_match_list.game_id",$sport_id)
+            ->groupBy('ant_match_list.match_id')
+            ->having('rate_count', '>', 0)
+            ->orderBy("ant_series_list.order_by")->get();
+    
+            $tmp = $this->rebuild($return, $api_lang,$sport_id);
+            $data['living'] = $tmp;
+        }
+        
+        ///////////////////////////////
+
+        // gzip
+        $data = $this->gzip($data);
+
+        $this->ApiSuccess($data,"01",true);
     }
 
     // 賽事列表- 投注接口
@@ -1170,48 +1170,48 @@ class ApiController extends Controller {
       
     	$input = $this->getRequest($request);
 
-      $return = $this->checkToken($input);
-      if ($return === false) {
-        $this->ApiError("PLAYER_RELOGIN",true);
-      }
+        $return = $this->checkToken($input);
+        if ($return === false) {
+            $this->ApiError("PLAYER_RELOGIN",true);
+        }
 
-    	/////////////////////////
-      // 取得語系
-      $player_id = $input['player'];
-      $api_lang = $this->getAgentLang($player_id);
-      if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "02");
-      }
-      
-      $name_columns = "name_".$api_lang;
+        /////////////////////////
+        // 取得語系
+        $player_id = $input['player'];
+        $api_lang = $this->getAgentLang($player_id);
+        if ($api_lang === false) {
+            $this->error(__CLASS__, __FUNCTION__, "02");
+        }
+        
+        $name_columns = "name_".$api_lang;
 
-      //////////////////////////////////////////
+        //////////////////////////////////////////
 
-      $match_id = $input['match_id'];
-      $sport_id = $input['sport_id'];
+        $match_id = $input['match_id'];
+        $sport_id = $input['sport_id'];
 
-      if (($match_id+0 != $match_id) && ($match_id+0 == 0)) {
-        $this->ApiError("01");
-      }
-      if (($sport_id+0 != $sport_id) && ($sport_id+0 == 0)) {
-        $this->ApiError("01");
-      }
+        if (($match_id+0 != $match_id) && ($match_id+0 == 0)) {
+            $this->ApiError("01");
+        }
+        if (($sport_id+0 != $sport_id) && ($sport_id+0 == 0)) {
+            $this->ApiError("01");
+        }
 
-      $return = AntMatchList::where("match_id",$match_id)->where("game_id",$sport_id)->get();
-      if ($return === false) {
-        $this->ApiError("02");
-      }
-      
-      $tmp = $this->rebuild($return, $api_lang,$sport_id);
+        $return = AntMatchList::where("match_id",$match_id)->where("game_id",$sport_id)->get();
+        if ($return === false) {
+            $this->ApiError("02");
+        }
+        
+        $tmp = $this->rebuild($return, $api_lang,$sport_id);
 
-      $data = $tmp;
+        $data = $tmp;
 
-      /**************************************/
+        /**************************************/
 
-      // gzip
-      $data = $this->gzip($data);
+        // gzip
+        $data = $this->gzip($data);
 
-      $this->ApiSuccess($data,"01",true); 
+        $this->ApiSuccess($data,"01",true); 
     }
     
     // 下注紀錄
