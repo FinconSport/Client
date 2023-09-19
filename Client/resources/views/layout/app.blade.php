@@ -226,11 +226,11 @@
 
 		// 帳號
 		var accountD = {}
-		const account_api = 'https://sportc.asgame.net/api/v1/common_account'
+		const account_api = 'https://sportc.asgame.net/api/v2/common_account'
 
 		// marquee
 		var marqueeD = {}
-		const marquee_api = 'https://sportc.asgame.net/api/v1/index_marquee'
+		const marquee_api = 'https://sportc.asgame.net/api/v2/index_marquee'
 
 		// sportList
 		var sportListD = {}
