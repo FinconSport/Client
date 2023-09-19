@@ -1694,7 +1694,7 @@ class LsportApiController extends Controller {
         $typeList = trans("pc.BalanceLogs_TypeList");
 
         //////////////////////////
-
+        $player_id = $input['player'];
         $return = PlayerBalanceLogs::where("player_id", $player_id)
             ->skip($skip)
             ->take($page_limit)
