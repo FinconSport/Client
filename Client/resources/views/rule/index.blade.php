@@ -427,9 +427,6 @@
         }, 500);
     });
 
-
-
-    var searchData = @json($search);
     // 語系
     var langTrans = @json(trans('rule'));
 
