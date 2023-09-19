@@ -17,7 +17,7 @@ return [
 		"pre_page" => "Previous Page", // "上一頁",
 		"next_page" => "Next Page", // "下一頁",
 		"last_page" => "Last Page", // "最後一頁",
-		"nodata" => " No Data Available", // "暫無資料",
+		"nodata" => " No Data Currently", // "暫無資料",
 	],
 
 	// 後端

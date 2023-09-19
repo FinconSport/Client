@@ -12,7 +12,7 @@ return [
 		"basketball" => "Basketball", // "籃球",
 		"soccor" => "Soccer", // "足球",
 		"betting_type" => "Betting Types", // "投注類型",
-		"solo_winners" => "Moneyline", // "獨贏盤",
+		"solo_winners" => "Winner", // "獨贏盤",
 		"get_the_ball" => "Handicap", // "讓球",
 		"lets_roll" => "Live Handicap", // "滾球讓球",
 		"total_score" => "Total Points: Over / Under", // "總得分: 大 / 小",
