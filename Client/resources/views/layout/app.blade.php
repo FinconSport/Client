@@ -26,7 +26,7 @@
             <h3>Loading</h3>
         </div>
     </div>
-	<div id='wrap' class="h-100 pb-3 w-100" hidden>
+	<div id='wrap' class="h-100 pb-3 w-100" style="opacity: 0">
 		<div class="leftArea">
 			<div id='logoArea'>
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">
@@ -146,9 +146,6 @@
 		</div>
 		<div class="rightArea">
 			<div id="navMarqueeBar">
-				<marquee id="marquee" class='bg-deepgreen' behavior="scroll" direction="left">
-					
-				</marquee>
 				<div class='rightNavTag'>
 					<span id="timer">{{ \Carbon\Carbon::createFromTimestamp($current_time)->format('H:i:s') }}</span>&ensp;
 					<span>
@@ -189,21 +186,19 @@
     <script src="{{ asset('js/jquery-ui.min.js?v=' . $system_config['version']) }}"></script>
     <script src="{{ asset('js/semantic.min.js?v=' . $system_config['version']) }}"></script>
 	<script>
-		// 獲取當前search條件
-		var searchData = @json($search);
-		// current_time
-		var current_time = '{{ $current_time }}';
-		var version = '{{ $system_config['version'] }}';
-		// csrf
+		const current_time = '{{ $current_time }}';
+		const version = '{{ $system_config["version"] }}';
 		const csrfToken = '{{ csrf_token() }}'
+		const commonLang = @json(trans('common')); // lang file
+		
+		// search conditions
+		const params = new URL(document.location).searchParams;
+		const entries = params.entries(); 
+		const searchData = paramsToObject(entries); 
+
+		// for sys msg
 		var errormsg = null
 		var successmsg = null
-		// 語系
-		var commonLang = @json(trans('common'));
-
-		var player_id = @json($player['id']);
-
-		// for test
 		@if(session()->has('player'))
 			errormsg = @json(session('error'));
 			successmsg = @json(session('success'));
@@ -212,12 +207,15 @@
 		@endif
 
 
+		
+
+
 		// ===== DATA LAYER ======
 
 		// player and sport_id
 		const player = 8
 		const token = 12345
-		const sport_id = 1
+		const sport = parseInt(searchData.sport)
 
 		// loading page control
 		var isReadyCommon = false
@@ -228,11 +226,11 @@
 
 		// 帳號
 		var accountD = {}
-		const account_api = 'https://sportc.asgame.net/api/v1/common_account'
+		const account_api = 'https://sportc.asgame.net/api/v2/common_account'
 
 		// marquee
 		var marqueeD = {}
-		const marquee_api = 'https://sportc.asgame.net/api/v1/index_marquee'
+		const marquee_api = 'https://sportc.asgame.net/api/v2/index_marquee'
 
 		// sportList
 		var sportListD = {}
@@ -266,28 +264,43 @@
 				}
 			});
 		}
-
 		// ===== DATA LAYER ======
+
+
+
+
+		// ===== VIEW LAYER ======
 		function viewCommonIni() {
 			// 帳號 餘額
 			$('.player').html(accountD.data.account)
 			$('.balance').html(accountD.data.balance)
 
-			// 跑馬燈
-			var marqueeContainer = $('#marquee');// 获取包裹marquee的元素
-			marqueeD.data.forEach(function(item) { // 遍历数据并为每一项创建HTML并添加到marqueeContainer中
+			// 创建一个空的跑马灯容器
+			var marqueeContainer = $('<marquee>', {
+				id: 'marquee',
+				class: 'bg-deepgreen',
+				behavior: 'scroll',
+				direction: 'left'
+			});
+
+			marqueeD.data.forEach(function(item) { 
 				var link = $('<a>', { // 创建<a>元素
 					href: '#',
 					class: 'marqlink'
 				});
-				
+
 				var span = $('<span>', { // 创建<span>元素
 					class: 'marq_context',
 					text: item
 				});
+
 				link.append(span); // 将<span>添加到<a>中
-				marqueeContainer.append(link);// 将<a>添加到marqueeContainer中
+				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
 			});
+
+			// 将跑马灯容器添加到页面中
+			$('.rightNavTag').before(marqueeContainer);
+
 
 
 			// 預設左邊選中樣式
@@ -332,9 +345,7 @@
 				startCalendar: $('#rangestart')
 			});
 		}
-
-
-
+		// ===== VIEW LAYER ======
 
 
 		$(document).ready(function() {
@@ -349,24 +360,18 @@
 
 
 			// view layer
-
 			// check if api are all loaded every 500 ms 
 			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1) {
 					isReadyCommon = true
+					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking
-					setTimeout(() => {
-						viewCommonIni() // excute all common view layer ini function
-					}, 500);
 				}
 			}, 500);
 			// view layer
 
 
-
-			
-
-			// 更新時間
+			// time update
 			var timestamp = parseInt('{{ $current_time }}');
 			setInterval(function() {
 				// 計算目前時間
@@ -384,9 +389,6 @@
 				timestamp++;
 			}, 1000);
 		});
-
-
-
 
 		//marquee onclick
 		$('.marqlink').click(function (event) {
@@ -425,8 +427,7 @@
 			});
 		});
 		
-		
-
+		// modal close
 		function closeModal() {
 			var modal = $('#marqModal');
 			modal.css("top","-100%");
@@ -441,10 +442,20 @@
 			}, 200);
 		}
 
+		// marquee close
 		$('#marqModal .btn-close').click(function (event) {
 			event.preventDefault(); // Prevents the default anchor behavior
 			closeModal();
 		});
+
+		// convert search data to obj
+		function paramsToObject(entries) {
+			const result = {}
+			for(const [key, value] of entries) { // each 'entry' is a [key, value] tupple
+				result[key] = value;
+			}
+			return result;
+		}
 	</script>
   @stack('main_js')
   </body>
