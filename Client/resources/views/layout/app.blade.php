@@ -34,10 +34,10 @@
 			<div id="sidenav">
 				<div id="userArea" class="row m-0">
 					<div class="col-6">
-						<p class="mb-0 text-center text-white"><span class="player">{{ $player['account'] }}</span></p>
+						<p class="mb-0 text-center text-white"><span class="player"></span></p>
 					</div>
 					<div class="col-6">
-						<p class="mb-0 text-center text-white"><span class="balance">{{ $player['balance'] }}</span></p>
+						<p class="mb-0 text-center text-white"><span class="balance"></span></p>
 					</div>
 				</div>
 				<div id="gameCategory" style="position: relative;">
@@ -147,18 +147,7 @@
 		<div class="rightArea">
 			<div id="navMarqueeBar">
 				<marquee id="marquee" class='bg-deepgreen' behavior="scroll" direction="left">
-					<!--- system notice_list loop query -->
-                    @foreach ( $notice_list as $key => $list)
-                            @if ($key == 0)
-                              @foreach ( collect($list)->sortByDesc('create_time')->all() as $li)<!--- sort by date descending -->
-                                @if (!empty($li))
-								<a href="#" data-createdate="{{ $li['create_time'] }}" class="marqlink"><span class="marq_title">{{ $li['title'] }}</span> : <span class="marq_context">{{ $li['context'] }}</span></a>
-                                  @else
-										<span> {{ trans('notice.main.no_result') }} </span>
-                                @endif
-                              @endforeach
-                            @endif
-                        @endforeach   
+					
 				</marquee>
 				<div class='rightNavTag'>
 					<span id="timer">{{ \Carbon\Carbon::createFromTimestamp($current_time)->format('H:i:s') }}</span>&ensp;
@@ -211,10 +200,7 @@
 		var successmsg = null
 		// 語系
 		var commonLang = @json(trans('common'));
-		var isReady = false
 
-		console.log('player')
-		console.log(@json($player));
 		var player_id = @json($player['id']);
 
 		// for test
@@ -225,10 +211,79 @@
 			showErrorToast(commonLang.js.loginFirst);                                            
 		@endif
 
-		$(document).ready(function() {
 
-			// loading page
-			$('#dimmer').dimmer('show');
+		// ===== DATA LAYER ======
+
+		// loading page control
+		var isReadyCommon = false
+		var isReadyCommonInt = null
+
+		// call api data
+		const commonCallData = { token: token, player: player }
+
+		// 帳號
+		var accountD = {}
+		const account_api = 'https://sportc.asgame.net/api/v1/common_account'
+
+		// marquee
+		var marqueeD = {}
+		const marquee_api = 'https://sportc.asgame.net/api/v1/index_marquee'
+
+		// sportList
+		var sportListD = {}
+		const sportList_api = '' // 目前沒有
+
+
+		function caller( url, data, obj ) {
+			console.log('caller')
+			$.ajax({
+				url: url,
+				method: 'POST',
+				data: data,
+				success: function(data) {
+					console.log(url + ' called success')
+					const json = JSON.parse(data); 
+					// 先判定要不要解壓縮
+					if(json.gzip === 1) {
+						// 將字符串轉換成 ArrayBuffer
+						const str = json.data;
+						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
+						const buffer = new Uint8Array(bytes).buffer;
+						// 解壓縮 ArrayBuffer
+						const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
+						json.data = uncompressed
+					}
+					Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					// 处理错误
+					console.error('Ajax error:', textStatus, errorThrown);
+				}
+			});
+		}
+
+		// ===== DATA LAYER ======
+		function viewCommonIni() {
+			// 帳號 餘額
+			$('.player').html(accountD.data.account)
+			$('.balance').html(accountD.data.balance)
+
+			// 跑馬燈
+			var marqueeContainer = $('#marquee');// 获取包裹marquee的元素
+			marqueeD.data.forEach(function(item) { // 遍历数据并为每一项创建HTML并添加到marqueeContainer中
+				var link = $('<a>', { // 创建<a>元素
+					href: '#',
+					class: 'marqlink'
+				});
+				
+				var span = $('<span>', { // 创建<span>元素
+					class: 'marq_context',
+					text: item
+				});
+				link.append(span); // 将<span>添加到<a>中
+				marqueeContainer.append(link);// 将<a>添加到marqueeContainer中
+			});
+
 
 			// 預設左邊選中樣式
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').addClass('on')
@@ -271,6 +326,40 @@
 				},
 				startCalendar: $('#rangestart')
 			});
+		}
+
+
+
+
+
+		$(document).ready(function() {
+
+			// loading page
+			$('#dimmer').dimmer('show');
+
+			// data layer
+			caller(account_api, commonCallData, accountD) // account
+			caller(marquee_api, commonCallData, marqueeD) // marquee
+			// data layer
+
+
+			// view layer
+
+			// check if api are all loaded every 500 ms 
+			isReadyCommonInt = setInterval(() => {
+				if(accountD.status === 1 && marqueeD.status === 1) {
+					isReadyCommon = true
+					clearInterval(isReadyCommonInt); // stop checking
+					setTimeout(() => {
+						viewCommonIni() // excute all common view layer ini function
+					}, 500);
+				}
+			}, 500);
+			// view layer
+
+
+
+			
 
 			// 更新時間
 			var timestamp = parseInt('{{ $current_time }}');
@@ -289,94 +378,68 @@
 				// 增加一秒
 				timestamp++;
 			}, 1000);
+		});
 
-			isReady = true
 
 
-			$('.userField').removeClass('userField')
-			$('.centered.inline.loader').remove() // 移除loader
 
-			//marquee onclick
-			$('.marqlink').click(function (event) {
-				//event.preventDefault(); // Prevents the default anchor behavior
-				event.stopPropagation(); //stopping propagation here
-				var title = $(this).find('.marq_title').text();
-        		var context = $(this).find('.marq_context').text();
-				var create_d = $(this).data("createdate");
-				modal = $('#marqModal');
-				
-				$('body').addClass("modal-open");
-				if(!$('.modal-backdrop').length) //to not conflict with page with bootstrap js
-				{
-					$(document.body).append("<div class='modal-backdrop fade'></div>");
-				}
-				else{
-					$('.modal-backdrop').removeClass("show");
-				}
-	
-				modal.addClass("show");
-				modal.css("display", "block");
-				setTimeout(function() {
-					$('.modal-backdrop').css("opacity", 0.5);
-					modal.css("opacity", 1);
-					modal.css("top",0);
-				}, 200);
-				
-				modal.find('.modal-title').text(title);
-				modal.find('.cdate').text(create_d);
-				modal.find('.modal-context').text(context);
-				// Add an event listener to close the modal when clicking outside
-				$(document).on('click', function (event) {
-					if ($('#marqModal').hasClass('show')) {
-						closeModal();
-					}
-			});
-			});
+		//marquee onclick
+		$('.marqlink').click(function (event) {
+			//event.preventDefault(); // Prevents the default anchor behavior
+			event.stopPropagation(); //stopping propagation here
+			var title = $(this).find('.marq_title').text();
+			var context = $(this).find('.marq_context').text();
+			var create_d = $(this).data("createdate");
+			modal = $('#marqModal');
 			
-			
-
-			function closeModal() {
-				var modal = $('#marqModal');
-				modal.css("top","-100%");
-				modal.css("opacity", 0);
-				modal.removeClass("show");
-				$('body').removeClass("modal-open");
-				$('.modal-backdrop').css("opacity", 0);
-				$(document).off('click'); // Remove the click outside event listener
-				setTimeout(function() {
-					modal.css("display", "none");
-					$(".modal-backdrop").remove();
-				}, 200);
+			$('body').addClass("modal-open");
+			if(!$('.modal-backdrop').length) //to not conflict with page with bootstrap js
+			{
+				$(document.body).append("<div class='modal-backdrop fade'></div>");
+			}
+			else{
+				$('.modal-backdrop').removeClass("show");
 			}
 
-			$('#marqModal .btn-close').click(function (event) {
-				event.preventDefault(); // Prevents the default anchor behavior
-				closeModal();
+			modal.addClass("show");
+			modal.css("display", "block");
+			setTimeout(function() {
+				$('.modal-backdrop').css("opacity", 0.5);
+				modal.css("opacity", 1);
+				modal.css("top",0);
+			}, 200);
+			
+			modal.find('.modal-title').text(title);
+			modal.find('.cdate').text(create_d);
+			modal.find('.modal-context').text(context);
+			// Add an event listener to close the modal when clicking outside
+			$(document).on('click', function (event) {
+				if ($('#marqModal').hasClass('show')) {
+					closeModal();
+				}
 			});
 		});
 		
+		
 
-		// 搜尋框 聯盟名稱
-		function filterSeiries(type = 0) {
-			// console.log('filterSeiries->' + type)
-			if( isReady === true && type === 0 ) {
-				$('.clearSearch').dropdown('clear')
-				console.log('dropdown clear')
-			}
-			let val = $('select[name="sport"]').val()
-			setTimeout(() => {
-				$('#series_id select option').each(function() {
-					let id = $(this).val()
-					if ($(this).attr('sport') === val) {
-						$('#series_id div[data-value="'+id+'"]').show()
-					} else {
-						$('#series_id div[data-value="'+id+'"]').hide()
-					}
-				});
-			}, 100);
+		function closeModal() {
+			var modal = $('#marqModal');
+			modal.css("top","-100%");
+			modal.css("opacity", 0);
+			modal.removeClass("show");
+			$('body').removeClass("modal-open");
+			$('.modal-backdrop').css("opacity", 0);
+			$(document).off('click'); // Remove the click outside event listener
+			setTimeout(function() {
+				modal.css("display", "none");
+				$(".modal-backdrop").remove();
+			}, 200);
 		}
 
-
+		$('#marqModal .btn-close').click(function (event) {
+			event.preventDefault(); // Prevents the default anchor behavior
+			closeModal();
+		});
 	</script>
   @stack('main_js')
   </body>
