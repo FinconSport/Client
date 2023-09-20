@@ -26,16 +26,7 @@
                                             @if(is_array($gr_baseball))
                                                 <ul>
                                                     @foreach($gr_baseball as $subKey => $subValue)
-                                                        <li>
-                                                            {{ $subValue }}
-                                                            @if(is_array($subValue))
-                                                                <ul>
-                                                                    @foreach($subValue as $subSubKey => $subSubValue)
-                                                                        <li>{{ $subSubValue }}</li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                        </li>
+                                                        <li>{{ $subValue }}</li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -52,14 +43,14 @@
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_9') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_10') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11') }}</li>
-                                    <ul class="number-bullets">
+                                    <!-- <ul class="number-bullets">
                                         <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_1') }}</li>
                                         <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2') }}</li>
                                         <ul class="no-bullets">
                                             <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_1') }}</li>
                                             <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_2') }}</li>
                                         </ul>
-                                    </ul>
+                                    </ul> -->
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
