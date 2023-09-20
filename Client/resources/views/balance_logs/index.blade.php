@@ -123,10 +123,26 @@
 
 	// 語系
     var langTrans = @json(trans('logs'));
-  	// 寫入頁面限定JS
-  	$(document).ready(function() {
-		// 當下搜尋條件
-        if( searchData.type !== undefined ) {
+
+
+	// detect ini ajax
+	var isReadyLogsInt = null
+
+	$(document).ready(function() {
+		// check if api are all loaded every 500 ms 
+		isReadyLogsInt = setInterval(() => {
+			if( isReadyCommon ) {
+				$('#dimmer').dimmer('hide'); // hide loading
+				$('#wrap').css('opacity', 1); // show the main content
+				renderView()
+				clearInterval(isReadyLogsInt); // stop checking
+			}
+		}, 500);
+	});
+
+	function renderView() {
+		// search condition
+		if( searchData.type !== undefined ) {
 			$('select[name="type"]').val(searchData.type)
 			$('select[name="type"]').trigger('change')
 		}
@@ -142,7 +158,7 @@
 			$('input[name="end_time"]').val(searchData.end_time)
 			$('input[name="end_time"]').trigger('change')
 		}
-	});
+	}
 
 	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
     $('.menuTypeBtn').click(function(){
