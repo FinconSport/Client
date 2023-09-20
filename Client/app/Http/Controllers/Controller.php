@@ -126,6 +126,7 @@ class Controller extends BaseController
 		}
 
 		$api_lang = $return['api_lang'];
+		app()->setLocale($api_lang);
 
 		return $api_lang;
 	}
