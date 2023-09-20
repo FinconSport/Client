@@ -285,7 +285,7 @@
 		// sportListD can be accessed global
 
         // check if api are all loaded every 500 ms 
-        isReadyIndexInt = setInterval(() => {
+        isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
             if( isReadyOrder === true && isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
