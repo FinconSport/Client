@@ -144,13 +144,13 @@ div[key="matchSportMenu"] {
     height: auto;
     display: flex;
     align-items: center;
+    word-break: keep-all;
 }
 
 .btnCalcuMoney #betMoney,
 .btnCalcuMoney #winningMoney {
     margin-top: 0rem;
     height: auto;
-    word-break: keep-all;
 }
 
 .btnCalcuMoney .w-40{
