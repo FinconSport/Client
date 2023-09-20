@@ -687,7 +687,7 @@ ORDER BY
 
             if ($marketBetData === false) {
                 $this->ApiError('03');
-            
+            }
             
             if (!$marketBetData->mb_name_locale) {
                 dd($marketBetData);
