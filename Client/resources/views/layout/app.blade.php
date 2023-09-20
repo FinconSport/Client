@@ -233,7 +233,6 @@
 
 
 		function caller( url, data, obj, isUpdate = 0 ) {
-			console.log('caller')
 			$.ajax({
 				url: url,
 				method: 'POST',
@@ -241,10 +240,8 @@
 				success: function(data) {
 					console.log(url + ' called success')
 					const json = JSON.parse(data); 
-					console.log(json)
 					// 先判定要不要解壓縮
-					if(json.gzip === 1 || json.gzip === undefined) {
-						console.log('uncompressed')
+					if(json.gzip === 1) {
 						// 將字符串轉換成 ArrayBuffer
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -258,9 +255,6 @@
 					} else {
 						// ajax更新 不可以整包覆蓋
 						// loop json.data-> 比較時間戳 不一樣再更新該筆就好
-
-						
-
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
