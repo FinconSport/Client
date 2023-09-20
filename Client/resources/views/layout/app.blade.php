@@ -179,6 +179,7 @@
 	<script src="{{ asset('js/common.js?v=' . $system_config['version']) }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js?v=' . $system_config['version']) }}"></script>
     <script src="{{ asset('js/semantic.min.js?v=' . $system_config['version']) }}"></script>
+	<script src="{{ asset('js/pako.min.js?v=' . $system_config['version']) }}"></script><!-- 解壓縮 -->
 	<script>
 		const current_time = '{{ $current_time }}';
 		const version = '{{ $system_config["version"] }}';
@@ -241,7 +242,7 @@
 					console.log(url + ' called success')
 					const json = JSON.parse(data); 
 					// 先判定要不要解壓縮
-					if(json.gzip === 1) {
+					if(json.gzip === 1 || json.gzip === undefined) {
 						// 將字符串轉換成 ArrayBuffer
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));

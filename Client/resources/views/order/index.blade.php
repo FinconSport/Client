@@ -64,22 +64,10 @@
 					</div>
 				</div>
 			</div>
-			<button style="width: 10%;" id='searchBtn' class="ui button active" onclick="searchOrder(1)">{{ trans('common.search_area.search') }}
+			<button style="width: 10%;" id='searchBtn' class="ui button active" onclick="searchOrder()">{{ trans('common.search_area.search') }}
 				<i class="fa-solid fa-magnifying-glass ml-1"></i>
 			</button>
 		</div>
-		
-		<form id="orderSearch" action="/order" method="POST" hidden>
-			@csrf
-			<input type="text" name="page" placeholder="page" >
-			<input type="text" name="order_id" placeholder="order_id" >
-			<input type="text" name="sport" placeholder="sport" >
-			<input type="text" name="series_id" placeholder="series_id" >
-			<input type="text" name="status" placeholder="status" >
-			<input type="text" name="start_time" placeholder="start_time" >
-			<input type="text" name="end_time" placeholder="end_time" >
-			<button type="submit">Submit</button>
-		</form>
 	</div>
 	<div id='searchCondition' class="p-0" style="background-color: transparent;">
 		<div>{{ trans('common.search_area.total') }}{{ $pagination['max_count'] }}{{ trans('common.search_area.game') }}</div>
@@ -226,52 +214,93 @@
 
 @push('main_js')
 <script>
-	
-	var isSearchForm = false
+
+
+	/* ===== PECO ===== 
+	1. pagination?
+	2. api因為先用手機版本的，不是status而是result(已結算、未結算)
+	3. api待定: seriesList, statusList
+	===== PECO ===== */
+
+
 	// 語系
     var langTrans = @json(trans('order'));
 
-	
+	// detect ini ajax
+    var isReadyOrderInt = null
+    var isReadyOrder = false
+
+	// order list data
+    var orderListD = {}
+    var callOrderListData = { token: token, player: player, result: 1, page: 1 }
+    const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
+
+	// seriesList
+	var seriesListD = {}
+    var callSeriesListData = commonCallData
+	const seriesList_api = '' // 目前沒有
+
+	// statusList
+	var statusListD = {}
+    var callStatusListData = commonCallData
+	const statusList_api = '' // 目前沒有
+
+	function renderView() {
+		// search condition
+		if( searchData.sport !== undefined ) {
+			$('select[name="sport"]').val(searchData.sport)
+			$('select[name="sport"]').trigger('change')
+		}
+        if( searchData.series_id !== undefined ) {
+			$('select[name="series_id"]').val(searchData.series_id)
+			$('select[name="series_id"]').trigger('change')
+		}
+		if( searchData.order_id !== undefined ) {
+			$('input[name="order_id"]').val(searchData.order_id)
+			$('input[name="order_id"]').trigger('change')
+		}
+		if( searchData.status !== undefined ) {
+			$('select[name="status"]').val(searchData.status)
+			$('select[name="status"]').trigger('change')
+		}
+		if( searchData.start_time !== undefined ) {
+			$('input[name="start_time"]').val(searchData.start_time)
+			$('input[name="start_time"]').trigger('change')
+		}
+		if( searchData.end_time !== undefined ) {
+			$('input[name="end_time"]').val(searchData.end_time)
+			$('input[name="end_time"]').trigger('change')
+		}
+	}
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 
-		// 內容太長
-		fixTextOverflow()
+		// ===== DATA LATER =====
 
-		// 當下搜尋條件
-        if( searchData._token !== undefined ) {
-            if( searchData.series_id !== undefined ) {
-                $('select[name="series_id"]').val(searchData.series_id)
-		        $('select[name="series_id"]').trigger('change')
-            }
-			if( searchData.status !== undefined ) {
-                $('select[name="status"]').val(searchData.status)
-		        $('select[name="status"]').trigger('change')
-            }
-			if( searchData.order_id !== undefined ) {
-                $('input[name="order_id"]').val(searchData.order_id)
-		        $('input[name="order_id"]').trigger('change')
-            }
-            if( searchData.start_time !== undefined ) {
-                $('input[name="start_time"]').val(searchData.start_time)
-		        $('input[name="start_time"]').trigger('change')
-            }
-            if( searchData.end_time !== undefined ) {
-                $('input[name="end_time"]').val(searchData.end_time)
-		        $('input[name="end_time"]').trigger('change')
-            }
-        }
+        // ini data from ajax
+        caller(orderList_api, callOrderListData, orderListD) // orderListD
+        // caller(seriesList_api, callSeriesListData, seriesListD) // seriesListD
+        // caller(statusList_api, callStatusListData, statusListD) // statusListD
+		// sportListD can be accessed global
 
+        // check if api are all loaded every 500 ms 
+        isReadyOrderInt = setInterval(() => {
+            if (orderListD.status === 1) { isReadyOrder = true; }
+            if( isReadyOrder === true && isReadyCommon === true) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').css('opacity', 1); // show the main content
+				renderView()
+                clearInterval(isReadyOrderInt); // stop checking
+            }
+        }, 500);
 	});
 
 
-	// 搜尋框 聯盟名稱
+	// search area series filter
 	function filterSeiries(type = 0) {
-		// console.log('filterSeiries->' + type)
-		if( isReady === true && type === 0 ) {
+		if( type === 0 ) {
 			$('.clearSearch').dropdown('clear')
-			console.log('dropdown clear')
 		}
 		let val = $('select[name="sport"]').val()
 		setTimeout(() => {
@@ -286,7 +315,7 @@
 		}, 100);
 	}
 
-	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
+	// left side menu
     $('.menuTypeBtn').click(function(){
         let key = $(this).attr('key')
         if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
@@ -308,7 +337,7 @@
         }
     })
 
-	// 內容太長 跑馬燈
+	// text overflow
     function fixTextOverflow() {
         Array.from(document.getElementsByClassName("textOverFlow")).forEach(
 			function(element, index, array) {
@@ -334,6 +363,7 @@
         marquee.scrollAmount = 3
     }
 
+	// pagination
 	function navPage(pagination) {
 		let queryData = @json($search);
 		let searchPage = @json($search)['page']
@@ -357,29 +387,28 @@
 		window.location.href = '/order?' + queryString;
 	}
 	
-	// 搜尋框
-	function searchOrder(page) {
-		$('#orderSearch input[name="page"]').val(page)
-		$('#orderSearch input[name="order_id"]').val($('input[name="order_id"]').val())
-		$('#orderSearch input[name="sport"]').val($('select[name="sport"]').val())
-		$('#orderSearch input[name="series_id"]').val($('select[name="series_id"]').val())
-		$('#orderSearch input[name="status"]').val($('select[name="status"]').val())
-		$('#orderSearch input[name="start_time"]').val($('input[name="start_time"]').val())
-		$('#orderSearch input[name="end_time"]').val($('input[name="end_time"]').val())
-		$('#orderSearch').submit()
+	// order search
+	function searchOrder() {
+		let queryData = {}
+		queryData.page = 1
+		let sSport = $('select[name="sport"]').val()
+		let sOrderId = $('input[name="order_id"]').val()
+		let sSeriesId = $('select[name="series_id"]').val()
+		let sStatus = $('select[name="status"]').val()
+		let sStartTime = $('input[name="start_time"]').val()
+		let sEndTime = $('input[name="end_time"]').val()
+		if(sSport) queryData.sport = sSport
+		if(sOrderId) queryData.order_id = sOrderId
+		if(sSeriesId) queryData.series_id = sSeriesId
+		if(sStatus) queryData.status = status
+		if(sStartTime) queryData.start_time = sStartTime
+		if(sEndTime) queryData.end_time = sEndTime
+		var queryString = new URLSearchParams(queryData).toString();
+		window.location.href = '/order?' + queryString;
 	}
 
-	$('#orderSearch').submit(function(e) {
-		e.preventDefault();
-		$('#orderSearch input').each(function() {
-			if ($(this).val() === '') {
-				$(this).remove();
-			}
-		});
-		this.submit();
-	});
 
-	// 展開 收合
+	// toggle
 	function toggleInfo(key, e) {
 		$('div[key="' + key + '"]:not(:first-child)').slideToggle();
 		let isopen = $(e).attr('isopen')
@@ -397,7 +426,7 @@
 	}
 
 
-  // for test
+  	// for test
     console.log("menu_count");
     console.log(@json($menu_count));
 
