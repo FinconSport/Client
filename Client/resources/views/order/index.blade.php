@@ -226,27 +226,7 @@
     var callOrderListData = { token: token, player: player, result: 1, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-
-
-  	// 寫入頁面限定JS
-  	$(document).ready(function() {
-
-		// ===== DATA LATER =====
-
-        // ini data from ajax
-        caller(orderList_api, callOrderListData, orderListD) // match_list
-
-        // check if api are all loaded every 500 ms 
-        isReadyIndexInt = setInterval(() => {
-            if (orderListD.status === 1) { isReadyOrder = true; }
-            if( isReadyOrder === true && isReadyCommon === true) {
-                $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
-                clearInterval(isReadyOrderInt); // stop checking
-            }
-        }, 500);
-
-
+	function renderView() {
 		// search condition
 		if( searchData.sport !== undefined ) {
 			$('select[name="sport"]').val(searchData.sport)
@@ -272,6 +252,26 @@
 			$('input[name="end_time"]').val(searchData.end_time)
 			$('input[name="end_time"]').trigger('change')
 		}
+	}
+
+  	// 寫入頁面限定JS
+  	$(document).ready(function() {
+
+		// ===== DATA LATER =====
+
+        // ini data from ajax
+        caller(orderList_api, callOrderListData, orderListD) // match_list
+
+        // check if api are all loaded every 500 ms 
+        isReadyIndexInt = setInterval(() => {
+            if (orderListD.status === 1) { isReadyOrder = true; }
+            if( isReadyOrder === true && isReadyCommon === true) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').css('opacity', 1); // show the main content
+				renderView()
+                clearInterval(isReadyOrderInt); // stop checking
+            }
+        }, 500);
 	});
 
 
