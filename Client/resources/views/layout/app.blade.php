@@ -180,11 +180,6 @@
     <script src="{{ asset('js/jquery-ui.min.js?v=' . $system_config['version']) }}"></script>
     <script src="{{ asset('js/semantic.min.js?v=' . $system_config['version']) }}"></script>
 	<script>
-		console.log("lang");
-    	console.log(@json($lang));
-
-
-
 		const current_time = '{{ $current_time }}';
 		const version = '{{ $system_config["version"] }}';
 		const csrfToken = '{{ csrf_token() }}'
