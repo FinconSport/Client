@@ -20,27 +20,25 @@
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @isset($generalRulesBaseball)
-                                        @foreach($generalRulesBaseball as $key => $rule)
-                                            @if (is_array($rule)) {{-- Check if the value is an array --}}
-                                                <ul>
-                                                    @foreach($rule as $subKey => $subRule)
-                                                        @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
-                                                            <ul>
-                                                                @foreach($subRule as $subSubKey => $subSubRule)
-                                                                    <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        @else
-                                                            <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            @else
-                                                <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $rule }}</li>
-                                            @endif
-                                        @endforeach
-                                    @endisset
+                                    @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
+                                        @if (is_array($grRule)) {{-- Check if the value is an array --}}
+                                            <ul>
+                                                @foreach($grRule as $subKey => $subRule)
+                                                    @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
+                                                        <ul>
+                                                            @foreach($subRule as $subSubKey => $subSubRule)
+                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $grRule }}</li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
@@ -417,12 +415,7 @@
 <script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <!-- <script src="{{ asset('js/bootstrap.min.js?v=' .$current_time) }}"></script> -->
 <script>
-    // 語系
-    var langTrans = @json(trans('rule'));
-
-    // detect ini ajax
     var isReadyRuleInt = null
-    
     $(document).ready(function() {
         // check if api are all loaded every 500 ms 
         isReadyRuleInt = setInterval(() => {
@@ -434,6 +427,8 @@
         }, 500);
     });
 
+    // 語系
+    var langTrans = @json(trans('rule'));
 
     // 左邊菜單  當點擊體育或串關時 移除目前選中樣式
     $('.menuTypeBtn').click(function(){
