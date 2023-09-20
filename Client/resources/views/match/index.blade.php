@@ -568,7 +568,7 @@
 		if(sStartTime) queryData.start_time = sStartTime
 		if(sEndTime) queryData.end_time = sEndTime
 		var queryString = new URLSearchParams(queryData).toString();
-		window.location.href = '/order?' + queryString;
+		window.location.href = '/match?' + queryString;
 	}
 
 
