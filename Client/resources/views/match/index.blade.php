@@ -6,7 +6,7 @@
 		<div class="w-100" style='display: inline-flex'>
 			<div id="series_id" style="width: 35%;margin-left: 1%" data-filter="off" data-filterpage="1">
 				<p class="mb-0 fw-600 fs-09">{{ trans('match.main.series') }}</p>
-				<select name="series_id" class="ui dropdown searchSelect seriesOption" onchange="filterMatch()">
+				<select name="series_id" class="ui dropdown searchSelect seriesOption" onchange="filterSeiries()">
 					<option value="">{{ trans('common.search_area.series') }}</option>
 					<option value="0">{{ trans('common.search_area.all') }}</option>
 					@foreach ($series_list as $key => $list)
@@ -40,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<button style="width: 20%;" id='searchBtn' class="ui button active" onclick="filterMatch()">{{ trans('common.search_area.search') }}
+			<button style="width: 20%;" id='searchBtn' class="ui button active" onclick="searchResult()">{{ trans('common.search_area.search') }}
 				<i class="fa-solid fa-magnifying-glass ml-1"></i>
 			</button>
 		</div>
@@ -378,134 +378,112 @@
 @endSection
 @push('main_js')
 <script>
-	
-	
-    // 目前賽事列表
-    var match_list = @json($data);
-    // 無限下拉判斷有沒有下一頁
-    var isLastPage = false;
-    if(match_list.length < 20 || match_list.length === 0) isLastPage = true
-	// 無限下拉鎖
-	var fetchMoreLock = true
-	// 語系
-    var langTrans = @json(trans('match'));
+
+	/*
+		===== PECO =====
+		1. search api and infiniti api?
+		2. 
+		===== PECO =====
+	*/ 
 
 	//Identify sport id
 	var sportn = parseInt(searchData["sport"], 10);
-	//data url
-	var url = '/match/list';
 
-	$(document).ready(function() {
-		// Using window.location.search
-		var queryString = window.location.search;
-		var urlParams = new URLSearchParams(queryString);
+	
 
-		// Accessing parameters
-		var series = urlParams.get("series_id");
-		var sdate = urlParams.get("start_time");
-		var edate = urlParams.get("end_time");
-		if (series != '')
-		{
-			$(".seriesOption select").find(":selected").val(series)
-		}
-		if (sdate != '')
-		{
-			$('input[name="start_time"]').val(sdate)
-		}
-		if (edate != '')
-		{
-			$('input[name="end_time"]').val(edate)
-		}
-		// 如果第一頁就不滿20筆 顯示沒有更多資料
-		isLastPage && $('#noMoreData').show()
-		// 文字太長處理
-		fixTextOverflow()
-		
-	});
+    
+    var isLastPage = false; // infinite scroll -> detect if it's last page
+	var fetchMoreLock = false; // infinite scroll lock -> to prevent infinite loop
+	var langTrans = @json(trans('match')); // lang file
 
-	// 內容太長 跑馬燈
-    function fixTextOverflow() {
-        Array.from(document.getElementsByClassName("textOverFlow")).forEach(
-			function(element, index, array) {
-				if (!element.querySelector("marquee") && isElementOverflowing(element)) {
-					wrapContentsInMarquee(element);
-				}
+	// detect ini ajax
+    var isReadyResultInt = null
+    var isReadyResult = false
+	
+	// result list data
+    var resultListD = {}
+    var callResultListData = { token: token, player: player, sport: sport, page: 1 }
+    const resultList_api = 'https://sportc.asgame.net/api/v1/result_index'
+
+	// seriesList
+	var seriesListD = {}
+    var callSeriesListData = commonCallData
+	const seriesList_api = '' // tbd
+
+	function renderView( isIni = 0 ) {
+		if( isIni === 1 ) { // initial
+			// search condition
+				if( searchData.series_id !== undefined ) {
+				$('select[name="series_id"]').val(searchData.series_id)
+				$('select[name="series_id"]').trigger('change')
 			}
-		);
-    }
+			if( searchData.start_time !== undefined ) {
+				$('input[name="start_time"]').val(searchData.start_time)
+				$('input[name="start_time"]').trigger('change')
+			}
+			if( searchData.end_time !== undefined ) {
+				$('input[name="end_time"]').val(searchData.end_time)
+				$('input[name="end_time"]').trigger('change')
+			}
+		}
+		
 
-	function formatDateTime(dateStr){
-		var startTime = dateStr; // Assuming e.start_time is a date string
-		var date = new Date(startTime);
+		/* render resultListD here
 
-		// Extract date components
-		var month = (date.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 to the month because it's zero-based
-		var day = date.getDate().toString().padStart(2, '0');
-		var hours = date.getHours().toString().padStart(2, '0');
-		var minutes = date.getMinutes().toString().padStart(2, '0');
+		loop resultListD to generate the html element
+		then use insertRow() to insert
+		note that insertRow() may need to be edited
 
-		// Formatted date string in "m-d H:i" format
-		var formattedDate = month + '-' + day + ' ' + hours + ':' + minutes;
-		return formattedDate
+
+
+
+		render resultListD here */
+
+		// detect if it's last page
+		if( resultListD.length !== 20 || resultListD.length === 0 ) isLastPage = true
+		isLastPage && $('#noMoreData').show()
 	}
 
-    function isElementOverflowing(element) {
-		var overflowX = element.offsetWidth < element.scrollWidth,
-			overflowY = element.offsetHeight < element.scrollHeight;
+	$(document).ready(function() {
 
-		return (overflowX || overflowY);
-		}
+		// ini data from ajax
+        caller(resultList_api, callSeriesListData, resultListD) // resultListD
+        // caller(seriesList_api, callSeriesListData, seriesListD) // seriesListD
 
-    function wrapContentsInMarquee(element) {
-    var marquee = document.createElement('marquee'),
-        contents = element.innerText;
-        marquee.innerText = contents;
-        element.innerHTML = '';
-        element.appendChild(marquee);
-        marquee.scrollAmount = 3
-    }
+
+		// check if api are all loaded every 500 ms 
+        isReadyResultInt = setInterval(() => {
+            if (resultListD.status === 1) { isReadyResult = true; }
+            if( isReadyResult === true && isReadyCommon === true) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').css('opacity', 1); // show the main content
+				renderView()
+                clearInterval(isReadyResultInt); // stop checking
+            }
+        }, 500);
+	});
+
 
 	// 下拉更多資料
 	function fetchMore() {
 		console.log('fetchMore')
+		$('#loader').show() // loading transition
 
-		$('#loader').show()
-		searchData['page'] = parseInt(searchData['page']) + 1
-		
+		callResultListData.page = parseInt(searchData.page) + 1
+
 		$.ajax({
-			url: url,
+			url: resultList_api,
 			type: 'POST',
 			headers: {
 				'X-CSRF-TOKEN': csrfToken
 			},
-			data: searchData,
+			data: callResultListData,
 			success: function(response) {
 				var data = JSON.parse(response).data
-				console.log(data)
-				if(data.length < 20 || data.length === 0) {
-                    $('#noMoreData').show();
-                    isLastPage = true
-                } 
-				data.forEach(e => {
-					// 兩隊都有才顯示
-					switch (sportn) {
-						case 1:
-							n = 14;
-							break;
-						case 2:
-							n = 26
-							break;
-						case 3:
-							n = 15;
-							break;
-					}
-					if (e.home_team_name && e.away_team_name) {
-						insertRow(e, n);
-					}
-				});
+				data = resultListD
+				renderView() // render the new data
 				$('#loader').hide()
-				// 回復開關
-                fetchMoreLock = true
+                fetchMoreLock = false // reset the infinite scroll lock
 			},
 			error: function(xhr, status, error) {
 				console.error('error');
@@ -513,9 +491,8 @@
 			}
 		});
 	}
-	
 
-	// 滑到最底
+	// scroll to bottom
 	var matchContainer = document.getElementById('tblbodyMatch');
 	matchContainer.addEventListener('scroll', function() {
 		var noDataDiv = document.getElementById("noDataF");
@@ -525,14 +502,13 @@
 		var scrollHeight = matchContainer.scrollHeight;
 		var scrollTop = matchContainer.scrollTop;
 		var clientHeight = matchContainer.clientHeight;
-		if (scrollTop + clientHeight + 1 >= scrollHeight && isLastPage === false && fetchMoreLock === true && noDataDivL < 1) {
-			fetchMoreLock = false
+		if (scrollTop + clientHeight + 1 >= scrollHeight && isLastPage === false && fetchMoreLock === false && noDataDivL < 1) {
+			fetchMoreLock = true // lock
 			fetchMore()
 		}
 	});
 
 	function insertRow(e, n) {
-		//console.log(n);
 		//start time
 		let insertStr = '<tr><td class="nowrap" rowspan="2">'+formatDateTime(e.start_time)+'</td>'
 		//series logo
@@ -561,28 +537,40 @@
 		}
 		insertStr += '</tr>'
 		$('#tblbodyMatch tbody').append(insertStr)
-		fixTextOverflow()
 	}
 
-	function filterMatch(){
-		var series = $(".seriesOption select").find(":selected").val();
-		var startDate =$('input[name="start_time"]').val();
-		var endDate = $('input[name="end_time"]').val();
-		const params = new URLSearchParams();
-		params.append("sport", sportn);
-		if (series !='' && series != 0){
-			params.append("series_id", series);
+	// search area series filter
+	function filterSeiries(type = 0) {
+		if( type === 0 ) {
+			$('.clearSearch').dropdown('clear')
 		}
-		if (startDate != ""){
-			params.append("start_time", startDate);
-		}
-		if (startDate != ""){
-			params.append("end_time", endDate);
-		}
-		const queryString = params.toString();
-		const url = `/match?${queryString}`;
-		window.location.href = url;
-	} 
+		let val = $('select[name="sport"]').val()
+		setTimeout(() => {
+			$('#series_id select option').each(function() {
+				let id = $(this).val()
+				if ($(this).attr('sport') === val) {
+					$('#series_id div[data-value="'+id+'"]').show()
+				} else {
+					$('#series_id div[data-value="'+id+'"]').hide()
+				}
+			});
+		}, 100);
+	}
+	
+	// reesult search
+	function searchResult() {
+		let queryData = {}
+		queryData.page = 1
+		let sSeriesId = $('select[name="series_id"]').val()
+		let sStartTime = $('input[name="start_time"]').val()
+		let sEndTime = $('input[name="end_time"]').val()
+		if(sSeriesId) queryData.series_id = sSeriesId
+		if(sStartTime) queryData.start_time = sStartTime
+		if(sEndTime) queryData.end_time = sEndTime
+		var queryString = new URLSearchParams(queryData).toString();
+		window.location.href = '/order?' + queryString;
+	}
+
 
   	// for test
     console.log("menu_count");
