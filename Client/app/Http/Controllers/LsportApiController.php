@@ -33,6 +33,7 @@ use App\Models\Agent;
 use App\Models\PlayerBalanceLogs;
 use App\Models\ClientMarquee;
 use App\Models\SystemConfig;
+use Exception;
 
 /**
  * LsportApiController
@@ -689,15 +690,19 @@ ORDER BY
                 $this->ApiError('03');
             }
             
-            if (!$marketBetData->mb_name_locale) {
-                dd($marketBetData);
-            }
+            try {
+                if (!$marketBetData->mb_name_locale) {
+                    dd($marketBetData);
+                }
 
-            // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($marketBetData->mb_name_locale)) {  // market name
-                $merket_bet_name = $marketBetData->mb_name_en;
-            } else {
-                $merket_bet_name = $marketBetData->mb_name_locale;
+                // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                if (!strlen($marketBetData->mb_name_locale)) {  // market name
+                    $merket_bet_name = $marketBetData->mb_name_en;
+                } else {
+                    $merket_bet_name = $marketBetData->mb_name_locale;
+                }
+            } catch (Exception $e) {
+                dd($marketBetData);
             }
 
             $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]['market_bets'] = array(
