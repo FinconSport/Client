@@ -532,14 +532,14 @@ ORDER BY
  */
 
     $data = DB::table('lsport_league as l')
-        ->join('lsport_fixture as f', 'l.fixture_id', '=', 'f.sport_id')
-        ->join('lsport_market as m', 'm.fixture_id', '=', 'f.fixture_id')
+        ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
+        ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
         ->join('lsport_team as th', function ($join) {
-            $join->on('th.team_id', '=', 'f.home_id')
+            $join->on('f.home_id', '=', 'th.team_id')
             ->on('l.league_id', '=', 'th.league_id');
         })
         ->join('lsport_team as ta', function ($join) {
-            $join->on('ta.team_id', '=', 'f.home_id')
+            $join->on('f.away_id', '=', 'ta.team_id')
             ->on('l.league_id', '=', 'ta.league_id');
         })
         ->select('l.name_en AS l_name_en, l.name_tw AS l_name_locale')
