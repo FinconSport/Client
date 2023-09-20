@@ -318,7 +318,6 @@
     // websocket用
     const messageQueue = []; // queue to store the package (FIFO)
     var renderInter = null // timer for refresh view layer
-    var latestTimeStamp = 0; // data layer
     var socket_status = false;
     var ws = null
     var heartbeatTimer = null
@@ -349,16 +348,16 @@
             2. ajax -> update the globe data
     */
 
-    // 監控ini ajax
+    // detect ini ajax
     var isReadyIndexInt = null
     var isReadyIndex = false
 
-    // 列表資料
+    // match list data
     var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
     const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
 
-    // 投注限額資料
+    // bet limitation data
     var betLimitationD = {}
     var callLimitationData = {}
     const betLimitation_api = ''
@@ -368,7 +367,10 @@
     
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
-        // 打開第一個
+
+        // put the view ini function here  ex: textoverflow handle, open the first toggle....
+
+        // open the first
         if($('div[id^=toggleContent_]:visible').length > 0) {
             setTimeout(() => {
                 $('.catWrapperTitle:visible').eq(0).click()
@@ -385,6 +387,10 @@
 
         // ini data from ajax
         caller(matchList_api, callMatchListData, matchListD) // match_list
+        // then call every 3 sec
+        setInterval(() => {
+            caller(matchList_api, callMatchListData, matchListD) // update 
+        }, 3000);
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
@@ -392,7 +398,6 @@
             if( isReadyIndex === true && isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
-                viewIni() // excute all view layer ini function
                 clearInterval(isReadyIndexInt); // stop checking
             }
         }, 500);
@@ -405,7 +410,8 @@
 
         
         // ===== VIEW LATER =====
-        renderInter = setInterval(() => { // 每三秒刷新一次
+        renderView(1); // ini data
+        renderInter = setInterval(() => { // then refresh every 3 sec
             renderView()
         }, 3000);
         // ===== VIEW LATER =====
@@ -458,14 +464,15 @@
         }
     }
 
-    // 刷新頁面資訊
-    function renderView() {
-        // 在這邊更新頁面資料 
+    // render view layer here
+    function renderView( isIni = 0 ) {
         console.log('renderView')
 
 
 
-        // 在這邊更新頁面資料 
+
+
+        if( isIni === 1 ) viewIni() // excute all view layer ini function
     }
 
     // detect if there's still package need to be processed

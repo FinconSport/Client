@@ -3,11 +3,10 @@
 @section('content')
 	<!-- 搜尋框 -->
 	<div id='searchArea' style="height: 5.5rem;">
-		<div class="ui active centered inline loader" style="margin-top: 3rem!important;"></div>
 		<div class="w-100" style='display: inline-flex'>
 			<div style="width: 10%; margin-left: 1%">
-				<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.sport') }}</p>
-				<select name="sport" class="ui dropdown searchSelect userField" onchange="filterSeiries()">
+				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.sport') }}</p>
+				<select name="sport" class="ui dropdown searchSelect" onchange="filterSeiries()">
 					<option value="">{{ trans('common.search_area.sport') }}</option>
 					@foreach($sport_list as $key => $item)
 						@if(isset($series_list[$key]))
@@ -18,8 +17,8 @@
 			</div>
 
 			<div id="series_id" style="width: 35%;margin-left: 1%">
-				<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.series') }}</p>
-				<select name="series_id" class="ui dropdown clearSearch searchSelect userField" onchange="filterSeiries(1)">
+				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.series') }}</p>
+				<select name="series_id" class="ui dropdown clearSearch searchSelect" onchange="filterSeiries(1)">
 					<option value="">{{ trans('common.search_area.series') }}</option>
 					@foreach($series_list as $key => $item)
 						@foreach($item as $key2 => $value)
@@ -29,14 +28,14 @@
 				</select>
 			</div>
 			<div style="width: 10%; margin-left: 1%">
-				<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.order_id') }}</p>
+				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.order_id') }}</p>
 				<div class="ui input focus">
-					<input autocomplete="off" class="userField w-100" name="order_id" type="text" placeholder="{{ trans('common.search_area.order_id') }}">
+					<input autocomplete="off" class="w-100" name="order_id" type="text" placeholder="{{ trans('common.search_area.order_id') }}">
 				</div>
 			</div>
 			<div style="width: 12%;margin-left: 1%">
-				<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.status') }}</p>
-				<select name="status" class="ui dropdown clearSearch searchSelect userField">
+				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.status') }}</p>
+				<select name="status" class="ui dropdown clearSearch searchSelect">
 					<option value="">{{ trans('common.search_area.status') }}</option>
 					@foreach($status_list as $key => $item)
 						<option value="{{ $key }}">{{ $item }}</option>
@@ -46,8 +45,8 @@
 			<div class="ui form" style="width: 23%;margin-left: 1%">
 				<div class="two fields">
 					<div class="field">
-						<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.start_time') }}</p>
-						<div class="ui calendar userField" id="rangestart">
+						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.start_time') }}</p>
+						<div class="ui calendar" id="rangestart">
 							<div class="ui input left icon">
 								<i class="fa-solid fa-calendar-days"></i>
 								<input autocomplete="off" name="start_time" type="text" placeholder="{{ trans('common.search_area.start_time') }}">
@@ -55,8 +54,8 @@
 						</div>
 					</div>
 					<div class="field">
-						<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.end_time') }}</p>
-						<div class="ui calendar userField" id="rangeend">
+						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.end_time') }}</p>
+						<div class="ui calendar" id="rangeend">
 							<div class="ui input left icon">
 								<i class="fa-solid fa-calendar-days"></i>
 								<input autocomplete="off" name="end_time" type="text" placeholder="{{ trans('common.search_area.end_time') }}">
@@ -65,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<button style="width: 10%;" id='searchBtn' class="ui button active userField" onclick="searchOrder(1)">{{ trans('common.search_area.search') }}
+			<button style="width: 10%;" id='searchBtn' class="ui button active" onclick="searchOrder(1)">{{ trans('common.search_area.search') }}
 				<i class="fa-solid fa-magnifying-glass ml-1"></i>
 			</button>
 		</div>
@@ -232,6 +231,8 @@
 	// 語系
     var langTrans = @json(trans('order'));
 
+	
+
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 
@@ -263,6 +264,27 @@
         }
 
 	});
+
+
+	// 搜尋框 聯盟名稱
+	function filterSeiries(type = 0) {
+		// console.log('filterSeiries->' + type)
+		if( isReady === true && type === 0 ) {
+			$('.clearSearch').dropdown('clear')
+			console.log('dropdown clear')
+		}
+		let val = $('select[name="sport"]').val()
+		setTimeout(() => {
+			$('#series_id select option').each(function() {
+				let id = $(this).val()
+				if ($(this).attr('sport') === val) {
+					$('#series_id div[data-value="'+id+'"]').show()
+				} else {
+					$('#series_id div[data-value="'+id+'"]').hide()
+				}
+			});
+		}, 100);
+	}
 
 	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
     $('.menuTypeBtn').click(function(){

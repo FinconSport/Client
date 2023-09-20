@@ -128,18 +128,6 @@
 							<div class="p-0 bg-deepgreen slideMenuTag" style="height: 1rem;"></div>
 						</div>
 					</div>
-
-					<!-- for test -->
-
-					<!-- <p class="text-white">status:  <span id="testStatus">1</span></p>
-					<button onclick="addStatus()">Add status Value</button>
-					<button onclick="delStatus()">Del status Value</button>
-					<p class="text-white">rate:  <span id="testRate">10</span></p>
-					<button onclick="addRate()">Add Rate Value</button>
-					<button onclick="delRate()">Del Rate Value</button> -->
-
-					<!-- for test -->
-
 					<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
 				</div>
 			</div>
@@ -213,7 +201,7 @@
 		// ===== DATA LAYER ======
 
 		// player and sport_id
-		const player = 8
+		const player = @json($player['id']);
 		const token = 12345
 		const sport = parseInt(searchData.sport)
 
