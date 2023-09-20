@@ -566,7 +566,7 @@ ORDER BY
     $arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
     $sport_name = '';
     foreach ($data as $dk => $dv) {
-        $leagud_id = $dv->league_id;
+        $league_id = $dv->league_id;
         $fixture_id = $dv->fixture_id;
         $market_id = $dv->market_id;
         $main_line = $dv->main_line;
@@ -598,7 +598,7 @@ ORDER BY
         }
 
         // league 層
-        if (!sizeof($arrLeagues[$leagud_id])) {
+        if (!isset($arrLeagues[$league_id]) || !sizeof($arrLeagues[$league_id])) {
 
             // 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($dv['th_name_locale'])) {  // league name
@@ -608,7 +608,7 @@ ORDER BY
             }
 
             // 包入 league 聯賽資料
-            $arrLeagues[$leagud_id] = array(
+            $arrLeagues[$league_id] = array(
                 'league_id' => $dv->league_id,
                 'league_name' => $league_name,
                 'fixtures' => array(),
@@ -616,7 +616,7 @@ ORDER BY
         }
 
         // fixture 層
-        if (!sizeof($arrLeagues[$leagud_id]['fixtures'][$fixture_id])) {
+        if (!isset($arrLeagues[$league_id]['fixtures'][$fixture_id]) || !sizeof($arrLeagues[$league_id]['fixtures'][$fixture_id])) {
 
             // 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($dv->th_name_locale)) {  // home team
@@ -631,7 +631,7 @@ ORDER BY
             }
 
             // 包入 fixture 賽事資料
-            $arrLeagues[$leagud_id]['fixtures'][$fixture_id] = array(
+            $arrLeagues[$league_id]['fixtures'][$fixture_id] = array(
                 'sport_id' => $dv->sport_id,
                 'league_id' => $dv->league_id,
                 'fixture_id' => $dv->fixture_id,
@@ -652,7 +652,8 @@ ORDER BY
         }
 
         //market 層
-        if (!sizeof($arrLeagues[$leagud_id]['fixtures'][$fixture_id]['markets'][$market_id])) {
+        if (!isset($arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]) ||
+            !sizeof($arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id])) {
 
             // 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($dv['m_name_locale'])) {  // market name
@@ -662,7 +663,7 @@ ORDER BY
             }
 
             // 包入 market 玩法資料
-            $arrLeagues[$leagud_id]['fixtures'][$fixture_id]['markets'][$market_id] = array(
+            $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id] = array(
                 'market_id' => $dv->market_id,
                 'market_name' => $market_name,
                 'market_bets' => array(),
