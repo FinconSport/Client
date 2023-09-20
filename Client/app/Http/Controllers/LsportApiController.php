@@ -1579,7 +1579,7 @@ ORDER BY
         
         // $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
 
-        $data = $tmp;
+        $data = $return;
 
         /**************************************/
 
