@@ -183,7 +183,6 @@
 		console.log("lang");
     	console.log(@json($lang));
 
-		console.log('testttt')
 
 
 		const current_time = '{{ $current_time }}';
