@@ -52,9 +52,11 @@
 								<div class='sportMenu' key='indexSportMenu'>
 									@foreach ($menu_count[0] as $key => $item)
 										@if(isset($sport_list[$key]))
-											<a class="sportSelect {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo(event, "{{ $key }}", "")'>
-												<i class="fa-solid icon-{{ $key }}"></i>
-												<span>{{ $sport_list[$key] }}</span>
+											<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo(event, "{{ $key }}", "")'>
+												<div class="d-flex align-items-center">
+													<i class="fa-solid icon-{{ $key }}"></i>
+													<span>{{ $sport_list[$key] }}</span>
+												</div>
 												<span class="menuStatistics_{{ $key }}">{{ $item }}</span>
 											</a>
 										@endif
@@ -69,9 +71,11 @@
 								<div class='sportMenu' key='mOrderSportMenu'>
 									@foreach ($menu_count[1] as $key => $item)
 									@if(isset($sport_list[$key]))
-									<a class="sportSelect {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "m_order")'>
-										<i class="fa-solid icon-{{ $key }}"></i>
-										<span>{{ $sport_list[$key] }}</span>
+									<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "m_order")'>
+										<div class="d-flex align-items-center">
+											<i class="fa-solid icon-{{ $key }}"></i>
+											<span>{{ $sport_list[$key] }}</span>
+										</div>
 										<span class="menuStatistics_{{ $key }}">{{ $item }}</span>
 									</a>
 									@endif
@@ -91,9 +95,11 @@
 								<span>{{ trans('common.left_menu.match') }}</span>
 								<div class='sportMenu' key='matchSportMenu'>
 									@foreach ($sport_list as $key => $item)
-										<a class="sportSelect {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "match")'>
-											<i class="fa-solid icon-{{ $key }}"></i>
-											<span>{{ $item }}</span>
+										<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "match")'>
+											<div class="d-flex align-items-center">
+												<i class="fa-solid icon-{{ $key }}"></i>
+												<span>{{ $item }}</span>
+											</div>
 											<span></span>
 										</a>
 									@endforeach
