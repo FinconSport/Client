@@ -557,7 +557,7 @@ ORDER BY
         ->orderBy('m.market_id', 'ASC')
         ->get();
 
-    dd($data);
+    var_dump($data);
 
 /*
 {
