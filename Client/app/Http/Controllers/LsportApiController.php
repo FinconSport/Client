@@ -497,9 +497,10 @@ class LsportApiController extends Controller {
 
         //////////////////////////////
         // 早盤
-        // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+        // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')  // 賽事-賠率
         // ->join('ant_series_list', function ($join) {
-        //         $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+        //         $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')  // 賽事-聯賽
+        //         ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');  // 賽事-聯賽
         // })
         // ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
         // ->where('ant_rate_list.is_active', '=', 1)
@@ -511,17 +512,41 @@ class LsportApiController extends Controller {
         // ->having('rate_count', '>', 0)
         // ->orderBy("ant_series_list.order_by")->get();
 
-        $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
+/*
+select f.* from lsport_fixture as f 
+
+join lsport_sport as s on (f.sport_id=s.sport_id) 
+join lsport_league as l on (l.league_id=f.league_id) 
+join lsport_team as t on (l.league_id=t.league_id) 
+join lsport_market as m on (m.fixture_id=f.fixture_id) 
+join lsport_market_bet as mb on (mb.market_id=m.market_id) 
+
+where f.sport_id=154914
+ */
+        $newReturn = LsportFixture::join('lsport_sport', 'lsport_fixture.fixture_id', '=', 'lsport_sport.sport_id')
+            ->join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
             ->join('lsport_league', function ($join) {
-                $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
+                $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')  // 賽事-聯賽
+                ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');  // 賽事-聯賽
             })
+            ->select('lsport_fixture.*')
             ->where('lsport_league.status', 1)
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
             ->where("lsport_fixture.sport_id", $sport_id)
             ->groupBy('lsport_fixture.fixture_id')
             ->get();
 
-        $data['early'] = $tmp;
+        // $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
+        //     ->join('lsport_league', function ($join) {
+        //         $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
+        //     })
+        //     ->where('lsport_league.status', 1)
+        //     ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
+        //     ->where("lsport_fixture.sport_id", $sport_id)
+        //     ->groupBy('lsport_fixture.fixture_id')
+        //     ->get();
+
+        //$data['early'] = $tmp;
 
         //////////////////////////////
         // 滾球
@@ -530,7 +555,7 @@ class LsportApiController extends Controller {
             // 串關不抓滾球賽事
             $data['living'] = array();
         } else {
-            $data['living'] = $tmp;
+            //$data['living'] = $tmp;
         }
         
         ///////////////////////////////
