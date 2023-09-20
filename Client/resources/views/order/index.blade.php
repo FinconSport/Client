@@ -246,7 +246,16 @@
 	const statusList_api = '' // 目前沒有
 
 	function renderView() {
-		// search condition
+
+		// loop sportListD, seriesListD, statusListD here to generate the search select then append into the page
+
+
+
+
+		// loop sportListD, seriesListD, statusListD here to generate the search select then append into the page
+
+
+		// search condition setting
 		if( searchData.sport !== undefined ) {
 			$('select[name="sport"]').val(searchData.sport)
 			$('select[name="sport"]').trigger('change')
@@ -299,7 +308,7 @@
         // check if api are all loaded every 500 ms 
         isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
-            if( isReadyOrder === true && isReadyCommon === true) {
+            if( isReadyOrder && isReadyCommon) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView()

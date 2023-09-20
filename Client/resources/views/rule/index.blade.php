@@ -415,7 +415,12 @@
 <script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <!-- <script src="{{ asset('js/bootstrap.min.js?v=' .$current_time) }}"></script> -->
 <script>
+    // 語系
+    var langTrans = @json(trans('rule'));
+
+    // detect ini ajax
     var isReadyRuleInt = null
+    
     $(document).ready(function() {
         // check if api are all loaded every 500 ms 
         isReadyRuleInt = setInterval(() => {
@@ -427,8 +432,6 @@
         }, 500);
     });
 
-    // 語系
-    var langTrans = @json(trans('rule'));
 
     // 左邊菜單  當點擊體育或串關時 移除目前選中樣式
     $('.menuTypeBtn').click(function(){

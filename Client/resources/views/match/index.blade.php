@@ -410,8 +410,19 @@
 	const seriesList_api = '' // tbd
 
 	function renderView( isIni = 0 ) {
+
+		
 		if( isIni === 1 ) { // initial will only do once
-			// search condition
+
+			// loop seriesListD here to generate the search select then append into the page
+
+
+
+
+
+			// loop seriesListD here to generate the search select then append into the page
+
+			// search condition setting
 			if( searchData.series_id !== undefined ) {
 				$('select[name="series_id"]').val(searchData.series_id)
 				$('select[name="series_id"]').trigger('change')
@@ -452,7 +463,7 @@
 		// check if api are all loaded every 500 ms 
         isReadyResultInt = setInterval(() => {
             if (resultListD.status === 1) { isReadyResult = true; }
-            if( isReadyResult === true && isReadyCommon === true) {
+            if( isReadyResult && isReadyCommon ) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView(1)

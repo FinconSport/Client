@@ -122,46 +122,81 @@
     
 @push('main_js')
 <script>
-  $(document).ready(function () {
-    $('.nav-link').on('click', function (e) {
-        e.preventDefault();
-        $('.nav-link').removeClass('active');
-        $(this).addClass('active');
+	// detect ini ajax
+	var isReadyNoticeInt = null
+	var isReadyNotice = false
 
-        var target = $(this).data('bs-target');
-        $('.tab-pane').removeClass('show active');
-        $(target).addClass('show active');
-        $('.notice-tab-content').animate({ scrollTop: 0 }, 'fast');
-    });
+	// notice list data
+	var noticeListD = {}
+	const noticeList_api = 'https://sportc.asgame.net/api/v2/index_notice'
 
-    // 左邊菜單  當點擊體育或串關時 移除目前選中樣式
-    $('.menuTypeBtn').click(function(){
-        let key = $(this).attr('key')
-        if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
-            $('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius','0')
-            $('div[key="notice"] .slideMenuTag').css('border-top-left-radius','0')
-            $('div[key="notice"] .slideMenuTag').css('background-color','#415b5a')
-            $('div[key="notice"] .slideMenuTag').css('color','white')
+	$(document).ready(function () {
 
-            $('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius','0')
-            $('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius','0')
-            $('div[key="notice"] .slideMenuTag').css('border-top-right-radius','0')
-        } else {
-            $('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius','25px')
-            $('div[key="notice"] .slideMenuTag').css('border-top-left-radius','25px')
-            $('div[key="notice"]').css('background-color','#415b5a')
-            $('div[key="notice"] .slideMenuTag').css('background-color','rgb(196, 211, 211)')
-            $('div[key="notice"] .slideMenuTag').css('color','#415b5a')
+		// ini data from ajax
+		caller(noticeList_api, commonCallData, noticeListD) // noticeListD
 
-            $('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius','15px')
-            $('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius','15px')
-            $('div[key="notice"] .slideMenuTag').css('border-top-right-radius','0')
-        }
-    })
+		// check if api are all loaded every 500 ms 
+		isReadyNoticeInt = setInterval(() => {
+            if (noticeListD.status === 1) { isReadyNotice = true; }
+			if( isReadyNotice && isReadyCommon ) {
+				$('#dimmer').dimmer('hide'); // hide loading
+				$('#wrap').css('opacity', 1); // show the main content
+				renderView()
+				clearInterval(isReadyNoticeInt); // stop checking
+			}
+		}, 500);
+	});
 
-});
-  console.log(@json($notice_list));
-  console.log("sport_list");
+
+	function renderView() {
+		// loop noticeListD here to generate the search select then append into the page
+
+
+
+
+		// loop noticeListD here to generate the search select then append into the page
+	}
+
+	$('.nav-link').on('click', function (e) {
+		e.preventDefault();
+		$('.nav-link').removeClass('active');
+		$(this).addClass('active');
+
+		var target = $(this).data('bs-target');
+		$('.tab-pane').removeClass('show active');
+		$(target).addClass('show active');
+		$('.notice-tab-content').animate({ scrollTop: 0 }, 'fast');
+	});
+
+	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
+	$('.menuTypeBtn').click(function(){
+		let key = $(this).attr('key')
+		if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
+			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius','0')
+			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius','0')
+			$('div[key="notice"] .slideMenuTag').css('background-color','#415b5a')
+			$('div[key="notice"] .slideMenuTag').css('color','white')
+
+			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius','0')
+			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius','0')
+			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius','0')
+		} else {
+			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius','25px')
+			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius','25px')
+			$('div[key="notice"]').css('background-color','#415b5a')
+			$('div[key="notice"] .slideMenuTag').css('background-color','rgb(196, 211, 211)')
+			$('div[key="notice"] .slideMenuTag').css('color','#415b5a')
+
+			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius','15px')
+			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius','15px')
+			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius','0')
+		}
+	})
+
+
+
+	console.log(@json($notice_list));
+	console.log("sport_list");
 	console.log(@json($sport_list));
 </script>
 @endpush
