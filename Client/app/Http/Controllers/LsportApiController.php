@@ -683,7 +683,7 @@ ORDER BY
             ->orderBy('mb.bet_id', 'ASC')
             ->get();
 
-            dd($marketBetData);
+            //dd($marketBetData);
 
             if ($marketBetData === false) {
                 $this->ApiError('03');
