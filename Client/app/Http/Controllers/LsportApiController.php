@@ -691,9 +691,9 @@ ORDER BY
             }
             
             try {
-                if (!$marketBetData->mb_name_locale) {
-                    dd($marketBetData);
-                }
+                // if (!$marketBetData->mb_name_locale) {
+                //     dd($marketBetData);
+                // }
 
                 // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($marketBetData->mb_name_locale)) {  // market name
@@ -702,6 +702,7 @@ ORDER BY
                     $merket_bet_name = $marketBetData->mb_name_locale;
                 }
             } catch (Exception $e) {
+                echo 'errrrrr.........\r\n';
                 dd($marketBetData);
             }
 
