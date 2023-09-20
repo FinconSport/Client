@@ -601,7 +601,7 @@ ORDER BY
         if (!isset($arrLeagues[$league_id]) || !sizeof($arrLeagues[$league_id])) {
 
             // 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($dv['th_name_locale'])) {  // league name
+            if (!strlen($dv->th_name_locale)) {  // league name
                 $league_name = $dv->l_name_en;
             } else {
                 $league_name = $dv->l_name_locale;
@@ -624,7 +624,7 @@ ORDER BY
             } else {
                 $home_team_name = $dv->th_name_locale;
             }
-            if (!strlen($dv['ta_name_locale'])) {  // away_team
+            if (!strlen($dv->ta_name_locale)) {  // away_team
                 $away_team_name = $dv->ta_name_en;
             } else {
                 $away_team_name = $dv->ta_name_locale;
@@ -656,10 +656,10 @@ ORDER BY
             !sizeof($arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id])) {
 
             // 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($dv['m_name_locale'])) {  // market name
-                $market_name = $dv['m_name_en'];
+            if (!strlen($dv->m_name_locale)) {  // market name
+                $market_name = $dv->m_name_en;
             } else {
-                $market_name = $dv['m_name_locale'];
+                $market_name = $dv->m_name_locale;
             }
 
             // 包入 market 玩法資料
