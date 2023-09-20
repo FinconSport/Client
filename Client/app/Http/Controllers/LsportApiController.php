@@ -691,7 +691,7 @@ ORDER BY
             }
 
             foreach ($marketBetData as $bk => $bv) {
-                $market_bet_id = $bv['bet_id'];
+                $market_bet_id = $bv->bet_id;
 
                 // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (isset($bv->mb_name_locale)) {  // market name
