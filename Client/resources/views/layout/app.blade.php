@@ -240,6 +240,7 @@
 				data: data,
 				success: function(data) {
 					console.log(url + ' called success')
+					console.log(data)
 					const json = JSON.parse(data); 
 					// 先判定要不要解壓縮
 					if(json.gzip === 1 || json.gzip === undefined) {
