@@ -410,7 +410,7 @@
 	const seriesList_api = '' // tbd
 
 	function renderView( isIni = 0 ) {
-		if( isIni === 1 ) { // initial
+		if( isIni === 1 ) { // initial will only do once
 			// search condition
 			if( searchData.series_id !== undefined ) {
 				$('select[name="series_id"]').val(searchData.series_id)
@@ -427,19 +427,18 @@
 		}
 		
 
-		/* render resultListD here
+		/* loop resultListD.data here to generate the html element then append into the page
 
-		loop resultListD to generate the html element
+		loop resultListD.data to generate the html element
 		then use insertRow() to insert
 		note that insertRow() may need to be edited
 
 
 
-
-		render resultListD here */
+		loop resultListD.data here to generate the html element then append into the page */
 
 		// detect if it's last page
-		if( resultListD.length !== 20 || resultListD.length === 0 ) isLastPage = true
+		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
 	}
 
