@@ -214,6 +214,15 @@
 
 @push('main_js')
 <script>
+
+
+	/* ===== PECO ===== 
+	1. pagination?
+	2. api因為先用手機版本的，不是status而是result(已結算、未結算)
+	3. api待定: seriesList, statusList
+	===== PECO ===== */
+
+
 	// 語系
     var langTrans = @json(trans('order'));
 
@@ -225,6 +234,16 @@
     var orderListD = {}
     var callOrderListData = { token: token, player: player, result: 1, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
+
+	// seriesList
+	var seriesListD = {}
+    var callSeriesListData = commonCallData
+	const seriesList_api = '' // 目前沒有
+
+	// statusList
+	var statusListD = {}
+    var callStatusListData = commonCallData
+	const statusList_api = '' // 目前沒有
 
 	function renderView() {
 		// search condition
@@ -260,7 +279,10 @@
 		// ===== DATA LATER =====
 
         // ini data from ajax
-        caller(orderList_api, callOrderListData, orderListD) // match_list
+        caller(orderList_api, callOrderListData, orderListD) // orderListD
+        // caller(seriesList_api, callSeriesListData, seriesListD) // seriesListD
+        // caller(statusList_api, callStatusListData, statusListD) // statusListD
+		// sportListD can be accessed global
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
@@ -275,7 +297,7 @@
 	});
 
 
-	// 搜尋框 聯盟名稱
+	// search area series filter
 	function filterSeiries(type = 0) {
 		if( type === 0 ) {
 			$('.clearSearch').dropdown('clear')
@@ -293,7 +315,7 @@
 		}, 100);
 	}
 
-	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
+	// left side menu
     $('.menuTypeBtn').click(function(){
         let key = $(this).attr('key')
         if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
@@ -315,7 +337,7 @@
         }
     })
 
-	// 內容太長 跑馬燈
+	// text overflow
     function fixTextOverflow() {
         Array.from(document.getElementsByClassName("textOverFlow")).forEach(
 			function(element, index, array) {
@@ -341,6 +363,7 @@
         marquee.scrollAmount = 3
     }
 
+	// pagination
 	function navPage(pagination) {
 		let queryData = @json($search);
 		let searchPage = @json($search)['page']
@@ -385,7 +408,7 @@
 	}
 
 
-	// 展開 收合
+	// toggle
 	function toggleInfo(key, e) {
 		$('div[key="' + key + '"]:not(:first-child)').slideToggle();
 		let isopen = $(e).attr('isopen')
@@ -403,7 +426,7 @@
 	}
 
 
-  // for test
+  	// for test
     console.log("menu_count");
     console.log(@json($menu_count));
 
