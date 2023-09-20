@@ -309,8 +309,7 @@
 @endSection
 
 @push('main_js')
-<!-- 解壓縮 -->
-<script src="{{ asset('js/pako.min.js?v=' . $system_config['version']) }}"></script>
+
 <script>
 
 
