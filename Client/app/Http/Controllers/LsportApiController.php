@@ -696,7 +696,7 @@ ORDER BY
                 // }
 
                 // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($marketBetData->mb_name_locale)) {  // market name
+                if (empty($marketBetData->mb_name_locale)) {  // market name
                     $merket_bet_name = $marketBetData->mb_name_en;
                 } else {
                     $merket_bet_name = $marketBetData->mb_name_locale;
