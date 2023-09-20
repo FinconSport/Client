@@ -679,7 +679,7 @@ ORDER BY
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
-            ->where('mb.main_line', $main_line)
+            ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
             ->orderBy('mb.bet_id', 'ASC')
             ->get();
 
