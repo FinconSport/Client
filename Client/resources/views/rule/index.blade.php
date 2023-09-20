@@ -19,43 +19,28 @@
                             <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
-                                <!-- <ul class="number-bullets">
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_2') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_3') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_4') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_5') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_6') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_7') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_8') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_9') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_10') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11') }}</li>
-                                    <ul class="number-bullets">
-                                        <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_1') }}</li>
-                                        <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2') }}</li>
-                                        <ul class="no-bullets">
-                                            <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_1') }}</li>
-                                            <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_2') }}</li>
-                                        </ul>
-                                    </ul>
-                                </ul> -->
                                 <ul class="number-bullets">
-                                    @foreach($generalRulesBaseball as $key => $rule)
-                                        @if (is_array($rule)) {{-- Check if the value is an array --}}
-                                            @foreach($rule as $subKey => $subRule)
-                                                @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
-                                                    @foreach($subRule as $subSubKey => $subSubRule)
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                    @isset($generalRulesBaseball)
+                                        @foreach($generalRulesBaseball as $key => $rule)
+                                            @if (is_array($rule)) {{-- Check if the value is an array --}}
+                                                <ul>
+                                                    @foreach($rule as $subKey => $subRule)
+                                                        @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
+                                                            <ul>
+                                                                @foreach($subRule as $subSubKey => $subSubRule)
+                                                                    <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
+                                                        @endif
                                                     @endforeach
-                                                @else
-                                                    <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $rule }}</li>
-                                        @endif
-                                    @endforeach
+                                                </ul>
+                                            @else
+                                                <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $rule }}</li>
+                                            @endif
+                                        @endforeach
+                                    @endisset
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
