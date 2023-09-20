@@ -66,7 +66,7 @@ return [
 		// "gr_baseball_9" => "如果比賽在規定時間前開賽，則實際開賽時間前的賽前盤投注全部有效，在實際開賽時間後的所有賽前盤投注均視為無效。",
 		"gr_baseball_10" => "Baseball leagues other than international baseball (e.g., MLB, NPB, KBO, CPBL, Mexican Baseball, Australian Baseball, etc.):",
 		// "gr_baseball_10" => "棒球賽事，如遇比00賽尚未開賽，官方已給出賽事延期訊息，則該場賽事的所有注單將會全部取消，串關以“1“計算 ; 但遇賽事已在進行中，中途因雨或其他因素暫停比賽時，36小時內官方如有公告該場賽事將保留場上狀況、且會在7天內繼續進行，則該場賽事所有註單將會保留並正常結算。",
-		"gr_baseball_11" => "Rules of arbitration for baseball leagues other than international baseball (MLB, Nippon Professional Baseball, Korean Baseball, Taiwanese Baseball, Mexican Baseball, Australian Baseball, etc.):"		
+		"gr_baseball_11" => "Rules of arbitration for baseball leagues other than international baseball (MLB, Nippon Professional Baseball, Korean Baseball, Taiwanese Baseball, Mexican Baseball, Australian Baseball, etc.):",
 		// "gr_baseball_11" => "除國際棒球以外的棒球聯盟裁定規則（美國職棒，日本職棒，韓國職棒，台灣職棒，墨西哥棒球，澳洲棒球...等）：",
 		"gr_baseball_11_1" => "In cases where the game is decided by the league due to a large point spread (a difference of 7 runs or more, and the game has reached 5 innings), all bets for that game (except for Odd/Even bets) will be considered valid.",
 		// "gr_baseball_11_1" => "如遇賽事因比分懸殊（落差達7分或以上，且賽事已進行至5局），經由聯盟裁定勝負的場次，該場賽事所有注單（除單雙玩法外）皆視為有效注單。",
