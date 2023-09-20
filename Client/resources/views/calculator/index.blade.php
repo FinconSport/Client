@@ -70,12 +70,12 @@
                 <div class="row m-0">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-around btnCalcuMoney">
-                            <div class="d-flex align-items-center w-40">
+                            <div class="d-flex align-items-stretch w-40">
                                 <span class="moneyLabel maxContent">{{ trans('calculator.calculator.betmoney') }}</span>
                                 <input class="w-100" id="betMoney" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" >
                             </div>
 
-                            <div class="d-flex align-items-center w-40">
+                            <div class="d-flex align-items-stretch w-40">
                                 <span class="moneyLabel maxContent">{{ trans('calculator.calculator.winmoney') }}</span>
                                 <input class="w-100" readonly id="winningMoney">
                             </div>
