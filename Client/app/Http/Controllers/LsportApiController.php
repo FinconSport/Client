@@ -703,6 +703,7 @@ ORDER BY
                 }
             } catch (Exception $e) {
                 echo 'errrrrr.........\r\n';
+                var_dump($e);
                 dd($marketBetData);
             }
 
