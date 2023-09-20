@@ -1488,15 +1488,16 @@ ORDER BY
             }
 
             $arrTemp = array(
-                'league_name' => $league_name,
+                'fixture_id' => $dv->fixture_id,
+                'start_time' => $dv->start_time,
+                'status' => $dv->f_status,
+                'last_update' => $dv->f_last_update,
+                'sport_id' => $dv->sport_id,
                 'sport_name' => $sport_name,
+                'league_id' => $dv->league_id,
+                'league_name' => $league_name,
                 'home_team_name' => $home_team_name,
                 'away_team_name' => $away_team_name,
-                'fixture_id' => $dv['fixture_id'],
-                'sport_id' => $dv['sport_id'],
-                'start_time' => $dv['start_time'],
-                'status' => $dv['f_status'],
-                'last_update' => $dv['f_last_update'],
             );
             $arrRet[] = $arrTemp;
         }
