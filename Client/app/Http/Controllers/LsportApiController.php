@@ -531,7 +531,7 @@ ORDER BY
 
  */
 
-    $data = DB::table('league as l')
+    $data = DB::table('lsport_league as l')
         ->join('lsport_fixture as f', 'l.fixture_id', '=', 'f.sport_id')
         ->join('lsport_team as th', function ($join) {
             $join->on('th.team_id', '=', 'f.home_id')
