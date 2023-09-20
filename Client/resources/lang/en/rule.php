@@ -74,8 +74,8 @@ return [
 			// "gr_baseball_11_1" => "如遇賽事因比分懸殊（落差達7分或以上，且賽事已進行至5局），經由聯盟裁定勝負的場次，該場賽事所有注單（除單雙玩法外）皆視為有效注單。",
 			"gr_baseball_11_2" => "In cases of weather-related (rain, snow, etc.) or other unforeseen factors causing the game to end prematurely before 9 innings are completed, and the league makes the final decision on the game result, settlement rules are as follows:",
 			// "gr_baseball_11_2" => "若因天氣因素（下雨.下雪...等）或其他突發因素，賽事未進行至9局提前結束，經由聯盟裁定最終賽果時，結算規則如下：",
-		]
-		
+		],
+
 		"gr_baseball_11_2_1" => "If the game has reached the end of the top half of the 5th inning (including 5 innings) or is in progress in the bottom half of the 5th inning, and the home team is leading, bets for that game (Moneyline, First-Half bets, and bets with clear results) will be settled normally.",
 		// "gr_baseball_11_2_1" => "＊ 賽事已進行至5局上半結束（含5局後），或五局下半進行中，為主場領先，則該場賽事的（全場獨贏盤、半場所有玩法以及已有明確賽果的玩法）將會正常結算。",
 		"gr_baseball_11_2_2" => "If the game has not reached the 5th inning and is decided to end prematurely by the league, bets for that game (First-Half Moneyline, Full-Time Moneyline, and bets with clear results) will be settled normally, while bets for other markets without clear results (such as Full-Time Handicap, Full-Time Over/Under, Full-Time Odd/Even, Full-Time Team Total, First-Half Handicap, First-Half Over/Under, 4-6 Inning Range bets, 7-9 Inning Range bets) will be canceled, and parlays will be calculated as '1'.",
