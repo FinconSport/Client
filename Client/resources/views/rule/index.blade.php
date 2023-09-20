@@ -19,7 +19,7 @@
                             <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
-                                <ul class="number-bullets">
+                                <!-- <ul class="number-bullets">
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_1') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_2') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_3') }}</li>
@@ -39,6 +39,23 @@
                                             <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_2') }}</li>
                                         </ul>
                                     </ul>
+                                </ul> -->
+                                <ul class="number-bullets">
+                                    @foreach($generalRulesBaseball as $key => $rule)
+                                        @if (is_array($rule)) {{-- Check if the value is an array --}}
+                                            @foreach($rule as $subKey => $subRule)
+                                                @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
+                                                    @foreach($subRule as $subSubKey => $subSubRule)
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                                    @endforeach
+                                                @else
+                                                    <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $rule }}</li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>

@@ -565,6 +565,7 @@ ORDER BY
     $arrLeagues = array();  //儲存league-fixture-market的階層資料
     $arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
     $sport_name = '';
+    $runCount = 0;
     foreach ($data as $dk => $dv) {
         $league_id = $dv->league_id;
         $fixture_id = $dv->fixture_id;
@@ -659,6 +660,8 @@ ORDER BY
                 'market_name' => $market_name,
                 'market_bets' => array(),
             );
+
+            $runCount += 1;
         }
     }
 
@@ -669,6 +672,7 @@ ORDER BY
         'leagues' => $arrLeagues,
     );
 
+    var_dump($runCount);
     echo(json_encode($arrFixtureAndMarkets));
 
     dd($arrRet);
