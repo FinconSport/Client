@@ -313,8 +313,7 @@
 <script src="{{ asset('js/pako.min.js?v=' . $system_config['version']) }}"></script>
 <script>
 
-    console.log("lang");
-    console.log(@json($lang));
+    
 
     // 語系
     const langTrans = @json(trans('index'));
