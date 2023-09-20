@@ -570,8 +570,14 @@ ORDER BY
         $fixture_id = $dv->fixture_id;
         $market_id = $dv->market_id;
         $main_line = $dv->main_line;
-        if (empty($sport_name)) {
-            $sport_name = $dv->sport_name;
+
+        // 判斷用戶語系資料是否為空,若是則用en就好
+        if (!strlen($sport_name)) {  //只須設定一次
+            if (!strlen($dv->s_name_locale)) {  // league name
+                $sport_name = $dv->s_name_en;
+            } else {
+                $sport_name = $dv->s_name_locale;
+            }
         }
 
         //儲存 fixture_id, market_id 及 main_line
@@ -579,14 +585,14 @@ ORDER BY
             $arrFixtureAndMarkets[$fixture_id][$market_id]['999999999'] = array(  // main_line為空白時用9個9代替
                 'fixture_id' => $fixture_id,
                 'market_id' => $fixture_id,
-                'market_name' => $dv->m_name_en,
+                //'market_name' => $dv->m_name_en,
                 'main_line' => $main_line,
             );
         } else {
             $arrFixtureAndMarkets[$fixture_id][$market_id][$main_line] = array(
                 'fixture_id' => $fixture_id,
                 'market_id' => $fixture_id,
-                'market_name' => $dv->m_name_en,
+                //'market_name' => $dv->m_name_en,
                 'main_line' => $main_line,
             );
         }
