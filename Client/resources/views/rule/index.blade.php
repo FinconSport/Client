@@ -20,25 +20,27 @@
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @foreach($generalRulesBaseball as $key => $grRule)
-                                        @if (is_array($grRule)) {{-- Check if the value is an array --}}
-                                            <ul>
-                                                @foreach($grRule as $subKey => $subRule)
-                                                    @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
-                                                        <ul>
-                                                            @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $grRule }}</li>
-                                        @endif
-                                    @endforeach
+                                    @isset($generalRulesBaseball)
+                                        @foreach($generalRulesBaseball as $key => $rule)
+                                            @if (is_array($rule)) {{-- Check if the value is an array --}}
+                                                <ul>
+                                                    @foreach($rule as $subKey => $subRule)
+                                                        @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
+                                                            <ul>
+                                                                @foreach($subRule as $subSubKey => $subSubRule)
+                                                                    <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $rule }}</li>
+                                            @endif
+                                        @endforeach
+                                    @endisset
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
