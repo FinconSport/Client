@@ -382,14 +382,13 @@
 	/*
 		===== PECO =====
 		1. search api and infiniti api?
-		2. 
+		2. api:result_index -> gzip is unset
 		===== PECO =====
 	*/ 
 
 	//Identify sport id
 	var sportn = parseInt(searchData["sport"], 10);
 
-	
 
     
     var isLastPage = false; // infinite scroll -> detect if it's last page
