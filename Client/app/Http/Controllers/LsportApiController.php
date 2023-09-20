@@ -545,12 +545,12 @@ ORDER BY
                 ->on('l.league_id', '=', 'ta.league_id');
             })
             ->select(
-                'l.name_en AS l_name_en', 'l.name_'.$this->agent_lang.' AS l_name_locale',
-                's.name_en AS s_name_en', 's.name_'.$this->agent_lang.' AS s_name_locale',
-                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.home_id', 'f.away_id', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',
-                'm.market_id', 'm.name_en AS m_name_en', 'm.name_'.$this->agent_lang.' AS m_name_locale', 'm.priority', 'm.main_line',
-                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.name_'.$this->agent_lang.' AS th_name_locale',
-                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.name_'.$this->agent_lang.' AS ta_name_locale'
+                'l.name_en AS l_name_en', 'l.'.$langCol.' AS l_name_locale',
+                's.name_en AS s_name_en', 's.'.$langCol.' AS s_name_locale',
+                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update', //'f.home_id', 'f.away_id', 
+                'm.market_id', 'm.name_en AS m_name_en', 'm.'.$langCol.' AS m_name_locale', 'm.priority', 'm.main_line',
+                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$langCol.' AS th_name_locale',
+                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
             )
             ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
@@ -603,7 +603,7 @@ ORDER BY
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($sport_name)) {  //只須設定一次
-                if (!strlen($dv->s_name_locale)) {  // league name
+                if (!strlen($dv->s_name_locale)) {  // sport name
                     $sport_name = $dv->s_name_en;
                 } else {
                     $sport_name = $dv->s_name_locale;
@@ -622,7 +622,7 @@ ORDER BY
             if (!isset($arrLeagues[$league_id]) || !sizeof($arrLeagues[$league_id])) {
 
                 // league_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->th_name_locale)) {  // league name
+                if (!strlen($dv->l_name_locale)) {  // league name
                     $league_name = $dv->l_name_en;
                 } else {
                     $league_name = $dv->l_name_locale;
@@ -1363,6 +1363,150 @@ ORDER BY
      */
     // 賽事結果 
     public function ResultIndex(Request $request) {
+      
+    	$input = $this->getRequest($request);
+
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
+        }
+
+        /////////////////////////
+        // 取得語系
+        $langCol = 'name_' . $this->agent_lang;
+
+        //////////////////////////////////////////
+        // 輸入判定
+        if (!isset($input['sport']) || ($input['sport'] == "")) {
+            $input['sport'] = 1;  // 預設1 , 足球
+        }
+        $sport_id = $input['sport'];
+
+        if (!isset($input['page']) || ($input['page'] == "")) {
+            $input['page'] = 1; // 預設1 
+        }
+        $page = $input['page'];
+
+    	/////////////////////////
+        // Search 區用
+
+        // 狀態
+        const ARR_FIXTURE_STATUS = array(
+            -1 => "異常",
+             1 => "等待開賽",
+             2 => "進行中",
+             3 => "已結束",
+             4 => "延期",
+             5 => "中斷",
+            99 => "取消"
+        );
+
+        /////////////////////////
+        $page_limit = $this->page_limit;
+        $skip = ($page-1)*$page_limit;
+
+        // 取得比賽資料
+        $data = DB::table('lsport_league as l')
+            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
+            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
+            ->join('lsport_team as th', function ($join) {
+                $join->on('f.home_id', '=', 'th.team_id')
+                ->on('l.league_id', '=', 'th.league_id');
+            })
+            ->join('lsport_team as ta', function ($join) {
+                $join->on('f.away_id', '=', 'ta.team_id')
+                ->on('l.league_id', '=', 'ta.league_id');
+            })
+            ->select(
+                'l.name_en AS l_name_en', 'l.'.$langCol.' AS l_name_locale',
+                's.name_en AS s_name_en', 's.'.$langCol.' AS s_name_locale',
+                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',  //'f.home_id', 'f.away_id',
+                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$langCol.' AS th_name_locale',
+                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
+            )
+            ->where('l.status', 1)
+            ->where('l.sport_id', $sport_id)
+            ->where('s.sport_id', $sport_id)
+            ->where('f.status', '>=', 2)  //賽事狀態: 進行中(2)或以上
+            ->where("th.sport_id", $sport_id)
+            ->where("th.sport_id", $sport_id)
+            ->orderBy('f.start_time', 'DESC')
+            ->skip($skip)
+            ->take($page_limit)
+            ->get();
+            
+        $pagination = $data->count();
+        
+        if ($data === false) {
+            $this->ApiError('02');
+        }
+/*
+    "series_name":"\u6cd5\u570b\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+         "series_logo":"https:\\sporta.asgame.net\uploads\series_219.png?v=1_2_35",
+    "id":67140,
+    "match_id":293735,
+    "game_id":2,
+    "series_id":219,
+    "start_time":"2023-09-18 01:00:00",
+    "end_time":"1970-01-01 08:00:00",
+    "status":"\u5df2\u7d50\u675f",
+    "stat":[],
+    "home_team_name":"\u827e\u65af\u7dad\u723e\u91cc\u6602\u7dad\u52d2\u73ed",
+        "home_team_logo":"https:\\sporta.asgame.net\uploads\team_1648.png?v=1_2_35",
+    "home_team_score":"89",
+    "away_team_name":"\u52d2\u8292\u85a9\u723e\u7279",
+        "away_team_logo":"https:\\sporta.asgame.net\uploads\team_3589.png?v=1_2_35",
+    "away_team_score":"75"
+ */
+        $arrRet = array();
+        foreach ($data as $dk => $dv) {
+
+            //判斷用戶語系資料是否為空,若是則用en就好
+            // league_name: 
+            if (!strlen($dv->l_name_locale)) {  // league name
+                $league_name = $dv->l_name_en;
+            } else {
+                $league_name = $dv->l_name_locale;
+            }
+            // sport_name: 
+            if (!strlen($dv->s_name_locale)) {  // sport name
+                $sport_name = $dv->s_name_en;
+            } else {
+                $sport_name = $dv->s_name_locale;
+            }
+            // home_team_name: 
+            if (!strlen($dv->th_name_locale)) {  // sport name
+                $home_team_name = $dv->th_name_en;
+            } else {
+                $home_team_name = $dv->th_name_locale;
+            }
+            // away_team_name: 
+            if (!strlen($dv->ta_name_locale)) {  // sport name
+                $away_team_name = $dv->ta_name_en;
+            } else {
+                $away_team_name = $dv->ta_name_locale;
+            }
+
+            $arrTemp = array(
+                'league_name' => $league_name,
+                'sport_name' => $sport_name,
+                'home_team_name' => $home_team_name,
+                'away_team_name' => $away_team_name,
+                'fixture_id' => $dv['fixture_id'],
+                'sport_id' => $dv['sport_id'],
+                'start_time' => $dv['start_time'],
+                'status' => $dv['f_status'],
+                'last_update' => $dv['f_last_update'],
+            );
+            $arrRet[] = $arrTemp;
+        }
+
+        // gzip
+        $data = $this->gzip($data);
+
+        $this->ajaxSuccess("success_result_index_01", $data);
+    }
+    public function ResultIndexOld(Request $request) {
       
     	$input = $this->getRequest($request);
 
