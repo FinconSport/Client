@@ -542,11 +542,13 @@ ORDER BY
             $join->on('f.away_id', '=', 'ta.team_id')
             ->on('l.league_id', '=', 'ta.league_id');
         })
-        ->select('l.name_en AS l_name_en, l.name_tw AS l_name_locale')
-        ->select('f.fixture_id, f.sport_id, f.league_id, f.start_time, f.home_id, f.away_id, f.livescore_extradata, f.periods, f.scoreboard, f.status AS f_status, f.last_update AS f_last_update')
-        ->select('m.market_id, m.name_en AS m_name_en, m.name_tw AS m_name_locale, m.priority, m.main_line')
-        ->select('th.team_id AS th_team_id, th.name_en AS th_name_en, th.name_tw AS th_name_locale')
-        ->select('ta.team_id AS ta_team_id, ta.name_en AS ta_name_en, ta.name_tw AS ta_name_locale')
+        ->select(
+            'l.name_en AS l_name_en', 'l.name_tw AS l_name_locale',
+            'f.fixture_id, f.sport_id', 'f.league_id', 'f.start_time', 'f.home_id', 'f.away_id', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',
+            'm.market_id', 'm.name_en AS m_name_en', 'm.name_tw AS m_name_locale', 'm.priority, m.main_line',
+            'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.name_tw AS th_name_locale',
+            'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.name_tw AS ta_name_locale'
+        )
         ->where('l.status', 1)
         ->where('l.sport_id', $sport_id)
         ->where('f.start_time', "<=", $after_tomorrow)
