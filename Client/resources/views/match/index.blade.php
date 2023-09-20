@@ -402,7 +402,7 @@
 	// result list data
     var resultListD = {}
     var callResultListData = { token: token, player: player, sport: sport, page: 1 }
-    const resultList_api = 'https://sportc.asgame.net/api/v1/result_index'
+    const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
 	// seriesList
 	var seriesListD = {}
