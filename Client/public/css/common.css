@@ -375,6 +375,11 @@ body {
     border-radius: 25px;
 }
 
+#searchBtn {
+    display: flex;
+    align-items: center;
+}
+
 #searchBtn:hover {
     background-color: #e1b348 !important;
 }

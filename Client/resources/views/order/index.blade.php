@@ -105,9 +105,9 @@
 					<th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
 					<th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
 					<th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
-					<th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
+					<th style="width: 10.5%;">{{ trans('order.main.bet_type') }}</th>
 					<th style="width: 30%;">{{ trans('order.main.detail') }}</th>
-					<th style="width: 12.5%;">{{ trans('order.main.bet_money') }}</th>
+					<th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
 					<th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
 					<th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
 				</tr>

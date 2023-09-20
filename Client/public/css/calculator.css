@@ -138,3 +138,21 @@ div[key="matchSportMenu"] {
     margin-top: -0.5rem;
     text-align: center;
 }
+
+
+.btnCalcuMoney .maxContent {
+    width: max-content;
+    min-width: max-content;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.btnCalcuMoney #betMoney,
+.btnCalcuMoney #winningMoney {
+    margin-top: 0rem;
+}
+
+.btnCalcuMoney .w-40{
+    width: 40%;
+}

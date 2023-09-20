@@ -61,7 +61,7 @@
 					<th style="width: 16%;">{{ trans('logs.main.logs_amount') }}</th>
 					<th style="width: 16%;">{{ trans('logs.main.logs_before_amount') }}</th>
 					<th style="width: 16%;">{{ trans('logs.main.logs_after_amount') }}</th>
-					<th style="width: 26%;" class="no-border-right">{{ trans('logs.main.logs_time') }}</th>
+					<th style="width: 20%;" class="no-border-right">{{ trans('logs.main.logs_time') }}</th>
 				</tr>
 				</thead>
 				<tbody>

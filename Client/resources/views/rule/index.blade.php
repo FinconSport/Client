@@ -21,10 +21,10 @@
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
-                                        @if (is_array($grRule)) {{-- Check if the value is an array --}}
+                                        @if (is_array($grRule))
                                             <ul>
                                                 @foreach($grRule as $subKey => $subRule)
-                                                    @if (is_array($subRule)) {{-- Check if the sub-value is an array --}}
+                                                    @if (is_array($subRule))
                                                         <ul>
                                                             @foreach($subRule as $subSubKey => $subSubRule)
                                                                 <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
@@ -44,6 +44,10 @@
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
+                                    @foreach(range(1, 2) as $i)
+                                        <div  >{{ $i }}</div>
+                                        <li key="{{ $i }}">{{ trans('rule.ruleContentsBaseBall.rc_baseball_$i') }}</li>
+                                    @endforeach
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_2') }}</li>
                                 </ul>
