@@ -150,6 +150,7 @@ div[key="matchSportMenu"] {
 .btnCalcuMoney #winningMoney {
     margin-top: 0rem;
     height: auto;
+    word-break: keep-all;
 }
 
 .btnCalcuMoney .w-40{
