@@ -533,6 +533,7 @@ ORDER BY
 
     $data = DB::table('lsport_league as l')
         ->join('lsport_fixture as f', 'l.fixture_id', '=', 'f.sport_id')
+        ->join('lsport_market as m', 'm.fixture_id', '=', 'f.fixture_id')
         ->join('lsport_team as th', function ($join) {
             $join->on('th.team_id', '=', 'f.home_id')
             ->on('l.league_id', '=', 'th.league_id');
@@ -541,12 +542,11 @@ ORDER BY
             $join->on('ta.team_id', '=', 'f.home_id')
             ->on('l.league_id', '=', 'ta.league_id');
         })
-        ->join('lsport_market as m', 'm.fixture_id', '=', 'f.fixture_id')
         ->select('l.name_en AS l_name_en, l.name_tw AS l_name_locale')
         ->select('f.fixture_id, f.sport_id, f.league_id, f.start_time, f.home_id, f.away_id, f.livescore_extradata, f.periods, f.scoreboard, f.status AS f_status, f.last_update AS f_last_update')
+        ->select('m.market_id, m.name_en AS m_name_en, m.name_tw AS m_name_locale, m.priority, m.main_line')
         ->select('th.team_id AS th_team_id, th.name_en AS th_name_en, th.name_tw AS th_name_locale')
         ->select('ta.team_id AS ta_team_id, ta.name_en AS ta_name_en, ta.name_tw AS ta_name_locale')
-        ->select('m.market_id, m.name_en AS m_name_en, m.name_tw AS m_name_locale, m.priority, m.main_line')
         ->where('l.status', 1)
         ->where('l.sport_id', $sport_id)
         ->where('f.start_time', "<=", $after_tomorrow)
