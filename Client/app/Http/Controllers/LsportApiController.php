@@ -689,33 +689,27 @@ ORDER BY
             if ($marketBetData === false) {
                 $this->ApiError('03');
             }
-            
-            try {
-                // if (!$marketBetData->mb_name_locale) {
-                //     dd($marketBetData);
-                // }
+
+            foreach ($marketBetData as $bk => $bv) {
+                $market_bet_id = $bv['bet_id'];
 
                 // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (empty($marketBetData->mb_name_locale)) {  // market name
+                if (isset($bv->mb_name_locale)) {  // market name
                     $merket_bet_name = $marketBetData->mb_name_en;
                 } else {
-                    $merket_bet_name = $marketBetData->mb_name_locale;
+                    $merket_bet_name = $bv->mb_name_locale;
                 }
-            } catch (Exception $e) {
-                echo 'errrrrr.........\r\n';
-                var_dump($e);
-                dd($marketBetData);
-            }
 
-            $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]['market_bets'] = array(
-                'merket_bet_id' => $marketBetData->bet_id,
-                'base_line' => $marketBetData->base_line,
-                'line' => $marketBetData->line,
-                'merket_bet_name' => $merket_bet_name,
-                'price' => $marketBetData->price,
-                'status' => $marketBetData->status,
-                'last_update' => $marketBetData->last_update,
-            );
+                $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]['market_bets'][$market_bet_id] = array(
+                    'merket_bet_id' => $market_bet_id,
+                    'base_line' => $bv->base_line,
+                    'line' => $bv->line,
+                    'merket_bet_name' => $merket_bet_name,
+                    'price' => $bv->price,
+                    'status' => $bv->status,
+                    'last_update' => $bv->last_update,
+                );
+            }
         }
     }
 
