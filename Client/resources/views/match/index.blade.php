@@ -463,7 +463,8 @@
 		// check if api are all loaded every 500 ms 
         isReadyResultInt = setInterval(() => {
             if (resultListD.status === 1) { isReadyResult = true; }
-            if( isReadyResult && isReadyCommon ) {
+            // if( isReadyResult && isReadyCommon ) {
+            if( isReadyCommon ) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView(1)
