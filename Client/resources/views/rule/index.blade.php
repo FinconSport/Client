@@ -180,22 +180,22 @@
                                 <h2>{{ trans('rule.ruleTitles.soccor') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_2') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_3') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_4') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_5') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_6') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_7') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_8') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_9') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_10') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_11') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_12') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_13') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_14') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_15') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccer_16') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_2') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_3') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_4') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_5') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_6') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_7') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_8') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_9') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_10') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_11') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_12') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_13') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_14') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_15') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_16') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.handicap') }}</h2>
