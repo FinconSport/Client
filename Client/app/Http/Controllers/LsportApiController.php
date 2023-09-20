@@ -687,6 +687,10 @@ ORDER BY
 
             if ($marketBetData === false) {
                 $this->ApiError('03');
+            
+            
+            if (!$marketBetData->mb_name_locale) {
+                dd($marketBetData);
             }
 
             // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
