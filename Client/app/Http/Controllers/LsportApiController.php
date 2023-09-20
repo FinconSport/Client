@@ -675,8 +675,8 @@ ORDER BY
                 'mb.name_en AS mb_name_en',
                 'mb.name_'.$this->agent_lang.' AS mb_name_locale',
                 'mb.price',
-                'mb.status AS mb_status',
-                'mb.last_update AS mb_last_update',
+                'mb.status AS status',
+                'mb.last_update AS last_update',
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
