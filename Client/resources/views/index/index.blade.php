@@ -341,7 +341,6 @@
             1. $player
             2. $token
             3. $system_config['version']
-            4. $search?
             5. $current_time?
     
         3. 資料接收機制
@@ -388,17 +387,22 @@
 
         // ini data from ajax
         caller(matchList_api, callMatchListData, matchListD) // match_list
-        // then call every 3 sec
+        // then call every 5 sec
         setInterval(() => {
-            caller(matchList_api, callMatchListData, matchListD) // update 
-        }, 3000);
+            caller(matchList_api, callMatchListData, matchListD, 1) // update 
+        }, 5000);
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
-            if (matchListD.status === 1) { isReadyIndex = true; }
-            if( isReadyIndex === true && isReadyCommon === true) {
+            // if (matchListD.status === 1) { isReadyIndex = true; }
+            // if( isReadyIndex === true && isReadyCommon === true) {
+            if( isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
+                renderView(1); // ini data
+                renderInter = setInterval(() => { // then refresh every 5 sec
+                    renderView()
+                }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
             }
         }, 500);
@@ -408,15 +412,6 @@
         setInterval(reconnent, 5000); // detect ws connetion state
         processMessageQueueAsync(); // detect if there's pkg in messageQueue
         // ===== DATA LATER =====
-
-        
-        // ===== VIEW LATER =====
-        renderView(1); // ini data
-        renderInter = setInterval(() => { // then refresh every 3 sec
-            renderView()
-        }, 3000);
-        // ===== VIEW LATER =====
-
     });
 
     // websocket
