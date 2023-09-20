@@ -3,12 +3,10 @@
 @section('content')
 	<!-- 搜尋框 -->
 	<div id='searchArea' style="height: 5.5rem;">
-		<div class="ui active centered inline loader" style="margin-top: 3rem!important;"></div>
 		<div class="w-100" style='display: inline-flex'>
-			
 			<div id="series_id" style="width: 35%;margin-left: 1%" data-filter="off" data-filterpage="1">
-				<p class="mb-0 fw-600 userField fs-09">{{ trans('match.main.series') }}</p>
-				<select name="series_id" class="ui dropdown searchSelect userField seriesOption" onchange="filterMatch()">
+				<p class="mb-0 fw-600 fs-09">{{ trans('match.main.series') }}</p>
+				<select name="series_id" class="ui dropdown searchSelect seriesOption" onchange="filterMatch()">
 					<option value="">{{ trans('common.search_area.series') }}</option>
 					<option value="0">{{ trans('common.search_area.all') }}</option>
 					@foreach ($series_list as $key => $list)
@@ -23,8 +21,8 @@
 			<div class="ui form" style="width:45%;margin-left: 1%">
 				<div class="two fields">
 					<div class="field">
-						<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.start_time') }}</p>
-						<div class="ui calendar userField" id="rangestart">
+						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.start_time') }}</p>
+						<div class="ui calendar" id="rangestart">
 							<div class="ui input left icon">
 								<i class="fa-solid fa-calendar-days"></i>
 								<input autocomplete="off" name="start_time" type="text" placeholder="{{ trans('common.search_area.start_time') }}">
@@ -32,8 +30,8 @@
 						</div>
 					</div>
 					<div class="field">
-						<p class="mb-0 fw-600 userField fs-09">{{ trans('common.search_area.end_time') }}</p>
-						<div class="ui calendar userField" id="rangeend">
+						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.end_time') }}</p>
+						<div class="ui calendar" id="rangeend">
 							<div class="ui input left icon">
 								<i class="fa-solid fa-calendar-days"></i>
 								<input autocomplete="off" name="end_time" type="text" placeholder="{{ trans('common.search_area.end_time') }}">
@@ -42,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<button style="width: 20%;" id='searchBtn' class="ui button active userField" onclick="filterMatch()">{{ trans('common.search_area.search') }}
+			<button style="width: 20%;" id='searchBtn' class="ui button active" onclick="filterMatch()">{{ trans('common.search_area.search') }}
 				<i class="fa-solid fa-magnifying-glass ml-1"></i>
 			</button>
 		</div>
