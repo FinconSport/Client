@@ -1155,7 +1155,7 @@ class ApiController extends Controller {
       }
       
       // gzip
-      $data = $this->gzip($data);
+      //$data = $this->gzip($data);
 
       $this->ajaxSuccess("success_result_index_01",$data);
     }

@@ -139,9 +139,9 @@ class LsportApiController extends Controller {
 
         // 篩選要回傳的賽事結果的欄位
         $data = array();
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
             $tmp = array();
-            foreach ($arrColsToReturn AS $key => $val) {
+            foreach ($arrColsToReturn as $key => $val) {
                 $tmp[$val] = $v[$val];
             }
 
@@ -182,7 +182,7 @@ class LsportApiController extends Controller {
         }
 
         $data = array();
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
             $data[] = $v['marquee'];
         }
 
@@ -218,7 +218,7 @@ class LsportApiController extends Controller {
             $this->ApiError("01");
         }
 
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
             $sport_id = 0;
             $title = $v['title'];
             $context = $v['marquee'];
@@ -244,7 +244,7 @@ class LsportApiController extends Controller {
         //     $this->ApiError("02");
         // }
 
-        // foreach ($return AS $k => $v) { 
+        // foreach ($return as $k => $v) { 
         //     $game_id = $v['game_id'];
         //     $title = $v['title_'.$this->agent_lang];
         //     $context = $v['context_'.$this->agent_lang];
@@ -295,7 +295,7 @@ class LsportApiController extends Controller {
         }
 
         $sport_type = array();
-        foreach ($arrSports AS $k => $v) {
+        foreach ($arrSports as $k => $v) {
             $sport_type[$v['sport_id']] = $v[$langCol];
         }
 
@@ -307,7 +307,7 @@ class LsportApiController extends Controller {
         $data = array();
         //$total = 0;
 
-        foreach ($menu_type AS $k => $v) {
+        foreach ($menu_type as $k => $v) {
             switch ($k) {
                 case 0:  // 進行中
                     // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
@@ -342,7 +342,7 @@ class LsportApiController extends Controller {
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($arrFixtures AS $kk => $vv) {
+                    foreach ($arrFixtures as $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
@@ -385,7 +385,7 @@ class LsportApiController extends Controller {
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($arrFixtures AS $kk => $vv) {
+                    foreach ($arrFixtures as $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
@@ -447,7 +447,7 @@ class LsportApiController extends Controller {
         }
 
         $arrAllSports = array();
-        foreach ($arrLsportSports AS $k => $v) {
+        foreach ($arrLsportSports as $k => $v) {
             $arrAllSports[] = array(
                 'id' => $v['id'],
                 'name' => $v[$langCol],
@@ -1380,36 +1380,33 @@ ORDER BY
         if (!isset($input['sport']) || ($input['sport'] == "")) {
             $input['sport'] = 1;  // 預設1 , 足球
         }
+        $sport_id = $input['sport'];
 
         if (!isset($input['page']) || ($input['page'] == "")) {
             $input['page'] = 1; // 預設1 
         }
+        $page = $input['page'];
 
     	/////////////////////////
-      
         // Search 區用
 
         // 狀態
         $status = [
             -1 => "異常",
-            1 => "等待開賽",
-            2 => "進行中",
-            3 => "已結束",
-            4 => "延期",
-            5 => "中斷",
+             1 => "等待開賽",
+             2 => "進行中",
+             3 => "已結束",
+             4 => "延期",
+             5 => "中斷",
             99 => "取消"
         ];
 
-            /////////////////////////
+        /////////////////////////
 
         // 取得比賽資料
 
         $page_limit = $this->page_limit;
-        $page = $input['page'];
         $skip = ($page-1)*$page_limit;
-
-        $sport_id = $input['sport'];
-
 
         // form search
         // $AntMatchList = AntMatchList::where("game_id", $sport_id)->where("status", ">=",2);
@@ -1435,7 +1432,7 @@ ORDER BY
         );
 
         $data = array();
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
 
             $tmp = array();
             
@@ -1457,7 +1454,7 @@ ORDER BY
             $tmp['league_name'] = $tmp_logo[$langCol];
             $tmp['series_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'] . "?v=" . $this->system_config['version'];
 
-            foreach ($columns AS $kk => $vv) {
+            foreach ($columns as $kk => $vv) {
                 $tmp[$vv] = $v[$vv]; 
             }
 
@@ -1477,7 +1474,7 @@ ORDER BY
 
             $teams = json_decode($v['teams'], true);
 
-            foreach ($teams AS $key => $value) {
+            foreach ($teams as $key => $value) {
                 $team_id = $value['team']['id'];
                 // $tmp_logo = AntTeamList::where("team_id", $team_id)->where("game_id", $sport_id)->first();
                 $tmp_logo = LsportTeam::where("team_id", $team_id)
@@ -1498,14 +1495,13 @@ ORDER BY
             
             }
 
-            foreach ($columns AS $kk => $vv) {
+            foreach ($columns as $kk => $vv) {
                 $tmp[$vv] = $v[$vv]; 
             }
             
             $tmp['status'] = $status[$v['status']];
         
-
-            foreach ($teams AS $kk => $vv) {
+            foreach ($teams as $kk => $vv) {
                 if ($vv['index'] == 1) {
                     $tmp['home_team_name'] = $vv['team']['name'];
                     $tmp['home_team_logo'] = $vv['team']['logo'];
@@ -1669,9 +1665,9 @@ ORDER BY
             "status"
         );
 
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
 
-            foreach ($columns AS $kk => $vv) {
+            foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
 
@@ -1690,7 +1686,7 @@ ORDER BY
                     $this->error(__CLASS__, __FUNCTION__, "02");
                 }
 
-                foreach ($cc AS $kkk => $vvv) {
+                foreach ($cc as $kkk => $vvv) {
                     $tmp_bet_data = array();
 
                     $league_id = $vvv['league_id'];
@@ -1739,7 +1735,7 @@ ORDER BY
                     $item_name = $vvv['type_item_name']; // 預設
                     $replace_lang[] = array("cn" => "单", "tw" => "單");
                     $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                    foreach ($replace_lang AS $lang_k => $lang_v) {
+                    foreach ($replace_lang as $lang_k => $lang_v) {
                     $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
                     }
                     $tmp_bet_data['type_item_name'] = $item_name;
@@ -1821,7 +1817,7 @@ ORDER BY
                 $item_name = $v['type_item_name']; // 預設
                 $replace_lang[] = array("cn" => "单", "tw" => "單");
                 $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                foreach ($replace_lang AS $lang_k => $lang_v) {
+                foreach ($replace_lang as $lang_k => $lang_v) {
                     $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
                 }
                 $tmp_bet_data['type_item_name'] = $item_name;
@@ -1917,7 +1913,7 @@ ORDER BY
         }
 
         $list = array();
-        foreach ($return AS $k => $v) {
+        foreach ($return as $k => $v) {
 
             $v['type'] = $typeList[$v['type']];
             $list[] = $v;
