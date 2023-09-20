@@ -94,9 +94,22 @@
 
 @push('main_js')
 <script>
-    var searchData = @json($search);
     // 語系
     var langTrans = @json(trans('calculator'));
+
+    // detect ini ajax
+    var isReadyCalInt = null
+    
+    $(document).ready(function() {
+        // check if api are all loaded every 500 ms 
+        isReadyCalInt = setInterval(() => {
+            if( isReadyCommon ) {
+                $('#dimmer').dimmer('hide'); // hide loading
+                $('#wrap').css('opacity', 1); // show the main content
+                clearInterval(isReadyCalInt); // stop checking
+            }
+        }, 500);
+    });
 
     // 左邊菜單  當點擊體育或串關時 移除目前選中樣式
     $('.menuTypeBtn').click(function(){
