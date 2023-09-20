@@ -581,21 +581,12 @@ ORDER BY
         }
 
         //儲存 fixture_id, market_id 及 main_line
-        if (!strlen($main_line)) {
-            $arrFixtureAndMarkets[$fixture_id][$market_id]['999999999'] = array(  // main_line為空白時用9個9代替
-                'fixture_id' => $fixture_id,
-                'market_id' => $fixture_id,
-                //'market_name' => $dv->m_name_en,
-                'main_line' => $main_line,
-            );
-        } else {
-            $arrFixtureAndMarkets[$fixture_id][$market_id][$main_line] = array(
-                'fixture_id' => $fixture_id,
-                'market_id' => $fixture_id,
-                //'market_name' => $dv->m_name_en,
-                'main_line' => $main_line,
-            );
-        }
+        $arrFixtureAndMarkets["{$fixture_id}|{$market_id}|{$main_line}"] = array(
+            'fixture_id' => $fixture_id,
+            'market_id' => $market_id,
+            'main_line' => $main_line,
+            //'market_name' => $dv->m_name_en,
+        );
 
         // league 層
         if (!isset($arrLeagues[$league_id]) || !sizeof($arrLeagues[$league_id])) {
