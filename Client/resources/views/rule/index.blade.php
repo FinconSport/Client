@@ -20,13 +20,6 @@
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @foreach(trans('rule.generalRulesBaseball') as $key => $translation)
-                                        @if (!empty($translation))
-                                            <li></li>
-                                        @else
-                                            <li>{{ $translation }}</li>
-                                        @endif
-                                    @endforeach
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_1') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_2') }}</li>
                                     <li>{{ trans('rule.generalRulesBaseball.gr_baseball_3') }}</li>
