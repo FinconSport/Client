@@ -552,9 +552,9 @@ ORDER BY
         ->where('f.start_time', "<=", $after_tomorrow)
         ->where("th.sport_id", $sport_id)
         ->where("th.sport_id", $sport_id)
-        ->order('l.league_id', 'ASC')
-        ->order('f.fixture_id', 'ASC')
-        ->order('m.market_id', 'ASC')
+        ->orderBy('l.league_id', 'ASC')
+        ->orderBy('f.fixture_id', 'ASC')
+        ->orderBy('m.market_id', 'ASC')
         ->get();
 
     dd($data);
