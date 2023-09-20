@@ -2022,6 +2022,63 @@ ORDER BY
      */
     protected function ApiSuccess($data, $message, $gzip = false) {
 
+    /*
+    array:2 [▼
+        "early" => array:1 [▼
+          154914 => array:3 [▼
+            "sport_id" => "154914"
+            "sport_name" => "棒球"
+            "leagues" => array:4 [▼
+              183 => array:3 [▼
+                "league_id" => 183
+                "league_name" => "美國職業棒球聯賽"
+                "fixtures" => array:3 [▼
+                  11387255 => array:9 [▼
+                    "fixture_id" => 11387255
+                    "start_time" => "2023-09-19 02:10:00"
+                    "status" => 3
+                    "last_update" => "2023-09-19 05:54:56"
+                    "home_team_id" => 77603
+                    "home_team_name" => "洛杉磯道奇"
+                    "away_team_id" => 77587
+                    "away_team_name" => "底特律老虎"
+                    "markets" => array:5 [▼
+                      28 => array:3 [▼
+                        "market_id" => 28
+                        "market_name" => "全場大小"
+                        "market_bets" => array:2 [▼
+                          54930042711387256 => array:7 [▼
+                            "merket_bet_id" => 54930042711387256
+                            "base_line" => "8.0"
+                            "line" => "8.0"
+                            "merket_bet_name" => "Over"
+                            "price" => "2.0484"
+                            "status" => 3
+                            "last_update" => "2023-09-19 04:06:38"
+                          ]
+                          182175272511387260 => array:7 [▶]
+                        ]
+                      ]
+                      226 => array:3 [▶]
+                      236 => array:3 [▶]
+                      281 => array:3 [▶]
+                      342 => array:3 [▶]
+                    ]
+                  ]
+                  11391624 => array:9 [▶]
+                  11391647 => array:9 [▶]
+                ]
+              ]
+              4146 => array:3 [▶]
+              5540 => array:3 [▶]
+              7807 => array:3 [▶]
+            ]
+          ]
+        ]
+        "living" => []
+      ]
+      */
+
         $success_code = strtoupper("SUCCESS_" . $this->controller . "_" . $this->function . "_" . $message);
 
         $tmp = array();
