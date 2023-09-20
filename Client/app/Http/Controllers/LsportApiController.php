@@ -566,10 +566,10 @@ ORDER BY
     $arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
     $sport_name = '';
     foreach ($data as $dk => $dv) {
-        $leagud_id = $dv['league_id'];
-        $fixture_id = $dv['fixture_id'];
-        $market_id = $dv['market_id'];
-        $main_line = $dv['main_line'];
+        $leagud_id = $dv->league_id;
+        $fixture_id = $dv->fixture_id;
+        $market_id = $dv->market_id;
+        $main_line = $dv->main_line;
         if (empty($sport_name)) {
             $sport_name = $dv['sport_name'];
         }
