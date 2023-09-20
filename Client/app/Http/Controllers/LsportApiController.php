@@ -665,11 +665,11 @@ ORDER BY
     }
 
     $arrRet = array();
-    $arrRet[$sport_id] = {
+    $arrRet[$sport_id] = array(
         'sport_id' => $sport_id,
         'sport_name' => $sport_name,
         'leagues' => $arrLeagues,
-    };
+    );
 
     dd($arrRet);
     dd($arrFixtureAndMarkets);
