@@ -271,6 +271,18 @@
 			$('input[name="end_time"]').val(searchData.end_time)
 			$('input[name="end_time"]').trigger('change')
 		}
+
+		// loop orderListD.data here to generate the html element then append into the page
+
+
+
+
+
+
+
+
+		// loop orderListD.data here to generate the html element then append into the page
+
 	}
 
   	// 寫入頁面限定JS
@@ -337,32 +349,6 @@
         }
     })
 
-	// text overflow
-    function fixTextOverflow() {
-        Array.from(document.getElementsByClassName("textOverFlow")).forEach(
-			function(element, index, array) {
-				if (!element.querySelector("marquee") && isElementOverflowing(element)) {
-					wrapContentsInMarquee(element);
-				}
-			}
-		);
-    }
-    function isElementOverflowing(element) {
-		var overflowX = element.offsetWidth < element.scrollWidth,
-			overflowY = element.offsetHeight < element.scrollHeight;
-
-		return (overflowX || overflowY);
-		}
-
-    function wrapContentsInMarquee(element) {
-    var marquee = document.createElement('marquee'),
-        contents = element.innerText;
-        marquee.innerText = contents;
-        element.innerHTML = '';
-        element.appendChild(marquee);
-        marquee.scrollAmount = 3
-    }
-
 	// pagination
 	function navPage(pagination) {
 		let queryData = @json($search);
@@ -422,7 +408,6 @@
 		}
 		$(e).html(switchStr)
 		$(e).attr('isopen', isopen)
-		fixTextOverflow()
 	}
 
 
