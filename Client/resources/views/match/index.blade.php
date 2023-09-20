@@ -413,7 +413,7 @@
 	function renderView( isIni = 0 ) {
 		if( isIni === 1 ) { // initial
 			// search condition
-				if( searchData.series_id !== undefined ) {
+			if( searchData.series_id !== undefined ) {
 				$('select[name="series_id"]').val(searchData.series_id)
 				$('select[name="series_id"]').trigger('change')
 			}
@@ -457,7 +457,7 @@
             if( isReadyResult === true && isReadyCommon === true) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
-				renderView()
+				renderView(1)
                 clearInterval(isReadyResultInt); // stop checking
             }
         }, 500);
@@ -540,10 +540,7 @@
 	}
 
 	// search area series filter
-	function filterSeiries(type = 0) {
-		if( type === 0 ) {
-			$('.clearSearch').dropdown('clear')
-		}
+	function filterSeiries() {
 		let val = $('select[name="sport"]').val()
 		setTimeout(() => {
 			$('#series_id select option').each(function() {
@@ -561,10 +558,10 @@
 	function searchResult() {
 		let queryData = {}
 		queryData.page = 1
-		let sSeriesId = $('select[name="series_id"]').val()
+		let sSeriesId = parseInt($('select[name="series_id"]').val())
 		let sStartTime = $('input[name="start_time"]').val()
 		let sEndTime = $('input[name="end_time"]').val()
-		if(sSeriesId) queryData.series_id = sSeriesId
+		if(sSeriesId && sSeriesId !== 0) queryData.series_id = sSeriesId
 		if(sStartTime) queryData.start_time = sStartTime
 		if(sEndTime) queryData.end_time = sEndTime
 		var queryString = new URLSearchParams(queryData).toString();
