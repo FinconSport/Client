@@ -632,15 +632,15 @@ ORDER BY
 
             // 包入 fixture 賽事資料
             $arrLeagues[$league_id]['fixtures'][$fixture_id] = array(
-                'sport_id' => $dv->sport_id,
-                'league_id' => $dv->league_id,
+                //'sport_id' => $dv->sport_id,
+                //'league_id' => $dv->league_id,
+                //'home_id' => $dv->home_id,
+                //'away_id' => $dv->away_id,
                 'fixture_id' => $dv->fixture_id,
                 'start_time' => $dv->start_time,
-                'home_id' => $dv->home_id,
-                'away_id' => $dv->away_id,
-                'livescore_extradata' => $dv->livescore_extradata,
-                'periods' => $dv->periods,
-                'scoreboard' => $dv->scoreboard,
+                //'livescore_extradata' => $dv->livescore_extradata,  // 此階段先不給
+                //'periods' => $dv->periods,  // 此階段先不給
+                //'scoreboard' => $dv->scoreboard,  // 此階段先不給
                 'status' => $dv->f_status,
                 'last_update' => $dv->f_last_update,
                 'home_team_id' => $dv->th_team_id,
@@ -678,8 +678,10 @@ ORDER BY
         'leagues' => $arrLeagues,
     );
 
+    echo(json_encode($arrFixtureAndMarkets));
+
     dd($arrRet);
-    dd($arrFixtureAndMarkets);
+    
 /*
 {
     Sport_id : { 
