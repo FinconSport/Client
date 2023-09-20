@@ -368,7 +368,7 @@
 	function searchOrder() {
 		let queryData = {}
 		queryData.page = 1
-		let sSport = $$('select[name="sport"]').val()
+		let sSport = $('select[name="sport"]').val()
 		let sOrderId = $('input[name="order_id"]').val()
 		let sSeriesId = $('select[name="series_id"]').val()
 		let sStatus = $('select[name="status"]').val()
