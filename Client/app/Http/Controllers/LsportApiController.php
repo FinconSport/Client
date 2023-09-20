@@ -571,6 +571,30 @@ ORDER BY
     $arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
     $sport_name = '';  //儲存球種名稱
 
+
+/*
+{
+    Sport_id : { 
+        League_id : {
+            Fixture_id: {
+                Fixture.*,
+                Market : [
+                    Market_id : {
+                        Market.id,
+                        Market.name : *LANG*,
+                        Bet : [
+                            Bet_id : {
+                                Bet.*
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+   }
+}
+*/
+
     foreach ($data as $dk => $dv) {
         $league_id = $dv->league_id;
         $fixture_id = $dv->fixture_id;
@@ -721,41 +745,15 @@ ORDER BY
     );
     $arrRet['living'] = array();  //living 走地目前都設空
 
-    //var_dump($runCount);
-    //echo(json_encode($arrFixtureAndMarkets));
-
-    dd($arrRet);
+    $data = $arrRet;
     
-/*
-{
-    Sport_id : { 
-        League_id : {
-            Fixture_id: {
-                Fixture.*,
-                Market : [
-                    Market_id : {
-                        Market.id,
-                        Market.name : *LANG*,
-                        Bet : [
-                            Bet_id : {
-                                Bet.*
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-   }
-}
-*/
 
         ///////////////////////////////
 
         // gzip
         // $data = $this->gzip($data);
 
-        // $this->ApiSuccess($data, "01", true);
-        $this->ApiSuccess($data, "01", false);
+        $this->ApiSuccess($data, "01");
     }
 
     /**
