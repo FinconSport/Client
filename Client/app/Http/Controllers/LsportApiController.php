@@ -138,9 +138,9 @@ class LsportApiController extends Controller {
 
         // 篩選要回傳的賽事結果的欄位
         $data = array();
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
             $tmp = array();
-            foreach ($arrColsToReturn as $key => $val) {
+            foreach ($arrColsToReturn AS $key => $val) {
                 $tmp[$val] = $v[$val];
             }
 
@@ -181,7 +181,7 @@ class LsportApiController extends Controller {
         }
 
         $data = array();
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
             $data[] = $v['marquee'];
         }
 
@@ -217,7 +217,7 @@ class LsportApiController extends Controller {
             $this->ApiError("01");
         }
 
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
             $sport_id = 0;
             $title = $v['title'];
             $context = $v['marquee'];
@@ -243,7 +243,7 @@ class LsportApiController extends Controller {
         //     $this->ApiError("02");
         // }
 
-        // foreach ($return as $k => $v) { 
+        // foreach ($return AS $k => $v) { 
         //     $game_id = $v['game_id'];
         //     $title = $v['title_'.$this->agent_lang];
         //     $context = $v['context_'.$this->agent_lang];
@@ -294,7 +294,7 @@ class LsportApiController extends Controller {
         }
 
         $sport_type = array();
-        foreach ($arrSports as $k => $v) {
+        foreach ($arrSports AS $k => $v) {
             $sport_type[$v['sport_id']] = $v[$langCol];
         }
 
@@ -306,7 +306,7 @@ class LsportApiController extends Controller {
         $data = array();
         //$total = 0;
 
-        foreach ($menu_type as $k => $v) {
+        foreach ($menu_type AS $k => $v) {
             switch ($k) {
                 case 0:  // 進行中
                     // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
@@ -314,7 +314,7 @@ class LsportApiController extends Controller {
                     //     $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
                     //          ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
                     // })
-                    // ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
+                    // ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) AS count,COUNT(*) AS rate_count')
                     // ->where('ant_rate_list.is_active', '=', 1)
                     // ->where('ant_match_list.status', 2)
                     // ->where('ant_series_list.status', 1)
@@ -327,7 +327,7 @@ class LsportApiController extends Controller {
                             $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                         })
-                        ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) as count,COUNT(*) as rate_count')
+                        ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) AS count,COUNT(*) AS rate_count')
                         //->where('lsport_market_bet.is_active', '=', 1)
                         ->where('lsport_fixture.status', 2)
                         ->where('lsport_league.status', 1)
@@ -341,7 +341,7 @@ class LsportApiController extends Controller {
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($arrFixtures as $kk => $vv) {
+                    foreach ($arrFixtures AS $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
@@ -357,7 +357,7 @@ class LsportApiController extends Controller {
                     //     $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')
                     //          ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
                     // })
-                    // ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) as count,COUNT(*) as rate_count')
+                    // ->selectRaw('ant_match_list.game_id, COUNT(DISTINCT ant_match_list.id) AS count,COUNT(*) AS rate_count')
                     // ->where('ant_rate_list.is_active', '=', 1)
                     // ->where('ant_match_list.status', 1)
                     // ->where('ant_series_list.status', 1)
@@ -370,7 +370,7 @@ class LsportApiController extends Controller {
                             $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
                                  ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
                         })
-                    ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) as count,COUNT(*) as rate_count')
+                    ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) AS count,COUNT(*) AS rate_count')
                     //->where('lsport_market_bet.is_active', '=', 1)
                     ->where('lsport_fixture.status', 1)
                     ->where('lsport_league.status', 1)
@@ -384,7 +384,7 @@ class LsportApiController extends Controller {
                     
                     $tmp = array();
                     $total = 0;
-                    foreach ($arrFixtures as $kk => $vv) {
+                    foreach ($arrFixtures AS $kk => $vv) {
                         $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
                         $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
                         $total += $vv['count'];
@@ -446,7 +446,7 @@ class LsportApiController extends Controller {
         }
 
         $arrAllSports = array();
-        foreach ($arrLsportSports as $k => $v) {
+        foreach ($arrLsportSports AS $k => $v) {
             $arrAllSports[] = array(
                 'id' => $v['id'],
                 'name' => $v[$langCol],
@@ -497,44 +497,146 @@ class LsportApiController extends Controller {
 
         //////////////////////////////
         // 早盤
-        // $return = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')  // 賽事-賠率
-        // ->join('ant_series_list', function ($join) {
-        //         $join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')  // 賽事-聯賽
-        //         ->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');  // 賽事-聯賽
-        // })
-        // ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
-        // ->where('ant_rate_list.is_active', '=', 1)
-        // ->where('ant_series_list.status', 1)
-        // ->where('ant_match_list.status', 1)
-        // ->where('ant_match_list.start_time', "<=", $after_tomorrow)
-        // ->where("ant_match_list.game_id", $sport_id)
-        // ->groupBy('ant_match_list.match_id')
-        // ->having('rate_count', '>', 0)
-        // ->orderBy("ant_series_list.order_by")->get();
 
 /*
-select f.* from lsport_fixture as f 
+SELECT
+    l.name_en AS l_name_en, l.name_tw AS l_name_locale,
+    f.fixture_id, f.sport_id, f.league_id, f.start_time, f.home_id, f.away_id, f.livescore_extradata, f.periods, f.scoreboard, f.status AS f_status, f.last_update AS f_last_update,
+    th.team_id AS th_team_id, th.name_en AS th_name_en, th.name_tw AS th_name_locale,
+    ta.team_id AS ta_team_id, ta.name_en AS ta_name_en, ta.name_tw AS ta_name_locale,
+    m.market_id, m.name_en AS m_name_en, m.name_tw AS m_name_locale, m.priority, m.main_line,
+    --mb.bet_id, mb.base_line, mb.line, mb.name_en AS mb_name_en, mb.name_tw AS mb_name_tw, mb.price, mb.status AS mb_status, mb.last_update AS mb_last_update
 
-join lsport_sport as s on (f.sport_id=s.sport_id) 
-join lsport_league as l on (l.league_id=f.league_id) 
-join lsport_team as t on (l.league_id=t.league_id) 
-join lsport_market as m on (m.fixture_id=f.fixture_id) 
-join lsport_market_bet as mb on (mb.market_id=m.market_id) 
+FROM lsport_league AS l
 
-where f.sport_id=154914
+JOIN lsport_fixture AS f on (l.league_id = f.league_id) 
+JOIN lsport_team AS th on (f.home_id = th.team_id AND l.league_id=th.league_id)
+JOIN lsport_team AS ta on (f.away_id = ta.team_id AND l.league_id=ta.league_id)
+JOIN lsport_market AS m on (m.fixture_id = f.fixture_id) 
+--JOIN lsport_market_bet AS mb on (mb.market_id = m.market_id AND mb.fixture_id = f.fixture_id)
+
+WHERE
+    l.sport_id = 154914
+    AND l.status = 1
+    AND f.start_time >= '2023-09-20 00:00:00'
+    AND f.sport_id = 154914
+    AND th.sport_id = 154914
+    AND ta.sport_id = 154914
+
+ORDER BY
+    l.league_id ASC,
+    f.fixture_id ASC,
+    m.market_id ASC,
+    --mb.bet_id ASC
+
  */
-        $newReturn = LsportFixture::join('lsport_sport', 'lsport_fixture.fixture_id', '=', 'lsport_sport.sport_id')
-            ->join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
-            ->join('lsport_league', function ($join) {
-                $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')  // 賽事-聯賽
-                ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');  // 賽事-聯賽
-            })
-            ->select('lsport_fixture.*')
-            ->where('lsport_league.status', 1)
-            ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
-            ->where("lsport_fixture.sport_id", $sport_id)
-            ->groupBy('lsport_fixture.fixture_id')
-            ->get();
+
+    $data = DB::table('league as l')
+        ->join('lsport_fixture as f', 'l.fixture_id', '=', 'f.sport_id')
+        ->join('lsport_team as th', function ($join) {
+            $join->on('th.team_id', '=', 'f.home_id')
+            ->on('l.league_id', '=', 'th.league_id');
+        })
+        ->join('lsport_team as ta', function ($join) {
+            $join->on('ta.team_id', '=', 'f.home_id')
+            ->on('l.league_id', '=', 'ta.league_id');
+        })
+        ->join('lsport_market as m', 'l.fixture_id', '=', 'f.sport_id')
+        ->select('l.name_en AS l_name_en, l.name_tw AS l_name_locale')
+        ->select('f.fixture_id, f.sport_id, f.league_id, f.start_time, f.home_id, f.away_id, f.livescore_extradata, f.periods, f.scoreboard, f.status AS f_status, f.last_update AS f_last_update')
+        ->select('th.team_id AS th_team_id, th.name_en AS th_name_en, th.name_tw AS th_name_locale')
+        ->select('ta.team_id AS ta_team_id, ta.name_en AS ta_name_en, ta.name_tw AS ta_name_locale')
+        ->select('m.market_id, m.name_en AS m_name_en, m.name_tw AS m_name_locale, m.priority, m.main_line')
+        ->where('l.status', 1)
+        ->where('l.sport_id', $sport_id)
+        ->where('f.start_time', "<=", $after_tomorrow)
+        ->where("th.sport_id", $sport_id)
+        ->where("th.sport_id", $sport_id)
+        ->order('l.league_id', 'ASC')
+        ->order('f.fixture_id', 'ASC')
+        ->order('m.market_id', 'ASC')
+        ->get();
+
+    dd($data);
+
+/*
+{
+    Sport_id : { 
+        League_id : {
+            Fixture_id: {
+                Fixture.*,
+                    Market : [
+                        Market_id : {
+                            Market.id,
+                            Market.name : *LANG*,
+                            Bet : [
+                                Bet_id : {
+                                        Bet.*
+                                }
+                            ]
+                        }
+                    ]
+            }
+        }
+   }
+}
+*/
+
+            // $data = array();
+
+            // $return = LsportFixture::where("status",1)->get();
+            // if ($return === false) {
+            //     dd(111);
+            // }
+
+            // foreach ($return as $k => $v) {
+            //     $sport_id = $v['sport_id'];
+            //     $league_id = $v['league_id'];
+            //     $fixture_id = $v['fixture_id'];
+
+            //     $data[$sport_id][$league_id][$fixture_id]['data'] = $v;
+
+            //     // query market
+            //     $xxx = LsportMarket::where("fixture_id",$fixture_id)->get();
+            //     if ($xxx === false) {
+            //         dd(111);
+            //     }
+
+            //     foreach ($xxx as $kk => $vv) {
+            //         $market_id = $vv['$market_id'];
+            //         $main_line = $vv['main_line'];
+
+
+            //         // query market bet 
+            //         $xxxx = LsportMarketBet::where("market_id",$market_id)->where("base_line",$main_line)->orderBy("bet_id","ASC")->get();
+            //         if ($xxxx === false) {
+            //             dd(3333);
+            //         }
+
+            //         $tmp = array();
+            //         foreach ($xxxx as $kkk => $vvv) {
+            //             $bet_id = $vvv['bet_id'];
+            //             $price = $vvv['price'];
+            //             $name = $vvv['name_tw'];
+            //             $base_line = $vvv['base_line'];
+            //             $status = $vvv['status'];
+                        
+                        
+            //             $tmp[$bet_id] = $vvv;
+            //         }
+
+                    
+            //         // TODO
+            //         $data[$sport_id][$league_id][$fixture_id]['Market'][$market_id] = array(
+            //             "Bet" => $tmp,
+            //             "data" => $vv
+            //         );
+
+            //     }
+                
+            // }
+
+            // dd($data);
 
         // $return = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
         //     ->join('lsport_league', function ($join) {
@@ -738,7 +840,7 @@ where f.sport_id=154914
         // decode 賠率
         $rate_data = json_decode($arrOdds['items'], true);
 
-        foreach ($rate_data as $k => $v) {
+        foreach ($rate_data AS $k => $v) {
             if ($v['id'] == $bet_type_item_id) {
                 $rate_data = $v;
             }
@@ -934,7 +1036,7 @@ where f.sport_id=154914
         $m_game_id = false;
 
         // 串關批量處理訂單
-        foreach ($bet_data as $k => $v) {
+        foreach ($bet_data AS $k => $v) {
             // 取得必要參數
             $fixture_id = $v['bet_match'];
             $bet_type_id = $v['bet_type'];
@@ -1065,7 +1167,7 @@ where f.sport_id=154914
             // decode 賠率
             $rate_data = json_decode($arrOdds['items'], true);
     
-            foreach ($rate_data as $k => $v) {
+            foreach ($rate_data AS $k => $v) {
                 if ($v['id'] == $bet_type_item_id) {
                     $rate_data = $v;
                 }
@@ -1246,7 +1348,7 @@ where f.sport_id=154914
         );
 
         $data = array();
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
 
             $tmp = array();
             
@@ -1268,7 +1370,7 @@ where f.sport_id=154914
             $tmp['league_name'] = $tmp_logo[$langCol];
             $tmp['series_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'] . "?v=" . $this->system_config['version'];
 
-            foreach ($columns as $kk => $vv) {
+            foreach ($columns AS $kk => $vv) {
                 $tmp[$vv] = $v[$vv]; 
             }
 
@@ -1288,7 +1390,7 @@ where f.sport_id=154914
 
             $teams = json_decode($v['teams'], true);
 
-            foreach ($teams as $key => $value) {
+            foreach ($teams AS $key => $value) {
                 $team_id = $value['team']['id'];
                 // $tmp_logo = AntTeamList::where("team_id", $team_id)->where("game_id", $sport_id)->first();
                 $tmp_logo = LsportTeam::where("team_id", $team_id)
@@ -1309,14 +1411,14 @@ where f.sport_id=154914
             
             }
 
-            foreach ($columns as $kk => $vv) {
+            foreach ($columns AS $kk => $vv) {
                 $tmp[$vv] = $v[$vv]; 
             }
             
             $tmp['status'] = $status[$v['status']];
         
 
-            foreach ($teams as $kk => $vv) {
+            foreach ($teams AS $kk => $vv) {
                 if ($vv['index'] == 1) {
                     $tmp['home_team_name'] = $vv['team']['name'];
                     $tmp['home_team_logo'] = $vv['team']['logo'];
@@ -1388,7 +1490,7 @@ where f.sport_id=154914
             $this->ApiError("03");
         }
         
-        $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
+        // $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
 
         $data = $tmp;
 
@@ -1479,9 +1581,9 @@ where f.sport_id=154914
             "status"
         );
 
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
 
-            foreach ($columns as $kk => $vv) {
+            foreach ($columns AS $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
 
@@ -1500,7 +1602,7 @@ where f.sport_id=154914
                     $this->error(__CLASS__, __FUNCTION__, "02");
                 }
 
-                foreach ($cc as $kkk => $vvv) {
+                foreach ($cc AS $kkk => $vvv) {
                     $tmp_bet_data = array();
 
                     $league_id = $vvv['league_id'];
@@ -1549,7 +1651,7 @@ where f.sport_id=154914
                     $item_name = $vvv['type_item_name']; // 預設
                     $replace_lang[] = array("cn" => "单", "tw" => "單");
                     $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                    foreach ($replace_lang as $lang_k => $lang_v) {
+                    foreach ($replace_lang AS $lang_k => $lang_v) {
                     $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
                     }
                     $tmp_bet_data['type_item_name'] = $item_name;
@@ -1631,7 +1733,7 @@ where f.sport_id=154914
                 $item_name = $v['type_item_name']; // 預設
                 $replace_lang[] = array("cn" => "单", "tw" => "單");
                 $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                foreach ($replace_lang as $lang_k => $lang_v) {
+                foreach ($replace_lang AS $lang_k => $lang_v) {
                     $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
                 }
                 $tmp_bet_data['type_item_name'] = $item_name;
@@ -1727,7 +1829,7 @@ where f.sport_id=154914
         }
 
         $list = array();
-        foreach ($return as $k => $v) {
+        foreach ($return AS $k => $v) {
 
             $v['type'] = $typeList[$v['type']];
             $list[] = $v;
