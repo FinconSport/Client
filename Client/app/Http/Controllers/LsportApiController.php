@@ -541,7 +541,7 @@ ORDER BY
             $join->on('ta.team_id', '=', 'f.home_id')
             ->on('l.league_id', '=', 'ta.league_id');
         })
-        ->join('lsport_market as m', 'l.fixture_id', '=', 'f.sport_id')
+        ->join('lsport_market as m', 'm.fixture_id', '=', 'f.fixture_id')
         ->select('l.name_en AS l_name_en, l.name_tw AS l_name_locale')
         ->select('f.fixture_id, f.sport_id, f.league_id, f.start_time, f.home_id, f.away_id, f.livescore_extradata, f.periods, f.scoreboard, f.status AS f_status, f.last_update AS f_last_update')
         ->select('th.team_id AS th_team_id, th.name_en AS th_name_en, th.name_tw AS th_name_locale')
