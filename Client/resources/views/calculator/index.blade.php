@@ -83,8 +83,16 @@
                     </div>
                 </div>
 
-
                 <div class="row m-0">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button onclick="clearAll()">{{ trans('calculator.calculator.clear') }}</button>
+                            <button onclick="claculate()">{{ trans('calculator.calculator.calculate') }}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row m-0">
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button onclick="clearAll()">{{ trans('calculator.calculator.clear') }}</button>
@@ -93,7 +101,7 @@
                         <button onclick="claculate()">{{ trans('calculator.calculator.calculate') }}</button>
                     </div>
                     <div class="col-2"></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
