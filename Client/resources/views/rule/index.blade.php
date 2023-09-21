@@ -184,22 +184,6 @@
                                     @foreach(trans('rule.generalRulesSoccor') as $key => $grRule)
                                         <li>{{ trans('rule.generalRulesSoccor.' . $key) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.generalRulesSoccor.gr_soccor_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_2') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_3') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_4') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_5') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_6') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_7') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_8') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_9') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_10') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_11') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_12') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_13') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_14') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_15') }}</li>
-                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_16') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.handicap') }}</h2>
@@ -208,25 +192,14 @@
                                     @foreach([1, 2, 3, 4, 5] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_1') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_2') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_3') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_4') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5') }}</li> -->
                                     <ul class="alpha-bullets">
                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_5_0') as $key => $grRule)
-                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_11_0.' . $key) }}</li>
+                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_0.' . $key) }}</li>
                                         @endforeach
-                                        <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_1') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_2') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_3') }}</li> -->
                                     </ul>
                                     @foreach([6, 7, 8] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_6') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_7') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_8') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.fulltime_handicap_result') }}</h3>
@@ -234,19 +207,10 @@
                                     @foreach([9, 10, 11, 12] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_9') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_10') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_11') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12') }}</li> -->
                                     <ul class="number-bullets">
                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_12_0') as $key => $grRule)
                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_0.' . $key) }}</li>
                                         @endforeach
-                                        <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_1') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_2') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_3') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_4') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_5') }}</li> -->
                                     </ul>
                                     <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_13') }}</li>
                                 </ul>
@@ -256,9 +220,6 @@
                                     @foreach([14, 15, 16] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_14') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_15') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_16') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
@@ -266,8 +227,6 @@
                                     @foreach([17, 18] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_17') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_18') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.ot_handicap') }}</h3>
@@ -275,8 +234,6 @@
                                     @foreach([19, 20] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_19') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_20') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.ot_let_1stHalf') }}</h3>
@@ -284,9 +241,6 @@
                                     @foreach([21, 22, 23] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_21') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_22') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_23') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.betting_sizes') }}</h3>
@@ -295,39 +249,30 @@
                                     @foreach([24, 25, 26, 27] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_24') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_25') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_26') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27') }}</li> -->
                                     <ul class="alpha-bullets">
                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_27_0') as $key => $grRule)
                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_0.' . $key) }}</li>
                                         @endforeach
-                                        <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_1') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_2') }}</li>
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_3') }}</li> -->
                                     </ul>
                                     <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28') }}</li>
                                     <ul class="alpha-bullets">
                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $key => $grRule)
                                             @if (is_array($grRule))
                                                 <ul class="roman-bullets">
-                                                    <li>{{ trans('rule.ruleContentsSoccor.' . $key) }}</li>
                                                     @foreach($grRule as $subKey => $subRule)
                                                         @if (is_array($subRule))
                                                             <ul class="roman-bullets">
-                                                                <li>{{ trans('rule.ruleContentsSoccor.' . $key . '.' . $subKey) }}</li>
                                                                 @foreach($subRule as $subSubKey => $subSubRule)
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
                                                                 @endforeach
                                                             </ul>
                                                         @else
-                                                            <li>{{ trans('rule.ruleContentsSoccor.' . $key . '.' . $subKey) }}</li>
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey) }}</li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
                                             @else
-                                                <li>{{ trans('rule.ruleContentsSoccor.' . $key) }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}: {{ $grRule }}</li>
                                             @endif
                                         @endforeach
                                     </ul>
@@ -337,17 +282,12 @@
                                     @foreach([29, 30] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_29') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_30') }}</li>  -->
                                 </ul>
                                 <h4>{{ trans('rule.ruleTitles.goal_overUnder_1stHalf') }}</h4>
                                 <ul class="number-bullets">
                                     @foreach([31, 32, 33] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_31') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_32') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_33') }}</li>  -->
                                 </ul>
                                 <h4>{{ trans('rule.ruleTitles.rolling_ball_overUnder') }}</h4>
                                 <ul class="number-bullets">
@@ -359,9 +299,6 @@
                                     @foreach([35, 36, 37] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_35') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_36') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_37') }}</li>  -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.ot_goals_overUnder_1stHalf') }}</h3>
@@ -369,9 +306,6 @@
                                     @foreach([38, 39, 40] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_38') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_39') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_40') }}</li>  -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.team_goals_overUnder') }}</h3>
@@ -379,10 +313,6 @@
                                     @foreach([41, 42, 43, 44] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_41') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_42') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_43') }}</li> 
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_44') }}</li>  -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
@@ -391,8 +321,6 @@
                                     @foreach([45, 46] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_45') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_46') }}</li> -->
                                 </ul>
                                 <h4>{{ trans('rule.ruleTitles.win_alone') }}</h4>
                                 <ul class="number-bullets">
@@ -407,34 +335,22 @@
                                     @foreach([49, 50, 51] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_49') }}</li>   
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_50') }}</li>  
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_51') }}</li>   -->
                                     <ul class="number-bullets">
                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_52') as $key => $grRule)
                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52.' . $key) }}</li>
                                         @endforeach
-                                        <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52_1') }}</li>  
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52_2') }}</li>  
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52_3') }}</li>    -->
                                         <ul class="upper-alpha-bullets">
                                             <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li>  
                                             <ul class="roman-bullets">
                                                 @foreach(trans('rule.ruleContentsSoccor.rc_soccor_53') as $key => $grRule)
                                                     <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53.' . $key) }}</li>
                                                 @endforeach
-                                                <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53_1') }}</li>
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53_2') }}</li>
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53_3') }}</li> -->
                                             </ul>
                                             <li><h4>{{ trans('rule.ruleTitles.example_2') }}</h4></li>  
                                             <ul class="roman-bullets">
                                                 @foreach(trans('rule.ruleContentsSoccor.rc_soccor_54') as $key => $grRule)
                                                     <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54.' . $key) }}</li>
                                                 @endforeach
-                                                <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54_1') }}</li>
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54_2') }}</li>
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54_3') }}</li> -->
                                             </ul>
                                         </ul>
                                         <li>{{ trans('rule.ruleTitles.example_2') }}</li>
@@ -446,8 +362,6 @@
                                     @foreach([55, 56] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_55') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_56') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.ot_winAlone_1stHalf') }}</h3>
@@ -455,9 +369,6 @@
                                     @foreach([57, 58, 59] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_57') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_58') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_59') }}</li> -->
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.crts') }}</h3>
@@ -466,19 +377,12 @@
                                     @foreach([60, 61, 62] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_60') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_61') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_62') }}</li> -->
                                 </ul>
                                 <h4>{{ trans('rule.ruleTitles.crts_1stHalf') }}</h4>
                                 <ul class="number-bullets">
                                     @foreach([63, 64, 65, 66] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
-                                    <!-- <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_63') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_64') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_65') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_66') }}</li> -->
                                 </ul>
                             </div>
                         </div>
