@@ -408,10 +408,10 @@
             }
         }, 500);
 
-        // websocket 
-        WebSocketDemo(); // ws connection
-        setInterval(reconnent, 5000); // detect ws connetion state
-        processMessageQueueAsync(); // detect if there's pkg in messageQueue
+        // websocket -> mark now
+        // WebSocketDemo(); // ws connection
+        // setInterval(reconnent, 5000); // detect ws connetion state
+        // processMessageQueueAsync(); // detect if there's pkg in messageQueue
         // ===== DATA LATER =====
     });
 
