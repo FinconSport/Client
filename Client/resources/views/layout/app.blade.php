@@ -208,7 +208,7 @@
 		// ===== DATA LAYER ======
 
 		console.log('player')
-		console.log(@json(session('player.limit_data')));
+		console.log(@json(session('player')));
 
 		// player and sport_id
 		const player = @json($player['id']);
