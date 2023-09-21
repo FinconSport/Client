@@ -339,13 +339,13 @@
             2. bet limitation?
 
             有哪些需要沿用laravel映射?
-            1. $player
-            2. $token
+            1. $player 
+            2. $token (先寫死12345，之後正式再來換)
             3. $system_config['version']
-            5. $current_time?
+            4. $current_time?
     
         3. 資料接收機制
-            1. ws -> push to queue -> update the globe data
+            1. ws -> push to queue -> update the globe data (先註解掉)
             2. ajax -> update the globe data
     */
 
@@ -400,7 +400,7 @@
             if( isReadyCommon) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
-                renderView(1); // ini data
+                viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     renderView()
                 }, 5000);
@@ -462,14 +462,12 @@
     }
 
     // render view layer here
-    function renderView( isIni = 0 ) {
+    function renderView( ) {
         console.log('renderView')
 
 
 
 
-
-        if( isIni === 1 ) viewIni() // excute all view layer ini function
     }
 
     // detect if there's still package need to be processed
