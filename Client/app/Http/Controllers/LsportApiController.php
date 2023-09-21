@@ -366,7 +366,7 @@ class LsportApiController extends Controller {
 ****************************************/
 
     /**
-     * MatchSport
+     * SportList (原名:MatchSport)
      *
      * 取回當前體育的所有球種(體育類型)的列表。
      *
@@ -374,8 +374,8 @@ class LsportApiController extends Controller {
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ARRAY 球種列表) | ApiError
      */
-    // 賽事列表-分類
-    public function MatchSport(Request $request) {
+    // 球種列表
+    public function SportList(Request $request) {
       
     	$input = $this->getRequest($request);
 
@@ -390,16 +390,31 @@ class LsportApiController extends Controller {
         //---------------------------------
         // 取得球種資料
         //$return = AntGameList::where("status", 1)->get();
-        $arrLsportSports = LsportSport::get();
+        $arrLsportSports = LsportSport::where('status', 1)
+            ->select(
+                'sport_id', 'name_en AS name_en', $langCol.' AS name_locale', 'status'
+            )
+            ->orderBy('id ASC')
+            ->get();
+
         if ($arrLsportSports === false) {
             $this->ApiError("01");
         }
 
         $arrAllSports = array();
-        foreach ($arrLsportSports as $k => $v) {
+        foreach ($arrLsportSports as $dk => $dv) {
+
+            // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+            if (!strlen($dv->name_locale)) {  // sport name
+                $sport_name = $dv->name_en;
+            } else {
+                $sport_name = $dv->name_locale;
+            }
+
             $arrAllSports[] = array(
-                'id' => $v['id'],
-                'name' => $v[$langCol],
+                'sport_id' => $dv->sport_id,
+                'name' => $sport_name,
+                'status' => $dv->status,
             );
         }
 
@@ -407,16 +422,6 @@ class LsportApiController extends Controller {
 
     }
 
-    /**
-     * MatchIndex
-     *
-     * 取得某一指定球種的含賽事資料(賠率、聯盟等)的賽事列表
-     * 
-     * @param Request $request: 前端傳入的使用者請求，
-     *                              # 必須包含player代表玩家的ID。User requests passed in by the front-end. Key 'player' is essential, which represents the player ID.
-     *                              # 必須包含sport_id代表球種的ID。Key 'sport_id' is essential, which represents the sport ID.
-     * @return ApiSuccess($data = ARRAY 該指定球種的含賽事資料(賠率、聯盟等)的賽事列表) | ApiError
-     */
     public function MatchIndex(Request $request) {
       
     	$input = $this->getRequest($request);
@@ -484,7 +489,7 @@ class LsportApiController extends Controller {
         }
 
         $arrLeagues = array();  //儲存league-fixture-market的階層資料
-        $arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
+        //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
         $sport_name = '';  //儲存球種名稱
 
 
@@ -527,12 +532,12 @@ class LsportApiController extends Controller {
             }
 
             //儲存 fixture_id, market_id 及 main_line
-            $arrFixtureAndMarkets["{$fixture_id}|{$market_id}|{$main_line}"] = array(
-                'fixture_id' => $fixture_id,
-                'market_id' => $market_id,
-                'main_line' => $main_line,
-                //'market_name' => $dv->m_name_en,
-            );
+            // $arrFixtureAndMarkets["{$fixture_id}|{$market_id}|{$main_line}"] = array(
+            //     'fixture_id' => $fixture_id,
+            //     'market_id' => $market_id,
+            //     'main_line' => $main_line,
+            //     //'market_name' => $dv->m_name_en,
+            // );
 
             // league 層
             if (!isset($arrLeagues[$league_id]) || !sizeof($arrLeagues[$league_id])) {
