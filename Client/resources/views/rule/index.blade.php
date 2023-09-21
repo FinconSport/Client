@@ -19,6 +19,27 @@
                             <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
                                 <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
+                                <ul class="number-bullets">
+                                    @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
+                                        @if (is_array($grRule))
+                                            <ul>
+                                                @foreach($grRule as $subKey => $subRule)
+                                                    @if (is_array($subRule))
+                                                        <ul>
+                                                            @foreach($subRule as $subSubKey => $subSubRule)
+                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
