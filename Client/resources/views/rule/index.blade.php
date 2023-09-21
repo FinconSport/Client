@@ -36,7 +36,7 @@
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
+                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}: {{ $grRule }}</li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -117,7 +117,7 @@
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <li>{{ trans('rule.generalRulesBasketball.' . $key) }}</li>
+                                            <li>{{ trans('rule.generalRulesBasketball.' . $key) }}: {{ $grRule }}</li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -263,11 +263,11 @@
                                                         @if (is_array($subRule))
                                                             <ul class="roman-bullets">
                                                                 @foreach($subRule as $subSubKey => $subSubRule)
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey) }}</li>
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
                                                                 @endforeach
                                                             </ul>
                                                         @else
-                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey) }}</li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
@@ -394,8 +394,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<!-- <link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet"> -->
+<!-- <link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
