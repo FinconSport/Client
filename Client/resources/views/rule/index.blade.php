@@ -45,7 +45,7 @@
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(range(1, 2) as $i)
-                                        <div  >{{ $i }}</div>
+                                        <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_' . $i) }}</li>
                                     @endforeach
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_2') }}</li>
