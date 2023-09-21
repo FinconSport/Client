@@ -604,6 +604,8 @@ class LsportApiController extends Controller {
                 $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id] = array(
                     'market_id' => $dv->market_id,
                     'market_name' => $market_name,
+                    'priority' => $dv->priority,
+                    'main_line' => $dv->main_line,
                     'market_bets' => array(),
                 );
 
