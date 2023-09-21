@@ -304,8 +304,8 @@
 
 
 @section('styles')
-<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-<link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet"> -->
 <link href="{{ asset('css/index_ind.css?v=' . $current_time) }}" rel="stylesheet">
 @endSection
 
@@ -408,10 +408,10 @@
             }
         }, 500);
 
-        // websocket 
-        WebSocketDemo(); // ws connection
-        setInterval(reconnent, 5000); // detect ws connetion state
-        processMessageQueueAsync(); // detect if there's pkg in messageQueue
+        // websocket -> mark now
+        // WebSocketDemo(); // ws connection
+        // setInterval(reconnent, 5000); // detect ws connetion state
+        // processMessageQueueAsync(); // detect if there's pkg in messageQueue
         // ===== DATA LATER =====
     });
 
