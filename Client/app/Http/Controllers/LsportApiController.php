@@ -253,7 +253,6 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
         // 取得球種資料
-        //$return = AntGameList::where("status", 1)->get();
         $arrSports = LsportSport::get();
         if ($arrSports === false) {
             $this->ApiError("01");
@@ -711,9 +710,9 @@ class LsportApiController extends Controller {
         // $is_better_rate = $input['better_rate'];
 
         $player_id = $input['player'];
-        $fixture_id = $input['bet_match'];  //ant_match_list.match_id
-        $bet_type_id = $input['bet_type'];  //ant_rate_list.rate_id
-        $bet_type_item_id = $input['bet_type_item'];  //JSON_DECODE(ant_rate_list.item).id
+        $fixture_id = $input['bet_match'];
+        $bet_type_id = $input['bet_type'];
+        $bet_type_item_id = $input['bet_type_item'];
         $player_rate = $input['bet_rate'];  //前端傳來的賠率
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = $input['better_rate'];  //受否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
@@ -779,7 +778,6 @@ class LsportApiController extends Controller {
 
 
         // 取得賽事資料
-        //   $return = AntMatchList::where("match_id", $match_id)->where("game_id", $game_id)->first();
         $arrFixtures = LsportFixture::where("fixture_id", $fixture_id)
             ->where("sport_id", $sport_id)
             ->first();
@@ -826,7 +824,6 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得賠率
-        // $return = AntRateList::where("rate_id", $bet_type_id)->where("match_id", $match_id)->first();
         $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
         if ($arrOdds == false) {
             $this->ApiError("09");
@@ -1098,7 +1095,6 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
     
             // 取得賽事資料
-            // $return = AntMatchList::where("match_id", $match_id)->where("game_id", $game_id)->first();
             $arrFixtures = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
             if ($arrFixtures == false) {
                 $this->ApiError("13");
@@ -1152,7 +1148,6 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
     
             // 取得賠率
-            // $return = AntRateList::where("rate_id", $bet_type_id)->where("match_id", $match_id)->first();
             $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
             if ($arrOdds === false) {
                 $this->ApiError("16");
@@ -1621,7 +1616,6 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        //$return = AntMatchList::where("match_id", $match_id)->where("game_id", $sport_id)->get();
         $return = LsportFixture::where("fixture_id", $fixture_id)
             ->where("sport_id", $sport_id)
             ->get();
@@ -1645,7 +1639,7 @@ class LsportApiController extends Controller {
     /**
      * CommonOrder
      *
-     * ?????
+     * 抓取玩家的投注紀錄。
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
      *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
@@ -1687,14 +1681,14 @@ class LsportApiController extends Controller {
             
             // 未結算
             if ($input['result'] == 0) {
-            $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
-            $groupedData = $groupedData->whereIn("status",[0,1,2,3]);
+                $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
+                $groupedData = $groupedData->whereIn("status",[0,1,2,3]);
             }
             
             // 已結算
             if ($input['result'] == 1) {
-            $GameOrder = $GameOrder->where("status",4);
-            $groupedData = $groupedData->where("status",4);
+                $GameOrder = $GameOrder->where("status",4);
+                $groupedData = $groupedData->where("status",4);
             }
         }
             
@@ -1746,7 +1740,7 @@ class LsportApiController extends Controller {
                     $tmp_bet_data = array();
 
                     $league_id = $vvv['league_id'];
-                    //$tmp_d = AntSeriesList::where("series_id", $series_id)->where("game_id", $vvv['game_id'])->first();
+
                     $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
                     $tmp_bet_data['league_name'] = $vvv['league_name'];
@@ -1755,36 +1749,36 @@ class LsportApiController extends Controller {
                     }
         
                     $type_id = $vvv['type_id'];
-                    // $tmp_d = AntRateList::where("rate_id", $type_id)->where("game_id", $vvv['game_id'])->first();
+
                     $tmp_d = LsportMarketBet::where("id", $type_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                    $tmp_bet_data['type_name'] = $vvv['type_name'];
+                        $tmp_bet_data['type_name'] = $vvv['type_name'];
                     } else {
-                    $tmp_bet_data['type_name'] = $tmp_d[$langCol];
+                        $tmp_bet_data['type_name'] = $tmp_d[$langCol];
                     }
                     
                     $replace_lang = array();
         
                     $home_team_id = $vvv['home_team_id'];
-                    // $tmp_d = AntTeamList::where("team_id", $home_team_id)->where("game_id", $vvv['game_id'])->first();
+
                     $tmp_d = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                    $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
+                        $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
                     } else {
-                    $tmp_bet_data['home_team_name'] = $tmp_d[$langCol];
-                    $replace_lang[0]['tw'] = $tmp_d['name_tw'];
-                    $replace_lang[0]['cn'] = $tmp_d['name_cn'];
+                        $tmp_bet_data['home_team_name'] = $tmp_d[$langCol];
+                        $replace_lang[0]['tw'] = $tmp_d['name_tw'];
+                        $replace_lang[0]['cn'] = $tmp_d['name_cn'];
                     }
         
                     $away_team_id = $vvv['away_team_id'];
-                    // $tmp_d = AntTeamList::where("team_id", $away_team_id)->where("game_id", $vvv['game_id'])->first();
+
                     $tmp_d = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                    $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
+                        $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
                     } else {
-                    $tmp_bet_data['away_team_name'] = $tmp_d[$langCol];
-                    $replace_lang[1]['tw'] = $tmp_d['name_tw'];
-                    $replace_lang[1]['cn'] = $tmp_d['name_cn'];
+                        $tmp_bet_data['away_team_name'] = $tmp_d[$langCol];
+                        $replace_lang[1]['tw'] = $tmp_d['name_tw'];
+                        $replace_lang[1]['cn'] = $tmp_d['name_cn'];
                     }
         
                     // rate item 顯示轉化
@@ -1792,7 +1786,7 @@ class LsportApiController extends Controller {
                     $replace_lang[] = array("cn" => "单", "tw" => "單");
                     $replace_lang[] = array("cn" => "双", "tw" => "雙");
                     foreach ($replace_lang as $lang_k => $lang_v) {
-                    $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
+                        $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
                     }
                     $tmp_bet_data['type_item_name'] = $item_name;
 
@@ -1804,22 +1798,22 @@ class LsportApiController extends Controller {
                     $tmp_bet_data['away_team_logo'] = "";
                     
                     // 取得隊伍logo
-                    // $tmp_logo = AntTeamList::where("team_id", $home_team_id)->where("game_id", $game_id)->first();
+
                     $tmp_logo = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $sport_id)->first();
                     if (($tmp_logo === false) || ($tmp_logo == null)) {
-                    continue;
+                        continue;
                     }
                     if (isset($tmp_logo['local_logo'])) {
-                    $tmp_bet_data['home_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
+                        $tmp_bet_data['home_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
                     }
             
-                    // $tmp_logo = AntTeamList::where("team_id", $away_team_id)->where("game_id", $game_id)->first();
+
                     $tmp_logo = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $sport_id)->first();
                     if (($tmp_logo === false) || ($tmp_logo == null)) {
-                    continue;
+                        continue;
                     }
                     if (isset($tmp_logo['local_logo'])) {
-                    $tmp_bet_data['away_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
+                        $tmp_bet_data['away_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
                     }
 
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
@@ -1828,7 +1822,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data = array();
 
                 $league_id = $v['league_id'];
-                // $tmp_d = AntSeriesList::where("series_id", $series_id)->where("game_id", $v['game_id'])->first();
+
                 $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $v['sport_id'])->first();
                 if ($tmp_d === null) {
                     $tmp_bet_data['league_name'] = $v['league_name'];
@@ -1837,7 +1831,7 @@ class LsportApiController extends Controller {
                 }
 
                 $type_id = $v['type_id'];
-                // $tmp_d = AntRateList::where("rate_id", $type_id)->where("game_id", $v['game_id'])->first();
+
                 $tmp_d = LsportMarketBet::where("id", $type_id)->where("sport_id", $v['sport_id'])->first();
                 if ($tmp_d === null) {
                     $tmp_bet_data['type_name'] = $v['type_name'];
@@ -1848,7 +1842,7 @@ class LsportApiController extends Controller {
                 $replace_lang = array();
 
                 $home_team_id = $v['home_team_id'];
-                // $tmp_d = AntTeamList::where("team_id", $home_team_id)->where("game_id", $v['game_id'])->first();
+
                 $tmp_d = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $v['sport_id'])->first();
                 if ($tmp_d === null) {
                     $tmp_bet_data['home_team_name'] = $v['home_team_name'];
@@ -1859,7 +1853,7 @@ class LsportApiController extends Controller {
                 }
 
                 $away_team_id = $v['away_team_id'];
-                // $tmp_d = AntTeamList::where("team_id", $away_team_id)->where("game_id", $v['game_id'])->first();
+
                 $tmp_d = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $v['sport_id'])->first();
                 if ($tmp_d === null) {
                     $tmp_bet_data['away_team_name'] = $v['away_team_name'];
@@ -1887,7 +1881,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['away_team_logo'] = "";
 
                 // 取得隊伍logo
-                // $tmp_logo = AntTeamList::where("team_id", $home_team_id)->where("game_id", $game_id)->first();
+
                 $tmp_logo = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $sport_id)->first();
                 if (($tmp_logo === false) || ($tmp_logo == null)) {
                     continue;
@@ -1896,7 +1890,6 @@ class LsportApiController extends Controller {
                     $tmp_bet_data['home_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
                 }
         
-                // $tmp_logo = AntTeamList::where("team_id", $away_team_id)->where("game_id", $game_id)->first();
                 $tmp_logo = LsportTeam::where("team_id", $away_team_id)->where("game_id", $sport_id)->first();
                 if (($tmp_logo === false) || ($tmp_logo == null)) {
                     continue;
