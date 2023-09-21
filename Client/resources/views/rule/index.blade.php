@@ -272,7 +272,7 @@
                                                     @endforeach
                                                 </ul>
                                             @else
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}: {{ $grRule }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
                                             @endif
                                         @endforeach
                                     </ul>
