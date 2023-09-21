@@ -389,7 +389,6 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 取得球種資料
-        //$return = AntGameList::where("status", 1)->get();
         $arrLsportSports = LsportSport::where('status', 1)
             ->select(
                 'sport_id', 'name_en AS name_en', $langCol.' AS name_locale', 'status'
@@ -677,7 +676,7 @@ class LsportApiController extends Controller {
         // gzip
         //$data = $this->gzip($data);
         //$this->ApiSuccess($data, "01", true);
-        $this->ApiSuccess($data, "01", false;
+        $this->ApiSuccess($data, "01", false);
     }
 
     /**
