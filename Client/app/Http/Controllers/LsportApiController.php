@@ -669,13 +669,11 @@ class LsportApiController extends Controller {
 
         $data = $arrRet;
 
-        dd($data);
-    
         ///////////////////////////////
         // gzip
-        //$data = $this->gzip($data);
-        //$this->ApiSuccess($data, "01", true);
-        $this->ApiSuccess($data, "01", false);
+        $data = $this->gzip($data);
+
+        $this->ApiSuccess($data, "01", true);
     }
 
     /**
