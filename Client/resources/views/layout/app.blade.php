@@ -208,8 +208,8 @@
 		// ===== DATA LAYER ======
 
 		// player and sport_id
-		const player = @json($player['id']);
-		const token = 12345
+		const player = {{ $player }};
+		const token = {{ $token }};
 		const sport = parseInt(searchData.sport)
 
 		// loading page control
