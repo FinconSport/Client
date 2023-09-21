@@ -413,7 +413,7 @@ class LsportApiController extends Controller {
             $arrAllSports[] = array(
                 'sport_id' => $dv->sport_id,
                 'name' => $sport_name,
-                'status' => $dv->status,
+                //'status' => $dv->status,
             );
         }
 
