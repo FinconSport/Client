@@ -10,15 +10,6 @@ use App\Models\GameMatch;
 use App\Models\GameResult;
 use App\Models\GameOrder;
 
-//  ANT號源已棄用
-// use App\Models\AntGameList;
-// use App\Models\AntMatchList;
-// use App\Models\AntRateList;
-// use App\Models\AntSeriesList;
-// use App\Models\AntTeamList;
-// use App\Models\AntTypeList;
-// use App\Models\AntNoticeList;
-
 //LSport
 use App\Models\LsportFixture;
 use App\Models\LsportLeague;
