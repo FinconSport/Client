@@ -207,9 +207,12 @@
 
 		// ===== DATA LAYER ======
 
+		console.log('player')
+		console.log(@json($player);)
+
 		// player and sport_id
-		const player = {{ $player }};
-		const token = {{ $token }};
+		const player = @json($player['id']);
+		const token = 12345
 		const sport = parseInt(searchData.sport)
 
 		// loading page control
