@@ -302,12 +302,12 @@
 
 
 
-			// 預設左邊選中樣式
+			// left side menu
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').addClass('on')
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').prev().addClass('preBtn')
 			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').next().addClass('nextBtn')
 
-			// 後臺訊息
+			// msg
 			if( errormsg ) showErrorToast(errormsg)
 			if( successmsg ) showSuccessToast(successmsg)
 			// 搜尋框ui
