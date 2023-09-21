@@ -467,7 +467,7 @@ class ApiController extends Controller {
         $player_id = $input['player'];
         $api_lang = $this->getAgentLang($player_id);
         if ($api_lang === false) {
-            $this->error(__CLASS__, __FUNCTION__, "01");
+          $this->ApiError("01");
         }
         
         $name_columns = "name_".$api_lang;
@@ -503,18 +503,18 @@ class ApiController extends Controller {
         
         // 參數檢查 TODO - 初步 隨便弄弄
         if ($bet_amount <= 0) {
-            $this->ApiError("01");
+            $this->ApiError("02");
         }
 
         // 取得用戶資料
         $return = Player::where("id",$player_id)->first();
         if ($return == false) {
-            $this->ApiError("02");
+            $this->ApiError("03");
         }
 
         // 如果用戶已停用
         if ($return['status'] == 0) {
-            $this->ApiError("03");
+            $this->ApiError("04");
         }
 
         $player_account = $return['account'];
@@ -524,7 +524,7 @@ class ApiController extends Controller {
 
         // 判斷餘額是否足夠下注
         if ($player_balance < $bet_amount) {
-            $this->ApiError("04");
+            $this->ApiError("05");
         }
         
         //////////////////////////////////////////
@@ -537,12 +537,12 @@ class ApiController extends Controller {
         // 取得商戶資料
         $return = Agent::where("id",$agent_id)->first();
         if ($return == false) {
-            $this->ApiError("05");
+            $this->ApiError("06");
         }
 
         // 如果商戶已停用
         if ($return['status'] == 0) {
-            $this->ApiError("06");
+            $this->ApiError("07");
         }
 
         $agent_account = $return['account'];
@@ -557,12 +557,12 @@ class ApiController extends Controller {
         // 取得賽事資料
         $return = LsportFixture::where("fixture_id",$fixture_id)->where("sport_id",$sport_id)->first();
         if ($return == false) {
-            $this->ApiError("07");
+            $this->ApiError("08");
         }
 
         //fixture status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
         if ($return['status'] >= 3) {
-            $this->ApiError("08");
+            $this->ApiError("09");
         }
 
         $league_id = $return['league_id'];
@@ -572,7 +572,7 @@ class ApiController extends Controller {
         // 取得聯盟
         $league_data = LsportLeague::where("league_id",$league_id)->first();
         if ($league_data['status'] != 1) {
-          $this->ApiError("09");
+          $this->ApiError("10");
       }
         //////////////////////////////////////////
         // order data
@@ -587,7 +587,7 @@ class ApiController extends Controller {
         // 主
         $team_data = LsportTeam::where("team_id",$home_id)->first();
         if ($team_data === false) {
-          $this->ApiError("09");
+          $this->ApiError("11");
         }
         $order['home_team_id'] = $home_id;
         $order['home_team_name'] = $team_data[$name_columns];
@@ -595,7 +595,7 @@ class ApiController extends Controller {
         // 客
         $team_data = LsportTeam::where("team_id",$away_id)->first();
         if ($team_data === false) {
-          $this->ApiError("09");
+          $this->ApiError("12");
         }
 
         $order['away_team_id'] = $away_id;
@@ -606,7 +606,7 @@ class ApiController extends Controller {
         // 取得玩法
         $market_data = LSportMarket::where("market_id",$market_id)->where("fixture_id",$fixture_id)->first();
         if ($market_data == false) {
-            $this->ApiError("09");
+            $this->ApiError("13");
         }
 
         $market_priority = $market_data['priority'];
@@ -614,7 +614,7 @@ class ApiController extends Controller {
         // 取得賠率
         $market_bet_data = LSportMarketBet::where("fixture_id",$fixture_id)->where("bet_id",$market_bet_id)->first();
         if ($market_bet_data == false) {
-          $this->ApiError("09");
+          $this->ApiError("14");
         }
 
         $current_market_bet_status = $market_bet_data['status'];
@@ -624,7 +624,7 @@ class ApiController extends Controller {
 
         // 非開盤狀態 1开、2锁、3结算
         if (($current_market_bet_status != 1)) {
-            $this->ApiError("14");
+            $this->ApiError("15");
         }
 
         //////////////////////////////////////////
@@ -645,7 +645,7 @@ class ApiController extends Controller {
 
         // 判斷 is_better_rate
         if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-            $this->ApiError("10");
+            $this->ApiError("16");
         }
 
         //////////////////////////////////////////
@@ -660,7 +660,7 @@ class ApiController extends Controller {
         // 新增注單資料
         $return = GameOrder::insertGetId($order);      
         if ($return == false) {
-            $this->ApiError("11");
+            $this->ApiError("17");
         }
 
         $order_id = $return;
@@ -669,7 +669,7 @@ class ApiController extends Controller {
             "m_id" => $order_id
         ]);      
         if ($return == false) {
-            $this->ApiError("12");
+            $this->ApiError("18");
         }
         
         // 扣款
@@ -681,7 +681,7 @@ class ApiController extends Controller {
             "balance" => $after_amount
         ]);      
         if ($return == false) {
-            $this->ApiError("13");
+            $this->ApiError("19");
         }
         
         // 帳變
