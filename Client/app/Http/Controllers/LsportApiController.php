@@ -366,7 +366,7 @@ class LsportApiController extends Controller {
 ****************************************/
 
     /**
-     * SportList (原名:MatchSport)
+     * MatchSport
      *
      * 取回當前體育的所有球種(體育類型)的列表。
      *
@@ -375,7 +375,7 @@ class LsportApiController extends Controller {
      * @return ApiSuccess($data = ARRAY 球種列表) | ApiError
      */
     // 球種列表
-    public function SportList(Request $request) {
+    public function MatchSport(Request $request) {
       
     	$input = $this->getRequest($request);
 
