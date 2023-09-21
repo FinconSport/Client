@@ -633,10 +633,10 @@ class ApiController extends Controller {
         $order['market_bet_id'] = $market_bet_id;
         $order['market_bet_line'] = $market_bet_line;
 
-        $order['market_name'] = $market_data['name_cn'];
-        $order['market_bet_name'] = $rate_data['name_cn'];
-        $order['market_priority'] = $type_priority;
-        $order['bet_rate'] = $rate_data['rate'];
+        $order['market_name'] = $market_data[$name_columns];
+        $order['market_bet_name'] = $market_bet_data[$name_columns];
+        $order['market_priority'] = $market_priority;
+        $order['bet_rate'] = $current_market_bet_rate;
         
         $order['player_rate'] = $player_rate;
         $order['better_rate'] = $is_better_rate;
