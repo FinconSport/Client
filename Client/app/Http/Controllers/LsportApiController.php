@@ -548,12 +548,12 @@ class LsportApiController extends Controller {
                 $arrLeagues[$league_id] = array(
                     'league_id' => $dv->league_id,
                     'league_name' => $league_name,
-                    'fixtures' => array(),
+                    'list' => array(),
                 );
             }
 
             // fixture 層
-            if (!isset($arrLeagues[$league_id]['fixtures'][$fixture_id]) || !sizeof($arrLeagues[$league_id]['fixtures'][$fixture_id])) {
+            if (!isset($arrLeagues[$league_id]['list'][$fixture_id]) || !sizeof($arrLeagues[$league_id]['list'][$fixture_id])) {
 
                 // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($dv->th_name_locale)) {  // home team
@@ -569,7 +569,7 @@ class LsportApiController extends Controller {
                 }
 
                 // 包入 fixture 賽事資料
-                $arrLeagues[$league_id]['fixtures'][$fixture_id] = array(
+                $arrLeagues[$league_id]['list'][$fixture_id] = array(
                     //'sport_id' => $dv->sport_id,
                     //'league_id' => $dv->league_id,
                     //'home_id' => $dv->home_id,
@@ -585,13 +585,13 @@ class LsportApiController extends Controller {
                     'home_team_name' => $home_team_name,
                     'away_team_id' => $dv->ta_team_id,
                     'away_team_name' => $away_team_name,
-                    'markets' => array(),
+                    'list' => array(),
                 );
             }
 
             //market 層
-            if (!isset($arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]) ||
-                !sizeof($arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id])) {
+            if (!isset($arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id]) ||
+                !sizeof($arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id])) {
 
                 // market_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($dv->m_name_locale)) {  // market name
@@ -601,12 +601,12 @@ class LsportApiController extends Controller {
                 }
 
                 // 包入 market 玩法資料
-                $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id] = array(
+                $arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
                     'market_id' => $dv->market_id,
                     'market_name' => $market_name,
                     'priority' => $dv->priority,
                     'main_line' => $dv->main_line,
-                    'market_bets' => array(),
+                    'list' => array(),
                 );
 
                 $marketBetData = DB::table('lsport_market_bet as mb')
@@ -642,7 +642,7 @@ class LsportApiController extends Controller {
                         $merket_bet_name = $bv->mb_name_locale;
                     }
 
-                    $arrLeagues[$league_id]['fixtures'][$fixture_id]['markets'][$market_id]['market_bets'][$market_bet_id] = array(
+                    $arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
                         'merket_bet_id' => $market_bet_id,
                         'merket_bet_name' => $merket_bet_name,
                         'base_line' => $bv->base_line,
@@ -664,13 +664,15 @@ class LsportApiController extends Controller {
         $arrRet['living'] = array();  //living 走地目前都設空
 
         $data = $arrRet;
+
+        dd($data);
     
 
         ///////////////////////////////
         // gzip
-        $data = $this->gzip($data);
-
-        $this->ApiSuccess($data, "01", true);
+        //$data = $this->gzip($data);
+        //$this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01", false;
     }
 
     /**
