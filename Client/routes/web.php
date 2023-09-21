@@ -90,12 +90,12 @@ Route::post('/api/v2/index_notice',     'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/index_match_list', 'App\Http\Controllers\LsportApiController@IndexMatchList');
 Route::post('/api/v2/result_index',     'App\Http\Controllers\LsportApiController@ResultIndex');
 Route::post('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
-Route::post('/api/v2/sport_list',      'App\Http\Controllers\LsportApiController@SportList');  //原名:MatchSport
+Route::post('/api/v2/sport_list',       'App\Http\Controllers\LsportApiController@SportList');  //原名:MatchSport
 Route::post('/api/v2/game_index',       'App\Http\Controllers\LsportApiController@GameIndex');
 Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiController@BalanceLogs');
 
 //for dev usage
-Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
+//Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
 
 Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
 Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
