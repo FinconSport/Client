@@ -27,16 +27,16 @@
                                                     @if (is_array($subRule))
                                                         <ul>
                                                             @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li class="1">{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
+                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
                                                             @endforeach
                                                         </ul>
                                                     @else
-                                                        <li class="2">{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
                                                     @endif
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <li class="3">{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
+                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -113,11 +113,11 @@
                                         @if (is_array($grRule))
                                             <ul class="alpha-bullets">
                                                 @foreach($grRule as $subKey => $subRule)
-                                                    <li class="1">{{ trans('rule.generalRulesBasketball.' . $key . '.' . $subKey) }}</li>
+                                                    <li>{{ trans('rule.generalRulesBasketball.' . $key . '.' . $subKey) }}</li>
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <li class="2">{{ trans('rule.generalRulesBasketball.' . $key) }}</li>
+                                            <li>{{ trans('rule.generalRulesBasketball.' . $key) }}</li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -263,16 +263,16 @@
                                                         @if (is_array($subRule))
                                                             <ul class="roman-bullets">
                                                                 @foreach($subRule as $subSubKey => $subSubRule)
-                                                                    <li class="1">{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey) }}</li>
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key . '.' . $subKey) }}</li>
                                                                 @endforeach
                                                             </ul>
                                                         @else
-                                                            <li class="2">{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
                                             @else
-                                                <li class="3">{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $key) }}</li>
                                             @endif
                                         @endforeach
                                     </ul>
