@@ -207,8 +207,6 @@
 
 		// ===== DATA LAYER ======
 
-		console.log('player')
-		console.log(@json($player);)
 
 		// player and sport_id
 		const player = @json($player['id']);
