@@ -25,18 +25,18 @@
                                             <ul>
                                                 @foreach($grRule as $subKey => $subRule)
                                                     @if (is_array($subRule))
-                                                        <ul>
+                                                        <ul >
                                                             @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
+                                                                <li class="first">{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
                                                             @endforeach
                                                         </ul>
                                                     @else
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
+                                                        <l class="second"i>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
                                                     @endif
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
+                                            <li class="third">{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
                                         @endif
                                     @endforeach
                                 </ul>
