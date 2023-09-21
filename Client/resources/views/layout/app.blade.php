@@ -229,7 +229,7 @@
 
 		// sportList
 		var sportListD = {}
-		const sportList_api = '' // 目前沒有
+		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
 
 
 		function caller( url, data, obj, isUpdate = 0 ) {
@@ -355,13 +355,14 @@
 			// data layer
 			caller(account_api, commonCallData, accountD) // account
 			caller(marquee_api, commonCallData, marqueeD) // marquee
+			caller(sportList_api, commonCallData, sportListD) // sportList
 			// data layer
 
 
 			// view layer
 			// check if api are all loaded every 500 ms 
 			isReadyCommonInt = setInterval(() => {
-				if(accountD.status === 1 && marqueeD.status === 1) {
+				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
 					isReadyCommon = true
 					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking
