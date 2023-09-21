@@ -663,7 +663,7 @@ class LsportApiController extends Controller {
         $arrRet['early'][$sport_id] = array(  //目前都只回傳early 早盤
             'sport_id' => $sport_id,
             'sport_name' => $sport_name,
-            'leagues' => $arrLeagues,
+            'list' => $arrLeagues,
         );
         $arrRet['living'] = array();  //living 走地目前都設空
 
@@ -671,7 +671,6 @@ class LsportApiController extends Controller {
 
         dd($data);
     
-
         ///////////////////////////////
         // gzip
         //$data = $this->gzip($data);
