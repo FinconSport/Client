@@ -46,7 +46,6 @@
                                 <ul class="number-bullets">
                                     @foreach(range(1, 2) as $i)
                                         <div  >{{ $i }}</div>
-                                        <li key="{{ $i }}">{{ trans('rule.ruleContentsBaseBall.rc_baseball_{{ $i }}') }}</li>
                                     @endforeach
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_2') }}</li>
