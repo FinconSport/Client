@@ -27,11 +27,11 @@
                                                     @if (is_array($subRule))
                                                         <ul>
                                                             @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}: {{ $subSubRule }}</li>
+                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
                                                             @endforeach
                                                         </ul>
                                                     @else
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}: {{ $subRule }}</li>
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
                                                     @endif
                                                 @endforeach
                                             </ul>
@@ -430,8 +430,8 @@
 @endsection
 
 @section('styles')
-<!-- <link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-<link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet"> -->
 <style>	
 /* 寫入頁面限定CSS */
 </style>
