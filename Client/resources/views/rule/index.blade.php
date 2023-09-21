@@ -27,11 +27,11 @@
                                                     @if (is_array($subRule))
                                                         <ul>
                                                             @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
+                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
                                                             @endforeach
                                                         </ul>
                                                     @else
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
+                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
                                                     @endif
                                                 @endforeach
                                             </ul>
