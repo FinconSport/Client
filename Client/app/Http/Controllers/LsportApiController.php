@@ -393,7 +393,7 @@ class LsportApiController extends Controller {
             ->select(
                 'sport_id', 'name_en AS name_en', $langCol.' AS name_locale', 'status'
             )
-            ->orderBy('id ASC')
+            ->orderBy('id', 'ASC')
             ->get();
 
         if ($arrLsportSports === false) {
