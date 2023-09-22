@@ -55,13 +55,13 @@
 		var player = {{ $player }};
 		var token = {{ $token }};
 		var lang = @json(session('player.lang'));
-		console.log(player)
-		console.log(token)
-		console.log(lang)
+		// console.log(player)
+		// console.log(token)
+		// console.log(lang)
 
 		// 投注限額
 		var limit = JSON.parse(@json(session('player.limit_data')));
-		console.log(limit)
+		// console.log(limit)
 		// var limit = {
 		// 	"early": {
 		// 		"1": {
@@ -148,55 +148,64 @@
 		}
 		
 		// 菜單與體育彩種預設
-		var menu = 0
-		var sport = 1
+		var menu = null
+		var sport = null
+
+		// Ajax用
+		var ajaxInt = null
+
+		// websocket用
+		const messageQueue = []; // queue to store the package (FIFO)
+		var socket_status = false;
+		var ws = null
+		var heartbeatTimer = null
+		var registerMatchList = []
+		var wsInt = null
 
 		// websocket
-		var ws = null;
-		var wsInt = null;
-		var socket_status = false;
-		var heartbeatTimer = null
-		
-		function WebSocketDemo(sport) {
-            console.log('WebSocketDemo')
-			if( wsInt === null ) {
-				// 監聽連線狀態
-				wsInt = setInterval(reconnent, 5000);
-			}
-            if ("WebSocket" in window) {
-				// console.log(sport)
-				ws = new WebSocket(wsUrl[sport]); // 連線
-				ws.onopen = function() {
-					socket_status = true; // 重連機制
-					heartbeatTimer = setInterval(() => { // 心跳
-						const heartbeat = {
-							"action":"heartbeat",
-						}
-						if ( ws.readyState === 1 ) {
+		function WebSocketDemo( sport ) {
+			console.log('WebSocketDemo')
+			if ("WebSocket" in window) {
+				try {
+					ws = new WebSocket(wsUrl[sport]); // 連線
+					ws.onopen = function() {
+						wsInt = setInterval(reconnent, 5000); // detect ws connetion state
+						wsRegisterMatch() // 註冊id
+						socket_status = true; // for reconnection
+						heartbeatTimer = setInterval(() => { // 心跳 
+							const heartbeat = {
+								"action": "heartbeat",
+							}
 							console.log(heartbeat)
 							ws.send(JSON.stringify(heartbeat));
-						}
-					}, 10000);
-				};
+						}, 10000);
+					};
 
-				// websocket is closed.
-				ws.onclose = function() { 
-					console.log('Connection closed with code: ', event.code);
-					socket_status = false;
-					// 移除心跳timer
-					clearInterval(heartbeatTimer)
-				};
-            } else {
-				// The browser doesn't support WebSocket
+					// websocket is closed
+					ws.onclose = function(event) {
+						console.log('Connection closed with code: ', event.code);
+						socket_status = false;
+						clearInterval(heartbeatTimer) // 移除心跳timer
+						clearInterval(wsInt)
+					};
+
+					// websocket is getting message
+					ws.onmessage = function(message) {
+						messageQueue.push(message); // push package to messageQueue
+					}
+				} catch (error) {
+					console.error(langTrans.js.websocket_connect_err, error);
+				}
+			} else {
 				console.log("WebSocket NOT supported by your Browser!");
-            }
+			}
 		}
 
 		 
 		// 重連機制
 		function reconnent() {
 			if (socket_status === false) {
-				WebSocketDemo( window.sport);
+				WebSocketDemo( window.sport );
 			}
 		}
 
@@ -214,8 +223,6 @@
 				document.querySelector('#root').style.setProperty('--vh', windowsVH + 'px');
 			});
 		}
-
-		
 		
 		// 網頁高度偵測
 		safariHacks();

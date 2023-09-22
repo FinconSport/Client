@@ -206,7 +206,7 @@ class CommonNotice extends React.Component {
               </button>
               {/* each btn */}
               {Object.entries(notice_cat).map(([key, val]) => (
-                <button
+                <button key={key}
                   onClick={() => this.handleTabChange(key)}
                   style={activeTab == key ? TabMenuBtnActive : TabMenuBtn}
                 >
@@ -245,7 +245,7 @@ class CommonNotice extends React.Component {
 
                   {/* each from notice_list */}
                   {Object.entries(notice_cat).map(([key, val]) => (
-                    <div
+                    <div  key={key}
                       className="content"
                       style={{ display: activeTab === key ? "block" : "none" }}
                     >
