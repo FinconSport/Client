@@ -629,16 +629,16 @@ class LsportApiController extends Controller {
                 foreach ($marketBetData as $bk => $bv) {
                     $market_bet_id = $bv->bet_id;
 
-                    // merket_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                    // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
                     if (isset($bv->mb_name_locale)) {  // market name
-                        $merket_bet_name = $bv->mb_name_en;
+                        $market_bet_name = $bv->mb_name_en;
                     } else {
-                        $merket_bet_name = $bv->mb_name_locale;
+                        $market_bet_name = $bv->mb_name_locale;
                     }
 
                     $arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
-                        'merket_bet_id' => $market_bet_id,
-                        'merket_bet_name' => $merket_bet_name,
+                        'market_bet_id' => $market_bet_id,
+                        'market_bet_name' => $market_bet_name,
                         'base_line' => $bv->base_line,
                         'line' => $bv->line,
                         'price' => $bv->price,
@@ -2104,8 +2104,8 @@ array:2 [▼
               "market_name" => "全場大小"  // 玩法名稱 (自動依據玩家語系抓取,若無資料則會以en版的填入)
               "market_bets" => array:2 [▼  // 各賠率
                 54930042711387256 => array:7 [▼  // key = 賠率ID
-                  "merket_bet_id" => 54930042711387256  // 賠率ID
-                  "merket_bet_name" => "Over"  // 賠率名稱 (自動依據玩家語系抓取,若無資料則會以en版的填入)
+                  "market_bet_id" => 54930042711387256  // 賠率ID
+                  "market_bet_name" => "Over"  // 賠率名稱 (自動依據玩家語系抓取,若無資料則會以en版的填入)
                   "base_line" => "8.0"  // base_line
                   "line" => "8.0"  // line
                   "price" => "2.0484"  // price
