@@ -207,8 +207,11 @@
 
 		// ===== DATA LAYER ======
 
+		console.log('player')
+		console.log(@json(session('player')));
+
 		// player and sport_id
-		const player = @json($player['id']);
+		const player = @json(session('player.id'));
 		const token = 12345
 		const sport = parseInt(searchData.sport)
 
