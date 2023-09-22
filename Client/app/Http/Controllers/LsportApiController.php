@@ -991,6 +991,18 @@ class LsportApiController extends Controller {
         if ($checkToken === false) {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
+        
+        /////////////////////////
+
+        $columns = array(
+            "token","player","sport_id","bet_data","bet_amount","better_rate"
+        );
+
+        foreach ($columns as $k => $v) {
+            if (!isset($input[$v])) {
+                $this->ApiError("01");
+            }
+        }
 
         //////////////////////////////////////////
         // 取得語系
@@ -1074,9 +1086,7 @@ class LsportApiController extends Controller {
         // 串關批量處理訂單
         foreach ($arrBetData AS $bk => $bet) {
             // 取得必要參數
-            $fixture_id = $bet['bet_match'];
-            $bet_type_id = $bet['bet_type'];
-            $bet_type_item_id = $bet['bet_type_item'];
+            $fixture_id = $bet['fixture_id'];
             $market_id = $bet['market_id'];  
             $market_bet_id = $bet['market_bet_id'];
             $player_rate = $bet['bet_rate'];  //前端傳來的賠率
@@ -1112,15 +1122,19 @@ class LsportApiController extends Controller {
                 'approval_time' => $default_approval_time,
             );
 
-            // 參數檢查 TODO - 初步 隨便弄弄
-            // if ($bet_amount <= 0) {
-            //     $this->ApiError("07");
-            // }
+            /////////////////////////////
+
+            // 取得賽事資料
+            $arrFixtureData = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
+            if ($arrFixtureData == false) {
+                $this->ApiError("13");
+            }
 
             // 判斷注單 是否為同一sport_id
             if ($m_sport_id === false) {
                 $m_sport_id = $arrFixtureData['sport_id'];
             }
+
             //串關注單全部的sport_id都要一樣 (不能跨球種)
             if ($m_sport_id != $arrFixtureData['sport_id']) {
                 $this->ApiError("14");
@@ -1130,16 +1144,10 @@ class LsportApiController extends Controller {
                 $order['sport_id'] = $arrFixtureData['sport_id'];
             }
 
-            //match status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
+            //fixture status : 1未开始、2进行中 
             // 串關只能賽前注單,不得是走地滾球
             if ($arrFixtureData['status'] != 1) {
                 $this->ApiError("15");
-            }
-
-            // 取得賽事資料
-            $arrFixtureData = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
-            if ($arrFixtureData == false) {
-                $this->ApiError("13");
             }
     
             $league_id = $arrFixtureData['league_id'];
@@ -1192,14 +1200,14 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // 取得玩法
             $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id",$fixture_id)->first();
-            if ($market_data == false) {
+            if ($market_data === false) {
                 $this->ApiError("13");
             }
             $market_priority = $market_data['priority'];
 
             // 取得賠率
             $marketBetData = LSportMarketBet::where("fixture_id", $fixture_id)->where("bet_id",$market_bet_id)->first();
-            if ($marketBetData == false) {
+            if ($marketBetData === false) {
               $this->ApiError("14");
             }
             $current_market_bet_status = $marketBetData['status'];
@@ -1234,6 +1242,13 @@ class LsportApiController extends Controller {
             }
 
             //////////////////////////////////////////
+            //
+
+            if ($m_order_id !== false) { 
+                $order['m_id'] = $m_order_id;  // 同一串關注單m_id均相同(第一筆寫入的注單ID)
+            }
+
+            //////////////////////////////////////////
             // 新增注單
             $newOrderId = GameOrder::insertGetId($order);      
             if ($newOrderId == false) {
@@ -1251,9 +1266,8 @@ class LsportApiController extends Controller {
                 if ($return == false) {
                     $this->ApiError("19");
                 }
-            } else {
-                $order['m_id'] = $m_order_id;  // 同一串關注單m_id均相同(第一筆寫入的注單ID)
-            }
+            } 
+               
         }
       
         //////////////////////////////////////////
