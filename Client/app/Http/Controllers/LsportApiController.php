@@ -413,6 +413,16 @@ class LsportApiController extends Controller {
 
     }
 
+    /**
+     * MatchSport
+     *
+     * 取回一指定球種的近期賽事(2天內開賽)的列表包含賠率及聯盟等。
+     *
+     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
+     *                          # *sport_id: 球種ID。
+     * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
+     */
     public function MatchIndex(Request $request) {
       
     	$input = $this->getRequest($request);
@@ -437,6 +447,8 @@ class LsportApiController extends Controller {
 
         // 新的LIST
         $data = array();
+
+        //取2天內賽事
         $today = time();
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow); 
@@ -1031,6 +1043,11 @@ class LsportApiController extends Controller {
 
         $arrBetData = json_decode($input['bet_data'], true);
 
+        //串關的注單數不能低於2
+        if (sizeof($arrBetData) < 2) {
+            $this->ApiError("20");
+        }
+
         //$order = array();
         
         // 參數檢查 TODO - 初步 隨便弄弄
@@ -1090,6 +1107,16 @@ class LsportApiController extends Controller {
             $market_id = $bet['market_id'];  
             $market_bet_id = $bet['market_bet_id'];
             $player_rate = $bet['bet_rate'];  //前端傳來的賠率
+
+            $columns = array(
+                "fixture_id", "market_id", "market_bet_id", "bet_rate"
+            );
+    
+            foreach ($columns as $k => $v) {
+                if (!isset($bet[$v])) {
+                    $this->ApiError("07");
+                }
+            }
 
             //////////////////////////////////////////
             // order data
