@@ -124,28 +124,57 @@ class MatchMenuNav extends React.Component {
             sport_id: window.sport,
             objTage: menuArr[window.menu],
             isMenuOpen: false,
-            
+            api_res: this.props.api_res
         }
     }
 
     componentDidMount() {
-        if( this.props.api_res.data[menuArr[window.menu]]?.total === 0 ) {
-            const keys = Object.keys(this.props.api_res.data);
-            const firstNonZeroTotalKey = keys.find(key => this.props.api_res.data[key].total !== 0);
-            const items = this.props.api_res.data[firstNonZeroTotalKey].items;
-            const firstNonZeroCountIndex =  Object.keys(items).find(key => items[key].count !== 0);
-            
-            window.menu = mapping[firstNonZeroTotalKey][1]
-            window.sport = firstNonZeroCountIndex
-            if(this.state.menu_id !== window.menu || this.state.sport_id !== window.sport) {
-                this.setState({
-                    menu_id: window.menu,
-                    sport_id: window.sport,
-                    objTage: menuArr[window.menu],
-                })
-                this.props.callBack(window.menu, window.sport)
+        // var isMorder = false;
+        // // 获取当前页面的 URL
+        // var currentURL = window.location.href;
+        // // 分割 URL，提取路径部分
+        // var pathArray = currentURL.split('/');
+        // // 获取最后一个路径部分，通常是当前分页的标识
+        // var currentPage = pathArray[pathArray.length - 1];
+        // // 使用条件运算符来设置 isMorder 变量
+
+        // isMorder = currentPage === 'm_order';
+        // if(isMorder) {
+        //     let newRes = delete this.state.data.living;
+        //     this.setState({
+        //         api_res: newRes
+        //     })
+        // }
+
+
+        let res = this.props.api_res
+        let rKey = null
+        // default menu
+        for (const key in res.data) {
+            if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
+                rKey = key
+                if(window.menu === null) {
+                    this.setState({
+                        menu_id: mapping[key][1],
+                        objTage: rKey
+                    })
+                    window.menu = mapping[key][1]
+                }
+                break; 
             }
         }
+        // default sport
+        if(window.sport === null) {
+            let itemData = res.data[rKey].items
+            let keys = Object.keys(itemData);
+            window.sport = parseInt(keys.find(key => itemData[key].count > 0))
+            this.setState({
+                sport_id: window.sport
+            })
+        }
+
+        this.props.callBack(window.menu, window.sport)
+
 	}
 
     // 選擇分頁
@@ -171,31 +200,16 @@ class MatchMenuNav extends React.Component {
 
     // 選擇球類
     handleSportChange = (sport_id) => {
-        sport_id = parseInt(sport_id)
         window.sport = sport_id
         this.setState({
             sport_id: sport_id
         })
         this.props.callBack(window.menu, window.sport)
-
     };
 
     render() {
-        const res = this.props.api_res;
-        var isMorder = false;
-        // 获取当前页面的 URL
-        var currentURL = window.location.href;
-        // 分割 URL，提取路径部分
-        var pathArray = currentURL.split('/');
-        // 获取最后一个路径部分，通常是当前分页的标识
-        var currentPage = pathArray[pathArray.length - 1];
-        // 使用条件运算符来设置 isMorder 变量
-
-        isMorder = currentPage === 'm_order';
-        if( res ){
-            if(isMorder) {
-                delete res.data.living;
-            }
+        const res = this.state.api_res;
+        if( res && window.menu !== null && window.sport !== null ){
             return (
                 <>
                     <div style={MatchMenuBar}>
@@ -215,19 +229,17 @@ class MatchMenuNav extends React.Component {
                         }
                     </div>
                     <div style={MatchSportBar}>
-                        {/* <div style={MatchSportBarSlider}> */}
-                            {
-                                Object.entries(res.data[this.state.objTage].items).map(([k, v],i) => {
-                                    return(
-                                        <MatchSportItem key={k} style={ parseInt(this.state.sport_id) === parseInt(k) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
-                                            <img style={MatchSportImg} alt={ v.name } src={ parseInt(this.state.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
-                                            <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v.name }</p>
-                                            <div style={CountSpan}>{ v.count }</div>
-                                        </MatchSportItem>
-                                    )
-                                })
-                            }
-                        {/* </div> */}
+                        {
+                            Object.entries(res.data[this.state.objTage].items).map(([k, v],i) => {
+                                return(
+                                    <MatchSportItem key={k} style={ this.state.sport_id == k ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
+                                        <img style={MatchSportImg} alt={ v.name } src={ parseInt(this.state.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
+                                        <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v.name }</p>
+                                        <div style={CountSpan}>{ v.count }</div>
+                                    </MatchSportItem>
+                                )
+                            })
+                        }
                     </div>
                 </>
             ) 

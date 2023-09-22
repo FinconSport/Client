@@ -12,7 +12,9 @@ const spinImg = {
 	width: '8rem',
 	height: '8rem',
 	left: 'calc(50% - 4rem)',
-	top: 'calc(30% - 2rem)'
+	top: 'calc(30% - 2rem)',
+	animation: 'rotate 5s linear infinite'
+
 }
 const titleImg = {
 	position: 'absolute',
@@ -35,8 +37,6 @@ class CommonLoader extends React.Component {
 				<img alt="spin" style={spinImg} src={require('../image/loading-spin.png')} />
 				<img alt="title" style={titleImg} src={require('../image/loading-title.png')} />
 			</div>
-
-			// 旋轉效果  直接加.rotateLoadingSpin
 		)
 	}
 }

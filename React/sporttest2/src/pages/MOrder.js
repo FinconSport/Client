@@ -37,10 +37,10 @@ class MOrder extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			baseApiUrl: 'https://sportc.asgame.net/api/v1/match_index?token=' + window.token+ '&player=' + window.player+ '',
-			accout_api: 'https://sportc.asgame.net/api/v1/common_account?token=' + window.token+ '&player=' + window.player+ '',
-			indexMatchList_api: 'https://sportc.asgame.net/api/v1/index_match_list?token=' + window.token+ '&player=' + window.player+ '',
-			betRecord_api: 'https://sportc.asgame.net/api/v1/common_order?token=' + window.token+ '&player=' + window.player+ '&page=1',
+			baseApiUrl: 'https://sportc.asgame.net/api/v2/match_index?token=' + window.token+ '&player=' + window.player+ '',
+			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
+			indexMatchList_api: 'https://sportc.asgame.net/api/v2/index_match_list?token=' + window.token+ '&player=' + window.player+ '',
+			betRecord_api: 'https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&page=1',
 			toastMsg: [],
 			menu_id: window.menu,
 			sport_id: window.sport,
@@ -53,15 +53,12 @@ class MOrder extends React.Component {
 			isOpenCal: false,
 			mOrderCount: 0
 		};
-
-		// this.handleMessage = this.handleMessage.bind(this); // 綁定 this
 	}
 
 	async caller(apiUrl, api_res, type = 0) {
 
 		const start = Date.now(); // 记录开始时间
 		const elapsedTime = Date.now() - start; // 计算经过的时间
-
 		const json = await GetIni(apiUrl); 
 		// 先判定要不要解壓縮
 		if(json.gzip === 1) {
@@ -89,26 +86,6 @@ class MOrder extends React.Component {
 			}
 		}
 
-		if( api_res === 'indexMatchList_res' ) {
-			var isMorder = false;
-			// 获取当前页面的 URL
-			var currentURL = window.location.href;
-			// 分割 URL，提取路径部分
-			var pathArray = currentURL.split('/');
-			// 获取最后一个路径部分，通常是当前分页的标识
-			var currentPage = pathArray[pathArray.length - 1];
-			// 使用条件运算符来设置 isMorder 变量
-
-			isMorder = currentPage === 'm_order';
-			if( isMorder ) {
-				delete json.data.living
-				this.setState({
-					menu_id: 0
-				})
-				window.menu = 0
-			}
-		}
-
 		this.setState({
 			[api_res]: json,
 		})
@@ -133,12 +110,12 @@ class MOrder extends React.Component {
 		
 
 		// 連線
-        if( window.ws ) {
-			window.wsInt = null
-			window.ws.close()
-			window.ws = null
-		}
-		window.WebSocketDemo( window.sport );
+        // if( window.ws ) {
+		// 	window.wsInt = null
+		// 	window.ws.close()
+		// 	window.ws = null
+		// }
+		// window.WebSocketDemo( window.sport );
 	}
 
 	// 刷新錢包餘額
@@ -151,7 +128,6 @@ class MOrder extends React.Component {
 
 	// 下拉更新
 	handleRefresh =() => {
-		console.log('handleRefresh')
 		this.setState({
 			toastMsg: [],
 			menu_id: window.menu,
@@ -180,14 +156,13 @@ class MOrder extends React.Component {
 
 	// 切換上方menu sport
 	changeTab = (menu, sport) => {
-		
-		if( this.state.sport_id !== sport ) {
-			// 連線
-			window.wsInt = null
-			window.ws.close()
-			window.ws = null
-			window.WebSocketDemo( sport );
-		} 
+		// if( this.state.sport_id !== sport ) {
+		// 	// 連線
+		// 	window.wsInt = null
+		// 	window.ws.close()
+		// 	window.ws = null
+		// 	window.WebSocketDemo( sport );
+		// } 
 
 		this.setState({
 			menu_id: menu,
@@ -201,8 +176,6 @@ class MOrder extends React.Component {
 
 	// 取得投注所需資料
 	getBetData = (betData) => {
-		// console.log('getbetdata')
-		// console.log(betData)
 		var updatedBetData = []
 
 		// 是否已經選過此玩法

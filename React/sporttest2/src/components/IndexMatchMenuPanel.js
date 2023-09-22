@@ -8,15 +8,9 @@ import soccer from "../image/ball/ball-soccer.png";
 import baseball from "../image/ball/ball-baseball.png";
 
 const imgArr = {
-	1: soccer,
-	2: basketball,
-	3: baseball,
-	4: "冰球",
-	5: tennis,
-	6: "美式足球",
-	7: "斯诺克",
-	8: "乒乓球",
-	9: "排球"
+	6046: soccer,
+	48242: basketball,
+	154914: baseball
 };
   
 

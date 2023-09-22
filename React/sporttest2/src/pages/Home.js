@@ -22,10 +22,10 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			accout_api: 'https://sportc.asgame.net/api/v1/common_account?token=' + window.token+ '&player=' + window.player+ '',
-			carousel_api: 'https://sportc.asgame.net/api/v1/index_carousel?token=' + window.token+ '&player=' + window.player+ '',
-			marquee_api: 'https://sportc.asgame.net/api/v1/index_marquee?token=' + window.token+ '&player=' + window.player+ '',
-			indexMatchList_api: 'https://sportc.asgame.net/api/v1/index_match_list?token=' + window.token+ '&player=' + window.player+ '',
+			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
+			carousel_api: 'https://sportc.asgame.net/api/v2/index_carousel?token=' + window.token+ '&player=' + window.player+ '',
+			marquee_api: 'https://sportc.asgame.net/api/v2/index_marquee?token=' + window.token+ '&player=' + window.player+ '',
+			indexMatchList_api: 'https://sportc.asgame.net/api/v2/index_match_list?token=' + window.token+ '&player=' + window.player+ '',
 			toastMsg: [],
 			isRefrehingBalance: false
 		};
@@ -55,7 +55,7 @@ class Home extends React.Component {
 			}
 		}
 
-		if(json.status === 0) {
+		if(json.status === 1) {
 			this.setState(prevState => ({
 				toastMsg: [...prevState.toastMsg, json.message],
 			}))
@@ -100,7 +100,6 @@ class Home extends React.Component {
 	}
 
 	render() {
-		window.ws = null
 		return (
 			this.state.ready === true ?
 				<>

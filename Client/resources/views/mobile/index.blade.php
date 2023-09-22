@@ -1,16 +1,16 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.55239b51.js"></script><link href="/static/css/main.ef30fc8d.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.49233607.js"></script><link href="/static/css/main.ef30fc8d.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
 		// var token = 12345 ;
 		// var lang = 'tw'
 		var player = {{ $player }};
 		var token = {{ $token }};
 		var lang = @json(session('player.lang'));
-		console.log(player)
-		console.log(token)
-		console.log(lang)
+		// console.log(player)
+		// console.log(token)
+		// console.log(lang)
 
 		// 投注限額
 		var limit = JSON.parse(@json(session('player.limit_data')));
-		console.log(limit)
+		// console.log(limit)
 		// var limit = {
 		// 	"early": {
 		// 		"1": {
@@ -97,55 +97,64 @@
 		}
 		
 		// 菜單與體育彩種預設
-		var menu = 0
-		var sport = 1
+		var menu = null
+		var sport = null
+
+		// Ajax用
+		var ajaxInt = null
+
+		// websocket用
+		const messageQueue = []; // queue to store the package (FIFO)
+		var socket_status = false;
+		var ws = null
+		var heartbeatTimer = null
+		var registerMatchList = []
+		var wsInt = null
 
 		// websocket
-		var ws = null;
-		var wsInt = null;
-		var socket_status = false;
-		var heartbeatTimer = null
-		
-		function WebSocketDemo(sport) {
-            console.log('WebSocketDemo')
-			if( wsInt === null ) {
-				// 監聽連線狀態
-				wsInt = setInterval(reconnent, 5000);
-			}
-            if ("WebSocket" in window) {
-				// console.log(sport)
-				ws = new WebSocket(wsUrl[sport]); // 連線
-				ws.onopen = function() {
-					socket_status = true; // 重連機制
-					heartbeatTimer = setInterval(() => { // 心跳
-						const heartbeat = {
-							"action":"heartbeat",
-						}
-						if ( ws.readyState === 1 ) {
+		function WebSocketDemo( sport ) {
+			console.log('WebSocketDemo')
+			if ("WebSocket" in window) {
+				try {
+					ws = new WebSocket(wsUrl[sport]); // 連線
+					ws.onopen = function() {
+						wsInt = setInterval(reconnent, 5000); // detect ws connetion state
+						wsRegisterMatch() // 註冊id
+						socket_status = true; // for reconnection
+						heartbeatTimer = setInterval(() => { // 心跳 
+							const heartbeat = {
+								"action": "heartbeat",
+							}
 							console.log(heartbeat)
 							ws.send(JSON.stringify(heartbeat));
-						}
-					}, 10000);
-				};
+						}, 10000);
+					};
 
-				// websocket is closed.
-				ws.onclose = function() { 
-					console.log('Connection closed with code: ', event.code);
-					socket_status = false;
-					// 移除心跳timer
-					clearInterval(heartbeatTimer)
-				};
-            } else {
-				// The browser doesn't support WebSocket
+					// websocket is closed
+					ws.onclose = function(event) {
+						console.log('Connection closed with code: ', event.code);
+						socket_status = false;
+						clearInterval(heartbeatTimer) // 移除心跳timer
+						clearInterval(wsInt)
+					};
+
+					// websocket is getting message
+					ws.onmessage = function(message) {
+						messageQueue.push(message); // push package to messageQueue
+					}
+				} catch (error) {
+					console.error(langTrans.js.websocket_connect_err, error);
+				}
+			} else {
 				console.log("WebSocket NOT supported by your Browser!");
-            }
+			}
 		}
 
 		 
 		// 重連機制
 		function reconnent() {
 			if (socket_status === false) {
-				WebSocketDemo( window.sport);
+				WebSocketDemo( window.sport );
 			}
 		}
 
@@ -163,8 +172,6 @@
 				document.querySelector('#root').style.setProperty('--vh', windowsVH + 'px');
 			});
 		}
-
-		
 		
 		// 網頁高度偵測
 		safariHacks();</script></body></html>

@@ -26,23 +26,8 @@ class IndexCarousel extends React.Component {
     constructor(props) {
 		super(props);
 		this.state = {
-            apiUrl: 'https://sportc.asgame.net/api/v1/index_carousel?token=' + window.token+ '&player=' + window.player,
 		};
 	}
-
-	async caller() {
-		const json = await GetIni(this.state.apiUrl); 
-		this.setState({
-			status: json.status,
-			data: json.data,
-			message: json.message
-		})
-	}
-
-	componentDidMount() {
-		this.caller()
-	}
-
 
     render() {
         var settings = {
@@ -54,7 +39,7 @@ class IndexCarousel extends React.Component {
             autoplaySpeed: 3000,
             cssEase: "linear",
         };
-        const { data } = this.state
+        const { data } = this.props
         
         if(data !== undefined){
             return (
