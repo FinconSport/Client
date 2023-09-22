@@ -313,6 +313,10 @@
 
 <script>
 
+    // 
+    const player = @json($player['id']);
+    const token = '12345';
+
 
     // 語系
     const langTrans = @json(trans('index'));
