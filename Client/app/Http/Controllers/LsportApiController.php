@@ -688,6 +688,18 @@ class LsportApiController extends Controller {
 
         /////////////////////////
 
+        $columns = array(
+            "token","player","sport_id","fixture_id","market_id","market_bet_id","bet_rate","bet_amount","better_rate"
+        );
+
+        foreach ($columns as $k => $v) {
+            if (!isset($input[$v])) {
+                $this->ApiError("01");
+            }
+        }
+
+        /////////////////
+
         // 取得語系
         $player_id = $input['player'];
         $api_lang = $this->getAgentLang($player_id);
