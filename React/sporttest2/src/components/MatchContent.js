@@ -72,29 +72,39 @@ class MatchContent extends React.Component {
 				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
 					this.findDifferences(originalData[key], updateData[key], currentPath);
 				} else if (key === 'price' && originalData[key] !== updateData[key]) {
+					console.log('oroginal data')
+					console.log(o)
+					console.log('update data')
+					console.log(u)
 					let market_bet_id = u.market_bet_id
 					let status = u.status
 					let uRate = u.price
 					let oRate = o.price
 					if( status === 1 ) {
 						if(uRate > oRate) {
+							this.removeRateStyle(market_bet_id)
 							// 賠率上升
 							$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
 						}
 
 						if(uRate < oRate) {
+							this.removeRateStyle(market_bet_id)
 							// 賠率下降
 							$('div[market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
 						}
 
 						setTimeout(() => {
-							$('div[market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-							$('div[market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+							this.removeRateStyle(market_bet_id)
 						}, 3000);
 					}					
 				}
 			}
 		}
+	}
+
+	removeRateStyle = (market_bet_id) => {
+		$('div[market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+		$('div[market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
 	}
 
 	// 頁面初始化 0 / update 1 / 按上面分類加載資料 2
@@ -155,7 +165,6 @@ class MatchContent extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.sport_id !== this.props.sport_id) {
 		  	this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 2);
-			
 		}
 		if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
 			this.setState({
