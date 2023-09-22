@@ -26,6 +26,8 @@ use App\Models\ClientMarquee;
 use App\Models\SystemConfig;
 use Exception;
 
+define('DEFAULT_SPORT_ID', 154914);  //預設的 sport_id (棒球)
+
 /**
  * LsportApiController
  * 
@@ -44,7 +46,7 @@ class LsportApiController extends Controller {
      * index
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return view('match.index') = 賽事頁面index。view('match.index') = MATCH page's index。
      */
     public function index(Request $request) {
@@ -60,7 +62,7 @@ class LsportApiController extends Controller {
      * If re-login is not required, then return an array that includes the player's account name and account balance.
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ::ApiSuccess($data = ARRAY{account, balance}) | ApiError
      */
     public function CommonAccount(Request $request) {
@@ -97,7 +99,7 @@ class LsportApiController extends Controller {
      * 
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ::ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
      */
     // 輪播
@@ -152,7 +154,7 @@ class LsportApiController extends Controller {
      * 
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
      */
     // 首頁跑馬燈
@@ -186,7 +188,7 @@ class LsportApiController extends Controller {
      * 取出各種公告(依系統、各球種...分類)讓前端顯示。
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ARRAY Client各種公告列表) | ApiError
      */
     // 系統公告接口
@@ -235,7 +237,7 @@ class LsportApiController extends Controller {
      * 取出賽事列表讓前端顯示。
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
      */
     // 首頁賽事
@@ -361,7 +363,7 @@ class LsportApiController extends Controller {
      * 取回當前體育的所有球種(體育類型)的列表。
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ARRAY 球種列表) | ApiError
      */
     // 球種列表
@@ -672,7 +674,7 @@ class LsportApiController extends Controller {
      * 投注接口
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ???) | ApiError
      */
     public function GameBet(Request $request) {
@@ -709,6 +711,10 @@ class LsportApiController extends Controller {
         }
 
         // 取得必要參數
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         $player_id = $input['player'];
         $fixture_id = $input['fixture_id'];  
         $market_id = $input['market_id'];  
@@ -717,7 +723,11 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
+<<<<<<< Updated upstream
         $sport_id = 1;
+=======
+        $sport_id = DEFAULT_SPORT_ID ;  //球種ID
+>>>>>>> Stashed changes
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -783,8 +793,45 @@ class LsportApiController extends Controller {
             $this->ApiError("08");
         }
 
+<<<<<<< Updated upstream
         //fixture status : 1未开始、2进行中、3已结束、4延期、5中断、99取消
         if ($return['status'] >= 3) {
+=======
+        // decode 聯盟
+        $series_data = json_decode($arrFixtures['league'], true);
+        //////////////////////////////////////////
+        // order data
+        $order['league_id'] = $series_data['league_id'];
+        $order['league_name'] = $series_data[$langCol];
+        $order['fixture_id'] = $fixture_id;
+        $order['sport_id'] = $arrFixtures['sport_id'];
+        //////////////////////////////////////////
+
+        // decode 隊伍
+        $teams_data = json_decode($arrFixtures['teams'], true);
+        //////////////////////////////////////////
+        // order data
+        if ($teams_data[0]['index'] == 1) {
+            $order['home_team_id'] = $teams_data[0]['team']['id'];
+            $order['home_team_name'] = $teams_data[0]['team'][$langCol];
+        } else {
+            $order['away_team_id'] = $teams_data[0]['team']['id'];
+            $order['away_team_name'] = $teams_data[0]['team'][$langCol];
+        }
+        
+        if ($teams_data[1]['index'] == 1) {
+            $order['home_team_id'] = $teams_data[1]['team']['id'];
+            $order['home_team_name'] = $teams_data[1]['team'][$langCol];
+        } else {
+            $order['away_team_id'] = $teams_data[1]['team']['id'];
+            $order['away_team_name'] = $teams_data[1]['team'][$langCol];
+        }
+        //////////////////////////////////////////
+
+        // 取得賠率
+        $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
+        if ($arrOdds == false) {
+>>>>>>> Stashed changes
             $this->ApiError("09");
         }
 
@@ -930,7 +977,11 @@ class LsportApiController extends Controller {
      * 串關投注接口
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
+     *                          # *bet_amount: 投注金額。
+     *                          # *better_rate: 是否接受較佳賠率。
+     *                          # sport_id: 球種ID。有預設值(棒球)。
+     *                          # *bet_data: 串關注單資料的陣列。
      * @return ApiSuccess($data = ???) | ApiError
      */
     public function mGameBet(Request $request) {
@@ -941,6 +992,46 @@ class LsportApiController extends Controller {
         if ($checkToken === false) {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
+
+        $arrEssentialOrderCols = array(  // 必要的注單欄位
+            'player_id',
+            'player_name',
+            'currency_type',
+            'agent_id',
+            'agent_name',
+            'league_id',
+            'league_name',
+            'fixture_id',
+            'sport_id',
+            'home_team_id',
+            'home_team_name',
+            'type_id',
+            --> 'type_name',
+            'type_item_id',
+            --> 'type_item_name',
+            'type_priority',
+            'bet_rate',
+            'player_rate',
+            'better_rate',
+            'bet_amount',
+            'status',
+            'create_time',
+            'approval_time',
+        );
+
+        /**
+前端傳來:
+    player,
+    bet_amount,
+    better_rate,
+    sport_id,
+    bet_data: [
+        bet_match,  // fixture_id
+        bet_type,  //market_id
+        bet_type_item,  //market_bet_id
+        bet_rate,
+    ]
+         */
 
         //////////////////////////////////////////
 
@@ -960,7 +1051,7 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];
         $is_better_rate = $input['better_rate'];
 
-        $sport_id = 1;
+        $sport_id = DEFAULT_SPORT_ID;
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1266,7 +1357,7 @@ class LsportApiController extends Controller {
      * Get game conditions of a specified sport ID. Ex. teams, results, etc.
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in from the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      *                          # sport: 球種的ID，未指定時為1 (足球)。The specified sport ID. Value = 1 (soccer) when not specified.
      *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
      * @return ApiSuccess($data = ARRAY 指定球種的賽事狀態列表) | ApiError
@@ -1589,7 +1680,7 @@ class LsportApiController extends Controller {
      * 取得單場賽事的資料。
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      *                          # fixture_id: 指定賽事的ID。The specified fixture ID.
      *                          # sport_id: 指定賽事的球種ID。The sport ID of the specified fixture.
      * @return ApiSuccess($data = ARRAY 指定的單場賽事資料) | ApiError
@@ -1646,7 +1737,7 @@ class LsportApiController extends Controller {
      * 抓取玩家的投注紀錄。
      * 
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ???) | ApiError
      */
     // 下注紀錄
@@ -1924,7 +2015,7 @@ class LsportApiController extends Controller {
      * The (balance logs)。
      *
      * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # player: 必要。玩家的ID。 Required. Represents the player ID.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
      *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
      * @return ApiSuccess($data = ARRAY 列表) | ApiError
      */
