@@ -225,14 +225,11 @@ div.submenu-btn {
 }
 
 .submenu-toggle-list {
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow:hidden;
     max-height: 0;
     transition: all 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    align-items: stretch;
-    flex-wrap: wrap;
 }
 
 .submenu-main.active .submenu-toggle-list {
@@ -249,14 +246,13 @@ div.submenu-btn {
     align-items: center;
     justify-content: space-between;
     display: flex;
-    /* margin:0rem 0rem 0rem 2.1rem; */
+    margin: 0.5rem 0rem 0.5rem 0.5rem;
     transition: all 0.2s linear;
 }
 
 a.sportSelect{
     color: white;
     text-decoration: none;
-    margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
 /* .sportSelect:nth-child(1) {
