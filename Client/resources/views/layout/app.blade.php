@@ -192,9 +192,7 @@
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
 
 		// tempo sport id
-		// var sportID = {
-		// 	"sport": "2",
-		// };
+		var sportID = {}
 
 
 		function caller( url, data, obj, isUpdate = 0 ) {
