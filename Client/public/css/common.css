@@ -147,7 +147,7 @@ body {
 a.submenu-btn,
 div.submenu-btn {
     cursor:pointer;
-    color: #ffffff;
+    color: #ffffff!important;
     text-decoration: none;
     display: flex;
     align-items: flex-start;
@@ -174,7 +174,7 @@ div.submenu-btn {
 }
 
 .submenu-main.active .submenu-btn{
-    color: #415b5a;
+    color: #415b5a!important;
 }
 
 .submenu-main.active{
@@ -264,6 +264,7 @@ a.sportSelect{
 a.submenu-inner:hover {
     color: white!important;
 }
+
 /* .sportSelect:nth-child(1) {
     margin:1rem 0rem 0rem 2.1rem!important;
 }

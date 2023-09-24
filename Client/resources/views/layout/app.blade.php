@@ -402,7 +402,7 @@
 		// add active class in submenu
 		const currentUrl = window.location.href;
 		const urlMappings = {
-			'?sport': 'lf_sport',
+			'/?sport': 'lf_sport',
 			'index': 'lf_sport',
 			'm_order?sport': 'lf_mOrder',
 			'order': 'lf_order',
