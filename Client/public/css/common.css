@@ -130,7 +130,7 @@ body {
 
  /* ------------ */
  #subMenuContainer {
-    height: calc(100% - 8rem);
+    height: calc(100% - 4rem);
     padding:1.5rem 0rem 1.5rem 1rem;
     position:relative;
     overflow-y: scroll;
@@ -225,12 +225,14 @@ div.submenu-btn {
 }
 
 .submenu-toggle-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-row-gap: 1rem;
-    overflow:hidden;
+    overflow: hidden;
     max-height: 0;
     transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
 }
 
 .submenu-main.active .submenu-toggle-list {
@@ -254,6 +256,7 @@ div.submenu-btn {
 a.sportSelect{
     color: white;
     text-decoration: none;
+    margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
 /* .sportSelect:nth-child(1) {
