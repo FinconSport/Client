@@ -131,7 +131,7 @@ body {
 
  /* ------------ */
  #subMenuContainer {
-    height: calc(100% - 4rem);
+    height: calc(100% - 5rem);
     padding:1.5rem 0rem 1.5rem 1rem;
     position:relative;
     overflow-y: scroll;
@@ -256,6 +256,14 @@ a.sportSelect{
     text-decoration: none;
 }
 
+.submenu-inner, a.submenu-inner {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.submenu-inner:hover {
+    color: white;
+}
 /* .sportSelect:nth-child(1) {
     margin:1rem 0rem 0rem 2.1rem!important;
 }
@@ -299,7 +307,7 @@ a.sportSelect:hover,
     border: none;
     color: #415b5a;
     font-weight: 600;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
 }
 
 
