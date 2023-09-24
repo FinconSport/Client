@@ -263,6 +263,7 @@
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
 			var matchSportCon = document.getElementById("matchSportCon");
 			var currentUrl = window.location.pathname;
+			console.log("sport=" + sport);
 
 			//sportListD loop and generated element
 			if (sportListD && sportListD.data) {
@@ -415,7 +416,6 @@
 
 		for (const urlFragment in urlMappings) {
 			if (currentUrl.includes(urlFragment)) {
-				console.log(urlMappings[urlFragment]);
 				$(`#${urlMappings[urlFragment]}`).addClass('active');
     			break;
 			}
