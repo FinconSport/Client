@@ -194,6 +194,14 @@
 		// tempo sport id
 		var sportID = {}
 
+		var currentUrl = window.location.href;
+		const matchSport = "match?sport";
+		if (currentUrl.includes(matchSport)) {
+			console.log(`The URL contains '${matchSport}'.`);
+		} else {
+			console.log(`The URL does not contain '${matchSport}'.`);
+		}
+
 
 		function caller( url, data, obj, isUpdate = 0 ) {
 			$.ajax({
