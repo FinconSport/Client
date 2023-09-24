@@ -261,16 +261,6 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 
-			// set active class left menu
-			var currentUrl = window.location.location;
-			const matchSport = "match?sport";
-			if (currentUrl.includes(matchSport)) {
-				console.log(`The URL contains '${matchSport}'.`);
-			} else {
-				console.log(`The URL does not contain '${matchSport}'.`);
-			};
-
-
 			// left side menu click function
 			$(document).ready(function(){
 
