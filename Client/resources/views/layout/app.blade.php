@@ -92,9 +92,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="subMenuLogoutCon">
-						<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
-					</div>
+				</div>
+				<div class="subMenuLogoutCon">
+					<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
 				</div>
 			</div>
 		</div>
