@@ -54,7 +54,7 @@
 							</div>
 						</div>
 						
-						<div class="submenu-main" id="lf_record">
+						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
 								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> {{ trans('common.left_menu.record') }}</a>
 							</div>
@@ -194,15 +194,6 @@
 		// tempo sport id
 		var sportID = {}
 
-		var currentUrl = window.location.href;
-		const matchSport = "match?sport";
-		if (currentUrl.includes(matchSport)) {
-			console.log("The URL contains matchSport");
-		} else {
-			console.log("The URL does not contains matchSport");
-		}
-
-
 		function caller( url, data, obj, isUpdate = 0 ) {
 			$.ajax({
 				url: url,
@@ -284,6 +275,26 @@
 					$('.sportSelect').not(this).removeClass("openToggle");
 				});
 			});
+
+			const keywords_url = {
+				lf_sport: "?sport",
+				lf_mOrder: "m_order?sport",
+				lf_order: "order",
+				lf_match: "match?sport",
+				lf_rule: "rule",
+				lf_logs: "logs",
+				lf_calcu: "calculator",
+				lf_notice: "notice"
+			};
+
+			const currentUrl = window.location.href;
+
+			for (const id in keywords_url) {
+				if (currentUrl.includes(keywords_url[id])) {
+					$("#" + id).addClass('active');
+				}
+			}
+			// ----------------------------
 
 			var indexSportCon = document.getElementById("indexSportCon");
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
