@@ -262,7 +262,7 @@ a.sportSelect{
 }
 
 a.submenu-inner:hover {
-    color: white;
+    color: white!important;
 }
 /* .sportSelect:nth-child(1) {
     margin:1rem 0rem 0rem 2.1rem!important;

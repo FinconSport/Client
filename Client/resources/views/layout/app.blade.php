@@ -38,7 +38,7 @@
 				</div>
 				<div id="gameCategory" class="game-con">
 					<div id="subMenuContainer">
-						<div class="submenu-main">
+						<div class="submenu-main" id="lf_sport">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-solid fa-house"></i> {{ trans('common.left_menu.sport_bet') }}</div>
 								<div id="indexSportCon" class="submenu-toggle-list">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 
-						<div class="submenu-main">
+						<div class="submenu-main" id="lf_mOrder">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> {{ trans('common.left_menu.m_bet') }}</div>
 								<div id="mOrderSportCon" class="submenu-toggle-list">
@@ -54,13 +54,13 @@
 							</div>
 						</div>
 						
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'order')) ? 'active' : '' }} ">
+						<div class="submenu-main" id="lf_record">
 							<div class="submenu-inner">
 								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> {{ trans('common.left_menu.record') }}</a>
 							</div>
 						</div>
 
-						<div class="submenu-main">
+						<div class="submenu-main" id="lf_match">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-solid fa-table"></i> {{ trans('common.left_menu.match') }}</div>
 								<div id="matchSportCon" class="submenu-toggle-list">
@@ -68,25 +68,25 @@
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'rule')) ? 'active' : '' }}">
+						<div class="submenu-main" id="lf_rule">
 							<div class="submenu-inner">
 								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> {{ trans('common.left_menu.rule') }}</a>
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'logs')) ? 'active' : '' }}">
+						<div class="submenu-main" id="lf_logs">
 							<div class="submenu-inner">
 								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> {{ trans('common.left_menu.logs') }}</a>
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'calculator')) ? 'active' : '' }}">
+						<div class="submenu-main" id="lf_calcu">
 							<div class="submenu-inner">
 								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> {{ trans('common.left_menu.calculator') }}</a>
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'notice')) ? 'active' : '' }}">
+						<div class="submenu-main" id="lf_notice">
 							<div class="submenu-inner">
 								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> {{ trans('common.left_menu.notice') }}</a>
 							</div>
@@ -191,8 +191,6 @@
 		var sportListD = {}
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
 
-		var currentUrl = window.location.pathname;
-
 		// tempo sport id
 		var sportID = {}
 
@@ -261,6 +259,16 @@
 
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
+
+
+			// set active class left menu
+			var currentUrl = window.location.location;
+			const matchSport = "match?sport";
+			if (currentUrl.includes(matchSport)) {
+				console.log(`The URL contains '${matchSport}'.`);
+			} else {
+				console.log(`The URL does not contain '${matchSport}'.`);
+			}
 
 
 			// left side menu click function
