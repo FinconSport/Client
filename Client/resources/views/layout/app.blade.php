@@ -46,7 +46,7 @@
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (window.location.pathname.includes('m_order?sport') ? 'active' : '' }}">
+						<div class="submenu-main {{ (window.location.pathname.includes('m_order?sport') ? 'active' : '') }}">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> {{ trans('common.left_menu.m_bet') }}</div>
 								<div id="mOrderSportCon" class="submenu-toggle-list">
@@ -54,13 +54,13 @@
 							</div>
 						</div>
 						
-						<div class="submenu-main {{ (Str::contains(request()->url(), 'order')) ? 'active' : '' }}">
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'order')) ? 'active' : '' }} ">
 							<div class="submenu-inner">
 								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> {{ trans('common.left_menu.record') }}</a>
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (window.location.pathname.includes('match?sport') ? 'active' : '' }}">
+						<div class="submenu-main {{ (window.location.pathname.includes('match?sport') ? 'active' : '') }}">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-solid fa-table"></i> {{ trans('common.left_menu.match') }}</div>
 								<div id="matchSportCon" class="submenu-toggle-list">
