@@ -156,7 +156,7 @@ div.submenu-btn {
 
 .submenu-main{
     color:#ffffff;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
     background-color: #415b5a;
@@ -687,37 +687,6 @@ a.sportSelect:hover,
 
 .menuTypeBtn.preBtn .slideMenuTag {
     border-bottom-right-radius: 15px;
-}
-
-.sportSelect {
-    border: 1px solid rgb(65, 91, 90);
-    border-radius: 25px;
-    padding: 0.2rem 1rem 0.2rem 0.5rem;
-    background: rgb(65, 91, 90);
-    color: white;
-    display: block;
-}
-
-.sportSelect {
-    margin: 0.5rem 0;
-}
-
-.sportSelect:hover {
-    color: white;
-}
-
-.sportSelect i {
-    margin-left: 0rem !important;
-    margin-right: 0.5rem;
-}
-
-.sportSelect span:last-child {
-    float: right;
-}
-
-.sportSelect.on {
-    background: white;
-    color: rgb(65, 91, 90);
 }
 
 /* Modal */
