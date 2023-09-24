@@ -38,7 +38,7 @@
 				</div>
 				<div id="gameCategory" class="game-con">
 					<div id="subMenuContainer">
-						<div class="submenu-main {{ (window.location.pathname.includes('?sport') || window.location.pathname.includes('index')) && !window.location.pathname.includes('m_order?sport') && !window.location.pathname.includes('match?sport') ? 'active' : '' }}">
+						<div class="submenu-main">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-solid fa-house"></i> {{ trans('common.left_menu.sport_bet') }}</div>
 								<div id="indexSportCon" class="submenu-toggle-list">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (window.location.pathname.includes('m_order?sport') ? 'active' : '') }}">
+						<div class="submenu-main">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> {{ trans('common.left_menu.m_bet') }}</div>
 								<div id="mOrderSportCon" class="submenu-toggle-list">
@@ -60,7 +60,7 @@
 							</div>
 						</div>
 
-						<div class="submenu-main {{ (window.location.pathname.includes('match?sport') ? 'active' : '') }}">
+						<div class="submenu-main">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-solid fa-table"></i> {{ trans('common.left_menu.match') }}</div>
 								<div id="matchSportCon" class="submenu-toggle-list">
