@@ -32,109 +32,69 @@
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">
 			</div>
 			<div id="sidenav">
-				<div id="userArea" class="row m-0">
-					<div class="col-6">
-						<p class="mb-0 text-center text-white"><span class="player"></span></p>
-					</div>
-					<div class="col-6">
-						<p class="mb-0 text-center text-white"><span class="balance"></span></p>
-					</div>
+				<div id="userArea" class="user-con">
+					<p><span class="player"></span></p>
+					<p><span class="balance"></span></p>
 				</div>
-				<div id="gameCategory" style="position: relative;">
+				<div id="gameCategory" class="game-con">
 					<div id="subMenuContainer">
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='menuTopFill'>
-							<div class="p-0 bg-deepgreen slideMenuTag" style="height: 1rem;"></div>
-						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='index' onclick="toggleMenu('indexSportMenu')">
-							<div  class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-house"></i>
-								<span>{{ trans('common.left_menu.sport_bet') }}</span>
-								<div class='sportMenu' key='indexSportMenu'>
-									@foreach ($menu_count[0] as $key => $item)
-										@if(isset($sport_list[$key]))
-											<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo(event, "{{ $key }}", "")'>
-												<div class="d-flex align-items-center">
-													<i class="fa-solid icon-{{ $key }}"></i>
-													<span>{{ $sport_list[$key] }}</span>
-												</div>
-												<span class="menuStatistics_{{ $key }}">{{ $item }}</span>
-											</a>
-										@endif
-									@endforeach
+						<div class="submenu-main {{ ((Str::contains(request()->url(), '?sport') || Str::contains(request()->url(), 'index')) && !Str::contains(request()->url(), 'm_order?sport') && !Str::contains(request()->url(), '/match?sport')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<div class="submenu-btn"><i class="fa-solid fa-house"></i> {{ trans('common.left_menu.sport_bet') }}</div>
+								<div id="indexSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='m_order' onclick="toggleMenu('mOrderSportMenu')">
-							<div  class="bg-deepgreen slideMenuTag">
-								<i class="fa-regular fa-circle-dot"></i>
-								<span>{{ trans('common.left_menu.m_bet') }}</span>
-								<div class='sportMenu' key='mOrderSportMenu'>
-									@foreach ($menu_count[1] as $key => $item)
-									@if(isset($sport_list[$key]))
-									<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "m_order")'>
-										<div class="d-flex align-items-center">
-											<i class="fa-solid icon-{{ $key }}"></i>
-											<span>{{ $sport_list[$key] }}</span>
-										</div>
-										<span class="menuStatistics_{{ $key }}">{{ $item }}</span>
-									</a>
-									@endif
-									@endforeach
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'm_order?sport')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> {{ trans('common.left_menu.m_bet') }}</div>
+								<div id="mOrderSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='order' onclick="navTo('order')">
-							<div  class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-file"></i>
-								<span>{{ trans('common.left_menu.record') }}</span>
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'order')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> {{ trans('common.left_menu.record') }}</a>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='match' onclick="toggleMenu('matchSportMenu')">
-							<div class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-table"></i>
-								<span>{{ trans('common.left_menu.match') }}</span>
-								<div class='sportMenu' key='matchSportMenu'>
-									@foreach ($sport_list as $key => $item)
-										<a class="sportSelect d-flex align-items-center justify-content-between {{ isset($search['sport']) && $search['sport'] == $key ? 'on' : ($loop->index === 0 && !isset($search['sport']) ? 'on' : '') }}" onclick='sportTo( event, "{{ $key }}", "match")'>
-											<div class="d-flex align-items-center">
-												<i class="fa-solid icon-{{ $key }}"></i>
-												<span>{{ $item }}</span>
-											</div>
-											<span></span>
-										</a>
-									@endforeach
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'match?sport')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<div class="submenu-btn"><i class="fa-solid fa-table"></i> {{ trans('common.left_menu.match') }}</div>
+								<div id="matchSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='rule' onclick="navTo('rule')">
-							<div class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-chess-rook"></i>
-								<span>{{ trans('common.left_menu.rule') }}</span>
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'rule')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> {{ trans('common.left_menu.rule') }}</a>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='logs' onclick="navTo('logs')">
-							<div class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-credit-card"></i>
-								<span>{{ trans('common.left_menu.logs') }}</span>
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'logs')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> {{ trans('common.left_menu.logs') }}</a>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='calculator' onclick="navTo('calculator')">
-							<div class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-calculator"></i>
-								<span>{{ trans('common.left_menu.calculator') }}</span>
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'calculator')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> {{ trans('common.left_menu.calculator') }}</a>
 							</div>
 						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='notice' onclick="navTo('notice')">
-							<div class="bg-deepgreen slideMenuTag">
-								<i class="fa-solid fa-scroll"></i>
-								<span>{{ trans('common.left_menu.notice') }}</span>
+
+						<div class="submenu-main {{ (Str::contains(request()->url(), 'notice')) ? 'active' : '' }}">
+							<div class="submenu-inner">
+								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> {{ trans('common.left_menu.notice') }}</a>
 							</div>
-						</div>
-						<div class="bg-lightgreen ml-1 menuTypeBtn" key='menuBottomFill'>
-							<div class="p-0 bg-deepgreen slideMenuTag" style="height: 1rem;"></div>
 						</div>
 					</div>
-					<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
+					<div class="subMenuLogoutCon">
+						<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -202,9 +162,6 @@
 		@endif
 
 
-		
-
-
 		// ===== DATA LAYER ======
 
 		console.log('player')
@@ -233,6 +190,11 @@
 		// sportList
 		var sportListD = {}
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
+
+		// tempo sport id
+		var sportID = {
+			"sport": "2",
+		};
 
 
 		function caller( url, data, obj, isUpdate = 0 ) {
@@ -268,9 +230,6 @@
 		}
 		// ===== DATA LAYER ======
 
-
-
-
 		// ===== VIEW LAYER ======
 		function viewCommonIni() {
 			// 帳號 餘額
@@ -304,11 +263,64 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 
+			// left side menu click function
+			$(document).ready(function(){
+				var currentUrl = window.location.href;
 
-			// left side menu
-			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').addClass('on')
-			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').prev().addClass('preBtn')
-			$('.sportMenu').filter(':visible').closest('.menuTypeBtn').next().addClass('nextBtn')
+				// Toggle 'active' class for submenu buttons
+				$(".submenu-btn").click(function(){
+					$(this).closest('.submenu-main').toggleClass('active');
+					$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				});
+
+				// Toggle 'openToggle' class for sport select elements
+				$(".sportSelect").click(function(){
+					$(this).toggleClass('openToggle');
+					$('.sportSelect').not(this).removeClass("openToggle");
+				});
+			});
+
+			var indexSportCon = document.getElementById("indexSportCon");
+			var mOrderSportCon = document.getElementById("mOrderSportCon");
+			var matchSportCon = document.getElementById("matchSportCon");
+			var currentUrl = window.location.pathname;
+
+			//sportListD loop and generated element
+			if (sportListD && sportListD.data) {
+				var sports = sportListD.data;
+
+				sports.forEach(function (x, index) {
+					var key = index + 1;
+					x.key = key;
+
+					//(index sport)
+					var indexSportSelect = document.createElement("a"); // parent div
+					indexSportSelect.setAttribute("id", x.sport_id);
+					indexSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					indexSportSelect.setAttribute("href", "/?sport=" + key);
+					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span>" + x.name + "</div><span class='menuStatistics_1'>" + '"' + "</span>";
+					//append parent div to the main container of index sport menu
+					indexSportCon.appendChild(indexSportSelect);
+
+					//(mOrder sport)
+					var mOrderSportSelect = document.createElement("a"); // parent div
+					mOrderSportSelect.setAttribute("id", x.sport_id);
+					mOrderSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					mOrderSportSelect.setAttribute("href", "/m_order?sport=" + key);
+					mOrderSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span>" + x.name + "</div><span class='menuStatistics_1'>" + '"' + "</span>";
+					//append parent div to the main container of mOrder sport menu
+					mOrderSportCon.appendChild(mOrderSportSelect);
+
+					//(match sport)
+					var matchSportSelect = document.createElement("a"); // parent div
+					matchSportSelect.setAttribute("id", x.sport_id);
+					matchSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					matchSportSelect.setAttribute("href", "/match?sport=" + key);
+					matchSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span>" + x.name + "</div><span class='menuStatistics_1'>" + '"' + "</span>";
+					//append parent div to the main container of match sport menu
+					matchSportCon.appendChild(matchSportSelect);
+				});
+			}
 
 			// msg
 			if( errormsg ) showErrorToast(errormsg)
