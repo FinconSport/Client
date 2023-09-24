@@ -281,11 +281,12 @@ a.sportSelect:hover,
 }
 
 .subMenuLogoutCon {
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding: 1rem;
     width: 100%;
     position: absolute;
     bottom: 0;
     background-color: #415b5a;
+    z-index: 2;
 }
 
 #logoutBtn {
