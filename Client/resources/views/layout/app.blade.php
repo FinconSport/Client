@@ -276,24 +276,24 @@
 				});
 			});
 
-			const keywords_url = {
-				lf_sport: "?sport",
-				lf_mOrder: "m_order?sport",
-				lf_order: "order",
-				lf_match: "match?sport",
-				lf_rule: "rule",
-				lf_logs: "logs",
-				lf_calcu: "calculator",
-				lf_notice: "notice"
-			};
+			// const keywords_url = {
+			// 	lf_sport: "?sport",
+			// 	lf_mOrder: "m_order?sport",
+			// 	lf_order: "order",
+			// 	lf_match: "match?sport",
+			// 	lf_rule: "rule",
+			// 	lf_logs: "logs",
+			// 	lf_calcu: "calculator",
+			// 	lf_notice: "notice"
+			// };
 
-			const currentUrl = window.location.href;
+			// const currentUrl = window.location.href;
 
-			for (const id in keywords_url) {
-				if (currentUrl.includes(keywords_url[id])) {
-					$("#" + id).addClass('active');
-				}
-			}
+			// for (const id in keywords_url) {
+			// 	if (currentUrl.includes(keywords_url[id])) {
+			// 		$("#" + id).addClass('active');
+			// 	}
+			// }
 			// ----------------------------
 
 			var indexSportCon = document.getElementById("indexSportCon");
