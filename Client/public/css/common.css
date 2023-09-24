@@ -177,7 +177,7 @@ div.submenu-btn {
 }
 
 .submenu-main.active{
-    background-color: #e2f0f0;
+    background-color: #c4d3d3;
     color: #415b5a;
     z-index:1;
 }
@@ -201,7 +201,7 @@ div.submenu-btn {
 
 .submenu-main.active .submenu-inner::before,
 .submenu-main.active .submenu-inner::after{
-    background-color: #e2f0f0;
+    background-color: #c4d3d3;
 }
 
 .submenu-main.active .submenu-inner::before{
