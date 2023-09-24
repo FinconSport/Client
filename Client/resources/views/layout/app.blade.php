@@ -197,9 +197,9 @@
 		var currentUrl = window.location.href;
 		const matchSport = "match?sport";
 		if (currentUrl.includes(matchSport)) {
-			console.log(`The URL contains '${matchSport}'.`);
+			console.log("The URL contains matchSport");
 		} else {
-			console.log(`The URL does not contain '${matchSport}'.`);
+			console.log("The URL does not contains matchSport");
 		}
 
 
