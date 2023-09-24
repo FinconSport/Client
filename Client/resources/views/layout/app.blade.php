@@ -399,9 +399,11 @@
 			});
 		});
 
+		// add active class in submenu
 		const currentUrl = window.location.href;
 		const urlMappings = {
 			'?sport': 'lf_sport',
+			'index': 'lf_sport',
 			'm_order?sport': 'lf_mOrder',
 			'order': 'lf_order',
 			'match?sport': 'lf_match',
@@ -414,8 +416,11 @@
 		for (const urlFragment in urlMappings) {
 			if (currentUrl.includes(urlFragment)) {
 				console.log(urlMappings[urlFragment]);
+				$(`#${urlMappings[urlFragment]}`).addClass('active');
+    			break;
 			}
 		}
+		// ----------------------------
 
 		//marquee onclick
 		$('.marqlink').click(function (event) {
