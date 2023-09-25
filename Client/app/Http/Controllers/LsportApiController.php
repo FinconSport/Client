@@ -501,10 +501,8 @@ class LsportApiController extends Controller {
 
         //儲存league-fixture-market的階層資料
         $arrLeagues = array(
-            //FIXTURE_STATUS['early'],  // 早盤
-            //FIXTURE_STATUS['living'],  // 走地
-            1,
-            2,
+            FIXTURE_STATUS['early'] => array(),  // 早盤
+            FIXTURE_STATUS['living'] => array(),  // 走地
         );
         //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
         $sport_name = '';  //儲存球種名稱
