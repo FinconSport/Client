@@ -387,13 +387,12 @@
             return mainDiv;
         }
 
-        createLeagueDiv.appendChild(createMainDiv);
-
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "seriesWrapperTitle";
             leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return leagueDiv;
+            createLeagueDiv.appendChild(createMainDiv);
         }
 
         function createListDiv(fixtureData) {
