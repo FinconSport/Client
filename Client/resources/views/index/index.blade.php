@@ -258,26 +258,26 @@
 
         // click function toggle
         $(document).ready(function(){
-            $(".seriesWrapperTitle").click(function(){
+            $(".seriesWrapperTitle").click(function () {
                 $(this).toggleClass("open");
-                const content2 = $(this).next('.fixture-container');
-                if (content2.length) {
-                    if (content2[0].style.maxHeight === '0px' || content2[0].style.maxHeight === '') {
-                        content2[0].style.maxHeight = 'auto';
+                const f = $(this).next('.fixture-container');
+                if (f.length) {
+                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
+                        f[0].style.maxHeight = 'auto';
                     } else {
-                        content2[0].style.maxHeight = '0';
+                        f[0].style.maxHeight = '0';
                     }
                 }
             });
-            
-            $(".catWrapperTitle").click(function(){
+
+            $(".catWrapperTitle").click(function () {
                 $(this).toggleClass("open");
-                const content1 = $(this).next('.league-list');
-                if (content1.length) {
-                    if (content1[0].style.maxHeight === '0px' || content1[0].style.maxHeight === '') {
-                        content1[0].style.maxHeight = 'auto';
+                const l = $(this).next('.league-list');
+                if (l.length) {
+                    if (l[0].style.maxHeight === '0px' || l[0].style.maxHeight === '') {
+                        l[0].style.maxHeight = 'auto';
                     } else {
-                        content1[0].style.maxHeight = '0';
+                        l[0].style.maxHeight = '0';
                     }
                 }
             });
