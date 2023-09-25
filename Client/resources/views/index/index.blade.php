@@ -380,7 +380,6 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-
         function createSportStructure(sportData, parentDiv, categoryLabel) {
             for (const sportId in sportData) {
                 const sport = sportData[sportId];
@@ -487,6 +486,7 @@
             createSportStructure(livingData, livingParentDiv, 'living');
         }
 
+        // open first div league
         var firstLeagueDiv = document.querySelector('.league-div');
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
@@ -495,7 +495,7 @@
             }
         }
 
-
+        // click function toggle
         $(document).ready(function(){
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
