@@ -513,3 +513,11 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .seriesWrapperContent {
     font-size: 1rem;
   }
+
+  #indexContainerLeft .main-div .seriesWrapper-left {
+    width: 30%;
+  }
+
+  #indexContainerLeft .main-div .seriesWrapper-right {
+    width: 70%;
+  }

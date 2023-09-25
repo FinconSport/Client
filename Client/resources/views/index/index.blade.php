@@ -416,6 +416,7 @@
                         fixtureContainer.setAttribute("class", "fixture-div");
                         fixtureContainer.innerHTML = "<div class='seriesWrapperContent'>" +
                                                         "<div class='seriesWrapper-left'>" +
+                                                            "<p> {{ trans('index.mainArea.time') }}" + fixture.start_time + "</p>" +
                                                             "<p>" + fixture.home_team_name + "</p>" +
                                                             "<p>" + fixture.away_team_name + "</p>" +
                                                         "</div>" +
