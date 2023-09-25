@@ -276,7 +276,7 @@
 					container.appendChild(sportSelect);
 				}
 
-				createSportSelect(indexSportCon, "/");
+				createSportSelect(indexSportCon, "/?sport=");
 				createSportSelect(mOrderSportCon, "/m_order?sport=");
 				createSportSelect(matchSportCon, "/match?sport=");
 				});
