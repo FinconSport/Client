@@ -2189,7 +2189,7 @@ periods:
 
 */
 
-        $ret = [[0],[0]];
+        $ret = array();
 
         // 處理總分
         $arr_results = $arr_scoreboard['Results'];
