@@ -389,7 +389,7 @@
 
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
-            listDiv.className = "";
+            listDiv.className = "league-div";
 
             if (fixtureData) {
                 for (const fixtureId in fixtureData) {
