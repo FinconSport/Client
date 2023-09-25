@@ -1496,8 +1496,6 @@ class LsportApiController extends Controller {
             $reponse[] = $tmp;
         }
 
-        dd($reponse);
-
         $data = $reponse;
 
         // gzip
