@@ -70,7 +70,7 @@
 
 						<div class="submenu-main" id="lf_rule">
 							<div class="submenu-inner">
-								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></a>
+								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></div>
 							</div>
 						</div>
 
