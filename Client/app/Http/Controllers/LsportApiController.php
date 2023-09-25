@@ -2213,7 +2213,7 @@ scoreboard:
         echo json_encode(['ret' => $return]);
     }
 
-     protected function getMatchPeriods_caller($sport_id, $fixture_status, $scoreboard_raw_data) {
+     protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard_raw_data) {
 
         // 除了走地中賽事其餘均回傳null
         if ($fixture_status != 2) {
