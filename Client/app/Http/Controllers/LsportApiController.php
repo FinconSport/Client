@@ -553,6 +553,12 @@ class LsportApiController extends Controller {
                 }
             }
 
+            // f.status 層 ----------------------------
+            if (!isset($arrLeagues[$fixture_status])) {
+
+                $arrLeagues[$fixture_status] = array();
+            }
+
             // league 層 ----------------------------
             if (!isset($arrLeagues[$fixture_status][$league_id])
                 || !sizeof($arrLeagues[$fixture_status][$league_id])
@@ -590,6 +596,8 @@ class LsportApiController extends Controller {
                 } else {
                     $away_team_name = $dv->ta_name_locale;
                 }
+
+
 
                 // 包入 fixture 賽事資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
