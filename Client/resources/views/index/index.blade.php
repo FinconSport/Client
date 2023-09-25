@@ -380,10 +380,6 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        var living_early = {
-            living: '{{ trans('index.mainArea.living') }}',
-            early: '{{ trans('index.mainArea.early') }}'
-        };
 
         function createSportStructure(sportData, parentDiv, parentLabel) {
             for (const sportId in sportData) {
@@ -392,7 +388,7 @@
 
                 // Determine the title based on the sport type
                 var dataToUse = matchListD.data.living ? matchListD.data.living : matchListD.data.early;
-                var titleText = dataToUse === matchListD.data.living ? "{{ trans('index.mainArea.living') }}" : "{{ trans('index.mainArea.early') }}";
+                var titleText = dataToUse === matchListD.data.early ? "{{ trans('index.mainArea.early') }}" : "{{ trans('index.mainArea.living') }}";
 
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
