@@ -15,12 +15,12 @@ const imgStyle = {
 
 
 const teamTitle = {
-    padding: '20px',
-    position: 'absolute',
-    translate: '-50%',
-    left: '50%',
-    top: '0',
+    marginTop: '4rem',
+    fontWeight: 600,
+    fontSize: '1.2rem',
 }
+
+
 
 class IndexCarousel extends React.Component {
     constructor(props) {
@@ -29,6 +29,16 @@ class IndexCarousel extends React.Component {
 		};
 	}
 
+    // 日期格式
+    formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
+    }
+
     render() {
         var settings = {
             dots: true,
@@ -36,11 +46,11 @@ class IndexCarousel extends React.Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 3000,
+            autoplaySpeed: 5000,
             cssEase: "linear",
         };
-        const { data } = this.props
-        
+
+        const { data } = this.props.api_res
         if(data !== undefined){
             return (
                 <div style={{ marginTop: '0.5rem', padding: '0 0.5rem' }}>
@@ -51,22 +61,27 @@ class IndexCarousel extends React.Component {
                         <div>
                             <img style={imgStyle} alt="sport" src={require('../image/sport.jpg')} />
                         </div>
-                        <div style={teamTitle}>
-                        <div className="IndexCarouselGame">
-                            <div className="CarouselGameDiv">
-                                <img alt='home' src={require('../image/icon/teamIcon/主隊1.png')} />
-                                <div>主隊1</div>
-                            </div>
-                            <div className="CarouselGameDiv CarouselGameScore">
-                                <div>2&nbsp;-&nbsp;3</div>
-                                <div className="mt-1" style={{fontSize: '0.9rem'}}>2023-07-03</div>
-                            </div>
-                            <div className="CarouselGameDiv">
-                                <img alt='away' src={require('../image/icon/teamIcon/客隊1.png')} />
-                                <div>客隊1</div>
-                            </div>
-                        </div>
-                    </div>
+                        {
+                            data.map( ele => {
+                                return(
+                                    <div className="IndexCarouselGame" key={ele} >
+                                        <div className="CarouselGameDiv">
+                                            {/* <img alt='home' src={require('../image/icon/teamIcon/主隊1.png')} /> */}
+                                            <div style={teamTitle}>{ ele.home }</div>
+                                        </div>
+                                        <div className="CarouselGameDiv CarouselGameScore">
+                                            <div>{ ele.home_score }&nbsp;-&nbsp;{ ele.away_score }</div>
+                                            <div className="mt-1" style={{fontSize: '0.9rem'}}>{ this.formatDateTime(ele.match_time) }</div>
+                                        </div>
+                                        <div className="CarouselGameDiv">
+                                            {/* <img alt='away' src={require('../image/icon/teamIcon/客隊1.png')} /> */}
+                                            <div style={teamTitle}>{ ele.away }</div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                       
                     </Slider>
                 </div>
             );

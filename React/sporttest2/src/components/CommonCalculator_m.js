@@ -200,14 +200,13 @@ const CalInfoCardIcon = {
     marginRight: '0.25rem'
 }
 
-const drfaultImg = 'https://sporta.asgame.net/uploads/default.png'
 
 class CommonCalculator extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            betApi: 'https://sportc.asgame.net/api/v1/common_order?token=' + window.token + '&player=' + window.player + '&page=',
-            accountApi: 'https://sportc.asgame.net/api/v1/common_account?token=' + window.token + '&player=' + window.player,
+            accountApi: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token + '&player=' + window.player,
+            game_bet: 'https://sportc.asgame.net/api/v2/m_game_bet',
             inputMoney: '',
             maxMoney: '0.00',
             isBetterRate: false,
@@ -238,25 +237,24 @@ class CommonCalculator extends React.Component {
         this.props.CloseCal()
     }
 
-
     componentDidUpdate(prevProps) {
-		if (prevProps.data !== this.props.data && this.props.data !== null ) {
-            // 取得限額
-            const start_time = new Date(this.props.data.start_time);
-            const currentDate = new Date();
-            if (start_time < currentDate) {
-                this.setState({
-                    maxLimit: window.limit.living[window.sport].max,
-                    minLimit: window.limit.living[window.sport].min
+		// if (prevProps.data !== this.props.data && this.props.data !== null ) {
+        //     // 取得限額
+        //     const start_time = new Date(this.props.data.start_time);
+        //     const currentDate = new Date();
+        //     if (start_time < currentDate) {
+        //         this.setState({
+        //             maxLimit: window.limit.living[window.sport].max,
+        //             minLimit: window.limit.living[window.sport].min
 
-                })
-            } else {
-                this.setState({
-                    maxLimit: window.limit.early[window.sport].max,
-                    minLimit: window.limit.early[window.sport].min
-                })
-            }
-		}
+        //         })
+        //     } else {
+        //         this.setState({
+        //             maxLimit: window.limit.early[window.sport].max,
+        //             minLimit: window.limit.early[window.sport].min
+        //         })
+        //     }
+		// }
 	}
 
     // 餘額更新
@@ -314,10 +312,6 @@ class CommonCalculator extends React.Component {
         })
     }
     
-    // 圖片毀損
-    handleError(event) {
-        event.target.src = drfaultImg;
-    }
 
     // 送出投注
     submitBet = () => {
@@ -332,23 +326,49 @@ class CommonCalculator extends React.Component {
             return;
         }
 
-        if ( money < this.state.minLimit ) {
-            this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
-            this.ClearMoney()
-            return;
-        }
+        // if ( money < this.state.minLimit ) {
+        //     this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
+        //     this.ClearMoney()
+        //     return;
+        // }
 
-        if ( money > this.state.maxLimit ) {
-            this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
-            this.ClearMoney()
-            return;
-        }
+        // if ( money > this.state.maxLimit ) {
+        //     this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
+        //     this.ClearMoney()
+        //     return;
+        // }
 
         // 金額通過檢查 送出投注
-        const sendOrderDataJSON = JSON.stringify(this.props.data.bet_data)
-        const isBetterRate = this.state.isBetterRate ? 1 : 0
-        this.caller('https://sportc.asgame.net/api/v1/m_game_bet?token=' + window.token + '&player=' + window.player + '&bet_data=' + sendOrderDataJSON + '&bet_amount=' + this.state.inputMoney + '&better_rate=' + isBetterRate + '&game_id=' + window.sport, 'afterBet')
-        
+        var betData = this.props.data.bet_data
+        betData.forEach(ele => {
+            delete ele.home_team_name;
+            delete ele.away_team_name;
+            delete ele.market_name;
+            delete ele.series_name;
+            delete ele.bet_item_name;
+            delete ele.sport_id;
+            return ele;
+        });
+
+        var sendOrderDataJSON = JSON.stringify(betData)
+        var mBetData = {
+            player: window.player,
+            token: window.token,
+            bet_data: sendOrderDataJSON,
+            bet_amount: this.state.inputMoney,
+            better_rate: this.state.isBetterRate ? 1 : 0,
+            sport_id: window.sport
+        }
+
+        const queryParams = [];
+        for (const key in mBetData) {
+            if (mBetData.hasOwnProperty(key)) {
+                queryParams.push(`${key}=${encodeURIComponent(mBetData[key])}`);
+            }
+        }
+        const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
+        this.caller(queryString , 'afterBet')
+
         // 關閉計算機以及串關明細並取消所有已選選項
         this.ClearAll()
     }
@@ -366,8 +386,9 @@ class CommonCalculator extends React.Component {
     }
 
     render() {
-        const sendOrderData = this.props.data
-        const res = this.props.api_res
+        const sendOrderData = this.props.data?.bet_data
+        const res = this.props.accountD
+
         if(res && sendOrderData) {
             return (
                 <>
@@ -393,12 +414,9 @@ class CommonCalculator extends React.Component {
                                 <div style={{ display: 'flex', width: '58%', marginLeft: '2%' }}>
                                     <span>Hi! { res.data.account }</span>
                                 </div>
-                                {/* <div> */}
-                                    {/* <p className='mb-0' style={{fontSize: '0.6rem', lineHeight: '1rem', marginTop: '0.3rem'}}>帳戶餘額</p> */}
                                     <p className='mb-0' style={BalanceStyle} onClick={this.props.callBack}>
                                         { res.data.balance }
                                     </p>
-                                {/* </div> */}
                                 <div style={{fontSize: '1.5rem', width: '15%'}}>
                                     <MdAutorenew style={RefreshStyle} className={this.props.isRefrehingBalance === true ? 'rotateRefresh' : ''} onClick={this.props.callBack} />
                                 </div>
@@ -421,21 +439,19 @@ class CommonCalculator extends React.Component {
                             <CalHeight8>
                                 <CalInfoCardWrapper id='calInfoCardWrapper'>
                                     {
-                                        sendOrderData.bet_data.map((data, i) => (
+                                        sendOrderData.map((data, i) => (
                                             <div className='row' key={i} style={CalInfoCard}>
                                                 <div className='col-1 text-center p-0 mb-2' style={BetCountStyle}>{i+1}</div>
-                                                <div className='col-9'>{ data.type_name }</div>
-                                                <div  bet_match={data.bet_match} bet_type={data.bet_type} bet_type_item={data.bet_type_item} className='col-2 p-0 text-center'>
+                                                <div className='col-9'>{ data.market_name }</div>
+                                                <div className='col-2 p-0 text-center'>
                                                     <span className='odd'>{ data.bet_rate }</span>
                                                 </div>
-                                                <div style={BetItemStyle}>{ data.type_item_name }</div>
+                                                <div style={BetItemStyle}>{ data.bet_item_name }</div>
                                                 <div>{ data.series_name }</div>
                                                 <div className='col-12'>
-                                                    <img style={CalInfoCardIcon} alt='home' src={data.home_logo} onError={this.handleError}/>
-                                                    { data.home_name }
+                                                    { data.home_team_name }
                                                     <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
-                                                    <img style={CalInfoCardIcon} alt='away' src={data.away_logo} onError={this.handleError}/>
-                                                    { data.away_name }
+                                                    { data.away_team_name }
                                                 </div>
                                             </div>
                                         ))
@@ -445,7 +461,8 @@ class CommonCalculator extends React.Component {
                             <CalHeight3 className='row' style={{ padding: '0 0.5rem', background: 'rgb(225, 235, 236)', borderTop: '2px solid rgba(65, 91, 90, 0.5)', boxShadow: 'rgba(65, 91, 90, 0.3) 0px 0px 5px 3px' }}>
                                 <div className='col-6'>{langText.CommonCalculator.maxwinning} <span>{this.state.maxMoney}</span></div>
                                 <div className='col-6'>
-                                    <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} />
+                                    {/* <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} /> */}
+                                    <MoneyInput readOnly value={this.state.inputMoney} className='w-100' />
                                 </div>
                             </CalHeight3>
                             <CalHeight12 className='row'>

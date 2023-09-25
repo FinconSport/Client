@@ -35,7 +35,6 @@ class Home extends React.Component {
 		const start = Date.now(); // 记录开始时间
 		const json = await GetIni(apiUrl);
 		const elapsedTime = Date.now() - start; // 计算经过的时间
-
 		this.setState({
 			[api_res]: json,
 		})

@@ -56,7 +56,7 @@
 						
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></a>
+								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
 							</div>
 						</div>
 
@@ -70,25 +70,25 @@
 
 						<div class="submenu-main" id="lf_rule">
 							<div class="submenu-inner">
-								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></a>
+								<div onclick="navTo('rule')" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_logs">
 							<div class="submenu-inner">
-								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> <p>{{ trans('common.left_menu.logs') }}</p></a>
+								<div onclick="navTo('logs')" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> <p>{{ trans('common.left_menu.logs') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_calcu">
 							<div class="submenu-inner">
-								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></a>
+								<div onclick="navTo('calculator')" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_notice">
 							<div class="submenu-inner">
-								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> <p>{{ trans('common.left_menu.notice') }}</p></a>
+								<div onclick="navTo('notice')" class="submenu-btn"><i class="fa-solid fa-scroll"></i> <p>{{ trans('common.left_menu.notice') }}</p></div>
 							</div>
 						</div>
 					</div>
@@ -257,8 +257,34 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			var sportType = isNaN(sport) ? 1 : sport; //<- make sport 1 if url is index
+			var sportType = sport;
 			console.log(sportType);
+
+			const currentUrl = window.location.href;
+			const noPath = window.location.pathname;
+
+			const urlMappings = {
+				'/?sport': 'lf_sport',
+				'm_order?': 'lf_mOrder',
+				'order': 'lf_order',
+				'match?': 'lf_match',
+				'rule': 'lf_rule',
+				'logs': 'lf_logs',
+				'calculator': 'lf_calcu',
+				'notice': 'lf_notice'
+			};
+
+			if (currentUrl.includes('index') || noPath == '/') {
+				sportType = 1; // Update sportType to 1 based on conditions
+				$("#lf_sport").addClass('active');
+			}
+
+			for (const urlFragment in urlMappings) {
+				if (currentUrl.includes(urlFragment)) {
+					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					break;
+				}
+			}
 
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
@@ -271,14 +297,14 @@
 					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("href", url + key);
+					sportSelect.setAttribute("onclick", 'sportTo(event, "' + x.sport_id + '", '+ url +')');
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
 
-				createSportSelect(indexSportCon, "/?sport=");
-				createSportSelect(mOrderSportCon, "/m_order?sport=");
-				createSportSelect(matchSportCon, "/match?sport=");
+				createSportSelect(indexSportCon, "");
+				createSportSelect(mOrderSportCon, "m_order");
+				createSportSelect(matchSportCon, "match");
 				});
 			}
 
@@ -365,8 +391,11 @@
 			}, 1000);
 		});
 
+
 		// left side menu click function
 		$(document).ready(function(){
+			var divElement = document.querySelector(".submenu-main");
+
 			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
 				$(this).closest('.submenu-main').toggleClass('active');
@@ -378,28 +407,8 @@
 				$(this).toggleClass('openToggle');
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
+
 		});
-
-		// add active class in submenu
-		const currentUrl = window.location.href;
-		const urlMappings = {
-			'/?sport': 'lf_sport',
-			'index': 'lf_sport',
-			'm_order?': 'lf_mOrder',
-			'order': 'lf_order',
-			'match?': 'lf_match',
-			'rule': 'lf_rule',
-			'logs': 'lf_logs',
-			'calculator': 'lf_calcu',
-			'notice': 'lf_notice'
-		};
-
-		for (const urlFragment in urlMappings) {
-			if (currentUrl.includes(urlFragment)) {
-				$(`#${urlMappings[urlFragment]}`).addClass('active');
-    			break;
-			}
-		}
 		// ----------------------------
 
 		//marquee onclick
