@@ -386,6 +386,7 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
+        // Function to create a league div
         function createLeagueDiv(leagueName) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
@@ -441,7 +442,6 @@
                 livingParentDiv.appendChild(leagueDiv);
             }
         }
-        
         // loop matchListD to generate html element here
 
         // open the first
