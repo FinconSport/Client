@@ -406,12 +406,12 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
-			var divElement = document.querySelector(".submenu-main");
-			if (!divElement.classList.contains("active")) {
-				console.log("no active class")
-			}
-
 		});
+
+		var divElement = document.querySelector(".submenu-main");
+		if (!divElement.classList.contains("active")) {
+			console.log("no active class")
+		}
 
 		// ----------------------------
 
