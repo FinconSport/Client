@@ -391,13 +391,14 @@
                 const numLeagues = Object.keys(sport.list).length;
 
                 // Determine the title based on the sport type
-                const sportTitle = living_early[sport.sport_type] || 'Unknown';
+                var dataToUse = matchListD.data.living ? matchListD.data.living : matchListD.data.early;
+                var titleText = dataToUse === matchListD.data.living ? "{{ trans('index.mainArea.living') }}" : "{{ trans('index.mainArea.early') }}";
 
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${sportTitle} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${titleText} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
                 parentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
