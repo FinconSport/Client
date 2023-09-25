@@ -2278,10 +2278,10 @@ class LsportApiController extends Controller {
 
         $ret = array();
         foreach ($arr_periods_raw_data as $pk => $pv) {
-            $sequence_number = $pv['SequenceNumber'];
+            $sequence_number = intval($pv['SequenceNumber']);
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = $rv['Position'] - 1;
+                $pos = intval($rv['Position'] - 1);
                 $ret[$pos][$sequence_number] = $rv['Value'];
             }
         }
