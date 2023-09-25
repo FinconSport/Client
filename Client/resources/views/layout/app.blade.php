@@ -396,6 +396,12 @@
 		$(document).ready(function(){
 			var divElement = document.querySelector(".submenu-main");
 
+			// Toggle 'active' class for submenu buttons
+			$(".submenu-btn").click(function(){
+				$(this).closest('.submenu-main').toggleClass('active');
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+			});
+
 			// Toggle 'openToggle' class for sport select elements
 			$(".sportSelect").click(function(){
 				$(this).toggleClass('openToggle');
@@ -403,43 +409,6 @@
 			});
 
 		});
-
-		// $(document).ready(function(){
-		// 	$(".submenu-btn").click(function(){
-		// 		$(this).closest('.submenu-main').toggleClass('clicked');
-		// 		$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-		// 		$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
-
-
-
-		// 		$('.submenu-main').not($(this).closest('.submenu-main.clicked .submenu-toggle-list')).css('maxHeight', '0');
-
-		// 		const sportListMenu = $(this).next('.submenu-toggle-list');
-		// 		if (sportListMenu.length) {
-		// 			if (sportListMenu[0].style.maxHeight === '0px' || sportListMenu[0].style.maxHeight === '') {
-		// 				sportListMenu[0].style.maxHeight = sportListMenu[0].scrollHeight + 'px';
-		// 			} else {
-		// 				// Check if 'clicked' class is present before setting max-height to 0
-		// 				if (!$(this).closest('.submenu-main').hasClass('clicked')) {
-		// 					sportListMenu[0].style.maxHeight = '0';
-		// 				}
-		// 			}
-		// 		}
-		// 	});
-		// });
-
-		$(document).ready(function() {
-			$('.submenu-btn').click(function() {
-				$(this).closest('.submenu-main').toggleClass('clicked');
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
-
-				const sportListMenu = $(this).siblings('.submenu-toggle-list');
-				$(this).siblings('.submenu-toggle-list').css('maxHeight', '900px');
-				$('.submenu-toggle-list').not(this).css('maxHeight', '');
-			});
-		});
-
 		// ----------------------------
 
 		//marquee onclick
