@@ -407,14 +407,18 @@
                     leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
                     sportContainer.appendChild(leagueContainer);
 
+                    const fixtureContainer = document.createElement("div");
+                    fixtureContainer.setAttribute("class", "fixture-container");
+                    leagueContainer.appendChild(fixtureContainer);
+
                     for (const fixtureId in league.list) {
                         const fixture = league.list[fixtureId];
 
                         // Create a container for each fixture within the league
-                        const fixtureContainer = document.createElement("div");
-                        fixtureContainer.setAttribute("id", fixture.fixture_id);
-                        fixtureContainer.setAttribute("class", "fixture-div");
-                        fixtureContainer.innerHTML = "<div class='seriesWrapperContent'>" +
+                        const fixtureItem = document.createElement("div");
+                        fixtureItem.setAttribute("id", fixture.fixture_id);
+                        fixtureItem.setAttribute("class", "fixture-div");
+                        fixtureItem.innerHTML = "<div class='seriesWrapperContent'>" +
                                                         "<div class='seriesWrapper-left'>" +
                                                             "<p> {{ trans('index.mainArea.time') }}" + fixture.start_time + "</p>" +
                                                             "<p>" + fixture.home_team_name + "</p>" +
@@ -453,7 +457,7 @@
                                                             "</table>" +
                                                         "</div>" +
                                                     "</div>";
-                        leagueContainer.appendChild(fixtureContainer);
+                        fixtureContainer.appendChild(fixtureItem);
                     }
                 }
             }
