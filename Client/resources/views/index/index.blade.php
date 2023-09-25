@@ -383,7 +383,7 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<h3>{{ trans('index.mainArea.${title}') }}(${fixtureCount})</h3>`;
+            leagueDiv.innerHTML = `<h3>{{ trans('index.mainArea.living') }}(${fixtureCount})</h3>`;
             return leagueDiv;
         }
 
