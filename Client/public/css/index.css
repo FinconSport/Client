@@ -485,12 +485,17 @@ div[key="sizeSmallRate"]:hover {
     font-size: 1.2rem;
 }
 
-#indexContainerLeft .main-div .catWrapperTitle {
+#indexContainerLeft .main-div .catWrapperTitle,
+#indexContainerLeft .main-div .seriesWrapperTitle {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
-  }
+}
+
+#indexContainerLeft .main-div p {
+    margin: 0px;
+}
 
 
 #indexContainerLeft .main-div .seriesWrapperTitle,
