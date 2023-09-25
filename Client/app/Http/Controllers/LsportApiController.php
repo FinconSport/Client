@@ -1451,13 +1451,16 @@ class LsportApiController extends Controller {
             $tmp['away_team_name'] = $return[$langCol];
 
             //////////////
-            
+
             $scoreboard = array();
 
             // 總分
             $tmp = json_decode($v['scoreboard'],true);
-            $d = array();
+ 
+            dd($tmp);
             foreach ($tmp as $kk => $vv) {
+
+                
                 $pos = $v['Position']-1;
                 $d[$pos] = $v['Value'];
             }
