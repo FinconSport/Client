@@ -381,7 +381,7 @@
 
         // loop matchListD to generate html element here
         function createMainDiv(title, fixtureCount) {
-            const leagueDiv = document.createElement("div");
+            const mainDiv = document.createElement("div");
             mainDiv.className = "main-div";
             mainDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return mainDiv;
@@ -392,7 +392,7 @@
             leagueDiv.className = "seriesWrapperTitle";
             leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return leagueDiv;
-            createLeagueDiv.appendChild(createMainDiv);
+            leagueDiv.appendChild(mainDiv);
         }
 
         function createListDiv(fixtureData) {
