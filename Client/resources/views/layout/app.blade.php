@@ -257,7 +257,7 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			var sportType = isNaN(sport) ? 1 : sport;
+			var sportType = isNaN(sport) ? 1 : sport; //<- make sport 1 if url is index
 			console.log(sportType);
 
 			if (sportListD && sportListD.data) {
