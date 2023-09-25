@@ -294,17 +294,17 @@
 				x.key = key;
 
 				function createSportSelect(container, url) {
-					var sportSelect = document.createElement("div");
+					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("onclick", 'sportTo(event, "' + x.sport_id + '", '+ url +')');
+					sportSelect.setAttribute("href", url + x.sport_id);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
 
-				createSportSelect(indexSportCon, "");
-				createSportSelect(mOrderSportCon, "m_order");
-				createSportSelect(matchSportCon, "match");
+				createSportSelect(indexSportCon, "/?sport=");
+				createSportSelect(mOrderSportCon, "/m_order?sport=");
+				createSportSelect(matchSportCon, "/match?sport=");
 				});
 			}
 
