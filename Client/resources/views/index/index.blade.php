@@ -383,11 +383,10 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<h3>${title} (${fixtureCount})</h3>`;
+            leagueDiv.innerHTML = `<h3>{{ trans('index.mainArea.living') }}(${fixtureCount})</h3>`;
             return leagueDiv;
         }
 
-        // Function to create a list div
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
             listDiv.className = "list";
@@ -412,15 +411,11 @@
             return listDiv;
         }
 
-        // Get the "early" and "living" data
         const earlyData = matchListD.data.early;
         const livingData = matchListD.data.living;
 
-        // Get the parent divs for "early" and "living"
         const earlyParentDiv = document.getElementById("early");
         const livingParentDiv = document.getElementById("living");
-
-        // Create the structure for "early" data
         for (const leagueId in earlyData) {
             if (earlyData.hasOwnProperty(leagueId)) {
                 const league = earlyData[leagueId];
@@ -428,14 +423,12 @@
                 const fixtureCount = league.list[183] && league.list[183].list
                     ? Object.keys(league.list[183].list).length
                     : 0;
-                const leagueDiv = createLeagueDiv("Early", fixtureCount);
+                const leagueDiv = createLeagueDiv("early", fixtureCount);
                 const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
                 leagueDiv.appendChild(listDiv);
                 earlyParentDiv.appendChild(leagueDiv);
             }
         }
-
-        // Create the structure for "living" data
         for (const leagueId in livingData) {
             if (livingData.hasOwnProperty(leagueId)) {
                 const league = livingData[leagueId];
@@ -443,12 +436,13 @@
                 const fixtureCount = league.list && league.list.length > 0
                     ? Object.keys(league.list).length
                     : 0;
-                const leagueDiv = createLeagueDiv("Living", fixtureCount);
+                const leagueDiv = createLeagueDiv("living", fixtureCount);
                 const listDiv = createListDiv(league.list);
                 leagueDiv.appendChild(listDiv);
                 livingParentDiv.appendChild(leagueDiv);
             }
         }
+        
         // loop matchListD to generate html element here
 
         // open the first

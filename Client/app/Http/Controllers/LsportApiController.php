@@ -2048,15 +2048,16 @@ class LsportApiController extends Controller {
         $return = $this->getMatchScoreboard(
             $request['sport_id'],
             $request['fixture_status'],
-            $request['periods_raw_data']
+            $request['periods_raw_data'],
+            $request['scoreboard_raw_data']
         );
         echo json_encode(['ret' => $return]);
     }
 
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods_raw_data, $scoreboard_raw_data) {
 
-        // 除了走地中賽事其餘均回傳null
-        if ($fixture_status != 2) {
+        // 如果還未開賽就回傳null
+        if ($fixture_status < 2) {
             return null;
         }
 
@@ -2072,7 +2073,7 @@ class LsportApiController extends Controller {
         } else {
             // 如果參數是字串則json_decoe看看
             $arr_periods_raw_data = json_decode($periods_raw_data, true);
-            // de不出東西就回傳null
+            // de不出東西就回傳false
             if (!$arr_periods_raw_data) {
                 return false;
             }
@@ -2083,7 +2084,7 @@ class LsportApiController extends Controller {
         } else {
             // 如果參數是字串則json_decoe看看
             $arr_scoreboard_raw_data = json_decode($scoreboard_raw_data, true);
-            // de不出東西就回傳null
+            // de不出東西就回傳false
             if (!$arr_scoreboard_raw_data) {
                 return false;
             }
@@ -2168,6 +2169,16 @@ scoreboard:
 */
 
         $ret = [];
+
+        // 處理總分
+        $arr_results = $arr_scoreboard_raw_data['Results'];
+        foreach ($arr_results as $rk => $rv) {
+            $pos = intval($rv['Position']);
+            $total_score = intval($rv['Value']);
+            //總分都是放在key=0的位置
+            $ret[$pos][0] = $total_score;
+        }
+
         // 各局得分
         foreach ($arr_periods_raw_data as $pk => $pv) {
             $type = intval($pv['Type']);  // type=局數號碼
@@ -2176,17 +2187,6 @@ scoreboard:
                 $pos = intval($rv['Position']);
                 $score = intval($rv['Value']);
                 $ret[$pos][$type] = $score;
-            }
-        }
-
-        // 處理總分
-        foreach ($arr_scoreboard_raw_data as $pk => $pv) {
-            $arr_results = $pv['Results'];
-            foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']);
-                $total_score = intval($rv['Value']);
-                //總分都是放在key=0的位置
-                $ret[$pos][0] = $total_score;
             }
         }
 
@@ -2212,7 +2212,7 @@ scoreboard:
         echo json_encode(['ret' => $return]);
     }
 
-     protected function getMatchPeriods_caller($sport_id, $fixture_status, $scoreboard_raw_data) {
+     protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard_raw_data) {
 
         // 除了走地中賽事其餘均回傳null
         if ($fixture_status != 2) {
