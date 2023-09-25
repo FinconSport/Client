@@ -518,6 +518,10 @@ div[key="sizeSmallRate"]:hover {
     width: 30%;
   }
 
+  #indexContainerLeft .main-div .seriesWrapper-left p {
+    margin-bottom: 0.5rem;
+  }
+
   #indexContainerLeft .main-div .seriesWrapper-right {
     width: 70%;
   }
