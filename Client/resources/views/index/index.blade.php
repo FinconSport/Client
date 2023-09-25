@@ -387,7 +387,7 @@
             return mainDiv;
         }
 
-        createLeagueDiv.appendChild(mainDiv);
+        createLeagueDiv.appendChild(createMainDiv);
 
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
