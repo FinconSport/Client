@@ -396,12 +396,6 @@
 		$(document).ready(function(){
 			var divElement = document.querySelector(".submenu-main");
 
-			// Toggle 'active' class for submenu buttons
-			$(".submenu-btn").click(function(){
-				$(this).closest('.submenu-main').toggleClass('active');
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-			});
-
 			// Toggle 'openToggle' class for sport select elements
 			$(".sportSelect").click(function(){
 				$(this).toggleClass('openToggle');
@@ -409,6 +403,23 @@
 			});
 
 		});
+
+		$(document).ready(function(){
+            $(".submenu-btn").click(function(){
+                $(this).toggleClass("open");
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+                const sportListMenu = $(this).next('.submenu-toggle-list');
+                if (sportListMenu.length) {
+                    if (sportListMenu[0].style.maxHeight === '0px' || sportListMenu[0].style.maxHeight === '') {
+                        sportListMenu[0].style.maxHeight = sportListMenu[0].scrollHeight + 'px';
+						$(this).closest('.submenu-main').toggleClass('active');
+                    } else {
+                        sportListMenu[0].style.maxHeight = '0';
+						$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+                    }
+                }
+            });
+        });
 		// ----------------------------
 
 		//marquee onclick
