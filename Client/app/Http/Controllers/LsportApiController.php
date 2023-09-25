@@ -1473,7 +1473,10 @@ class LsportApiController extends Controller {
                     $pos = $vvv['Position'];
                     $d[$pos] = $vvv['Value'];
                 }
-                $scoreboard[] = $d;
+                $type = $vv['Type'];
+                if ($type < 100) {  // 粗暴判斷
+                    $scoreboard[] = $d;
+                }
             }
 
             dd($v['fixture_id'],$scoreboard);
