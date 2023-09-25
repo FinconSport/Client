@@ -2325,9 +2325,9 @@ periods:
         $ret['period'] = $arr_scoreboard['CurrentPeriod'];
 
         // 各種比賽狀態(好壞球數,壘包狀態等等)
-        foreach ($livescore_extradata as $k => $v) {
-            $col_name = $rv['Name'];
-            $col_value = $rv['Value'];
+        foreach ($arr_livescore_extradata as $k => $v) {
+            $col_name = $v['Name'];
+            $col_value = $v['Value'];
             $ret[$col_name] = $col_value;
         }
 
