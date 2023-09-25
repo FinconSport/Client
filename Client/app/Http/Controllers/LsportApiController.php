@@ -1375,11 +1375,9 @@ class LsportApiController extends Controller {
 
     	/////////////////////////
         // Search 區用
-
-        $sport_id = $input['sport_id'];
+        $sport_id = $input['sport'];
         $page = $input['page'];
         
-
         // 狀態
         $fixture_status = array(
              1 => "等待開賽",
