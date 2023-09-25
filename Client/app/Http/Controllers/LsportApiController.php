@@ -276,8 +276,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
     	//---------------------------------
         // 取得球種資料
@@ -288,7 +291,7 @@ class LsportApiController extends Controller {
 
         $sport_type = array();
         foreach ($arrSports as $k => $v) {
-            $sport_type[$v['sport_id']] = $v[$langCol];
+            $sport_type[$v['sport_id']] = $v[$lang_col];
         }
 
         $menu_type = [
@@ -403,14 +406,17 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         //---------------------------------
         // 取得球種資料
         $Sports = LsportSport::where('status', 1)
             ->select(
-                'sport_id', 'name_en AS name_en', $langCol.' AS name_locale', 'status'
+                'sport_id', 'name_en AS name_en', $lang_col.' AS name_locale', 'status'
             )
             ->orderBy('id', 'ASC')
             ->get();
@@ -459,8 +465,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -499,12 +508,12 @@ class LsportApiController extends Controller {
                 ->on('l.league_id', '=', 'ta.league_id');
             })
             ->select(
-                'l.name_en AS l_name_en', 'l.'.$langCol.' AS l_name_locale',
-                's.name_en AS s_name_en', 's.'.$langCol.' AS s_name_locale',
+                'l.name_en AS l_name_en', 'l.'.$lang_col.' AS l_name_locale',
+                's.name_en AS s_name_en', 's.'.$lang_col.' AS s_name_locale',
                 'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update', //'f.home_id', 'f.away_id', 
-                'm.market_id', 'm.name_en AS m_name_en', 'm.'.$langCol.' AS m_name_locale', 'm.priority', 'm.main_line',
-                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$langCol.' AS th_name_locale',
-                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
+                'm.market_id', 'm.name_en AS m_name_en', 'm.'.$lang_col.' AS m_name_locale', 'm.priority', 'm.main_line',
+                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
+                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
             )
             //->where('l.status', 1)  // 原本只抓1=尚未開賽
             ->where('l.status', 1)
@@ -693,7 +702,7 @@ class LsportApiController extends Controller {
                     $market_bet_id = $bv->bet_id;
 
                     // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                    if (isset($bv->mb_name_locale)) {  // market name
+                    if (!strlen($bv->mb_name_locale)) {  // market name
                         $market_bet_name = $bv->mb_name_en;
                     } else {
                         $market_bet_name = $bv->mb_name_locale;
@@ -1030,9 +1039,11 @@ class LsportApiController extends Controller {
             }
         }
 
-        //////////////////////////////////////////
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         // 取得系統參數
         $arrSysConfig = SystemConfig::where("name","risk_order")->first();
@@ -1204,8 +1215,8 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // order data
             $order['league_id'] = $league_id;
-            $order['league_name'] = $arrLeagueData[$langCol];
-            if (!strlen($arrLeagueData[$langCol])) {
+            $order['league_name'] = $arrLeagueData[$lang_col];
+            if (!strlen($arrLeagueData[$lang_col])) {
                 $order['league_name'] = $arrLeagueData['name_en'];
             }
             $order['fixture_id'] = $fixture_id;
@@ -1219,9 +1230,9 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['home_team_id'] = $home_id;
-            $order['home_team_name'] = $homeTeamData[$langCol];
+            $order['home_team_name'] = $homeTeamData[$lang_col];
             // 語系
-            if (!strlen($homeTeamData[$langCol])) {
+            if (!strlen($homeTeamData[$lang_col])) {
                 $order['home_team_name'] = $homeTeamData['name_en'];
             }
             
@@ -1232,9 +1243,9 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['away_team_id'] = $away_id;
-            $order['away_team_name'] = $awayTeamData[$langCol];
+            $order['away_team_name'] = $awayTeamData[$lang_col];
             // 語系
-            if (!strlen($awayTeamData[$langCol])) {
+            if (!strlen($awayTeamData[$lang_col])) {
                 $order['away_team_name'] = $awayTeamData['name_en'];
             }
 
@@ -1268,8 +1279,8 @@ class LsportApiController extends Controller {
             $order['market_bet_id'] = $market_bet_id;
             $order['market_bet_line'] = $market_bet_line;
         
-            $order['market_name'] = $market_data[$langCol];
-            $order['market_bet_name'] = $marketBetData[$langCol];
+            $order['market_name'] = $market_data[$lang_col];
+            $order['market_bet_name'] = $marketBetData[$lang_col];
             $order['market_priority'] = $market_priority;
             $order['bet_rate'] = $current_market_bet_rate;
             
@@ -1364,9 +1375,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        /////////////////////////
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         /////////////////////////
         // 輸入判定
@@ -1431,7 +1444,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
             $tmp['league_id'] = $league_id;
-            $tmp['league_name'] = $return[$langCol];
+            $tmp['league_name'] = $return[$lang_col];
 
             // sport_name: 
             $sport_id = $v['sport_id'];
@@ -1440,7 +1453,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('04');
             }
             $tmp['sport_id'] = $sport_id;
-            $tmp['sport_name'] = $return[$langCol];
+            $tmp['sport_name'] = $return[$lang_col];
 
             // home_team_name: 
             $team_id = $v['home_id'];
@@ -1449,7 +1462,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('05');
             }
             $tmp['home_team_id'] = $team_id;
-            $tmp['home_team_name'] = $return[$langCol];
+            $tmp['home_team_name'] = $return[$lang_col];
 
             // away_team_name: 
             $team_id = $v['away_id'];
@@ -1458,7 +1471,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('05');
             }
             $tmp['away_team_id'] = $team_id;
-            $tmp['away_team_name'] = $return[$langCol];
+            $tmp['away_team_name'] = $return[$lang_col];
 
             //////////////
 
@@ -1537,9 +1550,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        /////////////////////////
-        // 語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
         if (!empty($input['sport_id'])) {
@@ -1547,16 +1562,16 @@ class LsportApiController extends Controller {
         } else {
             $this->ApiError("01");
         }
-        if (($fixture_id+0 != $fixture_id) || ($fixture_id+0 == 0)) {
+        if (($sport_id+0 != $sport_id) || ($fixtsport_idure_id+0 == 0)) {
             $this->ApiError("01");
         }
 
-        if (!empty($input['sport_id'])) {
+        if (!empty($input['fixture_id'])) {
             $fixture_id = $input['fixture_id'];
         } else {
             $this->ApiError("02");
         }
-        if (($sport_id+0 != $sport_id) && ($sport_id+0 == 0)) {
+        if (($fixture_id+0 != $fixture_id) && ($fixture_id+0 == 0)) {
             $this->ApiError("02");
         }
 
@@ -1599,9 +1614,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        /////////////////////////
-        // 語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -1694,7 +1711,7 @@ class LsportApiController extends Controller {
                     if ($tmp_d === null) {
                         $tmp_bet_data['league_name'] = $vvv['name_en'];
                     } else {
-                        $tmp_bet_data['league_name'] = $tmp_d[$langCol];
+                        $tmp_bet_data['league_name'] = $tmp_d[$lang_col];
                     }
         
                     $type_id = $vvv['type_id'];
@@ -1703,7 +1720,7 @@ class LsportApiController extends Controller {
                     if ($tmp_d === null) {
                         $tmp_bet_data['market_bet_name'] = $vvv['name_en'];
                     } else {
-                        $tmp_bet_data['type_name'] = $tmp_d[$langCol];
+                        $tmp_bet_data['type_name'] = $tmp_d[$lang_col];
                     }
         
                     // 主隊
@@ -1712,7 +1729,7 @@ class LsportApiController extends Controller {
                     if ($tmp_d === null) {
                         $tmp_bet_data['home_team_name'] = $vvv['name_en'];
                     } else {
-                        $tmp_bet_data['home_team_name'] = $tmp_d[$langCol];
+                        $tmp_bet_data['home_team_name'] = $tmp_d[$lang_col];
                     }
         
                     // 客隊
@@ -1721,7 +1738,7 @@ class LsportApiController extends Controller {
                     if ($tmp_d === null) {
                         $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
                     } else {
-                        $tmp_bet_data['away_team_name'] = $tmp_d[$langCol];
+                        $tmp_bet_data['away_team_name'] = $tmp_d[$lang_col];
                     }
         
                     ///////////////
@@ -1747,7 +1764,7 @@ class LsportApiController extends Controller {
                 if ($tmp_d === null) {
                     $tmp_bet_data['league_name'] = $v['name_en'];
                 } else {
-                    $tmp_bet_data['league_name'] = $tmp_d[$langCol];
+                    $tmp_bet_data['league_name'] = $tmp_d[$lang_col];
                 }
 
                 $type_id = $v['type_id'];
@@ -1756,7 +1773,7 @@ class LsportApiController extends Controller {
                 if ($tmp_d === null) {
                     $tmp_bet_data['type_name'] = $v['type_name'];
                 } else {
-                    $tmp_bet_data['type_name'] = $tmp_d[$langCol];
+                    $tmp_bet_data['type_name'] = $tmp_d[$lang_col];
                 }
                 
                 $replace_lang = array();
@@ -1767,7 +1784,7 @@ class LsportApiController extends Controller {
                 if ($tmp_d === null) {
                     $tmp_bet_data['home_team_name'] = $v['home_team_name'];
                 } else {
-                    $tmp_bet_data['home_team_name'] = $tmp_d[$langCol];
+                    $tmp_bet_data['home_team_name'] = $tmp_d[$lang_col];
                 }
 
                 $away_team_id = $v['away_team_id'];
@@ -1776,7 +1793,7 @@ class LsportApiController extends Controller {
                 if ($tmp_d === null) {
                     $tmp_bet_data['away_team_name'] = $v['away_team_name'];
                 } else {
-                    $tmp_bet_data['away_team_name'] = $tmp_d[$langCol];
+                    $tmp_bet_data['away_team_name'] = $tmp_d[$lang_col];
                 }
 
                 // rate item 顯示轉化
@@ -1828,9 +1845,11 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-        /////////////////////////
-        // 取得語系
-        $langCol = 'name_' . $this->agent_lang;
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -2028,15 +2047,6 @@ class LsportApiController extends Controller {
             ->count();
 
         if ($checkToken) {
-            //---------------------------------
-            // 取得代理的語系
-            $agentlang = $this->getAgentLang($player_id);
-            if ($agentlang === false) {
-                //$this->error(__CLASS__, __FUNCTION__, "02");
-                $agentlang = 'en';
-            }
-            $this->agent_lang = $agentlang;
-            //---------------------------------
             return true;
         }
 
