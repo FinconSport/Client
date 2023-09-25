@@ -191,9 +191,6 @@
 		var sportListD = {}
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
 
-		// tempo sport id
-		var sportID = {}
-
 		function caller( url, data, obj, isUpdate = 0 ) {
 			$.ajax({
 				url: url,
@@ -262,8 +259,10 @@
 			var indexSportCon = document.getElementById("indexSportCon");
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
 			var matchSportCon = document.getElementById("matchSportCon");
-			var currentUrl = window.location.pathname;
 			var sportType = sport;
+			if (isNaN(sportType)) {
+				sportType = 1;
+			}
 			console.log(sportType);
 
 			//sportListD loop and generated element
