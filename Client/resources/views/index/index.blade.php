@@ -414,14 +414,14 @@
                         const fixtureContainer = document.createElement("div");
                         fixtureContainer.setAttribute("id", fixture.fixture_id);
                         fixtureContainer.setAttribute("class", "fixture-div");
-                        fixtureContainer.innerHTML = "<div class='seriesWrapperContent>" +
+                        fixtureContainer.innerHTML = "<div class='seriesWrapperContent'>" +
                                                         "<div class='seriesWrapper-left'>" +
                                                             "<p>" + fixture.home_team_name + "</p>" +
                                                             "<p>" + fixture.away_team_name + "</p>" +
-                                                        "</div>" 
+                                                        "</div>" +
                                                         "<div class='seriesWrapper-right'>" +
-                                                        "</div>"+
-                                                    "</div>"
+                                                        "</div>" +
+                                                    "</div>";
                         leagueContainer.appendChild(fixtureContainer);
                     }
                 }
