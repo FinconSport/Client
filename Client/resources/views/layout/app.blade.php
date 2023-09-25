@@ -393,11 +393,15 @@
 
 		// left side menu click function
 		$(document).ready(function(){
-			
+			var divElement = document.querySelector(".submenu-main");
+
 			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
 				$(this).closest('.submenu-main').toggleClass('active');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				if (!divElement.classList.contains("active")) {
+					console.log("no active class")
+				}
 			});
 
 			// Toggle 'openToggle' class for sport select elements
@@ -407,12 +411,6 @@
 			});
 
 		});
-
-		var divElement = document.querySelector(".submenu-main");
-		if (!divElement.classList.contains("active")) {
-			console.log("no active class")
-		}
-
 		// ----------------------------
 
 		//marquee onclick
