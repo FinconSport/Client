@@ -404,7 +404,7 @@
                     leagueList.appendChild(leagueContainer);
                 }
 
-                if (!numLeagues === 0) {  // <- open first div and if has data
+                if (!numLeagues === 0) { // <- open first div and if has data
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
                     console.log('try');
                 }
