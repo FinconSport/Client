@@ -419,10 +419,6 @@
 				$(`#${urlMappings[urlFragment]}`).addClass('active');
     			break;
 			}
-			// Check if sportType is 0 and the URL contains the word "index"
-			if (sportType === 0 && currentUrl.includes("index")) {
-				
-			}
 		}
 		// ----------------------------
 
