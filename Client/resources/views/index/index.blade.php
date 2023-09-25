@@ -415,8 +415,8 @@
         }
 
         // Get the "early" and "living" data
-        const earlyData = jsonData.data.early;
-        const livingData = jsonData.data.living;
+        const earlyData = matchListD.data.early;
+        const livingData = matchListD.data.living;
 
         // Get the parent divs for "early" and "living"
         const earlyParentDiv = document.getElementById("early");
