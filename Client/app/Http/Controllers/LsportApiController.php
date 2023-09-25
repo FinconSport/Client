@@ -1464,9 +1464,19 @@ class LsportApiController extends Controller {
             $scoreboard[] = $d;
 
             // 局數 
+            $d = array();
             $tmp = json_decode($v['periods'],true);
 
-            dd($tmp);
+            foreach ($tmp as $kk => $vv) {
+                $d = array();
+                foreach ($vv['Results'] as $kkk => $vvv) {
+                    $pos = $vvv['Position'];
+                    $d[$pos] = $vvv['Value'];
+                }
+                $scoreboard[] = $d;
+            }
+
+            dd($v['fixture_id'],$scoreboard);
 
             ////////////
 
@@ -2063,7 +2073,9 @@ class LsportApiController extends Controller {
         if (is_array($periods_raw_data)) {
             $arr_periods_raw_data = $periods_raw_data;
         } else {
+            // 如果參數是字串則json_decoe看看
             $arr_periods_raw_data = json_decode($periods_raw_data, true);
+            // de不出東西就回傳null
             if (!$arr_periods_raw_data) {
                 return false;
             }
@@ -2071,12 +2083,15 @@ class LsportApiController extends Controller {
 
         //========================================
 
-        $ret = [[0],[0]];
+        $ret = [
+            //[0],
+            //[0]
+        ];
         foreach ($arr_periods_raw_data as $pk => $pv) {
             $sequence_number = intval($pv['SequenceNumber']);
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position'] - 1);
+                $pos = intval($rv['Position']) - 1;
                 $ret[$pos][$sequence_number] = intval($rv['Value']);
             }
         }
