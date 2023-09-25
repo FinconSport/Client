@@ -1401,7 +1401,6 @@ class LsportApiController extends Controller {
         $fixture_data = $return;
 
         $reponse = array();
-
         foreach ($fixture_data as $k => $v) {
 
             $tmp = array();
@@ -1479,8 +1478,6 @@ class LsportApiController extends Controller {
                 }
             }
 
-            dd($v['fixture_id'],$scoreboard);
-
             ////////////
 
             $tmp = array(
@@ -1496,10 +1493,14 @@ class LsportApiController extends Controller {
                 'home_team_name' => $home_team_name,
                 'away_team_id' => $team_id,
                 'away_team_name' => $away_team_name,
+                'scoreboard' => $scoreboard
             );
             $reponse[] = $tmp;
         }
 
+        dd($reponse);
+        
+        $data = $reponse;
         // gzip
         $data = $this->gzip($data);
 
