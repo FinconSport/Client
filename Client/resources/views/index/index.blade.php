@@ -382,8 +382,8 @@
         // loop matchListD to generate html element here
         const livingParentDiv = document.getElementById("living");
 
-        if (matchListData && matchListData.data) {
-            const earlyData = matchListData.data.early;
+        if (matchListD && matchListD.data) {
+            const earlyData = matchListD.data.early;
 
             for (const sportId in earlyData) {
                 const sport = earlyData[sportId];
