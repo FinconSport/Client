@@ -419,7 +419,7 @@
         for (const leagueId in earlyData) {
             if (earlyData.hasOwnProperty(leagueId)) {
                 const league = earlyData[leagueId];
-                const leagueName = league.list[183] ? league.list[183].league_name : 'Unknown League';
+                const leagueName = league.list[183] ? league.list[183].league_name : '';
                 const fixtureCount = league.list[183] && league.list[183].list
                     ? Object.keys(league.list[183].list).length
                     : 0;

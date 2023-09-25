@@ -490,3 +490,7 @@ div[key="sizeSmallRate"]:hover {
 #indexContainerLeft .league .catWrapperTitle {
     position: relative;
 }
+
+#indexContainerLeft .league .catWrapperContent {
+    display: none;
+}
