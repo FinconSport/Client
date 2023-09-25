@@ -156,12 +156,12 @@ div.submenu-btn {
 
 .submenu-main .submenu-btn i {
     color:#c79e42;
+    top: 3px;
 }
 
 .submenu-main i {
     margin-right: 0.5rem!important;
     position: relative;
-    top: 3px;
 }
 
 .submenu-main{
