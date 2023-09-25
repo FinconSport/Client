@@ -478,3 +478,19 @@ div[key="sizeSmallRate"]:hover {
     margin-right: 0.5rem;
     border-radius: 10px;
 }
+
+
+/* --------added by aya------ */
+#indexContainerLeft .league .fa-chevron-right {
+    position: absolute;
+    top: 33%;
+    right: 2%;
+}
+
+#indexContainerLeft .league .catWrapperTitle {
+    position: relative;
+}
+
+#indexContainerLeft .league .catWrapperContent {
+    display: none;
+}

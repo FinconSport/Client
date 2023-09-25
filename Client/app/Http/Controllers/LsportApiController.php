@@ -1383,7 +1383,13 @@ class LsportApiController extends Controller {
         $fixture_status = array(
              1 => "等待開賽",
              2 => "進行中",
-             3 => "已結束"
+             3 => "已結束",
+             4 => "取消",
+             5 => "延期",
+             6 => "中斷",
+             7 => "放棄",
+             8 => "失去覆蓋",
+             9 => "即將開始"
         );
 
         /////////////////////////
@@ -1407,7 +1413,7 @@ class LsportApiController extends Controller {
             
             $tmp['fixture_id']  = $v['fixture_id'];
             $tmp['start_time']  = $v['start_time'];
-            $tmp['status']      = $v['status'];
+            $tmp['status']      = $fixture_status[$v['status']];
             $tmp['last_update'] = $v['last_update'];
 
             ///////////////////////
@@ -1454,12 +1460,12 @@ class LsportApiController extends Controller {
             $scoreboard = array();
 
             // 總分
-            $tmp = json_decode($v['scoreboard'],true);
-            $tmp = (array)$tmp;
+            $json = json_decode($v['scoreboard'],true);
+            $json = (array)$json;
 
-            if (count($tmp) > 0) {
+            if (count($json) > 0) {
                 $d = array();
-                foreach ($tmp['Results'] as $kk => $vv) {
+                foreach ($json['Results'] as $kk => $vv) {
                     $pos = $vv['Position']-1;
                     $d[$pos] = $vv['Value'];
                 }
@@ -1468,10 +1474,10 @@ class LsportApiController extends Controller {
 
             // 局數 
             $d = array();
-            $tmp = json_decode($v['periods'],true);
-            $tmp = (array)$tmp;
-            if (count($tmp) > 0) {
-                foreach ($tmp as $kk => $vv) {
+            $json = json_decode($v['periods'],true);
+            $json = (array)$json;
+            if (count($json) > 0) {
+                foreach ($json as $kk => $vv) {
                     $d = array();
                     foreach ($vv['Results'] as $kkk => $vvv) {
                         $pos = $vvv['Position']-1;
@@ -1484,14 +1490,11 @@ class LsportApiController extends Controller {
                 }
             }
 
-            dd($scoreboard);
             $tmp['scoreboard'] = $scoreboard;
             ////////////
 
             $reponse[] = $tmp;
         }
-
-        dd($reponse);
 
         $data = $reponse;
 
@@ -1780,7 +1783,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
                 $tmp_bet_data['status'] = $arrOrderStatus[$v['status']];
                 $tmp_bet_data['type_priority'] = $v['type_priority'];
-                $tmp[$k]['bet_data'][] = $tmp_bet_data;
+            //    $tmp[$k]['bet_data'][] = $tmp_bet_data;
 
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
@@ -1788,6 +1791,8 @@ class LsportApiController extends Controller {
 
         }
 
+
+        dd($tmp);
         $data['list'] = $tmp;
         ////////////////////////
 
