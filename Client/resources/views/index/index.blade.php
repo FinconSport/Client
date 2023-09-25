@@ -397,11 +397,16 @@
                 leagueList.setAttribute("class", "league-list");
                 sportContainer.appendChild(leagueList);
 
-                if (numLeagues === 0) {
+                if (numLeagues === 0) {  // <- add no data 
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("class", "league-div");
                     leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
                     leagueList.appendChild(leagueContainer);
+                }
+
+                var firstDiv = document.querySelector("#indexContainerLeft div:first-child");
+                if (!numLeagues === 0) {  // <- open first div and if has data
+                    firstDiv.classList.add("open");
                 }
 
                 for (const leagueId in sport.list) {
@@ -412,7 +417,7 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
                     const fixtureContainer = document.createElement("div");
@@ -486,12 +491,12 @@
         $(document).ready(function(){
             $(".catWrapperTitle").click(function(){
                 $(this).toggleClass("open");
-                $('.catWrapperTitle').not(this).removeClass('open')
+                // $('.catWrapperTitle').not(this).removeClass('open')
             });
 
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
-                $('.seriesWrapperTitle').not(this).removeClass('open')
+                // $('.seriesWrapperTitle').not(this).removeClass('open')
             });
         });
         // loop matchListD to generate html element here
