@@ -390,17 +390,19 @@
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                if (numLeagues === 0) {
-                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
-                } else {
-                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
-                }
-                // sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
                 parentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
                 leagueList.setAttribute("class", "league-list");
                 sportContainer.appendChild(leagueList);
+
+                if (numLeagues === 0) {
+                    const leagueContainer = document.createElement("div");
+                    leagueContainer.setAttribute("class", "league-div");
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
+                    leagueList.appendChild(leagueContainer);
+                }
 
                 for (const leagueId in sport.list) {
                     const league = sport.list[leagueId];
@@ -410,12 +412,7 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    if (numFixtures === 0) {
-                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
-                    } else {
-                        leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
-                    }
-                    // leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
                     const fixtureContainer = document.createElement("div");
