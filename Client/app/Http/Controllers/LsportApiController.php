@@ -1363,7 +1363,7 @@ class LsportApiController extends Controller {
         // 取得語系
         $langCol = 'name_' . $this->agent_lang;
 
-        //////////////////////////////////////////
+        /////////////////////////
         // 輸入判定
         if (!isset($input['sport']) || ($input['sport'] == "")) {
             $input['sport'] = DEFAULT_SPORT_ID;  // 預設1 , 足球
@@ -1378,6 +1378,7 @@ class LsportApiController extends Controller {
         $sport_id = $input['sport'];
         $page = $input['page'];
         
+        /////////////////////////
         // 狀態
         $fixture_status = array(
              1 => "等待開賽",
@@ -1386,20 +1387,22 @@ class LsportApiController extends Controller {
         );
 
         /////////////////////////
+        // 分頁 
         $page_limit = $this->page_limit;
         $skip = ($page-1)*$page_limit;
 
+        /////////////////////////
         // 取得比賽資料
         $return = LsportFixture::where("status",">=",3)->where("sport_id",$sport_id)->orderBy("start_time","DESC")->get();
         if ($return === false) {
             $this->ApiError('02');
         }
 
-        dd($return);
-            
+        $data = $return;
 
-        $arrRet = array();
-        foreach ($data as $dk => $dv) {
+        dd($langCol);
+
+        foreach ($data as $k => $v) {
 
             //判斷用戶語系資料是否為空,若是則用en就好
             // league_name: 
@@ -1408,18 +1411,21 @@ class LsportApiController extends Controller {
             } else {
                 $league_name = $dv->l_name_locale;
             }
+
             // sport_name: 
             if (!strlen($dv->s_name_locale)) {  // sport name
                 $sport_name = $dv->s_name_en;
             } else {
                 $sport_name = $dv->s_name_locale;
             }
+
             // home_team_name: 
             if (!strlen($dv->th_name_locale)) {  // sport name
                 $home_team_name = $dv->th_name_en;
             } else {
                 $home_team_name = $dv->th_name_locale;
             }
+
             // away_team_name: 
             if (!strlen($dv->ta_name_locale)) {  // sport name
                 $away_team_name = $dv->ta_name_en;
