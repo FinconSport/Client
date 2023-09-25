@@ -297,7 +297,7 @@
 					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("onclick", "sportTo( event, " + x.sport_id);
+					sportSelect.setAttribute("onclick", 'sportTo(event, "' + x.sport_id + '", '+ url +')');
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
