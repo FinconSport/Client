@@ -43,6 +43,7 @@
     width: 100%;
     overflow-y: auto;
     padding: 0 5rem;
+    padding-bottom: 1rem;
 }
 /* 右方投注 */
 #indexContainerRight {
@@ -535,14 +536,14 @@ div[key="sizeSmallRate"]:hover {
     overflow: hidden;
     opacity: 0;
     height: 0;
-    transition: all .4s ease-in-out 0s;
-    -webkit-transition: all .4s ease-in-out 0s;
+    transition: all .5s ease-in-out 0s;
+    -webkit-transition: all .5s ease-in-out 0s;
   }
 
     #indexContainerLeft .main-div .catWrapperTitle i {
         transform: rotate(0deg);
-        transition: all .4s ease-in-out 0s;
-        -webkit-transition: all .4s ease-in-out 0s;
+        transition: all .5s ease-in-out 0s;
+        -webkit-transition: all .5s ease-in-out 0s;
     }
 
     #indexContainerLeft .main-div .seriesWrapperTitle i {
