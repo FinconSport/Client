@@ -501,8 +501,10 @@ class LsportApiController extends Controller {
 
         //儲存league-fixture-market的階層資料
         $arrLeagues = array(
-            FIXTURE_STATUS['early'],  // 早盤
-            FIXTURE_STATUS['living'],  // 走地
+            //FIXTURE_STATUS['early'],  // 早盤
+            //FIXTURE_STATUS['living'],  // 走地
+            1,
+            2,
         );
         //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
         $sport_name = '';  //儲存球種名稱
@@ -551,12 +553,6 @@ class LsportApiController extends Controller {
                 } else {
                     $sport_name = $dv->s_name_locale;
                 }
-            }
-
-            // f.status 層 ----------------------------
-            if (!isset($arrLeagues[$fixture_status])) {
-
-                $arrLeagues[$fixture_status] = array();
             }
 
             // league 層 ----------------------------
