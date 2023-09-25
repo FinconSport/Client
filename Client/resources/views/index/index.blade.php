@@ -463,13 +463,16 @@
             }
         }
 
-if (matchListD && matchListD.data) {
-    const earlyData = matchListD.data.early;
-    const livingData = matchListD.data.living;
+        const earlyParentDiv = document.getElementById("early");
+        const livingParentDiv = document.getElementById("living");
 
-    createSportStructure(earlyData, earlyParentDiv, 'early');
-    createSportStructure(livingData, livingParentDiv, 'living');
-}
+        if (matchListD && matchListD.data) {
+            const earlyData = matchListD.data.early;
+            const livingData = matchListD.data.living;
+
+            createSportStructure(earlyData, earlyParentDiv, 'early');
+            createSportStructure(livingData, livingParentDiv, 'living');
+        }
 
 
         $(document).ready(function(){
