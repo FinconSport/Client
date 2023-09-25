@@ -383,13 +383,13 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p></div>`;
+            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return leagueDiv;
         }
 
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
-            listDiv.className = "list";
+            listDiv.className = "catWrapperContent";
 
             if (fixtureData) {
                 for (const fixtureId in fixtureData) {
