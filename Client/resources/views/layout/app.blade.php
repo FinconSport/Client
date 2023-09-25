@@ -40,7 +40,7 @@
 					<div id="subMenuContainer">
 						<div class="submenu-main" id="lf_sport">
 							<div class="submenu-inner">
-								<div class="submenu-btn"><i class="fa-solid fa-house"></i> {{ trans('common.left_menu.sport_bet') }}</div>
+								<div class="submenu-btn"><i class="fa-solid fa-house"></i> <p>{{ trans('common.left_menu.sport_bet') }}</p></div>
 								<div id="indexSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 
 						<div class="submenu-main" id="lf_mOrder">
 							<div class="submenu-inner">
-								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> {{ trans('common.left_menu.m_bet') }}</div>
+								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.m_bet') }}</p></div>
 								<div id="mOrderSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
@@ -56,13 +56,13 @@
 						
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> {{ trans('common.left_menu.record') }}</a>
+								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></a>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_match">
 							<div class="submenu-inner">
-								<div class="submenu-btn"><i class="fa-solid fa-table"></i> {{ trans('common.left_menu.match') }}</div>
+								<div class="submenu-btn"><i class="fa-solid fa-table"></i> <p>{{ trans('common.left_menu.match') }}</p></div>
 								<div id="matchSportCon" class="submenu-toggle-list">
 								</div>
 							</div>
@@ -70,25 +70,25 @@
 
 						<div class="submenu-main" id="lf_rule">
 							<div class="submenu-inner">
-								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> {{ trans('common.left_menu.rule') }}</a>
+								<a href="/rule" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></a>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_logs">
 							<div class="submenu-inner">
-								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> {{ trans('common.left_menu.logs') }}</a>
+								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> <p>{{ trans('common.left_menu.logs') }}</p></a>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_calcu">
 							<div class="submenu-inner">
-								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> {{ trans('common.left_menu.calculator') }}</a>
+								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></a>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_notice">
 							<div class="submenu-inner">
-								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> {{ trans('common.left_menu.notice') }}</a>
+								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> <p>{{ trans('common.left_menu.notice') }}</p></a>
 							</div>
 						</div>
 					</div>
@@ -260,7 +260,8 @@
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
 			var matchSportCon = document.getElementById("matchSportCon");
 			var sportType = sport;
-			if (isNaN(sportType)) {
+			//if the url is index
+			if (isNaN(sportType)) { 
 				sportType = 1;
 			}
 			console.log(sportType);
@@ -278,7 +279,7 @@
 					indexSportSelect.setAttribute("id", x.sport_id);
 					indexSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
 					indexSportSelect.setAttribute("href", "/?sport=" + key);
-					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
+					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					//append parent div to the main container of index sport menu
 					indexSportCon.appendChild(indexSportSelect);
 
@@ -287,7 +288,7 @@
 					mOrderSportSelect.setAttribute("id", x.sport_id);
 					mOrderSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
 					mOrderSportSelect.setAttribute("href", "/m_order?sport=" + key);
-					mOrderSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
+					mOrderSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					//append parent div to the main container of mOrder sport menu
 					mOrderSportCon.appendChild(mOrderSportSelect);
 
@@ -296,7 +297,7 @@
 					matchSportSelect.setAttribute("id", x.sport_id);
 					matchSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
 					matchSportSelect.setAttribute("href", "/match?sport=" + key);
-					matchSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
+					matchSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					//append parent div to the main container of match sport menu
 					matchSportCon.appendChild(matchSportSelect);
 				});
