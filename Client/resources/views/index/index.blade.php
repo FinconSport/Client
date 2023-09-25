@@ -61,8 +61,12 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
-        <div id="earlyDiv"></div>
-        <div id="livingDiv"></div>
+        <div id="earlyDiv">
+            <p>early</p>
+        </div>
+        <div id="livingDiv">
+            <p>living</p>
+        </div>
     </div>
 
     <div id="indexContainerLeft" style="display:none;">
