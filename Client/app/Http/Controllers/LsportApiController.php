@@ -1413,7 +1413,7 @@ class LsportApiController extends Controller {
             
             $tmp['fixture_id']  = $v['fixture_id'];
             $tmp['start_time']  = $v['start_time'];
-            $tmp['status']      = $$fixture_status[$v['status']];
+            $tmp['status']      = $$fixture_status[intval($v['status'])];
             $tmp['last_update'] = $v['last_update'];
 
             ///////////////////////
