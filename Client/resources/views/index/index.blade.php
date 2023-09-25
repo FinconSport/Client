@@ -416,12 +416,6 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-
-                    const firstDiv = leagueContainer.querySelector("div.seriesWrapperTitle");
-                    if (firstDiv) {
-                        // Add the "open" class to the first div
-                        firstDiv.classList.add("open");
-                    }
                     
                     leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
@@ -491,6 +485,14 @@
 
             createSportStructure(earlyData, earlyParentDiv, 'early');
             createSportStructure(livingData, livingParentDiv, 'living');
+        }
+
+        var firstLeagueDiv = document.querySelector('.league-div');
+        if (firstLeagueDiv) {
+            var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
+            if (childLeagueDiv) {
+                childLeagueDiv.classList.add('open');
+            }
         }
 
 
