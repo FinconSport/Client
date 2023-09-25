@@ -865,6 +865,7 @@ class LsportApiController extends Controller {
         }
 
         $fixture_data = $return;
+        $league_id = $fixture_data['league_id'];
 
         //////////////////////////////////////////
         // order data
