@@ -277,11 +277,13 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				sportType = 1; // Update sportType to 1 based on conditions
 				$("#lf_sport").addClass('active');
+				$("#lf_sport .submenu-toggle-list").css('max-height', '900px');
 			}
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
 					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
 					break;
 				}
 			}
@@ -396,7 +398,10 @@
 		$(document).ready(function(){
 			$(".submenu-btn").click(function(){
 				$(this).closest('.submenu-main').toggleClass('active');
+				var submenuToggleList = $(this).next(".submenu-toggle-list");
+				submenuToggleList.css('max-height', '900px');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				$('.submenu-main').not($(this).next(".submenu-toggle-list")).css('max-height', '0px');
 			});
 
 			// Toggle 'openToggle' class for sport select elements
