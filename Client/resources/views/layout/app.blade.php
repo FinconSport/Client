@@ -263,17 +263,8 @@
 			const currentUrl = window.location.href;
 			const noPath = window.location.pathname;
 
-			if (currentUrl.includes('index') || noPath == '/') {
-				sportType = 1; // Update sportType to 1 based on conditions
-			}
-
-			if (noPath == '/') {
-				console.log(noPath); // Log 'noPath' when the path is empty
-			}
-
 			const urlMappings = {
 				'/?sport': 'lf_sport',
-				'index': 'lf_sport',
 				'm_order?': 'lf_mOrder',
 				'order': 'lf_order',
 				'match?': 'lf_match',
@@ -282,6 +273,11 @@
 				'calculator': 'lf_calcu',
 				'notice': 'lf_notice'
 			};
+
+			if (currentUrl.includes('index') || noPath == '/') {
+				sportType = 1; // Update sportType to 1 based on conditions
+				$("#lf_sport").addClass('active');
+			}
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
