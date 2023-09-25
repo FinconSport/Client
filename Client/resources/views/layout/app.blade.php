@@ -263,7 +263,7 @@
 			const currentUrl = window.location.href;
 			const noPath = window.location.pathname;
 
-			if (currentUrl.includes('index') || noPath == '/') {
+			if (currentUrl.includes('index') || noPath == '') {
 				sportType = 1;
 			}
 
