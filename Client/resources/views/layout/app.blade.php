@@ -264,7 +264,11 @@
 			const noPath = window.location.pathname;
 
 			if (currentUrl.includes('index') || noPath == '') {
-				sportType = 1;
+				sportType = 1; // Update sportType to 1 based on conditions
+			}
+
+			if (noPath == '') {
+				console.log(noPath); // Log 'noPath' when the path is empty
 			}
 
 			const urlMappings = {
