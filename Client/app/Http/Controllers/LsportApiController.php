@@ -1501,7 +1501,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess("01", $data);
+        $this->ApiSuccess($data,"01",true); 
     }
 
 
@@ -1747,7 +1747,7 @@ class LsportApiController extends Controller {
 
                 $type_id = $v['type_id'];
 
-                $tmp_d = LsportMarketBet::where("id", $type_id)->where("sport_id", $v['sport_id'])->first();
+                $tmp_d = LsportMarketBet::where("bet_id", $type_id)->where("sport_id", $v['sport_id'])->first();
                 if ($tmp_d === null) {
                     $tmp_bet_data['type_name'] = $v['type_name'];
                 } else {
