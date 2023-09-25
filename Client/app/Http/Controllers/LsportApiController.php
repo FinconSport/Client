@@ -1366,27 +1366,25 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 輸入判定
         if (!isset($input['sport']) || ($input['sport'] == "")) {
-            $input['sport'] = 1;  // 預設1 , 足球
+            $input['sport'] = DEFAULT_SPORT_ID;  // 預設1 , 足球
         }
-        $sport_id = $input['sport'];
 
         if (!isset($input['page']) || ($input['page'] == "")) {
             $input['page'] = 1; // 預設1 
         }
-        $page = $input['page'];
 
     	/////////////////////////
         // Search 區用
 
+        $sport_id = $input['sport_id'];
+        $page = $input['page'];
+        
+
         // 狀態
-        $arrFixtureStatus = array(
-            -1 => "異常",
+        $fixture_status = array(
              1 => "等待開賽",
              2 => "進行中",
-             3 => "已結束",
-             4 => "延期",
-             5 => "中斷",
-            99 => "取消"
+             3 => "已結束"
         );
 
         /////////////////////////
@@ -1394,40 +1392,13 @@ class LsportApiController extends Controller {
         $skip = ($page-1)*$page_limit;
 
         // 取得比賽資料
-        $data = DB::table('lsport_league as l')
-            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
-            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
-            ->join('lsport_team as th', function ($join) {
-                $join->on('f.home_id', '=', 'th.team_id')
-                ->on('l.league_id', '=', 'th.league_id');
-            })
-            ->join('lsport_team as ta', function ($join) {
-                $join->on('f.away_id', '=', 'ta.team_id')
-                ->on('l.league_id', '=', 'ta.league_id');
-            })
-            ->select(
-                'l.name_en AS l_name_en', 'l.'.$langCol.' AS l_name_locale',
-                's.name_en AS s_name_en', 's.'.$langCol.' AS s_name_locale',
-                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',  //'f.home_id', 'f.away_id',
-                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$langCol.' AS th_name_locale',
-                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
-            )
-            ->where('l.status', 1)
-            ->where('l.sport_id', $sport_id)
-            ->where('s.sport_id', $sport_id)
-            ->where('f.status', '>=', 2)  //賽事狀態: 進行中(2)或以上
-            ->where("th.sport_id", $sport_id)
-            ->where("th.sport_id", $sport_id)
-            ->orderBy('f.start_time', 'DESC')
-            ->skip($skip)
-            ->take($page_limit)
-            ->get();
-            
-        $pagination = $data->count();
-        
-        if ($data === false) {
+        $reutrn = LsportFixture::where("status",">=",3)->where("sport_id",$)->orderBy("start_time","DESC")->get();
+        if ($reutrn === false) {
             $this->ApiError('02');
         }
+        
+        dd($return);
+            
 
         $arrRet = array();
         foreach ($data as $dk => $dv) {
@@ -1478,7 +1449,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ajaxSuccess("success_result_index_01", $data);
+        $this->ApiSuccess("01", $data);
     }
 
 
@@ -1547,7 +1518,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01");
     }
 
     /**
@@ -1613,8 +1584,7 @@ class LsportApiController extends Controller {
             $this->ApiError("01");
         }
 
-        dd($return);
-        $arrOrderStatus = array(
+        $order_status = array(
             0 => "已取消",
             1 => "等待審核",
             2 => "等待開獎",
@@ -1625,7 +1595,7 @@ class LsportApiController extends Controller {
         $data = array();
         $tmp = array();
 
-        //!!!!!!!!!!!!!!!
+        /////////////////////////
 
         $columns = array(
             "id",
@@ -1639,12 +1609,11 @@ class LsportApiController extends Controller {
         );
 
         foreach ($return as $k => $v) {
-
             foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
 
-            $tmp[$k]['status'] = $arrOrderStatus[$v['status']];
+            $tmp[$k]['status'] = $order_status[$v['status']];
             $tmp[$k]['m_order'] = $v['m_order'];
 
             $sport_id = $v["sport_id"];
@@ -1662,11 +1631,11 @@ class LsportApiController extends Controller {
                 foreach ($cc as $kkk => $vvv) {
                     $tmp_bet_data = array();
 
+                    // 聯賽
                     $league_id = $vvv['league_id'];
-
                     $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                        $tmp_bet_data['league_name'] = $vvv['league_name'];
+                        $tmp_bet_data['league_name'] = $vvv['name_en'];
                     } else {
                         $tmp_bet_data['league_name'] = $tmp_d[$langCol];
                     }
@@ -1675,24 +1644,22 @@ class LsportApiController extends Controller {
 
                     $tmp_d = LsportMarketBet::where("id", $type_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                        $tmp_bet_data['type_name'] = $vvv['type_name'];
+                        $tmp_bet_data['market_bet_name'] = $vvv['name_en'];
                     } else {
                         $tmp_bet_data['type_name'] = $tmp_d[$langCol];
                     }
-                    
-                    $replace_lang = array();
         
+                    // 主隊
                     $home_team_id = $vvv['home_team_id'];
-
                     $tmp_d = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
-                        $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
+                        $tmp_bet_data['home_team_name'] = $vvv['name_en'];
                     } else {
                         $tmp_bet_data['home_team_name'] = $tmp_d[$langCol];
                     }
         
+                    // 客隊
                     $away_team_id = $vvv['away_team_id'];
-
                     $tmp_d = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $vvv['sport_id'])->first();
                     if ($tmp_d === null) {
                         $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
@@ -1700,51 +1667,28 @@ class LsportApiController extends Controller {
                         $tmp_bet_data['away_team_name'] = $tmp_d[$langCol];
                     }
         
-                    // rate item 顯示轉化
-                    $item_name = $vvv['type_item_name']; // 預設
-                    $replace_lang[] = array("cn" => "单", "tw" => "單");
-                    $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                    foreach ($replace_lang as $lang_k => $lang_v) {
-                        $item_name = str_replace($lang_v['cn'], $lang_v['tw'], $item_name);
-                    }
-                    $tmp_bet_data['type_item_name'] = $item_name;
+                    ///////////////
 
+                    $tmp_bet_data['type_item_name'] = $vvv['type_item_name'];
                     $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
                     $tmp_bet_data['status'] = $arrOrderStatus[$vvv['status']];
                     $tmp_bet_data['type_priority'] = $vvv['type_priority'];
-
-                    $tmp_bet_data['home_team_logo'] = "";
-                    $tmp_bet_data['away_team_logo'] = "";
                     
-                    // 取得隊伍logo
-
-                    $tmp_logo = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $sport_id)->first();
-                    if (($tmp_logo === false) || ($tmp_logo == null)) {
-                        continue;
-                    }
-                    if (isset($tmp_logo['local_logo'])) {
-                        $tmp_bet_data['home_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
-                    }
-            
-
-                    $tmp_logo = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $sport_id)->first();
-                    if (($tmp_logo === false) || ($tmp_logo == null)) {
-                        continue;
-                    }
-                    if (isset($tmp_logo['local_logo'])) {
-                        $tmp_bet_data['away_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
-                    }
 
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
             } else {
                 $tmp_bet_data = array();
 
+                // 聯賽
                 $league_id = $v['league_id'];
-
                 $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $v['sport_id'])->first();
+                if ($tmp_d === false) {
+                    $this->ApiError("01");
+                }
+
                 if ($tmp_d === null) {
-                    $tmp_bet_data['league_name'] = $v['league_name'];
+                    $tmp_bet_data['league_name'] = $v['name_en'];
                 } else {
                     $tmp_bet_data['league_name'] = $tmp_d[$langCol];
                 }
@@ -1789,26 +1733,6 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['type_priority'] = $v['type_priority'];
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
 
-                $tmp_bet_data['home_team_logo'] = "";
-                $tmp_bet_data['away_team_logo'] = "";
-
-                // 取得隊伍logo
-
-                $tmp_logo = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $sport_id)->first();
-                if (($tmp_logo === false) || ($tmp_logo == null)) {
-                    continue;
-                }
-                if (isset($tmp_logo['local_logo'])) {
-                    $tmp_bet_data['home_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
-                }
-        
-                $tmp_logo = LsportTeam::where("team_id", $away_team_id)->where("game_id", $sport_id)->first();
-                if (($tmp_logo === false) || ($tmp_logo == null)) {
-                    continue;
-                }
-                if (isset($tmp_logo['local_logo'])) {
-                    $tmp_bet_data['away_team_logo'] = $this->system_config['image_url'] . $tmp_logo['local_logo'];
-                }
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
@@ -1821,7 +1745,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01");
 
     }
 
@@ -1889,7 +1813,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true); 
+        $this->ApiSuccess($data, "01"); 
 
     }
 
