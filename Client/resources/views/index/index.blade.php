@@ -387,24 +387,24 @@
 
             for (const sportId in earlyData) {
                 const sport = earlyData[sportId];
+                const numLeagues = Object.keys(sport.list).length;
 
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
+                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
                 for (const leagueId in sport.list) {
                     const league = sport.list[leagueId];
-
-                    // Count the number of fixtures within each league
                     const numFixtures = Object.keys(league.list).length;
 
                     // Create a container for each league within the sport
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "</p><p>Number of Fixtures: " + numFixtures + "</p><i class='fa-solid fa-chevron-right'></i></div>";
+                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                     sportContainer.appendChild(leagueContainer);
 
                     for (const fixtureId in league.list) {
@@ -420,7 +420,6 @@
                 }
             }
         }
-
 
         
         // loop matchListD to generate html element here
