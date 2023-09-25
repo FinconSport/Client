@@ -411,11 +411,9 @@
 
 			// Function to determine the active submenu
 			function setActiveSubMenu() {
-				$('.submenu-main').removeClass("active");
 				for (const urlFragment in urlMappings) {
 					if (window.location.href.includes(urlFragment)) {
 						$(`#${urlMappings[urlFragment]}`).addClass('active');
-						divElement.classList.add('active');
 						return; // Exit the loop if a match is found
 					}
 				}
@@ -425,8 +423,11 @@
 			$(".submenu-btn").click(function(){
 				$(this).closest('.submenu-main').toggleClass('active');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				if (!divElement.classList.contains("active")) {
+					setActiveSubMenu();
+				}
 
-				setActiveSubMenu();
+				
 			});
 
 			// Toggle 'openToggle' class for sport select elements
