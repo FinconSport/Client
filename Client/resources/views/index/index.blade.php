@@ -383,8 +383,8 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            // leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.`${title}`') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
-            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
+            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.`${title}`') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
+            // leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return leagueDiv;
         }
 
