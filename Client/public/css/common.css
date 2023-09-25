@@ -184,8 +184,6 @@ div.submenu-btn {
     background-color: #c4d3d3;
     color: #415b5a;
     z-index:1;
-    -webkit-transition-delay: 1.1s; /* Safari */
-    transition-delay: 1.1s;
 }
 
 .submenu-main.active::before,
