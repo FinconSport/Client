@@ -416,9 +416,13 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    if (first div add class open) {
-                        leagueContainer.classList.add("open");
+
+                    const firstDiv = leagueContainer.querySelector("div.seriesWrapperTitle");
+                    if (firstDiv) {
+                        // Add the "open" class to the first div
+                        firstDiv.classList.add("open");
                     }
+                    
                     leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
