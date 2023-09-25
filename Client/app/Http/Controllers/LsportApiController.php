@@ -1476,7 +1476,7 @@ class LsportApiController extends Controller {
                 $scoreboard[] = $d;
             }
 
-            dd($scoreboard);
+            dd($v['fixture_id'],$scoreboard);
 
             ////////////
 
