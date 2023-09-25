@@ -483,11 +483,10 @@ class LsportApiController extends Controller {
                 'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
             )
             //->where('l.status', 1)  // 原本只抓1=尚未開賽
-            //->whereIn('l.f_status', [1, 2])  //可區分:未開賽及走地中
-            ->where('l.f_status', 1)
-            ->orWhere('l.f_status', 2)
+            ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
             ->where('s.sport_id', $sport_id)
+            ->whereIn('f.f_status', [1, 2])  //可區分:未開賽及走地中
             ->where('f.start_time', "<=", $after_tomorrow)
             ->where("th.sport_id", $sport_id)
             ->where("th.sport_id", $sport_id)
