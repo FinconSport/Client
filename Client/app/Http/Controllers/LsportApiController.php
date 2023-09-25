@@ -1390,8 +1390,8 @@ class LsportApiController extends Controller {
         $skip = ($page-1)*$page_limit;
 
         // 取得比賽資料
-        $reutrn = LsportFixture::where("status",">=",3)->where("sport_id",$sport_id)->orderBy("start_time","DESC")->get();
-        if ($reutrn === false) {
+        $return = LsportFixture::where("status",">=",3)->where("sport_id",$sport_id)->orderBy("start_time","DESC")->get();
+        if ($return === false) {
             $this->ApiError('02');
         }
 
