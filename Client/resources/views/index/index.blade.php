@@ -404,7 +404,7 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-chevron-right'></i></div>";
+                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
                     sportContainer.appendChild(leagueContainer);
 
                     for (const fixtureId in league.list) {
