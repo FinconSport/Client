@@ -536,6 +536,8 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 開始loop 賽事資料
 
+        dd($data);
+
         foreach ($data as $dk => $dv) {
             $league_id = $dv->league_id;
             $fixture_id = $dv->fixture_id;
