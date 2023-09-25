@@ -41,7 +41,6 @@ class LsportApiController extends Controller {
 
     protected $agent_lang;  // 玩家的代理的語系. 選擇相對應的DB翻譯欄位時會用到.
 
-
     /**
      * index
      *
@@ -616,7 +615,8 @@ class LsportApiController extends Controller {
                     $away_team_name = $dv->ta_name_locale;
                 }
 
-
+                $periods = null;
+                $scoreboard = null;
 
                 // 包入 fixture 賽事資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
@@ -629,13 +629,15 @@ class LsportApiController extends Controller {
                     //'livescore_extradata' => $dv->livescore_extradata,  // 目前開發階段先不給
                     //'periods' => $dv->periods,  // 目前開發階段先不給
                     //'scoreboard' => $dv->scoreboard,  // 目前開發階段先不給
-                    'status' => $dv->f_status,
+                    'status' => $fixture_status,
                     'last_update' => $dv->f_last_update,
                     'home_team_id' => $dv->th_team_id,
                     'home_team_name' => $home_team_name,
                     'away_team_id' => $dv->ta_team_id,
                     'away_team_name' => $away_team_name,
                     'list' => array(),
+                    'periods' => $periods,
+                    'scoreboard' => $scoreboard,
                 );
             }
 
@@ -2274,6 +2276,88 @@ class LsportApiController extends Controller {
         }
 
         return false;
+    }
+
+    /**
+     * getMatchPeriods
+     *
+     * 解析並回傳一場賽事的局數資料。應為走地中賽事。
+     * 
+     * @param 
+     * @return  # null
+     *          # false
+     *          # ARRAY
+     */
+
+    public function getMatchPeriods_caller(Request $request) {
+
+        $return = $this->getMatchPeriods(
+            $request['sport_id'],
+            $request['fixture_status'],
+            $request['periods_raw_data']
+        );
+        echo json_encode('ret' => $return,);
+    }
+
+    protected function getMatchPeriods($sport_id, $fixture_status, $periods_raw_data) {
+
+        // 除了走地中賽事其餘均回傳null
+        if ($fixture_status != 2) {
+            return null;
+        }
+
+        // 目前只處理棒球
+        if ($sport_id != DEFAULT_SPORT_ID) {
+            return null;
+        }
+
+        //========================================
+
+        if (is_array($periods_raw_data)) {
+            $arr_periods_raw_data = $periods_raw_data;
+        } else {
+            $arr_periods_raw_data = json_decode($periods_raw_data);
+            if (!$arr_periods_raw_data) {
+                return false;
+            }
+        }
+
+        //========================================
+
+        $ret = array();
+        foreach ($arr_periods_raw_data as $pk => $pv) {
+            $sequence_number = $pv['SequenceNumber'];
+            $arr_results = $pv['Results'];
+            foreach ($arr_results as $rk => $rv) {
+                $pos = $rv['Position'] - 1;
+                $ret[$pos][$sequence_number] = $rv['Value'];
+            }
+        }
+
+        return $ret;
+
+    }
+
+    /**
+     * getMatchScoreboard
+     *
+     * 解析並回傳一場賽事的比分板資料。應為走地中賽事。
+     * 
+     * @param 
+     * @return 
+     */
+    protected function getMatchScoreboard($sport_id, $fixture_status, $scoreboard_raw_data) {
+
+        // 除了走地中賽事其餘均回傳null
+        if ($fixture_status != 2) {
+            return null;
+        }
+
+        // 目前只處理棒球
+        if ($sport_id != DEFAULT_SPORT_ID) {
+            return null;
+        }
+
     }
 
 }
