@@ -256,50 +256,29 @@
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
 
-			var indexSportCon = document.getElementById("indexSportCon");
-			var mOrderSportCon = document.getElementById("mOrderSportCon");
-			var matchSportCon = document.getElementById("matchSportCon");
-			var sportType = sport;
-			//if the url is index
-			if (isNaN(sportType)) { 
-				sportType = 1;
-			}
+			// left menu - sportListD 
+			var sportType = isNaN(sport) ? 1 : sport;
 			console.log(sportType);
 
-			//sportListD loop and generated element
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
 
 				sports.forEach(function (x, index) {
-					var key = index + 1;
-					x.key = key;
+				var key = index + 1;
+				x.key = key;
 
-					//(index sport)
-					var indexSportSelect = document.createElement("a"); // parent div
-					indexSportSelect.setAttribute("id", x.sport_id);
-					indexSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					indexSportSelect.setAttribute("href", "/?sport=" + key);
-					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
-					//append parent div to the main container of index sport menu
-					indexSportCon.appendChild(indexSportSelect);
+				function createSportSelect(container, url) {
+					var sportSelect = document.createElement("a");
+					sportSelect.setAttribute("id", x.sport_id);
+					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
+					sportSelect.setAttribute("href", url + key);
+					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+					container.appendChild(sportSelect);
+				}
 
-					//(mOrder sport)
-					var mOrderSportSelect = document.createElement("a"); // parent div
-					mOrderSportSelect.setAttribute("id", x.sport_id);
-					mOrderSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					mOrderSportSelect.setAttribute("href", "/m_order?sport=" + key);
-					mOrderSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
-					//append parent div to the main container of mOrder sport menu
-					mOrderSportCon.appendChild(mOrderSportSelect);
-
-					//(match sport)
-					var matchSportSelect = document.createElement("a"); // parent div
-					matchSportSelect.setAttribute("id", x.sport_id);
-					matchSportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					matchSportSelect.setAttribute("href", "/match?sport=" + key);
-					matchSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
-					//append parent div to the main container of match sport menu
-					matchSportCon.appendChild(matchSportSelect);
+				createSportSelect(indexSportCon, "/");
+				createSportSelect(mOrderSportCon, "/m_order?sport=");
+				createSportSelect(matchSportCon, "/match?sport=");
 				});
 			}
 
