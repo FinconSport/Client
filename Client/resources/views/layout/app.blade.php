@@ -393,10 +393,11 @@
 
 		// left side menu click function
 		$(document).ready(function(){
+			
 			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
-				$(this).closest('.submenu-main').toggleClass('clicked');
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
+				$(this).closest('.submenu-main').toggleClass('active');
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 			});
 
 			// Toggle 'openToggle' class for sport select elements
@@ -404,6 +405,29 @@
 				$(this).toggleClass('openToggle');
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
+
+			const currentUrl = window.location.href;
+			const noPath = window.location.pathname;
+			
+			const urlMappings = {
+				'/?sport': 'lf_sport',
+				'm_order?': 'lf_mOrder',
+				'order': 'lf_order',
+				'match?': 'lf_match',
+				'rule': 'lf_rule',
+				'logs': 'lf_logs',
+				'calculator': 'lf_calcu',
+				'notice': 'lf_notice'
+			};
+
+			var divElement = document.querySelector(".submenu-main");
+			for (const urlFragment in urlMappings) {
+				if (!divElement.classList.contains("active")) {
+					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					break;
+				}
+			}
+
 		});
 
 		// ----------------------------
