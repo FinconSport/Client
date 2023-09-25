@@ -1398,57 +1398,87 @@ class LsportApiController extends Controller {
             $this->ApiError('02');
         }
 
-        $data = $return;
+        $fixture_data = $return;
 
-        foreach ($data as $k => $v) {
+        $reponse = array();
 
-            //判斷用戶語系資料是否為空,若是則用en就好
+        foreach ($fixture_data as $k => $v) {
+
+            $tmp = array();
+            
+            $tmp['fixture_id']  = $v['fixture_id'];
+            $tmp['start_time']  = $v['start_time'];
+            $tmp['status']      = $fixture_status[$v['status']];
+            $tmp['last_update'] = $v['last_update'];
+
+            ///////////////////////
+
+            // 語系套用
             // league_name: 
             $league_id = $v['league_id'];
             $return = LsportLeague::where("league_id",$league_id)->first();
             if ($return === false) {
                 $this->ApiError('03');
             }
-            
-        dd($return);
-
+            $tmp['league_id'] = $league_id;
+            $tmp['league_name'] = $return[$langCol];
 
             // sport_name: 
-            if (!strlen($dv->s_name_locale)) {  // sport name
-                $sport_name = $dv->s_name_en;
-            } else {
-                $sport_name = $dv->s_name_locale;
+            $sport_id = $v['sport_id'];
+            $return = LsportSport::where("sport_id",$sport_id)->first();
+            if ($return === false) {
+                $this->ApiError('04');
             }
+            $tmp['sport_id'] = $sport_id;
+            $tmp['sport_name'] = $return[$langCol];
 
             // home_team_name: 
-            if (!strlen($dv->th_name_locale)) {  // sport name
-                $home_team_name = $dv->th_name_en;
-            } else {
-                $home_team_name = $dv->th_name_locale;
+            $team_id = $v['home_id'];
+            $return = LsportTeam::where("team_id",$team_id)->first();
+            if ($return === false) {
+                $this->ApiError('05');
             }
+            $tmp['home_team_id'] = $team_id;
+            $tmp['home_team_name'] = $return[$langCol];
 
             // away_team_name: 
-            if (!strlen($dv->ta_name_locale)) {  // sport name
-                $away_team_name = $dv->ta_name_en;
-            } else {
-                $away_team_name = $dv->ta_name_locale;
+            $team_id = $v['away_id'];
+            $return = LsportTeam::where("team_id",$team_id)->first();
+            if ($return === false) {
+                $this->ApiError('05');
             }
+            $tmp['away_team_id'] = $team_id;
+            $tmp['away_team_name'] = $return[$langCol];
 
-            $arrTemp = array(
-                'fixture_id' => $dv->fixture_id,
-                'start_time' => $dv->start_time,
-                'status' => $dv->f_status,
-                'last_update' => $dv->f_last_update,
-                'sport_id' => $dv->sport_id,
+            //////////////
+
+            // 總分
+            $scoreboard = json_decode($v['scoreboard'],true);
+
+            dd($scoreboard);
+            
+            // 局數 
+            $periods = json_decode($v['periods'],true);
+
+            dd($periods);
+
+            ////////////
+
+            $tmp = array(
+                'fixture_id' => $v['fixture_id'],
+                'start_time' => $v['fixture_id'],
+                'status' => $v['status'],
+                'last_update' => $v['last_update'],
+                'sport_id' => $sport_id,
                 'sport_name' => $sport_name,
-                'league_id' => $dv->league_id,
+                'league_id' => $league_id,
                 'league_name' => $league_name,
-                'home_team_id' => $dv->th_team_id,
+                'home_team_id' => $team_id,
                 'home_team_name' => $home_team_name,
-                'away_team_id' => $dv->ta_team_id,
+                'away_team_id' => $team_id,
                 'away_team_name' => $away_team_name,
             );
-            $arrRet[] = $arrTemp;
+            $reponse[] = $tmp;
         }
 
         // gzip
