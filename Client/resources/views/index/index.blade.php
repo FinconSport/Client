@@ -380,24 +380,16 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        function createMainDiv(title, fixtureCount) {
-            const mainDiv = document.createElement("div");
-            mainDiv.className = "main-div";
-            mainDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
-            return mainDiv;
-        }
-
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
-            leagueDiv.className = "seriesWrapperTitle";
+            leagueDiv.className = "league";
             leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
             return leagueDiv;
-            leagueDiv.appendChild(mainDiv);
         }
 
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
-            listDiv.className = "seriesWrapperContent";
+            listDiv.className = "catWrapperContent";
 
             if (fixtureData) {
                 for (const fixtureId in fixtureData) {
@@ -431,7 +423,7 @@
                 const fixtureCount = league.list[183] && league.list[183].list
                     ? Object.keys(league.list[183].list).length
                     : 0;
-                const leagueDiv = createMainDiv("early", fixtureCount);
+                const leagueDiv = createLeagueDiv("early", fixtureCount);
                 const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
                 leagueDiv.appendChild(listDiv);
                 earlyParentDiv.appendChild(leagueDiv);
@@ -444,7 +436,7 @@
                 const fixtureCount = league.list && league.list.length > 0
                     ? Object.keys(league.list).length
                     : 0;
-                const leagueDiv = createMainDiv("living", fixtureCount);
+                const leagueDiv = createLeagueDiv("living", fixtureCount);
                 const listDiv = createListDiv(league.list);
                 leagueDiv.appendChild(listDiv);
                 livingParentDiv.appendChild(leagueDiv);
