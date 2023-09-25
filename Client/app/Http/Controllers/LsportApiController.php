@@ -620,7 +620,7 @@ class LsportApiController extends Controller {
                 $periods = $dv->periods;
                 $scoreboard = $dv->scoreboard;
                 //解析以回傳
-                $parsed_periods = $this->getMatchPeriods(sport_id:, $fixture_status, $scoreboard, $livescore_extradata);
+                $parsed_periods = $this->getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata);
                 $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
                 // 包入 fixture 賽事資料 ---------------
