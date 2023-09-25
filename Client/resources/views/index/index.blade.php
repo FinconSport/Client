@@ -476,7 +476,7 @@
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.early') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
+                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
