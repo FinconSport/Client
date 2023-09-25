@@ -297,14 +297,14 @@
 					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("href", url + key);
+					sportSelect.setAttribute("onclick", "sportTo( event, " + sportType, url);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
 
-				createSportSelect(indexSportCon, "/?sport=");
-				createSportSelect(mOrderSportCon, "/m_order?sport=");
-				createSportSelect(matchSportCon, "/match?sport=");
+				createSportSelect(indexSportCon, "");
+				createSportSelect(mOrderSportCon, "m_order");
+				createSportSelect(matchSportCon, "match");
 				});
 			}
 
