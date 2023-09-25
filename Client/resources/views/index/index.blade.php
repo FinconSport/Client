@@ -463,7 +463,12 @@
             }
         }
 
-        
+        $(document).ready(function(){
+            $(".catWrapperTitle").click(function(){
+                $(this).toggleClass("open");
+                $('.catWrapperTitle').not(this).removeClass('open')
+            });
+        });
         // loop matchListD to generate html element here
 
         // open the first

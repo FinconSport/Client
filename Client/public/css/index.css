@@ -492,6 +492,7 @@ div[key="sizeSmallRate"]:hover {
     justify-content: space-between;
     position: relative;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 #indexContainerLeft .main-div p {
@@ -532,4 +533,13 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .fixture-container,
   #indexContainerLeft .main-div .league-div {
     overflow: hidden;
+    opacity: 0;
+    height: 0;
+    transition: all .4s ease-in-out 0s;
+    -webkit-transition: all .4s ease-in-out 0s;
   }
+
+  #indexContainerLeft .main-div .catWrapperTitle.open .fixture-container{
+	opacity: 1;
+    height: auto;
+}
