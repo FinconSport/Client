@@ -404,9 +404,9 @@
                     leagueList.appendChild(leagueContainer);
                 }
 
-                var firstDiv = document.querySelector("#indexContainerLeft div:first-child");
                 if (!numLeagues === 0) {  // <- open first div and if has data
-                    firstDiv.classList.add("open");
+                    $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
+                    console.log('try');
                 }
 
                 for (const leagueId in sport.list) {
