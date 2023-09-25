@@ -314,8 +314,8 @@
 <script>
 
     // 
-    const player = @json($player['id']);
-    const token = '12345';
+    // const player = @json($player['id']);
+    // const token = '12345';
 
 
     // 語系
