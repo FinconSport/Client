@@ -245,13 +245,15 @@ div.submenu-btn {
     grid-template-columns: 1fr;
     overflow:hidden;
     max-height: 0;
-    transition: all 0.7s ease;
+    transition: max-height 0.3s ease-in-out;
+    -webkit-transition: max-height 0.3s ease-in-out;
 }
 
 .submenu-main.active .submenu-toggle-list,
 .submenu-main.clicked .submenu-toggle-list {
     max-height: 900px;
-    transition: all 2s ease;
+    transition: max-height 2s ease-in-out;
+    -webkit-transition: max-height 2s ease-in-out;
 }
 
 .sportSelect {
