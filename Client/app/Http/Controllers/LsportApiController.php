@@ -879,7 +879,7 @@ class LsportApiController extends Controller {
             $this->ApiError("08");
         }
 
-        $league_data = $reutrn;
+        $league_data = $return;
 
         //////////////////////////////////////////
         // order data
