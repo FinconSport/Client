@@ -383,38 +383,42 @@
         const livingParentDiv = document.getElementById("living");
 
         if (matchListD && matchListD.data) {
-				var earlyData = matchListD.data.early
+            const earlyData = matchListD.data.early;
 
-				earlyData.forEach(function (e, index) {
-				var key = index + 1;
-				e.key = key;
+            for (const sportId in earlyData) {
+                const sport = earlyData[sportId];
 
-                function createEarlyDiv(earlyContainer) {
-                    var earlyContainer = document.createElement("div");
-                    earlyContainer.setAttribute("id", e.sport_id);
-                    earlyContainer.setAttribute("class", "main-div");
-                    earlyContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}<p><i class='fa-solid fa-chevron-right'></i></div>";
-                    livingParentDiv.appendChild(MatchDiv);
-                    
-                    earlyData.list.forEach(function (list, index) {
-                        var leagueContainer = document.createElement("div");
-                        leagueContainer.setAttribute("id", list.league_id);
-                        leagueContainer.setAttribute("class", "league-div");
-                        leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>"list.league_name"</p><i class='fa-solid fa-chevron-right'></i></div>";
-                        earlyContainer.appendChild(leagueContainer);
+                // Create a container for each sport
+                const sportContainer = document.createElement("div");
+                sportContainer.setAttribute("id", sport.sport_id);
+                sportContainer.setAttribute("class", "main-div");
+                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}</p><i class='fa-solid fa-chevron-right'></i></div>";
+                livingParentDiv.appendChild(sportContainer);
 
-                        list.list.forEach(function (fixture, index) {
-                            var fixtureContainer = document.createElement("div");
-                            fixtureContainer.setAttribute("id", fixture.fixture_id);
-                            fixtureContainer.setAttribute("class", "fixture-div");
-                            fixtureContainer.innerHTML = "<div class='seriesWrapperContent'><p>"list.home_team_name"</p><p>"list.away_team_name"</p></div>";
-                            leagueContainer.appendChild(fixtureContainer);
-                        });
+                for (const leagueId in sport.list) {
+                    const league = sport.list[leagueId];
 
-                    });
+                    // Create a container for each league within the sport
+                    const leagueContainer = document.createElement("div");
+                    leagueContainer.setAttribute("id", league.league_id);
+                    leagueContainer.setAttribute("class", "league-div");
+                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "</p><i class='fa-solid fa-chevron-right'></i></div>";
+                    sportContainer.appendChild(leagueContainer);
+
+                    for (const fixtureId in league.list) {
+                        const fixture = league.list[fixtureId];
+
+                        // Create a container for each fixture within the league
+                        const fixtureContainer = document.createElement("div");
+                        fixtureContainer.setAttribute("id", fixture.fixture_id);
+                        fixtureContainer.setAttribute("class", "fixture-div");
+                        fixtureContainer.innerHTML = "<div class='seriesWrapperContent'><p>" + fixture.home_team_name + "</p><p>" + fixture.away_team_name + "</p></div>";
+                        leagueContainer.appendChild(fixtureContainer);
+                    }
                 }
-			});
-		}
+            }
+        }
+
         
         // loop matchListD to generate html element here
 
