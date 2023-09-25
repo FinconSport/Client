@@ -497,16 +497,28 @@
 
 
         $(document).ready(function(){
-            $(".catWrapperTitle").click(function(){
-                $(this).toggleClass("open");
-                // $('.catWrapperTitle').not(this).removeClass('open')
-            });
-
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
                 // $('.seriesWrapperTitle').not(this).removeClass('open')
             });
         });
+
+        const toggleButton = document.querySelector('catWrapperTitle');
+        const content = document.querySelector('league-list');
+
+        let isOpen = false;
+        toggleButton.addEventListener('click', () => {
+            if (isOpen) {
+                // Close the content
+                content.style.maxHeight = '0';
+            } else {
+                // Open the content
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+            
+            isOpen = !isOpen;
+        });
+
         // loop matchListD to generate html element here
 
         // open the first

@@ -535,9 +535,9 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .league-list {
     overflow: hidden;
     opacity: 0;
-    height: 0;
-    transition: all .5s ease-in-out 0s;
-    -webkit-transition: all .5s ease-in-out 0s;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+    -webkit-transition: max-height 0.3s ease-in-out;
   }
 
     #indexContainerLeft .main-div .catWrapperTitle i {
