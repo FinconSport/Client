@@ -383,7 +383,7 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<h3>{{ trans('index.mainArea')[${title}] }} (${fixtureCount})</h3>`;
+            leagueDiv.innerHTML = `<h3>{{ trans('index.mainArea.${title}') }} (${fixtureCount})</h3>`;
             return leagueDiv;
         }
 
@@ -423,7 +423,7 @@
                 const fixtureCount = league.list[183] && league.list[183].list
                     ? Object.keys(league.list[183].list).length
                     : 0;
-                const leagueDiv = createLeagueDiv("Early", fixtureCount);
+                const leagueDiv = createLeagueDiv("early", fixtureCount);
                 const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
                 leagueDiv.appendChild(listDiv);
                 earlyParentDiv.appendChild(leagueDiv);
@@ -436,7 +436,7 @@
                 const fixtureCount = league.list && league.list.length > 0
                     ? Object.keys(league.list).length
                     : 0;
-                const leagueDiv = createLeagueDiv("Living", fixtureCount);
+                const leagueDiv = createLeagueDiv("living", fixtureCount);
                 const listDiv = createListDiv(league.list);
                 leagueDiv.appendChild(listDiv);
                 livingParentDiv.appendChild(leagueDiv);
