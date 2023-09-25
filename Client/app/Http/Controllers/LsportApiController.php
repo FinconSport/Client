@@ -776,6 +776,7 @@ class LsportApiController extends Controller {
         
         $name_columns = "name_".$api_lang;
 
+
         //////////////////////////////////////////
 
         // 取得系統參數
@@ -857,27 +858,45 @@ class LsportApiController extends Controller {
         $order['agent_name'] = $agent_account;
         //////////////////////////////////////////
 
-
         // 取得賽事資料
         $return = LsportFixture::where("fixture_id",$fixture_id)->where("sport_id",$sport_id)->first();
         if ($return == false) {
             $this->ApiError("08");
         }
 
-        // decode 聯盟
-        $series_data = json_decode($arrFixtures['league'], true);
+        $fixture_data = $return;
+
         //////////////////////////////////////////
         // order data
-        $order['league_id'] = $series_data['league_id'];
-        $order['league_name'] = $series_data[$langCol];
         $order['fixture_id'] = $fixture_id;
-        $order['sport_id'] = $arrFixtures['sport_id'];
+        $order['sport_id'] = $fixture_data['sport_id'];
         //////////////////////////////////////////
 
-        // decode 隊伍
-        $teams_data = json_decode($arrFixtures['teams'], true);
+        // 取得聯盟資料
+        $return = LsportLeague::where("league_id",$league_id)->where("sport_id",$sport_id)->first();
+        if ($return == false) {
+            $this->ApiError("08");
+        }
+
+        $league_data = $reutrn;
+
         //////////////////////////////////////////
         // order data
+        $order['league_id'] = $league_data['league_id'];
+        $order['league_name'] = $league_data[$name_columns];
+        $order['fixture_id'] = $fixture_id;
+        $order['sport_id'] = $league_data['sport_id'];
+
+        //////////////////////////////////////////
+
+        // 取得隊伍資料
+
+        dd($fixture_data);
+        $return = LsportTeam::where()->first();
+
+        //////////////////////////////////////////
+        // order data
+    
         if ($teams_data[0]['index'] == 1) {
             $order['home_team_id'] = $teams_data[0]['team']['id'];
             $order['home_team_name'] = $teams_data[0]['team'][$langCol];
@@ -896,8 +915,8 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得賠率
-        $arrOdds = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
-        if ($arrOdds == false) {
+        $market_bet_data = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
+        if ($market_bet_data == false) {
             $this->ApiError("09");
         }
 
