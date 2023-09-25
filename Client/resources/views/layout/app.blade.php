@@ -261,8 +261,9 @@
 			console.log(sportType);
 
 			const currentUrl = window.location.href;
+			const noPath = window.location.pathname;
 
-			if (currentUrl.includes('index')) {
+			if (currentUrl.includes('index') || noPath == '/') {
 				sportType = 1;
 			}
 
