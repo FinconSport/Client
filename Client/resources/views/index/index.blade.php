@@ -396,6 +396,10 @@
                 sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
+                const leagueList = document.createElement("div");
+                leagueList.setAttribute("class", "league-list");
+                sportContainer.appendChild(leagueList);
+
                 for (const leagueId in sport.list) {
                     const league = sport.list[leagueId];
                     const numFixtures = Object.keys(league.list).length;
@@ -405,7 +409,7 @@
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
                     leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
-                    sportContainer.appendChild(leagueContainer);
+                    leagueList.appendChild(leagueContainer);
 
                     const fixtureContainer = document.createElement("div");
                     fixtureContainer.setAttribute("class", "fixture-container");
@@ -464,9 +468,10 @@
         }
 
         $(document).ready(function(){
-            $(".catWrapperTitle").click(function(){
+            $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
-                $('.catWrapperTitle').not(this).removeClass('open')
+                $('.seriesWrapperTitle').not(this).removeClass('open')
+                console.log("clicked");
             });
         });
         // loop matchListD to generate html element here

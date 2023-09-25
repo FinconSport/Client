@@ -531,7 +531,7 @@ div[key="sizeSmallRate"]:hover {
   }
 
   #indexContainerLeft .main-div .fixture-container,
-  #indexContainerLeft .main-div .league-div {
+  #indexContainerLeft .main-div .league-list {
     overflow: hidden;
     opacity: 0;
     height: 0;
@@ -539,7 +539,8 @@ div[key="sizeSmallRate"]:hover {
     -webkit-transition: all .4s ease-in-out 0s;
   }
 
-  #indexContainerLeft .main-div .catWrapperTitle.open .fixture-container{
+  #indexContainerLeft .main-div .catWrapperTitle.open .league-list,
+  #indexContainerLeft .main-div .seriesWrapperTitle.open .fixture-container{
 	opacity: 1;
     height: auto;
 }
