@@ -1608,13 +1608,12 @@ class LsportApiController extends Controller {
             }
         }
             
-
         $return = $GameOrder->groupBy('m_id')->skip($skip)->take($page_limit)->orderBy('m_id', 'DESC')->get();
         if ($return === false) {
             $this->ApiError("01");
         }
 
-        dd(return);
+        dd($return);
         $arrOrderStatus = array(
             0 => "已取消",
             1 => "等待審核",
