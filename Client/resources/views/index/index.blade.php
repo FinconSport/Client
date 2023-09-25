@@ -380,17 +380,24 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
+        var living_early = {
+            living: '{{ trans('index.mainArea.living') }}',
+            early: '{{ trans('index.mainArea.early') }}'
+        };
+
         function createSportStructure(sportData, parentDiv, parentLabel) {
             for (const sportId in sportData) {
                 const sport = sportData[sportId];
                 const numLeagues = Object.keys(sport.list).length;
 
+                // Determine the title based on the sport type
+                const sportTitle = living_early[sport.sport_type] || 'Unknown';
+
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                // sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.' . parentLabel) }}(${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
-                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${parentLabel}(${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${sportTitle} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
                 parentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
