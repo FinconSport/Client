@@ -263,6 +263,8 @@
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
 			var matchSportCon = document.getElementById("matchSportCon");
 			var currentUrl = window.location.pathname;
+			var sportType = sport;
+			console.log(sportType);
 
 			//sportListD loop and generated element
 			if (sportListD && sportListD.data) {
