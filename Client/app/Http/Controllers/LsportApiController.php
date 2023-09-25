@@ -494,7 +494,7 @@ class LsportApiController extends Controller {
             ->orderBy('f.fixture_id', 'ASC')
             ->orderBy('m.market_id', 'ASC')
             ->get();
-        
+
         if ($data === false) {
             $this->ApiError('02');
         }
@@ -537,14 +537,12 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 開始loop 賽事資料
 
-        dd($data);
-
         foreach ($data as $dk => $dv) {
             $league_id = $dv->league_id;
             $fixture_id = $dv->fixture_id;
             $market_id = $dv->market_id;
             $main_line = $dv->main_line;
-            $fixture_status = $dv->f_status;
+            $fixture_status = intval($dv->f_status);
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($sport_name)) {  //只須設定一次
