@@ -380,23 +380,17 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        const earlyParentDiv = document.getElementById("early");
-        const livingParentDiv = document.getElementById("living");
-
-        if (matchListD && matchListD.data) {
-            const earlyData = matchListD.data.early;
-            const livingData = matchListD.data.living;
-
-            for (const sportId in earlyData) {
-                const sport = earlyData[sportId];
+        function createSportStructure(sportData, parentDiv, parentLabel) {
+            for (const sportId in sportData) {
+                const sport = sportData[sportId];
                 const numLeagues = Object.keys(sport.list).length;
 
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.early') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
-                earlyParentDiv.appendChild(sportContainer);
+                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.${parentLabel}') }}(${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                parentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
                 leagueList.setAttribute("class", "league-list");
@@ -410,7 +404,7 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
                     const fixtureContainer = document.createElement("div");
@@ -424,143 +418,69 @@
                         const fixtureItem = document.createElement("div");
                         fixtureItem.setAttribute("id", fixture.fixture_id);
                         fixtureItem.setAttribute("class", "fixture-div");
-                        fixtureItem.innerHTML = "<div class='seriesWrapperContent'>" +
-                                                        "<div class='seriesWrapper-left'>" +
-                                                            "<p> {{ trans('index.mainArea.time') }}" + fixture.start_time + "</p>" +
-                                                            "<p>" + fixture.home_team_name + "</p>" +
-                                                            "<p>" + fixture.away_team_name + "</p>" +
-                                                        "</div>" +
-                                                        "<div class='seriesWrapper-right'>" +
-                                                            "<table class='table table-bordered h-100'>" +
-                                                                "<thead>" +
-                                                                    "<tr>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                    "</tr>" +
-                                                                "</thead>" +
-                                                                "<tbody>" +
-                                                                    "<tr>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                    "</tr>" +
-                                                                    "<tr>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                    "</tr>" +
-                                                                "</tbody>" +
-                                                            "</table>" +
-                                                        "</div>" +
-                                                    "</div>";
-                        fixtureContainer.appendChild(fixtureItem);
-                    }
-                }
-            }
-
-            for (const sportId in livingData) {
-                const sport = livingData[sportId];
-                const numLeagues = Object.keys(sport.list).length;
-
-                // Create a container for each sport
-                const sportContainer = document.createElement("div");
-                sportContainer.setAttribute("id", sport.sport_id);
-                sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
-                livingParentDiv.appendChild(sportContainer);
-
-                const leagueList = document.createElement("div");
-                leagueList.setAttribute("class", "league-list");
-                sportContainer.appendChild(leagueList);
-
-                for (const leagueId in sport.list) {
-                    const league = sport.list[leagueId];
-                    const numFixtures = Object.keys(league.list).length;
-
-                    // Create a container for each league within the sport
-                    const leagueContainer = document.createElement("div");
-                    leagueContainer.setAttribute("id", league.league_id);
-                    leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
-                    leagueList.appendChild(leagueContainer);
-
-                    const fixtureContainer = document.createElement("div");
-                    fixtureContainer.setAttribute("class", "fixture-container");
-                    leagueContainer.appendChild(fixtureContainer);
-
-                    for (const fixtureId in league.list) {
-                        const fixture = league.list[fixtureId];
-
-                        // Create a container for each fixture within the league
-                        const fixtureItem = document.createElement("div");
-                        fixtureItem.setAttribute("id", fixture.fixture_id);
-                        fixtureItem.setAttribute("class", "fixture-div");
-                        fixtureItem.innerHTML = "<div class='seriesWrapperContent'>" +
-                                                        "<div class='seriesWrapper-left'>" +
-                                                            "<p> {{ trans('index.mainArea.time') }}" + fixture.start_time + "</p>" +
-                                                            "<p>" + fixture.home_team_name + "</p>" +
-                                                            "<p>" + fixture.away_team_name + "</p>" +
-                                                        "</div>" +
-                                                        "<div class='seriesWrapper-right'>" +
-                                                            "<table class='table table-bordered h-100'>" +
-                                                                "<thead>" +
-                                                                    "<tr>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                        "<th></th>" +
-                                                                    "</tr>" +
-                                                                "</thead>" +
-                                                                "<tbody>" +
-                                                                    "<tr>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                    "</tr>" +
-                                                                    "<tr>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                        "<td></td>" +
-                                                                    "</tr>" +
-                                                                "</tbody>" +
-                                                            "</table>" +
-                                                        "</div>" +
-                                                    "</div>";
+                        fixtureItem.innerHTML = `<div class='seriesWrapperContent'>
+                                                    <div class='seriesWrapper-left'>
+                                                        <p>{{ trans('index.mainArea.time') }}${fixture.start_time}</p>
+                                                        <p>${fixture.home_team_name}</p>
+                                                        <p>${fixture.away_team_name}</p>
+                                                    </div>
+                                                    <div class='seriesWrapper-right'>
+                                                        <table class='table table-bordered h-100'>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>`;
                         fixtureContainer.appendChild(fixtureItem);
                     }
                 }
             }
         }
 
+if (matchListD && matchListD.data) {
+    const earlyData = matchListD.data.early;
+    const livingData = matchListD.data.living;
+
+    createSportStructure(earlyData, earlyParentDiv, 'early');
+    createSportStructure(livingData, livingParentDiv, 'living');
+}
+
+
         $(document).ready(function(){
             $(".catWrapperTitle").click(function(){
                 $(this).toggleClass("open");
                 $('.catWrapperTitle').not(this).removeClass('open')
-                console.log("clicked");
             });
 
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
                 $('.seriesWrapperTitle').not(this).removeClass('open')
-                console.log("clicked");
             });
         });
         // loop matchListD to generate html element here
