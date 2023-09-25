@@ -1463,12 +1463,10 @@ class LsportApiController extends Controller {
             }
             $scoreboard[] = $d;
 
-            dd($scoreboard);
-
             // 局數 
-            $periods = json_decode($v['periods'],true);
+            $tmp = json_decode($v['periods'],true);
 
-            dd($periods);
+            dd($tmp);
 
             ////////////
 
