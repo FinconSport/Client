@@ -421,7 +421,7 @@
                                                             "<p>" + fixture.away_team_name + "</p>" +
                                                         "</div>" +
                                                         "<div class='seriesWrapper-right'>" +
-                                                            "<table>" +
+                                                            "<table class='table table-bordered'>" +
                                                                 "<thead>" +
                                                                     "<tr>" +
                                                                         "<th></th>" +
