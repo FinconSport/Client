@@ -385,7 +385,7 @@
         function createLeagueDiv(title, fixtureCount) {
             const leagueDiv = document.createElement("div");
             leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<h3>${title} (${fixtureCount} fixtures)</h3>`;
+            leagueDiv.innerHTML = `<h3>${title} (${fixtureCount})</h3>`;
             return leagueDiv;
         }
 
@@ -400,7 +400,7 @@
                         const fixture = fixtureData[fixtureId];
                         const fixtureDiv = document.createElement("div");
                         fixtureDiv.className = "fixture";
-                        fixtureDiv.innerHTML = `<p>${fixture.home_team_name} vs. ${fixture.away_team_name} - ${fixture.start_time}</p>`;
+                        fixtureDiv.innerHTML = `<p>${fixture.home_team_name}  ${fixture.away_team_name}  ${fixture.start_time}</p>`;
                         listDiv.appendChild(fixtureDiv);
                     }
                 }
