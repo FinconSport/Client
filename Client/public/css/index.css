@@ -486,3 +486,7 @@ div[key="sizeSmallRate"]:hover {
     top: 33%;
     right: 2%;
 }
+
+#indexContainerLeft .league .catWrapperTitle {
+    position: relative;
+}
