@@ -385,9 +385,9 @@
 		const urlMappings = {
 			'/?sport': 'lf_sport',
 			'index': 'lf_sport',
-			'm_order?sport': 'lf_mOrder',
+			'm_order?': 'lf_mOrder',
 			'order': 'lf_order',
-			'match?sport': 'lf_match',
+			'match?': 'lf_match',
 			'rule': 'lf_rule',
 			'logs': 'lf_logs',
 			'calculator': 'lf_calcu',
