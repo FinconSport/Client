@@ -394,24 +394,9 @@
 
 		// left side menu click function
 		$(document).ready(function(){
-			var divElement = document.querySelector(".submenu-main");
-			var indexSportCon = $("#indexSportCon");
-			var mOrderSportCon = $("#mOrderSportCon");
-			var matchSportCon = $("#matchSportCon");
-
-			// Toggle 'active' class for submenu buttons
-			$("#lf_sport .submenu-btn").click(function(){
-				$('#lf_sport').toggleClass("clicked");
+			$(".submenu-btn").click(function(){
+				$(this).closest('.submenu-main').toggleClass('active');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
-				
-				if (indexSportCon.css('max-height') === '0px') {
-					indexSportCon.css('max-height', '900px');
-					mOrderSportCon.css('max-height', '0px');
-					matchSportCon.css('max-height', '0px');
-				} else {
-					indexSportCon.css('max-height', '0px');
-				}
 			});
 
 			// Toggle 'openToggle' class for sport select elements
