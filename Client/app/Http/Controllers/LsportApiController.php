@@ -1470,8 +1470,8 @@ class LsportApiController extends Controller {
             foreach ($tmp as $kk => $vv) {
                 $d = array();
                 foreach ($vv['Results'] as $kkk => $vvv) {
-                    $pos = $vv['Position'];
-                    $d[$pos] = $vv['Value'];
+                    $pos = $vvv['Position'];
+                    $d[$pos] = $vvv['Value'];
                 }
                 $scoreboard[] = $d;
             }
