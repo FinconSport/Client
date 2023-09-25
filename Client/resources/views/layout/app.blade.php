@@ -268,10 +268,10 @@
 				x.key = key;
 
 				function createSportSelect(container, url) {
-					var sportSelect = document.createElement("a");
+					var sportSelect = document.createElement("a");onclick='sportTo( event, "{{ $key }}", "match")'
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("href", url + key);
+					sportSelect.setAttribute("onclick", url + key);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
@@ -382,6 +382,13 @@
 
 		// add active class in submenu
 		const currentUrl = window.location.href;
+		const currentDomain = window.location.hostname;
+
+		if ( currentDomain === currentDomain ) {
+			console.log(currentDomain);
+			$('#lf_sport').addClass('active');
+		}
+
 		const urlMappings = {
 			'/?sport': 'lf_sport',
 			'index': 'lf_sport',
