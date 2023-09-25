@@ -1455,6 +1455,8 @@ class LsportApiController extends Controller {
 
             // 總分
             $tmp = json_decode($v['scoreboard'],true);
+            $tmp = (array)$tmp;
+
             if (count($tmp) > 0) {
                 $d = array();
                 foreach ($tmp['Results'] as $kk => $vv) {
@@ -1467,6 +1469,7 @@ class LsportApiController extends Controller {
             // 局數 
             $d = array();
             $tmp = json_decode($v['periods'],true);
+            $tmp = (array)$tmp;
             if (count($tmp) > 0) {
                 foreach ($tmp as $kk => $vv) {
                     $d = array();
