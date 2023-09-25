@@ -507,21 +507,20 @@
             });
         });
 
-        function toggleContent(toggleButton, content) {
-            let isOpen = false;
+        toggleButton.addEventListener('click', () => {
+            console.log('isOpen:', isOpen);
+            console.log('maxHeight:', content.style.maxHeight);
 
-            toggleButton.addEventListener('click', () => {
-                if (isOpen) {
-                    // Close the content
-                    content.style.maxHeight = '0';
-                } else {
-                    // Open the content
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
+            if (isOpen) {
+                // Close the content
+                content.style.maxHeight = '0';
+            } else {
+                // Open the content
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
 
-                isOpen = !isOpen;
-            });
-        }
+            isOpen = !isOpen;
+        });
 
         const firstToggle = document.querySelector('.catWrapperTitle');
         const firstToggleContent = document.querySelector('.league-list');
