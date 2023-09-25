@@ -101,6 +101,7 @@ body {
 /* css update left menu */
 #sidenav p {
     margin: 0.1rem;
+    font-weight: 600;
 }
 
 #sidenav {
@@ -150,18 +151,18 @@ div.submenu-btn {
     color: #ffffff!important;
     text-decoration: none;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
 }
 
 .submenu-main .submenu-btn i {
     color:#c79e42;
-    top: 3px;
 }
 
 .submenu-main i {
     margin-right: 0.5rem!important;
     position: relative;
+    font-size: 14px;
 }
 
 .submenu-main{
