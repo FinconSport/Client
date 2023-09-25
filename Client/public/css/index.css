@@ -481,28 +481,26 @@ div[key="sizeSmallRate"]:hover {
 
 
 /* --------added by aya------ */
-#indexContainerLeft .MatchMain-Con .fa-chevron-right {
-    position: absolute;
-    top: 33%;
-    right: 2%;
+#indexContainerLeft .main-div i {
+    font-size: 1.2rem;
 }
 
-#indexContainerLeft .MatchMain-Con .catWrapperTitle {
+#indexContainerLeft .main-div .catWrapperTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
-}
+  }
 
-/* #indexContainerLeft .MatchMain-Con .catWrapperContent {
-    display: none;
-} */
 
-#indexContainerLeft .seriesWrapperTitle,
-#indexContainerLeft .seriesWrapperContent {
+#indexContainerLeft .main-div .seriesWrapperTitle,
+#indexContainerLeft .main-div .seriesWrapperContent {
     background: #ffffff;
     border: 2px solid rgb(65,91,90);
     border-radius: 15px;
     padding: 0.5rem 2rem;
     height: auto;
-    /* font-size: 1.2rem; */
+    font-size: 1.2rem;
     font-weight: 600;
     margin-top: 0.5rem;
   }
