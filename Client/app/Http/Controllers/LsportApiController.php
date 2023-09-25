@@ -1401,14 +1401,13 @@ class LsportApiController extends Controller {
         $fixture_data = $return;
 
         $reponse = array();
-
         foreach ($fixture_data as $k => $v) {
 
             $tmp = array();
             
             $tmp['fixture_id']  = $v['fixture_id'];
             $tmp['start_time']  = $v['start_time'];
-            $tmp['status']      = $fixture_status[$v['status']];
+            $tmp['status']      = $v['status'];
             $tmp['last_update'] = $v['last_update'];
 
             ///////////////////////
@@ -1456,46 +1455,45 @@ class LsportApiController extends Controller {
 
             // 總分
             $tmp = json_decode($v['scoreboard'],true);
-            $d = array();
-            foreach ($tmp['Results'] as $kk => $vv) {
-                $pos = $vv['Position']-1;
-                $d[$pos] = $vv['Value'];
-            }
-            $scoreboard[] = $d;
+            $tmp = (array)$tmp;
 
-            // 局數 
-            $d = array();
-            $tmp = json_decode($v['periods'],true);
-
-            foreach ($tmp as $kk => $vv) {
+            if (count($tmp) > 0) {
                 $d = array();
-                foreach ($vv['Results'] as $kkk => $vvv) {
-                    $pos = $vvv['Position'];
-                    $d[$pos] = $vvv['Value'];
+                foreach ($tmp['Results'] as $kk => $vv) {
+                    $pos = $vv['Position']-1;
+                    $d[$pos] = $vv['Value'];
                 }
                 $scoreboard[] = $d;
             }
 
-            dd($scoreboard);
+            // 局數 
+            $d = array();
+            $tmp = json_decode($v['periods'],true);
+            $tmp = (array)$tmp;
+            if (count($tmp) > 0) {
+                foreach ($tmp as $kk => $vv) {
+                    $d = array();
+                    foreach ($vv['Results'] as $kkk => $vvv) {
+                        $pos = $vvv['Position'];
+                        $d[$pos] = $vvv['Value'];
+                    }
+                    $type = $vv['Type'];
+                    if ($type < 100) {  // 粗暴判斷
+                        $scoreboard[] = $d;
+                    }
+                }
+            }
 
+            dd($scoreboard);
+            $tmp['scoreboard'] = $scoreboard;
             ////////////
 
-            $tmp = array(
-                'fixture_id' => $v['fixture_id'],
-                'start_time' => $v['fixture_id'],
-                'status' => $v['status'],
-                'last_update' => $v['last_update'],
-                'sport_id' => $sport_id,
-                'sport_name' => $sport_name,
-                'league_id' => $league_id,
-                'league_name' => $league_name,
-                'home_team_id' => $team_id,
-                'home_team_name' => $home_team_name,
-                'away_team_id' => $team_id,
-                'away_team_name' => $away_team_name,
-            );
             $reponse[] = $tmp;
         }
+
+        dd($reponse);
+
+        $data = $reponse;
 
         // gzip
         $data = $this->gzip($data);
