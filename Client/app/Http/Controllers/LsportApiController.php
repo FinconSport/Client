@@ -2216,8 +2216,8 @@ periods:
         $return = $this->getMatchPeriods(
             $request['sport_id'],
             $request['fixture_status'],
-            $request['livescore_extradata'],
-            $request['scoreboard']
+            $request['scoreboard'],
+            $request['livescore_extradata']
         );
         echo json_encode(['ret' => $return]);
     }
