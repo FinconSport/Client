@@ -113,12 +113,37 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
+
+        $fakeData = [
+            [
+                "id" => 1,
+                "home" => '主人A隊',
+                "away" => '客人B隊',
+                "home_score" => 2,
+                "away_score" => 8,
+                "sell_status" => 1,
+                "match_time" => '2023-09-25 09:08:16'
+            ],
+            [
+                "id" => 1,
+                "home" => '主C隊',
+                "away" => '客D隊',
+                "home_score" => 6,
+                "away_score" => 127,
+                "sell_status" => 1,
+                "match_time" => '2023-09-25 09:15:40'
+            ],
+            [
+                "id" => 1,
+                "home" => '主主主甲隊',
+                "away" => '客客客乙隊',
+                "home_score" => 26,
+                "away_score" => 35,
+                "sell_status" => 1,
+                "match_time" => '2023-09-25 09:30:36'
+            ],
+        ];
         //---------------------------------
-        // DB取出有效的賽事結果
-        $return = GameResult::where("status", 1)->get();
-        if ($return === false) {
-          $this->ApiError("01");
-        }
 
         //欲回傳的賽事結果的欄位
         $arrColsToReturn = array(
@@ -133,14 +158,14 @@ class LsportApiController extends Controller {
 
         // 篩選要回傳的賽事結果的欄位
         $data = array();
-        foreach ($return as $k => $v) {
+        foreach ($fakeData as $k => $v) {
             $tmp = array();
             foreach ($arrColsToReturn as $key => $val) {
                 $tmp[$val] = $v[$val];
             }
 
             // 日期格式重整
-            $tmp['match_time'] = date('Y-m-d H:i:s', $tmp['match_time']);
+            $tmp['match_time'] = date('Y-m-d H:i:s', strtotime($tmp['match_time']));
             $data[] = $tmp;
         }
 
