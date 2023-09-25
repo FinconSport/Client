@@ -468,6 +468,12 @@
         }
 
         $(document).ready(function(){
+            $(".catWrapperTitle").click(function(){
+                $(this).toggleClass("open");
+                $('.catWrapperTitle').not(this).removeClass('open')
+                console.log("clicked");
+            });
+
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
                 $('.seriesWrapperTitle').not(this).removeClass('open')
