@@ -386,28 +386,34 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        for (const category of ["early", "living"]) {
-            for (const sportId in matchListD.data[category]) {
-                if (matchListD.data[category].hasOwnProperty(sportId)) {
-                    // Access relevant data within each sport
-                    const sportData = matchListD.data[category][sportId];
-                    const sportName = sportData.sport_name;
+        // Select the target <div> elements for "early" and "living"
+        const earlyDiv = document.getElementById("earlyDiv");
+        const livingDiv = document.getElementById("livingDiv");
 
-                    // Create elements based on the sport data (you can customize this part)
-                    const element = document.createElement("div");
-                    element.textContent = `Sport ID: ${sportId}, Sport Name: ${sportName}`;
+        // Function to create and append league elements
+        function createAndAppendLeagueElements(leagueData, targetDiv) {
+            for (const leagueId in leagueData) {
+                if (leagueData.hasOwnProperty(leagueId)) {
+                const league = leagueData[leagueId];
+                const leagueName = league.league_name;
 
-                    // Set an ID for the created element
-                    element.id = `element_${sportId}`;
+                // Create elements for league names
+                const leagueElement = document.createElement("div");
+                leagueElement.textContent = `League Name: ${leagueName}`;
 
-                    // Append the element to the appropriate <div> (early or living)
-                    if (category === "early") {
-                        earlyDiv.appendChild(element);
-                    } else if (category === "living") {
-                        livingDiv.appendChild(element);
-                    }
+                // Set an ID for the created element
+                leagueElement.id = `league_${leagueId}`;
+
+                // Append the league element to the target div
+                targetDiv.appendChild(leagueElement);
                 }
             }
+        }
+
+        // Loop through "early" and "living"
+        for (const category of ["early", "living"]) {
+            const targetDiv = category === "early" ? earlyDiv : livingDiv;
+            createAndAppendLeagueElements(matchListD.data[category], targetDiv);
         }
         
         // loop matchListD to generate html element here
