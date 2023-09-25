@@ -245,7 +245,6 @@ div.submenu-btn {
     grid-template-columns: 1fr;
     overflow:hidden;
     max-height: 0;
-    transition: max-height 1s ease-in;
 }
 
 .submenu-main.active .submenu-toggle-list,
