@@ -2268,7 +2268,7 @@ class LsportApiController extends Controller {
         if (is_array($periods_raw_data)) {
             $arr_periods_raw_data = $periods_raw_data;
         } else {
-            $arr_periods_raw_data = json_decode($periods_raw_data);
+            $arr_periods_raw_data = json_decode($periods_raw_data, true);
             if (!$arr_periods_raw_data) {
                 return false;
             }
