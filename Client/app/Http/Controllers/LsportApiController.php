@@ -2282,7 +2282,7 @@ class LsportApiController extends Controller {
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
                 $pos = intval($rv['Position'] - 1);
-                $ret[$pos][$sequence_number] = $rv['Value'];
+                $ret[$pos][$sequence_number] = intval($rv['Value']);
             }
         }
 
