@@ -400,16 +400,11 @@
 				var submenuToggleList = $(this).next(".submenu-toggle-list");
 				$(this).closest('.submenu-main').toggleClass('active');
 				if (submenuToggleList.css('max-height') === '0px') {
-					// Set max-height to 900px if it's currently 0px
 					submenuToggleList.css('max-height', '900px');
 				} else {
-					// Otherwise, set max-height to 0px
 					submenuToggleList.css('max-height', '0px');
 				}
-
-				// Remove the 'active' class from all .submenu-main elements
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				// Set max-height to 0px for all other .submenu-toggle-list elements
 				$('.submenu-toggle-list').not(submenuToggleList).css('max-height', '0px');
 			});
 
