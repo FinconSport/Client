@@ -481,21 +481,22 @@ div[key="sizeSmallRate"]:hover {
 
 
 /* --------added by aya------ */
-#indexContainerLeft .league .fa-chevron-right {
+#indexContainerLeft .MatchMain-Con .fa-chevron-right {
     position: absolute;
     top: 33%;
     right: 2%;
 }
 
-#indexContainerLeft .league .catWrapperTitle {
+#indexContainerLeft .MatchMain-Con .catWrapperTitle {
     position: relative;
 }
 
-/* #indexContainerLeft .league .catWrapperContent {
+/* #indexContainerLeft .MatchMain-Con .catWrapperContent {
     display: none;
 } */
 
-#indexContainerLeft .catWrapperContent {
+#indexContainerLeft .seriesWrapperTitle,
+#indexContainerLeft .seriesWrapperContent {
     background: #ffffff;
     border: 2px solid rgb(65,91,90);
     border-radius: 15px;

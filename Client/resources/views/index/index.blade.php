@@ -380,68 +380,41 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        function createLeagueDiv(title, fixtureCount) {
-            const leagueDiv = document.createElement("div");
-            leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
-            return leagueDiv;
-        }
-
-        function createListDiv(fixtureData) {
-            const listDiv = document.createElement("div");
-            listDiv.className = "league-div";
-
-            if (fixtureData) {
-                for (const fixtureId in fixtureData) {
-                    if (fixtureData.hasOwnProperty(fixtureId)) {
-                        const fixture = fixtureData[fixtureId];
-                        const fixtureDiv = document.createElement("div");
-                        fixtureDiv.className = "catWrapperContent";
-                        fixtureDiv.innerHTML = `<p>${fixture.home_team_name}  ${fixture.away_team_name}  ${fixture.start_time}</p>`;
-                        listDiv.appendChild(fixtureDiv);
-                    }
-                }
-            } else {
-                const noDataDiv = document.createElement("div");
-                noDataDiv.className = "no-data";
-                noDataDiv.textContent = "No data available.";
-                listDiv.appendChild(noDataDiv);
-            }
-
-            return listDiv;
-        }
-
-        const earlyData = matchListD.data.early;
-        const livingData = matchListD.data.living;
-
-        const earlyParentDiv = document.getElementById("early");
         const livingParentDiv = document.getElementById("living");
-        for (const leagueId in earlyData) {
-            if (earlyData.hasOwnProperty(leagueId)) {
-                const league = earlyData[leagueId];
-                const leagueName = league.list[183] ? league.list[183].league_name : '';
-                const fixtureCount = league.list[183] && league.list[183].list
-                    ? Object.keys(league.list[183].list).length
-                    : 0;
-                const leagueDiv = createLeagueDiv("early", fixtureCount);
-                const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
-                leagueDiv.appendChild(listDiv);
-                earlyParentDiv.appendChild(leagueDiv);
-            }
-        }
-        for (const leagueId in livingData) {
-            if (livingData.hasOwnProperty(leagueId)) {
-                const league = livingData[leagueId];
-                const leagueName = league.sport_name;
-                const fixtureCount = league.list && league.list.length > 0
-                    ? Object.keys(league.list).length
-                    : 0;
-                const leagueDiv = createLeagueDiv("living", fixtureCount);
-                const listDiv = createListDiv(league.list);
-                leagueDiv.appendChild(listDiv);
-                livingParentDiv.appendChild(leagueDiv);
-            }
-        }
+
+        if (matchListD && matchListD.data) {
+				var earlyData = matchListD.data.early
+
+				earlyData.forEach(function (e, index) {
+				var key = index + 1;
+				e.key = key;
+
+                function createEarlyDiv(earlyContainer) {
+                    var earlyContainer = document.createElement("div");
+                    earlyContainer.setAttribute("id", e.sport_id);
+                    earlyContainer.setAttribute("class", "main-div");
+                    earlyContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}<p><i class='fa-solid fa-chevron-right'></i></div>";
+                    livingParentDiv.appendChild(MatchDiv);
+                    
+                    earlyData.list.forEach(function (list, index) {
+                        var leagueContainer = document.createElement("div");
+                        leagueContainer.setAttribute("id", list.league_id);
+                        leagueContainer.setAttribute("class", "league-div");
+                        leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>"list.league_name"</p><i class='fa-solid fa-chevron-right'></i></div>";
+                        earlyContainer.appendChild(leagueContainer);
+
+                        list.list.forEach(function (fixture, index) {
+                            var fixtureContainer = document.createElement("div");
+                            fixtureContainer.setAttribute("id", fixture.fixture_id);
+                            fixtureContainer.setAttribute("class", "fixture-div");
+                            fixtureContainer.innerHTML = "<div class='seriesWrapperContent'><p>"list.home_team_name"</p><p>"list.away_team_name"</p></div>";
+                            leagueContainer.appendChild(fixtureContainer);
+                        });
+
+                    });
+                }
+			});
+		}
         
         // loop matchListD to generate html element here
 
