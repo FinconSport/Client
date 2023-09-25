@@ -393,7 +393,7 @@
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "accordion-item main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
+                sportContainer.innerHTML = "<div class='catWrapperTitle' data-bs-toggle='collapse' data-bs-target='#" +sport.list.league_id+ "' aria-expanded='true' aria-controls='collapseOne'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
                 for (const leagueId in sport.list) {
