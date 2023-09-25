@@ -682,7 +682,7 @@ class LsportApiController extends Controller {
                     'mb.base_line',
                     'mb.line',
                     'mb.name_en AS mb_name_en',
-                    'mb.name_'.$this->agent_lang.' AS mb_name_locale',
+                    'mb.name_'.$lang_col.' AS mb_name_locale',
                     'mb.price',
                     'mb.status AS status',
                     'mb.last_update AS last_update',
@@ -1582,7 +1582,7 @@ class LsportApiController extends Controller {
             $this->ApiError("03");
         }
         
-        // $tmp = $this->rebuild($return, $this->agent_lang, $sport_id);
+        // $tmp = $this->rebuild($return, $lang_col, $sport_id);
 
         $data = $return;
 
