@@ -512,6 +512,9 @@ div[key="sizeSmallRate"]:hover {
 
   #indexContainerLeft .main-div .seriesWrapperContent {
     font-size: 1rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
   }
 
   #indexContainerLeft .main-div .seriesWrapper-left {
