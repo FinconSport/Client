@@ -2049,13 +2049,13 @@ class LsportApiController extends Controller {
         $return = $this->getMatchScoreboard(
             $request['sport_id'],
             $request['fixture_status'],
-            $request['periods_raw_data'],
-            $request['scoreboard_raw_data']
+            $request['periods'],
+            $request['scoreboard']
         );
         echo json_encode(['ret' => $return]);
     }
 
-    protected function getMatchScoreboard($sport_id, $fixture_status, $periods_raw_data, $scoreboard_raw_data) {
+    protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
         // 如果還未開賽就回傳null
         if ($fixture_status < 2) {
@@ -2069,24 +2069,24 @@ class LsportApiController extends Controller {
 
         //========================================
 
-        if (is_array($periods_raw_data)) {
-            $arr_periods_raw_data = $periods_raw_data;
+        if (is_array($periods)) {
+            $arr_periods = $periods;
         } else {
             // 如果參數是字串則json_decoe看看
-            $arr_periods_raw_data = json_decode($periods_raw_data, true);
+            $arr_periods = json_decode($periods, true);
             // de不出東西就回傳false
-            if (!$arr_periods_raw_data) {
+            if (!$arr_periods) {
                 return false;
             }
         }
 
-        if (is_array($scoreboard_raw_data)) {
-            $arr_scoreboard_raw_data = $scoreboard_raw_data;
+        if (is_array($scoreboard)) {
+            $arr_scoreboard = $scoreboard;
         } else {
             // 如果參數是字串則json_decoe看看
-            $arr_scoreboard_raw_data = json_decode($scoreboard_raw_data, true);
+            $arr_scoreboard = json_decode($scoreboard, true);
             // de不出東西就回傳false
-            if (!$arr_scoreboard_raw_data) {
+            if (!$arr_scoreboard) {
                 return false;
             }
         }
@@ -2150,7 +2150,7 @@ periods:
       "Type": 2
     },
 
-scoreboard:
+棒球 scoreboard:
 {
     "CurrentPeriod": 40,
     "Results": [
@@ -2172,7 +2172,7 @@ scoreboard:
         $ret = [];
 
         // 處理總分
-        $arr_results = $arr_scoreboard_raw_data['Results'];
+        $arr_results = $arr_scoreboard['Results'];
         foreach ($arr_results as $rk => $rv) {
             $pos = intval($rv['Position']);
             $total_score = intval($rv['Value']);
@@ -2181,13 +2181,16 @@ scoreboard:
         }
 
         // 各局得分
-        foreach ($arr_periods_raw_data as $pk => $pv) {
+        // Position=40以上都不要計入
+        foreach ($arr_periods as $pk => $pv) {
             $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
                 $pos = intval($rv['Position']);
                 $score = intval($rv['Value']);
-                $ret[$pos][$type] = $score;
+                if ($pos < 40) {
+                    $ret[$pos][$type] = $score;
+                }
             }
         }
 
@@ -2208,15 +2211,68 @@ scoreboard:
         $return = $this->getMatchPeriods(
             $request['sport_id'],
             $request['fixture_status'],
-            $request['periods_raw_data']
+            $request['livescore_extradata'],
+            $request['scoreboard']
         );
         echo json_encode(['ret' => $return]);
     }
 
-     protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard_raw_data) {
+/*
+{
+   "period":1, // 第幾局
+    "turn" : 1, // 1為下, 2為上
+    "balls" : 1 // 壞球數, 
+    "strikes" : 1 , '' 好球數
+    "outs" : 1 , // 出局數
+    "bases" : "1/1/1"   // 1,2,3 壘是否有人
+}
 
-        // 除了走地中賽事其餘均回傳null
-        if ($fixture_status != 2) {
+棒球 scoreboard:
+{
+    "CurrentPeriod": 40,
+    "Results": [
+      {
+        "Position": "1",
+        "Value": "2"
+      },
+      {
+        "Position": "2",
+        "Value": "2"
+      }
+    ],
+    "Status": 2,
+    "Time": "-1"
+}
+
+棒球 livescore_extradata:
+[
+  {
+    "Name": "Balls",  // 好球數
+    "Value": "2"
+  },
+  {
+    "Name": "Turn",  // 上下半場。1=上半，2=下半
+    "Value": "2"
+  },
+  {
+    "Name": "Bases",  // 壘包狀態
+    "Value": "1/1/0"
+  },
+  {
+    "Name": "Strikes",  // 打擊數
+    "Value": "2"
+  },
+  {
+    "Name": "Outs",  // 出局數
+    "Value": "1"
+  }
+]
+*/
+
+     protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
+
+        // 如果還未開賽就回傳null
+        if ($fixture_status < 2) {
             return null;
         }
 
@@ -2224,6 +2280,53 @@ scoreboard:
         if ($sport_id != DEFAULT_SPORT_ID) {
             return null;
         }
+
+        //========================================
+
+        if (is_array($scoreboard)) {
+            $arr_scoreboard = $scoreboard;
+        } else {
+            // 如果參數是字串則json_decoe看看
+            $arr_scoreboard = json_decode($scoreboard, true);
+            // de不出東西就回傳false
+            if (!$arr_scoreboard) {
+                return false;
+            }
+        }
+
+        if (is_array($livescore_extradata)) {
+            $arr_periods = $livescore_extradata;
+        } else {
+            // 如果參數是字串則json_decoe看看
+            $arr_livescore_extradata = json_decode($livescore_extradata, true);
+            // de不出東西就回傳false
+            if (!$arr_livescore_extradata) {
+                return false;
+            }
+        }
+
+        //========================================
+
+        $ret = array(
+            "period": null, // 第幾局
+            // "turn" : 1, // 1為下, 2為上
+            // "balls" : 1 // 壞球數, 
+            // "strikes" : 1 , '' 好球數
+            // "outs" : 1 , // 出局數
+            // "bases" : "1/1/1"   // 1,2,3 壘是否有人
+        );
+
+        // 當前局數
+        $ret['period'] = $arr_scoreboard['CurrentPeriod'];
+
+        // 各種比賽狀態(好壞球數,壘包狀態等等)
+        foreach ($livescore_extradata as $k => $v) {
+            $col_name = $rv['Name'];
+            $col_value = $rv['Value'];
+            $ret[$col_name] = $col_value;
+        }
+
+        return $ret;
 
     }
 
