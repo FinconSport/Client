@@ -115,7 +115,7 @@ class CommonHistory extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            apiUrl: 'https://sportc.asgame.net/api/v1/common_order?token=' + window.token+ '&player=' + window.player+ '&page=',
+            apiUrl: 'https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&page=',
             page:1,
             activeTab: 0,
             hasMore:true,
@@ -133,7 +133,7 @@ class CommonHistory extends React.Component {
 
 		const json = await GetIni(apiUrl);
         // 先判定要不要解壓縮
-        if(json.gzip === 1) {
+        if(json.gzip) {
             // 將字符串轉換成 ArrayBuffer
             const str = json.data;
             const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -188,7 +188,7 @@ class CommonHistory extends React.Component {
             },() => {
                 let nowPage = parseInt(this.state.page)
                 let nextPage = nowPage + 1
-                this.caller('https://sportc.asgame.net/api/v1/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + this.state.searchStatus + '&page=' + nextPage ,1 ,nextPage)
+                this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + this.state.searchStatus + '&page=' + nextPage ,1 ,nextPage)
             })
         }
 	}
@@ -200,7 +200,7 @@ class CommonHistory extends React.Component {
 
     // 初始資料
     componentDidMount() {
-        this.caller('https://sportc.asgame.net/api/v1/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + this.state.searchStatus + '&page=1')
+        this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + this.state.searchStatus + '&page=1')
 	}
 
     // 每次點進來都撈一次
@@ -216,7 +216,7 @@ class CommonHistory extends React.Component {
         this.setState({
             searchStatus: status
         })
-        this.caller('https://sportc.asgame.net/api/v1/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + status + '&page=1')
+        this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + status + '&page=1')
     }
 
     // 圖片毀損
@@ -275,7 +275,7 @@ class CommonHistory extends React.Component {
                                             </div>
                                         </div>
                                         <div style={HistoryCardMain}>
-                                            <CommonHistorySlideToggle data={val}/>
+                                            {/* <CommonHistorySlideToggle data={val}/> */}
                                         </div>
                                         <div className='row m-0'>
                                             <div className='col-4 p-0'>{langText.CommonHistory.betamount}</div>

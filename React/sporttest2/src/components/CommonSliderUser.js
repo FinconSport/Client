@@ -188,9 +188,9 @@ class CommonSliderUser extends React.Component {
                   {langText.CommonNotice.notice}
                 </MenuBtn>
                 <MenuBtn>
-                  <Link style={{color: '#415b5a'}} to="/mobile/result">
+                  {/* <Link style={{color: '#415b5a'}} to="/mobile/result"> */}
                       {langText.ResultTitle.result}
-                    </Link>
+                    {/* </Link> */}
                 </MenuBtn>
               </div>
             </div>

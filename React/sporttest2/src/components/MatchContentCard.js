@@ -49,7 +49,7 @@ const SliderBrickHeight3 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.5rem;
+		font-size: 0.7rem;
 		line-height: 1.5rem;
 	}
 	.SliderBrickOdd{
@@ -69,7 +69,7 @@ const SliderBrickHeight2 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.5rem;
+		font-size: 0.7rem;
 		line-height: 2rem;
 	}
 	.SliderBrickOdd{
@@ -238,10 +238,6 @@ class MatchContentCard extends React.Component {
                                                 </div>
                                             </div>
                                             <div className='row m-0' style={rowHeight2}>
-                                                {/* <div className='col-10 p-0 teamSpan' style={TeamName}>
-                                                    { v.away_team_name }
-                                                </div> */}
-
                                                 <div className='col-10 p-0 teamSpan' style={TeamName}>
                                                     <div className="teamSpanMarquee">
                                                         <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
@@ -302,10 +298,13 @@ class MatchContentCard extends React.Component {
                                                                                                 tt.market_name,
                                                                                                 v.home_team_name,
                                                                                                 v.away_team_name,
-                                                                                                s.market_bet_name == 1 ?
-                                                                                                v.home_team_name + s.line
-                                                                                                :
-                                                                                                v.away_team_name + s.line
+                                                                                                (k === 1 || k === 2) ?
+                                                                                                (s.market_bet_name === "1" ? v.home_team_name : v.away_team_name) :
+                                                                                                (k === 3 || k === 4) ?
+                                                                                                (s.market_bet_name === "1" ? v.home_team_name + s.line : v.away_team_name + s.line) :
+                                                                                                (k === 5 || k === 6) ?
+                                                                                                (s.market_bet_name + ' ' + s.line) :
+                                                                                                null
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>

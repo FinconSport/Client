@@ -47,7 +47,8 @@ const MatchCardTitleArrow = {
 }
 
 const menuArr = ['early', 'living']
-
+var u = null
+var o = null
 
 class MatchContent extends React.Component {
 	constructor(props) {
@@ -60,11 +61,52 @@ class MatchContent extends React.Component {
 			isOpenCal: false,
 			toggleStates: {}, // 用一个对象来存储每个SlideToggle的开关状态
 		};
-		
-		// this.updateData = this.updateData.bind(this); // 綁定 this
 	}
 
-	// 頁面初始化 0 / 往下滑加載下一頁 1 / 按上面分類加載資料 2
+	findDifferences = (originalData, updateData, path = []) => {
+		for (const key in updateData) {
+			const currentPath = [...path, key];
+			if (originalData.hasOwnProperty(key)) {
+				u = updateData // 最後一筆物件資料
+				o = originalData // 最後一筆物件資料
+				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
+					this.findDifferences(originalData[key], updateData[key], currentPath);
+				} else if (key === 'price' && originalData[key] !== updateData[key]) {
+					// console.log(`============== ${u.market_bet_id} ==============`);
+					// console.log(`原始值: ${originalData[key]}`);
+					// console.log(`更新值: ${updateData[key]}`);
+					let market_bet_id = u.market_bet_id
+					let status = u.status
+					let uRate = u.price
+					let oRate = o.price
+					if( status === 1 ) {
+						if(uRate > oRate) {
+							this.removeRateStyle(market_bet_id)
+							// 賠率上升
+							$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
+						}
+
+						if(uRate < oRate) {
+							this.removeRateStyle(market_bet_id)
+							// 賠率下降
+							$('div[market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
+						}
+
+						setTimeout(() => {
+							this.removeRateStyle(market_bet_id)
+						}, 3000);
+					}					
+				}
+			}
+		}
+	}
+
+	removeRateStyle = (market_bet_id) => {
+		$('div[market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+		$('div[market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+	}
+
+	// 頁面初始化 0 / update 1 / 按上面分類加載資料 2
 	async caller(apiUrl, callerType = 0) {
 		if( callerType === 2 ) {
 			// 先滑到最上面再撈資料
@@ -72,7 +114,7 @@ class MatchContent extends React.Component {
 		}
 		const json = await GetIni(apiUrl); 
 		// 先判定要不要解壓縮
-		if(json.gzip === 1) {
+		if(json.gzip) {
 			// 將字符串轉換成 ArrayBuffer
 			const str = json.data;
 			const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -82,227 +124,46 @@ class MatchContent extends React.Component {
 			json.data = uncompressed
 		}
 
-		var registerId = []
-		Object.values(json.data).forEach((item) => {
-			item.forEach(ele => {
-				registerId.push(ele.series.id)
-			});
-		});
+		if( callerType === 1 ) {
+			var oldData = this.state.data[menuArr[window.menu]][window.sport]?.list
+			var updateData = json.data[menuArr[window.menu]][window.sport]?.list
+
+			if( updateData ) this.findDifferences(oldData, updateData)
+		}
+
+		// var registerId = []
+		// Object.values(json.data).forEach((item) => {
+		// 	item.forEach(ele => {
+		// 		registerId.push(ele.series.id)
+		// 	});
+		// });
 
 		this.setState({
 			data: json.data,
-		},() => {
-			// 註冊訂閱ID
-			const wsMsg = {
-				"action":"register",
-				"channel":'match',
-				"player": window.player,
-				"game_id": parseInt(window.sport),
-				"series": registerId // 要註冊的賽事
+		}, () => {
+			if( callerType !== 1) {
+				clearInterval(window.ajaxInt)
+				window.ajaxInt = setInterval(() => {
+					this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 1)
+				}, 5000);
 			}
-
-			// 當頁面重新Loading的時候有可能ws還沒連線好
-			var detectWsConnect = null
-			detectWsConnect = setInterval(() => {
-				console.log('connect m_order')
-				if( window.socket_status === true && window?.ws?.readyState === 1 ) {
-					console.log('ws m_order send -> ')
-					console.log(wsMsg)
-					window.ws.send(JSON.stringify(wsMsg));
-					clearInterval(detectWsConnect)
-
-					window.ws.onmessage = null
-					window.ws.onmessage = (message) => {
-						var msg = JSON.parse(message.data);
-						var match = msg.match_id
-						if( msg.channel === 'risk' ) match = msg.data.match_id
-						if ( !this.state.data ) return;
-			
-						// 定位舊資料
-						var originalData = null
-						var findData = null
-						if( msg.channel === 'match' || msg.channel === 'match-group' || msg.channel === 'risk' ) {
-							this.state.data[menuArr[window.menu]].forEach(ele => {
-								let temp1 = ele.list.find(item => item.match_id === match )
-								if( temp1 ) {
-									originalData = temp1
-									findData = temp1
-								}
-							});
-						}
-			
-						if ( !originalData ) return;
-						
-						// 控盤
-						if( msg.channel === 'risk') {
-							// pos
-							let pos = JSON.parse(msg.data.pos)
-							Object.entries(pos).forEach(([k, v]) => {
-								// 改變risk 
-								const targetRateList = originalData.rate[msg.data.game_priority];
-								for (let i = 0; i < targetRateList.length; i++) {
-									const rateData = targetRateList[i];
-									const rateKeys = Object.keys(rateData.rate);
-									if (rateKeys.length > k) {
-										// 找到第 k 比資料，設置 risk 
-										this.setState(() => {
-											rateData.rate[rateKeys[k]].risk = v
-											return { rateData }
-										})
-									}
-								}
-							});
-						}
-			
-						if ( ( msg.action === 'update' || msg.action === 'update-B' ) && msg.channel === 'match-group') {
-							var isAppendNewBet = false
-							var isAppendNewRate = false
-							if( originalData?.rate[msg.game_priority] !== undefined ) { 
-								// 原本就有的game_priority
-								originalData = originalData.rate[msg.game_priority].find(item => item.rate_id === msg.rate_id)
-								if ( originalData ) { 
-									// 有rate_id
-									msg.data.forEach(e => {
-			
-										if ( originalData.updated_at > e.updated_at ) return;
-			
-										let itemData = originalData.rate[e.id]
-										let originalRate = itemData.rate
-										let originalStatus = itemData.status
-										let updateRate = e.rate
-										let updateStatus = e.status
-										let updateRisk = e.risk
-			
-										// 更新state data
-										this.setState(() => {
-											itemData.risk = updateRisk 
-											itemData.rate = updateRate 
-											itemData.status = updateStatus
-											originalData.status = msg.status
-											originalData.updated_at = msg.data[0].updated_at
-											return { itemData, originalData }
-										})
-			
-										// 賠率上升
-										if( updateRate > originalRate ) {
-											// 加上賠率變化樣式並更改賠率
-											$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + '] .odd').html(updateRate)
-											$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + ']').addClass('raiseOdd')
-							
-											// 三秒後移除
-											setTimeout(() => {
-												$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + ']').removeClass('raiseOdd')
-											}, 3000);
-										}
-			
-										// 賠率下降
-										if( updateRate < originalRate ) {
-											// 加上賠率變化樣式並更改賠率
-											$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + '] .odd').html(updateRate)
-											$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + ']').addClass('lowerOdd')
-							
-											// 三秒後移除
-											setTimeout(() => {
-												$('div[bet_match=' + msg.match_id + '][bet_type=' + msg.rate_id + '][bet_type_item=' + e.id + ']').removeClass('lowerOdd')
-											}, 3000);
-										}
-									})
-									
-								} else {
-									isAppendNewBet = true
-									isAppendNewRate = true
-								}
-							} else {
-								isAppendNewBet = true
-							}
-			
-							if ( isAppendNewBet ) {
-								let bet_name = langText.MatchContent.game_priority[msg.game_priority]
-								let insertRateData = msg.data.reduce((acc, item) => {
-									acc[item.id] = item;
-									item['name'] = item.name_cn // ws通知沒有語系
-									item['value'] = item.name_cn // ws通知沒有語系
-									return acc;
-								}, {});
-			
-								let insertData = {
-									rate_id: msg.rate_id,
-									game_priority: msg.game_priority,
-									name: bet_name,
-									rate: insertRateData,
-									status: msg.status,
-									updated_at: msg.data[0].updated_at
-								}
-			
-								if( !isAppendNewRate ) {
-									this.setState(() => {
-										findData.rate[msg.game_priority] = []
-										return { findData }
-									});
-								}
-								
-								this.setState(() => {
-									findData.rate[msg.game_priority] = findData.rate[msg.game_priority].concat([insertData])
-									return { findData }
-								});
-							}
-						}
-						
-						// 比分更新
-						if(msg.action === 'update' && msg.channel === 'match' ) {
-							var updateHome = msg.data.teams.find(item => item.index === 1)
-							var updateAway = msg.data.teams.find(item => item.index === 2)
-							var updateHomeScore = updateHome.total_score
-							var updateAwayScore = updateAway.total_score
-			
-			
-							if( originalData ) {
-								var oldHomeScore = originalData.teams.find( item => item.index === 1 )
-								var oldAwayScore = originalData.teams.find( item => item.index === 2 )
-			
-								// 分數上升樣式
-								if( updateHomeScore > oldHomeScore.total_score ) {
-									$('div[cardid="' + msg.match_id + '"] .teamScore[index="1"]').addClass('raiseScore')
-								}
-								if( updateAwayScore > oldAwayScore.total_score ) {
-									$('div[cardid="' + msg.match_id + '"] .teamScore[index="2"]').addClass('raiseScore')
-								}
-			
-								// 三秒後移除上升樣式
-								setTimeout(() => {
-									$('div[cardid="' + msg.match_id + '"] .teamScore').removeClass('raiseScore')
-								}, 3000);
-			
-								
-								this.setState(() => {
-									oldHomeScore.total_score = updateHomeScore // 客隊分數
-									oldHomeScore.scores = updateHome.scores // 主隊局數更新
-									oldAwayScore.total_score = updateAwayScore // 客隊分數
-									oldAwayScore.scores = updateAway.scores // 客隊局數更新
-									originalData.status = msg.data.status // 狀態更新
-									return { originalData }
-								})
-							}
-						}
-					};
-						}
-					}, 500);
-				})
-		
+		})
 		
 	}
 
 	// 初始化資料 + ws handler
 	componentDidMount() {
-		console.log('componentDidMount')
 		this.caller(this.props.apiUrl + '&sport_id=' + this.state.sport_id)
 	}
 	
 	// 偵測menu改變
 	componentDidUpdate(prevProps) {
-		if (prevProps.sport_id !== this.props.sport_id) {
+		if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
 			this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 2);
-	  }
+			this.setState({
+				toggleStates: {}
+			});
+		}
 	}
 
 	// 滑到最上面
@@ -333,43 +194,56 @@ class MatchContent extends React.Component {
 
 	render() {
 		const { data } = this.state
-		
+		const bet_data = this.props.sendOrderData
 		return (
 			<div style={MatchMainContainer} id='MatchMainContainer'>
-			{
-				data && data[menuArr[window.menu]] &&
-				Object.entries(data[menuArr[window.menu]]).map(([k, v]) => {
-				return (
-				<SlideToggle key={k} duration={500}>
-					{({ toggle, setCollapsibleElement }) => (
-					<>
-						<div style={MatchCardTitle} onClick={() => { toggle();this.toggle(k) }}>
-						{ v.series.name }({ v.list.length })
-						{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
-						</div>
-						<div className='row m-0' ref={setCollapsibleElement}>
-						{v.list.map(ele => {
-							const selectedM = this.props.sendOrderData.bet_data.find(item => item.bet_match === ele.match_id);
-							return(
-								((window.menu === 0 && ele.status === 1) || (window.menu === 1 && ele.status === 2)) && (
-									<MatchContentCard
-										key={ele.match_id}
-										swiperIndex={this.state.swiperIndex}
-										swiperTabCallBack={this.swiperTabHandler}
-										getBetDataCallBack={this.getBetData}
-										data={ele}
-										selectedM={selectedM}
-									/>
-									)	
-							)
-						})}
-						</div>
-					</>
-					)}
-				</SlideToggle>
-				);
-			})}
-			<TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
+				{
+					data && data[menuArr[window.menu]][window.sport]?.list ?
+					Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
+						<SlideToggle key={k} duration={500}>
+						  {({ toggle, setCollapsibleElement }) => (
+							<>
+								<div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
+									{ v.league_name }({ Object.keys(v.list).length })
+									{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
+								</div>
+								<div className='row m-0' ref={setCollapsibleElement}>
+									{Object.entries(v.list).map(([k2, v2]) => {
+										const selectedM = bet_data.find(item => item.fixture_id === v2.fixture_id)
+										return (
+											<MatchContentCard
+												series_name={v.league_name}
+												key={v2.fixture_id}
+												swiperIndex={this.state.swiperIndex}
+												swiperTabCallBack={this.swiperTabHandler}
+												getBetDataCallBack={this.getBetData}
+												data={v2}
+												isOpen={this.state.toggleStates[k] ? false : true}
+												selectedM={ selectedM }
+											/>
+										);
+									})}
+								</div>
+
+							</>
+						  )}
+						</SlideToggle>
+					))
+					:
+					<div className="loading loading04 text-white mt-5">
+						<span>L</span>
+						<span>O</span>
+						<span>A</span>
+						<span>D</span>
+						<span>I</span>
+						<span>N</span>
+						<span>G</span>
+						<span>.</span>
+						<span>.</span>
+						<span>.</span>
+					</div>
+				}
+				<TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
 			</div>
 		);
 	}

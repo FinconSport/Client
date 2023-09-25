@@ -47,7 +47,7 @@ class Match extends React.Component {
 		const elapsedTime = Date.now() - start; // 计算经过的时间
 		const json = await GetIni(apiUrl); 
 		// 先判定要不要解壓縮
-		if(json.gzip === 1) {
+		if(json.gzip) {
 			// 將字符串轉換成 ArrayBuffer
 			const str = json.data;
 			const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -91,7 +91,7 @@ class Match extends React.Component {
 			})
 		}, 1000);
 		this.caller(this.state.accout_api, 'account_res')
-		this.caller(this.state.betRecord_api, 'betRecord_res')
+		// this.caller(this.state.betRecord_api, 'betRecord_res')
 		this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
 
 

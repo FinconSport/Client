@@ -116,7 +116,7 @@ class CommonFooter extends React.Component {
                         </Link>
                     </FooterTab>
                 </Col>
-                <CommonHistory isShow={this.state.isShow} callBack={this.closeHistory} />
+                {/* <CommonHistory isShow={this.state.isShow} callBack={this.closeHistory} /> */}
             </>
         )
     }

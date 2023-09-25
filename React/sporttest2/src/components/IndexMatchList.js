@@ -65,7 +65,6 @@ class IndexMatchList extends React.Component {
     render() {
         const res = this.props.api_res
         if( res !== undefined){
-            console.log(window.menu, window.sport)
             return(
                 <>
                     <div style={MatchListStyle}>

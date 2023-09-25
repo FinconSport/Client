@@ -61,7 +61,7 @@ class MOrder extends React.Component {
 		const elapsedTime = Date.now() - start; // 计算经过的时间
 		const json = await GetIni(apiUrl); 
 		// 先判定要不要解壓縮
-		if(json.gzip === 1) {
+		if(json.gzip) {
 			// 將字符串轉換成 ArrayBuffer
 			const str = json.data;
 			const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -86,6 +86,11 @@ class MOrder extends React.Component {
 			}
 		}
 
+		if( api_res === 'indexMatchList_res') {
+			delete json.data.living;
+			window.menu = 0
+		}
+
 		this.setState({
 			[api_res]: json,
 		})
@@ -105,7 +110,7 @@ class MOrder extends React.Component {
 			})
 		}, 1000);
 		this.caller(this.state.accout_api, 'account_res')
-		this.caller(this.state.betRecord_api, 'betRecord_res')
+		// this.caller(this.state.betRecord_api, 'betRecord_res')
 		this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
 		
 
@@ -177,10 +182,9 @@ class MOrder extends React.Component {
 	// 取得投注所需資料
 	getBetData = (betData) => {
 		var updatedBetData = []
-
 		// 是否已經選過此玩法
 		var existingItem = this.state.sendOrderData.bet_data.findIndex(function(data) {
-			return data.bet_match === betData.bet_match && data.bet_type === betData.bet_type && data.bet_type_item === betData.bet_type_item;
+			return data.fixture_id === betData.fixture_id && data.market_bet_id === betData.market_bet_id;
 		});
 		
 		if(existingItem !== -1){
@@ -196,7 +200,7 @@ class MOrder extends React.Component {
 		} else {
 			// 判斷是否選過這場賽事
 			var existingIndex = this.state.sendOrderData.bet_data.findIndex(function(data) {
-				return data.bet_match === betData.bet_match;
+				return data.fixture_id === betData.fixture_id;
 			});
 			if (existingIndex !== -1) {
 				// 有選過 移除原本的資料
@@ -280,10 +284,10 @@ class MOrder extends React.Component {
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} style={{ width: '74%' }}>
 						<MOrderDetail mOrderCount={this.state.mOrderCount} clearOrder={this.clearOrder} openOrderDetail={this.openOrderDetail} />
 						<MatchMenuNav api_res={this.state.indexMatchList_res} callBack={this.changeTab} />
-						<MatchContent apiUrl={this.state.baseApiUrl} menu_id={this.state.menu_id}  sport_id={this.state.sport_id} callBack={this.getBetData} sendOrderData={this.state.sendOrderData} />
+						<MatchContent apiUrl={this.state.baseApiUrl} menu_id={this.state.menu_id}  sport_id={this.state.sport_id} callBack={this.getBetData} sendOrderData={this.state.sendOrderData.bet_data} />
 						<div onClick={this.handleCallBMethod} style={slideIconStyle}><GrMenu /></div>
 					</PullToRefresh>
-					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.sendOrderData} CloseCal={this.CloseCal} ClearAll={this.ClearAll} api_res={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
+					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.sendOrderData} CloseCal={this.CloseCal} ClearAll={this.ClearAll} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 					<CommonFooter index={4} />
 				</div>
 			:

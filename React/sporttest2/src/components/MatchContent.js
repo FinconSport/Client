@@ -72,10 +72,9 @@ class MatchContent extends React.Component {
 				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
 					this.findDifferences(originalData[key], updateData[key], currentPath);
 				} else if (key === 'price' && originalData[key] !== updateData[key]) {
-					console.log('oroginal data')
-					console.log(o)
-					console.log('update data')
-					console.log(u)
+					// console.log(`============== ${u.market_bet_id} ==============`);
+					// console.log(`原始值: ${originalData[key]}`);
+					// console.log(`更新值: ${updateData[key]}`);
 					let market_bet_id = u.market_bet_id
 					let status = u.status
 					let uRate = u.price
@@ -113,10 +112,9 @@ class MatchContent extends React.Component {
 			// 先滑到最上面再撈資料
 			this.scrollToTop()
 		}
-		
 		const json = await GetIni(apiUrl); 
 		// 先判定要不要解壓縮
-		if(json.gzip === 1) {
+		if(json.gzip) {
 			// 將字符串轉換成 ArrayBuffer
 			const str = json.data;
 			const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -129,7 +127,6 @@ class MatchContent extends React.Component {
 		if( callerType === 1 ) {
 			var oldData = this.state.data[menuArr[window.menu]][window.sport]?.list
 			var updateData = json.data[menuArr[window.menu]][window.sport]?.list
-
 			if( updateData ) this.findDifferences(oldData, updateData)
 		}
 
@@ -140,35 +137,63 @@ class MatchContent extends React.Component {
 		// 	});
 		// });
 
-		// if( callerType !== 1) {
-			this.setState({
-				data: json.data,
-			}, () => {
-				if( callerType !== 1) {
-					clearInterval(window.ajaxInt)
-					window.ajaxInt = setInterval(() => {
-						this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 1)
-					}, 5000);
-				}
-			})
-		// }
-		
+		this.setState({
+			data: json.data,
+		}, () => {
+			if( callerType !== 1) {
+				clearInterval(window.ajaxInt)
+				window.ajaxInt = setInterval(() => {
+					this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 1)
+				}, 5000);
+			}
+		})
 	}
+
+	// ws function 
+	// detect if there's still package need to be processed
+	async processMessageQueueAsync() {
+		while (true) {
+			if (window.messageQueue.length > 0) {
+				this.processMessageQueue(); // package process function
+			} else {
+				await this.sleep(2); // check after 2 ms
+			}
+		}
+	}
+
+	// sleep function to pause
+	sleep = (ms) => {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	// package process function
+	processMessageQueue = () => {
+		const message = window.messageQueue.shift(); // to get the head pkg
+		const msg = JSON.parse(message.data); // convert to json
+		// setState to rerender
+
+
+
+
+		// setState to rerender
+	}
+	// ws function
 	
 	// 初始化資料 + ws handler
 	componentDidMount() {
-		this.caller(this.props.apiUrl + '&sport_id=' + this.state.sport_id)
+		this.caller(this.props.apiUrl + '&sport_id=' + window.sport)
+
+		// ws
 		
 	}
 				
 	// 偵測menu改變
 	componentDidUpdate(prevProps) {
-		if (prevProps.sport_id !== this.props.sport_id) {
-		  	this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 2);
-		}
 		if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
+			this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
 			this.setState({
-				toggleStates: {}
+				toggleStates: {},
+				sport_id: window.sport
 			});
 		}
 	}
@@ -244,7 +269,6 @@ class MatchContent extends React.Component {
 						<span>.</span>
 					</div>
 				}
-				
 			<TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
 			</div>
 		);

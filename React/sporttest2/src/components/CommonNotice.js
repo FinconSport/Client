@@ -134,7 +134,7 @@ class CommonNotice extends React.Component {
   async caller(apiUrl) {
     const json = await GetIni(apiUrl);
     // uncompressed
-    if (json.gzip === 1) {
+    if (json.gzip) {
       const str = json.data;
       const bytes = atob(str)
         .split("")

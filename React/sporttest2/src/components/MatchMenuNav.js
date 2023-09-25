@@ -129,31 +129,14 @@ class MatchMenuNav extends React.Component {
     }
 
     componentDidMount() {
-        // var isMorder = false;
-        // // 获取当前页面的 URL
-        // var currentURL = window.location.href;
-        // // 分割 URL，提取路径部分
-        // var pathArray = currentURL.split('/');
-        // // 获取最后一个路径部分，通常是当前分页的标识
-        // var currentPage = pathArray[pathArray.length - 1];
-        // // 使用条件运算符来设置 isMorder 变量
-
-        // isMorder = currentPage === 'm_order';
-        // if(isMorder) {
-        //     let newRes = delete this.state.data.living;
-        //     this.setState({
-        //         api_res: newRes
-        //     })
-        // }
-
-
-        let res = this.props.api_res
-        let rKey = null
+        console.log(window.menu, window.sport)
+        let res = this.state.api_res
         // default menu
+        let rKey = null
         for (const key in res.data) {
             if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
                 rKey = key
-                if(window.menu === null) {
+                if(window.menu === null || res.data[menuArr[window.menu]] === undefined) {
                     this.setState({
                         menu_id: mapping[key][1],
                         objTage: rKey
@@ -163,8 +146,12 @@ class MatchMenuNav extends React.Component {
                 break; 
             }
         }
+
+        console.log(rKey)
+        console.log(res.data[rKey].items[window.sport])
+        console.log(res)
         // default sport
-        if(window.sport === null) {
+        if(window.sport === null || res.data[rKey].items[window.sport] === undefined) {
             let itemData = res.data[rKey].items
             let keys = Object.keys(itemData);
             window.sport = parseInt(keys.find(key => itemData[key].count > 0))
@@ -172,9 +159,7 @@ class MatchMenuNav extends React.Component {
                 sport_id: window.sport
             })
         }
-
         this.props.callBack(window.menu, window.sport)
-
 	}
 
     // 選擇分頁
