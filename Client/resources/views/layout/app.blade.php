@@ -56,7 +56,7 @@
 						
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<a href="/order" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></a>
+								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
 							</div>
 						</div>
 
@@ -70,25 +70,25 @@
 
 						<div class="submenu-main" id="lf_rule">
 							<div class="submenu-inner">
-								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></div>
+								<div onclick="navTo('rule')" class="submenu-btn"><i class="fa-solid fa-chess-rook"></i> <p>{{ trans('common.left_menu.rule') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_logs">
 							<div class="submenu-inner">
-								<a href="/logs" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> <p>{{ trans('common.left_menu.logs') }}</p></a>
+								<div onclick="navTo('logs')" class="submenu-btn"><i class="fa-solid fa-credit-card"></i> <p>{{ trans('common.left_menu.logs') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_calcu">
 							<div class="submenu-inner">
-								<a href="/calculator" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></a>
+								<div onclick="navTo('calculator')" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></div>
 							</div>
 						</div>
 
 						<div class="submenu-main" id="lf_notice">
 							<div class="submenu-inner">
-								<a href="/notice" class="submenu-btn"><i class="fa-solid fa-scroll"></i> <p>{{ trans('common.left_menu.notice') }}</p></a>
+								<div onclick="navTo('notice')" class="submenu-btn"><i class="fa-solid fa-scroll"></i> <p>{{ trans('common.left_menu.notice') }}</p></div>
 							</div>
 						</div>
 					</div>
