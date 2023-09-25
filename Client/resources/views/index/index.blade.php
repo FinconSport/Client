@@ -406,7 +406,6 @@
 
                 if (numLeagues !== 0) { // <- open first div and if has data
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
-                    $('.league-div:first .seriesWrapperTitle').addClass("open");
                 }
 
                 for (const leagueId in sport.list) {
@@ -417,6 +416,9 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
+                    if (first div add class open) {
+                        leagueContainer.classList.add("open");
+                    }
                     leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
