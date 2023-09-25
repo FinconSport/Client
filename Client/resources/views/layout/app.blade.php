@@ -278,7 +278,6 @@
 					var indexSportSelect = document.createElement("a"); // parent div
 					indexSportSelect.setAttribute("id", x.sport_id);
 					indexSportSelect.setAttribute("class", "sportSelect " + (sportType === key.toString() ? "openToggle" : ""));
-					console.log(sportType + "==" key.toString());
 					indexSportSelect.setAttribute("href", "/?sport=" + key);
 					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
 					//append parent div to the main container of index sport menu
