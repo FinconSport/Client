@@ -294,10 +294,10 @@
 				x.key = key;
 
 				function createSportSelect(container, url) {
-					var sportSelect = document.createElement("a");
+					var sportSelect = document.createElement("div");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
-					sportSelect.setAttribute("onclick", 'navTo(event, "' + x.sport_id + '", '+ url +')');
+					sportSelect.setAttribute("onclick", 'navTo(' + sport, url + ')');
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
 				}
