@@ -1383,7 +1383,13 @@ class LsportApiController extends Controller {
         $fixture_status = array(
              1 => "等待開賽",
              2 => "進行中",
-             3 => "已結束"
+             3 => "已結束",
+             4 => "取消",
+             5 => "延期",
+             6 => "中斷",
+             7 => "放棄",
+             8 => "失去覆蓋",
+             9 => "即將開始"
         );
 
         /////////////////////////
@@ -1407,7 +1413,7 @@ class LsportApiController extends Controller {
             
             $tmp['fixture_id']  = $v['fixture_id'];
             $tmp['start_time']  = $v['start_time'];
-            $tmp['status']      = $v['status'];
+            $tmp['status']      = $$fixture_status[intval($v['status'])];
             $tmp['last_update'] = $v['last_update'];
 
             ///////////////////////
@@ -1489,8 +1495,6 @@ class LsportApiController extends Controller {
 
             $reponse[] = $tmp;
         }
-
-        dd($reponse);
 
         $data = $reponse;
 
