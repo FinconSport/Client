@@ -2036,9 +2036,9 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * getMatchPeriods
+     * getMatchScoreboard
      *
-     * 解析並回傳一場賽事的局數資料。應為走地中賽事。
+     * 解析並回傳一場賽事的各局主客隊得分資料。應為走地中賽事。
      * 
      * @param 
      * @return  # null
@@ -2046,9 +2046,9 @@ class LsportApiController extends Controller {
      *          # ARRAY
      */
 
-    public function getMatchPeriods_caller(Request $request) {
+    public function getMatchScoreboard_caller(Request $request) {
 
-        $return = $this->getMatchPeriods(
+        $return = $this->getMatchScoreboard(
             $request['sport_id'],
             $request['fixture_status'],
             $request['periods_raw_data']
@@ -2056,7 +2056,7 @@ class LsportApiController extends Controller {
         echo json_encode(['ret' => $return]);
     }
 
-    protected function getMatchPeriods($sport_id, $fixture_status, $periods_raw_data) {
+    protected function getMatchScoreboard($sport_id, $fixture_status, $periods_raw_data, $scoreboard_raw_data) {
 
         // 除了走地中賽事其餘均回傳null
         if ($fixture_status != 2) {
@@ -2081,18 +2081,115 @@ class LsportApiController extends Controller {
             }
         }
 
+        if (is_array($scoreboard_raw_data)) {
+            $arr_scoreboard_raw_data = $scoreboard_raw_data;
+        } else {
+            // 如果參數是字串則json_decoe看看
+            $arr_scoreboard_raw_data = json_decode($scoreboard_raw_data, true);
+            // de不出東西就回傳null
+            if (!$arr_scoreboard_raw_data) {
+                return false;
+            }
+        }
+
         //========================================
 
-        $ret = [
-            //[0],
-            //[0]
-        ];
+/*
+periods:
+[
+    {
+      "Incidents": null,
+      "IsConfirmed": true,
+      "IsFinished": true,
+      "Results": [
+        {
+          "Position": "1",
+          "Value": "0"
+        },
+        {
+          "Position": "2",
+          "Value": "0"
+        }
+      ],
+      "SequenceNumber": 1,
+      "SubPeriods": null,
+      "Type": 1
+    },
+    {
+      "Incidents": [
+        {
+          "IncidentType": 27,
+          "ParticipantPosition": "1",
+          "Period": 2,
+          "Results": [
+            {
+              "Position": "1",
+              "Value": "2"
+            },
+            {
+              "Position": "2",
+              "Value": "0"
+            }
+          ],
+          "Seconds": -1
+        }
+      ],
+      "IsConfirmed": true,
+      "IsFinished": true,
+      "Results": [
+        {
+          "Position": "1",
+          "Value": "2"
+        },
+        {
+          "Position": "2",
+          "Value": "0"
+        }
+      ],
+      "SequenceNumber": 2,
+      "SubPeriods": null,
+      "Type": 2
+    },
+
+scoreboard:
+{
+    "CurrentPeriod": 40,
+    "Results": [
+      {
+        "Position": "1",
+        "Value": "2"
+      },
+      {
+        "Position": "2",
+        "Value": "2"
+      }
+    ],
+    "Status": 2,
+    "Time": "-1"
+}
+
+*/
+
+        $ret = [];
+        // 各局得分
         foreach ($arr_periods_raw_data as $pk => $pv) {
-            $sequence_number = intval($pv['SequenceNumber']);
+            $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']) - 1;
-                $ret[$pos][$sequence_number] = intval($rv['Value']);
+                $pos = intval($rv['Position']);
+                $score = intval($rv['Value']);
+                $ret[$pos][$type] = $score;
+            }
+        }
+
+        // 處理總分
+        foreach ($arr_scoreboard_raw_data as $pk => $pv) {
+            $arr_results = $pv['Results'];
+            foreach ($arr_results as $rk => $rv) {
+                $pos = intval($rv['Position']);
+                $total_score = intval($rv['Value']);
+                //總分都是放在key=0的位置
+                $ret[$pos][0] = $total_score;
             }
         }
 
@@ -2108,7 +2205,17 @@ class LsportApiController extends Controller {
      * @param 
      * @return 
      */
-    protected function getMatchScoreboard($sport_id, $fixture_status, $scoreboard_raw_data) {
+    public function getMatchPeriods_caller(Request $request) {
+
+        $return = $this->getMatchPeriods(
+            $request['sport_id'],
+            $request['fixture_status'],
+            $request['periods_raw_data']
+        );
+        echo json_encode(['ret' => $return]);
+    }
+
+     protected function getMatchPeriods_caller($sport_id, $fixture_status, $scoreboard_raw_data) {
 
         // 除了走地中賽事其餘均回傳null
         if ($fixture_status != 2) {
