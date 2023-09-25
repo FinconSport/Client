@@ -401,7 +401,7 @@
 
 			// Toggle 'active' class for submenu buttons
 			$("#lf_sport .submenu-btn").click(function(){
-				$('#lf_sport').addClass("clicked");
+				$('#lf_sport').toggleClass("clicked");
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
 				
