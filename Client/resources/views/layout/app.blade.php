@@ -406,15 +406,15 @@
 
 		$(document).ready(function(){
             $(".submenu-btn").click(function(){
+				$(this).closest('.submenu-main').toggleClass('clicked');
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
                 const sportListMenu = $(this).next('.submenu-toggle-list');
                 if (sportListMenu.length) {
                     if (sportListMenu[0].style.maxHeight === '0px' || sportListMenu[0].style.maxHeight === '') {
                         sportListMenu[0].style.maxHeight = sportListMenu[0].scrollHeight + 'px';
-						$(this).closest('.submenu-main').toggleClass('clicked');
-						$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
                     } else {
                         sportListMenu[0].style.maxHeight = '0';
-						$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
                     }
                 }
             });
