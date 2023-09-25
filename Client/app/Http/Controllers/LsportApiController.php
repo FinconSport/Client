@@ -1455,26 +1455,29 @@ class LsportApiController extends Controller {
 
             // 總分
             $tmp = json_decode($v['scoreboard'],true);
-            $d = array();
-            foreach ($tmp['Results'] as $kk => $vv) {
-                $pos = $vv['Position']-1;
-                $d[$pos] = $vv['Value'];
+            if (count($tmp) > 0) {
+                $d = array();
+                foreach ($tmp['Results'] as $kk => $vv) {
+                    $pos = $vv['Position']-1;
+                    $d[$pos] = $vv['Value'];
+                }
+                $scoreboard[] = $d;
             }
-            $scoreboard[] = $d;
 
             // 局數 
             $d = array();
             $tmp = json_decode($v['periods'],true);
-
-            foreach ($tmp as $kk => $vv) {
-                $d = array();
-                foreach ($vv['Results'] as $kkk => $vvv) {
-                    $pos = $vvv['Position'];
-                    $d[$pos] = $vvv['Value'];
-                }
-                $type = $vv['Type'];
-                if ($type < 100) {  // 粗暴判斷
-                    $scoreboard[] = $d;
+            if (count($tmp) > 0) {
+                foreach ($tmp as $kk => $vv) {
+                    $d = array();
+                    foreach ($vv['Results'] as $kkk => $vvv) {
+                        $pos = $vvv['Position'];
+                        $d[$pos] = $vvv['Value'];
+                    }
+                    $type = $vv['Type'];
+                    if ($type < 100) {  // 粗暴判斷
+                        $scoreboard[] = $d;
+                    }
                 }
             }
 
