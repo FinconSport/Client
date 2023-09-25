@@ -1783,7 +1783,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
                 $tmp_bet_data['status'] = $arrOrderStatus[$v['status']];
                 $tmp_bet_data['type_priority'] = $v['type_priority'];
-                $tmp[$k]['bet_data'][] = $tmp_bet_data;
+            //    $tmp[$k]['bet_data'][] = $tmp_bet_data;
 
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
@@ -1791,6 +1791,8 @@ class LsportApiController extends Controller {
 
         }
 
+
+        dd($tmp);
         $data['list'] = $tmp;
         ////////////////////////
 
