@@ -389,14 +389,14 @@
 
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
-            listDiv.className = "catWrapperContent";
+            listDiv.className = "";
 
             if (fixtureData) {
                 for (const fixtureId in fixtureData) {
                     if (fixtureData.hasOwnProperty(fixtureId)) {
                         const fixture = fixtureData[fixtureId];
                         const fixtureDiv = document.createElement("div");
-                        fixtureDiv.className = "fixture";
+                        fixtureDiv.className = "catWrapperContent";
                         fixtureDiv.innerHTML = `<p>${fixture.home_team_name}  ${fixture.away_team_name}  ${fixture.start_time}</p>`;
                         listDiv.appendChild(fixtureDiv);
                     }
