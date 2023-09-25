@@ -406,26 +406,9 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
-			const currentUrl = window.location.href;
-			const noPath = window.location.pathname;
-			
-			const urlMappings = {
-				'/?sport': 'lf_sport',
-				'm_order?': 'lf_mOrder',
-				'order': 'lf_order',
-				'match?': 'lf_match',
-				'rule': 'lf_rule',
-				'logs': 'lf_logs',
-				'calculator': 'lf_calcu',
-				'notice': 'lf_notice'
-			};
-
 			var divElement = document.querySelector(".submenu-main");
-			for (const urlFragment in urlMappings) {
-				if (!divElement.classList.contains("active")) {
-					$(`#${urlMappings[urlFragment]}`).addClass('active');
-					break;
-				}
+			if (!divElement.classList.contains("active")) {
+				console.log("no active class")
 			}
 
 		});
