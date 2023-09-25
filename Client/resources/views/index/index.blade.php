@@ -421,6 +421,36 @@
                                                             "<p>" + fixture.away_team_name + "</p>" +
                                                         "</div>" +
                                                         "<div class='seriesWrapper-right'>" +
+                                                            "<table>" +
+                                                                "<thead>" +
+                                                                    "<tr>" +
+                                                                        "<th></th>" +
+                                                                        "<th></th>" +
+                                                                        "<th></th>" +
+                                                                        "<th></th>" +
+                                                                        "<th></th>" +
+                                                                        "<th></th>" +
+                                                                    "</tr>" +
+                                                                "</thead>" +
+                                                                "<tbody>" +
+                                                                    "<tr>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                    "</tr>" +
+                                                                    "<tr>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                        "<td></td>" +
+                                                                    "</tr>" +
+                                                                "</tbody>" +
+                                                            "</table>" +
                                                         "</div>" +
                                                     "</div>";
                         leagueContainer.appendChild(fixtureContainer);
