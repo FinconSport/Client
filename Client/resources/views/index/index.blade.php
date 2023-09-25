@@ -248,7 +248,7 @@
         }
 
         // open first div league
-        var firstLeagueDiv = document.querySelector('.league-div');
+        var firstLeagueDiv = document.querySelector('.fixture-container');
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
             if (childLeagueDiv) {
@@ -263,7 +263,7 @@
                 const content2 = $(this).next('.fixture-container');
                 if (content2.length) {
                     if (content2[0].style.maxHeight === '0px' || content2[0].style.maxHeight === '') {
-                        content2[0].style.maxHeight = content2[0].scrollHeight + 'px';
+                        content2[0].style.maxHeight = 'auto';
                     } else {
                         content2[0].style.maxHeight = '0';
                     }
@@ -275,7 +275,7 @@
                 const content1 = $(this).next('.league-list');
                 if (content1.length) {
                     if (content1[0].style.maxHeight === '0px' || content1[0].style.maxHeight === '') {
-                        content1[0].style.maxHeight = content1[0].scrollHeight + 'px';
+                        content1[0].style.maxHeight = 'auto';
                     } else {
                         content1[0].style.maxHeight = '0';
                     }
