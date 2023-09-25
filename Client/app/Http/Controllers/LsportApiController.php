@@ -483,7 +483,9 @@ class LsportApiController extends Controller {
                 'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$langCol.' AS ta_name_locale'
             )
             //->where('l.status', 1)  // 原本只抓1=尚未開賽
-            ->whereIn('l.status', [1, 2])  //可區分:未開賽及走地中
+            //->whereIn('l.f_status', [1, 2])  //可區分:未開賽及走地中
+            ->where('l.f_status', 1)
+            ->orWhere('l.f_status', 2)
             ->where('l.sport_id', $sport_id)
             ->where('s.sport_id', $sport_id)
             ->where('f.start_time', "<=", $after_tomorrow)
@@ -535,6 +537,8 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
         // 開始loop 賽事資料
+
+        dd($data);
 
         foreach ($data as $dk => $dv) {
             $league_id = $dv->league_id;
@@ -700,9 +704,11 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////
         // gzip
-        $data = $this->gzip($data);
+        //$data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true);
+        // $this->ApiSuccess($data, "01", true);
+        
+        $this->ApiSuccess($data, "01", false);
     }
 
     /**
