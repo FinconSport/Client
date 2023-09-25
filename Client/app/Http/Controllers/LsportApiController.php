@@ -615,8 +615,13 @@ class LsportApiController extends Controller {
                     $away_team_name = $dv->ta_name_locale;
                 }
 
-                $periods = null;
-                $scoreboard = null;
+                // 比分板跟各局得分
+                $livescore_extradata = $dv->livescore_extradata;
+                $periods = $dv->periods;
+                $scoreboard = $dv->scoreboard;
+                //解析以回傳
+                $parsed_periods = $this->getMatchPeriods(sport_id:, $fixture_status, $scoreboard, $livescore_extradata);
+                $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
                 // 包入 fixture 賽事資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
@@ -635,9 +640,9 @@ class LsportApiController extends Controller {
                     'home_team_name' => $home_team_name,
                     'away_team_id' => $dv->ta_team_id,
                     'away_team_name' => $away_team_name,
+                    'periods' => $parsed_periods,
+                    'scoreboard' => $parsed_scoreboard,
                     'list' => array(),
-                    'periods' => $periods,
-                    'scoreboard' => $scoreboard,
                 );
             }
 
@@ -730,11 +735,11 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////
         // gzip
-        $data = $this->gzip($data);
+        // $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true);
+        // $this->ApiSuccess($data, "01", true);
         
-        // $this->ApiSuccess($data, "01", false);
+        $this->ApiSuccess($data, "01", false);
     }
 
     /**
@@ -1570,7 +1575,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01");
+        $this->ApiSuccess($data, "01", true);
     }
 
     /**
@@ -1799,7 +1804,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01");
+        $this->ApiSuccess($data, "01", true);
 
     }
 
@@ -1867,7 +1872,7 @@ class LsportApiController extends Controller {
         // gzip
         $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01"); 
+        $this->ApiSuccess($data, "01", true); 
 
     }
 
