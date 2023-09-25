@@ -528,3 +528,8 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .seriesWrapper-right {
     width: 70%;
   }
+
+  #indexContainerLeft .main-div .fixture-container,
+  #indexContainerLeft .main-div .league-div {
+    overflow: hidden;
+  }

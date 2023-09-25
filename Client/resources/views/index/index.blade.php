@@ -62,7 +62,7 @@
 <div id="indexContainer">
     <div id="indexContainerLeft">
         <div id="early"></div>
-        <div id="living"></div>
+        <div id="living" class="accordion"></div>
     </div>
 
     <div id="indexContainerLeft" style="display:none;">
@@ -392,8 +392,8 @@
                 // Create a container for each sport
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
-                sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
+                sportContainer.setAttribute("class", "accordion-item main-div");
+                sportContainer.innerHTML = "<div class='catWrapperTitle' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'><p>{{ trans('index.mainArea.living') }}("+numLeagues+")</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
                 for (const leagueId in sport.list) {
@@ -403,7 +403,8 @@
                     // Create a container for each league within the sport
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
-                    leagueContainer.setAttribute("class", "league-div");
+                    leagueContainer.setAttribute("class", "accordion-collapse collapse league-div");
+                    sportContainer.setAttribute("data-bs-parent", sport.sport_id);
                     leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "("+numFixtures+")</p><i class='fa-solid fa-circle-chevron-down'></i></i></div>";
                     sportContainer.appendChild(leagueContainer);
 
