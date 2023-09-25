@@ -1458,8 +1458,8 @@ class LsportApiController extends Controller {
             $tmp = json_decode($v['scoreboard'],true);
             $d = array();
             foreach ($tmp['Results'] as $kk => $vv) {
-                $pos = $v['Position']-1;
-                $d[$pos] = $v['Value'];
+                $pos = $vv['Position']-1;
+                $d[$pos] = $vv['Value'];
             }
             $scoreboard[] = $d;
 
