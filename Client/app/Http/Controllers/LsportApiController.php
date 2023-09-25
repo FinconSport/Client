@@ -1484,6 +1484,7 @@ class LsportApiController extends Controller {
                 }
             }
 
+            dd($scoreboard);
             $tmp['scoreboard'] = $scoreboard;
             ////////////
 
@@ -1493,6 +1494,7 @@ class LsportApiController extends Controller {
         dd($reponse);
 
         $data = $reponse;
+
         // gzip
         $data = $this->gzip($data);
 
