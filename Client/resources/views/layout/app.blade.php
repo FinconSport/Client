@@ -263,7 +263,6 @@
 			var mOrderSportCon = document.getElementById("mOrderSportCon");
 			var matchSportCon = document.getElementById("matchSportCon");
 			var currentUrl = window.location.pathname;
-			console.log("sport=" + sport);
 
 			//sportListD loop and generated element
 			if (sportListD && sportListD.data) {
@@ -276,7 +275,7 @@
 					//(index sport)
 					var indexSportSelect = document.createElement("a"); // parent div
 					indexSportSelect.setAttribute("id", x.sport_id);
-					indexSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					indexSportSelect.setAttribute("class", "sportSelect " + (sport === key.toString() ? "openToggle" : ""));
 					indexSportSelect.setAttribute("href", "/?sport=" + key);
 					indexSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
 					//append parent div to the main container of index sport menu
@@ -285,7 +284,7 @@
 					//(mOrder sport)
 					var mOrderSportSelect = document.createElement("a"); // parent div
 					mOrderSportSelect.setAttribute("id", x.sport_id);
-					mOrderSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					mOrderSportSelect.setAttribute("class", "sportSelect " + (sport === key.toString() ? "openToggle" : ""));
 					mOrderSportSelect.setAttribute("href", "/m_order?sport=" + key);
 					mOrderSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
 					//append parent div to the main container of mOrder sport menu
@@ -294,7 +293,7 @@
 					//(match sport)
 					var matchSportSelect = document.createElement("a"); // parent div
 					matchSportSelect.setAttribute("id", x.sport_id);
-					matchSportSelect.setAttribute("class", "sportSelect " + (sportID.sport === key.toString() ? "openToggle" : ""));
+					matchSportSelect.setAttribute("class", "sportSelect " + (sport === key.toString() ? "openToggle" : ""));
 					matchSportSelect.setAttribute("href", "/match?sport=" + key);
 					matchSportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + '"' + "</span>";
 					//append parent div to the main container of match sport menu
