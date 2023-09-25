@@ -1467,12 +1467,14 @@ class LsportApiController extends Controller {
             $d = array();
             $tmp = json_decode($v['periods'],true);
 
-            dd($tmp);
-            foreach ($tmp['Results'] as $kk => $vv) {
-                $pos = $vv['Position'];
-                $d[$pos] = $vv['Value'];
+            foreach ($tmp as $kk => $vv) {
+                $d = array();
+                foreach ($vv['Results'] as $kkk => $vvv) {
+                    $pos = $vv['Position'];
+                    $d[$pos] = $vv['Value'];
+                }
+                $scoreboard[] = $d;
             }
-            $scoreboard[] = $d;
 
             dd($scoreboard);
 
