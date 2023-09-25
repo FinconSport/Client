@@ -294,7 +294,7 @@
 				x.key = key;
 
 				function createSportSelect(container, url) {
-					var sportSelect = document.createElement("a");
+					var sportSelect = document.createElement("div");
 					sportSelect.setAttribute("id", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
 					sportSelect.setAttribute("onclick", 'sportTo(event, "' + x.sport_id + '", '+ url +')');
