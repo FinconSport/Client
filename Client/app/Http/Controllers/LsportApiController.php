@@ -1400,17 +1400,18 @@ class LsportApiController extends Controller {
 
         $data = $return;
 
-        dd($langCol);
-
         foreach ($data as $k => $v) {
 
             //判斷用戶語系資料是否為空,若是則用en就好
             // league_name: 
-            if (!strlen($dv->l_name_locale)) {  // league name
-                $league_name = $dv->l_name_en;
-            } else {
-                $league_name = $dv->l_name_locale;
+            $league_id = $v['league_id'];
+            $return = LsportLeague::where("league_id",$league_id)->first();
+            if ($return === false) {
+                $this->ApiError('03');
             }
+            
+        dd($return);
+
 
             // sport_name: 
             if (!strlen($dv->s_name_locale)) {  // sport name
