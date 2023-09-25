@@ -2248,7 +2248,7 @@ class LsportApiController extends Controller {
             $request['fixture_status'],
             $request['periods_raw_data']
         );
-        echo json_encode('ret' => $return,);
+        echo json_encode(['ret' => $return]);
     }
 
     protected function getMatchPeriods($sport_id, $fixture_status, $periods_raw_data) {
