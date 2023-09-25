@@ -486,7 +486,7 @@ class LsportApiController extends Controller {
             ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
             ->where('s.sport_id', $sport_id)
-            ->whereIn('f.f_status', [1, 2])  //可區分:未開賽及走地中
+            ->whereIn('f.status', [1, 2])  //可區分:未開賽及走地中
             ->where('f.start_time', "<=", $after_tomorrow)
             ->where("th.sport_id", $sport_id)
             ->where("th.sport_id", $sport_id)
