@@ -390,7 +390,12 @@
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                if (numLeagues === 0) {
+                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
+                } else {
+                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                }
+                // sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
                 parentDiv.appendChild(sportContainer);
 
                 const leagueList = document.createElement("div");
@@ -405,7 +410,12 @@
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                    if (numFixtures === 0) {
+                    sportContainer.innerHTML = `<div class='catWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
+                    } else {
+                        leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                    }
+                    // leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
                     leagueList.appendChild(leagueContainer);
 
                     const fixtureContainer = document.createElement("div");
