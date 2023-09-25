@@ -1478,28 +1478,14 @@ class LsportApiController extends Controller {
                 }
             }
 
+            $tmp['scoreboard'] = $scoreboard;
             ////////////
 
-            $tmp = array(
-                'fixture_id' => $v['fixture_id'],
-                'start_time' => $v['fixture_id'],
-                'status' => $v['status'],
-                'last_update' => $v['last_update'],
-                'sport_id' => $sport_id,
-                'sport_name' => $sport_name,
-                'league_id' => $league_id,
-                'league_name' => $league_name,
-                'home_team_id' => $team_id,
-                'home_team_name' => $home_team_name,
-                'away_team_id' => $team_id,
-                'away_team_name' => $away_team_name,
-                'scoreboard' => $scoreboard
-            );
             $reponse[] = $tmp;
         }
 
         dd($reponse);
-        
+
         $data = $reponse;
         // gzip
         $data = $this->gzip($data);
