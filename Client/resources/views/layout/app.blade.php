@@ -395,8 +395,8 @@
 		$(document).ready(function(){
 			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
-				$(this).closest('.submenu-main').toggleClass('active');
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				$(this).closest('.submenu-main').toggleClass('clicked');
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
 			});
 
 			// Toggle 'openToggle' class for sport select elements
