@@ -386,8 +386,6 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-
-
         // Function to create a league div
         function createLeagueDiv(leagueName) {
             const leagueDiv = document.createElement("div");
@@ -400,15 +398,22 @@
         function createListDiv(fixtureData) {
             const listDiv = document.createElement("div");
             listDiv.className = "list";
-            
-            for (const fixtureId in fixtureData) {
-                if (fixtureData.hasOwnProperty(fixtureId)) {
-                    const fixture = fixtureData[fixtureId];
-                    const fixtureDiv = document.createElement("div");
-                    fixtureDiv.className = "fixture";
-                    fixtureDiv.innerHTML = `<p>${fixture.home_team_name} vs. ${fixture.away_team_name} - ${fixture.start_time}</p>`;
-                    listDiv.appendChild(fixtureDiv);
+
+            if (fixtureData) {
+                for (const fixtureId in fixtureData) {
+                    if (fixtureData.hasOwnProperty(fixtureId)) {
+                        const fixture = fixtureData[fixtureId];
+                        const fixtureDiv = document.createElement("div");
+                        fixtureDiv.className = "fixture";
+                        fixtureDiv.innerHTML = `<p>${fixture.home_team_name} vs. ${fixture.away_team_name} - ${fixture.start_time}</p>`;
+                        listDiv.appendChild(fixtureDiv);
+                    }
                 }
+            } else {
+                const noDataDiv = document.createElement("div");
+                noDataDiv.className = "no-data";
+                noDataDiv.textContent = "No fixtures available.";
+                listDiv.appendChild(noDataDiv);
             }
 
             return listDiv;
@@ -426,25 +431,26 @@
         for (const leagueId in earlyData) {
             if (earlyData.hasOwnProperty(leagueId)) {
                 const league = earlyData[leagueId];
-                const leagueName = league.list[183].league_name;
+                const leagueName = league.list[183] ? league.list[183].league_name : 'Unknown League';
                 const leagueDiv = createLeagueDiv(leagueName);
-                const listDiv = createListDiv(league.list[183].list);
+                const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
                 leagueDiv.appendChild(listDiv);
                 earlyParentDiv.appendChild(leagueDiv);
             }
         }
 
-        // Create the structure for "living" data (empty in this example)
+        // Create the structure for "living" data
         for (const leagueId in livingData) {
             if (livingData.hasOwnProperty(leagueId)) {
                 const league = livingData[leagueId];
                 const leagueName = league.sport_name;
                 const leagueDiv = createLeagueDiv(leagueName);
-                // No fixtures for "living" in this example
+                const listDiv = createListDiv(league.list);
+                leagueDiv.appendChild(listDiv);
                 livingParentDiv.appendChild(leagueDiv);
             }
         }
-        
+    
         // loop matchListD to generate html element here
 
         // open the first
