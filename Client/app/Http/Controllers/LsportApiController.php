@@ -2170,6 +2170,16 @@ scoreboard:
 */
 
         $ret = [];
+
+        // 處理總分
+        $arr_results = $arr_scoreboard_raw_data['Results'];
+        foreach ($arr_results as $rk => $rv) {
+            $pos = intval($rv['Position']);
+            $total_score = intval($rv['Value']);
+            //總分都是放在key=0的位置
+            $ret[$pos][0] = $total_score;
+        }
+
         // 各局得分
         foreach ($arr_periods_raw_data as $pk => $pv) {
             $type = intval($pv['Type']);  // type=局數號碼
@@ -2178,17 +2188,6 @@ scoreboard:
                 $pos = intval($rv['Position']);
                 $score = intval($rv['Value']);
                 $ret[$pos][$type] = $score;
-            }
-        }
-
-        // 處理總分
-        foreach ($arr_scoreboard_raw_data as $pk => $pv) {
-            $arr_results = $pv['Results'];
-            foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']);
-                $total_score = intval($rv['Value']);
-                //總分都是放在key=0的位置
-                $ret[$pos][0] = $total_score;
             }
         }
 
