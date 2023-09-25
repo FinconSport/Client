@@ -406,7 +406,7 @@
 
                 if (numLeagues !== 0) { // <- open first div and if has data
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
-                    console.log('try');
+                    $('.league-list .league-div:first-child .seriesWrapperTitle').addClass("open");
                 }
 
                 for (const leagueId in sport.list) {
