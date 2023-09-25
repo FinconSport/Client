@@ -380,90 +380,85 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
+        function createSportStructure(sportData, parentDiv, categoryLabel) {
+            const numLeagues = Object.keys(sportData).length;
 
-        function createSportStructure(sportData, parentDiv, parentLabel) {
-            for (const sportId in sportData) {
-                const sport = sportData[sportId];
-                const numLeagues = Object.keys(sport.list).length;
+            // Create a container for each sport
+            const sportContainer = document.createElement("div");
+            sportContainer.setAttribute("id", categoryLabel);
+            sportContainer.setAttribute("class", "main-div");
 
-                // Determine the title based on the sport type
-                var dataToUse = matchListD.data.living ? matchListD.data.living : matchListD.data.early;
-                var titleText = dataToUse === matchListD.data.early ? "{{ trans('index.mainArea.early') }}" : "{{ trans('index.mainArea.living') }}";
+            // Set the inner HTML based on the category label
+            sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
 
-                // Create a container for each sport
-                const sportContainer = document.createElement("div");
-                sportContainer.setAttribute("id", sport.sport_id);
-                sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${titleText} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
-                parentDiv.appendChild(sportContainer);
+            parentDiv.appendChild(sportContainer);
 
-                const leagueList = document.createElement("div");
-                leagueList.setAttribute("class", "league-list");
-                sportContainer.appendChild(leagueList);
+            const leagueList = document.createElement("div");
+            leagueList.setAttribute("class", "league-list");
+            sportContainer.appendChild(leagueList);
 
-                for (const leagueId in sport.list) {
-                    const league = sport.list[leagueId];
-                    const numFixtures = Object.keys(league.list).length;
+            for (const leagueId in sportData) {
+                const league = sportData[leagueId];
+                const numFixtures = Object.keys(league.list).length;
 
-                    // Create a container for each league within the sport
-                    const leagueContainer = document.createElement("div");
-                    leagueContainer.setAttribute("id", league.league_id);
-                    leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
-                    leagueList.appendChild(leagueContainer);
+                // Create a container for each league within the sport
+                const leagueContainer = document.createElement("div");
+                leagueContainer.setAttribute("id", league.league_id);
+                leagueContainer.setAttribute("class", "league-div");
+                leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name}(${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                leagueList.appendChild(leagueContainer);
 
-                    const fixtureContainer = document.createElement("div");
-                    fixtureContainer.setAttribute("class", "fixture-container");
-                    leagueContainer.appendChild(fixtureContainer);
+                const fixtureContainer = document.createElement("div");
+                fixtureContainer.setAttribute("class", "fixture-container");
+                leagueContainer.appendChild(fixtureContainer);
 
-                    for (const fixtureId in league.list) {
-                        const fixture = league.list[fixtureId];
+                for (const fixtureId in league.list) {
+                    const fixture = league.list[fixtureId];
 
-                        // Create a container for each fixture within the league
-                        const fixtureItem = document.createElement("div");
-                        fixtureItem.setAttribute("id", fixture.fixture_id);
-                        fixtureItem.setAttribute("class", "fixture-div");
-                        fixtureItem.innerHTML = `<div class='seriesWrapperContent'>
-                                                    <div class='seriesWrapper-left'>
-                                                        <p>{{ trans('index.mainArea.time') }}${fixture.start_time}</p>
-                                                        <p>${fixture.home_team_name}</p>
-                                                        <p>${fixture.away_team_name}</p>
-                                                    </div>
-                                                    <div class='seriesWrapper-right'>
-                                                        <table class='table table-bordered h-100'>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>`;
-                        fixtureContainer.appendChild(fixtureItem);
-                    }
+                    // Create a container for each fixture within the league
+                    const fixtureItem = document.createElement("div");
+                    fixtureItem.setAttribute("id", fixture.fixture_id);
+                    fixtureItem.setAttribute("class", "fixture-div");
+                    fixtureItem.innerHTML = `<div class='seriesWrapperContent'>
+                                                <div class='seriesWrapper-left'>
+                                                    <p>{{ trans('index.mainArea.time') }}${fixture.start_time}</p>
+                                                    <p>${fixture.home_team_name}</p>
+                                                    <p>${fixture.away_team_name}</p>
+                                                </div>
+                                                <div class='seriesWrapper-right'>
+                                                    <table class='table table-bordered h-100'>
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>`;
+                    fixtureContainer.appendChild(fixtureItem);
                 }
             }
         }
