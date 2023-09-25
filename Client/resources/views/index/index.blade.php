@@ -61,6 +61,11 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
+        <div id="earlyDiv"></div>
+        <div id="livingDiv"></div>
+    </div>
+
+    <div id="indexContainerLeft" style="display:none;">
         @foreach ($match_list as $key => $cat)
             <div id="toggleContent_{{ $key }}">
                 <div class="catWrapperTitle" id="catWrapperTitle_{{ $key }}" onclick="toggleCat('{{ $key }}')">
@@ -377,11 +382,29 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
+        for (const category of ["early", "living"]) {
+            for (const sportId in matchListD.data[category]) {
+                if (matchListD.data[category].hasOwnProperty(sportId)) {
+                    // Access relevant data within each sport
+                    const sportData = matchListD.data[category][sportId];
+                    const sportName = sportData.sport_name;
 
+                    // Create elements based on the sport data (you can customize this part)
+                    const element = document.createElement("div");
+                    element.textContent = `Sport ID: ${sportId}, Sport Name: ${sportName}`;
 
+                    // Set an ID for the created element
+                    element.id = `element_${sportId}`;
 
-
-
+                    // Append the element to the appropriate <div> (early or living)
+                    if (category === "early") {
+                        earlyDiv.appendChild(element);
+                    } else if (category === "living") {
+                        livingDiv.appendChild(element);
+                    }
+                }
+            }
+        }
         
         // loop matchListD to generate html element here
 
