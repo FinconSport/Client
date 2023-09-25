@@ -69,7 +69,7 @@ const SliderBrickHeight2 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.7rem;
+		font-size: 0.5rem;
 		line-height: 2rem;
 	}
 	.SliderBrickOdd{
