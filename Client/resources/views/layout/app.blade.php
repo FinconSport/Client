@@ -257,8 +257,33 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			var sportType = isNaN(sport) ? 1 : sport; //<- make sport 1 if url is index
+			var sportType = sport;
 			console.log(sportType);
+
+			const currentUrl = window.location.href;
+
+			if (currentUrl.includes('index')) {
+				sportType = 1;
+			}
+
+			const urlMappings = {
+				'/?sport': 'lf_sport',
+				'index': 'lf_sport',
+				'm_order?': 'lf_mOrder',
+				'order': 'lf_order',
+				'match?': 'lf_match',
+				'rule': 'lf_rule',
+				'logs': 'lf_logs',
+				'calculator': 'lf_calcu',
+				'notice': 'lf_notice'
+			};
+
+			for (const urlFragment in urlMappings) {
+				if (currentUrl.includes(urlFragment)) {
+					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					break;
+				}
+			}
 
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
@@ -380,33 +405,6 @@
 			});
 		});
 
-		// add active class in submenu
-		const currentUrl = window.location.href;
-		// const currentDomain = window.location.hostname;
-
-		// if ( currentDomain === currentDomain ) {
-		// 	console.log(currentDomain);
-		// 	$('#lf_sport').addClass('active');
-		// }
-
-		const urlMappings = {
-			'/?sport': 'lf_sport',
-			'index': 'lf_sport',
-			'm_order?': 'lf_mOrder',
-			'order': 'lf_order',
-			'match?': 'lf_match',
-			'rule': 'lf_rule',
-			'logs': 'lf_logs',
-			'calculator': 'lf_calcu',
-			'notice': 'lf_notice'
-		};
-
-		for (const urlFragment in urlMappings) {
-			if (currentUrl.includes(urlFragment)) {
-				$(`#${urlMappings[urlFragment]}`).addClass('active');
-    			break;
-			}
-		}
 		// ----------------------------
 
 		//marquee onclick
