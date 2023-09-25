@@ -396,37 +396,10 @@
 		$(document).ready(function(){
 			var divElement = document.querySelector(".submenu-main");
 
-			const urlMappings = {
-				'/?sport': 'lf_sport',
-				'index': 'lf_sport',
-				'm_order?': 'lf_mOrder',
-				'order': 'lf_order',
-				'match?': 'lf_match',
-				'rule': 'lf_rule',
-				'logs': 'lf_logs',
-				'calculator': 'lf_calcu',
-				'notice': 'lf_notice'
-			};
-
-			// Function to determine the active submenu
-			function setActiveSubMenu() {
-				for (const urlFragment in urlMappings) {
-					if (window.location.href.includes(urlFragment)) {
-						$(`#${urlMappings[urlFragment]}`).addClass('active');
-						return; // Exit the loop if a match is found
-					}
-				}
-			}
-
 			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
 				$(this).closest('.submenu-main').toggleClass('active');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				if (!divElement.classList.contains("active")) {
-					setActiveSubMenu();
-				}
-
-				
 			});
 
 			// Toggle 'openToggle' class for sport select elements
