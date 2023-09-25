@@ -363,7 +363,7 @@
     var isReadyIndex = false
 
     // match list data
-    // var matchListD = {}
+    var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
     const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
 
@@ -373,7 +373,7 @@
     const betLimitation_api = ''
     /* ===== DATA LAYER ===== */
 
-    var matchListD = {
+    const matchListDt = {
         "status": 1,
         "data": {
             "early": {
@@ -468,8 +468,8 @@
         }
 
         // Get the "early" and "living" data
-        const earlyData = matchListD.data.early;
-        const livingData = matchListD.data.living;
+        const earlyData = matchListDt.data.early;
+        const livingData = matchListDt.data.living;
 
         // Get the parent divs for "early" and "living"
         const earlyParentDiv = document.getElementById("early");
