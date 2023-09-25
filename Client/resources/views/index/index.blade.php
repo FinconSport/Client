@@ -499,46 +499,28 @@
         $(document).ready(function(){
             $(".seriesWrapperTitle").click(function(){
                 $(this).toggleClass("open");
-                // $('.seriesWrapperTitle').not(this).removeClass('open')
+                const content2 = $(this).next('.league-div');
+                if (content2.length) {
+                    if (content2[0].style.maxHeight === '0px' || content2[0].style.maxHeight === '') {
+                        content2[0].style.maxHeight = content2[0].scrollHeight + 'px';
+                    } else {
+                        content2[0].style.maxHeight = '0';
+                    }
+                }
             });
+            
             $(".catWrapperTitle").click(function(){
                 $(this).toggleClass("open");
-                // $('.seriesWrapperTitle').not(this).removeClass('open')
+                const content1 = $(this).next('.league-list');
+                if (content1.length) {
+                    if (content1[0].style.maxHeight === '0px' || content1[0].style.maxHeight === '') {
+                        content1[0].style.maxHeight = content1[0].scrollHeight + 'px';
+                    } else {
+                        content1[0].style.maxHeight = '0';
+                    }
+                }
             });
         });
-
-        const toggleButton1 = document.querySelector('.catWrapperTitle'); // Select by class name
-        const toggleButton2 = document.querySelector('.seriesWrapperTitle'); // Select by class name
-        const content1 = document.querySelector('.league-list'); // Select by class name
-        const content2 = document.querySelector('.league-div'); // Select by class name
-
-        let isOpen = false;
-
-        toggleButton1.addEventListener('click', () => {
-            if (isOpen) {
-                // Close the content
-                content1.style.maxHeight = '0';
-            } else {
-                // Open the content
-                content1.style.maxHeight = content1.scrollHeight + 'px';
-            }
-            
-            isOpen = !isOpen;
-        });
-
-        toggleButton2.addEventListener('click', () => {
-            if (isOpen) {
-                // Close the content
-                content2.style.maxHeight = '0';
-            } else {
-                // Open the content
-                content2.style.maxHeight = content2.scrollHeight + 'px';
-            }
-            
-            isOpen = !isOpen;
-        });
-
-
         // loop matchListD to generate html element here
 
         // open the first
