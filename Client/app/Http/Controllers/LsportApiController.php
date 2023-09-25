@@ -2049,7 +2049,8 @@ class LsportApiController extends Controller {
         $return = $this->getMatchScoreboard(
             $request['sport_id'],
             $request['fixture_status'],
-            $request['periods_raw_data']
+            $request['periods_raw_data'],
+            $request['scoreboard_raw_data']
         );
         echo json_encode(['ret' => $return]);
     }
