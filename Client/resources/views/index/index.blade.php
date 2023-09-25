@@ -507,30 +507,36 @@
             });
         });
 
-        toggleButton.addEventListener('click', () => {
-            console.log('isOpen:', isOpen);
-            console.log('maxHeight:', content.style.maxHeight);
+        const toggleButton1 = document.querySelector('.catWrapperTitle'); // Select by class name
+        const toggleButton2 = document.querySelector('.seriesWrapperTitle'); // Select by class name
+        const content1 = document.querySelector('.league-list'); // Select by class name
+        const content2 = document.querySelector('.league-div'); // Select by class name
 
+        let isOpen = false;
+
+        toggleButton1.addEventListener('click', () => {
             if (isOpen) {
                 // Close the content
-                content.style.maxHeight = '0';
+                content1.style.maxHeight = '0';
             } else {
                 // Open the content
-                content.style.maxHeight = content.scrollHeight + 'px';
+                content1.style.maxHeight = content1.scrollHeight + 'px';
             }
-
+            
             isOpen = !isOpen;
         });
 
-        const firstToggle = document.querySelector('.catWrapperTitle');
-        const firstToggleContent = document.querySelector('.league-list');
-
-        const secondToggle = document.querySelector('.seriesWrapperTitle');
-        const secondToggleContent = document.querySelector('.league-div');
-
-        toggleContent(firstToggle, firstToggleContent);
-        toggleContent(secondToggle, secondToggleContent);
-
+        toggleButton2.addEventListener('click', () => {
+            if (isOpen) {
+                // Close the content
+                content2.style.maxHeight = '0';
+            } else {
+                // Open the content
+                content2.style.maxHeight = content2.scrollHeight + 'px';
+            }
+            
+            isOpen = !isOpen;
+        });
 
 
         // loop matchListD to generate html element here
