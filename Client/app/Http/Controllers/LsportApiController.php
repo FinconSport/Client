@@ -866,6 +866,8 @@ class LsportApiController extends Controller {
 
         $fixture_data = $return;
         $league_id = $fixture_data['league_id'];
+        $home_id = $fixture_data['home_id'];
+        $away_id = $fixture_data['away_id'];
 
         //////////////////////////////////////////
         // order data
@@ -890,75 +892,6 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
 
-        // 取得隊伍資料
-
-        dd($fixture_data);
-        $return = LsportTeam::where()->first();
-
-        //////////////////////////////////////////
-        // order data
-    
-        if ($teams_data[0]['index'] == 1) {
-            $order['home_team_id'] = $teams_data[0]['team']['id'];
-            $order['home_team_name'] = $teams_data[0]['team'][$langCol];
-        } else {
-            $order['away_team_id'] = $teams_data[0]['team']['id'];
-            $order['away_team_name'] = $teams_data[0]['team'][$langCol];
-        }
-        
-        if ($teams_data[1]['index'] == 1) {
-            $order['home_team_id'] = $teams_data[1]['team']['id'];
-            $order['home_team_name'] = $teams_data[1]['team'][$langCol];
-        } else {
-            $order['away_team_id'] = $teams_data[1]['team']['id'];
-            $order['away_team_name'] = $teams_data[1]['team'][$langCol];
-        }
-        //////////////////////////////////////////
-
-        // 取得賠率
-        $market_bet_data = LsportMarketBet::where("id", $bet_type_id)->where("fixture_id", $fixture_id)->first();
-        if ($market_bet_data == false) {
-            $this->ApiError("09");
-        }
-
-        $league_id = $return['league_id'];
-        $home_id = $return['home_id']; 
-        $away_id = $return['away_id']; 
-
-        // 取得聯盟
-        $league_data = LsportLeague::where("league_id",$league_id)->first();
-        if ($league_data['status'] != 1) {
-          $this->ApiError("10");
-      }
-        //////////////////////////////////////////
-        // order data
-        $order['league_id'] = $league_id;
-        $order['league_name'] = $league_data[$name_columns]; 
-        $order['fixture_id'] = $fixture_id;
-        $order['sport_id'] = $league_data['sport_id'];
-        //////////////////////////////////////////
-
-        // 取得隊伍資料
-
-        // 主
-        $team_data = LsportTeam::where("team_id",$home_id)->first();
-        if ($team_data === false) {
-          $this->ApiError("11");
-        }
-        $order['home_team_id'] = $home_id;
-        $order['home_team_name'] = $team_data[$name_columns];
-        
-        // 客
-        $team_data = LsportTeam::where("team_id",$away_id)->first();
-        if ($team_data === false) {
-          $this->ApiError("12");
-        }
-
-        $order['away_team_id'] = $away_id;
-        $order['away_team_name'] = $team_data[$name_columns];
-
-        //////////////////////////////////////////
-
         // 取得玩法
         $market_data = LSportMarket::where("market_id",$market_id)->where("fixture_id",$fixture_id)->first();
         if ($market_data == false) {
@@ -976,7 +909,6 @@ class LsportApiController extends Controller {
         $current_market_bet_status = $market_bet_data['status'];
         $current_market_bet_rate = $market_bet_data['price'];
         $market_bet_line = $market_bet_data['base_line'];
-
 
         // 非開盤狀態 1开、2锁、3结算
         if (($current_market_bet_status != 1)) {
