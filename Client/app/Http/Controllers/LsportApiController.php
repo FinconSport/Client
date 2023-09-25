@@ -2057,8 +2057,8 @@ class LsportApiController extends Controller {
 
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods_raw_data, $scoreboard_raw_data) {
 
-        // 除了走地中賽事其餘均回傳null
-        if ($fixture_status != 2) {
+        // 如果還未開賽就回傳null
+        if ($fixture_status < 2) {
             return null;
         }
 
@@ -2074,7 +2074,7 @@ class LsportApiController extends Controller {
         } else {
             // 如果參數是字串則json_decoe看看
             $arr_periods_raw_data = json_decode($periods_raw_data, true);
-            // de不出東西就回傳null
+            // de不出東西就回傳false
             if (!$arr_periods_raw_data) {
                 return false;
             }
@@ -2085,7 +2085,7 @@ class LsportApiController extends Controller {
         } else {
             // 如果參數是字串則json_decoe看看
             $arr_scoreboard_raw_data = json_decode($scoreboard_raw_data, true);
-            // de不出東西就回傳null
+            // de不出東西就回傳false
             if (!$arr_scoreboard_raw_data) {
                 return false;
             }

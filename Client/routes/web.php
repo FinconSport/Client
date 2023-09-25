@@ -94,6 +94,7 @@ Route::post('/api/v2/match_sport',       'App\Http\Controllers\LsportApiControll
 Route::post('/api/v2/game_index',       'App\Http\Controllers\LsportApiController@GameIndex');
 Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiController@BalanceLogs');
 
+Route::get('/api/v2/gms_caller', 'App\Http\Controllers\LsportApiController@getMatchScoreboard_caller');
 Route::get('/api/v2/gmp_caller', 'App\Http\Controllers\LsportApiController@getMatchPeriods_caller');
 
 //for dev usage
