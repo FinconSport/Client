@@ -501,24 +501,37 @@
                 $(this).toggleClass("open");
                 // $('.seriesWrapperTitle').not(this).removeClass('open')
             });
+            $(".catWrapperTitle").click(function(){
+                $(this).toggleClass("open");
+                // $('.seriesWrapperTitle').not(this).removeClass('open')
+            });
         });
 
-        const toggleButton = document.querySelector('.catWrapperTitle'); // Select by class name
-        const content = document.querySelector('.league-list'); // Select by class name
+        function toggleContent(toggleButton, content) {
+            let isOpen = false;
 
-        let isOpen = false;
+            toggleButton.addEventListener('click', () => {
+                if (isOpen) {
+                    // Close the content
+                    content.style.maxHeight = '0';
+                } else {
+                    // Open the content
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
 
-        toggleButton.addEventListener('click', () => {
-            if (isOpen) {
-                // Close the content
-                content.style.maxHeight = '0';
-            } else {
-                // Open the content
-                content.style.maxHeight = content.scrollHeight + 'px';
-            }
-            
-            isOpen = !isOpen;
-        });
+                isOpen = !isOpen;
+            });
+        }
+
+        const firstToggle = document.querySelector('.catWrapperTitle');
+        const firstToggleContent = document.querySelector('.league-list');
+
+        const secondToggle = document.querySelector('.seriesWrapperTitle');
+        const secondToggleContent = document.querySelector('.league-div');
+
+        toggleContent(firstToggle, firstToggleContent);
+        toggleContent(secondToggle, secondToggleContent);
+
 
 
         // loop matchListD to generate html element here

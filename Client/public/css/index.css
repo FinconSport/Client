@@ -534,7 +534,6 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .fixture-container,
   #indexContainerLeft .main-div .league-list {
     overflow: hidden;
-    opacity: 0;
     max-height: 0;
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
@@ -557,9 +556,3 @@ div[key="sizeSmallRate"]:hover {
     #indexContainerLeft .main-div .catWrapperTitle.open i {
         transform: rotate(90deg);
     }
-
-  #indexContainerLeft .main-div .catWrapperTitle.open + .league-list,
-  #indexContainerLeft .main-div .seriesWrapperTitle.open + .fixture-container{
-	opacity: 1;
-    height: auto;
-}
