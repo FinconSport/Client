@@ -382,8 +382,8 @@
         // loop matchListD to generate html element here
         const livingParentDiv = document.getElementById("living");
 
-        if (matchListD && matchListD.data) {
-            const earlyData = matchListD.data.early;
+        if (matchListData && matchListData.data) {
+            const earlyData = matchListData.data.early;
 
             for (const sportId in earlyData) {
                 const sport = earlyData[sportId];
@@ -392,17 +392,19 @@
                 const sportContainer = document.createElement("div");
                 sportContainer.setAttribute("id", sport.sport_id);
                 sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = "<div class='catWrapperTitle'><p>{{ trans('index.mainArea.living') }}</p><i class='fa-solid fa-chevron-right'></i></div>";
                 livingParentDiv.appendChild(sportContainer);
 
                 for (const leagueId in sport.list) {
                     const league = sport.list[leagueId];
 
+                    // Count the number of fixtures within each league
+                    const numFixtures = Object.keys(league.list).length;
+
                     // Create a container for each league within the sport
                     const leagueContainer = document.createElement("div");
                     leagueContainer.setAttribute("id", league.league_id);
                     leagueContainer.setAttribute("class", "league-div");
-                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "</p><i class='fa-solid fa-chevron-right'></i></div>";
+                    leagueContainer.innerHTML = "<div class='seriesWrapperTitle'><p>" + league.league_name + "</p><p>Number of Fixtures: " + numFixtures + "</p><i class='fa-solid fa-chevron-right'></i></div>";
                     sportContainer.appendChild(leagueContainer);
 
                     for (const fixtureId in league.list) {
@@ -418,6 +420,7 @@
                 }
             }
         }
+
 
         
         // loop matchListD to generate html element here
