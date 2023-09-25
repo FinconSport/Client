@@ -1484,7 +1484,6 @@ class LsportApiController extends Controller {
                 }
             }
 
-            dd($scoreboard);
             $tmp['scoreboard'] = $scoreboard;
             ////////////
 
