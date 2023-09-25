@@ -2276,7 +2276,7 @@ class LsportApiController extends Controller {
 
         //========================================
 
-        $ret = array();
+        $ret = [[0],[0]];
         foreach ($arr_periods_raw_data as $pk => $pv) {
             $sequence_number = intval($pv['SequenceNumber']);
             $arr_results = $pv['Results'];
