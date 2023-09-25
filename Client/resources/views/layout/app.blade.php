@@ -409,7 +409,7 @@
 				$(this).closest('.submenu-main').toggleClass('clicked');
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("clicked");
-				$('.submenu-main.clicked').not($(this).closest('.submenu-toggle-list')).css('maxHeight', '0');
+				$('.submenu-main').not($(this).closest('.submenu-main .submenu-toggle-list')).css('maxHeight', '0');
 
 				const sportListMenu = $(this).next('.submenu-toggle-list');
 				if (sportListMenu.length) {
