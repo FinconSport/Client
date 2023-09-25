@@ -503,10 +503,11 @@
             });
         });
 
-        const toggleButton = document.querySelector('catWrapperTitle');
-        const content = document.querySelector('league-list');
+        const toggleButton = document.querySelector('.catWrapperTitle'); // Select by class name
+        const content = document.querySelector('.league-list'); // Select by class name
 
         let isOpen = false;
+
         toggleButton.addEventListener('click', () => {
             if (isOpen) {
                 // Close the content
@@ -518,6 +519,7 @@
             
             isOpen = !isOpen;
         });
+
 
         // loop matchListD to generate html element here
 
