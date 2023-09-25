@@ -391,29 +391,30 @@
         const livingDiv = document.getElementById("livingDiv");
 
         // Function to create and append league elements
-        function createAndAppendLeagueElements(leagueData, targetDiv) {
-            for (const leagueId in leagueData) {
-                if (leagueData.hasOwnProperty(leagueId)) {
-                const league = leagueData[leagueId];
-                const leagueName = league.league_name;
+        function createAndAppendLeagueElements(leagueData, targetDiv, sportName, sportId) {
+        for (const leagueId in leagueData) {
+            if (leagueData.hasOwnProperty(leagueId)) {
+            const league = leagueData[leagueId];
+            const leagueName = league.league_name;
 
-                // Create elements for league names
-                const leagueElement = document.createElement("div");
-                leagueElement.textContent = `League Name: ${leagueName}`;
+            // Create elements for sport name, sport id, and league name
+            const element = document.createElement("div");
+            element.textContent = `Sport ID: ${sportId}, Sport Name: ${sportName}, League Name: ${leagueName}`;
 
-                // Set an ID for the created element
-                leagueElement.id = `league_${leagueId}`;
+            // Set an ID for the created element
+            element.id = `league_${leagueId}`;
 
-                // Append the league element to the target div
-                targetDiv.appendChild(leagueElement);
-                }
+            // Append the element to the target div
+            targetDiv.appendChild(element);
             }
+        }
         }
 
         // Loop through "early" and "living"
         for (const category of ["early", "living"]) {
-            const targetDiv = category === "early" ? earlyDiv : livingDiv;
-            createAndAppendLeagueElements(matchListD.data[category], targetDiv);
+        const targetDiv = category === "early" ? earlyDiv : livingDiv;
+        const { sport_id: sportId, sport_name: sportName } = matchListD.data[category]["154914"];
+        createAndAppendLeagueElements(matchListD.data[category], targetDiv, sportName, sportId);
         }
         
         // loop matchListD to generate html element here
