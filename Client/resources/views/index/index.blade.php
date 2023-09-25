@@ -373,6 +373,59 @@
     const betLimitation_api = ''
     /* ===== DATA LAYER ===== */
 
+    const matchListDt = {
+        "status": 1,
+        "data": {
+            "early": {
+            "154914": {
+                "sport_id": "154914",
+                "sport_name": "Baseball",
+                "list": {
+                "183": {
+                    "league_id": 183,
+                    "league_name": "MLB",
+                    "list": {
+                    "11430661": {
+                        "fixture_id": 11430661,
+                        "start_time": "2023-09-26 09:40:00",
+                        "status": 1,
+                        "last_update": "2023-09-25 03:26:32",
+                        "home_team_id": 77592,
+                        "home_team_name": "Seattle Mariners",
+                        "away_team_id": 77602,
+                        "away_team_name": "Houston Astros",
+                        "periods": null,
+                        "scoreboard": null
+                    },
+                    "11430663": {
+                        "fixture_id": 11430663,
+                        "start_time": "2023-09-26 09:38:00",
+                        "status": 1,
+                        "last_update": "2023-09-25 04:02:19",
+                        "home_team_id": 77582,
+                        "home_team_name": "Los Angeles Angels",
+                        "away_team_id": 77594,
+                        "away_team_name": "Texas Rangers",
+                        "periods": null,
+                        "scoreboard": null
+                    },
+                    }
+                },
+                }
+            }
+            },
+            "living": {
+            "154914": {
+                "sport_id": "154914",
+                "sport_name": "Baseball",
+                "list": []
+            }
+            }
+        },
+        "message": "SUCCESS_API_MATCH_INDEX_01",
+        "gzip": true
+    }
+
 
     
     /* ===== VIEW LAYER ===== */
@@ -415,8 +468,8 @@
         }
 
         // Get the "early" and "living" data
-        const earlyData = matchListD.data.early;
-        const livingData = matchListD.data.living;
+        const earlyData = matchListDt.data.early;
+        const livingData = matchListDt.data.living;
 
         // Get the parent divs for "early" and "living"
         const earlyParentDiv = document.getElementById("early");
