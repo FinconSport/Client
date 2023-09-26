@@ -270,6 +270,8 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
+				var matchlist_sportID = v.data;
+				console.log(matchlist_sportID)
 			}
 
 			for (const urlFragment in urlMappings) {
