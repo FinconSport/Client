@@ -532,11 +532,12 @@ div[key="sizeSmallRate"]:hover {
   }
 
   #indexContainerLeft .main-div .fixture-container,
-  #indexContainerLeft .main-div .league-list {
+  #indexContainerLeft .main-div .league-list,
+  #indexContainerLeft .main-div .nogame-con {
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.3s ease-in-out;
-    -webkit-transition: max-height 0.3s ease-in-out;
+    transition: all .5s ease-in-out 0s;
+    -webkit-transition: all .5s ease-in-out 0s;
   }
 
     #indexContainerLeft .main-div .catWrapperTitle i {

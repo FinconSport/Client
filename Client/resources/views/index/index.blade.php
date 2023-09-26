@@ -159,7 +159,7 @@
 
                 if (numLeagues === 0) {  // <- add no data 
                     const leagueContainer = document.createElement("div");
-                    leagueContainer.setAttribute("class", "fixture-container");
+                    leagueContainer.setAttribute("class", "nogame-con");
                     leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
                     leagueList.appendChild(leagueContainer);
                 }
@@ -275,11 +275,14 @@
             $(".catWrapperTitle").click(function () {
                 $(this).toggleClass("open");
                 const f = $(this).next('.league-list');
-                if (f.length) {
-                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
+                const n = $(this).next('.nogame-con');
+                if (f.length || n.length) {
+                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '' || n[0].style.maxHeight === '0px' || n[0].style.maxHeight === '') {
                         f[0].style.maxHeight = '900px';
+                        n[0].style.maxHeight = '900px';
                     } else {
                         f[0].style.maxHeight = '0';
+                        n[0].style.maxHeight = '0';
                     }
                 }
             });
