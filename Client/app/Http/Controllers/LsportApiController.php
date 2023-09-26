@@ -8,7 +8,7 @@ use DB;
 // use Exception;
 
 // use App\Models\GameMatch;
-use App\Models\GameResult;
+// use App\Models\GameResult;  // 沒有這個model
 use App\Models\GameOrder;
 
 // LSport
@@ -379,7 +379,6 @@ class LsportApiController extends Controller {
 
         $this->ApiSuccess($data, "01"); 
     }
-
 
 /****************************************
  *    
@@ -1562,7 +1561,7 @@ class LsportApiController extends Controller {
         } else {
             $this->ApiError("01");
         }
-        if (($sport_id+0 != $sport_id) || ($fixtsport_idure_id+0 == 0)) {
+        if (($sport_id+0 != $sport_id) || ($fixture_id+0 == 0)) {
             $this->ApiError("01");
         }
 
@@ -1588,9 +1587,9 @@ class LsportApiController extends Controller {
 
         /**************************************/
         // gzip
-        $data = $this->gzip($data);
-
-        $this->ApiSuccess($data, "01", true);
+        // $data = $this->gzip($data);
+        // $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01", false);
     }
 
     /**
