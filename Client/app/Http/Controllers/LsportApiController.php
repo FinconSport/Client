@@ -1861,6 +1861,15 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
 
+            // 包入 market 玩法資料 ---------------
+            $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+                'market_id' => $v->market_id,
+                'market_name' => $market_name,
+                'priority' => $v->priority,
+                'main_line' => $v->main_line,
+                'list' => array(),
+            );
+
             // 開始繞賠率資料
             foreach ($marketBetData as $bk => $bv) {
                 $market_bet_id = $bv->bet_id;
@@ -1884,14 +1893,6 @@ class LsportApiController extends Controller {
                 );
             }
 
-            // 包入 market 玩法資料 ---------------
-            $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
-                'market_id' => $v->market_id,
-                'market_name' => $market_name,
-                'priority' => $v->priority,
-                'main_line' => $v->main_line,
-                'list' => array(),
-            );
         }
 
 
@@ -2463,8 +2464,8 @@ class LsportApiController extends Controller {
             $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']);
-                $score = intval($rv['Value']);
+                $pos = intval($rv['Position']+0);
+                $score = intval($rv['Value']+0);
                 if ($pos < 40) {
                     $ret[$pos][$type] = $score;
                 }
@@ -2543,6 +2544,7 @@ class LsportApiController extends Controller {
      protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
 
         // 如果還未開賽就回傳null
+        $fixture_status = intval($fixture_status);
         if ($fixture_status < 2) {
             return null;
         }
