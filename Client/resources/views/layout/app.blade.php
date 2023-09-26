@@ -164,8 +164,7 @@
 
 		// ===== DATA LAYER ======
 
-		console.log('player')
-		console.log(@json(session('player')));
+		
 
 		// player and sport_id
 		const player = @json(session('player.id'));
@@ -198,7 +197,6 @@
 				data: data,
 				success: function(data) {
 					const json = JSON.parse(data); 
-					console.log(json)
 					if(json.gzip) { // 解壓縮
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
