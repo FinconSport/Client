@@ -271,9 +271,15 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
-				const sportID = sportListD.data[0].sport_id;
-				if (isNaN(v)) {
-					v = sportID;
+				if (currentUrl.includes('index') || (window.location.pathname === '/' && window.location.search === '')) {
+					var anchor = document.createElement('a');
+					anchor.href = "/?sport=" + sportListD.data[0].sport_id;
+					var clickEvent = new MouseEvent('click', {
+						'view': window,
+						'bubbles': true,
+						'cancelable': true
+					});
+					anchor.dispatchEvent(clickEvent);
 				}
 			}
 
