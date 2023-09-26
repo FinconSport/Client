@@ -1630,9 +1630,13 @@ class LsportApiController extends Controller {
             $input['result'] = 0;
         }
 
+        //////////////////////////////////////////
+
         $page_limit = $this->page_limit;
         $page = $input['page'];
         $skip = ($page-1)*$page_limit;
+
+        //////////////////////////////////////////
 
         // 獲取注單資料
         $GameOrder = GameOrder::where("player_id", $input['player']);
@@ -1694,6 +1698,8 @@ class LsportApiController extends Controller {
             $home_team_id = $v["home_team_id"];
             $away_team_id = $v["away_team_id"];
 
+
+            dd($v);
             // 有串關資料
             if ($v['m_order'] == 1) {
 
