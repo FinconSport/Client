@@ -286,6 +286,11 @@
 					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
 					break;
 				}
+
+				if (!submenuClicked) {
+					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					console.log('add active to current page');
+				}
 			}
 
 			if (sportListD && sportListD.data) {
@@ -408,6 +413,7 @@
                 }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
+				submenuClicked = true;
             });
 
 			// Toggle 'openToggle' class for sport select elements
