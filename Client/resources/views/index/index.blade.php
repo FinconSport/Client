@@ -446,26 +446,21 @@
                                     let price = item.attr('price')
 
                                     console.log(item.attr('home') + ' VS ' + item.attr('away'))
-                                    console.log(market_bet_id)
-                                    console.log(v4)
-                                    console.log(v4.status)
-                                    console.log(v4.status === 1)
-
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() !== (v4.market_bet_id).toString() ) {
-                                        // console.log('盤口::' + market_bet_id + ' -> ' + v4.market_bet_id)
+                                        console.log('盤口::' + market_bet_id + ' -> ' + v4.market_bet_id)
                                         // set attribute
                                         item.attr('market_bet_id', v4.market_bet_id)
                                         item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
                                     } else {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
-                                            // console.log('賠率::' + price + ' ->' + v4.price)
+                                            console.log('賠率::' + price + ' ->' + v4.price)
                                             // 賠率下降
                                             lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
                                         if( parseFloat(price) < parseFloat(v4.price) ) {
-                                            // console.log('賠率::' + price + ' ->' + v4.price)
+                                            console.log('賠率::' + price + ' ->' + v4.price)
                                             // 賠率上升
                                             raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
@@ -474,11 +469,13 @@
 
                                     // 顯示
                                     if( v4.status === 1 ) {
+                                        console.log(v4.market_bet_id + ' -> open')
                                         item.find('.rate_name').show()
                                         item.find('.odd').show()
                                         item.find('i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
+                                        console.log(v4.market_bet_id + ' -> lock')
                                         item.find('.rate_name').hide()
                                         item.find('.odd').hide()
                                         item.find('i').show()
