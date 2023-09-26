@@ -324,6 +324,8 @@
             $('#indexContainerLeft').append(el_toggle)
         })
 
+        statistics()
+
         // loop matchListD to generate html element here
     }
     /* ===== VIEW LAYER ===== */
@@ -718,6 +720,7 @@
             let id = $(this).attr('id').replace('_total', '')
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
+            if( count === 0 ) $(this).closest('div[id^="toggleContent"]').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
@@ -726,7 +729,6 @@
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
         })
-
 
         
     }
