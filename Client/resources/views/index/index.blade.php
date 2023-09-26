@@ -3389,9 +3389,6 @@
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() !== (v4.market_bet_id).toString() ) {
                                         console.log('盤口::' + market_bet_id + ' -> ' + v4.market_bet_id)
-                                        // set attribute
-                                        item.attr('market_bet_id', v4.market_bet_id)
-                                        item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
                                     } else {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
@@ -3404,18 +3401,23 @@
                                             // 賠率上升
                                             raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
-                                        item.attr('bet_rate', v4.price)
                                     }
 
-                                    // 顯示
+                                    
+                                    // set attribute
+                                    item.attr('market_bet_id', v4.market_bet_id)
+                                    item.attr('bet_rate', v4.price)
+                                    item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    // 賦值
+                                    item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
+                                    item.find('.odd').html(v4.price)
+
                                     if( v4.status === 1 ) {
-                                        console.log(betData.market_name + ' ' + v4.market_bet_name + ' ' + v4.line + ' -> open')
                                         item.find('.rate_name').show()
                                         item.find('.odd').show()
                                         item.find('i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        console.log(betData.market_name + ' ' + v4.market_bet_name + ' ' + v4.line + ' -> lock')
                                         item.find('.rate_name').hide()
                                         item.find('.odd').hide()
                                         item.find('i').show()
