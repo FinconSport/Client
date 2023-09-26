@@ -255,9 +255,6 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			var sportType = sport;
-			console.log(sportType);
-
 			const currentUrl = window.location.href;
 			const noPath = window.location.pathname;
 
@@ -273,15 +270,14 @@
 			};
 
 			if (currentUrl.includes('index') || noPath == '/') {
-				sportType = 1; // Update sportType to 1 based on conditions
 				$("#lf_sport").addClass('active');
-				$("#lf_sport .submenu-toggle-list").css('max-height', '900px');
+				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 			}
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
 					$(`#${urlMappings[urlFragment]}`).addClass('active currentpage');
-					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
+					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
 					break;
 				}
 			}
