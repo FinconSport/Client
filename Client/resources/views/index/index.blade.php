@@ -292,7 +292,6 @@
             $(".catWrapperTitle").click(function () {
                 $(this).toggleClass("open");
                 const f = $(this).next('.league-list');
-                // const n = $(this).next('.nogame-con');
                 if (f.length) {
                     if (f[0].style.height === '0px' || f[0].style.height === '') {
                         f[0].style.height = 'auto';
@@ -308,21 +307,6 @@
                         });
                     }
                 }
-                // if (n.length) {
-                //     if (n[0].style.height === '0px' || n[0].style.height === '') {
-                //         n[0].style.height = 'auto';
-                //         n.css({
-                //             "transition": "height .5s ease-in-out 0s",
-                //             "-webkit-transition": "height .5s ease-in-out 0s"
-                //         });
-                //     } else {
-                //         n[0].style.height = '0';
-                //         n.css({
-                //             "transition": "height .5s ease-in-out 0s",
-                //             "-webkit-transition": "height .5s ease-in-out 0s"
-                //         });
-                //     }
-                // }
             });
         });
 
