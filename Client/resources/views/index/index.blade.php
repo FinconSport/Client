@@ -254,13 +254,14 @@
                     let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
                     let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
                     priorityArr.forEach(( i, j ) => {
+                        let bet_div = $('div[template="betDiv"]')
                         let betData = Object.values(v3.list).find(m => m.priority === i)
                         bet_label = bet_div.find('.betLabel')
                         bet_label.html(gameTitle[j])
 
                         bet_div.removeAttr('hidden')
                         bet_div.removeAttr('template')
-                        card.append(betData)
+                        card.append(bet_div)
                     });
 
                     // <div class="betLabel"></div>
