@@ -272,7 +272,7 @@
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 				if (isNaN(v.data)) {
-					// v.data = 0;
+					v.data = sportListD.data[0].sport_id;;
 					console.log('null');
 				}
 			}
