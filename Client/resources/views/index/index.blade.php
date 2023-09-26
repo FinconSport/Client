@@ -276,12 +276,17 @@
                 $(this).toggleClass("open");
                 const f = $(this).next('.league-list');
                 const n = $(this).next('.nogame-con');
-                if (f.length || n.length) {
-                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '' || n[0].style.maxHeight === '0px' || n[0].style.maxHeight === '') {
+                if (f.length) {
+                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
                         f[0].style.maxHeight = '900px';
-                        n[0].style.maxHeight = '900px';
                     } else {
                         f[0].style.maxHeight = '0';
+                    }
+                }
+                if (n.length) {
+                    if (n[0].style.maxHeight === '0px' || n[0].style.maxHeight === '') {
+                        n[0].style.maxHeight = '900px';
+                    } else {
                         n[0].style.maxHeight = '0';
                     }
                 }
