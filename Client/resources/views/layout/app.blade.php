@@ -271,16 +271,16 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
-				if (currentUrl.includes('index') || (window.location.pathname === '/' && window.location.search === '')) {
-					var anchor = document.createElement('a');
-					anchor.href = "/?sport=" + sportListD.data[0].sport_id;
-					var clickEvent = new MouseEvent('click', {
-						'view': window,
-						'bubbles': true,
-						'cancelable': true
-					});
-					anchor.dispatchEvent(clickEvent);
-				}
+				// if (currentUrl.includes('index') || (window.location.pathname === '/' && window.location.search === '')) {
+				// 	var anchor = document.createElement('a');
+				// 	anchor.href = "/?sport=" + sportListD.data[0].sport_id;
+				// 	var clickEvent = new MouseEvent('click', {
+				// 		'view': window,
+				// 		'bubbles': true,
+				// 		'cancelable': true
+				// 	});
+				// 	anchor.dispatchEvent(clickEvent);
+				// }
 			}
 
 			for (const urlFragment in urlMappings) {
