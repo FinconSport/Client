@@ -71,7 +71,7 @@
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
         <span class="elToggleDir" style="float: right;">
-            <i class="fa-solid fa-chevron-right"></i> 
+            <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
     <div class="catWrapperContent">
@@ -87,6 +87,41 @@
     </span>
 </div>
 <div template='leagueToggleContentTemplate' class="seriesWrapperContent" hidden>
+</div>
+
+<!-- fixture card template -->
+<div template='fixtureCardTemplate' class="indexEachCard" hidden>
+    <div class="indexBetCard">
+        <div class="indexBetCardInfo">
+            <div class="timeSpan">
+                <span class="timer"></span>
+            </div>
+            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
+                </div>
+                <div class="scoreSpan" style="width: 20%;">
+                </div>
+            </div>
+            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
+                </div>
+                <div class="scoreSpan" style="width: 20%;">
+                </div>
+            </div>
+        </div>
+        <div class="indexBetCardTable row m-0 text-center">
+            <div class="col-2 p-0">
+                <div class="betLabel">
+                    gameTitle
+                </div>
+                <div class="betItemDiv" onclick="openCal($(this), 1)">
+                    <span class="rate_name">rate_name</span>&ensp;
+                    <span class="odd">odd</span>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- no data -->
@@ -165,7 +200,6 @@
 
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  
-            console.log(k, v)
             let el_toggle = $('div[template="elToggleTemplate"]').clone()
             let el_toggle_title = el_toggle.find('.catWrapperTitle')
             let el_toggle_text = el_toggle.find('.elToggleText')
@@ -185,7 +219,6 @@
             el_toggle.removeAttr('template')
 
             Object.entries(v[sport].list).map(([k2, v2]) => {  
-                console.log(k2, v2)
                 let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
                 let league_toggle_name = league_toggle.find('.legToggleName')
                 let league_toggle_count = league_toggle.find('.legToggleCount')
@@ -194,7 +227,7 @@
                 league_toggle.attr('id', `seriesWrapperTitle_${k}_${k2}`)
                 league_toggle.attr('onclick', `toggleSeries('${k}_${k2}')`)
                 league_toggle.attr('league_id', v2.league_id)
-                league_toggle_name.html(v2.name)
+                league_toggle_name.html(v2.league_name)
                 league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
                 league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
 
@@ -203,6 +236,22 @@
 
                 let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
                 league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
+
+                Object.entries(v2.list).map(([k3, v3]) => { 
+                    let card = $('div[template="fixtureCardTemplate"]').clone()
+                    let home_team_info = card.find('key="homeTeamInfo"')
+                    let away_team_info = card.find('key="awayTeamInfo"')
+                    card.attr('id', k3)
+                    home_team_info.find('.teamSpan').html(v3.home_team_name)
+                    home_team_info.find('.scoreSpan').html()
+                    away_team_info.find('.teamSpan').html(v3.away_team_name)
+                    away_team_info.find('.scoreSpan').html()
+
+                    card.removeAttr('hidden')
+                    card.removeAttr('template')
+
+                    league_toggle_content.append(card)
+                })
 
                 league_toggle_content.removeAttr('hidden')
                 league_toggle_content.removeAttr('template')
