@@ -693,7 +693,7 @@
                 console.log(res)
                 if (res.message === 'SUCCESS_API_GAME_BET_01') {
                     // 餘額更新
-                    $('.balance').html(res.data)
+                    refreshBalence()
                     showSuccessToast(res.message)
                 } else {
                     showErrorToast(res.message)
@@ -716,7 +716,7 @@
     function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
         caller(account_api, commonCallData, accountD)
-        accountD = null
+        accountD = {}
         refreshInt = null
         refreshInt = setInterval(() => {
             if (accountD) {
