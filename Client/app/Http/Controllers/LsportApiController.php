@@ -1729,21 +1729,21 @@ class LsportApiController extends Controller {
             } else {
                 $tmp_bet_data = array();
 
-                $tmp_bet_data['market_bet_name'] = $vvv['market_bet_name'];
-                $tmp_bet_data['market_bet_line'] = $vvv['market_bet_line'];
-                $tmp_bet_data['market_priority'] = $vvv['market_priority'];
+                $tmp_bet_data['market_bet_name'] = $v['market_bet_name'];
+                $tmp_bet_data['market_bet_line'] = $v['market_bet_line'];
+                $tmp_bet_data['market_priority'] = $v['market_priority'];
 
                 ///////////////
 
-                $tmp_bet_data['home_team_id'] = $vvv['home_team_id'];
-                $tmp_bet_data['away_team_id'] = $vvv['away_team_id'];
-                $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
-                $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
-                $tmp_bet_data['home_team_score'] = $vvv['home_team_score'];
-                $tmp_bet_data['away_team_score'] = $vvv['away_team_score'];
+                $tmp_bet_data['home_team_id'] = $v['home_team_id'];
+                $tmp_bet_data['away_team_id'] = $v['away_team_id'];
+                $tmp_bet_data['home_team_name'] = $v['home_team_name'];
+                $tmp_bet_data['away_team_name'] = $v['away_team_name'];
+                $tmp_bet_data['home_team_score'] = $v['home_team_score'];
+                $tmp_bet_data['away_team_score'] = $v['away_team_score'];
                 
-                $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
-                $tmp_bet_data['status'] = $order_status[$vvv['status']];
+                $tmp_bet_data['bet_rate'] = $v['bet_rate'];
+                $tmp_bet_data['status'] = $order_status[$v['status']];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
