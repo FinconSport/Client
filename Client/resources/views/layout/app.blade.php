@@ -277,11 +277,13 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				sportType = 1; // Update sportType to 1 based on conditions
 				$("#lf_sport").addClass('active');
+				$("#lf_sport .submenu-toggle-list").css('max-height', '900px');
 			}
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
 					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
 					break;
 				}
 			}
@@ -296,7 +298,7 @@
 				function createSportSelect(container, url) {
 					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("id", x.sport_id);
-					sportSelect.setAttribute("class", "sportSelect " + (sportType === key ? "openToggle" : ""));
+					sportSelect.setAttribute("class", "sportSelect " + (currentUrl.includes(url + x.sport_id) ? "openToggle" : ""));
 					sportSelect.setAttribute("href", url + x.sport_id);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
@@ -394,13 +396,19 @@
 
 		// left side menu click function
 		$(document).ready(function(){
-			var divElement = document.querySelector(".submenu-main");
-
-			// Toggle 'active' class for submenu buttons
 			$(".submenu-btn").click(function(){
-				$(this).closest('.submenu-main').toggleClass('active');
+                $(this).closest('.submenu-main').toggleClass('active');
+                var submenuToggleList = $(this).next(".submenu-toggle-list");
+                if (submenuToggleList.length) {
+                    if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
+                        submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
+                    } else {
+                        submenuToggleList[0].style.maxHeight = '0';
+                    }
+                }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-			});
+				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
+            });
 
 			// Toggle 'openToggle' class for sport select elements
 			$(".sportSelect").click(function(){

@@ -174,7 +174,6 @@ div.submenu-btn {
     position:relative;
 }
 
-.submenu-main.clicked .submenu-btn,
 .submenu-main.active .submenu-btn{
     color: #415b5a!important;
 }
@@ -189,11 +188,7 @@ div.submenu-btn {
 .submenu-main.active::before,
 .submenu-main.active .submenu-inner::before,
 .submenu-main.active::after,
-.submenu-main.active .submenu-inner::after,
-.submenu-main.clicked::before,
-.submenu-main.clicked .submenu-inner::before,
-.submenu-main.clicked::after,
-.submenu-main.clicked .submenu-inner::after{
+.submenu-main.active .submenu-inner::after{
     position:absolute;
     content:'';
     height:2rem;
@@ -202,34 +197,27 @@ div.submenu-btn {
 }
 
 .submenu-main.active::before,
-.submenu-main.active::after,
-.submenu-main.clicked::before,
-.submenu-main.clicked::after{
+.submenu-main.active::after{
     background-color: #415b5a;
     transform: rotate(180deg);
 }
 
 .submenu-main.active .submenu-inner::before,
-.submenu-main.active .submenu-inner::after,
-.submenu-main.clicked .submenu-inner::before,
-.submenu-main.clicked .submenu-inner::after{
+.submenu-main.active .submenu-inner::after{
     background-color: #c4d3d3;
 }
 
-.submenu-main.active .submenu-inner::before,
-.submenu-main.clicked .submenu-inner::before{
+.submenu-main.active .submenu-inner::before{
     top:-2rem;
     z-index: -1;
 }
 
-.submenu-main.active::before,
-.submenu-main.clicked::before{
+.submenu-main.active::before{
     top:-2rem;
     border-top-left-radius: 2rem;
 }
 
-.submenu-main.active .submenu-inner::after,
-.submenu-main.clicked .submenu-inner::after{
+.submenu-main.active .submenu-inner::after{
     bottom:-2rem;
     z-index: -1;
 }
@@ -245,14 +233,13 @@ div.submenu-btn {
     grid-template-columns: 1fr;
     overflow:hidden;
     max-height: 0;
-    transition: all 0.7s ease;
+    transition: max-height 0.3s ease;
+    -webkit-transition: max-height 0.3s ease;
 }
 
-.submenu-main.active .submenu-toggle-list,
-.submenu-main.clicked .submenu-toggle-list {
+/* .submenu-main.active .submenu-toggle-list{
     max-height: 900px;
-    transition: all 2s ease;
-}
+} */
 
 .sportSelect {
     border: 1px solid #415b5a;

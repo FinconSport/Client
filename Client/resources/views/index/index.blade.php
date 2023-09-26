@@ -64,245 +64,6 @@
         <div id="early"></div>
         <div id="living"></div>
     </div>
-
-    <div id="indexContainerLeft" style="display:none;">
-        @foreach ($match_list as $key => $cat)
-            <div id="toggleContent_{{ $key }}">
-                <div class="catWrapperTitle" id="catWrapperTitle_{{ $key }}" onclick="toggleCat('{{ $key }}')">
-                    <span>{{ trans('index.mainArea')[$key] }}
-                        (<span id="catWrapperContent_{{ $key }}_total">{{ count($match_list[$key]) }}</span>)
-                    </span>
-                    <span id="catWrapperTitle_{{ $key }}_dir" style="float: right;">
-                        <i class="fa-solid fa-chevron-right"></i> 
-                    </span>
-                </div>
-                <div class="catWrapperContent" id="catWrapperContent_{{ $key }}" style="display: none;">
-                    @foreach ($cat as $key2 => $ser)
-                        <div class="seriesWrapperTitle" id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}" onclick="toggleSeries('{{ $key }}_{{ $key2 }}')" series_id="{{ $ser['series']['id'] }}">
-                            <span>{{ $ser['series']['name'] }}</span>
-                            (<span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_count">{{ count($ser['list']) }}</span>)
-                            <span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_dir" style="float: right;">
-                                <i class="fa-solid fa-circle-chevron-down"></i>
-                            </span>
-                        </div>
-                        <div class="seriesWrapperContent" id="seriesWrapperContent_{{ $key }}_{{ $key2 }}">
-                        @if(count($match_list[$key]) > 0)
-                                @foreach ($ser['list'] as $key3 => $item)
-                                    <div class="indexEachCard" key='{{ $item["match_id"] }}' status='{{ $item["status"] }}' style="@if($item['status'] == -1) display: none; @endif">
-                                        <div class="indexBetCard">
-                                            <div class="indexBetCardInfo">
-                                                <div class="timeSpan">{{ trans('index.mainArea.time') }}<span class="timer" series_id="{{ $ser['series']['id'] }}">{{ $item['start_time'] }}</span>
-                                                </div>
-                                                <div class="w-100" style="display: inline-flex;">
-                                                    @foreach ($item['teams'] as $team)
-                                                        @if($team['index'] === 1)
-                                                            @if(isset($team['team']['name']))
-                                                                <div class="textOverFlow teamSpan" style="width: 80%;">
-                                                                    {{ $team['team']['name'] }} [{{ trans('index.mainArea.homeTeamTag') }}]
-                                                                </div>
-                                                            @endif
-                                                            @if (isset($team['total_score']))
-                                                                <div class="scoreSpan" style="width: 20%;">
-                                                                    {{ $team['total_score'] }}
-                                                                </div>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                                <div class="w-100" style="display: inline-flex;">
-                                                    @foreach ($item['teams'] as $team)
-                                                        @if($team['index'] === 2)
-                                                            @if(isset($team['team']['name']))
-                                                                <div class="textOverFlow teamSpan" style="width: 80%;">
-                                                                    {{ $team['team']['name'] }}
-                                                                </div>
-                                                            @endif
-                                                            @if (isset($team['total_score']))
-                                                                <div class="scoreSpan" style="width: 20%;">
-                                                                    {{ $team['total_score'] }}
-                                                                </div>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="indexBetCardTable row m-0 text-center">
-                                                <!-- 全場獨贏 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.0') }}
-                                                    </div>
-                                                    @if (isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]))
-                                                        <!-- 主勝 -->
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate'])->sortKeys() as $subrate)
-                                                            @if($loop->first)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                    <span>{{ trans('index.mainArea.homeWin') }}&ensp;</span>
-                                                                    <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                        <!-- 客勝 -->
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate'])->sortKeys() as $subrate)
-                                                            @if($loop->last)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                    <span>{{ trans('index.mainArea.awayWin') }}&ensp;</span>
-                                                                    <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                        <!-- 平局 -->
-                                                        @if($search['sport'] == 1)
-                                                            @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate'])->sortKeys() as $subrate)
-                                                                @if($loop->index === 1)
-                                                                    <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.0')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                        <span>{{ trans('index.mainArea.tie') }}&ensp;</span>
-                                                                        <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                        <i class="fa-solid fa-lock"></i>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <!-- 全場獨贏 -->
-                                                <!-- 全場讓球 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.1') }}
-                                                    </div>
-                                                    @isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.1')])
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.1')])->sortBy('rate_value')->sortBy('status') as $subrate)
-                                                            @foreach (collect($subrate['rate'])->sortKeys() as $ssubrate)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $subrate['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $subrate['rate_id'] }}" rate_name="{{ $subrate['name'] }}" rate="{{ $ssubrate['id'] }}" bet_name="{{ $ssubrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $subrate['status'] }}" rate_item_status="{{ $ssubrate['status'] }}" risk="{{ $ssubrate['risk'] }}">
-                                                                    <span class="rate_name">{{ $ssubrate['value'] }}</span>&ensp;
-                                                                    <span class="odd">{{ $ssubrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endforeach
-                                                            @break
-                                                        @endforeach
-                                                    @endisset
-                                                </div>
-                                                <!-- 全場讓球 -->
-                                                <!-- 全場大小 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.2') }}
-                                                    </div>
-                                                    @isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.2')])
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.2')])->sortBy('rate_value')->sortBy('status') as $subrate)
-                                                            @foreach (collect($subrate['rate'])->sortKeys() as $ssubrate)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $subrate['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $subrate['rate_id'] }}" rate_name="{{ $subrate['name'] }}" rate="{{ $ssubrate['id'] }}" bet_name="{{ $ssubrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $subrate['status'] }}" rate_item_status="{{ $ssubrate['status'] }}" risk="{{ $ssubrate['risk'] }}">
-                                                                    <span class="rate_name">{{ $ssubrate['name'] }}</span>&ensp;
-                                                                    <span class="odd">{{ $ssubrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endforeach
-                                                            @break
-                                                        @endforeach
-                                                    @endisset
-                                                </div>
-                                                <!-- 全場大小 -->
-                                                <!-- 半場獨贏 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.3') }}
-                                                    </div>
-                                                    @if (isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]))
-                                                        <!-- 主勝 -->
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate'])->sortKeys() as $subrate)
-                                                            @if($loop->first)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                    <span>{{ trans('index.mainArea.homeWin') }}&ensp;</span>
-                                                                    <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                                @break
-                                                            @endif
-                                                        @endforeach
-                                                        <!-- 客勝 -->
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate'])->sortKeys() as $subrate)
-                                                            @if($loop->last)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                    <span>{{ trans('index.mainArea.awayWin') }}&ensp;</span>
-                                                                    <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                                @break
-                                                            @endif
-                                                        @endforeach
-                                                        <!-- 平局 -->
-                                                        @if($search['sport'] != 2)
-                                                            @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate'])->sortKeys() as $subrate)
-                                                                @if($loop->index === 1)
-                                                                    <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['rate_id'] }}" rate_name="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['name'] }}" rate="{{ $subrate['id'] }}" bet_name="{{ $subrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.3')][0]['status'] }}" rate_item_status="{{ $subrate['status'] }}" risk="{{ $subrate['risk'] }}">
-                                                                        <span>{{ trans('index.mainArea.tie') }}&ensp;</span>
-                                                                        <span class="odd">{{ $subrate['rate'] }}</span>
-                                                                        <i class="fa-solid fa-lock"></i>
-                                                                    </div>
-                                                                    @break
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <!-- 半場獨贏 -->
-                                                <!-- 半場讓球 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.4') }}
-                                                    </div>
-                                                    @isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.4')])
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.4')])->sortBy('rate_value')->sortBy('status') as $subrate)
-                                                            @foreach (collect($subrate['rate'])->sortKeys() as $ssubrate)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $subrate['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $subrate['rate_id'] }}" rate_name="{{ $subrate['name'] }}" rate="{{ $ssubrate['id'] }}" bet_name="{{ $ssubrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $subrate['status'] }}" rate_item_status="{{ $ssubrate['status'] }}" risk="{{ $ssubrate['risk'] }}">
-                                                                    <span class="rate_name">{{ $ssubrate['value'] }}</span>&ensp;
-                                                                    <span class="odd">{{ $ssubrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endforeach
-                                                            @break
-                                                        @endforeach
-                                                        @endisset
-                                                </div>
-                                                <!-- 半場讓球 -->
-                                                <!-- 半場大小 -->
-                                                <div class="col-2 p-0">
-                                                    <div class="betLabel">
-                                                        {{ trans('index.sportBetData.' . intval($search['sport']) . '.gameTitle.5') }}
-                                                    </div>
-                                                    @isset($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.5')])
-                                                        @foreach (collect($item['rate'][trans('index.sportBetData.' . intval($search['sport']) . '.priorityArr.5')])->sortBy('rate_value')->sortBy('status') as $subrate)
-                                                            @foreach (collect($subrate['rate'])->sortKeys() as $ssubrate)
-                                                                <div class="betItemDiv" index='{{ $loop->index }}' game_priority="{{ $subrate['game_priority'] }}" onclick="openCal($(this), 1)" match_id='{{ $item["match_id"] }}' rate_id="{{ $subrate['rate_id'] }}" rate_name="{{ $subrate['name'] }}" rate="{{ $ssubrate['id'] }}" bet_name="{{ $ssubrate['name'] }}" key='{{ $key }}' key2='{{ $key2 }}' key3='{{ $key3 }}' rate_status="{{ $subrate['status'] }}" rate_item_status="{{ $ssubrate['status'] }}" risk="{{ $ssubrate['risk'] }}">
-                                                                    <span class="rate_name">{{ $ssubrate['name'] }}</span>&ensp;
-                                                                    <span class="odd">{{ $ssubrate['rate'] }}</span>
-                                                                    <i class="fa-solid fa-lock"></i>
-                                                                </div>
-                                                            @endforeach
-                                                            @break
-                                                        @endforeach
-                                                    @endisset
-                                                </div>
-                                                <!-- 半場大小 -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endforeach
-        <div id="noData" style="display: none;">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
-        </div>
-    </div>
 </div>
 @endsection
 
@@ -380,77 +141,183 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        function createLeagueDiv(title, fixtureCount) {
-            const leagueDiv = document.createElement("div");
-            leagueDiv.className = "league";
-            leagueDiv.innerHTML = `<div class="catWrapperTitle"><p>{{ trans('index.mainArea.living') }}(${fixtureCount})</p><i class="fa-solid fa-chevron-right"></i></div>`;
-            return leagueDiv;
-        }
+        function createSportStructure(sportData, parentDiv, categoryLabel) {
+            for (const sportId in sportData) {
+                const sport = sportData[sportId];
+                const numLeagues = Object.keys(sport.list).length;
 
-        function createListDiv(fixtureData) {
-            const listDiv = document.createElement("div");
-            listDiv.className = "";
+                // Create a container for each sport
+                const sportContainer = document.createElement("div");
+                sportContainer.setAttribute("id", sport.sport_id);
+                sportContainer.setAttribute("class", "main-div");
+                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
+                parentDiv.appendChild(sportContainer);
 
-            if (fixtureData) {
-                for (const fixtureId in fixtureData) {
-                    if (fixtureData.hasOwnProperty(fixtureId)) {
-                        const fixture = fixtureData[fixtureId];
-                        const fixtureDiv = document.createElement("div");
-                        fixtureDiv.className = "catWrapperContent";
-                        fixtureDiv.innerHTML = `<p>${fixture.home_team_name}  ${fixture.away_team_name}  ${fixture.start_time}</p>`;
-                        listDiv.appendChild(fixtureDiv);
+                const leagueList = document.createElement("div");
+                leagueList.setAttribute("class", "league-list");
+                sportContainer.appendChild(leagueList);
+
+                if (numLeagues === 0) {  // <- add no data 
+                    const leagueContainer = document.createElement("div");
+                    leagueContainer.setAttribute("class", "nogame-con");
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
+                    leagueList.appendChild(leagueContainer);
+                }
+
+                if (numLeagues !== 0) { // <- open first div and if has data
+                    $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
+                    const element = document.querySelector('#indexContainerLeft div:first-child .league-list');
+                    element.style.height = 'auto';
+                }
+
+                for (const leagueId in sport.list) {
+                    const league = sport.list[leagueId];
+                    const numFixtures = Object.keys(league.list).length;
+
+                    // Create a container for each league within the sport
+                    const leagueContainer = document.createElement("div");
+                    leagueContainer.setAttribute("id", league.league_id);
+                    leagueContainer.setAttribute("class", "league-div");
+                    
+                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
+                    leagueList.appendChild(leagueContainer);
+
+                    const fixtureContainer = document.createElement("div");
+                    fixtureContainer.setAttribute("class", "fixture-container");
+                    leagueContainer.appendChild(fixtureContainer);
+
+                    for (const fixtureId in league.list) {
+                        const fixture = league.list[fixtureId];
+
+                        // Create a container for each fixture within the league
+                        const fixtureItem = document.createElement("div");
+                        fixtureItem.setAttribute("id", fixture.fixture_id);
+                        fixtureItem.setAttribute("class", "fixture-div");
+                        fixtureItem.innerHTML = `<div class='seriesWrapperContent'>
+                                                    <div class='seriesWrapper-left'>
+                                                        <p>{{ trans('index.mainArea.time') }}${fixture.start_time}</p>
+                                                        <p>${fixture.home_team_name}</p>
+                                                        <p>${fixture.away_team_name}</p>
+                                                    </div>
+                                                    <div class='seriesWrapper-right'>
+                                                        <table class='table table-bordered h-100'>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>`;
+                        fixtureContainer.appendChild(fixtureItem);
                     }
                 }
-            } else {
-                const noDataDiv = document.createElement("div");
-                noDataDiv.className = "no-data";
-                noDataDiv.textContent = "No data available.";
-                listDiv.appendChild(noDataDiv);
             }
-
-            return listDiv;
         }
-
-        const earlyData = matchListD.data.early;
-        const livingData = matchListD.data.living;
 
         const earlyParentDiv = document.getElementById("early");
         const livingParentDiv = document.getElementById("living");
-        for (const leagueId in earlyData) {
-            if (earlyData.hasOwnProperty(leagueId)) {
-                const league = earlyData[leagueId];
-                const leagueName = league.list[183] ? league.list[183].league_name : '';
-                const fixtureCount = league.list[183] && league.list[183].list
-                    ? Object.keys(league.list[183].list).length
-                    : 0;
-                const leagueDiv = createLeagueDiv("early", fixtureCount);
-                const listDiv = createListDiv(league.list[183] ? league.list[183].list : null);
-                leagueDiv.appendChild(listDiv);
-                earlyParentDiv.appendChild(leagueDiv);
-            }
+
+        if (matchListD && matchListD.data) {
+            const earlyData = matchListD.data.early;
+            const livingData = matchListD.data.living;
+
+            createSportStructure(earlyData, earlyParentDiv, 'early');
+            createSportStructure(livingData, livingParentDiv, 'living');
         }
-        for (const leagueId in livingData) {
-            if (livingData.hasOwnProperty(leagueId)) {
-                const league = livingData[leagueId];
-                const leagueName = league.sport_name;
-                const fixtureCount = league.list && league.list.length > 0
-                    ? Object.keys(league.list).length
-                    : 0;
-                const leagueDiv = createLeagueDiv("living", fixtureCount);
-                const listDiv = createListDiv(league.list);
-                leagueDiv.appendChild(listDiv);
-                livingParentDiv.appendChild(leagueDiv);
-            }
+
+        $(document).ready(function() {
+        // Find the first .fixture-container element
+        var firstFixtureContainer = $(".fixture-container:first");
+
+        // Check if it exists
+        if (firstFixtureContainer.length > 0) {
+            // Add the class 'open' to its sibling .seriesWrapperTitle
+            firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+
+            // Set the height to 'auto' and add the transition properties
+            firstFixtureContainer.css({
+                "height": "auto",
+                "transition": "height .5s ease-in-out 0s",
+                "-webkit-transition": "height .5s ease-in-out 0s"
+            });
         }
-        
+        });
+
+        // click function toggle
+        $(document).ready(function(){
+            $(".seriesWrapperTitle").click(function () {
+                $(this).toggleClass("open");
+                const l = $(this).next('.fixture-container');
+                if (l.length) {
+                    if (l[0].style.height === '0px' || l[0].style.height === '') {
+                        l[0].style.height = 'auto';
+                        l.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
+                    } else {
+                        l[0].style.height = '0';
+                        l.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
+                    }
+                }
+            });
+
+            $(".catWrapperTitle").click(function () {
+                $(this).toggleClass("open");
+                const f = $(this).next('.league-list');
+                if (f.length) {
+                    if (f[0].style.height === '0px' || f[0].style.height === '') {
+                        f[0].style.height = 'auto';
+                        f.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
+                    } else {
+                        f[0].style.height = '0';
+                        f.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
+                    }
+                }
+            });
+        });
+
         // loop matchListD to generate html element here
 
         // open the first
-        if($('div[id^=toggleContent_]:visible').length > 0) {
-            setTimeout(() => {
-                $('.catWrapperTitle:visible').eq(0).click()
-            }, 500);
-        }
+        // if($('div[id^=toggleContent_]:visible').length > 0) {
+        //     setTimeout(() => {
+        //         $('.catWrapperTitle:visible').eq(0).click()
+        //     }, 500);
+        // }
     }
     /* ===== VIEW LAYER ===== */
 
