@@ -255,12 +255,11 @@
 
             if (firstLeagueDiv) {
                 var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
-
+                firstLeagueDiv.style.height = 'auto';
                 if (childLeagueDiv) {
                     console.log("Child League Div: ", childLeagueDiv);
-
                     childLeagueDiv.classList.add('open');
-                    firstLeagueDiv.style.height = 'auto';
+                    
                 }
             }
         });
