@@ -168,8 +168,6 @@
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
                     const element = document.querySelector('#indexContainerLeft div:first-child .league-list');
                     element.style.height = 'auto';
-                    element.css("transition", "height .5s ease-in-out 0s");
-                    element.css("-webkit-transition", "height .5s ease-in-out 0s");
                 }
 
                 for (const leagueId in sport.list) {
