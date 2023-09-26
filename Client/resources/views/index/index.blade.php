@@ -152,6 +152,8 @@
 
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  
+
+
             let el_toggle = $('div[template="elToggleTemplate"]').clone()
             let el_toggle_title = el_toggle.find('.catWrapperTitle')
             let el_toggle_text = el_toggle.find('.elToggleText')
@@ -161,11 +163,15 @@
             el_toggle.attr('id', 'toggleContent_' + k)
             el_toggle_title.attr('id', 'catWrapperTitle_' + k)
             el_toggle_title.attr('onclick', 'toggleCat("' + k + '")')
+            el_toggle_text.html(k)
             el_toggle_count.attr('id', 'catWrapperContent_' + k + '_total')
+            el_toggle_count.html('(' + 123 + ')')
             el_toggle_dir.attr('id', 'catWrapperTitle_' + k + '_dir')
             
             el_toggle.removeAttr('hidden')
 
+            console.log(k)
+            console.log(el_toggle)
             $('#indexContainerLeft').append(el_toggle)
         })
         
