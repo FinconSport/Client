@@ -1640,13 +1640,13 @@ class LsportApiController extends Controller {
             if (empty($input[$input_name])) {
                 $this->ApiError('01');
             }
-            // ex. $player = $input['player];
-            $$input_name = $input[$input_name];  //從input宣告新變數
         }
+        $player_id = $input['player'];
+        $fixture_id = $input['fixture_id'];
+        $sport_id = $input['sport_id'];
 
         //---------------------------------
         // 取得代理的語系
-        //$player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
         $lang_col = 'name_' . $agent_lang;
 
@@ -1677,12 +1677,13 @@ class LsportApiController extends Controller {
             if (empty($input[$input_name])) {
                 $this->ApiError('01');
             }
-            $$input_name = $input[$input_name];  //從input宣告新變數, ex. $player = $input['player];
         }
+        $player_id = $input['player'];
+        $fixture_id = $input['fixture_id'];
+        $sport_id = $input['sport_id'];
 
         //---------------------------------
         // 取得代理的語系
-        //$player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
         $lang_col = 'name_' . $agent_lang;
 
