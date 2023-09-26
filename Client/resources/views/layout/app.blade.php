@@ -401,7 +401,7 @@
 				var submenuToggleList = $(this).next(".submenu-toggle-list");
 				if (submenuToggleList.length) {
 				if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
-					submenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
+					submenuToggleList.animate({ maxHeight: '900px' }, 300);
 					console.log("Click");
 					submenuClicked = true;
 				} else {
