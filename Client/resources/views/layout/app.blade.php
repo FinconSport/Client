@@ -269,9 +269,6 @@
 			};
 
 			if (currentUrl.includes('index') || noPath == '/') {
-				const firstSportId = sportListD.data[0].sport_id;
-				sportType = firstSportId; 
-				// window.location.href = "/?sport=" + sportListD.data[0].sport_id;
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 			}
