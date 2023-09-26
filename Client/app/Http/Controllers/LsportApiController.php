@@ -707,7 +707,7 @@ class LsportApiController extends Controller {
                     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
-                        'base_line' => $bv->base_line,
+                        //'base_line' => $bv->base_line,
                         'line' => $bv->line,
                         'price' => $bv->price,
                         'status' => $bv->status,
@@ -1859,7 +1859,7 @@ class LsportApiController extends Controller {
                 $arr_market_bet[] = array(
                     'market_bet_id' => $market_bet_id,
                     'market_bet_name' => $market_bet_name,
-                    'base_line' => $bv->base_line,
+                    //'base_line' => $bv->base_line,
                     'line' => $bv->line,
                     'price' => $bv->price,
                     'status' => $bv->status,
@@ -2447,9 +2447,9 @@ class LsportApiController extends Controller {
             $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']+0);
-                $score = intval($rv['Value']+0);
-                if ($pos < 40) {
+                $pos = intval($rv['Position']);
+                $score = intval($rv['Value']);
+                if ($type < 40) {
                     $ret[$pos][$type] = $score;
                 }
             }
