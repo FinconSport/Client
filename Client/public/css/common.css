@@ -233,8 +233,8 @@ div.submenu-btn {
     grid-template-columns: 1fr;
     overflow:hidden;
     max-height: 0;
-    transition: max-height 0.3s ease;
-    -webkit-transition: max-height 0.3s ease;
+    /* transition: max-height 0.3s ease;
+    -webkit-transition: max-height 0.3s ease; */
 }
 
 /* .submenu-main.active .submenu-toggle-list{
