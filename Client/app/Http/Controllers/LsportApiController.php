@@ -1969,7 +1969,6 @@ class LsportApiController extends Controller {
             "id",
             "m_id",
             "bet_amount",
-            "result_data",
             "result_amount",
             "create_time",
             "result_time",
@@ -1997,93 +1996,51 @@ class LsportApiController extends Controller {
                     $this->error(__CLASS__, __FUNCTION__, "02");
                 }
 
-                dd($cc);
                 foreach ($cc as $kkk => $vvv) {
                     $tmp_bet_data = array();
 
-                    $type_id = $vvv['type_id'];
+                    $tmp_bet_data['market_bet_name'] = $vvv['market_bet_name'];
+                    $tmp_bet_data['market_bet_line'] = $vvv['market_bet_line'];
+                    $tmp_bet_data['market_priority'] = $vvv['market_priority'];
 
-                    $tmp_d = LsportMarketBet::where("id", $type_id)->first();
-                    if ($tmp_d === null) {
-                        $tmp_bet_data['market_bet_name'] = $vvv['name_en'];
-                    } else {
-                        $tmp_bet_data['type_name'] = $tmp_d[$lang_col];
-                    }
-        
                     ///////////////
 
-                    $tmp_bet_data['type_item_name'] = $vvv['type_item_name'];
-                    $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
-                    $tmp_bet_data['status'] = $arrOrderStatus[$vvv['status']];
-                    $tmp_bet_data['type_priority'] = $vvv['type_priority'];
+                    $tmp_bet_data['home_team_id'] = $vvv['home_team_id'];
+                    $tmp_bet_data['away_team_id'] = $vvv['away_team_id'];
+                    $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
+                    $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
+                    $tmp_bet_data['home_team_score'] = $vvv['home_team_score'];
+                    $tmp_bet_data['away_team_score'] = $vvv['away_team_score'];
                     
-
+                    $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
+                    $tmp_bet_data['status'] = $order_status[$vvv['status']];
+                    
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
             } else {
                 $tmp_bet_data = array();
 
-                // 聯賽
-                $league_id = $v['league_id'];
-                $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $v['sport_id'])->first();
-                if ($tmp_d === false) {
-                    $this->ApiError("01");
-                }
+                $tmp_bet_data['market_bet_name'] = $v['market_bet_name'];
+                $tmp_bet_data['market_bet_line'] = $v['market_bet_line'];
+                $tmp_bet_data['market_priority'] = $v['market_priority'];
 
-                if ($tmp_d === null) {
-                    $tmp_bet_data['league_name'] = $v['name_en'];
-                } else {
-                    $tmp_bet_data['league_name'] = $tmp_d[$lang_col];
-                }
+                ///////////////
 
-                $type_id = $v['type_id'];
-
-                $tmp_d = LsportMarketBet::where("bet_id", $type_id)->first();
-                if ($tmp_d === null) {
-                    $tmp_bet_data['type_name'] = $v['type_name'];
-                } else {
-                    $tmp_bet_data['type_name'] = $tmp_d[$lang_col];
-                }
+                $tmp_bet_data['home_team_id'] = $v['home_team_id'];
+                $tmp_bet_data['away_team_id'] = $v['away_team_id'];
+                $tmp_bet_data['home_team_name'] = $v['home_team_name'];
+                $tmp_bet_data['away_team_name'] = $v['away_team_name'];
+                $tmp_bet_data['home_team_score'] = $v['home_team_score'];
+                $tmp_bet_data['away_team_score'] = $v['away_team_score'];
                 
-                $replace_lang = array();
-
-                $home_team_id = $v['home_team_id'];
-
-                $tmp_d = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $v['sport_id'])->first();
-                if ($tmp_d === null) {
-                    $tmp_bet_data['home_team_name'] = $v['home_team_name'];
-                } else {
-                    $tmp_bet_data['home_team_name'] = $tmp_d[$lang_col];
-                }
-
-                $away_team_id = $v['away_team_id'];
-
-                $tmp_d = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $v['sport_id'])->first();
-                if ($tmp_d === null) {
-                    $tmp_bet_data['away_team_name'] = $v['away_team_name'];
-                } else {
-                    $tmp_bet_data['away_team_name'] = $tmp_d[$lang_col];
-                }
-
-                // rate item 顯示轉化
-                $item_name = $v['type_item_name']; // 預設
-                $replace_lang[] = array("cn" => "单", "tw" => "單");
-                $replace_lang[] = array("cn" => "双", "tw" => "雙");
-                $tmp_bet_data['type_item_name'] = $item_name;
-
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
-                $tmp_bet_data['status'] = $arrOrderStatus[$v['status']];
-                $tmp_bet_data['type_priority'] = $v['type_priority'];
-            //    $tmp[$k]['bet_data'][] = $tmp_bet_data;
-
+                $tmp_bet_data['status'] = $order_status[$v['status']];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
 
         }
 
-
-        dd($tmp);
         $data['list'] = $tmp;
         ////////////////////////
 
