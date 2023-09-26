@@ -74,7 +74,7 @@
             <i class="fa-solid fa-chevron-right"></i> 
         </span>
     </div>
-    <div class="catWrapperContent" hidden>
+    <div class="catWrapperContent">
     </div>
 </div>
 
@@ -175,7 +175,7 @@
 
             el_toggle.attr('id', 'toggleContent_' + k)
             el_toggle_title.attr('id', `catWrapperTitle_${k}`)
-            el_toggle_title.attr('onclick', `toggleCat("${k}")`)
+            el_toggle_title.attr('onclick', `toggleCat('${k}')`)
             el_toggle_text.html(k)
             el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
             el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
@@ -187,14 +187,13 @@
             Object.entries(v[sport].list).map(([k2, v2]) => {  
                 console.log(k2, v2)
                 let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
-                let league_toggle_title = league_toggle.find('.seriesWrapperTitle')
                 let league_toggle_name = league_toggle.find('.legToggleName')
                 let league_toggle_count = league_toggle.find('.legToggleCount')
                 let league_toggle_dir = league_toggle.find('.legToggleDir')
 
-                league_toggle_title.attr('id', `seriesWrapperTitle_${k}_${k2}`)
-                league_toggle_title.attr('onclick', `toggleSeries("${k}_${k2}")`)
-                league_toggle_title.attr('league_id', v2.league_id)
+                league_toggle.attr('id', `seriesWrapperTitle_${k}_${k2}`)
+                league_toggle.attr('onclick', `toggleSeries('${k}_${k2}')`)
+                league_toggle.attr('league_id', v2.league_id)
                 league_toggle_name.html(v2.name)
                 league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
                 league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
@@ -208,9 +207,8 @@
                 league_toggle_content.removeAttr('hidden')
                 league_toggle_content.removeAttr('template')
 
-
-                el_toggle.append(league_toggle)
-                el_toggle.append(league_toggle_content)
+                el_toggle_content.append(league_toggle)
+                el_toggle_content.append(league_toggle_content)
             })
 
             el_toggle.removeAttr('hidden')
