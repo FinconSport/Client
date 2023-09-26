@@ -270,7 +270,7 @@
 
 			if (currentUrl.includes('index') || noPath == '/') {
 				const firstSportId = sportListD.data[0].sport_id;
-				console.log(firstSportId);
+				sportType = firstSportId; 
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 			}
