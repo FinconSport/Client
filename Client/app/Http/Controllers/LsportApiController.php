@@ -1713,8 +1713,8 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[1] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($sk >= 1) && ($sk < 40)) {
-                    $arr_home_team_scores = array(
+                if (($stage >= 1) && ($stage < 40)) {
+                    $arr_home_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
                     );
@@ -1729,8 +1729,8 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[2] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($sk >= 1) && ($sk < 40)) {
-                    $arr_away_team_scores = array(
+                if (($stage >= 1) && ($stage < 40)) {
+                    $arr_away_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
                     );
@@ -1750,6 +1750,11 @@ class LsportApiController extends Controller {
             'last_update' => $data->f_last_update,
             'periods' => $parsed_periods,
             'scoreboard' => $parsed_scoreboard,
+            'series' => array(
+                'id' => $data->league_id,
+                'sport_id' => $sport_id,
+                'name' => $league_name,
+            ),
             'teams' => array(
                 // 主隊
                 array(
@@ -1773,11 +1778,6 @@ class LsportApiController extends Controller {
                         'name' => $away_team_name,
                     )
                 ),
-            ),
-            'series' => array(
-                'id' => $data->league_id,
-                'sport_id' => $sport_id,
-                'name' => $league_name,
             ),
             'market' => array(),
         );
