@@ -250,28 +250,26 @@
         }
 
         $(document).ready(function() {
-            // Find the first .fixture-container element within #living
-            var firstLivingFixtureContainer = $("#living .fixture-container:first");
-            if (firstLivingFixtureContainer.length > 0) {
-                firstLivingFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-                firstLivingFixtureContainer.css({
-                    "height": "auto",
-                    "transition": "height .5s ease-in-out 0s",
-                    "-webkit-transition": "height .5s ease-in-out 0s"
-                });
+            // Function to apply actions to the first .fixture-container element within a container
+            function applyActionsToFirstFixtureContainer(containerId) {
+                var firstFixtureContainer = $("#" + containerId + " .fixture-container:first");
+                if (firstFixtureContainer.length > 0) {
+                    firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+                    firstFixtureContainer.css({
+                        "height": "auto",
+                        "transition": "height .5s ease-in-out 0s",
+                        "-webkit-transition": "height .5s ease-in-out 0s"
+                    });
+                }
             }
 
-            // Find the first .fixture-container element within #early
-            var firstEarlyFixtureContainer = $("#early .fixture-container:first");
-            if (firstEarlyFixtureContainer.length > 0) {
-                firstEarlyFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-                firstEarlyFixtureContainer.css({
-                    "height": "auto",
-                    "transition": "height .5s ease-in-out 0s",
-                    "-webkit-transition": "height .5s ease-in-out 0s"
-                });
-            }
+            // Call the function for the #living container
+            applyActionsToFirstFixtureContainer("living");
+
+            // Call the function for the #early container
+            applyActionsToFirstFixtureContainer("early");
         });
+
 
 
         // click function toggle
