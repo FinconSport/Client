@@ -458,7 +458,9 @@
                                             // 賠率上升
                                             raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
-                                    } 
+                                    } else {
+                                        console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
+                                    }
 
                                     
                                     // set attribute
