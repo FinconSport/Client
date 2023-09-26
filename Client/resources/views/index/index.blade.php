@@ -200,8 +200,8 @@
                 league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
                 league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
 
-                league_toggle.removeAttr('hidden')
-                league_toggle.removeAttr('template')
+                // league_toggle.removeAttr('hidden')
+                // league_toggle.removeAttr('template')
 
                 // let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
                 // league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
@@ -210,7 +210,7 @@
                 // league_toggle_content.removeAttr('template')
 
 
-                el_toggle.append(league_toggle)
+                // el_toggle.append(league_toggle)
                 // el_toggle.append(league_toggle_content)
             })
 
