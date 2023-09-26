@@ -555,10 +555,10 @@ div[key="sizeSmallRate"]:hover {
         transform: rotate(-90deg);
     }
 
-    #indexContainerLeft .main-div .seriesWrapperTitle.open i {
+    /* #indexContainerLeft .main-div .seriesWrapperTitle.open i {
         transform: rotate(0deg);
     }
 
     #indexContainerLeft .main-div .catWrapperTitle.open i {
         transform: rotate(90deg);
-    }
+    } */
