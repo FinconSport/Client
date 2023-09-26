@@ -469,13 +469,13 @@
 
                                     // 顯示
                                     if( v4.status === 1 ) {
-                                        console.log(v4.market_bet_id + ' -> open')
+                                        console.log(betData.market_name + ' ' + v4.market_bet_name + ' ' + v4.line + ' -> open')
                                         item.find('.rate_name').show()
                                         item.find('.odd').show()
                                         item.find('i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        console.log(v4.market_bet_id + ' -> lock')
+                                        console.log(betData.market_name + ' ' + v4.market_bet_name + ' ' + v4.line + ' -> lock')
                                         item.find('.rate_name').hide()
                                         item.find('.odd').hide()
                                         item.find('i').show()
