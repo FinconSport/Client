@@ -395,38 +395,41 @@
 		// left side menu click function
 		$(document).ready(function () {
 			var submenuClicked = false;
+			var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
+
 			$(".submenu-btn").click(function () {
 				$(this).closest('.submenu-main').toggleClass('active');
 
-				var submenuToggleList = $(this).next(".submenu-toggle-list");
-				if (submenuToggleList.length) {
-				if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
-					submenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
+				var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
+				if (currentSubmenuToggleList.length) {
+				if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
+					currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
 					console.log("Click");
 					submenuClicked = true;
 				} else {
-					submenuToggleList.animate({ maxHeight: '0' }, 300);
+					currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
 					console.log("unclick");
 					submenuClicked = false;
 				}
 				}
 
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-toggle-list').not(submenuToggleList[0]).animate({ maxHeight: '0' }, 300);
+				$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
 
 				// Delayed action using setTimeout
-				setTimeout(function () {
-				if (!submenuClicked) {
-					console.log("!submenuClicked");
-					if ($(".submenu-main").hasClass("currentpage")) {
-					$(".submenu-main.currentpage").addClass('active');
-					$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
-					}
-				}
-				}, 2500);
+				// setTimeout(function () {
+				// if (!submenuClicked) {
+				// 	console.log("!submenuClicked");
+				// 	if ($(".submenu-main").hasClass("currentpage")) {
+				// 	$(".submenu-main.currentpage").addClass('active');
+				// 	$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
+				// 	}
+				// }
+				// }, 3000);
 
 			});
 		});
+
 		// ----------------------------
 
 		//marquee onclick
