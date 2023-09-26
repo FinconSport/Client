@@ -187,6 +187,7 @@
             Object.entries(v[sport].list).map(([k2, v2]) => {  
                 console.log(k2, v2)
                 let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
+                console.log(league_toggle)
                 let league_toggle_title = league_toggle.find('.seriesWrapperTitle')
                 let league_toggle_name = league_toggle.find('.legToggleName')
                 let league_toggle_count = league_toggle.find('.legToggleCount')
@@ -202,15 +203,15 @@
                 league_toggle.removeAttr('hidden')
                 league_toggle.removeAttr('template')
 
-                let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
-                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
+                // let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
+                // league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
 
-                league_toggle_content.removeAttr('hidden')
-                league_toggle_content.removeAttr('template')
+                // league_toggle_content.removeAttr('hidden')
+                // league_toggle_content.removeAttr('template')
 
 
                 el_toggle.append(league_toggle)
-                el_toggle.append(league_toggle_content)
+                // el_toggle.append(league_toggle_content)
             })
 
             league_toggle.removeAttr('hidden')
