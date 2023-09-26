@@ -1861,6 +1861,15 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
 
+            // 包入 market 玩法資料 ---------------
+            $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+                'market_id' => $v->market_id,
+                'market_name' => $market_name,
+                'priority' => $v->priority,
+                'main_line' => $v->main_line,
+                'list' => array(),
+            );
+
             // 開始繞賠率資料
             foreach ($marketBetData as $bk => $bv) {
                 $market_bet_id = $bv->bet_id;
@@ -1884,14 +1893,6 @@ class LsportApiController extends Controller {
                 );
             }
 
-            // 包入 market 玩法資料 ---------------
-            $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
-                'market_id' => $v->market_id,
-                'market_name' => $market_name,
-                'priority' => $v->priority,
-                'main_line' => $v->main_line,
-                'list' => array(),
-            );
         }
 
 
