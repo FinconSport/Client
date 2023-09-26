@@ -451,6 +451,7 @@
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
 
+                                    console.log(item)
                                     console.log(v4)
                                     console.log(market_bet_id)
                                     console.log(v4.market_bet_id)
