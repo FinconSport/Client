@@ -712,6 +712,25 @@
         closeCal()
     }
 
+    // 統計
+    function statistics() {
+        $('#indexContainer .elToggleCount').each(function() {
+            let id = $(this).attr('id').replace('_total', '')
+            let count = $('#' + id).find('.indexEachCard').length
+            $(this).html(count)
+        })
+
+        $('#indexContainer .legToggleCount').each(function() {
+            let idArr = $(this).attr('id').split('_')
+            let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
+            let count = $('#' + id).find('.indexEachCard').length
+            $(this).html(count)
+        })
+
+
+        
+    }
+
     // 餘額
     function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
