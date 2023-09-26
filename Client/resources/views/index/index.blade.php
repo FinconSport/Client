@@ -76,56 +76,6 @@
     </div>
 </div>
 
-<!-- league toggle template -->
-<div class="catWrapperContent" id="catWrapperContent_{{ $key }}" hidden>
-    <div class="seriesWrapperTitle" id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}" onclick="toggleSeries('{{ $key }}_{{ $key2 }}')" series_id="{{ $ser['series']['id'] }}">
-        <span>{{ $ser['series']['name'] }}</span>
-        (<span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_count">{{ count($ser['list']) }}</span>)
-        <span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_dir" style="float: right;">
-            <i class="fa-solid fa-circle-chevron-down"></i>
-        </span>
-    </div>
-    <div class="seriesWrapperContent" id="seriesWrapperContent_{{ $key }}_{{ $key2 }}">
-    </div>
-</div>
-
-<!-- fixture card template -->
-<div class="indexEachCard" hidden>
-    <div class="indexBetCard">
-        <div class="indexBetCardInfo">
-            <div class="timeSpan">{{ trans('index.mainArea.time') }}<span class="timer" series_id="{{ $ser['series']['id'] }}">{{ $item['start_time'] }}</span>
-            </div>
-            <div class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
-                    team name
-                </div>
-                <div class="scoreSpan" style="width: 20%;">
-                    team score
-                </div>
-            </div>
-            <div class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
-                    team name
-                </div>
-                <div class="scoreSpan" style="width: 20%;">
-                    team score
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-            <div class="col-2 p-0">
-                <div class="betLabel">
-                    gameTitle
-                </div>
-                <div class="betItemDiv" onclick="openCal($(this), 1)">
-                    <span class="rate_name">rate_name</span>&ensp;
-                    <span class="odd">odd</span>
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- no data -->
 <div id="noData" style="display: none;">
     <i class="fa-solid fa-circle-exclamation"></i>
