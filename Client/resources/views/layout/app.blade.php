@@ -197,15 +197,12 @@
 				method: 'POST',
 				data: data,
 				success: function(data) {
-					console.log(url + ' called success')
 					const json = JSON.parse(data); 
-					// 先判定要不要解壓縮
-					if(json.gzip) {
-						// 將字符串轉換成 ArrayBuffer
+					console.log(json)
+					if(json.gzip) { // 解壓縮
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
 						const buffer = new Uint8Array(bytes).buffer;
-						// 解壓縮 ArrayBuffer
 						const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
 						json.data = uncompressed
 					}
@@ -215,10 +212,11 @@
 						// ajax更新 不可以整包覆蓋
 						// loop json.data-> 比較時間戳 不一樣再更新該筆就好
 					}
+					showSuccessToast(json.message)
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					// 处理错误
 					console.error('Ajax error:', textStatus, errorThrown);
+					showErrorToast(jqXHR)
 				}
 			});
 		}
@@ -395,37 +393,39 @@
 
 		
 		// left side menu click function
-		$(document).ready(function(){
+		$(document).ready(function () {
 			var submenuClicked = false;
-			$(".submenu-btn").click(function(){
-                $(this).closest('.submenu-main').toggleClass('active');
-                var submenuToggleList = $(this).next(".submenu-toggle-list");
-                if (submenuToggleList.length) {
-                    if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
-                        submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
-						console.log("Click");
-						submenuClicked = true;
-                    } else {
-                        submenuToggleList[0].style.maxHeight = '0';
-						console.log("unclick");
-						submenuClicked = false;
-                    }
-                }
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
-            });
+			$(".submenu-btn").click(function () {
+				$(this).closest('.submenu-main').toggleClass('active');
 
-			// Add a delay before checking submenuClicked
-			setTimeout(function () {
+				var submenuToggleList = $(this).next(".submenu-toggle-list");
+				if (submenuToggleList.length) {
+				if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
+					submenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
+					console.log("Click");
+					submenuClicked = true;
+				} else {
+					submenuToggleList.animate({ maxHeight: '0' }, 300);
+					console.log("unclick");
+					submenuClicked = false;
+				}
+				}
+
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				$('.submenu-toggle-list').not(submenuToggleList[0]).animate({ maxHeight: '0' }, 300);
+
+				// Delayed action using setTimeout
+				setTimeout(function () {
 				if (!submenuClicked) {
 					console.log("!submenuClicked");
 					if ($(".submenu-main").hasClass("currentpage")) {
-						$(".submenu-main.currentpage").addClass('active');
-						$(".submenu-main.currentpage .submenu-toggle-list").css('max-height', '900px');
+					$(".submenu-main.currentpage").addClass('active');
+					$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
 					}
 				}
-			}, 3000);
+				}, 3000);
 
+			});
 		});
 		// ----------------------------
 
