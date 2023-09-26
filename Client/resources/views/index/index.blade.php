@@ -217,7 +217,6 @@
             el_toggle.attr('id', 'toggleContent_' + k)
             el_toggle_title.attr('id', `catWrapperTitle_${k}`)
             el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-            // el_toggle_text.html(k)
             el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
             el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
             el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
