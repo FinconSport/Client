@@ -1669,10 +1669,9 @@ class LsportApiController extends Controller {
 
         // 包入 league 聯賽資料
         $arrFixture['series'] = array(
-            'id' => $data->league_id,
+            'league_id' => $data->league_id,
             'sport_id' => $sport_id,
             'name' => $league_name,
-            'list' => array(),
         );
 
         // fixture 層 ----------------------------
@@ -1698,6 +1697,47 @@ class LsportApiController extends Controller {
         $parsed_periods = $this->getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata);
         $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
+        // 主客隊分數
+        $home_team_total_score = null;  //主隊總分
+        $arr_home_team_scores = array();  //主隊比分板
+        $away_team_total_score = null;  //客隊總分
+        $arr_away_team_scores = array();  //客隊比分板
+
+        if ($parsed_scoreboard) {
+            //主隊---------
+
+            //總分
+            $home_team_total_score = $parsed_scoreboard[1][0];
+
+            //比分板
+            foreach ($parsed_scoreboard[1] as $sk => $sv) {
+                $stage = intval($sk);
+                $score = intval($sv);
+                if (($sk >= 1) && ($sk < 40)) {
+                    $arr_home_team_scores = array(
+                        'stage' => $stage,
+                        'score' => $score,
+                    )
+                }
+            }
+            //客隊---------
+
+            //總分
+            $away_team_total_score = $parsed_scoreboard[2][0];
+
+            //比分板
+            foreach ($parsed_scoreboard[2] as $sk => $sv) {
+                $stage = intval($sk);
+                $score = intval($sv);
+                if (($sk >= 1) && ($sk < 40)) {
+                    $arr_away_team_scores = array(
+                        'stage' => $stage,
+                        'score' => $score,
+                    )
+                }
+            }
+        }
+
         // 包入 fixture 賽事資料 ---------------
         $arrFixture['list'] = array(
             //'sport_id' => $data->sport_id,
@@ -1708,18 +1748,41 @@ class LsportApiController extends Controller {
             'start_time' => $data->start_time,
             'status' => $fixture_status,
             'last_update' => $data->f_last_update,
-            'home_team_id' => $data->th_team_id,
-            'home_team_name' => $home_team_name,
+            
             'away_team_id' => $data->ta_team_id,
             'away_team_name' => $away_team_name,
             'periods' => $parsed_periods,
             'scoreboard' => $parsed_scoreboard,
+            'teams' => array(
+                // 主隊
+                array(
+                    'index' => 2,
+                    'total_score' => $home_team_total_score,
+                    'scores' => $arr_home_team_scores,
+                    'team' => array(
+                        'id' => $data->th_team_id,
+                        'sport_id' => $sport_id,
+                        'name' => $home_team_name,
+                    )
+                ),
+                // 客隊
+                array(
+                    'index' => 1,
+                    'total_score' => $away_team_total_score,
+                    'scores' => $arr_away_team_scores,
+                    'team' => array(
+                        'id' => $data->th_team_id,
+                        'sport_id' => $sport_id,
+                        'name' => $home_team_name,
+                    )
+                ),
+            ),
             'series' => array(
                 'id' => $data->league_id,
                 'sport_id' => $sport_id,
                 'name' => $league_name,
             ),
-            'rate' => array(),
+            'market' => array(),
         );
 
         //market 層 ----------------------------
@@ -1776,6 +1839,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
 
+            // 目前賽事的賠率資料
             $arr_market_bet = array();
 
             // 開始繞賠率資料
@@ -1789,7 +1853,7 @@ class LsportApiController extends Controller {
                     $market_bet_name = $bv->mb_name_locale;
                 }
 
-                // 包入 market_bet 賠率資料 ---------------
+                // 組合 market_bet 賠率資料 ---------------
                 $arr_market_bet[] = array(
                     'market_bet_id' => $market_bet_id,
                     'market_bet_name' => $market_bet_name,
@@ -1801,7 +1865,7 @@ class LsportApiController extends Controller {
                 );
             }
 
-            // 包入 market 玩法資料 ---------------
+            // 包入 market 玩法資料 (含 market_bet 賠率資料) ---------------
             $arrFixture['list']['market'][] = array(
                 'market_id' => $v->market_id,
                 'market_name' => $market_name,
