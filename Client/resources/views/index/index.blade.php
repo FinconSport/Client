@@ -166,6 +166,8 @@
 
                 if (numLeagues !== 0) { // <- open first div and if has data
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
+                    const element = document.querySelector('#indexContainerLeft div:first-child .catWrapperTitle .league-list');
+                    element.style.height = '0';
                 }
 
                 for (const leagueId in sport.list) {
