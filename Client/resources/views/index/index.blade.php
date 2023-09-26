@@ -110,17 +110,19 @@
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
-            <div class="col-2 p-0">
-                <div class="betLabel">
-                    gameTitle
-                </div>
-                <div class="betItemDiv" onclick="openCal($(this), 1)">
-                    <span class="rate_name">rate_name</span>&ensp;
-                    <span class="odd">odd</span>
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-            </div>
+            
         </div>
+    </div>
+</div>
+
+<!-- bet div template -->
+<div class="col-2 p-0" template='betDiv' hidden>
+    <div class="betLabel">
+    </div>
+    <div class="betItemDiv" onclick="openCal($(this))">
+        <span class="rate_name"></span>&ensp;
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock"></i>
     </div>
 </div>
 
@@ -239,17 +241,38 @@
 
                 Object.entries(v2.list).map(([k3, v3]) => { 
                     let card = $('div[template="fixtureCardTemplate"]').clone()
+                    let time = card.find('.timer');
                     let home_team_info = card.find('[key="homeTeamInfo"]');
                     let away_team_info = card.find('[key="awayTeamInfo"]')
+
                     card.attr('id', k3)
+                    time.html(v3.start_time)
                     home_team_info.find('.teamSpan').html(v3.home_team_name)
                     home_team_info.find('.scoreSpan').html()
                     away_team_info.find('.teamSpan').html(v3.away_team_name)
                     away_team_info.find('.scoreSpan').html()
 
+
+                    Object.entries(v3.list).map(([k4, v4]) => { 
+                        let bet_div = $('div[template="betDiv"]').clone()
+                        let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                        let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+                        priorityArr.map( ([i,j]) => {
+                            console.log(i, j)
+                            let betData = Object.values(v4).find(m => m.priority === i)
+                            bet_label = bet_div.find('.betLabel')
+                        })
+
+                        // <div class="betLabel"></div>
+                        // <div class="betItemDiv" onclick="openCal($(this))">
+                        //     <span class="rate_name"></span>&ensp;
+                        //     <span class="odd"></span>
+                        //     <i class="fa-solid fa-lock"></i>
+                        // </div>
+                    })
+
                     card.removeAttr('hidden')
                     card.removeAttr('template')
-
                     league_toggle_content.append(card)
                 })
 
@@ -516,7 +539,7 @@
 
     // 打開投注計算機
     var sendOrderData = {}
-    function openCal(e, spanIndex = 0) {
+    function openCal(e) {
         if (!e.find('.fa-lock').is(':visible')) {
             let match_id = e.attr('match_id')
             let rate_id = e.attr('rate_id')
