@@ -688,7 +688,7 @@
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
             data: sendOrderData,
-            success: function(data) {
+            success: function(response) {
                 let res = JSON.parse(response)
                 if (res.message === 'SUCCESS_ORDER_CREATE_01') {
                     // 餘額更新
