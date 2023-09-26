@@ -249,17 +249,21 @@
             createSportStructure(livingData, livingParentDiv, 'living');
         }
 
-        // open first div league
-        var firstLeagueDiv = document.querySelector('.fixture-container');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Open the first div with the class "fixture-container"
+            var firstLeagueDiv = document.querySelector('.fixture-container');
 
-        if (firstLeagueDiv) {
-            var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
+            if (firstLeagueDiv) {
+                var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
 
-            if (childLeagueDiv && firstLeagueDiv) {
-                childLeagueDiv.classList.add('open');
-                firstLeagueDiv.style.height = 'auto';
+                if (childLeagueDiv) {
+                    console.log("Child League Div: ", childLeagueDiv);
+
+                    childLeagueDiv.classList.add('open');
+                    firstLeagueDiv.style.height = 'auto';
+                }
             }
-        }
+        });
 
         // click function toggle
         $(document).ready(function(){
