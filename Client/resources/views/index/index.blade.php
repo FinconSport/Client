@@ -264,12 +264,12 @@
         $(document).ready(function(){
             (".seriesWrapperTitle").click(function () {
                 $(this).toggleClass("open");
-                const f = $(this).next('.fixture-container');
-                if (f.length) {
-                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
-                        f[0].style.maxHeight = '900px';
+                const l = $(this).next('.fixture-container');
+                if (l.length) {
+                    if (l[0].style.maxHeight === '0px' || l[0].style.maxHeight === '') {
+                        l[0].style.maxHeight = '900px';
                     } else {
-                        f[0].style.maxHeight = '0';
+                        l[0].style.maxHeight = '0';
                     }
                 }
             });
