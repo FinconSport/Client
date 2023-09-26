@@ -250,22 +250,25 @@
         }
 
         $(document).ready(function() {
-        // Find the first .fixture-container element
-        var firstFixtureContainer = $(".fixture-container:first");
+            // Function to apply actions to the first .fixture-container element within a container
+            function applyActionsToFirstFixtureContainer(containerId) {
+                var firstFixtureContainer = $("#" + containerId + " .fixture-container:first");
+                if (firstFixtureContainer.length > 0) {
+                    firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+                    firstFixtureContainer.css({
+                        "height": "auto",
+                        "transition": "height .5s ease-in-out 0s",
+                        "-webkit-transition": "height .5s ease-in-out 0s"
+                    });
+                }
+            }
 
-        // Check if it exists
-        if (firstFixtureContainer.length > 0) {
-            // Add the class 'open' to its sibling .seriesWrapperTitle
-            firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-
-            // Set the height to 'auto' and add the transition properties
-            firstFixtureContainer.css({
-                "height": "auto",
-                "transition": "height .5s ease-in-out 0s",
-                "-webkit-transition": "height .5s ease-in-out 0s"
-            });
-        }
+            // Call the function for the #living/#early container
+            applyActionsToFirstFixtureContainer("living");
+            applyActionsToFirstFixtureContainer("early");
         });
+
+
 
         // click function toggle
         $(document).ready(function(){
