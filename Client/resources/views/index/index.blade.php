@@ -69,10 +69,23 @@
 <div template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
-        <span class="elToggleCount"></span>
+        (<span class="elToggleCount"></span>)
         <span class="elToggleDir" style="float: right;">
             <i class="fa-solid fa-chevron-right"></i> 
         </span>
+    </div>
+</div>
+
+<!-- league toggle template -->
+<div template='leagueToggleTemplate' class="catWrapperContent" hidden>
+    <div class="seriesWrapperTitle">
+        <span class="legToggleName"></span>
+        (<span class="legToggleCount"></span>)
+        <span class="legToggleDir" style="float: right;">
+            <i class="fa-solid fa-circle-chevron-down"></i>
+        </span>
+    </div>
+    <div class="seriesWrapperContent">
     </div>
 </div>
 
@@ -152,8 +165,7 @@
 
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  
-
-
+            console.log(k, v)
             let el_toggle = $('div[template="elToggleTemplate"]').clone()
             let el_toggle_title = el_toggle.find('.catWrapperTitle')
             let el_toggle_text = el_toggle.find('.elToggleText')
@@ -161,17 +173,41 @@
             let el_toggle_dir = el_toggle.find('.elToggleDir')
 
             el_toggle.attr('id', 'toggleContent_' + k)
-            el_toggle_title.attr('id', 'catWrapperTitle_' + k)
-            el_toggle_title.attr('onclick', 'toggleCat("' + k + '")')
+            el_toggle_title.attr('id', `catWrapperTitle_${k}`)
+            el_toggle_title.attr('onclick', `toggleCat("${k}")`)
             el_toggle_text.html(k)
-            el_toggle_count.attr('id', 'catWrapperContent_' + k + '_total')
-            el_toggle_count.html('(' + 123 + ')')
-            el_toggle_dir.attr('id', 'catWrapperTitle_' + k + '_dir')
+            el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
+            el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
             
             el_toggle.removeAttr('hidden')
+            el_toggle.removeAttr('template')
+            
 
-            console.log(k)
-            console.log(el_toggle)
+            Object.entries(v[sport].list).map(([k2, v2]) => {  
+                console.log(k2, v2)
+                let league_toggle = $('div[template="leagueToggleTemplate"]').clone()
+                let league_toggle_title = league_toggle.find('.seriesWrapperTitle')
+                let league_toggle_name = league_toggle.find('.legToggleName')
+                let league_toggle_count = league_toggle.find('.legToggleCount')
+                let league_toggle_dir = league_toggle.find('.legToggleDir')
+                let league_toggle_content = league_toggle.find('.seriesWrapperContent')
+
+                league_toggle.attr('id', `catWrapperContent_${k}`)
+                league_toggle_title.attr('id', `seriesWrapperTitle_${k}_${k2}`)
+                league_toggle_title.attr('onclick', `toggleSeries("${k}_${k2}")`)
+                league_toggle_title.attr('league_id', v2.league_id)
+                league_toggle_name.html(v2.name)
+                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
+                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
+                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
+
+                league_toggle_dir.removeAttr('hidden')
+                league_toggle_dir.removeAttr('template')
+
+                el_toggle.append(league_toggle_dir)
+            })
+
+
             $('#indexContainerLeft').append(el_toggle)
         })
         
