@@ -232,8 +232,6 @@
             el_toggle.removeAttr('hidden')
             el_toggle.removeAttr('template')
 
-            console.log(v)
-            console.log(sport)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
                 let league_toggle_name = league_toggle.find('.legToggleName')
