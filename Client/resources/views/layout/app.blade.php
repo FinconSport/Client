@@ -396,6 +396,8 @@
 		
 		// left side menu click function
 		$(document).ready(function(){
+			var submenuClicked = false; // Initialize submenuClicked to false
+
 			$(".submenu-btn").click(function(){
                 $(this).closest('.submenu-main').toggleClass('active');
                 var submenuToggleList = $(this).next(".submenu-toggle-list");
@@ -417,16 +419,16 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
-			// console.log("submenuClicked: " + submenuClicked);
+			console.log("submenuClicked: " + submenuClicked);
 
-			// if (!submenuClicked) {
-			// 	console.log("Inside !submenuClicked block");
-			// 	const $currentpageSubmenu = $('.submenu-main.currentpage');
-			// 	if ($currentpageSubmenu.length > 0) {
-			// 		$currentpageSubmenu.addClass('active');
-			// 		$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
-			// 	}
-			// }
+			if (!submenuClicked) {
+				console.log("Inside !submenuClicked block");
+				const $currentpageSubmenu = $('.submenu-main.currentpage');
+				if ($currentpageSubmenu.length > 0) {
+				$currentpageSubmenu.addClass('active');
+				$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
+				}
+			}
 
 		});
 		// ----------------------------
