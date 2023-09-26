@@ -1537,92 +1537,6 @@ class LsportApiController extends Controller {
      */
     // 遊戲頁
 
-/*
-{
-  "status": 1,
-  "data": [
-    {
-      "series": {
-        "id": 2172,
-        "game_id": 1,
-        "abbr": "欧足锦2024外",
-        "logo": "https://sporta.asgame.net/uploads/series_2172.png?v=1_2_36",
-        "name": "歐洲足球錦標賽2024外圍賽"
-      },
-      "list": [
-        {
-          "id": 19856,
-          "match_id": 254100,
-          "game_id": 1,
-          "start_time": "2023-09-08 00:00:00",
-          "end_time": "1970-01-01 08:00:00",
-          "status": 3,
-          "bo": 1,
-          "win_team": 0,
-          "live_status": 0,
-          "has_live": 0,
-          "has_animation": 0,
-          "series": {
-            "id": 2172,
-            "game_id": 1,
-            "abbr": "欧足锦2024外",
-            "logo": "https://sporta.asgame.net/uploads/series_2172.png?v=1_2_36",
-            "name": "歐洲足球錦標賽2024外圍賽"
-          },
-          "teams": [
-            {
-              "team_id": 0,
-              "index": 2,
-              "total_score": "2",
-              "scores": [
-                {
-                  "stage": 1,
-                  "score": "0"
-                },
-                {
-                  "stage": 2,
-                  "score": "2"
-                }
-              ],
-              "team": {
-                "id": 36720,
-                "game_id": 1,
-                "logo": "https://sporta.asgame.net/uploads/team_1133162.png?v=1_2_36",
-                "name": "黑山"
-              }
-            },
-            {
-              "team_id": 0,
-              "index": 1,
-              "total_score": "2",
-              "scores": [
-                {
-                  "stage": 1,
-                  "score": "0"
-                },
-                {
-                  "stage": 2,
-                  "score": "2"
-                }
-              ],
-              "team": {
-                "id": 40337,
-                "game_id": 1,
-                "logo": "https://sporta.asgame.net/uploads/team_1146529.png?v=1_2_36",
-                "name": "立陶宛"
-              }
-            }
-          ],
-          "rate": []
-        }
-      ]
-    }
-  ],
-  "message": "SUCCESS_API_GAME_INDEX_01",
-  "gzip": 0
-}
-*/
-
     // 純避免前端出錯用. 實際在 GameIndex2
     public function GameIndex(Request $request) {
 
@@ -1715,11 +1629,6 @@ class LsportApiController extends Controller {
             ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
             ->where('f.fixture_id', $fixture_id)
-            // ->where('s.sport_id', $sport_id)
-            // ->whereIn('f.status', [1, 2])  //可區分:未開賽及走地中
-            // ->where('f.start_time', "<=", $after_tomorrow)
-            // ->where("th.sport_id", $sport_id)
-            // ->where("th.sport_id", $sport_id)
             ->first();
 
         if ($data === false) {
@@ -1759,9 +1668,10 @@ class LsportApiController extends Controller {
         }
 
         // 包入 league 聯賽資料
-        $arrFixture[$league_id] = array(
-            'league_id' => $data->league_id,
-            'league_name' => $league_name,
+        $arrFixture['series'] = array(
+            'id' => $data->league_id,
+            'sport_id' => $sport_id,
+            'name' => $league_name,
             'list' => array(),
         );
 
@@ -1789,7 +1699,7 @@ class LsportApiController extends Controller {
         $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
         // 包入 fixture 賽事資料 ---------------
-        $arrFixture[$league_id]['list'][$fixture_id] = array(
+        $arrFixture['list'] = array(
             //'sport_id' => $data->sport_id,
             //'league_id' => $data->league_id,
             //'home_id' => $data->home_id,
@@ -1804,7 +1714,12 @@ class LsportApiController extends Controller {
             'away_team_name' => $away_team_name,
             'periods' => $parsed_periods,
             'scoreboard' => $parsed_scoreboard,
-            'list' => array(),
+            'series' => array(
+                'id' => $data->league_id,
+                'sport_id' => $sport_id,
+                'name' => $league_name,
+            ),
+            'rate' => array(),
         );
 
         //market 層 ----------------------------
@@ -1861,14 +1776,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
 
-            // 包入 market 玩法資料 ---------------
-            $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
-                'market_id' => $v->market_id,
-                'market_name' => $market_name,
-                'priority' => $v->priority,
-                'main_line' => $v->main_line,
-                'list' => array(),
-            );
+            $arr_market_bet = array();
 
             // 開始繞賠率資料
             foreach ($marketBetData as $bk => $bv) {
@@ -1882,7 +1790,7 @@ class LsportApiController extends Controller {
                 }
 
                 // 包入 market_bet 賠率資料 ---------------
-                $arrFixture[$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                $arr_market_bet[] = array(
                     'market_bet_id' => $market_bet_id,
                     'market_bet_name' => $market_bet_name,
                     'base_line' => $bv->base_line,
@@ -1893,9 +1801,16 @@ class LsportApiController extends Controller {
                 );
             }
 
+            // 包入 market 玩法資料 ---------------
+            $arrFixture['list']['market'][] = array(
+                'market_id' => $v->market_id,
+                'market_name' => $market_name,
+                'priority' => $v->priority,
+                'main_line' => $v->main_line,
+                'rate' => $arr_market_bet,
+            );
+
         }
-
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
