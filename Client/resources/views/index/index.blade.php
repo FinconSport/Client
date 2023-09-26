@@ -249,12 +249,12 @@
 
         // open first div league
         var firstLeagueDiv = document.querySelector('.fixture-container');
+
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
             var l = firstLeagueDiv.querySelector('.league-list');
-            console.log('childLeagueDiv:', childLeagueDiv);
-            console.log('l:', l);
-            if (childLeagueDiv) {
+
+            if (childLeagueDiv && l) {
                 childLeagueDiv.classList.add('open');
                 l.style.maxHeight = '900px';
             }
