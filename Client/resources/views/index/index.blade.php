@@ -254,7 +254,7 @@
             var l = firstLeagueDiv.querySelector('.league-list');
             if (childLeagueDiv) {
                 childLeagueDiv.classList.add('open');
-                l.style.maxHeight = 'calc(100% - -1rem)';
+                l.style.maxHeight = '900px';
             }
         }
 
@@ -265,7 +265,7 @@
                 const f = $(this).next('.fixture-container');
                 if (f.length) {
                     if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
-                        f[0].style.maxHeight = 'calc(100% - -1rem)';
+                        f[0].style.maxHeight = '900px';
                     } else {
                         f[0].style.maxHeight = '0';
                     }
@@ -274,12 +274,12 @@
 
             $(".catWrapperTitle").click(function () {
                 $(this).toggleClass("open");
-                const l = $(this).next('.league-list');
-                if (l.length) {
-                    if (l[0].style.maxHeight === '0px' || l[0].style.maxHeight === '') {
-                        l[0].style.maxHeight = 'calc(100% - -1rem)';
+                const f = $(this).next('.league-list');
+                if (f.length) {
+                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
+                        f[0].style.maxHeight = '900px';
                     } else {
-                        l[0].style.maxHeight = '0';
+                        f[0].style.maxHeight = '0';
                     }
                 }
             });
