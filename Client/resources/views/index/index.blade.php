@@ -473,6 +473,7 @@
                                     // old attribute
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
+
                                    
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
@@ -488,6 +489,7 @@
                                             raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
                                     } else {
+                                        console.log(item.attr('home') + ' VS ' + item.attr('away'))
                                         console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
                                     }
 
