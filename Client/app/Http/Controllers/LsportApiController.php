@@ -2463,8 +2463,8 @@ class LsportApiController extends Controller {
             $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
             foreach ($arr_results as $rk => $rv) {
-                $pos = intval($rv['Position']);
-                $score = intval($rv['Value']);
+                $pos = intval($rv['Position']+0);
+                $score = intval($rv['Value']+0);
                 if ($pos < 40) {
                     $ret[$pos][$type] = $score;
                 }
@@ -2543,6 +2543,7 @@ class LsportApiController extends Controller {
      protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
 
         // 如果還未開賽就回傳null
+        $fixture_status = intval($fixture_status);
         if ($fixture_status < 2) {
             return null;
         }
