@@ -263,10 +263,8 @@
                 }
             }
 
-            // Call the function for the #living container
+            // Call the function for the #living/#early container
             applyActionsToFirstFixtureContainer("living");
-
-            // Call the function for the #early container
             applyActionsToFirstFixtureContainer("early");
         });
 
