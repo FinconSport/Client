@@ -420,7 +420,7 @@
 						console.log("!submenuClicked");
 						if ($(".submenu-main").hasClass("currentpage")) {
 							$(".submenu-main.currentpage").addClass('active');
-							$(".submenu-main.currentpage .submenu-toggle-list").css('max-height', '900px');
+							$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
 						}
 					}				
 				}, 3000);
