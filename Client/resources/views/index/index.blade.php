@@ -238,18 +238,18 @@
                 let league_toggle_count = league_toggle.find('.legToggleCount')
                 let league_toggle_dir = league_toggle.find('.legToggleDir')
 
-                league_toggle.attr('id', `seriesWrapperTitle_${k}_${k2}`)
-                league_toggle.attr('onclick', `toggleSeries('${k}_${k2}')`)
+                league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
+                league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
                 league_toggle.attr('league_id', v2.league_id)
                 league_toggle_name.html(v2.league_name)
-                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
-                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
+                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
+                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
 
                 league_toggle.removeAttr('hidden')
                 league_toggle.removeAttr('template')
 
                 let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
-                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
+                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
 
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let card = $('div[template="fixtureCardTemplate"]').clone()
@@ -450,11 +450,7 @@
                                     // old attribute
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
-
-                                    console.log(item)
-                                    console.log(v4)
-                                    console.log(market_bet_id)
-                                    console.log(v4.market_bet_id)
+                                   
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
                                         // 判斷賠率是否有改變
