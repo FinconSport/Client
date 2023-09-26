@@ -1661,7 +1661,7 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($data, "01", false);
     }
 
-    public function GameIndex2(Request $request) {
+    public function aaa(Request $request) {
 
     	$input = $this->getRequest($request);
 
