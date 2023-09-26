@@ -118,7 +118,12 @@
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
     <div class="betLabel"></div>
-    <div class="betItemDiv" onclick="openCal($(this))">
+    <div class="betItemDiv" index=0 onclick="openCal($(this))">
+        <span class="rate_name"></span>&ensp;
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock"></i>
+    </div>
+    <div class="betItemDiv" index=1 onclick="openCal($(this))">
         <span class="rate_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
@@ -258,6 +263,29 @@
                         let betData = Object.values(v3.list).find(m => m.priority === i)
                         bet_label = bet_div.find('.betLabel')
                         bet_label.html(gameTitle[j])
+
+                        let firstDiv = bet_div.find('div[index=0]')
+                        let secondDiv = bet_div.find('div[index=1]')
+                        let item = null
+                        if( betData && Object.keys(betData.list).length > 0 ) {
+                            Object.entries(betData.list).map(([k4, v4], s) => { 
+                                item = bet_div.find('.betItemDiv').eq(s)
+                                item.find('.rate_name').html(v4.line)
+                                item.find('.odd').html(v4.price)
+                                item.find('i').hide()
+
+                                item.find('.rate_name').show()
+                                item.find('.odd').show()
+                                item.find('i').hide()
+                            })
+                        } else {
+                            firstDiv.find('.rate_name').hide()
+                            firstDiv.find('.odd').hide()
+                            firstDiv.find('i').show()
+                            secondDiv.find('.rate_name').hide()
+                            secondDiv.find('.odd').hide()
+                            secondDiv.find('i').show()
+                        }
 
                         bet_div.removeAttr('hidden')
                         bet_div.removeAttr('template')
