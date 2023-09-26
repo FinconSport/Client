@@ -386,7 +386,7 @@
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
-                $('div[template="betDiv"] div[index=2]').remove()
+                if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
 
 
                 oldMatchListD = matchListD // record
