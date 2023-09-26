@@ -408,17 +408,18 @@
 					}
 				}
 
-				// Delayed action using setTimeout
-				setTimeout(function () {
-					console.log("!submenuClicked");
-					if ($(".submenu-main").hasClass("currentpage")) {
-						$(".submenu-main.currentpage").addClass('active');
-						$(".submenu-main.currentpage .submenu-toggle-list").css('max-height', '900px');
-					}
+				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
 
-					$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-					$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
-				}, 3000);
+				// Delayed action using setTimeout
+				// setTimeout(function () {
+				// 	console.log("!submenuClicked");
+				// 	if ($(".submenu-main").hasClass("currentpage")) {
+				// 		$(".submenu-main.currentpage").addClass('active');
+				// 		$(".submenu-main.currentpage .submenu-toggle-list").css('max-height', '900px');
+				// 	}
+					
+				// }, 3000);
 			});
 		});
 		// ----------------------------
