@@ -2064,6 +2064,7 @@ class LsportApiController extends Controller {
      *          # ARRAY
      */
 
+    // 測試用
     public function getMatchScoreboard_caller(Request $request) {
 
         $return = $this->getMatchScoreboard(
@@ -2088,6 +2089,7 @@ class LsportApiController extends Controller {
         }
 
         //========================================
+        // 處理傳入參數
 
         if (is_array($periods)) {
             $arr_periods = $periods;
@@ -2114,7 +2116,8 @@ class LsportApiController extends Controller {
         //========================================
 
 /*
-periods:
+範例來源字串
+棒球 periods:
 [
     {
       "Incidents": null,
@@ -2226,6 +2229,8 @@ periods:
      * @param 
      * @return 
      */
+
+    // 測試用
     public function getMatchPeriods_caller(Request $request) {
 
         $return = $this->getMatchPeriods(
@@ -2238,15 +2243,7 @@ periods:
     }
 
 /*
-{
-   "period":1, // 第幾局
-    "turn" : 1, // 1為下, 2為上
-    "balls" : 1 // 壞球數, 
-    "strikes" : 1 , '' 好球數
-    "outs" : 1 , // 出局數
-    "bases" : "1/1/1"   // 1,2,3 壘是否有人
-}
-
+範例來源字串:
 棒球 scoreboard:
 {
     "CurrentPeriod": 40,
@@ -2302,6 +2299,7 @@ periods:
         }
 
         //========================================
+        // 處理傳入參數
 
         if (is_array($scoreboard)) {
             $arr_scoreboard = $scoreboard;
