@@ -417,15 +417,15 @@
 				$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
 
 				// Delayed action using setTimeout
-				setTimeout(function () {
-				if (!submenuClicked) {
-					console.log("!submenuClicked");
-					if ($(".submenu-main").hasClass("currentpage")) {
-					$(".submenu-main.currentpage").addClass('active');
-					$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
-					}
-				}
-				}, 3000);
+				// setTimeout(function () {
+				// if (!submenuClicked) {
+				// 	console.log("!submenuClicked");
+				// 	if ($(".submenu-main").hasClass("currentpage")) {
+				// 	$(".submenu-main.currentpage").addClass('active');
+				// 	$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
+				// 	}
+				// }
+				// }, 3000);
 
 			});
 		});
