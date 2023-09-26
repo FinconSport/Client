@@ -197,15 +197,11 @@
 				method: 'POST',
 				data: data,
 				success: function(data) {
-					console.log(url + ' called success')
 					const json = JSON.parse(data); 
-					// 先判定要不要解壓縮
-					if(json.gzip) {
-						// 將字符串轉換成 ArrayBuffer
+					if(json.gzip) { // 解壓縮
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
 						const buffer = new Uint8Array(bytes).buffer;
-						// 解壓縮 ArrayBuffer
 						const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
 						json.data = uncompressed
 					}

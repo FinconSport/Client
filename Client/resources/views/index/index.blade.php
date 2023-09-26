@@ -690,7 +690,8 @@
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
-                if (res.message === 'SUCCESS_ORDER_CREATE_01') {
+                console.log(res)
+                if (res.message === 'SUCCESS_API_GAME_BET_01') {
                     // 餘額更新
                     $('.balance').html(res.data)
                     showSuccessToast(res.message)
@@ -714,9 +715,9 @@
     // 餘額
     function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
+        caller(account_api, commonCallData, accountD)
         accountD = null
         refreshInt = null
-        caller(account_api, commonCallData, accountD)
         refreshInt = setInterval(() => {
             if (accountD) {
                 $('.player').html(accountD.data.account)
