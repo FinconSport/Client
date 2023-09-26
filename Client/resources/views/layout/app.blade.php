@@ -394,12 +394,13 @@
 		});
 
 		
-		// if (!submenuClicked) {
-		// 	$(`#${urlMappings[urlFragment]}`).addClass('active');
-		// 	console.log('add active to current page');
-		// }
-
-
+		if (!submenuClicked) {
+			if ($('.submenu-main.currentpage').length > 0) {
+				$('.submenu-main.currentpage').addClass('active');
+				$('.submenu-main.currentpage .submenu-toggle-list').css('max-height', '900px');
+			}
+		}
+		
 		// left side menu click function
 		$(document).ready(function(){
 			$(".submenu-btn").click(function(){
@@ -414,6 +415,7 @@
                 }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
+				submenuClicked = true;
             });
 
 			// Toggle 'openToggle' class for sport select elements
