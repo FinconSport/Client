@@ -1748,9 +1748,6 @@ class LsportApiController extends Controller {
             'start_time' => $data->start_time,
             'status' => $fixture_status,
             'last_update' => $data->f_last_update,
-            
-            'away_team_id' => $data->ta_team_id,
-            'away_team_name' => $away_team_name,
             'periods' => $parsed_periods,
             'scoreboard' => $parsed_scoreboard,
             'teams' => array(
