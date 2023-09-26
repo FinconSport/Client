@@ -254,6 +254,9 @@
 			const currentUrl = window.location.href;
 			const noPath = window.location.pathname;
 
+			var sportType = sport;
+			console.log(sportType);
+
 			const urlMappings = {
 				'/?sport': 'lf_sport',
 				'm_order?': 'lf_mOrder',
@@ -266,6 +269,8 @@
 			};
 
 			if (currentUrl.includes('index') || noPath == '/') {
+				const firstSportId = sportListD.data[0].sport_id;
+				console.log(firstSportId);
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 			}
