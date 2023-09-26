@@ -417,7 +417,10 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
+			console.log("submenuClicked: " + submenuClicked);
+
 			// if (!submenuClicked) {
+			// 	console.log("Inside !submenuClicked block");
 			// 	const $currentpageSubmenu = $('.submenu-main.currentpage');
 			// 	if ($currentpageSubmenu.length > 0) {
 			// 		$currentpageSubmenu.addClass('active');
