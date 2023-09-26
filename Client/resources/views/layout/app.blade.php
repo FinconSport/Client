@@ -271,6 +271,11 @@
 			if (currentUrl.includes('index') || noPath == '/') {
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
+				if (!window.location.search.includes('sport=')) {
+					var sportId = sportListD.data[0].sport_id;
+					var newUrl = "/?sport=" + sportId;
+					history.pushState({}, '', newUrl);
+				}
 			}
 
 			for (const urlFragment in urlMappings) {
