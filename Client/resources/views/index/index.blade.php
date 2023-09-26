@@ -128,6 +128,11 @@
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
     </div>
+    <div class="betItemDiv" index=2>
+        <span class="rate_name"></span>&ensp;
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock"></i>
+    </div>
 </div>
 
 <!-- no data -->
@@ -274,6 +279,7 @@
 
                         let firstDiv = bet_div.find('div[index=0]')
                         let secondDiv = bet_div.find('div[index=1]')
+                        let thirdDiv = bet_div.find('div[index=2]')
                         let item = null
                         if( betData && Object.keys(betData.list).length > 0 ) {
                             Object.entries(betData.list).map(([k4, v4], s) => { 
@@ -315,6 +321,12 @@
                             secondDiv.find('.odd').hide()
                             secondDiv.find('i').show()
                             secondDiv.removeAttr('onclick')
+                            if( thirdDiv ) {
+                                thirdDiv.find('.rate_name').hide()
+                                thirdDiv.find('.odd').hide()
+                                thirdDiv.find('i').show()
+                                thirdDiv.removeAttr('onclick')
+                            }
                         }
 
                         bet_div.removeAttr('hidden')
@@ -372,6 +384,10 @@
                 // game priority and gameTitle
                 priorityArr = langTrans['sportBetData'][sport]['priorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+
+                // soccer has three bet div others only two
+                $('div[template="betDiv"] div[index=2]').remove()
+
 
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
@@ -449,6 +465,7 @@
                             let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
                             let secondDiv = bet_div.find('div[index=1]')
+                            let thirdDiv = bet_div.find('div[index=2]')
                             let item = null
                             if( betData && Object.keys(betData.list).length > 0 ) {
                                 Object.entries(betData.list).map(([k4, v4], s) => { 
@@ -505,6 +522,13 @@
                                 secondDiv.find('.odd').hide()
                                 secondDiv.find('i').show()
                                 secondDiv.removeAttr('onclick')
+
+                                if( thirdDiv ) {
+                                    thirdDiv.find('.rate_name').hide()
+                                    thirdDiv.find('.odd').hide()
+                                    thirdDiv.find('i').show()
+                                    thirdDiv.removeAttr('onclick')
+                                }
                             }
                         });
                     } else {
