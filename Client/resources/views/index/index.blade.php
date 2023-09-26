@@ -426,6 +426,7 @@
 
     // render view layer here
     function renderView() {
+        console.log('renderView')
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
@@ -446,8 +447,8 @@
 
                                     console.log(item.attr('home') + ' VS ' + item.attr('away'))
                                     // 判斷盤口是否有改變
-                                    if( market_bet_id !== v4.market_bet_id ) {
-                                        console.log('盤口::' + market_bet_id + ' ->' + v4.market_bet_id)
+                                    if( market_bet_id.toString() !== (v4.market_bet_id).toString() ) {
+                                        console.log('盤口::' + market_bet_id + ' -> ' + v4.market_bet_id)
                                         // set attribute
                                         item.attr('market_bet_id', v4.market_bet_id)
                                         item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
