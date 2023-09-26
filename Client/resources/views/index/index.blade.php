@@ -239,8 +239,8 @@
 
                 Object.entries(v2.list).map(([k3, v3]) => { 
                     let card = $('div[template="fixtureCardTemplate"]').clone()
-                    let home_team_info = card.find('key="homeTeamInfo"')
-                    let away_team_info = card.find('key="awayTeamInfo"')
+                    let home_team_info = card.find('[key="homeTeamInfo"]');
+                    let away_team_info = card.find('[key="awayTeamInfo"]')
                     card.attr('id', k3)
                     home_team_info.find('.teamSpan').html(v3.home_team_name)
                     home_team_info.find('.scoreSpan').html()
