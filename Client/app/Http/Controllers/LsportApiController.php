@@ -1720,13 +1720,13 @@ class LsportApiController extends Controller {
             // ->where('f.start_time', "<=", $after_tomorrow)
             // ->where("th.sport_id", $sport_id)
             // ->where("th.sport_id", $sport_id)
-            ->first();
+            ->get();
 
         if ($data === false) {
             $this->ApiError('02');
         }
 
-        // dd($data);
+        dd($data);
 
         $sport_name = '';  //儲存球種名稱
 
