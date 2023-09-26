@@ -251,7 +251,7 @@
         var firstLeagueDiv = document.querySelector('.fixture-container');
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
-            var l = firstLeagueDiv.next('.league-list');
+            var l = firstLeagueDiv.querySelector('.league-list');
             if (childLeagueDiv) {
                 childLeagueDiv.classList.add('open');
                 l.style.maxHeight = 'calc(100% - -1rem)';
