@@ -719,7 +719,7 @@
         accountD = {}
         refreshInt = null
         refreshInt = setInterval(() => {
-            if (accountD) {
+            if (accountD.status === 1) {
                 $('.player').html(accountD.data.account)
 			    $('.balance').html(accountD.data.balance)
                 clearInterval(refreshInt)
