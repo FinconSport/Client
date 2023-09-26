@@ -653,8 +653,8 @@
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
         if (isNaN(inputMoney)) inputMoney = 0
-        if (inputMoney < min) inputMoney = min
-        if (inputMoney > max) inputMoney = max
+        // if (inputMoney < min) inputMoney = min
+        // if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
         let maxMoney = (inputMoney * odd).toFixed(2);
         $('#maxWinning').html(maxMoney)
@@ -675,23 +675,20 @@
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
-        if (sendOrderData.bet_amount < min) {
-            showErrorToast(langTrans.js.tooless_bet_amout + min);
-            return;
-        }
-        if (sendOrderData.bet_amount > max) {
-            showErrorToast(langTrans.js.toohigh_bet_amout + max);
-            return;
-        }
+        // if (sendOrderData.bet_amount < min) {
+        //     showErrorToast(langTrans.js.tooless_bet_amout + min);
+        //     return;
+        // }
+        // if (sendOrderData.bet_amount > max) {
+        //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
+        //     return;
+        // }
 
         $.ajax({
-            url: '/order/create',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
+            url: 'https://sportc.asgame.net/api/v2/game_bet',
+            method: 'POST',
             data: sendOrderData,
-            success: function(response) {
+            success: function(data) {
                 let res = JSON.parse(response)
                 if (res.message === 'SUCCESS_ORDER_CREATE_01') {
                     // 餘額更新
@@ -701,11 +698,12 @@
                     showErrorToast(res.message)
                 }
             },
-            error: function(xhr, status, error) {
+            error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                showErrorToast(xhr)
+                showErrorToast(jqXHR)
             }
         });
+       
         // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
@@ -716,28 +714,17 @@
     // 餘額
     function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
-        $.ajax({
-            url: '/account',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                let data = JSON.parse(response)
-                let account = data.data.balance
-                // 停止旋轉
+        accountD = null
+        refreshInt = null
+        caller(account_api, commonCallData, accountD)
+        refreshInt = setInterval(() => {
+            if (accountD) {
+                $('.player').html(accountD.data.account)
+			    $('.balance').html(accountD.data.balance)
+                clearInterval(refreshInt)
                 $('#refreshIcon').removeClass('rotate-animation')
-                showSuccessToast(data.message)
-                // 餘額
-                $('.balance').html(account)
-            },
-            error: function(xhr, status, error) {
-                console.error('error');
-                // 停止旋轉
-                $('#refreshIcon').removeClass('rotate-animation')
-                showErrorToast(data.message)
             }
-        });
+        }, 500);
     }
 </script>
 @endpush
