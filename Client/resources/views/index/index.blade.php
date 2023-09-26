@@ -250,22 +250,29 @@
         }
 
         $(document).ready(function() {
-        // Find the first .fixture-container element
-        var firstFixtureContainer = $(".fixture-container:first");
+            // Find the first .fixture-container element within #living
+            var firstLivingFixtureContainer = $("#living .fixture-container:first");
+            if (firstLivingFixtureContainer.length > 0) {
+                firstLivingFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+                firstLivingFixtureContainer.css({
+                    "height": "auto",
+                    "transition": "height .5s ease-in-out 0s",
+                    "-webkit-transition": "height .5s ease-in-out 0s"
+                });
+            }
 
-        // Check if it exists
-        if (firstFixtureContainer.length > 0) {
-            // Add the class 'open' to its sibling .seriesWrapperTitle
-            firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-
-            // Set the height to 'auto' and add the transition properties
-            firstFixtureContainer.css({
-                "height": "auto",
-                "transition": "height .5s ease-in-out 0s",
-                "-webkit-transition": "height .5s ease-in-out 0s"
-            });
-        }
+            // Find the first .fixture-container element within #early
+            var firstEarlyFixtureContainer = $("#early .fixture-container:first");
+            if (firstEarlyFixtureContainer.length > 0) {
+                firstEarlyFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+                firstEarlyFixtureContainer.css({
+                    "height": "auto",
+                    "transition": "height .5s ease-in-out 0s",
+                    "-webkit-transition": "height .5s ease-in-out 0s"
+                });
+            }
         });
+
 
         // click function toggle
         $(document).ready(function(){
