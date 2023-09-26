@@ -205,7 +205,8 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data).map(([k, v]) => {  
+
+        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             let el_toggle = $('div[template="elToggleTemplate"]').clone()
             let el_toggle_title = el_toggle.find('.catWrapperTitle')
             let el_toggle_text = el_toggle.find('.elToggleText')
@@ -224,7 +225,7 @@
             el_toggle.removeAttr('hidden')
             el_toggle.removeAttr('template')
 
-            Object.entries(v[sport].list).map(([k2, v2]) => {  
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
                 let league_toggle_name = league_toggle.find('.legToggleName')
                 let league_toggle_count = league_toggle.find('.legToggleCount')
@@ -243,7 +244,7 @@
                 let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
                 league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
 
-                Object.entries(v2.list).map(([k3, v3]) => { 
+                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let card = $('div[template="fixtureCardTemplate"]').clone()
                     let time = card.find('.timer');
                     let home_team_info = card.find('[key="homeTeamInfo"]');
@@ -256,6 +257,7 @@
                     away_team_info.find('.teamSpan').html(v3.away_team_name)
                     away_team_info.find('.scoreSpan').html()
 
+                    // bet area
                     let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
                     let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
                     priorityArr.forEach(( i, j ) => {
@@ -270,7 +272,19 @@
                         if( betData && Object.keys(betData.list).length > 0 ) {
                             Object.entries(betData.list).map(([k4, v4], s) => { 
                                 item = bet_div.find('.betItemDiv').eq(s)
-                                item.find('.rate_name').html(v4.line)
+                                
+                                // set attribute
+                                item.attr('fixture_id', k3)
+                                item.attr('market_id', betData.market_id)
+                                item.attr('market_bet_id', v4.market_bet_id)
+                                item.attr('bet_rate', v4.price)
+                                item.attr('bet_type', betData.market_name)
+                                item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                item.attr('league', v2.league_name)
+                                item.attr('home', v3.home_team_name)
+                                item.attr('away', v3.away_team_name)
+                                
+                                item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
                                 item.find('.odd').html(v4.price)
                                 item.find('i').hide()
 
@@ -292,13 +306,6 @@
                         card.find('.indexBetCardTable').append(bet_div)
                     });
 
-                    // <div class="betLabel"></div>
-                    // <div class="betItemDiv" onclick="openCal($(this))">
-                    //     <span class="rate_name"></span>&ensp;
-                    //     <span class="odd"></span>
-                    //     <i class="fa-solid fa-lock"></i>
-                    // </div>
-
                     card.removeAttr('hidden')
                     card.removeAttr('template')
                     league_toggle_content.append(card)
@@ -316,22 +323,8 @@
 
             $('#indexContainerLeft').append(el_toggle)
         })
-        
-
-        
-
-
-
-       
 
         // loop matchListD to generate html element here
-
-        // open the first
-        // if($('div[id^=toggleContent_]:visible').length > 0) {
-        //     setTimeout(() => {
-        //         $('.catWrapperTitle:visible').eq(0).click()
-        //     }, 500);
-        // }
     }
     /* ===== VIEW LAYER ===== */
 
@@ -568,76 +561,67 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
-        if (!e.find('.fa-lock').is(':visible')) {
-            let match_id = e.attr('match_id')
-            let rate_id = e.attr('rate_id')
-            let rate = e.attr('rate')
-            let odd = e.find('.odd').html()
+        let fixture_id = e.attr('fixture_id')
+        let market_id = e.attr('market_id')
+        let market_bet_id = e.attr('market_bet_id')
+        let bet_rate = e.attr('bet_rate')
+        let bet_type = e.attr('bet_type')
+        let bet_name = e.attr('bet_name')
+        let league = e.attr('league')
+        let home = e.attr('home')
+        let away = e.attr('away')
 
-            let rate_name = e.attr('rate_name')
-            let bet_name = e.attr('bet_name')
 
-            let key = e.attr('key')
-            let key2 = e.attr('key2')
-            let key3 = e.attr('key3')
-
-            let result = match_list[key][key2]['list'][key3]
-            let series = result.series.name
-
-            var homeData = result.teams.find(item => item.index === 1)
-            var awayData = result.teams.find(item => item.index === 2)
-            let homeTeam = homeData.team.name ?? langTrans.mainArea.homeTeam;
-            let awayTeam = awayData.team.name ?? langTrans.mainArea.awayTeam;
-
-            sendOrderData = {
-                bet_match: match_id,
-                bet_type: rate_id,
-                bet_type_item: rate,
-                bet_rate: odd,
-                better_rate: 0,
-                game_id: searchData.sport
-            }
-
-            $('#leftSlideOrder span[key="rate_name"]').html(rate_name)
-            $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
-            $('#leftSlideOrder span[key="odd"]').html(odd)
-            $('#leftSlideOrder p[key="series"]').html(series)
-            $('#leftSlideOrder span[key="home"]').html(homeTeam)
-            $('#leftSlideOrder span[key="away"]').html(awayTeam)
-            $('#leftSlideOrder div[key="oddContainer"]').attr('match_id', match_id)
-            $('#leftSlideOrder div[key="oddContainer"]').attr('rate_id', rate_id)
-            $('#leftSlideOrder div[key="oddContainer"]').attr('rate', rate)
-
-            $('#leftSlideOrder').show("slide", {
-                direction: "left"
-            }, 500);
-            $('#mask').fadeIn()
-
-            // 選中樣式
-            $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + rate + ']').addClass('m_order_on')
-
-            // 判斷滾球or早盤
-            const start_time = new Date(result.start_time).getTime();
-            const now = new Date().getTime();
-            let placeholderStr = langTrans.js.limit
-
-            if (now > start_time) {
-                // 滾球
-                min = parseInt(limit.living[sport].min)
-                max = parseInt(limit.living[sport].max)
-            } else {
-                // 早盤
-                min = parseInt(limit.early[sport].min)
-                max = parseInt(limit.early[sport].max)
-            }
-            placeholderStr += min
-            placeholderStr += '-'
-            placeholderStr += max
-            $('#moneyInput').attr('placeholder', placeholderStr)
-            $('#moneyInput').val(min)
-            $('#moneyInput').trigger('change')
-            $('#moneyInput').focus()
+        sendOrderData = {
+            token: token,
+            player: player,
+            sport_id: sport,
+            fixture_id: fixture_id,
+            market_id: market_id,
+            market_bet_id: market_bet_id,
+            bet_rate: bet_rate,
+            better_rate: 0,
         }
+
+        $('#leftSlideOrder span[key="rate_name"]').html(bet_type)
+        $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
+        $('#leftSlideOrder span[key="odd"]').html(bet_rate)
+        $('#leftSlideOrder p[key="series"]').html(league)
+        $('#leftSlideOrder span[key="home"]').html(home)
+        $('#leftSlideOrder span[key="away"]').html(away)
+        $('#leftSlideOrder div[key="oddContainer"]').attr('fixture_id', fixture_id)
+        $('#leftSlideOrder div[key="oddContainer"]').attr('market_id', market_id)
+        $('#leftSlideOrder div[key="oddContainer"]').attr('market_bet_id', market_bet_id)
+
+        $('#leftSlideOrder').show("slide", {
+            direction: "left"
+        }, 500);
+        $('#mask').fadeIn()
+
+        // 選中樣式
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
+
+        // 判斷滾球or早盤
+        // const start_time = new Date(result.start_time).getTime();
+        // const now = new Date().getTime();
+        // let placeholderStr = langTrans.js.limit
+
+        // if (now > start_time) {
+        //     // 滾球
+        //     min = parseInt(limit.living[sport].min)
+        //     max = parseInt(limit.living[sport].max)
+        // } else {
+        //     // 早盤
+        //     min = parseInt(limit.early[sport].min)
+        //     max = parseInt(limit.early[sport].max)
+        // }
+        // placeholderStr += min
+        // placeholderStr += '-'
+        // placeholderStr += max
+        // $('#moneyInput').attr('placeholder', placeholderStr)
+        // $('#moneyInput').val(min)
+        // $('#moneyInput').trigger('change')
+        // $('#moneyInput').focus()
     }
 
     // 關閉左邊投注區塊
