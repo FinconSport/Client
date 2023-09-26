@@ -117,8 +117,7 @@
 
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
-    <div class="betLabel">
-    </div>
+    <div class="betLabel"></div>
     <div class="betItemDiv" onclick="openCal($(this))">
         <span class="rate_name"></span>&ensp;
         <span class="odd"></span>
@@ -252,24 +251,25 @@
                     away_team_info.find('.teamSpan').html(v3.away_team_name)
                     away_team_info.find('.scoreSpan').html()
 
+                    let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                    let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+                    priorityArr.forEach(( i, j ) => {
+                        let bet_div = $('div[template="betDiv"]')
+                        let betData = Object.values(v3.list).find(m => m.priority === i)
+                        bet_label = bet_div.find('.betLabel')
+                        bet_label.html(gameTitle[j])
 
-                    Object.entries(v3.list).map(([k4, v4]) => { 
-                        let bet_div = $('div[template="betDiv"]').clone()
-                        let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
-                        let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
-                        priorityArr.map( ([i,j]) => {
-                            console.log(i, j)
-                            let betData = Object.values(v4).find(m => m.priority === i)
-                            bet_label = bet_div.find('.betLabel')
-                        })
+                        bet_div.removeAttr('hidden')
+                        bet_div.removeAttr('template')
+                        card.append(bet_div)
+                    });
 
-                        // <div class="betLabel"></div>
-                        // <div class="betItemDiv" onclick="openCal($(this))">
-                        //     <span class="rate_name"></span>&ensp;
-                        //     <span class="odd"></span>
-                        //     <i class="fa-solid fa-lock"></i>
-                        // </div>
-                    })
+                    // <div class="betLabel"></div>
+                    // <div class="betItemDiv" onclick="openCal($(this))">
+                    //     <span class="rate_name"></span>&ensp;
+                    //     <span class="odd"></span>
+                    //     <i class="fa-solid fa-lock"></i>
+                    // </div>
 
                     card.removeAttr('hidden')
                     card.removeAttr('template')
