@@ -396,18 +396,16 @@
 		
 		// left side menu click function
 		$(document).ready(function(){
-			var submenuClicked = false; // Initialize submenuClicked to false
-
 			$(".submenu-btn").click(function(){
                 $(this).closest('.submenu-main').toggleClass('active');
                 var submenuToggleList = $(this).next(".submenu-toggle-list");
                 if (submenuToggleList.length) {
                     if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
                         submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
-						submenuClicked = true;
+						console.log("Click");
                     } else {
                         submenuToggleList[0].style.maxHeight = '0';
-						submenuClicked = false;
+						console.log("unclick");
                     }
                 }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
@@ -419,8 +417,6 @@
 				$(this).toggleClass('openToggle');
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
-
-			console.log("submenuClicked: " + submenuClicked);
 
 			if (!submenuClicked) {
 				console.log("!submenuClicked");
