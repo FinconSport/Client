@@ -1829,8 +1829,8 @@ class LsportApiController extends Controller {
         // 開始繞玩法資料
         foreach ($marketData as $k => $v) {
 
-            $market_id = $v['$market_id'];
-            $main_line = $v['$main_line'];
+            $market_id = $v->market_id;
+            $main_line = $v->main_line;
 
             // // market_name: 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($v->m_name_locale)) {  // market name
