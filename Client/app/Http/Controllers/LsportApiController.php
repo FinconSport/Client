@@ -1750,8 +1750,6 @@ class LsportApiController extends Controller {
 
         }
 
-
-        dd($tmp);
         $data['list'] = $tmp;
         ////////////////////////
 
