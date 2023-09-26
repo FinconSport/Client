@@ -256,7 +256,7 @@
 
             if (childLeagueDiv && l) {
                 childLeagueDiv.classList.add('open');
-                l.style.maxHeight = '900px';
+                l.style.height = 'auto';
             }
         }
 
@@ -266,10 +266,10 @@
                 $(this).toggleClass("open");
                 const l = $(this).next('.fixture-container');
                 if (l.length) {
-                    if (l[0].style.maxHeight === '0px' || l[0].style.maxHeight === '') {
-                        l[0].style.maxHeight = '900px';
+                    if (l[0].style.height === '0px' || l[0].style.height === '') {
+                        l[0].style.height = 'auto';
                     } else {
-                        l[0].style.maxHeight = '0';
+                        l[0].style.height = '0';
                     }
                 }
             });
@@ -279,17 +279,17 @@
                 const f = $(this).next('.league-list');
                 const n = $(this).next('.nogame-con');
                 if (f.length) {
-                    if (f[0].style.maxHeight === '0px' || f[0].style.maxHeight === '') {
-                        f[0].style.maxHeight = '900px';
+                    if (f[0].style.height === '0px' || f[0].style.height === '') {
+                        f[0].style.height = 'auto';
                     } else {
-                        f[0].style.maxHeight = '0';
+                        f[0].style.height = '0';
                     }
                 }
                 if (n.length) {
-                    if (n[0].style.maxHeight === '0px' || n[0].style.maxHeight === '') {
-                        n[0].style.maxHeight = '900px';
+                    if (n[0].style.height === '0px' || n[0].style.height === '') {
+                        n[0].style.height = 'auto';
                     } else {
-                        n[0].style.maxHeight = '0';
+                        n[0].style.height = '0';
                     }
                 }
             });
