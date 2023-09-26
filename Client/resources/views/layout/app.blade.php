@@ -417,13 +417,13 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
-			if (!submenuClicked) {
-				const $currentpageSubmenu = $('.submenu-main.currentpage');
-				if ($currentpageSubmenu.length > 0) {
-					$currentpageSubmenu.addClass('active');
-					$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
-				}
-			}
+			// if (!submenuClicked) {
+			// 	const $currentpageSubmenu = $('.submenu-main.currentpage');
+			// 	if ($currentpageSubmenu.length > 0) {
+			// 		$currentpageSubmenu.addClass('active');
+			// 		$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
+			// 	}
+			// }
 
 		});
 		// ----------------------------
