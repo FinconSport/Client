@@ -1238,9 +1238,10 @@ class ApiController extends Controller {
         /**************************************/
 
         // gzip
-        $data = $this->gzip($data);
+        // $data = $this->gzip($data);
 
-        $this->ApiSuccess($data,"01",true); 
+        // $this->ApiSuccess($data,"01",true); 
+        $this->ApiSuccess($data,"01",false);  // 測試用
     }
     
     // 下注紀錄
