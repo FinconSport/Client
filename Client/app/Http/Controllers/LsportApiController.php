@@ -1767,7 +1767,7 @@ class LsportApiController extends Controller {
                     'total_score' => $home_team_total_score,
                     'scores' => $arr_home_team_scores,
                     'team' => array(
-                        'id' => $data->th_team_id,
+                        'team_id' => $data->th_team_id,
                         'sport_id' => $sport_id,
                         'name' => $home_team_name,
                     )
@@ -1778,7 +1778,7 @@ class LsportApiController extends Controller {
                     'total_score' => $away_team_total_score,
                     'scores' => $arr_away_team_scores,
                     'team' => array(
-                        'id' => $data->ta_team_id,
+                        'team_id' => $data->ta_team_id,
                         'sport_id' => $sport_id,
                         'name' => $away_team_name,
                     )
