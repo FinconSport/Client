@@ -532,8 +532,7 @@ div[key="sizeSmallRate"]:hover {
   }
 
   #indexContainerLeft .main-div .fixture-container,
-  #indexContainerLeft .main-div .league-list,
-  #indexContainerLeft .main-div .nogame-con {
+  #indexContainerLeft .main-div .league-list {
     overflow-y: auto;
     overflow-x: hidden;
     height: 0;
