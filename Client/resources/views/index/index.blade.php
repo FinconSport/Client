@@ -266,6 +266,7 @@
                     priorityArr.forEach(( i, j ) => {
                         let bet_div = $('div[template="betDiv"]').clone()
                         let betData = Object.values(v3.list).find(m => m.priority === i)
+                        bet_div.attr('priority', i)
                         bet_label = bet_div.find('.betLabel')
                         bet_label.html(gameTitle[j])
 
@@ -433,7 +434,7 @@
                     let isExist = $(`#${k3}`).length > 0 ? true : false
                     if( isExist ) {
                         priorityArr.forEach(( i, j ) => {
-                            let bet_div = $(`#${k3}`)
+                            let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
                             let secondDiv = bet_div.find('div[index=1]')
