@@ -262,7 +262,7 @@
 
         // click function toggle
         $(document).ready(function(){
-            (".seriesWrapperTitle").click(function () {
+            $(".seriesWrapperTitle").click(function () {
                 $(this).toggleClass("open");
                 const l = $(this).next('.fixture-container');
                 if (l.length) {
@@ -294,6 +294,7 @@
                 }
             });
         });
+
         // loop matchListD to generate html element here
 
         // open the first
