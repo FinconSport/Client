@@ -1669,7 +1669,7 @@ class LsportApiController extends Controller {
 
         // 包入 league 聯賽資料
         $arrFixture['series'] = array(
-            'league_id' => $data->league_id,
+            'league_id' => $league_id,
             'sport_id' => $sport_id,
             'name' => $league_name,
         );
@@ -1703,6 +1703,7 @@ class LsportApiController extends Controller {
         $away_team_total_score = null;  //客隊總分
         $arr_away_team_scores = array();  //客隊比分板
 
+        // for: list.teams.scores & list.teams.total_score
         if ($parsed_scoreboard) {
             //主隊---------
 
@@ -1745,6 +1746,10 @@ class LsportApiController extends Controller {
             //'home_id' => $data->home_id,
             //'away_id' => $data->away_id,
             'fixture_id' => $data->fixture_id,
+            'home_team_id' => $data->th_team_id,
+            'home_team_name' => $home_team_name,
+            'away_team_id' => $data->ta_team_id,
+            'away_team_name' => $away_team_name,
             'start_time' => $data->start_time,
             'status' => $fixture_status,
             'last_update' => $data->f_last_update,
