@@ -168,6 +168,8 @@
                     $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
                     const element = document.querySelector('#indexContainerLeft div:first-child .league-list');
                     element.style.height = 'auto';
+                    element.css("transition", "height .5s ease-in-out 0s");
+                    element.css("-webkit-transition", "height .5s ease-in-out 0s");
                 }
 
                 for (const leagueId in sport.list) {
@@ -257,7 +259,9 @@
             if (firstFixtureContainer.length > 0) {
                 // Add the class 'open' to its sibling .seriesWrapperTitle
                 firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-                firstFixtureContainer.css("height", "auto")
+                firstFixtureContainer.css("height", "auto");
+                firstFixtureContainer.css("transition", "height .5s ease-in-out 0s");
+                firstFixtureContainer.css("-webkit-transition", "height .5s ease-in-out 0s");
             }
         });
 
@@ -269,8 +273,12 @@
                 if (l.length) {
                     if (l[0].style.height === '0px' || l[0].style.height === '') {
                         l[0].style.height = 'auto';
+                        l[0].css("transition", "height .5s ease-in-out 0s");
+                        l[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     } else {
                         l[0].style.height = '0';
+                        l[0].css("transition", "height .5s ease-in-out 0s");
+                        l[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     }
                 }
             });
@@ -282,15 +290,23 @@
                 if (f.length) {
                     if (f[0].style.height === '0px' || f[0].style.height === '') {
                         f[0].style.height = 'auto';
+                        f[0].css("transition", "height .5s ease-in-out 0s");
+                        f[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     } else {
                         f[0].style.height = '0';
+                        f[0].css("transition", "height .5s ease-in-out 0s");
+                        f[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     }
                 }
                 if (n.length) {
                     if (n[0].style.height === '0px' || n[0].style.height === '') {
                         n[0].style.height = 'auto';
+                        n[0].css("transition", "height .5s ease-in-out 0s");
+                        n[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     } else {
                         n[0].style.height = '0';
+                        n[0].css("transition", "height .5s ease-in-out 0s");
+                        n[0].css("-webkit-transition", "height .5s ease-in-out 0s");
                     }
                 }
             });
@@ -299,11 +315,11 @@
         // loop matchListD to generate html element here
 
         // open the first
-        if($('div[id^=toggleContent_]:visible').length > 0) {
-            setTimeout(() => {
-                $('.catWrapperTitle:visible').eq(0).click()
-            }, 500);
-        }
+        // if($('div[id^=toggleContent_]:visible').length > 0) {
+        //     setTimeout(() => {
+        //         $('.catWrapperTitle:visible').eq(0).click()
+        //     }, 500);
+        // }
     }
     /* ===== VIEW LAYER ===== */
 

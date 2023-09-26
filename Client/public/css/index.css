@@ -537,8 +537,8 @@ div[key="sizeSmallRate"]:hover {
     overflow-y: auto;
     overflow-x: hidden;
     height: 0;
-    transition: all .5s ease-in-out 0s;
-    -webkit-transition: all .5s ease-in-out 0s;
+    transition: height .5s ease-in-out 0s;
+    -webkit-transition: height .5s ease-in-out 0s;
   }
 
   #indexContainerLeft .main-div .fixture-container::-webkit-scrollbar,
