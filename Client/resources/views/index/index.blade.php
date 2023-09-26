@@ -340,6 +340,12 @@
             $('#indexContainerLeft').append(el_toggle)
         })
 
+        // 滾球移到最上面
+        let parentNode = $('#indexContainerLeft')
+        let livingNode = $('#toggleContent_living')
+        livingNode.prependTo(parentNode);
+
+        // 統計
         statistics()
 
         // loop matchListD to generate html element here
