@@ -417,7 +417,7 @@
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
 
-			console.log("submenuClicked: " + submenuClicked);
+			// console.log("submenuClicked: " + submenuClicked);
 
 			// if (!submenuClicked) {
 			// 	console.log("Inside !submenuClicked block");
