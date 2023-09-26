@@ -254,11 +254,10 @@
 
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
-            var l = firstLeagueDiv.querySelector('.league-list');
 
-            if (childLeagueDiv && l) {
+            if (childLeagueDiv && firstLeagueDiv) {
                 childLeagueDiv.classList.add('open');
-                l.style.height = 'auto';
+                firstLeagueDiv.style.height = 'auto';
             }
         }
 
