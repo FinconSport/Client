@@ -423,7 +423,7 @@
 					$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
 					}
 				}
-				}, 3000);
+				}, 2000);
 
 			});
 		});
