@@ -433,6 +433,7 @@
                     if( isExist ) {
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3}`)
+                            let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
                             let secondDiv = bet_div.find('div[index=1]')
                             let item = null
