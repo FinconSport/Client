@@ -250,17 +250,21 @@
         }
 
         $(document).ready(function() {
-           // Open the first div with the class "fixture-container"
-            var firstFixtureContainer = $(".fixture-container:first");
+        // Find the first .fixture-container element
+        var firstFixtureContainer = $(".fixture-container:first");
 
-            // Check if it exists
-            if (firstFixtureContainer.length > 0) {
-                // Add the class 'open' to its sibling .seriesWrapperTitle
-                firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-                firstFixtureContainer.css("height", "auto");
-                firstFixtureContainer.css("transition", "height .5s ease-in-out 0s");
-                firstFixtureContainer.css("-webkit-transition", "height .5s ease-in-out 0s");
-            }
+        // Check if it exists
+        if (firstFixtureContainer.length > 0) {
+            // Add the class 'open' to its sibling .seriesWrapperTitle
+            firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
+
+            // Set the height to 'auto' and add the transition properties
+            firstFixtureContainer.css({
+                "height": "auto",
+                "transition": "height .5s ease-in-out 0s",
+                "-webkit-transition": "height .5s ease-in-out 0s"
+            });
+        }
         });
 
         // click function toggle
@@ -271,12 +275,16 @@
                 if (l.length) {
                     if (l[0].style.height === '0px' || l[0].style.height === '') {
                         l[0].style.height = 'auto';
-                        l[0].css("transition", "height .5s ease-in-out 0s");
-                        l[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        l.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     } else {
                         l[0].style.height = '0';
-                        l[0].css("transition", "height .5s ease-in-out 0s");
-                        l[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        l.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     }
                 }
             });
@@ -288,23 +296,31 @@
                 if (f.length) {
                     if (f[0].style.height === '0px' || f[0].style.height === '') {
                         f[0].style.height = 'auto';
-                        f[0].css("transition", "height .5s ease-in-out 0s");
-                        f[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        f.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     } else {
                         f[0].style.height = '0';
-                        f[0].css("transition", "height .5s ease-in-out 0s");
-                        f[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        f.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     }
                 }
                 if (n.length) {
                     if (n[0].style.height === '0px' || n[0].style.height === '') {
                         n[0].style.height = 'auto';
-                        n[0].css("transition", "height .5s ease-in-out 0s");
-                        n[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        n.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     } else {
                         n[0].style.height = '0';
-                        n[0].css("transition", "height .5s ease-in-out 0s");
-                        n[0].css("-webkit-transition", "height .5s ease-in-out 0s");
+                        n.css({
+                            "transition": "height .5s ease-in-out 0s",
+                            "-webkit-transition": "height .5s ease-in-out 0s"
+                        });
                     }
                 }
             });
