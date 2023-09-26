@@ -716,16 +716,11 @@
     function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
         caller(account_api, commonCallData, accountD)
-        accountD = {}
-        refreshInt = null
-        refreshInt = setInterval(() => {
-            if (accountD.status === 1) {
-                $('.player').html(accountD.data.account)
-			    $('.balance').html(accountD.data.balance)
-                clearInterval(refreshInt)
-                $('#refreshIcon').removeClass('rotate-animation')
-            }
-        }, 500);
+        setTimeout(() => {
+            $('.player').html(accountD.data.account)
+            $('.balance').html(accountD.data.balance)
+            $('#refreshIcon').removeClass('rotate-animation')
+        }, 1000);
     }
 </script>
 @endpush
