@@ -2687,7 +2687,7 @@
                                                 "market_bet_id": 17225993711435036,
                                                 "market_bet_name": "大",
                                                 "line": "4.5",
-                                                "price": "1.857",
+                                                "price": "777777",
                                                 "status": 1,
                                                 "last_update": "2023-09-26 17:12:05"
                                             },
@@ -2695,7 +2695,7 @@
                                                 "market_bet_id": 89688518111435040,
                                                 "market_bet_name": "小",
                                                 "line": "4.5",
-                                                "price": "2.1669",
+                                                "price": "0.000005",
                                                 "status": 1,
                                                 "last_update": "2023-09-26 17:12:05"
                                             }
@@ -3383,7 +3383,7 @@
                                     item = bet_div.find('.betItemDiv').eq(s)
                                     // old attribute
                                     let market_bet_id = item.attr('market_bet_id')
-                                    let price = item.attr('price')
+                                    let price = item.attr('bet_rate')
 
                                     console.log(item.attr('home') + ' VS ' + item.attr('away'))
                                     // 判斷盤口是否有改變
