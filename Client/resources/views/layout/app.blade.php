@@ -404,13 +404,14 @@
                 if (submenuToggleList.length) {
                     if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
                         submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
+						submenuClicked = true;
                     } else {
                         submenuToggleList[0].style.maxHeight = '0';
+						submenuClicked = false;
                     }
                 }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
-				submenuClicked = true;
             });
 
 			// Toggle 'openToggle' class for sport select elements
@@ -422,7 +423,7 @@
 			console.log("submenuClicked: " + submenuClicked);
 
 			if (!submenuClicked) {
-				console.log("Inside !submenuClicked block");
+				console.log("!submenuClicked");
 				const $currentpageSubmenu = $('.submenu-main.currentpage');
 				if ($currentpageSubmenu.length > 0) {
 				$currentpageSubmenu.addClass('active');
