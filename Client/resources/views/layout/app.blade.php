@@ -282,7 +282,7 @@
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
-					$(`#${urlMappings[urlFragment]}`).addClass('active');
+					$(`#${urlMappings[urlFragment]}`).addClass('active currentpage');
 					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
 					break;
 				}
@@ -393,7 +393,7 @@
 			}, 1000);
 		});
 
-
+		
 		// left side menu click function
 		$(document).ready(function(){
 			$(".submenu-btn").click(function(){
@@ -408,6 +408,7 @@
                 }
 				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
+				submenuClicked = true;
             });
 
 			// Toggle 'openToggle' class for sport select elements
@@ -415,6 +416,14 @@
 				$(this).toggleClass('openToggle');
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
+
+			if (!submenuClicked) {
+				const $currentpageSubmenu = $('.submenu-main.currentpage');
+				if ($currentpageSubmenu.length > 0) {
+					$currentpageSubmenu.addClass('active');
+					$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
+				}
+			}
 
 		});
 		// ----------------------------
