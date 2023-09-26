@@ -451,6 +451,9 @@
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
 
+                                    console.log(v4)
+                                    console.log(market_bet_id)
+                                    console.log(v4.market_bet_id)
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
                                         // 判斷賠率是否有改變

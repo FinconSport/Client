@@ -205,7 +205,6 @@
 						json.data = uncompressed
 					}
 					Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
-					console.log(json)
 					if( isUpdate === 0 ) {
 						showSuccessToast(json.message)
 					} 
