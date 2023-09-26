@@ -1726,7 +1726,7 @@ class LsportApiController extends Controller {
             $this->ApiError('02');
         }
 
-        dd($data);
+        // dd($data);
 
         $sport_name = '';  //儲存球種名稱
 
@@ -1758,7 +1758,7 @@ class LsportApiController extends Controller {
         }
 
         // 包入 league 聯賽資料
-        $arrLeagues[$fixture_status][$league_id] = array(
+        $arrLeagues[$league_id] = array(
             'league_id' => $data->league_id,
             'league_name' => $league_name,
             'list' => array(),
@@ -1788,7 +1788,7 @@ class LsportApiController extends Controller {
         $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
         // 包入 fixture 賽事資料 ---------------
-        $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
+        $arrLeagues[$league_id]['list'][$fixture_id] = array(
             //'sport_id' => $data->sport_id,
             //'league_id' => $data->league_id,
             //'home_id' => $data->home_id,
@@ -1817,7 +1817,7 @@ class LsportApiController extends Controller {
         }
 
         // 包入 market 玩法資料 ---------------
-        $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+        $arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id] = array(
             'market_id' => $data->market_id,
             'market_name' => $market_name,
             'priority' => $data->priority,
@@ -1859,7 +1859,7 @@ class LsportApiController extends Controller {
             }
 
             // 包入 market_bet 賠率資料 ---------------
-            $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+            $arrLeagues[$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
                 'market_bet_id' => $market_bet_id,
                 'market_bet_name' => $market_bet_name,
                 'base_line' => $bv->base_line,
@@ -1873,9 +1873,10 @@ class LsportApiController extends Controller {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data = $arrLeagues;
 
-        dd($data);
+        dd($arrLeagues);
+
+        $data = $arrLeagues;
 
         /**************************************/
         // gzip
