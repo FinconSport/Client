@@ -2449,7 +2449,7 @@ class LsportApiController extends Controller {
             foreach ($arr_results as $rk => $rv) {
                 $pos = intval($rv['Position']);
                 $score = intval($rv['Value']);
-                if ($type < 40) {
+                if ($type <= 40) {  // 40 通常為加時，也要計入 (football的50是罰球)
                     $ret[$pos][$type] = $score;
                 }
             }
