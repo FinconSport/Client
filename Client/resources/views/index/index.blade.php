@@ -197,7 +197,7 @@
     var betLimitationD = {}
     var callLimitationData = {}
     const betLimitation_api = ''
-    
+
     // game priority and gameTitle
     var priorityArr = null
     var gameTitle = null
@@ -363,6 +363,10 @@
         isReadyIndexInt = setInterval(() => {
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex && isReadyCommon) {
+                // game priority and gameTitle
+                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
@@ -371,10 +375,6 @@
                     renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
-
-                // game priority and gameTitle
-                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
-                gameTitle = langTrans['sportBetData'][sport]['gameTitle']
             }
         }, 500);
 
