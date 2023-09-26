@@ -209,6 +209,7 @@
 					} else {
 						// ajax更新 不可以整包覆蓋
 						// loop json.data-> 比較時間戳 不一樣再更新該筆就好
+						Object.assign(obj, json); 
 					}
 					showSuccessToast(json.message)
 				},
