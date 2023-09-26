@@ -534,10 +534,16 @@ div[key="sizeSmallRate"]:hover {
   #indexContainerLeft .main-div .fixture-container,
   #indexContainerLeft .main-div .league-list,
   #indexContainerLeft .main-div .nogame-con {
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 0;
     transition: all .5s ease-in-out 0s;
     -webkit-transition: all .5s ease-in-out 0s;
+  }
+
+  #indexContainerLeft .main-div .fixture-container::-webkit-scrollbar,
+  #indexContainerLeft .main-div .league-list::-webkit-scrollbar{
+    width: 0px;
   }
 
     #indexContainerLeft .main-div .catWrapperTitle i {

@@ -252,6 +252,8 @@
         if (firstLeagueDiv) {
             var childLeagueDiv = firstLeagueDiv.querySelector('.seriesWrapperTitle');
             var l = firstLeagueDiv.querySelector('.league-list');
+            console.log('childLeagueDiv:', childLeagueDiv);
+            console.log('l:', l);
             if (childLeagueDiv) {
                 childLeagueDiv.classList.add('open');
                 l.style.maxHeight = '900px';
@@ -260,7 +262,7 @@
 
         // click function toggle
         $(document).ready(function(){
-            $(".seriesWrapperTitle").click(function () {
+            (".seriesWrapperTitle").click(function () {
                 $(this).toggleClass("open");
                 const f = $(this).next('.fixture-container');
                 if (f.length) {
