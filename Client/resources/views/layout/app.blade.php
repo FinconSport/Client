@@ -272,6 +272,7 @@
 				$("#lf_sport").addClass('active');
 				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
 				var matchlist_sportID = v.data;
+				matchlist_sportID = sportListD.data[0].sport_i;
 				console.log(matchlist_sportID)
 			}
 
