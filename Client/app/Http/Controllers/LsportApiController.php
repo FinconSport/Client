@@ -1717,7 +1717,7 @@ class LsportApiController extends Controller {
                     $arr_home_team_scores = array(
                         'stage' => $stage,
                         'score' => $score,
-                    )
+                    );
                 }
             }
             //客隊---------
@@ -1733,7 +1733,7 @@ class LsportApiController extends Controller {
                     $arr_away_team_scores = array(
                         'stage' => $stage,
                         'score' => $score,
-                    )
+                    );
                 }
             }
         }
@@ -1771,9 +1771,9 @@ class LsportApiController extends Controller {
                     'total_score' => $away_team_total_score,
                     'scores' => $arr_away_team_scores,
                     'team' => array(
-                        'id' => $data->th_team_id,
+                        'id' => $data->ta_team_id,
                         'sport_id' => $sport_id,
-                        'name' => $home_team_name,
+                        'name' => $away_team_name,
                     )
                 ),
             ),
@@ -1836,7 +1836,7 @@ class LsportApiController extends Controller {
             ->get();
 
             if ($marketBetData === false) {
-                $this->ApiError('03');
+                $this->ApiError('04');
             }
 
             // 目前賽事的賠率資料
