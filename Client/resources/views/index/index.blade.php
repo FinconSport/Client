@@ -61,9 +61,75 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
-        <div id="early"></div>
-        <div id="living"></div>
+        
     </div>
+</div>
+
+<!-- early living toggle template -->
+<div template='elToggleTemplate' hidden>
+    <div class="catWrapperTitle">
+        <span class="elToggleText"></span>
+        <span class="elToggleCount"></span>
+        <span class="elToggleDir" style="float: right;">
+            <i class="fa-solid fa-chevron-right"></i> 
+        </span>
+    </div>
+</div>
+
+<!-- league toggle template -->
+<div class="catWrapperContent" id="catWrapperContent_{{ $key }}" hidden>
+    <div class="seriesWrapperTitle" id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}" onclick="toggleSeries('{{ $key }}_{{ $key2 }}')" series_id="{{ $ser['series']['id'] }}">
+        <span>{{ $ser['series']['name'] }}</span>
+        (<span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_count">{{ count($ser['list']) }}</span>)
+        <span id="seriesWrapperTitle_{{ $key }}_{{ $key2 }}_dir" style="float: right;">
+            <i class="fa-solid fa-circle-chevron-down"></i>
+        </span>
+    </div>
+    <div class="seriesWrapperContent" id="seriesWrapperContent_{{ $key }}_{{ $key2 }}">
+    </div>
+</div>
+
+<!-- fixture card template -->
+<div class="indexEachCard" hidden>
+    <div class="indexBetCard">
+        <div class="indexBetCardInfo">
+            <div class="timeSpan">{{ trans('index.mainArea.time') }}<span class="timer" series_id="{{ $ser['series']['id'] }}">{{ $item['start_time'] }}</span>
+            </div>
+            <div class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
+                    team name
+                </div>
+                <div class="scoreSpan" style="width: 20%;">
+                    team score
+                </div>
+            </div>
+            <div class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
+                    team name
+                </div>
+                <div class="scoreSpan" style="width: 20%;">
+                    team score
+                </div>
+            </div>
+        </div>
+        <div class="indexBetCardTable row m-0 text-center">
+            <div class="col-2 p-0">
+                <div class="betLabel">
+                    gameTitle
+                </div>
+                <div class="betItemDiv" onclick="openCal($(this), 1)">
+                    <span class="rate_name">rate_name</span>&ensp;
+                    <span class="odd">odd</span>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- no data -->
+<div id="noData" style="display: none;">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
 </div>
 @endsection
 
@@ -78,12 +144,6 @@
 @push('main_js')
 
 <script>
-
-    // 
-    // const player = @json($player['id']);
-    // const token = '12345';
-
-
     // 語系
     const langTrans = @json(trans('index'));
 
@@ -141,177 +201,30 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        function createSportStructure(sportData, parentDiv, categoryLabel) {
-            for (const sportId in sportData) {
-                const sport = sportData[sportId];
-                const numLeagues = Object.keys(sport.list).length;
+        Object.entries(matchListD.data).map(([k, v]) => {  
+            let el_toggle = $('div[template="elToggleTemplate"]').clone()
+            let el_toggle_title = el_toggle.find('.catWrapperTitle')
+            let el_toggle_text = el_toggle.find('.elToggleText')
+            let el_toggle_count = el_toggle.find('.elToggleCount')
+            let el_toggle_dir = el_toggle.find('.elToggleDir')
 
-                // Create a container for each sport
-                const sportContainer = document.createElement("div");
-                sportContainer.setAttribute("id", sport.sport_id);
-                sportContainer.setAttribute("class", "main-div");
-                sportContainer.innerHTML = `<div class='catWrapperTitle'><p>${categoryLabel === 'living' ? '{{ trans('index.mainArea.living') }}' : '{{ trans('index.mainArea.early') }}'} (${numLeagues})</p><i class='fa-solid fa-chevron-right'></i></div>`;
-                parentDiv.appendChild(sportContainer);
+            el_toggle.attr('id', 'toggleContent_' + k)
+            el_toggle_title.attr('id', 'catWrapperTitle_' + k)
+            el_toggle_title.attr('onclick', 'toggleCat("' + k + '")')
+            el_toggle_count.attr('id', 'catWrapperContent_' + k + '_total')
+            el_toggle_dir.attr('id', 'catWrapperTitle_' + k + '_dir')
+            
+            el_toggle.removeAttr('hidden')
 
-                const leagueList = document.createElement("div");
-                leagueList.setAttribute("class", "league-list");
-                sportContainer.appendChild(leagueList);
+            $('#indexContainerLeft').append(el_toggle)
+        })
+        
 
-                if (numLeagues === 0) {  // <- add no data 
-                    const leagueContainer = document.createElement("div");
-                    leagueContainer.setAttribute("class", "nogame-con");
-                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>{{ trans('index.mainArea.nogame') }}</p></div>`;
-                    leagueList.appendChild(leagueContainer);
-                }
-
-                if (numLeagues !== 0) { // <- open first div and if has data
-                    $('#indexContainerLeft div:first-child .catWrapperTitle').addClass("open");
-                    const element = document.querySelector('#indexContainerLeft div:first-child .league-list');
-                    element.style.height = 'auto';
-                }
-
-                for (const leagueId in sport.list) {
-                    const league = sport.list[leagueId];
-                    const numFixtures = Object.keys(league.list).length;
-
-                    // Create a container for each league within the sport
-                    const leagueContainer = document.createElement("div");
-                    leagueContainer.setAttribute("id", league.league_id);
-                    leagueContainer.setAttribute("class", "league-div");
-                    
-                    leagueContainer.innerHTML = `<div class='seriesWrapperTitle'><p>${league.league_name} (${numFixtures})</p><i class='fa-solid fa-circle-chevron-down'></i></div>`;
-                    leagueList.appendChild(leagueContainer);
-
-                    const fixtureContainer = document.createElement("div");
-                    fixtureContainer.setAttribute("class", "fixture-container");
-                    leagueContainer.appendChild(fixtureContainer);
-
-                    for (const fixtureId in league.list) {
-                        const fixture = league.list[fixtureId];
-
-                        // Create a container for each fixture within the league
-                        const fixtureItem = document.createElement("div");
-                        fixtureItem.setAttribute("id", fixture.fixture_id);
-                        fixtureItem.setAttribute("class", "fixture-div");
-                        fixtureItem.innerHTML = `<div class='seriesWrapperContent'>
-                                                    <div class='seriesWrapper-left'>
-                                                        <p>{{ trans('index.mainArea.time') }}${fixture.start_time}</p>
-                                                        <p>${fixture.home_team_name}</p>
-                                                        <p>${fixture.away_team_name}</p>
-                                                    </div>
-                                                    <div class='seriesWrapper-right'>
-                                                        <table class='table table-bordered h-100'>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>`;
-                        fixtureContainer.appendChild(fixtureItem);
-                    }
-                }
-            }
-        }
-
-        const earlyParentDiv = document.getElementById("early");
-        const livingParentDiv = document.getElementById("living");
-
-        if (matchListD && matchListD.data) {
-            const earlyData = matchListD.data.early;
-            const livingData = matchListD.data.living;
-
-            createSportStructure(earlyData, earlyParentDiv, 'early');
-            createSportStructure(livingData, livingParentDiv, 'living');
-        }
-
-        $(document).ready(function() {
-            // Function to apply actions to the first .fixture-container element within a container
-            function applyActionsToFirstFixtureContainer(containerId) {
-                var firstFixtureContainer = $("#" + containerId + " .fixture-container:first");
-                if (firstFixtureContainer.length > 0) {
-                    firstFixtureContainer.next(".seriesWrapperTitle").addClass("open");
-                    firstFixtureContainer.css({
-                        "height": "auto",
-                        "transition": "height .5s ease-in-out 0s",
-                        "-webkit-transition": "height .5s ease-in-out 0s"
-                    });
-                }
-            }
-
-            // Call the function for the #living/#early container
-            applyActionsToFirstFixtureContainer("living");
-            applyActionsToFirstFixtureContainer("early");
-        });
+        
 
 
 
-        // click function toggle
-        $(document).ready(function(){
-            $(".seriesWrapperTitle").click(function () {
-                $(this).toggleClass("open");
-                const l = $(this).next('.fixture-container');
-                if (l.length) {
-                    if (l[0].style.height === '0px' || l[0].style.height === '') {
-                        l[0].style.height = 'auto';
-                        l.css({
-                            "transition": "height .5s ease-in-out 0s",
-                            "-webkit-transition": "height .5s ease-in-out 0s"
-                        });
-                    } else {
-                        l[0].style.height = '0';
-                        l.css({
-                            "transition": "height .5s ease-in-out 0s",
-                            "-webkit-transition": "height .5s ease-in-out 0s"
-                        });
-                    }
-                }
-            });
-
-            $(".catWrapperTitle").click(function () {
-                $(this).toggleClass("open");
-                const f = $(this).next('.league-list');
-                if (f.length) {
-                    if (f[0].style.height === '0px' || f[0].style.height === '') {
-                        f[0].style.height = 'auto';
-                        f.css({
-                            "transition": "height .5s ease-in-out 0s",
-                            "-webkit-transition": "height .5s ease-in-out 0s"
-                        });
-                    } else {
-                        f[0].style.height = '0';
-                        f.css({
-                            "transition": "height .5s ease-in-out 0s",
-                            "-webkit-transition": "height .5s ease-in-out 0s"
-                        });
-                    }
-                }
-            });
-        });
+       
 
         // loop matchListD to generate html element here
 
