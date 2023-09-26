@@ -717,7 +717,6 @@
         $('#refreshIcon').addClass('rotate-animation')
         caller(account_api, commonCallData, accountD)
         setTimeout(() => {
-            $('.player').html(accountD.data.account)
             $('.balance').html(accountD.data.balance)
             $('#refreshIcon').removeClass('rotate-animation')
         }, 1000);
