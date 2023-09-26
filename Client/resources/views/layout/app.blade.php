@@ -394,13 +394,6 @@
 		});
 
 		
-		if (!submenuClicked) {
-			if ($('.submenu-main.currentpage').length > 0) {
-				$('.submenu-main.currentpage').addClass('active');
-				$('.submenu-main.currentpage .submenu-toggle-list').css('max-height', '900px');
-			}
-		}
-		
 		// left side menu click function
 		$(document).ready(function(){
 			$(".submenu-btn").click(function(){
@@ -423,6 +416,14 @@
 				$(this).toggleClass('openToggle');
 				$('.sportSelect').not(this).removeClass("openToggle");
 			});
+
+			if (!submenuClicked) {
+				const $currentpageSubmenu = $('.submenu-main.currentpage');
+				if ($currentpageSubmenu.length > 0) {
+					$currentpageSubmenu.addClass('active');
+					$currentpageSubmenu.find('.submenu-toggle-list').css('max-height', '900px');
+				}
+			}
 
 		});
 		// ----------------------------
