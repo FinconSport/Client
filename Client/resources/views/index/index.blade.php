@@ -197,10 +197,12 @@
     var betLimitationD = {}
     var callLimitationData = {}
     const betLimitation_api = ''
-
+    
     // game priority and gameTitle
-    const priorityArr = langTrans['sportBetData'][sport]['priorityArr']
-    const gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+    var priorityArr = null
+    var gameTitle = null
+
+    
     /* ===== DATA LAYER ===== */
     
     /* ===== VIEW LAYER ===== */
@@ -369,6 +371,10 @@
                     renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
+
+                // game priority and gameTitle
+                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                gameTitle = langTrans['sportBetData'][sport]['gameTitle']
             }
         }, 500);
 
