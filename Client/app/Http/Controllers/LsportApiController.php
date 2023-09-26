@@ -1699,7 +1699,6 @@ class LsportApiController extends Controller {
             $away_team_id = $v["away_team_id"];
 
 
-            dd($v);
             // 有串關資料
             if ($v['m_order'] == 1) {
 
@@ -1708,18 +1707,10 @@ class LsportApiController extends Controller {
                     $this->error(__CLASS__, __FUNCTION__, "02");
                 }
 
+                dd($cc);
                 foreach ($cc as $kkk => $vvv) {
                     $tmp_bet_data = array();
 
-                    // 聯賽
-                    $league_id = $vvv['league_id'];
-                    $tmp_d = LsportLeague::where("league_id", $league_id)->where("sport_id", $vvv['sport_id'])->first();
-                    if ($tmp_d === null) {
-                        $tmp_bet_data['league_name'] = $vvv['name_en'];
-                    } else {
-                        $tmp_bet_data['league_name'] = $tmp_d[$lang_col];
-                    }
-        
                     $type_id = $vvv['type_id'];
 
                     $tmp_d = LsportMarketBet::where("id", $type_id)->first();
@@ -1727,24 +1718,6 @@ class LsportApiController extends Controller {
                         $tmp_bet_data['market_bet_name'] = $vvv['name_en'];
                     } else {
                         $tmp_bet_data['type_name'] = $tmp_d[$lang_col];
-                    }
-        
-                    // 主隊
-                    $home_team_id = $vvv['home_team_id'];
-                    $tmp_d = LsportTeam::where("team_id", $home_team_id)->where("sport_id", $vvv['sport_id'])->first();
-                    if ($tmp_d === null) {
-                        $tmp_bet_data['home_team_name'] = $vvv['name_en'];
-                    } else {
-                        $tmp_bet_data['home_team_name'] = $tmp_d[$lang_col];
-                    }
-        
-                    // 客隊
-                    $away_team_id = $vvv['away_team_id'];
-                    $tmp_d = LsportTeam::where("team_id", $away_team_id)->where("sport_id", $vvv['sport_id'])->first();
-                    if ($tmp_d === null) {
-                        $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
-                    } else {
-                        $tmp_bet_data['away_team_name'] = $tmp_d[$lang_col];
                     }
         
                     ///////////////
