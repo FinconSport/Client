@@ -397,36 +397,32 @@
 		
 		// left side menu click function
 		$(document).ready(function(){
-			var submenuClicked = false;
 			$(".submenu-btn").click(function(){
-                $(this).closest('.submenu-main').toggleClass('active');
-                var submenuToggleList = $(this).next(".submenu-toggle-list");
-                if (submenuToggleList.length) {
-                    if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
-                        submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
-						console.log("Click");
-						submenuClicked = true;
-                    } else {
-                        submenuToggleList[0].style.maxHeight = '0';
-						console.log("unclick");
-						submenuClicked = false;
-                    }
-                }
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
-            });
+				$(this).closest('.submenu-main').toggleClass('active');
 
-			// Add a delay before checking submenuClicked
-			setTimeout(function () {
-				if (!submenuClicked) {
+				var submenuToggleList = $(this).next(".submenu-toggle-list");
+				if (submenuToggleList.length) {
+					if (submenuToggleList[0].style.maxHeight === '0px' || submenuToggleList[0].style.maxHeight === '') {
+						submenuToggleList[0].style.maxHeight = submenuToggleList[0].scrollHeight + 'px';
+						console.log("Click");
+					} else {
+						submenuToggleList[0].style.maxHeight = '0';
+						console.log("unclick");
+					}
+				}
+
+				// Delayed action using setTimeout
+				setTimeout(function () {
 					console.log("!submenuClicked");
 					if ($(".submenu-main").hasClass("currentpage")) {
 						$(".submenu-main.currentpage").addClass('active');
 						$(".submenu-main.currentpage .submenu-toggle-list").css('max-height', '900px');
 					}
-				}
-			}, 3000);
 
+					$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+					$('.submenu-toggle-list').not(submenuToggleList[0]).css('max-height', '0');
+				}, 3000);
+			});
 		});
 		// ----------------------------
 
