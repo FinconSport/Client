@@ -233,6 +233,7 @@
 			});
 
 			var modalContainer = $('<div>', {
+				id: 'modalMarqueeCon',
 				class: 'modalContainer',
 			});
 
@@ -254,6 +255,7 @@
 
 				link.append(span); // 将<span>添加到<a>中
 				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
+				modalContainer.append(modalContainerTxt);
 			});
 
 			// 将跑马灯容器添加到页面中
