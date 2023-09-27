@@ -595,7 +595,8 @@ class LsportApiController extends Controller {
             // market_count ---------------------
             $market_counts = DB::table('lsport_market as m')
                 ->join('lsport_fixture as f', 'f.fixture', '=', 'm.fixture')
-                ->select('f.fixture_id', 'COUNT(*) as market_count')
+                ->select('f.fixture_id')
+                ->selectRaw('COUNT(*) as market_count')
                 ->where('f.start_time', "<=", $after_tomorrow)
                 ->groupBy('f.fixture_id')
                 ->get();
