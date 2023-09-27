@@ -80,7 +80,7 @@
 							</div>
 						</div>
 
-						<div class="submenu-main" id="lf_calcu">
+						<div class="submenu-main" id="lf_calculator">
 							<div class="submenu-inner">
 								<div onclick="navTo('calculator')" class="submenu-btn"><i class="fa-solid fa-calculator"></i> <p>{{ trans('common.left_menu.calculator') }}</p></div>
 							</div>
