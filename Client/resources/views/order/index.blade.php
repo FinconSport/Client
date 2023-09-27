@@ -2,7 +2,7 @@
 
 @section('content')
 	<!-- 搜尋框 -->
-	<div id='searchArea' style="height: 5.5rem;">
+	<!-- <div id='searchArea' style="height: 5.5rem;">
 		<div class="w-100" style='display: inline-flex'>
 			<div style="width: 10%; margin-left: 1%">
 				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.sport') }}</p>
@@ -94,7 +94,7 @@
 			<div>{{ $sport_list[$search['sport']] }}</div>
 		@endif
 			
-	</div>
+	</div> -->
 
 
 	<div id="orderContainer">
@@ -242,12 +242,9 @@
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
-
 		// ===== DATA LATER =====
-
         // ini data from ajax
         caller(orderList_api, callOrderListData, orderListD) // orderListD
-
         // check if api are all loaded every 500 ms 
         isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
