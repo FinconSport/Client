@@ -610,10 +610,6 @@ class LsportApiController extends Controller {
                 $fixture_market_bet_count[$dv2->fixture_id] = $dv2->market_count;
             }
 
-            if (!empty($input['is_debug'])) {
-                dd($fixture_market_bet_count);
-            }
-
             // league 層 ----------------------------
             if (!isset($arrLeagues[$fixture_status][$league_id])
                 || !sizeof($arrLeagues[$fixture_status][$league_id])
@@ -774,6 +770,10 @@ class LsportApiController extends Controller {
         );
 
         $data = $arrRet;
+
+        if (!empty($input['is_debug'])) {
+            dd($data);
+        }
 
         ///////////////////////////////
         // gzip
