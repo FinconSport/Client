@@ -16,7 +16,7 @@
                     <div key='index' class="orderCardIndex"></div>
                 </div>
                 <div class="col-11 p-0">
-                    <p class="fs-5 mb-0 mb-2" key='series'></p>
+                    <p class="fs-5 mb-0 mb-2" key='league'></p>
                 </div>
                 <div class="col-12 p-0">
                     <p class="mb-2">
@@ -825,7 +825,12 @@
                 fixture_id: fixture_id,
                 market_id: market_id,
                 market_bet_id: market_bet_id,
-                bet_rate: bet_rate
+                bet_rate: bet_rate,
+                bet_type: bet_type,
+                bet_name: bet_name,
+                league: league,
+                home: home,
+                away: away
             })
         }
 
