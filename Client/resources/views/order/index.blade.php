@@ -195,14 +195,13 @@
 			</table>
 		</div>
 	</div>
-
-	<div id="pagination">
+	<!-- <div id="pagination">
 		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
 		<button onclick="navPage(1)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.pre_page') }}</button>
 		<p>{{ $pagination['current_page'] }} /  {{ $pagination['max_page'] }}</p>
 		<button onclick="navPage(2)" class="ui button" @if($pagination['current_page'] == $pagination['max_page'] || $pagination['max_page'] == 0 ) disabled @endif>{{ trans('order.main.next_page') }}</button>
 		<button onclick="navPage(3)" class="ui button"@if($pagination['current_page'] == $pagination['max_page'] || $pagination['max_page'] == 0 ) disabled @endif>{{ trans('order.main.last_page') }}</button>
-	</div>
+	</div> -->
 @endsection
 
 @section('styles')
@@ -224,7 +223,7 @@
 
 	// order list data
     var orderListD = {}
-    var callOrderListData = { token: token, player: player, result: 1, page: 1 }
+    var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
@@ -243,9 +242,10 @@
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
-        // ini data from ajax
+		if( searchData.result ) callOrderListData.result = parseInt(searchData.result) // get result params
         caller(orderList_api, callOrderListData, orderListD) // orderListD
-        // check if api are all loaded every 500 ms 
+		
+		// check if api are all loaded every 500 ms 
         isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
             if( isReadyOrder && isReadyCommon) {
@@ -257,16 +257,7 @@
         }, 500);
 	});
 
-
-	
-
-	
-
-	
-	
-	
-
-	// toggle
+	// toggle the m_order details content
 	function toggleInfo(key, e) {
 		$('div[key="' + key + '"]:not(:first-child)').slideToggle();
 		let isopen = $(e).attr('isopen')
