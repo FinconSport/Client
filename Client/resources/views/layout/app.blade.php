@@ -192,6 +192,9 @@
 		var v = {}
 
 		function caller( url, data, obj, isUpdate = 0 ) {
+
+			console.log(data)
+
 			$.ajax({
 				url: url,
 				method: 'POST',
