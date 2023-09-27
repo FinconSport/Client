@@ -638,6 +638,7 @@ class LsportApiController extends Controller {
                     //'away_id' => $dv->away_id,
                     'fixture_id' => $dv->fixture_id,
                     'start_time' => $dv->start_time,
+                    'order_by' => strtotime($dv->start_time),
                     'status' => $fixture_status,
                     'last_update' => $dv->f_last_update,
                     'home_team_id' => $dv->th_team_id,
@@ -685,7 +686,8 @@ class LsportApiController extends Controller {
                 ->where('mb.fixture_id', $fixture_id)
                 ->where('mb.market_id', $market_id)
                 ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
-                ->orderBy('mb.bet_id', 'ASC')  //注意排序
+                //->orderBy('mb.bet_id', 'ASC')  //注意排序
+                ->orderBy('mb.name_en', 'ASC')  //注意排序
                 ->get();
 
                 if ($marketBetData === false) {
@@ -704,9 +706,11 @@ class LsportApiController extends Controller {
                     }
 
                     // 包入 market_bet 賠率資料 ---------------
-                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                    //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
+                        'market_bet_name_en' => $bv->mb_name_en,
                         //'base_line' => $bv->base_line,
                         'line' => $bv->line,
                         'price' => $bv->price,
