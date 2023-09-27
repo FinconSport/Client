@@ -118,12 +118,17 @@
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
     <div class="betLabel"></div>
-    <div class="betItemDiv" index=0 onclick="openCal($(this))">
+    <div class="betItemDiv" index=0>
         <span class="rate_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
     </div>
-    <div class="betItemDiv" index=1 onclick="openCal($(this))">
+    <div class="betItemDiv" index=1>
+        <span class="rate_name"></span>&ensp;
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock"></i>
+    </div>
+    <div class="betItemDiv" index=2>
         <span class="rate_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
@@ -189,6 +194,7 @@
 
     // match list data
     var matchListD = {}
+    var oldMatchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
     const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
 
@@ -196,6 +202,12 @@
     var betLimitationD = {}
     var callLimitationData = {}
     const betLimitation_api = ''
+
+    // game priority and gameTitle
+    var priorityArr = null
+    var gameTitle = null
+
+    
     /* ===== DATA LAYER ===== */
     
     /* ===== VIEW LAYER ===== */
@@ -217,7 +229,7 @@
             el_toggle.attr('id', 'toggleContent_' + k)
             el_toggle_title.attr('id', `catWrapperTitle_${k}`)
             el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-            el_toggle_text.html(k)
+            el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
             el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
             el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
             el_toggle_content.attr('id', `catWrapperContent_${k}`)
@@ -231,18 +243,18 @@
                 let league_toggle_count = league_toggle.find('.legToggleCount')
                 let league_toggle_dir = league_toggle.find('.legToggleDir')
 
-                league_toggle.attr('id', `seriesWrapperTitle_${k}_${k2}`)
-                league_toggle.attr('onclick', `toggleSeries('${k}_${k2}')`)
+                league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
+                league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
                 league_toggle.attr('league_id', v2.league_id)
                 league_toggle_name.html(v2.league_name)
-                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${k2}_count`)
-                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${k2}_dir`)
+                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
+                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
 
                 league_toggle.removeAttr('hidden')
                 league_toggle.removeAttr('template')
 
                 let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
-                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${k2}`)
+                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
 
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let card = $('div[template="fixtureCardTemplate"]').clone()
@@ -258,22 +270,22 @@
                     away_team_info.find('.scoreSpan').html()
 
                     // bet area
-                    let priorityArr = langTrans['sportBetData'][sport]['priorityArr']
-                    let gameTitle = langTrans['sportBetData'][sport]['gameTitle']
                     priorityArr.forEach(( i, j ) => {
                         let bet_div = $('div[template="betDiv"]').clone()
                         let betData = Object.values(v3.list).find(m => m.priority === i)
+                        bet_div.attr('priority', i)
                         bet_label = bet_div.find('.betLabel')
                         bet_label.html(gameTitle[j])
 
                         let firstDiv = bet_div.find('div[index=0]')
                         let secondDiv = bet_div.find('div[index=1]')
+                        let thirdDiv = bet_div.find('div[index=2]')
                         let item = null
                         if( betData && Object.keys(betData.list).length > 0 ) {
                             Object.entries(betData.list).map(([k4, v4], s) => { 
                                 item = bet_div.find('.betItemDiv').eq(s)
-                                
                                 // set attribute
+                                item.attr('priority', i)
                                 item.attr('fixture_id', k3)
                                 item.attr('market_id', betData.market_id)
                                 item.attr('market_bet_id', v4.market_bet_id)
@@ -286,19 +298,35 @@
                                 
                                 item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
                                 item.find('.odd').html(v4.price)
-                                item.find('i').hide()
 
-                                item.find('.rate_name').show()
-                                item.find('.odd').show()
-                                item.find('i').hide()
+                                if( v4.status === 1 ) {
+                                    item.find('.rate_name').show()
+                                    item.find('.odd').show()
+                                    item.find('i').hide()
+                                    item.attr('onclick', 'openCal($(this))')
+                                } else {
+                                    item.find('.rate_name').hide()
+                                    item.find('.odd').hide()
+                                    item.find('i').show()
+                                    item.removeAttr('onclick')
+                                }
+                                
                             })
                         } else {
                             firstDiv.find('.rate_name').hide()
                             firstDiv.find('.odd').hide()
                             firstDiv.find('i').show()
+                            firstDiv.removeAttr('onclick')
                             secondDiv.find('.rate_name').hide()
                             secondDiv.find('.odd').hide()
                             secondDiv.find('i').show()
+                            secondDiv.removeAttr('onclick')
+                            if( thirdDiv ) {
+                                thirdDiv.find('.rate_name').hide()
+                                thirdDiv.find('.odd').hide()
+                                thirdDiv.find('i').show()
+                                thirdDiv.removeAttr('onclick')
+                            }
                         }
 
                         bet_div.removeAttr('hidden')
@@ -324,6 +352,12 @@
             $('#indexContainerLeft').append(el_toggle)
         })
 
+        // 滾球移到最上面
+        let parentNode = $('#indexContainerLeft')
+        let livingNode = $('#toggleContent_living')
+        livingNode.prependTo(parentNode);
+
+        // 統計
         statistics()
 
         // loop matchListD to generate html element here
@@ -347,6 +381,15 @@
         isReadyIndexInt = setInterval(() => {
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex && isReadyCommon) {
+                // game priority and gameTitle
+                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                gameTitle = langTrans['sportBetData'][sport]['gameTitle']
+
+                // soccer has three bet div others only two
+                if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
+
+
+                oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
@@ -411,11 +454,93 @@
     }
 
     // render view layer here
-    function renderView( ) {
-        console.log('renderView')
+    function renderView() {
+        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
+                    let isExist = $(`#${k3}`).length > 0 ? true : false
+                    if( isExist ) {
+                        priorityArr.forEach(( i, j ) => {
+                            let bet_div = $(`#${k3} div[priority=${i}]`)
+                            let betData = Object.values(v3.list).find(m => m.priority === i)
+                            let firstDiv = bet_div.find('div[index=0]')
+                            let secondDiv = bet_div.find('div[index=1]')
+                            let thirdDiv = bet_div.find('div[index=2]')
+                            let item = null
+                            if( betData && Object.keys(betData.list).length > 0 ) {
+                                Object.entries(betData.list).map(([k4, v4], s) => { 
+                                    item = bet_div.find('.betItemDiv').eq(s)
+                                    // old attribute
+                                    let market_bet_id = item.attr('market_bet_id')
+                                    let price = item.attr('bet_rate')
 
+                                   
+                                    // 判斷盤口是否有改變
+                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
+                                        // 判斷賠率是否有改變
+                                        if( parseFloat(price) > parseFloat(v4.price) ) {
+                                            console.log('賠率::' + price + ' ->' + v4.price)
+                                            // 賠率下降
+                                            lowerOdd(k3, betData.market_id, v4.market_bet_id)
+                                        }
+                                        if( parseFloat(price) < parseFloat(v4.price) ) {
+                                            console.log('賠率::' + price + ' ->' + v4.price)
+                                            // 賠率上升
+                                            raiseOdd(k3, betData.market_id, v4.market_bet_id)
+                                        }
+                                    } else {
+                                        console.log(item.attr('home') + ' VS ' + item.attr('away'))
+                                        console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
+                                    }
 
+                                    
+                                    // set attribute
+                                    item.attr('market_bet_id', v4.market_bet_id)
+                                    item.attr('bet_rate', v4.price)
+                                    item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    // 賦值
+                                    item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
+                                    item.find('.odd').html(v4.price)
 
+                                    if( v4.status === 1 ) {
+                                        item.find('.rate_name').show()
+                                        item.find('.odd').show()
+                                        item.find('i').hide()
+                                        item.attr('onclick', 'openCal($(this))')
+                                    } else {
+                                        item.find('.rate_name').hide()
+                                        item.find('.odd').hide()
+                                        item.find('i').show()
+                                        item.removeAttr('onclick')
+                                    }
+                                })
+                            } else {
+                                firstDiv.find('.rate_name').hide()
+                                firstDiv.find('.odd').hide()
+                                firstDiv.find('i').show()
+                                firstDiv.removeAttr('onclick')
+
+                                secondDiv.find('.rate_name').hide()
+                                secondDiv.find('.odd').hide()
+                                secondDiv.find('i').show()
+                                secondDiv.removeAttr('onclick')
+
+                                if( thirdDiv ) {
+                                    thirdDiv.find('.rate_name').hide()
+                                    thirdDiv.find('.odd').hide()
+                                    thirdDiv.find('i').show()
+                                    thirdDiv.removeAttr('onclick')
+                                }
+                            }
+                        });
+                    } else {
+                        // 新的賽事
+                    }
+                })
+            })
+        })
+
+        statistics()
 
     }
 
@@ -504,41 +629,41 @@
     }
 
     // 賠率上升
-    function raiseOdd(match_id, rate_id, id, updateRate) {
+    function raiseOdd(fixture_id, market_id, market_bet_id) {
+        console.log('raiseOdd')
         // 先移除現有樣式
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('raiseOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-up').remove()
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('lowerOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
 
         // 再加上賠率變化樣式
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').addClass('raiseOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .odd').html(updateRate)
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .odd').after('<i class="fa-solid fa-caret-up"></i>')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-solid fa-caret-up"></i>')
 
         // 三秒後移除
         setTimeout(() => {
-            $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('raiseOdd')
-            $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-up').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
         }, 3000);
     }
     // 賠率下降
-    function lowerOdd(match_id, rate_id, id, updateRate) {
+    function lowerOdd(fixture_id, market_id, market_bet_id) {
+        console.log('lowerOdd')
         // 先移除現有樣式
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('raiseOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-up').remove()
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('lowerOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
 
         // 再加上賠率變化樣式
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').addClass('lowerOdd')
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .odd').html(updateRate)
-        $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .odd').after('<i class="fa-sharp fa-solid fa-caret-down"></i>')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-sharp fa-solid fa-caret-down"></i>')
 
         // 三秒後移除
         setTimeout(() => {
-            $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + ']').removeClass('lowerOdd')
-            $('div[match_id=' + match_id + '][rate_id=' + rate_id + '][rate=' + id + '] .fa-caret-down').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
         }, 3000);
     }
 
@@ -729,8 +854,6 @@
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
         })
-
-        
     }
 
     // 餘額

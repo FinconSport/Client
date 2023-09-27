@@ -164,13 +164,12 @@
 
 		// ===== DATA LAYER ======
 
-		console.log('player')
-		console.log(@json(session('player')));
+		
 
 		// player and sport_id
 		const player = @json(session('player.id'));
 		const token = 12345
-		const sport = parseInt(searchData.sport)
+		var sport = parseInt(searchData.sport)
 
 		// loading page control
 		var isReadyCommon = false
@@ -190,15 +189,18 @@
 		// sportList
 		var sportListD = {}
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
+		var v = {}
 
 		function caller( url, data, obj, isUpdate = 0 ) {
+
+			console.log(data)
+
 			$.ajax({
 				url: url,
 				method: 'POST',
 				data: data,
 				success: function(data) {
 					const json = JSON.parse(data); 
-					console.log(json)
 					if(json.gzip) { // 解壓縮
 						const str = json.data;
 						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
@@ -206,13 +208,10 @@
 						const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
 						json.data = uncompressed
 					}
+					Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
 					if( isUpdate === 0 ) {
-						Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
-					} else {
-						// ajax更新 不可以整包覆蓋
-						// loop json.data-> 比較時間戳 不一樣再更新該筆就好
-					}
-					showSuccessToast(json.message)
+						showSuccessToast(json.message)
+					} 
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.error('Ajax error:', textStatus, errorThrown);
@@ -255,11 +254,11 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			var sportType = sport;
-			console.log(sportType);
-
 			const currentUrl = window.location.href;
 			const noPath = window.location.pathname;
+
+			var sportType = sport;
+			console.log(sportType);
 
 			const urlMappings = {
 				'/?sport': 'lf_sport',
@@ -273,15 +272,24 @@
 			};
 
 			if (currentUrl.includes('index') || noPath == '/') {
-				sportType = 1; // Update sportType to 1 based on conditions
 				$("#lf_sport").addClass('active');
-				$("#lf_sport .submenu-toggle-list").css('max-height', '900px');
+				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
+				// if (currentUrl.includes('index') || (window.location.pathname === '/' && window.location.search === '')) {
+				// 	var anchor = document.createElement('a');
+				// 	anchor.href = "/?sport=" + sportListD.data[0].sport_id;
+				// 	var clickEvent = new MouseEvent('click', {
+				// 		'view': window,
+				// 		'bubbles': true,
+				// 		'cancelable': true
+				// 	});
+				// 	anchor.dispatchEvent(clickEvent);
+				// }
 			}
 
 			for (const urlFragment in urlMappings) {
 				if (currentUrl.includes(urlFragment)) {
 					$(`#${urlMappings[urlFragment]}`).addClass('active currentpage');
-					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).css('max-height', '900px');
+					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
 					break;
 				}
 			}
@@ -364,6 +372,7 @@
 			// check if api are all loaded every 500 ms 
 			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
+					if( !sport ) sport = sportListD.data[0].sport_id // default sport
 					isReadyCommon = true
 					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking
