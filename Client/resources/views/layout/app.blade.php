@@ -327,6 +327,7 @@
 			// left menu - sportListD 
 			const pathName = window.location.pathname;
 			var currentPage = null
+			var currentResult = null
 			switch (pathName) {
 				case '/':case '/index':
 					currentPage = 'lf_sport'
@@ -335,12 +336,13 @@
 					currentPage = 'lf_mOrder'
 					break;
 				case '/order':
-					currentPage = 'lf_order'
-					break;
-				case '/order?result=1':
-					currentPage = 'result_settled'
-				case '/order?result=0':
-					currentPage = 'result_unsettled'
+					if (window.location.search === '?result=1') {
+						currentResult = 'result_settled';
+						currentPage = 'lf_order';
+					} else if (window.location.search === '?result=0') {
+						currentResult = 'result_unsettled';
+						currentPage = 'lf_order';
+					}
 					break;
 				case '/match':
 					currentPage = 'lf_match'
@@ -382,7 +384,7 @@
 				$(`#${currentPage}`).addClass('active currentpage');
 				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
 				$(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle')
-				$(`#${currentPage}`).addClass('openToggle')
+				$(`#${currentResult}`).addClass('openToggle')
 
 			}
 
