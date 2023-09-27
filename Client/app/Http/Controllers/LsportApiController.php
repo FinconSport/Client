@@ -679,6 +679,7 @@ class LsportApiController extends Controller {
                     'mb.price',
                     'mb.status AS status',
                     'mb.last_update AS last_update',
+                    'mb.name_en AS mb_name_en',
                 )
                 ->where('mb.fixture_id', $fixture_id)
                 ->where('mb.market_id', $market_id)
@@ -1828,6 +1829,7 @@ class LsportApiController extends Controller {
                 'mb.price',
                 'mb.status AS status',
                 'mb.last_update AS last_update',
+                'mb.name_en AS mb_name_en',
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
