@@ -258,7 +258,7 @@
 
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
-			modalContainer.append(modalContainerTxt); 
+			// modalContainer.append(modalContainerTxt); 
 
 			// left menu - sportListD 
 			const pathName = window.location.pathname;
