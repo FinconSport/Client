@@ -282,9 +282,25 @@
 				}).animate({
 					opacity: 1
 				}, 500);
+
+				// to close the modal when clicking outside
+				$('.modaldiv').click(function (e) {
+					if ($(e.target).hasClass('modal')) {
+						closeModal(modalId);
+					}
+				});
 			}
 
-			// Attach a click event handler to the links
+			// Function to close the modal
+			function closeModal(modalId) {
+				$('#' + modalId).animate({
+					opacity: 0
+				}, 500, function() {
+					$(this).css('display', 'none');
+				});
+				$('.modaldiv').off('click'); // Remove the click event handler
+			}
+
 			$('.marqlink').click(function (e) {
 				e.preventDefault(); // Prevent the default behavior of the link
 				var modalId = $(this).attr('href').substring(1); // Get the modal ID from the href attribute
