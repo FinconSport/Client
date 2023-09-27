@@ -509,7 +509,7 @@
                             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
                             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
                             let timerStr = v3.periods.period + '局'
-                            v3.periods.Turn === '1' ? timerStr += '下半' : timerStr += '上半'
+                            v3.periods.Turn === '1' ? timerStr += '下' : timerStr += '上'
                             time.html(timerStr)
                         }
 
