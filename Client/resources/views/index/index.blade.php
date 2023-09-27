@@ -483,16 +483,16 @@
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
-                    let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
+                    let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
+                    
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
-                        
-                        let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
+                        let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
