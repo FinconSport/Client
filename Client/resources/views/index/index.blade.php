@@ -242,7 +242,7 @@
             $('#indexContainerLeft').append(el_toggle)
         }
 
-        function createCateLeague(k, k2, v2) {
+        function createLeague(k, k2, v2) {
             let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
             let league_toggle_name = league_toggle.find('.legToggleName')
             let league_toggle_count = league_toggle.find('.legToggleCount')
@@ -355,7 +355,7 @@
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                createCateLeague(k, k2, v2)
+                createLeague(k, k2, v2)
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
                 })
@@ -473,18 +473,18 @@
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
-                    // let isSwitchCate = $(`#catWrapperContent_${k} #${k3}`).length > 0 ? false : true // is changind living and early
-                    // if( isSwitchCate ) {
-                    //     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false
-                    //     if( isLeagueExist ) {
-                    //         let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
-                    //         let livingNode = $(`#${k3}`)
-                    //         livingNode.prependTo(parentNode);
-                    //     } else {
-
-                    //     }
-                    // }
                     if( isExist ) {
+                        let isSwitchCate = $(`#catWrapperContent_${k} #${k3}`).length > 0 ? false : true // is changing early to living
+                        let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
+                        let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
+                        if( isSwitchCate ) {
+                            if( !isCateExist ) createCate(k, v)
+                            if( !isLeagueExist ) createLeague(k, k2, v2)
+                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
+                            let livingNode = $(`#${k3}`)
+                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
+                        }   
+
                         let card = $(`#${k3}`) // 有可能early -> living
                         card.attr('cate', k)
                         priorityArr.forEach(( i, j ) => {
@@ -561,6 +561,9 @@
                         });
                     } else {
                         // 新的賽事
+                        if( !isCateExist ) createCate(k, v)
+                        if( !isLeagueExist ) createLeague(k, k2, v2)
+                        createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
                     }
                 })
             })
@@ -571,13 +574,12 @@
             let cate = $(this).attr('cate')
             let league_id = $(this).attr('league_id')
             let fixture_id = $(this).attr('id')
-            let testArr = matchListD.data[cate][sport].list[league_id].list
+            let testArr = matchListD.data[cate][sport]?.list[league_id]?.list
             console.log(testArr)
         });
 
 
         statistics()
-
     }
 
     // detect if there's still package need to be processed
