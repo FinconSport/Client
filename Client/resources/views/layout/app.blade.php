@@ -302,7 +302,7 @@
 
 				$(`#${currentPage}`).addClass('active currentpage');
 				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
-				$(`#subMenuContainer .currentpage div[key="${sport}"]`).addClass('openToggle')
+				$(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle')
 
 			}
 
