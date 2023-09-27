@@ -26,8 +26,9 @@ class Result extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			accout_api: 'https://sportc.asgame.net/api/v1/common_account?token=' + window.token+ '&player=' + window.player+ '',
-			sport_id: 1,
+			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player,
+			match_sport: 'https://sportc.asgame.net/api/v2/match_sport?token=' + window.token+ '&player=' + window.player,
+			sport_id: window.sport,
 			isRefrehingBalance: false,
 		};
 	}
@@ -81,6 +82,7 @@ class Result extends React.Component {
 			})
 		}, 1000);
 		this.caller(this.state.accout_api, 'account_res')
+		this.caller(this.state.match_sport, 'sportList')
 	}
 
 	// 刷新錢包餘額
@@ -93,7 +95,6 @@ class Result extends React.Component {
 
 	// 下拉更新
 	handleRefresh =() => {
-		// console.log('handleRefresh')
 		this.setState({
 			toastMsg: [],
 			menu_id: window.menu,
@@ -129,8 +130,8 @@ class Result extends React.Component {
 				<div style={GameWrapperStyle} id="ResultOuterContainer">
 					<CommonSliderUser ref={(ref) => (this.sliderRef = ref)} api_res={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} style={{ width: '74%' }}>
-						<ResultMenuNav sport_id={this.state.sport_id} api_res={this.state.ResultList_res} callBack={this.changeTab} />
-						<ResultContent sport_id={this.state.sport_id} callBack={this.changeTab}/>
+						<ResultMenuNav api_res={this.state.sportList} callBack={this.changeTab} />
+						<ResultContent sport_id={this.state.sport_id}/>
 						<div onClick={this.handleCallBMethod} style={slideIconStyle}><GrMenu /></div>
 					</PullToRefresh>
 					<CommonFooter/>

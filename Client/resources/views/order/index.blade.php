@@ -2,7 +2,7 @@
 
 @section('content')
 	<!-- 搜尋框 -->
-	<div id='searchArea' style="height: 5.5rem;">
+	<!-- <div id='searchArea' style="height: 5.5rem;">
 		<div class="w-100" style='display: inline-flex'>
 			<div style="width: 10%; margin-left: 1%">
 				<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.sport') }}</p>
@@ -94,7 +94,7 @@
 			<div>{{ $sport_list[$search['sport']] }}</div>
 		@endif
 			
-	</div>
+	</div> -->
 
 
 	<div id="orderContainer">
@@ -215,14 +215,6 @@
 @push('main_js')
 <script>
 
-
-	/* ===== PECO ===== 
-	1. pagination?
-	2. api因為先用手機版本的，不是status而是result(已結算、未結算)
-	3. api待定: seriesList, statusList
-	===== PECO ===== */
-
-
 	// 語系
     var langTrans = @json(trans('order'));
 
@@ -235,52 +227,7 @@
     var callOrderListData = { token: token, player: player, result: 1, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	// seriesList
-	var seriesListD = {}
-    var callSeriesListData = commonCallData
-	const seriesList_api = '' // 目前沒有
-
-	// statusList
-	var statusListD = {}
-    var callStatusListData = commonCallData
-	const statusList_api = '' // 目前沒有
-
 	function renderView() {
-
-		// loop sportListD, seriesListD, statusListD here to generate the search select then append into the page
-
-
-
-
-		// loop sportListD, seriesListD, statusListD here to generate the search select then append into the page
-
-
-		// search condition setting
-		if( searchData.sport !== undefined ) {
-			$('select[name="sport"]').val(searchData.sport)
-			$('select[name="sport"]').trigger('change')
-		}
-        if( searchData.series_id !== undefined ) {
-			$('select[name="series_id"]').val(searchData.series_id)
-			$('select[name="series_id"]').trigger('change')
-		}
-		if( searchData.order_id !== undefined ) {
-			$('input[name="order_id"]').val(searchData.order_id)
-			$('input[name="order_id"]').trigger('change')
-		}
-		if( searchData.status !== undefined ) {
-			$('select[name="status"]').val(searchData.status)
-			$('select[name="status"]').trigger('change')
-		}
-		if( searchData.start_time !== undefined ) {
-			$('input[name="start_time"]').val(searchData.start_time)
-			$('input[name="start_time"]').trigger('change')
-		}
-		if( searchData.end_time !== undefined ) {
-			$('input[name="end_time"]').val(searchData.end_time)
-			$('input[name="end_time"]').trigger('change')
-		}
-
 		// loop orderListD.data here to generate the html element then append into the page
 
 
@@ -291,20 +238,13 @@
 
 
 		// loop orderListD.data here to generate the html element then append into the page
-
 	}
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
-
 		// ===== DATA LATER =====
-
         // ini data from ajax
         caller(orderList_api, callOrderListData, orderListD) // orderListD
-        // caller(seriesList_api, callSeriesListData, seriesListD) // seriesListD
-        // caller(statusList_api, callStatusListData, statusListD) // statusListD
-		// sportListD can be accessed global
-
         // check if api are all loaded every 500 ms 
         isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
@@ -318,90 +258,13 @@
 	});
 
 
-	// search area series filter
-	function filterSeiries(type = 0) {
-		if( type === 0 ) {
-			$('.clearSearch').dropdown('clear')
-		}
-		let val = $('select[name="sport"]').val()
-		setTimeout(() => {
-			$('#series_id select option').each(function() {
-				let id = $(this).val()
-				if ($(this).attr('sport') === val) {
-					$('#series_id div[data-value="'+id+'"]').show()
-				} else {
-					$('#series_id div[data-value="'+id+'"]').hide()
-				}
-			});
-		}, 100);
-	}
-
-	// left side menu
-    $('.menuTypeBtn').click(function(){
-        let key = $(this).attr('key')
-        if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
-            $('div[key="order"] .slideMenuTag').css('border-bottom-left-radius','0')
-            $('div[key="order"] .slideMenuTag').css('border-top-left-radius','0')
-            $('div[key="order"] .slideMenuTag').css('background-color','#415b5a')
-            $('div[key="order"] .slideMenuTag').css('color','white')
-
-            $('div[key="m_order"] .slideMenuTag').css('border-bottom-right-radius','0')
-            $('div[key="match"] .slideMenuTag').css('border-top-right-radius','0')
-        } else {
-            $('div[key="order"] .slideMenuTag').css('border-bottom-left-radius','25px')
-            $('div[key="order"] .slideMenuTag').css('border-top-left-radius','25px')
-            $('div[key="order"] .slideMenuTag').css('background-color','rgb(196, 211, 211)')
-            $('div[key="order"] .slideMenuTag').css('color','#415b5a')
-
-            $('div[key="m_order"] .slideMenuTag').css('border-bottom-right-radius','15px')
-            $('div[key="match"] .slideMenuTag').css('border-top-right-radius','15px')
-        }
-    })
-
-	// pagination
-	function navPage(pagination) {
-		let queryData = @json($search);
-		let searchPage = @json($search)['page']
-		delete queryData.page;
-		switch (pagination) {
-			case 0:
-				searchPage = 1
-				break;
-			case 1:
-				searchPage -= 1
-				break;
-			case 2:
-				searchPage += 1
-				break;
-			case 3:
-				searchPage = @json($pagination)['max_page']
-				break;
-		}
-		queryData['page'] = searchPage
-		var queryString = new URLSearchParams(queryData).toString();
-		window.location.href = '/order?' + queryString;
-	}
 	
-	// order search
-	function searchOrder() {
-		let queryData = {}
-		queryData.page = 1
-		let sSport = $('select[name="sport"]').val()
-		let sOrderId = $('input[name="order_id"]').val()
-		let sSeriesId = $('select[name="series_id"]').val()
-		let sStatus = $('select[name="status"]').val()
-		let sStartTime = $('input[name="start_time"]').val()
-		let sEndTime = $('input[name="end_time"]').val()
-		if(sSport) queryData.sport = sSport
-		if(sOrderId) queryData.order_id = sOrderId
-		if(sSeriesId) queryData.series_id = sSeriesId
-		if(sStatus) queryData.status = status
-		if(sStartTime) queryData.start_time = sStartTime
-		if(sEndTime) queryData.end_time = sEndTime
-		var queryString = new URLSearchParams(queryData).toString();
-		window.location.href = '/order?' + queryString;
-	}
 
+	
+
+	
+	
+	
 
 	// toggle
 	function toggleInfo(key, e) {
@@ -418,33 +281,5 @@
 		$(e).html(switchStr)
 		$(e).attr('isopen', isopen)
 	}
-
-
-  	// for test
-    console.log("menu_count");
-    console.log(@json($menu_count));
-
-    console.log("sport_list");
-    console.log(@json($sport_list));
-
-    console.log("series_list");
-    console.log(@json($series_list));
-    
-    console.log("type_list");
-    console.log(@json($type_list));
-
-    console.log("status_list");
-    console.log(@json($status_list));
-
-    console.log("order_list");
-    console.log(@json($data));
-
-    console.log("pagination");
-    console.log(@json($pagination));
-
-    console.log("search");
-    console.log(@json($search));
-    
-
 </script>
 @endpush

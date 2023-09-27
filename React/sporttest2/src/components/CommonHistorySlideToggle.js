@@ -76,11 +76,11 @@ class CommonHistory extends React.Component {
                     <div className='teamSpan'>
                         <div className="teamSpanMarquee">
                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                { val.bet_data[0].series_name }&emsp;&emsp;&emsp;
+                                { val.bet_data[0].league_name }&emsp;&emsp;&emsp;
                             </Marquee>
                         </div>
                         <span className="teamSpanSpan">
-                            { val.bet_data[0].series_name }
+                            { val.bet_data[0].league_name }
                         </span>
                     </div>
                     <div className='row m-0'>
@@ -99,42 +99,38 @@ class CommonHistory extends React.Component {
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    { val.bet_data[0].type_item_name }&ensp;({ val.bet_data[0].type_name })&emsp;&emsp;&emsp;
+                                    { langText.CommonHistory.sportPriority[window.sport][val.bet_data[0].market_priority] }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                { val.bet_data[0].type_item_name }&ensp;({ val.bet_data[0].type_name })
+                                { langText.CommonHistory.sportPriority[window.sport][val.bet_data[0].market_priority] }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
                             </span>
                         </div>
                         <div className='col-3 p-0 text-right'>
                             {val.m_order === 0 || this.state.isOpen === true ? `@${val.bet_data[0]?.bet_rate}` : null}
                         </div>
-
                     </div>
-                    {/* 比分 */}
                     {
-                        val.bet_data[0]?.home_team_score && val.bet_data[0]?.away_team_name && (
-                            <>
-                                <div className='row m-0'>
-                                    <div className='col-9 p-0'>
-                                        {val.bet_data[0].home_team_name}
-                                    </div>
-                                    <div className='col-3 p-0 text-right'>
-                                        {val.bet_data[0].home_team_score}
-                                    </div>
+                        val.bet_data[0].home_team_score && val.bet_data[0].away_team_name &&
+                        <>
+                            <div className='row m-0'>
+                                <div className='col-9 p-0'>
+                                    {val.bet_data[0].home_team_name}
                                 </div>
-                                <div className='row m-0'>
-                                    <div className='col-9 p-0'>
-                                        {val.bet_data[0].away_team_name}
-                                    </div>
-                                    <div className='col-3 p-0 text-right'>
-                                        {val.bet_data[0].away_team_score}
-                                    </div>
+                                <div className='col-3 p-0 text-right'>
+                                    {val.bet_data[0].home_team_score}
                                 </div>
-                            </>
-                        )
+                            </div>
+                            <div className='row m-0'>
+                                <div className='col-9 p-0'>
+                                    {val.bet_data[0].away_team_name}
+                                </div>
+                                <div className='col-3 p-0 text-right'>
+                                    {val.bet_data[0].away_team_score}
+                                </div>
+                            </div>
+                        </>
                     }
-                    {/* 比分 */}
                 </div>
                 <ToggleContainer style={this.state.isOpen === true ? {maxHeight: val.bet_data.length * 4.5 + 'rem'} : null}>
                     {Object.entries(val.bet_data).map(([k, v]) =>
@@ -143,11 +139,11 @@ class CommonHistory extends React.Component {
                                 <div className='teamSpan'>
                                     <div className="teamSpanMarquee">
                                         <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                            {v.series_name}&emsp;&emsp;&emsp;
+                                            {v.league_name}&emsp;&emsp;&emsp;
                                         </Marquee>
                                     </div>
                                     <span className="teamSpanSpan">
-                                        {v.series_name}
+                                        {v.league_name}
                                     </span>
                                 </div>
                                 <div className='row m-0'>
@@ -166,11 +162,11 @@ class CommonHistory extends React.Component {
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                {v.type_item_name}&ensp;({v.type_name})&emsp;&emsp;&emsp;
+                                                { langText.CommonHistory.sportPriority[window.sport][v.market_priority] } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            {v.type_item_name}&ensp;({v.type_name})
+                                            { langText.CommonHistory.sportPriority[window.sport][v.market_priority] }&ensp;({v.market_bet_name + v.market_bet_line})
                                         </span>
                                     </div>
                                     <div className='col-3 p-0 text-right'>
@@ -179,30 +175,27 @@ class CommonHistory extends React.Component {
                                         </span>
                                     </div>
                                 </div>
-                                {/* 比分 */}
                                 {
-                                    v?.home_team_score && v?.away_team_score && (
-                                        <>
-                                            <div className='row m-0'>
-                                                <div className='col-9 p-0'>
-                                                    { v.home_team_name }
-                                                </div>
-                                                <div className='col-3 p-0 text-right'>
-                                                    { v.home_team_score }
-                                                </div>
+                                    v.home_team_score && v.away_team_score &&
+                                    <>
+                                        <div className='row m-0'>
+                                            <div className='col-9 p-0'>
+                                                { v.home_team_name }
                                             </div>
-                                            <div className='row m-0'>
-                                                <div className='col-9 p-0'>
-                                                    { v.away_team_name }
-                                                </div>
-                                                <div className='col-3 p-0 text-right'>
-                                                    { v.away_team_score }
-                                                </div>
+                                            <div className='col-3 p-0 text-right'>
+                                                { v.home_team_score }
                                             </div>
-                                        </>
-                                    )
+                                        </div>
+                                        <div className='row m-0'>
+                                            <div className='col-9 p-0'>
+                                                { v.away_team_name }
+                                            </div>
+                                            <div className='col-3 p-0 text-right'>
+                                                { v.away_team_score }
+                                            </div>
+                                        </div>
+                                    </>
                                 }
-                                {/* 比分 */}
                             </ToggleDiv>
                         )
                     )}

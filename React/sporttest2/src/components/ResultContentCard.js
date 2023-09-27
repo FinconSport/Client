@@ -15,7 +15,6 @@ const ResultCard_item = {
     background: '#e2f0f0',
     borderRadius: '15px',
     marginBottom: '1rem',
-    paddingTop: '1rem',
     zIndex: 1,
     transition: 'opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease', 
 };
@@ -95,23 +94,9 @@ class ResultContentCard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            isOtherBetOpen: false,
-            swiperIndex: 0,
-            match_id: this.props.data.match_id,
-            prevBtnOpacity: '0',
-            nextBtnOpacity: '1',
 		};
-        this.slideToggleRef = React.createRef();
 	}
     
-    // 右邊滑動
-    swiperHandler = (swiperIndex) => {
-        this.setState({
-            swiperIndex: swiperIndex
-        })
-        this.props.swiperTabCallBack(swiperIndex)
-    }
-
     // 文字太長變成跑馬燈
     textOverFlow = (id) => {
         $('div[cardid="' + id + '"] .teamSpan').each(function(){
@@ -126,30 +111,10 @@ class ResultContentCard extends React.Component {
     }
 
     componentDidMount() {
-        this.textOverFlow(this.props.data.match_id)
+        this.textOverFlow(this.props.data.fixture_id)
     } 
-    
-    handleOpacityClick = () => {
-        const prevElement = document.querySelector('.swiper-slide-prev');
-        if (!prevElement) {
-            this.setState({ prevBtnOpacity: '0' });
-        } else {
-            this.setState({ prevBtnOpacity: '1' });
-        }
-
-        const nextElement = document.querySelector('.swiper-slide-next');
-        if (!nextElement) {
-            this.setState({ nextBtnOpacity: '0' });
-        } else {
-            this.setState({ nextBtnOpacity: '1' });
-        }
-    }
-
-    // 圖片毀損
-    handleError(event) {
-        event.target.src = drfaultImg;
-    }
-
+  
+   
     // 日期格式
     formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -162,535 +127,105 @@ class ResultContentCard extends React.Component {
 
 	render() {
 		const v = this.props.data
-        const { prevBtnOpacity, nextBtnOpacity } = this.state;
-
         const sport = parseInt(window.sport)
-        var fixedPriorityArr = []
         var gameTitle = []
-        if(sport === 1) {
-           fixedPriorityArr = [0, 1, 2]
-           gameTitle = [langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore]
+        if( sport === 6046 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore]]
         }
-        if(sport === 2) {
-            fixedPriorityArr = [0, 1, 2, 3, 4, 5, 6]
-            gameTitle = [langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore,langText.ResultTitle.firstQuarterScore,langText.ResultTitle.secondQuarterScore,langText.ResultTitle.thirdQuarterScore,langText.ResultTitle.fourthQuarterScore]
-        }
-        if(sport === 3) {
-            fixedPriorityArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-            gameTitle = [langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo,langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive,langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight,langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven,langText.ResultTitle.gameTwelve,langText.ResultTitle.overtime,langText.ResultTitle.bttngAve]
+        if( sport === 154914 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
+            [langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive],
+            [langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight],
+            [langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven],
+            [langText.ResultTitle.gameTwelve]]
         }
         
         if ( v !== undefined ){
+            let scores = v.scoreboard
+            let scoreData = scores.reduce((acc, currentValue, currentIndex) => {
+                if (currentIndex % 3 === 0) {
+                    acc.push([]);
+                }
+                acc[acc.length - 1].push(currentValue);
+                return acc;
+            }, []);
             return (
-                <div style={ ResultCard_item } cardid={v.match_id}>
+                <div style={ ResultCard_item } cardid={v.fixture_id}>
                     <div>
                         <div className='row m-0'>
                             {/* left part */}
                             <div className='col-45' style={{ padding: '0 0rem 0 0.5rem'}}>
-                                <div className='row m-0' style={rowHeight2}>
-                                    <div className='col-10 p-0'>
-                                        <p className='mb-0 mt-1'>{this.formatDateTime(v.start_time)}</p>
-                                    </div>
+                                <div style={rowHeight2}>
+                                    <p className='mb-0 mt-1'>{this.formatDateTime(v.start_time)}</p>
                                 </div>
-                                <div className='row m-0' style={rowHeight2}>
-                                    <div className='col-2 p-0'>
-                                        {
-                                            v?.home_team_logo && <img style={ResultTeamIcon} alt='home' src={v.home_team_logo}  onError={this.handleError}/>
-                                        }
-                                    </div>
-                                    <div className='col-9 p-0 teamSpan' style={TeamName}>
+                                <div style={rowHeight2}>
+                                    <div className='p-0 teamSpan' style={TeamName}>
                                         <div className="teamSpanMarquee">
-                                            <Marquee className='ResultCard_itemMarquee mt-1' speed={20} gradient={false}>
-                                                { v?.home_team_name && v.home_team_name}[{ langText.ResultTitle.hometag }]
+                                            <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
+                                                { v.home_team_name }&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            { v?.home_team_name && v.home_team_name }[{ langText.ResultTitle.hometag }]
+                                            { v.home_team_name }
                                         </span>
                                     </div>
                                 </div>
-                                <div className='row m-0' style={rowHeight2}>
-                                    <div className='col-2 p-0'>
-                                        {
-                                            v?.away_team_logo && <img style={ResultTeamIcon} alt='away' src={v.away_team_logo}  onError={this.handleError}/>
-                                        }
-                                    </div>
-                                    <div className='col-9 p-0 teamSpan' style={TeamName}>
+                                <div style={rowHeight2}>
+                                    <div className='p-0 teamSpan' style={TeamName}>
                                         <div className="teamSpanMarquee">
-                                            <Marquee className='ResultCard_itemMarquee mt-1' speed={20} gradient={false}>
-                                                { v?.away_team_name && v.away_team_name }
+                                            <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
+                                                { v.away_team_name }&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            { v?.away_team_name && v.away_team_name }
+                                            { v.away_team_name }
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             {/* right part */}
-                            <div className='col-55 text-center' style={{ paddingLeft: 0, paddingRight: "calc(var(--bs-gutter-x) * 0.7)"}}>
-                            {
-                                (fixedPriorityArr.length > 3 ) && (
-                                    // this.state.swiperIndex === 0 ? (
-                                    // <IoIosArrowForward onClick={() => { this.ResultCard_itemSwiper.slideNext() }} style={SliderRightArrow} />
-                                    // ) : (
-                                    // <IoIosArrowBack onClick={() => { this.ResultCard_itemSwiper.slidePrev() }} style={SliderLeftArrow} />
-                                    // )
-                                    <div>
-                                        <div style={{ opacity: prevBtnOpacity }} onClick={this.handleOpacityClick}>
-                                           <IoIosArrowBack onClick={() => { this.ResultCard_itemSwiper.slidePrev() }} style={SliderLeftArrow} />
-                                        </div>
-                                        <div style={{ opacity: nextBtnOpacity }} onClick={this.handleOpacityClick}>
-                                           <IoIosArrowForward onClick={() => { this.ResultCard_itemSwiper.slideNext() }} style={SliderRightArrow} />
-                                        </div>
-                                    </div>
-                                )
-                            }
+                            <div className='col-55 text-center' style={{ paddingLeft: 0}}>
                                 <Swiper
                                     slidesPerView={1}
                                     pagination={true}
                                     modules={[Controller, Pagination]}
-                                    onSwiper={Swiper => (this.ResultCard_itemSwiper = Swiper)}
-                                    className='ResultCard_itemSwiper'
-                                    onSlideChange={(Swiper) => {this.swiperHandler(Swiper.activeIndex)}}
-                                        style={{ position: 'relative', zIndex: 0}}
+                                    onSwiper={Swiper => (this.matchCardSwiper = Swiper)}
+                                    className='matchCardSwiper'
+                                    style={{ position: 'relative', zIndex: 0}}
                                 >
-                                    {sport === 1 && 
-                                    <div>
-                                       <SwiperSlide className="sport1con">
-                                            <div className='row m-0'>
-                                                <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                    <div style={SliderTitleDiv}>{gameTitle[0]}</div>
-                                                </div>
-                                                <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                    <div style={SliderTitleDiv}>{gameTitle[1]}</div>
-                                                </div>
-                                                <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                    <div style={SliderTitleDiv}>{gameTitle[2]}</div>
-                                                </div>
-                                            </div>
-                                            <div className='row m-0'>
-                                                <div className='col-4' style={Padding01}>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                            {v?.stat.home_stat[fixedPriorityArr[0]] ? (<div>{v.stat.home_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                        {v?.stat.away_stat[fixedPriorityArr[0]] ? (<div>{v.stat.away_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                </div>
-                                                <div className='col-4' style={Padding01}>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                            {v?.stat.home_stat[fixedPriorityArr[1]] ? (<div>{v.stat.home_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                        {v?.stat.away_stat[fixedPriorityArr[1]] ? (<div>{v.stat.away_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                </div>
-                                                <div className='col-4' style={Padding01}>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                            {v?.stat.home_stat[fixedPriorityArr[2]] ? (<div>{v.stat.home_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                    <SliderBrickHeight2>
-                                                        <div className="w-100 h-100" style={stat}>
-                                                        {v?.stat.away_stat[fixedPriorityArr[2]] ? (<div>{v.stat.away_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                        </div>
-                                                    </SliderBrickHeight2>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    </div>
+                                    {
+                                        scoreData.map((v1, k1) => {
+                                            return(
+                                                <SwiperSlide key={k1}>
+                                                    <div className='row m-0'>
+                                                        {
+                                                            v1.map((v2, k2) => {
+                                                                return(
+                                                                    <div className='col' style={Padding01} key={k2}>
+                                                                        <div style={SliderTitleDiv}>{ gameTitle[k1][k2] }</div>
+                                                                        <SliderBrickHeight2>
+                                                                            <div className="w-100 h-100">
+                                                                                <p className='SliderBrickTitle'>
+                                                                                    { v2[0] }
+                                                                                </p>
+                                                                            </div>
+                                                                        </SliderBrickHeight2>
+                                                                        <SliderBrickHeight2>
+                                                                            <div className="w-100 h-100">
+                                                                                <p className='SliderBrickTitle'>
+                                                                                    { v2[1] }
+                                                                                </p>
+                                                                            </div>
+                                                                        </SliderBrickHeight2>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                </SwiperSlide>
+                                            )
+                                        })
                                     }
-                                    {sport === 2 && 
-                                    <div>
-                                    <SwiperSlide className="sport2con">
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[0]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[1]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[2]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[0]] ? (<div>{v.stat.home_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[0]] ? (<div>{v.stat.away_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[1]] ? (<div>{v.stat.home_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[1]] ? (<div>{v.stat.away_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[2]] ? (<div>{v.stat.home_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[2]] ? (<div>{v.stat.away_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                     <SwiperSlide>
-                                         <div className='row m-0'>
-                                             <div className='col-3' style={{ ...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[3]}</div>
-                                             </div>
-                                             <div className='col-3' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[4]}</div>
-                                             </div>
-                                             <div className='col-3' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[5]}</div>
-                                             </div>
-                                             <div className='col-3' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[6]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-3' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[3]] ? (<div>{v.stat.home_stat[fixedPriorityArr[3]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[3]] ? (<div>{v.stat.away_stat[fixedPriorityArr[3]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-3' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[4]] ? (<div>{v.stat.home_stat[fixedPriorityArr[4]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[4]] ? (<div>{v.stat.away_stat[fixedPriorityArr[4]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-3' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[5]] ? (<div>{v.stat.home_stat[fixedPriorityArr[5]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[5]] ? (<div>{v.stat.away_stat[fixedPriorityArr[5]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-3' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[6]] ? (<div>{v.stat.home_stat[fixedPriorityArr[6]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[6]] ? (<div>{v.stat.away_stat[fixedPriorityArr[6]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                    </div>
-                                    }
-                                    {sport === 3 && 
-                                    <div>
-                                    <SwiperSlide className="sport3con">
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[0]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[1]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[2]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[0]] ? (<div>{v.stat.home_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[0]] ? (<div>{v.stat.away_stat[fixedPriorityArr[0]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[1]] ? (<div>{v.stat.home_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[1]] ? (<div>{v.stat.away_stat[fixedPriorityArr[1]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[2]] ? (<div>{v.stat.home_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[2]] ? (<div>{v.stat.away_stat[fixedPriorityArr[2]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                     <SwiperSlide>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{ ...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[3]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[4]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[5]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[3]] ? (<div>{v.stat.home_stat[fixedPriorityArr[3]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[3]] ? (<div>{v.stat.away_stat[fixedPriorityArr[3]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[4]] ? (<div>{v.stat.home_stat[fixedPriorityArr[4]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[4]] ? (<div>{v.stat.away_stat[fixedPriorityArr[4]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[5]] ? (<div>{v.stat.home_stat[fixedPriorityArr[5]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[5]] ? (<div>{v.stat.away_stat[fixedPriorityArr[5]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                     <SwiperSlide>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[6]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[7]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[8]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[6]] ? (<div>{v.stat.home_stat[fixedPriorityArr[6]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[6]] ? (<div>{v.stat.away_stat[fixedPriorityArr[6]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[7]] ? (<div>{v.stat.home_stat[fixedPriorityArr[7]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[7]] ? (<div>{v.stat.away_stat[fixedPriorityArr[7]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[8]] ? (<div>{v.stat.home_stat[fixedPriorityArr[8]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[8]] ? (<div>{v.stat.away_stat[fixedPriorityArr[8]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                     <SwiperSlide>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[9]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[10]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[11]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[9]] ? (<div>{v.stat.home_stat[fixedPriorityArr[9]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[9]] ? (<div>{v.stat.away_stat[fixedPriorityArr[9]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[10]] ? (<div>{v.stat.home_stat[fixedPriorityArr[10]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[10]] ? (<div>{v.stat.away_stat[fixedPriorityArr[10]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[11]] ? (<div>{v.stat.home_stat[fixedPriorityArr[11]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[11]] ? (<div>{v.stat.away_stat[fixedPriorityArr[11]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                     <SwiperSlide>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[12]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[13]}</div>
-                                             </div>
-                                             <div className='col-4' style={{...Padding01, rowHeight2}}>
-                                                 <div style={SliderTitleDiv}>{gameTitle[14]}</div>
-                                             </div>
-                                         </div>
-                                         <div className='row m-0'>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[12]] ? (<div>{v.stat.home_stat[fixedPriorityArr[12]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[12]] ? (<div>{v.stat.away_stat[fixedPriorityArr[12]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[13]] ? (<div>{v.stat.home_stat[fixedPriorityArr[13]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[13]] ? (<div>{v.stat.away_stat[fixedPriorityArr[13]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                             <div className='col-4' style={Padding01}>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                         {v?.stat.home_stat[fixedPriorityArr[14]] ? (<div>{v.stat.home_stat[fixedPriorityArr[14]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                                 <SliderBrickHeight2>
-                                                     <div className="w-100 h-100" style={stat}>
-                                                     {v?.stat.away_stat[fixedPriorityArr[14]] ? (<div>{v.stat.away_stat[fixedPriorityArr[14]]}</div>) : (<div>--</div>)}
-                                                     </div>
-                                                 </SliderBrickHeight2>
-                                             </div>
-                                         </div>
-                                     </SwiperSlide>
-                                    </div>
-                                    }
-    
                                 </Swiper>
                             </div>
                         </div>

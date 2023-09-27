@@ -67,62 +67,53 @@ const ResultSportImg = {
 }
 
 
-const sportObj = {
-    // 1: 'Soccer',
-    1: '足球',
-    // 2: 'basketball',
-    2: '籃球',
-    // 3: 'baseball'
-    3: '棒球'
-}
 
 class ResultMenuNav extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            sport_id: this.props.sport,
+            api_res: this.props.api_res
         }
     }
-
-    // sport_id change call back
-    // handleSportChange = (sport_id) => {
-    //     sport_id = parseInt(sport_id)
-    //     this.props.callBack(sport_id)
-    // };
+    componentDidMount() {
+        let res = this.state.api_res
+        if(window.sport === null) {
+            window.sport = res.data[0].sport_id
+        }
+        this.props.callBack(window.sport)
+	}
 
     handleSportChange = (sport_id) => {
-        sport_id = parseInt(sport_id)
         window.sport = sport_id
-        this.setState({
-            sport_id: sport_id
-        })
         this.props.callBack(window.sport)
     };
 
     render() {
-        return (
-            <>
-                <div style={ResultMenuBar}>
-                    <Link to="/mobile">
-                        <FaChevronLeft style={backIcon} />
-                    </Link>
-                </div>
-                <div style={ResultSportBar}>
-                    {/* <div style={ResultSportBarSlider}> */}
+        const res = this.state.api_res;
+        if( res && window.sport !== null ) {
+            return (
+                <>
+                    <div style={ResultMenuBar}>
+                        <Link to="/mobile">
+                            <FaChevronLeft style={backIcon} />
+                        </Link>
+                    </div>
+                    <div style={ResultSportBar}>
                         {
-                            Object.entries(sportObj).map(([k, v],i) => {
+                            res.data.map( v => {
                                 return(
-                                    <ResultSportItem key={k} style={ parseInt(this.props.sport_id) === parseInt(k) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
-                                        <img style={ResultSportImg} alt={ v.name } src={ parseInt(this.props.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
-                                        <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v }</p>
+                                    <ResultSportItem key={v.sport_id} style={ parseInt(window.sport) === parseInt(v.sport_id) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v.sport_id))}>
+                                        <img style={ResultSportImg} alt={ v.name } src={ parseInt(window.sport) === parseInt(v.sport_id) ? require('../image/ball/ball-' + v.sport_id + '.png') : require('../image/ball/ball-' + v.sport_id + '-white.png') } />
+                                        <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v.name }</p>
                                     </ResultSportItem>
                                 )
                             })
                         }
-                    {/* </div> */}
-                </div>
-            </>
-        ) 
+                    </div>
+                </>
+            ) 
+        }
+       
     }
 }
 

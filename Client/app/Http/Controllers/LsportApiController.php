@@ -1051,7 +1051,7 @@ class LsportApiController extends Controller {
         /////////////////////////
 
         $columns = array(
-            "token","player","sport_id","bet_data","bet_amount","better_rate"
+            "token","player","sport_id","bet_data","bet_amount",
         );
 
         foreach ($columns as $k => $v) {
@@ -1080,7 +1080,7 @@ class LsportApiController extends Controller {
         // 取得必要參數
         $player_id = $input['player'];
         $bet_amount = $input['bet_amount'];  //投注金額
-        $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
+        $is_better_rate = (empty($input['better_rate']) == false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
         $sport_id = DEFAULT_SPORT_ID;
         if (isset($input['sport_id'])) {
