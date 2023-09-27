@@ -192,6 +192,8 @@
     var isReadyIndexInt = null
     var isReadyIndex = false
 
+    var isReadySportInt = null
+
     // match list data
     var matchListD = {}
     var oldMatchListD = {}
@@ -370,12 +372,19 @@
     $(document).ready(function() {
         // ===== DATA LATER =====
 
-        // ini data from ajax
-        caller(matchList_api, callMatchListData, matchListD) // match_list
-        // then call every 5 sec
-        setInterval(() => {
-            caller(matchList_api, callMatchListData, matchListD, 1) // update 
-        }, 5000);
+        // detest is sport List is ready
+        isReadySportInt = setInterval(() => {
+            if( isReadyCommon ) {
+                clearInterval(isReadySportInt)
+                // ini data from ajax
+                caller(matchList_api, callMatchListData, matchListD) // match_list
+                // then call every 5 sec
+                setInterval(() => {
+                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                }, 5000);
+            }
+        }, 100);
+
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
