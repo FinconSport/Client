@@ -219,149 +219,6 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-
-        function createCate(k, v) {
-            let el_toggle = $('div[template="elToggleTemplate"]').clone()
-            let el_toggle_title = el_toggle.find('.catWrapperTitle')
-            let el_toggle_text = el_toggle.find('.elToggleText')
-            let el_toggle_count = el_toggle.find('.elToggleCount')
-            let el_toggle_dir = el_toggle.find('.elToggleDir')
-            let el_toggle_content = el_toggle.find('.catWrapperContent')
-
-            el_toggle.attr('id', 'toggleContent_' + k)
-            el_toggle_title.attr('id', `catWrapperTitle_${k}`)
-            el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-            el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
-            el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
-            el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
-            el_toggle_content.attr('id', `catWrapperContent_${k}`)
-
-            el_toggle.removeAttr('hidden')
-            el_toggle.removeAttr('template')
-
-            $('#indexContainerLeft').append(el_toggle)
-        }
-
-        function createLeague(k, k2, v2) {
-            let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
-            let league_toggle_name = league_toggle.find('.legToggleName')
-            let league_toggle_count = league_toggle.find('.legToggleCount')
-            let league_toggle_dir = league_toggle.find('.legToggleDir')
-
-            league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
-            league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
-            league_toggle.attr('league_id', v2.league_id)
-            league_toggle_name.html(v2.league_name)
-            league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
-            league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
-
-            league_toggle.removeAttr('hidden')
-            league_toggle.removeAttr('template')
-
-            let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
-            league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-
-            league_toggle_content.removeAttr('hidden')
-            league_toggle_content.removeAttr('template')
-
-            let el_toggle_content = $(`#catWrapperContent_${k}`)
-            el_toggle_content.append(league_toggle)
-            el_toggle_content.append(league_toggle_content)
-        }
-
-        function createFixtureCard(k, league_id, league_name, k3, v3) {
-            let card = $('div[template="fixtureCardTemplate"]').clone()
-            let time = card.find('.timer');
-            let home_team_info = card.find('[key="homeTeamInfo"]')
-            let away_team_info = card.find('[key="awayTeamInfo"]')
-
-            card.attr('id', k3)
-            card.attr('cate', k)
-            card.attr('status', v3.status)
-            card.attr('league_id', league_id)
-            time.html(v3.start_time)
-            home_team_info.find('.teamSpan').html(v3.home_team_name)
-            home_team_info.find('.scoreSpan').html()
-            away_team_info.find('.teamSpan').html(v3.away_team_name)
-            away_team_info.find('.scoreSpan').html()
-
-            // living score
-            if( v3.status === 2 ) {
-                home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-                away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-                let timerStr = v3.periods.period + '局'
-                v3.periods.Turn === '1' ? timerStr += '下半' : timerStr += '上半'
-                time.html(timerStr)
-            }
-
-            // bet area
-            priorityArr.forEach(( i, j ) => {
-                let bet_div = $('div[template="betDiv"]').clone()
-                let betData = Object.values(v3.list).find(m => m.priority === i)
-                bet_div.attr('priority', i)
-                bet_label = bet_div.find('.betLabel')
-                bet_label.html(gameTitle[j])
-
-                let firstDiv = bet_div.find('div[index=0]')
-                let secondDiv = bet_div.find('div[index=1]')
-                let thirdDiv = bet_div.find('div[index=2]')
-                let item = null
-                if( betData && Object.keys(betData.list).length > 0 ) {
-                    Object.entries(betData.list).map(([k4, v4], s) => { 
-                        item = bet_div.find('.betItemDiv').eq(s)
-                        // set attribute
-                        item.attr('priority', i)
-                        item.attr('fixture_id', k3)
-                        item.attr('market_id', betData.market_id)
-                        item.attr('market_bet_id', v4.market_bet_id)
-                        item.attr('bet_rate', v4.price)
-                        item.attr('bet_type', betData.market_name)
-                        item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
-                        item.attr('league', league_name)
-                        item.attr('home', v3.home_team_name)
-                        item.attr('away', v3.away_team_name)
-                        item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
-                        item.find('.odd').html(v4.price)
-                        if( v4.status === 1 ) {
-                            item.find('.rate_name').show()
-                            item.find('.odd').show()
-                            item.find('i').hide()
-                            item.attr('onclick', 'openCal($(this))')
-                        } else {
-                            item.find('.rate_name').hide()
-                            item.find('.odd').hide()
-                            item.find('i').show()
-                            item.removeAttr('onclick')
-                        }
-                    })
-                } else {
-                    firstDiv.find('.rate_name').hide()
-                    firstDiv.find('.odd').hide()
-                    firstDiv.find('i').show()
-                    firstDiv.removeAttr('onclick')
-                    secondDiv.find('.rate_name').hide()
-                    secondDiv.find('.odd').hide()
-                    secondDiv.find('i').show()
-                    secondDiv.removeAttr('onclick')
-                    if( thirdDiv ) {
-                        thirdDiv.find('.rate_name').hide()
-                        thirdDiv.find('.odd').hide()
-                        thirdDiv.find('i').show()
-                        thirdDiv.removeAttr('onclick')
-                    }
-                }
-
-                bet_div.removeAttr('hidden')
-                bet_div.removeAttr('template')
-                card.find('.indexBetCardTable').append(bet_div)
-            });
-
-            card.removeAttr('hidden')
-            card.removeAttr('template')
-            let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
-            league_toggle_content.append(card)
-        }
-
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
@@ -383,9 +240,149 @@
     }
     /* ===== VIEW LAYER ===== */
 
+
+    function createCate(k, v) {
+        let el_toggle = $('div[template="elToggleTemplate"]').clone()
+        let el_toggle_title = el_toggle.find('.catWrapperTitle')
+        let el_toggle_text = el_toggle.find('.elToggleText')
+        let el_toggle_count = el_toggle.find('.elToggleCount')
+        let el_toggle_dir = el_toggle.find('.elToggleDir')
+        let el_toggle_content = el_toggle.find('.catWrapperContent')
+
+        el_toggle.attr('id', 'toggleContent_' + k)
+        el_toggle_title.attr('id', `catWrapperTitle_${k}`)
+        el_toggle_title.attr('onclick', `toggleCat('${k}')`)
+        el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
+        el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
+        el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
+        el_toggle_content.attr('id', `catWrapperContent_${k}`)
+
+        el_toggle.removeAttr('hidden')
+        el_toggle.removeAttr('template')
+
+        $('#indexContainerLeft').append(el_toggle)
+    }
+
+    function createLeague(k, k2, v2) {
+        let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
+        let league_toggle_name = league_toggle.find('.legToggleName')
+        let league_toggle_count = league_toggle.find('.legToggleCount')
+        let league_toggle_dir = league_toggle.find('.legToggleDir')
+
+        league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
+        league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
+        league_toggle.attr('league_id', v2.league_id)
+        league_toggle_name.html(v2.league_name)
+        league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
+        league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
+
+        league_toggle.removeAttr('hidden')
+        league_toggle.removeAttr('template')
+
+        let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
+        league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
+
+        league_toggle_content.removeAttr('hidden')
+        league_toggle_content.removeAttr('template')
+
+        let el_toggle_content = $(`#catWrapperContent_${k}`)
+        el_toggle_content.append(league_toggle)
+        el_toggle_content.append(league_toggle_content)
+    }
+
+    function createFixtureCard(k, league_id, league_name, k3, v3) {
+        let card = $('div[template="fixtureCardTemplate"]').clone()
+        let time = card.find('.timer');
+        let home_team_info = card.find('[key="homeTeamInfo"]')
+        let away_team_info = card.find('[key="awayTeamInfo"]')
+
+        card.attr('id', k3)
+        card.attr('cate', k)
+        card.attr('status', v3.status)
+        card.attr('league_id', league_id)
+        time.html(v3.start_time)
+        home_team_info.find('.teamSpan').html(v3.home_team_name)
+        home_team_info.find('.scoreSpan').html()
+        away_team_info.find('.teamSpan').html(v3.away_team_name)
+        away_team_info.find('.scoreSpan').html()
+
+        // living score
+        if( v3.status === 2 ) {
+            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            let timerStr = v3.periods.period + langTrans.mainArea.stage
+            v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+            time.html(timerStr)
+        }
+
+        // bet area
+        priorityArr.forEach(( i, j ) => {
+            let bet_div = $('div[template="betDiv"]').clone()
+            let betData = Object.values(v3.list).find(m => m.priority === i)
+            bet_div.attr('priority', i)
+            bet_label = bet_div.find('.betLabel')
+            bet_label.html(gameTitle[j])
+
+            let firstDiv = bet_div.find('div[index=0]')
+            let secondDiv = bet_div.find('div[index=1]')
+            let thirdDiv = bet_div.find('div[index=2]')
+            let item = null
+            if( betData && Object.keys(betData.list).length > 0 ) {
+                Object.entries(betData.list).map(([k4, v4], s) => { 
+                    item = bet_div.find('.betItemDiv').eq(s)
+                    // set attribute
+                    item.attr('priority', i)
+                    item.attr('fixture_id', k3)
+                    item.attr('market_id', betData.market_id)
+                    item.attr('market_bet_id', v4.market_bet_id)
+                    item.attr('bet_rate', v4.price)
+                    item.attr('bet_type', betData.market_name)
+                    item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                    item.attr('league', league_name)
+                    item.attr('home', v3.home_team_name)
+                    item.attr('away', v3.away_team_name)
+                    item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
+                    item.find('.odd').html(v4.price)
+                    if( v4.status === 1 ) {
+                        item.find('.rate_name').show()
+                        item.find('.odd').show()
+                        item.find('i').hide()
+                        item.attr('onclick', 'openCal($(this))')
+                    } else {
+                        item.find('.rate_name').hide()
+                        item.find('.odd').hide()
+                        item.find('i').show()
+                        item.removeAttr('onclick')
+                    }
+                })
+            } else {
+                firstDiv.find('.rate_name').hide()
+                firstDiv.find('.odd').hide()
+                firstDiv.find('i').show()
+                firstDiv.removeAttr('onclick')
+                secondDiv.find('.rate_name').hide()
+                secondDiv.find('.odd').hide()
+                secondDiv.find('i').show()
+                secondDiv.removeAttr('onclick')
+                if( thirdDiv ) {
+                    thirdDiv.find('.rate_name').hide()
+                    thirdDiv.find('.odd').hide()
+                    thirdDiv.find('i').show()
+                    thirdDiv.removeAttr('onclick')
+                }
+            }
+
+            bet_div.removeAttr('hidden')
+            bet_div.removeAttr('template')
+            card.find('.indexBetCardTable').append(bet_div)
+        });
+
+        card.removeAttr('hidden')
+        card.removeAttr('template')
+        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+        league_toggle_content.append(card)
+    }
    
-
-
     $(document).ready(function() {
         // ===== DATA LATER =====
 
@@ -483,17 +480,16 @@
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+                    let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
+                    let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
+                    
                     if( isExist ) {
-
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
-                        
                         let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
-                        let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
-                        let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
@@ -508,8 +504,8 @@
                         if( v3.status === 2 ) {
                             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
                             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-                            let timerStr = v3.periods.period + '局'
-                            v3.periods.Turn === '1' ? timerStr += '下半' : timerStr += '上半'
+                            let timerStr = v3.periods.period + langTrans.mainArea.stage
+                            v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                             time.html(timerStr)
                         }
 
