@@ -269,7 +269,7 @@
 						<span class="close-modal">&times;</span>
 					</div>
 					<div class="modal-body">
-						` + item + `
+						<h5>` + item + `</h5>
 					</div>
 				`;
 				modalContent.html(modalHtml);
@@ -302,7 +302,7 @@
 					closeModal(modalId);
 				});
 			}
-			
+
 			// Function to close the modal
 			function closeModal(modalId) {
 				$('#' + modalId).animate({
