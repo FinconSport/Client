@@ -224,7 +224,7 @@
 
 	// order list data
     var orderListD = {}
-    var callOrderListData = { token: token, player: player, result: searchData.result, page: 1 }
+    var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
@@ -243,6 +243,8 @@
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
+
+		if( searchData.result ) callOrderListData.result = parseInt(searchData.result) // get result params
         caller(orderList_api, callOrderListData, orderListD) // orderListD
         
 		
