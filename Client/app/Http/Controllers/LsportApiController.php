@@ -922,7 +922,7 @@ class LsportApiController extends Controller {
         // order data
         $order['away_team_id'] = $return['team_id'];
         $order['away_team_name'] = $return[$name_columns];
-        
+
         //////////////////////////////////////////
 
         // 取得玩法
@@ -2062,8 +2062,8 @@ class LsportApiController extends Controller {
 
                 ///////////////
 
-                $tmp_bet_data['league_id'] = $vvv['league_id'];
-                $tmp_bet_data['league_name'] = $vvv['league_name'];
+                $tmp_bet_data['league_id'] = $v['league_id'];
+                $tmp_bet_data['league_name'] = $v['league_name'];
                 $tmp_bet_data['home_team_id'] = $v['home_team_id'];
                 $tmp_bet_data['away_team_id'] = $v['away_team_id'];
                 $tmp_bet_data['home_team_name'] = $v['home_team_name'];
