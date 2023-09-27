@@ -256,11 +256,11 @@
 				// Create a modal for each item
 				var modal = $('<div>', {
 					id: modalId, // Assign the unique ID to the modal
-					class: 'modal',
+					class: 'marquee-modal' + modalId,
 				});
 
 				var modalContent = $('<div>', {
-					class: 'modal-content',
+					class: 'marquee-modal-content',
 					text: item,
 				});
 
