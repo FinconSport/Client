@@ -27,7 +27,8 @@ use App\Models\ClientMarquee;
 use App\Models\SystemConfig;
 
 define('DEFAULT_SPORT_ID', 154914);  //預設的 sport_id (棒球)
-define('SPORT_ID', array(
+define('SPORT_ID',
+    array(
         'baseball' => 154914,  //棒球 sport_id
         'football' => 6046,  //棒球 sport_id
         'basketball', 48242,  //棒球 sport_id
@@ -565,6 +566,7 @@ class LsportApiController extends Controller {
             $this->ApiError('02');
         }
 
+        // 除錯用 debug
         if (!empty($input['is_debug'])) {
             dd($data);
         }
@@ -1891,7 +1893,7 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////////
 
-        // debug 用
+        // 除錯用 debug
         if (!empty($input['is_debug'])) {
             dd($arrFixture);
         }
