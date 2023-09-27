@@ -43,28 +43,35 @@ class ResultContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      apiUrl: 'https://sportc.asgame.net/api/v1/result_index?token=',
-			sport_id: this.props.sport_id, // set default to soccer
-      page: 1,
+      		apiUrl: 'https://sportc.asgame.net/api/v2/result_index?token=',
+			sport_id: window.sport, 
+      		page: 1,
 			swiperIndex: 0,
-      fetchMoreLock: 0 // default close
+      		fetchMoreLock: 0 // default close
 		};
 	}
 
 	// 頁面初始化 0 / 往下滑加載下一頁 1 / 按上面分類加載資料 2
-  async caller(apiUrl, callerType = 0, page=1) {
-    // console.log(apiUrl)
-    const json = await GetIni(apiUrl);
-    const str = json.data;
-    const bytes = atob(str).split("").map((char) => char.charCodeAt(0));
-    const buffer = new Uint8Array(bytes).buffer;
-    const compressed = JSON.parse(pako.inflate(buffer, { to: "string" }));
-    json.data = compressed;
+	async caller(apiUrl, callerType = 0, page=1) {
+		if( callerType === 2 ) {
+			// 先滑到最上面再撈資料
+			this.scrollToTop()
+		}
+		const json = await GetIni(apiUrl);
+		// 先判定要不要解壓縮
+		if(json.gzip) {
+			// 將字符串轉換成 ArrayBuffer
+			const str = json.data;
+			const bytes = atob(str).split('').map(char => char.charCodeAt(0));
+			const buffer = new Uint8Array(bytes).buffer;
+			// 解壓縮 ArrayBuffer
+			const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
+			json.data = uncompressed
+		}
 
-    const newData = json.data
-    // console.log(newData)
-    var data = []
-    switch (callerType) {
+		const newData = json.data
+		var data = []
+		switch (callerType) {
 			case 0:
 				// 初始化
 				data = [...Object.values(newData)]
@@ -76,15 +83,13 @@ class ResultContent extends React.Component {
 				break;
 		}
 
-    this.setState({
-      data: data,
-      page: page,
-      fetchMoreLock: 0
-    },() => {
-      // console.log(this.state.data)
-    });
+		this.setState({
+			data: data,
+			page: page,
+			fetchMoreLock: 0
+		});
 
-    if(Object.keys(newData).length === 0 || Object.keys(newData).length !== 20){
+		if(Object.keys(newData).length === 0 || Object.keys(newData).length !== 20){
 			this.setState({
 				hasMore: false
 			})
@@ -93,22 +98,19 @@ class ResultContent extends React.Component {
 				hasMore: true
 			})
 		}
-  }
-  
+	}
 	
 	// ini
 	componentDidMount() {
-		this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + this.props.sport_id)
-
+		this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + window.sport)
 	}
 
-  // sport_id onchange
+	// sport_id onchange
 	componentDidUpdate(prevProps) {
 		if (prevProps.sport_id !== this.props.sport_id) {
-      this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + this.props.sport_id)
+			this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + window.sport)
 		}
 	}
-				
 
 	// 滑到最上面
 	scrollToTop = () => {
@@ -122,65 +124,63 @@ class ResultContent extends React.Component {
 		})
 	}
 
-  // call api載入下一頁資料
+  	// call api載入下一頁資料
 	getNewPage = () => {
-    // console.log('getNewPage')
-    // console.log(this.state.fetchMoreLock)
-    if(this.state.fetchMoreLock === 0) {
-        this.setState({
-            fetchMoreLock: 1
-        },() => {
-            let nowPage = parseInt(this.state.page)
-            let nextPage = nowPage + 1
-            this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + nextPage + '&sport=' + this.state.sport_id, 1, nextPage)
-        })
-    }
-}
+		if(this.state.fetchMoreLock === 0) {
+			this.setState({
+				fetchMoreLock: 1
+			},() => {
+				let nowPage = parseInt(this.state.page)
+				let nextPage = nowPage + 1
+				this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + nextPage + '&sport=' + this.state.sport_id, 1, nextPage)
+			})
+		}
+	}
 	render() {
 		const { data } = this.state
-      return (
-        <div style={ResultMainContainer} id='ResultMainContainer'>
-         <div id="ResultMain" style={ PageContainer }>
+		return (
+			<div style={ResultMainContainer} id='ResultMainContainer'>
+				<div id="ResultMain" style={ PageContainer }>
 					{
 						data && data.length > 0 ? 
-							<InfiniteScroll
-								dataLength={ data }
-								next={this.getNewPage}
-								hasMore={true}
-								loader={
-									<div className="loading loading04">
-										<span>L</span>
-										<span>O</span>
-										<span>A</span>
-										<span>D</span>
-										<span>I</span>
-										<span>N</span>
-										<span>G</span>
-										<span>.</span>
-										<span>.</span>
-										<span>.</span>
-									</div>
-								}
-								scrollableTarget="ResultMain">
-                {
-                    data &&
-                    data.map((v) => (
-                        <ResultContentCard
-                          key={v.match_id}
-                          swiperIndex={this.state.swiperIndex}
-                          swiperTabCallBack={this.swiperTabHandler}
-                          data={v}
-                        />
-                    ))
-                  }
-							</InfiniteScroll>
+						<InfiniteScroll
+							dataLength={ data }
+							next={this.getNewPage}
+							hasMore={true}
+							loader={
+								<div className="loading loading04">
+									<span>L</span>
+									<span>O</span>
+									<span>A</span>
+									<span>D</span>
+									<span>I</span>
+									<span>N</span>
+									<span>G</span>
+									<span>.</span>
+									<span>.</span>
+									<span>.</span>
+								</div>
+							}
+						scrollableTarget="ResultMain">
+						{
+							data &&
+							data.map((v) => (
+								<ResultContentCard
+									key={v.fixture_id}
+									swiperIndex={this.state.swiperIndex}
+									swiperTabCallBack={this.swiperTabHandler}
+									data={v}
+								/>
+							))
+						}
+						</InfiniteScroll>
 						:
 						<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.CommonLogs.nomoredata}</h5>
 					}
 				</div>
-        <TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
-        </div>
-      );
+				<TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
+			</div>
+		);
 	}
 }
 

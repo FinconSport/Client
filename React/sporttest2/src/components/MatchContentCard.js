@@ -308,15 +308,7 @@ class MatchContentCard extends React.Component {
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
-                                                                                                    {
-                                                                                                        (k === 1 || k === 2) ?
-                                                                                                        (s.market_bet_name === "1" ? langText.MatchContentCard.homewin : langText.MatchContentCard.awaywin) :
-                                                                                                        (k === 3 || k === 4) ?
-                                                                                                        s.line :
-                                                                                                        (k === 5 || k === 6) ?
-                                                                                                        (s.market_bet_name + s.line) :
-                                                                                                        null
-                                                                                                    }
+                                                                                                    { s.market_bet_name + s.line }
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?

@@ -275,7 +275,7 @@ class CommonHistory extends React.Component {
                                             </div>
                                         </div>
                                         <div style={HistoryCardMain}>
-                                            {/* <CommonHistorySlideToggle data={val}/> */}
+                                            <CommonHistorySlideToggle data={val}/>
                                         </div>
                                         <div className='row m-0'>
                                             <div className='col-4 p-0'>{langText.CommonHistory.betamount}</div>

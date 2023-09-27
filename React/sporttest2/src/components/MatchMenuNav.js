@@ -147,9 +147,9 @@ class MatchMenuNav extends React.Component {
             }
         }
 
-        console.log(rKey)
-        console.log(res.data[rKey].items[window.sport])
-        console.log(res)
+        // console.log(rKey)
+        // console.log(res.data[rKey].items[window.sport])
+        // console.log(res)
         // default sport
         if(window.sport === null || res.data[rKey].items[window.sport] === undefined) {
             let itemData = res.data[rKey].items

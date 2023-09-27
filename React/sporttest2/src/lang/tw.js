@@ -32,6 +32,16 @@ const twTranslation = {
     betstatus: "注單狀態:",
     bettime: "下注時間:",
     nomoredata: "沒有更多注單了",
+    sportPriority: {
+      154914: {
+        1: '全場獨贏',
+        2: '前五局獨贏',
+        3: '全場讓球',
+        4: '前五局讓球',
+        5: '全場大小',
+        6: '前五局大小',
+      }
+    }
   },
   CommonHistorySlideToggle: {
     open: "展開",
