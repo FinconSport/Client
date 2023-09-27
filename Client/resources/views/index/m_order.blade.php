@@ -245,6 +245,7 @@
 
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            if( k === 'living' ) return; 
             createCate(k, v)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 createLeague(k, k2, v2)
@@ -502,6 +503,7 @@
     // render view layer here
     function renderView() {
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            if( k === 'living' ) return; 
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
@@ -514,25 +516,6 @@
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
-                        let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
-                        if( isSwitchCate ) {
-                            if( !isCateExist ) createCate(k, v)
-                            if( !isLeagueExist ) createLeague(k, k2, v2)
-                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
-                            let livingNode = $(`#${k3}`)
-                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
-                            card.attr('cate', k)
-                            card.attr('status', v3.status)
-                        }   
-
-                        // living
-                        if( v3.status === 2 ) {
-                            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-                            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-                            let timerStr = v3.periods.period + langTrans.mainArea.stage
-                            v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-                            time.html(timerStr)
-                        }
 
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
@@ -971,6 +954,15 @@
         var jsonData = {
             ...sendOrderData
         };
+
+        jsonData.bet_data.forEach(ele => {
+            delete ele.home;
+            delete ele.away;
+            delete ele.bet_type;
+            delete ele.bet_name;
+            delete ele.league;
+            return ele;
+        });
         jsonData.bet_data = JSON.stringify(jsonData.bet_data)
 
         $.ajax({
@@ -980,7 +972,7 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
-                if (res.message === 'SUCCESS_API_GAME_BET_01') {
+                if (res.message === 'SUCCESS_API_M_GAME_BET_01') {
                     // 餘額更新
                     refreshBalence()
                     showSuccessToast(res.message)
