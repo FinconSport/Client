@@ -377,6 +377,7 @@
             if( isReadyCommon ) {
                 console.log(sportListD)
                 console.log(sport)
+                callMatchListData.sport_id = sport
                 clearInterval(isReadySportInt)
                 // ini data from ajax
                 caller(matchList_api, callMatchListData, matchListD) // match_list
