@@ -265,12 +265,12 @@
 				});
 
 				var modalHtml = `
-						<div class="modal-header">
-							<span class="close-modal">&times;</span>
-						</div>
-						<div class="modal-body">
-							<h5>` item ` </h5>
-						</div>
+					<div class="modal-header">
+						<span aria-hidden="true" data-dismiss="modal">&times;</span>
+					</div>
+					<div class="modal-body">
+						` + item + `
+					</div>
 				`;
 				modalContent.html(modalHtml);
 
@@ -296,11 +296,6 @@
 					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
-				});
-
-				// Close the modal when clicking the close button
-				$('.close-modal').click(function () {
-					closeModal(modalId);
 				});
 			}
 			// Function to close the modal
