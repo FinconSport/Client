@@ -53,12 +53,25 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-file"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
+								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
+								<div id="orderSportCon" class="submenu-toggle-list">
+									<a class="sportSelect" href="/order?result=1">
+										<div class="sportname-con">
+											<span><p>Settled</p></span>
+										</div>
+									</a>
+									<a class="sportSelect" href="/order?result=0">
+										<div class="sportname-con">
+											<span><p>Unsettled</p></span>
+										</div>
+									</a>
+								</div>
 							</div>
 						</div>
+						
 
 						<div class="submenu-main" id="lf_match">
 							<div class="submenu-inner">
