@@ -237,9 +237,11 @@
 				class: 'modalContainer',
 			});
 
-			marqueeD.data.forEach(function(item) { 
+			marqueeD.data.forEach(function(item, index) { 
+				var modalId = 'modal_' + index;
+
 				var link = $('<a>', { // 创建<a>元素
-					href: '#',
+					href: '#' + modalId, // Link to the corresponding modal
 					class: 'marqlink'
 				});
 
@@ -256,6 +258,22 @@
 				link.append(span); // 将<span>添加到<a>中
 				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
 				modalContainer.append(modalContainerTxt);
+				
+				// Create a modal for each item
+				var modal = $('<div>', {
+					id: modalId, // Assign the unique ID to the modal
+					class: 'modal',
+				});
+
+				var modalContent = $('<div>', {
+					class: 'modal-content',
+					text: 'Modal content for ' + item,
+				});
+
+				modal.append(modalContent);
+
+				// Append the modal to  the main container of modal items
+				modalContainer.append(modal);
 			});
 
 			// 将跑马灯容器添加到页面中
