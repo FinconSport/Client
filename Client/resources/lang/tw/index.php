@@ -30,7 +30,10 @@ return [
 		'awayTeam' => '客隊',
 		'gaming' => '開賽中',
 		'notgaming' => '未開賽',
-		'homeTeamTag' => '主'
+		'homeTeamTag' => '主',
+		'upperStage' => '上',
+		'lowerStage' => '下',
+		'stage' => '局',
 	],
 	'm_order' => [
 		'morder_detail' => '串關明細',
