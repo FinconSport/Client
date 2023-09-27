@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use DB;
 
-use App\Models\AntGameList;
-use App\Models\AntMatchList;
-use App\Models\AntRateList;
-use App\Models\AntSeriesList;
-use App\Models\AntTeamList;
-use App\Models\AntTypeList;
-use App\Models\GameOrder;
+// use App\Models\AntGameList;
+// use App\Models\AntMatchList;
+// use App\Models\AntRateList;
+// use App\Models\AntSeriesList;
+// use App\Models\AntTeamList;
+// use App\Models\AntTypeList;
+// use App\Models\GameOrder;
+
+use App\Models\LsportSport;
+use App\Models\LsportLeague;
+use App\Models\LsportFixture;
+use App\Models\LsportMarket;
+use App\Models\LsportMarketBet;
+use App\Models\LsportTeam;
+
 use App\Models\SystemConfig;
 use App\Models\Player;
 use App\Models\Agent;
@@ -52,7 +60,7 @@ class OrderController extends PcController {
       }
 
       // 格式處理
-      $input_columns = array("page","order_id","type_id","sport","series_id","status");
+      $input_columns = array("page","order_id","type_id","sport",'league_id',"status");
       foreach ($input_columns as $k => $v) {
         if (isset($input[$v])) {
           if ($input[$v] != "") {
@@ -129,18 +137,18 @@ class OrderController extends PcController {
       $groupedData = GameOrder::select('m_id')->where("player_id",$session['player']['id']);
         
       if (isset($input['order_id']) && ($input['order_id'] != "")) {
-        $GameOrder = $GameOrder->where("id",$input['order_id']);
-        $groupedData = $groupedData->where("id",$input['order_id']);
+        $GameOrder = $GameOrder->where('id',$input['order_id']);
+        $groupedData = $groupedData->where('id',$input['order_id']);
       }
         
       if (isset($input['sport']) && ($input['sport'] != "")) {
-        $GameOrder = $GameOrder->where("game_id",$input['sport']);
-        $groupedData = $groupedData->where("game_id",$input['sport']);
+        $GameOrder = $GameOrder->where('sport_id',$input['sport']);
+        $groupedData = $groupedData->where('sport_id',$input['sport']);
       }
   
-      if (isset($input['series_id']) && ($input['series_id'] != "")) {
-        $GameOrder = $GameOrder->where("series_id",$input['series_id']);
-        $groupedData = $groupedData->where("series_id",$input['series_id']);
+      if (isset($input['league_id']) && ($input['league_id'] != "")) {
+        $GameOrder = $GameOrder->where('league_id',$input['league_id']);
+        $groupedData = $groupedData->where('league_id',$input['league_id']);
       }
   
       if (isset($input['type_id']) && ($input['type_id'] != "")) {
@@ -171,7 +179,7 @@ class OrderController extends PcController {
       ///////////////////////
 
       $columns = array(
-        "id",
+        'id',
         "m_id",
         "m_order",
         "bet_amount",
@@ -206,19 +214,19 @@ class OrderController extends PcController {
             $name_columns = "name_".$api_lang;
             $tmp_bet_data = array();
 
-            $series_id = $vvv['series_id'];
-            $tmp_d = AntSeriesList::where("series_id",$series_id)->where("game_id",$vvv['game_id'])->first();
+            $league_id = $vvv['league_id'];
+            $tmp_d = LsportLeague::where('league_id',$league_id)->where('sport_id',$vvv['sport_id'])->first();
             if ($tmp_d === false) {
               $this->error(__CLASS__, __FUNCTION__, "04");
             }
             if ($tmp_d === null) {
-              $tmp_bet_data['series_name'] = $vvv['series_name'];
+              $tmp_bet_data['league_name'] = $vvv['league_name'];
             } else {
-              $tmp_bet_data['series_name'] = $tmp_d[$name_columns];
+              $tmp_bet_data['league_name'] = $tmp_d[$name_columns];
             }
   
             $type_id = $vvv['type_id'];
-            $tmp_d = AntRateList::where("rate_id",$type_id)->where("game_id",$vvv['game_id'])->first();
+            $tmp_d = LsportMarketBet::where('bet_id',$type_id)->where('sport_id',$vvv['sport_id'])->first();
             if ($tmp_d === false) {
               $this->error(__CLASS__, __FUNCTION__, "05");
             }
@@ -231,7 +239,7 @@ class OrderController extends PcController {
             $replace_lang = array();
   
             $home_team_id = $vvv['home_team_id'];
-            $tmp_d = AntTeamList::where("team_id",$home_team_id)->where("game_id",$vvv['game_id'])->first();
+            $tmp_d = LsportTeam::where("team_id",$home_team_id)->where('sport_id',$vvv['sport_id'])->first();
             if ($tmp_d === false) {
               $this->error(__CLASS__, __FUNCTION__, "06");
             }
@@ -244,7 +252,7 @@ class OrderController extends PcController {
             }
   
             $away_team_id = $vvv['away_team_id'];
-            $tmp_d = AntTeamList::where("team_id",$away_team_id)->where("game_id",$vvv['game_id'])->first();
+            $tmp_d = LsportTeam::where("team_id",$away_team_id)->where('sport_id',$vvv['sport_id'])->first();
             if ($tmp_d === false) {
               $this->error(__CLASS__, __FUNCTION__, "07");
             }
@@ -278,19 +286,19 @@ class OrderController extends PcController {
           $name_columns = "name_".$api_lang;
           $tmp_bet_data = array();
 
-          $series_id = $v['series_id'];
-          $tmp_d = AntSeriesList::where("series_id",$series_id)->where("game_id",$v['game_id'])->first();
+          $league_id = $v['league_id'];
+          $tmp_d = LsportLeague::where('league_id',$league_id)->where('sport_id',$v['sport_id'])->first();
           if ($tmp_d === false) {
             $this->error(__CLASS__, __FUNCTION__, "08");
           }
           if ($tmp_d === null) {
-            $tmp_bet_data['series_name'] = $v['series_name'];
+            $tmp_bet_data['league_name'] = $v['league_name'];
           } else {
-            $tmp_bet_data['series_name'] = $tmp_d[$name_columns];
+            $tmp_bet_data['league_name'] = $tmp_d[$name_columns];
           }
 
           $type_id = $v['type_id'];
-          $tmp_d = AntRateList::where("rate_id",$type_id)->where("game_id",$v['game_id'])->first();
+          $tmp_d = LsportMarketBet::where('bet_id',$type_id)->where('sport_id',$v['sport_id'])->first();
           if ($tmp_d === false) {
             $this->error(__CLASS__, __FUNCTION__, "09");
           }
@@ -303,7 +311,7 @@ class OrderController extends PcController {
           $replace_lang = array();
 
           $home_team_id = $v['home_team_id'];
-          $tmp_d = AntTeamList::where("team_id",$home_team_id)->where("game_id",$v['game_id'])->first();
+          $tmp_d = LsportTeam::where("team_id",$home_team_id)->where('sport_id',$v['sport_id'])->first();
           if ($tmp_d === false) {
             $this->error(__CLASS__, __FUNCTION__, "10");
           }
@@ -316,7 +324,7 @@ class OrderController extends PcController {
           }
 
           $away_team_id = $v['away_team_id'];
-          $tmp_d = AntTeamList::where("team_id",$away_team_id)->where("game_id",$v['game_id'])->first();
+          $tmp_d = LsportTeam::where("team_id",$away_team_id)->where('sport_id',$v['sport_id'])->first();
           if ($tmp_d === false) {
             $this->error(__CLASS__, __FUNCTION__, "11");
           }
@@ -429,21 +437,21 @@ class OrderController extends PcController {
       } else {
         // 預設通過
         $default_order_status = 2;
-        $default_approval_time = date("Y-m-d H:i:s");
+        $default_approval_time = date('Y-m-d H:i:s');
       }
 
       // 取得必要參數
       $player_id = $session['player']['id'];
-      $match_id = $input['bet_match'];
+      $fixture_id = $input['bet_match'];
       $bet_type_id = $input['bet_type'];
       $bet_type_item_id = $input['bet_type_item'];
       $player_rate = $input['bet_rate'];
       $bet_amount = $input['bet_amount'];
       $is_better_rate = $input['better_rate'];
       
-      $game_id = 1;
-      if (isset($input['game_id'])) {
-        $game_id = $input['game_id'];
+      $sport_id = 1;
+      if (isset($input['sport_id'])) {
+        $sport_id = $input['sport_id'];
       }
       
       $order = array();
@@ -454,7 +462,7 @@ class OrderController extends PcController {
       }
 
       // 取得用戶資料
-      $return = Player::where("id",$player_id)->first();
+      $return = Player::where('id',$player_id)->first();
       if ($return == false) {
         $this->ApiError("02");
       }
@@ -482,7 +490,7 @@ class OrderController extends PcController {
       //////////////////////////////////////////
 
       // 取得商戶資料
-      $return = Agent::where("id",$agent_id)->first();
+      $return = Agent::where('id',$agent_id)->first();
       if ($return == false) {
         $this->ApiError("05");
       }
@@ -502,7 +510,7 @@ class OrderController extends PcController {
 
 
       // 取得賽事資料
-      $return = AntMatchList::where("match_id",$match_id)->where("game_id",$game_id)->first();
+      $return = LsportFixture::where('fixture_id',$fixture_id)->where('sport_id',$sport_id)->first();
       if ($return == false) {
         $this->ApiError("07");
       }
@@ -516,10 +524,10 @@ class OrderController extends PcController {
       $series_data = json_decode($return['series'],true);
       //////////////////////////////////////////
       // order data
-      $order['series_id'] = $series_data['id'];
-      $order['series_name'] = $series_data['name_cn'];
-      $order['match_id'] = $match_id;
-      $order['game_id'] = $return['game_id'];
+      $order['league_id'] = $series_data['id'];
+      $order['league_name'] = $series_data['name_cn'];
+      $order['fixture_id'] = $fixture_id;
+      $order['sport_id'] = $return['sport_id'];
       //////////////////////////////////////////
 
       // decode 隊伍
@@ -545,7 +553,7 @@ class OrderController extends PcController {
       //////////////////////////////////////////
 
       // 取得賠率
-      $return = AntRateList::where("rate_id",$bet_type_id)->where("match_id",$match_id)->first();
+      $return = LsportMarketBet::where('bet_id',$bet_type_id)->where('fixture_id',$fixture_id)->first();
       if ($return == false) {
         $this->ApiError("09");
       }
@@ -591,7 +599,7 @@ class OrderController extends PcController {
       // order data
       $order['bet_amount'] = $bet_amount;
       $order['status'] = $default_order_status;
-      $order['create_time'] = date("Y-m-d H:i:s");
+      $order['create_time'] = date('Y-m-d H:i:s');
       $order['approval_time'] = $default_approval_time;
       
       //////////////////////////////////////////
@@ -604,7 +612,7 @@ class OrderController extends PcController {
 
       // 填入m_id
       $m_order_id = $return;
-      $return = GameOrder::where("id",$m_order_id)->update([
+      $return = GameOrder::where('id',$m_order_id)->update([
         "m_id" => $m_order_id
       ]);      
       if ($return == false) {
@@ -616,7 +624,7 @@ class OrderController extends PcController {
       $change_amount = $bet_amount;
       $after_amount = $before_amount - $change_amount;
 
-      $return = Player::where("id",$player_id)->update([
+      $return = Player::where('id',$player_id)->update([
         "balance" => $after_amount
       ]);      
       if ($return == false) {
@@ -633,7 +641,7 @@ class OrderController extends PcController {
       $tmp['change_balance'] = $change_amount;
       $tmp['before_balance'] = $before_amount;
       $tmp['after_balance'] = $after_amount;
-      $tmp['create_time'] = date("Y-m-d H:i:s");
+      $tmp['create_time'] = date('Y-m-d H:i:s');
       PlayerBalanceLogs::insert($tmp);
 
       $this->ApiSuccess($after_amount,"01");
@@ -684,7 +692,7 @@ class OrderController extends PcController {
       } else {
         // 預設通過
         $default_order_status = 2;
-        $default_approval_time = date("Y-m-d H:i:s");
+        $default_approval_time = date('Y-m-d H:i:s');
       }
 
 
@@ -698,16 +706,16 @@ class OrderController extends PcController {
       foreach ($bet_data as $k => $v) {
         // 取得必要參數
         $player_id = $session['player']['id'];
-        $match_id = $v['bet_match'];
+        $fixture_id = $v['bet_match'];
         $bet_type_id = $v['bet_type'];
         $bet_type_item_id = $v['bet_type_item'];
         $player_rate = $v['bet_rate'];
         $bet_amount = $input['bet_amount'];
         $is_better_rate = $input['better_rate'];
 
-        $game_id = 1;
-        if (isset($input['game_id'])) {
-          $game_id = $input['game_id'];
+        $sport_id = 1;
+        if (isset($input['sport_id'])) {
+          $sport_id = $input['sport_id'];
         }
 
         $order = array();
@@ -718,7 +726,7 @@ class OrderController extends PcController {
         }
   
         // 取得用戶資料
-        $return = Player::where("id",$player_id)->first();
+        $return = Player::where('id',$player_id)->first();
         if ($return == false) {
           $this->ApiError("02");
         }
@@ -746,7 +754,7 @@ class OrderController extends PcController {
         //////////////////////////////////////////
   
         // 取得商戶資料
-        $return = Agent::where("id",$agent_id)->first();
+        $return = Agent::where('id',$agent_id)->first();
         if ($return == false) {
           $this->ApiError("05");
         }
@@ -765,16 +773,16 @@ class OrderController extends PcController {
         //////////////////////////////////////////
   
         // 取得賽事資料
-        $return = AntMatchList::where("match_id",$match_id)->where("game_id",$game_id)->first();
+        $return = LsportFixture::where('fixture_id',$fixture_id)->where('sport_id',$sport_id)->first();
         if ($return == false) {
           $this->ApiError("07");
         }
   
         // 判斷注單 是否為同一game_id
         if ($m_game_id === false) {
-          $m_game_id = $return['game_id'];
+          $m_game_id = $return['sport_id'];
         } else {
-          if ($m_game_id != $return['game_id']) {
+          if ($m_game_id != $return['sport_id']) {
             $this->ApiError("07");
           }
         }
@@ -789,10 +797,10 @@ class OrderController extends PcController {
         $series_data = json_decode($return['series'],true);
         //////////////////////////////////////////
         // order data
-        $order['series_id'] = $series_data['id'];
-        $order['series_name'] = $series_data['name_cn'];
-        $order['match_id'] = $match_id;
-        $order['game_id'] = $return['game_id'];
+        $order['league_id'] = $series_data['id'];
+        $order['league_name'] = $series_data['name_cn'];
+        $order['fixture_id'] = $fixture_id;
+        $order['sport_id'] = $return['sport_id'];
         //////////////////////////////////////////
   
         // decode 隊伍
@@ -818,7 +826,7 @@ class OrderController extends PcController {
         //////////////////////////////////////////
   
         // 取得賠率
-        $return = AntRateList::where("rate_id",$bet_type_id)->where("match_id",$match_id)->first();
+        $return = LsportMarketBet::where('bet_id',$bet_type_id)->where('fixture_id',$fixture_id)->first();
         if ($return === false) {
           $this->ApiError("09");
         }
@@ -869,7 +877,7 @@ class OrderController extends PcController {
         // order data
         $order['bet_amount'] = $bet_amount;
         $order['status'] = $default_order_status;
-        $order['create_time'] = date("Y-m-d H:i:s");
+        $order['create_time'] = date('Y-m-d H:i:s');
         $order['approval_time'] = $default_approval_time;
         
         //////////////////////////////////////////
@@ -883,7 +891,7 @@ class OrderController extends PcController {
         // 設定串關id , 這是第一筆注單
         if ($m_order_id === false) {
           $m_order_id = $return;
-          $return = GameOrder::where("id",$m_order_id)->update([
+          $return = GameOrder::where('id',$m_order_id)->update([
             "m_id" => $m_order_id
           ]);      
           if ($return == false) {
@@ -897,7 +905,7 @@ class OrderController extends PcController {
       $change_amount = $bet_amount;
       $after_amount = $before_amount - $change_amount;
 
-      $return = Player::where("id",$player_id)->update([
+      $return = Player::where('id',$player_id)->update([
         "balance" => $after_amount
       ]);      
       if ($return == false) {
@@ -914,7 +922,7 @@ class OrderController extends PcController {
       $tmp['change_balance'] = $change_amount;
       $tmp['before_balance'] = $before_amount;
       $tmp['after_balance'] = $after_amount;
-      $tmp['create_time'] = date("Y-m-d H:i:s");
+      $tmp['create_time'] = date('Y-m-d H:i:s');
       PlayerBalanceLogs::insert($tmp);
 
       $this->ApiSuccess($after_amount,"01");
