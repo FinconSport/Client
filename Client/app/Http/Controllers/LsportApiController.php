@@ -632,7 +632,7 @@ class LsportApiController extends Controller {
                 $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
 
                 // 包入 fixture 賽事資料 ---------------
-                $arrLeagues[$fixture_status][$league_id]['list'][$dv->start_time.'|'.$fixture_id] = array(
+                $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
                     //'sport_id' => $dv->sport_id,
                     //'league_id' => $dv->league_id,
                     'fixture_id' => $dv->fixture_id,
@@ -650,8 +650,8 @@ class LsportApiController extends Controller {
             }
 
             //market 層 ----------------------------
-            if (!isset($arrLeagues[$fixture_status][$league_id]['list'][$dv->start_time.'|'.$fixture_id]['list'][$market_id])
-                || !sizeof($arrLeagues[$fixture_status][$league_id]['list'][$dv->start_time.'|'.$fixture_id]['list'][$market_id])) {
+            if (!isset($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])
+                || !sizeof($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])) {
 
                 // market_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($dv->m_name_locale)) {  // market name
@@ -661,7 +661,7 @@ class LsportApiController extends Controller {
                 }
 
                 // 包入 market 玩法資料 ---------------
-                $arrLeagues[$fixture_status][$league_id]['list'][$dv->start_time.'|'.$fixture_id]['list'][$market_id] = array(
+                $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
                     'market_id' => $dv->market_id,
                     'market_name' => $market_name,
                     'priority' => $dv->priority,
@@ -705,7 +705,7 @@ class LsportApiController extends Controller {
 
                     // 包入 market_bet 賠率資料 ---------------
                     //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
-                    $arrLeagues[$fixture_status][$league_id]['list'][$dv->start_time.'|'.$fixture_id]['list'][$market_id]['list'][] = array(
+                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
                         'market_bet_name_en' => $bv->mb_name_en,
