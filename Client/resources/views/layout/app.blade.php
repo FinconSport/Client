@@ -256,7 +256,7 @@
 				// Create a modal for each item
 				var modal = $('<div>', {
 					id: modalId, // Assign the unique ID to the modal
-					class: 'modaldiv modal' + modalId,
+					class: 'modaldiv modal close-modal' + modalId,
 				});
 
 				var modalContent = $('<div>', {
