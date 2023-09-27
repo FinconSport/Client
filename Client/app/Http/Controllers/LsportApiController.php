@@ -519,8 +519,7 @@ class LsportApiController extends Controller {
                 'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update', //'f.home_id', 'f.away_id', 
                 'm.market_id', 'm.name_en AS m_name_en', 'm.'.$lang_col.' AS m_name_locale', 'm.priority', 'm.main_line',
                 'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
-                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale',
-                DB::raw('(SELECT COUNT(*) FROM lsport_market m2 WHERE m2.fixture_id=l.fixture_id) AS market_count')
+                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
             )
             ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
@@ -591,6 +590,19 @@ class LsportApiController extends Controller {
                 } else {
                     $sport_name = $dv->s_name_locale;
                 }
+            }
+
+            // market_count ---------------------
+            $market_counts = DB::table('lsport_market as m')
+                ->join('lsport_fixture as f', 'f.fixture', '=', 'm.fixture')
+                ->select('f.fixture_id, COUNT(*) as market_count')
+                ->where('f.start_time', "<=", $after_tomorrow)
+                ->groupBy('f.fixture_id')
+                ->get();
+            
+
+            if (!empty($input['is_debug'])) {
+                dd($market_counts);
             }
 
             // league 層 ----------------------------
