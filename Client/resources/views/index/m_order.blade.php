@@ -971,6 +971,15 @@
         var jsonData = {
             ...sendOrderData
         };
+
+        jsonData.bet_data.forEach(ele => {
+            delete ele.home;
+            delete ele.away;
+            delete ele.bet_type;
+            delete ele.bet_name;
+            delete ele.league;
+            return ele;
+        });
         jsonData.bet_data = JSON.stringify(jsonData.bet_data)
 
         $.ajax({
