@@ -250,14 +250,8 @@
 					text: item
 				});
 
-				var modalContainerTxt = $('<div>', {
-					class: 'marq_modal_context',
-					text: item,
-				});
-
 				link.append(span); // 将<span>添加到<a>中
 				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
-				modalContainer.append(modalContainerTxt);
 				
 				// Create a modal for each item
 				var modal = $('<div>', {
