@@ -2493,6 +2493,11 @@ class LsportApiController extends Controller {
             }
         }
 
+        //陣列依key值ASC排序,因為有時候type=40的會出現在其他較小的type之前
+        foreach ($ret as $rk => &$rv) {
+            ksort($rv);
+        }
+
         return $ret;
 
     }
