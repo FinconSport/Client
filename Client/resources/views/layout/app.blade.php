@@ -337,9 +337,9 @@
 				case '/order':
 					currentPage = 'lf_order'
 					break;
-				case '?result=1':
+				case '/order?result=1':
 					currentPage = 'result_settled'
-				case '?result=0':
+				case '/order?result=0':
 					currentPage = 'result_unsettled'
 					break;
 				case '/match':
