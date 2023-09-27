@@ -570,15 +570,19 @@
         })
 
         // 找移除的
-        $('.indexEachCard').each(function() {
+        $('#indexContainerLeft .indexEachCard').each(function() {
             let cate = $(this).attr('cate')
             let league_id = $(this).attr('league_id')
             let fixture_id = $(this).attr('id')
-            let testArr = matchListD.data[cate][sport]?.list[league_id]?.list
-            console.log(testArr)
+            let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
+            let result = null
+            if( resultArr ) result = resultArr.find(e => (e.fixture_id).toString() === fixture_id.toString() )
+            if( reesult === null ) {
+                closeFixture(fixture_id)
+            } else{
+                console.log(fixture_id, result)
+            }
         });
-
-
         statistics()
     }
 
