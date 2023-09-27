@@ -556,7 +556,7 @@ class LsportApiController extends Controller {
             // ->where("th.sport_id", $sport_id)
             // ->where("th.sport_id", $sport_id)
             ->orderBy('l.league_id', 'ASC')
-            ->orderBy('f.start_time', 'ASC')
+            //->orderBy('f.start_time', 'ASC')
             ->orderBy('f.fixture_id', 'ASC')
             ->orderBy('m.market_id', 'ASC')
             ->get();
