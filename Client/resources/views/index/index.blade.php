@@ -375,6 +375,8 @@
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
+                console.log(sportListD)
+                console.log(sport)
                 clearInterval(isReadySportInt)
                 // ini data from ajax
                 caller(matchList_api, callMatchListData, matchListD) // match_list
