@@ -269,7 +269,7 @@
             el_toggle_content.append(league_toggle_content)
         }
 
-        function createFixtureCard(k, league_id, k3, v3) {
+        function createFixtureCard(k, league_id, league_name, k3, v3) {
             let card = $('div[template="fixtureCardTemplate"]').clone()
             let time = card.find('.timer');
             let home_team_info = card.find('[key="homeTeamInfo"]');
@@ -307,7 +307,7 @@
                         item.attr('bet_rate', v4.price)
                         item.attr('bet_type', betData.market_name)
                         item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
-                        item.attr('league', v2.league_name)
+                        item.attr('league', league_name)
                         item.attr('home', v3.home_team_name)
                         item.attr('away', v3.away_team_name)
                         item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
@@ -357,7 +357,7 @@
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 createCateLeague(k, k2, v2)
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    createFixtureCard(k, v2.league_id, k3, v3)
+                    createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
                 })
             })
         })
