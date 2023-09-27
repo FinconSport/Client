@@ -261,11 +261,20 @@
 
 				var modalContent = $('<div>', {
 					class: 'marquee-modal-content',
-					text: item,
 				});
 
-				modal.append(modalContent);
+				var modalHtml = `
+					<div class="modal-header">
+						<span aria-hidden="true" class="close-modal">&times;</span>
+					</div>
+					<div class="modal-body">
+						<h5>` + item + `</h5>
+					</div>
+				`;
 
+				modalContent.html(modalHtml);
+
+				modal.append(modalContent);
 				// Append the modal to  the main container of modal items
 				modalContainer.append(modal);
 			});
@@ -282,15 +291,13 @@
 				}).animate({
 					opacity: 1
 				}, 500);
-
-				// to close the modal when clicking outside
-				$('.modaldiv').click(function (e) {
+				// Close the modal when clicking either modaldiv or close-modal
+				$('.modaldiv, .close-modal').click(function (e) {
 					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
 				});
 			}
-
 			// Function to close the modal
 			function closeModal(modalId) {
 				$('#' + modalId).animate({
@@ -458,21 +465,20 @@
 
 			var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
 			if (currentSubmenuToggleList.length) {
-			if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
-				currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
-				console.log("Click");
-				submenuClicked = true;
-			} else {
-				currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
-				console.log("unclick");
-				submenuClicked = false;
-			}
+				if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
+					currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
+					console.log("Click");
+					submenuClicked = true;
+				} else {
+					currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
+					console.log("unclick");
+					submenuClicked = false;
+				}
 			}
 
 			$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
 			$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
 		});
-
 		// ----------------------------
 
 
@@ -490,6 +496,7 @@
 				$(".modal-backdrop").remove();
 			}, 200);
 		}
+
 		// convert search data to obj
 		function paramsToObject(entries) {
 			const result = {}
