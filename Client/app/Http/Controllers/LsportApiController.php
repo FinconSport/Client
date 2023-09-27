@@ -27,6 +27,13 @@ use App\Models\ClientMarquee;
 use App\Models\SystemConfig;
 
 define('DEFAULT_SPORT_ID', 154914);  //預設的 sport_id (棒球)
+define('LSPORT_SPORT_ID',
+    array(
+        'baseball' => 154914,
+        'basketball' => 48242,
+        'football' => 6046,
+    )
+);
 
 /**
  * LsportApiController
@@ -1523,7 +1530,7 @@ class LsportApiController extends Controller {
                         $d[$pos] = $vvv['Value'];
                     }
                     $type = $vv['Type'];
-                    if ($type < 100) {  // 粗暴判斷
+                    if ($type <= 50) {  // 粗暴判斷
                         $scoreboard[] = $d;
                     }
                 }
@@ -1740,7 +1747,7 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[1] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($stage >= 1) && ($stage < 40)) {
+                if (($stage >= 1) && ($stage <= 50)) {
                     $arr_home_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
@@ -1756,7 +1763,7 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[2] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($stage >= 1) && ($stage < 40)) {
+                if (($stage >= 1) && ($stage <= 50)) {
                     $arr_away_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
@@ -2351,8 +2358,9 @@ class LsportApiController extends Controller {
             return null;
         }
 
-        // 目前只處理棒球
-        if ($sport_id != DEFAULT_SPORT_ID) {
+        // 目前只處理特定類型
+        //if ($sport_id != DEFAULT_SPORT_ID) {
+        if (!in_array($sport_id, LSPORT_SPORT_ID)) {
             return null;
         }
 
@@ -2479,7 +2487,7 @@ class LsportApiController extends Controller {
             foreach ($arr_results as $rk => $rv) {
                 $pos = intval($rv['Position']);
                 $score = intval($rv['Value']);
-                if ($type <= 40) {  // 40 通常為加時，也要計入 (football的50是罰球)
+                if ($type <= 50) {  // 40 通常為加時，也要計入 (football的50是罰球)
                     $ret[$pos][$type] = $score;
                 }
             }
@@ -2562,8 +2570,9 @@ class LsportApiController extends Controller {
             return null;
         }
 
-        // 目前只處理棒球
-        if ($sport_id != DEFAULT_SPORT_ID) {
+        // 目前只處理特定類型
+        //if ($sport_id != DEFAULT_SPORT_ID) {
+        if (!in_array($sport_id, LSPORT_SPORT_ID)) {
             return null;
         }
 
