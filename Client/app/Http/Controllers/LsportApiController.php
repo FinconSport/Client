@@ -2442,7 +2442,7 @@ class LsportApiController extends Controller {
         }
 
         // 各局得分
-        // Position=40以上都不要計入
+        // Type(局數)超過40都不要計入
         foreach ($arr_periods as $pk => $pv) {
             $type = intval($pv['Type']);  // type=局數號碼
             $arr_results = $pv['Results'];
@@ -2453,6 +2453,11 @@ class LsportApiController extends Controller {
                     $ret[$pos][$type] = $score;
                 }
             }
+        }
+
+        // 依照key值排序,因為有時Type=40的元素會出現在Type < 40的地方
+        foreach ($ret as $rk => &$rv) {
+            ksort($rv);
         }
 
         return $ret;
