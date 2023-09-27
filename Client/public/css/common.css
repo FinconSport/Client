@@ -770,4 +770,25 @@ a.sportSelect:hover,
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+    height: 50%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.marquee-modal-content .modal-header {
+    justify-content: flex-end;
+}
+
+.marquee-modal-content span.close-modal {
+    cursor: pointer;
+    font-size: 1.5rem;
+    right: 0;
+    position: relative;
+}
+
+.marquee-modal-content .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

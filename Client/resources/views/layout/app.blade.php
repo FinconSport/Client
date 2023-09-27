@@ -265,10 +265,10 @@
 
 				var modalHtml = `
 					<div class="modal-header">
-						<span aria-hidden="true" data-dismiss="modal">&times;</span>
+						<span aria-hidden="true" class="close-modal">&times;</span>
 					</div>
 					<div class="modal-body">
-						` + item + `
+						<h5>` + item + `</h5>
 					</div>
 				`;
 
