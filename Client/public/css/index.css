@@ -402,26 +402,7 @@ div[key="sizeSmallRate"]:hover {
     position: relative;
 }
 
-/* toast message */
-#toast {
-    z-index: 2;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-.toastType {
-    font-size: 1rem;
-}
-.toastType.success {
-    background-color: rgb(6, 198, 85);
-    color: white;
-    padding: 10px;
-}
-.toastType.error {
-    background-color: rgb(212, 0, 0);
-    color: white;
-    padding: 10px;
-}
+
 
 /* 賠率變化 */
 .raiseOdd {
