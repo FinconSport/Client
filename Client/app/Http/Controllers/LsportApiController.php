@@ -565,6 +565,10 @@ class LsportApiController extends Controller {
             $this->ApiError('02');
         }
 
+        if (!empty($input['is_debug'])) {
+            dd($data);
+        }
+
         //儲存league-fixture-market的階層資料
         $arrLeagues = array(
             FIXTURE_STATUS['early'] => array(),  // 早盤
