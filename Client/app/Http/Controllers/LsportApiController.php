@@ -1667,7 +1667,7 @@ class LsportApiController extends Controller {
         }
 
         // 包入 league 聯賽資料
-        $arrFixture['series'] = array(
+        $arrFixture['league'] = array(
             'league_id' => $league_id,
             'sport_id' => $sport_id,
             'name' => $league_name,
@@ -1754,7 +1754,7 @@ class LsportApiController extends Controller {
             'last_update' => $data->f_last_update,
             'periods' => $parsed_periods,
             'scoreboard' => $parsed_scoreboard,
-            'series' => array(
+            'league' => array(
                 'id' => $data->league_id,
                 'sport_id' => $sport_id,
                 'name' => $league_name,
