@@ -27,6 +27,12 @@ use App\Models\ClientMarquee;
 use App\Models\SystemConfig;
 
 define('DEFAULT_SPORT_ID', 154914);  //預設的 sport_id (棒球)
+define('SPORT_ID', array(
+        'baseball' => 154914,  //棒球 sport_id
+        'football' => 6046,  //棒球 sport_id
+        'basketball', 48242,  //棒球 sport_id
+    )
+);
 
 /**
  * LsportApiController
@@ -1029,7 +1035,7 @@ class LsportApiController extends Controller {
         /////////////////////////
         //---------------------------------
         // 處理輸入
-        $necessaryInputs = array('player','sport_id','bet_data','bet_amount','better_rate',);
+        $necessaryInputs = array('player','sport_id','bet_data','bet_amount',);
         foreach ($necessaryInputs as $nk => $input_name) {
             if (empty($input[$input_name])) {
                 $this->ApiError('01');
@@ -1039,7 +1045,7 @@ class LsportApiController extends Controller {
         $sport_id = $input['sport_id'];
         $bet_data = $input['bet_data'];
         $bet_amount = $input['bet_amount'];  //投注金額
-        $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
+        $is_better_rate = (!empty($input['better_rate']) == true);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
         //---------------------------------
         // 取得代理的語系
@@ -1073,7 +1079,7 @@ class LsportApiController extends Controller {
         
         // 參數檢查 TODO - 初步 隨便弄弄
         if ($bet_amount <= 0) {
-            $this->ApiError("01");
+            $this->ApiError("21");
         }
 
         // 取得用戶資料
