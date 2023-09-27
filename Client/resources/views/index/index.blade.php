@@ -519,7 +519,6 @@
                                         console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
                                     }
 
-                                    
                                     // set attribute
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
@@ -570,15 +569,18 @@
         })
 
         // 找移除的
-        $('.indexEachCard').each(function() {
+        $('#indexContainerLeft .indexEachCard').each(function() {
             let cate = $(this).attr('cate')
             let league_id = $(this).attr('league_id')
             let fixture_id = $(this).attr('id')
-            let testArr = matchListD.data[cate][sport]?.list[league_id]?.list
-            console.log(testArr)
+            let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
+            let result = null
+            if( resultArr ) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
+            
+            if( result === null ) {
+                closeFixture(fixture_id)
+            } 
         });
-
-
         statistics()
     }
 
@@ -632,6 +634,7 @@
 
     // remove fixture
     function closeFixture(id) {
+        console.log('closeFixture')
         $(`#${id}`).hide(1000)
         setTimeout(() => {
             $(`#${id}`).remove()
