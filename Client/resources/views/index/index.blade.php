@@ -220,7 +220,7 @@
 
         // loop matchListD to generate html element here
 
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+        function createCate(k, v) {
             let el_toggle = $('div[template="elToggleTemplate"]').clone()
             let el_toggle_title = el_toggle.find('.catWrapperTitle')
             let el_toggle_text = el_toggle.find('.elToggleText')
@@ -235,123 +235,131 @@
             el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
             el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
             el_toggle_content.attr('id', `catWrapperContent_${k}`)
-            
-            el_toggle.removeAttr('hidden')
-            el_toggle.removeAttr('template')
-
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
-                let league_toggle_name = league_toggle.find('.legToggleName')
-                let league_toggle_count = league_toggle.find('.legToggleCount')
-                let league_toggle_dir = league_toggle.find('.legToggleDir')
-
-                league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
-                league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
-                league_toggle.attr('league_id', v2.league_id)
-                league_toggle_name.html(v2.league_name)
-                league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
-                league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
-
-                league_toggle.removeAttr('hidden')
-                league_toggle.removeAttr('template')
-
-                let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
-                league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-
-                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    let card = $('div[template="fixtureCardTemplate"]').clone()
-                    let time = card.find('.timer');
-                    let home_team_info = card.find('[key="homeTeamInfo"]');
-                    let away_team_info = card.find('[key="awayTeamInfo"]')
-
-                    card.attr('id', k3)
-                    time.html(v3.start_time)
-                    home_team_info.find('.teamSpan').html(v3.home_team_name)
-                    home_team_info.find('.scoreSpan').html()
-                    away_team_info.find('.teamSpan').html(v3.away_team_name)
-                    away_team_info.find('.scoreSpan').html()
-
-                    // bet area
-                    priorityArr.forEach(( i, j ) => {
-                        let bet_div = $('div[template="betDiv"]').clone()
-                        let betData = Object.values(v3.list).find(m => m.priority === i)
-                        bet_div.attr('priority', i)
-                        bet_label = bet_div.find('.betLabel')
-                        bet_label.html(gameTitle[j])
-
-                        let firstDiv = bet_div.find('div[index=0]')
-                        let secondDiv = bet_div.find('div[index=1]')
-                        let thirdDiv = bet_div.find('div[index=2]')
-                        let item = null
-                        if( betData && Object.keys(betData.list).length > 0 ) {
-                            Object.entries(betData.list).map(([k4, v4], s) => { 
-                                item = bet_div.find('.betItemDiv').eq(s)
-                                // set attribute
-                                item.attr('priority', i)
-                                item.attr('fixture_id', k3)
-                                item.attr('market_id', betData.market_id)
-                                item.attr('market_bet_id', v4.market_bet_id)
-                                item.attr('bet_rate', v4.price)
-                                item.attr('bet_type', betData.market_name)
-                                item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
-                                item.attr('league', v2.league_name)
-                                item.attr('home', v3.home_team_name)
-                                item.attr('away', v3.away_team_name)
-                                
-                                item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
-                                item.find('.odd').html(v4.price)
-
-                                if( v4.status === 1 ) {
-                                    item.find('.rate_name').show()
-                                    item.find('.odd').show()
-                                    item.find('i').hide()
-                                    item.attr('onclick', 'openCal($(this))')
-                                } else {
-                                    item.find('.rate_name').hide()
-                                    item.find('.odd').hide()
-                                    item.find('i').show()
-                                    item.removeAttr('onclick')
-                                }
-                                
-                            })
-                        } else {
-                            firstDiv.find('.rate_name').hide()
-                            firstDiv.find('.odd').hide()
-                            firstDiv.find('i').show()
-                            firstDiv.removeAttr('onclick')
-                            secondDiv.find('.rate_name').hide()
-                            secondDiv.find('.odd').hide()
-                            secondDiv.find('i').show()
-                            secondDiv.removeAttr('onclick')
-                            if( thirdDiv ) {
-                                thirdDiv.find('.rate_name').hide()
-                                thirdDiv.find('.odd').hide()
-                                thirdDiv.find('i').show()
-                                thirdDiv.removeAttr('onclick')
-                            }
-                        }
-
-                        bet_div.removeAttr('hidden')
-                        bet_div.removeAttr('template')
-                        card.find('.indexBetCardTable').append(bet_div)
-                    });
-
-                    card.removeAttr('hidden')
-                    card.removeAttr('template')
-                    league_toggle_content.append(card)
-                })
-
-                league_toggle_content.removeAttr('hidden')
-                league_toggle_content.removeAttr('template')
-
-                el_toggle_content.append(league_toggle)
-                el_toggle_content.append(league_toggle_content)
-            })
 
             el_toggle.removeAttr('hidden')
             el_toggle.removeAttr('template')
 
             $('#indexContainerLeft').append(el_toggle)
+        }
+
+        function createCateLeague(k, k2, v2) {
+            let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
+            let league_toggle_name = league_toggle.find('.legToggleName')
+            let league_toggle_count = league_toggle.find('.legToggleCount')
+            let league_toggle_dir = league_toggle.find('.legToggleDir')
+
+            league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
+            league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
+            league_toggle.attr('league_id', v2.league_id)
+            league_toggle_name.html(v2.league_name)
+            league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
+            league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
+
+            league_toggle.removeAttr('hidden')
+            league_toggle.removeAttr('template')
+
+            let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
+            league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
+
+            league_toggle_content.removeAttr('hidden')
+            league_toggle_content.removeAttr('template')
+
+            let el_toggle_content = $(`#catWrapperContent_${k}`)
+            el_toggle_content.append(league_toggle)
+            el_toggle_content.append(league_toggle_content)
+        }
+
+        function createFixtureCard(k, league_id, k3, v3) {
+            let card = $('div[template="fixtureCardTemplate"]').clone()
+            let time = card.find('.timer');
+            let home_team_info = card.find('[key="homeTeamInfo"]');
+            let away_team_info = card.find('[key="awayTeamInfo"]')
+
+            card.attr('id', k3)
+            card.attr('cate', k)
+            card.attr('league_id', v2.league_id)
+            time.html(v3.start_time)
+            home_team_info.find('.teamSpan').html(v3.home_team_name)
+            home_team_info.find('.scoreSpan').html()
+            away_team_info.find('.teamSpan').html(v3.away_team_name)
+            away_team_info.find('.scoreSpan').html()
+
+            // bet area
+            priorityArr.forEach(( i, j ) => {
+                let bet_div = $('div[template="betDiv"]').clone()
+                let betData = Object.values(v3.list).find(m => m.priority === i)
+                bet_div.attr('priority', i)
+                bet_label = bet_div.find('.betLabel')
+                bet_label.html(gameTitle[j])
+
+                let firstDiv = bet_div.find('div[index=0]')
+                let secondDiv = bet_div.find('div[index=1]')
+                let thirdDiv = bet_div.find('div[index=2]')
+                let item = null
+                if( betData && Object.keys(betData.list).length > 0 ) {
+                    Object.entries(betData.list).map(([k4, v4], s) => { 
+                        item = bet_div.find('.betItemDiv').eq(s)
+                        // set attribute
+                        item.attr('priority', i)
+                        item.attr('fixture_id', k3)
+                        item.attr('market_id', betData.market_id)
+                        item.attr('market_bet_id', v4.market_bet_id)
+                        item.attr('bet_rate', v4.price)
+                        item.attr('bet_type', betData.market_name)
+                        item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                        item.attr('league', v2.league_name)
+                        item.attr('home', v3.home_team_name)
+                        item.attr('away', v3.away_team_name)
+                        item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
+                        item.find('.odd').html(v4.price)
+                        if( v4.status === 1 ) {
+                            item.find('.rate_name').show()
+                            item.find('.odd').show()
+                            item.find('i').hide()
+                            item.attr('onclick', 'openCal($(this))')
+                        } else {
+                            item.find('.rate_name').hide()
+                            item.find('.odd').hide()
+                            item.find('i').show()
+                            item.removeAttr('onclick')
+                        }
+                    })
+                } else {
+                    firstDiv.find('.rate_name').hide()
+                    firstDiv.find('.odd').hide()
+                    firstDiv.find('i').show()
+                    firstDiv.removeAttr('onclick')
+                    secondDiv.find('.rate_name').hide()
+                    secondDiv.find('.odd').hide()
+                    secondDiv.find('i').show()
+                    secondDiv.removeAttr('onclick')
+                    if( thirdDiv ) {
+                        thirdDiv.find('.rate_name').hide()
+                        thirdDiv.find('.odd').hide()
+                        thirdDiv.find('i').show()
+                        thirdDiv.removeAttr('onclick')
+                    }
+                }
+
+                bet_div.removeAttr('hidden')
+                bet_div.removeAttr('template')
+                card.find('.indexBetCardTable').append(bet_div)
+            });
+
+            card.removeAttr('hidden')
+            card.removeAttr('template')
+            let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+            league_toggle_content.append(card)
+        }
+
+        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            createCate(k, v)
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+                createCateLeague(k, k2, v2)
+                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
+                    createFixtureCard(k, v2.league_id, k3, v3)
+                })
+            })
         })
 
         // 滾球移到最上面
@@ -361,7 +369,6 @@
 
         // 統計
         statistics()
-
         // loop matchListD to generate html element here
     }
     /* ===== VIEW LAYER ===== */
@@ -465,8 +472,21 @@
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    let isExist = $(`#${k3}`).length > 0 ? true : false
+                    let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+                    // let isSwitchCate = $(`#catWrapperContent_${k} #${k3}`).length > 0 ? false : true // is changind living and early
+                    // if( isSwitchCate ) {
+                    //     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false
+                    //     if( isLeagueExist ) {
+                    //         let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
+                    //         let livingNode = $(`#${k3}`)
+                    //         livingNode.prependTo(parentNode);
+                    //     } else {
+
+                    //     }
+                    // }
                     if( isExist ) {
+                        let card = $(`#${k3}`) // 有可能early -> living
+                        card.attr('cate', k)
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
@@ -481,7 +501,6 @@
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
 
-                                   
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
                                         // 判斷賠率是否有改變
@@ -547,6 +566,16 @@
             })
         })
 
+        // 找移除的
+        $('.indexEachCard').each(function() {
+            let cate = $(this).attr('cate')
+            let league_id = $(this).attr('league_id')
+            let fixture_id = $(this).attr('id')
+            let testArr = matchListD.data[cate][sport].list[league_id].list
+            console.log(testArr)
+        });
+
+
         statistics()
 
     }
@@ -598,6 +627,15 @@
         console.log(wsMsg)
         ws.send(JSON.stringify(wsMsg));
     }
+
+    // remove fixture
+    function closeFixture(id) {
+        $(`#${id}`).hide(1000)
+        setTimeout(() => {
+            $(`#${id}`).remove()
+        }, 1000);
+    }
+
 
     // 大分類收合
     function toggleCat( key ) {
@@ -860,6 +898,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
+            if( count === 0 ) $(this).closest('.seriesWrapperTitle').hide()
         })
     }
 
