@@ -238,7 +238,7 @@
 			});
 
 			marqueeD.data.forEach(function(item, index) { 
-				var modalId = 'modal_' + index;
+				var modalId = 'marquee_' + index;
 
 				var link = $('<a>', { // 创建<a>元素
 					href: '#' + modalId, // Link to the corresponding modal
@@ -261,7 +261,7 @@
 
 				var modalContent = $('<div>', {
 					class: 'modal-content',
-					text: 'Modal content for ' + item,
+					text: item,
 				});
 
 				modal.append(modalContent);
