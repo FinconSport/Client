@@ -679,7 +679,6 @@ class LsportApiController extends Controller {
                     'mb.price',
                     'mb.status AS status',
                     'mb.last_update AS last_update',
-                    'mb.name_en AS mb_name_en',
                 )
                 ->where('mb.fixture_id', $fixture_id)
                 ->where('mb.market_id', $market_id)
@@ -708,6 +707,7 @@ class LsportApiController extends Controller {
                     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
+                        'market_bet_name_en' => $bv->mb_name_en,
                         //'base_line' => $bv->base_line,
                         'line' => $bv->line,
                         'price' => $bv->price,
@@ -1829,7 +1829,6 @@ class LsportApiController extends Controller {
                 'mb.price',
                 'mb.status AS status',
                 'mb.last_update AS last_update',
-                'mb.name_en AS mb_name_en',
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
@@ -1860,6 +1859,7 @@ class LsportApiController extends Controller {
                 $arr_market_bet[] = array(
                     'market_bet_id' => $market_bet_id,
                     'market_bet_name' => $market_bet_name,
+                    'market_bet_name_en' => $bv->mb_name_en,
                     //'base_line' => $bv->base_line,
                     'line' => $bv->line,
                     'price' => $bv->price,
