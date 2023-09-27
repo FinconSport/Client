@@ -232,6 +232,10 @@
 				direction: 'left'
 			});
 
+			var modalContainer = $('<div>', {
+				class: 'modalContainer',
+			});
+
 			marqueeD.data.forEach(function(item) { 
 				var link = $('<a>', { // 创建<a>元素
 					href: '#',
@@ -243,12 +247,18 @@
 					text: item
 				});
 
+				var modalContainerTxt = $('<div>', {
+					class: 'marq_modal_context',
+					text: item,
+				});
+
 				link.append(span); // 将<span>添加到<a>中
 				marqueeContainer.append(link); // 将<a>添加到跑马灯容器中
 			});
 
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
+			modalContainer.append(modalContainerTxt); 
 
 			// left menu - sportListD 
 			const pathName = window.location.pathname;
