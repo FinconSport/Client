@@ -283,41 +283,33 @@
 			$('.rightNavTag').before(marqueeContainer);
 			marqueeContainer.after(modalContainer);
 
-			//marquee onclick
+			//marquee onclick ------
 			function showModal(modalId) {
-				$('#' + modalId).css({
-					'display': 'block',
-					'opacity': 0
-				}).animate({
-					opacity: 1
-				}, 500);
+				$('#' + modalId).css({ 'display': 'block', 'opacity': 0 }).animate({ opacity: 1 }, 500);
 				// to close the modal when clicking outside
 				$('.modaldiv').click(function (e) {
 					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
 				});
-
 				$('.close-modal').click(function () {
 					closeModal(modalId);
 				});
 			}
-
 			// Function to close the modal
 			function closeModal(modalId) {
-				$('#' + modalId).animate({
-					opacity: 0
-				}, 500, function() {
+				$('#' + modalId).animate({ opacity: 0 }, 500, function() {
 					$(this).css('display', 'none');
 				});
 				$('.modaldiv').off('click'); // Remove the click event handler
 			}
-
+			// if click marquee, show the modal
 			$('.marqlink').click(function (e) {
 				e.preventDefault(); // Prevent the default behavior of the link
 				var modalId = $(this).attr('href').substring(1); // Get the modal ID from the href attribute
-				showModal(modalId); // Show the modal
+				showModal(modalId);
 			});
+			//marquee onclick ------
 
 			// left menu - sportListD 
 			const pathName = window.location.pathname;
