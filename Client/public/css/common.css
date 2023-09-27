@@ -777,7 +777,7 @@ a.sportSelect:hover,
 }
 
 .marquee-modal-content .modal-header {
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .marquee-modal-content span.close-modal {

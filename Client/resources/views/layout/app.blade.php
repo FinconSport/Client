@@ -266,6 +266,7 @@
 
 				var modalHtml = `
 					<div class="modal-header">
+						<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">
 						<span class="close-modal">&times;</span>
 					</div>
 					<div class="modal-body">
