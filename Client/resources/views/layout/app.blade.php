@@ -289,7 +289,7 @@
 				function createSportSelect(container, url) {
 					var sportSelect = document.createElement("a");
 					sportSelect.setAttribute("key", x.sport_id);
-					sportSelect.setAttribute("class", "sportSelect " + (currentUrl.includes(x.sport_id) ? "openToggle" : ""));
+					sportSelect.setAttribute("class", "sportSelect");
 					sportSelect.setAttribute("href", url + x.sport_id);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 					container.appendChild(sportSelect);
