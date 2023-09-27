@@ -256,22 +256,22 @@
 				// Create a modal for each item
 				var modal = $('<div>', {
 					id: modalId, // Assign the unique ID to the modal
-					class: 'modaldiv modal close-modal' + modalId,
+					class: 'modaldiv modal' + modalId,
 				});
 
 				var modalContent = $('<div>', {
 					class: 'marquee-modal-content',
+					text: item,
 				});
 
 				var modalHtml = `
-					<div class="modal-header">
-						<span aria-hidden="true" class="close-modal">&times;</span>
-					</div>
-					<div class="modal-body">
-						<h5>` + item + `</h5>
-					</div>
+						<div class="modal-header">
+							<span class="close-modal">&times;</span>
+						</div>
+						<div class="modal-body">
+							<h5>` item ` </h5>
+						</div>
 				`;
-
 				modalContent.html(modalHtml);
 
 				modal.append(modalContent);
@@ -291,11 +291,16 @@
 				}).animate({
 					opacity: 1
 				}, 500);
-				// Close the modal when clicking either modaldiv or close-modal
-				$('.modaldiv, .close-modal').click(function (e) {
+				// to close the modal when clicking outside
+				$('.modaldiv').click(function (e) {
 					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
+				});
+
+				// Close the modal when clicking the close button
+				$('.close-modal').click(function () {
+					closeModal(modalId);
 				});
 			}
 			// Function to close the modal
