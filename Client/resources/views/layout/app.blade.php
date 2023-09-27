@@ -266,7 +266,7 @@
 
 				var modalHtml = `
 					<div class="modal-header">
-						<span aria-hidden="true" data-dismiss="modal">&times;</span>
+						<span class="close-modal">&times;</span>
 					</div>
 					<div class="modal-body">
 						` + item + `
@@ -297,7 +297,12 @@
 						closeModal(modalId);
 					}
 				});
+
+				$('.close-modal').click(function () {
+					closeModal(modalId);
+				});
 			}
+			
 			// Function to close the modal
 			function closeModal(modalId) {
 				$('#' + modalId).animate({
