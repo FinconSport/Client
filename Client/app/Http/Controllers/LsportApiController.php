@@ -593,17 +593,25 @@ class LsportApiController extends Controller {
             }
 
             // market_count ---------------------
-            $market_counts = DB::table('lsport_market as m')
+            $data2 = DB::table('lsport_market as m')
                 ->join('lsport_fixture as f', 'f.fixture_id', '=', 'm.fixture_id')
                 ->select('f.fixture_id')
                 ->selectRaw('COUNT(*) as market_count')
                 ->where('f.start_time', "<=", $after_tomorrow)
                 ->groupBy('f.fixture_id')
                 ->get();
-            
+
+            if ($data2 === false) {
+                $this->ApiError('02');
+            }
+
+            $fixture_market_bet_count = array();
+            foreach ($data2 as $dk2 => $dv2) {
+                $fixture_market_bet_count[$dv2->fixture_id] = $dv2->market_count;
+            }
 
             if (!empty($input['is_debug'])) {
-                dd($market_counts);
+                dd($fixture_market_bet_count);
             }
 
             // league 層 ----------------------------
@@ -648,6 +656,9 @@ class LsportApiController extends Controller {
                 $livescore_extradata = $dv->livescore_extradata;
                 $periods = $dv->periods;
                 $scoreboard = $dv->scoreboard;
+
+                // 該場賽事的玩法(market)數量
+                $market_count = ((!empty($fixture_market_bet_count[$fixture_id])) ? ($fixture_market_bet_count[$fixture_id]) : (-1));
                 //解析以回傳
                 $parsed_periods = $this->getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata);
                 $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
@@ -669,6 +680,7 @@ class LsportApiController extends Controller {
                     'away_team_name' => $away_team_name,
                     'periods' => $parsed_periods,
                     'scoreboard' => $parsed_scoreboard,
+                    'market_count' => $market_count,
                     'list' => array(),
                 );
             }
