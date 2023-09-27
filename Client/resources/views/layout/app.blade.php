@@ -285,7 +285,7 @@
 
 				// to close the modal when clicking outside
 				$('.modaldiv').click(function (e) {
-					if ($(e.target).hasClass('modal')) {
+					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
 				});
