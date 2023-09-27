@@ -780,7 +780,7 @@ a.sportSelect:hover,
     justify-content: flex-end;
 }
 
-.marquee-modal-content span.close-modal {
+.marquee-modal-content span {
     cursor: pointer;
     font-size: 1.5rem;
     right: 0;

@@ -256,7 +256,7 @@
 				// Create a modal for each item
 				var modal = $('<div>', {
 					id: modalId, // Assign the unique ID to the modal
-					class: 'modaldiv modal' + modalId,
+					class: 'modaldiv modal close-modal' + modalId,
 				});
 
 				var modalContent = $('<div>', {
@@ -292,7 +292,7 @@
 					opacity: 1
 				}, 500);
 				// Close the modal when clicking either modaldiv or close-modal
-				$('.modaldiv, .close-modal').click(function (e) {
+				$('.close-modal').click(function (e) {
 					if ($(e.target).hasClass('modaldiv')) {
 						closeModal(modalId);
 					}
@@ -305,7 +305,7 @@
 				}, 500, function() {
 					$(this).css('display', 'none');
 				});
-				$('.modaldiv').off('click'); // Remove the click event handler
+				$('.close-modal').off('click'); // Remove the click event handler
 			}
 
 			$('.marqlink').click(function (e) {
