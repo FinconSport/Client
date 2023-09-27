@@ -922,6 +922,7 @@ class LsportApiController extends Controller {
         // order data
         $order['away_team_id'] = $return['team_id'];
         $order['away_team_name'] = $return[$name_columns];
+        
         //////////////////////////////////////////
 
         // 取得玩法
