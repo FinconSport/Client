@@ -224,7 +224,7 @@
 
 	// order list data
     var orderListD = {}
-    var callOrderListData = { token: token, player: player, result: 1, page: 1 }
+    var callOrderListData = { token: token, player: player, result: searchData.result, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
@@ -243,9 +243,10 @@
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
-        // ini data from ajax
         caller(orderList_api, callOrderListData, orderListD) // orderListD
-        // check if api are all loaded every 500 ms 
+        
+		
+		// check if api are all loaded every 500 ms 
         isReadyOrderInt = setInterval(() => {
             if (orderListD.status === 1) { isReadyOrder = true; }
             if( isReadyOrder && isReadyCommon) {
@@ -256,15 +257,6 @@
             }
         }, 500);
 	});
-
-
-	
-
-	
-
-	
-	
-	
 
 	// toggle
 	function toggleInfo(key, e) {
