@@ -375,12 +375,9 @@
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
-                console.log(sportListD)
-                console.log(sport)
+                callMatchListData.sport_id = sport // default sport
                 clearInterval(isReadySportInt)
-                // ini data from ajax
                 caller(matchList_api, callMatchListData, matchListD) // match_list
-                // then call every 5 sec
                 setInterval(() => {
                     caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
@@ -398,7 +395,6 @@
 
                 // soccer has three bet div others only two
                 if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
-
 
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading

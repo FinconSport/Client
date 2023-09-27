@@ -251,56 +251,44 @@
 			$('.rightNavTag').before(marqueeContainer);
 
 			// left menu - sportListD 
-			const currentUrl = window.location.href;
-			const noPath = window.location.pathname;
-
-			var sportType = sport;
-			console.log(sportType);
-
-			const urlMappings = {
-				'/?sport': 'lf_sport',
-				'm_order?': 'lf_mOrder',
-				'order': 'lf_order',
-				'match?': 'lf_match',
-				'rule': 'lf_rule',
-				'logs': 'lf_logs',
-				'calculator': 'lf_calcu',
-				'notice': 'lf_notice'
-			};
-
-			if (currentUrl.includes('index') || noPath == '/') {
-				$("#lf_sport").addClass('active');
-				$("#lf_sport .submenu-toggle-list").animate({'max-height': '900px'}, 300);
-				// if (currentUrl.includes('index') || (window.location.pathname === '/' && window.location.search === '')) {
-				// 	var anchor = document.createElement('a');
-				// 	anchor.href = "/?sport=" + sportListD.data[0].sport_id;
-				// 	var clickEvent = new MouseEvent('click', {
-				// 		'view': window,
-				// 		'bubbles': true,
-				// 		'cancelable': true
-				// 	});
-				// 	anchor.dispatchEvent(clickEvent);
-				// }
-			}
-
-			for (const urlFragment in urlMappings) {
-				if (currentUrl.includes(urlFragment)) {
-					$(`#${urlMappings[urlFragment]}`).addClass('active currentpage');
-					$(`#${urlMappings[urlFragment]} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
+			const pathName = window.location.pathname;
+			var currentPage = null
+			switch (pathName) {
+				case '/':case '/index':
+					currentPage = 'lf_sport'
 					break;
-				}
+				case '/m_order':
+					currentPage = 'lf_mOrder'
+					break;
+				case '/order':
+					currentPage = 'lf_order'
+					break;
+				case '/match':
+					currentPage = 'lf_match'
+					break;
+				case '/rule':
+					currentPage = 'lf_rule'
+					break;
+				case '/logs':
+					currentPage = 'lf_logs'
+					break;
+				case '/calculator':
+					currentPage = 'lf_calculator'
+					break;
+				case '/notice':
+					currentPage = 'lf_notice'
+					break;
 			}
 
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
-
 				sports.forEach(function (x, index) {
 				var key = index + 1;
 				x.key = key;
 
 				function createSportSelect(container, url) {
 					var sportSelect = document.createElement("a");
-					sportSelect.setAttribute("id", x.sport_id);
+					sportSelect.setAttribute("key", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect " + (currentUrl.includes(x.sport_id) ? "openToggle" : ""));
 					sportSelect.setAttribute("href", url + x.sport_id);
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
@@ -311,6 +299,11 @@
 				createSportSelect(mOrderSportCon, "/m_order?sport=");
 				createSportSelect(matchSportCon, "/match?sport=");
 				});
+
+				$(`#${currentPage}`).addClass('active currentpage');
+				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
+				$(`#subMenuContainer .currentpage div[key="${sport}"]`).addClass('openToggle')
+
 			}
 
 			// msg
@@ -401,41 +394,26 @@
 
 		
 		// left side menu click function
-		$(document).ready(function () {
-			var submenuClicked = false;
-			var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
+		var submenuClicked = false;
+		var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
+		$(".submenu-btn").click(function () {
+			$(this).closest('.submenu-main').toggleClass('active');
 
-			$(".submenu-btn").click(function () {
-				$(this).closest('.submenu-main').toggleClass('active');
+			var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
+			if (currentSubmenuToggleList.length) {
+			if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
+				currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
+				console.log("Click");
+				submenuClicked = true;
+			} else {
+				currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
+				console.log("unclick");
+				submenuClicked = false;
+			}
+			}
 
-				var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
-				if (currentSubmenuToggleList.length) {
-				if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
-					currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
-					console.log("Click");
-					submenuClicked = true;
-				} else {
-					currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
-					console.log("unclick");
-					submenuClicked = false;
-				}
-				}
-
-				$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-				$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
-
-				// Delayed action using setTimeout
-				// setTimeout(function () {
-				// if (!submenuClicked) {
-				// 	console.log("!submenuClicked");
-				// 	if ($(".submenu-main").hasClass("currentpage")) {
-				// 	$(".submenu-main.currentpage").addClass('active');
-				// 	$(".submenu-main.currentpage .submenu-toggle-list").animate({ maxHeight: '900px' }, 300);
-				// 	}
-				// }
-				// }, 3000);
-
-			});
+			$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+			$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
 		});
 
 		// ----------------------------
