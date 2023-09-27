@@ -1530,7 +1530,7 @@ class LsportApiController extends Controller {
                         $d[$pos] = $vvv['Value'];
                     }
                     $type = $vv['Type'];
-                    if ($type < 100) {  // 粗暴判斷
+                    if ($type <= 50) {  // 粗暴判斷
                         $scoreboard[] = $d;
                     }
                 }
@@ -1747,7 +1747,7 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[1] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($stage >= 1) && ($stage < 40)) {
+                if (($stage >= 1) && ($stage <= 50)) {
                     $arr_home_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
@@ -1763,7 +1763,7 @@ class LsportApiController extends Controller {
             foreach ($parsed_scoreboard[2] as $sk => $sv) {
                 $stage = intval($sk);
                 $score = intval($sv);
-                if (($stage >= 1) && ($stage < 40)) {
+                if (($stage >= 1) && ($stage <= 50)) {
                     $arr_away_team_scores[] = array(
                         'stage' => $stage,
                         'score' => $score,
