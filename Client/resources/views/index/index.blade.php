@@ -277,7 +277,7 @@
 
             card.attr('id', k3)
             card.attr('cate', k)
-            card.attr('league_id', v2.league_id)
+            card.attr('league_id', league_id)
             time.html(v3.start_time)
             home_team_info.find('.teamSpan').html(v3.home_team_name)
             home_team_info.find('.scoreSpan').html()
