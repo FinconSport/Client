@@ -272,17 +272,27 @@
         function createFixtureCard(k, league_id, league_name, k3, v3) {
             let card = $('div[template="fixtureCardTemplate"]').clone()
             let time = card.find('.timer');
-            let home_team_info = card.find('[key="homeTeamInfo"]');
+            let home_team_info = card.find('[key="homeTeamInfo"]')
             let away_team_info = card.find('[key="awayTeamInfo"]')
 
             card.attr('id', k3)
             card.attr('cate', k)
+            card.attr('status', v3.status)
             card.attr('league_id', league_id)
             time.html(v3.start_time)
             home_team_info.find('.teamSpan').html(v3.home_team_name)
             home_team_info.find('.scoreSpan').html()
             away_team_info.find('.teamSpan').html(v3.away_team_name)
             away_team_info.find('.scoreSpan').html()
+
+            // living score
+            if( v3.status === 2 ) {
+                home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+                away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+                let timerStr = v3.periods.period + '局'
+                v3.periods.Turn === '1' ? timerStr += '下半' : timerStr += '上半'
+                time.html(timerStr)
+            }
 
             // bet area
             priorityArr.forEach(( i, j ) => {
@@ -474,7 +484,14 @@
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     if( isExist ) {
-                        let isSwitchCate = $(`#catWrapperContent_${k} #${k3}`).length > 0 ? false : true // is changing early to living
+
+                        let card = $(`#${k3}`) 
+                        let time = card.find('.timer');
+                        let home_team_info = card.find('[key="homeTeamInfo"]')
+                        let away_team_info = card.find('[key="awayTeamInfo"]')
+                        let nowStatus = parseInt(card.attr('status'))
+                        
+                        let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
                         let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                         let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
                         if( isSwitchCate ) {
@@ -483,10 +500,19 @@
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
                             let livingNode = $(`#${k3}`)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
+                            card.attr('cate', k)
+                            card.attr('status', v3.status)
                         }   
 
-                        let card = $(`#${k3}`) // 有可能early -> living
-                        card.attr('cate', k)
+                        // living
+                        if( v3.status === 2 ) {
+                            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+                            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+                            let timerStr = v3.periods.period + '局'
+                            v3.periods.Turn === '1' ? timerStr += '下' : timerStr += '上'
+                            time.html(timerStr)
+                        }
+
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
@@ -576,8 +602,7 @@
             let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
             let result = null
             if( resultArr ) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
-            
-            if( result === null ) {
+            if( !result ) {
                 closeFixture(fixture_id)
             } 
         });
