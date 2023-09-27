@@ -57,7 +57,7 @@
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
 								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
-								<!-- <div id="orderSportCon" class="submenu-toggle-list">
+								<div id="orderSportCon" class="submenu-toggle-list">
 									<a class="sportSelect" href="/order?result=1">
 										<div class="sportname-con">
 											<span><p>Settled</p></span>
@@ -68,7 +68,7 @@
 											<span><p>Unsettled</p></span>
 										</div>
 									</a>
-								</div> -->
+								</div>
 							</div>
 						</div>
 						
@@ -337,6 +337,11 @@
 				case '/order':
 					currentPage = 'lf_order'
 					break;
+				case '/order?result=1':
+					currentPage = 'lf_order'
+				case '/order?result=2':
+					currentPage = 'lf_order'
+					break;
 				case '/match':
 					currentPage = 'lf_match'
 					break;
@@ -377,6 +382,7 @@
 				$(`#${currentPage}`).addClass('active currentpage');
 				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
 				$(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle')
+				$(`#${currentPage}.currentpage .sportSelect`).addClass('openToggle')
 
 			}
 
