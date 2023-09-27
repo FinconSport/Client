@@ -256,7 +256,7 @@
 				// Create a modal for each item
 				var modal = $('<div>', {
 					id: modalId, // Assign the unique ID to the modal
-					class: 'marquee-modal' + modalId,
+					class: 'modaldiv modal' + modalId,
 				});
 
 				var modalContent = $('<div>', {
@@ -273,6 +273,39 @@
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
 			marqueeContainer.after(modalContainer);
+
+			//marquee onclick
+			function showModal(modalId) {
+				$('#' + modalId).css({
+					'display': 'block',
+					'opacity': 0
+				}).animate({
+					opacity: 1
+				}, 500);
+
+				// to close the modal when clicking outside
+				$('.modaldiv').click(function (e) {
+					if ($(e.target).hasClass('modaldiv')) {
+						closeModal(modalId);
+					}
+				});
+			}
+
+			// Function to close the modal
+			function closeModal(modalId) {
+				$('#' + modalId).animate({
+					opacity: 0
+				}, 500, function() {
+					$(this).css('display', 'none');
+				});
+				$('.modaldiv').off('click'); // Remove the click event handler
+			}
+
+			$('.marqlink').click(function (e) {
+				e.preventDefault(); // Prevent the default behavior of the link
+				var modalId = $(this).attr('href').substring(1); // Get the modal ID from the href attribute
+				showModal(modalId); // Show the modal
+			});
 
 			// left menu - sportListD 
 			const pathName = window.location.pathname;
@@ -442,43 +475,7 @@
 
 		// ----------------------------
 
-		//marquee onclick
-		$('.marqlink').click(function (event) {
-			//event.preventDefault(); // Prevents the default anchor behavior
-			event.stopPropagation(); //stopping propagation here
-			var title = $(this).find('.marq_title').text();
-			var context = $(this).find('.marq_context').text();
-			var create_d = $(this).data("createdate");
-			modal = $('#marqModal');
-			
-			$('body').addClass("modal-open");
-			if(!$('.modal-backdrop').length) //to not conflict with page with bootstrap js
-			{
-				$(document.body).append("<div class='modal-backdrop fade'></div>");
-			}
-			else{
-				$('.modal-backdrop').removeClass("show");
-			}
 
-			modal.addClass("show");
-			modal.css("display", "block");
-			setTimeout(function() {
-				$('.modal-backdrop').css("opacity", 0.5);
-				modal.css("opacity", 1);
-				modal.css("top",0);
-			}, 200);
-			
-			modal.find('.modal-title').text(title);
-			modal.find('.cdate').text(create_d);
-			modal.find('.modal-context').text(context);
-			// Add an event listener to close the modal when clicking outside
-			$(document).on('click', function (event) {
-				if ($('#marqModal').hasClass('show')) {
-					closeModal();
-				}
-			});
-		});
-		
 		// modal close
 		function closeModal() {
 			var modal = $('#marqModal');
@@ -493,13 +490,6 @@
 				$(".modal-backdrop").remove();
 			}, 200);
 		}
-
-		// marquee close
-		$('#marqModal .btn-close').click(function (event) {
-			event.preventDefault(); // Prevents the default anchor behavior
-			closeModal();
-		});
-
 		// convert search data to obj
 		function paramsToObject(entries) {
 			const result = {}
