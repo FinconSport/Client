@@ -801,7 +801,6 @@ class LsportApiController extends Controller {
         
         $name_columns = "name_".$api_lang;
 
-
         //////////////////////////////////////////
 
         // 取得系統參數
