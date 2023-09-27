@@ -492,14 +492,13 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 處理輸入
-        $necessaryInputs = array('player', 'sport_id', 'fixture_id');
+        $necessaryInputs = array('player', 'sport_id',);
         foreach ($necessaryInputs as $nk => $input_name) {
             if (empty($input[$input_name])) {
                 $this->ApiError('01');
             }
         }
         $player_id = $input['player'];
-        $fixture_id = $input['fixture_id'];
         $sport_id = $input['sport_id'];
 
         //---------------------------------
