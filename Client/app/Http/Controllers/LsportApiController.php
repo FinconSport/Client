@@ -634,8 +634,6 @@ class LsportApiController extends Controller {
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
                     //'sport_id' => $dv->sport_id,
                     //'league_id' => $dv->league_id,
-                    //'home_id' => $dv->home_id,
-                    //'away_id' => $dv->away_id,
                     'fixture_id' => $dv->fixture_id,
                     'start_time' => $dv->start_time,
                     'status' => $fixture_status,
@@ -681,11 +679,13 @@ class LsportApiController extends Controller {
                     'mb.price',
                     'mb.status AS status',
                     'mb.last_update AS last_update',
+                    'mb.name_en AS mb_name_en',
                 )
                 ->where('mb.fixture_id', $fixture_id)
                 ->where('mb.market_id', $market_id)
                 ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
-                ->orderBy('mb.bet_id', 'ASC')  //注意排序
+                //->orderBy('mb.bet_id', 'ASC')  //注意排序
+                ->orderBy('mb.name_en', 'ASC')  //注意排序
                 ->get();
 
                 if ($marketBetData === false) {
@@ -704,7 +704,8 @@ class LsportApiController extends Controller {
                     }
 
                     // 包入 market_bet 賠率資料 ---------------
-                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                    //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
                         //'base_line' => $bv->base_line,
@@ -1601,9 +1602,7 @@ class LsportApiController extends Controller {
         $agent_lang = $this->getAgentLang($player_id);
         $lang_col = 'name_' . $agent_lang;
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////
 
         //依照 sport_id, fixture_id 取出單場"賽事+聯盟+球種+主隊+客隊"資料
         $data = DB::table('lsport_league as l')
@@ -1830,11 +1829,13 @@ class LsportApiController extends Controller {
                 'mb.price',
                 'mb.status AS status',
                 'mb.last_update AS last_update',
+                'mb.name_en AS mb_name_en',
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
             ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
-            ->orderBy('mb.bet_id', 'ASC')  //注意排序
+            //->orderBy('mb.bet_id', 'ASC')  //注意排序
+            ->orderBy('mb.name_en', 'ASC')  //注意排序
             ->get();
 
             if ($marketBetData === false) {
@@ -1878,10 +1879,9 @@ class LsportApiController extends Controller {
 
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////
 
+        // debug 用
         if (!empty($input['is_debug'])) {
             dd($arrFixture);
         }
