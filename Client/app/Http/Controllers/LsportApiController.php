@@ -578,9 +578,10 @@ class LsportApiController extends Controller {
         foreach ($data as $dk => $dv) {
             $league_id = $dv->league_id;
             $fixture_id = $dv->fixture_id;
-            $market_id = $dv->market_id;
-            $main_line = $dv->main_line;
             $fixture_status = intval($dv->f_status);
+            $market_id = $dv->market_id;
+            $market_priority = $dv->priority;
+            $market_main_line = $dv->main_line;
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
             if (!strlen($sport_name)) {  //只須設定一次
@@ -605,7 +606,7 @@ class LsportApiController extends Controller {
 
                 // 包入 league 聯賽資料
                 $arrLeagues[$fixture_status][$league_id] = array(
-                    'league_id' => $dv->league_id,
+                    'league_id' => $league_id,
                     'league_name' => $league_name,
                     'list' => array(),
                 );
@@ -671,10 +672,10 @@ class LsportApiController extends Controller {
 
                 // 包入 market 玩法資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
-                    'market_id' => $dv->market_id,
+                    'market_id' => $market_id,
                     'market_name' => $market_name,
-                    'priority' => $dv->priority,
-                    'main_line' => $dv->main_line,
+                    'priority' => $market_priority,
+                    'main_line' => $market_main_line,
                     'list' => array(),
                 );
  
@@ -692,7 +693,7 @@ class LsportApiController extends Controller {
                 )
                 ->where('mb.fixture_id', $fixture_id)
                 ->where('mb.market_id', $market_id)
-                ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
+                ->where('mb.base_line', $market_main_line)  //這邊用 base_line 或 line 都可以
                 //->orderBy('mb.bet_id', 'ASC')  //注意排序
                 ->orderBy('mb.name_en', 'ASC')  //注意排序
                 ->get();
