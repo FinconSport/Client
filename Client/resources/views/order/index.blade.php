@@ -195,8 +195,6 @@
 		});
 
 		createTotal(totalResultAmount, totalBetAmount);
-
-		return totalResultAmount;
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -253,8 +251,7 @@
 		);
 
 		if (betIndex > 0) { // Check if it's not the first item
-			// Add a custom class to elements of subsequent bet_data items
-			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
+			betDataDetailsContainer.addClass('hide-betaDetcon');
 			$('#betDataDetails_' + orderItem.id + ' .order-toggleButton').addClass('showbutton');
 		}
 
@@ -276,7 +273,6 @@
 	}
 
 	function createTotal(totalResultAmount, totalBetAmount) {
-
 		let orderDataTotal = $('#countTr').clone();
 
 		orderDataTotal.removeAttr('hidden');
@@ -288,11 +284,7 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	sportListD.data.forEach(sport => {
-		const sportId = sport.sport_id;
-		const name = sport.name;
-		console.log(`Sport ID: ${sportId}, Name: ${name}`);
-	});
+	consoloe.log(sportListD);
 
 
   	// 寫入頁面限定JS
