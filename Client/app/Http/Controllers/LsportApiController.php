@@ -351,7 +351,7 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        dd($data);
+        //dd($data);
         
     	//---------------------------------
         $ret = array();
@@ -403,7 +403,7 @@ class LsportApiController extends Controller {
 
         }
 
-        var_dump($living_type_total);
+        //var_dump($living_type_total);
 
         // dd($ret);
 
