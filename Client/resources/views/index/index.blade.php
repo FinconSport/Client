@@ -61,7 +61,6 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
-        
     </div>
 </div>
 
@@ -312,6 +311,10 @@
             v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
             time.html(timerStr)
         }
+        // ready to start
+        if( v3.status === 9 ) {
+            time.html(langTrans.mainArea.readyToStart)
+        }
 
         // bet area
         priorityArr.forEach(( i, j ) => {
@@ -480,14 +483,14 @@
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-                    
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
-                        let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
+                        let isStatusSame = nowStatus === v3.status ? true : false // is status the same
+                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
                         console.log(k3 + ' isSwitch ->' + isSwitchCate)
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
@@ -507,6 +510,10 @@
                             let timerStr = v3.periods.period + langTrans.mainArea.stage
                             v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                             time.html(timerStr)
+                        }
+                        // ready to start
+                        if( v3.status === 9 ) {
+                            time.html(langTrans.mainArea.readyToStart)
                         }
 
                         priorityArr.forEach(( i, j ) => {
