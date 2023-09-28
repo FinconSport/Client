@@ -322,10 +322,10 @@ class LsportApiController extends Controller {
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
         
-        $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
+        $data = LsportSport::leftJoin('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
             // DB::table('lsport_league as l')
             // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
-            ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
+            ->leftJoin('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->leftJoin('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
                 'lsport_sport.sport_id, lsport_sport.name_en, COUNT(*) as cnt'
