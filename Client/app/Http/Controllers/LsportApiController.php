@@ -322,12 +322,13 @@ class LsportApiController extends Controller {
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
         
-        $data = DB::table('lsport_league as l')
-            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
-            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
-            ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
+        $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
+            // DB::table('lsport_league as l')
+            // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
+            ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
+            ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
-                'COUNT(*)'
+                'lsport_sport.sport_id, COUNT(*) as cnt'
             )
             ->where('l.status', 1)
             ->whereIn('f.status', [1, 2])  //可區分:未開賽及走地中
