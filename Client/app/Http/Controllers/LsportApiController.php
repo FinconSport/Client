@@ -349,7 +349,7 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        dd($data);
+        // dd($data);
 
     	//---------------------------------
         $ret = array(
