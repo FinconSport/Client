@@ -474,42 +474,43 @@
             }
         }
 
-        function createList(orderItem, orderIndex) {
-            let orderData = $('tbody[template="orderTemplate"]').clone();
-            let orderData_id = orderData.find('.orderData_id');
-            let orderData_mOrder = orderData.find('.orderData_mOrder');
-            let orderData_betAmount = orderData.find('.orderData_betAmount');
-            let orderData_createdTime = orderData.find('.orderData_createdTime');
-            let orderData_resultAmount = orderData.find('.orderData_resultAmount');
-            let orderData_resultTime = orderData.find('.orderData_resultTime');
-            let orderData_status = orderData.find('.orderData_status');
-            let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
-            let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
+		function createList(orderItem, orderIndex) {
+			let orderData = $('tbody[template="orderTemplate"]').clone();
+			orderData.removeAttr('hidden');
+			orderData.removeAttr('template');
+			
+			// Find elements within the cloned template
+			let orderData_id = orderData.find('.orderData_id');
+			let orderData_mOrder = orderData.find('.orderData_mOrder');
+			let orderData_betAmount = orderData.find('.orderData_betAmount');
+			let orderData_createdTime = orderData.find('.orderData_createdTime');
+			let orderData_resultAmount = orderData.find('.orderData_resultAmount');
+			let orderData_resultTime = orderData.find('.orderData_resultTime');
+			let orderData_status = orderData.find('.orderData_status');
+			let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
+			let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
-            orderData_id.html(orderItem.id);
-            orderData_mOrder.html(orderItem.m_order);
-            orderData_betAmount.html(orderItem.bet_amount);
-            orderData_createdTime.html(orderItem.create_time);
-            orderData_resultAmount.html(orderItem.result_amount);
-            orderData_resultTime.html(orderItem.result_time);
-            orderData_status.html(orderItem.status);
-            orderData_totalBetAmount.html(orderItem.bet_amount);
-            orderData_totalResultAmount.html(orderItem.result_amount);
+			// Set content for the found elements
+			orderData_id.html(orderItem.id);
+			orderData_mOrder.html(orderItem.m_order);
+			orderData_betAmount.html(orderItem.bet_amount);
+			orderData_createdTime.html(orderItem.create_time);
+			orderData_resultAmount.html(orderItem.result_amount);
+			orderData_resultTime.html(orderItem.result_time);
+			orderData_status.html(orderItem.status);
+			orderData_totalBetAmount.html(orderItem.bet_amount);
+			orderData_totalResultAmount.html(orderItem.result_amount);
 
-            orderData.removeAttr('hidden');
-            orderData.removeAttr('template');
+			$('#orderDataTemp').append(orderData);
+		}
 
-            $('#orderDataTemp').append(orderData);
-        }
+		function createData(orderItem, betItem, betIndex) {
+			// Create and append elements for bet data (if needed)
+			// ...
 
-        function createData(orderData, betItem, betIndex) {
-            // Create and append elements for bet data (if needed)
-            // ...
-
-            // Example code for adding a bet data element
-            let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
-            orderData.find('.orderData_betDataDetails').append(betDataElement);
-        }
+			let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
+			orderItem.find('.orderData_betDataDetails').append(betDataElement);
+		}
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
