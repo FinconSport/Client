@@ -58,24 +58,25 @@
 				</tbody>
             </table>
         </div>
-    </div>
-	<div id="noMoreData" style="display: none">
-		<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
-	</div>
-	<div id="loader" style="display: none">
-		<div colspan="29" class="loading loading04">
-			<span>L</span>
-			<span>O</span>
-			<span>A</span>
-			<span>D</span>
-			<span>I</span>
-			<span>N</span>
-			<span>G</span>
-			<span>.</span>
-			<span>.</span>
-			<span>.</span>
+		<div id="loader" style="display: none">
+			<div colspan="29" class="loading loading04">
+				<span>L</span>
+				<span>O</span>
+				<span>A</span>
+				<span>D</span>
+				<span>I</span>
+				<span>N</span>
+				<span>G</span>
+				<span>.</span>
+				<span>.</span>
+				<span>.</span>
+			</div>
+		</div>  
+		<div id="noMoreData" style="display: none">
+			<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 		</div>
-	</div>  
+    </div>
+	
 @endsection
 @section('styles')
 <link href="{{ asset('css/match.css?v=' . $current_time) }}" rel="stylesheet">
@@ -102,7 +103,7 @@
     var callResultListData = { token: token, player: player, sport: sport, page: 1 }
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
-	function renderView( isIni = 0 ) {
+	function renderView() {
 		
 		matchTitleAll.forEach(ele => {
 			let str = ''
@@ -139,7 +140,7 @@
 		})
 
 		// detect if it's last page
-		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
+		if( resultListD.data.length !== 20 || resultListD.data.length === 0 || resultListD.data.length > 20 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
 	}
 
@@ -180,43 +181,21 @@
 
 
 	// 下拉更多資料
-	function fetchMore() {
+	async function fetchMore() {
 		console.log('fetchMore')
 		$('#loader').show() // loading transition
-
-		callResultListData.page = parseInt(searchData.page) + 1
-		$.ajax({
-			url: resultList_api,
-			type: 'POST',
-			headers: {
-				'X-CSRF-TOKEN': csrfToken
-			},
-			data: callResultListData,
-			success: function(response) {
-				var data = JSON.parse(response).data
-				data = resultListD
-				renderView() // render the new data
-				$('#loader').hide()
-                fetchMoreLock = false // reset the infinite scroll lock
-			},
-			error: function(xhr, status, error) {
-				console.error('error');
-				console.error(xhr,status,error);
-			}
-		});
+		callResultListData.page += 1
+		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
+		renderView()
 	}
 
 	// scroll to bottom
-	var matchContainer = document.getElementById('tblbodyMatch');
+	var matchContainer = document.getElementById('matchContainer');
 	matchContainer.addEventListener('scroll', function() {
-		var noDataDiv = document.getElementById("noDataF");
-		var noDataDivL = noDataDiv ? noDataDiv.length : 0;
-		var seriesElement = document.getElementById("series_id");
-		var filterStatData = seriesElement.getAttribute("data-filter");
 		var scrollHeight = matchContainer.scrollHeight;
 		var scrollTop = matchContainer.scrollTop;
 		var clientHeight = matchContainer.clientHeight;
-		if (scrollTop + clientHeight + 1 >= scrollHeight && isLastPage === false && fetchMoreLock === false && noDataDivL < 1) {
+		if (scrollTop + clientHeight + 1 >= scrollHeight && isLastPage === false && fetchMoreLock === false) {
 			fetchMoreLock = true // lock
 			fetchMore()
 		}
