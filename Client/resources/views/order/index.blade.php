@@ -300,13 +300,15 @@
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
+		orderDataTotal.empty();
+
 		// Find elements within the cloned template
 		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
 		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
 		orderData_totalBetAmount.text('0');
-		orderData_totalResultAmount.text('0' + totalResultAmount);
+		orderData_totalResultAmount.text(totalResultAmount);
 
 		$('#orderTr').after(orderDataTotal);
 	}
