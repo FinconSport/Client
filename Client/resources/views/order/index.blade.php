@@ -243,7 +243,7 @@
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
 		// Create a container for each bet_data
-		let betDataDetailsContainer = $('<div class="d-flex flex-column">');
+		let betDataDetailsContainer = $('<div class="d-flex flex-column betaDetcon">');
 
 		// Find elements within the cloned template (similar to your existing code)
 		let betDataDetails_leagueName = $('<span class="betDataDetails_leagueName">').html(betItem.league_name);
@@ -261,16 +261,12 @@
 			betDataDetails_BetStatus
 		);
 
-		if (totalBetDataCount > 1) {
-			// Create and append the button
-			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
-			betDataDetailsContainer.append(button);
-		}
-
 		// Check if betIndex is greater than 0 (not the first bet_data)
 		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
-			betDataDetailsContainer.addClass('custom-class'); // Change 'custom-class' to your desired class name
+			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'custom-class' to your desired class name
+			var button = $('<button>Your Button Text</button>');
+			button.appendTo(orderDataBetDataDetails);
 		}
 
 		// Append the container to the orderDataBetDataDetails
