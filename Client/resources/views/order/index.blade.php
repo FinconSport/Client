@@ -261,11 +261,15 @@
 			betDataDetails_BetStatus
 		);
 
-		// Check if betIndex is greater than 0 (not the first bet_data)
 		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
-			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'custom-class' to your desired class name
-			var button = $('<button>Your Button Text</button>');
+			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
+
+			var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
+			button.on('click', function () {
+				// Toggle the visibility of the corresponding betDataDetailsContainer with slide animation
+				betDataDetailsContainer.slideToggle();
+			});
 			button.appendTo(orderDataBetDataDetails);
 		}
 
