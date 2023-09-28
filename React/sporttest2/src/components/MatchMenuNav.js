@@ -205,7 +205,6 @@ class MatchMenuNav extends React.Component {
     render() {
         const res = this.state.api_res;
         if( res && window.menu !== null && window.sport !== null ){
-            console.log(res)
             return (
                 <>
                     <div style={MatchMenuBar}>
