@@ -260,23 +260,24 @@
 			betDataDetails_BetRate,
 			betDataDetails_BetStatus
 		);
-
-		var buttonAppended = false;
-
-		if (betIndex > 0 && !buttonAppended) {
+		
+		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
 
-			var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
-			button.on('click', function () {
-				// Toggle the visibility of the corresponding betDataDetailsContainer with slide animation
-				betDataDetailsContainer.slideToggle();
-			});
+			// Check if the button is already appended to this specific orderDataBetDataDetails
+			if (!orderDataBetDataDetails.data('button-appended')) {
+				var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
+				button.on('click', function () {
+					// Toggle the visibility of the corresponding betDataDetailsContainer with slide animation
+					betDataDetailsContainer.slideToggle();
+				});
+				
+				button.appendTo(orderDataBetDataDetails);
 
-			button.appendTo(orderDataBetDataDetails);
-
-			// Set the flag to true to indicate that the button has been appended
-			buttonAppended = true;
+				// Mark this specific orderDataBetDataDetails as having the button appended
+				orderDataBetDataDetails.data('button-appended', true);
+			}
 		}
 
 		// Append the container to the orderDataBetDataDetails
