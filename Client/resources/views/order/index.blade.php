@@ -461,10 +461,10 @@
 
 	function renderView() {
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			createList(orderItem, orderIndex); // Assuming this function works correctly
-			// Iterate over the 'bet_data' array in orderItem
+			createList(orderItem, orderIndex);
+			createTotal(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex); // Assuming this function works correctly
+				createBetDataDetails(orderItem, betItem, betIndex);
 			});
 		});
 	}
@@ -485,8 +485,6 @@
 		let orderData_resultAmount = orderData.find('.orderData_resultAmount');
 		let orderData_resultTime = orderData.find('.orderData_resultTime');
 		let orderData_status = orderData.find('.orderData_status');
-		let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
-		let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
@@ -497,8 +495,6 @@
 		orderData_resultAmount.html(orderItem.result_amount);
 		orderData_resultTime.html(orderItem.result_time);
 		orderData_status.html(orderItem.status);
-		orderData_totalBetAmount.html(orderItem.bet_amount);
-		orderData_totalResultAmount.html(orderItem.result_amount);
 
 		$('#countTr').before(orderData);
 	}
@@ -522,6 +518,22 @@
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
+	}
+
+	function createTotal(orderItem, orderIndex) {
+		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
+		orderDataTotal.removeAttr('hidden');
+		orderDataTotal.removeAttr('template');
+
+		// Find elements within the cloned template
+		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
+		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
+
+		// Set content for the found elements
+		orderData_totalBetAmount.html(orderItem.bet_amount);
+		orderData_totalResultAmount.html(orderItem.result_amount);
+
+		$('#orderTr').after(orderData);
 	}
 
 
