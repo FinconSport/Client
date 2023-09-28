@@ -127,7 +127,7 @@
 									<span class="betDataDetails_AwayName"></span>
 								</div>
 								<div>
-									<span class="betDataDetails_BetName"></span>
+									<span class="betDataDetails_BetNameLine"></span>
 									<span class="betDataDetails_BetLine"></span>
 								</div>
 							</span>
@@ -251,15 +251,14 @@
 		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
 		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
 		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_BetName = betDataDetails.find('.betDataDetails_BetName');
+		let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
 		let betDataDetails_BetLine = betDataDetails.find('.betDataDetails_BetLine');
 
 		// Set content for the found elements
 		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetLine.html(betItem.market_bet_line);
+		betDataDetails_BetNameLine.html(betItem.market_bet_name + betItem.market_bet_line);
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
