@@ -118,8 +118,10 @@
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
-                        <td class="orderData_betDataDetails" template="betDataDetailsTemp" hidden>
-							<span class="betDataDetails_betaName"></span>
+                        <td class="orderData_betDataDetails">
+							<div template="betDataDetailsTemp" hidden>
+								<span class="betDataDetails_betaName"></span>
+							</div>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
@@ -513,7 +515,7 @@
 		}
 
 		function createbetDataDetails(orderItem, orderIndex) {
-			let betDataDetails = $('td[template="betDataDetailsTemp"]').clone();
+			let betDataDetails = $('div[template="betDataDetailsTemp"]').clone();
 
 			betDataDetails.removeAttr('hidden');
 			betDataDetails.removeAttr('template');
@@ -523,7 +525,7 @@
 
 			// Set content for the found elements
 			betDataDetails_betaName.html(orderItem.bet_data.market_bet_name);
-			$('.orderData_mOrder').after(betDataDetails);
+			$('.orderData_betDataDetails').append(betDataDetails);
 		}
 
   	// 寫入頁面限定JS
