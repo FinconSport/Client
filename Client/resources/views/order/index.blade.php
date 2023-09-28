@@ -210,9 +210,22 @@
 					toggleButton.click(() => {
 						// Toggle the display of additional bet_data
 						for (let i = 1; i < betDataDetailsCount; i++) {
-							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+							toggleBetDataDetails(orderItem.id, i);
 						}
 						toggleButton.hide(); // Hide the "Show More Bet Data" button
+						let hideButton = $('<button>').text('Hide Bet Data');
+						hideButton.click(() => {
+							// Hide all bet_data except the first one
+							for (let i = 1; i < betDataDetailsCount; i++) {
+								toggleBetDataDetails(orderItem.id, i, 'hide');
+							}
+							hideButton.hide(); // Hide the "Hide Bet Data" button
+							toggleButton.show(); // Show the "Show More Bet Data" button again
+						});
+						// Append the hide button
+						let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+						let orderDataBetDataDetails = $('#' + betDataDetailsId);
+						orderDataBetDataDetails.append(hideButton);
 					});
 
 					// Append the toggle button
@@ -229,6 +242,19 @@
 
 		return totalResultAmount;
 	}
+
+	// Function to toggle bet_data details visibility
+	function toggleBetDataDetails(orderItemId, index, action = 'toggle') {
+		let betDataDetailsId = 'betDataDetails_' + orderItemId + '_' + index;
+		let betDataDetails = $('#' + betDataDetailsId);
+
+		if (action === 'toggle') {
+			betDataDetails.toggle(); // Toggle visibility
+		} else if (action === 'hide') {
+			betDataDetails.hide(); // Hide
+		}
+	}
+
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
