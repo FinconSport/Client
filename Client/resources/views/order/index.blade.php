@@ -513,7 +513,7 @@
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
 
-		$('.orderData_betDataDetails').before(betDataDetails);
+		$('.orderData_betDataDetails').append(betDataDetails);
 	}
 
 
