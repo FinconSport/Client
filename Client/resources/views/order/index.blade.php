@@ -296,10 +296,8 @@
 
 	
 	function createTotal(totalResultAmount) {
-		// Remove any existing total row
-		$('#countTr').remove();
-		
-		// Clone the template row
+
+		// Clone the template row for the total
 		let orderDataTotal = $('#countTr').clone();
 
 		// Remove hidden and template attributes
@@ -312,8 +310,6 @@
 		// Append the total row to the table body
 		$('#orderDataTemp').append(orderDataTotal);
 	}
-
-	createTotal();
 
 
   	// 寫入頁面限定JS
