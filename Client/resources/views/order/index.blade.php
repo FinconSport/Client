@@ -202,7 +202,8 @@
 		for (const item of orderListD.data.list) {
 			for (const bet of item.bet_data) {
 				const sportId = bet.sport_id;
-				const sportName = sportMapping[sportId] || "unknown";
+				const matchingSport = sportMapping.find(sport => sport.sport_id === sportId);
+				const sportName = matchingSport ? matchingSport.name : "unknown";
 				console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
 			}
 		}
