@@ -19,6 +19,22 @@
     padding-right: 1rem;
 }
 
+th {
+    border-top: none!important;
+}
+
+tr td:first-child, tr th:first-child {
+    border-left: none!important;
+}
+
+tr td:last-child, tr th:last-child {
+    border-right: none!important;
+}
+
+tr:last-child td,
+tr:nth-last-child(2) td {
+    border-bottom: none!important;
+}
 
 #matchTable td,
 #matchTable th {
@@ -26,17 +42,5 @@
     padding: 0.5rem;
     font-weight: 600;
 }
-.no-border-left{
-    border-left: none!important;
-}
-.no-border-top td,
-.no-border-top th{
-    border-top: none!important;
-}
-.no-border-right{
-    border-right: none!important;
-}
-.no-border-bottom td {
-    border-bottom: none!important;
-}
+
 
