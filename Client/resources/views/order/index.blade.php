@@ -122,7 +122,6 @@
 							<span template="betDataDetailsTemp" hidden>
 								<span class="betDataDetails_betaName"></span>
 							</span>
-							<span class="betDataDetails_betaName"></span>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
@@ -477,7 +476,6 @@
 			// Find elements within the cloned template
 			let orderData_id = orderData.find('.orderData_id');
 			let orderData_mOrder = orderData.find('.orderData_mOrder');
-			let betDataDetails_betaName = orderData.find('.betDataDetails_betaName');
 			let orderData_betAmount = orderData.find('.orderData_betAmount');
 			let orderData_createdTime = orderData.find('.orderData_createdTime');
 			let orderData_resultAmount = orderData.find('.orderData_resultAmount');
@@ -489,7 +487,6 @@
 			// Set content for the found elements
 			orderData_id.html(orderItem.id);
 			orderData_mOrder.html(orderItem.m_order);
-			betDataDetails_betaName.html(orderItem.bet_data.market_bet_name);
 			orderData_betAmount.html(orderItem.bet_amount);
 			orderData_createdTime.html(orderItem.create_time);
 			orderData_resultAmount.html(orderItem.result_amount);
@@ -527,7 +524,7 @@
 			let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
 
 			// Set content for the found elements
-			betDataDetails_betaName.html(orderItem.bet_data.market_bet_name);
+			betDataDetails_betaName.html(betItem.market_bet_name);
 			$('.orderData_betDataDetails').append(betDataDetails);
 		}
 
