@@ -185,6 +185,11 @@
                 createData(item, index, betItem, betIndex);
             });
         });
+
+        // Loop through sportListD.data to generate sport-related elements (if needed)
+        sportListD.data.forEach((sport) => {
+            // You can create sport-related elements here if required
+        });
     }
 
 	
