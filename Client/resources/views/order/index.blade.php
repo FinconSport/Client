@@ -274,11 +274,13 @@
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 		console.log('count:' + betIndex);
 
+		var countBetaData = betIndex + 1;
+
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }}</button>");
+			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }} (" + countBetaData + ")</button>");
 			button.on('click', function () {
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-				if (button.text() === '{{ trans('order.main.expand') }}') {
+				if (button.text() === '{{ trans('order.main.expand') }} (" + countBetaData + ")') {
 					button.text('{{ trans('order.main.close') }}');
 				} else {
 					button.text('{{ trans('order.main.expand') }}');
