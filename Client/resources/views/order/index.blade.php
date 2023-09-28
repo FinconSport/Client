@@ -179,6 +179,7 @@
 
 	// order list data
     var orderListD = {}
+	var sportListD = []
 	// var orderListD = {
 	// 	"status": 1,
 	// 	"data": {
@@ -488,7 +489,7 @@
 	} else {
 		console.log("Sport with ID 6046 not found.");
 	}
-	
+
 	console.log(sport);
 
 	function createList(orderItem, orderIndex) {
