@@ -131,7 +131,7 @@ div[key="matchSportMenu"]{
 }
 .orderData_betDataDetails {
     position: relative;
-    padding: 1rem!important;
+    padding: 2rem!important;
 }
 
 .betaDetcon {
@@ -166,7 +166,7 @@ div[key="matchSportMenu"]{
     right: 0.5rem;
     transition: all 0.5s ease 0s;
     width: 4.5rem;
-    top: 1.2rem;
+    top: 2.2rem;
     height: 1.5rem;
     line-height: 1.5rem;
     border: none;
