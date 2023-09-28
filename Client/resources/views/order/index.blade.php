@@ -207,19 +207,19 @@
 				// If there are more than one bet_data, add a toggle button
 				if (betDataDetailsCount > 1) {
 					let toggleButton = $('<button>').text('Show More Bet Data');
-					let showMore = true;
+					let showMore = false; // Initialize showMore as false
 
 					toggleButton.click(() => {
 						if (showMore) {
+							// Hide additional bet_data
+							$('.additional-bet-data').hide();
+							toggleButton.text('Show More Bet Data'); // Change button text
+						} else {
 							// Show additional bet_data
 							for (let i = 1; i < betDataDetailsCount; i++) {
 								createBetDataDetails(orderItem, orderItem.bet_data[i], i);
 							}
 							toggleButton.text('Hide Bet Data'); // Change button text
-						} else {
-							// Hide additional bet_data
-							$('.additional-bet-data').hide();
-							toggleButton.text('Show More Bet Data'); // Change button text
 						}
 						showMore = !showMore; // Toggle showMore flag
 					});
@@ -238,6 +238,7 @@
 
 		return totalResultAmount;
 	}
+
 
 
 	function createList(orderItem, orderIndex) {
