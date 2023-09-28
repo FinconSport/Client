@@ -130,7 +130,8 @@ div[key="matchSportMenu"]{
     margin-top: 60px;
 }
 .orderData_betDataDetails {
-    padding: 1rem;
+    position: relative;
+    padding: 1.5rem 1rem 1rem 1rem;
 }
 
 .betaDetcon {

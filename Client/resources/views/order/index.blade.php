@@ -271,14 +271,14 @@
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $('<button class="order-toggleButton">Expand</button>'); // Change 'Show/Hide' to your desired button text
+			var button = $('<button class="order-toggleButton">Show</button>'); // Change 'Show/Hide' to your desired button text
 			button.on('click', function () {
 				// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
 
 				// Change the button text based on the current visibility state
-				if (button.text() === 'Expand') {
-					button.text('Expand');
+				if (button.text() === 'Show') {
+					button.text('Hide');
 				} else {
 					button.text('Close');
 				}
