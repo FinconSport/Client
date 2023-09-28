@@ -264,7 +264,7 @@
 		if (betIndex > 0) { // Check if it's not the first item
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
-			$('.order-toggleButton').addClass('showbutton');
+			$('#betDataDetails_' + orderItem.id + ' .order-toggleButton').addClass('showbutton');
 		}
 
 		// Append the container to the orderDataBetDataDetails
