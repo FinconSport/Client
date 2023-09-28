@@ -243,7 +243,7 @@
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
 		// Create a container for each bet_data
-		let betDataDetailsContainer = $('<div class="d-flex flex-column betaDetcon">');
+		let betDataDetailsContainer = $('<div class="betaDetcon">');
 
 		// Find elements within the cloned template (similar to your existing code)
 		let betDataDetails_leagueName = $('<span class="betDataDetails_leagueName">').html(betItem.league_name);
