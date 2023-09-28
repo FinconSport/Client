@@ -25,6 +25,8 @@ return [
 		"pre_page" => "Previous Page",  //  "上一頁",
 		"next_page" => "Next Page",  // "下一頁",
 		"last_page" => "Last Page",  //  "最後一頁",
+		"expand" => "Expand",  // "展開",
+		"close" => "Close",  //  "收起",
 	],  //  
 	'sportPriority' => [
 		1 => 'Full Match Win',

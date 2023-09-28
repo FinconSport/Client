@@ -25,6 +25,8 @@ return [
 		"pre_page" => "上一頁",
 		"next_page" => "下一頁",
 		"last_page" => "最後一頁",
+		"expand" => "展開",
+		"close" => "收起",
 	]
 	// 後端
 ];
