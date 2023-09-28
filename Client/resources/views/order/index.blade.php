@@ -460,18 +460,12 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
-		let totalResultAmount = 0;
-
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
-
-			totalResultAmount += orderItem.result_amount;
 		});
-
-		console.log('Total Result Amount:', totalResultAmount);
 	}
 	
 	console.log(sport);
@@ -524,6 +518,18 @@
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
+
+	function calculateTotalResultAmount() {
+		let totalResultAmount = 0;
+		orderListD.data.list.forEach((orderItem) => {
+			totalResultAmount += orderItem.result_amount;
+		});
+		return totalResultAmount;
+	}
+	
+	let totalResultAmount = calculateTotalResultAmount();
+	console.log('Total Result Amount:', totalResultAmount);
+
 
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
