@@ -401,7 +401,7 @@ class LsportApiController extends Controller {
         foreach ($ret as $living_status_code => $v) {
             $total = 0;
             foreach ($v['items'] as $fixture_id => $arr) {
-                $living_total[$living_status_code] += $arr['count'];
+                $total += $arr['count'];
             }
             $ret[$living_status_code]['total'] = $total;
         }
