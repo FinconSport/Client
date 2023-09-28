@@ -296,6 +296,9 @@
 
 	
 	function createTotal(totalResultAmount) {
+		// Remove any existing total row
+		$('#countTr').remove();
+		
 		// Clone the template row
 		let orderDataTotal = $('#countTr').clone();
 
