@@ -181,7 +181,7 @@
         // Loop through orderListD.data.list to generate HTML elements and append them to the page
         orderListD.data.list.forEach((orderItem, orderIndex) => {
             createList(orderItem, orderIndex);
-            item.bet_data.forEach((betItem, betIndex) => {
+            orderItem.bet_data.forEach((betItem, betIndex) => {
                 createData(orderItem, orderIndex, betItem, betIndex);
             });
         });
