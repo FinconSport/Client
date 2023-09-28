@@ -511,8 +511,7 @@
 		betDataDetails_betaName.html(betItem.market_bet_name);
 
 		// Append betDataDetails to the corresponding orderData
-		let orderData = $('#orderDataTemp tr').eq(orderItem.m_id); // Assuming m_id is unique
-		orderData.find('.orderData_betDataDetails').append(betDataDetails);
+		$('.orderData_betDataDetails').before(betDataDetails);
 	}
 
 
