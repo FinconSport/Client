@@ -306,7 +306,7 @@
 
 		// Set content for the found elements
 		orderData_totalBetAmount.text('0');
-		orderData_totalResultAmount.text(totalResultAmount);
+		orderData_totalResultAmount.text('0' + totalResultAmount);
 
 		$('#orderTr').after(orderDataTotal);
 	}
