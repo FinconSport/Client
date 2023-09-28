@@ -296,20 +296,18 @@
 
 	
 	function createTotal(totalResultAmount) {
-		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
+		// Clone the template row
+		let orderDataTotal = $('#countTr').clone();
+
+		// Remove hidden and template attributes
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
-		// Find elements within the cloned template
-		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
-		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
+		// Set the content for the total result amount
+		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 
-		// Set content for the found elements
-		orderData_totalBetAmount.text('0');
-		orderData_totalResultAmount.text(totalResultAmount);
-
-		// $('#orderTr').after(orderDataTotal);
-		orderDataTotal.appendTo('.orderDataTemp');
+		// Append the total row to the table body
+		$('#orderDataTemp').append(orderDataTotal);
 	}
 
 	createTotal();
