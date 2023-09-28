@@ -118,12 +118,8 @@
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
-                        <td>
-							<div template="betDataDetailsTemp" hidden>
-								<div class="orderData_betDataDetails">
-									<span class="betDataDetails_betaName"></span>
-								</div>
-							</div>
+                        <td class="orderData_betDataDetails">
+							<span template="betDataDetailsTemp" hidden class="betDataDetails_betaName"></span>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
