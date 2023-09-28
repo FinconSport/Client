@@ -119,9 +119,7 @@
                         </td>
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
-							<div template="betDataDetailsTemp" hidden>
-								<span class="betDataDetails_betaName"></span>
-							</div>
+							<span template="betDataDetailsTemp" hidden class="betDataDetails_betaName"></span>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
