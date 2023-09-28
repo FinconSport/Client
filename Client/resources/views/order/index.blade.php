@@ -516,6 +516,7 @@
 
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
+		orderDataBetDataDetails.empty();
 
 		orderDataBetDataDetails.append(betDataDetails);
 	}
