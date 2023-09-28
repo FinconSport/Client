@@ -278,9 +278,9 @@
 
 				// Change the button text based on the current visibility state
 				if (button.text() === 'Expand') {
-					button.text('Expand');
-				} else {
 					button.text('Close');
+				} else {
+					button.text('Expand');
 				}
 			});
 
