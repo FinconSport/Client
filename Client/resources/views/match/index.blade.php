@@ -89,6 +89,7 @@
 	var fetchMoreLock = false; // infinite scroll lock -> to prevent infinite loop
 	var langTrans = @json(trans('match')); // lang file
 	var matchTitle = null
+	var matchCommonTitle = langTrans.matchTitle.commonTitle
 
 	// detect ini ajax
     var isReadyResultInt = null
@@ -113,9 +114,9 @@
 			str += '<td rowspan=2>' + v.league_name + '</td>'
 
 			str += '<td>' + v.home_team_name + '</td>'
-			matchTitle.forEach((v, k) => {
-				if(v.scoreboard[k][0]) {
-					str += '<td>' + v.scoreboard[k][0] + '</td>'
+			matchTitle.forEach((v2, k2) => {
+				if(v.scoreboard[k2]) {
+					str += '<td>' + v.scoreboard[k2][0] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -124,9 +125,9 @@
 
 			str += '<tr>'
 			str += '<td>' + v.away_team_name + '</td>'
-			matchTitle.forEach((v, k) => {
-				if(v.scoreboard[k][1]) {
-					str += '<td>' + v.scoreboard[k][1] + '</td>'
+			matchTitle.forEach((v2, k2) => {
+				if(v.scoreboard[k2]) {
+					str += '<td>' + v.scoreboard[k2][1] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -147,7 +148,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callResultListData.sport_id = sport // default sport
-				matchTitle = langTrans.matchTitle[sport]
+				matchTitle = langTrans.matchTitle[sport].concat(matchCommonTitle)
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
