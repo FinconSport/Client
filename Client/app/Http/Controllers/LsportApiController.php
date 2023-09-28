@@ -334,8 +334,6 @@ class LsportApiController extends Controller {
         }
 
         $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
-            // DB::table('lsport_league as l')
-            // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->selectRaw(
                 "lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt"
@@ -350,52 +348,29 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        //dd($data);
+        // dd($data);
         
     	//---------------------------------
         $ret = array();
-        $arrFixtures = array();
 
         $living_types = [
             1 => "early",  //早盤
             2 => "living",  //走地
         ];
 
-        // 繞[走地,早盤]2種類型
-        foreach ($living_types as $living_status_code => $living_status) {
-            $ret[$living_status] = array();
+        // 繞賽事數量結果
+        foreach ($data as $k3 => $v3) {
+            $sport_id = $v3->sport_id;
+            $fixture_status = $v3->status;  // 賽事狀態:1,2
+            $fixture_count = $v3->cnt;  // 該球種賽事數量
+            $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
 
-            $ret[$living_status]['items'] = array();
-            $ret[$living_status]['total'] = 0;
-
-            $living_type_total[$living_status] = 0;
-
-            // 繞各球種
-            foreach ($arrSports as $k2 => $v2) {
-
-                // 以球種ID為key
-                $ret[$living_status]['items'][$v2->sport_id] = array(
-                    'name' => $v2->name_locale,  // 球種名稱
-                    'count' => 0,  // 球種賽事數量
-                );
-
-                // 繞賽事數量結果
-                foreach ($data as $k3 => $v3) {
-                    $sport_id = $v3->sport_id;
-                    $fixture_status = $v3->status;  // 賽事狀態:1,2
-                    $fixture_count = $v3->cnt;  // 該球種賽事數量
-                    $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
-
-                    // 在正確位置置入賽事數量
-                    if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
-                        $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
-                    }
-                    
-                }
-
-            }
-
+            // 在正確位置置入賽事數量
+            $ret[$fixture_status]['items'][$sport_id]['count'] = $fixture_count;
+            
         }
+
+        dd($ret);
 
         //算早盤total 跟 走地total
         foreach ($ret as $living_status_code => $v) {
