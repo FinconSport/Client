@@ -187,9 +187,9 @@
 
 	 // loop matchListD to generate html element here
 	 Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
-		createCate(orderItem, orderIndex)
+		createList(orderItem, orderIndex)
 		Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
-			// createLeague(k, k2, v2)
+			// createData(orderItem, betItem, betIndex)
 		})
 	})
 
