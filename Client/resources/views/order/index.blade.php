@@ -225,7 +225,7 @@
 				const sportId = bet.sport_id;
 				const matchingSport = sportListD.data.find(sport => sport.sport_id === sportId);
 				sportName = matchingSport ? matchingSport.name : "unknown";
-				console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
+				console.log(`Order ID: `+ orderItem.id + `, Sport ID: ${sportId}, Sport Name: ${sportName}`);
 			}
 		}
 
