@@ -343,12 +343,12 @@ class LsportApiController extends Controller {
             ->whereIn('lsport_fixture.status', [1, 2])  //可區分:未開賽及走地中
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
             ->groupBy('lsport_sport.sport_id', 'lsport_fixture.status')
-            ->toSql();
+            ->get();
         if ($data === false) {
             $this->ApiError("02");
         }
 
-        dd($data);
+        // dd($data);
         
     	//---------------------------------
         $ret = array();
@@ -358,19 +358,41 @@ class LsportApiController extends Controller {
             2 => "living",  //走地
         ];
 
-        // 繞賽事數量結果
-        foreach ($data as $k3 => $v3) {
-            $sport_id = $v3->sport_id;
-            $fixture_status = $v3->status;  // 賽事狀態:1,2
-            $fixture_count = $v3->cnt;  // 該球種賽事數量
-            $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
+        // 繞[走地,早盤]2種類型
+        foreach ($living_types as $living_status_code => $living_status) {
+            $ret[$living_status] = array();
 
-            // 在正確位置置入賽事數量
-            $ret[$fixture_status]['items'][$sport_id]['count'] = $fixture_count;
-            
+            $ret[$living_status]['items'] = array();
+            $ret[$living_status]['total'] = 0;
+
+            $living_type_total[$living_status] = 0;
+
+            // 繞各球種
+            foreach ($arrSports as $k2 => $v2) {
+
+                // 以球種ID為key
+                $ret[$living_status]['items'][$v2->sport_id] = array(
+                    'name' => $v2->name_locale,  // 球種名稱
+                    'count' => 0,  // 球種賽事數量
+                );
+
+                // 繞賽事數量結果
+                foreach ($data as $k3 => $v3) {
+                    $sport_id = $v3->sport_id;
+                    $fixture_status = $v3->status;  // 賽事狀態:1,2
+                    $fixture_count = $v3->cnt;  // 該球種賽事數量
+                    $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
+
+                    // 在正確位置置入賽事數量
+                    if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
+                        $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
+                    }
+                    
+                }
+
+            }
+
         }
-
-        dd($ret);
 
         //算早盤total 跟 走地total
         foreach ($ret as $living_status_code => $v) {
