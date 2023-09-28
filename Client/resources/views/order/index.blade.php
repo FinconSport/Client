@@ -241,6 +241,8 @@
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
+		
+		orderDataBetDataDetails.empty();
 
 		// Create a container for each bet_data
 		let betDataDetailsContainer = $('<div>');
