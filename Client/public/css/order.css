@@ -30,7 +30,7 @@ div[key="matchSportMenu"]{
     border: 2px solid rgb(65, 91, 90);
     border-radius: 30px;
     padding: 1rem 0rem 1rem 1rem;
-    height: calc(100% - 8rem);
+    height: 100%;
     overflow: hidden;
     margin-bottom: 1rem;
     color: rgb(65, 91, 90);

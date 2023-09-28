@@ -175,7 +175,6 @@
 
 	// order list data
     var orderListD = {}
-	var sportMap = {};
 
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
@@ -184,18 +183,11 @@
 		let totalResultAmount = 0;
 		let totalBetAmount = 0;
 
-		sportlistD.data.forEach(function(sport) {
-			sportMap[sport.sport_id] = sport.name;
-		});
-
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 			createBetDataDetails(orderItem, betItem, betIndex);
 			});
-
-			var sportName = sportMap[betItem.sport_id];
-			console.log("Sport Name: " + sportName);
 
 			// Validate and accumulate total
 			totalResultAmount += parseFloat(orderItem.result_amount) || 0;
