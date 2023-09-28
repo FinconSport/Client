@@ -119,7 +119,9 @@
                         </td>
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
-							<span template="betDataDetailsTemp" hidden class="betDataDetails_betaName"></span>
+							<span template="betDataDetailsTemp" hidden>
+								<span class="betDataDetails_betaName"></span>
+							</span>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
@@ -513,7 +515,7 @@
 		}
 
 		function createbetDataDetails(orderItem, betItem, betIndex) {
-			let betDataDetails = $('div[template="betDataDetailsTemp"]').clone();
+			let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 
 			betDataDetails.removeAttr('hidden');
 			betDataDetails.removeAttr('template');
