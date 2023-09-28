@@ -179,6 +179,8 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
+	console.log(sportListD.data);
+
 	function renderView() {
 		let totalResultAmount = 0;
 		let totalBetAmount = 0;
