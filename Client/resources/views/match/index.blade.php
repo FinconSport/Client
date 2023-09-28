@@ -90,6 +90,7 @@
 	var langTrans = @json(trans('match')); // lang file
 	var matchTitle = null
 	var matchCommonTitle = langTrans.matchTitle.commonTitle
+	var matchTitleAll = null
 
 	// detect ini ajax
     var isReadyResultInt = null
@@ -103,7 +104,7 @@
 
 	function renderView( isIni = 0 ) {
 		
-		matchTitle.forEach(ele => {
+		matchTitleAll.forEach(ele => {
 			let str = ''
 			str += '<th>' + ele + '</th>'
 			$('#tableTitle').append(str)
@@ -148,7 +149,8 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callResultListData.sport_id = sport // default sport
-				matchTitle = langTrans.matchTitle[sport].concat(matchCommonTitle)
+				matchTitle = langTrans.matchTitle[sport]
+				matchTitleAll = langTrans.matchTitle[sport].concat(matchCommonTitle)
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
