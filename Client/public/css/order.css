@@ -138,7 +138,3 @@ div[key="matchSportMenu"]{
 .betaDetcon.hide-betaDetcon {
     display: none;
 }
-
-.betaDetcon.hide-betaDetcon.show-betaDetcon {
-    display: flex!important;
-}
