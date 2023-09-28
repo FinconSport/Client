@@ -285,15 +285,14 @@
 	}
 
 	console.log(sportListD);
-	const sportsArray = sportListD.data.map(sport => {
-		return {
-			sport_id: sport.sport_id,
-			name: sport.name
-		};
+	const sportsObject = {};
+
+	sportListD.data.forEach(sport => {
+		sportsObject[sport.sport_id] = sport.name;
 	});
 
-	// Display the array of sport objects
-	console.log(sportsArray);
+	// Display the object
+	console.log(sportsObject);
 
 
   	// 寫入頁面限定JS
