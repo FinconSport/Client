@@ -97,104 +97,55 @@
 	</div> -->
 
 
-	<div id="orderContainer">
-		<div id="tableContainer">
-			<table id="orderTable" class="cell-border w-100 text-center ">
-				<thead>
-				<tr class="no-border-top">
-					<th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-					<th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
-					<th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
-					<th style="width: 10.5%;">{{ trans('order.main.bet_type') }}</th>
-					<th style="width: 30%;">{{ trans('order.main.detail') }}</th>
-					<th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
-					<th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
-					<th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
-				</tr>
-				</thead>
-				<tbody>
-					@isset($data['list'])
-						@foreach($data['list'] as $key => $item)
-							<tr>
-								<td class="no-border-left">{{ $item['id'] }}</td>
-								<td>
-									@if($item['m_order'] === 1)
-										{{ trans('order.main.m_bet') }}
-									@else
-										{{ trans('order.main.sport_bet') }}
-									@endif
-								</td>
-								<td>{{ $sport_list[$search['sport']] }}</td>
-								<td>
-									@foreach($item['bet_data'] as $k => $v)
-										<div key='{{ $key }}' class="text-center" style="@if($k !== 0) display: none; border-top: 2px solid rgb(196,211,211); @endif; padding: 0.5rem; height: 75px;line-height: 55px; ">
-											{{ $v['type_name'] }}
-										</div>
-									@endforeach
-								</td>
-								<td>
-									@foreach($item['bet_data'] as $k => $v)
-										<div key='{{ $key }}' class="row m-0" style="@if($k !== 0) display: none; border-top: 2px solid rgb(196,211,211); @endif; padding: 0.5rem; height: 75px;line-height: 55px; ">
-											<div class="col-2">
-												@if($item['m_order'] === 1)
-													<div class="orderInfoIndex">{{$k+1}}</div>
-												@endif
-											</div>
-											<div class="col-8 text-left">
-												<p class="mb-0 textOverFlow">{{ $v['series_name'] }}</p>
-												<p class="mb-0 textOverFlow">
-													{{ $v['home_team_name'] }} 
-												@if(isset($v['home_team_score']))
-													<span>{{$v['home_team_score']}}</span>
-												@endif
-												 VS {{ $v['away_team_name'] }} 
-												@if(isset($v['away_team_score']))
-													<span>{{$v['away_team_score']}}</span>
-												@endif
-												</p>
-												<p class="mb-0 textOverFlow">
-													{{ $v['type_item_name'] }} @ {{ $v['bet_rate'] }}
-												</p>
-											</div>
-											<div class="col-2 text-left">
-												@if($item['m_order'] === 1 && $k === 0 )
-													<div isopen=false onclick="toggleInfo('{{ $key }}', this)" class="orderInfoIndex text-center" style="width: 4rem;">{{ trans('order.main.open') }}▸</div>
-												@endif
-											</div>
-										</div>
-									@endforeach
-								</td>
-								<td class="text-right">{{ $item['bet_amount'] }}
-									<br>
-									<span class="text-muted">{{ date("m-d H:i", strtotime($item['create_time'])) }}</td>
-								<td class="text-right">{{ $item['result_amount'] }}
-									<br>
-									<span class="text-muted">{{ date("m-d H:i", strtotime($item['result_time'])) }}</span>
-								</td>
-								<td class="no-border-right">{{ $status_list[$item['status']] }}</td>
-							</tr>
-						@endforeach
-					@else
-						<tr>
-							<td id="noDataTd" colspan="9" class="no-border-left no-border-right">
-								<i class="fa-solid fa-circle-exclamation"></i>
-								<p>{{ trans('order.main.nodata') }}</p>
-							</td>
-						</tr>
-					@endisset
-						<tr id="countTr" class="no-border-bottom">
-							<td colspan="4"></td>
-							<td class="p-0">
-								<div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div>
-							</td>
-							<td class="text-right">{{ $data['total']['bet_amount'] }}</td>
-							<td class="text-right">{{ $data['total']['result_amount'] }}</td>
-							<td colspan="3"></td>
-						</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+    <div id="orderContainer">
+        <div id="tableContainer" style="overflow: auto;">
+            <table id="orderTable" class="cell-border w-100 text-center">
+                <thead>
+                    <tr class="no-border-top">
+                        <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
+                        <th style="width: 40%;">{{ trans('order.main.detail') }}</th>
+                        <th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
+                        <th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
+                        <th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
+                    </tr>
+                </thead>
+                <tbody id="orderDataTemp">
+                    <!-- The template for rendering order data -->
+                    <tr template="orderTemplate" hidden>
+                        <td class="no-border-left orderData_id"></td>
+                        <td template="sportType" hidden>
+                            <span class="orderData_sportType"></span>
+                        </td>
+                        <td class="orderData_mOrder"></td>
+                        <td class="orderData_betDataDetails"></td>
+                        <td class="text-right">
+                            <span class="orderData_betAmount"></span>
+                            <br>
+                            <span class="text-muted orderData_createdTime"></span>
+                        </td>
+                        <td class="text-right">
+                            <span class="orderData_resultAmount"></span>
+                            <br>
+                            <span class="text-muted orderData_resultTime"></span>
+                        </td>
+                        <td class="no-border-right orderData_status"></td>
+                    </tr>
+                    <tr id="countTr" class="no-border-bottom">
+                        <td colspan="4"></td>
+                        <td class="p-0">
+                            <div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div>
+                        </td>
+                        <td class="text-right orderData_totalBetAmount"></td>
+                        <td class="text-right orderData_totalResultAmount"></td>
+                        <td colspan="3"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 	<!-- <div id="pagination">
 		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
 		<button onclick="navPage(1)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.pre_page') }}</button>
@@ -226,18 +177,53 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	function renderView() {
-		// loop orderListD.data here to generate the html element then append into the page
+    function renderView() {
+        // Loop through orderListD.data.list to generate HTML elements and append them to the page
+        orderListD.data.list.forEach((orderItem, orderIndex) => {
+            createList(orderItem, orderIndex);
+            orderItem.bet_data.forEach((betItem, betIndex) => {
+                createData(orderItem, orderIndex, betItem, betIndex);
+            });
+        });
+    }
 
+    function createList(orderItem, orderIndex) {
+        let orderData = $('tbody[template="orderTemplate"]').clone();
+        let orderData_id = orderData.find('.orderData_id');
+        let orderData_sportType = orderData.find('.orderData_sportType');
+        let orderData_mOrder = orderData.find('.orderData_mOrder');
+        let orderData_betAmount = orderData.find('.orderData_betAmount');
+        let orderData_createdTime = orderData.find('.orderData_createdTime');
+        let orderData_resultAmount = orderData.find('.orderData_resultAmount');
+        let orderData_resultTime = orderData.find('.orderData_resultTime');
+        let orderData_status = orderData.find('.orderData_status');
+        let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
+        let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
+        orderData_id.html(orderItem.id);
+        orderData_mOrder.html(orderItem.m_order);
+        orderData_betAmount.html(orderItem.bet_amount);
+        orderData_createdTime.html(orderItem.create_time);
+        orderData_resultAmount.html(orderItem.result_amount);
+        orderData_resultTime.html(orderItem.result_time);
+        orderData_status.html(orderItem.status);
+        orderData_totalBetAmount.html(orderItem.bet_amount);
+        orderData_totalResultAmount.html(orderItem.result_amount);
 
+        orderData.removeAttr('hidden');
+        orderData.removeAttr('template');
 
+        $('#orderDataTemp').append(orderData);
+    }
 
+    function createData(orderItem, orderIndex, betItem, betIndex) {
+        // Create and append elements for bet data (if needed)
+    }
 
-
-
-		// loop orderListD.data here to generate the html element then append into the page
-	}
+    function findSportNameById(id) {
+        const sportType = sportListD.data.find(item => item.sport_id === id);
+        return sportType ? sportType.name : 'Unknown';
+    }
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {

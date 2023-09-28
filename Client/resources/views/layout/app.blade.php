@@ -382,7 +382,7 @@
 				});
 
 				$(`#${currentPage}`).addClass('active currentpage');
-				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 1000);
+				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);
 				$(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle')
 				$(`#${currentResult}`).addClass('openToggle')
 
@@ -484,7 +484,7 @@
 			var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
 			if (currentSubmenuToggleList.length) {
 				if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
-					currentSubmenuToggleList.animate({ maxHeight: '900px' }, 1000);
+					currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300);
 					console.log("Click");
 					submenuClicked = true;
 				} else {
