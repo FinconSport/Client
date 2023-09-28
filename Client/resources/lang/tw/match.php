@@ -94,7 +94,12 @@ return [
 		"scoreofmissedshots" => "射偏次數比分",
 		"scoreofshotsontarget" => "射正次數比分",
 		"numberofattacks" => "進攻次數",
+	],
+	'matchTitle' => [
+		'totalScore' => '總分', 
+		'no' => '第',
+		'stage' => '局',
+		'quater' => '節'
 	]
-
 	// 後端
 ];
