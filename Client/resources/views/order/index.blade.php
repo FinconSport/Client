@@ -284,12 +284,10 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	sportListD.data.forEach(function(sport) {
-        console.log("Sport ID: " + sport.sport_id);
-        console.log("Name: " + sport.name);
-        console.log("Key: " + sport.key);
-        console.log("");
-    });
+	const sportIds = sportListD.data.map(item => item.sport_id);
+
+	// Display the extracted sport_ids
+	console.log(sportIds);
 
 
   	// 寫入頁面限定JS
