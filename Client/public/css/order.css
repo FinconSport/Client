@@ -131,7 +131,10 @@ div[key="matchSportMenu"]{
 }
 
 
-.element.style {
-    display: flex;
-    flex-direction: column;
+.betaDetcon.hide-betaDetcon {
+    display: none;
+}
+
+.betaDetcon.hide-betaDetcon.show-betaDetcon {
+    display: flex!important;
 }
