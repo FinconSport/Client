@@ -467,6 +467,7 @@
 				createBetDataDetails(orderItem, betItem, betIndex); // Assuming this function works correctly
 			});
 		});
+		console.log('sport +' + sport);
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -511,7 +512,6 @@
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
 
-		// Append betDataDetails to the corresponding orderData
 		$('.orderData_betDataDetails').before(betDataDetails);
 	}
 
