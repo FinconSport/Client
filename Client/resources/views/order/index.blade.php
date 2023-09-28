@@ -480,6 +480,7 @@
 		let orderData_id = orderData.find('.orderData_id');
 		let orderData_mOrder = orderData.find('.orderData_mOrder');
 		let orderData_betAmount = orderData.find('.orderData_betAmount');
+		let orderData_betDataDetails = orderData.find('.orderData_betDataDetails');
 		let orderData_createdTime = orderData.find('.orderData_createdTime');
 		let orderData_resultAmount = orderData.find('.orderData_resultAmount');
 		let orderData_resultTime = orderData.find('.orderData_resultTime');
@@ -490,6 +491,7 @@
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
 		orderData_mOrder.html(orderItem.m_order);
+		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem)
 		orderData_betAmount.html(orderItem.bet_amount);
 		orderData_createdTime.html(orderItem.create_time);
 		orderData_resultAmount.html(orderItem.result_amount);
@@ -502,6 +504,8 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
+		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 
 		betDataDetails.removeAttr('hidden');
@@ -513,7 +517,7 @@
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
 
-		$('.orderData_betDataDetails').append(betDataDetails);
+		orderDataBetDataDetails.append(betDataDetails);
 	}
 
 
