@@ -506,8 +506,11 @@
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
-		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 
+		// Remove any existing bet data details before appending a new one
+		orderDataBetDataDetails.empty();
+
+		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 		betDataDetails.removeAttr('hidden');
 		betDataDetails.removeAttr('template');
 
@@ -516,8 +519,8 @@
 
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
-		orderDataBetDataDetails.empty();
 
+		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
 
