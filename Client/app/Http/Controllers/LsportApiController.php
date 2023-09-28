@@ -353,6 +353,7 @@ class LsportApiController extends Controller {
         
     	//---------------------------------
         $ret = array();
+        $living_type_total = array();
 
         $living_type = [
             1 => "early",  //早盤
@@ -364,6 +365,9 @@ class LsportApiController extends Controller {
             $ret[$living_status] = array();
 
             $ret[$living_status]['items'] = array();
+            $ret[$living_status]['total'] = 0;
+
+            $living_type_total[$living_status] = 0;
 
             // 繞各球種
             foreach ($arrSports as $k2 => $v2) {
@@ -385,9 +389,16 @@ class LsportApiController extends Controller {
                     if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
                         $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
                     }
+
+                    if (1) {
+                        $living_type_total[$living_key] += $fixture_count;
+                    }
                 }
 
             }
+
+            $ret[$living_status]['total'] = $living_type_total[$living_status];
+
         }
 
         // dd($ret);
