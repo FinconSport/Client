@@ -274,10 +274,10 @@
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }}</button>");
+			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }} (" + betItem.bet_data.length + ")</button>");
 			button.on('click', function () {
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-				if (button.text() === '{{ trans('order.main.expand') }}') {
+				if (button.text() === '{{ trans('order.main.expand') }} (' + betItem.bet_data.length + ')') {
 					button.text('{{ trans('order.main.close') }}');
 				} else {
 					button.text('{{ trans('order.main.expand') }}');
