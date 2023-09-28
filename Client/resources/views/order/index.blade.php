@@ -526,7 +526,7 @@
 		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
 
 		// Set content for the found elements
-		betDataDetails_leagueName.html(betItem.home_team_name);
+		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
 
