@@ -380,6 +380,7 @@ class LsportApiController extends Controller {
                     'count' => 0,  // 球種賽事數量
                 );
 
+                $sport_total = 0;
                 // 繞賽事數量結果
                 foreach ($data as $k3 => $v3) {
                     $sport_id = $v3->sport_id;
@@ -391,16 +392,17 @@ class LsportApiController extends Controller {
                     if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
                         $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
                     }
+                    $sport_total += $fixture_count;
+                    
+                }
 
-                    if (isset($living_type_total[$living_key])) {
-                        $living_type_total[$living_key] += $fixture_count;
-                        echo "[{$k3}]\$living_type_total[{$living_key}] += {$fixture_count};\r\n";
-                    }
+                $living_type_total[$living_key] += $sport_total;
+
+                if (isset($living_type_total[$living_status])) {
+                    $ret[$living_status]['total'] = $living_type_total[$living_status];
                 }
 
             }
-
-            $ret[$living_status]['total'] = $living_type_total[$living_status];
 
         }
 
