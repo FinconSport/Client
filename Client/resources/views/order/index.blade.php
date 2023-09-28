@@ -474,7 +474,7 @@
 
 	// Function to find the sport with the specific sport_id
 	function findSportById(data, sportId) {
-		for (const sport of data.data) {
+		for (const sport of sportListD.data) {
 			if (sport.sport_id === sportId) {
 				return sport;
 			}
