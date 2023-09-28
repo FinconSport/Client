@@ -493,7 +493,7 @@
 
 	function findSportByIdAndSetVariable(sportId) {
 		const sportType = sportListD.data.find(item => item.sport_id === sportId);
-		let sportName = null; // Initialize the variable
+		let sportName = null;
 		if (sportType) {
 			sportName = sportType.name;
 			console.log(`Sport Name: ${sportName}`);
