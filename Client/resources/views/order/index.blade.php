@@ -288,9 +288,7 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	const sportsData = sportListD.data;
-
-	sportsData.forEach(sport => {
+	sportListD.data.forEach(sport => {
 		const sportId = sport.sport_id;
 		const name = sport.name;
 		console.log(`Sport ID: ${sportId}, Name: ${name}`);
