@@ -300,8 +300,6 @@
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
-		orderDataTotal.empty();
-
 		// Find elements within the cloned template
 		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
 		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
