@@ -261,7 +261,9 @@
 			betDataDetails_BetStatus
 		);
 
-		if (betIndex > 0) {
+		var buttonAppended = false;
+
+		if (betIndex > 0 && !buttonAppended) {
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
 
@@ -270,7 +272,11 @@
 				// Toggle the visibility of the corresponding betDataDetailsContainer with slide animation
 				betDataDetailsContainer.slideToggle();
 			});
+
 			button.appendTo(orderDataBetDataDetails);
+
+			// Set the flag to true to indicate that the button has been appended
+			buttonAppended = true;
 		}
 
 		// Append the container to the orderDataBetDataDetails
