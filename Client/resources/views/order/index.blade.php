@@ -482,16 +482,12 @@
 	
 	if (sportListD && sportListD.data) {
 		var sportList = sportListD.data;
-		sportList.forEach(function (x, index) {
-			var key = index + 1;
-			x.key = key;
-		});
 
 		// Log the sportList to inspect its contents
 		console.log("Sport List:", sportList);
 
 		// Find the specific sport with ID 6046
-		var specificSport = sportList.find(item => item.sport_id === sport);
+		var specificSport = sportList.find(item => item.sport_id === 6046);
 
 		// Check if the specific sport was found
 		if (specificSport) {
@@ -501,6 +497,8 @@
 		} else {
 			console.log("Sport with ID 6046 not found.");
 		}
+	} else {
+		console.log("Sport List data not available.");
 	}
 
 
