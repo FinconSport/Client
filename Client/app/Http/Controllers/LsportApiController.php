@@ -355,13 +355,13 @@ class LsportApiController extends Controller {
         $ret = array();
         $living_type_total = array();
 
-        $living_type = [
+        $living_types = [
             1 => "early",  //早盤
             2 => "living",  //走地
         ];
 
         // 繞[走地,早盤]2種類型
-        foreach ($living_type as $living_status_code => $living_status) {
+        foreach ($living_types as $living_status_code => $living_status) {
             $ret[$living_status] = array();
 
             $ret[$living_status]['items'] = array();
@@ -383,14 +383,14 @@ class LsportApiController extends Controller {
                     $sport_id = $v3->sport_id;
                     $fixture_status = $v3->status;  // 賽事狀態:1,2
                     $fixture_count = $v3->cnt;  // 該球種賽事數量
-                    $living_key = $living_type[$fixture_status];  //living_type[0]=living, living_type[1]=early
+                    $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
 
                     // 在正確位置置入賽事數量
                     if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
                         $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
                     }
 
-                    if (1) {
+                    if (isset($living_type_total[$living_key])) {
                         $living_type_total[$living_key] += $fixture_count;
                     }
                 }
