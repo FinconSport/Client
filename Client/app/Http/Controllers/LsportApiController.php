@@ -343,12 +343,12 @@ class LsportApiController extends Controller {
             ->whereIn('lsport_fixture.status', [1, 2])  //可區分:未開賽及走地中
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
             ->groupBy('lsport_sport.sport_id', 'lsport_fixture.status')
-            ->get();
+            ->toSql();
         if ($data === false) {
             $this->ApiError("02");
         }
 
-        // dd($data);
+        dd($data);
         
     	//---------------------------------
         $ret = array();
