@@ -482,18 +482,27 @@
 	
 	if (sportListD && sportListD.data) {
 		var sportList = sportListD.data;
+		sportList.forEach(function (x, index) {
+			var key = index + 1;
+			x.key = key;
+		});
 
-		const specificSport = sportList.find(item => item.sport_id === sport);
+		// Log the sportList to inspect its contents
+		console.log("Sport List:", sportList);
+
+		// Find the specific sport with ID 6046
+		var specificSport = sportList.find(item => item.sport_id === sport);
+
+		// Check if the specific sport was found
 		if (specificSport) {
 			console.log("Sport ID:", specificSport.sport_id);
 			console.log("Name:", specificSport.name);
 			console.log("Key:", specificSport.key);
 		} else {
-			console.log("Sport with ID not found.");
+			console.log("Sport with ID 6046 not found.");
 		}
 	}
 
-	console.log(sportListD.data);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
