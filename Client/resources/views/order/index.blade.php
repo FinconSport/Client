@@ -161,7 +161,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -179,7 +180,6 @@
 
 	// order list data
     var orderListD = {}
-	var sportListD = {}
 	// var orderListD = {
 	// 	"status": 1,
 	// 	"data": {
@@ -479,16 +479,9 @@
     	return totalResultAmount;
 	}
 
-	// const specificSport = sportListData.data.find(item => item.sport_id === sport);
-
-	// if (specificSport) {
-	// 	console.log("Sport ID:", specificSport.sport_id);
-	// 	console.log("Name:", specificSport.name);
-	// 	console.log("Key:", specificSport.key);
-	// } else {
-	// 	console.log("Sport with ID not found.");
-	// }
-
+	if (sportListD && sportListD.data) {
+		console.log('sportLIst' + sportListD);
+	}
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
