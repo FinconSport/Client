@@ -493,7 +493,7 @@
 		}
 	}
 
-	console.log(sportListD);
+	console.log(sportListD.data);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
