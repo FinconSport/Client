@@ -246,6 +246,7 @@
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 		
+		betDataDetailsContainer.empty();
 
 		// Create a container for each bet_data
 		// let betDataDetailsContainer = $('<div class="betaDetcon">');
