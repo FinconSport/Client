@@ -339,7 +339,7 @@ class LsportApiController extends Controller {
             ->selectRaw(
                 "lsport_sport.sport_id,
                 lsport_sport.{$lang_col} as sport_name_locale,
-                lsport_fixture.fixture_status,
+                lsport_fixture.status as fixture_status,
                 COUNT(DISTINCT lsport_fixture.fixture_id) as fixture_cnt"
             )
             ->where('lsport_sport.status', 1)
