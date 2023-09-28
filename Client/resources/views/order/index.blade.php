@@ -219,7 +219,12 @@
         // Create and append elements for bet data (if needed)
     }
 
-    renderView();
+    function findSportNameById(id) {
+        const sportType = sportListD.data.find(item => item.sport_id === id);
+        return sportType ? sportType.name : 'Unknown';
+    }
+
+	renderView();
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
