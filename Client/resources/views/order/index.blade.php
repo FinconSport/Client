@@ -238,7 +238,7 @@
 		$('#countTr').before(orderData);
 	}
 
-	function createBetDataDetails(orderItem, betItem, betIndex) {
+	function createBetDataDetails(orderItem, betItem, betIndex, totalBetDataCount) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
@@ -261,6 +261,7 @@
 			betDataDetails_BetStatus
 		);
 
+		// Check if there's more than one bet_data to add a button
 		if (totalBetDataCount > 1) {
 			// Create and append the button
 			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
@@ -275,9 +276,8 @@
 
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
-	}
+		}
 
-	
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
