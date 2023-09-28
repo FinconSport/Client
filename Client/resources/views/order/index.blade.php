@@ -508,8 +508,8 @@
 			// Create and append elements for bet data (if needed)
 			// ...
 
-			let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
-			orderItem.find('.orderData_betDataDetails').append(betDataElement);
+			// let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
+			// orderItem.find('.orderData_betDataDetails').append(betDataElement);
 		}
 
   	// 寫入頁面限定JS
