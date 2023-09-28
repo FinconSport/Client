@@ -3,7 +3,7 @@
     border: 2px solid rgb(65, 91, 90);
     border-radius: 30px;
     padding: 1rem 0rem 1rem 1rem;
-    height: calc(100% - 8rem);
+    height: 100%;
     overflow: hidden;
     margin-bottom: 1rem;
     color: rgb(65, 91, 90);
@@ -35,6 +35,17 @@ tr:last-child td,
 tr:nth-last-child(2) td {
     border-bottom: none!important;
 }
+
+tr.even {
+    background-color: rgb(222 225 225);
+}
+
+tr:nth-child(odd):hover, /* 当任何一个 tr 被悬停时 */
+tr:nth-child(odd):hover + tr /* 选择同级之后的所有 tr */
+{
+  background-color: rgb(198 217 217); /* 设置背景颜色 */
+}
+
 
 #matchTable td,
 #matchTable th {

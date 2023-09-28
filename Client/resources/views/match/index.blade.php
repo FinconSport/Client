@@ -79,7 +79,7 @@
 	
 @endsection
 @section('styles')
-<link href="{{ asset('css/match.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/match.css?v=' . $system_config['version']) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -113,7 +113,7 @@
 		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 
-			let str = '<tr>'
+			let str = '<tr class="odd">'
 			if( k % 2 === 0) str = '<tr class="even">'
 			str += '<td rowspan=2>' + formatDateTime(v.start_time) + '</td>'
 			str += '<td rowspan=2>' + v.league_name + '</td>'
@@ -131,7 +131,7 @@
 			if( k % 2 === 0) {
 				str += '<tr class="even">'
 			} else {
-				str += '<tr>'
+				str += '<tr class="odd">'
 			}
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
