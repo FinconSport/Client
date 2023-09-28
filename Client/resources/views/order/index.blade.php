@@ -206,7 +206,7 @@
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
 
-			createTotal(orderItem, orderIndex);
+			createTotal(orderItem, orderIndex, totalResultAmount);
 
 		});
 
@@ -290,7 +290,7 @@
 	}
 
 	
-	function createTotal() {
+	function createTotal(orderItem, orderIndex, totalResultAmount) {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
