@@ -197,11 +197,16 @@
 		let totalResultAmount = 0;
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			createList(orderItem, orderIndex);
+			// Create a container div for each orderItem
+			const orderContainer = document.createElement('div');
+			orderContainer.classList.add('order-container');
+
+			createList(orderContainer, orderItem, orderIndex);
+
 			let showMoreButton = false; // Track whether to show the "Show More" button
 
 			orderItem.bet_data.forEach((betItem, betIndex) => {
-			createBetDataDetails(orderItem, betItem, betIndex);
+			createBetDataDetails(orderContainer, orderItem, betItem, betIndex);
 
 			if (betIndex > 0) {
 				// Hide bet data details initially if there is more than one
@@ -224,8 +229,8 @@
 				renderView(); // Re-render the view after toggling visibility
 			});
 
-			// Append the "Show More" button to the orderItem
-			orderItem.appendChild(showMoreButtonElement);
+			// Append the "Show More" button to the orderContainer
+			orderContainer.appendChild(showMoreButtonElement);
 
 			// Add a "Hide" button initially (hidden)
 			const hideButtonElement = document.createElement('button');
@@ -241,9 +246,13 @@
 				renderView(); // Re-render the view after hiding
 			});
 
-			// Append the "Hide" button to the orderItem
-			orderItem.appendChild(hideButtonElement);
+			// Append the "Hide" button to the orderContainer
+			orderContainer.appendChild(hideButtonElement);
 			}
+
+			// Append the orderContainer to the parent element (e.g., a list or a main container)
+			// Make sure to adapt this to your actual HTML structure
+			document.body.appendChild(orderContainer);
 
 			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
@@ -252,7 +261,6 @@
 
 		return totalResultAmount;
 	}
-
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
