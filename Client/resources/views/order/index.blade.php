@@ -199,7 +199,6 @@
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			let betDataDetailsCount = orderItem.bet_data.length;
-			let isBetDataVisible = false; // Track whether bet data is currently visible
 
 			if (betDataDetailsCount > 0) {
 			// Create and append the first bet_data
@@ -208,27 +207,30 @@
 			// If there are more than one bet_data, add a toggle button
 			if (betDataDetailsCount > 1) {
 				let toggleButton = $('<button>').text('Show More Bet Data');
+				toggleButton.click(() => {
+				// Toggle the display of additional bet_data
+				for (let i = 1; i < betDataDetailsCount; i++) {
+					createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+				}
+				toggleButton.hide(); // Hide the "Show More Bet Data" button
+				let hideButton = $('<button>').text('Hide Bet Data');
+				hideButton.click(() => {
+					// Hide additional bet_data when "Hide Bet Data" button is clicked
+					for (let i = 1; i < betDataDetailsCount; i++) {
+					$('#betDataDetails_' + orderItem.id + '_' + i).hide();
+					}
+					hideButton.hide(); // Hide the "Hide Bet Data" button
+					toggleButton.show(); // Show the "Show More Bet Data" button again
+				});
+				// Append the "Hide Bet Data" button
 				let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 				let orderDataBetDataDetails = $('#' + betDataDetailsId);
-
-				toggleButton.click(() => {
-				if (isBetDataVisible) {
-					// Hide the additional bet_data
-					for (let i = 1; i < betDataDetailsCount; i++) {
-					$('#betData_' + orderItem.id + '_' + i).hide();
-					}
-					toggleButton.text('Show More Bet Data'); // Change button text
-				} else {
-					// Show the additional bet_data
-					for (let i = 1; i < betDataDetailsCount; i++) {
-					createBetDataDetails(orderItem, orderItem.bet_data[i], i);
-					}
-					toggleButton.text('Hide Bet Data'); // Change button text
-				}
-				isBetDataVisible = !isBetDataVisible; // Toggle visibility state
+				orderDataBetDataDetails.append(hideButton);
 				});
 
 				// Append the toggle button
+				let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+				let orderDataBetDataDetails = $('#' + betDataDetailsId);
 				orderDataBetDataDetails.append(toggleButton);
 			}
 			}
@@ -239,7 +241,7 @@
 		console.log('Total Result Amount:', totalResultAmount);
 
 		return totalResultAmount;
-		}
+	}
 
 
 	function createList(orderItem, orderIndex) {
