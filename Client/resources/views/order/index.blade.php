@@ -264,22 +264,20 @@
 		if (betIndex > 0) { // Check if it's not the first item
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
-			
-			if (betIndex === 0) { // Check if it's the first item
-				var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
-				button.on('click', function () {
-				// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
-				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-				});
-
-				button.appendTo(orderDataBetDataDetails);
-			}
 		}
 
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
-		
+		if (betIndex === 0) { // Check if it's the first item
+			var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
+			button.on('click', function () {
+			// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
+			orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
+			});
+
+			button.appendTo(orderDataBetDataDetails);
+		}
 	}
 
 	
