@@ -285,7 +285,7 @@
 	}
 
 	var sportListData = sportListD;
-	console.log(":" + sportListData);
+	console.log(sportListData);
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
