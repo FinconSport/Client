@@ -7,8 +7,6 @@ import  "../css/MatchMenuNav.css";
 import styled from '@emotion/styled';
 
 
-
-
 const MatchMenuBar = {
     display: 'flex',
 	padding: '0 0.5rem 0 0.5rem',
@@ -129,8 +127,16 @@ class MatchMenuNav extends React.Component {
     }
 
     componentDidMount() {
-        console.log(window.menu, window.sport)
         let res = this.state.api_res
+        for (const category in res.data) {
+            if (res.data[category].items) {
+                for (const key in res.data[category].items) {
+                    if (res.data[category].items[key].count === 0) {
+                        delete res.data[category].items[key];
+                    }
+                }
+            }
+        }
         // default menu
         let rKey = null
         for (const key in res.data) {
@@ -160,6 +166,10 @@ class MatchMenuNav extends React.Component {
             })
         }
         this.props.callBack(window.menu, window.sport)
+
+        this.setState({
+            api_res: res
+        })
 	}
 
     // 選擇分頁
@@ -195,6 +205,7 @@ class MatchMenuNav extends React.Component {
     render() {
         const res = this.state.api_res;
         if( res && window.menu !== null && window.sport !== null ){
+            console.log(res)
             return (
                 <>
                     <div style={MatchMenuBar}>
