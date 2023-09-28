@@ -258,7 +258,7 @@
 		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_BetNameLine.html(betItem.market_bet_name + betItem.market_bet_line);
+		betDataDetails_BetNameLine.html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
