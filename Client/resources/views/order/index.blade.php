@@ -261,6 +261,12 @@
 			betDataDetails_BetStatus
 		);
 
+		if (totalBetDataCount > 1) {
+			// Create and append the button
+			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
+			betDataDetailsContainer.append(button);
+		}
+
 		// Check if betIndex is greater than 0 (not the first bet_data)
 		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
