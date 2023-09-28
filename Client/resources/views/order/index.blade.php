@@ -465,7 +465,7 @@
 		}
 
 		function createList(orderItem, orderIndex) {
-			let orderData = $('tbody[template="orderTemplate"]').clone();
+			let orderData = $('tr[template="orderTemplate"]').clone();
 			orderData.removeAttr('hidden');
 			orderData.removeAttr('template');
 			
