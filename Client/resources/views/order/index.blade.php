@@ -197,16 +197,7 @@
 
 		createTotal(totalResultAmount, totalBetAmount);
 
-		const sportMapping = sportListD.data;
-
-		for (const item of orderListD.data.list) {
-			for (const bet of item.bet_data) {
-				const sportId = bet.sport_id;
-				const matchingSport = sportMapping.find(sport => sport.sport_id === sportId);
-				const sportName = matchingSport ? matchingSport.name : "unknown";
-				console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
-			}
-		}
+		
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -225,10 +216,18 @@
 		let orderData_resultTime = orderData.find('.orderData_resultTime');
 		let orderData_status = orderData.find('.orderData_status');
 
-		// Get the sportName for the current orderItem
-		const sportId = orderItem.sport_id; // Assuming sport_id is present in orderItem
-		const matchingSport = sportListD.data.find(sport => sport.sport_id === sportId);
-		const sportName = matchingSport ? matchingSport.name : "unknown";
+		// Initialize sportName to "unknown"
+		let sportName = "unknown";
+
+		// Iterate through orderListD.data.list
+		for (const item of orderListD.data.list) {
+			for (const bet of item.bet_data) {
+				const sportId = bet.sport_id;
+				const matchingSport = sportListD.data.find(sport => sport.sport_id === sportId);
+				sportName = matchingSport ? matchingSport.name : "unknown";
+				console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
+			}
+		}
 
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
