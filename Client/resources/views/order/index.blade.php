@@ -220,8 +220,8 @@
 		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
 		orderData_betAmount.html(orderItem.bet_amount);
 		orderData_createdTime.html(orderItem.create_time);
-		orderData_resultAmount.html(orderItem.result_amount);
-		orderData_resultTime.html(orderItem.result_time);
+		orderData_resultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
+		orderData_resultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderData_status.html(orderItem.status);
 
 		$('#countTr').before(orderData);
@@ -238,8 +238,8 @@
 		let betDataDetails_leagueName = $('<div class="mb-3">').html('<span>' + betItem.league_name + '</span>');
 		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
 		let betDataDetails_MarketNameLineRate = $('<div>').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span> @' + betItem.bet_rate + '</span>');
-		let betDataDetails_HomeTeam = $('<div>').html('<span>' + betItem.home_team_name + '</span><span> ' + betItem.home_team_score + '</span>');
-		let betDataDetails_AwayTeam = $('<div>').html('<span>' + betItem.away_team_name + '</span><span> ' + betItem.away_team_score + '</span>');
+		let betDataDetails_HomeTeam = $('<div>').html('<span>' + betItem.home_team_name + '</span><span> ' + betItem.home_team_score === null ? '' : betItem.home_team_score + '</span>');
+		let betDataDetails_AwayTeam = $('<div>').html('<span>' + betItem.away_team_name + '</span><span> ' + betItem.away_team_score === null ? '' : betItem.away_team_score + '</span>');
 		let betDataDetails_Status = $('<div>').html('<span>' + betItem.status + '</span>');
 
 		// Append the elements to the container
