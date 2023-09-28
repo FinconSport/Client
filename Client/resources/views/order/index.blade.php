@@ -179,7 +179,7 @@
 
 	// order list data
     var orderListD = {}
-	var sportListD = []
+	var sportListD = {}
 	// var orderListD = {
 	// 	"status": 1,
 	// 	"data": {
