@@ -286,17 +286,17 @@ class LsportApiController extends Controller {
     "living": {
         "items": {
             "154914": {"name": "棒球","count": 8}
-            },
-            "total": 8
         },
-        "early": {
-            "items": {
-                "6046": {"name": "足球","count": 83},
-                "48242": {"name": "籃球","count": 20},
-                "154914": {"name": "棒球","count": 17}
-            },
-            "total": 120
-        }
+        "total": 8
+    },
+    "early": {
+        "items": {
+            "6046": {"name": "足球","count": 83},
+            "48242": {"name": "籃球","count": 20},
+            "154914": {"name": "棒球","count": 17}
+        },
+        "total": 120
+    }
 }
 */
     public function IndexMatchList2(Request $request) {
@@ -322,21 +322,25 @@ class LsportApiController extends Controller {
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
         
-        $data = LsportSport::leftJoin('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
+        $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
             // DB::table('lsport_league as l')
             // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
-            ->leftJoin('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
+            ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
-                'lsport_sport.sport_id, lsport_sport.name_en, COUNT(*) as cnt'
+                'lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt'
             )
             ->where('lsport_league.status', 1)
             ->whereIn('lsport_fixture.status', [1, 2])  //可區分:未開賽及走地中
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
-            ->groupBy('lsport_sport.sport_id')
+            ->groupBy('lsport_sport.sport_id', 'lsport_fixture.status')
             ->get();
 
-        dd($data);
+        foreach ($data as $dk => $dv) {
+
+        }
+
+        dd($sql);
 
         ///////////////////////////////////
         $this->ApiSuccess($data, "01"); 
