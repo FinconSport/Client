@@ -252,9 +252,9 @@
 		// Find elements within the cloned template (similar to your existing code)
 		let betDataDetails_leagueName = $('<div class="mb-3">').html('<span>' + betItem.league_name + '</span>');
 		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
-		let betDataDetails_MarketNameLineRate = $('<div class="d-flex justify-content-around">').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
-		let betDataDetails_HomeTeam = $('<div class="d-flex justify-content-around">').html('<span>' + betItem.home_team_name + '</span><span>' + betItem.home_team_score + '</span>');
-		let betDataDetails_AwayTeam = $('<div class="d-flex justify-content-around">').html('<span>' + betItem.away_team_name + '</span><span>' + betItem.away_team_score + '</span>');
+		let betDataDetails_MarketNameLineRate = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
+		let betDataDetails_HomeTeam = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.home_team_name + '</span><span>' + betItem.home_team_score + '</span>');
+		let betDataDetails_AwayTeam = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.away_team_name + '</span><span>' + betItem.away_team_score + '</span>');
 		let betDataDetails_Status = $('<div>').html('<span>' + betItem.status + '</span>');
 
 		// Append the elements to the container
