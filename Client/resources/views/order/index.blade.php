@@ -455,24 +455,25 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-    // function renderView() {
-    //     orderListD.data.list.forEach((orderItem, orderIndex) => {
-    //         createList(orderItem, orderIndex);
-    //         orderItem.bet_data.forEach((betItem, betIndex) => {
-    //             createData(orderItem, orderIndex, betItem, betIndex);
-    //         });
-    //     });
-    // }
+		function renderView() {
+			// orderListD.data.list.forEach((orderItem, orderIndex) => {
+			//     createList(orderItem, orderIndex);
+			//     orderItem.bet_data.forEach((betItem, betIndex) => {
+			//         createData(orderItem, orderIndex, betItem, betIndex);
+			//     });
+			// });
+			// Use a regular for loop to iterate over the array
+			for (let orderIndex = 0; orderIndex < orderListD.data.list.length; orderIndex++) {
+				createList(orderListD.data.list[orderIndex], orderIndex);
 
-        // Use a regular for loop to iterate over the array
-        for (let orderIndex = 0; orderIndex < orderListD.data.list.length; orderIndex++) {
-            createList(orderListD.data.list[orderIndex], orderIndex);
+				// Iterate over the bet_data array
+				for (let betIndex = 0; betIndex < orderListD.data.list[orderIndex].bet_data.length; betIndex++) {
+					createData(orderListD.data.list[orderIndex], orderListD.data.list[orderIndex].bet_data[betIndex], betIndex);
+				}
+			}
+		}
 
-            // Iterate over the bet_data array
-            for (let betIndex = 0; betIndex < orderListD.data.list[orderIndex].bet_data.length; betIndex++) {
-                createData(orderListD.data.list[orderIndex], orderListD.data.list[orderIndex].bet_data[betIndex], betIndex);
-            }
-        }
+        
 
 		function createList(orderItem, orderIndex) {
 			let orderData = $('tbody[template="orderTemplate"]').clone();
