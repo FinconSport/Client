@@ -207,29 +207,31 @@
 				// If there are more than one bet_data, add a toggle button
 				if (betDataDetailsCount > 1) {
 					let toggleButton = $('<button>').text('Show More Bet Data');
-					let hideButton = $('<button>').text('Hide Bet Data');
-					
-					// Function to toggle the display of additional bet_data
-					function toggleAdditionalBetData() {
+					toggleButton.click(() => {
 						for (let i = 1; i < betDataDetailsCount; i++) {
 							const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-							const additionalBetData = $('#' + betDataId);
-							additionalBetData.toggle(); // Toggle the visibility of additional bet_data
+							$('#' + betDataId).show(); // Show additional bet_data
 						}
-						toggleButton.toggle(); // Toggle the visibility of "Show More Bet Data" button
-						hideButton.toggle(); // Toggle the visibility of "Hide Bet Data" button
-					}
+						toggleButton.hide(); // Hide the "Show More Bet Data" button
+						hideButton.show(); // Show the "Hide Bet Data" button
+					});
+
+					let hideButton = $('<button>').text('Hide Bet Data');
+					hideButton.click(() => {
+						for (let i = 1; i < betDataDetailsCount; i++) {
+							const betDataId = `betDataDetails_${orderItem.id}_${i}`;
+							$('#' + betDataId).hide(); // Hide additional bet_data
+						}
+						toggleButton.show(); // Show the "Show More Bet Data" button
+						hideButton.hide(); // Hide the "Hide Bet Data" button
+					});
 
 					// Initially hide additional bet_data and the "Hide Bet Data" button
 					for (let i = 1; i < betDataDetailsCount; i++) {
 						const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-						const additionalBetData = $('#' + betDataId);
-						additionalBetData.hide(); // Hide additional bet_data
+						$('#' + betDataId).hide(); // Hide additional bet_data
 					}
 					hideButton.hide(); // Hide "Hide Bet Data" button
-
-					toggleButton.click(toggleAdditionalBetData);
-					hideButton.click(toggleAdditionalBetData);
 
 					// Append the toggle and hide buttons
 					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
@@ -246,6 +248,7 @@
 
 		return totalResultAmount;
 	}
+
 
 
 	function createList(orderItem, orderIndex) {
