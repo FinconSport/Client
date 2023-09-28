@@ -515,7 +515,7 @@
 		}
 
 		function createbetDataDetails(orderItem, betItem, betIndex) {
-			let betDataDetails = $('div[template="betDataDetailsTemp"]').clone();
+			let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 
 			betDataDetails.removeAttr('hidden');
 			betDataDetails.removeAttr('template');
