@@ -193,20 +193,24 @@
     }
 
 	
-    function findSportByIdAndSetVariable(id) {
-        const sportType = sportListD.data.find(item => item.sport_id === id);
-        let sportName = null; // Initialize the variable
-        if (sportType) {
-            sportName = sportType.name;
-            console.log(`Sport Name: ${sportName}`);
-            console.log(sportType);
-        } else {
-            console.log(`Sport with sport_id ${id} not found.`);
-        }
-    }
+	function findSportByIdAndSetVariable(id) {
+		if (sportListD && sportListD.data) {
+			const sportType = sportListD.data.find(item => item.sport_id === id);
+			if (sportType) {
+				let sportName = sportType.name;
+				console.log(`Sport Name: ${sportName}`);
+				console.log(sportType);
+			} else {
+				console.log(`Sport with sport_id ${id} not found.`);
+			}
+		} else {
+			console.log('sportListD or sportListD.data is undefined or null.');
+		}
+	}
 
     // Example usage of findSportByIdAndSetVariable
     findSportByIdAndSetVariable(sport);
+	console.log(sport);
 
     function createList(orderItem, orderIndex) {
         let orderData = $('tbody[template="orderTemplate"]').clone();
