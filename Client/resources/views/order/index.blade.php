@@ -272,15 +272,12 @@
 
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
-		console.log('count:' + betIndex);
-
-		var countBetaData = betIndex + 1;
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }} (" + countBetaData + ")</button>");
+			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }}</button>");
 			button.on('click', function () {
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-				if (button.text() === '{{ trans('order.main.expand') }} (' + countBetaData + ')') {
+				if (button.text() === '{{ trans('order.main.expand') }}') {
 					button.text('{{ trans('order.main.close') }}');
 				} else {
 					button.text('{{ trans('order.main.expand') }}');
