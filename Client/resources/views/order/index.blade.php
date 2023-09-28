@@ -266,13 +266,14 @@
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
 		}
 
+		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $('<button>Show/Hide All</button>'); // Change 'Show/Hide All' to your desired button text
+			var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
 			button.on('click', function () {
-				// Toggle the visibility of all betDataDetailsContainer elements with slide animation
-				betDataDetailsContainer.slideToggle();
+			// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
+			orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
 			});
 
 			button.appendTo(orderDataBetDataDetails);
