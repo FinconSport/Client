@@ -54,23 +54,7 @@
 					<tr id="tableTitle">
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="nowrap" rowspan="2">time</td>
-						<td class="nowrap" rowspan="2">
-							series_name
-						</td>
-						<td class="nowrap">
-							home_team_name
-						</td>
-						<td>point</td>
-					</tr>
-					<tr>
-						<td class="nowrap">
-						home_team_name
-						</td>
-						<td>point</td>
-					</tr>
+				<tbody id="tableContent">
 				</tbody>
 			</table>
 		</div>
@@ -117,12 +101,40 @@
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
 	function renderView( isIni = 0 ) {
-		matchTitle.map(([k, v]) => {
-			console.log(k, v)
+		
+		matchTitle.forEach(ele => {
+			let str = ''
+			str += '<th>' + ele + '</th>'
+			$('#tableTitle').append(str)
+		});
+		Object.entries(resultListD.data).map(([k, v]) => { 
+			let str = '<tr>'
+			str += '<td rowspan=2>' + formatDateTime(v.start_time) + '</td>'
+			str += '<td rowspan=2>' + v.league_name + '</td>'
+
+			str += '<td>' + v.home_team_name + '</td>'
+			matchTitle.forEach((v, k) => {
+				if(v.scoreboard[k][0]) {
+					str += '<td>' + v.scoreboard[k][0] + '</td>'
+				} else {
+					str += '<td>-</td>'
+				}
+			});
+			str += '</tr>'
+
+			str += '<tr>'
+			str += '<td>' + v.away_team_name + '</td>'
+			matchTitle.forEach((v, k) => {
+				if(v.scoreboard[k][1]) {
+					str += '<td>' + v.scoreboard[k][1] + '</td>'
+				} else {
+					str += '<td>-</td>'
+				}
+			});
+			str += '</tr>'
+			$('#tableContent').append(str)
+
 		})
-		// Object.entries(resultListD.data).map(([k, v]) => { 
-		// 	console.log(k, v)
-		// })
 
 		// detect if it's last page
 		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
@@ -153,6 +165,15 @@
             }
         }, 500);
 	});
+
+	formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
+    }
 
 
 	// 下拉更多資料
