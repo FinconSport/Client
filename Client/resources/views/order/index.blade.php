@@ -246,32 +246,37 @@
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
+		// Check if the container already exists for this betIndex
+		let existingContainer = orderDataBetDataDetails.find('.betDataDetailsContainer').eq(betIndex);
+
 		// Create a container for each bet_data
 		// let betDataDetailsContainer = $('<div class="betaDetcon">');
-		let betDataDetailsContainer = $('span[template="betDataDetailsTemp"]').clone();
+		if (existingContainer.length === 0) {
+			let betDataDetailsContainer = $('span[template="betDataDetailsTemp"]').clone();
 
-		betDataDetailsContainer.removeAttr('hidden');
-		betDataDetailsContainer.removeAttr('template');
+			betDataDetailsContainer.removeAttr('hidden');
+			betDataDetailsContainer.removeAttr('template');
 
-		// betDataDetailsContainer.empty();
+			// betDataDetailsContainer.empty();
 
-		betDataDetailsContainer.find('.betDataDetails_leagueName').html(betItem.league_name);
-		betDataDetailsContainer.find('.betDataDetails_HomeAway').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
-		betDataDetailsContainer.find('.betDataDetails_BetNameLine').html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
-		betDataDetailsContainer.find('.betDataDetails_BetRateStatus').html('@' + betItem.bet_rate);
-		betDataDetailsContainer.find('.betDataDetails_HomeName').html(betItem.home_team_name);
-		betDataDetailsContainer.find('.betDataDetails_HomeScore').html(betItem.home_team_score);
-		betDataDetailsContainer.find('.betDataDetails_AwayName').html(betItem.away_team_name);
-		betDataDetailsContainer.find('.betDataDetails_AwayScore').html(betItem.away_team_score);
+			betDataDetailsContainer.find('.betDataDetails_leagueName').html(betItem.league_name);
+			betDataDetailsContainer.find('.betDataDetails_HomeAway').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
+			betDataDetailsContainer.find('.betDataDetails_BetNameLine').html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
+			betDataDetailsContainer.find('.betDataDetails_BetRateStatus').html('@' + betItem.bet_rate);
+			betDataDetailsContainer.find('.betDataDetails_HomeName').html(betItem.home_team_name);
+			betDataDetailsContainer.find('.betDataDetails_HomeScore').html(betItem.home_team_score);
+			betDataDetailsContainer.find('.betDataDetails_AwayName').html(betItem.away_team_name);
+			betDataDetailsContainer.find('.betDataDetails_AwayScore').html(betItem.away_team_score);
 
-		if (betIndex > 0) { // Check if it's not the first item
-			// Add a custom class to elements of subsequent bet_data items
-			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
-			$('#betDataDetails_' + orderItem.id + ' .order-toggleButton').addClass('showbutton');
+			if (betIndex > 0) { // Check if it's not the first item
+				// Add a custom class to elements of subsequent bet_data items
+				betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
+				$('#betDataDetails_' + orderItem.id + ' .order-toggleButton').addClass('showbutton');
+			}
+
+			// Append the container to the orderDataBetDataDetails
+			orderDataBetDataDetails.append(betDataDetailsContainer);
 		}
-
-		// Append the container to the orderDataBetDataDetails
-		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
 			var button = $('<button class="order-toggleButton">Expand</button>');
