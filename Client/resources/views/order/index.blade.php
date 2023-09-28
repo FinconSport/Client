@@ -179,17 +179,13 @@
 
     function renderView() {
         // Loop through orderListD.data.list to generate HTML elements and append them to the page
-        orderListD.data.list.forEach((item, index) => {
+        orderListD.data.list.forEach((orderItem, orderIndex) => {
             createList(orderItem, orderIndex);
             item.bet_data.forEach((betItem, betIndex) => {
                 createData(orderItem, orderIndex, betItem, betIndex);
             });
         });
     }
-
-    // Example usage of findSportByIdAndSetVariable
-    // findSportByIdAndSetVariable(searchData.sport);
-	console.log(searchData.sport);
 
     function createList(orderItem, orderIndex) {
         let orderData = $('tbody[template="orderTemplate"]').clone();
@@ -205,7 +201,6 @@
         let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
         orderData_id.html(orderItem.id);
-        // orderData_sportType.html(findSportNameById(orderItem.sport_id));
         orderData_mOrder.html(orderItem.m_order);
         orderData_betAmount.html(orderItem.bet_amount);
         orderData_createdTime.html(orderItem.create_time);
