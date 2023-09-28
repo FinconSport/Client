@@ -285,15 +285,8 @@
 	}
 
 	var sportListData = sportListD;
-	for (const item of sportListData.data) {
-		const sportId = item.sport_id;
-		const name = item.name;
-		const key = item.key;
-
-		console.log("Sport ID:", sportId);
-		console.log("Name:", name);
-		console.log("Key:", key);
-	}
+	const message = sportListData.message;
+	console.log('message: ' + message);
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
