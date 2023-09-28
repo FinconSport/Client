@@ -35,6 +35,12 @@ define('LSPORT_SPORT_ID',
     )
 );
 
+//lsport_fixture.status 賽事狀態
+define('FIXTURE_STATUS', array(
+    'early' => 1,  // 未開賽
+    'living' => 2,  // 賽事中
+));
+
 /**
  * LsportApiController
  * 
@@ -274,6 +280,67 @@ class LsportApiController extends Controller {
      * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
      */
     // 首頁賽事
+/*
+回傳格式:
+{
+    "living": {
+        "items": {
+            "154914": {"name": "棒球","count": 8}
+            },
+            "total": 8
+        },
+        "early": {
+            "items": {
+                "6046": {"name": "足球","count": 83},
+                "48242": {"name": "籃球","count": 20},
+                "154914": {"name": "棒球","count": 17}
+            },
+            "total": 120
+        }
+}
+*/
+    public function IndexMatchList2(Request $request) {
+        
+        $input = $this->getRequest($request);
+
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
+        }
+
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
+
+        //---------------------------------
+
+        ///////////////////////////////////
+        //取2天內賽事
+        $today = time();
+        $after_tomorrow = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
+        
+        $data = DB::table('lsport_league as l')
+            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
+            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
+            ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
+            ->selectRaw(
+                'COUNT(*)'
+            )
+            ->where('l.status', 1)
+            ->whereIn('f.status', [1, 2])  //可區分:未開賽及走地中
+            ->where('f.start_time', "<=", $after_tomorrow)
+            ->groupBy('s.sport_id')
+            ->get();
+
+        dd($data);
+
+        ///////////////////////////////////
+        $this->ApiSuccess($data, "01"); 
+    }
+
     public function IndexMatchList(Request $request) {
       
     	$input = $this->getRequest($request);
@@ -492,12 +559,6 @@ class LsportApiController extends Controller {
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
-        //lsport_fixture.status 賽事狀態
-        define('FIXTURE_STATUS', array(
-            'early' => 1,  // 未開賽
-            'living' => 2,  // 賽事中
-        ));
-
         //////////////////////////////////////////
         // DB取出賽事
 
@@ -686,11 +747,13 @@ class LsportApiController extends Controller {
                 || !sizeof($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])) {
 
                 // market_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->m_name_locale)) {  // market name
-                    $market_name = $dv->m_name_en;
-                } else {
-                    $market_name = $dv->m_name_locale;
-                }
+                // 一定有值不需判斷了
+                // if (!strlen($dv->m_name_locale)) {  // market name
+                //     $market_name = $dv->m_name_en;
+                // } else {
+                //     $market_name = $dv->m_name_locale;
+                // }
+                $market_name = $dv->m_name_locale;
 
                 // 包入 market 玩法資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
@@ -729,11 +792,13 @@ class LsportApiController extends Controller {
                     $market_bet_id = $bv->bet_id;
 
                     // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                    if (!strlen($bv->mb_name_locale)) {  // market name
-                        $market_bet_name = $bv->mb_name_en;
-                    } else {
-                        $market_bet_name = $bv->mb_name_locale;
-                    }
+                    // 一定有值不需判斷了
+                    // if (!strlen($bv->mb_name_locale)) {  // market name
+                    //     $market_bet_name = $bv->mb_name_en;
+                    // } else {
+                    //     $market_bet_name = $bv->mb_name_locale;
+                    // }
+                    $market_bet_name = $bv->mb_name_locale;
 
                     // 包入 market_bet 賠率資料 ---------------
                     //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
@@ -2429,14 +2494,8 @@ class LsportApiController extends Controller {
       "IsConfirmed": true,
       "IsFinished": true,
       "Results": [
-        {
-          "Position": "1",
-          "Value": "0"
-        },
-        {
-          "Position": "2",
-          "Value": "0"
-        }
+        {"Position": "1","Value": "0"},
+        {"Position": "2","Value": "0"}
       ],
       "SequenceNumber": 1,
       "SubPeriods": null,
@@ -2449,14 +2508,8 @@ class LsportApiController extends Controller {
           "ParticipantPosition": "1",
           "Period": 2,
           "Results": [
-            {
-              "Position": "1",
-              "Value": "2"
-            },
-            {
-              "Position": "2",
-              "Value": "0"
-            }
+            {"Position": "1","Value": "2"},
+            {"Position": "2","Value": "0"}
           ],
           "Seconds": -1
         }
@@ -2464,14 +2517,8 @@ class LsportApiController extends Controller {
       "IsConfirmed": true,
       "IsFinished": true,
       "Results": [
-        {
-          "Position": "1",
-          "Value": "2"
-        },
-        {
-          "Position": "2",
-          "Value": "0"
-        }
+        {"Position": "1","Value": "2"},
+        {"Position": "2","Value": "0"}
       ],
       "SequenceNumber": 2,
       "SubPeriods": null,
@@ -2482,14 +2529,8 @@ class LsportApiController extends Controller {
 {
     "CurrentPeriod": 40,
     "Results": [
-      {
-        "Position": "1",
-        "Value": "2"
-      },
-      {
-        "Position": "2",
-        "Value": "2"
-      }
+      {"Position": "1","Value": "2"},
+      {"Position": "2","Value": "2"}
     ],
     "Status": 2,
     "Time": "-1"
@@ -2558,14 +2599,8 @@ class LsportApiController extends Controller {
 {
     "CurrentPeriod": 40,
     "Results": [
-      {
-        "Position": "1",
-        "Value": "2"
-      },
-      {
-        "Position": "2",
-        "Value": "2"
-      }
+      {"Position": "1","Value": "2"},
+      {"Position": "2","Value": "2"}
     ],
     "Status": 2,
     "Time": "-1"
@@ -2573,26 +2608,11 @@ class LsportApiController extends Controller {
 
 棒球 livescore_extradata:
 [
-  {
-    "Name": "Balls",  // 好球數
-    "Value": "2"
-  },
-  {
-    "Name": "Turn",  // 上下半場。1=上半，2=下半
-    "Value": "2"
-  },
-  {
-    "Name": "Bases",  // 壘包狀態
-    "Value": "1/1/0"
-  },
-  {
-    "Name": "Strikes",  // 打擊數
-    "Value": "2"
-  },
-  {
-    "Name": "Outs",  // 出局數
-    "Value": "1"
-  }
+  {"Name": "Balls","Value": "2"},  // 好球數
+  {"Name": "Turn","Value": "2"},  // 上下半場。1=上半，2=下半
+  {"Name": "Bases","Value": "1/1/0"},  // 壘包狀態
+  {"Name": "Strikes","Value": "2"},  // 打擊數
+  {"Name": "Outs","Value": "1"}  // 出局數
 ]
 */
 
