@@ -249,43 +249,20 @@
 		// Create a container for each bet_data
 		// let betDataDetailsContainer = $('<div class="betaDetcon">');
 		let betDataDetailsContainer = $('span[template="betDataDetailsTemp"]').clone();
+
 		betDataDetailsContainer.removeAttr('hidden');
 		betDataDetailsContainer.removeAttr('template');
 
-		betDataDetailsContainer.empty();
+		// betDataDetailsContainer.empty();
 
-		let betDataDetails_leagueName = betDataDetailsContainer.find('.betDataDetails_leagueName');
-		let betDataDetails_HomeAway = betDataDetailsContainer.find('.betDataDetails_HomeAway');
-		let betDataDetails_BetNameLine = betDataDetailsContainer.find('.betDataDetails_BetNameLine');
-		let betDataDetails_BetRateStatus = betDataDetailsContainer.find('.betDataDetails_BetRateStatus');
-		let betDataDetails_HomeName = betDataDetailsContainer.find('.betDataDetails_HomeName');
-		let betDataDetails_HomeScore = betDataDetailsContainer.find('.betDataDetails_HomeScore');
-		let betDataDetails_AwayName = betDataDetailsContainer.find('.betDataDetails_AwayName');
-		let betDataDetails_AwayScore = betDataDetailsContainer.find('.betDataDetails_AwayScore');
-
-		betDataDetails_leagueName.html(betItem.league_name);
-		betDataDetails_HomeAway.html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
-		betDataDetails_BetNameLine.html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
-		betDataDetails_BetRateStatus.html('@' + betItem.bet_rate);
-		betDataDetails_HomeName.html(betItem.home_team_name);
-		betDataDetails_HomeScore.html(betItem.home_team_score);
-		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_AwayScore.html(betItem.away_team_score);
-
-		// let betDataDetails_leagueName = $('<span class="betDataDetails_leagueName">').html(betItem.league_name);
-		// let betDataDetails_HomeAwayTeam = $('<br><span class="betDataDetails_HomeAwayTeam">').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
-		// let betDataDetails_BetNameLine = $('<br><span class="betDataDetails_BetNameLine">').html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
-		// let betDataDetails_BetRateStatus = $('<br><span class="betDataDetails_BetRateStatus">').html('@' + betItem.bet_rate);
-		// let betDataDetails_BetStatus = $('<br><span class="betDataDetails_BetStatus">').html(betItem.bet_status);
-
-		// Append the elements to the container
-		// betDataDetailsContainer.append(
-		// 	betDataDetails_leagueName,
-		// 	betDataDetails_HomeAwayTeam,
-		// 	betDataDetails_BetNameLine,
-		// 	betDataDetails_BetRate,
-		// 	betDataDetails_BetStatus
-		// );
+		betDataDetailsContainer.find('.betDataDetails_leagueName').html(betItem.league_name);
+		betDataDetailsContainer.find('.betDataDetails_HomeAway').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
+		betDataDetailsContainer.find('.betDataDetails_BetNameLine').html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
+		betDataDetailsContainer.find('.betDataDetails_BetRateStatus').html('@' + betItem.bet_rate);
+		betDataDetailsContainer.find('.betDataDetails_HomeName').html(betItem.home_team_name);
+		betDataDetailsContainer.find('.betDataDetails_HomeScore').html(betItem.home_team_score);
+		betDataDetailsContainer.find('.betDataDetails_AwayName').html(betItem.away_team_name);
+		betDataDetailsContainer.find('.betDataDetails_AwayScore').html(betItem.away_team_score);
 
 		if (betIndex > 0) { // Check if it's not the first item
 			// Add a custom class to elements of subsequent bet_data items
@@ -297,19 +274,15 @@
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $('<button class="order-toggleButton">Expand</button>'); // Change 'Show/Hide' to your desired button text
+			var button = $('<button class="order-toggleButton">Expand</button>');
 			button.on('click', function () {
-				// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-
-				// Change the button text based on the current visibility state
 				if (button.text() === 'Expand') {
 					button.text('Close');
 				} else {
 					button.text('Expand');
 				}
 			});
-
 			button.appendTo(orderDataBetDataDetails);
 		}
 	}
