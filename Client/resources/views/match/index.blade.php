@@ -47,18 +47,18 @@
 	</div> -->
 	
 	<!-- Table -->
-	<div id="tblMatchResult">
-		<div id="tblbodyMatch">
-			<table class="table table-striped table-bordered">
+	<div id="matchContainer">
+        <div id="tableContainer" style="overflow: auto;">
+            <table id="matchTable" class="cell-border w-100 text-center">
 				<thead>
 					<tr id="tableTitle">
 					</tr>
 				</thead>
 				<tbody id="tableContent">
 				</tbody>
-			</table>
-		</div>
-	</div>
+            </table>
+        </div>
+    </div>
 	<div id="noMoreData" style="display: none">
 		<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 	</div>
@@ -78,7 +78,7 @@
 	</div>  
 @endsection
 @section('styles')
-<link href="{{ asset('css/match.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/match.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
