@@ -533,7 +533,7 @@
 		orderData_totalBetAmount.html(orderItem.bet_amount);
 		orderData_totalResultAmount.html(orderItem.result_amount);
 
-		$('#orderTr').after(orderData);
+		$('#orderTr').after(orderDataTotal);
 	}
 
 
