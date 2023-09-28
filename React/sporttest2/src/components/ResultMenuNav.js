@@ -79,12 +79,18 @@ class ResultMenuNav extends React.Component {
         let res = this.state.api_res
         if(window.sport === null) {
             window.sport = res.data[0].sport_id
+            this.setState({
+                sport_id: window.sport
+            })
         }
         this.props.callBack(window.sport)
 	}
 
     handleSportChange = (sport_id) => {
         window.sport = sport_id
+        this.setState({
+            sport_id: sport_id
+        })
         this.props.callBack(window.sport)
     };
 

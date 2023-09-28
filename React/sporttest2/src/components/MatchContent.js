@@ -230,6 +230,7 @@ class MatchContent extends React.Component {
 			<div style={MatchMainContainer} id='MatchMainContainer'>
 				{
 					data && data[menuArr[window.menu]][window.sport]?.list ?
+					Object.entries(data[menuArr[window.menu]][window.sport].list).length > 0 ?
 					Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
 						<SlideToggle key={k} duration={500}>
 						  {({ toggle, setCollapsibleElement }) => (
@@ -254,7 +255,10 @@ class MatchContent extends React.Component {
 							</>
 						  )}
 						</SlideToggle>
-					))
+
+					
+					)) :
+					<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
 					:
 					<div className="loading loading04 text-white mt-5">
 						<span>L</span>

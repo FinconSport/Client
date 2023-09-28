@@ -84,22 +84,22 @@ return [
         29 => "1st 5 innings-Handicap", // baseball        // 29 => "前5局 - 讓球", // 棒
 	],
 	'sportBetData' => [
-		1 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Half-time winner', 'Half-time handicap', 'Half-time over/under', 'All', 'Winner', 'Handicap', 'Over/Under'], // ['全場獨贏', '全場讓球', '全場大小', '半場獨贏', '半場讓球', '半場大小', '所有', '獨贏', '讓球', '大小']
-			'priorityArr' => ['5', '2', '1', '6', '4', '3'],
-			'stage' => ['1st half', '2nd half', 'Overtime)'], // ['上半場', '下半場', '延長賽']
+		6046 => [
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Half-time winner', 'Half-time handicap', 'Half-time over/under'],
+			'priorityArr' => [13, 15, 17, 14, 16, 18],
+			'stage' => ['1st half', '2nd half', 'Overtime)'],
 			'ws' => 'wss://soccer.asgame.net/ws'
 		],
-		2 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st-half winner', '1st-half handicap', '1st-half over/under', 'All', 'Winner', 'Handicap', 'Over/Under'], // ['全場獨贏', '全場讓分', '全場大小', '上半場獨贏', '上半場讓分', '上半場大小', '所有', '獨贏', '讓分', '大小']
-			'priorityArr' => ['5', '9', '1', '6', '10', '3'],
-			'stage' => ['1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'Overtime'], // ['第一節', '第二節', '第三節', '第四節', '延長賽']
+		48242 => [
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st-half winner', '1st-half handicap', '1st-half over/under'],
+			'priorityArr' => [7, 9, 11, 8, 10, 12],
+			'stage' => ['1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'Overtime'],
 			'ws' => 'wss://basketball.asgame.net/ws'
 		],
-		3 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st 5 innings winner', '1st 5 innings handicap', '1st 5 innings over/under', 'All', 'Winner', 'Handicap', 'Over/Under'], // ['全場獨贏', '全場讓球', '全場大小', '前五局獨贏', '前五局讓球', '前五局大小', '所有', '獨贏', '讓球', '大小']
-			'priorityArr' => ['5', '2', '1', '28', '29', '27'],
-			'stage' => ['Full-time winner', 'Full-time handicap', ' Full-time handicap', 'Full-time over/under', '1st 5 innings winner', '1st 5 innings over/under', 'All', 'Winner', 'Handicap', 'Over/Under'], // ['第一局', '第二局', '第三局', '第四局', '第五局', '第六局', '第七局', '第八局', '第九局', '延長賽']
+		154914 => [
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st 5 innings winner', '1st 5 innings handicap', '1st 5 innings over/under'],
+			'priorityArr' => [1, 3, 5, 2, 4, 6],
+			'stage' => ['1st Stage','2nd Stage','3rd Stage','4st Stage','5st Stage','6st Stage','7st Stage','8st Stage','9st Stage','Overtime'],
 			'ws' => 'wss://baseball.asgame.net/ws'
 		],
 		4 => [

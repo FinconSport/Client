@@ -299,7 +299,7 @@ class LsportApiController extends Controller {
     }
 }
 */
-    public function IndexMatchList2(Request $request) {
+    public function IndexMatchList(Request $request) {
         
         $input = $this->getRequest($request);
 
@@ -321,32 +321,80 @@ class LsportApiController extends Controller {
         $today = time();
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
-        
+
+    	//---------------------------------
+
         $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
-            // DB::table('lsport_league as l')
-            // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
-                'lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt'
+                "lsport_sport.sport_id,
+                lsport_sport.{$lang_col} as sport_name_locale,
+                lsport_fixture.status as fixture_status,
+                COUNT(DISTINCT lsport_fixture.fixture_id) as fixture_cnt"
             )
+            ->where('lsport_sport.status', 1)
             ->where('lsport_league.status', 1)
             ->whereIn('lsport_fixture.status', [1, 2])  //可區分:未開賽及走地中
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
-            ->groupBy('lsport_sport.sport_id', 'lsport_fixture.status')
+            ->groupBy('lsport_sport.sport_id', "lsport_sport.{$lang_col}", 'lsport_fixture.status')
             ->get();
-
-        foreach ($data as $dk => $dv) {
-
+        if ($data === false) {
+            $this->ApiError("02");
         }
 
-        dd($sql);
+        // dd($data);
+
+    	//---------------------------------
+        $ret = array(
+            'living' => array(
+                'items' => array(),
+                'total' => 0
+            ),
+            'early' => array(
+                'items' => array(),
+                'total' => 0
+            )
+        );
+
+        $living_types = [
+            1 => "early",  //早盤
+            2 => "living",  //走地
+        ];
+
+        // 繞賽事數量結果
+        $totals = array(
+            'living' => 0,
+            'early' => 0
+        );
+        foreach ($data as $k3 => $v3) {
+            $sport_id = $v3->sport_id;
+            $sport_name = $v3->sport_name_locale;  // 球種名稱
+            $fixture_status = $v3->fixture_status;  // 賽事狀態:1,2
+            $fixture_count = $v3->fixture_cnt;  // 該球種賽事數量
+            $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
+            $totals[$living_key] += $fixture_count;  // 算living及early的total
+
+            if (!isset($ret[$living_key]['items'][$sport_id])) {
+                $ret[$living_key]['items'][$sport_id] = array('name'=>null,'count'=>null);
+            }
+
+            // 置入賽事數量
+            $ret[$living_key]['items'][$sport_id]['name'] = $sport_name;
+            $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
+            
+        }
+        foreach ($totals as $living_key => $total) {
+            $ret[$living_key]['total'] = $total;
+        }
+
+        // dd($ret);
 
         ///////////////////////////////////
-        $this->ApiSuccess($data, "01"); 
+        $this->ApiSuccess($ret, "01"); 
     }
 
-    public function IndexMatchList(Request $request) {
+    public function IndexMatchListOld(Request $request) {
       
     	$input = $this->getRequest($request);
 
@@ -587,6 +635,7 @@ class LsportApiController extends Controller {
                 'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
                 'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
             )
+            ->where('s.status', 1)
             ->where('l.status', 1)
             ->where('l.sport_id', $sport_id)
             // ->where('s.sport_id', $sport_id)
