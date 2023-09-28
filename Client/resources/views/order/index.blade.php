@@ -479,7 +479,7 @@
     	return totalResultAmount;
 	}
 
-	if (sportListD && sportListD.data) {
+	if (sportListD) {
 		console.log('sportLIst' + sportListD);
 	}
 
