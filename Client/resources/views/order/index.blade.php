@@ -185,6 +185,9 @@
     var isReadyOrderInt = null
     var isReadyOrder = false
 
+	// title
+	var sportPriority = langTrans.sportPriority
+
 	// order list data
     var orderListD = {}
 	// var orderListD = {
@@ -555,7 +558,7 @@
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
 		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetLine.html(betItem.market_bet_line);
+		betDataDetails_BetLine.html(betItem.market_bet_line + sportPriority[betItem.market_priority]);
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
