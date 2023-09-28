@@ -531,10 +531,7 @@ class LsportApiController extends Controller {
             ->orderBy('l.league_id', 'ASC')
             ->orderBy('f.fixture_id', 'ASC')
             ->orderBy('m.market_id', 'ASC')
-            ->toSql();
-            //->get();
-
-            dd($data);
+            ->get();
 
         if ($data === false) {
             $this->ApiError('02');
