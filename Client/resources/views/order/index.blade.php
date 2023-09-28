@@ -478,40 +478,16 @@
 
     	return totalResultAmount;
 	}
-	
-	
-	// const sportListD = {
-	// 	"status": 1,
-	// 	"data": [
-	// 		{
-	// 			"sport_id": 154914,
-	// 			"name": "棒球",
-	// 			"key": 1
-	// 		},
-	// 		{
-	// 			"sport_id": 6046,
-	// 			"name": "足球",
-	// 			"key": 2
-	// 		},
-	// 		{
-	// 			"sport_id": 48242,
-	// 			"name": "籃球",
-	// 			"key": 3
-	// 		}
-	// 	],
-	// 	"message": "SUCCESS_API_MATCH_SPORT_01",
-	// 	"gzip": false
-	// };
 
-	const specificSport = sportListD.data.find(item => item.sport_id === sport);
+	// const specificSport = sportListData.data.find(item => item.sport_id === sport);
 
-	if (specificSport) {
-		console.log("Sport ID:", specificSport.sport_id);
-		console.log("Name:", specificSport.name);
-		console.log("Key:", specificSport.key);
-	} else {
-		console.log("Sport with ID not found.");
-	}
+	// if (specificSport) {
+	// 	console.log("Sport ID:", specificSport.sport_id);
+	// 	console.log("Name:", specificSport.name);
+	// 	console.log("Key:", specificSport.key);
+	// } else {
+	// 	console.log("Sport with ID not found.");
+	// }
 
 
 	function createList(orderItem, orderIndex) {
