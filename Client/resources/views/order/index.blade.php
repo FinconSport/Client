@@ -460,7 +460,7 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
-		Object.entries(orderListD.data).map(([orderItem, orderIndex]) => {
+		Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
             createList(orderItem, orderIndex);
             Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
                 createBetDataDetails(orderItem, betItem, betIndex);
