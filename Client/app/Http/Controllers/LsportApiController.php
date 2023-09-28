@@ -2177,6 +2177,10 @@ class LsportApiController extends Controller {
                 foreach ($cc as $kkk => $vvv) {
                     $tmp_bet_data = array();
 
+                    $tmp_bet_data['sport_id'] = $vvv['sport_id'];
+                    $tmp_bet_data['market_id'] = $vvv['market_id'];
+                    $tmp_bet_data['market_name'] = $vvv['market_name'];
+                    $tmp_bet_data['market_bet_id'] = $vvv['market_bet_id'];
                     $tmp_bet_data['market_bet_name'] = $vvv['market_bet_name'];
                     $tmp_bet_data['market_bet_line'] = $vvv['market_bet_line'];
                     $tmp_bet_data['market_priority'] = $vvv['market_priority'];
@@ -2200,7 +2204,11 @@ class LsportApiController extends Controller {
             } else {
                 $tmp_bet_data = array();
 
-                $tmp_bet_data['market_bet_name'] = $v['market_bet_name'];
+                $tmp_bet_data['sport_id'] = $vvv['sport_id'];
+                $tmp_bet_data['market_id'] = $vvv['market_id'];
+                $tmp_bet_data['market_name'] = $vvv['market_name'];
+                $tmp_bet_data['market_bet_id'] = $vvv['market_bet_id'];
+                $tmp_bet_data['market_bet_name'] = $vvv['market_bet_name'];
                 $tmp_bet_data['market_bet_line'] = $v['market_bet_line'];
                 $tmp_bet_data['market_priority'] = $v['market_priority'];
 

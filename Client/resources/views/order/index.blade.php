@@ -127,8 +127,7 @@
 									<span class="betDataDetails_AwayName"></span>
 								</div>
 								<div>
-									<span class="betDataDetails_BetName"></span>
-									<span class="betDataDetails_BetLine"></span>
+									<span class="betDataDetails_BetNameLine"></span>
 								</div>
 							</span>
 						</td>
@@ -184,6 +183,9 @@
 	// detect ini ajax
     var isReadyOrderInt = null
     var isReadyOrder = false
+
+	// title
+	var sportPriority = langTrans.sportPriority
 
 	// order list data
     var orderListD = {}
@@ -488,22 +490,6 @@
 
 	console.log(sportListD);
 
-	// Define the sport ID you want to find
-	const sportID = sport;
-
-	function findSportByIdAndSetVariable(sportId, sportListD) {
-		const sportType = sportListD.find(item => item.sport_id === sportId);
-		if (sportType) {
-			const sportName = sportType.name;
-			console.log(`Sport Name: ${sportName}`);
-			console.log(sportType);
-		} else {
-			console.log(`Sport with sport_id ${sportId} not found.`);
-		}
-	}
-
-	// findSportByIdAndSetVariable(sportID, sportListD.data);
-
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
 		orderData.removeAttr('hidden');
@@ -547,7 +533,7 @@
 		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
 		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
 		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_BetName = betDataDetails.find('.betDataDetails_BetName');
+		let betDataDetails_BetName_Line = betDataDetails.find('.betDataDetails_BetNameLine');
 		let betDataDetails_BetLine = betDataDetails.find('.betDataDetails_BetLine');
 
 		// Set content for the found elements
@@ -555,8 +541,7 @@
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
 		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetLine.html(betItem.market_bet_line);
-
+		betDataDetails_BetLine.html(betItem.market_bet_line + sportPriority[betItem.market_priority]);
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
