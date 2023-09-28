@@ -176,15 +176,22 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-    function renderView() {
-        // Loop through orderListD.data.list to generate HTML elements and append them to the page
-        orderListD.data.list.forEach((orderItem, orderIndex) => {
-            createList(orderItem, orderIndex);
-            orderItem.bet_data.forEach((betItem, betIndex) => {
-                createData(orderItem, orderIndex, betItem, betIndex);
-            });
-        });
-    }
+    // function renderView() {
+    //     orderListD.data.list.forEach((orderItem, orderIndex) => {
+    //         createList(orderItem, orderIndex);
+    //         orderItem.bet_data.forEach((betItem, betIndex) => {
+    //             createData(orderItem, orderIndex, betItem, betIndex);
+    //         });
+    //     });
+    // }
+
+	 // loop matchListD to generate html element here
+	 Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
+		createList(orderItem, orderIndex)
+		Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
+			// createData(orderItem, betItem, betIndex)
+		})
+	})
 
     function createList(orderItem, orderIndex) {
         let orderData = $('tbody[template="orderTemplate"]').clone();
@@ -223,8 +230,6 @@
         const sportType = sportListD.data.find(item => item.sport_id === id);
         return sportType ? sportType.name : 'Unknown';
     }
-
-	renderView();
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
