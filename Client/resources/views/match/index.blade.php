@@ -51,25 +51,7 @@
 		<div id="tblbodyMatch">
 			<table class="table table-striped table-bordered">
 				<thead>
-					<tr>
-					<th>{{ trans('match.main.date') }}</th>
-					<th>{{ trans('match.main.series') }}</th>
-					<th>{{ trans('match.main.homeaway') }}</th>
-					<th>{{ trans('match.baseball.fulltimescore') }}</th>
-					<th>{{ trans('match.baseball.firstround') }}</th>
-					<th>{{ trans('match.baseball.secondgame') }}</th>
-					<th>{{ trans('match.baseball.thirdinning') }}</th>
-					<th>{{ trans('match.baseball.fourthinning') }}</th>
-					<th>{{ trans('match.baseball.fifthinning') }}</th>
-					<th>{{ trans('match.baseball.sixthinning') }}</th>
-					<th>{{ trans('match.baseball.seventhinning') }}</th>
-					<th>{{ trans('match.baseball.eighthinning') }}</th>
-					<th>{{ trans('match.baseball.ninthinning') }}</th>
-					<th>{{ trans('match.baseball.tenthinning') }}</th>
-					<th>{{ trans('match.baseball.eleventhinning') }}</th>
-					<th>{{ trans('match.baseball.twelfthinning') }}</th>
-					<th>{{ trans('match.baseball.overtime') }}</th>
-					<th>{{ trans('match.baseball.hitscore') }}</th>
+					<tr id="tableTitle">
 					</tr>
 				</thead>
 				<tbody>
@@ -122,6 +104,7 @@
     var isLastPage = false; // infinite scroll -> detect if it's last page
 	var fetchMoreLock = false; // infinite scroll lock -> to prevent infinite loop
 	var langTrans = @json(trans('match')); // lang file
+	var matchTitle = null
 
 	// detect ini ajax
     var isReadyResultInt = null
@@ -134,26 +117,12 @@
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
 	function renderView( isIni = 0 ) {
-		if( isIni === 1 ) { // initial will only do once
-			// loop seriesListD here to generate the search select then append into the page
-
-
-
-
-
-			// loop seriesListD here to generate the search select then append into the page
-		}
-		
-
-		/* loop resultListD.data here to generate the html element then append into the page
-
-		loop resultListD.data to generate the html element
-		then use insertRow() to insert
-		note that insertRow() may need to be edited
-
-
-
-		loop resultListD.data here to generate the html element then append into the page */
+		matchTitle.map(([k, v]) => {
+			console.log(k, v)
+		})
+		// Object.entries(resultListD.data).map(([k, v]) => { 
+		// 	console.log(k, v)
+		// })
 
 		// detect if it's last page
 		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
@@ -166,6 +135,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callResultListData.sport_id = sport // default sport
+				matchTitle = langTrans.matchTitle[sport]
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
@@ -178,7 +148,7 @@
             if( isReadyCommon && isReadyResult ) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
-				renderView(1)
+				renderView()
                 clearInterval(isReadyResultInt); // stop checking
             }
         }, 500);
@@ -191,7 +161,6 @@
 		$('#loader').show() // loading transition
 
 		callResultListData.page = parseInt(searchData.page) + 1
-
 		$.ajax({
 			url: resultList_api,
 			type: 'POST',
@@ -228,87 +197,6 @@
 			fetchMore()
 		}
 	});
-
-	function insertRow(e, n) {
-		//start time
-		let insertStr = '<tr><td class="nowrap" rowspan="2">'+formatDateTime(e.start_time)+'</td>'
-		//series logo
-		insertStr += '<td class="nowrap" rowspan="2"><img src="' + e.series_logo + '" class="serieslogo" onerror="this.src=\'https://sporta.asgame.net/uploads/default.png?v=' + version + '\'" >'+e.series_name+'</td>'
-		//home logo and name
-		insertStr += '<td class="nowrap"><img src="'+e.home_team_logo+'" alt="homelogo" class="teamlogo" onerror="this.src=\'https://sporta.asgame.net/uploads/default.png?v=' + version + '\'" >'+e.home_team_name+'</td>'
-		//need to loop e.stat to get home_stat
-		if (e.stat.home_stat && Array.isArray(e.stat.home_stat)) {
-			let homeStat = e.stat.home_stat;
-			for (let i = 0; i < n; i++) {
-				insertStr += '<td>' + (homeStat[i] ? homeStat[i] : '-') + '</td>';
-			}
-		} else {
-			insertStr += '<td>-</td>'.repeat(n); // Repeat '<td>-</td>' 
-		}
-		insertStr += '</tr><tr>'
-		insertStr += '<td class="nowrap"><img src="'+e.away_team_logo+'" alt="awaylogo" class="teamlogo" onerror="this.src=\'https://sporta.asgame.net/uploads/default.png?v=' + version + '\'" >'+e.away_team_name+'</td>'
-		//need to loop e.stat to get away_stat
-		if (e.stat.away_stat && Array.isArray(e.stat.away_stat)) {
-			let awayStat = e.stat.away_stat;
-			for (let i = 0; i < n; i++) {
-				insertStr += '<td>' + (awayStat[i] ? awayStat[i] : '-') + '</td>';
-			}
-		} else {
-			insertStr += '<td>-</td>'.repeat(n); // Repeat '<td>-</td>' 
-		}
-		insertStr += '</tr>'
-		$('#tblbodyMatch tbody').append(insertStr)
-	}
-
-	// search area series filter
-	function filterSeiries() {
-		let val = $('select[name="sport"]').val()
-		setTimeout(() => {
-			$('#series_id select option').each(function() {
-				let id = $(this).val()
-				if ($(this).attr('sport') === val) {
-					$('#series_id div[data-value="'+id+'"]').show()
-				} else {
-					$('#series_id div[data-value="'+id+'"]').hide()
-				}
-			});
-		}, 100);
-	}
-	
-	// reesult search
-	function searchResult() {
-		let queryData = {}
-		queryData.page = 1
-		let sSeriesId = parseInt($('select[name="series_id"]').val())
-		let sStartTime = $('input[name="start_time"]').val()
-		let sEndTime = $('input[name="end_time"]').val()
-		if(sSeriesId && sSeriesId !== 0) queryData.series_id = sSeriesId
-		if(sStartTime) queryData.start_time = sStartTime
-		if(sEndTime) queryData.end_time = sEndTime
-		var queryString = new URLSearchParams(queryData).toString();
-		window.location.href = '/match?' + queryString;
-	}
-
-
-  	// for test
-    console.log("menu_count");
-    console.log(@json($menu_count));
-
-    console.log("sport_list");
-    console.log(@json($sport_list));
-
-    console.log("series_list");
-    console.log(@json($series_list));
-
-    console.log("status_list");
-    console.log(@json($status_list));
-    
-    console.log("match_list");
-    console.log(@json($data));
-	
-    console.log("search");
-    console.log(@json($search));
-    
 </script>
 @endpush
 
