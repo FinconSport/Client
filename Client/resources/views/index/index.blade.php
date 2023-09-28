@@ -477,10 +477,2154 @@
 
     // render view layer here
     function renderView() {
+
+        // fake data test
+        matchListD = {
+    "status": 1,
+    "data": {
+        "early": {
+            "154914": {
+                "sport_id": "154914",
+                "sport_name": "棒球",
+                "list": {
+                    "5540": {
+                        "league_id": 5540,
+                        "league_name": "中華職棒",
+                        "list": {
+                            "11405499": {
+                                "fixture_id": 11405499,
+                                "start_time": "2023-09-28 18:35:00",
+                                "order_by": 1695897300,
+                                "status": 9,
+                                "last_update": "2023-09-21 08:02:50",
+                                "home_team_id": 52398469,
+                                "home_team_name": "樂天猿",
+                                "away_team_id": 327587,
+                                "away_team_name": "統一獅",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 6,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "8.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 135975060711405500,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "8.5",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:21:09"
+                                            },
+                                            {
+                                                "market_bet_id": 202554746111405500,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "8.5",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:21:09"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 142542734111405500,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.47",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 15:49:38"
+                                            },
+                                            {
+                                                "market_bet_id": 182871186811405500,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.7",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 15:49:38"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 165414276711405500,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "1.86",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:58:09"
+                                            },
+                                            {
+                                                "market_bet_id": 24882624311405500,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.86",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:58:09"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "183": {
+                        "league_id": 183,
+                        "league_name": "美國職業棒球聯賽",
+                        "list": {
+                            "11448572": {
+                                "fixture_id": 11448572,
+                                "start_time": "2023-09-29 02:30:00",
+                                "order_by": 1695925800,
+                                "status": 1,
+                                "last_update": "2023-09-28 17:42:33",
+                                "home_team_id": 77587,
+                                "home_team_name": "底特律老虎",
+                                "away_team_id": 77588,
+                                "away_team_name": "堪薩斯皇家",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "7.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 35860972811448572,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "7.0",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:31:28"
+                                            },
+                                            {
+                                                "market_bet_id": 54265856411448580,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "7.0",
+                                                "price": "1.95",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:31:28"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 164568195611448580,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.86",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 14:35:00"
+                                            },
+                                            {
+                                                "market_bet_id": 108320139911448580,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "1.95",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 14:35:00"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 140889182011448580,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.0",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:03:02"
+                                            },
+                                            {
+                                                "market_bet_id": 75516805811448580,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.0",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:03:02"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 112431120311448580,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "1.86",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 14:35:00"
+                                            },
+                                            {
+                                                "market_bet_id": 79889284011448580,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "1.95",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 14:35:00"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 90903231511448580,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "1.5",
+                                                "price": "1.5",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:55:02"
+                                            },
+                                            {
+                                                "market_bet_id": 151362953511448580,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-1.5",
+                                                "price": "2.5",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:55:02"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11448592": {
+                                "fixture_id": 11448592,
+                                "start_time": "2023-09-29 01:10:00",
+                                "order_by": 1695921000,
+                                "status": 1,
+                                "last_update": "2023-09-28 00:35:20",
+                                "home_team_id": 77589,
+                                "home_team_name": "明尼蘇達雙城",
+                                "away_team_id": 77591,
+                                "away_team_name": "奧克蘭運動家",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "8.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 44348052411448590,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "8.5",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:26:05"
+                                            },
+                                            {
+                                                "market_bet_id": 98161706411448590,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "8.5",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:26:05"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 166588777011448580,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.35",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:27:00"
+                                            },
+                                            {
+                                                "market_bet_id": 106299558511448590,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "3.3",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:27:00"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 139287102511448590,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "1.86",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:30"
+                                            },
+                                            {
+                                                "market_bet_id": 36846638111448590,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "1.95",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:30"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 2534575511448592,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "1.4",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:30"
+                                            },
+                                            {
+                                                "market_bet_id": 35076411811448590,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "3.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:30"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 30420428211448590,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "1.8",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:27:00"
+                                            },
+                                            {
+                                                "market_bet_id": 66519060811448590,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:27:00"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11448602": {
+                                "fixture_id": 11448602,
+                                "start_time": "2023-09-29 07:07:00",
+                                "order_by": 1695942420,
+                                "status": 1,
+                                "last_update": "2023-09-28 00:40:11",
+                                "home_team_id": 77595,
+                                "home_team_name": "多倫多藍鳥",
+                                "away_team_id": 77590,
+                                "away_team_name": "紐約洋基",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "9.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 62154455211448600,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "9.0",
+                                                "price": "1.95",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:55:15"
+                                            },
+                                            {
+                                                "market_bet_id": 203016483611448600,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "9.0",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:55:15"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 138056485811448600,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.54",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 08:00:50"
+                                            },
+                                            {
+                                                "market_bet_id": 134831849711448600,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.65",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 08:00:50"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 39009535511448600,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 05:00:38"
+                                            },
+                                            {
+                                                "market_bet_id": 82330157911448600,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 05:00:38"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 173732387511448600,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "1.54",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:33:28"
+                                            },
+                                            {
+                                                "market_bet_id": 206274223811448600,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "2.65",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:33:28"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 156058214611448600,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "2.1",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:38:58"
+                                            },
+                                            {
+                                                "market_bet_id": 9657215211448602,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.76",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:38:58"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11449129": {
+                                "fixture_id": 11449129,
+                                "start_time": "2023-09-29 04:10:00",
+                                "order_by": 1695931800,
+                                "status": 1,
+                                "last_update": "2023-09-28 03:07:53",
+                                "home_team_id": 77604,
+                                "home_team_name": "密爾瓦基釀酒",
+                                "away_team_id": 77611,
+                                "away_team_name": "聖路易紅雀",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "7.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 132953593011449140,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "7.5",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 08:45:47"
+                                            },
+                                            {
+                                                "market_bet_id": 40876442411449130,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "7.5",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 08:45:47"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 18076256911449130,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.54",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:38:00"
+                                            },
+                                            {
+                                                "market_bet_id": 138532137211449140,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.65",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:38:00"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 61114523211449130,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 04:55:07"
+                                            },
+                                            {
+                                                "market_bet_id": 186382344811449120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "1.8",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 04:55:07"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 72201934411449140,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "1.55",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:24:30"
+                                            },
+                                            {
+                                                "market_bet_id": 82818228311449140,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "2.6",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:24:30"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 20159809711449130,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "2.15",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 03:12:40"
+                                            },
+                                            {
+                                                "market_bet_id": 182447169311449120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 03:12:40"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11449260": {
+                                "fixture_id": 11449260,
+                                "start_time": "2023-09-29 09:40:00",
+                                "order_by": 1695951600,
+                                "status": 1,
+                                "last_update": "2023-09-28 03:56:27",
+                                "home_team_id": 77592,
+                                "home_team_name": "西雅圖水手",
+                                "away_team_id": 77594,
+                                "away_team_name": "德州遊騎兵",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "7.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 2531961611449260,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "7.5",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 04:53:17"
+                                            },
+                                            {
+                                                "market_bet_id": 202478974611449250,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "7.5",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 04:53:17"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 169367518911449250,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:02"
+                                            },
+                                            {
+                                                "market_bet_id": 129039066211449260,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:32:02"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 61670676511449260,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.0",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:27:39"
+                                            },
+                                            {
+                                                "market_bet_id": 76614037311449260,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.0",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:27:39"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 188984021011449250,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "1.8",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:37:02"
+                                            },
+                                            {
+                                                "market_bet_id": 13343439911449260,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:37:02"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 44044814011449260,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "1.5",
+                                                "price": "1.48",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:27:09"
+                                            },
+                                            {
+                                                "market_bet_id": 63692375011449260,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-1.5",
+                                                "price": "2.55",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 16:27:09"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11449261": {
+                                "fixture_id": 11449261,
+                                "start_time": "2023-09-29 07:10:00",
+                                "order_by": 1695942600,
+                                "status": 1,
+                                "last_update": "2023-09-28 03:56:28",
+                                "home_team_id": 77606,
+                                "home_team_name": "紐約大都會",
+                                "away_team_id": 77601,
+                                "away_team_name": "邁阿密馬林魚",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "7.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 145501685911449250,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "7.5",
+                                                "price": "1.86",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:35:15"
+                                            },
+                                            {
+                                                "market_bet_id": 206000180511449250,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "7.5",
+                                                "price": "1.95",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:35:15"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 89623134411449260,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "2.15",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 09:43:19"
+                                            },
+                                            {
+                                                "market_bet_id": 66985259711449260,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 09:43:19"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 144114429311449260,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 10:59:21"
+                                            },
+                                            {
+                                                "market_bet_id": 203077244711449250,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 10:59:21"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "0.0",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 113018872711449260,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.0",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:45:56"
+                                            },
+                                            {
+                                                "market_bet_id": 102402578811449260,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.0",
+                                                "price": "1.8",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 13:45:56"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 200477899311449250,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "1.5",
+                                                "price": "1.66",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:01:42"
+                                            },
+                                            {
+                                                "market_bet_id": 172928715711449250,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-1.5",
+                                                "price": "2.3",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 07:01:42"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5540": {
+                        "league_id": 5540,
+                        "league_name": "中華職棒",
+                        "list": {
+                            "11405508": {
+                                "fixture_id": 11405508,
+                                "start_time": "2023-09-28 18:35:00",
+                                "order_by": 1695897300,
+                                "status": 1,
+                                "last_update": "2023-09-21 08:02:52",
+                                "home_team_id": 52036807,
+                                "home_team_name": "中信兄弟",
+                                "away_team_id": 52398924,
+                                "away_team_name": "味全龍",
+                                "periods": null,
+                                "scoreboard": null,
+                                "market_bet_count": 6,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "5.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 132951728711405500,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "5.5",
+                                                "price": "1.74",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:00:39"
+                                            },
+                                            {
+                                                "market_bet_id": 42600719111405500,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "5.5",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:00:39"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 54726635611405500,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.71",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 15:58:08"
+                                            },
+                                            {
+                                                "market_bet_id": 95055088311405500,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.1",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 15:58:08"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 133407224811405500,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "2.9",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:00:39"
+                                            },
+                                            {
+                                                "market_bet_id": 64239727411405500,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.42",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:00:39"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "living": {
+            "154914": {
+                "sport_id": "154914",
+                "sport_name": "棒球",
+                "list": {
+                    "4146": {
+                        "league_id": 4146,
+                        "league_name": "日本職業棒球",
+                        "list": {
+                            "11447778": {
+                                "fixture_id": 11447778,
+                                "start_time": "2023-09-28 17:00:00",
+                                "order_by": 1695891600,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:42:45",
+                                "home_team_id": 205808,
+                                "home_team_name": "樂天金鷹",
+                                "away_team_id": 205804,
+                                "away_team_name": "歐力士猛牛",
+                                "periods": {
+                                    "period": 2,
+                                    "Turn": "1",
+                                    "Outs": "2",
+                                    "Balls": "0",
+                                    "Strikes": "0"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        1,
+                                        0,
+                                        1
+                                    ],
+                                    "2": [
+                                        3,
+                                        0,
+                                        3
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "9.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 77356965011447780,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "9.5",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            },
+                                            {
+                                                "market_bet_id": 187197328011447780,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "9.5",
+                                                "price": "1.83",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 164226350511447780,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "3.25",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            },
+                                            {
+                                                "market_bet_id": 108661985011447780,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "1.33",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "5.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 196397720911447780,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "5.5",
+                                                "price": "1.63",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            },
+                                            {
+                                                "market_bet_id": 31776356911447776,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "5.5",
+                                                "price": "2.2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 184937397011447780,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "1.5",
+                                                "price": "2.5",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            },
+                                            {
+                                                "market_bet_id": 161263139211447780,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-1.5",
+                                                "price": "1.5",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "2.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 71037268111447780,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "2.5",
+                                                "price": "1.67",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            },
+                                            {
+                                                "market_bet_id": 23668108311447776,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-2.5",
+                                                "price": "2.1",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:38"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11447779": {
+                                "fixture_id": 11447779,
+                                "start_time": "2023-09-28 17:00:00",
+                                "order_by": 1695891600,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:42:52",
+                                "home_team_id": 205806,
+                                "home_team_name": "日本火腿鬥士",
+                                "away_team_id": 205807,
+                                "away_team_name": "千葉羅德海洋",
+                                "periods": {
+                                    "period": 2,
+                                    "Turn": "1",
+                                    "Strikes": "0",
+                                    "Outs": "2",
+                                    "Bases": "0/0/0",
+                                    "Balls": "0"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        2,
+                                        1,
+                                        0
+                                    ],
+                                    "2": [
+                                        1,
+                                        1,
+                                        0
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "7.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 154624433111447780,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "7.5",
+                                                "price": "1.77",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            },
+                                            {
+                                                "market_bet_id": 58196077111447780,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "7.5",
+                                                "price": "1.91",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 131537925211447780,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.56",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            },
+                                            {
+                                                "market_bet_id": 91209472511447780,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.3",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 15204692311447780,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "1.67",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            },
+                                            {
+                                                "market_bet_id": 128592177711447780,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "2.1",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "-0.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 141749739911447780,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5",
+                                                "price": "1.5",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            },
+                                            {
+                                                "market_bet_id": 122923643911447780,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5",
+                                                "price": "2.5",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-0.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 5499460511447779,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5",
+                                                "price": "1.63",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            },
+                                            {
+                                                "market_bet_id": 110138135311447780,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5",
+                                                "price": "2.2",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:51"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "7807": {
+                        "league_id": 7807,
+                        "league_name": "韓國職棒聯賽",
+                        "list": {
+                            "11447719": {
+                                "fixture_id": 11447719,
+                                "start_time": "2023-09-28 16:00:00",
+                                "order_by": 1695888000,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:41:19",
+                                "home_team_id": 299494,
+                                "home_team_name": "樂天巨人",
+                                "away_team_id": 299489,
+                                "away_team_name": "華老鷹",
+                                "periods": {
+                                    "period": 6,
+                                    "Balls": "3",
+                                    "Outs": "2",
+                                    "Bases": "1/1/0",
+                                    "Strikes": "2",
+                                    "Turn": "1"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        2,
+                                        0,
+                                        0,
+                                        0,
+                                        2,
+                                        0,
+                                        0
+                                    ],
+                                    "2": [
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "4.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 88459701611447710,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "1.77",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            },
+                                            {
+                                                "market_bet_id": 206172291211447700,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "1.91",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 132667217811447710,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.1",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            },
+                                            {
+                                                "market_bet_id": 92338765111447710,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "6.5",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "0.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 203610815111447700,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "0.5",
+                                                "price": "1.56",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:02:32"
+                                            },
+                                            {
+                                                "market_bet_id": 182310110911447700,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "0.5",
+                                                "price": "2.3",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:02:32"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "-0.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 189947826911447700,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5",
+                                                "price": "2.2",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:17:40"
+                                            },
+                                            {
+                                                "market_bet_id": 4369878111447719,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5",
+                                                "price": "1.63",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:17:40"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-2.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 174750269711447700,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-2.5",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            },
+                                            {
+                                                "market_bet_id": 204423726311447700,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "2.5",
+                                                "price": "1.71",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:19"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11447720": {
+                                "fixture_id": 11447720,
+                                "start_time": "2023-09-28 16:00:00",
+                                "order_by": 1695888000,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:42:16",
+                                "home_team_id": 299490,
+                                "home_team_name": "NC恐龍",
+                                "away_team_id": 299495,
+                                "away_team_name": "起亞老虎",
+                                "periods": {
+                                    "period": 3,
+                                    "Balls": "0",
+                                    "Turn": "1",
+                                    "Bases": "1/0/0",
+                                    "Strikes": "0",
+                                    "Outs": "2"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        10,
+                                        1,
+                                        5,
+                                        4
+                                    ],
+                                    "2": [
+                                        3,
+                                        1,
+                                        0,
+                                        2
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "18.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 90321560111447710,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "18.5",
+                                                "price": "1.83",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            },
+                                            {
+                                                "market_bet_id": 179032947511447700,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "18.5",
+                                                "price": "1.83",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 121121229011447710,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.01",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            },
+                                            {
+                                                "market_bet_id": 35487165111447720,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "13",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "14.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 112049241611447710,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "14.5",
+                                                "price": "1.63",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            },
+                                            {
+                                                "market_bet_id": 124428991811447710,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "14.5",
+                                                "price": "2.2",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "-7.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 119937584611447710,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-7.5",
+                                                "price": "2.4",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            },
+                                            {
+                                                "market_bet_id": 158922051611447700,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "7.5",
+                                                "price": "1.53",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-6.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 177730524311447700,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-6.5",
+                                                "price": "1.67",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            },
+                                            {
+                                                "market_bet_id": 125712450511447710,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "6.5",
+                                                "price": "2.1",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:42:35"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11447721": {
+                                "fixture_id": 11447721,
+                                "start_time": "2023-09-28 16:00:00",
+                                "order_by": 1695888000,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:42:53",
+                                "home_team_id": 52217281,
+                                "home_team_name": "耐克森英雄",
+                                "away_team_id": 52555190,
+                                "away_team_name": "SSG登陸者",
+                                "periods": {
+                                    "period": 6,
+                                    "Turn": "2",
+                                    "Outs": "2",
+                                    "Balls": "1",
+                                    "Strikes": "1",
+                                    "Bases": "1/0/1"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        2,
+                                        0,
+                                        1,
+                                        0,
+                                        0,
+                                        1,
+                                        0
+                                    ],
+                                    "2": [
+                                        1,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        1,
+                                        0
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "6.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 9097080511447720,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "6.5",
+                                                "price": "1.87",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:53"
+                                            },
+                                            {
+                                                "market_bet_id": 39620059911447720,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "6.5",
+                                                "price": "1.8",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:53"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 12611224911447720,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "1.37",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:53"
+                                            },
+                                            {
+                                                "market_bet_id": 52939677611447720,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "2.95",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:53"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 113073524511447730,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "1.5",
+                                                "price": "1.5",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:22:13"
+                                            },
+                                            {
+                                                "market_bet_id": 94729695511447730,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "1.5",
+                                                "price": "2.5",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:22:13"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 89825427511447730,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "2.25",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:31:24"
+                                            },
+                                            {
+                                                "market_bet_id": 51780298311447720,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.57",
+                                                "status": 3,
+                                                "last_update": "2023-09-28 17:31:24"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "-1.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 74865054511447730,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "2.25",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:25"
+                                            },
+                                            {
+                                                "market_bet_id": 104309684711447730,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.57",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:25"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "11447722": {
+                                "fixture_id": 11447722,
+                                "start_time": "2023-09-28 16:00:00",
+                                "order_by": 1695888000,
+                                "status": 2,
+                                "last_update": "2023-09-28 17:42:54",
+                                "home_team_id": 299496,
+                                "home_team_name": "LG雙子",
+                                "away_team_id": 299493,
+                                "away_team_name": "三星獅子",
+                                "periods": {
+                                    "period": 5,
+                                    "Strikes": "1",
+                                    "Balls": "0",
+                                    "Bases": "0/0/0",
+                                    "Outs": "0",
+                                    "Turn": "1"
+                                },
+                                "scoreboard": {
+                                    "1": [
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ],
+                                    "2": [
+                                        9,
+                                        2,
+                                        0,
+                                        0,
+                                        7,
+                                        0
+                                    ]
+                                },
+                                "market_bet_count": 10,
+                                "list": {
+                                    "28": {
+                                        "market_id": 28,
+                                        "market_name": "全場大小",
+                                        "priority": 5,
+                                        "main_line": "12.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 44874510311447720,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "12.5",
+                                                "price": "1.71",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:40:46"
+                                            },
+                                            {
+                                                "market_bet_id": 73841314711447730,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "12.5",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:40:46"
+                                            }
+                                        ]
+                                    },
+                                    "226": {
+                                        "market_id": 226,
+                                        "market_name": "全場獨贏",
+                                        "priority": 1,
+                                        "main_line": "",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 40910592811447720,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "18",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:42:55"
+                                            },
+                                            {
+                                                "market_bet_id": 582140111447722,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "1",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:40:46"
+                                            }
+                                        ]
+                                    },
+                                    "236": {
+                                        "market_id": 236,
+                                        "market_name": "上半場大小",
+                                        "priority": 6,
+                                        "main_line": "10.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 147014697411447700,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "10.5",
+                                                "price": "2.2",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:21:10"
+                                            },
+                                            {
+                                                "market_bet_id": 149013914411447700,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "10.5",
+                                                "price": "1.63",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:21:10"
+                                            }
+                                        ]
+                                    },
+                                    "281": {
+                                        "market_id": 281,
+                                        "market_name": "上半場讓分",
+                                        "priority": 4,
+                                        "main_line": "8.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 205692557411447700,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "8.5",
+                                                "price": "1.83",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:21:10"
+                                            },
+                                            {
+                                                "market_bet_id": 206030549411447700,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-8.5",
+                                                "price": "1.83",
+                                                "status": 2,
+                                                "last_update": "2023-09-28 17:21:10"
+                                            }
+                                        ]
+                                    },
+                                    "342": {
+                                        "market_id": 342,
+                                        "market_name": "全場讓分",
+                                        "priority": 3,
+                                        "main_line": "8.5",
+                                        "list": [
+                                            {
+                                                "market_bet_id": 66405907611447720,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "8.5",
+                                                "price": "1.63",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:40:46"
+                                            },
+                                            {
+                                                "market_bet_id": 102470968811447730,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-8.5",
+                                                "price": "2.2",
+                                                "status": 1,
+                                                "last_update": "2023-09-28 17:40:46"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "message": "SUCCESS_API_MATCH_INDEX_01",
+    "gzip": true
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // fake data test
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+                    let isExist = $(`#catWrapperTitle_${k} #${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
                     if( isExist ) {
@@ -488,20 +2632,20 @@
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
-                        let nowStatus = parseInt(card.attr('status'))
-                        let isStatusSame = nowStatus === v3.status ? true : false // is status the same
-                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
-                        console.log(k3 + ' isSwitch ->' + isSwitchCate)
-                        if( isSwitchCate ) {
-                            if( !isCateExist ) createCate(k, v)
-                            if( !isLeagueExist ) createLeague(k, k2, v2)
-                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
-                            let livingNode = $(`#${k3}`)
-                            console.log(parentNode, livingNode)
-                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
-                            card.attr('cate', k)
-                            card.attr('status', v3.status)
-                        }   
+                        // let nowStatus = parseInt(card.attr('status'))
+                        // let isStatusSame = nowStatus === v3.status ? true : false // is status the same
+                        // let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
+                        // console.log(k3 + ' isSwitch ->' + isSwitchCate)
+                        // if( isSwitchCate ) {
+                        //     if( !isCateExist ) createCate(k, v)
+                        //     if( !isLeagueExist ) createLeague(k, k2, v2)
+                        //     let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
+                        //     let livingNode = $(`#${k3}`)
+                        //     console.log(parentNode, livingNode)
+                        //     livingNode.prependTo(parentNode); // move to corrsponding cate and league
+                        //     card.attr('cate', k)
+                        //     card.attr('status', v3.status)
+                        // }   
 
                         // living
                         if( v3.status === 2 ) {
@@ -588,6 +2732,7 @@
                             }
                         });
                     } else {
+                        closeFixture(k3)
                         // 新的賽事
                         if( !isCateExist ) createCate(k, v)
                         if( !isLeagueExist ) createLeague(k, k2, v2)
