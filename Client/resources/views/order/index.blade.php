@@ -462,7 +462,6 @@
 	function renderView() {
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
-			createTotal(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
@@ -520,7 +519,7 @@
 		orderDataBetDataDetails.append(betDataDetails);
 	}
 
-	function createTotal(orderItem, orderIndex) {
+	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
@@ -530,11 +529,13 @@
 		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
-		orderData_totalBetAmount.html(orderItem.bet_amount);
-		orderData_totalResultAmount.html(orderItem.result_amount);
+		orderData_totalBetAmount.html('0');
+		orderData_totalResultAmount.html('0');
 
 		$('#orderTr').after(orderDataTotal);
 	}
+
+	createTotal();
 
 
   	// 寫入頁面限定JS
