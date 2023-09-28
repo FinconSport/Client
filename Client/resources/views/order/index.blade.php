@@ -270,7 +270,7 @@
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
 		if (betIndex === 0) { // Check if it's the first item
-			var button = $('<button>Show/Hide</button>'); // Change 'Show/Hide' to your desired button text
+			var button = $('<button>Show</button>'); // Change 'Show/Hide' to your desired button text
 			button.on('click', function () {
 				// Toggle the visibility of elements with the 'hide-betaDetcon' class within this specific orderDataBetDataDetails
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
