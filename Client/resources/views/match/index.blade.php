@@ -57,7 +57,7 @@
 				<tbody id="tableContent">
 				</tbody>
             </table>
-			<div id="loader" style="display: none">
+			<div id="loader" style="display: none; margin-top: 2rem;">
 				<div colspan="29" class="loading loading04">
 					<span>L</span>
 					<span>O</span>
@@ -71,7 +71,7 @@
 					<span>.</span>
 				</div>
 			</div>  
-			<div id="noMoreData" style="display: none">
+			<div id="noMoreData" style="display: none; margin-top: 2rem;">
 				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 			</div>
         </div>
@@ -103,15 +103,18 @@
     var callResultListData = { token: token, player: player, sport: sport, page: 1 }
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
-	function renderView() {
+	function renderView(isIni = 0) {
+		if( isIni === 1 ) {
+			matchTitleAll.forEach(ele => {
+				let str = ''
+				str += '<th>' + ele + '</th>'
+				$('#tableTitle').append(str)
+			});
+		}
 		
-		matchTitleAll.forEach(ele => {
-			let str = ''
-			str += '<th>' + ele + '</th>'
-			$('#tableTitle').append(str)
-		});
 		Object.entries(resultListD.data).map(([k, v]) => { 
 			let str = '<tr>'
+			if( k % 2 === 0) str = '<tr class="even">'
 			str += '<td rowspan=2>' + formatDateTime(v.start_time) + '</td>'
 			str += '<td rowspan=2>' + v.league_name + '</td>'
 
@@ -125,7 +128,11 @@
 			});
 			str += '</tr>'
 
-			str += '<tr>'
+			if( k % 2 === 0) {
+				str = '<tr class="even">'
+			} else {
+				str += '<tr>'
+			}
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
@@ -140,7 +147,6 @@
 		})
 
 		// detect if it's last page
-		// if( resultListD.data.length !== 20 || resultListD.data.length === 0 || resultListD.data.length > 20 ) isLastPage = true
 		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
 	}
@@ -187,11 +193,11 @@
 		$('#loader').show() // loading transition
 		callResultListData.page += 1
 		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
-		renderView()
+		renderView(1)
 	}
 
 	// scroll to bottom
-	var matchContainer = document.getElementById('matchContainer');
+	var matchContainer = document.getElementById('tableContainer');
 	matchContainer.addEventListener('scroll', function() {
 		var scrollHeight = matchContainer.scrollHeight;
 		var scrollTop = matchContainer.scrollTop;
