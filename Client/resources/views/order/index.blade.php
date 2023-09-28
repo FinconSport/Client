@@ -199,6 +199,7 @@
 
 	function renderView() {
 		let totalResultAmount = 0;
+		let totalBetAmount = 0;
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			// Assuming createList and createBetDataDetails are valid functions.
@@ -209,11 +210,12 @@
 
 			// Validate and accumulate totalResultAmount
 			totalResultAmount += parseFloat(orderItem.result_amount) || 0;
+			totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
 		});
 
-		createTotal(totalResultAmount);
+		createTotal(totalResultAmount, totalBetAmount);
 
-		console.log('Total Result Amount:', totalResultAmount);
+		console.log('Total Bet Amount:', totalBetAmount);
 
 		return totalResultAmount;
 	}
@@ -295,7 +297,7 @@
 	}
 
 	
-	function createTotal(totalResultAmount) {
+	function createTotal(totalResultAmount, totalBetAmount) {
 
 		// Clone the template row for the total
 		let orderDataTotal = $('#countTr').clone();
@@ -305,6 +307,7 @@
 		orderDataTotal.removeAttr('template');
 
 		// Set the content for the total result amount
+		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 
 		// Append the total row to the table body
