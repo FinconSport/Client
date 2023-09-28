@@ -2,7 +2,7 @@
 
 @section('content')
 	<!-- 搜尋框 -->
-	<div id='searchArea' style="height: 5.5rem;">
+	<!-- <div id='searchArea' style="height: 5.5rem;">
 		<div class="w-100" style='display: inline-flex'>
 			<div id="series_id" style="width: 35%;margin-left: 1%" data-filter="off" data-filterpage="1">
 				<p class="mb-0 fw-600 fs-09">{{ trans('match.main.series') }}</p>
@@ -44,215 +44,11 @@
 				<i class="fa-solid fa-magnifying-glass ml-1"></i>
 			</button>
 		</div>
-	</div>
+	</div> -->
 	
 	<!-- Table -->
 	<div id="tblMatchResult">
 		<div id="tblbodyMatch">
-		@switch(intval($search['sport']))
-        @case('1')
-            <!-- Content for sport 1 -->
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr>
-						<th>{{ trans('match.main.date') }}</th>
-						<th>{{ trans('match.main.series') }}</th>
-						<th>{{ trans('match.main.homeaway') }}</th>
-						<th>{{ trans('match.football.fulltimescore') }}</th>
-						<th>{{ trans('match.football.firsthalfscore') }}</th>
-						<th>{{ trans('match.football.secondhalfscore') }}</th>
-						<th>{{ trans('match.football.cornerscore') }}</th>
-						<th>{{ trans('match.football.freekickscore') }}</th>
-						<th>{{ trans('match.football.overtimescore') }}</th>
-						<th>{{ trans('match.football.scoreofdangerousoffenses') }}</th>
-						<th>{{ trans('match.football.penaltyscore') }}</th>
-						<th>{{ trans('match.football.redcardscore') }}</th>
-						<th>{{ trans('match.football.yellowcardscore') }}</th>
-						<th>{{ trans('match.football.scoreofmissedshots') }}</th>
-						<th>{{ trans('match.football.scoreofshotsontarget') }}</th>
-						<th>{{ trans('match.football.numberofattacks') }}</th>
-						<th>{{ trans('match.football.cornerscore') }}</th>
-						</tr>
-					</thead>
-					<tbody>
-						@if(!empty($data['list']))
-								@foreach($data['list'] as $key => $item)
-								<tr>
-									<td class="nowrap" rowspan="2">{{date('m-d H:i', strtotime($item['start_time']))}}</td>
-									<td class="nowrap" rowspan="2">
-										@if(isset($item['series_logo']))
-										<img src="{{ $item['series_logo'] }}" class='serieslogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-										@endif
-										@if(isset($item['series_name']))
-											{{ $item['series_name'] }}
-										@endif
-									</td>
-									<!--Home Logo-->
-									<td class="nowrap">
-										@if(isset($item['home_team_logo']))
-										<img src="{{ $item['home_team_logo'] }}" alt='homelogo' class='teamlogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'">
-										@endif
-										{{ $item['home_team_name'] }}
-									</td>
-									<!--Home Stat-->
-									@if(isset($item['stat']['home_stat']) && is_array($item['stat']['home_stat']))
-									@foreach($item['stat']['home_stat'] as $val2 => $e2)
-											@if ($e2!="")
-												<td>{{$e2}}</td>
-											@else
-												<td>-</td>
-											@endif
-									@endforeach
-									@else
-									@for ($i = 0; $i < 14; $i++)
-										<td>-</td>
-									@endfor
-									@endif
-								</tr>
-								<tr>
-									<!--Away Logo-->
-									<td class="nowrap">
-										@if(isset($item['away_team_logo']))
-										<img src="{{ $item['away_team_logo'] }}" alt='awaylogo' class='teamlogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-										@endif {{$item['away_team_name']}}
-									</td>
-									<!--Away Stat-->
-									@if(isset($item['stat']['away_stat']) && is_array($item['stat']['away_stat']))
-									@foreach($item['stat']['away_stat'] as $val2 => $e2)
-											@if ($e2!="")
-												<td>{{$e2}}</td>
-											@else
-												<td>-</td>
-											@endif
-									@endforeach
-									@else
-									@for ($i = 0; $i < 14; $i++)
-										<td>-</td>
-									@endfor
-									@endif
-								</tr>
-						@endforeach         
-					@endif
-					<tr id="loader" style="display: none">
-						<td class="loading loading04">
-							<span>L</span>
-							<span>O</span>
-							<span>A</span>
-							<span>D</span>
-							<span>I</span>
-							<span>N</span>
-							<span>G</span>
-							<span>.</span>
-							<span>.</span>
-							<span>.</span>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-            @break
-
-        @case('2')
-            <!-- Content for sport 2 -->
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr>
-						<th>{{ trans('match.main.date') }}</th>
-						<th>{{ trans('match.main.series') }}</th>
-						<th>{{ trans('match.main.homeaway') }}</th>
-						<th>{{ trans('match.basketball.fulltimescore') }}</th>
-						<th>{{ trans('match.basketball.firsthalfscore') }}</th>
-						<th>{{ trans('match.basketball.secondhalfscore') }}</th>
-						<th>{{ trans('match.basketball.firstquarter') }}</th>
-						<th>{{ trans('match.basketball.secondquarter') }}</th>
-						<th>{{ trans('match.basketball.thirdquarter') }}</th>
-						<th>{{ trans('match.basketball.fourthquarter') }}</th>
-						<th>{{ trans('match.basketball.twopoints') }}</th>
-						<th>{{ trans('match.basketball.threepoints') }}</th>
-						<th>{{ trans('match.basketball.penalty') }}</th>
-						<th>{{ trans('match.basketball.freethrowpercentage') }}</th>
-						<th>{{ trans('match.basketball.numberoffreethrows') }}</th>
-						<th>{{ trans('match.basketball.totalnumberoffouls') }}</th>
-						<th>{{ trans('match.basketball.foulsfirstquarter') }}</th>
-						<th>{{ trans('match.basketball.foulssecondquarter') }}</th>
-						<th>{{ trans('match.basketball.foulsthirdquarter') }}</th>
-						<th>{{ trans('match.basketball.foulsfourthquarter') }}</th>
-						<th>{{ trans('match.basketball.overtimefouls') }}</th>
-						<th>{{ trans('match.basketball.foulsfirsthalf') }}</th>
-						<th>{{ trans('match.basketball.foulssecondhalf') }}</th>
-						<th>{{ trans('match.basketball.totalnumberofpauses') }}</th>
-						<th>{{ trans('match.basketball.timeoutsfirstquarter') }}</th>
-						<th>{{ trans('match.basketball.timeoutssecondquarter') }}</th>
-						<th>{{ trans('match.basketball.timeoutsthirdquarter') }}</th>
-						<th>{{ trans('match.basketball.timeoutsfourthquarter') }}</th>
-						<th>{{ trans('match.basketball.overtimetimeouts') }}</th>
-						</tr>
-					</thead>
-					<tbody>
-						@if(!empty($data['list']))
-								@foreach($data['list'] as $key => $item)
-								<tr>
-									<td class="nowrap" rowspan="2">{{date('m-d H:i', strtotime($item['start_time']))}}</td>
-									<td class="nowrap" rowspan="2">
-										@if(isset($item['series_logo']))
-										<img src="{{ $item['series_logo'] }}" class='serieslogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-										@endif
-										@if(isset($item['series_name']))
-											{{ $item['series_name'] }}
-										@endif
-									</td>
-									<!--Home Logo-->
-									<td class="nowrap">
-										@if(isset($item['home_team_logo']))
-										<img src="{{ $item['home_team_logo'] }}" alt='homelogo' class='teamlogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'">
-										@endif
-										{{ $item['home_team_name'] }}
-									</td>
-									<!--Home Stat-->
-									@if(isset($item['stat']['home_stat']) && is_array($item['stat']['home_stat']))
-									@foreach($item['stat']['home_stat'] as $val2 => $e2)
-											@if ($e2!="")
-												<td>{{$e2}}</td>
-											@else
-												<td>-</td>
-											@endif
-									@endforeach
-									@else
-									@for ($i = 0; $i < 26; $i++)
-										<td>-</td>
-									@endfor
-									@endif
-								</tr>
-								<tr>
-									<!--Away Logo-->
-									<td class="nowrap">
-										@if(isset($item['away_team_logo']))
-										<img src="{{ $item['away_team_logo'] }}" class='serieslogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-										@endif {{$item['away_team_name']}}
-									</td>
-									<!--Away Stat-->
-									@if(isset($item['stat']['away_stat']) && is_array($item['stat']['away_stat']))
-									@foreach($item['stat']['away_stat'] as $val2 => $e2)
-											@if ($e2!="")
-												<td>{{$e2}}</td>
-											@else
-												<td>-</td>
-											@endif
-									@endforeach
-									@else
-									@for ($i = 0; $i < 26; $i++)
-										<td>-</td>
-									@endfor
-									@endif
-								</tr>
-						@endforeach
-						      
-					@endif
-					</tbody>
-				</table>
-            @break
-
-        @case('3')
-		<!-- Content for sport 3 -->
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
@@ -277,76 +73,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					@if(!empty($data['list']))
-							@foreach($data['list'] as $key => $item)
-							<tr>
-								<td class="nowrap" rowspan="2">{{date('m-d H:i', strtotime($item['start_time']))}}</td>
-								<td class="nowrap" rowspan="2">
-									@if(isset($item['series_logo']))
-									<img src="{{ $item['series_logo'] }}" class='serieslogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-									@endif
-									@if(isset($item['series_name']))
-										{{ $item['series_name'] }}
-									@endif
-								</td>
-								<!--Home Logo-->
-								<td class="nowrap">
-									@if(isset($item['home_team_logo']))
-									<img src="{{ $item['home_team_logo'] }}" alt='homelogo' class='teamlogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'">
-									@endif
-									{{ $item['home_team_name'] }}
-								</td>
-								<!--Home Stat-->
-								@if(isset($item['stat']['home_stat']) && is_array($item['stat']['home_stat']))
-								@foreach($item['stat']['home_stat'] as $val2 => $e2)
-										@if ($e2!="")
-											<td>{{$e2}}</td>
-										@else
-											<td>-</td>
-										@endif
-								@endforeach
-								@else
-								@for ($i = 0; $i < 15; $i++)
-									<td>-</td>
-								@endfor
-								@endif
-							</tr>
-							<tr>
-								<!--Away Logo-->
-								<td class="nowrap">
-									@if(isset($item['away_team_logo']))
-									<img src="{{ $item['away_team_logo'] }}" class='serieslogo' onerror="this.src='https://sporta.asgame.net/uploads/default.png?v={{$system_config['version']}}'" >
-									@endif {{$item['away_team_name']}}
-								</td>
-								<!--Away Stat-->
-								@if(isset($item['stat']['away_stat']) && is_array($item['stat']['away_stat']))
-								@foreach($item['stat']['away_stat'] as $val2 => $e2)
-										@if ($e2!="")
-											<td>{{$e2}}</td>
-										@else
-											<td>-</td>
-										@endif
-								@endforeach
-								@else
-								@for ($i = 0; $i < 15; $i++)
-									<td>-</td>
-								@endfor
-								@endif
-							</tr>
-					@endforeach     
-					@endif
+					<tr>
+						<td class="nowrap" rowspan="2">time</td>
+						<td class="nowrap" rowspan="2">
+							series_name
+						</td>
+						<td class="nowrap">
+							home_team_name
+						</td>
+						<td>point</td>
+					</tr>
+					<tr>
+						<td class="nowrap">
+						home_team_name
+						</td>
+						<td>point</td>
+					</tr>
 				</tbody>
 			</table>
-		@break
-            <!-- Content for sport 3 -->
-        @default
-    @endswitch
-	@if(empty($data['list']))
-		<div id="noDataF">
-			<i class="fa-solid fa-circle-exclamation"></i>
-			<p class="mb-0">{{ trans('match.main.nogame') }}</p>
-		</div>   
-	@endif
+		</div>
+	</div>
 	<div id="noMoreData" style="display: none">
 		<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 	</div>
@@ -364,9 +110,6 @@
 			<span>.</span>
 		</div>
 	</div>  
-</div>
-</div>
-	
 @endsection
 @section('styles')
 <link href="{{ asset('css/match.css?v=' . $system_config['version']) }}" rel="stylesheet">
@@ -391,10 +134,7 @@
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
 
 	function renderView( isIni = 0 ) {
-
-		
 		if( isIni === 1 ) { // initial will only do once
-
 			// loop seriesListD here to generate the search select then append into the page
 
 
@@ -435,7 +175,7 @@
         isReadyResultInt = setInterval(() => {
             if (resultListD.status === 1) { isReadyResult = true; }
             // if( isReadyResult && isReadyCommon ) {
-            if( isReadyCommon ) {
+            if( isReadyCommon && isReadyResult ) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView(1)
