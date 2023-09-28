@@ -194,61 +194,41 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
-    let totalResultAmount = 0;
+		let totalResultAmount = 0;
 
-    orderListD.data.list.forEach((orderItem, orderIndex) => {
-        createList(orderItem, orderIndex);
-        let betDataDetailsCount = orderItem.bet_data.length;
+		orderListD.data.list.forEach((orderItem, orderIndex) => {
+			createList(orderItem, orderIndex);
+			let betDataDetailsCount = orderItem.bet_data.length;
 
-        if (betDataDetailsCount > 0) {
-            // Create and append the first bet_data
-            createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
+			if (betDataDetailsCount > 0) {
+				// Create and append the first bet_data
+				createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
 
-            // If there are more than one bet_data, add a toggle button
-            if (betDataDetailsCount > 1) {
-                let toggleButton = $('<button>').text('Show More Bet Data');
-                toggleButton.click(() => {
-                    for (let i = 1; i < betDataDetailsCount; i++) {
-                        const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-                        $('#' + betDataId).show(); // Show additional bet_data
-                    }
-                    toggleButton.hide(); // Hide the "Show More Bet Data" button
-                    hideButton.show(); // Show the "Hide Bet Data" button
-                });
+				// If there are more than one bet_data, add a toggle button
+				if (betDataDetailsCount > 1) {
+					let toggleButton = $('<button>').text('Show More Bet Data');
+					toggleButton.click(() => {
+						// Toggle the display of additional bet_data
+						for (let i = 1; i < betDataDetailsCount; i++) {
+							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+						}
+						toggleButton.hide(); // Hide the "Show More Bet Data" button
+					});
 
-                let hideButton = $('<button>').text('Hide Bet Data');
-                hideButton.click(() => {
-                    for (let i = 1; i < betDataDetailsCount; i++) {
-                        const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-                        $('#' + betDataId).hide(); // Hide additional bet_data
-                    }
-                    toggleButton.show(); // Show the "Show More Bet Data" button
-                    hideButton.hide(); // Hide the "Hide Bet Data" button
-                });
+					// Append the toggle button
+					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+					let orderDataBetDataDetails = $('#' + betDataDetailsId);
+					orderDataBetDataDetails.append(toggleButton);
+				}
+			}
 
-                // Initially hide additional bet_data and the "Hide Bet Data" button
-                for (let i = 1; i < betDataDetailsCount; i++) {
-                    const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-                    $('#' + betDataId).hide(); // Hide additional bet_data
-                }
-                hideButton.hide(); // Hide "Hide Bet Data" button
+			totalResultAmount += parseFloat(orderItem.result_amount);
+		});
 
-                // Append the toggle and hide buttons
-                let betDataDetailsId = 'betDataDetails_' + orderItem.id;
-                let orderDataBetDataDetails = $('#' + betDataDetailsId);
-                orderDataBetDataDetails.append(toggleButton);
-                orderDataBetDataDetails.append(hideButton);
-            }
-        }
+		console.log('Total Result Amount:', totalResultAmount);
 
-        totalResultAmount += parseFloat(orderItem.result_amount);
-    });
-
-    console.log('Total Result Amount:', totalResultAmount);
-
-    return totalResultAmount;
-}
-
+		return totalResultAmount;
+	}
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
