@@ -202,7 +202,7 @@
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
 
-			totalResultAmount += parseFloat(orderItem.result_amount); // Convert to float and accumulate the result_amount
+			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
 
 		console.log('Total Result Amount:', totalResultAmount);
@@ -242,37 +242,35 @@
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
-		// Remove any existing bet data details before appending a new one
-		orderDataBetDataDetails.empty();
-
-		// Access the properties of betItem directly
-		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
-		betDataDetails.removeAttr('hidden');
-		betDataDetails.removeAttr('template');
+		// Create a container for each bet_data
+		let betDataDetailsContainer = $('<div>');
 
 		// Find elements within the cloned template (similar to your existing code)
-		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
-		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
-		let betDataDetails_HomeScore = betDataDetails.find('.betDataDetails_HomeScore');
-		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_AwayScore = betDataDetails.find('.betDataDetails_AwayScore');
-		let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
-		let betDataDetails_BetRate = betDataDetails.find('.betDataDetails_BetRate');
-		let betDataDetails_BetStatus = betDataDetails.find('.betDataDetails_BetStatus');
+		let betDataDetails_leagueName = $('<span class="betDataDetails_leagueName">').html(betItem.league_name);
+		let betDataDetails_HomeName = $('<span class="betDataDetails_HomeName">').html(betItem.home_team_name);
+		let betDataDetails_HomeScore = $('<span class="betDataDetails_HomeScore">').html('(' + betItem.home_team_score + ')');
+		let betDataDetails_AwayName = $('<span class="betDataDetails_AwayName">').html(betItem.away_team_name);
+		let betDataDetails_AwayScore = $('<span class="betDataDetails_AwayScore">').html('(' + betItem.away_team_score + ')');
+		let betDataDetails_BetNameLine = $('<span class="betDataDetails_BetNameLine">').html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
+		let betDataDetails_BetRate = $('<span class="betDataDetails_BetRate">').html('@' + betItem.bet_rate);
+		let betDataDetails_BetStatus = $('<span class="betDataDetails_BetStatus">').html(betItem.bet_status);
 
-		// Set content for the found elements (access properties of betItem)
-		betDataDetails_leagueName.html(betItem.league_name);
-		betDataDetails_HomeName.html(betItem.home_team_name);
-		betDataDetails_HomeScore.html('(' + betItem.home_team_score + ')');
-		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_AwayScore.html('(' + betItem.away_team_score + ')');
-		betDataDetails_BetNameLine.html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
-		betDataDetails_BetRate.html('@' + betItem.bet_rate);
-		betDataDetails_BetStatus.html(betItem.bet_status);
+		// Append the elements to the container
+		betDataDetailsContainer.append(
+			betDataDetails_leagueName,
+			betDataDetails_HomeName,
+			betDataDetails_HomeScore,
+			betDataDetails_AwayName,
+			betDataDetails_AwayScore,
+			betDataDetails_BetNameLine,
+			betDataDetails_BetRate,
+			betDataDetails_BetStatus
+		);
 
-		// Append the new betDataDetails to the orderDataBetDataDetails
-		orderDataBetDataDetails.append(betDataDetails);
+		// Append the container to the orderDataBetDataDetails
+		orderDataBetDataDetails.append(betDataDetailsContainer);
 	}
+	
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
