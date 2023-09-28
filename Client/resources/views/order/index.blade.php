@@ -479,15 +479,15 @@
     	return totalResultAmount;
 	}
 
-	const specificSport = sportListData.data.find(item => item.sport_id === sport);
+	// const specificSport = sportListData.data.find(item => item.sport_id === sport);
 
-	if (specificSport) {
-		console.log("Sport ID:", specificSport.sport_id);
-		console.log("Name:", specificSport.name);
-		console.log("Key:", specificSport.key);
-	} else {
-		console.log("Sport with ID not found.");
-	}
+	// if (specificSport) {
+	// 	console.log("Sport ID:", specificSport.sport_id);
+	// 	console.log("Name:", specificSport.name);
+	// 	console.log("Key:", specificSport.key);
+	// } else {
+	// 	console.log("Sport with ID not found.");
+	// }
 
 
 	function createList(orderItem, orderIndex) {
