@@ -272,7 +272,7 @@
 
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
-		console.log('count:' + betItem.length);
+		console.log('count:' + orderItem.beta_data.length);
 
 		if (betIndex === 0) { // Check if it's the first item
 			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }}</button>");
