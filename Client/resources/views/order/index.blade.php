@@ -284,10 +284,6 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	var sportListData = sportListD;
-	const message = sportListData.message;
-	console.log('message: ' + message);
-
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
