@@ -198,42 +198,9 @@
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
-			let betDataDetailsCount = orderItem.bet_data.length;
-
-			if (betDataDetailsCount > 0) {
-			// Create and append the first bet_data
-			createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
-
-			// If there are more than one bet_data, add a toggle button
-			if (betDataDetailsCount > 1) {
-				let toggleButton = $('<button>').text('Show More Bet Data');
-				toggleButton.click(() => {
-				// Toggle the display of additional bet_data
-				for (let i = 1; i < betDataDetailsCount; i++) {
-					createBetDataDetails(orderItem, orderItem.bet_data[i], i);
-				}
-				toggleButton.hide(); // Hide the "Show More Bet Data" button
-				let hideButton = $('<button>').text('Hide Bet Data');
-				hideButton.click(() => {
-					// Hide additional bet_data when "Hide Bet Data" button is clicked
-					for (let i = 1; i < betDataDetailsCount; i++) {
-					$('#betDataDetails_' + orderItem.id + '_' + i).hide();
-					}
-					hideButton.hide(); // Hide the "Hide Bet Data" button
-					toggleButton.show(); // Show the "Show More Bet Data" button again
-				});
-				// Append the "Hide Bet Data" button
-				let betDataDetailsId = 'betDataDetails_' + orderItem.id;
-				let orderDataBetDataDetails = $('#' + betDataDetailsId);
-				orderDataBetDataDetails.append(hideButton);
-				});
-
-				// Append the toggle button
-				let betDataDetailsId = 'betDataDetails_' + orderItem.id;
-				let orderDataBetDataDetails = $('#' + betDataDetailsId);
-				orderDataBetDataDetails.append(toggleButton);
-			}
-			}
+			orderItem.bet_data.forEach((betItem, betIndex) => {
+				createBetDataDetails(orderItem, betItem, betIndex);
+			});
 
 			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
@@ -242,7 +209,6 @@
 
 		return totalResultAmount;
 	}
-
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
@@ -295,9 +261,16 @@
 			betDataDetails_BetStatus
 		);
 
+		// Check if betIndex is greater than 0 (not the first bet_data)
+		if (betIndex > 0) {
+			// Add a custom class to elements of subsequent bet_data items
+			betDataDetailsContainer.addClass('custom-class'); // Change 'custom-class' to your desired class name
+		}
+
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 	}
+
 	
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
