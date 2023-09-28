@@ -213,7 +213,8 @@
 					showButton.click(() => {
 						// Show all bet_data items except the first one
 						for (let i = 1; i < betDataDetailsCount; i++) {
-							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+							let betDataId = 'betData_' + orderItem.id + '_' + i;
+							$('#' + betDataId).show(); // Show additional bet_data items
 						}
 						showButton.hide(); // Hide the "Show More Bet Data" button
 						hideButton.show(); // Show the "Hide Bet Data" button
@@ -224,7 +225,7 @@
 						// Hide all bet_data items except the first one
 						for (let i = 1; i < betDataDetailsCount; i++) {
 							let betDataId = 'betData_' + orderItem.id + '_' + i;
-							$('#' + betDataId).hide();
+							$('#' + betDataId).hide(); // Hide additional bet_data items
 						}
 						showButton.show(); // Show the "Show More Bet Data" button
 						hideButton.hide(); // Hide the "Hide Bet Data" button
