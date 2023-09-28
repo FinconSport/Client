@@ -245,14 +245,14 @@
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
-		
-		betDataDetailsContainer.empty();
 
 		// Create a container for each bet_data
 		// let betDataDetailsContainer = $('<div class="betaDetcon">');
 		let betDataDetailsContainer = $('span[template="betDataDetailsTemp"]').clone();
 		betDataDetailsContainer.removeAttr('hidden');
 		betDataDetailsContainer.removeAttr('template');
+
+		betDataDetailsContainer.empty();
 
 		let betDataDetails_leagueName = betDataDetailsContainer.find('.betDataDetails_leagueName');
 		let betDataDetails_HomeAway = betDataDetailsContainer.find('.betDataDetails_HomeAway');
