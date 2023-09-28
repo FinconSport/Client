@@ -262,11 +262,9 @@
 		// Set content for the found elements
 		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
-		var homeTeamScore = {!! isset($betItem->home_team_score) ? json_encode('(' . $betItem->home_team_score . ')') : "''" !!};
-    	betDataDetails_HomeScore.html('(' + homeTeamScore + ')');
+		betDataDetails_HomeScore.html('(' + betItem.home_team_score + ')');
 		betDataDetails_AwayName.html(betItem.away_team_name);
-		var awayTeamScore = {!! isset($betItem->away_team_score) ? json_encode('(' . $betItem->away_team_score . ')') : "''" !!};
-    	betDataDetails_AwayScore.html('(' + awayTeamScore + ')');
+		betDataDetails_AwayScore.html('(' + betItem.away_team_score +')');
 		betDataDetails_BetNameLine.html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
 		betDataDetails_BetRate.html('@' + betItem.bet_rate);
 		betDataDetails_BetStatus.html(betItem.bet_status);
