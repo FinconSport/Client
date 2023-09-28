@@ -33,7 +33,7 @@ const ResultMainContainer = {
   width: '100%',
   background: 'rgb(65, 91, 90)',
   overflow: 'hidden scroll',
-  padding: '0.5rem',
+  padding: '0 0.5rem',
   height: 'calc(100% - 14rem)',
   fontWeight: '600'
 }
@@ -44,10 +44,11 @@ class ResultContent extends React.Component {
 		super(props);
 		this.state = {
       		apiUrl: 'https://sportc.asgame.net/api/v2/result_index?token=',
-			sport_id: window.sport, 
+			sport_id: this.props.sport_id,
       		page: 1,
 			swiperIndex: 0,
-      		fetchMoreLock: 0 // default close
+      		fetchMoreLock: 0, // default close
+			hasMore: true
 		};
 	}
 
@@ -72,7 +73,7 @@ class ResultContent extends React.Component {
 		const newData = json.data
 		var data = []
 		switch (callerType) {
-			case 0:
+			case 0:case 2:
 				// 初始化
 				data = [...Object.values(newData)]
 				break;
@@ -89,7 +90,7 @@ class ResultContent extends React.Component {
 			fetchMoreLock: 0
 		});
 
-		if(Object.keys(newData).length === 0 || Object.keys(newData).length !== 20){
+		if(Object.keys(newData).length === 0 || Object.keys(newData).length !== 20 || Object.keys(newData).length > 20){
 			this.setState({
 				hasMore: false
 			})
@@ -108,7 +109,13 @@ class ResultContent extends React.Component {
 	// sport_id onchange
 	componentDidUpdate(prevProps) {
 		if (prevProps.sport_id !== this.props.sport_id) {
-			this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + window.sport)
+			this.caller(this.state.apiUrl + window.token +'&player=' + window.player + '&page=' + this.state.page + '&sport=' + window.sport, 2)
+			this.setState({
+				toggleStates: {},
+				sport_id: window.sport,
+				data: null,
+				hasMore: true
+			});
 		}
 	}
 
@@ -141,12 +148,13 @@ class ResultContent extends React.Component {
 		return (
 			<div style={ResultMainContainer} id='ResultMainContainer'>
 				<div id="ResultMain" style={ PageContainer }>
-					{
-						data && data.length > 0 ? 
+				{
+					data ?
+						data && data.length > 0 && 
 						<InfiniteScroll
 							dataLength={ data }
 							next={this.getNewPage}
-							hasMore={true}
+							hasMore={this.state.hasMore}
 							loader={
 								<div className="loading loading04">
 									<span>L</span>
@@ -173,12 +181,29 @@ class ResultContent extends React.Component {
 								/>
 							))
 						}
+						{
+							!this.state.hasMore &&
+							<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.CommonLogs.nomoredata}</h5>
+						}
 						</InfiniteScroll>
-						:
-						<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.CommonLogs.nomoredata}</h5>
-					}
-				</div>
+					:
+					<div className="loading loading04 text-white mt-5">
+						<span>L</span>
+						<span>O</span>
+						<span>A</span>
+						<span>D</span>
+						<span>I</span>
+						<span>N</span>
+						<span>G</span>
+						<span>.</span>
+						<span>.</span>
+						<span>.</span>
+					</div>
+				}
+
+				
 				<TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
+				</div>
 			</div>
 		);
 	}

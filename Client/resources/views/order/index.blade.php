@@ -469,8 +469,7 @@
 		});
 	}
 	
-	console.log(sportListD);
-
+	console.log(sport);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();

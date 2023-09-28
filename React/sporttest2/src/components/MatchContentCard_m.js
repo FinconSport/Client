@@ -69,7 +69,7 @@ const SliderBrickHeight2 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.5rem;
+		font-size: 0.7rem;
 		line-height: 2rem;
 	}
 	.SliderBrickOdd{
@@ -172,7 +172,9 @@ class MatchContentCard extends React.Component {
     } 
 
 
-    getBetData = (sport, fixture_id, market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name) => {
+    getBetData = (sport, fixture_id, market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, status) => {
+
+        if( status !== 1 ) return;
         this.props.getBetDataCallBack(
             {
                 sport_id: sport, 
@@ -204,7 +206,7 @@ class MatchContentCard extends React.Component {
 	render() {
 		const v = this.props.data
         const sport = parseInt(window.sport)
-        const gameTitle = [[1,3,5],[2,4,6]]
+        const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
         if ( v !== undefined ){
             return (
                 <div style={{ ...MatchCard, ...(this.props.isOpen ? CardShow : CardHide) }} cardid={v.fixture_id}>
@@ -223,7 +225,19 @@ class MatchContentCard extends React.Component {
                                                 }
                                             </div>
                                             <div className='col-10 p-0'>
-                                                <p className='mb-0 mt-1'>{this.formatDateTime(v.start_time)}</p>
+                                            <p className='mb-0 mt-1'>
+                                                    {
+                                                        v.status === 1 ?
+                                                        this.formatDateTime(v.start_time)
+                                                        :
+                                                        (
+                                                            v.periods.Turn === '1' ?
+                                                            v.periods.period + langText.MatchContentCard.stage + langText.MatchContentCard.lowerStage
+                                                            :
+                                                            v.periods.period + langText.MatchContentCard.stage + langText.MatchContentCard.upperStage
+                                                        )
+                                                    }
+                                                </p>
                                             </div>
                                         </div>
                                         {/* <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} > */}
@@ -239,7 +253,7 @@ class MatchContentCard extends React.Component {
                                                     </span>
                                                 </div>
                                                 <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
-                                                    { v?.home_team_score }
+                                                    { v?.scoreboard && v.scoreboard[1][0] }
                                                 </div>
                                             </div>
                                             <div className='row m-0' style={rowHeight2}>
@@ -254,7 +268,7 @@ class MatchContentCard extends React.Component {
                                                     </span>
                                                 </div>
                                                 <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
-                                                    { v?.away_team_score }
+                                                    { v?.scoreboard && v.scoreboard[2][0] }
                                                 </div>
                                             </div>
                                         {/* </Link> */}
@@ -294,6 +308,50 @@ class MatchContentCard extends React.Component {
                                                                                     tt && Object.keys(tt.list).length > 0 ? 
                                                                                     Object.entries(tt.list).map(([r,s]) => {
                                                                                         return(
+                                                                                            k === 13 || k === 14 ?
+                                                                                            <SliderBrickHeight3 key={r} onClick={()=>this.getBetData(
+                                                                                                sport, 
+                                                                                                v.fixture_id,
+                                                                                                tt.market_id,
+                                                                                                s.market_bet_id,
+                                                                                                s.price,
+                                                                                                tt.market_name,
+                                                                                                v.home_team_name,
+                                                                                                v.away_team_name,
+                                                                                                (k === 1 || k === 2) ?
+                                                                                                (s.market_bet_name === "1" ? v.home_team_name : v.away_team_name) :
+                                                                                                (k === 3 || k === 4) ?
+                                                                                                (s.market_bet_name === "1" ? v.home_team_name + s.line : v.away_team_name + s.line) :
+                                                                                                (k === 5 || k === 6) ?
+                                                                                                (s.market_bet_name + ' ' + s.line) :
+                                                                                                null,
+                                                                                                s.status
+                                                                                            )}>
+                                                                                                <div className="w-100 h-100" market_bet_id={s.market_bet_id} 
+                                                                                                style={ this.props?.selectedM?.market_bet_id === s.market_bet_id ? selectedOn : null}
+                                                                                                >
+                                                                                                <p className='SliderBrickTitle'>
+                                                                                                    {
+                                                                                                        s.market_bet_name === '' ?
+                                                                                                        langText.MatchContentCard.tie + s.line
+                                                                                                        :
+                                                                                                        s.market_bet_name + s.line
+                                                                                                    }
+                                                                                                    
+                                                                                                </p>
+                                                                                                    {
+                                                                                                        s.status === 1 ?
+                                                                                                        <p className='SliderBrickOdd odd'>
+                                                                                                            { s.price }
+                                                                                                        </p>
+                                                                                                        :
+                                                                                                        <p className='SliderBrickOdd'>
+                                                                                                            <AiFillLock />
+                                                                                                        </p>
+                                                                                                    }
+                                                                                                </div>
+                                                                                            </SliderBrickHeight3>
+                                                                                            :
                                                                                             <SliderBrickHeight2 key={r} onClick={()=>this.getBetData(
                                                                                                 sport, 
                                                                                                 v.fixture_id,
@@ -309,14 +367,15 @@ class MatchContentCard extends React.Component {
                                                                                                 (s.market_bet_name === "1" ? v.home_team_name + s.line : v.away_team_name + s.line) :
                                                                                                 (k === 5 || k === 6) ?
                                                                                                 (s.market_bet_name + ' ' + s.line) :
-                                                                                                null
+                                                                                                null,
+                                                                                                s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id} 
                                                                                                 style={ this.props?.selectedM?.market_bet_id === s.market_bet_id ? selectedOn : null}
                                                                                                 >
-                                                                                                    <p className='SliderBrickTitle'>
-                                                                                                        { s.market_bet_name + s.line }
-                                                                                                    </p>
+                                                                                                <p className='SliderBrickTitle'>
+                                                                                                    { s.market_bet_name + s.line }
+                                                                                                </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
                                                                                                         <p className='SliderBrickOdd odd'>
@@ -332,6 +391,19 @@ class MatchContentCard extends React.Component {
                                                                                         )
                                                                                     })
                                                                                     :
+                                                                                    k === 13 || k === 14 ?
+                                                                                    <div key={k}>
+                                                                                        <SliderBrickHeight3>
+                                                                                            <AiFillLock style={{ marginTop:'1rem'}} />
+                                                                                        </SliderBrickHeight3>
+                                                                                        <SliderBrickHeight3>
+                                                                                            <AiFillLock style={{ marginTop:'1rem'}} />
+                                                                                        </SliderBrickHeight3>
+                                                                                        <SliderBrickHeight3>
+                                                                                            <AiFillLock style={{ marginTop:'1rem'}} />
+                                                                                        </SliderBrickHeight3>
+                                                                                    </div>
+                                                                                    :
                                                                                     <div key={k}>
                                                                                         <SliderBrickHeight2>
                                                                                             <AiFillLock style={{ marginTop:'1rem'}} />
@@ -340,6 +412,7 @@ class MatchContentCard extends React.Component {
                                                                                             <AiFillLock style={{ marginTop:'1rem'}} />
                                                                                         </SliderBrickHeight2>
                                                                                     </div>
+                                                                                    
                                                                                 }
                                                                             </div>
                                                                         )
@@ -360,8 +433,6 @@ class MatchContentCard extends React.Component {
             );
         }
 	}
-	
-	
 }
 
 

@@ -1,94 +1,9 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.772b999b.js"></script><link href="/static/css/main.21c96673.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.5c073244.js"></script><link href="/static/css/main.21c96673.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
 		// var token = 12345 ;
 		// var lang = 'tw'
 		var player = {{ $player }};
 		var token = {{ $token }};
 		var lang = @json(session('player.lang'));
-		// console.log(player)
-		// console.log(token)
-		// console.log(lang)
-
-		// 投注限額
-		var limit = JSON.parse(@json(session('player.limit_data')));
-		// console.log(limit)
-		// var limit = {
-		// 	"early": {
-		// 		"1": {
-		// 			"min": "1000",
-		// 			"max": "50000"
-		// 		},
-		// 		"2": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"3": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"4": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"5": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"6": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"7": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"8": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"9": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		}
-		// 	},
-		// 	"living": {
-		// 		"1": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"2": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"3": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"4": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"5": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"6": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"7": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"8": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		},
-		// 		"9": {
-		// 			"min": "100",
-		// 			"max": "10000"
-		// 		}
-		// 	}
-		// }
 
 		const wsUrl = {
 			1: 'wss://soccer.asgame.net/ws',

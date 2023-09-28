@@ -11,12 +11,15 @@ const ToggleBtnStyle = {
     position: 'absolute',
     right: '0.5rem',
     transition: 'all 0.5s ease',
-    width: '4.5rem'
+    width: '4.5rem',
+    top: '0.5rem',
+    height: '1.5rem',
+    lineHeight: '1.5rem'
 }
 
 const ToggleDiv = styled.div`
     border-top: 1px solid rgb(65, 91, 90);
-    height: 4.5rem;
+    height: auto;
 `
 
 const ToggleContainer = styled.div`
@@ -132,7 +135,7 @@ class CommonHistory extends React.Component {
                         </>
                     }
                 </div>
-                <ToggleContainer style={this.state.isOpen === true ? {maxHeight: val.bet_data.length * 4.5 + 'rem'} : null}>
+                <ToggleContainer style={this.state.isOpen === true ? {maxHeight: val.bet_data.length * 6.5 + 'rem'} : null}>
                     {Object.entries(val.bet_data).map(([k, v]) =>
                         k !== '0' && (
                             <ToggleDiv key={k}>
@@ -201,9 +204,9 @@ class CommonHistory extends React.Component {
                     )}
                     {/* The last element */}
                     {val.m_order === 1 && (
-                        <div className='row m-0' onClick={this.toggleCard} key={val.m_order} style={{height: '2rem'}}>
-                            <div className='col-9'></div>
-                            <div style={{ ...ToggleBtnStyle, ...(this.state.isOpen === true ? { bottom: '0.5rem' } : {bottom: '1.5rem'}) }} className='col-3 p-0 text-center'>
+                        <div className='row m-0' onClick={this.toggleCard} key={val.m_order}>
+                            <div className='col-9' style={{ height: 0}}></div>
+                            <div style={ToggleBtnStyle} className='col-3 p-0 text-center'>
                                 {this.state.isOpen === false ? langText.CommonHistorySlideToggle.open + '(' + val.bet_data.length + ')' : langText.CommonHistorySlideToggle.close}
                             </div>
                         </div>

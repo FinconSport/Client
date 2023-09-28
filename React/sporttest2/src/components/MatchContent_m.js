@@ -127,7 +127,6 @@ class MatchContent extends React.Component {
 		if( callerType === 1 ) {
 			var oldData = this.state.data[menuArr[window.menu]][window.sport]?.list
 			var updateData = json.data[menuArr[window.menu]][window.sport]?.list
-
 			if( updateData ) this.findDifferences(oldData, updateData)
 		}
 
@@ -144,24 +143,57 @@ class MatchContent extends React.Component {
 			if( callerType !== 1) {
 				clearInterval(window.ajaxInt)
 				window.ajaxInt = setInterval(() => {
-					this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 1)
+					this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 1)
 				}, 5000);
 			}
 		})
-		
 	}
 
+	// ws function 
+	// detect if there's still package need to be processed
+	async processMessageQueueAsync() {
+		while (true) {
+			if (window.messageQueue.length > 0) {
+				this.processMessageQueue(); // package process function
+			} else {
+				await this.sleep(2); // check after 2 ms
+			}
+		}
+	}
+
+	// sleep function to pause
+	sleep = (ms) => {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	// package process function
+	processMessageQueue = () => {
+		const message = window.messageQueue.shift(); // to get the head pkg
+		const msg = JSON.parse(message.data); // convert to json
+		// setState to rerender
+
+
+
+
+		// setState to rerender
+	}
+	// ws function
+	
 	// 初始化資料 + ws handler
 	componentDidMount() {
-		this.caller(this.props.apiUrl + '&sport_id=' + this.state.sport_id)
+		this.caller(this.props.apiUrl + '&sport_id=' + window.sport)
+
+		// ws
+		
 	}
 	
 	// 偵測menu改變
 	componentDidUpdate(prevProps) {
 		if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
-			this.caller(this.props.apiUrl + '&sport_id=' + this.props.sport_id, 2);
+			this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
 			this.setState({
-				toggleStates: {}
+				toggleStates: {},
+				sport_id: window.sport
 			});
 		}
 	}
@@ -199,6 +231,7 @@ class MatchContent extends React.Component {
 			<div style={MatchMainContainer} id='MatchMainContainer'>
 				{
 					data && data[menuArr[window.menu]][window.sport]?.list ?
+					Object.entries(data[menuArr[window.menu]][window.sport].list).length > 0 ?
 					Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
 						<SlideToggle key={k} duration={500}>
 						  {({ toggle, setCollapsibleElement }) => (
@@ -228,7 +261,8 @@ class MatchContent extends React.Component {
 							</>
 						  )}
 						</SlideToggle>
-					))
+					)) :
+					<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
 					:
 					<div className="loading loading04 text-white mt-5">
 						<span>L</span>
