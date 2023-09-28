@@ -287,6 +287,9 @@
 	var sportListData = sportListD;
 	console.log(sportListData);
 
+	const sportIds = sportListData.data.map(item => item.sport_id);
+	console.log(sportIds);
+
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
