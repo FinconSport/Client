@@ -197,62 +197,30 @@
 		let totalResultAmount = 0;
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			// Create a container div for each orderItem
-			const orderContainer = document.createElement('div');
-			orderContainer.classList.add('order-container');
+			createList(orderItem, orderIndex);
+			let betDataDetailsCount = orderItem.bet_data.length;
 
-			createList(orderContainer, orderItem, orderIndex);
+			if (betDataDetailsCount > 0) {
+				// Create and append the first bet_data
+				createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
 
-			let showMoreButton = false; // Track whether to show the "Show More" button
+				// If there are more than one bet_data, add a toggle button
+				if (betDataDetailsCount > 1) {
+					let toggleButton = $('<button>').text('Show More Bet Data');
+					toggleButton.click(() => {
+						// Toggle the display of additional bet_data
+						for (let i = 1; i < betDataDetailsCount; i++) {
+							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+						}
+						toggleButton.hide(); // Hide the "Show More Bet Data" button
+					});
 
-			orderItem.bet_data.forEach((betItem, betIndex) => {
-			createBetDataDetails(orderContainer, orderItem, betItem, betIndex);
-
-			if (betIndex > 0) {
-				// Hide bet data details initially if there is more than one
-				betItem.hidden = true;
-				if (!showMoreButton) showMoreButton = true; // Show "Show More" button
-			}
-			});
-
-			if (showMoreButton) {
-			// Add a "Show More" button if there is more than one bet_data
-			const showMoreButtonElement = document.createElement('button');
-			showMoreButtonElement.textContent = 'Show More';
-			showMoreButtonElement.addEventListener('click', () => {
-				orderItem.bet_data.forEach((betItem, betIndex) => {
-				if (betIndex > 0) {
-					// Toggle the visibility of bet data details
-					betItem.hidden = !betItem.hidden;
+					// Append the toggle button
+					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+					let orderDataBetDataDetails = $('#' + betDataDetailsId);
+					orderDataBetDataDetails.append(toggleButton);
 				}
-				});
-				renderView(); // Re-render the view after toggling visibility
-			});
-
-			// Append the "Show More" button to the orderContainer
-			orderContainer.appendChild(showMoreButtonElement);
-
-			// Add a "Hide" button initially (hidden)
-			const hideButtonElement = document.createElement('button');
-			hideButtonElement.textContent = 'Hide';
-			hideButtonElement.style.display = 'none';
-			hideButtonElement.addEventListener('click', () => {
-				orderItem.bet_data.forEach((betItem, betIndex) => {
-				if (betIndex > 0) {
-					// Hide all bet data details except the first one
-					betItem.hidden = true;
-				}
-				});
-				renderView(); // Re-render the view after hiding
-			});
-
-			// Append the "Hide" button to the orderContainer
-			orderContainer.appendChild(hideButtonElement);
 			}
-
-			// Append the orderContainer to the parent element (e.g., a list or a main container)
-			// Make sure to adapt this to your actual HTML structure
-			document.body.appendChild(orderContainer);
 
 			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
