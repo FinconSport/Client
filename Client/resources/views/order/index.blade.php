@@ -467,8 +467,19 @@
 				createBetDataDetails(orderItem, betItem, betIndex); // Assuming this function works correctly
 			});
 		});
-		console.log('sport +' + sport);
 	}
+
+	function findSportByIdAndSetVariable(sport) {
+        const sportType = sportListD.data.find(item => item.sport_id === sport);
+        let sportName = null; // Initialize the variable
+        if (sportType) {
+            sportName = sportType.name;
+            console.log(`Sport Name: ${sportName}`);
+            console.log(sportType);
+        } else {
+            console.log(`Sport with sport_id ${id} not found.`);
+        }
+    }
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
