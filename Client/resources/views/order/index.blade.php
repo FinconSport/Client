@@ -470,8 +470,10 @@
 
 			totalResultAmount += orderItem.result_amount;
 		});
-		return totalResultAmount;
+		
 		console.log('Total Result Amount:', totalResultAmount);
+
+    	return totalResultAmount;
 	}
 	
 	
