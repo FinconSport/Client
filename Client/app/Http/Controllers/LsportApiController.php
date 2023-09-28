@@ -1580,7 +1580,7 @@ class LsportApiController extends Controller {
 
         /////////////////////////
         // 取得比賽資料
-        $return = LsportFixture::where("status",3)->where("sport_id",$sport_id)->orderBy("start_time","DESC")->get();
+        $return = LsportFixture::whereIn("status",[3,4,5,6,7])->where("sport_id",$sport_id)->orderBy("start_time","DESC")->get();
         if ($return === false) {
             $this->ApiError('02');
         }

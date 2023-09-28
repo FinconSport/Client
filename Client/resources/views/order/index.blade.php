@@ -198,48 +198,9 @@
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
-			let betDataDetailsCount = orderItem.bet_data.length;
-
-			if (betDataDetailsCount > 0) {
-				// Create and append the first bet_data
-				createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
-
-				// If there are more than one bet_data, add a toggle button
-				if (betDataDetailsCount > 1) {
-					let toggleButton = $('<button>').text('Show More Bet Data');
-					toggleButton.click(() => {
-						for (let i = 1; i < betDataDetailsCount; i++) {
-							const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-							$('#' + betDataId).show(); // Show additional bet_data
-						}
-						toggleButton.hide(); // Hide the "Show More Bet Data" button
-						hideButton.show(); // Show the "Hide Bet Data" button
-					});
-
-					let hideButton = $('<button>').text('Hide Bet Data');
-					hideButton.click(() => {
-						for (let i = 1; i < betDataDetailsCount; i++) {
-							const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-							$('#' + betDataId).hide(); // Hide additional bet_data
-						}
-						toggleButton.show(); // Show the "Show More Bet Data" button
-						hideButton.hide(); // Hide the "Hide Bet Data" button
-					});
-
-					// Initially hide additional bet_data and the "Hide Bet Data" button
-					for (let i = 1; i < betDataDetailsCount; i++) {
-						const betDataId = `betDataDetails_${orderItem.id}_${i}`;
-						$('#' + betDataId).hide(); // Hide additional bet_data
-					}
-					hideButton.hide(); // Hide "Hide Bet Data" button
-
-					// Append the toggle and hide buttons
-					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
-					let orderDataBetDataDetails = $('#' + betDataDetailsId);
-					orderDataBetDataDetails.append(toggleButton);
-					orderDataBetDataDetails.append(hideButton);
-				}
-			}
+			orderItem.bet_data.forEach((betItem, betIndex) => {
+				createBetDataDetails(orderItem, betItem, betIndex);
+			});
 
 			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
@@ -248,8 +209,6 @@
 
 		return totalResultAmount;
 	}
-
-
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
@@ -302,9 +261,22 @@
 			betDataDetails_BetStatus
 		);
 
+		if (totalBetDataCount > 1) {
+			// Create and append the button
+			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
+			betDataDetailsContainer.append(button);
+		}
+
+		// Check if betIndex is greater than 0 (not the first bet_data)
+		if (betIndex > 0) {
+			// Add a custom class to elements of subsequent bet_data items
+			betDataDetailsContainer.addClass('custom-class'); // Change 'custom-class' to your desired class name
+		}
+
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 	}
+
 	
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
