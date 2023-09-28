@@ -60,12 +60,12 @@
 								<div id="orderSportCon" class="submenu-toggle-list">
 									<a class="sportSelect" id="result_settled" href="/order?result=1">
 										<div class="sportname-con">
-											<span><p>Settled</p></span>
+											<span><p>{{ trans('common.left_menu.settled') }}</p></span>
 										</div>
 									</a>
 									<a class="sportSelect" id="result_unsettled" href="/order?result=0">
 										<div class="sportname-con">
-											<span><p>Unsettled</p></span>
+											<span><p>{{ trans('common.left_menu.unsettled') }}</p></span>
 										</div>
 									</a>
 								</div>

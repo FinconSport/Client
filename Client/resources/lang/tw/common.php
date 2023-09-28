@@ -10,6 +10,8 @@ return [
 		"sport_bet" => "體育投注",
 		"m_bet" => "串關投注",
 		"record" => "注單紀錄",
+		"settled" => "Settled",
+		"unsettled" => "Unsettled",
 		"match" => "賽事結果",
 		"rule" => "競猜規則",
 		"logs" => "帳變紀錄",
