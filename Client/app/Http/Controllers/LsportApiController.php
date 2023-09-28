@@ -328,7 +328,7 @@ class LsportApiController extends Controller {
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
-                'lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt'
+                "lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt"
             )
             ->where('lsport_league.status', 1)
             ->whereIn('lsport_fixture.status', [1, 2])  //可區分:未開賽及走地中
