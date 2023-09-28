@@ -114,7 +114,7 @@
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td class="no-border-left orderData_id"></td>
-                        <td template="sportType">
+                        <td>
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
@@ -216,6 +216,7 @@
 
 		// Find elements within the cloned template
 		let orderData_id = orderData.find('.orderData_id');
+		let orderData_sportType = orderData.find('.orderData_sportType');
 		let orderData_mOrder = orderData.find('.orderData_mOrder');
 		let orderData_betAmount = orderData.find('.orderData_betAmount');
 		let orderData_betDataDetails = orderData.find('.orderData_betDataDetails');
@@ -224,8 +225,14 @@
 		let orderData_resultTime = orderData.find('.orderData_resultTime');
 		let orderData_status = orderData.find('.orderData_status');
 
+		// Get the sportName for the current orderItem
+		const sportId = orderItem.sport_id; // Assuming sport_id is present in orderItem
+		const matchingSport = sportListD.data.find(sport => sport.sport_id === sportId);
+		const sportName = matchingSport ? matchingSport.name : "unknown";
+
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
+		orderData_sportType.html(sportName); 
 		orderData_mOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
 		orderData_betAmount.html(orderItem.bet_amount);
