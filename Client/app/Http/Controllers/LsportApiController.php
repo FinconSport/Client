@@ -707,24 +707,6 @@ class LsportApiController extends Controller {
                 }
             }
 
-            // market_count ---------------------
-            // $data2 = DB::table('lsport_market as m')
-            //     ->join('lsport_fixture as f', 'f.fixture_id', '=', 'm.fixture_id')
-            //     ->select('f.fixture_id')
-            //     ->selectRaw('COUNT(*) as market_count')
-            //     ->where('f.start_time', "<=", $after_tomorrow)
-            //     ->groupBy('f.fixture_id')
-            //     ->get();
-
-            // if ($data2 === false) {
-            //     $this->ApiError('02');
-            // }
-
-            // $fixture_market_bet_count = array();
-            // foreach ($data2 as $dk2 => $dv2) {
-            //     $fixture_market_bet_count[$dv2->fixture_id] = $dv2->market_count;
-            // }
-
             // league 層 ----------------------------
             if (!isset($arrLeagues[$fixture_status][$league_id])
                 || !sizeof($arrLeagues[$fixture_status][$league_id])
@@ -791,7 +773,7 @@ class LsportApiController extends Controller {
                     'away_team_name' => $away_team_name,
                     'periods' => $parsed_periods,
                     'scoreboard' => $parsed_scoreboard,
-                    //'market_count' => $market_count,
+                    'market_bet_count' => 0,
                     'list' => array(),
                 );
             }
@@ -844,6 +826,9 @@ class LsportApiController extends Controller {
                 // 開始繞賠率資料
                 foreach ($marketBetData as $bk => $bv) {
                     $market_bet_id = $bv->bet_id;
+
+                    // 加總 market_bet_count
+                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['market_bet_count'] += 1;
 
                     // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
                     // 一定有值不需判斷了
