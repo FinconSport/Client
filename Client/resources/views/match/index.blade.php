@@ -113,9 +113,9 @@
 			str += '<td rowspan=2>' + v.league_name + '</td>'
 
 			str += '<td>' + v.home_team_name + '</td>'
-			matchTitle.forEach((v, k) => {
-				if(v?.scoreboard[k][0]) {
-					str += '<td>' + v.scoreboard[k][0] + '</td>'
+			matchTitle.forEach((v2, k2) => {
+				if(v.scoreboard[k2][0]) {
+					str += '<td>' + v.scoreboard[k2][0] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -124,9 +124,9 @@
 
 			str += '<tr>'
 			str += '<td>' + v.away_team_name + '</td>'
-			matchTitle.forEach((v, k) => {
-				if(v?.scoreboard[k][1]) {
-					str += '<td>' + v.scoreboard[k][1] + '</td>'
+			matchTitle.forEach((v2, k2) => {
+				if(v.scoreboard[k2][1]) {
+					str += '<td>' + v.scoreboard[k2][1] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
