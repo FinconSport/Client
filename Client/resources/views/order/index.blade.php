@@ -120,7 +120,9 @@
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
 							<span template="betDataDetailsTemp" hidden>
-								<span class="betDataDetails_betaName"></span>
+								<span class="betDataDetails_leagueName"></span>
+								<span class="betDataDetails_HomeName"></span>
+								<span class="betDataDetails_AwayName"></span>
 							</span>
 						</td>
                         <td class="text-right">
@@ -519,10 +521,14 @@
 		betDataDetails.removeAttr('template');
 
 		// Find elements within the cloned template
-		let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
+		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
+		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
+		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
 
 		// Set content for the found elements
-		betDataDetails_betaName.html(betItem.market_bet_name);
+		betDataDetails_leagueName.html(betItem.home_team_name);
+		betDataDetails_HomeName.html(betItem.home_team_name);
+		betDataDetails_AwayName.html(betItem.away_team_name);
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
