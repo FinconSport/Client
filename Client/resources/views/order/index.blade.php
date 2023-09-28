@@ -202,6 +202,8 @@
 
 		createTotal(totalResultAmount, totalBetAmount);
 
+		const sportMapping = sportListD.data;
+
 		for (const item of orderListD.data.list) {
 			for (const bet of item.bet_data) {
 				const sportId = bet.sport_id;
