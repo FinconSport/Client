@@ -120,7 +120,9 @@
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
 							<span template="betDataDetailsTemp" hidden>
-								<span class="betDataDetails_betaName"></span>
+								<span class="betDataDetails_leagueName"></span>
+								<span class="betDataDetails_HomeName"></span>
+								<span class="betDataDetails_AwayName"></span>
 							</span>
 						</td>
                         <td class="text-right">
@@ -136,13 +138,13 @@
                         <td class="no-border-right orderData_status"></td>
                     </tr>
                     <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-                        <td colspan="4"></td>
-                        <td class="p-0">
-                            <div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div>
-                        </td>
-                        <td class="text-right orderData_totalBetAmount"></td>
-                        <td class="text-right orderData_totalResultAmount"></td>
-                        <td colspan="3"></td>
+						<td style="width: 5%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 40%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
+                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
+                        <td style="width: 10%;"></td>
                     </tr>
                 </tbody>
             </table>
@@ -159,7 +161,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -460,16 +463,25 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
+		let totalResultAmount = 0;
+
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			createList(orderItem, orderIndex); // Assuming this function works correctly
-			// Iterate over the 'bet_data' array in orderItem
+			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex); // Assuming this function works correctly
+				createBetDataDetails(orderItem, betItem, betIndex);
 			});
+
+			totalResultAmount += orderItem.result_amount;
 		});
+
+		console.log('Total Result Amount:', totalResultAmount);
+
+    	return totalResultAmount;
 	}
-	
-	console.log(sport);
+
+	if (sportListD && sportListD.data) {
+		console.log('sportLIst' + sportListD);
+	}
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
@@ -485,8 +497,6 @@
 		let orderData_resultAmount = orderData.find('.orderData_resultAmount');
 		let orderData_resultTime = orderData.find('.orderData_resultTime');
 		let orderData_status = orderData.find('.orderData_status');
-		let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
-		let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
@@ -497,8 +507,6 @@
 		orderData_resultAmount.html(orderItem.result_amount);
 		orderData_resultTime.html(orderItem.result_time);
 		orderData_status.html(orderItem.status);
-		orderData_totalBetAmount.html(orderItem.bet_amount);
-		orderData_totalResultAmount.html(orderItem.result_amount);
 
 		$('#countTr').before(orderData);
 	}
@@ -515,14 +523,36 @@
 		betDataDetails.removeAttr('template');
 
 		// Find elements within the cloned template
-		let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
+		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
+		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
+		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
 
 		// Set content for the found elements
-		betDataDetails_betaName.html(betItem.market_bet_name);
+		betDataDetails_leagueName.html(betItem.league_name);
+		betDataDetails_HomeName.html(betItem.home_team_name);
+		betDataDetails_AwayName.html(betItem.away_team_name);
 
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
+
+	function createTotal() {
+		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
+		orderDataTotal.removeAttr('hidden');
+		orderDataTotal.removeAttr('template');
+
+		// Find elements within the cloned template
+		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
+		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
+
+		// Set content for the found elements
+		orderData_totalBetAmount.html('0');
+		orderData_totalResultAmount.html('0');
+
+		$('#orderTr').after(orderDataTotal);
+	}
+
+	createTotal();
 
 
   	// 寫入頁面限定JS
