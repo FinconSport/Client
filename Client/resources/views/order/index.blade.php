@@ -260,8 +260,8 @@
 			betDataDetails_BetRate,
 			betDataDetails_BetStatus
 		);
-		
-		if (betIndex > 0) {
+
+		if (betItem > 0) {
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('hide-betaDetcon'); // Change 'hide-betaDetcon' to your desired class name
 
