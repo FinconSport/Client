@@ -308,7 +308,8 @@
 		orderData_totalBetAmount.text('0');
 		orderData_totalResultAmount.text(totalResultAmount);
 
-		$('#orderTr').after(orderDataTotal);
+		// $('#orderTr').after(orderDataTotal);
+		orderDataTotal.appendTo('.orderDataTemp');
 	}
 
 	createTotal();
