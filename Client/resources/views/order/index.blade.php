@@ -463,7 +463,7 @@
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 			    createList(orderItem, orderIndex);
 			    orderItem.bet_data.forEach((betItem, betIndex) => {
-			        createbetDataDetails(orderItem, orderIndex);
+			        createbetDataDetails(orderItem, betItem, betIndex);
 			    });
 			});
 		}
