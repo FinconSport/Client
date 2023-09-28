@@ -129,3 +129,9 @@ div[key="matchSportMenu"]{
 #orderContainer {
     margin-top: 60px;
 }
+
+
+.element.style {
+    display: flex;
+    flex-direction: column;
+}

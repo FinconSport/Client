@@ -26,6 +26,26 @@ return [
 		"next_page" => "Next Page",  // "下一頁",
 		"last_page" => "Last Page",  //  "最後一頁",
 	],  //  
-
+	'sportPriority' => [
+		1 => 'Full Match Win',
+		2 => 'First Five Innings Win',
+		3 => 'Full Match Handicap',
+		4 => 'First Five Innings Handicap',
+		5 => 'Full Match Over/Under',
+		6 => 'First Five Innings Over/Under',
+		7 => 'Full Match Win',
+		8 => 'First Half Win',
+		9 => 'Full Match Spread',
+		10 => 'First Half Spread',
+		11 => 'Full Match Over/Under',
+		12 => 'First Half Over/Under',
+		13 => 'Full Match Win',
+		14 => 'First Half Win',
+		15 => 'Full Match Handicap',
+		16 => 'First Half Handicap',
+		17 => 'Full Match Over/Under',
+		18 => 'First Half Over/Under',
+	]
+	
 	// 後端
 ];

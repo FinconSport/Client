@@ -94,7 +94,12 @@ return [
 		"scoreofmissedshots" => "Shots Off Target Score", // "射偏次數比分",
 		"scoreofshotsontarget" => "Shots On Target Score", // "射正次數比分",
 		"numberofattacks" => "Total Attacks", // "進攻次數",
+	],
+	'matchTitle' => [
+		'commonTitle' => ['Date', 'League', 'Match'],
+		6046 => ['Total', '1st Half', '2nd Half', 'Overtime'],
+		48242 => ['Total', '1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter', 'Overtime'],
+		154914 => ['Total', '1st Set', '2nd Set', '3rd Set', '4th Set', '5th Set', '6th Set', '7th Set', '8th Set', '9th Set', 'Overtime']
 	]
-
 	// 後端
 ];

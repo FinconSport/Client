@@ -120,15 +120,18 @@
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
 							<span template="betDataDetailsTemp" hidden>
-								<span class="betDataDetails_leagueName"></span>
+								<!-- <span class="betDataDetails_leagueName"></span>
 								<div>
-									<span class="betDataDetails_HomeName"></span>
+									<span class="betDataDetails_HomeName"></span><span class="betDataDetails_HomeScore"></span>
 									<span>&ensp;VS&ensp;</span>
-									<span class="betDataDetails_AwayName"></span>
+									<span class="betDataDetails_AwayName"></span><span class="betDataDetails_AwayScore"></span>
 								</div>
 								<div>
 									<span class="betDataDetails_BetNameLine"></span>
-								</div>
+									<span class="betDataDetails_BetLine"></span><br>
+									<span class="betDataDetails_BetRate"></span><br>
+									<span class="betDataDetails_BetStatus"></span>
+								</div> -->
 							</span>
 						</td>
                         <td class="text-right">
@@ -184,290 +187,9 @@
     var isReadyOrderInt = null
     var isReadyOrder = false
 
-	// title
-	var sportPriority = langTrans.sportPriority
-
 	// order list data
     var orderListD = {}
-	// var orderListD = {
-	// 	"status": 1,
-	// 	"data": {
-	// 		"list": [
-	// 		{
-	// 			"id": 165,
-	// 			"m_id": 165,
-	// 			"bet_amount": "123.000",
-	// 			"result_amount": "159.900",
-	// 			"create_time": "2023-09-27 16:32:05",
-	// 			"result_time": "2023-09-27 16:47:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "主",
-	// 				"market_bet_line": "-4.5",
-	// 				"market_priority": 3,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 299490,
-	// 				"away_team_id": 299495,
-	// 				"home_team_name": "NC恐龍",
-	// 				"away_team_name": "起亞老虎",
-	// 				"home_team_score": "4",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.300",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 164,
-	// 			"m_id": 164,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "0.000",
-	// 			"create_time": "2023-09-27 16:31:53",
-	// 			"result_time": "2023-09-27 16:53:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "小",
-	// 				"market_bet_line": "5.5",
-	// 				"market_priority": 5,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "2.250",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 163,
-	// 			"m_id": 163,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "157.000",
-	// 			"create_time": "2023-09-27 16:31:50",
-	// 			"result_time": "2023-09-27 16:53:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "大",
-	// 				"market_bet_line": "5.5",
-	// 				"market_priority": 5,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.570",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 162,
-	// 			"m_id": 162,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "255.000",
-	// 			"create_time": "2023-09-27 16:31:45",
-	// 			"result_time": "2023-09-27 18:13:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "客",
-	// 				"market_bet_line": "-1.5",
-	// 				"market_priority": 3,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "2.550",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 161,
-	// 			"m_id": 161,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "0.000",
-	// 			"create_time": "2023-09-27 16:31:43",
-	// 			"result_time": "2023-09-27 18:13:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "主",
-	// 				"market_bet_line": "-1.5",
-	// 				"market_priority": 3,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.480",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 160,
-	// 			"m_id": 160,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "100.000",
-	// 			"create_time": "2023-09-27 16:31:34",
-	// 			"result_time": "2023-09-27 18:13:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "客",
-	// 				"market_bet_line": "",
-	// 				"market_priority": 1,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "6.750",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 159,
-	// 			"m_id": 159,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "100.000",
-	// 			"create_time": "2023-09-27 16:31:31",
-	// 			"result_time": "2023-09-27 18:13:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "主",
-	// 				"market_bet_line": "",
-	// 				"market_priority": 1,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.090",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 148,
-	// 			"m_id": 148,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "100.000",
-	// 			"create_time": "2023-09-27 15:03:08",
-	// 			"result_time": "2023-09-27 18:13:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "客",
-	// 				"market_bet_line": "",
-	// 				"market_priority": 1,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "2.650",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 144,
-	// 			"m_id": 144,
-	// 			"bet_amount": "100.000",
-	// 			"result_amount": "0.000",
-	// 			"create_time": "2023-09-27 14:58:58",
-	// 			"result_time": "2023-09-27 16:53:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "小",
-	// 				"market_bet_line": "5.5",
-	// 				"market_priority": 5,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.830",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		},
-	// 		{
-	// 			"id": 143,
-	// 			"m_id": 143,
-	// 			"bet_amount": "123.000",
-	// 			"result_amount": "0.000",
-	// 			"create_time": "2023-09-27 14:58:46",
-	// 			"result_time": "2023-09-27 16:53:00",
-	// 			"status": "已開獎",
-	// 			"m_order": 0,
-	// 			"bet_data": [
-	// 			{
-	// 				"market_bet_name": "小",
-	// 				"market_bet_line": "5.5",
-	// 				"market_priority": 5,
-	// 				"league_id": 7807,
-	// 				"league_name": "韓國職棒聯賽",
-	// 				"home_team_id": 52555190,
-	// 				"away_team_id": 52325610,
-	// 				"home_team_name": "SSG登陸者",
-	// 				"away_team_name": "鬥山熊",
-	// 				"home_team_score": "3",
-	// 				"away_team_score": "0",
-	// 				"bet_rate": "1.830",
-	// 				"status": "已開獎"
-	// 			}
-	// 			]
-	// 		}
-	// 		]
-	// 	},
-	// 	"message": "SUCCESS_API_COMMON_ORDER_01",
-	// 	"gzip": true
-	// }
+
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
@@ -476,19 +198,37 @@
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
-			orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex);
-			});
+			let betDataDetailsCount = orderItem.bet_data.length;
 
-			totalResultAmount += orderItem.result_amount;
+			if (betDataDetailsCount > 0) {
+				// Create and append the first bet_data
+				createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
+
+				// If there are more than one bet_data, add a toggle button
+				if (betDataDetailsCount > 1) {
+					let toggleButton = $('<button>').text('Show More Bet Data');
+					toggleButton.click(() => {
+						// Toggle the display of additional bet_data
+						for (let i = 1; i < betDataDetailsCount; i++) {
+							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+						}
+						toggleButton.hide(); // Hide the "Show More Bet Data" button
+					});
+
+					// Append the toggle button
+					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
+					let orderDataBetDataDetails = $('#' + betDataDetailsId);
+					orderDataBetDataDetails.append(toggleButton);
+				}
+			}
+
+			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
 
 		console.log('Total Result Amount:', totalResultAmount);
 
-    	return totalResultAmount;
+		return totalResultAmount;
 	}
-
-	console.log(sportListD);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
@@ -522,30 +262,30 @@
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
-		// Remove any existing bet data details before appending a new one
-		orderDataBetDataDetails.empty();
+		// Create a container for each bet_data
+		let betDataDetailsContainer = $('<div class="d-flex flex-column">');
 
-		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
-		betDataDetails.removeAttr('hidden');
-		betDataDetails.removeAttr('template');
+		// Find elements within the cloned template (similar to your existing code)
+		let betDataDetails_leagueName = $('<span class="betDataDetails_leagueName">').html(betItem.league_name);
+		let betDataDetails_HomeAwayTeam = $('<span class="betDataDetails_HomeAwayTeam">').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
+		let betDataDetails_BetNameLine = $('<span class="betDataDetails_BetNameLine">').html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
+		let betDataDetails_BetRate = $('<span class="betDataDetails_BetRate">').html('@' + betItem.bet_rate);
+		let betDataDetails_BetStatus = $('<span class="betDataDetails_BetStatus">').html(betItem.bet_status);
 
-		// Find elements within the cloned template
-		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
-		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
-		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_BetName_Line = betDataDetails.find('.betDataDetails_BetNameLine');
-		let betDataDetails_BetLine = betDataDetails.find('.betDataDetails_BetLine');
+		// Append the elements to the container
+		betDataDetailsContainer.append(
+			betDataDetails_leagueName,
+			betDataDetails_HomeAwayTeam,
+			betDataDetails_BetNameLine,
+			betDataDetails_BetRate,
+			betDataDetails_BetStatus
+		);
 
-		// Set content for the found elements
-		betDataDetails_leagueName.html(betItem.league_name);
-		betDataDetails_HomeName.html(betItem.home_team_name);
-		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetLine.html(betItem.market_bet_line + sportPriority[betItem.market_priority]);
-		// Append the new betDataDetails to the orderDataBetDataDetails
-		orderDataBetDataDetails.append(betDataDetails);
+		// Append the container to the orderDataBetDataDetails
+		orderDataBetDataDetails.append(betDataDetailsContainer);
 	}
 
+	
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
