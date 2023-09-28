@@ -243,7 +243,8 @@
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
 		// Remove any existing bet data details before appending a new one
-		
+		orderDataBetDataDetails.empty();
+
 		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 		betDataDetails.removeAttr('hidden');
 		betDataDetails.removeAttr('template');
