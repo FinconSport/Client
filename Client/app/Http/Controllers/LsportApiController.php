@@ -340,7 +340,7 @@ class LsportApiController extends Controller {
 
         }
 
-        dd($sql);
+        dd($data);
 
         ///////////////////////////////////
         $this->ApiSuccess($data, "01"); 
