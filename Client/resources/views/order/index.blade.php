@@ -469,22 +469,6 @@
 		});
 	}
 
-	// Define the sport ID you want to find
-	const sportID = sport;
-
-	function findSportByIdAndSetVariable(sportId) {
-		const sportType = sportListD.data.find(item => item.sport_id === sportId);
-		let sportName = null; // Initialize the variable
-		if (sportType) {
-			sportName = sportType.name;
-			console.log(`Sport Name: ${sportName}`);
-			console.log(sportType);
-		} else {
-			console.log(`Sport with sport_id ${sportId} not found.`);
-		}
-	}
-
-	findSportByIdAndSetVariable(sportID);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
