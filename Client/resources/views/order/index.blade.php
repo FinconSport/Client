@@ -198,37 +198,51 @@
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
-			let betDataDetailsCount = orderItem.bet_data.length;
+			let showMoreButton = false; // Track whether to show the "Show More" button
 
-			if (betDataDetailsCount > 0) {
-				// Create and append the first bet_data
-				createBetDataDetails(orderItem, orderItem.bet_data[0], 0);
+			orderItem.bet_data.forEach((betItem, betIndex) => {
+			createBetDataDetails(orderItem, betItem, betIndex);
 
-				if (betDataDetailsCount > 1) {
-					let toggleButton = $('<button>').text('Show More Bet Data');
-					let orderDataBetDataDetails = $('#betDataDetails_' + orderItem.id);
-					let additionalBetDataVisible = true; // Initialize additionalBetDataVisible as true
+			if (betIndex > 0) {
+				// Hide bet data details initially if there is more than one
+				betItem.hidden = true;
+				if (!showMoreButton) showMoreButton = true; // Show "Show More" button
+			}
+			});
 
-					toggleButton.click(() => {
-						if (additionalBetDataVisible) {
-							// Hide additional bet_data except the first one
-							for (let i = 1; i < betDataDetailsCount; i++) {
-								$('#betDataDetails_' + orderItem.id + '_data_' + i).hide();
-							}
-							toggleButton.text('Show More Bet Data'); // Change button text
-						} else {
-							// Show additional bet_data
-							for (let i = 1; i < betDataDetailsCount; i++) {
-								createBetDataDetails(orderItem, orderItem.bet_data[i], i);
-							}
-							toggleButton.text('Hide Bet Data'); // Change button text
-						}
-						additionalBetDataVisible = !additionalBetDataVisible; // Toggle additionalBetDataVisible flag
-					});
-
-					// Append the toggle button
-					orderDataBetDataDetails.append(toggleButton);
+			if (showMoreButton) {
+			// Add a "Show More" button if there is more than one bet_data
+			const showMoreButtonElement = document.createElement('button');
+			showMoreButtonElement.textContent = 'Show More';
+			showMoreButtonElement.addEventListener('click', () => {
+				orderItem.bet_data.forEach((betItem, betIndex) => {
+				if (betIndex > 0) {
+					// Toggle the visibility of bet data details
+					betItem.hidden = !betItem.hidden;
 				}
+				});
+				renderView(); // Re-render the view after toggling visibility
+			});
+
+			// Append the "Show More" button to the orderItem
+			orderItem.appendChild(showMoreButtonElement);
+
+			// Add a "Hide" button initially (hidden)
+			const hideButtonElement = document.createElement('button');
+			hideButtonElement.textContent = 'Hide';
+			hideButtonElement.style.display = 'none';
+			hideButtonElement.addEventListener('click', () => {
+				orderItem.bet_data.forEach((betItem, betIndex) => {
+				if (betIndex > 0) {
+					// Hide all bet data details except the first one
+					betItem.hidden = true;
+				}
+				});
+				renderView(); // Re-render the view after hiding
+			});
+
+			// Append the "Hide" button to the orderItem
+			orderItem.appendChild(hideButtonElement);
 			}
 
 			totalResultAmount += parseFloat(orderItem.result_amount);
@@ -238,7 +252,6 @@
 
 		return totalResultAmount;
 	}
-
 
 
 	function createList(orderItem, orderIndex) {
