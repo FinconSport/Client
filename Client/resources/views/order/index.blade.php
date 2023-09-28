@@ -252,13 +252,31 @@
 		let betDataDetails_BetRate = $('<span class="betDataDetails_BetRate">').html('@' + betItem.bet_rate);
 		let betDataDetails_BetStatus = $('<span class="betDataDetails_BetStatus">').html(betItem.bet_status);
 
-		// Add a "Show" button and a click event handler
-		let showButton = $('<button class="showButton">Show</button>');
-		showButton.on('click', function () {
-			// Hide all bet data details except the first one
-			$('.betDataDetailsContainer').hide();
-			betDataDetailsContainer.show();
-		});
+		// Add "Show" button only when there is more than one bet_data
+		if (orderItem.bet_data.length > 1) {
+			// Add a "Show" button and a click event handler
+			let showButton = $('<button class="showButton">Show</button>');
+			showButton.on('click', function () {
+				// Hide all bet data details except the first one
+				$('.betDataDetailsContainer').hide();
+				betDataDetailsContainer.show();
+			});
+
+			// Add a "Hide" button and a click event handler
+			let hideButton = $('<button class="hideButton">Hide</button>');
+			hideButton.on('click', function () {
+				// Hide the current bet data details
+				betDataDetailsContainer.hide();
+			});
+
+			// Append the "Show" button
+			betDataDetailsContainer.append(showButton);
+
+			// Initially hide all bet data details except the first one
+			if (betIndex !== 0) {
+				betDataDetailsContainer.hide();
+			}
+		}
 
 		// Append the elements to the container
 		betDataDetailsContainer.append(
@@ -266,18 +284,13 @@
 			betDataDetails_HomeAwayTeam,
 			betDataDetails_BetNameLine,
 			betDataDetails_BetRate,
-			betDataDetails_BetStatus,
-			showButton
+			betDataDetails_BetStatus
 		);
 
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
-
-		// Initially hide all bet data details except the first one
-		if (betIndex !== 0) {
-			betDataDetailsContainer.hide();
-		}
 	}
+
 
 
 	
