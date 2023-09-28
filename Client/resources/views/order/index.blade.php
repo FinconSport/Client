@@ -245,32 +245,34 @@
 		// Remove any existing bet data details before appending a new one
 		orderDataBetDataDetails.empty();
 
-		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
-		betDataDetails.removeAttr('hidden');
-		betDataDetails.removeAttr('template');
+		betItem.forEach((item, index) => {
+			let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
+			betDataDetails.removeAttr('hidden');
+			betDataDetails.removeAttr('template');
 
-		// Find elements within the cloned template
-		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
-		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
-		let betDataDetails_HomeScore = betDataDetails.find('.betDataDetails_HomeScore');
-		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_AwayScore = betDataDetails.find('.betDataDetails_AwayScore');
-		let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
-		let betDataDetails_BetRate= betDataDetails.find('.betDataDetails_BetRate');
-		let betDataDetails_BetStatus= betDataDetails.find('.betDataDetails_BetStatus');
+			// Find elements within the cloned template (similar to your existing code)
+			let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
+			let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
+			let betDataDetails_HomeScore = betDataDetails.find('.betDataDetails_HomeScore');
+			let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
+			let betDataDetails_AwayScore = betDataDetails.find('.betDataDetails_AwayScore');
+			let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
+			let betDataDetails_BetRate = betDataDetails.find('.betDataDetails_BetRate');
+			let betDataDetails_BetStatus = betDataDetails.find('.betDataDetails_BetStatus');
 
-		// Set content for the found elements
-		betDataDetails_leagueName.html(betItem.league_name);
-		betDataDetails_HomeName.html(betItem.home_team_name);
-		betDataDetails_HomeScore.html('(' + betItem.home_team_score + ')');
-		betDataDetails_AwayName.html(betItem.away_team_name);
-		betDataDetails_AwayScore.html('(' + betItem.away_team_score +')');
-		betDataDetails_BetNameLine.html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
-		betDataDetails_BetRate.html('@' + betItem.bet_rate);
-		betDataDetails_BetStatus.html(betItem.bet_status);
+			// Set content for the found elements (similar to your existing code)
+			betDataDetails_leagueName.html(item.league_name);
+			betDataDetails_HomeName.html(item.home_team_name);
+			betDataDetails_HomeScore.html('(' + item.home_team_score + ')');
+			betDataDetails_AwayName.html(item.away_team_name);
+			betDataDetails_AwayScore.html('(' + item.away_team_score + ')');
+			betDataDetails_BetNameLine.html(item.market_name + item.market_bet_name + item.market_bet_line);
+			betDataDetails_BetRate.html('@' + item.bet_rate);
+			betDataDetails_BetStatus.html(item.bet_status);
 
-		// Append the new betDataDetails to the orderDataBetDataDetails
-		orderDataBetDataDetails.append(betDataDetails);
+			// Append the new betDataDetails to the orderDataBetDataDetails
+			orderDataBetDataDetails.append(betDataDetails);
+		});
 	}
 
 	function createTotal() {
