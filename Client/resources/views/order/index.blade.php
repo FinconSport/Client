@@ -502,7 +502,7 @@
 		}
 	}
 
-	findSportByIdAndSetVariable(sportID, sportListD.data);
+	// findSportByIdAndSetVariable(sportID, sportListD.data);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
