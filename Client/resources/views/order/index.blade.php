@@ -198,6 +198,7 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	let totalResultAmount = 0;
+	let totalRowAppended = false;
 
 	function renderView() {
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
@@ -291,13 +292,21 @@
 
 	
 	function createTotal(orderItem) {
-		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
-		orderDataTotal.removeAttr('hidden');
-		orderDataTotal.removeAttr('template');
-
 		// You may need to find the correct property in orderItem for result_amount
 		// For this example, I'll assume it's orderItem.result_amount
 		totalResultAmount += parseFloat(orderItem.result_amount);
+
+		// Find the total row if it exists
+		let orderDataTotal = $('tr[template="orderTotalTemplate"]');
+
+		// If the total row doesn't exist and it hasn't been appended yet, create and append it
+		if (!orderDataTotal.length && !totalRowAppended) {
+			orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
+			orderDataTotal.removeAttr('hidden');
+			orderDataTotal.removeAttr('template');
+			$('#orderTr').after(orderDataTotal);
+			totalRowAppended = true; // Set the flag to indicate that the total row has been appended
+		}
 
 		// Find elements within the cloned template
 		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
@@ -306,8 +315,6 @@
 		// Set content for the found elements
 		orderData_totalBetAmount.html('0');
 		orderData_totalResultAmount.html(totalResultAmount);
-
-		$('#orderTr').after(orderDataTotal);
 
 		console.log('Total Result Amount:', totalResultAmount);
 	}
