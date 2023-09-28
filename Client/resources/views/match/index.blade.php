@@ -171,7 +171,7 @@
             if( isReadyCommon && isReadyResult ) {
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
-				renderView()
+				renderView(1)
                 clearInterval(isReadyResultInt); // stop checking
             }
         }, 500);
@@ -193,7 +193,7 @@
 		$('#loader').show() // loading transition
 		callResultListData.page += 1
 		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
-		renderView(1)
+		renderView()
 	}
 
 	// scroll to bottom
