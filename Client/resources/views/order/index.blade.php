@@ -460,12 +460,12 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
-		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			createList(orderItem, orderIndex);
-			orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex);
-			});
-		});
+		Object.entries(orderListD.data).map(([orderItem, orderIndex]) => {
+            createList(orderItem, orderIndex);
+            Object.entries(orderItem.bet_data.list).map(([betItem, betIndex]) => {
+                createBetDataDetails(orderItem, betItem, betIndex);
+            })
+        })
 	}
 
 	function createList(orderItem, orderIndex) {
