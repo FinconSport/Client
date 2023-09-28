@@ -198,14 +198,24 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
+		let totalResultAmount = 0;
+
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
+			// Assuming createList and createBetDataDetails are valid functions.
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex);
+			createBetDataDetails(orderItem, betItem, betIndex);
 			});
-			
-			totalResultAmount += parseFloat(orderItem.result_amount);
+
+			// Validate and accumulate totalResultAmount
+			totalResultAmount += parseFloat(orderItem.result_amount) || 0;
 		});
+
+		createTotal(totalResultAmount);
+
+		console.log('Total Result Amount:', totalResultAmount);
+
+		return totalResultAmount;
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -285,13 +295,7 @@
 	}
 
 	
-	function createTotal() {
-		let totalResultAmount = 0;
-
-		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			totalResultAmount += parseFloat(orderItem.result_amount);
-		});
-
+	function createTotal(totalResultAmount) {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
@@ -301,13 +305,10 @@
 		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
-		orderData_totalBetAmount.html('0');
-		orderData_totalResultAmount.html('0');
+		orderData_totalBetAmount.text('0');
+		orderData_totalResultAmount.text(totalResultAmount);
 
 		$('#orderTr').after(orderDataTotal);
-
-		console.log('Total Result Amount:', totalResultAmount);
-		return totalResultAmount;
 	}
 
 	createTotal();
