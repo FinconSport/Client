@@ -238,7 +238,7 @@
 		$('#countTr').before(orderData);
 	}
 
-	function createBetDataDetails(orderItem, betItem, betIndex, totalBetDataCount) {
+	function createBetDataDetails(orderItem, betItem, betIndex) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
@@ -261,16 +261,12 @@
 			betDataDetails_BetStatus
 		);
 
-		if (totalBetDataCount > 1) {
-			// Create and append the button
-			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
-			betDataDetailsContainer.append(button);
-		}
-
 		// Check if betIndex is greater than 0 (not the first bet_data)
 		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('custom-class'); // Change 'custom-class' to your desired class name
+			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
+			orderDataBetDataDetails.append(button);
 		}
 
 		// Append the container to the orderDataBetDataDetails
