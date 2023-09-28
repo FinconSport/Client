@@ -534,6 +534,8 @@ class LsportApiController extends Controller {
             ->toSql();
             //->get();
 
+            dd($data);
+
         if ($data === false) {
             $this->ApiError('02');
         }
