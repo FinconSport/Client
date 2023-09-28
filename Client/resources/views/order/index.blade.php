@@ -121,8 +121,16 @@
                         <td class="orderData_betDataDetails">
 							<span template="betDataDetailsTemp" hidden>
 								<span class="betDataDetails_leagueName"></span>
-								<span class="betDataDetails_HomeName"></span>
-								<span class="betDataDetails_AwayName"></span>
+								<div>
+									<span class="betDataDetails_HomeName"></span>
+									<span>&ensp;VS&ensp;</span>
+									<span class="betDataDetails_AwayName"></span>
+								</div>
+								<div>
+									<span class="betDataDetails_HomeName"></span>
+									<span>&ensp;VS&ensp;</span>
+									<span class="betDataDetails_AwayName"></span>
+								</div>
 							</span>
 						</td>
                         <td class="text-right">
@@ -479,9 +487,7 @@
     	return totalResultAmount;
 	}
 
-	if (sportListD) {
-		console.log('sportLIst' + sportListD);
-	}
+	console.log(sportListD);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
