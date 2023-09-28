@@ -206,35 +206,28 @@
 
 				// If there are more than one bet_data, add a toggle button
 				if (betDataDetailsCount > 1) {
-					let showButton = $('<button>').text('Show More Bet Data');
-					let hideButton = $('<button>').text('Hide Bet Data').hide();
+					let toggleButton = $('<button>').text('Show More Bet Data');
+					let showMore = true;
 
-					// Show More Bet Data button click event
-					showButton.click(() => {
-						// Show all bet_data items except the first one
-						for (let i = 1; i < betDataDetailsCount; i++) {
-							let betDataId = 'betData_' + orderItem.id + '_' + i;
-							$('#' + betDataId).show(); // Show additional bet_data items
+					toggleButton.click(() => {
+						if (showMore) {
+							// Show additional bet_data
+							for (let i = 1; i < betDataDetailsCount; i++) {
+								createBetDataDetails(orderItem, orderItem.bet_data[i], i);
+							}
+							toggleButton.text('Hide Bet Data'); // Change button text
+						} else {
+							// Hide additional bet_data
+							$('.additional-bet-data').hide();
+							toggleButton.text('Show More Bet Data'); // Change button text
 						}
-						showButton.hide(); // Hide the "Show More Bet Data" button
-						hideButton.show(); // Show the "Hide Bet Data" button
+						showMore = !showMore; // Toggle showMore flag
 					});
 
-					// Hide Bet Data button click event
-					hideButton.click(() => {
-						// Hide all bet_data items except the first one
-						for (let i = 1; i < betDataDetailsCount; i++) {
-							let betDataId = 'betData_' + orderItem.id + '_' + i;
-							$('#' + betDataId).hide(); // Hide additional bet_data items
-						}
-						showButton.show(); // Show the "Show More Bet Data" button
-						hideButton.hide(); // Hide the "Hide Bet Data" button
-					});
-
-					// Append the buttons
+					// Append the toggle button
 					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 					let orderDataBetDataDetails = $('#' + betDataDetailsId);
-					orderDataBetDataDetails.append(showButton, hideButton);
+					orderDataBetDataDetails.append(toggleButton);
 				}
 			}
 
@@ -245,6 +238,7 @@
 
 		return totalResultAmount;
 	}
+
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
