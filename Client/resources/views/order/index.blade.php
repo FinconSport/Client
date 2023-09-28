@@ -257,7 +257,7 @@
 			betDataDetailsContainer.removeAttr('hidden');
 			betDataDetailsContainer.removeAttr('template');
 
-			// betDataDetailsContainer.empty();
+			betDataDetailsContainer.empty();
 
 			betDataDetailsContainer.find('.betDataDetails_leagueName').html(betItem.league_name);
 			betDataDetailsContainer.find('.betDataDetails_HomeAway').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
