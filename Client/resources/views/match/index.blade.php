@@ -129,7 +129,7 @@
 			str += '</tr>'
 
 			if( k % 2 === 0) {
-				str = '<tr class="even">'
+				str += '<tr class="even">'
 			} else {
 				str += '<tr>'
 			}
