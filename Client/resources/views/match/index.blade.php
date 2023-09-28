@@ -57,24 +57,24 @@
 				<tbody id="tableContent">
 				</tbody>
             </table>
-        </div>
-		<div id="loader" style="display: none">
-			<div colspan="29" class="loading loading04">
-				<span>L</span>
-				<span>O</span>
-				<span>A</span>
-				<span>D</span>
-				<span>I</span>
-				<span>N</span>
-				<span>G</span>
-				<span>.</span>
-				<span>.</span>
-				<span>.</span>
+			<div id="loader" style="display: none">
+				<div colspan="29" class="loading loading04">
+					<span>L</span>
+					<span>O</span>
+					<span>A</span>
+					<span>D</span>
+					<span>I</span>
+					<span>N</span>
+					<span>G</span>
+					<span>.</span>
+					<span>.</span>
+					<span>.</span>
+				</div>
+			</div>  
+			<div id="noMoreData" style="display: none">
+				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 			</div>
-		</div>  
-		<div id="noMoreData" style="display: none">
-			<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
-		</div>
+        </div>
     </div>
 	
 @endsection
@@ -140,7 +140,8 @@
 		})
 
 		// detect if it's last page
-		if( resultListD.data.length !== 20 || resultListD.data.length === 0 || resultListD.data.length > 20 ) isLastPage = true
+		// if( resultListD.data.length !== 20 || resultListD.data.length === 0 || resultListD.data.length > 20 ) isLastPage = true
+		if( resultListD.data.length !== 20 || resultListD.data.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
 	}
 
