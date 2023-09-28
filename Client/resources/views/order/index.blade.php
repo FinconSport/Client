@@ -197,16 +197,16 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	function renderView() {
-		let totalResultAmount = 0;
+	let totalResultAmount = 0;
 
+	function renderView() {
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
 
-			createTotal(orderItem, orderIndex, totalResultAmount);
+			createTotal(orderItem);
 
 		});
 
@@ -290,13 +290,13 @@
 	}
 
 	
-	function createTotal(orderItem, orderIndex, totalResultAmount) {
+	function createTotal(orderItem) {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
-		// orderDataTotal.empty();
-
+		// You may need to find the correct property in orderItem for result_amount
+		// For this example, I'll assume it's orderItem.result_amount
 		totalResultAmount += parseFloat(orderItem.result_amount);
 
 		// Find elements within the cloned template
@@ -310,11 +310,7 @@
 		$('#orderTr').after(orderDataTotal);
 
 		console.log('Total Result Amount:', totalResultAmount);
-
-		return totalResultAmount;
 	}
-
-	createTotal();
 
 
   	// 寫入頁面限定JS
