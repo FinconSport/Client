@@ -252,7 +252,7 @@
 		// Find elements within the cloned template (similar to your existing code)
 		let betDataDetails_leagueName = $('<div>').html('<span>' + betItem.league_name + '</span>');
 		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
-		let betDataDetails_MarketNameLineRate = $('<div').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
+		let betDataDetails_MarketNameLineRate = $('<div>').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
 		let betDataDetails_HomeTeam = $('<div>').html('<span>' + betItem.home_team_name + '</span><span>' + betItem.home_team_score + '</span>');
 		let betDataDetails_AwayTeam = $('<div>').html('<span>' + betItem.away_team_name + '</span><span>' + betItem.away_team_score + '</span>');
 		let betDataDetails_Status = $('<div>').html('<span>' + betItem.bet_status + '</span>');
