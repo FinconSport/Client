@@ -462,7 +462,7 @@
 	function renderView() {
 		Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
             createList(orderItem, orderIndex);
-            Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
+            Object.entries(orderItem.bet_data.list).map(([betItem, betIndex]) => {
                 createBetDataDetails(orderItem, betItem, betIndex);
             })
         })
