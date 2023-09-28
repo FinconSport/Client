@@ -96,12 +96,8 @@ class Result extends React.Component {
 	// 下拉更新
 	handleRefresh =() => {
 		this.setState({
-			toastMsg: [],
-			menu_id: window.menu,
 			sport_id: window.sport,
 			isRefrehingBalance: false,
-			betData: null,
-			isOpenCal: false
 		},() => {
 			// 下拉刷新時，重新初始化頁面
 			this.componentDidMount()

@@ -4,7 +4,6 @@ import { langText } from "../pages/LanguageContext";
 import $ from 'jquery';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Controller, Pagination } from 'swiper';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.css';
 import  "../css/ResultPage.css";
@@ -18,11 +17,7 @@ const ResultCard_item = {
     zIndex: 1,
     transition: 'opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease', 
 };
-const ResultTeamIcon = {
-	width: '1.3rem',
-	height: '1.3rem',
-    objectFit: "contain",
-}
+
 const Padding01 = {
 	padding: '0.1rem',
 }
@@ -41,14 +36,9 @@ const rowHeight2 = {
     justifyContent: 'flex-start',
 }
 
-const stat = {
-	display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-
 const SliderBrickHeight2 = styled.div`
-	height: 3.3rem;
+	height: 3rem;
+    line-height: 3rem;
 	background: white;
 	margin-bottom: 0.3rem;
 	border-radius: 5px;
@@ -67,33 +57,17 @@ const SliderBrickHeight2 = styled.div`
 	}
 `
 
-const SliderLeftArrow = {
-	color: 'white',
-	position: 'absolute',
-	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
-	top: '7rem',
-	left: '39%',
-	fontSize: '1.5rem'
-}
-const SliderRightArrow = {
-	color: 'white',
-	position: 'absolute',
-	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
-	top: '7rem',
-	right: '-1%',
-	fontSize: '1.5rem'
-}
-
 const TeamName = {
     lineHeight: '2rem',
 }
 
-const drfaultImg = 'https://sporta.asgame.net/uploads/default.png'
 
 class ResultContentCard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+            scoreData: [],
+            v: this.props.data
 		};
 	}
     
@@ -112,6 +86,38 @@ class ResultContentCard extends React.Component {
 
     componentDidMount() {
         this.textOverFlow(this.props.data.fixture_id)
+        const data = this.props.data
+        const sport = parseInt(window.sport)
+        let gameTitle = []
+        if( sport === 48242 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstQuarterScore,langText.ResultTitle.secondQuarterScore], 
+            [langText.ResultTitle.thirdQuarterScore,langText.ResultTitle.fourthQuarterScore]]
+        }
+        if( sport === 6046 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore]]
+        }
+        if( sport === 154914 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
+            [langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive],
+            [langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight],
+            [langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven],
+            [langText.ResultTitle.gameTwelve]]
+        }
+
+        let scores = data.scoreboard
+        let scoreData = scores.reduce((acc, currentValue, currentIndex) => {
+            if (currentIndex % 3 === 0) {
+                acc.push([]);
+            }
+            acc[acc.length - 1].push(currentValue);
+            return acc;
+        }, []);
+
+        this.setState({
+            scoreData: scoreData,
+            gameTitle: gameTitle
+        })
+
     } 
   
    
@@ -126,33 +132,12 @@ class ResultContentCard extends React.Component {
     }
 
 	render() {
-		const v = this.props.data
-        const sport = parseInt(window.sport)
-        var gameTitle = []
-        if( sport === 6046 ) {
-            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore]]
-        }
-        if( sport === 154914 ) {
-            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
-            [langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive],
-            [langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight],
-            [langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven],
-            [langText.ResultTitle.gameTwelve]]
-        }
-        
+        const v = this.state.v
         if ( v !== undefined ){
-            let scores = v.scoreboard
-            let scoreData = scores.reduce((acc, currentValue, currentIndex) => {
-                if (currentIndex % 3 === 0) {
-                    acc.push([]);
-                }
-                acc[acc.length - 1].push(currentValue);
-                return acc;
-            }, []);
             return (
                 <div style={ ResultCard_item } cardid={v.fixture_id}>
                     <div>
-                        <div className='row m-0'>
+                        <div className='row m-0 p-1'>
                             {/* left part */}
                             <div className='col-45' style={{ padding: '0 0rem 0 0.5rem'}}>
                                 <div style={rowHeight2}>
@@ -194,7 +179,7 @@ class ResultContentCard extends React.Component {
                                     style={{ position: 'relative', zIndex: 0}}
                                 >
                                     {
-                                        scoreData.map((v1, k1) => {
+                                        this.state.scoreData.map((v1, k1) => {
                                             return(
                                                 <SwiperSlide key={k1}>
                                                     <div className='row m-0'>
@@ -202,17 +187,17 @@ class ResultContentCard extends React.Component {
                                                             v1.map((v2, k2) => {
                                                                 return(
                                                                     <div className='col' style={Padding01} key={k2}>
-                                                                        <div style={SliderTitleDiv}>{ gameTitle[k1][k2] }</div>
+                                                                        <div style={SliderTitleDiv}>{ this.state.gameTitle[k1][k2] }</div>
                                                                         <SliderBrickHeight2>
                                                                             <div className="w-100 h-100">
-                                                                                <p className='SliderBrickTitle'>
+                                                                                <p>
                                                                                     { v2[0] }
                                                                                 </p>
                                                                             </div>
                                                                         </SliderBrickHeight2>
                                                                         <SliderBrickHeight2>
                                                                             <div className="w-100 h-100">
-                                                                                <p className='SliderBrickTitle'>
+                                                                                <p>
                                                                                     { v2[1] }
                                                                                 </p>
                                                                             </div>
