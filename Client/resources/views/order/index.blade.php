@@ -118,11 +118,9 @@
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
-                        <td>
+                        <td class="orderData_betDataDetails">
 							<div template="betDataDetailsTemp" hidden>
-								<div class="orderData_betDataDetails">
-									<span class="betDataDetails_betaName"></span>
-								</div>
+								<span class="betDataDetails_betaName"></span>
 							</div>
 						</td>
                         <td class="text-right">
