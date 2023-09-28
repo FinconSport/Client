@@ -135,8 +135,7 @@ div[key="matchSportMenu"]{
 }
 
 .betaDetcon {
-    display: flex;
-    flex-direction: column;
+    display: block;
     text-align: left;
 }
 
