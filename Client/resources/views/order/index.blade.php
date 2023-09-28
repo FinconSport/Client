@@ -460,12 +460,18 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
+		let totalResultAmount = 0;
+
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
+
+			totalResultAmount += orderItem.result_amount;
 		});
+
+		console.log('Total Result Amount:', totalResultAmount);
 	}
 	
 	console.log(sport);
