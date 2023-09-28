@@ -114,7 +114,7 @@
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td class="no-border-left orderData_id"></td>
-                        <td template="sportType" hidden>
+                        <td template="sportType">
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
