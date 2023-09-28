@@ -337,7 +337,10 @@ class LsportApiController extends Controller {
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
             ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
-                "lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(DISTINCT lsport_fixture.fixture_id) as cnt"
+                "lsport_sport.sport_id,
+                lsport_sport.{$lang_col} as sport_name_locale,
+                lsport_fixture.fixture_status,
+                COUNT(DISTINCT lsport_fixture.fixture_id) as fixture_cnt"
             )
             ->where('lsport_sport.status', 1)
             ->where('lsport_league.status', 1)
@@ -409,15 +412,19 @@ class LsportApiController extends Controller {
         );
         foreach ($data as $k3 => $v3) {
             $sport_id = $v3->sport_id;
-            $fixture_status = $v3->status;  // 賽事狀態:1,2
-            $fixture_count = $v3->cnt;  // 該球種賽事數量
+            $sport_name = $v3->sport_name_locale;  // 球種名稱
+            $fixture_status = $v3->fixture_status;  // 賽事狀態:1,2
+            $fixture_count = $v3->fixture_cnt;  // 該球種賽事數量
             $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
             $totals[$living_key] += $fixture_count;  // 算living及early的total
 
-            // 在正確位置置入賽事數量
-            if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
-                $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
+            if (!isset($ret[$living_key]['items'][$sport_id])) {
+                $ret[$living_key]['items'][$sport_id] = array('name'=>null,'count'=>null);
             }
+
+            // 置入賽事數量
+            $ret[$living_key]['items'][$sport_id]['name'] = $sport_name;
+            $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
             
         }
         foreach ($totals as $living_key => $total) {
