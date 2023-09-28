@@ -136,13 +136,13 @@
                         <td class="no-border-right orderData_status"></td>
                     </tr>
                     <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-                        <td colspan="4"></td>
-                        <td class="p-0">
-                            <div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div>
-                        </td>
-                        <td class="text-right orderData_totalBetAmount"></td>
-                        <td class="text-right orderData_totalResultAmount"></td>
-                        <td colspan="3"></td>
+						<td style="width: 5%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 40%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
+                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
+                        <td style="width: 10%;"></td>
                     </tr>
                 </tbody>
             </table>
@@ -470,7 +470,7 @@
 
 			totalResultAmount += orderItem.result_amount;
 		});
-		
+
 		console.log('Total Result Amount:', totalResultAmount);
 
     	return totalResultAmount;
