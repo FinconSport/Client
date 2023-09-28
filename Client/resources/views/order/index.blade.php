@@ -197,21 +197,15 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	let totalResultAmount = 0;
-	let totalRowAppended = false;
-
 	function renderView() {
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
-
-			createTotal(orderItem);
-
+			
+			totalResultAmount += parseFloat(orderItem.result_amount);
 		});
-
-		
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -291,22 +285,16 @@
 	}
 
 	
-	function createTotal(orderItem) {
-		// You may need to find the correct property in orderItem for result_amount
-		// For this example, I'll assume it's orderItem.result_amount
-		totalResultAmount += parseFloat(orderItem.result_amount);
+	function createTotal() {
+		let totalResultAmount = 0;
 
-		// Find the total row if it exists
-		let orderDataTotal = $('tr[template="orderTotalTemplate"]');
+		orderListD.data.list.forEach((orderItem, orderIndex) => {
+			totalResultAmount += parseFloat(orderItem.result_amount);
+		});
 
-		// If the total row doesn't exist and it hasn't been appended yet, create and append it
-		if (!orderDataTotal.length && !totalRowAppended) {
-			orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
-			orderDataTotal.removeAttr('hidden');
-			orderDataTotal.removeAttr('template');
-			$('#orderTr').after(orderDataTotal);
-			totalRowAppended = true; // Set the flag to indicate that the total row has been appended
-		}
+		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
+		orderDataTotal.removeAttr('hidden');
+		orderDataTotal.removeAttr('template');
 
 		// Find elements within the cloned template
 		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
@@ -314,10 +302,15 @@
 
 		// Set content for the found elements
 		orderData_totalBetAmount.html('0');
-		orderData_totalResultAmount.html(totalResultAmount);
+		orderData_totalResultAmount.html('0');
+
+		$('#orderTr').after(orderDataTotal);
 
 		console.log('Total Result Amount:', totalResultAmount);
+		return totalResultAmount;
 	}
+
+	createTotal();
 
 
   	// 寫入頁面限定JS
