@@ -463,7 +463,7 @@
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 			    createList(orderItem, orderIndex);
 			    orderItem.bet_data.forEach((betItem, betIndex) => {
-			        createbetDataDetails(orderItem, orderIndex);
+			        createbetDataDetails(orderItem, betItem, betIndex);
 			    });
 			});
 		}
@@ -514,7 +514,7 @@
 			$('#orderTr').after(orderTotal);
 		}
 
-		function createbetDataDetails(orderItem, orderIndex) {
+		function createbetDataDetails(orderItem, betItem, betIndex) {
 			let betDataDetails = $('div[template="betDataDetailsTemp"]').clone();
 
 			betDataDetails.removeAttr('hidden');
@@ -524,7 +524,7 @@
 			let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
 
 			// Set content for the found elements
-			betDataDetails_betaName.html(orderItem.bet_data.market_bet_name);
+			betDataDetails_betaName.html(betItem.market_bet_line);
 			$('.orderData_betDataDetails').append(betDataDetails);
 		}
 
