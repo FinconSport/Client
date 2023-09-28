@@ -285,6 +285,15 @@
 	}
 
 	console.log(sportListD);
+	const sportsArray = sportListD.data.map(sport => {
+		return {
+			sport_id: sport.sport_id,
+			name: sport.name
+		};
+	});
+
+	// Display the array of sport objects
+	console.log(sportsArray);
 
 
   	// 寫入頁面限定JS
