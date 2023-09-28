@@ -459,74 +459,61 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-		function renderView() {
-			orderListD.data.list.forEach((orderItem, orderIndex) => {
-			    createList(orderItem, orderIndex);
-			    orderItem.bet_data.forEach((betItem, betIndex) => {
-			        createbetDataDetails(orderItem, betItem, betIndex);
-			    });
-			});
-		}
+	function renderView() {
+		Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
+            createList(orderItem, orderIndex);
+            Object.entries(orderItem.bet_data.list).map(([betItem, betIndex]) => {
+                createBetDataDetails(orderItem, betItem, betIndex);
+            })
+        })
+	}
 
-		function createList(orderItem, orderIndex) {
-			let orderData = $('tr[template="orderTemplate"]').clone();
-			orderData.removeAttr('hidden');
-			orderData.removeAttr('template');
-			
-			// Find elements within the cloned template
-			let orderData_id = orderData.find('.orderData_id');
-			let orderData_mOrder = orderData.find('.orderData_mOrder');
-			let orderData_betAmount = orderData.find('.orderData_betAmount');
-			let orderData_createdTime = orderData.find('.orderData_createdTime');
-			let orderData_resultAmount = orderData.find('.orderData_resultAmount');
-			let orderData_resultTime = orderData.find('.orderData_resultTime');
-			let orderData_status = orderData.find('.orderData_status');
-			let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
-			let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
+	function createList(orderItem, orderIndex) {
+		let orderData = $('tr[template="orderTemplate"]').clone();
+		orderData.removeAttr('hidden');
+		orderData.removeAttr('template');
 
-			// Set content for the found elements
-			orderData_id.html(orderItem.id);
-			orderData_mOrder.html(orderItem.m_order);
-			orderData_betAmount.html(orderItem.bet_amount);
-			orderData_createdTime.html(orderItem.create_time);
-			orderData_resultAmount.html(orderItem.result_amount);
-			orderData_resultTime.html(orderItem.result_time);
-			orderData_status.html(orderItem.status);
-			orderData_totalBetAmount.html(orderItem.bet_amount);
-			orderData_totalResultAmount.html(orderItem.result_amount);
+		// Find elements within the cloned template
+		let orderData_id = orderData.find('.orderData_id');
+		let orderData_mOrder = orderData.find('.orderData_mOrder');
+		let orderData_betAmount = orderData.find('.orderData_betAmount');
+		let orderData_createdTime = orderData.find('.orderData_createdTime');
+		let orderData_resultAmount = orderData.find('.orderData_resultAmount');
+		let orderData_resultTime = orderData.find('.orderData_resultTime');
+		let orderData_status = orderData.find('.orderData_status');
+		let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
+		let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
-			$('#countTr').before(orderData);
-		}
+		// Set content for the found elements
+		orderData_id.html(orderItem.id);
+		orderData_mOrder.html(orderItem.m_order);
+		orderData_betAmount.html(orderItem.bet_amount);
+		orderData_createdTime.html(orderItem.create_time);
+		orderData_resultAmount.html(orderItem.result_amount);
+		orderData_resultTime.html(orderItem.result_time);
+		orderData_status.html(orderItem.status);
+		orderData_totalBetAmount.html(orderItem.bet_amount);
+		orderData_totalResultAmount.html(orderItem.result_amount);
 
-		function createTotal(orderItem, orderIndex) {
-			let orderTotal = $('tr[template="orderTotalTemplate"]').clone();
-			orderTotal.removeAttr('hidden');
-			orderTotal.removeAttr('template');
-			
-			// Find elements within the cloned template
-			let orderData_totalBetAmount = orderTotal.find('.orderData_totalBetAmount');
-			let orderData_totalResultAmount = orderTotal.find('.orderData_totalResultAmount');
+		$('#countTr').before(orderData);
+	}
 
-			// Set content for the found elements
-			orderData_totalBetAmount.html(orderItem.bet_amount);
-			orderData_totalResultAmount.html(orderItem.result_amount);
+	function createBetDataDetails(orderItem, betItem, betIndex) {
+		let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
 
-			$('#orderTr').after(orderTotal);
-		}
+		betDataDetails.removeAttr('hidden');
+		betDataDetails.removeAttr('template');
 
-		function createbetDataDetails(orderItem, betItem, betIndex) {
-			let betDataDetails = $('span[template="betDataDetailsTemp"]').clone();
+		// Find elements within the cloned template
+		let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
 
-			betDataDetails.removeAttr('hidden');
-			betDataDetails.removeAttr('template');
+		// Set content for the found elements
+		betDataDetails_betaName.html(betItem.market_bet_name);
 
-			// Find elements within the cloned template
-			let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
+		// Append betDataDetails to the corresponding orderData
+		$('.orderData_betDataDetails').before(betDataDetails);
+	}
 
-			// Set content for the found elements
-			betDataDetails_betaName.html(betItem.market_bet_name);
-			$('.orderData_betDataDetails').append(betDataDetails);
-		}
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
