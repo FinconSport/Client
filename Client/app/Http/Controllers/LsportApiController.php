@@ -394,6 +394,7 @@ class LsportApiController extends Controller {
 
                     if (isset($living_type_total[$living_key])) {
                         $living_type_total[$living_key] += $fixture_count;
+                        echo "[{$k3}]\$living_type_total[{$living_key}] += {$fixture_count};\r\n";
                     }
                 }
 
