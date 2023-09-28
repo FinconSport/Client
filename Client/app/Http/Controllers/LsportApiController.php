@@ -403,7 +403,10 @@ class LsportApiController extends Controller {
         // }
 
         // 繞賽事數量結果
-        $totals = array();
+        $totals = array(
+            'living' => 0,
+            'early' => 0
+        );
         foreach ($data as $k3 => $v3) {
             $sport_id = $v3->sport_id;
             $fixture_status = $v3->status;  // 賽事狀態:1,2
