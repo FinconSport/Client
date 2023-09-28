@@ -122,9 +122,9 @@
 							<span template="betDataDetailsTemp" hidden>
 								<span class="betDataDetails_leagueName"></span>
 								<div>
-									<span class="betDataDetails_HomeName"></span>
+									<span class="betDataDetails_HomeName"></span><span class="betDataDetails_HomeScore"></span>
 									<span>&ensp;VS&ensp;</span>
-									<span class="betDataDetails_AwayName"></span>
+									<span class="betDataDetails_AwayName"></span><span class="betDataDetails_AwayScore"></span>
 								</div>
 								<div>
 									<span class="betDataDetails_BetNameLine"></span>
@@ -252,7 +252,9 @@
 		// Find elements within the cloned template
 		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
 		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
+		let betDataDetails_HomeScore = betDataDetails.find('.betDataDetails_HomeScore');
 		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
+		let betDataDetails_AwayScore = betDataDetails.find('.betDataDetails_AwayScore');
 		let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
 		let betDataDetails_BetRate= betDataDetails.find('.betDataDetails_BetRate');
 		let betDataDetails_BetStatus= betDataDetails.find('.betDataDetails_BetStatus');
@@ -260,7 +262,9 @@
 		// Set content for the found elements
 		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
+		betDataDetails_HomeScore.html('('betItem.home_team_score')');
 		betDataDetails_AwayName.html(betItem.away_team_name);
+		betDataDetails_AwayScore.html('('betItem.away_team_score')');
 		betDataDetails_BetNameLine.html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
 		betDataDetails_BetRate.html('@' + betItem.bet_rate);
 		betDataDetails_BetStatus.html(betItem.bet_status);
