@@ -488,11 +488,13 @@
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
                         let isSwitchCate = nowStatus === v3.status ? false : true // is changing early to living
+                        console.log(k3 + ' isSwitch ->' + isSwitchCate)
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
                             let livingNode = $(`#${k3}`)
+                            console.log(parentNode, livingNode)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
                             card.attr('cate', k)
                             card.attr('status', v3.status)
