@@ -469,6 +469,21 @@
 		});
 	}
 
+	function findSportByIdAndSetVariable(sportId) {
+		const sportType = sportListD.data.find(item => item.sport_id === sportId);
+		let sportName = null; // Initialize the variable
+		if (sportType) {
+			sportName = sportType.name;
+			console.log(`Sport Name: ${sportName}`);
+			console.log(sportType);
+		} else {
+			console.log(`Sport with sport_id ${sportId} not found.`);
+		}
+	}
+
+	// Call the function with the sport ID you want to find
+	findSportByIdAndSetVariable(sport);
+
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
 		orderData.removeAttr('hidden');
@@ -511,7 +526,6 @@
 		// Set content for the found elements
 		betDataDetails_betaName.html(betItem.market_bet_name);
 
-		// Append betDataDetails to the corresponding orderData
 		$('.orderData_betDataDetails').before(betDataDetails);
 	}
 
