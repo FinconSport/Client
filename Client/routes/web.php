@@ -99,7 +99,7 @@ Route::get('/api/v2/gms_caller', 'App\Http\Controllers\LsportApiController@getMa
 Route::get('/api/v2/gmp_caller', 'App\Http\Controllers\LsportApiController@getMatchPeriods_caller');
 Route::get('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
 Route::post('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
-Route::get('/api/v2/index_match_list2', 'App\Http\Controllers\LsportApiController@IndexMatchList2');
+// Route::get('/api/v2/index_match_list2', 'App\Http\Controllers\LsportApiController@IndexMatchList2');
 
 //for dev usage
 //Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
