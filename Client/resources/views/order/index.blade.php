@@ -284,7 +284,13 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	console.log(sportListD.Object.data);
+	var sportListD = @json($sportListD); 
+	sportListD.data.forEach(function(sport) {
+        console.log("Sport ID: " + sport.sport_id);
+        console.log("Name: " + sport.name);
+        console.log("Key: " + sport.key);
+        console.log("");
+    });
 
 
   	// 寫入頁面限定JS
