@@ -206,12 +206,11 @@
 				createBetDataDetails(orderItem, betItem, betIndex);
 			});
 
-			totalResultAmount += parseFloat(orderItem.result_amount);
+			createTotal(orderItem, orderIndex);
+
 		});
 
-		console.log('Total Result Amount:', totalResultAmount);
-
-		return totalResultAmount;
+		
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -296,15 +295,23 @@
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
+		// orderDataTotal.empty();
+
+		totalResultAmount += parseFloat(orderItem.result_amount);
+
 		// Find elements within the cloned template
 		let orderData_totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
 		let orderData_totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
 
 		// Set content for the found elements
 		orderData_totalBetAmount.html('0');
-		orderData_totalResultAmount.html('0');
+		orderData_totalResultAmount.html(totalResultAmount);
 
 		$('#orderTr').after(orderDataTotal);
+
+		console.log('Total Result Amount:', totalResultAmount);
+
+		return totalResultAmount;
 	}
 
 	createTotal();
