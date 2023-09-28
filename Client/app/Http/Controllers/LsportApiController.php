@@ -299,7 +299,7 @@ class LsportApiController extends Controller {
     }
 }
 */
-    public function IndexMatchList2(Request $request) {
+    public function IndexMatchList(Request $request) {
         
         $input = $this->getRequest($request);
 
@@ -394,7 +394,7 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($ret, "01"); 
     }
 
-    public function IndexMatchList(Request $request) {
+    public function IndexMatchListOld(Request $request) {
       
     	$input = $this->getRequest($request);
 
