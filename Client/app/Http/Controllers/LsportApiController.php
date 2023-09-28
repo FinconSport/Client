@@ -323,15 +323,6 @@ class LsportApiController extends Controller {
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
     	//---------------------------------
-        // 取得球種資料
-        $arrSports = LsportSport::select(
-            'sport_id', $lang_col.' AS name_locale'
-        )
-        ->where('lsport_sport.status', 1)
-        ->get();
-        if ($arrSports === false) {
-            $this->ApiError("01");
-        }
 
         $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
@@ -340,7 +331,7 @@ class LsportApiController extends Controller {
                 "lsport_sport.sport_id,
                 lsport_sport.{$lang_col} as sport_name_locale,
                 lsport_fixture.status as fixture_status,
-                COUNT( lsport_fixture.fixture_id) as fixture_cnt"
+                COUNT(DISTINCT lsport_fixture.fixture_id) as fixture_cnt"
             )
             ->where('lsport_sport.status', 1)
             ->where('lsport_league.status', 1)
@@ -371,40 +362,6 @@ class LsportApiController extends Controller {
             2 => "living",  //走地
         ];
 
-        // // 繞[走地,早盤]2種類型
-        // foreach ($living_types as $living_status_code => $living_status) {
-        //     $ret[$living_status] = array();
-
-        //     $ret[$living_status]['items'] = array();
-        //     $ret[$living_status]['total'] = 0;
-
-        //     // 繞各球種
-        //     foreach ($arrSports as $k2 => $v2) {
-
-        //         // 以球種ID為key
-        //         $ret[$living_status]['items'][$v2->sport_id] = array(
-        //             'name' => $v2->name_locale,  // 球種名稱
-        //             'count' => 0,  // 球種賽事數量
-        //         );
-
-        //         // 繞賽事數量結果
-        //         foreach ($data as $k3 => $v3) {
-        //             $sport_id = $v3->sport_id;
-        //             $fixture_status = $v3->status;  // 賽事狀態:1,2
-        //             $fixture_count = $v3->cnt;  // 該球種賽事數量
-        //             $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
-
-        //             // 在正確位置置入賽事數量
-        //             if (isset($ret[$living_key]['items'][$sport_id]['count'])) {
-        //                 $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
-        //             }
-                    
-        //         }
-
-        //     }
-
-        // }
-
         // 繞賽事數量結果
         $totals = array(
             'living' => 0,
@@ -430,19 +387,8 @@ class LsportApiController extends Controller {
         foreach ($totals as $living_key => $total) {
             $ret[$living_key]['total'] = $total;
         }
-        
-        //算早盤total 跟 走地total
-        // foreach ($ret as $living_status_code => $v) {
-        //     $total = 0;
-        //     foreach ($v['items'] as $fixture_id => $arr) {
-        //         $total += $arr['count'];
-        //     }
-        //     $ret[$living_status_code]['total'] = $total;
-        // }
 
-        //var_dump($living_total);
-
-        dd($ret);
+        // dd($ret);
 
         ///////////////////////////////////
         $this->ApiSuccess($ret, "01"); 
