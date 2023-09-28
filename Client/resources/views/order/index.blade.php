@@ -112,13 +112,15 @@
                     </tr>
                 </thead>
                 <tbody id="orderDataTemp">
-                    <tr template="orderTemplate" hidden>
+                    <tr id="orderTr" template="orderTemplate" hidden>
                         <td class="no-border-left orderData_id"></td>
                         <td template="sportType" hidden>
                             <span class="orderData_sportType"></span>
                         </td>
                         <td class="orderData_mOrder"></td>
-                        <td class="orderData_betDataDetails"></td>
+                        <td class="orderData_betDataDetails" template="betDataDetailsTemp" hidden>
+							<span class="betDataDetails_betaName"></span>
+						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
                             <br>
@@ -131,7 +133,7 @@
                         </td>
                         <td class="no-border-right orderData_status"></td>
                     </tr>
-                    <tr id="countTr" class="no-border-bottom">
+                    <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
                         <td colspan="4"></td>
                         <td class="p-0">
                             <div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div>
@@ -458,9 +460,9 @@
 		function renderView() {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 			    createList(orderItem, orderIndex);
-			    // orderItem.bet_data.forEach((betItem, betIndex) => {
-			    //     createData(orderItem, orderIndex, betItem, betIndex);
-			    // });
+			    orderItem.bet_data.forEach((betItem, betIndex) => {
+			        createbetDataDetails(orderItem, orderIndex, betItem, betIndex);
+			    });
 			});
 		}
 
@@ -494,10 +496,35 @@
 			$('#countTr').before(orderData);
 		}
 
-		// function createData(orderItem, betItem, betIndex) {
-		// 	let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
-		// 	orderItem.find('.orderData_betDataDetails').append(betDataElement);
-		// }
+		function createTotal(orderItem, orderIndex) {
+			let orderTotal = $('tr[template="orderTotalTemplate"]').clone();
+			orderTotal.removeAttr('hidden');
+			orderTotal.removeAttr('template');
+			
+			// Find elements within the cloned template
+			let orderData_totalBetAmount = orderTotal.find('.orderData_totalBetAmount');
+			let orderData_totalResultAmount = orderTotal.find('.orderData_totalResultAmount');
+
+			// Set content for the found elements
+			orderData_totalBetAmount.html(orderItem.bet_amount);
+			orderData_totalResultAmount.html(orderItem.result_amount);
+
+			$('#orderTr').after(orderTotal);
+		}
+
+		function createbetDataDetails(orderItem, betItem, betIndex) {
+			let betDataDetails = $('td[template="betDataDetailsTemp"]').clone();
+
+			betDataDetails.removeAttr('hidden');
+			betDataDetails.removeAttr('template');
+
+			// Find elements within the cloned template
+			let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
+
+			// Set content for the found elements
+			betDataDetails_betaName.html(betItem.market_bet_name);
+			$('.orderData_mOrder').after(betDataDetails);
+		}
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
