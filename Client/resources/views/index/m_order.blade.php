@@ -84,7 +84,6 @@
     </div>
 </div>
 
-
 <!-- early living toggle template -->
 <div template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
@@ -253,10 +252,6 @@
             })
         })
 
-        // 滾球移到最上面
-        let parentNode = $('#indexContainerLeft')
-        let livingNode = $('#toggleContent_living')
-        livingNode.prependTo(parentNode);
 
         // 統計
         statistics()
@@ -329,15 +324,6 @@
             home_team_info.find('.scoreSpan').html()
             away_team_info.find('.teamSpan').html(v3.away_team_name)
             away_team_info.find('.scoreSpan').html()
-
-            // living score
-            if( v3.status === 2 ) {
-                home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-                away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-                let timerStr = v3.periods.period + langTrans.mainArea.stage
-                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-                time.html(timerStr)
-            }
 
             // bet area
             priorityArr.forEach(( i, j ) => {
@@ -507,13 +493,18 @@
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-                    
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
+                        let isStatusSame = nowStatus === v3.status ? true : false // is status the same
+                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
+                        if( isSwitchCate ) {
+                            closeFixture(k3)
+                            return;
+                        }   
 
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)

@@ -130,8 +130,11 @@ div[key="matchSportMenu"]{
     margin-top: 60px;
 }
 
-
-.element.style {
+.betaDetcon {
     display: flex;
     flex-direction: column;
+}
+
+.betaDetcon.hide-betaDetcon {
+    display: none;
 }

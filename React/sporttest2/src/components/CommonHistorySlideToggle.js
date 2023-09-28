@@ -102,11 +102,11 @@ class CommonHistory extends React.Component {
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    { langText.CommonHistory.sportPriority[window.sport][val.bet_data[0].market_priority] }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
+                                    { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                { langText.CommonHistory.sportPriority[window.sport][val.bet_data[0].market_priority] }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
+                                { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
                             </span>
                         </div>
                         <div className='col-3 p-0 text-right'>
@@ -165,11 +165,11 @@ class CommonHistory extends React.Component {
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                { langText.CommonHistory.sportPriority[window.sport][v.market_priority] } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
+                                                { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            { langText.CommonHistory.sportPriority[window.sport][v.market_priority] }&ensp;({v.market_bet_name + v.market_bet_line})
+                                            { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})
                                         </span>
                                     </div>
                                     <div className='col-3 p-0 text-right'>

@@ -91,17 +91,16 @@ class ResultContentCard extends React.Component {
         let gameTitle = []
         if( sport === 48242 ) {
             gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstQuarterScore,langText.ResultTitle.secondQuarterScore], 
-            [langText.ResultTitle.thirdQuarterScore,langText.ResultTitle.fourthQuarterScore]]
+            [langText.ResultTitle.thirdQuarterScore,langText.ResultTitle.fourthQuarterScore,langText.ResultTitle.overtime]]
         }
         if( sport === 6046 ) {
-            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore]]
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore,langText.ResultTitle.overtime]]
         }
         if( sport === 154914 ) {
             gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
             [langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive],
             [langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight],
-            [langText.ResultTitle.gameNine,langText.ResultTitle.gameTen,langText.ResultTitle.gameEleven],
-            [langText.ResultTitle.gameTwelve]]
+            [langText.ResultTitle.gameNine,langText.ResultTitle.overtime]]
         }
 
         let scores = data.scoreboard
@@ -132,7 +131,7 @@ class ResultContentCard extends React.Component {
     }
 
 	render() {
-        const v = this.state.v
+        const { v, scoreData, gameTitle} = this.state
         if ( v !== undefined ){
             return (
                 <div style={ ResultCard_item } cardid={v.fixture_id}>
@@ -170,48 +169,63 @@ class ResultContentCard extends React.Component {
                             </div>
                             {/* right part */}
                             <div className='col-55 text-center' style={{ paddingLeft: 0}}>
-                                <Swiper
-                                    slidesPerView={1}
-                                    pagination={true}
-                                    modules={[Controller, Pagination]}
-                                    onSwiper={Swiper => (this.matchCardSwiper = Swiper)}
-                                    className='matchCardSwiper'
-                                    style={{ position: 'relative', zIndex: 0}}
-                                >
-                                    {
-                                        this.state.scoreData.map((v1, k1) => {
-                                            return(
-                                                <SwiperSlide key={k1}>
-                                                    <div className='row m-0'>
-                                                        {
-                                                            v1.map((v2, k2) => {
-                                                                return(
-                                                                    <div className='col' style={Padding01} key={k2}>
-                                                                        <div style={SliderTitleDiv}>{ this.state.gameTitle[k1][k2] }</div>
-                                                                        <SliderBrickHeight2>
-                                                                            <div className="w-100 h-100">
-                                                                                <p>
-                                                                                    { v2[0] }
-                                                                                </p>
-                                                                            </div>
-                                                                        </SliderBrickHeight2>
-                                                                        <SliderBrickHeight2>
-                                                                            <div className="w-100 h-100">
-                                                                                <p>
-                                                                                    { v2[1] }
-                                                                                </p>
-                                                                            </div>
-                                                                        </SliderBrickHeight2>
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        }
-                                                    </div>
-                                                </SwiperSlide>
-                                            )
-                                        })
-                                    }
-                                </Swiper>
+                                {
+                                    gameTitle &&
+                                    <Swiper
+                                        slidesPerView={1}
+                                        pagination={true}
+                                        modules={[Controller, Pagination]}
+                                        onSwiper={Swiper => (this.matchCardSwiper = Swiper)}
+                                        className='matchCardSwiper'
+                                        style={{ position: 'relative', zIndex: 0}}
+                                    >
+                                        {
+                                            gameTitle.map((v1, k1) => {
+                                                return(
+                                                    <SwiperSlide key={k1}>
+                                                        <div className='row m-0'>
+                                                            {
+                                                                v1.map((v2, k2) => {
+                                                                    return(
+                                                                        <div className='col' style={Padding01} key={k2}>
+                                                                            <div style={SliderTitleDiv}>{ v2 }</div>
+                                                                            <SliderBrickHeight2>
+                                                                                <div className="w-100 h-100">
+                                                                                    <p>
+                                                                                        {
+                                                                                            scoreData[k1] && scoreData[k1][k2] ?
+                                                                                            scoreData[k1][k2][0]
+                                                                                            :
+                                                                                            '-'
+                                                                                        }
+                                                                                    </p>
+                                                                                </div>
+                                                                            </SliderBrickHeight2>
+                                                                            <SliderBrickHeight2>
+                                                                                <div className="w-100 h-100">
+                                                                                    <p>
+                                                                                        {
+                                                                                            scoreData[k1] && scoreData[k1][k2] ?
+                                                                                            scoreData[k1][k2][1]
+                                                                                            :
+                                                                                            '-'
+                                                                                        }
+                                                                                    </p>
+                                                                                </div>
+                                                                            </SliderBrickHeight2>
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
+                                                    </SwiperSlide>
+                                                )
+                                            })
+                                        }
+                                    </Swiper>
+
+                                }
+                               
                             </div>
                         </div>
                     </div>
