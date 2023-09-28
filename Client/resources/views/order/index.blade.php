@@ -180,33 +180,12 @@
     function renderView() {
         // Loop through orderListD.data.list to generate HTML elements and append them to the page
         orderListD.data.list.forEach((item, index) => {
-            createList(item, index);
+            createList(orderItem, orderIndex);
             item.bet_data.forEach((betItem, betIndex) => {
-                createData(item, index, betItem, betIndex);
+                createData(orderItem, orderIndex, betItem, betIndex);
             });
         });
-
-        // Loop through sportListD.data to generate sport-related elements (if needed)
-        sportListD.data.forEach((sport) => {
-            // You can create sport-related elements here if required
-        });
     }
-
-	
-	function findSportByIdAndSetVariable(id) {
-		if (sportListD && sportListD.data) {
-			const sportType = sportListD.data.find(item => item.sport_id === id);
-			if (sportType) {
-				let sportName = sportType.name;
-				console.log(`Sport Name: ${sportName}`);
-				console.log(sportType);
-			} else {
-				console.log(`Sport with sport_id ${id} not found.`);
-			}
-		} else {
-			console.log('sportListD or sportListD.data is undefined or null.');
-		}
-	}
 
     // Example usage of findSportByIdAndSetVariable
     findSportByIdAndSetVariable(searchData.sport);
