@@ -491,7 +491,7 @@
 	// Define the sport ID you want to find
 	const sportID = sport;
 
-	function findSportByIdAndSetVariable(sportId, sportListD.) {
+	function findSportByIdAndSetVariable(sportId, sportListD) {
 		const sportType = sportListD..find(item => item.sport_id === sportId);
 		if (sportType) {
 			const sportName = sportType.name;
