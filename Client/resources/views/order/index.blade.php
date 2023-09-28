@@ -468,6 +468,8 @@
 			});
 		});
 	}
+	
+	console.log(sportListD);
 
 
 	function createList(orderItem, orderIndex) {
