@@ -112,7 +112,6 @@
                     </tr>
                 </thead>
                 <tbody id="orderDataTemp">
-                    <!-- The template for rendering order data -->
                     <tr template="orderTemplate" hidden>
                         <td class="no-border-left orderData_id"></td>
                         <td template="sportType" hidden>
@@ -220,10 +219,7 @@
         // Create and append elements for bet data (if needed)
     }
 
-    function findSportNameById(id) {
-        const sportType = sportListD.data.find(item => item.sport_id === id);
-        return sportType ? sportType.name : 'Unknown';
-    }
+    renderView();
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
