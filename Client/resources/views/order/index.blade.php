@@ -474,6 +474,7 @@
 		return totalResultAmount;
 	}
 
+	const totalResultAmount = renderView();
 	console.log('Total Result Amount:', totalResultAmount);
 	
 	console.log(sport);
