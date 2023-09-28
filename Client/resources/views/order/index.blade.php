@@ -502,19 +502,14 @@
             $('#orderDataTemp').append(orderData);
         }
 
-        function createData(orderItem, betItem, betIndex) {
+        function createData(orderData, betItem, betIndex) {
             // Create and append elements for bet data (if needed)
             // ...
 
             // Example code for adding a bet data element
             let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
-            orderItem.find('.orderData_betDataDetails').append(betDataElement);
+            orderData.find('.orderData_betDataDetails').append(betDataElement);
         }
-
-    function findSportNameById(id) {
-        const sportType = sportListD.data.find(item => item.sport_id === id);
-        return sportType ? sportType.name : 'Unknown';
-    }
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
