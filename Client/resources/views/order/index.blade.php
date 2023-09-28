@@ -521,12 +521,12 @@
 
 	function calculateTotalResultAmount() {
 		let totalResultAmount = 0;
-		orderListD.data.list.forEach((orderItem) => {
+		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			totalResultAmount += orderItem.result_amount;
 		});
 		return totalResultAmount;
 	}
-	
+
 	let totalResultAmount = calculateTotalResultAmount();
 	console.log('Total Result Amount:', totalResultAmount);
 
