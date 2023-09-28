@@ -479,18 +479,17 @@
     	return totalResultAmount;
 	}
 	
-	const specificSport = sportListD.data.find(item => item.sport_id === sport);
+	// const specificSport = sportListD.data.find(item => item.sport_id === sport);
 
-	// Check if the specific sport was found
-	if (specificSport) {
-		console.log("Sport ID:", specificSport.sport_id);
-		console.log("Name:", specificSport.name);
-		console.log("Key:", specificSport.key);
-	} else {
-		console.log("Sport with ID 6046 not found.");
-	}
+	// if (specificSport) {
+	// 	console.log("Sport ID:", specificSport.sport_id);
+	// 	console.log("Name:", specificSport.name);
+	// 	console.log("Key:", specificSport.key);
+	// } else {
+	// 	console.log("Sport with ID 6046 not found.");
+	// }
 
-	console.log(sport);
+	console.log(sportListD);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
