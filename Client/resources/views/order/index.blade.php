@@ -471,9 +471,10 @@
 			totalResultAmount += orderItem.result_amount;
 		});
 		return totalResultAmount;
+		console.log('Total Result Amount:', totalResultAmount);
 	}
 	
-	console.log('Total Result Amount:', totalResultAmount);
+	
 	console.log(sport);
 
 	function createList(orderItem, orderIndex) {
