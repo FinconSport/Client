@@ -284,7 +284,6 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	var sportListD = @json($sportListD); 
 	sportListD.data.forEach(function(sport) {
         console.log("Sport ID: " + sport.sport_id);
         console.log("Name: " + sport.name);
