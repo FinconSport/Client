@@ -250,7 +250,7 @@
 		let betDataDetails_HomeAwayTeam = $('<span class="betDataDetails_HomeAwayTeam">').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
 		let betDataDetails_BetNameLine = $('<span class="betDataDetails_BetNameLine">').html(betItem.market_name + betItem.market_bet_name + betItem.market_bet_line);
 		let betDataDetails_BetRate = $('<span class="betDataDetails_BetRate">').html('@' + betItem.bet_rate);
-		let betDataDetails_BetStatus = $('<span class="betDataDetails_BetStatus">').html(betItem.bet_status);
+		let betDataDetails_BetStatus = $('<span class="betDataDetails_BetStatus">').html(betItem.status);
 
 		// Append the elements to the container
 		betDataDetailsContainer.append(
