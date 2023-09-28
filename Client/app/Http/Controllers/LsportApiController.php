@@ -326,14 +326,14 @@ class LsportApiController extends Controller {
             ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
             ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
             ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
-            // ->selectRaw(
-            //     'COUNT(*)'
-            // )
+            ->selectRaw(
+                'COUNT(*)'
+            )
             ->where('l.status', 1)
             ->whereIn('f.status', [1, 2])  //可區分:未開賽及走地中
             ->where('f.start_time', "<=", $after_tomorrow)
             ->groupBy('s.sport_id')
-            ->count();
+            ->get();
 
         dd($data);
 
