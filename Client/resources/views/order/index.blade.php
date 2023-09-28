@@ -127,7 +127,8 @@
 									<span class="betDataDetails_AwayName"></span>
 								</div>
 								<div>
-									<span class="betDataDetails_BetNameLine"></span>
+									<span class="betDataDetails_BetName"></span>
+									<span class="betDataDetails_BetLine"></span>
 								</div>
 							</span>
 						</td>
@@ -184,12 +185,9 @@
     var isReadyOrderInt = null
     var isReadyOrder = false
 
-	// title
-	var sportPriority = langTrans.sportPriority
-
 	// order list data
     var orderListD = {}
-	
+
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
@@ -209,8 +207,6 @@
 
     	return totalResultAmount;
 	}
-
-	console.log(sportListD);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
@@ -255,14 +251,16 @@
 		let betDataDetails_leagueName = betDataDetails.find('.betDataDetails_leagueName');
 		let betDataDetails_HomeName = betDataDetails.find('.betDataDetails_HomeName');
 		let betDataDetails_AwayName = betDataDetails.find('.betDataDetails_AwayName');
-		let betDataDetails_BetNameLine = betDataDetails.find('.betDataDetails_BetNameLine');
+		let betDataDetails_BetName = betDataDetails.find('.betDataDetails_BetName');
+		let betDataDetails_BetLine = betDataDetails.find('.betDataDetails_BetLine');
 
 		// Set content for the found elements
 		betDataDetails_leagueName.html(betItem.league_name);
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
 		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetNameLine.html(betItem.market_bet_line + betItem.market_priority);
+		betDataDetails_BetLine.html(betItem.market_bet_line);
+
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
