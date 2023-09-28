@@ -284,15 +284,7 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	console.log(sportListD);
-	const sportsObject = {};
-
-	sportListD.data.forEach(sport => {
-		sportsObject[sport.sport_id] = sport.name;
-	});
-
-	// Display the object
-	console.log(sportsObject);
+	console.log(sportListD.Object.data);
 
 
   	// 寫入頁面限定JS
