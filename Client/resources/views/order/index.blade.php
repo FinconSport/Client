@@ -469,9 +469,7 @@
 		});
 	}
 	
-	// The specific sport_id to find
-	const specificSportId = sport;
-	console.log(specificSportId);
+	console.log(sport);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
