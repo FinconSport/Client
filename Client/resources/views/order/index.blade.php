@@ -461,7 +461,7 @@
 
 	function renderView() {
 		let totalResultAmount = 0;
-		
+
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -470,13 +470,10 @@
 
 			totalResultAmount += orderItem.result_amount;
 		});
-
 		return totalResultAmount;
 	}
-
-	const totalResultAmount = renderView();
-	console.log('Total Result Amount:', totalResultAmount);
 	
+	console.log('Total Result Amount:', totalResultAmount);
 	console.log(sport);
 
 	function createList(orderItem, orderIndex) {
@@ -527,9 +524,6 @@
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
-
-	
-
 
 	function createTotal() {
 		let orderDataTotal = $('tr[template="orderTotalTemplate"]').clone();
