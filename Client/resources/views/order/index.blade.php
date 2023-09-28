@@ -464,46 +464,52 @@
     //     });
     // }
 
-	 // loop matchListD to generate html element here
-	 Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
-		createList(orderItem, orderIndex)
-		Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
-			createData(orderItem, betItem, betIndex)
-		})
-	})
+        // Use a regular for loop to iterate over the array
+        for (let orderIndex = 0; orderIndex < orderListD.data.list.length; orderIndex++) {
+            createList(orderListD.data.list[orderIndex], orderIndex);
 
-    function createList(orderItem, orderIndex) {
-        let orderData = $('tbody[template="orderTemplate"]').clone();
-        let orderData_id = orderData.find('.orderData_id');
-        let orderData_sportType = orderData.find('.orderData_sportType');
-        let orderData_mOrder = orderData.find('.orderData_mOrder');
-        let orderData_betAmount = orderData.find('.orderData_betAmount');
-        let orderData_createdTime = orderData.find('.orderData_createdTime');
-        let orderData_resultAmount = orderData.find('.orderData_resultAmount');
-        let orderData_resultTime = orderData.find('.orderData_resultTime');
-        let orderData_status = orderData.find('.orderData_status');
-        let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
-        let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
+            // Iterate over the bet_data array
+            for (let betIndex = 0; betIndex < orderListD.data.list[orderIndex].bet_data.length; betIndex++) {
+                createData(orderListD.data.list[orderIndex], orderListD.data.list[orderIndex].bet_data[betIndex], betIndex);
+            }
+        }
 
-        orderData_id.html(orderItem.id);
-        orderData_mOrder.html(orderItem.m_order);
-        orderData_betAmount.html(orderItem.bet_amount);
-        orderData_createdTime.html(orderItem.create_time);
-        orderData_resultAmount.html(orderItem.result_amount);
-        orderData_resultTime.html(orderItem.result_time);
-        orderData_status.html(orderItem.status);
-        orderData_totalBetAmount.html(orderItem.bet_amount);
-        orderData_totalResultAmount.html(orderItem.result_amount);
+        function createList(orderItem, orderIndex) {
+            let orderData = $('tbody[template="orderTemplate"]').clone();
+            let orderData_id = orderData.find('.orderData_id');
+            let orderData_mOrder = orderData.find('.orderData_mOrder');
+            let orderData_betAmount = orderData.find('.orderData_betAmount');
+            let orderData_createdTime = orderData.find('.orderData_createdTime');
+            let orderData_resultAmount = orderData.find('.orderData_resultAmount');
+            let orderData_resultTime = orderData.find('.orderData_resultTime');
+            let orderData_status = orderData.find('.orderData_status');
+            let orderData_totalBetAmount = orderData.find('.orderData_totalBetAmount');
+            let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
-        orderData.removeAttr('hidden');
-        orderData.removeAttr('template');
+            orderData_id.html(orderItem.id);
+            orderData_mOrder.html(orderItem.m_order);
+            orderData_betAmount.html(orderItem.bet_amount);
+            orderData_createdTime.html(orderItem.create_time);
+            orderData_resultAmount.html(orderItem.result_amount);
+            orderData_resultTime.html(orderItem.result_time);
+            orderData_status.html(orderItem.status);
+            orderData_totalBetAmount.html(orderItem.bet_amount);
+            orderData_totalResultAmount.html(orderItem.result_amount);
 
-        $('#orderDataTemp').append(orderData);
-    }
+            orderData.removeAttr('hidden');
+            orderData.removeAttr('template');
 
-    function createData(orderItem, orderIndex, betItem, betIndex) {
-        // Create and append elements for bet data (if needed)
-    }
+            $('#orderDataTemp').append(orderData);
+        }
+
+        function createData(orderItem, betItem, betIndex) {
+            // Create and append elements for bet data (if needed)
+            // ...
+
+            // Example code for adding a bet data element
+            let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
+            orderItem.find('.orderData_betDataDetails').append(betDataElement);
+        }
 
     function findSportNameById(id) {
         const sportType = sportListD.data.find(item => item.sport_id === id);
