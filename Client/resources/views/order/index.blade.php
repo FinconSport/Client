@@ -119,24 +119,6 @@
                         </td>
                         <td class="orderData_mOrder"></td>
                         <td class="orderData_betDataDetails">
-							<span class="betaDetcon" template="betDataDetailsTemp" hidden>
-								<span class="betDataDetails_leagueName"></span>
-								<div>
-									<span class="betDataDetails_HomeAway"></span>
-								</div>
-								<div>
-									<span class="betDataDetails_BetNameLine"></span>
-									<span class="betDataDetails_BetRateStatus"></span>
-								</div>
-								<div>
-									<span class="betDataDetails_HomeName"></span>
-									<span class="betDataDetails_HomeScore"></span>
-								</div>
-								<div>
-									<span class="betDataDetails_AwayName"></span>
-									<span class="betDataDetails_AwayScore"></span>
-								</div>
-							</span>
 						</td>
                         <td class="text-right">
                             <span class="orderData_betAmount"></span>
@@ -202,20 +184,17 @@
 		let totalBetAmount = 0;
 
 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			// Assuming createList and createBetDataDetails are valid functions.
 			createList(orderItem, orderIndex);
 			orderItem.bet_data.forEach((betItem, betIndex) => {
 			createBetDataDetails(orderItem, betItem, betIndex);
 			});
 
-			// Validate and accumulate totalResultAmount
+			// Validate and accumulate total
 			totalResultAmount += parseFloat(orderItem.result_amount) || 0;
 			totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
 		});
 
 		createTotal(totalResultAmount, totalBetAmount);
-
-		console.log('Total Bet Amount:', totalBetAmount);
 
 		return totalResultAmount;
 	}
@@ -237,7 +216,7 @@
 
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
-		orderData_mOrder.html(orderItem.m_order);
+		orderData_mOrder.html((orderItem.m_order === 0 ? '{{ trans("index.main.sport") }}' : '{{ trans("index.main.morder") }}')orderItem.m_order);
 		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
 		orderData_betAmount.html(orderItem.bet_amount);
 		orderData_createdTime.html(orderItem.create_time);
@@ -255,7 +234,7 @@
 		// Create a container for each bet_data
 		let betDataDetailsContainer = $('<div class="betaDetcon">');
 
-		// Find elements within the cloned template (similar to your existing code)
+		// Set content
 		let betDataDetails_leagueName = $('<div class="mb-3">').html('<span>' + betItem.league_name + '</span>');
 		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
 		let betDataDetails_MarketNameLineRate = $('<div>').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span> @' + betItem.bet_rate + '</span>');
@@ -296,21 +275,16 @@
 		}
 	}
 
-	
 	function createTotal(totalResultAmount, totalBetAmount) {
 
-		// Clone the template row for the total
 		let orderDataTotal = $('#countTr').clone();
 
-		// Remove hidden and template attributes
 		orderDataTotal.removeAttr('hidden');
 		orderDataTotal.removeAttr('template');
 
-		// Set the content for the total result amount
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 
-		// Append the total row to the table body
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 

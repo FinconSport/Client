@@ -27,6 +27,8 @@ return [
 		"last_page" => "最後一頁",
 		"expand" => "展開",
 		"close" => "收起",
+		"sport" => "体育博彩",
+    	"morder" => "交叉比赛投注",
 	]
 	// 後端
 ];

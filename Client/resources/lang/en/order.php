@@ -27,6 +27,8 @@ return [
 		"last_page" => "Last Page",  //  "最後一頁",
 		"expand" => "Expand",  // "展開",
 		"close" => "Close",  //  "收起",
+		"sport" => "Sports betting", // 体育博彩
+    	"morder" => "Cross match betting", //交叉比赛投注
 	],  //  
 	'sportPriority' => [
 		1 => 'Full Match Win',
