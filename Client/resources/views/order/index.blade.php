@@ -216,7 +216,7 @@
 
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
-		orderData_mOrder.html(orderItem.m_order === '0' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
+		orderData_mOrder.html(orderItem.m_order === '0' ? '{{ trans("index.main.sport") }}' : '{{ trans("index.main.morder") }}');
 		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
 		orderData_betAmount.html(orderItem.bet_amount);
 		orderData_createdTime.html(orderItem.create_time);
