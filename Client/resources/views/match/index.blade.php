@@ -150,7 +150,7 @@
             if( isReadyCommon ) {
                 callResultListData.sport_id = sport // default sport
 				matchTitle = langTrans.matchTitle[sport]
-				matchTitleAll = langTrans.matchTitle[sport].concat(matchCommonTitle)
+				matchTitleAll = matchCommonTitle.concat(langTrans.matchTitle[sport])
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
