@@ -179,6 +179,12 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
+	const sportMapping = {
+		154914: "baseball",
+		6046: "basketball",
+		48242: "soccer"
+	};
+
 	function renderView() {
 		let totalResultAmount = 0;
 		let totalBetAmount = 0;
@@ -195,6 +201,14 @@
 		});
 
 		createTotal(totalResultAmount, totalBetAmount);
+
+		for (const item of orderListD.data.list) {
+			for (const bet of item.bet_data) {
+				const sportId = bet.sport_id;
+				const sportName = sportMapping[sportId] || "unknown";
+				console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
+			}
+		}
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -226,19 +240,9 @@
 	}
 
 
-	const sportMapping = {
-		154914: "baseball",
-		6046: "basketball",
-		48242: "soccer"
-	};
+	
 
-	for (const item of orderListD.data.list) {
-		for (const bet of item.bet_data) {
-			const sportId = bet.sport_id;
-			const sportName = sportMapping[sportId] || "unknown";
-			console.log(`Sport ID: ${sportId}, Sport Name: ${sportName}`);
-		}
-	}
+	
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
