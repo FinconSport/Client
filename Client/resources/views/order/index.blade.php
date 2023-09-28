@@ -188,7 +188,7 @@
     }
 
     // Example usage of findSportByIdAndSetVariable
-    findSportByIdAndSetVariable(searchData.sport);
+    // findSportByIdAndSetVariable(searchData.sport);
 	console.log(searchData.sport);
 
     function createList(orderItem, orderIndex) {
@@ -205,7 +205,7 @@
         let orderData_totalResultAmount = orderData.find('.orderData_totalResultAmount');
 
         orderData_id.html(orderItem.id);
-        orderData_sportType.html(findSportNameById(orderItem.sport_id));
+        // orderData_sportType.html(findSportNameById(orderItem.sport_id));
         orderData_mOrder.html(orderItem.m_order);
         orderData_betAmount.html(orderItem.bet_amount);
         orderData_createdTime.html(orderItem.create_time);
