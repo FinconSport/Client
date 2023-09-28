@@ -265,8 +265,8 @@
 		if (betIndex > 0) {
 			// Add a custom class to elements of subsequent bet_data items
 			betDataDetailsContainer.addClass('custom-class'); // Change 'custom-class' to your desired class name
-			let button = $('<button class="btn btn-primary">Button Text</button>'); // Replace "Button Text" with your desired button text
-			orderDataBetDataDetails.append(button);
+			let button = $('<button class="btn btn-primary">Show more</button>'); // Replace "Button Text" with your desired button text
+			$('.custom-class').after(button);
 		}
 
 		// Append the container to the orderDataBetDataDetails
