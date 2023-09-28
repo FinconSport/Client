@@ -488,14 +488,14 @@
 					console.log("Click");
 					submenuClicked = true;
 				} else {
-					currentSubmenuToggleList.animate({ maxHeight: '0' }, 300, 'ease-out');
+					currentSubmenuToggleList.animate({ maxHeight: '0' }, 300);
 					console.log("unclick");
 					submenuClicked = false;
 				}
 			}
 
 			$('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-			$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300, 'ease-out');
+			$('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300);
 		});
 		// ----------------------------
 
