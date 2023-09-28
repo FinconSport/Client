@@ -105,7 +105,7 @@
                         <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
-                        <th style="width: 40%;">{{ trans('order.main.detail') }}</th>
+                        <th style="width: 30%;">{{ trans('order.main.detail') }}</th>
                         <th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
                         <th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
                         <th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
@@ -154,7 +154,7 @@
 						<td style="width: 5%;"></td>
                         <td style="width: 10%;"></td>
                         <td style="width: 10%;"></td>
-                        <td style="width: 40%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 30%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
                         <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
                         <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
                         <td style="width: 10%;"></td>
@@ -252,9 +252,9 @@
 		// Find elements within the cloned template (similar to your existing code)
 		let betDataDetails_leagueName = $('<div class="mb-3">').html('<span>' + betItem.league_name + '</span>');
 		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
-		let betDataDetails_MarketNameLineRate = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
-		let betDataDetails_HomeTeam = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.home_team_name + '</span><span>' + betItem.home_team_score + '</span>');
-		let betDataDetails_AwayTeam = $('<div class="d-flex justify-content-between">').html('<span>' + betItem.away_team_name + '</span><span>' + betItem.away_team_score + '</span>');
+		let betDataDetails_MarketNameLineRate = $('<div class="d-flex justify-content-start"">').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span> @' + betItem.bet_rate + '</span>');
+		let betDataDetails_HomeTeam = $('<div class="d-flex justify-content-start"">').html('<span>' + betItem.home_team_name + '</span><span> ' + betItem.home_team_score + '</span>');
+		let betDataDetails_AwayTeam = $('<div class="d-flex justify-content-start"">').html('<span>' + betItem.away_team_name + '</span><span> ' + betItem.away_team_score + '</span>');
 		let betDataDetails_Status = $('<div>').html('<span>' + betItem.status + '</span>');
 
 		// Append the elements to the container
