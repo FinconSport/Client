@@ -284,7 +284,7 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	consoloe.log(sportListD);
+	console.log(sportListD);
 
 
   	// 寫入頁面限定JS
