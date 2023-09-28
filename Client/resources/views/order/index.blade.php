@@ -469,6 +469,9 @@
 		});
 	}
 
+	// Define the sport ID you want to find
+	const sportID = sport;
+
 	function findSportByIdAndSetVariable(sportId) {
 		const sportType = sportListD.data.find(item => item.sport_id === sportId);
 		let sportName = null; // Initialize the variable
@@ -481,8 +484,7 @@
 		}
 	}
 
-	// Call the function with the sport ID you want to find
-	findSportByIdAndSetVariable(sport);
+	findSportByIdAndSetVariable(sportID);
 
 	function createList(orderItem, orderIndex) {
 		let orderData = $('tr[template="orderTemplate"]').clone();
