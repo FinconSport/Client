@@ -185,11 +185,6 @@
                 createData(item, index, betItem, betIndex);
             });
         });
-
-        // Loop through sportListD.data to generate sport-related elements (if needed)
-        sportListD.data.forEach((sport) => {
-            // You can create sport-related elements here if required
-        });
     }
 
 	
@@ -209,8 +204,8 @@
 	}
 
     // Example usage of findSportByIdAndSetVariable
-    findSportByIdAndSetVariable(sport);
-	console.log(sport);
+    findSportByIdAndSetVariable(searchData.sport);
+	console.log(searchData.sport);
 
     function createList(orderItem, orderIndex) {
         let orderData = $('tbody[template="orderTemplate"]').clone();
