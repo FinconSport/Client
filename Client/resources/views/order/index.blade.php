@@ -206,19 +206,34 @@
 
 				// If there are more than one bet_data, add a toggle button
 				if (betDataDetailsCount > 1) {
-					let toggleButton = $('<button>').text('Show More Bet Data');
-					toggleButton.click(() => {
-						// Toggle the display of additional bet_data
+					let showButton = $('<button>').text('Show More Bet Data');
+					let hideButton = $('<button>').text('Hide Bet Data').hide();
+
+					// Show More Bet Data button click event
+					showButton.click(() => {
+						// Show all bet_data items except the first one
 						for (let i = 1; i < betDataDetailsCount; i++) {
 							createBetDataDetails(orderItem, orderItem.bet_data[i], i);
 						}
-						toggleButton.hide(); // Hide the "Show More Bet Data" button
+						showButton.hide(); // Hide the "Show More Bet Data" button
+						hideButton.show(); // Show the "Hide Bet Data" button
 					});
 
-					// Append the toggle button
+					// Hide Bet Data button click event
+					hideButton.click(() => {
+						// Hide all bet_data items except the first one
+						for (let i = 1; i < betDataDetailsCount; i++) {
+							let betDataId = 'betData_' + orderItem.id + '_' + i;
+							$('#' + betDataId).hide();
+						}
+						showButton.show(); // Show the "Show More Bet Data" button
+						hideButton.hide(); // Hide the "Hide Bet Data" button
+					});
+
+					// Append the buttons
 					let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 					let orderDataBetDataDetails = $('#' + betDataDetailsId);
-					orderDataBetDataDetails.append(toggleButton);
+					orderDataBetDataDetails.append(showButton, hideButton);
 				}
 			}
 
