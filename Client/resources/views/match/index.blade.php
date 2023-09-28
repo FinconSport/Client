@@ -89,6 +89,7 @@
 	var fetchMoreLock = false; // infinite scroll lock -> to prevent infinite loop
 	var langTrans = @json(trans('match')); // lang file
 	var matchTitle = null
+	var matchCommonTitle = langTrans.matchTitle.commonTitle
 
 	// detect ini ajax
     var isReadyResultInt = null
@@ -147,7 +148,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callResultListData.sport_id = sport // default sport
-				matchTitle = langTrans.matchTitle[sport]
+				matchTitle = langTrans.matchTitle[sport].concat(matchCommonTitle)
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
