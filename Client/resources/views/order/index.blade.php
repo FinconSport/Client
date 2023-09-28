@@ -468,7 +468,7 @@
 	 Object.entries(orderListD.data.list).map(([orderItem, orderIndex]) => {
 		createList(orderItem, orderIndex)
 		Object.entries(orderItem.bet_data).map(([betItem, betIndex]) => {
-			// createData(orderItem, betItem, betIndex)
+			createData(orderItem, betItem, betIndex)
 		})
 	})
 
