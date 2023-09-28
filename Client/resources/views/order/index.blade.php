@@ -285,11 +285,7 @@
 	}
 
 	var sportListData = sportListD;
-	console.log(sportListData);
-
-	// Display the extracted sport_ids
-	console.log(sportIds);
-
+	console.log(":" + sportListData);
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
