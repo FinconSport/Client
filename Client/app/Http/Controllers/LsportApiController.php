@@ -299,7 +299,7 @@ class LsportApiController extends Controller {
     }
 }
 */
-    public function IndexMatchList2(Request $request) {
+    public function IndexMatchList(Request $request) {
         
         $input = $this->getRequest($request);
 
@@ -337,7 +337,6 @@ class LsportApiController extends Controller {
             // DB::table('lsport_league as l')
             // ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
-            ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
                 "lsport_sport.sport_id, lsport_sport.{$lang_col}, lsport_fixture.status, COUNT(*) as cnt"
             )
@@ -355,6 +354,7 @@ class LsportApiController extends Controller {
         
     	//---------------------------------
         $ret = array();
+        $arrFixtures = array();
 
         $living_types = [
             1 => "early",  //早盤
@@ -412,119 +412,6 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         $this->ApiSuccess($ret, "01"); 
-    }
-
-    public function IndexMatchList(Request $request) {
-      
-    	$input = $this->getRequest($request);
-
-        $checkToken = $this->checkToken($input);
-        if ($checkToken === false) {
-            $this->ApiError("PLAYER_RELOGIN", true);
-        }
-
-        //---------------------------------
-        // 取得代理的語系
-        $player_id = $input['player'];
-        $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
-
-    	//---------------------------------
-        // 取得球種資料
-        $arrSports = LsportSport::get();
-        if ($arrSports === false) {
-            $this->ApiError("01");
-        }
-
-        $sport_type = array();
-        foreach ($arrSports as $k => $v) {
-            $sport_type[$v['sport_id']] = $v[$lang_col];
-        }
-
-        $menu_type = [
-            0 => "living",  //走地
-            1 => "early",  //早盤
-        ];
-
-        $data = array();
-        //$total = 0;
-
-        foreach ($menu_type as $k => $v) {
-
-            switch ($k) {
-                case 0:  // 進行中
-
-                    $arrFixtures = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
-                        ->join('lsport_league', function ($join) {
-                            $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
-                                 ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
-                        })
-                        ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) AS count, COUNT(*) AS rate_count')
-                        //->where('lsport_market_bet.is_active', '=', 1)
-                        ->where('lsport_fixture.status', 2)  // 2=進行中
-                        ->where('lsport_league.status', 1)
-                        ->groupBy('lsport_fixture.sport_id')
-                        ->having('rate_count', '>', 0)
-                        ->get();
-
-                    if ($arrFixtures === false) {
-                        $this->ApiError("01");
-                    }
-                    
-                    $tmp = array();
-                    $total = 0;
-                    foreach ($arrFixtures as $kk => $vv) {
-                        $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
-                        $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
-                        $total += $vv['count'];
-                    }
-
-                    $tmp['total'] = $total;
-                    $data[$v] = $tmp;
-                    break;
-
-                case 1:  // 早盤
-
-                    $arrFixtures = LsportFixture::join('lsport_market_bet', 'lsport_fixture.fixture_id', '=', 'lsport_market_bet.fixture_id')
-                        ->join('lsport_league', function ($join) {
-                            $join->on('lsport_fixture.sport_id', '=', 'lsport_league.sport_id')
-                                 ->on('lsport_fixture.league_id', '=', 'lsport_league.league_id');
-                        })
-                    ->selectRaw('lsport_fixture.sport_id, COUNT(DISTINCT lsport_fixture.id) AS count, COUNT(*) AS rate_count')
-                    //->where('lsport_market_bet.is_active', '=', 1)
-                    ->where('lsport_fixture.status', 1)  // 1=尚未開打
-                    ->where('lsport_league.status', 1)
-                    ->groupBy('lsport_fixture.sport_id')
-                    ->having('rate_count', '>', 0)
-                    ->get();
-
-                    if ($arrFixtures === false) {
-                        $this->ApiError("01");
-                    }
-                    
-                    $tmp = array();
-                    $total = 0;
-                    foreach ($arrFixtures as $kk => $vv) {
-                        $tmp["items"][$vv['sport_id']]['name'] = $sport_type[$vv['sport_id']];
-                        $tmp["items"][$vv['sport_id']]['count'] = $vv['count'];
-                        $total += $vv['count'];
-                    }
-
-                    $tmp['total'] = $total;
-                    $data[$v] = $tmp;
-                    break;
-
-                default:
-                    break;
-            }
-            
-            // 處理加總
-            $total = array_sum($data[$v]);
-            $data[$v]['total'] = $total;
-            
-        }
-
-        $this->ApiSuccess($data, "01"); 
     }
 
 /****************************************

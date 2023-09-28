@@ -468,6 +468,28 @@
 			});
 		});
 	}
+	
+	// The specific sport_id to find
+	const specificSportId = sport;
+
+	// Function to find the sport with the specific sport_id
+	function findSportById(data, sportId) {
+		for (const sport of sportListD.data) {
+			if (sport.sport_id === sportId) {
+				return sport;
+			}
+		}
+		return null; // Return null if the sport is not found
+	}
+
+	// Call the function to find the sport
+	const foundSport = findSportById(sportListD, specificSportId);
+
+	if (foundSport) {
+		console.log(foundSport);
+	} else {
+		console.log(`Sport with sport_id ${specificSportId} not found.`);
+	}
 
 
 	function createList(orderItem, orderIndex) {
