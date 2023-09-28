@@ -262,7 +262,7 @@
 		betDataDetails_HomeName.html(betItem.home_team_name);
 		betDataDetails_AwayName.html(betItem.away_team_name);
 		betDataDetails_BetName.html(betItem.market_bet_name);
-		betDataDetails_BetNameLine.html(betItem.market_bet_line + sportPriority[betItem.market_priority]);
+		betDataDetails_BetNameLine.html(betItem.market_bet_line + betItem.market_priority);
 		// Append the new betDataDetails to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetails);
 	}
