@@ -337,8 +337,6 @@
 					@endif
 				</tbody>
 			</table>
-			
-		
 		@break
             <!-- Content for sport 3 -->
         @default
@@ -378,19 +376,6 @@
 @endSection
 @push('main_js')
 <script>
-
-	/*
-		===== PECO =====
-		1. search api and infiniti api?
-		2. api:result_index -> gzip is unset
-		===== PECO =====
-	*/ 
-
-	//Identify sport id
-	var sportn = parseInt(searchData["sport"], 10);
-
-
-    
     var isLastPage = false; // infinite scroll -> detect if it's last page
 	var fetchMoreLock = false; // infinite scroll lock -> to prevent infinite loop
 	var langTrans = @json(trans('match')); // lang file
@@ -398,16 +383,12 @@
 	// detect ini ajax
     var isReadyResultInt = null
     var isReadyResult = false
+	var isReadySportInt = null
 	
 	// result list data
     var resultListD = {}
     var callResultListData = { token: token, player: player, sport: sport, page: 1 }
     const resultList_api = 'https://sportc.asgame.net/api/v2/result_index'
-
-	// seriesList
-	var seriesListD = {}
-    var callSeriesListData = commonCallData
-	const seriesList_api = '' // tbd
 
 	function renderView( isIni = 0 ) {
 
@@ -421,20 +402,6 @@
 
 
 			// loop seriesListD here to generate the search select then append into the page
-
-			// search condition setting
-			if( searchData.series_id !== undefined ) {
-				$('select[name="series_id"]').val(searchData.series_id)
-				$('select[name="series_id"]').trigger('change')
-			}
-			if( searchData.start_time !== undefined ) {
-				$('input[name="start_time"]').val(searchData.start_time)
-				$('input[name="start_time"]').trigger('change')
-			}
-			if( searchData.end_time !== undefined ) {
-				$('input[name="end_time"]').val(searchData.end_time)
-				$('input[name="end_time"]').trigger('change')
-			}
 		}
 		
 
@@ -455,10 +422,14 @@
 
 	$(document).ready(function() {
 
-		// ini data from ajax
-        caller(resultList_api, callSeriesListData, resultListD) // resultListD
-        // caller(seriesList_api, callSeriesListData, seriesListD) // seriesListD
-
+		// detest is sport List is ready
+        isReadySportInt = setInterval(() => {
+            if( isReadyCommon ) {
+                callResultListData.sport_id = sport // default sport
+				caller(resultList_api, callResultListData, resultListD) // resultListD
+                clearInterval(isReadySportInt)
+            }
+        }, 100);
 
 		// check if api are all loaded every 500 ms 
         isReadyResultInt = setInterval(() => {
