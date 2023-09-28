@@ -421,7 +421,7 @@ class LsportApiController extends Controller {
             
         }
         foreach ($totals as $living_key => $total) {
-            $ret[$living_key]['items']['total'] = $total;
+            $ret[$living_key]['total'] = $total;
         }
         
         //算早盤total 跟 走地total
