@@ -456,24 +456,13 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 		function renderView() {
-			// orderListD.data.list.forEach((orderItem, orderIndex) => {
-			//     createList(orderItem, orderIndex);
-			//     orderItem.bet_data.forEach((betItem, betIndex) => {
-			//         createData(orderItem, orderIndex, betItem, betIndex);
-			//     });
-			// });
-			// Use a regular for loop to iterate over the array
-			for (let orderIndex = 0; orderIndex < orderListD.data.list.length; orderIndex++) {
-				createList(orderListD.data.list[orderIndex], orderIndex);
-
-				// Iterate over the bet_data array
-				for (let betIndex = 0; betIndex < orderListD.data.list[orderIndex].bet_data.length; betIndex++) {
-					createData(orderListD.data.list[orderIndex], orderListD.data.list[orderIndex].bet_data[betIndex], betIndex);
-				}
-			}
+			orderListD.data.list.forEach((orderItem, orderIndex) => {
+			    createList(orderItem, orderIndex);
+			    // orderItem.bet_data.forEach((betItem, betIndex) => {
+			    //     createData(orderItem, orderIndex, betItem, betIndex);
+			    // });
+			});
 		}
-
-        
 
 		function createList(orderItem, orderIndex) {
 			let orderData = $('tbody[template="orderTemplate"]').clone();
@@ -505,13 +494,10 @@
 			$('#orderDataTemp').append(orderData);
 		}
 
-		function createData(orderItem, betItem, betIndex) {
-			// Create and append elements for bet data (if needed)
-			// ...
-
-			// let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
-			// orderItem.find('.orderData_betDataDetails').append(betDataElement);
-		}
+		// function createData(orderItem, betItem, betIndex) {
+		// 	let betDataElement = $('<div>').html('Bet Data: ' + betItem.market_bet_name);
+		// 	orderItem.find('.orderData_betDataDetails').append(betDataElement);
+		// }
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
