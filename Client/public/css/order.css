@@ -131,7 +131,7 @@ div[key="matchSportMenu"]{
 }
 .orderData_betDataDetails {
     position: relative;
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 1.5rem 1rem 1rem 1rem!important;
 }
 
 .betaDetcon {
