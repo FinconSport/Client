@@ -524,7 +524,7 @@
 			let betDataDetails_betaName = betDataDetails.find('.betDataDetails_betaName');
 
 			// Set content for the found elements
-			betDataDetails_betaName.html(betItem.market_bet_line);
+			betDataDetails_betaName.html(betItem.market_bet_name);
 			$('.orderData_betDataDetails').append(betDataDetails);
 		}
 
