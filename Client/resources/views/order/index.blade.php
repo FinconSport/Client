@@ -284,6 +284,8 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	var sportListD = sportListD;
+
 	const sportIds = sportListD.data.map(item => item.sport_id);
 
 	// Display the extracted sport_ids
