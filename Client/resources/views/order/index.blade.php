@@ -179,11 +179,6 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	const sportMapping = {
-		154914: "baseball",
-		6046: "basketball",
-		48242: "soccer"
-	};
 
 	function renderView() {
 		let totalResultAmount = 0;
