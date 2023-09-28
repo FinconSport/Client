@@ -347,6 +347,9 @@ class LsportApiController extends Controller {
             ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
             ->groupBy('lsport_sport.sport_id', 'lsport_fixture.status')
             ->get();
+        if ($data === false) {
+            $this->ApiError("02");
+        }
         
     	//---------------------------------
         $ret = array();
@@ -390,7 +393,7 @@ class LsportApiController extends Controller {
         // dd($ret);
 
         ///////////////////////////////////
-        $this->ApiSuccess($data, "01"); 
+        $this->ApiSuccess($ret, "01"); 
     }
 
     public function IndexMatchList(Request $request) {
