@@ -243,28 +243,29 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-
 		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
 		let orderDataBetDataDetails = $('#' + betDataDetailsId);
 
-		orderDataBetDataDetails.empty();
-
-
 		// Create a container for each bet_data
-		// let betDataDetailsContainer = $('<div class="betaDetcon">');
-		let betDataDetailsContainer = $('span[template="betDataDetailsTemp"]').clone();
+		let betDataDetailsContainer = $('<div class="betaDetcon">');
 
-		betDataDetailsContainer.removeAttr('hidden');
-		betDataDetailsContainer.removeAttr('template');
+		// Find elements within the cloned template (similar to your existing code)
+		let betDataDetails_leagueName = $('<div').html('<span>' + betItem.league_name + '</span>');
+		let betDataDetails_HomeName = $('<div').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
+		let betDataDetails_MarketNameLineRate = $('<div').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span>@' + betItem.bet_rate + '</span>');
+		let betDataDetails_HomeTeam = $('<div').html('<span>' + betItem.home_team_name + '</span><span>' + betItem.home_team_score + '</span>');
+		let betDataDetails_AwayTeam = $('<div').html('<span>' + betItem.away_team_name + '</span><span>' + betItem.away_team_score + '</span>');
+		let betDataDetails_Status = $('<div').html('<span>' + betItem.bet_status + '</span>');
 
-		betDataDetailsContainer.find('.betDataDetails_leagueName').html(betItem.league_name);
-		betDataDetailsContainer.find('.betDataDetails_HomeAway').html(betItem.home_team_name + '(' + betItem.home_team_score + ') VS ' + betItem.away_team_name + '(' + betItem.away_team_score + ')');
-		betDataDetailsContainer.find('.betDataDetails_BetNameLine').html(betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')');
-		betDataDetailsContainer.find('.betDataDetails_BetRateStatus').html('@' + betItem.bet_rate);
-		betDataDetailsContainer.find('.betDataDetails_HomeName').html(betItem.home_team_name);
-		betDataDetailsContainer.find('.betDataDetails_HomeScore').html(betItem.home_team_score);
-		betDataDetailsContainer.find('.betDataDetails_AwayName').html(betItem.away_team_name);
-		betDataDetailsContainer.find('.betDataDetails_AwayScore').html(betItem.away_team_score);
+		// Append the elements to the container
+		betDataDetailsContainer.append(
+			betDataDetails_leagueName,
+			betDataDetails_HomeName,
+			betDataDetails_MarketNameLineRate,
+			betDataDetails_HomeTeam,
+			betDataDetails_AwayTeam,
+			betDataDetails_Status
+		);
 
 		if (betIndex > 0) { // Check if it's not the first item
 			// Add a custom class to elements of subsequent bet_data items
