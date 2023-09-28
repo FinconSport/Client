@@ -491,7 +491,7 @@
 		// Set content for the found elements
 		orderData_id.html(orderItem.id);
 		orderData_mOrder.html(orderItem.m_order);
-		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem)
+		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
 		orderData_betAmount.html(orderItem.bet_amount);
 		orderData_createdTime.html(orderItem.create_time);
 		orderData_resultAmount.html(orderItem.result_amount);
