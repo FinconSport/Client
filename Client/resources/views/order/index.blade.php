@@ -277,6 +277,7 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	//updateTotal when new data is loaded
 	function updateTotal() {
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount);
@@ -284,6 +285,7 @@
 
 	var hasMoreData = true;
 
+	// infinite scroll
 	$('#tableContainer').on('scroll', function () {
 	var container = $(this);
 	if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
