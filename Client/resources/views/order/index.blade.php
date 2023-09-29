@@ -146,6 +146,7 @@
         </div>
     </div>
 
+	<div id="loadingIndicator" style="display: none; text-align: center;"></div>
 	<!-- <div id="pagination">
 		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
 		<button onclick="navPage(1)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.pre_page') }}</button>
