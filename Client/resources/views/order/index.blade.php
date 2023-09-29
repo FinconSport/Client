@@ -284,9 +284,16 @@
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
 			caller(orderList_api, callOrderListData, orderListD)
-				.then(function () {
+				.then(function (response) {
 					$('#loadingIndicator').hide();
 					renderView();
+
+					// Check if there is more data in the API response
+					if (response.hasMoreData === true) {
+						hasMoreData = true;
+					} else {
+						hasMoreData = false;
+					}
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
@@ -294,6 +301,7 @@
 				});
 		}
 	});
+
 
 
   	// 寫入頁面限定JS
