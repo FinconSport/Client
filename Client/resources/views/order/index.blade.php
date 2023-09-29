@@ -276,27 +276,23 @@
 	}
 
 	var hasMoreData = true; // Assuming this variable is correctly defined
-	var maxPage = 10; // Set a maximum page limit (adjust as needed)
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
-			$('#loadingIndicator').show();
-			if (callOrderListData.page < maxPage) {
+			caller(orderList_api, callOrderListData, orderListD)
+				$('#loadingIndicator').show();
 				callOrderListData.page = parseInt(callOrderListData.page) + 1;
-				caller(orderList_api, callOrderListData, orderListD)
-					.then(function () {
-						$('#loadingIndicator').hide();
+				.then(function () {
+					if (orderListD.length > 0) {
+                        $('#loadingIndicator').hide();
 						renderView();
-					})
-					.catch(function (error) {
-						console.error('Error fetching more data:', error);
-						// Handle errors here
-					});
-			} else {
-				// No more data to load
-				$('#loadingIndicator').hide();
-			}
+                    }
+				})
+				.catch(function (error) {
+					console.error('Error fetching more data:', error);
+					// Handle errors here
+				});
 		}
 	});
 
