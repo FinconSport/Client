@@ -288,11 +288,16 @@
 					$('#loadingIndicator').hide();
 					renderView();
 
-					// Check if there is more data in the API response
-					if (response.hasMoreData === true) {
-						hasMoreData = true;
+					// Check if response is defined and has the 'hasMoreData' property
+					if (response && typeof response.hasMoreData !== 'undefined') {
+						if (response.hasMoreData === true) {
+							hasMoreData = true;
+						} else {
+							hasMoreData = false;
+						}
 					} else {
-						hasMoreData = false;
+						console.error('API response is missing the "hasMoreData" property.');
+						// Handle the missing property case here
 					}
 				})
 				.catch(function (error) {
@@ -301,7 +306,6 @@
 				});
 		}
 	});
-
 
 
   	// 寫入頁面限定JS
