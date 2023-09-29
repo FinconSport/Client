@@ -558,6 +558,7 @@
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
                                     if( v4.status === 1 ) {
                                         item.find('.bet_name').show()
