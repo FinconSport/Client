@@ -935,14 +935,13 @@
         })
     }
 
+
     // 餘額
-    function refreshBalence() {
+    async function refreshBalence() {
         $('#refreshIcon').addClass('rotate-animation')
-        caller(account_api, commonCallData, accountD)
-        setTimeout(() => {
-            $('.balance').html(accountD.data.balance)
-            $('#refreshIcon').removeClass('rotate-animation')
-        }, 1000);
+        await caller(account_api, commonCallData, accountD)
+        $('.balance').html(accountD.data.balance)
+        $('#refreshIcon').removeClass('rotate-animation')
     }
 </script>
 @endpush
