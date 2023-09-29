@@ -185,11 +185,11 @@
 	let totalBetAmount = 0;
 
 	function renderView() {
-		if (orderListD && orderListD.data.list ) {
+		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				createList(orderItem, orderIndex);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
-				createBetDataDetails(orderItem, betItem, betIndex);
+					createBetDataDetails(orderItem, betItem, betIndex);
 				});
 
 				// Validate and accumulate total
@@ -269,6 +269,11 @@
 		}
 	}
 
+	function updateTotal() {
+		$('.orderData_totalBetAmount').text(totalBetAmount);
+		$('.orderData_totalResultAmount').text(totalResultAmount);
+	}
+
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
@@ -287,8 +292,9 @@
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
 					$('#loadingIndicator').hide();
-					if (orderListD && orderListD.data.list ) {
+					if (orderListD && orderListD.data.list) {
 						renderView();
+						updateTotal(); // Call updateTotal when new data is loaded
 					}
 				})
 				.catch(function (error) {
