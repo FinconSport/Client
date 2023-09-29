@@ -280,7 +280,7 @@
 			button.on('click', function () {
 				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
 				if (button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')') {
-					button.text('{{ trans('order.main.close') }} (' + betDataLength + ')');
+					button.text('{{ trans('order.main.close') }}');
 				} else {
 					button.text('{{ trans('order.main.expand') }} (' + betDataLength + ')');
 				}
