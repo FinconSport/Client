@@ -277,19 +277,27 @@
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-		if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+
+		// Calculate how close to the bottom of the scroll container we are
+		var scrollBottom = container[0].scrollHeight - container.scrollTop() - container.innerHeight();
+
+		if (scrollBottom <= 100) {
+			// Show loading indicator
 			$('#loadingIndicator').show();
+
+			// Increment the page number
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
+			// Call the 'caller' function to fetch more data
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function (response) {
-					
-					// Check if response is defined and has the 'hasMoreData' property
+					// Check if response is defined and has more data
 					if (response) {
 						$('#loadingIndicator').hide();
-						renderView();
+						renderView(); // Only render the view if there's more data
 					} else {
-						console.log(response);
+						// No more data available, hide the loading indicator
+						$('#loadingIndicator').hide();
 					}
 				})
 				.catch(function (error) {
