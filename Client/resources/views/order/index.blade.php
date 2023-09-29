@@ -314,6 +314,7 @@
 		await caller(orderList_api, callOrderListData, orderListD, 1) // resultListD
 		renderView()
 		updateTotal()
+		$('#loader').hide() // loading transition
 	}
 
 	// scroll to bottom
