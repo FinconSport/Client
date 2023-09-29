@@ -181,27 +181,6 @@
     var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	function caller(api, data, target) {
-		// Implement your API call logic here and return a Promise
-		return new Promise((resolve, reject) => {
-			// Example: Make an AJAX request to the API
-			$.ajax({
-				url: api,
-				method: 'GET',
-				data: data,
-				success: function (response) {
-					// Update the target data (orderListD) with the fetched data
-					// Replace this with your actual data handling logic
-					target.data.list = target.data.list.concat(response.data.list);
-					resolve();
-				},
-				error: function (error) {
-					reject(error);
-				}
-			});
-		});
-    }
-
 	function renderView() {
 		let totalResultAmount = 0;
 		let totalBetAmount = 0;
@@ -297,42 +276,21 @@
 	}
 
 	$(window).on('scroll', function () {
-		// Check if the user has scrolled to the bottom of the page
 		if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-			// Display the loading indicator
 			$('#loadingIndicator').show();
-
-			// Increment the page number
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
-			// Make an API call to fetch more data
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
-					// Hide the loading indicator
 					$('#loadingIndicator').hide();
-
-					// Render the newly fetched data
 					renderView();
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
-					// You can handle errors here, e.g., display an error message.
+					// Handle errors here
 				});
 		}
 	});
-
-		caller(orderList_api, callOrderListData, orderListD)
-		.then(function () {
-			// Hide the loading indicator
-			$('#loadingIndicator').hide();
-
-			// Render the newly fetched data
-			renderView();
-		})
-		.catch(function (error) {
-			console.error('Error fetching more data:', error); // Add this line for error logging
-			// You can handle errors here, e.g., display an error message.
-		});
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
