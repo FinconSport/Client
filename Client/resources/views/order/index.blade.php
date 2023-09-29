@@ -196,8 +196,6 @@
 		});
 
 		createTotal(totalResultAmount, totalBetAmount);
-
-		
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -275,6 +273,55 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		$('#orderDataTemp').append(orderDataTotal);
 	}
+
+
+	    // Define variables for tracking the current page, whether more data is available, and whether a new request is in progress.
+		let currentPage = 1;
+		let isMoreDataAvailable = true;
+		let isLoading = false;
+
+		// Function to load more data when scrolling near the bottom of the container.
+		function loadMoreData() {
+			if (!isLoading && isMoreDataAvailable) {
+				const container = document.getElementById("orderContainer");
+				if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
+					// User is near the bottom, load more data
+					currentPage++;
+
+					const callOrderListData = {
+						page: currentPage,
+						// Add other parameters as needed
+					};
+
+					isLoading = true;
+
+					// Make an AJAX request to fetch more data (replace this with your actual AJAX call)
+					caller(orderList_api, callOrderListData, orderListD).then(response => {
+						if (response.status === 1) {
+						// Append the new data to the table
+						renderView();
+
+						isLoading = false;
+
+						// Check if there are more pages of data to load
+						if (response.data.list.length === 0) {
+							// No more data available, handle as needed
+							handleNoMoreData();
+						}
+						}
+					});
+				}
+			}
+		}
+
+		// Function to handle the "No more data" case
+		function handleNoMoreData() {
+		isMoreDataAvailable = false;
+		console.log("No more data available.");
+		}
+
+		// Attach the loadMoreData function to the scroll event of the container
+		document.getElementById("orderContaine").addEventListener("scroll", loadMoreData);
 
 
   	// 寫入頁面限定JS
