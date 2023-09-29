@@ -275,32 +275,21 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	var hasMoreData = true;
-
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+		if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			$('#loadingIndicator').show();
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function (response) {
-
+					
 					// Check if response is defined and has the 'hasMoreData' property
-					if (response && typeof response.hasMoreData !== 'undefined') {
-						if (response.hasMoreData === true) {
-							hasMoreData = true;
-						} else {
-							hasMoreData = false;
-						}
-
+					if (response && response.data.list.length > 0) {
 						$('#loadingIndicator').hide();
 						renderView();
 					} else {
-						// If 'hasMoreData' property is missing or not as expected, assume no more data is available
-						hasMoreData = false;
-						console.warn('API response is missing the "hasMoreData" property or it has an unexpected value.');
-						// Optionally, you can log a warning or handle this case differently
+						console.log('error');
 					}
 				})
 				.catch(function (error) {
