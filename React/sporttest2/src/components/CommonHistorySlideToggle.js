@@ -82,13 +82,11 @@ class CommonHistory extends React.Component {
                     <div className='teamSpan'>
                         <div className="teamSpanMarquee">
                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                {/* { val.bet_data[0].league_name }&emsp;&emsp;&emsp; */}
-                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                { val.bet_data[0].league_name }&emsp;&emsp;&emsp;
                             </Marquee>
                         </div>
                         <span className="teamSpanSpan">
-                            {/* { val.bet_data[0].league_name } */}
-                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                            { val.bet_data[0].league_name }
                         </span>
                     </div>
                     <div className='row m-0'>
@@ -151,13 +149,11 @@ class CommonHistory extends React.Component {
                                 <div className='teamSpan'>
                                     <div className="teamSpanMarquee">
                                         <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                            {/* {v.league_name}&emsp;&emsp;&emsp; */}
-                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                            {v.league_name}&emsp;&emsp;&emsp;
                                         </Marquee>
                                     </div>
                                     <span className="teamSpanSpan">
-                                        {/* {v.league_name} */}
-                                        我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                        {v.league_name}
                                     </span>
                                 </div>
                                 <div className='row m-0'>
