@@ -275,37 +275,40 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	var hasMorePages = true; // Initialize a variable to track if there are more pages initially.
+
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
+		if (
+			container.scrollTop() + container.innerHeight() >=
+			container[0].scrollHeight - 100
+		) {
+			if (hasMorePages) {
+				$('#loadingIndicator').show();
+				callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
-		// Calculate how close to the bottom of the scroll container we are
-		var scrollBottom = container[0].scrollHeight - container.scrollTop() - container.innerHeight();
-
-		if (scrollBottom <= 100) {
-			// Show loading indicator
-			$('#loadingIndicator').show();
-
-			// Increment the page number
-			callOrderListData.page = parseInt(callOrderListData.page) + 1;
-
-			// Call the 'caller' function to fetch more data
-			caller(orderList_api, callOrderListData, orderListD)
-				.then(function (response) {
-					// Check if response is defined and has more data
-					if (response) {
+				caller(orderList_api, callOrderListData, orderListD)
+					.then(function () {
 						$('#loadingIndicator').hide();
-						renderView(); // Only render the view if there's more data
-					} else {
-						// No more data available, hide the loading indicator
-						$('#loadingIndicator').hide();
-					}
-				})
-				.catch(function (error) {
-					console.error('Error fetching more data:', error);
-					// Handle errors here
-				});
+						renderView();
+					})
+					.catch(function (error) {
+						console.error('Error fetching more data:', error);
+						// Handle errors here
+					});
+			} else {
+				// If there are no more pages, do not render the view.
+				console.log('No more pages to fetch');
+			}
 		}
 	});
+
+	// When there are no more pages to fetch, set hasMorePages to false.
+	// For example, when you determine that there are no more pages in your API response.
+	function setNoMorePages() {
+		hasMorePages = false;
+	}
+
 
 
 
