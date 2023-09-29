@@ -277,6 +277,15 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	// Function to check if orderListD has data for a specific page
+	function hasDataForPage(page) {
+		if (orderListD && orderListD.data.list) {
+			// Check if orderListD has data for the given page
+			return orderListD.data.list.some(item => item.page === page);
+		}
+		return false; // No data in orderListD
+	}
+
 	var hasMoreData = true;
 
 	$('#tableContainer').on('scroll', function () {
@@ -288,8 +297,14 @@
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
 					$('#loadingIndicator').hide();
-					if (orderListD && orderListD.data.list ) {
+					if (hasDataForPage(callOrderListData.page)) {
+						// Render the view if there's data for the current page
 						renderView();
+					} else {
+						// Handle the case where there's no data for the current page
+						console.warn('No data for page ' + callOrderListData.page);
+						// Optionally, you can choose to not render anything here
+						// renderEmptyView();
 					}
 				})
 				.catch(function (error) {
@@ -298,6 +313,7 @@
 				});
 		}
 	});
+
 
 
   	// 寫入頁面限定JS
