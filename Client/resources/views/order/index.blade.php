@@ -144,9 +144,10 @@
                 </tbody>
             </table>
         </div>
+		<div id="loadingIndicator" style="display: none;">Loading more data...</div>
     </div>
 
-	<div id="loadingIndicator" style="display: none;">Loading more data...</div>
+	
 
 	<!-- <div id="pagination">
 		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
