@@ -144,7 +144,6 @@
                 </tbody>
             </table>
         </div>
-		<div id="loadingIndicator" style="display: none;">Loading more data...</div>
     </div>
 
 	
@@ -270,11 +269,7 @@
 		}
 	}
 
-	function updateTotal() {
-		$('.orderData_totalBetAmount').text(totalBetAmount);
-		$('.orderData_totalResultAmount').text(totalResultAmount);
-	}
-
+	
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
@@ -282,27 +277,29 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	function updateTotal() {
+		$('.orderData_totalBetAmount').text(totalBetAmount);
+		$('.orderData_totalResultAmount').text(totalResultAmount);
+	}
+
 	var hasMoreData = true;
 
 	$('#tableContainer').on('scroll', function () {
-		var container = $(this);
-		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
-			$('#loadingIndicator').show();
-			callOrderListData.page = parseInt(callOrderListData.page) + 1;
+	var container = $(this);
+	if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+		callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
-			caller(orderList_api, callOrderListData, orderListD)
-				.then(function () {
-					$('#loadingIndicator').hide();
-					if (orderListD && orderListD.data.list) {
-						renderView();
-						updateTotal(); // Call updateTotal when new data is loaded
-					}
-				})
-				.catch(function (error) {
-					console.error('Error fetching more data:', error);
-					// Handle errors here
-				});
-		}
+		caller(orderList_api, callOrderListData, orderListD)
+		.then(function () {
+			if (orderListD && orderListD.data.list) {
+			renderView();
+			updateTotal(); // Call updateTotal when new data is loaded
+			}
+		})
+		.catch(function (error) {
+			console.error('Error fetching more data:', error);
+		});
+	}
 	});
 
 
