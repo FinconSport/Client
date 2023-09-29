@@ -289,7 +289,8 @@
 				.then(function (response) {
 					$('#loadingIndicator').hide();
 
-					if (response.data.list.length > 0) {
+					// Check if response and response.data are defined
+					if (response && response.data && response.data.list) {
 						// Render the newly fetched data
 						renderView();
 					} else {
