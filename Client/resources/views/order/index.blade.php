@@ -282,6 +282,8 @@
 
 		// Check if there is more data to load and if the user has scrolled to the bottom
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+			console.log('Scrolling to load more data.');
+
 			$('#loadingIndicator').show();
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
@@ -296,6 +298,7 @@
 					} else {
 						// No more data to load, set the flag to false
 						hasMoreData = false;
+						console.log('No more data to load.');
 					}
 				})
 				.catch(function (error) {
