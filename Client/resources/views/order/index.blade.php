@@ -181,10 +181,10 @@
     var callOrderListData = { token: token, player: player, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	function renderView() {
-		let totalResultAmount = 0;
-		let totalBetAmount = 0;
+	let totalResultAmount = 0;
+	let totalBetAmount = 0;
 
+	function renderView() {
 		if (orderListD && orderListD.data.list ) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				createList(orderItem, orderIndex);
@@ -269,7 +269,7 @@
 		}
 	}
 
-	function createTotal(totalResultAmount, totalBetAmount) {
+	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
