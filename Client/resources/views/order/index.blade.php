@@ -201,105 +201,81 @@
 	}
 
 	function createList(orderItem, orderIndex) {
-		let orderData = $('tr[template="orderTemplate"]').clone();
-		orderData.removeAttr('hidden');
-		orderData.removeAttr('template');
+		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+		const orderDataId = orderData.find('.orderData_id');
+		const orderDataSportType = orderData.find('.orderData_sportType');
+		const orderDataMOrder = orderData.find('.orderData_mOrder');
+		const orderDataBetAmount = orderData.find('.orderData_betAmount');
+		const orderDataBetDataDetails = orderData.find('.orderData_betDataDetails');
+		const orderDataCreatedTime = orderData.find('.orderData_createdTime');
+		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
+		const orderDataResultTime = orderData.find('.orderData_resultTime');
+		const orderDataStatus = orderData.find('.orderData_status');
 
-		// Find elements within the cloned template
-		let orderData_id = orderData.find('.orderData_id');
-		let orderData_sportType = orderData.find('.orderData_sportType');
-		let orderData_mOrder = orderData.find('.orderData_mOrder');
-		let orderData_betAmount = orderData.find('.orderData_betAmount');
-		let orderData_betDataDetails = orderData.find('.orderData_betDataDetails');
-		let orderData_createdTime = orderData.find('.orderData_createdTime');
-		let orderData_resultAmount = orderData.find('.orderData_resultAmount');
-		let orderData_resultTime = orderData.find('.orderData_resultTime');
-		let orderData_status = orderData.find('.orderData_status');
+		let sportName = '';
 
-		let sportName = "";
-
-		// Iterate through orderListD.data.list
 		for (const item of orderListD.data.list) {
 			for (const bet of item.bet_data) {
-				const sportId = bet.sport_id;
-				const matchingSport = sportListD.data.find(sport => sport.sport_id === sportId);
-				sportName = matchingSport ? matchingSport.name : "";
+			const matchingSport = sportListD.data.find(sport => sport.sport_id === bet.sport_id);
+			sportName = matchingSport ? matchingSport.name : '';
 			}
 		}
-		// Set content for the found elements
-		orderData_id.html(orderItem.id);
-		orderData_sportType.html(sportName); 
-		orderData_mOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
-		orderData_betDataDetails.attr('id', 'betDataDetails_' + orderItem.id)
-		orderData_betAmount.html(orderItem.bet_amount);
-		orderData_createdTime.html(orderItem.create_time);
-		orderData_resultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
-		orderData_resultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderData_status.html(orderItem.status);
+
+		orderDataId.html(orderItem.id);
+		orderDataSportType.html(sportName);
+		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
+		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
+		orderDataBetAmount.html(orderItem.bet_amount);
+		orderDataCreatedTime.html(orderItem.create_time);
+		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
+		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
+		orderDataStatus.html(orderItem.status);
 
 		$('#countTr').before(orderData);
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		let betDataDetailsId = 'betDataDetails_' + orderItem.id;
-		let orderDataBetDataDetails = $('#' + betDataDetailsId);
-
-		// Create a container for each bet_data
-		let betDataDetailsContainer = $('<div class="betaDetcon">');
-
-		// Set content
-		let betDataDetails_leagueName = $('<div class="mb-3">').html('<span>' + betItem.league_name + '</span>');
-		let betDataDetails_HomeName = $('<div>').html('<span>' + betItem.home_team_name + ' VS ' + betItem.away_team_name + '</span>');
-		let betDataDetails_MarketNameLineRate = $('<div>').html('<span>' + betItem.market_name + ' (' +betItem.market_bet_name + betItem.market_bet_line + ')</span><span> @' + betItem.bet_rate + '</span>');
-		let betDataDetails_HomeTeam = $('<div>').html('<span>' + betItem.home_team_name + '</span>' + (betItem.home_team_score === null ? '' : '<span> ' + betItem.home_team_score + '</span>'));
-		let betDataDetails_AwayTeam = $('<div>').html('<span>' + betItem.away_team_name + '</span>' + (betItem.away_team_score === null ? '' : '<span> ' + betItem.away_team_score + '</span>'));
-		let betDataDetails_Status = $('<div>').html('<span>' + betItem.status + '</span>');
-
-		// Append the elements to the container
+		const betDataDetailsId = `betDataDetails_${orderItem.id}`;
+		const orderDataBetDataDetails = $(`#${betDataDetailsId}`);
+		const betDataDetailsContainer = $('<div class="betaDetcon">');
+		
+		const createHtmlElement = (className, content) => $('<div>').html(`<span>${content}</span>`).addClass(className);
+		
 		betDataDetailsContainer.append(
-			betDataDetails_leagueName,
-			betDataDetails_HomeName,
-			betDataDetails_MarketNameLineRate,
-			betDataDetails_HomeTeam,
-			betDataDetails_AwayTeam,
-			betDataDetails_Status
+			createHtmlElement('mb-3', betItem.league_name),
+			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name}`),
+			createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
+			createHtmlElement('', `${betItem.home_team_name}${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}`),
+			createHtmlElement('', `${betItem.away_team_name}${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`}`),
+			createHtmlElement('', betItem.status)
 		);
 
-		if (betIndex > 0) { // Check if it's not the first item
+		if (betIndex > 0) {
 			betDataDetailsContainer.addClass('hide-betaDetcon');
-			$('#betDataDetails_' + orderItem.id + ' .order-toggleButton').addClass('showbutton');
+			$(`#betDataDetails_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 		}
 
-		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
-		let betDataLength = orderItem.bet_data.length;
+		const betDataLength = orderItem.bet_data.length;
 
-		if (betIndex === 0) { // Check if it's the first item
-			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }} (" + betDataLength + ")</button>");
+		if (betIndex === 0) {
+			const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${betDataLength})</button>`);
 			button.on('click', function () {
-				orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-				if (button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')') {
-					button.text('{{ trans('order.main.close') }}');
-				} else {
-					button.text('{{ trans('order.main.expand') }} (' + betDataLength + ')');
-				}
+			orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
+			button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
 			});
 			button.appendTo(orderDataBetDataDetails);
 		}
 	}
 
 	function createTotal(totalResultAmount, totalBetAmount) {
-		let orderDataTotal = $('#countTr').clone();
-
-		orderDataTotal.removeAttr('hidden');
-		orderDataTotal.removeAttr('template');
-
+		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-
 		$('#orderDataTemp').append(orderDataTotal);
 	}
+
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
