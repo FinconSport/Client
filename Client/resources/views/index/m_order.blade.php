@@ -165,6 +165,7 @@
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/m_order.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
