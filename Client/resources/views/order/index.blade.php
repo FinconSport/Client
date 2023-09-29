@@ -292,7 +292,7 @@
 		var container = $(this);
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			$('#loadingIndicator').show();
-			callOrderListData.page = parseInt(callOrderListData.page) + 1;
+			callOrderListData.page = callOrderListData.page + 1;
 
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
