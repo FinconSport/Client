@@ -223,6 +223,7 @@
 
                 // 获取 list 对象的所有属性，并将它们存储在一个数组中
                 const listKeys = Object.keys(v2.list);
+                console.log(v2.list)
 
                 // 使用 sort 方法对 listKeys 数组进行排序
                 listKeys.sort((a, b) => {
@@ -234,21 +235,8 @@
                     return orderByA - orderByB;
                 });
 
-                // 现在，listKeys 数组包含按 orderBy 排序的键
-
-                // 创建一个新的对象，根据排序后的键重新构建 list 对象
-                const sortedList = {};
-                listKeys.forEach(key => {
-                    sortedList[key] = v2.list[key];
-                });
-
-                // 现在，sortedList 包含按 orderBy 排序的 list 对象
-
-                console.log(sortedList);
-
-                                
-                Object.entries(sortedList).map(([k3, v3]) => {  // fixture card
-                    createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
+                listKeys.forEach( ele => {
+                    createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
             })
         })
