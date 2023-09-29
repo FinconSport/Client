@@ -143,6 +143,23 @@
                     </tr>
                 </tbody>
             </table>
+			<div id="loader" style="display: none; margin-top: 2rem;">
+				<div colspan="29" class="loading loading04">
+					<span>L</span>
+					<span>O</span>
+					<span>A</span>
+					<span>D</span>
+					<span>I</span>
+					<span>N</span>
+					<span>G</span>
+					<span>.</span>
+					<span>.</span>
+					<span>.</span>
+				</div>
+			</div>  
+			<div id="noMoreData" style="display: none; margin-top: 2rem;">
+				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
+			</div>
         </div>
     </div>
 
@@ -184,6 +201,10 @@
 	let totalResultAmount = 0;
 	let totalBetAmount = 0;
 
+	// infinite scroll control
+	var fetchMoreLock = false
+	var isLastPage = false
+
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
@@ -197,6 +218,8 @@
 				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
 			});
 
+			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
+			isLastPage && $('#noMoreData').show()
 		}
 	}
 
@@ -283,26 +306,28 @@
 		$('.orderData_totalResultAmount').text(totalResultAmount);
 	}
 
-	var hasMoreData = true;
-
-	// infinite scroll
-	$('#tableContainer').on('scroll', function () {
-	var container = $(this);
-	if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
-		callOrderListData.page = parseInt(callOrderListData.page) + 1;
-
-		caller(orderList_api, callOrderListData, orderListD)
-		.then(function () {
-			if (orderListD && orderListD.data.list) {
-			renderView();
-			updateTotal(); // Call updateTotal when new data is loaded
-			}
-		})
-		.catch(function (error) {
-			console.error('Error fetching more data:', error);
-		});
+	// 下拉更多資料
+	async function fetchMore() {
+		console.log('fetchMore')
+		$('#loader').show() // loading transition
+		callResultListData.page += 1
+		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
+		renderView()
+		updateTotal()
 	}
+
+	// scroll to bottom
+	var matchContainer = document.getElementById('tableContainer');
+	matchContainer.addEventListener('scroll', function() {
+		var scrollHeight = matchContainer.scrollHeight;
+		var scrollTop = matchContainer.scrollTop;
+		var clientHeight = matchContainer.clientHeight;
+		if (scrollTop + clientHeight + 1 >= scrollHeight && isLastPage === false && fetchMoreLock === false) {
+			fetchMoreLock = true // lock
+			fetchMore()
+		}
 	});
+
 
 
   	// 寫入頁面限定JS
