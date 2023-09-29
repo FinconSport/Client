@@ -273,7 +273,7 @@
 		// Append the container to the orderDataBetDataDetails
 		orderDataBetDataDetails.append(betDataDetailsContainer);
 
-		let betDataLength = betItem.bet_data.length;
+		let betDataLength = betItem && betItem.bet_data ? betItem.bet_data.length : 0;
 
 		if (betIndex === 0) { // Check if it's the first item
 			var button = $("<button class='order-toggleButton'>{{ trans('order.main.expand') }} (" + betDataLength + ")</button>");
@@ -286,6 +286,12 @@
 				}
 			});
 			button.appendTo(orderDataBetDataDetails);
+		}
+
+		if (betDataCounts.has(orderItem.id)) {
+			betDataCounts.set(orderItem.id, betDataCounts.get(orderItem.id) + betDataLength);
+		} else {
+			betDataCounts.set(orderItem.id, betDataLength);
 		}
 	}
 
