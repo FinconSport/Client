@@ -178,7 +178,7 @@
 	// order list data
     var orderListD = {}
 
-    var callOrderListData = { token: token, player: player, result: 0, page: 2 }
+    var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
@@ -275,32 +275,31 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	// var hasMoreData = true; // Assuming this variable is correctly defined
+	var hasMoreData = true; // Assuming this variable is correctly defined
 
-	// $('#tableContainer').on('scroll', function () {
-	// 	var container = $(this);
-	// 	if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
-	// 		// Display loading indicator
-	// 		$('#loadingIndicator').show();
-			
-	// 		// Increment the page number (assuming callOrderListData.page is defined)
-	// 		callOrderListData.page = parseInt(callOrderListData.page) + 1;
+	$('#tableContainer').on('scroll', function () {
+		var container = $(this);
 
-	// 		// Call the API to fetch more data (assuming caller, orderList_api, and orderListD are defined)
-	// 		caller(orderList_api, callOrderListData, orderListD)
-	// 			.then(function () {
-	// 				// Hide loading indicator and render the view
-	// 				$('#loadingIndicator').hide();
-	// 				renderView();
-	// 			})
-	// 			.catch(function (error) {
-	// 				console.error('Error fetching more data:', error);
-	// 				// Handle errors here
-	// 			});
-	// 	} else {
-	// 		console.log('No more data to load.');
-	// 	}
-	// });
+		if (parseInt(callOrderListData.page) === 0) {
+			console.log('callOrderListData.page is 0');
+			return; // Stop further execution
+		}
+
+		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+			$('#loadingIndicator').show();
+			callOrderListData.page = parseInt(callOrderListData.page) + 1;
+
+			caller(orderList_api, callOrderListData, orderListD)
+				.then(function () {
+					$('#loadingIndicator').hide();
+					renderView();
+				})
+				.catch(function (error) {
+					console.error('Error fetching more data:', error);
+					// Handle errors here
+				});
+		}
+	});
 
 
   	// 寫入頁面限定JS
