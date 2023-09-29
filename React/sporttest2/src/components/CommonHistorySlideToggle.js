@@ -82,22 +82,26 @@ class CommonHistory extends React.Component {
                     <div className='teamSpan'>
                         <div className="teamSpanMarquee">
                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                { val.bet_data[0].league_name }&emsp;&emsp;&emsp;
+                                {/* { val.bet_data[0].league_name }&emsp;&emsp;&emsp; */}
+                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                             </Marquee>
                         </div>
                         <span className="teamSpanSpan">
-                            { val.bet_data[0].league_name }
+                            {/* { val.bet_data[0].league_name } */}
+                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                         </span>
                     </div>
                     <div className='row m-0'>
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }&emsp;&emsp;&emsp;
+                                    {/* { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }&emsp;&emsp;&emsp; */}
+                                    我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }
+                                {/* { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name } */}
+                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                             </span>
                         </div>
                     </div>
@@ -105,11 +109,13 @@ class CommonHistory extends React.Component {
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
+                                    {/* { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp; */}
+                                    我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
+                                {/* { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line }) */}
+                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                             </span>
                         </div>
                         <div className='col-3 p-0 text-right'>
@@ -145,22 +151,26 @@ class CommonHistory extends React.Component {
                                 <div className='teamSpan'>
                                     <div className="teamSpanMarquee">
                                         <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                            {v.league_name}&emsp;&emsp;&emsp;
+                                            {/* {v.league_name}&emsp;&emsp;&emsp; */}
+                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                         </Marquee>
                                     </div>
                                     <span className="teamSpanSpan">
-                                        {v.league_name}
+                                        {/* {v.league_name} */}
+                                        我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                     </span>
                                 </div>
                                 <div className='row m-0'>
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}&emsp;&emsp;&emsp;
+                                                {/* {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}&emsp;&emsp;&emsp; */}
+                                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}
+                                            {/* {v.home_team_name}&ensp;VS&ensp;{v.away_team_name} */}
+                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                         </span>
                                     </div>
                                 </div>
@@ -168,11 +178,13 @@ class CommonHistory extends React.Component {
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
+                                                {/* { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp; */}
+                                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})
+                                            {/* { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line}) */}
+                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
                                         </span>
                                     </div>
                                     <div className='col-3 p-0 text-right'>
