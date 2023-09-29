@@ -182,12 +182,19 @@
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
+		let totalResultAmount = 0;
+		let totalBetAmount = 0;
+
 		if (orderListD && orderListD.data.list ) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				createList(orderItem, orderIndex);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 				createBetDataDetails(orderItem, betItem, betIndex);
 				});
+
+				// Validate and accumulate total
+				totalResultAmount += parseFloat(orderItem.result_amount) || 0;
+				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
 			});
 
 		}
@@ -262,20 +269,7 @@
 		}
 	}
 
-	function createTotal() {
-		let totalResultAmount = 0;
-		let totalBetAmount = 0;
-
-		if (orderListD && orderListD.data.list ) {
-			orderListD.data.list.forEach((x, i) => {
-				// Validate and accumulate total
-				totalResultAmount += parseFloat(x.result_amount) || 0;
-				totalBetAmount += parseFloat(x.bet_amount) || 0;
-			});
-
-			createTotal(totalResultAmount, totalBetAmount);
-		}
-
+	function createTotal(totalResultAmount, totalBetAmount) {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
@@ -318,7 +312,7 @@
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView();
-				createTotal();
+				createTotal(totalResultAmount, totalBetAmount);
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
