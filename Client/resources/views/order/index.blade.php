@@ -309,7 +309,18 @@
 		hasMorePages = false;
 	}
 
-
+	// Example caller function
+	function caller(api, data, resultData) {
+		// Replace this with your actual API calling logic
+		return new Promise(function (resolve, reject) {
+			// Simulate API call with a delay
+			setTimeout(function () {
+				// Assuming you determine there are no more pages to fetch
+				setNoMorePages();
+				resolve();
+			}, 1000); // Simulated delay of 1 second
+		});
+	}
 
 
   	// 寫入頁面限定JS
