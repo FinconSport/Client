@@ -285,13 +285,13 @@
 
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function (response) {
-					$('#loadingIndicator').hide();
-					renderView();
 
 					// Check if response is defined and has the 'hasMoreData' property
 					if (response && typeof response.hasMoreData !== 'undefined') {
 						if (response.hasMoreData === true) {
 							hasMoreData = true;
+							$('#loadingIndicator').hide();
+							renderView();
 						} else {
 							hasMoreData = false;
 						}
