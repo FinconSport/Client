@@ -552,9 +552,10 @@
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    
                                     // 賦值
-                                    item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
-                                    item.find('.odd').html(v4.price)
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
 
                                     if( v4.status === 1 ) {
                                         item.find('.bet_name').show()
