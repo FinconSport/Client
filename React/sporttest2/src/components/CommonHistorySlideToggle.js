@@ -38,7 +38,8 @@ class CommonHistory extends React.Component {
 
     // 收合
     toggleCard = () => {
-        if( !this.state.isOpen ) this.textOverFlow(this.props.data.id)
+        this.textOverFlow(this.props.data.id)
+        // if( !this.state.isOpen ) this.textOverFlow(this.props.data.id)
         this.setState({
             isOpen: !this.state.isOpen
         })
@@ -93,13 +94,11 @@ class CommonHistory extends React.Component {
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    {/* { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }&emsp;&emsp;&emsp; */}
-                                    我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                    { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }&emsp;&emsp;&emsp;
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                {/* { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name } */}
-                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }
                             </span>
                         </div>
                     </div>
@@ -107,13 +106,11 @@ class CommonHistory extends React.Component {
                         <div className='col-9 p-0 teamSpan'>
                             <div className="teamSpanMarquee">
                                 <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                    {/* { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp; */}
-                                    我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                    { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
                                 </Marquee>
                             </div>
                             <span className="teamSpanSpan">
-                                {/* { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line }) */}
-                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
                             </span>
                         </div>
                         <div className='col-3 p-0 text-right'>
@@ -121,7 +118,7 @@ class CommonHistory extends React.Component {
                         </div>
                     </div>
                     {
-                        val.bet_data[0].home_team_score && val.bet_data[0].away_team_name &&
+                        val.bet_data[0].home_team_score && val.bet_data[0].away_team_score &&
                         <>
                             <div className='row m-0'>
                                 <div className='col-9 p-0'>
@@ -160,13 +157,11 @@ class CommonHistory extends React.Component {
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                {/* {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}&emsp;&emsp;&emsp; */}
-                                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                                {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            {/* {v.home_team_name}&ensp;VS&ensp;{v.away_team_name} */}
-                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                            {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}
                                         </span>
                                     </div>
                                 </div>
@@ -174,13 +169,11 @@ class CommonHistory extends React.Component {
                                     <div className='col-9 p-0 teamSpan'>
                                         <div className="teamSpanMarquee">
                                             <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
-                                                {/* { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp; */}
-                                                我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                                { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
                                             </Marquee>
                                         </div>
                                         <span className="teamSpanSpan">
-                                            {/* { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line}) */}
-                                            我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長我很長
+                                            { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})
                                         </span>
                                     </div>
                                     <div className='col-3 p-0 text-right'>
