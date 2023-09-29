@@ -227,8 +227,8 @@
                 // 使用 sort 方法对 listKeys 数组进行排序
                 listKeys.sort((a, b) => {
                     // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
-                    const orderByA = test.list[a].order_by;
-                    const orderByB = test.list[b].order_by;
+                    const orderByA = v2.list[a].order_by;
+                    const orderByB = v2.list[b].order_by;
 
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
@@ -239,7 +239,7 @@
                 // 创建一个新的对象，根据排序后的键重新构建 list 对象
                 const sortedList = {};
                 listKeys.forEach(key => {
-                    sortedList[key] = test.list[key];
+                    sortedList[key] = v2.list[key];
                 });
 
                 // 现在，sortedList 包含按 orderBy 排序的 list 对象
