@@ -38,10 +38,10 @@ class CommonHistory extends React.Component {
 
     // 收合
     toggleCard = () => {
+        if( !this.state.isOpen ) this.textOverFlow(this.props.data.id)
         this.setState({
             isOpen: !this.state.isOpen
         })
-        this.textOverFlow(this.props.data.id, 1)
     }
 
     // 文字太長變成跑馬燈
