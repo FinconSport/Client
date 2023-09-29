@@ -67,6 +67,9 @@ class CommonHistory extends React.Component {
 	componentDidUpdate(prevProps) {
         // 恢復預設
 		if (prevProps.data.id !== this.props.data.id) {
+            this.setState({
+                isOpen: false
+            })
             this.textOverFlow(this.props.data.match_id)
         }
 	}
