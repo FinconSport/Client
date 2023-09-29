@@ -296,8 +296,10 @@
 							hasMoreData = false;
 						}
 					} else {
-						console.error('API response is missing the "hasMoreData" property.');
-						// Handle the missing property case here
+						// If 'hasMoreData' property is missing or not as expected, assume no more data is available
+						hasMoreData = false;
+						console.warn('API response is missing the "hasMoreData" property or it has an unexpected value.');
+						// Optionally, you can log a warning or handle this case differently
 					}
 				})
 				.catch(function (error) {
@@ -306,6 +308,7 @@
 				});
 		}
 	});
+
 
 
   	// 寫入頁面限定JS
