@@ -310,8 +310,8 @@
 	async function fetchMore() {
 		console.log('fetchMore')
 		$('#loader').show() // loading transition
-		callResultListData.page += 1
-		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
+		callOrderListData.page += 1
+		await caller(orderList_api, callOrderListData, orderListD, 1) // resultListD
 		renderView()
 		updateTotal()
 	}
