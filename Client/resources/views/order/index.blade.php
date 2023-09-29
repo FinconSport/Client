@@ -146,7 +146,6 @@
         </div>
     </div>
 
-	<div id="loadingIndicator" style="display: none; text-align: center;"></div>
 	<!-- <div id="pagination">
 		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
 		<button onclick="navPage(1)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.pre_page') }}</button>
@@ -274,58 +273,6 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		$('#orderDataTemp').append(orderDataTotal);
 	}
-
-            if (!isLoading && isMoreDataAvailable) {
-                const container = document.getElementById("orderContainer");
-                if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
-                    // User is near the bottom, load more data
-                    currentPage++;
-
-                    const callOrderListData = {
-                        page: currentPage,
-                        // Add other parameters as needed
-                    };
-
-                    isLoading = true;
-
-                    // Show the loading indicator
-                    const loadingIndicator = document.getElementById("loadingIndicator");
-                    loadingIndicator.style.display = "block";
-
-                    try {
-                        // Simulate an AJAX request with a delay (replace with your actual AJAX call)
-                        const response = await simulateAjaxCall(callOrderListData);
-
-                        // Simulated response (replace with your actual API response handling)
-                        const simulatedResponse = {
-                            status: 1,
-                            data: {
-                                list: generateSimulatedData(), // Generate some simulated data
-                            },
-                        };
-
-                        if (simulatedResponse.status === 1) {
-                            // Append the new data to the table (replace with your actual rendering logic)
-                            renderData(simulatedResponse.data.list);
-
-                            isLoading = false;
-
-                            // Hide the loading indicator
-                            loadingIndicator.style.display = "none";
-
-                            // Check if there are more pages of data to load (replace with your actual check)
-                            if (simulatedResponse.data.list.length === 0) {
-                                // No more data available, handle as needed
-                                handleNoMoreData();
-                            }
-                        }
-                    } catch (error) {
-                        // Handle any errors here
-                        console.error(error);
-                    }
-                }
-            }
-        }
 
 
   	// 寫入頁面限定JS
