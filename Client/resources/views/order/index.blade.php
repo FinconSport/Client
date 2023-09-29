@@ -279,24 +279,14 @@
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-		
-		// Check if there is more data to load and if the user has scrolled to the bottom
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			$('#loadingIndicator').show();
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
 			caller(orderList_api, callOrderListData, orderListD)
-				.then(function (response) {
+				.then(function () {
 					$('#loadingIndicator').hide();
-
-					// Check if response and response.data are defined
-					if (response && response.data && response.data.list && response.data.list.length > 0) {
-						// Render the newly fetched data
-						renderView();
-					} else {
-						// No more data to load, set the flag to false
-						hasMoreData = false;
-					}
+					renderView();
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
