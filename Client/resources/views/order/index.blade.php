@@ -288,7 +288,9 @@
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
 					$('#loadingIndicator').hide();
-					renderView();
+					if (orderListD && orderListD.data.list ) {
+						renderView();
+					}
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
