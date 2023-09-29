@@ -21,10 +21,10 @@
             </p>
         </div>
         <div class="col-12">
-            <div class="leftSlideOrderCard row m-0">
-                <div class="col-12"><span key='rate_name'></span></div>
+            <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
+                <div class="col-12"><span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
-                <div class="col-4 mb-2 mt-2 text-right" key='oddContainer'>
+                <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
                 </div>
                 <div class="col-12">
@@ -118,17 +118,17 @@
 <div class="col-2 p-0" template='betDiv' hidden>
     <div class="betLabel"></div>
     <div class="betItemDiv" index=0>
-        <span class="rate_name"></span>&ensp;
+        <span class="bet_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
     </div>
     <div class="betItemDiv" index=1>
-        <span class="rate_name"></span>&ensp;
+        <span class="bet_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
     </div>
     <div class="betItemDiv" index=2>
-        <span class="rate_name"></span>&ensp;
+        <span class="bet_name"></span>&ensp;
         <span class="odd"></span>
         <i class="fa-solid fa-lock"></i>
     </div>
@@ -342,31 +342,31 @@
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
-                    item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
+                    item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
                     item.find('.odd').html(v4.price)
                     if( v4.status === 1 ) {
-                        item.find('.rate_name').show()
+                        item.find('.bet_name').show()
                         item.find('.odd').show()
                         item.find('i').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.rate_name').hide()
+                        item.find('.bet_name').hide()
                         item.find('.odd').hide()
                         item.find('i').show()
                         item.removeAttr('onclick')
                     }
                 })
             } else {
-                firstDiv.find('.rate_name').hide()
+                firstDiv.find('.bet_name').hide()
                 firstDiv.find('.odd').hide()
                 firstDiv.find('i').show()
                 firstDiv.removeAttr('onclick')
-                secondDiv.find('.rate_name').hide()
+                secondDiv.find('.bet_name').hide()
                 secondDiv.find('.odd').hide()
                 secondDiv.find('i').show()
                 secondDiv.removeAttr('onclick')
                 if( thirdDiv ) {
-                    thirdDiv.find('.rate_name').hide()
+                    thirdDiv.find('.bet_name').hide()
                     thirdDiv.find('.odd').hide()
                     thirdDiv.find('i').show()
                     thirdDiv.removeAttr('onclick')
@@ -552,35 +552,36 @@
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    
                                     // 賦值
-                                    item.find('.rate_name').html(v4.market_bet_name + ' ' + v4.line)
-                                    item.find('.odd').html(v4.price)
+                                    $('div[fixture_id="' + k3 + '"] .odd').html(v4.price)
+                                    $('div[fixture_id="' + k3 + '"] .bet_name').html(v4.market_bet_name + ' ' + v4.line)
 
                                     if( v4.status === 1 ) {
-                                        item.find('.rate_name').show()
+                                        item.find('.bet_name').show()
                                         item.find('.odd').show()
                                         item.find('i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.rate_name').hide()
+                                        item.find('.bet_name').hide()
                                         item.find('.odd').hide()
                                         item.find('i').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
-                                firstDiv.find('.rate_name').hide()
+                                firstDiv.find('.bet_name').hide()
                                 firstDiv.find('.odd').hide()
                                 firstDiv.find('i').show()
                                 firstDiv.removeAttr('onclick')
 
-                                secondDiv.find('.rate_name').hide()
+                                secondDiv.find('.bet_name').hide()
                                 secondDiv.find('.odd').hide()
                                 secondDiv.find('i').show()
                                 secondDiv.removeAttr('onclick')
 
                                 if( thirdDiv ) {
-                                    thirdDiv.find('.rate_name').hide()
+                                    thirdDiv.find('.bet_name').hide()
                                     thirdDiv.find('.odd').hide()
                                     thirdDiv.find('i').show()
                                     thirdDiv.removeAttr('onclick')
@@ -788,15 +789,15 @@
             better_rate: 0,
         }
 
-        $('#leftSlideOrder span[key="rate_name"]').html(bet_type)
+        $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
         $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
         $('#leftSlideOrder span[key="away"]').html(away)
-        $('#leftSlideOrder div[key="oddContainer"]').attr('fixture_id', fixture_id)
-        $('#leftSlideOrder div[key="oddContainer"]').attr('market_id', market_id)
-        $('#leftSlideOrder div[key="oddContainer"]').attr('market_bet_id', market_bet_id)
+        $('#leftSlideOrder div[key="slideOrderCard"]').attr('fixture_id', fixture_id)
+        $('#leftSlideOrder div[key="slideOrderCard"]').attr('market_id', market_id)
+        $('#leftSlideOrder div[key="slideOrderCard"]').attr('market_bet_id', market_bet_id)
 
         $('#leftSlideOrder').show("slide", {
             direction: "left"
