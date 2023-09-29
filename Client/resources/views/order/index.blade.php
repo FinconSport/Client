@@ -285,11 +285,11 @@
 				.then(function (response) {
 					
 					// Check if response is defined and has the 'hasMoreData' property
-					if (response && response.data.list.length > 0) {
+					if (response) {
 						$('#loadingIndicator').hide();
 						renderView();
 					} else {
-						console.log('error');
+						console.log(response);
 					}
 				})
 				.catch(function (error) {
