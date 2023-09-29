@@ -279,12 +279,7 @@
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-
-		if (parseInt(callOrderListData.page) === 0) {
-			console.log('callOrderListData.page is 0');
-			return; // Stop further execution
-		}
-
+		console.log(parseInt(callOrderListData.page))
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			$('#loadingIndicator').show();
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
