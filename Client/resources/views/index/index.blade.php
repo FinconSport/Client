@@ -550,7 +550,7 @@
                                     }
 
                                     // set attribute
-                                    $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
+                                    if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
