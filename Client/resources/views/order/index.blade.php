@@ -178,7 +178,7 @@
 	// order list data
     var orderListD = {}
 
-    var callOrderListData = { token: token, player: player, result: 0, page: 1 }
+    var callOrderListData = { token: token, player: player, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
 	function renderView() {
