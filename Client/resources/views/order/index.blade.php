@@ -321,16 +321,18 @@
 		}
 	});
 
-	// Initial data loading when the page loads
-	caller(orderList_api, callOrderListData, orderListD)
-	.then(function () {
-		// Render the initial data
-		renderView();
-	})
-	.catch(function (error) {
-		console.error('Error fetching initial data:', error);
-		// You can handle errors here, e.g., display an error message.
-	});
+		caller(orderList_api, callOrderListData, orderListD)
+		.then(function () {
+			// Hide the loading indicator
+			$('#loadingIndicator').hide();
+
+			// Render the newly fetched data
+			renderView();
+		})
+		.catch(function (error) {
+			console.error('Error fetching more data:', error); // Add this line for error logging
+			// You can handle errors here, e.g., display an error message.
+		});
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
