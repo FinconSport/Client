@@ -195,6 +195,8 @@
 		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
 		renderView()
 		$('#loader').hide() // loading transition
+		fetchMoreLock = false
+
 	}
 
 	// scroll to bottom

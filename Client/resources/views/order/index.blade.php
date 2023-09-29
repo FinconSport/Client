@@ -314,6 +314,7 @@
 		renderView()
 		updateTotal()
 		$('#loader').hide() // loading transition
+		fetchMoreLock = false
 	}
 
 	// scroll to bottom
