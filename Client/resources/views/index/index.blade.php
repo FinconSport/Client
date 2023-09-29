@@ -392,9 +392,9 @@
             if( isReadyCommon ) {
                 callMatchListData.sport_id = sport // default sport
                 clearInterval(isReadySportInt)
-                caller2(matchList_api, callMatchListData, matchListD) // match_list
+                caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    caller2(matchList_api, callMatchListData, matchListD, 1) // update 
+                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
@@ -935,12 +935,11 @@
         })
     }
 
-
     // 餘額
     async function refreshBalence() {
-    $('#refreshIcon').addClass('rotate-animation');
+        $('#refreshIcon').addClass('rotate-animation');
         try {
-            await caller2(account_api, commonCallData, accountD);
+            await caller(account_api, commonCallData, accountD);
             $('.balance').html(accountD.data.balance);
         } catch (error) {
             console.error('Error:', error);
@@ -948,36 +947,6 @@
         } finally {
             $('#refreshIcon').removeClass('rotate-animation');
         }
-    }
-
-    function caller2(url, data, obj, isUpdate = 0) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: data,
-                success: function (data) {
-                    const json = JSON.parse(data);
-                    if (json.gzip) {
-                        const str = json.data;
-                        const bytes = atob(str).split('').map(char => char.charCodeAt(0));
-                        const buffer = new Uint8Array(bytes).buffer;
-                        const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
-                        json.data = uncompressed;
-                    }
-                    Object.assign(obj, json);
-                    if (isUpdate === 0) {
-                        showSuccessToast(json.message);
-                    }
-                    resolve(); // 解决 Promise
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error('Ajax error:', textStatus, errorThrown);
-                    showErrorToast(jqXHR);
-                    reject(errorThrown); // 拒绝 Promise 并传递错误信息
-                }
-            });
-        });
     }
 </script>
 @endpush

@@ -204,29 +204,33 @@
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
 		var v = {}
 
-		function caller( url, data, obj, isUpdate = 0 ) {
-			$.ajax({
-				url: url,
-				method: 'POST',
-				data: data,
-				success: function(data) {
-					const json = JSON.parse(data); 
-					if(json.gzip) { // 解壓縮
-						const str = json.data;
-						const bytes = atob(str).split('').map(char => char.charCodeAt(0));
-						const buffer = new Uint8Array(bytes).buffer;
-						const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
-						json.data = uncompressed
+		function caller(url, data, obj, isUpdate = 0) {
+			return new Promise((resolve, reject) => {
+				$.ajax({
+					url: url,
+					method: 'POST',
+					data: data,
+					success: function (data) {
+						const json = JSON.parse(data);
+						if (json.gzip) {
+							const str = json.data;
+							const bytes = atob(str).split('').map(char => char.charCodeAt(0));
+							const buffer = new Uint8Array(bytes).buffer;
+							const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
+							json.data = uncompressed;
+						}
+						Object.assign(obj, json);
+						if (isUpdate === 0) {
+							showSuccessToast(json.message);
+						}
+						resolve(); // 解决 Promise
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.error('Ajax error:', textStatus, errorThrown);
+						showErrorToast(jqXHR);
+						reject(errorThrown); // 拒绝 Promise 并传递错误信息
 					}
-					Object.assign(obj, json); // 将 json 中的属性复制到 obj 中
-					if( isUpdate === 0 ) {
-						showSuccessToast(json.message)
-					} 
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.error('Ajax error:', textStatus, errorThrown);
-					showErrorToast(jqXHR)
-				}
+				});
 			});
 		}
 		// ===== DATA LAYER ======

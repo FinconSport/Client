@@ -1004,13 +1004,17 @@
     }
 
     // 餘額
-    function refreshBalence() {
-        $('#refreshIcon').addClass('rotate-animation')
-        caller(account_api, commonCallData, accountD)
-        setTimeout(() => {
-            $('.balance').html(accountD.data.balance)
-            $('#refreshIcon').removeClass('rotate-animation')
-        }, 1000);
+    async function refreshBalence() {
+        $('#refreshIcon').addClass('rotate-animation');
+        try {
+            await caller(account_api, commonCallData, accountD);
+            $('.balance').html(accountD.data.balance);
+        } catch (error) {
+            console.error('Error:', error);
+            // 处理错误情况
+        } finally {
+            $('#refreshIcon').removeClass('rotate-animation');
+        }
     }
 </script>
 @endpush
