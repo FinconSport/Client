@@ -287,12 +287,6 @@
 			});
 			button.appendTo(orderDataBetDataDetails);
 		}
-
-		if (betDataCounts.has(orderItem.id)) {
-			betDataCounts.set(orderItem.id, betDataCounts.get(orderItem.id) + betDataLength);
-		} else {
-			betDataCounts.set(orderItem.id, betDataLength);
-		}
 	}
 
 	function createTotal(totalResultAmount, totalBetAmount) {
