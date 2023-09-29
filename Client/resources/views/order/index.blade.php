@@ -275,8 +275,9 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	$(window).on('scroll', function () {
-		if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+	$('#tableContainer').on('scroll', function () {
+		var container = $(this);
+		if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			$('#loadingIndicator').show();
 			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
