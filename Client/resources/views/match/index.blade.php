@@ -194,6 +194,7 @@
 		callResultListData.page += 1
 		await caller(resultList_api, callResultListData, resultListD, 1) // resultListD
 		renderView()
+		$('#loader').hide() // loading transition
 	}
 
 	// scroll to bottom

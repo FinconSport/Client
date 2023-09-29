@@ -270,7 +270,6 @@
 			createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
 			createHtmlElement('', `${betItem.home_team_name}${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}`),
 			createHtmlElement('', `${betItem.away_team_name}${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`}`),
-			createHtmlElement('', betItem.status)
 		);
 
 		if (betIndex > 0) {
