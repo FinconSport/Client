@@ -529,6 +529,7 @@
                                     // old attribute
                                     let market_bet_id = item.attr('market_bet_id')
                                     let price = item.attr('bet_rate')
+                                    let isSelected = item.hasClass('m_order_on')
 
                                     // 判斷盤口是否有改變
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
@@ -549,10 +550,11 @@
                                     }
 
                                     // set attribute
+                                    $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
-                                    
+
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
