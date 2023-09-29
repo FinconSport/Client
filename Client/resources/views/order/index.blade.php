@@ -279,10 +279,11 @@
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
+		$('#loadingIndicator').show();
+		callOrderListData.page = parseInt(callOrderListData.page) + 1;
+
 		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			caller(orderList_api, callOrderListData, orderListD)
-				$('#loadingIndicator').show();
-				callOrderListData.page = parseInt(callOrderListData.page) + 1;
 				.then(function () {
 					if (orderListD.length > 0) {
                         $('#loadingIndicator').hide();
