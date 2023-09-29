@@ -275,62 +275,57 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-    let currentPage = 1;
-    let isMoreDataAvailable = true;
-    let isLoading = false;
+            if (!isLoading && isMoreDataAvailable) {
+                const container = document.getElementById("orderContainer");
+                if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
+                    // User is near the bottom, load more data
+                    currentPage++;
 
-    // Function to load more data when scrolling near the bottom of the container.
-    function loadMoreData() {
-        if (!isLoading && isMoreDataAvailable) {
-            const container = document.getElementById("orderContainer");
-            if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
-                // User is near the bottom, load more data
-                currentPage++;
+                    const callOrderListData = {
+                        page: currentPage,
+                        // Add other parameters as needed
+                    };
 
-                const callOrderListData = {
-                    page: currentPage,
-                    // Add other parameters as needed
-                };
+                    isLoading = true;
 
-                isLoading = true;
+                    // Show the loading indicator
+                    const loadingIndicator = document.getElementById("loadingIndicator");
+                    loadingIndicator.style.display = "block";
 
-                // Show the loading indicator
-                const loadingIndicator = document.getElementById("loadingIndicator");
-                loadingIndicator.style.display = "block";
+                    try {
+                        // Simulate an AJAX request with a delay (replace with your actual AJAX call)
+                        const response = await simulateAjaxCall(callOrderListData);
 
-                // Make an AJAX request to fetch more data (replace this with your actual AJAX call)
-                caller(orderList_api, callOrderListData, orderListD).then(response => {
-                    if (response.status === 1) {
-                        // Append the new data to the table
-                        renderView();
+                        // Simulated response (replace with your actual API response handling)
+                        const simulatedResponse = {
+                            status: 1,
+                            data: {
+                                list: generateSimulatedData(), // Generate some simulated data
+                            },
+                        };
 
-                        isLoading = false;
+                        if (simulatedResponse.status === 1) {
+                            // Append the new data to the table (replace with your actual rendering logic)
+                            renderData(simulatedResponse.data.list);
 
-                        // Hide the loading indicator
-                        loadingIndicator.style.display = "none";
+                            isLoading = false;
 
-                        // Check if there are more pages of data to load
-                        if (response.data.list.length === 0) {
-                            // No more data available, handle as needed
-                            handleNoMoreData();
+                            // Hide the loading indicator
+                            loadingIndicator.style.display = "none";
+
+                            // Check if there are more pages of data to load (replace with your actual check)
+                            if (simulatedResponse.data.list.length === 0) {
+                                // No more data available, handle as needed
+                                handleNoMoreData();
+                            }
                         }
+                    } catch (error) {
+                        // Handle any errors here
+                        console.error(error);
                     }
-                });
+                }
             }
         }
-    }
-
-    // Function to handle the "No more data" case
-    function handleNoMoreData() {
-        isMoreDataAvailable = false;
-        console.log("No more data available.");
-    }
-
-    // Attach the loadMoreData function to the scroll event of the container
-    document.getElementById("orderContainer").addEventListener("scroll", loadMoreData);
-
-    // Initial data load (optional)
-    loadMoreData();
 
 
   	// 寫入頁面限定JS
