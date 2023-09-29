@@ -964,7 +964,7 @@
                 console.log(res)
                 if (res.message === 'SUCCESS_API_M_GAME_BET_01') {
                     // 餘額更新
-                    refreshBalence()
+                    refreshBalence(1)
                     showSuccessToast(res.message)
                 } else {
                     showErrorToast(res.message)
@@ -979,10 +979,7 @@
         // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
-        // 隱藏計算機
-        closeCal(1)
-        // 取消全部所選玩法
-        closeOrderDetail()
+        
     }
 
     // 統計
@@ -1004,7 +1001,7 @@
     }
 
     // 餘額
-    async function refreshBalence() {
+    async function refreshBalence( isCloseCal = 0) {
         $('#refreshIcon').addClass('rotate-animation');
         try {
             await caller(account_api, commonCallData, accountD);
@@ -1014,6 +1011,13 @@
             // 处理错误情况
         } finally {
             $('#refreshIcon').removeClass('rotate-animation');
+            if( isCloseCal === 1 ) {
+                // 隱藏計算機
+                closeCal(1)
+                // 取消全部所選玩法
+                closeOrderDetail()
+            }
+       
         }
     }
 </script>
