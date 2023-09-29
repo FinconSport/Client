@@ -267,10 +267,10 @@
 		let totalBetAmount = 0;
 
 		if (orderListD && orderListD.data.list ) {
-			orderListD.data.list.forEach((orderItem, orderIndex) => {
+			orderListD.data.list.forEach((x, i) => {
 				// Validate and accumulate total
-				totalResultAmount += parseFloat(orderItem.result_amount) || 0;
-				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
+				totalResultAmount += parseFloat(x.result_amount) || 0;
+				totalBetAmount += parseFloat(x.bet_amount) || 0;
 			});
 
 			createTotal(totalResultAmount, totalBetAmount);
