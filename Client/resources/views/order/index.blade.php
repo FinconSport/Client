@@ -290,11 +290,12 @@
 					if (response && typeof response.hasMoreData !== 'undefined') {
 						if (response.hasMoreData === true) {
 							hasMoreData = true;
-							$('#loadingIndicator').hide();
-							renderView();
 						} else {
 							hasMoreData = false;
 						}
+
+						$('#loadingIndicator').hide();
+						renderView();
 					} else {
 						// If 'hasMoreData' property is missing or not as expected, assume no more data is available
 						hasMoreData = false;
