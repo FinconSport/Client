@@ -275,20 +275,22 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	var hasMoreData = true; // Assuming this variable is correctly defined
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
 		$('#loadingIndicator').show();
+		if (typeof callOrderListData.page === 'undefined') {
+			$('#loadingIndicator').hide();
+			return; // No more data to load, exit the function
+		}
+
 		callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
-		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+		if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
 					$('#loadingIndicator').hide();
-					if (orderListD.length > 0) {
 						renderView();
-                    }
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
