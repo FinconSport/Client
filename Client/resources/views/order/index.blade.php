@@ -185,18 +185,20 @@
 		let totalResultAmount = 0;
 		let totalBetAmount = 0;
 
-		orderListD.data.list.forEach((orderItem, orderIndex) => {
-			createList(orderItem, orderIndex);
-			orderItem.bet_data.forEach((betItem, betIndex) => {
-			createBetDataDetails(orderItem, betItem, betIndex);
+		if (orderListD && orderListD.data.list ) {
+			orderListD.data.list.forEach((orderItem, orderIndex) => {
+				createList(orderItem, orderIndex);
+				orderItem.bet_data.forEach((betItem, betIndex) => {
+				createBetDataDetails(orderItem, betItem, betIndex);
+				});
+
+				// Validate and accumulate total
+				totalResultAmount += parseFloat(orderItem.result_amount) || 0;
+				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
 			});
 
-			// Validate and accumulate total
-			totalResultAmount += parseFloat(orderItem.result_amount) || 0;
-			totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
-		});
-
-		createTotal(totalResultAmount, totalBetAmount);
+			createTotal(totalResultAmount, totalBetAmount);
+		}
 	}
 
 	function createList(orderItem, orderIndex) {
@@ -275,41 +277,43 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
-	var hasMorePages = true; // Initialize a variable to track if there are more pages initially.
+	// Function to check if orderListD has data for a specific page
+	function hasDataForPage(page) {
+		if (orderListD && orderListD.data.list) {
+			// Check if orderListD has data for the given page
+			return orderListD.data.list.some(item => item.page === page);
+		}
+		return false; // No data in orderListD
+	}
+
+	var hasMoreData = true;
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-		if (
-			container.scrollTop() + container.innerHeight() >=
-			container[0].scrollHeight - 100
-		) {
-			if (hasMorePages) {
-				$('#loadingIndicator').show();
-				callOrderListData.page = parseInt(callOrderListData.page) + 1;
+		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+			$('#loadingIndicator').show();
+			callOrderListData.page = callOrderListData.page + 1;
 
-				caller(orderList_api, callOrderListData, orderListD)
-					.then(function () {
-						$('#loadingIndicator').hide();
+			caller(orderList_api, callOrderListData, orderListD)
+				.then(function () {
+					$('#loadingIndicator').hide();
+					if (hasDataForPage(callOrderListData.page)) {
+						// Render the view if there's data for the current page
 						renderView();
-					})
-					.catch(function (error) {
-						console.error('Error fetching more data:', error);
-						// Handle errors here
-					});
-			} else {
-				// If there are no more pages, do not render the view.
-				console.log('No more pages to fetch');
-			}
+					} else {
+						// Handle the case where there's no data for the current page
+						console.warn('No data for page ' + callOrderListData.page);
+						// Optionally, you can choose to not render anything here
+						// renderEmptyView();
+					}
+				})
+				.catch(function (error) {
+					console.error('Error fetching more data:', error);
+					// Handle errors here
+				});
 		}
 	});
 
-	// When there are no more pages to fetch, set hasMorePages to false.
-	// For example, when you determine that there are no more pages in your API response.
-	function setNoMorePages() {
-		hasMorePages = false;
-	}
-
-	setNoMorePages();
 
 
   	// 寫入頁面限定JS
