@@ -275,22 +275,18 @@
 		$('#orderDataTemp').append(orderDataTotal);
 	}
 
+	var hasMoreData = true;
 
 	$('#tableContainer').on('scroll', function () {
 		var container = $(this);
-		$('#loadingIndicator').show();
-		if (typeof callOrderListData.page === 'undefined') {
-			$('#loadingIndicator').hide();
-			return; // No more data to load, exit the function
-		}
+		if (hasMoreData && container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
+			$('#loadingIndicator').show();
+			callOrderListData.page = parseInt(callOrderListData.page) + 1;
 
-		callOrderListData.page = parseInt(callOrderListData.page) + 1;
-
-		if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 100) {
 			caller(orderList_api, callOrderListData, orderListD)
 				.then(function () {
 					$('#loadingIndicator').hide();
-						renderView();
+					renderView();
 				})
 				.catch(function (error) {
 					console.error('Error fetching more data:', error);
