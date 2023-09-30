@@ -803,6 +803,13 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
+        // 先移除樣式
+        $('.leftSlideOrderCard').removeClass('raiseOdd')
+        $('.leftSlideOrderCard .fa-caret-up').remove()
+        $('.leftSlideOrderCard').removeClass('lowerOdd')
+        $('.leftSlideOrderCard .fa-caret-down').remove()
+
+
         let fixture_id = e.attr('fixture_id')
         let market_id = e.attr('market_id')
         let market_bet_id = e.attr('market_bet_id')
