@@ -35,7 +35,44 @@ return [
 		'lowerStage' => 'Lower',
 		'stage' => 'Stage',
 		'readyToStart' => 'To be start',
-		'overtime' => 'Over time'
+		'overtime' => 'Over time',
+		'statusArr' => [
+			154914 => [
+				1 => '1st Inning',
+				2 => '2nd Inning',
+				3 => '3rd Inning',
+				4 => '4th Inning',
+				5 => '5th Inning',
+				6 => '6th Inning',
+				7 => '7th Inning',
+				8 => '8th Inning',
+				9 => '9th Inning',
+				40 => 'Extra Innings',
+				62 => 'Error',
+				100 => 'Full Time',
+				101 => 'Full Time After Extra Time',
+			],
+			48242 => [
+				1 => '1st Quarter',
+				2 => '2nd Quarter',
+				3 => '3rd Quarter',
+				4 => '4th Quarter',
+				40 => 'Overtime',
+				100 => 'Full Time',
+				101 => 'Full Time After Overtime',
+			],
+			6046 => [
+				10 => '1st Half',
+				20 => '2nd Half',
+				25 => '3rd Half',
+				30 => 'Overtime 1st Half',
+				35 => 'Overtime 2nd Half',
+				50 => 'Penalties',
+				100 => 'Full Time',
+				101 => 'Full Time After Overtime',
+				102 => 'Full Time After Penalties',
+			]
+		]
 	],
 	'm_order' => [
 		'morder_detail' => 'Parlay Details', // "串關明細"

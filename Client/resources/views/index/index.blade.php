@@ -319,15 +319,9 @@
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
             // stage
-            if( v3.periods.period < 100 ) { // 比賽結束前有可能傳100，忽略不更新
-                if( v3.periods.period === 40 ) { // 加時賽
-                    time.html(langTrans.mainArea.overtime)
-                } else {
-                    let timerStr = v3.periods.period + langTrans.mainArea.stage
-                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-                    time.html(timerStr)
-                }
-            }
+            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+            time.html(timerStr)
         }
         // ready to start
         if( v3.status === 9 ) {
@@ -546,15 +540,9 @@
 
 
                             // stage
-                            if( v3.periods.period < 100 ) { // 比賽結束前有可能傳100，忽略不更新
-                                if( v3.periods.period === 40 ) { // 加時賽
-                                    time.html(langTrans.mainArea.overtime)
-                                } else {
-                                    let timerStr = v3.periods.period + langTrans.mainArea.stage
-                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-                                    time.html(timerStr)
-                                }
-                            }
+                            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+                            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                            time.html(timerStr)
                         }
                         // ready to start
                         if( v3.status === 9 ) {
