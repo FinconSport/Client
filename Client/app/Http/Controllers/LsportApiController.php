@@ -1119,7 +1119,7 @@ class LsportApiController extends Controller {
 
         $current_market_bet_status = $market_bet_data['status'];
         $current_market_bet_rate = $market_bet_data['price'];
-        $market_bet_line = $market_bet_data['base_line'];
+        $market_bet_line = $market_bet_data['line'];
 
         // 非開盤狀態 1开、2锁、3结算
         if (($current_market_bet_status != 1)) {
@@ -1459,7 +1459,7 @@ class LsportApiController extends Controller {
             }
             $current_market_bet_status = $marketBetData['status'];
             $current_market_bet_rate = $marketBetData['price'];
-            $market_bet_line = $marketBetData['base_line'];
+            $market_bet_line = $marketBetData['line'];
 
             // 非開盤狀態 1开、2锁、3结算
             if (($current_market_bet_status != 1)) {
