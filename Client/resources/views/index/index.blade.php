@@ -230,6 +230,7 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
+                console.log(listKeys)
                 listKeys.forEach( ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
