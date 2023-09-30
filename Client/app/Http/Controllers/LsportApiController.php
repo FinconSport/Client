@@ -714,7 +714,7 @@ class LsportApiController extends Controller {
             $fixture_id = $dv->fixture_id;
 
             $fixture_status = intval($dv->f_status);
-            $real_fixture_status = $fixture_status;
+            $real_fixture_status = $fixture_status;  // 傳遞給前端讓前端知道賽事真實狀態
 
             // 處理即將開賽歸類於走地的問題
             if ($fixture_status == FIXTURE_STATUS['about_to_start']) {
@@ -2717,7 +2717,7 @@ class LsportApiController extends Controller {
         }
 
         if (is_array($livescore_extradata)) {
-            $arr_periods = $livescore_extradata;
+            $arr_livescore_extradata = $livescore_extradata;
         } else {
             // 如果參數是字串則json_decoe看看
             $arr_livescore_extradata = json_decode($livescore_extradata, true);

@@ -317,8 +317,10 @@
         if( v3.status === 2 ) {
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-            let timerStr = v3.periods.period + langTrans.mainArea.stage
-            v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+            // stage
+            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
             time.html(timerStr)
         }
         // ready to start
@@ -515,10 +517,31 @@
 
                         // living
                         if( v3.status === 2 ) {
-                            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-                            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-                            let timerStr = v3.periods.period + langTrans.mainArea.stage
-                            v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                            // score
+                            let homeScore = home_team_info.find('.scoreSpan')
+                            let awayScore = away_team_info.find('.scoreSpan')
+
+                            let nowHomeScore = parseInt(homeScore.html())
+                            let nowAwayScore = parseInt(awayScore.html())
+
+                            let updateHome = parseInt(v3.scoreboard[1][0])
+                            let updateAway = parseInt(v3.scoreboard[2][0])
+
+                            if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
+                            if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
+
+                            setTimeout(() => {
+                                homeScore.removeClass('raiseScore')
+                                awayScore.removeClass('raiseScore')
+                            }, 3000);
+
+                            homeScore.html( v3.scoreboard[1][0] )
+                            awayScore.html( v3.scoreboard[2][0] )
+
+
+                            // stage
+                            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+                            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                             time.html(timerStr)
                         }
                         // ready to start
@@ -780,6 +803,13 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
+        // 先移除樣式
+        $('.leftSlideOrderCard').removeClass('raiseOdd')
+        $('.leftSlideOrderCard .fa-caret-up').remove()
+        $('.leftSlideOrderCard').removeClass('lowerOdd')
+        $('.leftSlideOrderCard .fa-caret-down').remove()
+
+
         let fixture_id = e.attr('fixture_id')
         let market_id = e.attr('market_id')
         let market_bet_id = e.attr('market_bet_id')
