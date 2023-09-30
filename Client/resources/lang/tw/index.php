@@ -34,7 +34,8 @@ return [
 		'upperStage' => '上',
 		'lowerStage' => '下',
 		'stage' => '局',
-		'readyToStart' => '即將開賽'
+		'readyToStart' => '即將開賽',
+		'overtime' => '加時賽'
 	],
 	'm_order' => [
 		'morder_detail' => '串關明細',

@@ -30,7 +30,12 @@ return [
 		'awayTeam' => 'Away Team', // "客隊"
 		'gaming' => 'Match in progress', // "開賽中"
 		'notgaming' => 'Not Started', // "未開賽"
-		'homeTeamTag' => 'Main' // "主"
+		'homeTeamTag' => 'Main', // "主"
+		'upperStage' => 'Upper',
+		'lowerStage' => 'Lower',
+		'stage' => 'Stage',
+		'readyToStart' => 'To be start',
+		'overtime' => 'Over time'
 	],
 	'm_order' => [
 		'morder_detail' => 'Parlay Details', // "串關明細"

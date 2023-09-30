@@ -539,9 +539,13 @@
 
                             // stage
                             if( v3.periods.period < 100 ) { // 比賽結束前有可能傳100，忽略不更新
-                                let timerStr = v3.periods.period + langTrans.mainArea.stage
-                                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-                                time.html(timerStr)
+                                if( v3.periods.period === 40 ) { // 加時賽
+                                    time.html(langTrans.mainArea.overtime)
+                                } else {
+                                    let timerStr = v3.periods.period + langTrans.mainArea.stage
+                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                                    time.html(timerStr)
+                                }
                             }
                         }
                         // ready to start
