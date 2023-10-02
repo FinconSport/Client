@@ -211,7 +211,7 @@ class MatchContentCard extends React.Component {
                                 <div className='row m-0' ref={setCollapsibleElement}>
                                     <div className='col-45' style={{ padding: '0 0.5rem'}}>
                                         <div className='row m-0' style={rowHeight2}>
-                                            <div className='col-2 p-0'>
+                                            <div className='col-2 p-0' style={{ lineHeight: '1rem' }}>
                                                 {
                                                     this.state.isSetStar === true ?
                                                     <IoIosStar onClick={()=>this.setStarState(v.fixture_id)} style={{ fontSize: '1.1rem' }} />
@@ -219,7 +219,7 @@ class MatchContentCard extends React.Component {
                                                     <IoIosStarOutline onClick={()=>{this.setStarState(v.fixture_id)}} style={{ fontSize: '1.1rem' }} />
                                                 }
                                             </div>
-                                            <div className='col-10 p-0'>
+                                            <div className='col-10 p-0' style={{ lineHeight: '1rem' }}>
                                                 <p className='mb-0 mt-1'>
                                                     {
                                                         v.status === 1 ?
@@ -231,6 +231,14 @@ class MatchContentCard extends React.Component {
                                                             :
                                                             v.periods.period + langText.MatchContentCard.stage + langText.MatchContentCard.upperStage
                                                         )
+                                                    }
+                                                </p>
+                                            </div>
+                                            <div className="col-12 p-0" style={{ lineHeight: '0.5rem', color: 'red' }}>
+                                                <p className='mb-0 mt-1'>
+                                                    {
+                                                        v.status > 3 && v.status < 9 && 
+                                                        <small>{ langText.MatchContentCard.fixtureStatus[v.status] }</small>
                                                     }
                                                 </p>
                                             </div>

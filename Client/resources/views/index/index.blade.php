@@ -61,6 +61,11 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
+        <!-- no data -->
+        <div id="noData" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
+        </div>
     </div>
 </div>
 
@@ -94,6 +99,9 @@
         <div class="indexBetCardInfo">
             <div class="timeSpan">
                 <span class="timer"></span>
+            </div>
+            <div class="statusSpan">
+                <span class="fixtureStatus"></span>
             </div>
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
                 <div class="textOverFlow teamSpan" style="width: 80%;">
@@ -134,11 +142,7 @@
     </div>
 </div>
 
-<!-- no data -->
-<div id="noData" style="display: none;">
-    <i class="fa-solid fa-circle-exclamation"></i>
-    <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
-</div>
+
 @endsection
 
 
@@ -301,6 +305,7 @@
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
         let time = card.find('.timer');
+        let fStatus = card.find('.fixtureStatus');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
 
@@ -309,6 +314,7 @@
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(v3.start_time)
+        if( v3.status > 3 && v3.status < 9 ) fStatus.html(langTrans.mainArea.fixtureStatus[v3.status]) // statusSpan
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
         away_team_info.find('.teamSpan').html(v3.away_team_name)
@@ -320,7 +326,7 @@
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
             // stage
-            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
             time.html(timerStr)
         }
@@ -499,6 +505,7 @@
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
+                        let fStatus = card.find('.fixtureStatus');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
@@ -541,14 +548,16 @@
 
 
                             // stage
-                            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+                            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                             time.html(timerStr)
                         }
                         // ready to start
-                        if( v3.status === 9 ) {
-                            time.html(langTrans.mainArea.readyToStart)
-                        }
+                        if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
+
+                        // statusSpan
+                        if( v3.status > 3 && v3.status < 9 ) fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
+                        
 
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
@@ -978,6 +987,13 @@
             $(this).html(count)
             if( count === 0 ) $(this).closest('.seriesWrapperTitle').hide()
         })
+
+        // is no data
+        if( $('#indexContainer .indexEachCard').length === 0 ) {
+            $('#noData').show()
+        } else {
+            $('#noData').hide()
+        }
     }
 
     // 餘額
