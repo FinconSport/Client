@@ -103,12 +103,15 @@
 		
 		noticeListD.data[0].forEach( ele => {
 			let card = $('div[template="card"]').clone()
-			card.find('div[key="title"]').html( ele.title )
-			card.find('div[key="time"]').html( ele.create_time )
-			card.find('div[key="content"]').html( ele.context )
+			card.find('p[key="title"]').html( ele.title )
+			card.find('p[key="time"]').html( ele.create_time )
+			card.find('p[key="content"]').html( ele.context )
+			card.removeAttr('template')
+			card.removeAttr('hidden')
+			let card2 = card.clone()
 
 			$('#v-pills-all').append( card )
-			$('#v-pills-0').append( card )
+			$('#v-pills-0').append( card2 )
 		})
 
 		
