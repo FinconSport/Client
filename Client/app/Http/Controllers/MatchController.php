@@ -61,14 +61,14 @@ class MatchController extends PcController {
     	/////////////////////////
       // Search 區用
 
-      // 取得體育種類列表
-      $this->getGameList($api_lang);
+    //   // 取得體育種類列表
+    //   $this->getGameList($api_lang);
       
-      // 取得公告資料
-      $this->getNoticeList($api_lang);
+    //   // 取得公告資料
+    //   $this->getNoticeList($api_lang);
 
-      // 取得熱門聯賽列表
-      $this->getHotSeriesList($input['sport'],$api_lang);
+    //   // 取得熱門聯賽列表
+    //   $this->getHotSeriesList($input['sport'],$api_lang);
 
       // 狀態
       $status = [
