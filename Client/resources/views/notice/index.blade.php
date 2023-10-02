@@ -11,113 +11,42 @@
 			<!--- Button for System Notification -->
 			<button class="nav-link" id="v-pills-system-tab" data-bs-toggle="pill" data-bs-target="#v-pills-system" type="button" role="tab" aria-controls="v-pills-system" aria-selected="false">{{ trans('notice.main.system') }}</button>
 			<!--- Sport Type Navigation Loop -->
-			@foreach ( $sport_list as $id => $sports)
-			<button class="nav-link" id="v-pills-{{$id}}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{$id}}" type="button" role="tab" aria-controls="v-pills-{{$id}}" aria-selected="false">{{ $sports }}</button>
-			@endforeach
-
 		</div>
+
+
+		<div class="card" hidden>
+			<div class="card-header d-flex">
+				<div class="p-2 bd-highlight notice-title">
+					<p> {{ $item['title'] }} </p>
+				</div>
+				<div class="ms-auto p-2 bd-highlight">
+					<p> {{ $item['create_time'] }} </p>
+				</div>
+			</div>
+			<div class="card-body">
+				<p> {{ $item['context'] }} </p>
+			</div>
+		</div>
+
+		<div class="tab-pane fade" id="v-pills-" role="tabpanel" aria-labelledby="v-pills--tab" hidden>
+					
+		</div>
+
+
 		<div class="notice-container-pad col-10">
 			<!--- Tab Container -->
 			<div class="notice-tab-content tab-content" id="v-pills-tabContent">
 				<!---All Announcement Tab Container -->
 				<div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
 					<!--- all notice_list loop query -->
-					@foreach (collect($notice_list)->flatten(1)->sortByDesc('create_time') as $item)
-					@if (!empty($item))
-					<div class="card">
-						<div class="card-header d-flex">
-							<div class="p-2 bd-highlight notice-title">
-								<p> {{ $item['title'] }} </p>
-							</div>
-							<div class="ms-auto p-2 bd-highlight">
-								<p> {{ $item['create_time'] }} </p>
-							</div>
-						</div>
-						<div class="card-body">
-							<p> {{ $item['context'] }} </p>
-						</div>
-					</div>
-					@else
-					<div class="card">
-						<div class="card-body">
-							<div class="noData" style="">
-								<i class="fa-solid fa-circle-exclamation"></i>
-								<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-							</div>
-						</div>
-					</div>
-					@endif
-					@endforeach
 				</div>
 				<!--- System Announcement Tab Container -->
 				<div class="tab-pane fade" id="v-pills-system" role="tabpanel" aria-labelledby="v-pills-all-tab">
 					<!--- system notice_list loop query -->
-					@foreach ( $notice_list as $key => $list)
-					@if ($key == 0)
-					@foreach ( collect($list)->sortByDesc('create_time')->all() as $li)<!--- sort by date descending -->
-					@if (!empty($li))
-					<div class="card">
-						<div class="card-header d-flex">
-							<div class="p-2 bd-highlight notice-title">
-								<p> {{ $li['title'] }} </p>
-							</div>
-							<div class="ms-auto p-2 bd-highlight">
-								<p> {{ $li['create_time'] }} </p>
-							</div>
-						</div>
-						<div class="card-body">
-							<p> {{ $li['context'] }} </p>
-						</div>
-					</div>
-					@else
-					<div class="card">
-						<div class="card-body">
-							<div class="noData" style="">
-								<i class="fa-solid fa-circle-exclamation"></i>
-								<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-							</div>
-						</div>
-					</div>
-					@endif
-					@endforeach
-					@endif
-					@endforeach
 				</div>
 
 				<!---Sport Announcement Tab Container Loop -->
-				@foreach ( $sport_list as $id => $sports)
-				<div class="tab-pane fade" id="v-pills-{{$id}}" role="tabpanel" aria-labelledby="v-pills-{{$id}}-tab">
-					<!--- sport notice_list loop query -->
-					@if (array_key_exists($id,$notice_list))
-					@foreach ( $notice_list as $key => $list)
-					<div>
-						@if ($key == $id)
-						@foreach ( collect($list)->sortByDesc('create_time')->all() as $li)<!--- sort by date descending -->
-						<div class="card">
-							<div class="card-header d-flex">
-								<div class="p-2 bd-highlight notice-title">
-									<p> {{ $li['title'] }} </p>
-								</div>
-								<div class="ms-auto p-2 bd-highlight">
-									<p> {{ $li['create_time'] }} </p>
-								</div>
-							</div>
-							<div class="card-body">
-								<p> {{ $li['context'] }} </p>
-							</div>
-						</div>
-						@endforeach
-						@endif
-					</div>
-					@endforeach
-					@else
-					<div class="noData" style="">
-						<i class="fa-solid fa-circle-exclamation"></i>
-						<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-					</div>
-					@endif
-				</div>
-				@endforeach
+				
 			</div>
 		</div>
 	</div>
@@ -164,7 +93,11 @@
 
 	function renderView() {
 		// loop noticeListD here to generate the search select then append into the page
-
+		sportListD.data.forEach(ele => {
+			let str = '<button class="nav-link" id="v-pills-' + ele.sport_id + '-tab" data-bs-toggle="pill" data-bs-target="#v-pills-' + ele.sport_id + '" type="button" role="tab" aria-controls="v-pills-' + ele.sport_id + '" aria-selected="false">' + ele.name + '</button>'
+			$('#v-pills-tab').append(str)
+		});
+		
 
 
 
