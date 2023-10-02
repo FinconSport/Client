@@ -16,7 +16,8 @@ const ToTopStyle = {
 	color: 'white',
 	borderRadius: '50%',
 	fontSize: '2.5rem',
-	padding: '0.3rem'
+	padding: '0.3rem',
+    opacity: 0.7
 }
 
 const RulesWrapper = {

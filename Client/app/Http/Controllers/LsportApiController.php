@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use DB;
 // use Exception;
 
-// use App\Models\GameMatch;
-// use App\Models\GameResult;  // 沒有這個model
 use App\Models\GameOrder;
 
 // LSport
@@ -972,8 +970,8 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得系統參數
-        $return = SystemConfig::where("name","risk_order")->first();
-        if ($return['value'] > 0) {
+        $risk_order = $this->system_config['risk_order'];
+        if ($risk_order > 0) {
             $default_order_status = 1;
             $default_approval_time = null;
         } else {
@@ -1245,8 +1243,8 @@ class LsportApiController extends Controller {
         $lang_col = 'name_' . $agent_lang;
 
         // 取得系統參數
-        $arrSysConfig = SystemConfig::where("name","risk_order")->first();
-        if ($arrSysConfig['value'] > 0) {
+        $risk_order = $this->system_config['risk_order'];
+        if ($risk_order > 0) {
             $default_order_status = 1;
             $default_approval_time = null;
         } else {

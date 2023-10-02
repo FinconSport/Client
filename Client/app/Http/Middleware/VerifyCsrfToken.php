@@ -13,7 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
             '/tg',
-            '/tg/josh',
 
             '/index/match_list',
             
