@@ -1023,7 +1023,7 @@
         })
     
         // is no data
-        if( $('.indexEachCard').length === 0 ) {
+        if( $('#indexContainer .indexEachCard').length === 0 ) {
             $('#noData').show()
         } else {
             $('#noData').hide()
