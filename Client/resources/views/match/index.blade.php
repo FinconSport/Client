@@ -118,9 +118,7 @@
 			str += '<td rowspan=2>'
 			str += '<p class="mb-0">' + formatDateTime(v.start_time) + '</p>'
 			str += '<p class="mb-0 text-red">'
-			// if( v.status > 3 && v.status < 9 ) {
-				str += v.status_name
-			// }
+			if( v.status > 3 && v.status < 9 ) str += v.status_name
 			str += '</p>'
 			str += '</td>'
 			
