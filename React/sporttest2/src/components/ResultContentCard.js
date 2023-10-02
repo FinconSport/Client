@@ -36,6 +36,22 @@ const rowHeight2 = {
     justifyContent: 'flex-start',
 }
 
+const rowHeight15 = {
+    height: '1.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+}
+
+const rowHeight1 = {
+    height: '1rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    fontSize: '0.8rem',
+    color: 'red'
+}
+
 const SliderBrickHeight2 = styled.div`
 	height: 3rem;
     line-height: 3rem;
@@ -139,8 +155,16 @@ class ResultContentCard extends React.Component {
                         <div className='row m-0 p-1'>
                             {/* left part */}
                             <div className='col-45' style={{ padding: '0 0rem 0 0.5rem'}}>
-                                <div style={rowHeight2}>
+                                <div style={rowHeight15}>
                                     <p className='mb-0 mt-1'>{this.formatDateTime(v.start_time)}</p>
+                                </div>
+                                <div style={rowHeight1}>
+                                    <p className='mb-0 mt-1'>
+                                        {
+                                            v.status > 3 && v.status < 9 &&
+                                            v.status_name
+                                        }
+                                    </p>
                                 </div>
                                 <div style={rowHeight2}>
                                     <div className='p-0 teamSpan' style={TeamName}>

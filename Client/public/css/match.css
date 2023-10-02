@@ -21,6 +21,9 @@
 
 th {
     border-top: none!important;
+    position: sticky;
+    top: 0;
+    background: white;
 }
 
 tr td:first-child, tr th:first-child {
