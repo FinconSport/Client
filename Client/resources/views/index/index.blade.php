@@ -313,7 +313,7 @@
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(v3.start_time)
-        fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
+        if( v3.status > 3 && v3.status < 9 ) fStatus.html(langTrans.mainArea.fixtureStatus[v3.status]) // statusSpan
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
         away_team_info.find('.teamSpan').html(v3.away_team_name)
@@ -552,12 +552,11 @@
                             time.html(timerStr)
                         }
                         // ready to start
-                        if( v3.status === 9 ) {
-                            time.html(langTrans.mainArea.readyToStart)
-                        }
+                        if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
 
                         // statusSpan
-                        fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
+                        if( v3.status > 3 && v3.status < 9 ) fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
+                        
 
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
