@@ -358,14 +358,6 @@ class OrderController extends PcController {
 
       /////////////////////////
 
-      // 菜單統計
-      $return = $this->menu_count($session['player']['id']);
-      if ($return === false) {
-        $this->error(__CLASS__, __FUNCTION__, "12");
-      }
-
-      $this->assign("menu_count",$return);
-
       return view('order.index',$this->data);
     }
 
