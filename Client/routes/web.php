@@ -51,6 +51,10 @@ Route::get('/error/500', 'App\Http\Controllers\TestController@error_500');
 Route::get('/error/ip', 'App\Http\Controllers\TestController@error_ip');
 Route::get('/error/maintain', 'App\Http\Controllers\TestController@maintain');
 
+// TG通知用
+Route::get('/tg', 'App\Http\Controllers\TgBotController@index');
+Route::post('/tg', 'App\Http\Controllers\TgBotController@index');
+
 // Mobile
 Route::get('/mobile', 'App\Http\Controllers\MobileController@index');
 Route::get('/mobile/index', 'App\Http\Controllers\MobileController@index');
