@@ -9,28 +9,26 @@
 			<!--- Button for All Notification-->
 			<button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">{{ trans('notice.main.all') }}</button>
 			<!--- Button for System Notification -->
-			<button class="nav-link" id="v-pills-system-tab" data-bs-toggle="pill" data-bs-target="#v-pills-system" type="button" role="tab" aria-controls="v-pills-system" aria-selected="false">{{ trans('notice.main.system') }}</button>
+			<button class="nav-link" id="v-pills-0-tab" data-bs-toggle="pill" data-bs-target="#v-pills-0" type="button" role="tab" aria-controls="v-pills-0" aria-selected="false">{{ trans('notice.main.system') }}</button>
 			<!--- Sport Type Navigation Loop -->
 		</div>
 
 
-		<div class="card" hidden>
+		<div template='card' class="card" hidden>
 			<div class="card-header d-flex">
 				<div class="p-2 bd-highlight notice-title">
-					<p>  </p>
+					<p key='title'></p>
 				</div>
 				<div class="ms-auto p-2 bd-highlight">
-					<p> </p>
+					<p key='time'></p>
 				</div>
 			</div>
 			<div class="card-body">
-				<p> </p>
+				<p key='content'></p>
 			</div>
 		</div>
 
-		<div class="tab-pane fade" id="v-pills-" role="tabpanel" aria-labelledby="v-pills--tab" hidden>
-					
-		</div>
+	
 
 
 		<div class="notice-container-pad col-10">
@@ -41,12 +39,10 @@
 					<!--- all notice_list loop query -->
 				</div>
 				<!--- System Announcement Tab Container -->
-				<div class="tab-pane fade" id="v-pills-system" role="tabpanel" aria-labelledby="v-pills-all-tab">
+				<div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-0-tab">
 					<!--- system notice_list loop query -->
 				</div>
-
 				<!---Sport Announcement Tab Container Loop -->
-				
 			</div>
 		</div>
 	</div>
@@ -95,11 +91,27 @@
 		// loop noticeListD here to generate the search select then append into the page
 		sportListD.data.forEach(ele => {
 			let str = '<button class="nav-link" id="v-pills-' + ele.sport_id + '-tab" data-bs-toggle="pill" data-bs-target="#v-pills-' + ele.sport_id + '" type="button" role="tab" aria-controls="v-pills-' + ele.sport_id + '" aria-selected="false">' + ele.name + '</button>'
+
+			let str2 = '<div class="tab-pane fade" id="v-pills-' + ele.sport_id + '" role="tabpanel" aria-labelledby="v-pills-' + ele.sport_id + '-tab"></div>'
+
+			
+			
+
 			$('#v-pills-tab').append(str)
+			$('#v-pills-tabContent').append(str2)
 		});
 		
+		noticeListD.data[0].forEach( ele => {
+			let card = $('div[template="card"]').clone()
+			card.find('div[key="title"]').html( ele.title )
+			card.find('div[key="time"]').html( ele.create_time )
+			card.find('div[key="content"]').html( ele.context )
 
+			$('#v-pills-all').append( card )
+			$('#v-pills-0').append( card )
+		})
 
+		
 
 		// loop noticeListD here to generate the search select then append into the page
 	}
