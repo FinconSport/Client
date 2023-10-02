@@ -8,17 +8,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\PlayerOnline;
-use App\Models\AntGameList;
-use App\Models\AntMatchList;
-use App\Models\AntRateList;
-use App\Models\AntSeriesList;
-use App\Models\AntTeamList;
-use App\Models\AntTypeList;
-use App\Models\AntNoticeList;
 use App\Models\ClientMarquee;
 use App\Models\Player;
 use App\Models\Agent;
@@ -32,56 +25,56 @@ class PcController extends Controller {
 	}
   
 	// 取得NoticeList 公告列表 , PC端限定,  映射至頁面
-	protected function getNoticeList($api_lang = 'cn') {
+	// protected function getNoticeList($api_lang = 'cn') {
 
-		$days = date('Y-m-d 00:00:00', strtotime('-1 days'));
+	// 	$days = date('Y-m-d 00:00:00', strtotime('-1 days'));
 
-		$notice_list = array();
+	// 	$notice_list = array();
 
-		// 系統公告
-		$return = ClientMarquee::where("status",1)->get();      
-		if ($return === false) {
-		  $this->ApiError("01");
-		}
+	// 	// 系統公告
+	// 	$return = ClientMarquee::where("status",1)->get();      
+	// 	if ($return === false) {
+	// 	  $this->ApiError("01");
+	// 	}
   
-		foreach ($return as $k => $v) {
-		  $game_id = 0;
-		  $title = $v['title'];
-		  $context = $v['marquee'];
-		  $create_time = $v['create_time'];
+	// 	foreach ($return as $k => $v) {
+	// 	  $game_id = 0;
+	// 	  $title = $v['title'];
+	// 	  $context = $v['marquee'];
+	// 	  $create_time = $v['create_time'];
   
-		  $notice_list[$game_id][] = [
-			"game_id" => $game_id,
-			"title" => $title,
-			"context" => $context,
-			"create_time" => $create_time,
-		  ];
-		}
+	// 	  $notice_list[$game_id][] = [
+	// 		"game_id" => $game_id,
+	// 		"title" => $title,
+	// 		"context" => $context,
+	// 		"create_time" => $create_time,
+	// 	  ];
+	// 	}
   
-		/////////////////
+	// 	/////////////////
   
-		$return = AntNoticeList::where('create_time',">=", $days)->orderBy("create_time","DESC")->get();
-		if ($return === false) {
-		  $this->ApiError("02");
-		}
+	// 	$return = AntNoticeList::where('create_time',">=", $days)->orderBy("create_time","DESC")->get();
+	// 	if ($return === false) {
+	// 	  $this->ApiError("02");
+	// 	}
   
-		foreach ($return as $k => $v) {
-		  $game_id = $v['game_id'];
-		  $title = $v['title_'.$api_lang];
-		  $context = $v['context_'.$api_lang];
-		  $create_time = $v['create_time'];
+	// 	foreach ($return as $k => $v) {
+	// 	  $game_id = $v['game_id'];
+	// 	  $title = $v['title_'.$api_lang];
+	// 	  $context = $v['context_'.$api_lang];
+	// 	  $create_time = $v['create_time'];
   
-		  $notice_list[$game_id][] = [
-			"game_id" => $game_id,
-			"title" => $title,
-			"context" => $context,
-			"create_time" => $create_time,
-		  ];
-		}
+	// 	  $notice_list[$game_id][] = [
+	// 		"game_id" => $game_id,
+	// 		"title" => $title,
+	// 		"context" => $context,
+	// 		"create_time" => $create_time,
+	// 	  ];
+	// 	}
 		
-		$this->assign("notice_list",$notice_list);
+	// 	$this->assign("notice_list",$notice_list);
   
-	}
+	// }
 
 	// Marquee 取得NoticeList 公告列表 , PC端限定,  映射至頁面
 	protected function getMarqueeList($lang = 'cn') {
