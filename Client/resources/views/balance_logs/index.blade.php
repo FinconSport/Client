@@ -109,21 +109,8 @@
 @push('main_js')
 <script>
 
-	// 帳變類型選單
-	console.log("type_list");
-    console.log(@json($type_list));
-	
-	// 列表
-	console.log("list");
-    console.log(@json($list));
-
-	// 分頁
-	console.log("pagination");
-    console.log(@json($pagination));
-
 	// 語系
     var langTrans = @json(trans('logs'));
-
 
 	// detect ini ajax
 	var isReadyLogsInt = null

@@ -208,11 +208,5 @@
 			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
 		}
 	})
-
-
-
-	console.log(@json($notice_list));
-	console.log("sport_list");
-	console.log(@json($sport_list));
 </script>
 @endpush

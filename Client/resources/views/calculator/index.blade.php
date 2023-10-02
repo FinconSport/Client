@@ -46,27 +46,6 @@
                     <p>{{ trans('calculator.calculator.process') }}</p>
                     <p id="processStr"></p>
                 </div>
-                <!-- <div class="row m-0">
-                    <div class="col-1"></div>
-                    <div class="col-5 row m-0">
-                        <div class="col-6 p-0 text-right">
-                            <span class="moneyLabel">{{ trans('calculator.calculator.betmoney') }}</span>
-                        </div>
-                        <div class="col-6 p-0 text-left">
-                            <input class="w-100" id="betMoney" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" >
-                        </div>
-                    </div>
-                    <div class="col-5 row m-0 text-right">
-                        <div class="col-6 p-0">
-                            <span class="moneyLabel">{{ trans('calculator.calculator.winmoney') }}</span>
-                        </div>
-                        <div class="col-6 p-0 text-left">
-                            <input class="w-100" readonly id="winningMoney">
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div> -->
-
                 <div class="row m-0">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-around btnCalcuMoney">
@@ -91,17 +70,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="row m-0">
-                    <div class="col-2"></div>
-                    <div class="col-4">
-                        <button onclick="clearAll()">{{ trans('calculator.calculator.clear') }}</button>
-                    </div>
-                    <div class="col-4">
-                        <button onclick="claculate()">{{ trans('calculator.calculator.calculate') }}</button>
-                    </div>
-                    <div class="col-2"></div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -112,7 +80,6 @@
 
 @section('styles')
 <link href="{{ asset('css/calculator.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<!-- <link href="{{ asset('css/calculator.css?v=' . $current_time) }}" rel="stylesheet"> -->
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -123,7 +90,6 @@
 <script>
     // 語系
     var langTrans = @json(trans('calculator'));
-
     // detect ini ajax
     var isReadyCalInt = null
     
