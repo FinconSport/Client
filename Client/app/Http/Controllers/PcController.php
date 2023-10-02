@@ -119,55 +119,55 @@ class PcController extends Controller {
 		$this->assign("token",$token);
 	}
 
-	// 新的menu_count
-	protected function menu_count($input , $is_sport = true) {
-        $return = AntGameList::where("status",1)->get();
-		if ($return === false) {
-		  return false;
-		}
+	// // 新的menu_count
+	// protected function menu_count($input , $is_sport = true) {
+    //     $return = AntGameList::where("status",1)->get();
+	// 	if ($return === false) {
+	// 	  return false;
+	// 	}
 		
-		$game_list = array();
-		foreach ($return as $k => $v) {
-			$sport_id = $v['id'];
+	// 	$game_list = array();
+	// 	foreach ($return as $k => $v) {
+	// 		$sport_id = $v['id'];
 
-			$today = time();
-			$after_tomorrow = $today + 2 * 24 * 60 * 60; 
-			$after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow); 
+	// 		$today = time();
+	// 		$after_tomorrow = $today + 2 * 24 * 60 * 60; 
+	// 		$after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow); 
 
-			// 體育
-			$tmp = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-				->join('ant_series_list', function ($join) {
-					$join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-				})
-			  ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
-			  ->where('ant_rate_list.is_active', '=', 1)
-			  ->where('ant_series_list.status', 1)
-      		  ->where('ant_match_list.start_time',"<=", $after_tomorrow)
-			  ->whereIn('ant_match_list.status', [1,2])
-			  ->where("ant_match_list.game_id",$sport_id)
-			  ->groupBy('ant_match_list.match_id')->having('rate_count', '>', 0)->get();
+	// 		// 體育
+	// 		$tmp = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+	// 			->join('ant_series_list', function ($join) {
+	// 				$join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+	// 			})
+	// 		  ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
+	// 		  ->where('ant_rate_list.is_active', '=', 1)
+	// 		  ->where('ant_series_list.status', 1)
+    //   		  ->where('ant_match_list.start_time',"<=", $after_tomorrow)
+	// 		  ->whereIn('ant_match_list.status', [1,2])
+	// 		  ->where("ant_match_list.game_id",$sport_id)
+	// 		  ->groupBy('ant_match_list.match_id')->having('rate_count', '>', 0)->get();
 			
-			  $game_list[0][$sport_id] = count($tmp);
+	// 		  $game_list[0][$sport_id] = count($tmp);
 
-			// 串關
-			$tmp = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
-				->join('ant_series_list', function ($join) {
-					$join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
-				})
-			  ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
-			  ->where('ant_rate_list.is_active', '=', 1)
-			  ->where('ant_series_list.status', 1)
-			  ->where('ant_match_list.start_time',"<=", $after_tomorrow)
-			  ->where('ant_match_list.status', 1)
-			  ->where("ant_match_list.game_id",$sport_id)
-			  ->groupBy('ant_match_list.match_id')->having('rate_count', '>', 0)->get();
+	// 		// 串關
+	// 		$tmp = AntMatchList::join('ant_rate_list', 'ant_match_list.match_id', '=', 'ant_rate_list.match_id')
+	// 			->join('ant_series_list', function ($join) {
+	// 				$join->on('ant_match_list.game_id', '=', 'ant_series_list.game_id')->on('ant_match_list.series_id', '=', 'ant_series_list.series_id');
+	// 			})
+	// 		  ->select('ant_match_list.*', DB::raw('COUNT(ant_rate_list.id) as rate_count'))
+	// 		  ->where('ant_rate_list.is_active', '=', 1)
+	// 		  ->where('ant_series_list.status', 1)
+	// 		  ->where('ant_match_list.start_time',"<=", $after_tomorrow)
+	// 		  ->where('ant_match_list.status', 1)
+	// 		  ->where("ant_match_list.game_id",$sport_id)
+	// 		  ->groupBy('ant_match_list.match_id')->having('rate_count', '>', 0)->get();
 
-			$game_list[1][$sport_id] = count($tmp);
-		}
+	// 		$game_list[1][$sport_id] = count($tmp);
+	// 	}
 
-		return $game_list;
+	// 	return $game_list;
 
-	}
+	// }
 
 	// Api Success
 	protected function ApiSuccess($data,$message,$gzip=false) {
