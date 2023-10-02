@@ -115,7 +115,16 @@
 		Object.entries(resultListD.data).map(([k, v]) => { 
 			let str = '<tr class="odd">'
 			if( k % 2 === 0) str = '<tr class="even">'
-			str += '<td rowspan=2>' + formatDateTime(v.start_time) + '</td>'
+			str += '<td rowspan=2>'
+			str += '<p class="mb-0">' + formatDateTime(v.start_time) + '</p>'
+			str += '<p class="mb-0 text-red">'
+			// if( v.status > 3 && v.status < 9 ) {
+				str += v.status_name
+			// }
+			str += '</p>'
+			str += '</td>'
+			
+			
 			str += '<td rowspan=2>' + v.league_name + '</td>'
 
 			str += '<td>' + v.home_team_name + '</td>'

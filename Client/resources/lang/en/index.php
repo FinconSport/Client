@@ -72,17 +72,6 @@ return [
 				101 => 'Full Time After Overtime',
 				102 => 'Full Time After Penalties',
 			]
-		],
-		'fixtureStatus' => [
-			1 => "Waiting to Start",
-			2 => "In Progress",
-			3 => "Finished",
-			4 => "Cancelled",
-			5 => "Postponed",
-			6 => "Interrupted",
-			7 => "Abandoned",
-			8 => "Lost Coverage",
-			9 => "Upcoming"
 		]
 	],
 	'm_order' => [
