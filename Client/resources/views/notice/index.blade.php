@@ -17,14 +17,14 @@
 		<div class="card" hidden>
 			<div class="card-header d-flex">
 				<div class="p-2 bd-highlight notice-title">
-					<p> {{ $item['title'] }} </p>
+					<p>  </p>
 				</div>
 				<div class="ms-auto p-2 bd-highlight">
-					<p> {{ $item['create_time'] }} </p>
+					<p> </p>
 				</div>
 			</div>
 			<div class="card-body">
-				<p> {{ $item['context'] }} </p>
+				<p> </p>
 			</div>
 		</div>
 
