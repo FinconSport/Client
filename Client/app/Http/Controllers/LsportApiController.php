@@ -972,6 +972,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得系統參數
+        dd($this->system_config);
         $return = SystemConfig::where("name","risk_order")->first();
         if ($return['value'] > 0) {
             $default_order_status = 1;
