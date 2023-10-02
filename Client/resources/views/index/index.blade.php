@@ -95,6 +95,9 @@
             <div class="timeSpan">
                 <span class="timer"></span>
             </div>
+            <div class="statusSpan">
+                <span class="fixtureStatus"></span>
+            </div>
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
                 <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
@@ -301,6 +304,7 @@
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
         let time = card.find('.timer');
+        let fStatus = card.find('.fixtureStatus');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
 
@@ -309,6 +313,7 @@
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(v3.start_time)
+        fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
         away_team_info.find('.teamSpan').html(v3.away_team_name)
@@ -320,7 +325,7 @@
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
             // stage
-            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
             time.html(timerStr)
         }
@@ -499,6 +504,7 @@
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
+                        let fStatus = card.find('.fixtureStatus');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
@@ -541,7 +547,7 @@
 
 
                             // stage
-                            let timerStr = langTrans.mainArea.statusArr[sport][v3.periods.period]
+                            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                             time.html(timerStr)
                         }
@@ -549,6 +555,9 @@
                         if( v3.status === 9 ) {
                             time.html(langTrans.mainArea.readyToStart)
                         }
+
+                        // statusSpan
+                        fStatus.html(langTrans.mainArea.fixtureStatus[v3.status])
 
                         priorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)

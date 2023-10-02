@@ -116,6 +116,15 @@
     font-size: 1rem;
     font-weight: 600;
 }
+.timeSpan {
+    height: 2rem;
+    line-height: 2rem;
+}
+.statusSpan {
+    height: 1rem;
+    line-height: 1rem;
+    color: red;
+}
 .indexBetCardTable {
     width: 72%;
 }
