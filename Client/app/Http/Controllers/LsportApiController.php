@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use DB;
 // use Exception;
 
-// use App\Models\GameMatch;
-// use App\Models\GameResult;  // 沒有這個model
 use App\Models\GameOrder;
 
 // LSport
