@@ -61,6 +61,11 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
+        <!-- no data -->
+        <div id="noData" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
+        </div>
     </div>
 </div>
 
@@ -137,11 +142,7 @@
     </div>
 </div>
 
-<!-- no data -->
-<div id="noData" style="display: none;">
-    <i class="fa-solid fa-circle-exclamation"></i>
-    <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
-</div>
+
 @endsection
 
 
@@ -986,6 +987,13 @@
             $(this).html(count)
             if( count === 0 ) $(this).closest('.seriesWrapperTitle').hide()
         })
+
+        // is no data
+        if( $('.indexEachCard').length === 0 ) {
+            $('#noData').show()
+        } else {
+            $('#noData').hide()
+        }
     }
 
     // 餘額
