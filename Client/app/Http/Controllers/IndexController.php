@@ -39,18 +39,7 @@ class IndexController extends PcController {
       } else {
         $this->error(__CLASS__, __FUNCTION__, "01");
       }
-
-      if ((!isset($input['sport'])) || ($input['sport'] == "")) {
-        $input['sport'] = 1;  // 預設1 , 足球
-      }
-
-      if ((!isset($input['page'])) || ($input['page'] == "")) {
-        $input['page'] = 1; // 預設1 
-      }
       
-      $this->assign("search",$input);
-      $this->assign("match_status",$this->match_status);
-
       $this->getCurrentTime();
 
       // 輸出玩家資料
