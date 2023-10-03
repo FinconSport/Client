@@ -145,12 +145,12 @@
 			for (const bet of item.bet_data) {
 			const matchingSport = sportListD.data.find(sport => sport.sport_id === bet.sport_id);
 			sportName = matchingSport ? matchingSport.name : '';
-			console.log(bet.sport_id + ' sportname' + matchingSport.name);
+			console.log(bet.sport_id + ' sportname ' + matchingSport.name);
 			}
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataSportType.html(sportName);
+		orderDataSportType.html(matchingSport.name);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
