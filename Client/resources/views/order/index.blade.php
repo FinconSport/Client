@@ -150,7 +150,7 @@
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataSportType.html(matchingSport.name);
+		orderDataSportType.html(sportName);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
