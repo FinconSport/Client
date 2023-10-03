@@ -1,8 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-
-
 	<!-- Table -->
 	<div id="matchContainer">
         <div id="tableContainer" style="overflow: auto;">
@@ -35,7 +33,7 @@
 				</div>
 			</div>  
 			<div id="noMoreData" style="display: none; margin-top: 2rem;">
-				<td colspan="6"><p class="mb-0">>{{ trans('logs.main.nodata') }}</p></td>
+				<td colspan="6"><p class="mb-0">>{{ trans('logs.main.nomoredata') }}</p></td>
 			</div>
         </div>
     </div>
@@ -73,13 +71,13 @@
 			if( isReadyCommon && isReadyLogs ) {
 				$('#dimmer').dimmer('hide'); // hide loading
 				$('#wrap').css('opacity', 1); // show the main content
-				renderView()
+				renderView(1)
 				clearInterval(isReadyLogsInt); // stop checking
 			}
 		}, 500);
 	});
 
-	function renderView() {
+	function renderView( isIni = 0 ) {
 		Object.entries(logsListD.data.list).map(([k, v]) => { 
 			console.log(v)
 			let str = '<tr class="odd">'
@@ -98,11 +96,12 @@
 		// detect if it's last page
 		if( logsListD.data.list.length !== 20 || logsListD.data.list.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
+
+		if( isIni === 1 && window.innerHeight > 750 ) fetchMore()
 	}
 
 	// 下拉更多資料
 	async function fetchMore() {
-		console.log('fetchMore')
 		$('#loader').show() // loading transition
 		callLogsListData.page += 1
 		await caller(logsList_api, callLogsListData, logsListD, 1) // logsListD

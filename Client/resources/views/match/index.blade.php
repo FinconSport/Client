@@ -2,7 +2,7 @@
 
 @section('content')
 	<!-- Table -->
-	<div id="matchContainer">
+	<div id="matchContainer" class="match">
         <div id="tableContainer" style="overflow: auto;">
             <table id="matchTable" class="cell-border w-100 text-center">
 				<thead>

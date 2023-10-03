@@ -17,7 +17,7 @@ return [
 		"pre_page" => "上一頁",
 		"next_page" => "下一頁",
 		"last_page" => "最後一頁",
-		"nodata" => "暫無資料",
+		"nomoredata" => "沒有更多資料了",
 	],
 
 	// 後端
