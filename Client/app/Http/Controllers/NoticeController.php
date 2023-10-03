@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use DB;
 
-use App\Models\AntGameList;
-use App\Models\AntMatchList;
-use App\Models\AntRateList;
-use App\Models\AntSeriesList;
-use App\Models\AntTeamList;
-use App\Models\AntTypeList;
 use App\Models\Player;
 
 
@@ -62,25 +56,6 @@ class NoticeController extends PcController {
 
     	/////////////////////////
       // Search 區用
-
-      // 取得體育種類列表
-      $this->getGameList($api_lang);
-      
-      // 取得公告資料
-      $this->getNoticeList($api_lang);
-
-      // 取得熱門聯賽列表
-      $this->getHotSeriesList($input['sport'],$api_lang);
-
-
-      // 菜單統計
-      $return = $this->menu_count($input);
-      if ($return === false) {
-        $this->error(__CLASS__, __FUNCTION__, "03");
-      }
-
-      $this->assign("menu_count",$return);
-
 
       return view('notice.index',$this->data);
       

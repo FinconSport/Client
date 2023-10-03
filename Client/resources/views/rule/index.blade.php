@@ -395,14 +395,12 @@
 
 @section('styles')
 <link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<!-- <link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet"> -->
 <style>	
 /* 寫入頁面限定CSS */
 </style>
 @endSection
 @push('main_js')
 <script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
-<!-- <script src="{{ asset('js/bootstrap.min.js?v=' .$current_time) }}"></script> -->
 <script>
     var isReadyRuleInt = null
     $(document).ready(function() {

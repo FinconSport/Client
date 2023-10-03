@@ -9,115 +9,40 @@
 			<!--- Button for All Notification-->
 			<button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">{{ trans('notice.main.all') }}</button>
 			<!--- Button for System Notification -->
-			<button class="nav-link" id="v-pills-system-tab" data-bs-toggle="pill" data-bs-target="#v-pills-system" type="button" role="tab" aria-controls="v-pills-system" aria-selected="false">{{ trans('notice.main.system') }}</button>
+			<button class="nav-link" id="v-pills-0-tab" data-bs-toggle="pill" data-bs-target="#v-pills-0" type="button" role="tab" aria-controls="v-pills-0" aria-selected="false">{{ trans('notice.main.system') }}</button>
 			<!--- Sport Type Navigation Loop -->
-			@foreach ( $sport_list as $id => $sports)
-			<button class="nav-link" id="v-pills-{{$id}}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{$id}}" type="button" role="tab" aria-controls="v-pills-{{$id}}" aria-selected="false">{{ $sports }}</button>
-			@endforeach
-
 		</div>
+
+
+		<div template='card' class="card" hidden>
+			<div class="card-header d-flex">
+				<div class="p-2 bd-highlight notice-title">
+					<p key='title'></p>
+				</div>
+				<div class="ms-auto p-2 bd-highlight">
+					<p key='time'></p>
+				</div>
+			</div>
+			<div class="card-body">
+				<p key='content'></p>
+			</div>
+		</div>
+
+	
+
+
 		<div class="notice-container-pad col-10">
 			<!--- Tab Container -->
 			<div class="notice-tab-content tab-content" id="v-pills-tabContent">
 				<!---All Announcement Tab Container -->
 				<div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
 					<!--- all notice_list loop query -->
-					@foreach (collect($notice_list)->flatten(1)->sortByDesc('create_time') as $item)
-					@if (!empty($item))
-					<div class="card">
-						<div class="card-header d-flex">
-							<div class="p-2 bd-highlight notice-title">
-								<p> {{ $item['title'] }} </p>
-							</div>
-							<div class="ms-auto p-2 bd-highlight">
-								<p> {{ $item['create_time'] }} </p>
-							</div>
-						</div>
-						<div class="card-body">
-							<p> {{ $item['context'] }} </p>
-						</div>
-					</div>
-					@else
-					<div class="card">
-						<div class="card-body">
-							<div class="noData" style="">
-								<i class="fa-solid fa-circle-exclamation"></i>
-								<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-							</div>
-						</div>
-					</div>
-					@endif
-					@endforeach
 				</div>
 				<!--- System Announcement Tab Container -->
-				<div class="tab-pane fade" id="v-pills-system" role="tabpanel" aria-labelledby="v-pills-all-tab">
+				<div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-0-tab">
 					<!--- system notice_list loop query -->
-					@foreach ( $notice_list as $key => $list)
-					@if ($key == 0)
-					@foreach ( collect($list)->sortByDesc('create_time')->all() as $li)<!--- sort by date descending -->
-					@if (!empty($li))
-					<div class="card">
-						<div class="card-header d-flex">
-							<div class="p-2 bd-highlight notice-title">
-								<p> {{ $li['title'] }} </p>
-							</div>
-							<div class="ms-auto p-2 bd-highlight">
-								<p> {{ $li['create_time'] }} </p>
-							</div>
-						</div>
-						<div class="card-body">
-							<p> {{ $li['context'] }} </p>
-						</div>
-					</div>
-					@else
-					<div class="card">
-						<div class="card-body">
-							<div class="noData" style="">
-								<i class="fa-solid fa-circle-exclamation"></i>
-								<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-							</div>
-						</div>
-					</div>
-					@endif
-					@endforeach
-					@endif
-					@endforeach
 				</div>
-
 				<!---Sport Announcement Tab Container Loop -->
-				@foreach ( $sport_list as $id => $sports)
-				<div class="tab-pane fade" id="v-pills-{{$id}}" role="tabpanel" aria-labelledby="v-pills-{{$id}}-tab">
-					<!--- sport notice_list loop query -->
-					@if (array_key_exists($id,$notice_list))
-					@foreach ( $notice_list as $key => $list)
-					<div>
-						@if ($key == $id)
-						@foreach ( collect($list)->sortByDesc('create_time')->all() as $li)<!--- sort by date descending -->
-						<div class="card">
-							<div class="card-header d-flex">
-								<div class="p-2 bd-highlight notice-title">
-									<p> {{ $li['title'] }} </p>
-								</div>
-								<div class="ms-auto p-2 bd-highlight">
-									<p> {{ $li['create_time'] }} </p>
-								</div>
-							</div>
-							<div class="card-body">
-								<p> {{ $li['context'] }} </p>
-							</div>
-						</div>
-						@endforeach
-						@endif
-					</div>
-					@endforeach
-					@else
-					<div class="noData" style="">
-						<i class="fa-solid fa-circle-exclamation"></i>
-						<p class="mb-0">{{ trans('notice.main.no_result') }}</p>
-					</div>
-					@endif
-				</div>
-				@endforeach
 			</div>
 		</div>
 	</div>
@@ -164,9 +89,32 @@
 
 	function renderView() {
 		// loop noticeListD here to generate the search select then append into the page
+		sportListD.data.forEach(ele => {
+			let str = '<button class="nav-link" id="v-pills-' + ele.sport_id + '-tab" data-bs-toggle="pill" data-bs-target="#v-pills-' + ele.sport_id + '" type="button" role="tab" aria-controls="v-pills-' + ele.sport_id + '" aria-selected="false">' + ele.name + '</button>'
 
+			let str2 = '<div class="tab-pane fade" id="v-pills-' + ele.sport_id + '" role="tabpanel" aria-labelledby="v-pills-' + ele.sport_id + '-tab"></div>'
 
+			
+			
 
+			$('#v-pills-tab').append(str)
+			$('#v-pills-tabContent').append(str2)
+		});
+		
+		noticeListD.data[0].forEach( ele => {
+			let card = $('div[template="card"]').clone()
+			card.find('p[key="title"]').html( ele.title )
+			card.find('p[key="time"]').html( ele.create_time )
+			card.find('p[key="content"]').html( ele.context )
+			card.removeAttr('template')
+			card.removeAttr('hidden')
+			let card2 = card.clone()
+
+			$('#v-pills-all').append( card )
+			$('#v-pills-0').append( card2 )
+		})
+
+		
 
 		// loop noticeListD here to generate the search select then append into the page
 	}
@@ -208,11 +156,5 @@
 			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
 		}
 	})
-
-
-
-	console.log(@json($notice_list));
-	console.log("sport_list");
-	console.log(@json($sport_list));
 </script>
 @endpush

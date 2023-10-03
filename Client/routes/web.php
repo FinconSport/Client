@@ -70,22 +70,6 @@ Route::get('/mobile/m_ip', 'App\Http\Controllers\MobileController@index');
 Route::get('/mobile/m_500', 'App\Http\Controllers\MobileController@index');
 
 // ClientApi
-
-// 第二版, ant 
-Route::post('/api/v1/common_account', 'App\Http\Controllers\ApiController@CommonAccount');
-Route::post('/api/v1/index_carousel', 'App\Http\Controllers\ApiController@IndexCarousel');
-Route::post('/api/v1/index_marquee', 'App\Http\Controllers\ApiController@IndexMarquee');
-Route::post('/api/v1/index_notice', 'App\Http\Controllers\ApiController@IndexNotice');
-Route::post('/api/v1/index_match_list', 'App\Http\Controllers\ApiController@IndexMatchList');
-Route::post('/api/v1/result_index', 'App\Http\Controllers\ApiController@ResultIndex');
-Route::post('/api/v1/match_index', 'App\Http\Controllers\ApiController@MatchIndex');
-Route::post('/api/v1/match_sport', 'App\Http\Controllers\ApiController@MatchSport');
-Route::post('/api/v1/game_index', 'App\Http\Controllers\ApiController@GameIndex');
-Route::post('/api/v1/game_bet', 'App\Http\Controllers\ApiController@GameBet');
-Route::post('/api/v1/m_game_bet', 'App\Http\Controllers\ApiController@mGameBet');
-Route::post('/api/v1/common_order', 'App\Http\Controllers\ApiController@CommonOrder');
-Route::post('/api/v1/balance_logs', 'App\Http\Controllers\ApiController@BalanceLogs');
-
 //API V2, LSport
 Route::post('/api/v2/common_account',   'App\Http\Controllers\LsportApiController@CommonAccount');
 Route::post('/api/v2/index_carousel',   'App\Http\Controllers\LsportApiController@IndexCarousel');

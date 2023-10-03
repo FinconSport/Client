@@ -1,51 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-	<!-- 搜尋框 -->
-	<!-- <div id='searchArea' style="height: 5.5rem;">
-		<div class="w-100" style='display: inline-flex'>
-			<div id="series_id" style="width: 35%;margin-left: 1%" data-filter="off" data-filterpage="1">
-				<p class="mb-0 fw-600 fs-09">{{ trans('match.main.series') }}</p>
-				<select name="series_id" class="ui dropdown searchSelect seriesOption" onchange="filterSeiries()">
-					<option value="">{{ trans('common.search_area.series') }}</option>
-					<option value="0">{{ trans('common.search_area.all') }}</option>
-					@foreach ($series_list as $key => $list)
-						@if ($key == intval($search['sport']))
-							@foreach ($list as $key2 => $v)
-								<option series="{{ $v }}" value="{{ $key2 }}">{{ $v }}</option>
-							@endforeach
-						@endif
-					@endforeach
-				</select>
-			</div>
-			<div class="ui form" style="width:45%;margin-left: 1%">
-				<div class="two fields">
-					<div class="field">
-						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.start_time') }}</p>
-						<div class="ui calendar" id="rangestart">
-							<div class="ui input left icon">
-								<i class="fa-solid fa-calendar-days"></i>
-								<input autocomplete="off" name="start_time" type="text" placeholder="{{ trans('common.search_area.start_time') }}">
-							</div>
-						</div>
-					</div>
-					<div class="field">
-						<p class="mb-0 fw-600 fs-09">{{ trans('common.search_area.end_time') }}</p>
-						<div class="ui calendar" id="rangeend">
-							<div class="ui input left icon">
-								<i class="fa-solid fa-calendar-days"></i>
-								<input autocomplete="off" name="end_time" type="text" placeholder="{{ trans('common.search_area.end_time') }}">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<button style="width: 20%;" id='searchBtn' class="ui button active" onclick="searchResult()">{{ trans('common.search_area.search') }}
-				<i class="fa-solid fa-magnifying-glass ml-1"></i>
-			</button>
-		</div>
-	</div> -->
-	
 	<!-- Table -->
 	<div id="matchContainer">
         <div id="tableContainer" style="overflow: auto;">
