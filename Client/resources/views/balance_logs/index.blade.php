@@ -33,7 +33,7 @@
 				</div>
 			</div>  
 			<div id="noMoreData" style="display: none; margin-top: 2rem;">
-				<td colspan="6"><p class="mb-0">>{{ trans('logs.main.nomoredata') }}</p></td>
+				<td colspan="6"><p class="mb-0">{{ trans('logs.main.nomoredata') }}</p></td>
 			</div>
         </div>
     </div>
