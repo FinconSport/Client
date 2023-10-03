@@ -145,6 +145,7 @@
 			for (const bet of item.bet_data) {
 			const matchingSport = sportListD.data.find(sport => sport.sport_id === bet.sport_id);
 			sportName = matchingSport ? matchingSport.name : '';
+			console.log(bet.sport_id + ' sportname' + matchingSport.name);
 			}
 		}
 
