@@ -80,7 +80,8 @@
 	});
 
 	function renderView() {
-		Object.entries(logsListD.data).map(([k, v]) => { 
+		Object.entries(logsListD.data.list).map(([k, v]) => { 
+			console.log(v)
 			let str = '<tr class="odd">'
 			if( k % 2 === 0) str = '<tr class="even">'
 
@@ -95,7 +96,7 @@
 		})
 
 		// detect if it's last page
-		if( logsListD.data.length !== 20 || logsListD.data.length === 0 ) isLastPage = true
+		if( logsListD.data.list.length !== 20 || logsListD.data.list.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
 	}
 
