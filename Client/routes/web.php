@@ -81,6 +81,9 @@ Route::post('/api/v2/match_index',      'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/match_sport',       'App\Http\Controllers\LsportApiController@MatchSport');
 Route::post('/api/v2/game_index',       'App\Http\Controllers\LsportApiController@GameIndex');
 Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiController@BalanceLogs');
+Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
+Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
+Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiController@CommonOrder');
 
 //for test
 // Route::get('/api/v2/gms_caller', 'App\Http\Controllers\LsportApiController@getMatchScoreboard_caller');
@@ -91,7 +94,3 @@ Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiControlle
 
 //for dev usage
 //Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
-
-Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
-Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
-Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiController@CommonOrder');
