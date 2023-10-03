@@ -1606,7 +1606,7 @@ class LsportApiController extends Controller {
 
             if ($is_bet_delay) {  // 延時投注功能已啟動
                 $default_order_status = 1;
-                //建立延時注單時以下欄位應該留空: approval_time, market_bet_line, market_bet_name, bet_rate
+                //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
                 // 寫入延時注單的delay_time
@@ -1626,41 +1626,42 @@ class LsportApiController extends Controller {
             }
         }
 
+        // 取得賠率
+        $market_bet_data = LSportMarketBet::where(
+            "fixture_id", $fixture_id
+        )->where(
+            "bet_id", $market_bet_id
+        )->first();
+        if ($market_bet_data == false) {
+            $this->ApiError("14");
+        }
+
+        //////////////////////////////////////////
+        // order data
+        $market_bet_line = $market_bet_data['line'];
+        $order['market_bet_line'] = $market_bet_line;
+        $order['market_bet_name'] = $market_bet_data[$lang_col];
+        //////////////////////////////////////////
+
         // 風控大單'未'啟動 AND 延時投注功能已啟動
         if (($is_risk_order == false) && ($is_bet_delay == true)) {
-            //建立延時注單時以下欄位應該留空: approval_time, market_bet_line, market_bet_name, bet_rate
+            //建立延時注單時以下欄位應該留空: approval_time, bet_rate
             //////////////////////////////////////////
             // order data
-            $order['market_bet_line'] = null;
-            $order['market_bet_name'] = null;
             $order['bet_rate'] = null;
             //////////////////////////////////////////
         }
         // 風控大單啟動 OR 延時投注功能'未'啟動 --> 取賠率資料寫入注單
         else {
-            // 取得賠率
-            $market_bet_data = LSportMarketBet::where(
-                "fixture_id", $fixture_id
-            )->where(
-                "bet_id", $market_bet_id
-            )->first();
-            if ($market_bet_data == false) {
-                $this->ApiError("14");
-            }
-
-            // $current_market_bet_status = $market_bet_data['status'];
+            $current_market_bet_status = $market_bet_data['status'];
             $current_market_bet_rate = $market_bet_data['price'];
-            $market_bet_line = $market_bet_data['line'];
 
             // 非開盤狀態 1开、2锁、3结算
-            // --> 改交由DelayBet腳本去做
-            // if (($current_market_bet_status != 1)) {
-            //     $this->ApiError("15");
-            // }
+            if (($current_market_bet_status != 1)) {
+                $this->ApiError("15");
+            }
             //////////////////////////////////////////
             // order data
-            $order['market_bet_line'] = $market_bet_line;
-            $order['market_bet_name'] = $market_bet_data[$lang_col];
             $order['bet_rate'] = $current_market_bet_rate;
             //////////////////////////////////////////
 
@@ -1843,7 +1844,7 @@ class LsportApiController extends Controller {
 
             if ($is_bet_delay) {  // 延時投注功能已啟動
                 $default_order_status = 1;
-                //建立延時注單時以下欄位應該留空: approval_time, market_bet_line, market_bet_name, bet_rate
+                //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
                 // 寫入延時注單的delay_time
@@ -2011,42 +2012,40 @@ class LsportApiController extends Controller {
             }
             $market_priority = $market_data['priority'];
 
+            // 取得賠率
+            $market_bet_data = LSportMarketBet::where(
+                "fixture_id", $fixture_id
+            )->where(
+                "bet_id", $market_bet_id
+            )->first();
+            if ($market_bet_data == false) {
+                $this->ApiError("14");
+            }
+
+            $market_bet_line = $market_bet_data['line'];
+            $order['market_bet_line'] = $market_bet_line;
+            $order['market_bet_name'] = $market_bet_data[$lang_col];
+
             //////////////////////////////////////////
             // 風控大單'未'啟動 AND 延時投注功能已啟動
             if (($is_risk_order == false) && ($is_bet_delay == true)) {
-                //建立延時注單時以下欄位應該留空: approval_time, market_bet_line, market_bet_name, bet_rate
+                //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 //////////////////////////////////////////
                 // order data
-                $order['market_bet_line'] = null;
-                $order['market_bet_name'] = null;
                 $order['bet_rate'] = null;
                 //////////////////////////////////////////
             }
             // 風控大單啟動 OR 延時投注功能'未'啟動 --> 取賠率資料寫入注單
             else {
-                // 取得賠率
-                $market_bet_data = LSportMarketBet::where(
-                    "fixture_id", $fixture_id
-                )->where(
-                    "bet_id", $market_bet_id
-                )->first();
-                if ($market_bet_data == false) {
-                    $this->ApiError("14");
-                }
-
-                // $current_market_bet_status = $market_bet_data['status'];
+                $current_market_bet_status = $market_bet_data['status'];
                 $current_market_bet_rate = $market_bet_data['price'];
-                $market_bet_line = $market_bet_data['line'];
 
                 // 非開盤狀態 1开、2锁、3结算
-                // --> 改交由DelayBet腳本去做
-                // if (($current_market_bet_status != 1)) {
-                //     $this->ApiError("15");
-                // }
+                if (($current_market_bet_status != 1)) {
+                    $this->ApiError("15");
+                }
                 //////////////////////////////////////////
                 // order data
-                $order['market_bet_line'] = $market_bet_line;
-                $order['market_bet_name'] = $market_bet_data[$lang_col];
                 $order['bet_rate'] = $current_market_bet_rate;
                 //////////////////////////////////////////
 
@@ -2058,16 +2057,8 @@ class LsportApiController extends Controller {
 
             //////////////////////////////////////////
             // order data
-
             $order['market_name'] = $market_data[$lang_col];
             $order['market_priority'] = $market_priority;
-
-            // $order['market_bet_name'] = $market_bet_data[$lang_col];
-            // $order['market_bet_line'] = $market_bet_line;
-            // $order['bet_rate'] = $current_market_bet_rate;
-
-            // $order['player_rate'] = $player_rate;
-            // $order['better_rate'] = $is_better_rate;
 
             //////////////////////////////////////////
             // 判斷 is_better_rate
@@ -2077,7 +2068,6 @@ class LsportApiController extends Controller {
 
             //////////////////////////////////////////
             // m_id
-
             if ($m_order_id !== false) { 
                 $order['m_id'] = $m_order_id;  // 同一串關注單m_id均相同(第一筆寫入的注單ID)
             }
