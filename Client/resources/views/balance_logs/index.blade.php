@@ -104,8 +104,8 @@
 	async function fetchMore() {
 		console.log('fetchMore')
 		$('#loader').show() // loading transition
-		calllogsListData.page += 1
-		await caller(resultList_api, calllogsListData, logsListD, 1) // logsListD
+		callLogsListData.page += 1
+		await caller(resultList_api, callLogsListData, logsListD, 1) // logsListD
 		renderView()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
