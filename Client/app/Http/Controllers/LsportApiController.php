@@ -40,6 +40,15 @@ define('FIXTURE_STATUS', array(
     'about_to_start' => 9,  // 即將開賽
 ));
 
+//game_order.status 賽事狀態
+define('GAME_ORDER_STATUS', array(
+    'delay_bet' => 1,  // 新的延時注單
+    'wait_for_result' => 2,  // 等待開獎的注單
+    'wait_for_payment' => 3,  // 等待派彩的注單
+    'finished' => 4,  // 已派彩的注單 (結束)
+    'wait_for_audit' => 5,  // 等待審核的注單
+));
+
 /**
  * LsportApiController
  * 
@@ -1596,7 +1605,7 @@ class LsportApiController extends Controller {
         $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
 
         if ($is_risk_order) {  // 風控大單功能已啟動
-            $default_order_status = 5;
+            $default_order_status = GAME_ORDER_STATUS['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
         }
@@ -1604,7 +1613,7 @@ class LsportApiController extends Controller {
         else {
             // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
-                $default_order_status = 1;
+                $default_order_status = GAME_ORDER_STATUS['delay_bet'];
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
@@ -1619,7 +1628,7 @@ class LsportApiController extends Controller {
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
-                $default_order_status = 2;
+                $default_order_status = GAME_ORDER_STATUS['wait_for_result'];
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
             }
@@ -1862,7 +1871,7 @@ class LsportApiController extends Controller {
         $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
 
         if ($is_risk_order) {  // 風控大單功能已啟動
-            $default_order_status = 5;
+            $default_order_status = GAME_ORDER_STATUS['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
         }
@@ -1870,7 +1879,7 @@ class LsportApiController extends Controller {
         else {
             // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
-                $default_order_status = 1;
+                $default_order_status = GAME_ORDER_STATUS['delay_bet'];
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
@@ -1885,7 +1894,7 @@ class LsportApiController extends Controller {
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
-                $default_order_status = 2;
+                $default_order_status = GAME_ORDER_STATUS['wait_for_result'];
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
             }
@@ -3261,7 +3270,7 @@ class LsportApiController extends Controller {
 
         // 如果還未開賽就回傳null
         $fixture_status = intval($fixture_status);
-        if ($fixture_status < 2) {
+        if ($fixture_status < FIXTURE_STATUS['living']) {
             return null;
         }
 
