@@ -1590,22 +1590,19 @@ class LsportApiController extends Controller {
         // 計算風控大單功能是否啟動:
         // 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
         $is_risk_order = (!empty($risk_order) && ($risk_order > 0) && ($bet_amount >= $risk_order));
+
+        // 延時投注
+        $bet_delay = $this->system_config['bet_delay'];
+        $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
+
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = 5;
             $default_approval_time = null;
             $default_delay_datetime = null;
-        } else {
-            // 預設通過
-            $default_order_status = 2;
-            $default_approval_time = date("Y-m-d H:i:s");
-            $default_delay_datetime = null;
         }
-
-        // 延時投注功能(風控大單優先於延時投注)
-        if ($is_risk_order == false) {  // 風控大單功能未啟動
-            $bet_delay = $this->system_config['bet_delay'];
-            $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
-
+        // 風控大單功能未啟動
+        else {
+            // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
                 $default_order_status = 1;
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
@@ -1620,8 +1617,8 @@ class LsportApiController extends Controller {
                 $delay_time = (time() + $delay_sec);
 
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
-            } else {
-                // 預設通過
+            } else {  // 風控大單,延時投注均未啟動
+                // 通過
                 $default_order_status = 2;
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
@@ -1859,22 +1856,19 @@ class LsportApiController extends Controller {
         // 計算風控大單功能是否啟動: 
         // 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
         $is_risk_order = (!empty($risk_order) && ($risk_order > 0) && ($bet_amount >= $risk_order));
+
+        // 延時投注
+        $bet_delay = $this->system_config['bet_delay'];
+        $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
+
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = 5;
             $default_approval_time = null;
             $default_delay_datetime = null;
-        } else {
-            // 預設通過
-            $default_order_status = 2;
-            $default_approval_time = date("Y-m-d H:i:s");
-            $default_delay_datetime = null;
         }
-
-        // 延時投注功能(風控大單優先於延時投注)
-        if ($is_risk_order == false) {  // 風控大單功能未啟動
-            $bet_delay = $this->system_config['bet_delay'];
-            $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
-
+        // 風控大單功能未啟動
+        else {
+            // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
                 $default_order_status = 1;
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
@@ -1889,8 +1883,8 @@ class LsportApiController extends Controller {
                 $delay_time = (time() + $delay_sec);
 
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
-            } else {
-                // 預設通過
+            } else {  // 風控大單,延時投注均未啟動
+                // 通過
                 $default_order_status = 2;
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
