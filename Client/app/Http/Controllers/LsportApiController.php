@@ -980,7 +980,7 @@ class LsportApiController extends Controller {
         $current_market_bet_rate = $market_bet_data['price'];
         $market_bet_line = $market_bet_data['line'];
 
-        // 非開盤狀態 1开、2锁、3结算
+        // 賠率非開盤狀態 1开、2锁、3结算
         if (($current_market_bet_status != 1)) {
             $this->ApiError("15");
         }
@@ -1320,7 +1320,7 @@ class LsportApiController extends Controller {
             $current_market_bet_rate = $market_bet_data['price'];
             $market_bet_line = $market_bet_data['line'];
 
-            // 非開盤狀態 1开、2锁、3结算
+            // 賠率非開盤狀態 1开、2锁、3结算
             if (($current_market_bet_status != 1)) {
                 $this->ApiError("15");
             }
@@ -1586,7 +1586,9 @@ class LsportApiController extends Controller {
 
         // 風控大單
         $risk_order = $this->system_config['risk_order'];
-        // 計算風控大單功能是否啟動: 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
+
+        // 計算風控大單功能是否啟動:
+        // 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
         $is_risk_order = (!empty($risk_order) && ($risk_order > 0) && ($bet_amount >= $risk_order));
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = 5;
@@ -1643,31 +1645,60 @@ class LsportApiController extends Controller {
         $order['market_bet_name'] = $market_bet_data[$lang_col];
         //////////////////////////////////////////
 
-        // 風控大單'未'啟動 AND 延時投注功能已啟動
-        if (($is_risk_order == false) && ($is_bet_delay == true)) {
-            //建立延時注單時以下欄位應該留空: approval_time, bet_rate
-            //////////////////////////////////////////
-            // order data
-            $order['bet_rate'] = null;
-            //////////////////////////////////////////
-        }
-        // 風控大單啟動 OR 延時投注功能'未'啟動 --> 取賠率資料寫入注單
-        else {
-            $current_market_bet_status = $market_bet_data['status'];
-            $current_market_bet_rate = $market_bet_data['price'];
 
-            // 非開盤狀態 1开、2锁、3结算
-            if (($current_market_bet_status != 1)) {
-                $this->ApiError("15");
+        //////////////////////////////////////////
+        // 建立延時注單時或風控大單以下欄位應該留空: approval_time, bet_rate
+        // 風控大單啟動 --> '不'取賠率資料寫入注單, 賠率資料留到運營審核通過當下才會取
+        // 延時投注啟動 --> '不'取賠率資料寫入注單, 賠率資料留到delay_time到期才會取
+
+        /*
+        風控大單 YES 延時投注 YES: '不'取賠率資料
+        風控大單 YES 延時投注 NO:  '不'取賠率資料
+        風控大單 NO 延時投注 YES:  '不'取賠率資料
+        風控大單 NO 延時投注 NO:  取賠率資料
+        */
+        if ($is_risk_order == true) {
+            if ($is_bet_delay == true) {
+                //////////////////////////////////////////
+                // order data
+                $order['bet_rate'] = null;
+                //////////////////////////////////////////
             }
-            //////////////////////////////////////////
-            // order data
-            $order['bet_rate'] = $current_market_bet_rate;
-            //////////////////////////////////////////
+            // $is_risk_order: false AND $is_bet_delay=true
+            else {
+                //////////////////////////////////////////
+                // order data
+                $order['bet_rate'] = null;
+                //////////////////////////////////////////
+            }
+        }
+        // $is_risk_order: false
+        else {
+            if ($is_bet_delay == true) {
+                //////////////////////////////////////////
+                // order data
+                $order['bet_rate'] = null;
+                //////////////////////////////////////////
+            }
+            // $is_risk_order: false AND $is_bet_delay=false
+            else {
+                $current_market_bet_status = $market_bet_data['status'];
+                $current_market_bet_rate = $market_bet_data['price'];
 
-            // 判斷 is_better_rate
-            if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-                $this->ApiError("16");
+                // 賠率非開盤狀態 1开、2锁、3结算
+                if (($current_market_bet_status != 1)) {
+                    $this->ApiError("15");
+                }
+
+                // 判斷 is_better_rate
+                if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
+                    $this->ApiError("16");
+                }
+
+                //////////////////////////////////////////
+                // order data
+                $order['bet_rate'] = $current_market_bet_rate;
+                //////////////////////////////////////////
             }
         }
 
@@ -1824,7 +1855,9 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 風控大單
         $risk_order = $this->system_config['risk_order'];
-        // 計算風控大單功能是否啟動: 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
+
+        // 計算風控大單功能是否啟動: 
+        // 1) 有risk_order這參數 2) 且risk_order大於零 3) 且投注額大於等於risk_order
         $is_risk_order = (!empty($risk_order) && ($risk_order > 0) && ($bet_amount >= $risk_order));
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = 5;
@@ -2027,31 +2060,58 @@ class LsportApiController extends Controller {
             $order['market_bet_name'] = $market_bet_data[$lang_col];
 
             //////////////////////////////////////////
-            // 風控大單'未'啟動 AND 延時投注功能已啟動
-            if (($is_risk_order == false) && ($is_bet_delay == true)) {
-                //建立延時注單時以下欄位應該留空: approval_time, bet_rate
-                //////////////////////////////////////////
-                // order data
-                $order['bet_rate'] = null;
-                //////////////////////////////////////////
-            }
-            // 風控大單啟動 OR 延時投注功能'未'啟動 --> 取賠率資料寫入注單
-            else {
-                $current_market_bet_status = $market_bet_data['status'];
-                $current_market_bet_rate = $market_bet_data['price'];
+            // 建立延時注單時或風控大單以下欄位應該留空: approval_time, bet_rate
+            // 風控大單啟動 --> '不'取賠率資料寫入注單, 賠率資料留到運營審核通過當下才會取
+            // 延時投注啟動 --> '不'取賠率資料寫入注單, 賠率資料留到delay_time到期才會取
 
-                // 非開盤狀態 1开、2锁、3结算
-                if (($current_market_bet_status != 1)) {
-                    $this->ApiError("15");
+            /*
+            風控大單 YES 延時投注 YES: '不'取賠率資料
+            風控大單 YES 延時投注 NO:  '不'取賠率資料
+            風控大單 NO 延時投注 YES:  '不'取賠率資料
+            風控大單 NO 延時投注 NO:  取賠率資料
+            */
+            if ($is_risk_order == true) {
+                if ($is_bet_delay == true) {
+                    //////////////////////////////////////////
+                    // order data
+                    $order['bet_rate'] = null;
+                    //////////////////////////////////////////
                 }
-                //////////////////////////////////////////
-                // order data
-                $order['bet_rate'] = $current_market_bet_rate;
-                //////////////////////////////////////////
+                // $is_risk_order: false AND $is_bet_delay=true
+                else {
+                    //////////////////////////////////////////
+                    // order data
+                    $order['bet_rate'] = null;
+                    //////////////////////////////////////////
+                }
+            }
+            // $is_risk_order: false
+            else {
+                if ($is_bet_delay == true) {
+                    //////////////////////////////////////////
+                    // order data
+                    $order['bet_rate'] = null;
+                    //////////////////////////////////////////
+                }
+                // $is_risk_order: false AND $is_bet_delay=false
+                else {
+                    $current_market_bet_status = $market_bet_data['status'];
+                    $current_market_bet_rate = $market_bet_data['price'];
+    
+                    // 賠率非開盤狀態 1开、2锁、3结算
+                    if (($current_market_bet_status != 1)) {
+                        $this->ApiError("15");
+                    }
+    
+                    // 判斷 is_better_rate
+                    if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
+                        $this->ApiError("16");
+                    }
 
-                // 判斷 is_better_rate
-                if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-                    $this->ApiError("16");
+                    //////////////////////////////////////////
+                    // order data
+                    $order['bet_rate'] = $current_market_bet_rate;
+                    //////////////////////////////////////////
                 }
             }
 
