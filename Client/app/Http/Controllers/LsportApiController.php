@@ -1602,7 +1602,9 @@ class LsportApiController extends Controller {
 
         // 延時投注
         $bet_delay = $this->system_config['bet_delay'];
-        $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
+        $arr_bet_delay = json_decode($bet_delay, true);
+        // 延時投注功能是否啟動
+        $is_bet_delay = (!empty($bet_delay) && !empty($arr_bet_delay));
 
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = GAME_ORDER_STATUS['wait_for_audit'];
@@ -1868,7 +1870,9 @@ class LsportApiController extends Controller {
 
         // 延時投注
         $bet_delay = $this->system_config['bet_delay'];
-        $is_bet_delay = (!empty($bet_delay) && (json_decode($bet_delay, true)));  // 延時投注功能是否啟動
+        $arr_bet_delay = json_decode($bet_delay, true);
+        // 延時投注功能是否啟動
+        $is_bet_delay = (!empty($bet_delay) && !empty($arr_bet_delay));
 
         if ($is_risk_order) {  // 風控大單功能已啟動
             $default_order_status = GAME_ORDER_STATUS['wait_for_audit'];
