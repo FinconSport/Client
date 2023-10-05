@@ -908,7 +908,7 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        if (isNaN(inputMoney)) inputMoney = 0
+        if (isNaN(inputMoney)) inputMoney = ''
         // if (inputMoney < min) inputMoney = min
         // if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
@@ -1008,14 +1008,14 @@
     }
 
     // scroll效果
-    $('#indexContainerLeft').scroll(function(){
-        $('#indexContainerLeft .seriesWrapperTitle').each(function(){
-            let offsetTop = $(this).offset().top
-            if( offsetTop < 95 && offsetTop > 90 ) {
-                $(this).css('position', 'fixed')
-                $(this).css('width', '102rem')
-            }
-        })
-    });
+    // $('#indexContainerLeft').scroll(function(){
+    //     $('#indexContainerLeft .seriesWrapperTitle').each(function(){
+    //         let offsetTop = $(this).offset().top
+    //         if( offsetTop < 95 && offsetTop > 90 ) {
+    //             $(this).css('position', 'fixed')
+    //             $(this).css('width', '102rem')
+    //         }
+    //     })
+    // });
 </script>
 @endpush
