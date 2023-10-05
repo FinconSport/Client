@@ -17,6 +17,9 @@ class TestController extends PcController {
       $dd = LsportSport::getName(154914,'en');
       dd($dd);
 
+      $dd = LsportSport::getName(154914,'tw');
+      dd($dd);
+
     }
 
 
