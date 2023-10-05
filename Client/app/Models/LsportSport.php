@@ -17,11 +17,12 @@ class LsportSport extends CacheModel
     public static function getName($data) {
 
 		// input
-		$sport_id = 154914;
-		$api_lang = 'tw';
+		$data['sport_id'] = 154914;
+		$data['api_lang'] = 'tw';
 
         // 緩存時間
         $cacheAliveTime = 3600;
+		
         // 緩存Key
 		$cacheKey = static::getCacheKey($data);
 
