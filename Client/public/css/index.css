@@ -18,23 +18,23 @@
     background: white;
     border: 2px solid rgb(65,91,90);
     border-radius: 8px;
+    margin-top: 0.5rem;
 }
 
 .seriesWrapperTitle{
-    background: white;
-    /* border: 2px solid rgb(65,91,90);
-    border-radius: 15px; */
     padding: 0.5rem 1rem;
-    height: 4rem;
+    height: 3rem;
     font-size: 1.2rem;
     font-weight: 600;
-    /* margin-top: 0.5rem; */
+    line-height: 1.5rem;
 }
 
 .seriesWrapperTitle span {
     line-height: 2.5rem;
 }
-
+.seriesWrapperContent{
+    padding: 0 0 0.5rem 0;
+}
 /* 主要投注 */
 #indexContainer {
     display: inline-flex;
@@ -82,17 +82,17 @@
     width: 100%;
     padding-right: 1rem;
 }
+.indexEachCard {
+    padding: 0 1rem;
+}
 .indexBetCard {
-    background-color: white;
-    border: 2px solid rgb(65, 91, 90);
-    border-radius: 30px;
+    background-color: rgb(242, 242, 242);
+    border-radius: 8px;
     overflow-x: hidden;
-    padding: 1rem;
-    margin-top: 0.5rem;
+    padding: 0 1rem;
+    margin-top: 0.3rem;
 }
-.indexEachCard{
-    /* margin-bottom: 1rem; */
-}
+
 .indexBetCardLabel {
     display: inline;
 }
@@ -465,86 +465,3 @@ div[key="sizeSmallRate"]:hover {
     margin-right: 0.5rem;
     border-radius: 10px;
 }
-
-
-/* --------added by aya------ */
-#indexContainerLeft .main-div i {
-    font-size: 1.2rem;
-}
-
-#indexContainerLeft .main-div .catWrapperTitle,
-#indexContainerLeft .main-div .seriesWrapperTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-#indexContainerLeft .main-div p {
-    margin: 0px;
-}
-
-
-#indexContainerLeft .main-div .seriesWrapperTitle,
-#indexContainerLeft .main-div .seriesWrapperContent {
-    /* background: #ffffff; */
-    /* border: 2px solid rgb(65,91,90); */
-    border-radius: 8px;
-    padding: 1rem 2rem;
-    height: auto;
-    font-weight: 600;
-    /* margin-top: 0.5rem; */
-  }
-
-  #indexContainerLeft .main-div .seriesWrapperContent {
-    font-size: 1rem;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-  }
-
-  #indexContainerLeft .main-div .seriesWrapper-left {
-    width: 30%;
-  }
-
-  #indexContainerLeft .main-div .seriesWrapper-left p {
-    margin-bottom: 0.5rem;
-  }
-
-  #indexContainerLeft .main-div .seriesWrapper-right {
-    width: 70%;
-  }
-
-  #indexContainerLeft .main-div .fixture-container,
-  #indexContainerLeft .main-div .league-list {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 0;
-    transition: height .5s ease-in-out 0s;
-    -webkit-transition: height .5s ease-in-out 0s;
-  }
-
-  #indexContainerLeft .main-div .fixture-container::-webkit-scrollbar,
-  #indexContainerLeft .main-div .league-list::-webkit-scrollbar{
-    width: 0px;
-  }
-
-    #indexContainerLeft .main-div .catWrapperTitle i {
-        transform: rotate(90deg);
-        transition: all .5s ease-in-out 0s;
-        -webkit-transition: all .5s ease-in-out 0s;
-    }
-
-    #indexContainerLeft .main-div .seriesWrapperTitle i {
-        transform: rotate(0deg);
-    }
-
-    /* #indexContainerLeft .main-div .seriesWrapperTitle.open i {
-        transform: rotate(90deg);
-    }
-
-    #indexContainerLeft .main-div .catWrapperTitle.open i {
-        transform: rotate(-90deg);
-    } */

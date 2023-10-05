@@ -74,7 +74,7 @@
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
-        <span class="elToggleDir" style="float: left;">
+        <span class="elToggleDir" style="float: left;padding-right: 1rem;">
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
@@ -87,7 +87,7 @@
     <div class="seriesWrapperTitle">
         <span class="legToggleName"></span>
         (<span class="legToggleCount"></span>)
-        <span class="legToggleDir" style="float: left;">
+        <span class="legToggleDir" style="float: left;padding-right: 1rem;">
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
