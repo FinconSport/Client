@@ -919,7 +919,7 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        if (isNaN(inputMoney)) inputMoney = 0
+        if (isNaN(inputMoney)) inputMoney = ''
         // if (inputMoney < min) inputMoney = min
         // if (inputMoney > max) inputMoney = max
         let maxMoney = (inputMoney * mOrderRate).toFixed(2);

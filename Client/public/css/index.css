@@ -108,7 +108,7 @@
     font-weight: 600;
 }
 .indexBetCardInfo {
-    width: 28%;
+    width: 30%;
     float: left;
 }
 .teamSpan{
@@ -121,8 +121,15 @@
     font-size: 1rem;
     font-weight: 600;
 }
+.timeSpan{
+    width: 10%;
+    float: left;
+}
 .indexBetCardTable {
-    width: 72%;
+    width: 55%;
+}
+.otherBetWay{
+    width: 5%;
 }
 .indexBetCardInfo > div {
     height: 3rem;

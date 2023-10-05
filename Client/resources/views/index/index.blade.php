@@ -98,10 +98,10 @@
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
+        <div class="timeSpan">
+            <span class="timer"></span>
+        </div>
         <div class="indexBetCardInfo">
-            <div class="timeSpan">
-                <span class="timer"></span>
-            </div>
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
                 <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
@@ -116,7 +116,8 @@
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
-            
+        </div>
+        <div class="otherBetWay">
         </div>
     </div>
 </div>
