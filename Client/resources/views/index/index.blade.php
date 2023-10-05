@@ -750,9 +750,11 @@
         if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').hide()
         } else {
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').show()
         }
     }
 
