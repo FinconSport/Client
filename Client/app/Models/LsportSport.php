@@ -20,8 +20,8 @@ class LsportSport extends CacheModel
         // 緩存時間
         $cacheAliveTime = 3600;
         // 緩存Key
-		$this->$funciton_name = __FUNCTION__;
-		dd($this->$funciton_name);
+		self::funciton_name = __FUNCTION__;
+		dd(self::funciton_name);
         $cacheKey = (new static)->getCacheKey($data);
 		
 		$sport_id = $data['sport_id'];
