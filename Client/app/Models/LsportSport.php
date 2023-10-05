@@ -23,8 +23,8 @@ class LsportSport extends CacheModel
 		$sport_id = $data['sport_id'];
 		$api_lang = 'tw';
 
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($sport_id, $api_lang, $lsportSport) {
-            $data = $lsportSport->where('sport_id', $sport_id)->first();
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($sport_id, $api_lang) {
+            $data = self::where('sport_id', $sport_id)->first();
             // 默认名称
             $name = $data['name_en'];
             if (($data['name_' . $api_lang] != "") && ($data['name_' . $api_lang] != null)) {
