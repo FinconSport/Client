@@ -18,7 +18,7 @@ class LsportSport extends Model
         // 緩存時間
 		$cacheAliveTime = 3600;
 		// 緩存Key
-		$cacheKey = $this->table . "_" . $sport_id;
+		$cacheKey = static::$table . "_" . $sport_id;
  
         return Cache::put($cacheKey, function () {
             $data = self::where('sport_id', $sport_id)->first();
