@@ -131,19 +131,19 @@
     <div class="betItemDiv row m-0" index=0>
         <div class="col-5 p-0"><span class="bet_name"></span></div>
         <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
         <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=1>
         <div class="col-5 p-0"><span class="bet_name"></span></div>
         <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
         <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=2>
         <div class="col-5 p-0"><span class="bet_name"></span></div>
         <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
         <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
     </div>
 </div>
@@ -380,26 +380,29 @@
                     item.find('.bet_name').show()
                     item.find('.odd').show()
                     if( v4.status === 1 ) {
-                        item.find('i').hide()
+                        item.find('.nAllLock i').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('i').show()
+                        item.find('.nAllLock i').show()
                         item.removeAttr('onclick')
                     }
                 })
             } else {
-                firstDiv.find('.bet_name').show()
-                firstDiv.find('.odd').show()
-                firstDiv.find('i').show()
+                firstDiv.find('.bet_name').hide()
+                firstDiv.find('.odd').hide()
+                firstDiv.find('.nAllLock i').hide()
+                firstDiv.find('.allLock').show()
                 firstDiv.removeAttr('onclick')
-                secondDiv.find('.bet_name').show()
-                secondDiv.find('.odd').show()
-                secondDiv.find('i').show()
+                secondDiv.find('.bet_name').hide()
+                secondDiv.find('.odd').hide()
+                secondDiv.find('.nAllLock i').hide()
+                secondDiv.find('.allLock').show()
                 secondDiv.removeAttr('onclick')
                 if( thirdDiv ) {
                     thirdDiv.find('.bet_name').show()
                     thirdDiv.find('.odd').show()
-                    thirdDiv.find('i').show()
+                    thirdDiv.find('.nAllLock i').show()
+                    thirdDiv.find('.allLock').show()
                     thirdDiv.removeAttr('onclick')
                 }
             }
@@ -614,31 +617,33 @@
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
 
+                                    item.find('.allLock').hide()
                                     item.find('.bet_name').show()
                                     item.find('.odd').show()
                                     if( v4.status === 1 ) {
-                                        item.find('i').hide()
+                                        item.find('.nAllLock i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('i').show()
+                                        item.find('.nAllLock i').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
                                 firstDiv.find('.bet_name').hide()
                                 firstDiv.find('.odd').hide()
-                                firstDiv.find('i').show()
+                                firstDiv.find('.nAllLock i').hide()
+                                firstDiv.find('.allLock').show()
                                 firstDiv.removeAttr('onclick')
-
                                 secondDiv.find('.bet_name').hide()
                                 secondDiv.find('.odd').hide()
-                                secondDiv.find('i').show()
+                                secondDiv.find('.nAllLock i').hide()
+                                secondDiv.find('.allLock').show()
                                 secondDiv.removeAttr('onclick')
-
                                 if( thirdDiv ) {
-                                    thirdDiv.find('.bet_name').hide()
-                                    thirdDiv.find('.odd').hide()
-                                    thirdDiv.find('i').show()
+                                    thirdDiv.find('.bet_name').show()
+                                    thirdDiv.find('.odd').show()
+                                    thirdDiv.find('.nAllLock i').show()
+                                    thirdDiv.find('.allLock').show()
                                     thirdDiv.removeAttr('onclick')
                                 }
                             }
