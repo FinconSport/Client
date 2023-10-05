@@ -127,7 +127,7 @@
 </div>
 
 <!-- bet div template -->
-<div class="col-2 p-0" template='betDiv' hidden>
+<div class="col p-0" template='betDiv' hidden>
     <div class="betItemDiv row m-0" index=0>
         <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
