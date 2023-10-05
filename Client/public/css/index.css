@@ -113,7 +113,7 @@
     float: left;
 }
 
-.homeTeamInfo .teamSpan {
+[key="homeTeamInfo"] .teamSpan {
     margin-top: 1rem;
 }
 .teamSpan{

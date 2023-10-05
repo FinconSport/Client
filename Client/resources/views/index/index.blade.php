@@ -226,7 +226,7 @@
     const betLimitation_api = ''
 
     // game priority and gameTitle
-    var priorityArr = null
+    var mainPriorityArr = null
     var gameTitle = null
 
     
@@ -312,7 +312,7 @@
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
 
         // bet title
-        priorityArr.forEach(( i, j ) => {
+        mainPriorityArr.forEach(( i, j ) => {
             league_bet_title.append('<div class="labelTiem col-2 p-0">' + gameTitle[j] + '</div>')
         })
 
@@ -360,7 +360,7 @@
         }
 
         // bet area
-        priorityArr.forEach(( i, j ) => {
+        mainPriorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
@@ -451,7 +451,7 @@
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex && isReadyCommon) {
                 // game priority and gameTitle
-                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
@@ -584,7 +584,7 @@
                         
                         
 
-                        priorityArr.forEach(( i, j ) => {
+                        mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
