@@ -147,14 +147,17 @@
 }
 .betItemDiv, .labelItem {
     height: 3rem;
-    line-height: 3rem;
+    line-height: 2rem;
     font-size: 0.9rem;
     overflow: hidden;
-    padding: 0 0.5rem;
+    padding: 0.5rem;
 }
 
 .labelItem{
     text-align: center;
+}
+.labelItem div:not(:last-child){
+    border-right: 2px solid rgb(220, 220, 220);
 }
 
 .betLabelContainer{
