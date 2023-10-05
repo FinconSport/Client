@@ -313,7 +313,7 @@
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
-        time.html(v3.start_time)
+        time.html(formatDateTime(v3.start_time))
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
@@ -1006,6 +1006,15 @@
         } finally {
             $('#refreshIcon').removeClass('rotate-animation');
         }
+    }
+
+    formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
     }
 
     // scroll效果
