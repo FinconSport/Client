@@ -14,12 +14,14 @@ class LsportSport extends Model
 	protected $table = "lsport_sport";
 
 	// 取得Sport Name
-    public static function getName($sport_id, $api_lang) {
+    public static function getName($sport_id, $api_lang = 'en') {
         // 緩存時間
         $cacheAliveTime = 3600;
         // 緩存Key
 		$tableName = (new static)->getTable();
-		$cacheKey = $tableName . "_" . $sport_id;
+		$cacheKey = $tableName . "_" . __FUNCTION__ . "_" . $sport_id;
+
+		dd($cacheKey);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($sport_id, $api_lang) {
             $data = self::where('sport_id', $sport_id)->first();
