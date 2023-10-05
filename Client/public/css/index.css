@@ -22,7 +22,7 @@
 }
 
 .seriesWrapperTitle{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     height: 3rem;
     font-size: 1.2rem;
     font-weight: 600;
@@ -139,7 +139,7 @@
 .betItemDiv, .labelTiem {
     height: 3rem;
     line-height: 2.5rem;
-    border: 1px solid rgb(220,220,220);
+    /* border: 1px solid rgb(220,220,220); */
     font-size: 0.9rem;
     overflow: hidden;
     padding: 0rem 0.5rem;
@@ -150,114 +150,6 @@
     display: flex;
 }
 
-.indexBetCardTable .col-2 > div:first-child {
-    border-top: none!important;
-}
-
-.indexBetCardTable .col-2:first-child > div,
-.indexBetCardTable .col-2:nth-child(7) > div {
-    border-left: none!important;
-}
-.indexBetCardTable .col-2:nth-child(6) > div,
-.indexBetCardTable .col-2:last-child > div {
-    border-right: none!important;
-}
-.otherBetArea{
-    max-height: 0px;
-    overflow: hidden;
-}
-
-.otherBetArea .indexBetCardTable .col-6,
-.otherBetArea .indexBetCardTable .col-12{
-    border: 1px solid rgb(220,220,220);
-    /* height: 4rem; */
-    /* line-height: 2rem; */
-    font-size: 0.9rem;
-    overflow: hidden;
-}
-
-.otherBetArea .indexBetCardTable {
-    width: 100%;
-    margin: 0;
-}
-
-.otherBetArea .indexBetCardTable marquee p {
-    line-height: 2.5rem;
-}
-
-.otherBetArea .indexBetCardTable[sport="2"] {
-    /* width: 12%!important; */
-}
-.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(odd){
-    /* border-left: none!important; */
-}
-
-.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(even){
-    /* border-right: none!important; */
-}
-
-/* .indexBetCardTable .col-6 > div:first-child {
-    border-top: none!important;
-}
-
-.indexBetCardTable .col-6:first-child > div {
-    border-left: none!important;
-}
-
-.indexBetCardTable .col-6:last-child > div {
-    border-right: none!important;
-} */
-
-/* 波膽 */
-.otherbet {
-    width: calc(100% + 4rem);
-    display: flex;
-    margin-left: -1rem;
-    margin-top: 1rem;
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    line-height: 1.1rem;
-}
-.tabCardLabel{
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    margin: 0 0 0.3rem 0;
-}
-.tabCardContent {
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 0 0 0.5rem 0;
-}
-.segmentContainer .nogameitem {
-    height: 20rem;
-    font-size: 1.5rem;
-    padding-top: 5rem;
-    background-color: white;
-    border-radius: 25px;
-    text-align: center;
-}
-.tabCardContent div {
-    border: 1px solid rgb(220,220,220);
-    font-size: 0.9rem;
-    line-height: 2.5rem;
-    cursor: pointer;
-    padding: 0;
-    height: 2.5rem;
-}
-.hcapTitle p{
-    line-height: 1.5rem!important;
-}
-.hcapTitle {
-    height: 3rem!important;
-}
-/* 小螢幕 */
-@media (max-width: 1600px) {
-    .tabCardContent .hcapTitle {
-        font-size: 0.5rem;
-    }
-}
 
 .text-orange {
     color: #c79e42;

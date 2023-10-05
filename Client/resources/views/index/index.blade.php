@@ -298,7 +298,7 @@
 
         // bet title
         priorityArr.forEach(( i, j ) => {
-            league_bet_title.append('<div class="labelTiem">' + gameTitle[j] + '</div>')
+            league_bet_title.append('<div class="labelTiem col-2 p-0">' + gameTitle[j] + '</div>')
         })
 
         // content
