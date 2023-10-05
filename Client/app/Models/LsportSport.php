@@ -18,8 +18,7 @@ class LsportSport extends CacheModel
         // 緩存時間
         $cacheAliveTime = 3600;
         // 緩存Key
-        $lsportSport = new static;
-        $cacheKey = $lsportSport->getCacheKey($data);
+        $cacheKey = (new static)->getCacheKey($data);
 		
 		$sport_id = $data['sport_id'];
 		$api_lang = 'tw';
