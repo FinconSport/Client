@@ -13,16 +13,12 @@ class LsportSport extends CacheModel
 	public $timestamps = false;
 	protected $table = "lsport_sport";
 
-	public $funciton_name;
-
     public static function getName($data) {
 
         // 緩存時間
         $cacheAliveTime = 3600;
         // 緩存Key
-		$this->funciton_name = __FUNCTION__;
-		dd($this->funciton_name);
-        $cacheKey = (new static)->getCacheKey($data);
+        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 		
 		$sport_id = $data['sport_id'];
 		$api_lang = 'tw';
