@@ -138,6 +138,15 @@
 .indexBetCardTable {
     width: 60%;
 }
+.indexBetCardTable div:first-child .betItemDiv {
+    border-left: 2px solid rgb(220,220,220);
+}
+
+.indexBetCardTable div .betItemDiv:last-child {
+    border-bottom: 2px solid rgb(220,220,220);
+}
+
+
 .otherBetWay{
     width: 5%;
 }
@@ -145,16 +154,21 @@
     height: 3rem;
     line-height: 3rem;
 }
+.betItemDiv {
+    border-top: 2px solid rgb(220, 220, 220);
+    border-right: 2px solid rgb(220, 220, 220);
+    padding: 0.5rem;
+}
 .betItemDiv, .labelItem {
     height: 3rem;
     line-height: 2rem;
     font-size: 0.9rem;
     overflow: hidden;
-    padding: 0.5rem;
 }
 
 .labelItem{
     text-align: center;
+    padding: 0.5rem 0;
 }
 .betLabelContainer .labelItem:not(:last-child) > div{
     border-right: 2px solid rgb(220, 220, 220);
