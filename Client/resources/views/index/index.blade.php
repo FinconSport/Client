@@ -183,6 +183,9 @@
     var ws = null
     var heartbeatTimer = null
 
+    // 需要把bet_name替換成主客隊名的priority
+    const convertTeamPriArr = [1, 3]
+
     /* ===== DATA LAYER ===== */
     /*  
         1. 現在大部份資料都api化，通過call ajax來loading
@@ -382,6 +385,8 @@
                     item.attr('bet_rate', v4.price)
                     item.attr('bet_type', betData.market_name)
                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                    item.attr('bet_name_en', v4.market_bet_name_en)
+                    item.attr('line', v4.line)
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
@@ -622,6 +627,8 @@
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    item.attr('bet_name_en', v4.market_bet_name_en)
+                                    item.attr('line', v4.line)
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
@@ -856,10 +863,12 @@
         let bet_rate = e.attr('bet_rate')
         let bet_type = e.attr('bet_type')
         let bet_name = e.attr('bet_name')
+        let bet_name_en = e.attr('bet_name_en')
+        let bet_name_line = e.attr('line')
         let league = e.attr('league')
         let home = e.attr('home')
         let away = e.attr('away')
-
+        let priority = parseInt(e.attr('priority'))
 
         sendOrderData = {
             token: token,
@@ -872,8 +881,15 @@
             better_rate: 0,
         }
 
+        if( convertTeamPriArr.indexOf(priority) === -1 ) {
+            $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
+        } else {
+            let str = bet_name_en == 1 ? home : away
+            str += ' ' + line
+            $('#leftSlideOrder span[key="bet_name"]').html(str)
+        }
+
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-        $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
