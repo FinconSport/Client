@@ -93,7 +93,6 @@
             (<span class="legToggleCount"></span>)
         </div>
         <div class="betLabelContainer" style="width: 55%;">
-
         </div>
     </div>
     <div class="seriesWrapperContent">
@@ -288,6 +287,7 @@
         let league_toggle_name = league_toggle.find('.legToggleName')
         let league_toggle_count = league_toggle.find('.legToggleCount')
         let league_toggle_dir = league_toggle.find('.legToggleDir')
+        let league_bet_title = league_toggle.find('.betLabelContainer')
 
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
@@ -295,6 +295,11 @@
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
+
+        // bet title
+        priorityArr.forEach(( i, j ) => {
+            league_bet_title.append('<div>' + gameTitle[j] + '</div>')
+        })
 
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
@@ -344,10 +349,6 @@
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-
-            let str = '<div>' + gameTitle[j] + '</div>'
-            betLabelContainer.append(str)
-
             // bet_label = bet_div.find('.betLabel')
             // bet_label.html(gameTitle[j])
 
