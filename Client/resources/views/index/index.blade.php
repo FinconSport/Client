@@ -129,9 +129,9 @@
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
     <div class="betItemDiv row m-0" index=0>
-        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center">
+        <div class="col-4 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -139,9 +139,9 @@
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=1>
-        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center">
+        <div class="col-4 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -149,9 +149,9 @@
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=2>
-        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center">
+        <div class="col-4 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>

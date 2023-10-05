@@ -109,7 +109,7 @@
     font-weight: 600;
 }
 .indexBetCardInfo {
-    width: 30%;
+    width: 25%;
     float: left;
 }
 
@@ -133,9 +133,10 @@
     width: 10%;
     float: left;
     line-height: 6rem;
+    text-align: center;
 }
 .indexBetCardTable {
-    width: 55%;
+    width: 60%;
 }
 .otherBetWay{
     width: 5%;
@@ -146,7 +147,7 @@
 }
 .betItemDiv, .labelTiem {
     height: 3rem;
-    line-height: 2.5rem;
+    line-height: 3rem;
     font-size: 0.9rem;
     overflow: hidden;
     padding: 0 0.5rem;
