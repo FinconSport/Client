@@ -112,10 +112,17 @@
     width: 30%;
     float: left;
 }
+
+.homeTeamInfo .teamSpan {
+    margin-top: 1rem;
+}
 .teamSpan{
     font-size: 1.1rem;
     font-weight: 600;
-    /* overflow: auto; */
+    height: 2rem;
+    line-height: 2rem;
+    border-left: 2px solid rgb(220, 220, 220);
+    padding: 0 1rem;
 }
 .timeSpan,
 .indexBetCardTable {
@@ -125,6 +132,7 @@
 .timeSpan{
     width: 10%;
     float: left;
+    line-height: 6rem;
 }
 .indexBetCardTable {
     width: 55%;
