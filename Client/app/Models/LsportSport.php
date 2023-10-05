@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
-class LsportSport extends Model
+class LsportSport extends CacheModel
 {
 	use HasFactory;
 	
@@ -14,12 +14,16 @@ class LsportSport extends Model
 	protected $table = "lsport_sport";
 
 	// 取得Sport Name
-    public static function getName($sport_id, $api_lang = 'en') {
+    public static function getName($data) {
+
+		// input
+		$sport_id = $data['sport_id'];
+		$api_lang = $data['api_lang'];
+
         // 緩存時間
         $cacheAliveTime = 3600;
         // 緩存Key
-		$tableName = (new static)->getTable();
-		$cacheKey = MD5($tableName . "_" . __FUNCTION__ . "_" . $sport_id);
+		$cacheKey = static::getCacheKey($data);
 
 		dd($cacheKey);
 
