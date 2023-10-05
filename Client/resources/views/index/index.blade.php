@@ -74,7 +74,7 @@
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
-        <span class="elToggleDir" style="float: right;">
+        <span class="elToggleDir" style="float: left;">
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
@@ -83,14 +83,16 @@
 </div>
 
 <!-- league toggle template -->
-<div template='leagueToggleTitleTemplate' class="seriesWrapperTitle" hidden>
-    <span class="legToggleName"></span>
-    (<span class="legToggleCount"></span>)
-    <span class="legToggleDir" style="float: right;">
-        <i class="fa-solid fa-circle-chevron-down"></i>
-    </span>
-</div>
-<div template='leagueToggleContentTemplate' class="seriesWrapperContent" hidden>
+<div template='leagueWrapper' hidden>
+    <div class="seriesWrapperTitle">
+        <span class="legToggleName"></span>
+        (<span class="legToggleCount"></span>)
+        <span class="legToggleDir" style="float: left;">
+            <i class="fa-solid fa-chevron-down"></i> 
+        </span>
+    </div>
+    <div class="seriesWrapperContent">
+    </div>
 </div>
 
 <!-- fixture card template -->
@@ -145,7 +147,8 @@
 
 
 @section('styles')
-<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
@@ -273,7 +276,10 @@
     }
 
     function createLeague(k, k2, v2) {
-        let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
+
+        // title
+        let league_wrapper = $('div[template="leagueWrapper"]').clone()
+        let league_toggle = league_wrapper.find('.seriesWrapperTitle')
         let league_toggle_name = league_toggle.find('.legToggleName')
         let league_toggle_count = league_toggle.find('.legToggleCount')
         let league_toggle_dir = league_toggle.find('.legToggleDir')
@@ -285,18 +291,15 @@
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
 
-        league_toggle.removeAttr('hidden')
-        league_toggle.removeAttr('template')
-
-        let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
+        // content
+        let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
 
-        league_toggle_content.removeAttr('hidden')
-        league_toggle_content.removeAttr('template')
+        league_wrapper.removeAttr('template')
+        league_wrapper.removeAttr('hidden')
 
         let el_toggle_content = $(`#catWrapperContent_${k}`)
-        el_toggle_content.append(league_toggle)
-        el_toggle_content.append(league_toggle_content)
+        el_toggle_content.append(league_wrapper)
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
@@ -1003,5 +1006,16 @@
             $('#refreshIcon').removeClass('rotate-animation');
         }
     }
+
+    // scroll效果
+    $('#indexContainerLeft').scroll(function(){
+        $('#indexContainerLeft .seriesWrapperTitle').each(function(){
+            let offsetTop = $(this).offset().top
+            if( offsetTop < 95 && offsetTop > 90 ) {
+                $(this).css('position', 'fixed')
+                $(this).css('width', '102rem')
+            }
+        })
+    });
 </script>
 @endpush

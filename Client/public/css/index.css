@@ -42,7 +42,7 @@
     color: #415b5a;
     width: 100%;
     overflow-y: auto;
-    padding: 0 5rem;
+    padding: 0 1rem 0 0;
     padding-bottom: 1rem;
 }
 /* 右方投注 */
