@@ -92,7 +92,7 @@
             <span class="legToggleName"></span>
             (<span class="legToggleCount"></span>)
         </div>
-        <div class="betLabelContainer" style="width: 55%;">
+        <div class="betLabelContainer">
         </div>
     </div>
     <div class="seriesWrapperContent">
@@ -298,7 +298,7 @@
 
         // bet title
         priorityArr.forEach(( i, j ) => {
-            league_bet_title.append('<div>' + gameTitle[j] + '</div>')
+            league_bet_title.append('<div class="labelTiem">' + gameTitle[j] + '</div>')
         })
 
         // content
