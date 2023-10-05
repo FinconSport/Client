@@ -14,7 +14,7 @@ class TestController extends PcController {
     public function index(Request $request) {
     
 
-      $dd = Lsport::getName(154914,$agent_lang);
+      $dd = LsportSport::getName(154914,$agent_lang);
       dd($dd);
 
     }
