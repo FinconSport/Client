@@ -85,7 +85,7 @@
 <!-- league toggle template -->
 <div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
-        <div style="width: 40%;">
+        <div style="width: 35%;">
             <span class="legToggleDir" style="padding-right: 1rem;">
                 <i class="fa-solid fa-chevron-down"></i> 
             </span>
@@ -316,7 +316,7 @@
 
         // bet title
         mainPriorityArr.forEach(( i, j ) => {
-            league_bet_title.append('<div class="labelTiem col p-0">' + gameTitle[j] + '</div>')
+            league_bet_title.append('<div class="labelItem col p-0"><div>' + gameTitle[j] + '</div></div>')
         })
 
         // content
