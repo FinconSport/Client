@@ -19,7 +19,7 @@ class LsportSport extends Model
         $cacheAliveTime = 3600;
         // 緩存Key
 		$tableName = (new static)->getTable();
-		$cacheKey = $tableName . "_" . __FUNCTION__ . "_" . $sport_id;
+		$cacheKey = MD5($tableName . "_" . __FUNCTION__ . "_" . $sport_id);
 
 		dd($cacheKey);
 
