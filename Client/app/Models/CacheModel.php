@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class CacheModel extends Model {
 
     // 設定cacheKey
-    protected function getCacheKey($data) {
+    protected static function getCacheKey($data) {
 
         $tableName = $this->getTable();
 		$key = json_encode($data,true);

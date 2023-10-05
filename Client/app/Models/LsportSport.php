@@ -20,7 +20,7 @@ class LsportSport extends CacheModel
         $cacheAliveTime = 3600;
 
         // 緩存Key
-		$cacheKey = parent::getCacheKey($data);
+		$cacheKey = static::getCacheKey($data);
 
 		dd($cacheKey);
 
