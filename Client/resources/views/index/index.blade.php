@@ -85,11 +85,16 @@
 <!-- league toggle template -->
 <div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
-        <span class="legToggleName"></span>
-        (<span class="legToggleCount"></span>)
-        <span class="legToggleDir" style="float: left;padding-right: 1rem;">
-            <i class="fa-solid fa-chevron-down"></i> 
-        </span>
+        <div style="width: 40%;">
+            <span class="legToggleDir" style="padding-right: 1rem;">
+                <i class="fa-solid fa-chevron-down"></i> 
+            </span>
+            <span class="legToggleName"></span>
+            (<span class="legToggleCount"></span>)
+        </div>
+        <div class="betLabelContainer" style="width: 55%;">
+
+        </div>
     </div>
     <div class="seriesWrapperContent">
     </div>
@@ -124,7 +129,6 @@
 
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
-    <div class="betLabel"></div>
     <div class="betItemDiv" index=0>
         <span class="bet_name"></span>&ensp;
         <span class="odd"></span>
@@ -340,8 +344,12 @@
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-            bet_label = bet_div.find('.betLabel')
-            bet_label.html(gameTitle[j])
+
+            let str = '<div>' + gameTitle[j] + '</div>'
+            betLabelContainer.append(str)
+
+            // bet_label = bet_div.find('.betLabel')
+            // bet_label.html(gameTitle[j])
 
             let firstDiv = bet_div.find('div[index=0]')
             let secondDiv = bet_div.find('div[index=1]')
