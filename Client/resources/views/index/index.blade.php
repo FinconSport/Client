@@ -131,19 +131,31 @@
     <div class="betItemDiv row m-0" index=0>
         <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up"></i>
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=1>
         <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up"></i>
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=2>
         <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-3 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up"></i>
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
 </div>
@@ -380,28 +392,28 @@
                     item.find('.bet_name').show()
                     item.find('.odd').show()
                     if( v4.status === 1 ) {
-                        item.find('.nAllLock i').hide()
+                        item.find('.nAllLock .fa-lock').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.nAllLock i').show()
+                        item.find('.nAllLock .fa-lock').show()
                         item.removeAttr('onclick')
                     }
                 })
             } else {
                 firstDiv.find('.bet_name').hide()
                 firstDiv.find('.odd').hide()
-                firstDiv.find('.nAllLock i').hide()
+                firstDiv.find('.nAllLock .fa-lock').hide()
                 firstDiv.find('.allLock').show()
                 firstDiv.removeAttr('onclick')
                 secondDiv.find('.bet_name').hide()
                 secondDiv.find('.odd').hide()
-                secondDiv.find('.nAllLock i').hide()
+                secondDiv.find('.nAllLock .fa-lock').hide()
                 secondDiv.find('.allLock').show()
                 secondDiv.removeAttr('onclick')
                 if( thirdDiv ) {
                     thirdDiv.find('.bet_name').show()
                     thirdDiv.find('.odd').show()
-                    thirdDiv.find('.nAllLock i').show()
+                    thirdDiv.find('.nAllLock .fa-lock').show()
                     thirdDiv.find('.allLock').show()
                     thirdDiv.removeAttr('onclick')
                 }
@@ -621,28 +633,28 @@
                                     item.find('.bet_name').show()
                                     item.find('.odd').show()
                                     if( v4.status === 1 ) {
-                                        item.find('.nAllLock i').hide()
+                                        item.find('.nAllLock .fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.nAllLock i').show()
+                                        item.find('.nAllLock .fa-lock').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
                                 firstDiv.find('.bet_name').hide()
                                 firstDiv.find('.odd').hide()
-                                firstDiv.find('.nAllLock i').hide()
+                                firstDiv.find('.nAllLock .fa-lock').hide()
                                 firstDiv.find('.allLock').show()
                                 firstDiv.removeAttr('onclick')
                                 secondDiv.find('.bet_name').hide()
                                 secondDiv.find('.odd').hide()
-                                secondDiv.find('.nAllLock i').hide()
+                                secondDiv.find('.nAllLock .fa-lock').hide()
                                 secondDiv.find('.allLock').show()
                                 secondDiv.removeAttr('onclick')
                                 if( thirdDiv ) {
                                     thirdDiv.find('.bet_name').show()
                                     thirdDiv.find('.odd').show()
-                                    thirdDiv.find('.nAllLock i').show()
+                                    thirdDiv.find('.nAllLock .fa-lock').show()
                                     thirdDiv.find('.allLock').show()
                                     thirdDiv.removeAttr('onclick')
                                 }
@@ -774,18 +786,19 @@
         console.log('raiseOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-solid fa-caret-up"></i>')
-
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').show()
+        
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
@@ -793,18 +806,19 @@
         console.log('lowerOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-sharp fa-solid fa-caret-down"></i>')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').show()
 
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
         }, 3000);
     }
 

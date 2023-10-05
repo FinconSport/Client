@@ -141,6 +141,7 @@
     line-height: 2.5rem;
     font-size: 0.9rem;
     overflow: hidden;
+    padding: 0 0.5rem;
 }
 
 .labelTiem{
@@ -201,14 +202,7 @@
     border: none!important;
 }
 
-#leftSlideOrder .raiseOdd .odd {
-    background-color: rgb(233 61 61 / 15%);
-    border: red 1px solid!important;
-}
-#leftSlideOrder .lowerOdd .odd {
-    background-color: rgb(139 201 91 / 15%);
-    border: rgb(139, 201, 91) 1px solid!important;
-}
+
 .raiseScore::after {
     content: "\25B2"; /* Unicode 字符，代表上箭头 */
     display: inline-block;
@@ -317,20 +311,11 @@ div[key="sizeSmallRate"]:hover {
 
 
 /* 賠率變化 */
-.raiseOdd {
-    background-color: rgb(233 61 61 / 15%);
-    border: red 1px solid!important;
-}
-
 .raiseOdd .odd,
 .raiseOdd i {
     color: red!important;
 }
 
-.lowerOdd {
-    background-color: rgb(139 201 91 / 15%);
-    border: rgb(139, 201, 91) 1px solid!important;
-}
 .lowerOdd .odd,
 .lowerOdd i {
     color: rgb(0, 212, 81)!important;
@@ -341,10 +326,6 @@ div[key="sizeSmallRate"]:hover {
     text-shadow: 1px 1px 0px rgb(200,200,200);
 }
 
-.raiseOdd .fa-caret-up,
-.lowerOdd .fa-caret-down{
-    margin-left: 0.5rem;
-}
 
 #noData {
     width: 100%;
