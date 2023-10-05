@@ -83,7 +83,7 @@
 </div>
 
 <!-- league toggle template -->
-<div template='leagueWrapper' hidden>
+<div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
         <span class="legToggleName"></span>
         (<span class="legToggleCount"></span>)
@@ -730,12 +730,12 @@
     // 聯賽分類收合
     function toggleSeries( key ) {
         $('#seriesWrapperContent_' + key).slideToggle( "slow" );
-        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-circle-chevron-right')) {
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-circle-chevron-right')
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-circle-chevron-down')
+        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
         } else {
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-circle-chevron-right')
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-circle-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
         }
     }
 

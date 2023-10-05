@@ -1,7 +1,7 @@
 /* 分類 */
 .catWrapperTitle {
     background: rgb(184, 214, 212);
-    border: 2px solid rgb(65,91,90);
+    border: 2px solid rgb(65, 91, 90);
     border-radius: 15px;
     padding: 0.5rem 1rem;
     height: 3rem;
@@ -14,20 +14,13 @@
     line-height: 1.5rem;
 }
 
-.seriesWrapperTitle{
+.leagueWrapper {
     background: white;
-    border: 2px solid rgb(65,91,90);
-    border-radius: 15px;
-    padding: 0.5rem 1rem;
-    height: 4rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
+    border: 2px solid rgb(65, 91, 90);
+    border-radius: 8px;
 }
 
-.seriesWrapperTitle span {
-    line-height: 2.5rem;
-}
+
 
 
 /* 主要投注 */
@@ -37,6 +30,7 @@
     height: calc(100% - -1rem);
     margin-top: 1rem;
 }
+
 /* 中間投注 */
 #indexContainerLeft {
     color: #415b5a;
@@ -45,6 +39,7 @@
     padding: 0 1rem 0 0;
     padding-bottom: 1rem;
 }
+
 /* 右方投注 */
 #indexContainerRight {
     width: 30%;
@@ -53,30 +48,35 @@
     color: rgb(65, 91, 90);
     font-weight: 600;
 }
-#indexContainerRightInfo{
-    background-image:url(../image/gameStatus.jpg);
+
+#indexContainerRightInfo {
+    background-image: url(../image/gameStatus.jpg);
     height: 12rem;
     background-size: 100% 100%;
     text-align: center;
     color: white;
     font-weight: 600;
 }
+
 #indexContainerRightInfo img {
     width: 4rem;
     height: 4rem;
 }
+
 #indexContainerRight .segment {
-    overflow: hidden!important;
+    overflow: hidden !important;
     padding-right: 0;
 }
+
 /* scrollbar 會超出border radius部分 故再多包一層 */
-.segmentContainer{  
+.segmentContainer {
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
     width: 100%;
     padding-right: 1rem;
 }
+
 .indexBetCard {
     background-color: white;
     border: 2px solid rgb(65, 91, 90);
@@ -85,73 +85,85 @@
     padding: 1rem;
     margin-top: 0.5rem;
 }
-.indexEachCard{
+
+.indexEachCard {
     /* margin-bottom: 1rem; */
 }
+
 .indexBetCardLabel {
     display: inline;
 }
+
 .indexBetCardLabel img {
     float: left;
-    width: 2.5rem!important;
-    height: 2.5rem!important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
 }
+
 .indexBetCardSpan {
     font-size: 1.3rem;
     margin-left: 1rem;
     line-height: 2.5rem;
     font-weight: 600;
 }
+
 .indexBetCardInfo {
     width: 28%;
     float: left;
 }
-.teamSpan{
+
+.teamSpan {
     font-size: 1.1rem;
     font-weight: 600;
     /* overflow: auto; */
 }
+
 .timeSpan,
 .indexBetCardTable {
     font-size: 1rem;
     font-weight: 600;
 }
+
 .indexBetCardTable {
     width: 72%;
 }
-.indexBetCardInfo > div {
+
+.indexBetCardInfo>div {
     height: 3rem;
     line-height: 3rem;
 }
-.indexBetCardTable .col-2 > div {
+
+.indexBetCardTable .col-2>div {
     height: 3rem;
     line-height: 2.5rem;
-    border: 1px solid rgb(220,220,220);
+    border: 1px solid rgb(220, 220, 220);
     font-size: 0.9rem;
     overflow: hidden;
     padding: 0rem 0.5rem;
 }
 
-.indexBetCardTable .col-2 > div:first-child {
-    border-top: none!important;
+.indexBetCardTable .col-2>div:first-child {
+    border-top: none !important;
 }
 
-.indexBetCardTable .col-2:first-child > div,
-.indexBetCardTable .col-2:nth-child(7) > div {
-    border-left: none!important;
+.indexBetCardTable .col-2:first-child>div,
+.indexBetCardTable .col-2:nth-child(7)>div {
+    border-left: none !important;
 }
-.indexBetCardTable .col-2:nth-child(6) > div,
-.indexBetCardTable .col-2:last-child > div {
-    border-right: none!important;
+
+.indexBetCardTable .col-2:nth-child(6)>div,
+.indexBetCardTable .col-2:last-child>div {
+    border-right: none !important;
 }
-.otherBetArea{
+
+.otherBetArea {
     max-height: 0px;
     overflow: hidden;
 }
 
 .otherBetArea .indexBetCardTable .col-6,
-.otherBetArea .indexBetCardTable .col-12{
-    border: 1px solid rgb(220,220,220);
+.otherBetArea .indexBetCardTable .col-12 {
+    border: 1px solid rgb(220, 220, 220);
     /* height: 4rem; */
     /* line-height: 2rem; */
     font-size: 0.9rem;
@@ -170,11 +182,12 @@
 .otherBetArea .indexBetCardTable[sport="2"] {
     /* width: 12%!important; */
 }
-.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(odd){
+
+.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(odd) {
     /* border-left: none!important; */
 }
 
-.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(even){
+.otherBetArea .indexBetCardTable[sport="2"] div:nth-child(even) {
     /* border-right: none!important; */
 }
 
@@ -201,17 +214,20 @@
     font-size: 1.1rem;
     line-height: 1.1rem;
 }
-.tabCardLabel{
+
+.tabCardLabel {
     color: white;
     font-weight: 600;
     font-size: 1rem;
     margin: 0 0 0.3rem 0;
 }
+
 .tabCardContent {
     border-radius: 10px;
     overflow: hidden;
     margin: 0 0 0.5rem 0;
 }
+
 .segmentContainer .nogameitem {
     height: 20rem;
     font-size: 1.5rem;
@@ -220,20 +236,24 @@
     border-radius: 25px;
     text-align: center;
 }
+
 .tabCardContent div {
-    border: 1px solid rgb(220,220,220);
+    border: 1px solid rgb(220, 220, 220);
     font-size: 0.9rem;
     line-height: 2.5rem;
     cursor: pointer;
     padding: 0;
     height: 2.5rem;
 }
-.hcapTitle p{
-    line-height: 1.5rem!important;
+
+.hcapTitle p {
+    line-height: 1.5rem !important;
 }
+
 .hcapTitle {
-    height: 3rem!important;
+    height: 3rem !important;
 }
+
 /* 小螢幕 */
 @media (max-width: 1600px) {
     .tabCardContent .hcapTitle {
@@ -246,22 +266,24 @@
 }
 
 /* 左側投注slider */
-#leftSlideOrder{
+#leftSlideOrder {
     position: absolute;
     top: 0;
     left: 0;
     width: 25rem;
     height: 100%;
     z-index: 1;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 5rem 2rem;
     font-weight: 600;
     color: white;
 }
+
 #leftSlideOrder .teamLogo {
     width: 1.5rem;
     height: 1.5rem;
 }
+
 #leftSlideOrder button {
     background-color: #c79e42;
     color: white;
@@ -273,32 +295,36 @@
     margin-top: 0.5rem;
     font-weight: 600;
 }
+
 #leftSlideOrder button:last-child {
     background-color: white;
     color: rgb(65, 91, 90);
 }
 
 /* 賠率變化樣式 */
-.odd{
-    color: #c79e42 ;
+.odd {
+    color: #c79e42;
 }
 
 #leftSlideOrder .raiseOdd,
-#leftSlideOrder .lowerOdd{
-    background-color: white!important;
-    border: none!important;
+#leftSlideOrder .lowerOdd {
+    background-color: white !important;
+    border: none !important;
 }
 
 #leftSlideOrder .raiseOdd .odd {
     background-color: rgb(233 61 61 / 15%);
-    border: red 1px solid!important;
+    border: red 1px solid !important;
 }
+
 #leftSlideOrder .lowerOdd .odd {
     background-color: rgb(139 201 91 / 15%);
-    border: rgb(139, 201, 91) 1px solid!important;
+    border: rgb(139, 201, 91) 1px solid !important;
 }
+
 .raiseScore::after {
-    content: "\25B2"; /* Unicode 字符，代表上箭头 */
+    content: "\25B2";
+    /* Unicode 字符，代表上箭头 */
     display: inline-block;
     color: red;
     position: absolute;
@@ -309,35 +335,40 @@
     position: relative;
     font-style: italic;
 }
-.teamScore.raiseScore::after{
+
+.teamScore.raiseScore::after {
     /* top: -0.5rem; */
     /* right: -0.5rem; */
-    font-size: 1.2rem!important;
+    font-size: 1.2rem !important;
 }
 
 
 
 #quickContainer .quick {
     background-color: rgb(226, 240, 240);
-    border:1px solid rgb(65, 91, 90);
+    border: 1px solid rgb(65, 91, 90);
     text-align: center;
     margin: 0 0.2rem;
     border-radius: 5px;
     line-height: 1.5rem;
     cursor: pointer;
 }
-#quickContainer .quick:hover{
+
+#quickContainer .quick:hover {
     background-color: rgb(65, 91, 90);
     color: white;
 }
+
 #quickContainer {
     display: flex;
 }
-#quickContainer > div {
+
+#quickContainer>div {
     padding: 0;
     width: 25%;
 }
-#mask{
+
+#mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -347,7 +378,8 @@
     background-color: black;
     opacity: 0.5;
 }
-.leftSlideOrderCard{
+
+.leftSlideOrderCard {
     background-color: white;
     padding: 0.5rem 0 1rem 0;
     color: rgb(65, 91, 90);
@@ -366,13 +398,14 @@
 /* 刷新餘額 icon旋轉 */
 @keyframes rotate {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
-  
+
 .rotate-animation {
     animation: rotate 2s linear infinite;
 }
@@ -394,6 +427,7 @@ div[key="sizeSmallRate"]:hover {
     color: #c79e42;
     cursor: pointer;
 }
+
 .scoreSpan {
     text-align: center;
     color: #c79e42;
@@ -407,30 +441,31 @@ div[key="sizeSmallRate"]:hover {
 /* 賠率變化 */
 .raiseOdd {
     background-color: rgb(233 61 61 / 15%);
-    border: red 1px solid!important;
+    border: red 1px solid !important;
 }
 
 .raiseOdd .odd,
 .raiseOdd i {
-    color: red!important;
+    color: red !important;
 }
 
 .lowerOdd {
     background-color: rgb(139 201 91 / 15%);
-    border: rgb(139, 201, 91) 1px solid!important;
+    border: rgb(139, 201, 91) 1px solid !important;
 }
+
 .lowerOdd .odd,
 .lowerOdd i {
-    color: rgb(0, 212, 81)!important;
+    color: rgb(0, 212, 81) !important;
 }
 
 .raiseOdd .text-orange,
 .lowerOdd .text-orange {
-    text-shadow: 1px 1px 0px rgb(200,200,200);
+    text-shadow: 1px 1px 0px rgb(200, 200, 200);
 }
 
 .raiseOdd .fa-caret-up,
-.lowerOdd .fa-caret-down{
+.lowerOdd .fa-caret-down {
     margin-left: 0.5rem;
 }
 
@@ -484,59 +519,63 @@ div[key="sizeSmallRate"]:hover {
 
 #indexContainerLeft .main-div .seriesWrapperTitle,
 #indexContainerLeft .main-div .seriesWrapperContent {
-    background: #ffffff;
-    border: 2px solid rgb(65,91,90);
-    border-radius: 15px;
+    /* background: #ffffff; */
+    /* border: 2px solid rgb(65,91,90); */
+    border-radius: 8px;
     padding: 1rem 2rem;
     height: auto;
     font-weight: 600;
-    margin-top: 0.5rem;
-  }
+    /* margin-top: 0.5rem; */
+}
 
-  #indexContainerLeft .main-div .seriesWrapperContent {
+.seriesWrapperTitle span {
+    line-height: 2.5rem;
+}
+
+#indexContainerLeft .main-div .seriesWrapperContent {
     font-size: 1rem;
     display: flex;
     align-content: center;
     justify-content: center;
-  }
+}
 
-  #indexContainerLeft .main-div .seriesWrapper-left {
+#indexContainerLeft .main-div .seriesWrapper-left {
     width: 30%;
-  }
+}
 
-  #indexContainerLeft .main-div .seriesWrapper-left p {
+#indexContainerLeft .main-div .seriesWrapper-left p {
     margin-bottom: 0.5rem;
-  }
+}
 
-  #indexContainerLeft .main-div .seriesWrapper-right {
+#indexContainerLeft .main-div .seriesWrapper-right {
     width: 70%;
-  }
+}
 
-  #indexContainerLeft .main-div .fixture-container,
-  #indexContainerLeft .main-div .league-list {
+#indexContainerLeft .main-div .fixture-container,
+#indexContainerLeft .main-div .league-list {
     overflow-y: auto;
     overflow-x: hidden;
     height: 0;
     transition: height .5s ease-in-out 0s;
     -webkit-transition: height .5s ease-in-out 0s;
-  }
+}
 
-  #indexContainerLeft .main-div .fixture-container::-webkit-scrollbar,
-  #indexContainerLeft .main-div .league-list::-webkit-scrollbar{
+#indexContainerLeft .main-div .fixture-container::-webkit-scrollbar,
+#indexContainerLeft .main-div .league-list::-webkit-scrollbar {
     width: 0px;
-  }
+}
 
-    #indexContainerLeft .main-div .catWrapperTitle i {
-        transform: rotate(90deg);
-        transition: all .5s ease-in-out 0s;
-        -webkit-transition: all .5s ease-in-out 0s;
-    }
+#indexContainerLeft .main-div .catWrapperTitle i {
+    transform: rotate(90deg);
+    transition: all .5s ease-in-out 0s;
+    -webkit-transition: all .5s ease-in-out 0s;
+}
 
-    #indexContainerLeft .main-div .seriesWrapperTitle i {
-        transform: rotate(0deg);
-    }
+#indexContainerLeft .main-div .seriesWrapperTitle i {
+    transform: rotate(0deg);
+}
 
-    /* #indexContainerLeft .main-div .seriesWrapperTitle.open i {
+/* #indexContainerLeft .main-div .seriesWrapperTitle.open i {
         transform: rotate(90deg);
     }
 
