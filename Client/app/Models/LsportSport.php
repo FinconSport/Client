@@ -14,7 +14,7 @@ class LsportSport extends CacheModel
 	protected $table = "lsport_sport";
 
 	// 取得Sport Name
-    public static function getName($data) {
+    public static function getName(array $data) {
 
 		// input
 		$data['sport_id'] = 154914;
@@ -22,7 +22,7 @@ class LsportSport extends CacheModel
 
         // 緩存時間
         $cacheAliveTime = 3600;
-		
+
         // 緩存Key
 		$cacheKey = static::getCacheKey($data);
 
