@@ -14,11 +14,7 @@ class LsportSport extends CacheModel
 	protected $table = "lsport_sport";
 
 	// 取得Sport Name
-    public static function getName(array $data) {
-
-		// input
-		$data['sport_id'] = 154914;
-		$data['api_lang'] = 'tw';
+    public static function getName($data) {
 
         // 緩存時間
         $cacheAliveTime = 3600;
