@@ -16,19 +16,18 @@ class LsportSport extends Model
 	// 取得Sport Name
     public static function getName($sport_id, $api_lang) {
         // 緩存時間
-		$cacheAliveTime = 3600;
-		// 緩存Key
-		$tableName = (new static)->getTable();
-		$cacheKey = $tableName . "_" . $sport_id;
- 
-        return Cache::put($cacheKey, function () {
+        $cacheAliveTime = 3600;
+        // 緩存Key
+        $cacheKey = static::$table . "_" . $sport_id;
+
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($sport_id, $api_lang) {
             $data = self::where('sport_id', $sport_id)->first();
-			// default name
-			$name = $data['name_en'];
-			if (($data['name_'.$api_lang] != "") && ($data['name_'.$api_lang] != null)) {
-				$name = $data['name_'.$api_lang];
-			}
+            // default name
+            $name = $data['name_en'];
+            if (($data['name_'.$api_lang] != "") && ($data['name_'.$api_lang] != null)) {
+                $name = $data['name_'.$api_lang];
+            }
             return $name; 
-        }, $cacheAliveTime);
+        });
     }
 }
