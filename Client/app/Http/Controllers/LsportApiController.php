@@ -1761,7 +1761,7 @@ class LsportApiController extends Controller {
         $tmp['create_time'] = date("Y-m-d H:i:s");
         PlayerBalanceLogs::insert($tmp);
 
-        $this->ApiSuccess($return,"01");
+        $this->ApiSuccess($order_id,"01");
 
     }
 
@@ -2187,7 +2187,7 @@ class LsportApiController extends Controller {
         $tmp['create_time'] = date("Y-m-d H:i:s");
         PlayerBalanceLogs::insert($tmp);
 
-        $this->ApiSuccess($return, "01");
+        $this->ApiSuccess($m_order_id, "01");
 
     }
 
