@@ -156,12 +156,12 @@
 .labelItem{
     text-align: center;
 }
-.labelItem div:not(:last-child){
+.betLabelContainer .labelItem:not(:last-child) > div{
     border-right: 2px solid rgb(220, 220, 220);
 }
 
 .betLabelContainer{
-    width: 55%;
+    width: 60%;
     display: flex;
 }
 
