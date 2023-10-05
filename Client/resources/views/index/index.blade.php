@@ -885,7 +885,7 @@
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
             let str = bet_name_en == 1 ? home : away
-            str += ' ' + line
+            str += ' ' + bet_name_line
             $('#leftSlideOrder span[key="bet_name"]').html(str)
         }
 
