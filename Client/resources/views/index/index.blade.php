@@ -133,8 +133,8 @@
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
         <div class="col-3 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up"></i>
-            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
@@ -143,8 +143,8 @@
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
         <div class="col-3 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up"></i>
-            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
@@ -153,8 +153,8 @@
         <div class="col-4 p-0 text-right"><span class="odd"></span></div>
         <div class="col-3 p-0 nAllLock text-center">
             <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up"></i>
-            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
