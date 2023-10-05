@@ -129,22 +129,22 @@
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
     <div class="betItemDiv row m-0" index=0>
-        <div class="col-5 p-0"><span class="bet_name"></span></div>
-        <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
-        <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=1>
-        <div class="col-5 p-0"><span class="bet_name"></span></div>
-        <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
-        <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=2>
-        <div class="col-5 p-0"><span class="bet_name"></span></div>
-        <div class="col-4 p-0"><span class="odd"></span></div>
-        <div class="col-3 p-0 nAllLock"><i class="fa-solid fa-lock"></i></div>
-        <div class="col-12 p-0 allLock"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-5 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-3 p-0 nAllLock text-center"><i class="fa-solid fa-lock"></i></div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
 </div>
 
