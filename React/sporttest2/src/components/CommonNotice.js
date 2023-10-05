@@ -151,7 +151,7 @@ class CommonNotice extends React.Component {
   // 初始資料
   componentDidMount() {
     this.caller(
-      "https://sportc.asgame.net/api/v1/index_notice?token=" +
+      "https://sportc.asgame.net/api/v2/index_notice?token=" +
         window.token +
         "&player=" +
         window.player
@@ -184,6 +184,9 @@ class CommonNotice extends React.Component {
       const noticeArray = Object.values(notice_list);
       const allNotice = noticeArray.flat();
 
+
+
+      console.log(notice_list)
       return (
         <div
           style={{

@@ -141,15 +141,13 @@
 
 		let sportName = '';
 
-		for (const item of orderListD.data.list) {
-			for (const bet of item.bet_data) {
+		for (const bet of orderItem.bet_data) {
 			const matchingSport = sportListD.data.find(sport => sport.sport_id === bet.sport_id);
 			sportName = matchingSport ? matchingSport.name : '';
-			}
+			orderDataSportType.html(sportName);
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataSportType.html(sportName);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);

@@ -182,7 +182,7 @@ class CommonLogs extends React.Component {
             },() => {
                 let nowPage = parseInt(this.state.page)
                 let nextPage = nowPage + 1
-                this.caller('https://sportc.asgame.net/api/v1/balance_logs?token=' + window.token+ '&player=' + window.player + '&page=' + nextPage ,1 ,nextPage)
+                this.caller('https://sportc.asgame.net/api/v2/balance_logs?token=' + window.token+ '&player=' + window.player + '&page=' + nextPage ,1 ,nextPage)
             })
         }
 	}
@@ -193,7 +193,7 @@ class CommonLogs extends React.Component {
     }
     // 初始資料
     componentDidMount() {
-        this.caller('https://sportc.asgame.net/api/v1/balance_logs?token=' + window.token+ '&player=' + window.player + '&page=1')
+        this.caller('https://sportc.asgame.net/api/v2/balance_logs?token=' + window.token+ '&player=' + window.player + '&page=1')
 	}
 
     // 每次點進來都撈一次

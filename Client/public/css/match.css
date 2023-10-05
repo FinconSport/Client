@@ -44,7 +44,7 @@ tr.even {
 }
 
 tr:nth-child(odd):hover, /* 当任何一个 tr 被悬停时 */
-tr:nth-child(odd):hover + tr /* 选择同级之后的所有 tr */
+.match tr:nth-child(odd):hover + tr /* 选择同级之后的所有 tr */
 {
   background-color: rgb(198 217 217); /* 设置背景颜色 */
 }
