@@ -139,10 +139,12 @@
 .betItemDiv, .labelTiem {
     height: 3rem;
     line-height: 2.5rem;
-    /* border: 1px solid rgb(220,220,220); */
     font-size: 0.9rem;
     overflow: hidden;
-    padding: 0rem 0.5rem;
+}
+
+.labelTiem{
+    text-align: center;
 }
 
 .betLabelContainer{

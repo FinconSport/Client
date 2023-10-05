@@ -128,20 +128,20 @@
 
 <!-- bet div template -->
 <div class="col-2 p-0" template='betDiv' hidden>
-    <div class="betItemDiv" index=0>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+    <div class="betItemDiv row m-0" index=0>
+        <div class="col-4"><span class="bet_name"></span></div>
+        <div class="col-4"><span class="odd"></span></div>
+        <div class="col-4"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv" index=1>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+    <div class="betItemDiv row m-0" index=1>
+        <div class="col-4"><span class="bet_name"></span></div>
+        <div class="col-4"><span class="odd"></span></div>
+        <div class="col-4"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv" index=2>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+    <div class="betItemDiv row m-0" index=2>
+        <div class="col-4"><span class="bet_name"></span></div>
+        <div class="col-4"><span class="odd"></span></div>
+        <div class="col-4"><i class="fa-solid fa-lock"></i></div>
     </div>
 </div>
 
@@ -372,14 +372,13 @@
                     item.attr('away', v3.away_team_name)
                     item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
                     item.find('.odd').html(v4.price)
+
+                    item.find('.bet_name').show()
+                    item.find('.odd').show()
                     if( v4.status === 1 ) {
-                        item.find('.bet_name').show()
-                        item.find('.odd').show()
                         item.find('i').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.bet_name').hide()
-                        item.find('.odd').hide()
                         item.find('i').show()
                         item.removeAttr('onclick')
                     }
@@ -610,14 +609,13 @@
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
+
+                                    item.find('.bet_name').show()
+                                    item.find('.odd').show()
                                     if( v4.status === 1 ) {
-                                        item.find('.bet_name').show()
-                                        item.find('.odd').show()
                                         item.find('i').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.bet_name').hide()
-                                        item.find('.odd').hide()
                                         item.find('i').show()
                                         item.removeAttr('onclick')
                                     }
