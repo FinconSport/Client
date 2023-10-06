@@ -298,8 +298,8 @@ class LsportApiController extends Controller {
                 $notice_type = "{$arr_notice_type[0]} {$arr_notice_type[1]}";
                 $fixture_id = $arr_notice_type[2];
             }
-            $title = __('Title:'.$notice_type);
-            $context = __($notice_type, ['fixture_id' => $fixture_id]);
+            $title = trans('Title:'.$notice_type);
+            $context = trans($notice_type, ['fixture_id' => $fixture_id]);
             $create_time = $v['create_time'];
 
             $notice_list[$sport_id][] = [
