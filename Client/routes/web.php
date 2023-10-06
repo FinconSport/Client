@@ -91,8 +91,8 @@ Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiControlle
 // Route::get('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
 // Route::post('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
 // Route::get('/api/v2/index_match_list2', 'App\Http\Controllers\LsportApiController@IndexMatchList2');
-Route::get('/api/v2/game_bet2', 'App\Http\Controllers\LsportApiController@GameBet2');
-Route::get('/api/v2/m_game_bet2', 'App\Http\Controllers\LsportApiController@mGameBet2');
+// Route::get('/api/v2/game_bet2', 'App\Http\Controllers\LsportApiController@GameBet2');
+// Route::get('/api/v2/m_game_bet2', 'App\Http\Controllers\LsportApiController@mGameBet2');
 
 //for dev usage
 //Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
