@@ -74,7 +74,7 @@
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
-        <span class="elToggleDir" style="float: right;">
+        <span class="elToggleDir" style="float: left;padding-right: 1rem;">
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
@@ -83,23 +83,29 @@
 </div>
 
 <!-- league toggle template -->
-<div template='leagueToggleTitleTemplate' class="seriesWrapperTitle" hidden>
-    <span class="legToggleName"></span>
-    (<span class="legToggleCount"></span>)
-    <span class="legToggleDir" style="float: right;">
-        <i class="fa-solid fa-circle-chevron-down"></i>
-    </span>
-</div>
-<div template='leagueToggleContentTemplate' class="seriesWrapperContent" hidden>
+<div class="leagueWrapper" template='leagueWrapper' hidden>
+    <div class="seriesWrapperTitle">
+        <div style="width: 35%;">
+            <span class="legToggleDir" style="padding-right: 1rem;">
+                <i class="fa-solid fa-chevron-down"></i> 
+            </span>
+            <span class="legToggleName"></span>
+            (<span class="legToggleCount"></span>)
+        </div>
+        <div class="betLabelContainer">
+        </div>
+    </div>
+    <div class="seriesWrapperContent">
+    </div>
 </div>
 
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
+        <div class="timeSpan">
+            <span class="timer"></span>
+        </div>
         <div class="indexBetCardInfo">
-            <div class="timeSpan">
-                <span class="timer"></span>
-            </div>
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
                 <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
@@ -114,28 +120,43 @@
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
-            
+        </div>
+        <div class="otherBetWay">
         </div>
     </div>
 </div>
 
 <!-- bet div template -->
-<div class="col-2 p-0" template='betDiv' hidden>
-    <div class="betLabel"></div>
-    <div class="betItemDiv" index=0>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+<div class="col p-0" template='betDiv' hidden>
+    <div class="betItemDiv row m-0" index=0>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-4 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
+        </div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv" index=1>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+    <div class="betItemDiv row m-0" index=1>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-4 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
+        </div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv" index=2>
-        <span class="bet_name"></span>&ensp;
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock"></i>
+    <div class="betItemDiv row m-0" index=2>
+        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
+        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
+        <div class="col-4 p-0 nAllLock text-center">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
+        </div>
+        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
 </div>
 
@@ -145,7 +166,8 @@
 
 
 @section('styles')
-<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
@@ -160,6 +182,9 @@
     var socket_status = false;
     var ws = null
     var heartbeatTimer = null
+
+    // 需要把bet_name替換成主客隊名的priority
+    const convertTeamPriArr = [1, 3]
 
     /* ===== DATA LAYER ===== */
     /*  
@@ -204,7 +229,7 @@
     const betLimitation_api = ''
 
     // game priority and gameTitle
-    var priorityArr = null
+    var mainPriorityArr = null
     var gameTitle = null
 
     
@@ -273,10 +298,14 @@
     }
 
     function createLeague(k, k2, v2) {
-        let league_toggle = $('div[template="leagueToggleTitleTemplate"]').clone()
+
+        // title
+        let league_wrapper = $('div[template="leagueWrapper"]').clone()
+        let league_toggle = league_wrapper.find('.seriesWrapperTitle')
         let league_toggle_name = league_toggle.find('.legToggleName')
         let league_toggle_count = league_toggle.find('.legToggleCount')
         let league_toggle_dir = league_toggle.find('.legToggleDir')
+        let league_bet_title = league_toggle.find('.betLabelContainer')
 
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
@@ -285,18 +314,20 @@
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
 
-        league_toggle.removeAttr('hidden')
-        league_toggle.removeAttr('template')
+        // bet title
+        mainPriorityArr.forEach(( i, j ) => {
+            league_bet_title.append('<div class="labelItem col"><div>' + gameTitle[j] + '</div></div>')
+        })
 
-        let league_toggle_content = $('div[template="leagueToggleContentTemplate"]').clone()
+        // content
+        let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
 
-        league_toggle_content.removeAttr('hidden')
-        league_toggle_content.removeAttr('template')
+        league_wrapper.removeAttr('template')
+        league_wrapper.removeAttr('hidden')
 
         let el_toggle_content = $(`#catWrapperContent_${k}`)
-        el_toggle_content.append(league_toggle)
-        el_toggle_content.append(league_toggle_content)
+        el_toggle_content.append(league_wrapper)
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
@@ -309,7 +340,7 @@
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
-        time.html(v3.start_time)
+        time.html(formatDateTime(v3.start_time))
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
@@ -332,12 +363,12 @@
         }
 
         // bet area
-        priorityArr.forEach(( i, j ) => {
+        mainPriorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-            bet_label = bet_div.find('.betLabel')
-            bet_label.html(gameTitle[j])
+            // bet_label = bet_div.find('.betLabel')
+            // bet_label.html(gameTitle[j])
 
             let firstDiv = bet_div.find('div[index=0]')
             let secondDiv = bet_div.find('div[index=1]')
@@ -354,36 +385,41 @@
                     item.attr('bet_rate', v4.price)
                     item.attr('bet_type', betData.market_name)
                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                    item.attr('bet_name_en', v4.market_bet_name_en)
+                    item.attr('line', v4.line)
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
                     item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
                     item.find('.odd').html(v4.price)
+
+                    item.find('.allLock').hide()
+                    item.find('.bet_name').show()
+                    item.find('.odd').show()
                     if( v4.status === 1 ) {
-                        item.find('.bet_name').show()
-                        item.find('.odd').show()
-                        item.find('i').hide()
+                        item.find('.nAllLock .fa-lock').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.bet_name').hide()
-                        item.find('.odd').hide()
-                        item.find('i').show()
+                        item.find('.nAllLock .fa-lock').show()
                         item.removeAttr('onclick')
                     }
                 })
             } else {
                 firstDiv.find('.bet_name').hide()
                 firstDiv.find('.odd').hide()
-                firstDiv.find('i').show()
+                firstDiv.find('.nAllLock .fa-lock').hide()
+                firstDiv.find('.allLock').show()
                 firstDiv.removeAttr('onclick')
                 secondDiv.find('.bet_name').hide()
                 secondDiv.find('.odd').hide()
-                secondDiv.find('i').show()
+                secondDiv.find('.nAllLock .fa-lock').hide()
+                secondDiv.find('.allLock').show()
                 secondDiv.removeAttr('onclick')
                 if( thirdDiv ) {
-                    thirdDiv.find('.bet_name').hide()
-                    thirdDiv.find('.odd').hide()
-                    thirdDiv.find('i').show()
+                    thirdDiv.find('.bet_name').show()
+                    thirdDiv.find('.odd').show()
+                    thirdDiv.find('.nAllLock .fa-lock').show()
+                    thirdDiv.find('.allLock').show()
                     thirdDiv.removeAttr('onclick')
                 }
             }
@@ -420,7 +456,7 @@
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex && isReadyCommon) {
                 // game priority and gameTitle
-                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
@@ -553,7 +589,7 @@
                         
                         
 
-                        priorityArr.forEach(( i, j ) => {
+                        mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
@@ -591,39 +627,42 @@
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                    item.attr('bet_name_en', v4.market_bet_name_en)
+                                    item.attr('line', v4.line)
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
+
+                                    item.find('.allLock').hide()
+                                    item.find('.bet_name').show()
+                                    item.find('.odd').show()
                                     if( v4.status === 1 ) {
-                                        item.find('.bet_name').show()
-                                        item.find('.odd').show()
-                                        item.find('i').hide()
+                                        item.find('.nAllLock .fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.bet_name').hide()
-                                        item.find('.odd').hide()
-                                        item.find('i').show()
+                                        item.find('.nAllLock .fa-lock').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
                                 firstDiv.find('.bet_name').hide()
                                 firstDiv.find('.odd').hide()
-                                firstDiv.find('i').show()
+                                firstDiv.find('.nAllLock .fa-lock').hide()
+                                firstDiv.find('.allLock').show()
                                 firstDiv.removeAttr('onclick')
-
                                 secondDiv.find('.bet_name').hide()
                                 secondDiv.find('.odd').hide()
-                                secondDiv.find('i').show()
+                                secondDiv.find('.nAllLock .fa-lock').hide()
+                                secondDiv.find('.allLock').show()
                                 secondDiv.removeAttr('onclick')
-
                                 if( thirdDiv ) {
-                                    thirdDiv.find('.bet_name').hide()
-                                    thirdDiv.find('.odd').hide()
-                                    thirdDiv.find('i').show()
+                                    thirdDiv.find('.bet_name').show()
+                                    thirdDiv.find('.odd').show()
+                                    thirdDiv.find('.nAllLock .fa-lock').show()
+                                    thirdDiv.find('.allLock').show()
                                     thirdDiv.removeAttr('onclick')
                                 }
                             }
@@ -727,12 +766,14 @@
     // 聯賽分類收合
     function toggleSeries( key ) {
         $('#seriesWrapperContent_' + key).slideToggle( "slow" );
-        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-circle-chevron-right')) {
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-circle-chevron-right')
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-circle-chevron-down')
+        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').hide()
         } else {
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-circle-chevron-right')
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-circle-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').show()
         }
     }
 
@@ -752,18 +793,19 @@
         console.log('raiseOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-solid fa-caret-up"></i>')
-
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').show()
+        
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
@@ -771,18 +813,19 @@
         console.log('lowerOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').remove()
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .odd').after('<i class="fa-sharp fa-solid fa-caret-down"></i>')
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').show()
 
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').remove()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
         }, 3000);
     }
 
@@ -820,10 +863,12 @@
         let bet_rate = e.attr('bet_rate')
         let bet_type = e.attr('bet_type')
         let bet_name = e.attr('bet_name')
+        let bet_name_en = e.attr('bet_name_en')
+        let bet_name_line = e.attr('line')
         let league = e.attr('league')
         let home = e.attr('home')
         let away = e.attr('away')
-
+        let priority = parseInt(e.attr('priority'))
 
         sendOrderData = {
             token: token,
@@ -836,8 +881,15 @@
             better_rate: 0,
         }
 
+        if( convertTeamPriArr.indexOf(priority) === -1 ) {
+            $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
+        } else {
+            let str = bet_name_en == 1 ? home : away
+            str += ' ' + bet_name_line
+            $('#leftSlideOrder span[key="bet_name"]').html(str)
+        }
+
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-        $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
@@ -905,7 +957,7 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        if (isNaN(inputMoney)) inputMoney = 0
+        if (isNaN(inputMoney)) inputMoney = ''
         // if (inputMoney < min) inputMoney = min
         // if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
@@ -1003,5 +1055,25 @@
             $('#refreshIcon').removeClass('rotate-animation');
         }
     }
+
+    formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
+    }
+
+    // scroll效果
+    // $('#indexContainerLeft').scroll(function(){
+    //     $('#indexContainerLeft .seriesWrapperTitle').each(function(){
+    //         let offsetTop = $(this).offset().top
+    //         if( offsetTop < 95 && offsetTop > 90 ) {
+    //             $(this).css('position', 'fixed')
+    //             $(this).css('width', '102rem')
+    //         }
+    //     })
+    // });
 </script>
 @endpush

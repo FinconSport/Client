@@ -230,7 +230,7 @@
     const betLimitation_api = ''
 
     // game priority and gameTitle
-    var priorityArr = null
+    var mainPriorityArr = null
     var gameTitle = null
 
     
@@ -339,7 +339,7 @@
             away_team_info.find('.scoreSpan').html()
 
             // bet area
-            priorityArr.forEach(( i, j ) => {
+            mainPriorityArr.forEach(( i, j ) => {
                 let bet_div = $('div[template="betDiv"]').clone()
                 let betData = Object.values(v3.list).find(m => m.priority === i)
                 bet_div.attr('priority', i)
@@ -427,7 +427,7 @@
             if (matchListD.status === 1) { isReadyIndex = true; }
             if( isReadyIndex && isReadyCommon) {
                 // game priority and gameTitle
-                priorityArr = langTrans['sportBetData'][sport]['priorityArr']
+                mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
@@ -521,7 +521,7 @@
                         
 
 
-                        priorityArr.forEach(( i, j ) => {
+                        mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
                             let firstDiv = bet_div.find('div[index=0]')
@@ -919,7 +919,7 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        if (isNaN(inputMoney)) inputMoney = 0
+        if (isNaN(inputMoney)) inputMoney = ''
         // if (inputMoney < min) inputMoney = min
         // if (inputMoney > max) inputMoney = max
         let maxMoney = (inputMoney * mOrderRate).toFixed(2);
