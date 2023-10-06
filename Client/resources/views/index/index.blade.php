@@ -129,9 +129,9 @@
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
     <div class="betItemDiv row m-0" index=0>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
+        <div class="col"><span class="bet_name"></span></div>
+        <div class="col p-0 text-right"><span class="odd"></span></div>
+        <div class="col nAllLock text-left">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -139,9 +139,9 @@
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=1>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
+        <div class="col"><span class="bet_name"></span></div>
+        <div class="col p-0 text-right"><span class="odd"></span></div>
+        <div class="col nAllLock text-left">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -149,9 +149,9 @@
         <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
     <div class="betItemDiv row m-0" index=2>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
+        <div class="col"><span class="bet_name"></span></div>
+        <div class="col p-0 text-right"><span class="odd"></span></div>
+        <div class="col nAllLock text-left">
             <i class="fa-solid fa-lock"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -367,8 +367,6 @@
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-            // bet_label = bet_div.find('.betLabel')
-            // bet_label.html(gameTitle[j])
 
             let firstDiv = bet_div.find('div[index=0]')
             let secondDiv = bet_div.find('div[index=1]')
@@ -390,9 +388,22 @@
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
-                    item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
-                    item.find('.odd').html(v4.price)
 
+                    switch ( i ) {
+                        case 1:
+                            item.find('.bet_name').html('')
+                            break;
+                        case 3:
+                            item.find('.bet_name').html( v4.line )
+                            break;
+                        case 5:case 7:
+                            item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                            break;
+                        default:
+                            break;
+                    }
+
+                    item.find('.odd').html(v4.price)
                     item.find('.allLock').hide()
                     item.find('.bet_name').show()
                     item.find('.odd').show()
@@ -632,9 +643,22 @@
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
+                                    switch ( i ) {
+                                        case 1:
+                                            item.find('.bet_name').html('')
+                                            break;
+                                        case 3:
+                                            item.find('.bet_name').html( v4.line )
+                                            break;
+                                        case 5:case 7:
+                                            item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
                                     item.find('.allLock').hide()
                                     item.find('.bet_name').show()
