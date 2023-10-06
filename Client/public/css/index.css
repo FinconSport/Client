@@ -137,6 +137,20 @@
     line-height: 5rem;
     text-align: center;
 }
+
+.baseballSpan{
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+.baseballSpan .timer {
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+.baseballSpan .baseCon {
+    height: 2.5rem;
+}
+
 .indexBetCardTable {
     width: 60%;
 }
@@ -152,7 +166,14 @@
 .otherBetWay{
     width: 5%;
     height: 5rem;
+    text-align: center;
 }
+
+.otherBetWay i {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
 .indexBetCardInfo > div {
     height: 2.5rem;
     line-height: 2.5rem;

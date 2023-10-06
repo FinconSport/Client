@@ -102,8 +102,12 @@
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
-        <div class="timeSpan">
+        <div class="timeSpan" key='not-baseball'>
             <span class="timer"></span>
+        </div>
+        <div class="baseballSpan" key='baseball'>
+            <div class="timer"></div>
+            <div class="baseCon"></div>
         </div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
@@ -333,6 +337,10 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
+
+        // 壘包 好壞球 只有 滾球 棒球有
+        sport === 154914 && v3.status === 2 ? card.find('[key="not-baseball"]').remove() : card.find('[key="baseball"]').remove()
+
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
