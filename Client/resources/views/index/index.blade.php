@@ -70,7 +70,7 @@
 </div>
 
 <!-- early living toggle template -->
-<div template='elToggleTemplate' hidden>
+<div template='elToggleTemplate' class="h-100" hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
