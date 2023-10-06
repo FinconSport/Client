@@ -7,6 +7,13 @@
     height: 3rem;
     font-size: 1.2rem;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.catWrapperContent{
+    overflow: auto;
+    height: 50rem;
 }
 
 .catWrapperTitle span {
@@ -27,6 +34,10 @@
     font-weight: 600;
     line-height: 1.5rem;
     display: flex;
+    position: sticky;
+    top: 0.5rem;
+    background-color: white;
+    z-index: 1;
 }
 
 .seriesWrapperTitle span {
@@ -34,6 +45,8 @@
 }
 .seriesWrapperContent{
     padding: 0 0 0.5rem 0;
+    z-index: 0;
+    position: relative;
 }
 /* 主要投注 */
 #indexContainer {
@@ -46,7 +59,7 @@
 #indexContainerLeft {
     color: #415b5a;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding: 0 1rem 0 0;
     padding-bottom: 1rem;
 }
@@ -181,6 +194,8 @@
     border-top: 2px solid rgb(220, 220, 220);
     border-right: 2px solid rgb(220, 220, 220);
     padding: 0.5rem;
+    z-index: 0;
+    position: relative;
 }
 
 .betItemDiv, .labelItem {

@@ -1087,15 +1087,5 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-    // scroll效果
-    // $('#indexContainerLeft').scroll(function(){
-    //     $('#indexContainerLeft .seriesWrapperTitle').each(function(){
-    //         let offsetTop = $(this).offset().top
-    //         if( offsetTop < 95 && offsetTop > 90 ) {
-    //             $(this).css('position', 'fixed')
-    //             $(this).css('width', '102rem')
-    //         }
-    //     })
-    // });
 </script>
 @endpush
