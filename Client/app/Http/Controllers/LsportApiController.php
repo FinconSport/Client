@@ -300,7 +300,6 @@ class LsportApiController extends Controller {
             $league_id = $v['league_id'];
             $fixture_id = $v['fixture_id'];
             $notice_type = $v['type'];
-            $fixture_id = null;
 
             // sport -----
             $sport = LsportSport::where('sport_id', $sport_id)->first();
