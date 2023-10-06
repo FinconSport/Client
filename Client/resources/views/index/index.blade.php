@@ -637,8 +637,19 @@
                                         default:
                                             break;
                                     }
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
+                                    // 左邊投注區塊
+                                    let calBetNameStr = ''
+                                    let home = item.attr('home')
+                                    let away = item.attr('away')
+                                    if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                        calBetNameStr = v4.market_bet_name + ' ' + v4.line
+                                    } else {
+                                        calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                    }
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+
+                                    // 狀態 鎖頭
                                     if( v4.status === 1 ) {
                                         item.find('.fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
