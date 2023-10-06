@@ -27,6 +27,7 @@
     border: 2px solid rgb(65,91,90);
     border-radius: 5px;
     margin-bottom: 0.5rem;
+    border-top: none;
 }
 
 .seriesWrapperTitle{
@@ -40,6 +41,7 @@
     top: calc( 0.25rem - 4px );
     background-color: white;
     z-index: 1;
+    border-top: 2px solid rgb(65,91,90);
 }
 
 .seriesWrapperTitle span {
