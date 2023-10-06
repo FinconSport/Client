@@ -205,6 +205,7 @@
 		var v = {}
 
 		function caller(url, data, obj, isUpdate = 0) {
+			console.log(url)
 			return new Promise((resolve, reject) => {
 				$.ajax({
 					url: url,
@@ -212,6 +213,7 @@
 					data: data,
 					success: function (data) {
 						const json = JSON.parse(data);
+						console.log(json)
 						if (json.gzip) {
 							const str = json.data;
 							const bytes = atob(str).split('').map(char => char.charCodeAt(0));
