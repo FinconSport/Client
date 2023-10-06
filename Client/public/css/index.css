@@ -253,7 +253,7 @@
     left: 0;
     width: 25rem;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background-color: rgba(0,0,0,0.5);
     padding: 5rem 2rem;
     font-weight: 600;
@@ -337,7 +337,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background-color: black;
     opacity: 0.5;
 }
