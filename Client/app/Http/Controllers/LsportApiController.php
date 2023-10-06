@@ -133,7 +133,6 @@ class LsportApiController extends Controller {
             $this->ApiError("PLAYER_RELOGIN", true);
         }
 
-
         $fakeData = [
             [
                 "id" => 1,

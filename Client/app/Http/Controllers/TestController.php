@@ -13,7 +13,6 @@ class TestController extends PcController {
     // 首頁
     public function index(Request $request) {
     
-
       $data['sport_id'] = 154914;
       $data['api_lang'] = 'tw';
 
