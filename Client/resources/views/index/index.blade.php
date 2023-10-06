@@ -70,7 +70,7 @@
 </div>
 
 <!-- early living toggle template -->
-<div template='elToggleTemplate' hidden>
+<div class="cateWrapper" template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
@@ -303,7 +303,6 @@
     }
 
     function createLeague(k, k2, v2) {
-
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -765,7 +764,6 @@
 
     // remove fixture
     function closeFixture(id) {
-        console.log('closeFixture')
         $(`#${id}`).hide(1000)
         setTimeout(() => {
             $(`#${id}`).remove()
@@ -1045,7 +1043,7 @@
             let id = $(this).attr('id').replace('_total', '')
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('div[id^="toggleContent"]').hide()
+            if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
@@ -1053,7 +1051,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.seriesWrapperTitle').hide()
+            if( count === 0 ) $(this).closest('.leagueWrapper').hide()
         })
 
         // is no data
