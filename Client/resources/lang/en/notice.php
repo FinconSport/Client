@@ -25,20 +25,20 @@ return [
 
     // 賽事取消原因. 用於DB::lsport_notice
     'fixture_cancellation_reasons' => [
-        'title:Event Cancelled' => 'Event cancelled',
-        'title:Invalid Event' => 'Event invalid',
-        'title:Wrong League' => 'Event wrong league',
-        'title:Participants Swapped' => 'Participants swapped',
-        'title:Home/Away Team Corrected' => 'Home/away team incorrect',
-        'title:Duplication of' => 'Event duplicated',
-        'title:Fixture Status Corrected' => 'Event wrong status',
+        'title:Event Cancelled' => 'Event cancelled :sport_name/:league_name',
+        'title:Invalid Event' => 'Event invalid :sport_name/:league_name',
+        'title:Wrong League' => 'Event wrong league :sport_name/:league_name',
+        'title:Participants Swapped' => 'Participants swapped :sport_name/:league_name',
+        'title:Home/Away Team Corrected' => 'Home/away team incorrect :sport_name/:league_name',
+        'title:Duplication of' => 'Event duplicated :sport_name/:league_name',
+        'title:Fixture Status Corrected' => 'Event wrong status :sport_name/:league_name',
 
-        'Event Cancelled' => 'The event was canceled and will not take place',
-        'Invalid Event' => 'The canceled event was created according to incorrect metadata',
-        'Wrong League' => 'The event was created under the wrong league',
-        'Participants Swapped' => 'The canceled event was created with incorrect order of participants',
-        'Home/Away Team Corrected' => '	The canceled event was created with an incorrect home/away participant',
-        'Duplication of' => 'The cancelled event duplicates with the nother event with ID :fixture_id',
-        'Fixture Status Corrected' => 'The canceled event received an incorrect Livescore update',
+        'Event Cancelled' => 'The event was canceled and will not take place :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Invalid Event' => 'The canceled event was created according to incorrect metadata :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Wrong League' => 'The event was created under the wrong league :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Participants Swapped' => 'The canceled event was created with incorrect order of participants :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Home/Away Team Corrected' => '	The canceled event was created with an incorrect home/away participant :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Duplication of' => 'The cancelled event duplicates with the nother event with ID :fixture_id :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Fixture Status Corrected' => 'The canceled event received an incorrect Livescore update :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
     ]
 ];
