@@ -213,6 +213,7 @@
 					data: data,
 					success: function (data) {
 						const json = JSON.parse(data);
+						console.log(json)
 						if (json.gzip) {
 							const str = json.data;
 							console.log(str)
