@@ -128,36 +128,34 @@
 
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
-    <div class="betItemDiv row m-0" index=0>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
-            <i class="fa-solid fa-lock"></i>
+</div>
+<!-- betItem template -->
+<div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
+    <div class="col p-0">
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock" style="display: none;"></i>
+        <i class="fa-solid fa-caret-up" style="display: none;"></i>
+        <i class="fa-solid fa-caret-down" style="display: none;"></i>
+    </div>
+</div>
+
+<div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
+    <div class="col text-right p-0">
+        <span class="bet_name"></span>
+    </div>
+    <div class="col m-0 row text-right">
+        <div class="odd col-5 p-0 text-left"></div>
+        <div class="col-7 text-left p-0">
+            <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv row m-0" index=1>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
-            <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
-        </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
-    </div>
-    <div class="betItemDiv row m-0" index=2>
-        <div class="col-4 p-0 text-left"><span class="bet_name"></span></div>
-        <div class="col-4 p-0 text-right"><span class="odd"></span></div>
-        <div class="col-4 p-0 nAllLock text-center">
-            <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
-        </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
-    </div>
+</div>
+
+<!-- no data betItem template -->
+<div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
+    <i class="fa-solid fa-lock"></i>
 </div>
 
 
@@ -256,7 +254,6 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
-                console.log(listKeys)
                 listKeys.forEach( ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
@@ -367,16 +364,11 @@
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-            // bet_label = bet_div.find('.betLabel')
-            // bet_label.html(gameTitle[j])
 
-            let firstDiv = bet_div.find('div[index=0]')
-            let secondDiv = bet_div.find('div[index=1]')
-            let thirdDiv = bet_div.find('div[index=2]')
-            let item = null
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
-                    item = bet_div.find('.betItemDiv').eq(s)
+                    let item = null
+                    i === 1 ? item = $(`div[template="betItem-${i}"]`).clone() : item = $(`div[template="betItem"]`).clone()
                     // set attribute
                     item.attr('priority', i)
                     item.attr('fixture_id', k3)
@@ -390,37 +382,44 @@
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
-                    item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+
                     item.find('.odd').html(v4.price)
 
-                    item.find('.allLock').hide()
-                    item.find('.bet_name').show()
-                    item.find('.odd').show()
+                    // 按照不同體育種類、玩法 顯示相對應內容
+                    switch ( i ) {
+                        case 3:case 203:case 204:
+                            item.find('.bet_name').html( v4.line )
+                            break;
+                        case 5:case 205:case 206:
+                            item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                            break;
+                        case 7:
+                            item.find('.bet_name').html( v4.market_bet_name )
+                            break;
+                        default:
+                            break;
+                    }
+
                     if( v4.status === 1 ) {
-                        item.find('.nAllLock .fa-lock').hide()
+                        item.find('.fa-lock').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.nAllLock .fa-lock').show()
+                        item.find('.fa-lock').show()
                         item.removeAttr('onclick')
                     }
+
+                    item.removeAttr('hidden')
+                    item.removeAttr('template')
+                    bet_div.append(item)
+
                 })
             } else {
-                firstDiv.find('.bet_name').hide()
-                firstDiv.find('.odd').hide()
-                firstDiv.find('.nAllLock .fa-lock').hide()
-                firstDiv.find('.allLock').show()
-                firstDiv.removeAttr('onclick')
-                secondDiv.find('.bet_name').hide()
-                secondDiv.find('.odd').hide()
-                secondDiv.find('.nAllLock .fa-lock').hide()
-                secondDiv.find('.allLock').show()
-                secondDiv.removeAttr('onclick')
-                if( thirdDiv ) {
-                    thirdDiv.find('.bet_name').show()
-                    thirdDiv.find('.odd').show()
-                    thirdDiv.find('.nAllLock .fa-lock').show()
-                    thirdDiv.find('.allLock').show()
-                    thirdDiv.removeAttr('onclick')
+                let i = sport === 6046 ? 3 : 2
+                for (let j = 0; j < i; j++) {
+                    let item = $('div[template="betItem-no"]').clone()
+                    item.removeAttr('hidden')
+                    item.removeAttr('template')
+                    bet_div.append(item)
                 }
             }
 
@@ -460,7 +459,7 @@
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
-                if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
+                // if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
 
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
@@ -548,7 +547,6 @@
                             if( !isLeagueExist ) createLeague(k, k2, v2)
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
                             let livingNode = $(`#${k3}`)
-                            console.log(parentNode, livingNode)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
                             card.attr('cate', k)
                             card.attr('status', v3.status)
@@ -559,10 +557,8 @@
                             // score
                             let homeScore = home_team_info.find('.scoreSpan')
                             let awayScore = away_team_info.find('.scoreSpan')
-
                             let nowHomeScore = parseInt(homeScore.html())
                             let nowAwayScore = parseInt(awayScore.html())
-
                             let updateHome = parseInt(v3.scoreboard[1][0])
                             let updateAway = parseInt(v3.scoreboard[2][0])
 
@@ -577,7 +573,6 @@
                             homeScore.html( v3.scoreboard[1][0] )
                             awayScore.html( v3.scoreboard[2][0] )
 
-
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
@@ -585,9 +580,6 @@
                         }
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
-
-                        
-                        
 
                         mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
@@ -604,8 +596,8 @@
                                     let price = item.attr('bet_rate')
                                     let isSelected = item.hasClass('m_order_on')
 
-                                    // 判斷盤口是否有改變
-                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
+                                    // 判斷盤口是否有改變且狀態為1
+                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
                                             console.log('賠率::' + price + ' ->' + v4.price)
@@ -632,38 +624,48 @@
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .bet_name`).html(v4.market_bet_name + ' ' + v4.line)
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
+                                    switch ( i ) {
+                                        case 1:
+                                            item.find('.bet_name').html('')
+                                            break;
+                                        case 3:
+                                            item.find('.bet_name').html( v4.line )
+                                            break;
+                                        case 5:case 7:
+                                            item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                                            break;
+                                        default:
+                                            break;
+                                    }
 
+                                    // 左邊投注區塊
+                                    let calBetNameStr = ''
+                                    let home = item.attr('home')
+                                    let away = item.attr('away')
+                                    if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                        calBetNameStr = v4.market_bet_name + ' ' + v4.line
+                                    } else {
+                                        calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                    }
+                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
 
-                                    item.find('.allLock').hide()
-                                    item.find('.bet_name').show()
-                                    item.find('.odd').show()
+                                    // 狀態 鎖頭
                                     if( v4.status === 1 ) {
-                                        item.find('.nAllLock .fa-lock').hide()
+                                        item.find('.fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.nAllLock .fa-lock').show()
+                                        item.find('.fa-lock').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
-                                firstDiv.find('.bet_name').hide()
-                                firstDiv.find('.odd').hide()
-                                firstDiv.find('.nAllLock .fa-lock').hide()
-                                firstDiv.find('.allLock').show()
-                                firstDiv.removeAttr('onclick')
-                                secondDiv.find('.bet_name').hide()
-                                secondDiv.find('.odd').hide()
-                                secondDiv.find('.nAllLock .fa-lock').hide()
-                                secondDiv.find('.allLock').show()
-                                secondDiv.removeAttr('onclick')
-                                if( thirdDiv ) {
-                                    thirdDiv.find('.bet_name').show()
-                                    thirdDiv.find('.odd').show()
-                                    thirdDiv.find('.nAllLock .fa-lock').show()
-                                    thirdDiv.find('.allLock').show()
-                                    thirdDiv.removeAttr('onclick')
+                                bet_div.html('')
+                                let i = sport === 6046 ? 3 : 2
+                                for (let j = 0; j < i; j++) {
+                                    let item = $('div[template="betItem-no"]').clone()
+                                    item.removeAttr('hidden')
+                                    item.removeAttr('template')
+                                    bet_div.append(item)
                                 }
                             }
                         });
@@ -794,18 +796,17 @@
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
-
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').hide()
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').show()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').show()
         
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
@@ -814,18 +815,18 @@
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-up').hide()
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').hide()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').hide()
 
 
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
-        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').show()
+        $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').show()
 
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
-            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .nAllLock .fa-caret-down').hide()
+            $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-down').hide()
         }, 3000);
     }
 
