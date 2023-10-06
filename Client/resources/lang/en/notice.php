@@ -22,4 +22,13 @@ return [
 	],
 
 	// 後端
+    'fixture_cancellation_reasons' => [
+        'Event Cancelled' => 'The event was canceled and will not take place',
+        'Invalid Event' => 'The canceled event was created according to incorrect metadata',
+        'Wrong League' => 'The event was created under the wrong league',
+        'Participants Swapped' => 'The canceled event was created with incorrect order of participants',
+        'Home/Away Team Corrected' => '	The canceled event was created with an incorrect home/away participant',
+        'Duplication of' => 'There are two instances of the same fixture, and we have canceled one of them. Refer to the Fixture ID in the :fixture_id',
+        'Fixture Status Corrected' => 'The canceled event received an incorrect Livescore update',
+    ]
 ];

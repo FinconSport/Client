@@ -253,8 +253,11 @@ class LsportApiController extends Controller {
         $notice_list = array();
 
         // 系統公告
-        // ????????????????????????????????????????? 下面怪怪的
-        $return = ClientMarquee::where("status", 1)->get();      
+        $return = ClientMarquee::where(
+            "status", 1
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -263,6 +266,39 @@ class LsportApiController extends Controller {
             $sport_id = 0;
             $title = $v['title'];
             $context = $v['marquee'];
+            $create_time = $v['create_time'];
+
+            $notice_list[$sport_id][] = [
+                "sport_id" => $sport_id,
+                "title" => $title,
+                "context" => $context,
+                "create_time" => $create_time,
+            ];
+        }
+
+
+        //---------------------------------
+        // 自DB取出LsportNotice
+        $return = LsportNotice::orderBy(
+            'sport_id', 'ASC'
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
+        if ($return === false) {
+            $this->ApiError("02");
+        }
+
+        foreach ($return as $k => $v) {
+            $sport_id = $v['sport_id'];
+            $notice_type = $v['type'];
+            $fixture_id = null;
+            if (strpos($notice_type, 'Duplication of') !== false) {  // Duplication of <FIXTURE_ID> 的錯誤
+                $arr_notice_type = explode(' ', $notice_type);
+                $notice_type = "{$arr_notice_type[0]} {$arr_notice_type[1]}";
+                $fixture_id = $arr_notice_type[2];
+            }
+            $title = __('Title:'.$notice_type);
+            $context = __($notice_type, ['fixture_id' => $fixture_id]);
             $create_time = $v['create_time'];
 
             $notice_list[$sport_id][] = [
