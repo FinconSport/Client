@@ -317,7 +317,7 @@ class LsportApiController extends Controller {
                 $away_team_id = $fixture['away_id'];
 
                 // team: home team -----
-                $home_team = LsportTeam::where('sport_id', $home_team_id)->first();
+                $home_team = LsportTeam::where('team_id', $home_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($home_team[$lang_col])) {  // sport name
                     $home_team_name = $home_team['name_en'];
@@ -326,7 +326,7 @@ class LsportApiController extends Controller {
                 }
 
                 // team: away team -----
-                $away_team = LsportTeam::where('sport_id', $away_team_id)->first();
+                $away_team = LsportTeam::where('team_id', $away_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
                 if (!strlen($away_team[$lang_col])) {  // sport name
                     $away_team_name = $away_team['name_en'];
