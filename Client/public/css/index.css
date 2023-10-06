@@ -160,6 +160,7 @@
     border-right: 2px solid rgb(220, 220, 220);
     padding: 0.5rem;
 }
+
 .betItemDiv, .labelItem {
     height: 2.5rem;
     line-height: 1.5rem;
@@ -170,10 +171,19 @@
 .betItemDiv div {
     position: relative;
 }
+
+.fa-lock {
+    color: rgb(188 207 206);
+}
+
 [key="betItemDiv-1"] i {
     position: absolute;
     top: 0.3rem;
     margin-left: 0.5rem;
+}
+
+[key="betItemDiv-no"] i {
+    margin-top: 0.3rem;
 }
 
 .labelItem{
@@ -348,18 +358,13 @@ div[key="sizeSmallRate"]:hover {
 
 /* 賠率變化 */
 .raiseOdd .odd,
-.raiseOdd i {
+.betItemDiv .fa-caret-up {
     color: red!important;
 }
 
 .lowerOdd .odd,
-.lowerOdd i {
+.betItemDiv .fa-caret-down {
     color: rgb(0, 212, 81)!important;
-}
-
-.raiseOdd .text-orange,
-.lowerOdd .text-orange {
-    text-shadow: 1px 1px 0px rgb(200,200,200);
 }
 
 
