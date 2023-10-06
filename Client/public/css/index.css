@@ -90,8 +90,8 @@
     background-color: rgb(242, 242, 242);
     border-radius: 8px;
     overflow-x: hidden;
-    padding: 0 1rem;
-    margin-top: 0.3rem;
+    padding: 0.2rem 1rem;
+    margin-top: 0.2rem;
 }
 
 .indexBetCardLabel {
@@ -114,7 +114,8 @@
 }
 
 [key="homeTeamInfo"] .teamSpan {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    /* line-height: 1.5rem; */
 }
 .teamSpan{
     font-size: 1.1rem;
@@ -132,7 +133,7 @@
 .timeSpan{
     width: 10%;
     float: left;
-    line-height: 6rem;
+    line-height: 5rem;
     text-align: center;
 }
 .indexBetCardTable {
@@ -151,8 +152,8 @@
     width: 5%;
 }
 .indexBetCardInfo > div {
-    height: 3rem;
-    line-height: 3rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 .betItemDiv {
     border-top: 2px solid rgb(220, 220, 220);
@@ -160,8 +161,8 @@
     padding: 0.5rem;
 }
 .betItemDiv, .labelItem {
-    height: 3rem;
-    line-height: 2rem;
+    height: 2.5rem;
+    line-height: 1.5rem;
     font-size: 0.9rem;
     overflow: hidden;
 }
