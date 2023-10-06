@@ -444,7 +444,7 @@
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    // caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
@@ -547,7 +547,6 @@
                             if( !isLeagueExist ) createLeague(k, k2, v2)
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
                             let livingNode = $(`#${k3}`)
-                            console.log(parentNode, livingNode)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
                             card.attr('cate', k)
                             card.attr('status', v3.status)
@@ -558,10 +557,8 @@
                             // score
                             let homeScore = home_team_info.find('.scoreSpan')
                             let awayScore = away_team_info.find('.scoreSpan')
-
                             let nowHomeScore = parseInt(homeScore.html())
                             let nowAwayScore = parseInt(awayScore.html())
-
                             let updateHome = parseInt(v3.scoreboard[1][0])
                             let updateAway = parseInt(v3.scoreboard[2][0])
 
@@ -576,7 +573,6 @@
                             homeScore.html( v3.scoreboard[1][0] )
                             awayScore.html( v3.scoreboard[2][0] )
 
-
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                             if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
@@ -584,9 +580,6 @@
                         }
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
-
-                        
-                        
 
                         mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
@@ -603,8 +596,8 @@
                                     let price = item.attr('bet_rate')
                                     let isSelected = item.hasClass('m_order_on')
 
-                                    // 判斷盤口是否有改變
-                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() ) {
+                                    // 判斷盤口是否有改變且狀態為1
+                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
                                             console.log('賠率::' + price + ' ->' + v4.price)
@@ -631,7 +624,6 @@
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
-
                                     switch ( i ) {
                                         case 1:
                                             item.find('.bet_name').html('')
@@ -645,37 +637,24 @@
                                         default:
                                             break;
                                     }
-
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(v4.market_bet_name + ' ' + v4.line)
 
-                                    item.find('.allLock').hide()
-                                    item.find('.bet_name').show()
-                                    item.find('.odd').show()
                                     if( v4.status === 1 ) {
-                                        item.find('.nAllLock .fa-lock').hide()
+                                        item.find('.fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
                                     } else {
-                                        item.find('.nAllLock .fa-lock').show()
+                                        item.find('.fa-lock').show()
                                         item.removeAttr('onclick')
                                     }
                                 })
                             } else {
-                                firstDiv.find('.bet_name').hide()
-                                firstDiv.find('.odd').hide()
-                                firstDiv.find('.nAllLock .fa-lock').hide()
-                                firstDiv.find('.allLock').show()
-                                firstDiv.removeAttr('onclick')
-                                secondDiv.find('.bet_name').hide()
-                                secondDiv.find('.odd').hide()
-                                secondDiv.find('.nAllLock .fa-lock').hide()
-                                secondDiv.find('.allLock').show()
-                                secondDiv.removeAttr('onclick')
-                                if( thirdDiv ) {
-                                    thirdDiv.find('.bet_name').show()
-                                    thirdDiv.find('.odd').show()
-                                    thirdDiv.find('.nAllLock .fa-lock').show()
-                                    thirdDiv.find('.allLock').show()
-                                    thirdDiv.removeAttr('onclick')
+                                item.html('')
+                                let i = sport === 6046 ? 3 : 2
+                                for (let j = 0; j < i; j++) {
+                                    let item = $('div[template="betItem-no"]').clone()
+                                    item.removeAttr('hidden')
+                                    item.removeAttr('template')
+                                    bet_div.append(item)
                                 }
                             }
                         });
