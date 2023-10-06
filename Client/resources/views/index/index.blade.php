@@ -385,6 +385,7 @@
 
                     item.find('.odd').html(v4.price)
 
+                    // 按照不同體育種類、玩法 顯示相對應內容
                     switch ( i ) {
                         case 3:case 203:case 204:
                             item.find('.bet_name').html( v4.line )
