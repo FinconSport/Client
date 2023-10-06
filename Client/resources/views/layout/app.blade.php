@@ -212,8 +212,6 @@
 					data: data,
 					success: function (data) {
 						const json = JSON.parse(data);
-						console.log(json)
-						if( url === sportList_api ) json.gzip = false
 						if (json.gzip) {
 							const str = json.data;
 							const bytes = atob(str).split('').map(char => char.charCodeAt(0));
