@@ -14,6 +14,7 @@ use App\Models\LsportSport;
 use App\Models\LsportTeam;
 use App\Models\LsportMarket;
 use App\Models\LsportMarketBet;
+use App\Models\LsportNotice;
 
 use App\Models\PlayerOnline;
 use App\Models\Player;
