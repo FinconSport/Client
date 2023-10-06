@@ -183,6 +183,8 @@
 
     // 需要把bet_name替換成主客隊名的priority
     const convertTeamPriArr = [1, 3]
+    // 獨贏系列
+    const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
 
     /* ===== DATA LAYER ===== */
     /*  
@@ -368,7 +370,6 @@
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     let item = null
-                    let allWinArr = langTrans.priorityArr.allwin // 獨贏系列
                     allWinArr.indexOf(i) !== -1 ? item = $(`div[template="betItem-1"]`).clone() : item = $(`div[template="betItem"]`).clone()
                     // set attribute
                     item.attr('priority', i)
@@ -409,19 +410,29 @@
                         item.removeAttr('onclick')
                     }
 
+                    
+
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
 
                 })
             } else {
-                let i = sport === 6046 ? 3 : 2
-                for (let j = 0; j < i; j++) {
+                for (let j = 0; j < 2; j++) {
                     let item = $('div[template="betItem-no"]').clone()
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
                 }
+            }
+
+            // 足球 讓球、大小 補空格
+            if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
+                let item = $('div[template="betItem-no"]').clone()
+                item.find('i').remove()
+                item.removeAttr('hidden')
+                item.removeAttr('template')
+                bet_div.append(item)
             }
 
             bet_div.removeAttr('hidden')
