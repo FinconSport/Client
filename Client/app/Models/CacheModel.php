@@ -11,8 +11,7 @@ class CacheModel extends Model {
         $tableName = (new static)->getTable();
 		$key = json_encode($data,true);
 		$cacheKey = $tableName . "_" . $funcName . "_" . $key;
-
-        dd($cacheKey);
+        $cacheKey = MD5($cacheKey);
 
         return $cacheKey;
     }
