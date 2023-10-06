@@ -648,7 +648,7 @@
                                     }
                                 })
                             } else {
-                                item.html('')
+                                bet_div.html('')
                                 let i = sport === 6046 ? 3 : 2
                                 for (let j = 0; j < i; j++) {
                                     let item = $('div[template="betItem-no"]').clone()
