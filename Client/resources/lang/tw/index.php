@@ -89,6 +89,9 @@ return [
 		'tooless_bet_amout' => '最低投注',
 		'toohigh_bet_amout' => '最高投注',
 	],
+	'priorityArr' => [
+		'allwin' => [1, 2, 101, 102, 201, 202]
+	],
 	'sportBetData' => [
 		6046 => [
 			'gameTitle' => ['全場獨贏', '全場讓球', '全場大小', '上半場獨贏', '上半場讓球', '上半場大小'],
