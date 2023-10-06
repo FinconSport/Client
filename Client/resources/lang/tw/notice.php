@@ -24,13 +24,13 @@ return [
 
 	// 後端
     'fixture_cancellation_reasons' => [
-        'Title:Event Cancelled' => '賽事已取消',
-        'Title:Invalid Event' => '賽事無效',
-        'Title:Wrong League' => '聯盟錯誤',
-        'Title:Participants Swapped' => '選手次序錯誤',
-        'Title:Home/Away Team Corrected' => '主客隊伍錯誤',
-        'Title:Duplication of' => '賽事重複',
-        'Title:Fixture Status Corrected' => '比分資料錯誤',
+        'title:Event Cancelled' => '賽事已取消',
+        'title:Invalid Event' => '賽事無效',
+        'title:Wrong League' => '聯盟錯誤',
+        'title:Participants Swapped' => '選手次序錯誤',
+        'title:Home/Away Team Corrected' => '主客隊伍錯誤',
+        'title:Duplication of' => '賽事重複',
+        'title:Fixture Status Corrected' => '比分資料錯誤',
         
         'Event Cancelled' => '賽事已取消將不會開賽',
         'Invalid Event' => '已取消賽事的資料來源不正確導致',
