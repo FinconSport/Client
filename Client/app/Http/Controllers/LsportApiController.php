@@ -295,11 +295,11 @@ class LsportApiController extends Controller {
             $fixture_id = null;
             if (strpos($notice_type, 'Duplication of') !== false) {  // Duplication of <FIXTURE_ID> 的錯誤
                 $arr_notice_type = explode(' ', $notice_type);
-                $notice_type = "{$arr_notice_type[0]} {$arr_notice_type[1]}";
+                $notice_type = "{$arr_notice_type[0]}{$arr_notice_type[1]}";
                 $fixture_id = $arr_notice_type[2];
             }
-            $title = __('Title:'.$notice_type);
-            $context = __($notice_type, ['fixture_id' => $fixture_id]);
+            $title = __('fixture_cancellation_reasons.'.'Title:'.$notice_type);
+            $context = __('fixture_cancellation_reasons.'.$notice_type, ['fixture_id' => $fixture_id]);
             $create_time = $v['create_time'];
 
             $notice_list[$sport_id][] = [
