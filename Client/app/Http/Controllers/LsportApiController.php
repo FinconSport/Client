@@ -312,6 +312,7 @@ class LsportApiController extends Controller {
 
             // fixture -----
             $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
+            if (!$fixture) dd($fixture);
             $fixture_start_time = $fixture['start_time'];
             $home_team_id = $fixture['home_id'];
             $away_team_id = $fixture['away_id'];
