@@ -131,7 +131,7 @@
 </div>
 <!-- betItem template -->
 <div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
-    <div class="col p-0">
+    <div class="col-6 p-0 text-right">
         <span class="odd"></span>
         <i class="fa-solid fa-lock" style="display: none;"></i>
         <i class="fa-solid fa-caret-up" style="display: none;"></i>
