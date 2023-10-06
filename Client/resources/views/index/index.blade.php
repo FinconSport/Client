@@ -254,7 +254,6 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
-                console.log(listKeys)
                 listKeys.forEach( ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
@@ -387,13 +386,13 @@
                     item.find('.odd').html(v4.price)
 
                     switch ( i ) {
-                        case 3:
+                        case 3:case 201:case 202:
                             item.find('.bet_name').html( v4.line )
                             break;
-                        case 5:
+                        case 5:case 203:case 204:
                             item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
                             break;
-                        case 7:
+                        case 7:case 205:case 206:
                             item.find('.bet_name').html( v4.market_bet_name )
                             break;
                         default:
