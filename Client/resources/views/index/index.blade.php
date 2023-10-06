@@ -368,7 +368,8 @@
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     let item = null
-                    i === 1 ? item = $(`div[template="betItem-${i}"]`).clone() : item = $(`div[template="betItem"]`).clone()
+                    let allWinArr = langTrans.priorityArr.allwin // 獨贏系列
+                    allWinArr.indexOf(i) !== -1 ? item = $(`div[template="betItem-1"]`).clone() : item = $(`div[template="betItem"]`).clone()
                     // set attribute
                     item.attr('priority', i)
                     item.attr('fixture_id', k3)
@@ -383,8 +384,8 @@
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
 
+                    // rate
                     item.find('.odd').html(v4.price)
-
                     // 按照不同體育種類、玩法 顯示相對應內容
                     switch ( i ) {
                         case 3:case 203:case 204:
