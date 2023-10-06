@@ -205,7 +205,6 @@
 		var v = {}
 
 		function caller(url, data, obj, isUpdate = 0) {
-			console.log(url)
 			return new Promise((resolve, reject) => {
 				$.ajax({
 					url: url,
@@ -213,15 +212,13 @@
 					data: data,
 					success: function (data) {
 						const json = JSON.parse(data);
-						console.log(json)
-						if (json.gzip) {
-							const str = json.data;
-							console.log(str)
-							const bytes = atob(str).split('').map(char => char.charCodeAt(0));
-							const buffer = new Uint8Array(bytes).buffer;
-							const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
-							json.data = uncompressed;
-						}
+						// if (json.gzip) {
+						// 	const str = json.data;
+						// 	const bytes = atob(str).split('').map(char => char.charCodeAt(0));
+						// 	const buffer = new Uint8Array(bytes).buffer;
+						// 	const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
+						// 	json.data = uncompressed;
+						// }
 						Object.assign(obj, json);
 						if (isUpdate === 0) {
 							showSuccessToast(json.message);
