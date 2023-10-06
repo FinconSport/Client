@@ -70,7 +70,7 @@
 </div>
 
 <!-- early living toggle template -->
-<div template='elToggleTemplate' hidden>
+<div class="cateWrapper" template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
@@ -102,8 +102,12 @@
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
-        <div class="timeSpan">
+        <div class="timeSpan" key='not-baseball'>
             <span class="timer"></span>
+        </div>
+        <div class="baseballSpan" key='baseball'>
+            <div class="timer"></div>
+            <div class="baseCon"></div>
         </div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
@@ -299,7 +303,6 @@
     }
 
     function createLeague(k, k2, v2) {
-
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -333,6 +336,10 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
+
+        // 壘包 好壞球 只有 滾球 棒球有
+        sport === 154914 && v3.status === 2 ? card.find('[key="not-baseball"]').remove() : card.find('[key="baseball"]').remove()
+
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
@@ -757,7 +764,6 @@
 
     // remove fixture
     function closeFixture(id) {
-        console.log('closeFixture')
         $(`#${id}`).hide(1000)
         setTimeout(() => {
             $(`#${id}`).remove()
@@ -1037,7 +1043,7 @@
             let id = $(this).attr('id').replace('_total', '')
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('div[id^="toggleContent"]').hide()
+            if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
@@ -1045,7 +1051,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.seriesWrapperTitle').hide()
+            if( count === 0 ) $(this).closest('.leagueWrapper').hide()
         })
 
         // is no data
@@ -1079,15 +1085,5 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-    // scroll效果
-    // $('#indexContainerLeft').scroll(function(){
-    //     $('#indexContainerLeft .seriesWrapperTitle').each(function(){
-    //         let offsetTop = $(this).offset().top
-    //         if( offsetTop < 95 && offsetTop > 90 ) {
-    //             $(this).css('position', 'fixed')
-    //             $(this).css('width', '102rem')
-    //         }
-    //     })
-    // });
 </script>
 @endpush

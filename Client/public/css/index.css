@@ -7,7 +7,13 @@
     height: 3rem;
     font-size: 1.2rem;
     font-weight: 600;
-    margin-top: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 0.5rem;
+}
+.catWrapperContent{
+    overflow: auto;
 }
 
 .catWrapperTitle span {
@@ -18,16 +24,22 @@
     background: white;
     border: 2px solid rgb(65,91,90);
     border-radius: 5px;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-top: none;
 }
 
 .seriesWrapperTitle{
-    padding: 0.25rem 1rem;
-    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    height: 3rem;
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.5rem;
     display: flex;
+    position: sticky;
+    top: calc( 0.25rem - 4px );
+    background-color: white;
+    z-index: 1;
+    border-top: 2px solid rgb(65,91,90);
 }
 
 .seriesWrapperTitle span {
@@ -35,21 +47,25 @@
 }
 .seriesWrapperContent{
     padding: 0 0 0.5rem 0;
+    z-index: 0;
+    position: relative;
 }
 /* 主要投注 */
 #indexContainer {
     display: inline-flex;
     width: 100%;
     height: calc(100% - -1rem);
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 /* 中間投注 */
 #indexContainerLeft {
     color: #415b5a;
     width: 100%;
-    overflow-y: auto;
-    padding: 0 1rem 0 0;
+    height: 100%;
+    padding: 0;
     padding-bottom: 1rem;
+    overflow-y: auto;
+    padding-right: 1rem;
 }
 /* 右方投注 */
 #indexContainerRight {
@@ -137,6 +153,20 @@
     line-height: 5rem;
     text-align: center;
 }
+
+.baseballSpan{
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+.baseballSpan .timer {
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+.baseballSpan .baseCon {
+    height: 2.5rem;
+}
+
 .indexBetCardTable {
     width: 60%;
 }
@@ -152,7 +182,14 @@
 .otherBetWay{
     width: 5%;
     height: 5rem;
+    text-align: center;
 }
+
+.otherBetWay i {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
 .indexBetCardInfo > div {
     height: 2.5rem;
     line-height: 2.5rem;
@@ -161,6 +198,8 @@
     border-top: 2px solid rgb(220, 220, 220);
     border-right: 2px solid rgb(220, 220, 220);
     padding: 0.5rem;
+    z-index: 0;
+    position: relative;
 }
 
 .betItemDiv, .labelItem {
@@ -213,7 +252,7 @@
     left: 0;
     width: 25rem;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background-color: rgba(0,0,0,0.5);
     padding: 5rem 2rem;
     font-weight: 600;
@@ -297,7 +336,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background-color: black;
     opacity: 0.5;
 }
