@@ -443,9 +443,9 @@
             if( isReadyCommon ) {
                 callMatchListData.sport_id = sport // default sport
                 clearInterval(isReadySportInt)
-                // caller(matchList_api, callMatchListData, matchListD) // match_list
+                caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    // caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
