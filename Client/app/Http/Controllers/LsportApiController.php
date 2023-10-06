@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use DB;
 // use Exception;
 
-use App\Models\GameOrder;
-
 // LSport
 use App\Models\LsportFixture;
 use App\Models\LsportLeague;
@@ -20,6 +18,7 @@ use App\Models\LsportMarketBet;
 use App\Models\PlayerOnline;
 use App\Models\Player;
 use App\Models\Agent;
+use App\Models\GameOrder;
 use App\Models\PlayerBalanceLogs;
 use App\Models\ClientMarquee;
 // use App\Models\SystemConfig;
