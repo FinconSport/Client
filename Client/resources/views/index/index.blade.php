@@ -122,6 +122,8 @@
         <div class="indexBetCardTable row m-0 text-center">
         </div>
         <div class="otherBetWay">
+            <i class="fa-solid fa-play"></i>
+            <p>+123</p>
         </div>
     </div>
 </div>
@@ -429,7 +431,6 @@
             // 足球 讓球、大小 補空格
             if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
                 let item = $('div[template="betItem-no"]').clone()
-                item.find('i').remove()
                 item.removeAttr('hidden')
                 item.removeAttr('template')
                 bet_div.append(item)
