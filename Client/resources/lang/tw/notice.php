@@ -37,7 +37,7 @@ return [
         'Wrong League' => '已取消賽事建立於錯誤的聯盟之下',
         'Participants Swapped' => '已取消賽事的選手次序錯誤',
         'Home/Away Team Corrected' => '已取消賽事的主客隊伍錯誤',
-        'Duplication of' => '已取消賽事與另一場ID為:fixture_id的賽事重複',
+        'Duplicationof' => '已取消賽事與另一場ID為:fixture_id的賽事重複',
         'Fixture Status Corrected' => '已取消賽事收到了不正確的即時比分資料',
     ]
 ];
