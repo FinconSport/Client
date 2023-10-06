@@ -416,7 +416,7 @@
             } else {
                 let i = sport === 6046 ? 3 : 2
                 for (let j = 0; j < i; j++) {
-                    let item = $('div[key="betItem-no"]').clone()
+                    let item = $('div[template="betItem-no"]').clone()
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
@@ -444,7 +444,7 @@
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                    // caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
