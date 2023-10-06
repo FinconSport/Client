@@ -128,36 +128,34 @@
 
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
-    <div class="betItemDiv row m-0" index=0>
-        <div class="col"><span class="bet_name"></span></div>
-        <div class="col p-0 text-right"><span class="odd"></span></div>
-        <div class="col nAllLock text-left">
-            <i class="fa-solid fa-lock"></i>
+</div>
+<!-- betItem template -->
+<div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
+    <div class="col p-0">
+        <span class="odd"></span>
+        <i class="fa-solid fa-lock" style="display: none;"></i>
+        <i class="fa-solid fa-caret-up" style="display: none;"></i>
+        <i class="fa-solid fa-caret-down" style="display: none;"></i>
+    </div>
+</div>
+
+<div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
+    <div class="col text-right p-0">
+        <span class="bet_name"></span>
+    </div>
+    <div class="col m-0 row text-right">
+        <div class="odd col-5 p-0 text-left"></div>
+        <div class="col-7 text-left p-0">
+            <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
     </div>
-    <div class="betItemDiv row m-0" index=1>
-        <div class="col"><span class="bet_name"></span></div>
-        <div class="col p-0 text-right"><span class="odd"></span></div>
-        <div class="col nAllLock text-left">
-            <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
-        </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
-    </div>
-    <div class="betItemDiv row m-0" index=2>
-        <div class="col"><span class="bet_name"></span></div>
-        <div class="col p-0 text-right"><span class="odd"></span></div>
-        <div class="col nAllLock text-left">
-            <i class="fa-solid fa-lock"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
-        </div>
-        <div class="col-12 p-0 allLock text-center"><i class="fa-solid fa-lock"></i></div>
-    </div>
+</div>
+
+<!-- no data betItem template -->
+<div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
+    <i class="fa-solid fa-lock"></i>
 </div>
 
 
@@ -368,13 +366,10 @@
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
 
-            let firstDiv = bet_div.find('div[index=0]')
-            let secondDiv = bet_div.find('div[index=1]')
-            let thirdDiv = bet_div.find('div[index=2]')
-            let item = null
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
-                    item = bet_div.find('.betItemDiv').eq(s)
+                    let item = null
+                    i === 1 ? item = $(`div[template="betItem-${i}"]`).clone() : item = $(`div[template="betItem"]`).clone()
                     // set attribute
                     item.attr('priority', i)
                     item.attr('fixture_id', k3)
@@ -389,49 +384,42 @@
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
 
+                    item.find('.odd').html(v4.price)
+
                     switch ( i ) {
-                        case 1:
-                            item.find('.bet_name').html('')
-                            break;
                         case 3:
                             item.find('.bet_name').html( v4.line )
                             break;
-                        case 5:case 7:
+                        case 5:
                             item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                            break;
+                        case 7:
+                            item.find('.bet_name').html( v4.market_bet_name )
                             break;
                         default:
                             break;
                     }
 
-                    item.find('.odd').html(v4.price)
-                    item.find('.allLock').hide()
-                    item.find('.bet_name').show()
-                    item.find('.odd').show()
                     if( v4.status === 1 ) {
-                        item.find('.nAllLock .fa-lock').hide()
+                        item.find('.fa-lock').hide()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
-                        item.find('.nAllLock .fa-lock').show()
+                        item.find('.fa-lock').show()
                         item.removeAttr('onclick')
                     }
+
+                    item.removeAttr('hidden')
+                    item.removeAttr('template')
+                    bet_div.append(item)
+
                 })
             } else {
-                firstDiv.find('.bet_name').hide()
-                firstDiv.find('.odd').hide()
-                firstDiv.find('.nAllLock .fa-lock').hide()
-                firstDiv.find('.allLock').show()
-                firstDiv.removeAttr('onclick')
-                secondDiv.find('.bet_name').hide()
-                secondDiv.find('.odd').hide()
-                secondDiv.find('.nAllLock .fa-lock').hide()
-                secondDiv.find('.allLock').show()
-                secondDiv.removeAttr('onclick')
-                if( thirdDiv ) {
-                    thirdDiv.find('.bet_name').show()
-                    thirdDiv.find('.odd').show()
-                    thirdDiv.find('.nAllLock .fa-lock').show()
-                    thirdDiv.find('.allLock').show()
-                    thirdDiv.removeAttr('onclick')
+                let i = sport === 6046 ? 3 : 2
+                for (let j = 0; j < i; j++) {
+                    let item = $('div[key="betItem-no"]').clone()
+                    item.removeAttr('hidden')
+                    item.removeAttr('template')
+                    bet_div.append(item)
                 }
             }
 
@@ -471,7 +459,7 @@
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 // soccer has three bet div others only two
-                if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
+                // if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
 
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading

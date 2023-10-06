@@ -167,6 +167,15 @@
     overflow: hidden;
 }
 
+.betItemDiv div {
+    position: relative;
+}
+[key="betItemDiv-1"] i {
+    position: absolute;
+    top: 0.3rem;
+    margin-left: 0.5rem;
+}
+
 .labelItem{
     text-align: center;
     padding: 0.5rem 0;
