@@ -391,7 +391,7 @@
                             item.find('.bet_name').html( v4.line )
                             break;
                         case 5:case 205:case 206:
-                            item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                            item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                             break;
                         case 7:
                             item.find('.bet_name').html( v4.market_bet_name )

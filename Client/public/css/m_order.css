@@ -23,7 +23,7 @@
     color: rgb(65, 91, 90);
     font-weight: 600;
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 #m_order_detail button:first-child{
@@ -71,7 +71,7 @@
 #leftSlideOrderCardContainer::-webkit-scrollbar {
     width: 8px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #leftSlideOrderCardContainer::-webkit-scrollbar-thumb {
