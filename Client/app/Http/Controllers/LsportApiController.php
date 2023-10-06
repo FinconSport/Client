@@ -484,7 +484,7 @@ class LsportApiController extends Controller {
         ///////////////////////////////////
         $data = $arrAllSports;
 
-        $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01");
 
     }
 
@@ -1768,7 +1768,7 @@ class LsportApiController extends Controller {
         ///////////////////////////////////
         $data = $order_id;
 
-        $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01");
 
     }
 
@@ -2197,7 +2197,7 @@ class LsportApiController extends Controller {
         ///////////////////////////////////
         $data = $m_order_id;
 
-        $this->ApiSuccess($data, "01", true);
+        $this->ApiSuccess($data, "01");
 
     }
 
