@@ -32,12 +32,12 @@ return [
         'title:Duplication of' => '賽事重複-:sport_name/:league_name',
         'title:Fixture Status Corrected' => '比分資料錯誤-:sport_name/:league_name',
         
-        'Event Cancelled' => '賽事已取消將不會開賽: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Invalid Event' => '已取消賽事的資料來源不正確: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Wrong League' => '已取消賽事建立於錯誤的聯盟之下: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Participants Swapped' => '已取消賽事的選手次序錯誤: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Home/Away Team Corrected' => '已取消賽事的主客隊伍錯誤: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Duplication of' => '已取消賽事與另一場ID為:fixture_id的賽事重複: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
-        'Fixture Status Corrected' => '已取消賽事收到了不正確的即時比分資料: :sport_name/:league_name/:fixture_start_time/:home_team_name vs. :away_team_name',
+        'Event Cancelled' => '賽事已取消將不會開賽: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Invalid Event' => '已取消賽事的資料來源不正確: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Wrong League' => '已取消賽事建立於錯誤的聯盟之下: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Participants Swapped' => '已取消賽事的選手次序錯誤: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Home/Away Team Corrected' => '已取消賽事的主客隊伍錯誤: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Duplication of' => '已取消賽事與另一場ID為:fixture_id的賽事重複: :fixture_start_time/:home_team_name vs. :away_team_name',
+        'Fixture Status Corrected' => '已取消賽事收到了不正確的即時比分資料: :fixture_start_time/:home_team_name vs. :away_team_name',
     ]
 ];
