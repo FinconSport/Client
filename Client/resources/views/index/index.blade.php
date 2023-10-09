@@ -842,6 +842,7 @@
 
     // 註冊賽事id
     function wsRegisterMatch() {
+        console.log(socket_status)
         const wsMsg = {
             "action": "register",
             "sport_id": sport,
