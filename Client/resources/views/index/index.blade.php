@@ -382,16 +382,17 @@
             // exception baseball
             if( sport === 154914 ) {
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
                 // base
-                console.log(v3.periods)
+                let baseCont = card.find('img[alt="base"]')
                 let baseText = v3.periods.Bases
                 if( baseText) {
                     baseText = v3.periods.Bases.replaceAll('/','')
-                    let baseCont = card.find('img[alt="base"]')
-                    baseCont.attr('src', `/image/base/${baseText}.png`)
                 } else {
-                    baseCont.attr('src', `/image/base/000.png`)
+                    baseText = '000'
                 }
+                baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                 // balls
                 let strike = card.find('div[key="strike"]')
