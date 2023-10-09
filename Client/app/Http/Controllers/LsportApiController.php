@@ -283,7 +283,7 @@ class LsportApiController extends Controller {
                 // team: home team -----
                 $home_team = LsportTeam::where('team_id', $home_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($home_team[$lang_col])) {  // sport name
+                if (empty($home_team[$lang_col])) {  // sport name
                     $home_team_name = $home_team['name_en'];
                 } else {
                     $home_team_name = $home_team[$lang_col];
@@ -292,7 +292,7 @@ class LsportApiController extends Controller {
                 // team: away team -----
                 $away_team = LsportTeam::where('team_id', $away_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($away_team[$lang_col])) {  // sport name
+                if (empty($away_team[$lang_col])) {  // sport name
                     $away_team_name = $away_team['name_en'];
                 } else {
                     $away_team_name = $away_team[$lang_col];
@@ -428,7 +428,7 @@ class LsportApiController extends Controller {
                 // team: home team -----
                 $home_team = LsportTeam::where('team_id', $home_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($home_team[$lang_col])) {  // sport name
+                if (empty($home_team[$lang_col])) {  // sport name
                     $home_team_name = $home_team['name_en'];
                 } else {
                     $home_team_name = $home_team[$lang_col];
@@ -437,7 +437,7 @@ class LsportApiController extends Controller {
                 // team: away team -----
                 $away_team = LsportTeam::where('team_id', $away_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($away_team[$lang_col])) {  // sport name
+                if (empty($away_team[$lang_col])) {  // sport name
                     $away_team_name = $away_team['name_en'];
                 } else {
                     $away_team_name = $away_team[$lang_col];
@@ -703,7 +703,7 @@ class LsportApiController extends Controller {
         foreach ($Sports as $dk => $sv) {
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($sv->name_locale)) {  // sport name
+            if (empty($sv->name_locale)) {  // sport name
                 $sport_name = $sv->name_en;
             } else {
                 $sport_name = $sv->name_locale;
@@ -810,7 +810,7 @@ class LsportApiController extends Controller {
             // $this::FIXTURE_STATUS['about_to_start'] => array(),  // 即將開賽
         );
         //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
-        $sport_name = '';  //儲存球種名稱
+        $sport_name = null;  //儲存球種名稱
 
 /*
 {
@@ -859,8 +859,8 @@ class LsportApiController extends Controller {
             // $market_main_line = $dv->main_line;
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($sport_name)) {  //只須設定一次
-                if (!strlen($dv->s_name_locale)) {  // sport name
+            if (empty($sport_name)) {  //只須設定一次
+                if (empty($dv->s_name_locale)) {  // sport name
                     $sport_name = $dv->s_name_en;
                 } else {
                     $sport_name = $dv->s_name_locale;
@@ -873,7 +873,7 @@ class LsportApiController extends Controller {
                 ) {
 
                 // league_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->l_name_locale)) {  // league name
+                if (empty($dv->l_name_locale)) {  // league name
                     $league_name = $dv->l_name_en;
                 } else {
                     $league_name = $dv->l_name_locale;
@@ -893,13 +893,13 @@ class LsportApiController extends Controller {
                 ) {
 
                 // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->th_name_locale)) {  // home team
+                if (empty($dv->th_name_locale)) {  // home team
                     $home_team_name = $dv->th_name_en;
                 } else {
                     $home_team_name = $dv->th_name_locale;
                 }
                 // away_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->ta_name_locale)) {  // away_team
+                if (empty($dv->ta_name_locale)) {  // away_team
                     $away_team_name = $dv->ta_name_en;
                 } else {
                     $away_team_name = $dv->ta_name_locale;
@@ -961,7 +961,7 @@ class LsportApiController extends Controller {
                 $market_main_line = $v->main_line;
 
                 // market_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($v->m_name_locale)) {
+                if (empty($v->m_name_locale)) {
                     $market_name = $v->m_name_en;
                 } else {
                     $market_name = $v->m_name_locale;
@@ -1001,7 +1001,7 @@ class LsportApiController extends Controller {
 
                     // $market_bet_name = $v2->mb_name_locale;
                     // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                    if (!strlen($v2->mb_name_locale)) {
+                    if (empty($v2->mb_name_locale)) {
                         $market_bet_name = $v2->mb_name_en;
                     } else {
                         $market_bet_name = $v2->mb_name_locale;
@@ -1013,7 +1013,7 @@ class LsportApiController extends Controller {
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
                         'market_bet_name_en' => $v2->mb_name_en,
-                        //'base_line' => $bv->base_line,
+                        //'base_line' => $v2->base_line,
                         'line' => $v2->line,
                         'price' => $v2->price,
                         'status' => $v2->status,
@@ -1615,7 +1615,7 @@ class LsportApiController extends Controller {
     //         // order data
     //         $order['league_id'] = $league_id;
     //         $order['league_name'] = $league_data[$lang_col];
-    //         if (!strlen($league_data[$lang_col])) {
+    //         if (empty($league_data[$lang_col])) {
     //             $order['league_name'] = $league_data['name_en'];
     //         }
     //         $order['fixture_id'] = $fixture_id;
@@ -1631,7 +1631,7 @@ class LsportApiController extends Controller {
     //         $order['home_team_id'] = $home_team_id;
     //         $order['home_team_name'] = $home_team_data[$lang_col];
     //         // 語系
-    //         if (!strlen($home_team_data[$lang_col])) {
+    //         if (empty($home_team_data[$lang_col])) {
     //             $order['home_team_name'] = $home_team_data['name_en'];
     //         }
             
@@ -1644,7 +1644,7 @@ class LsportApiController extends Controller {
     //         $order['away_team_id'] = $away_team_id;
     //         $order['away_team_name'] = $away_team_data[$lang_col];
     //         // 語系
-    //         if (!strlen($away_team_data[$lang_col])) {
+    //         if (empty($away_team_data[$lang_col])) {
     //             $order['away_team_name'] = $away_team_data['name_en'];
     //         }
 
@@ -1883,7 +1883,12 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['league_id'] = $league_data['league_id'];
-        $order['league_name'] = $league_data[$lang_col];
+        
+        if (empty($league_data[$lang_col])) {
+            $order['league_name'] = $league_data['name_en'];
+        } else {
+            $order['league_name'] = $league_data[$lang_col];
+        }
         $order['fixture_id'] = $fixture_id;
         $order['sport_id'] = $league_data['sport_id'];
         //////////////////////////////////////////
@@ -2349,9 +2354,10 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // order data
             $order['league_id'] = $league_id;
-            $order['league_name'] = $league_data[$lang_col];
-            if (!strlen($league_data[$lang_col])) {
+            if (empty($league_data[$lang_col])) {
                 $order['league_name'] = $league_data['name_en'];
+            } else {
+                $order['league_name'] = $league_data[$lang_col];
             }
             $order['fixture_id'] = $fixture_id;
 
@@ -2364,10 +2370,11 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['home_team_id'] = $home_team_id;
-            $order['home_team_name'] = $home_team_data[$lang_col];
             // 語系
-            if (!strlen($home_team_data[$lang_col])) {
+            if (empty($home_team_data[$lang_col])) {
                 $order['home_team_name'] = $home_team_data['name_en'];
+            } else {
+                $order['home_team_name'] = $home_team_data[$lang_col];
             }
             
             // 客隊
@@ -2377,10 +2384,11 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['away_team_id'] = $away_team_id;
-            $order['away_team_name'] = $away_team_data[$lang_col];
             // 語系
-            if (!strlen($away_team_data[$lang_col])) {
+            if (empty($away_team_data[$lang_col])) {
                 $order['away_team_name'] = $away_team_data['name_en'];
+            } else {
+                $order['away_team_name'] = $away_team_data[$lang_col];
             }
 
             //////////////////////////////////////////
@@ -2782,7 +2790,7 @@ class LsportApiController extends Controller {
 
         // dd($data);
 
-        $sport_name = '';  //儲存球種名稱
+        $sport_name = null;  //儲存球種名稱
 
         //////////////////////////////////////////
         // 開始loop 賽事資料
@@ -2795,8 +2803,8 @@ class LsportApiController extends Controller {
         $arrFixture = array();
 
         // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($sport_name)) {  //只須設定一次
-            if (!strlen($data->s_name_locale)) {  // sport name
+        if (empty($sport_name)) {  //只須設定一次
+            if (empty($data->s_name_locale)) {  // sport name
                 $sport_name = $data->s_name_en;
             } else {
                 $sport_name = $data->s_name_locale;
@@ -2806,7 +2814,7 @@ class LsportApiController extends Controller {
         // league 層 ----------------------------
 
         // league_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->l_name_locale)) {  // league name
+        if (empty($data->l_name_locale)) {  // league name
             $league_name = $data->l_name_en;
         } else {
             $league_name = $data->l_name_locale;
@@ -2822,13 +2830,13 @@ class LsportApiController extends Controller {
         // fixture 層 ----------------------------
 
         // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->th_name_locale)) {  // home team
+        if (empty($data->th_name_locale)) {  // home team
             $home_team_name = $data->th_name_en;
         } else {
             $home_team_name = $data->th_name_locale;
         }
         // away_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->ta_name_locale)) {  // away_team
+        if (empty($data->ta_name_locale)) {  // away_team
             $away_team_name = $data->ta_name_en;
         } else {
             $away_team_name = $data->ta_name_locale;
@@ -2958,7 +2966,7 @@ class LsportApiController extends Controller {
             $main_line = $v->main_line;
 
             // // market_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($v->m_name_locale)) {  // market name
+            if (empty($v->m_name_locale)) {  // market name
                 $market_name = $v->m_name_en;
             } else {
                 $market_name = $v->m_name_locale;
@@ -2994,7 +3002,7 @@ class LsportApiController extends Controller {
                 $market_bet_id = $bv->bet_id;
 
                 // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($bv->mb_name_locale)) {  // market name
+                if (empty($bv->mb_name_locale)) {  // market name
                     $market_bet_name = $bv->mb_name_en;
                 } else {
                     $market_bet_name = $bv->mb_name_locale;
