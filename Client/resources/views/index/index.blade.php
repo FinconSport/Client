@@ -345,7 +345,6 @@
         let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
 
-        // $('.leagueWrapper').contents().unwrap();
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
@@ -827,11 +826,12 @@
 
     // 大分類收合
     function toggleCat( key ) {
-        if( $(`#toggleContent_${key}`).css('height') === 0 ) {
-            $(`#toggleContent_${key}`).css('overflow', auto)
+        console.log($(`#toggleContent_${key}`).css('height'))
+        if( $(`#toggleContent_${key}`).css('height') === '42px' ) {
+            $(`#toggleContent_${key}`).css('overflow', 'auto')
             $(`#toggleContent_${key}`).animate( { height: auto }, 1000);
         } else {
-            $(`#toggleContent_${key}`).css('overflow', hidden)
+            $(`#toggleContent_${key}`).css('overflow', 'hidden')
             $(`#toggleContent_${key}`).animate( { height: '3rem' }, 1000);
         }
         if($(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).hasClass('fa-chevron-down')) {
