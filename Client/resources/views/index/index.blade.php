@@ -304,7 +304,7 @@
         el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
         el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
 
-        el_toggle.contents().unwrap();
+        // el_toggle.contents().unwrap();
         $('#indexContainerLeft').append(el_toggle)
     }
 
@@ -335,7 +335,7 @@
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
         league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
-        league_wrapper.contents().unwrap();
+        // league_wrapper.contents().unwrap();
 
         let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
