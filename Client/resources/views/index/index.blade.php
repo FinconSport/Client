@@ -734,8 +734,6 @@
 
     // package process function
     function processMessageQueue() {
-        console.log(messageQueue)
-
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to json
         console.log(msg)
@@ -809,7 +807,7 @@
 
     // 賠率上升
     function raiseOdd(fixture_id, market_id, market_bet_id) {
-        console.log('raiseOdd')
+        // console.log('raiseOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
@@ -828,7 +826,7 @@
     }
     // 賠率下降
     function lowerOdd(fixture_id, market_id, market_bet_id) {
-        console.log('lowerOdd')
+        // console.log('lowerOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
