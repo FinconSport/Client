@@ -111,8 +111,8 @@
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-1 h-100 p-0"></div>
-                <div class="col-6 p-0" key='base'>
-                    <img class="h-100" alt="base">
+                <div class="col-6 h-100 p-0" key='base'>
+                    <img alt="base">
                 </div>
                 <div class="col-3 h-100 p-0" key='balls'>
                     <div key='strike'></div>
