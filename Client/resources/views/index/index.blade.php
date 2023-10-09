@@ -371,7 +371,7 @@
         away_team_info.find('.teamSpan').html(v3.away_team_name)
         away_team_info.find('.scoreSpan').html()
 
-        console.log('id->' + k3)
+        console.log('id->' + k3 + ' status->' + v3.status)
 
         // living score
         if( v3.status === 2 ) {
