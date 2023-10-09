@@ -55,9 +55,11 @@
             <button id="cancelOrder">{{ trans('index.bet_area.cancel') }}</button>
         </div>
     </div>
-    <button id="show-button">Show Loading</button>
 </div>
-<div id="leftSlideOrderLoadingContainer" class="hidden"><div id="leftSlideOrderLoadingSpinner"></div></div>
+<div id="leftSlideOrderLoadingContainer" class="hidden">
+    <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
+    <span>{{ trans('index.bet_area.loading') }}</span>
+</div>
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
@@ -79,8 +81,6 @@
         <span class="elToggleDir" style="float: left;padding-right: 1rem;">
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
-    </div>
-    <div class="catWrapperContent">
     </div>
 </div>
 
@@ -113,11 +113,11 @@
                 <div class="col p-0 h-100 w-100">
                     <img class="h-100" src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
                 </div>
-                <!-- <div class="col h-100 p-0 w-100">
+                <div class="col h-100 p-0 w-100">
                     <img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike">
                     <img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball">
                     <img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out">
-                </div> -->
+                </div>
             </div>
         </div>
         <div class="indexBetCardInfo">
@@ -297,7 +297,6 @@
         let el_toggle_text = el_toggle.find('.elToggleText')
         let el_toggle_count = el_toggle.find('.elToggleCount')
         let el_toggle_dir = el_toggle.find('.elToggleDir')
-        let el_toggle_content = el_toggle.find('.catWrapperContent')
 
         el_toggle.attr('id', 'toggleContent_' + k)
         el_toggle_title.attr('id', `catWrapperTitle_${k}`)
@@ -305,7 +304,6 @@
         el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
         el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
         el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
-        el_toggle_content.attr('id', `catWrapperContent_${k}`)
 
         el_toggle.removeAttr('hidden')
         el_toggle.removeAttr('template')
@@ -314,6 +312,7 @@
     }
 
     function createLeague(k, k2, v2) {
+        console.log(v2.league_id)
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -325,6 +324,7 @@
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
         league_toggle.attr('league_id', v2.league_id)
+        league_toggle.attr('leagueText', `${k}${v2.league_id}`)
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
@@ -337,12 +337,14 @@
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
+        league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
-        league_wrapper.removeAttr('template')
         league_wrapper.removeAttr('hidden')
+        league_wrapper.removeAttr('template')
 
-        let el_toggle_content = $(`#catWrapperContent_${k}`)
+        let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
+
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
@@ -386,6 +388,17 @@
                 console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
+                // balls
+                let strike = card.find('img[alt="strike"]')
+                let strikeText = v3.periods.Strikes
+                strike.attr('src', `/image/balls/s${strikeText}.png`)
+                let ball = card.find('img[alt="ball"]')
+                let ballText = v3.periods.Balls
+                ball.attr('src', `/image/balls/b${ballText}.png`)
+                let out = card.find('img[alt="out"]')
+                let outText = v3.periods.Outs
+                out.attr('src', `/image/balls/o${outText}.png`)
             }
 
             time.html(timerStr)
@@ -524,6 +537,15 @@
         // ===== DATA LATER =====
     });
 
+    ///game bet loading
+    function showLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
+    }
+
     // websocket
     function WebSocketDemo() {
         console.log('WebSocketDemo')
@@ -569,6 +591,7 @@
             WebSocketDemo();
         }
     }
+    
 
     // render view layer here
     function renderView() {
@@ -630,6 +653,17 @@
                                 console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
+                                // balls
+                                let strike = card.find('img[alt="strike"]')
+                                let strikeText = v3.periods.Strikes
+                                strike.attr('src', `/image/balls/s${strikeText}.png`)
+                                let ball = card.find('img[alt="ball"]')
+                                let ballText = v3.periods.Balls
+                                ball.attr('src', `/image/balls/b${ballText}.png`)
+                                let out = card.find('img[alt="out"]')
+                                let outText = v3.periods.Outs
+                                out.attr('src', `/image/balls/o${outText}.png`)
                             } 
                             time.html(timerStr)
                         }
@@ -776,13 +810,29 @@
     // package process function
     function processMessageQueue() {
         const message = messageQueue.shift(); // to get the head pkg
-        const msg = JSON.parse(message.data); // convert to json
-        console.log(msg)
+        const msg = JSON.parse(message.data); // convert to JSON
+        console.log(msg);
+        let hasTenSecondsPassed = false;
 
         // delay_order
-        if( msg.action === 'delay_order' ){
-            showSuccessToast(msg.order_id)
-            refreshBalence()
+        if (msg.action === 'delay_order') {
+            showSuccessToast(msg.order_id);
+            refreshBalence();
+            // after the msg pop up delay 1 second to hide the loading and close the betting area
+            setTimeout(function() {
+                hideLoading();
+                closeCal();
+            }, 1000);
+
+            // if the msg is not getting in 10 sec, hide the loading and close the betting area
+            setTimeout(function() {
+                hasTenSecondsPassed = true;
+            }, 10000); 
+
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal();
+            }
         }
         // delay_order
     }
@@ -809,16 +859,34 @@
 
 
     // 大分類收合
-    function toggleCat( key ) {
-        $('#catWrapperContent_' + key).slideToggle( "slow" );
-        if($('#catWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
-            $('#catWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
-            $('#catWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
+    function toggleCat(key) {
+        var $toggleContent = $(`#toggleContent_${key}`);
+        var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
+        
+        // 获取当前高度
+        var currentHeight = $toggleContent.height();
+        
+        if (currentHeight === 49) {
+            // 如果高度为 49px，则展开
+            $toggleContent.css('overflow', 'auto');
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
+                // 动画完成后，将高度设置为 'auto'
+                $toggleContent.removeAttr('style')
+            });
         } else {
-            $('#catWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
-            $('#catWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
+            // 如果高度不是 49px，则收起
+            $toggleContent.css('overflow', 'hidden');
+            $toggleContent.animate({ height: '49px' }, 1000);
+        }
+
+        // 切换图标方向
+        if ($icon.hasClass('fa-chevron-down')) {
+            $icon.removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        } else {
+            $icon.removeClass('fa-chevron-right').addClass('fa-chevron-down');
         }
     }
+
 
 
     // 聯賽分類收合
@@ -987,9 +1055,8 @@
     }
 
     // 關閉左邊投注區塊
-    $('#mask, #cancelOrder').click(function() {
+    $('#cancelOrder').click(function() {
         closeCal();
-        hideLoading();
     })
 
     function closeCal() {
@@ -1001,18 +1068,6 @@
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
         $('div').removeClass('m_order_on')
-    }
-
-    document.getElementById("show-button").addEventListener("click", function () {
-        showLoading();
-    });
-
-    function showLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
-    }
-
-    function hideLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
     }
 
     // 金額快速鍵
@@ -1060,6 +1115,9 @@
         //     return;
         // }
 
+        // Show loading spinner while submitting
+        showLoading();
+
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
@@ -1074,25 +1132,28 @@
                 // } else {
                 //     showErrorToast(res.message)
                 // }
+
+                // hideLoading();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
+                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });
-       
+
         // 金額歸零
-        $('#moneyInput').val('')
-        $('#moneyInput').trigger('change')
+        $('#moneyInput').val('');
+        $('#moneyInput').trigger('change');
         // 隱藏計算機
-        closeCal()
+        // closeCal()
     }
 
     // 統計
     function statistics() {
         $('#indexContainer .elToggleCount').each(function() {
-            let id = $(this).attr('id').replace('_total', '')
-            let count = $('#' + id).find('.indexEachCard').length
+            let id = $(this).attr('id').split('_')[1]
+            let count = $('#toggleContent_' + id).find('.indexEachCard').length
             $(this).html(count)
             if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
@@ -1102,7 +1163,11 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.leagueWrapper').hide()
+            if( count === 0 ) {
+                let leagueText = idArr[1] + idArr[2]
+                $(`.seriesWrapperTitle[leagueText="${leagueText}"]`).remove()
+                $(`.seriesWrapperContent[leagueText="${leagueText}"]`).remove()
+            }
         })
 
         // is no data
