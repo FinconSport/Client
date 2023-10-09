@@ -450,18 +450,19 @@ div[key="sizeSmallRate"]:hover {
 }
 
 #leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner {
-    border: 5px solid transparent;
-    border-top: 5px dashed transparent;
+    border: 5px solid #f3f3f3;
+    border-top: 5px dashed #b8d6d4;
+    /* border: 5px dashed transparent; */
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    animation: colorChange 2s linear infinite;
+    animation: loadingspin 2s linear infinite;
 }
 
-/* @keyframes loadingspin {
+@keyframes loadingspin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-} */
+}
 
 @keyframes colorChange {
     0% {
