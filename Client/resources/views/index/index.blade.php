@@ -371,6 +371,8 @@
         away_team_info.find('.teamSpan').html(v3.away_team_name)
         away_team_info.find('.scoreSpan').html()
 
+        console.log('id->' + k3)
+
         // living score
         if( v3.status === 2 ) {
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
@@ -459,8 +461,6 @@
                         item.removeAttr('onclick')
                     }
 
-                    
-
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
@@ -487,6 +487,8 @@
             bet_div.removeAttr('template')
             card.find('.indexBetCardTable').append(bet_div)
         });
+
+        console.log(card)
 
         card.removeAttr('hidden')
         card.removeAttr('template')
