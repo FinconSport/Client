@@ -304,7 +304,9 @@
         el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
         el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
 
-        // el_toggle.contents().unwrap();
+        el_toggle.removeAttr('hidden')
+        el_toggle.removeAttr('template')
+
         $('#indexContainerLeft').append(el_toggle)
     }
 
@@ -335,10 +337,13 @@
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
         league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
-        // league_wrapper.contents().unwrap();
+        el_toggle_content.removeAttr('hidden')
+        el_toggle_content.removeAttr('template')
 
         let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
+
+        $('.leagueWrapper').contents().unwrap();
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
