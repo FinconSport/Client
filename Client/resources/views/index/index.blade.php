@@ -392,13 +392,13 @@
                 // balls
                 let strike = card.find('div[key="strike"]')
                 let strikeText = v3.periods.Strikes
-                strike.attr('background-image', `/image/balls/s${strikeText}.png`)
+                strike.css('background-image', `/image/balls/s${strikeText}.png`)
                 let ball = card.find('div[key="ball"]')
                 let ballText = v3.periods.Balls
-                ball.attr('background-image', `/image/balls/b${ballText}.png`)
+                ball.css('background-image', `/image/balls/b${ballText}.png`)
                 let out = card.find('div[key="out"]')
                 let outText = v3.periods.Outs
-                out.attr('background-image', `/image/balls/o${outText}.png`)
+                out.css('background-image', `/image/balls/o${outText}.png`)
             }
 
             time.html(timerStr)
@@ -657,13 +657,13 @@
                                 // balls
                                 let strike = card.find('div[key="strike"]')
                                 let strikeText = v3.periods.Strikes
-                                strike.attr('background-image', `/image/balls/s${strikeText}.png`)
+                                strike.css('background-image', `/image/balls/s${strikeText}.png`)
                                 let ball = card.find('div[key="ball"]')
                                 let ballText = v3.periods.Balls
-                                ball.attr('background-image', `/image/balls/b${ballText}.png`)
+                                ball.css('background-image', `/image/balls/b${ballText}.png`)
                                 let out = card.find('div[key="out"]')
                                 let outText = v3.periods.Outs
-                                out.attr('background-image', `/image/balls/o${outText}.png`)
+                                out.css('background-image', `/image/balls/o${outText}.png`)
                             } 
                             time.html(timerStr)
                         }
