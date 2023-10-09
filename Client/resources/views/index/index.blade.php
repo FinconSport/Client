@@ -296,7 +296,6 @@
         let el_toggle_text = el_toggle.find('.elToggleText')
         let el_toggle_count = el_toggle.find('.elToggleCount')
         let el_toggle_dir = el_toggle.find('.elToggleDir')
-        let el_toggle_content = el_toggle.find('.catWrapperContent')
 
         el_toggle.attr('id', 'toggleContent_' + k)
         el_toggle_title.attr('id', `catWrapperTitle_${k}`)
@@ -304,11 +303,8 @@
         el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
         el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
         el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
-        el_toggle_content.attr('id', `catWrapperContent_${k}`)
 
-        el_toggle.removeAttr('hidden')
-        el_toggle.removeAttr('template')
-
+        el_toggle.contents().unwrap();
         $('#indexContainerLeft').append(el_toggle)
     }
 
@@ -324,6 +320,7 @@
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
         league_toggle.attr('league_id', v2.league_id)
+        league_toggle.attr('leagueText', `${k}${v2.league_id}`)
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
@@ -336,11 +333,11 @@
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
+        league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
-        league_wrapper.removeAttr('template')
-        league_wrapper.removeAttr('hidden')
+        league_wrapper.contents().unwrap();
 
-        let el_toggle_content = $(`#catWrapperContent_${k}`)
+        let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
     }
 
@@ -823,13 +820,17 @@
 
     // 大分類收合
     function toggleCat( key ) {
-        $('#catWrapperContent_' + key).slideToggle( "slow" );
-        if($('#catWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
-            $('#catWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
-            $('#catWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
+        if( $(`#toggleContent_${key}`).css('height') === 0 ) {
+            $(`#toggleContent_${key}`).animate( { height: auto }, 1000);
         } else {
-            $('#catWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
-            $('#catWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
+            $(`#toggleContent_${key}`).animate( { height: 0 }, 1000);
+        }
+        if($(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).hasClass('fa-chevron-down')) {
+            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).removeClass('fa-chevron-down')
+            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).addClass('fa-chevron-right')
+        } else {
+            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).addClass('fa-chevron-down')
+            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).removeClass('fa-chevron-right')
         }
     }
 
@@ -1108,7 +1109,11 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.leagueWrapper').hide()
+            if( count === 0 ) {
+                let leagueText = idArr[1] + idArr[2]
+                $(`.seriesWrapperTitle[leagueText="${leagueText}"]`).remove()
+                $(`.seriesWrapperContent[leagueText="${leagueText}"]`).remove()
+            }
         })
 
         // is no data
