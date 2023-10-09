@@ -478,9 +478,6 @@
                 mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
-                // soccer has three bet div others only two
-                // if( sport !== 6046 ) $('div[template="betDiv"] div[index=2]').remove()
-
                 oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
@@ -489,13 +486,16 @@
                     renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
+
+
+                // websocket -> mark now
+                WebSocketDemo(); // ws connection
+                setInterval(reconnent, 5000); // detect ws connetion state
+                processMessageQueueAsync(); // detect if there's pkg in messageQueue
             }
         }, 500);
 
-        // websocket -> mark now
-        // WebSocketDemo(); // ws connection
-        // setInterval(reconnent, 5000); // detect ws connetion state
-        // processMessageQueueAsync(); // detect if there's pkg in messageQueue
+        
         // ===== DATA LATER =====
     });
 
@@ -504,26 +504,26 @@
         console.log('WebSocketDemo')
         if ("WebSocket" in window) {
             try {
-                let ws_url = langTrans['sportBetData'][sport]['ws']
+                let ws_url = 'wss://broadcast.asgame.net/ws'
 
                 ws = new WebSocket(ws_url); // websocket 連線
                 ws.onopen = function() {
                     wsRegisterMatch() // 註冊id
                     socket_status = true; // for reconnection
-                    heartbeatTimer = setInterval(() => { // 心跳 
-                        const heartbeat = {
-                            "action": "heartbeat",
-                        }
-                        console.log(heartbeat)
-                        ws.send(JSON.stringify(heartbeat));
-                    }, 10000);
+                    // heartbeatTimer = setInterval(() => { // 心跳 
+                    //     const heartbeat = {
+                    //         "action": "heartbeat",
+                    //     }
+                    //     console.log(heartbeat)
+                    //     ws.send(JSON.stringify(heartbeat));
+                    // }, 10000);
                 };
 
                 // websocket is closed
                 ws.onclose = function(event) {
                     console.log('Connection closed with code: ', event.code);
                     socket_status = false;
-                    clearInterval(heartbeatTimer) // 移除心跳timer
+                    // clearInterval(heartbeatTimer) // 移除心跳timer
                 };
 
                 // websocket is getting message
@@ -735,6 +735,8 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to json
 
+        console.log(msg)
+
         // 更新matchListD
 
 
@@ -745,17 +747,10 @@
 
     // 註冊賽事id
     function wsRegisterMatch() {
-        // 要註冊給ws的id陣列 ( 聯賽id )
-        var registerId = $('.seriesWrapperTitle').map(function() {
-            return parseInt($(this).attr('series_id'));
-        }).get();
-
         const wsMsg = {
             "action": "register",
-            "channel": 'match',
+            "sport_id": sport,
             "player": player,
-            "game_id": parseInt(searchData.sport),
-            "series": registerId // 要註冊的賽事
         }
         console.log('ws match send -> ')
         console.log(wsMsg)
