@@ -792,15 +792,27 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
+        let hasTenSecondsPassed = false;
 
         // delay_order
         if (msg.action === 'delay_order') {
             showSuccessToast(msg.order_id);
             refreshBalence();
+            // after the msg pop up delay 1 second to hide the loading and close the betting area
             setTimeout(function() {
                 hideLoading();
                 closeCal();
             }, 1000);
+
+            // if the msg is not getting in 10 sec, hide the loading and close the betting area
+            setTimeout(function() {
+                hasTenSecondsPassed = true;
+            }, 10000); 
+
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal();
+            }
         }
         // delay_order
     }
