@@ -270,10 +270,10 @@ class LsportApiController extends Controller {
             // fixture -----
             $fixture = LsportFixture::where(
                 'fixture_id', $fixture_id
-            )->where(
-                'start_time', '>=', $fixture_start_time
-            )->where(
-                'start_time', '<=', $fixture_end_time
+            // )->where(
+            //     'start_time', '>=', $fixture_start_time
+            // )->where(
+            //     'start_time', '<=', $fixture_end_time
             )->first();
             if ($fixture) {
                 $fixture_start_time = $fixture['start_time'];

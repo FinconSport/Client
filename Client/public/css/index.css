@@ -474,3 +474,7 @@ div[key="sizeSmallRate"]:hover {
     position: relative;
 }
 @keyframes s4 {to{transform: rotate(1turn)}}
+
+#leftSlideOrderLoadingContainer span::after{
+    
+}
