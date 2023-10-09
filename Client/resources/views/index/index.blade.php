@@ -1064,7 +1064,7 @@
     }
 
     // 關閉左邊投注區塊
-    $('#cancelOrder').click(function() {
+    $('#mask, #cancelOrder').click(function() {
         closeCal();
     })
 
