@@ -345,12 +345,12 @@ class LsportApiController extends Controller {
 
         $data = $notice_list;
         // gzip
-        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
-            $data = $this->gzip($data);
-            $this->ApiSuccess($data, "01", true);
-        } else {
+        // if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+        //     $data = $this->gzip($data);
+        //     $this->ApiSuccess($data, "01", true);
+        // } else {
             $this->ApiSuccess($data, "01", false);
-        }
+        // }
     }
 
     /**
