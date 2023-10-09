@@ -261,24 +261,22 @@
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
-            for (let i = 0; i < 5; i++) { // 假數據 為了測試滑動
-                Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                    createLeague(k, k2, v2)
-                    // 获取 list 对象的所有属性，并将它们存储在一个数组中
-                    const listKeys = Object.keys(v2.list);
-                    // 使用 sort 方法对 listKeys 数组进行排序
-                    listKeys.sort((a, b) => {
-                        // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
-                        const orderByA = v2.list[a].order_by;
-                        const orderByB = v2.list[b].order_by;
-                        // 比较 orderByA 和 orderByB，以确定排序顺序
-                        return orderByA - orderByB;
-                    });
-                    listKeys.forEach( ele => {
-                        createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
-                    })
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+                createLeague(k, k2, v2)
+                // 获取 list 对象的所有属性，并将它们存储在一个数组中
+                const listKeys = Object.keys(v2.list);
+                // 使用 sort 方法对 listKeys 数组进行排序
+                listKeys.sort((a, b) => {
+                    // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
+                    const orderByA = v2.list[a].order_by;
+                    const orderByB = v2.list[b].order_by;
+                    // 比较 orderByA 和 orderByB，以确定排序顺序
+                    return orderByA - orderByB;
+                });
+                listKeys.forEach( ele => {
+                    createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
-            }
+            })
         })
 
         // 滾球移到最上面
