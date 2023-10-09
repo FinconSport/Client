@@ -869,8 +869,7 @@
         
         // 获取当前高度
         var currentHeight = $toggleContent.height().toFixed(2);
-        
-        if (currentHeight === 37.8) {
+        if (currentHeight == 37.8) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
             $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
