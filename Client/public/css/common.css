@@ -764,13 +764,13 @@ a.sportSelect:hover,
 
 .marquee-modal-content {
     background-color: white;
-    padding: 20px 35px;
+    padding: 20px 35px 30px 35px;
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
-    height: 20%;
+    height: fit-content;
     width: auto;
     display: flex;
     flex-direction: column;
@@ -791,6 +791,7 @@ a.sportSelect:hover,
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .marquee-modal-content .modal-body h5{
