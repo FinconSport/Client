@@ -523,6 +523,15 @@
         // ===== DATA LATER =====
     });
 
+    ///game bet loading
+    function showLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
+    }
+
     // websocket
     function WebSocketDemo() {
         console.log('WebSocketDemo')
@@ -568,6 +577,7 @@
             WebSocketDemo();
         }
     }
+    
 
     // render view layer here
     function renderView() {
@@ -775,15 +785,18 @@
     // package process function
     function processMessageQueue() {
         const message = messageQueue.shift(); // to get the head pkg
-        const msg = JSON.parse(message.data); // convert to json
-        console.log(msg)
+        const msg = JSON.parse(message.data); // convert to JSON
+        console.log(msg);
 
         // delay_order
-        if( msg.action === 'delay_order' ){
-            showSuccessToast(msg.order_id)
-            refreshBalence()
+        if (msg.action === 'delay_order') {
+            showSuccessToast(msg.order_id);
+            refreshBalence();
         }
         // delay_order
+
+        // Hide the loading spinner
+        hideLoading();
     }
 
     // 註冊賽事id
@@ -986,10 +999,9 @@
     }
 
     // 關閉左邊投注區塊
-    // $('#mask, #cancelOrder').click(function() {
-    //     closeCal();
-    //     hideLoading();
-    // })
+    $('#cancelOrder').click(function() {
+        closeCal();
+    })
 
     function closeCal() {
         $('#leftSlideOrder').hide("slide", {
@@ -1031,14 +1043,6 @@
         let bool = is_better_rate === true ? 1 : 0
         sendOrderData.better_rate = bool
     })
-
-    function showLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
-    }
-
-    function hideLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
-    }
 
     // 投注
     function sendOrder() {
