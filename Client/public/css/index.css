@@ -16,6 +16,10 @@
     overflow: auto;
 }
 
+#catWrapperTitle_living {
+    background: #FFCB9C!important;
+}
+
 .catWrapperTitle span {
     line-height: 1.5rem;
 }
