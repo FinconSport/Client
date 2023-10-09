@@ -13,7 +13,7 @@ return [
 		'bet' => '投注',
 		'cancel' => '取消',
 		'limit' => '限額',
-		'loading' => '加载中...',
+		'loading' => '確認中...',
 	],
 	'mainArea' => [
 		'early' => '早盤',
