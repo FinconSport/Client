@@ -166,6 +166,7 @@
 }
 .baseballSpan .baseCon {
     height: 2.5rem;
+    padding: 0.25rem 0.5rem;
 }
 .baseballSpan .baseCon div[key='balls'] div{
     height: 33.33333%;
