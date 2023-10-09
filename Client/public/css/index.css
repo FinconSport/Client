@@ -450,12 +450,21 @@ div[key="sizeSmallRate"]:hover {
 }
 
 #leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner {
-    border: 5px dash #f3f3f3;
-    border-top: 5px dash #b8d6d4;
+    /* border: 5px solid #f3f3f3;
+    border-top: 5px dashed #b8d6d4;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    animation: loadingspin 2s linear infinite;
+    animation: loadingspin 2s linear infinite; */
+    width: 100px;
+    height: 100px;
+    border: 8px solid transparent;
+    border-top: 8px dashed transparent;
+    border-image: linear-gradient(90deg, #f3f3f3, #f3f3f3, #f3f3f3, #b8d6d4, #f3f3f3, #f3f3f3);
+    border-image-slice: 1;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
 }
 
 @keyframes loadingspin {
