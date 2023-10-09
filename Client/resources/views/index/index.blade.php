@@ -113,11 +113,11 @@
                 <div class="col p-0 h-100 w-100">
                     <img class="h-100" src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
                 </div>
-                <!-- <div class="col h-100 p-0 w-100">
+                <div class="col h-100 p-0 w-100">
                     <img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike">
                     <img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball">
                     <img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out">
-                </div> -->
+                </div>
             </div>
         </div>
         <div class="indexBetCardInfo">
@@ -388,6 +388,17 @@
                 console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
+                // balls
+                let strike = card.find('img[alt="strike"]')
+                let strikeText = v3.periods.Strikes
+                strike.attr('src', `/image/balls/s${strikeText}.png`)
+                let ball = card.find('img[alt="ball"]')
+                let ballText = v3.periods.Balls
+                ball.attr('src', `/image/balls/b${ballText}.png`)
+                let out = card.find('img[alt="out"]')
+                let outText = v3.periods.Outs
+                out.attr('src', `/image/balls/o${outText}.png`)
             }
 
             time.html(timerStr)
@@ -510,7 +521,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView()
+                    renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -642,6 +653,17 @@
                                 console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
+                                // balls
+                                let strike = card.find('img[alt="strike"]')
+                                let strikeText = v3.periods.Strikes
+                                strike.attr('src', `/image/balls/s${strikeText}.png`)
+                                let ball = card.find('img[alt="ball"]')
+                                let ballText = v3.periods.Balls
+                                ball.attr('src', `/image/balls/b${ballText}.png`)
+                                let out = card.find('img[alt="out"]')
+                                let outText = v3.periods.Outs
+                                out.attr('src', `/image/balls/o${outText}.png`)
                             } 
                             time.html(timerStr)
                         }
@@ -844,17 +866,17 @@
         // 获取当前高度
         var currentHeight = $toggleContent.height();
         
-        if (currentHeight === 42) {
-            // 如果高度为 42px，则展开
+        if (currentHeight === 49) {
+            // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
             $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
                 // 动画完成后，将高度设置为 'auto'
                 $toggleContent.removeAttr('style')
             });
         } else {
-            // 如果高度不是 42px，则收起
+            // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '42px' }, 1000);
+            $toggleContent.animate({ height: '49px' }, 1000);
         }
 
         // 切换图标方向
