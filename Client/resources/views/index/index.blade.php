@@ -652,11 +652,15 @@
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
                                 // base
-                                let baseText = v3.periods.Bases
-                                if( !baseText) return;
-                                baseText = v3.periods.Bases.replaceAll('/','')
                                 let baseCont = card.find('img[alt="base"]')
+                                let baseText = v3.periods.Bases
+                                if( baseText) {
+                                    baseText = v3.periods.Bases.replaceAll('/','')
+                                } else {
+                                    baseText = '000'
+                                }
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                                 // balls
                                 let strike = card.find('div[key="strike"]')
