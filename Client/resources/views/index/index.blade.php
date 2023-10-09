@@ -968,11 +968,11 @@
     });
 
     function showLoading() {
-        document.getElementById("loading-container").classList.remove("hidden");
+        document.getElementById("leftSlideOrderLoadingContainerr").classList.remove("hidden");
     }
 
     function hideLoading() {
-        document.getElementById("loading-container").classList.add("hidden");
+        document.getElementById("leftSlideOrderLoadingContainerr").classList.add("hidden");
     }
 
     // 金額快速鍵
