@@ -647,7 +647,7 @@
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
                                     item.attr('bet_name_en', v4.market_bet_name_en)
                                     item.attr('line', v4.line)
-                                    item.attr('league', league_name)
+                                    item.attr('league', v2.league_name)
                                     item.attr('home', v3.home_team_name)
                                     item.attr('away', v3.away_team_name)
 
