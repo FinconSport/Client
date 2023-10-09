@@ -241,9 +241,10 @@ class LsportApiController extends Controller {
             $create_time = $v['create_time'];
 
             $notice_list[] = [
-                "sport_id" => $sport_id,
+                "id" => $sport_id,
                 "title" => $title,
                 "marquee" => $context,
+                "status" => 1,
                 "create_time" => $create_time,
             ];
         }
@@ -331,9 +332,10 @@ class LsportApiController extends Controller {
                 $create_time = $v['create_time'];
     
                 $notice_list[] = [
-                    "sport_id" => $sport_id,
+                    "id" => $sport_id,
                     "title" => $title,
                     "marquee" => $context,
+                    "status" => 1,
                     "create_time" => $create_time,
                 ];
             }
