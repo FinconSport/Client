@@ -29,7 +29,8 @@ class LsportSport extends CacheModel
             
 			// 預設值
             $name = $data['name_en'];
-            if (($data['name_' . $api_lang] != "") && ($data['name_' . $api_lang] != null)) {
+            //if (($data['name_' . $api_lang] != "") && ($data['name_' . $api_lang] != null)) {
+            if (isset($data['name_' . $api_lang]) && !empty($data['name_' . $api_lang])) {
                 $name = $data['name_' . $api_lang];
             }
             return $name;
