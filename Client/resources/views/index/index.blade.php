@@ -324,7 +324,6 @@
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
         league_toggle.attr('league_id', v2.league_id)
-        league_toggle.attr('leagueText', `${k}${v2.league_id}`)
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
@@ -337,7 +336,6 @@
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-        league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
         league_wrapper.removeAttr('hidden')
         league_wrapper.removeAttr('template')
@@ -386,7 +384,7 @@
                 // base
                 let baseCont = card.find('img[alt="base"]')
                 let baseText = v3.periods.Bases
-                if( baseText) {
+                if( baseText ) {
                     baseText = v3.periods.Bases.replaceAll('/','')
                 } else {
                     baseText = '000'
@@ -654,7 +652,7 @@
                                 // base
                                 let baseCont = card.find('img[alt="base"]')
                                 let baseText = v3.periods.Bases
-                                if( baseText) {
+                                if( baseText ) {
                                     baseText = v3.periods.Bases.replaceAll('/','')
                                 } else {
                                     baseText = '000'
@@ -1173,11 +1171,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) {
-                let leagueText = idArr[1] + idArr[2]
-                $(`.seriesWrapperTitle[leagueText="${leagueText}"]`).remove()
-                $(`.seriesWrapperContent[leagueText="${leagueText}"]`).remove()
-            }
+            if( count === 0 ) $(this).closest('.leagueWrapper').remove()
         })
 
         // is no data
