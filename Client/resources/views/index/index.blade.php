@@ -830,7 +830,7 @@
         if( $(`#toggleContent_${key}`).css('height') === 0 ) {
             $(`#toggleContent_${key}`).animate( { height: auto }, 1000);
         } else {
-            $(`#toggleContent_${key}`).animate( { height: 0 }, 1000);
+            $(`#toggleContent_${key}`).animate( { height: '3rem' }, 1000);
         }
         if($(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).hasClass('fa-chevron-down')) {
             $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).removeClass('fa-chevron-down')
