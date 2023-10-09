@@ -111,12 +111,12 @@
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-6 h-100 p-0">
-                    <img class="h-100" src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
+                    <img class="h-100" alt="base">
                 </div>
                 <div class="col-6 h-100 p-0" key='balls'>
-                    <div><img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike"></div>
-                    <div><img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball"></div>
-                    <div><img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out"></div>
+                    <div key='strike'></div>
+                    <div key='ball'></div>
+                    <div key='ball'></div>
                 </div>
             </div>
         </div>
@@ -392,13 +392,13 @@
                 // balls
                 let strike = card.find('img[alt="strike"]')
                 let strikeText = v3.periods.Strikes
-                strike.attr('src', `/image/balls/s${strikeText}.png`)
+                strike.attr('background-image', `/image/balls/s${strikeText}.png`)
                 let ball = card.find('img[alt="ball"]')
                 let ballText = v3.periods.Balls
-                ball.attr('src', `/image/balls/b${ballText}.png`)
+                ball.attr('background-image', `/image/balls/b${ballText}.png`)
                 let out = card.find('img[alt="out"]')
                 let outText = v3.periods.Outs
-                out.attr('src', `/image/balls/o${outText}.png`)
+                out.attr('background-image', `/image/balls/o${outText}.png`)
             }
 
             time.html(timerStr)

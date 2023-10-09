@@ -169,6 +169,7 @@
 }
 .baseballSpan .baseCon div[key='balls'] div{
     height: 33.33333%;
+    background-size: 100% 100%;
 }
 
 .indexBetCardTable {
