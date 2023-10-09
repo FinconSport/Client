@@ -561,7 +561,7 @@
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
                         let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
-                        console.log(k3 + ' isSwitch ->' + isSwitchCate + ' newStatus = ' + v3.status)
+                        // console.log(k3 + ' isSwitch ->' + isSwitchCate + ' newStatus = ' + v3.status)
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
@@ -620,18 +620,18 @@
                                     if( market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
-                                            console.log('賠率::' + price + ' ->' + v4.price)
+                                            // console.log('賠率::' + price + ' ->' + v4.price)
                                             // 賠率下降
                                             lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
                                         if( parseFloat(price) < parseFloat(v4.price) ) {
-                                            console.log('賠率::' + price + ' ->' + v4.price)
+                                            // console.log('賠率::' + price + ' ->' + v4.price)
                                             // 賠率上升
                                             raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                         }
                                     } else {
-                                        console.log(item.attr('home') + ' VS ' + item.attr('away'))
-                                        console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
+                                        // console.log(item.attr('home') + ' VS ' + item.attr('away'))
+                                        // console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
                                     }
 
                                     // set attribute
