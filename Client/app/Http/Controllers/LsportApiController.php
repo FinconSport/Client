@@ -950,9 +950,9 @@ class LsportApiController extends Controller {
             ->orderBy('m.market_id', 'ASC')
             ->get();
 
-            // if ($market_data === false) {
-            //     $this->ApiError('03');
-            // }
+            if ($market_data === false) {
+                $this->ApiError('03');
+            }
 
             // 開始繞玩法資料
             foreach ($market_data as $k => $v) {
@@ -980,6 +980,10 @@ class LsportApiController extends Controller {
                 //->orderBy('mb.bet_id', 'ASC')  //注意排序
                 ->orderBy('mb.name_en', 'ASC')  //注意排序
                 ->get();
+
+                if ($market_bet_data === false) {
+                    $this->ApiError('04');
+                }
 
                 $arr_market_bet = array();
 
