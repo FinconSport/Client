@@ -450,8 +450,8 @@ div[key="sizeSmallRate"]:hover {
 }
 
 #leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #415b5a;
+    border: 5px dash #f3f3f3;
+    border-top: 5px dash #b8d6d4;
     border-radius: 50%;
     width: 50px;
     height: 50px;
