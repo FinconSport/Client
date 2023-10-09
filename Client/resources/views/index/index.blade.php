@@ -383,6 +383,7 @@
             if( sport === 154914 ) {
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                 // base
+                console.log(v3.periods)
                 let baseText = v3.periods.Bases
                 if( baseText) {
                     baseText = v3.periods.Bases.replaceAll('/','')
