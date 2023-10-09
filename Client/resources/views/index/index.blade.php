@@ -79,8 +79,6 @@
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
-    <div class="catWrapperContent">
-    </div>
 </div>
 
 <!-- league toggle template -->
@@ -311,6 +309,7 @@
     }
 
     function createLeague(k, k2, v2) {
+        console.log(v2.league_id)
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -343,7 +342,7 @@
         let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
 
-        $('.leagueWrapper').contents().unwrap();
+        // $('.leagueWrapper').contents().unwrap();
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
