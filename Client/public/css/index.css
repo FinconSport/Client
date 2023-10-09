@@ -495,7 +495,7 @@ div[key="sizeSmallRate"]:hover {
     border-radius: 50%;
     padding: 3px;
     background: conic-gradient(#9d9d9e 75%,#b8d6d4) content-box;
-    -webkit-mask: repeating-conic-gradient(#9e9d9d00 0deg,#9e9d9d 1deg 20deg,#0000 21deg 36deg), radial-gradient(farthest-side,#9e9d9d00 calc(100% - 9px),#9d9d9e calc(100% - 8px));
+    -webkit-mask: repeating-conic-gradient(#9e9d9d00 0deg,#9e9d9d 1deg, #9e9d9d 32deg,#0000 32deg 36deg), radial-gradient(farthest-side,#9e9d9d00 calc(100% - 9px),#9d9d9e calc(100% - 8px));
     -webkit-mask-composite: destination-in;
     mask-composite: intersect;
     animation: s4 1s infinite steps(10);
