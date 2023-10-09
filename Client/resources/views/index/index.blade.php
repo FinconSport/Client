@@ -796,11 +796,18 @@
         if (msg.action === 'delay_order') {
             showSuccessToast(msg.order_id);
             refreshBalence();
+            // after the toast message pop up delay 1 second to hide the loading and close thebetting area
             setTimeout(function() {
                 hideLoading();
                 closeCal();
             }, 1000);
         }
+
+        // if the msg is not getting in 10 sec, close the betting area.
+        setTimeout(function() {
+            hideLoading();
+            closeCal();
+        }, 10000);
         // delay_order
     }
 
