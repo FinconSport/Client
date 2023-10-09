@@ -162,6 +162,7 @@
 .baseballSpan .timer {
     height: 2.5rem;
     line-height: 2.5rem;
+    font-weight: 600;
 }
 .baseballSpan .baseCon {
     height: 2.5rem;
@@ -217,7 +218,8 @@
     color: rgb(188 207 206);
 }
 
-[key="betItemDiv-1"] i {
+[key='betItemDiv-1'] i, 
+[key='betItemDiv'] i {
     position: absolute;
     top: 0.3rem;
     margin-left: 0.5rem;
@@ -426,3 +428,70 @@ div[key="sizeSmallRate"]:hover {
     margin-top: 25%;
 }
 
+
+/* #leftSlideOrder > loading  */
+#leftSlideOrderLoadingContainer.hidden {
+    display: none;
+}
+
+#leftSlideOrderLoadingContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25rem;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 5rem 2rem;
+    color: white;
+    font-weight: 600;
+}
+
+#leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px dashed #b8d6d4;
+    /* border: 5px dashed transparent; */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: loadingspin 2s linear infinite;
+}
+
+@keyframes loadingspin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes colorChange {
+    0% {
+        border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, purple);
+        border-image-slice: 1;
+    }
+    16.67% {
+        border-image-source: linear-gradient(90deg, orange, yellow, green, blue, purple, red);
+        border-image-slice: 1;
+    }
+    33.33% {
+        border-image-source: linear-gradient(90deg, yellow, green, blue, purple, red, orange);
+        border-image-slice: 1;
+    }
+    50% {
+        border-image-source: linear-gradient(90deg, green, blue, purple, red, orange, yellow);
+        border-image-slice: 1;
+    }
+    66.67% {
+        border-image-source: linear-gradient(90deg, blue, purple, red, orange, yellow, green);
+        border-image-slice: 1;
+    }
+    83.33% {
+        border-image-source: linear-gradient(90deg, purple, red, orange, yellow, green, blue);
+        border-image-slice: 1;
+    }
+    100% {
+        border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, purple);
+        border-image-slice: 1;
+    }
+}
