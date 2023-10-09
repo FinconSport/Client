@@ -382,14 +382,17 @@
             // exception baseball
             if( sport === 154914 ) {
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
                 // base
-                console.log(v3.periods)
+                let baseCont = card.find('img[alt="base"]')
                 let baseText = v3.periods.Bases
                 if( baseText) {
                     baseText = v3.periods.Bases.replaceAll('/','')
-                    let baseCont = card.find('img[alt="base"]')
-                    baseCont.attr('src', `/image/base/${baseText}.png`)
+                } else {
+                    baseText = '000'
                 }
+                baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                 // balls
                 let strike = card.find('div[key="strike"]')
@@ -522,7 +525,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView()
+                    renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -649,11 +652,15 @@
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
                                 // base
-                                let baseText = v3.periods.Bases
-                                if( !baseText) return;
-                                baseText = v3.periods.Bases.replaceAll('/','')
                                 let baseCont = card.find('img[alt="base"]')
+                                let baseText = v3.periods.Bases
+                                if( baseText) {
+                                    baseText = v3.periods.Bases.replaceAll('/','')
+                                } else {
+                                    baseText = '000'
+                                }
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                                 // balls
                                 let strike = card.find('div[key="strike"]')
@@ -814,7 +821,7 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
-        let hasTenSecondsPassed = false;
+        
 
         // delay_order
         if (msg.action === 'delay_order') {
@@ -825,19 +832,13 @@
                 hideLoading();
                 closeCal();
             }, 1000);
-
-            // if the msg is not getting in 10 sec, hide the loading and close the betting area
-            setTimeout(function() {
-                hasTenSecondsPassed = true;
-            }, 10000); 
-
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal();
-            }
         }
         // delay_order
     }
+
+    $('#mask, #cancelOrder').click(function() {
+        closeCal();
+    })
 
     // 註冊賽事id
     function wsRegisterMatch() {
@@ -871,14 +872,14 @@
         if (currentHeight === 49) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
-            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
                 // 动画完成后，将高度设置为 'auto'
                 $toggleContent.removeAttr('style')
             });
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '49px' }, 1000);
+            $toggleContent.animate({ height: '49px' }, 700);
         }
 
         // 切换图标方向
@@ -893,7 +894,7 @@
 
     // 聯賽分類收合
     function toggleSeries( key ) {
-        $('#seriesWrapperContent_' + key).slideToggle( "slow" );
+        $('#seriesWrapperContent_' + key).slideToggle( 700 );
         if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
@@ -1057,7 +1058,7 @@
     }
 
     // 關閉左邊投注區塊
-    $('#cancelOrder').click(function() {
+    $('#mask, #cancelOrder').click(function() {
         closeCal();
     })
 
@@ -1147,8 +1148,16 @@
         // 金額歸零
         $('#moneyInput').val('');
         $('#moneyInput').trigger('change');
-        // 隱藏計算機
-        // closeCal()
+
+        let hasTenSecondsPassed = false;
+        // if the msg is not getting in 10 sec, hide the loading and close the betting area
+        setTimeout(function() {
+            hasTenSecondsPassed = true;
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal();
+            }
+        }, 10000);
     }
 
     // 統計
