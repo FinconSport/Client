@@ -110,14 +110,14 @@
         <div class="baseballSpan" key='baseball'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
-                <div class="col p-0">
-                    <img src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
+                <div class="col p-0 h-100 w-100">
+                    <img class="h-100" src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
                 </div>
-                <div class="col p-0" key='balls'>
+                <!-- <div class="col h-100 p-0 w-100">
                     <img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike">
                     <img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball">
                     <img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out">
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="indexBetCardInfo">
@@ -380,9 +380,11 @@
 
 
                 // base
+                console.log(v3.periods.Bases)
                 let baseText = v3.periods.Bases.replace('/','')
+                console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
-                baseCont.attr('src', `/public/image/base/${baseText}.png`)
+                baseCont.attr('src', `/image/base/${baseText}.png`)
             }
 
             time.html(timerStr)
@@ -617,7 +619,16 @@
 
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-                            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                            if( sport === 154914 ) {
+                                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+                                // base
+                                console.log(v3.periods.Bases)
+                                let baseText = v3.periods.Bases.replace('/','')
+                                console.log(baseText)
+                                let baseCont = card.find('img[alt="base"]')
+                                baseCont.attr('src', `/image/base/${baseText}.png`)
+                            } 
                             time.html(timerStr)
                         }
                         // ready to start
