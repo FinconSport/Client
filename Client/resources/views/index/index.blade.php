@@ -507,7 +507,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView()
+                    // renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
