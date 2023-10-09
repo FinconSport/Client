@@ -55,7 +55,9 @@
             <button id="cancelOrder">{{ trans('index.bet_area.cancel') }}</button>
         </div>
     </div>
+    <button id="show-button">Show Loading</button>
 </div>
+<div id="leftSlideOrderLoadingContainer" class="hidden"><div id="leftSlideOrderLoadingSpinner"></div></div>
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
@@ -961,6 +963,18 @@
         $('div').removeClass('m_order_on')
     }
 
+    document.getElementById("show-button").addEventListener("click", function () {
+        showLoading();
+    });
+
+    function showLoading() {
+        document.getElementById("loading-container").classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        document.getElementById("loading-container").classList.add("hidden");
+    }
+
     // 金額快速鍵
     $('#leftSlideOrder .quick').click(function() {
         let inputMoney = parseInt($('#moneyInput').val())
@@ -969,6 +983,7 @@
         $('#moneyInput').val(inputMoney)
         $('#moneyInput').trigger('change')
     })
+    
 
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
