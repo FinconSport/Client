@@ -337,8 +337,8 @@
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
         league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
-        el_toggle_content.removeAttr('hidden')
-        el_toggle_content.removeAttr('template')
+        league_wrapper.removeAttr('hidden')
+        league_wrapper.removeAttr('template')
 
         let el_toggle_content = $(`#toggleContent_${k}`)
         el_toggle_content.append(league_wrapper)
