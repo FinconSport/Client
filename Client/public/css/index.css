@@ -217,7 +217,8 @@
     color: rgb(188 207 206);
 }
 
-.betItemDiv i {
+[key='betItemDiv-1'] i, 
+[key='betItemDiv'] i {
     position: absolute;
     top: 0.3rem;
     margin-left: 0.5rem;
