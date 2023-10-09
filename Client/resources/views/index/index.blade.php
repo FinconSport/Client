@@ -380,8 +380,9 @@
 
 
                 // base
-                console.log(v3.periods.Bases)
-                let baseText = v3.periods.Bases.replaceAll('/','')
+                let baseText = v3.periods.Bases
+                if( !baseText) return;
+                baseText = v3.periods.Bases.replaceAll('/','')
                 console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
                 baseCont.attr('src', `/image/base/${baseText}.png`)
@@ -623,8 +624,9 @@
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
                                 // base
-                                console.log(v3.periods.Bases)
-                                let baseText = v3.periods.Bases.replaceAll('/','')
+                                let baseText = v3.periods.Bases
+                                if( !baseText) return;
+                                baseText = v3.periods.Bases.replaceAll('/','')
                                 console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
