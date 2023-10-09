@@ -740,7 +740,7 @@
 
         // delay_order
         if( msg.action === 'delay_order' ){
-            showSuccessToast(order_id)
+            showSuccessToast(msg.order_id)
         }
         // delay_order
     }
