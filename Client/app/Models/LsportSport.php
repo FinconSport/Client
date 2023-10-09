@@ -29,11 +29,28 @@ class LsportSport extends CacheModel
             
 			// 預設值
             $name = $data['name_en'];
-            //if (($data['name_' . $api_lang] != "") && ($data['name_' . $api_lang] != null)) {
             if (isset($data['name_' . $api_lang]) && !empty($data['name_' . $api_lang])) {
                 $name = $data['name_' . $api_lang];
             }
             return $name;
+        });
+    }
+    
+    public static function getStatus($data) {
+
+        // 緩存時間
+        $cacheAliveTime = 3600;
+
+        // 緩存Key
+        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
+
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
+			$sport_id = $data['sport_id'];
+
+            $data = self::where('sport_id', $sport_id)->select('status')->first();
+            $return = $data;
+
+            return $return;
         });
     }
 }

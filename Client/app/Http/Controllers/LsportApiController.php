@@ -544,9 +544,33 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
+        // $sss = LsportFixture::whereIn("status",[1,2])->get();
+        // $list = array();
+        // foreach ($sss as $kk => $vv) {
+
+        //     $tmp = array();
+        //     // SPORT NAME
+        //     $sport_id = $vv['sport_id'];
+        //     $data = array(
+        //         "sport_id" => $sport_id,
+        //         "api_lang" => $agent_lang
+        //     );
+        //     $sport_name = LsportSport::getName($data);
+        //     $tmp['name'] = 321312
+
+        //     // SPORT STATUS
+        //     $sport_status = LsportSport::where(xxxx)->first();
+        //     if ($sport_status != 1) {
+        //         continue;
+        //     }
+
+
+        //     $list[] = $tmp;
+        // }
+
         $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
-            ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
+            //->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
                 "lsport_sport.sport_id,
                 lsport_sport.{$lang_col} as sport_name_locale,
@@ -564,6 +588,8 @@ class LsportApiController extends Controller {
         }
 
         // dd($data);
+
+        
 
     	//---------------------------------
         $ret = array(
