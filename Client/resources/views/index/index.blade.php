@@ -868,7 +868,7 @@
         var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
         
         // 获取当前高度
-        var currentHeight = $toggleContent.height();
+        var currentHeight = $toggleContent.height().toFixed(2);
         
         if (currentHeight === 37.8) {
             // 如果高度为 49px，则展开
