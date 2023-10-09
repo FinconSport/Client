@@ -792,11 +792,11 @@
         if (msg.action === 'delay_order') {
             showSuccessToast(msg.order_id);
             refreshBalence();
+            setTimeout(function() {
+                hideLoading();
+            }, 6000);
         }
         // delay_order
-
-        // Hide the loading spinner
-        hideLoading();
     }
 
     // 註冊賽事id
