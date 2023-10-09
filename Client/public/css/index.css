@@ -465,8 +465,13 @@ div[key="sizeSmallRate"]:hover {
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
+    content: '';
     background: #9d9d9e;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 @keyframes mulShdSpin {
