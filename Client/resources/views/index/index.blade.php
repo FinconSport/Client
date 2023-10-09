@@ -110,13 +110,14 @@
         <div class="baseballSpan" key='baseball'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
+                <div class="col-1 h-100 p-0"></div>
                 <div class="col-6 h-100 p-0">
                     <img class="h-100" alt="base">
                 </div>
-                <div class="col-6 h-100 p-0" key='balls'>
+                <div class="col-3 h-100 p-0" key='balls'>
                     <div key='strike'></div>
                     <div key='ball'></div>
-                    <div key='ball'></div>
+                    <div key='out'></div>
                 </div>
             </div>
         </div>
@@ -392,13 +393,13 @@
                 // balls
                 let strike = card.find('div[key="strike"]')
                 let strikeText = v3.periods.Strikes
-                strike.css('background-image', `/image/balls/s${strikeText}.png`)
+                strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                 let ball = card.find('div[key="ball"]')
                 let ballText = v3.periods.Balls
-                ball.css('background-image', `/image/balls/b${ballText}.png`)
+                ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                 let out = card.find('div[key="out"]')
                 let outText = v3.periods.Outs
-                out.css('background-image', `/image/balls/o${outText}.png`)
+                out.css('background-image', `url(/image/balls/o${outText}.png)`)
             }
 
             time.html(timerStr)
@@ -657,13 +658,13 @@
                                 // balls
                                 let strike = card.find('div[key="strike"]')
                                 let strikeText = v3.periods.Strikes
-                                strike.css('background-image', `/image/balls/s${strikeText}.png`)
+                                strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                                 let ball = card.find('div[key="ball"]')
                                 let ballText = v3.periods.Balls
-                                ball.css('background-image', `/image/balls/b${ballText}.png`)
+                                ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                                 let out = card.find('div[key="out"]')
                                 let outText = v3.periods.Outs
-                                out.css('background-image', `/image/balls/o${outText}.png`)
+                                out.css('background-image', `url(/image/balls/o${outText}.png)`)
                             } 
                             time.html(timerStr)
                         }
