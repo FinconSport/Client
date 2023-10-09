@@ -1059,6 +1059,8 @@
         //     return;
         // }
 
+        console.log(sendOrderData)
+
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
