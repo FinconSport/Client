@@ -794,7 +794,8 @@
             refreshBalence();
             setTimeout(function() {
                 hideLoading();
-            }, 6000);
+                closeCal();
+            }, 1000);
         }
         // delay_order
     }
