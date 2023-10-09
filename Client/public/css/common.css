@@ -800,7 +800,7 @@ a.sportSelect:hover,
 
 /* toast message */
 #toast {
-    z-index: 3;
+    z-index: 4;
     position: absolute;
     top: 10px;
     right: 10px;
