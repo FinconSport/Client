@@ -450,13 +450,12 @@ div[key="sizeSmallRate"]:hover {
 }
 
 #leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner {
-    width: 100px;
-    height: 100px;
-    border: 8px solid #3498db;
-    border-top: 8px solid transparent;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #415b5a;
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
     animation: loadingspin 2s linear infinite;
-    margin: 0 auto;
 }
 
 @keyframes loadingspin {
