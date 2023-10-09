@@ -324,7 +324,6 @@
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
         league_toggle.attr('league_id', v2.league_id)
-        league_toggle.attr('leagueText', `${k}${v2.league_id}`)
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
@@ -337,7 +336,6 @@
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-        league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
         league_wrapper.removeAttr('hidden')
         league_wrapper.removeAttr('template')
@@ -386,7 +384,7 @@
                 // base
                 let baseCont = card.find('img[alt="base"]')
                 let baseText = v3.periods.Bases
-                if( baseText) {
+                if( baseText ) {
                     baseText = v3.periods.Bases.replaceAll('/','')
                 } else {
                     baseText = '000'
@@ -654,7 +652,7 @@
                                 // base
                                 let baseCont = card.find('img[alt="base"]')
                                 let baseText = v3.periods.Bases
-                                if( baseText) {
+                                if( baseText ) {
                                     baseText = v3.periods.Bases.replaceAll('/','')
                                 } else {
                                     baseText = '000'
@@ -842,6 +840,7 @@
 
     // 註冊賽事id
     function wsRegisterMatch() {
+        console.log(socket_status)
         const wsMsg = {
             "action": "register",
             "sport_id": sport,
@@ -867,9 +866,8 @@
         var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
         
         // 获取当前高度
-        var currentHeight = $toggleContent.height();
-        
-        if (currentHeight === 49) {
+        var currentHeight = $toggleContent.height().toFixed(2);
+        if (currentHeight == 37.8) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
             $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
@@ -879,7 +877,7 @@
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '49px' }, 700);
+            $toggleContent.animate({ height: '37.8px' }, 700);
         }
 
         // 切换图标方向
@@ -1067,6 +1065,7 @@
             direction: "left"
         }, 500);
         $('#mask').fadeOut()
+        // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
@@ -1145,9 +1144,7 @@
             }
         });
 
-        // 金額歸零
-        $('#moneyInput').val('');
-        $('#moneyInput').trigger('change');
+        
 
         let hasTenSecondsPassed = false;
         // if the msg is not getting in 10 sec, hide the loading and close the betting area
@@ -1174,11 +1171,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) {
-                let leagueText = idArr[1] + idArr[2]
-                $(`.seriesWrapperTitle[leagueText="${leagueText}"]`).remove()
-                $(`.seriesWrapperContent[leagueText="${leagueText}"]`).remove()
-            }
+            if( count === 0 ) $(this).closest('.leagueWrapper').remove()
         })
 
         // is no data
