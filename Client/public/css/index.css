@@ -185,11 +185,11 @@
     width: 60%;
 }
 .indexBetCardTable div:first-child .betItemDiv {
-    border-left: 2px solid rgb(220,220,220);
+    border-left: 1px solid rgb(220,220,220);
 }
 
 .indexBetCardTable div .betItemDiv:last-child {
-    border-bottom: 2px solid rgb(220,220,220);
+    border-bottom: 1px solid rgb(220,220,220);
 }
 
 
@@ -209,8 +209,8 @@
     line-height: 2.5rem;
 }
 .betItemDiv {
-    border-top: 2px solid rgb(220, 220, 220);
-    border-right: 2px solid rgb(220, 220, 220);
+    border-top: 1px solid rgb(220, 220, 220);
+    border-right: 1px solid rgb(220, 220, 220);
     padding: 0.5rem 0.25rem;
     z-index: 0;
     position: relative;
