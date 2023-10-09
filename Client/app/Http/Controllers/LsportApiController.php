@@ -240,10 +240,11 @@ class LsportApiController extends Controller {
             $context = $v['marquee'];
             $create_time = $v['create_time'];
 
-            $notice_list[$sport_id][] = [
-                "sport_id" => $sport_id,
+            $notice_list[] = [
+                "id" => $sport_id,
                 "title" => $title,
-                "context" => $context,
+                "marquee" => $context,
+                "status" => 1,
                 "create_time" => $create_time,
             ];
         }
@@ -330,10 +331,11 @@ class LsportApiController extends Controller {
                 ]);
                 $create_time = $v['create_time'];
     
-                $notice_list[$sport_id][] = [
-                    "sport_id" => $sport_id,
+                $notice_list[] = [
+                    "id" => $sport_id,
                     "title" => $title,
-                    "context" => $context,
+                    "marquee" => $context,
+                    "status" => 1,
                     "create_time" => $create_time,
                 ];
             }
@@ -343,12 +345,12 @@ class LsportApiController extends Controller {
 
         $data = $notice_list;
         // gzip
-        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
-            $data = $this->gzip($data);
-            $this->ApiSuccess($data, "01", true);
-        } else {
+        // if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+        //     $data = $this->gzip($data);
+        //     $this->ApiSuccess($data, "01", true);
+        // } else {
             $this->ApiSuccess($data, "01", false);
-        }
+        // }
     }
 
     /**
