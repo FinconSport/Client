@@ -25,7 +25,7 @@ return [
 
     // 賽事取消原因. 用於DB::lsport_notice
     'fixture_cancellation_reasons' => [
-        'date_time_to_hour' => 'd M H:i',
+        'date_time_to_hour' => 'j n H:i',
         'title:Event Cancelled' => 'Event cancelled-:sport_name/:league_name',
         'title:Invalid Event' => 'Event invalid-:sport_name/:league_name',
         'title:Wrong League' => 'Event wrong league-:sport_name/:league_name',
