@@ -878,14 +878,14 @@
         if (currentHeight === 49) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
-            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
                 // 动画完成后，将高度设置为 'auto'
                 $toggleContent.removeAttr('style')
             });
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '49px' }, 1000);
+            $toggleContent.animate({ height: '49px' }, 700);
         }
 
         // 切换图标方向
@@ -900,7 +900,7 @@
 
     // 聯賽分類收合
     function toggleSeries( key ) {
-        $('#seriesWrapperContent_' + key).slideToggle( "slow" );
+        $('#seriesWrapperContent_' + key).slideToggle( 700 );
         if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
