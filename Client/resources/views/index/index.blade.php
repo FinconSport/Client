@@ -55,7 +55,6 @@
             <button id="cancelOrder">{{ trans('index.bet_area.cancel') }}</button>
         </div>
     </div>
-    <button id="show-button">Show Loading</button>
 </div>
 <div id="leftSlideOrderLoadingContainer" class="hidden"><div id="leftSlideOrderLoadingSpinner"></div></div>
 <div id='searchCondition'>
@@ -987,10 +986,10 @@
     }
 
     // 關閉左邊投注區塊
-    $('#mask, #cancelOrder').click(function() {
-        closeCal();
-        hideLoading();
-    })
+    // $('#mask, #cancelOrder').click(function() {
+    //     closeCal();
+    //     hideLoading();
+    // })
 
     function closeCal() {
         $('#leftSlideOrder').hide("slide", {
@@ -1001,18 +1000,6 @@
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
         $('div').removeClass('m_order_on')
-    }
-
-    document.getElementById("show-button").addEventListener("click", function () {
-        showLoading();
-    });
-
-    function showLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
-    }
-
-    function hideLoading() {
-        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
     }
 
     // 金額快速鍵
@@ -1045,6 +1032,14 @@
         sendOrderData.better_rate = bool
     })
 
+    function showLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        document.getElementById("leftSlideOrderLoadingContainer").classList.add("hidden");
+    }
+
     // 投注
     function sendOrder() {
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
@@ -1060,6 +1055,9 @@
         //     return;
         // }
 
+        // Show loading spinner while submitting
+        showLoading();
+
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
@@ -1074,18 +1072,21 @@
                 // } else {
                 //     showErrorToast(res.message)
                 // }
+
+                hideLoading();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
+                hideLoading();
                 showErrorToast(jqXHR)
             }
         });
-       
+
         // 金額歸零
-        $('#moneyInput').val('')
-        $('#moneyInput').trigger('change')
+        $('#moneyInput').val('');
+        $('#moneyInput').trigger('change');
         // 隱藏計算機
-        closeCal()
+        // closeCal()
     }
 
     // 統計
