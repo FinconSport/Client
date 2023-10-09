@@ -458,23 +458,44 @@ div[key="sizeSmallRate"]:hover {
     animation: loadingspin 2s linear infinite; */
     width: 100px;
     height: 100px;
-    border: 8px dashed transparent;
+    border: 5px dashed transparent;
     border-radius: 50%;
     animation: colorChange 3s linear infinite;
     margin: 0 auto;
 }
 
-@keyframes loadingspin {
+/* @keyframes loadingspin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
+} */
 
 @keyframes colorChange {
-    0% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, purple); }
-    16.67% { border-image: linear-gradient(90deg, orange, yellow, green, blue, purple, red); }
-    33.33% { border-image: linear-gradient(90deg, yellow, green, blue, purple, red, orange); }
-    50% { border-image: linear-gradient(90deg, green, blue, purple, red, orange, yellow); }
-    66.67% { border-image: linear-gradient(90deg, blue, purple, red, orange, yellow, green); }
-    83.33% { border-image: linear-gradient(90deg, purple, red, orange, yellow, green, blue); }
-    100% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, purple); }
+    0% {
+        border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, purple);
+        border-image-slice: 1;
+    }
+    16.67% {
+        border-image-source: linear-gradient(90deg, orange, yellow, green, blue, purple, red);
+        border-image-slice: 1;
+    }
+    33.33% {
+        border-image-source: linear-gradient(90deg, yellow, green, blue, purple, red, orange);
+        border-image-slice: 1;
+    }
+    50% {
+        border-image-source: linear-gradient(90deg, green, blue, purple, red, orange, yellow);
+        border-image-slice: 1;
+    }
+    66.67% {
+        border-image-source: linear-gradient(90deg, blue, purple, red, orange, yellow, green);
+        border-image-slice: 1;
+    }
+    83.33% {
+        border-image-source: linear-gradient(90deg, purple, red, orange, yellow, green, blue);
+        border-image-slice: 1;
+    }
+    100% {
+        border-image-source: linear-gradient(90deg, red, orange, yellow, green, blue, purple);
+        border-image-slice: 1;
+    }
 }
