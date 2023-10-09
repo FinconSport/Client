@@ -206,7 +206,7 @@ class LsportApiController extends Controller {
      */
     // 首頁跑馬燈
     public function IndexMarquee(Request $request) {
-      
+
     	$input = $this->getRequest($request);
 
         $checkToken = $this->checkToken($input);
@@ -215,19 +215,140 @@ class LsportApiController extends Controller {
         }
 
         //---------------------------------
-        // 自DB取出有效的Client端跑馬燈(此跑馬燈其實也就是Client端系統公告)
-        $return = ClientMarquee::where("status", 1)->get();      
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
+
+        //---------------------------------
+        // 自DB取出有效的Client端系統公告(其實也就是Client端跑馬燈)
+        $notice_list = array();
+
+        // 系統公告
+        $return = ClientMarquee::where(
+            "status", 1
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
         if ($return === false) {
             $this->ApiError("01");
         }
 
-        $data = array();
         foreach ($return as $k => $v) {
-            $data[] = $v['marquee'];
+            $sport_id = 0;
+            $title = $v['title'];
+            $context = $v['marquee'];
+            $create_time = $v['create_time'];
+
+            $notice_list[$sport_id][] = [
+                "sport_id" => $sport_id,
+                "title" => $title,
+                "context" => $context,
+                "create_time" => $create_time,
+            ];
+        }
+
+
+        //---------------------------------
+        // 自DB取出LsportNotice
+        $return = LsportNotice::orderBy(
+            'sport_id', 'ASC'
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
+        if ($return === false) {
+            $this->ApiError("02");
+        }
+
+        foreach ($return as $k => $v) {
+            $sport_id = $v['sport_id'];
+            $league_id = $v['league_id'];
+            $fixture_id = $v['fixture_id'];
+            $notice_type = $v['type'];
+
+            // sport -----
+            $sport = LsportSport::where('sport_id', $sport_id)->first();
+            $sport_name = $sport[$lang_col];
+
+            // league -----
+            $league = LsportLeague::where('league_id', $league_id)->first();
+            $league_name = $league[$lang_col];
+
+            //對於跑馬燈只要抓前後一天內的賽事資料就好
+            $fixture_start_time = date('Y-m-d H:i:s', time()-60*60*24);
+            $fixture_end_time = date('Y-m-d H:i:s', time()+60*60*24);
+            // fixture -----
+            $fixture = LsportFixture::where(
+                'fixture_id', $fixture_id
+            )->where(
+                'start_time', '>=', $fixture_start_time
+            )->where(
+                'start_time', '<=', $fixture_end_time
+            )->first();
+            if ($fixture) {
+                $fixture_start_time = $fixture['start_time'];
+                $home_team_id = $fixture['home_id'];
+                $away_team_id = $fixture['away_id'];
+
+                // team: home team -----
+                $home_team = LsportTeam::where('team_id', $home_team_id)->first();
+                // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+                if (!strlen($home_team[$lang_col])) {  // sport name
+                    $home_team_name = $home_team['name_en'];
+                } else {
+                    $home_team_name = $home_team[$lang_col];
+                }
+
+                // team: away team -----
+                $away_team = LsportTeam::where('team_id', $away_team_id)->first();
+                // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+                if (!strlen($away_team[$lang_col])) {  // sport name
+                    $away_team_name = $away_team['name_en'];
+                } else {
+                    $away_team_name = $away_team[$lang_col];
+                }
+
+                // 處理 Duplication of <FIXTURE_ID> 的翻譯問題
+                if (strpos($notice_type, 'Duplication of') !== false) {
+                    $arr_notice_type = explode(' ', $notice_type);
+                    $notice_type = "{$arr_notice_type[0]} {$arr_notice_type[1]}";
+                    $fixture_id = $arr_notice_type[2];
+                }
+    
+                $title = trans('notice.fixture_cancellation_reasons.'.'title:'.$notice_type, [
+                    'sport_name' => $sport_name,
+                    'league_name' => $league_name,
+                ]);
+                $fixture_start_time2 = date('m-d H:i', strtotime($fixture_start_time));
+                $context = trans('notice.fixture_cancellation_reasons.'.$notice_type, [
+                    'sport_name' => $sport_name,
+                    'league_name' => $league_name,
+                    'fixture_start_time' => $fixture_start_time2,
+                    'home_team_name' => $home_team_name,
+                    'away_team_name' => $away_team_name,
+                    'fixture_id' => $fixture_id,
+                ]);
+                $create_time = $v['create_time'];
+    
+                $notice_list[$sport_id][] = [
+                    "sport_id" => $sport_id,
+                    "title" => $title,
+                    "context" => $context,
+                    "create_time" => $create_time,
+                ];
+            }
         }
 
         ///////////////////////////////////
-        $this->ApiSuccess($data, "01");
+
+        $data = $notice_list;
+        // gzip
+        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+            $data = $this->gzip($data);
+            $this->ApiSuccess($data, "01", true);
+        } else {
+            $this->ApiSuccess($data, "01", false);
+        }
     }
 
     /**
