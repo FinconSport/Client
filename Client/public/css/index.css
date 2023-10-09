@@ -468,6 +468,6 @@ div[key="sizeSmallRate"]:hover {
     -webkit-mask-composite: destination-in;
     mask-composite: intersect;
     animation:s4 1s infinite steps(10);
-    position: relative;
+    position: absolute;
 }
 @keyframes s4 {to{transform: rotate(1turn)}}
