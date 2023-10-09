@@ -56,7 +56,10 @@
         </div>
     </div>
 </div>
-<div id="leftSlideOrderLoadingContainer" class="hidden"><div id="leftSlideOrderLoadingSpinner"></div></div>
+<div id="leftSlideOrderLoadingContainer" class="hidden">
+    <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
+    <span>{{ trans('index.bet_area.loading') }}</span>
+</div>
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
