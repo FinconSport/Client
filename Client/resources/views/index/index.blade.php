@@ -1077,11 +1077,11 @@
                 //     showErrorToast(res.message)
                 // }
 
-                hideLoading();
+                // hideLoading();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                hideLoading();
+                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });
