@@ -870,7 +870,7 @@
         // 获取当前高度
         var currentHeight = $toggleContent.height();
         
-        if (currentHeight === 49) {
+        if (currentHeight === 37.8) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
             $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
@@ -880,7 +880,7 @@
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '49px' }, 700);
+            $toggleContent.animate({ height: '37.8px' }, 700);
         }
 
         // 切换图标方向
