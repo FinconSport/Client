@@ -400,10 +400,10 @@
                     item.find('.odd').html(v4.price)
                     // 按照不同體育種類、玩法 顯示相對應內容
                     switch ( i ) {
-                        case 3:case 203:case 204:
+                        case 3:case 203:case 204:case 103:case 104:  // 讓球
                             item.find('.bet_name').html( v4.line )
                             break;
-                        case 5:case 205:case 206:
+                        case 5:case 205:case 206:case 105:case 106: // 大小
                             item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                             break;
                         case 7:
@@ -618,8 +618,8 @@
                                     let price = item.attr('bet_rate')
                                     let isSelected = item.hasClass('m_order_on')
 
-                                    // 判斷盤口是否有改變且狀態為1
-                                    if( market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
+                                    // 判斷盤口存在+是否有改變且狀態為1
+                                    if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                         // 判斷賠率是否有改變
                                         if( parseFloat(price) > parseFloat(v4.price) ) {
                                             // console.log('賠率::' + price + ' ->' + v4.price)
@@ -638,11 +638,19 @@
 
                                     // set attribute
                                     if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
+                                    item.attr('priority', i)
+                                    item.attr('fixture_id', k3)
+                                    item.attr('market_id', betData.market_id)
                                     item.attr('market_bet_id', v4.market_bet_id)
                                     item.attr('bet_rate', v4.price)
+                                    item.attr('bet_type', betData.market_name)
                                     item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
                                     item.attr('bet_name_en', v4.market_bet_name_en)
                                     item.attr('line', v4.line)
+                                    item.attr('league', league_name)
+                                    item.attr('home', v3.home_team_name)
+                                    item.attr('away', v3.away_team_name)
+
 
                                     // 賦值
                                     $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
