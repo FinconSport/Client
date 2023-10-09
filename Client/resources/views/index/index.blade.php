@@ -732,9 +732,10 @@
 
     // package process function
     function processMessageQueue() {
+        console.log(messageQueue)
+
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to json
-
         console.log(msg)
 
         // 更新matchListD
