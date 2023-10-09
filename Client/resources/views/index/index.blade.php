@@ -1152,12 +1152,11 @@
         // if the msg is not getting in 10 sec, hide the loading and close the betting area
         setTimeout(function() {
             hasTenSecondsPassed = true;
-        }, 10000); 
-
-        if (hasTenSecondsPassed) {
-            hideLoading();
-            closeCal();
-        }
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal();
+            }
+        }, 10000);
     }
 
     // 統計
