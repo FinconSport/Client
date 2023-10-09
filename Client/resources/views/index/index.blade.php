@@ -381,12 +381,10 @@
             if( sport === 154914 ) {
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
-
                 // base
                 let baseText = v3.periods.Bases
                 if( !baseText) return;
                 baseText = v3.periods.Bases.replaceAll('/','')
-                console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
                 baseCont.attr('src', `/image/base/${baseText}.png`)
 
@@ -402,6 +400,7 @@
                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
             }
 
+            console.log(timerStr)
             time.html(timerStr)
         }
         // ready to start
@@ -644,6 +643,8 @@
 
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+
+                            // exception baseball
                             if( sport === 154914 ) {
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
@@ -651,7 +652,6 @@
                                 let baseText = v3.periods.Bases
                                 if( !baseText) return;
                                 baseText = v3.periods.Bases.replaceAll('/','')
-                                console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
 
@@ -665,7 +665,9 @@
                                 let out = card.find('div[key="out"]')
                                 let outText = v3.periods.Outs
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
-                            } 
+                            }
+
+                            console.log(timerStr)
                             time.html(timerStr)
                         }
                         // ready to start
