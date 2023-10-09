@@ -381,7 +381,7 @@
 
                 // base
                 console.log(v3.periods.Bases)
-                let baseText = v3.periods.Bases.replace('/','')
+                let baseText = v3.periods.Bases.replaceAll('/','')
                 console.log(baseText)
                 let baseCont = card.find('img[alt="base"]')
                 baseCont.attr('src', `/image/base/${baseText}.png`)
@@ -624,7 +624,7 @@
 
                                 // base
                                 console.log(v3.periods.Bases)
-                                let baseText = v3.periods.Bases.replace('/','')
+                                let baseText = v3.periods.Bases.replaceAll('/','')
                                 console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
