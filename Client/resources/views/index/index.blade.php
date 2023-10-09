@@ -849,7 +849,7 @@
             $toggleContent.css('overflow', 'auto');
             $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
                 // 动画完成后，将高度设置为 'auto'
-                $toggleContent.css('height', 'auto');
+                $toggleContent.removeAttr('style')
             });
         } else {
             // 如果高度不是 42px，则收起
