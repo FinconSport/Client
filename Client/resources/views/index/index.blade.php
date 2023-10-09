@@ -1067,6 +1067,7 @@
             direction: "left"
         }, 500);
         $('#mask').fadeOut()
+        // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
@@ -1145,9 +1146,7 @@
             }
         });
 
-        // 金額歸零
-        $('#moneyInput').val('');
-        $('#moneyInput').trigger('change');
+        
 
         let hasTenSecondsPassed = false;
         // if the msg is not getting in 10 sec, hide the loading and close the betting area
