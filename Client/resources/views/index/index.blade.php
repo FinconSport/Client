@@ -150,7 +150,7 @@
         <span class="bet_name"></span>
     </div>
     <div class="col m-0 row text-right">
-        <div class="odd col-5 p-0 text-left"></div>
+        <div class="odd col-5 p-0"></div>
         <div class="col-7 text-left p-0">
             <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
