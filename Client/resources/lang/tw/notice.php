@@ -25,6 +25,7 @@ return [
 	// 後端
     'fixture_cancellation_reasons' => [
         'date_time_to_hour' => 'n月j日 H:i',
+
         'title:Event Cancelled' => '【賽事取消-:sport_name/:league_name】',
         'title:Invalid Event' => '【賽事無效-:sport_name/:league_name】',
         'title:Wrong League' => '【聯盟錯誤-:sport_name/:league_name】',
