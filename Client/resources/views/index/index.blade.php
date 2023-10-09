@@ -837,23 +837,34 @@
 
 
     // 大分類收合
-    function toggleCat( key ) {
-        console.log($(`#toggleContent_${key}`).css('height'))
-        if( $(`#toggleContent_${key}`).css('height') === '42px' ) {
-            $(`#toggleContent_${key}`).css('overflow', 'auto')
-            $(`#toggleContent_${key}`).animate( { height: auto }, 1000);
+    function toggleCat(key) {
+        var $toggleContent = $(`#toggleContent_${key}`);
+        var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
+        
+        // 获取当前高度
+        var currentHeight = $toggleContent.height();
+        
+        if (currentHeight === 42) {
+            // 如果高度为 42px，则展开
+            $toggleContent.css('overflow', 'auto');
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
+                // 动画完成后，将高度设置为 'auto'
+                $toggleContent.css('height', 'auto');
+            });
         } else {
-            $(`#toggleContent_${key}`).css('overflow', 'hidden')
-            $(`#toggleContent_${key}`).animate( { height: '3rem' }, 1000);
+            // 如果高度不是 42px，则收起
+            $toggleContent.css('overflow', 'hidden');
+            $toggleContent.animate({ height: '42px' }, 1000);
         }
-        if($(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).hasClass('fa-chevron-down')) {
-            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).removeClass('fa-chevron-down')
-            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).addClass('fa-chevron-right')
+
+        // 切换图标方向
+        if ($icon.hasClass('fa-chevron-down')) {
+            $icon.removeClass('fa-chevron-down').addClass('fa-chevron-right');
         } else {
-            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).addClass('fa-chevron-down')
-            $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`).removeClass('fa-chevron-right')
+            $icon.removeClass('fa-chevron-right').addClass('fa-chevron-down');
         }
     }
+
 
 
     // 聯賽分類收合
