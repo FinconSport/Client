@@ -313,7 +313,7 @@
     }
 
     function createLeague(k, k2, v2) {
-        console.log(v2.league_id)
+        console.log('createLeague->' + v2.league_name)
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -349,6 +349,8 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
+
+        console.log('createFixtureCard->' + v3.home_team_name + ' VS ' + v3.away_team_name)
         let card = $('div[template="fixtureCardTemplate"]').clone()
 
         // 壘包 好壞球 只有 滾球 棒球有
@@ -400,7 +402,7 @@
                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
             }
 
-            console.log(timerStr)
+            console.log(v3.home_team_name + ' VS ' + v3.away_team_name + ' -> ' + timerStr)
             time.html(timerStr)
         }
         // ready to start
@@ -667,7 +669,7 @@
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
                             }
 
-                            console.log(timerStr)
+                            console.log(v3.home_team_name + ' VS ' + v3.away_team_name + ' -> ' + timerStr)
                             time.html(timerStr)
                         }
                         // ready to start
