@@ -235,18 +235,7 @@ class LsportApiController extends Controller {
         }
 
         foreach ($return as $k => $v) {
-            $sport_id = 0;
-            $title = $v['title'];
-            $context = $v['marquee'];
-            $create_time = $v['create_time'];
-
-            $notice_list[] = [
-                "id" => $sport_id,
-                "title" => $title,
-                "marquee" => $context,
-                "status" => 1,
-                "create_time" => $create_time,
-            ];
+            $notice_list[] = $v['marquee'];
         }
 
 
@@ -329,15 +318,8 @@ class LsportApiController extends Controller {
                     'away_team_name' => $away_team_name,
                     'fixture_id' => $fixture_id,
                 ]);
-                $create_time = $v['create_time'];
     
-                $notice_list[] = [
-                    "id" => $sport_id,
-                    "title" => $title,
-                    "marquee" => $context,
-                    "status" => 1,
-                    "create_time" => $create_time,
-                ];
+                $notice_list[] = "{$title}: {$context}";
             }
         }
 
