@@ -738,12 +738,11 @@
         const msg = JSON.parse(message.data); // convert to json
         console.log(msg)
 
-        // 更新matchListD
-
-
-
-
-        // 更新matchListD
+        // delay_order
+        if( msg.action === 'delay_order' ){
+            showSuccessToast(order_id)
+        }
+        // delay_order
     }
 
     // 註冊賽事id
