@@ -821,7 +821,7 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
-        let hasTenSecondsPassed = false;
+        
 
         // delay_order
         if (msg.action === 'delay_order') {
@@ -832,19 +832,13 @@
                 hideLoading();
                 closeCal();
             }, 1000);
-
-            // if the msg is not getting in 10 sec, hide the loading and close the betting area
-            setTimeout(function() {
-                hasTenSecondsPassed = true;
-            }, 10000); 
-
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal();
-            }
         }
         // delay_order
     }
+
+    $('#mask, #cancelOrder').click(function() {
+        closeCal();
+    })
 
     // 註冊賽事id
     function wsRegisterMatch() {
@@ -1064,7 +1058,7 @@
     }
 
     // 關閉左邊投注區塊
-    $('#cancelOrder').click(function() {
+    $('#mask, #cancelOrder').click(function() {
         closeCal();
     })
 
@@ -1154,8 +1148,17 @@
         // 金額歸零
         $('#moneyInput').val('');
         $('#moneyInput').trigger('change');
-        // 隱藏計算機
-        // closeCal()
+
+        let hasTenSecondsPassed = false;
+        // if the msg is not getting in 10 sec, hide the loading and close the betting area
+        setTimeout(function() {
+            hasTenSecondsPassed = true;
+        }, 10000); 
+
+        if (hasTenSecondsPassed) {
+            hideLoading();
+            closeCal();
+        }
     }
 
     // 統計

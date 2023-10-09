@@ -460,6 +460,17 @@ div[key="sizeSmallRate"]:hover {
     font-weight: 600;
 }
 
+#leftSlideOrderLoadingContainer::after{
+    position: fixed;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: transparent;
+}
+
 #leftSlideOrderLoadingContainer span {
     margin-top: 0.5rem;
     font-weight: 600;
