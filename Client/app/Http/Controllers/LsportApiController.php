@@ -309,7 +309,11 @@ class LsportApiController extends Controller {
                     'sport_name' => $sport_name,
                     'league_name' => $league_name,
                 ]);
-                $fixture_start_time2 = date('m-d H:i', strtotime($fixture_start_time));
+                // $fixture_start_time2 = date('m-d H:i', strtotime($fixture_start_time));
+                $fixture_start_time2 = date(
+                    trans('notice.fixture_cancellation_reasons.date_time_to_hour'),
+                    strtotime($fixture_start_time)
+                );
                 $context = trans('notice.fixture_cancellation_reasons.'.$notice_type, [
                     'sport_name' => $sport_name,
                     'league_name' => $league_name,
@@ -450,7 +454,11 @@ class LsportApiController extends Controller {
                     'sport_name' => $sport_name,
                     'league_name' => $league_name,
                 ]);
-                $fixture_start_time2 = date('m-d H:i', strtotime($fixture_start_time));
+                // $fixture_start_time2 = date('m-d H:i', strtotime($fixture_start_time));
+                $fixture_start_time2 = date(
+                    trans('notice.fixture_cancellation_reasons.date_time_to_hour'),
+                    strtotime($fixture_start_time)
+                );
                 $context = trans('notice.fixture_cancellation_reasons.'.$notice_type, [
                     'sport_name' => $sport_name,
                     'league_name' => $league_name,
