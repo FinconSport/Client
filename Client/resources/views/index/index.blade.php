@@ -1102,8 +1102,8 @@
     // 統計
     function statistics() {
         $('#indexContainer .elToggleCount').each(function() {
-            let id = $(this).attr('id').replace('_total', '')
-            let count = $('#' + id).find('.indexEachCard').length
+            let id = $(this).attr('id').split('_')[1]
+            let count = $('#toggleContent_' + id).find('.indexEachCard').length
             $(this).html(count)
             if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
