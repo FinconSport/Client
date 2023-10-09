@@ -463,16 +463,4 @@ div[key="sizeSmallRate"]:hover {
     mask-composite: intersect;
     animation:s4 1s infinite steps(10);
 }
-  @keyframes s4 {to{transform: rotate(1turn)}}
-
-  #leftSlideOrderLoadingContainer #leftSlideOrderLoadingSpinner::after {
-    width: 3em;
-    height: 3em;
-    border-radius: 50%;
-    position: absolute;
-    content: '';
-    background: #9d9d9e;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
+@keyframes s4 {to{transform: rotate(1turn)}}
