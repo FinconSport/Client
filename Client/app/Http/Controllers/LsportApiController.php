@@ -956,11 +956,16 @@ class LsportApiController extends Controller {
 
             // 開始繞玩法資料
             foreach ($market_data as $k => $v) {
-                $market_id = $v->bet_id;
-                $market_name = $v->m_name_locale;
+                $market_id = $v->market_id;
                 $market_priority = $v->priority;
                 $market_main_line = $v->main_line;
 
+                // market_name: 判斷用戶語系資料是否為空,若是則用en就好
+                if (!strlen($v->m_name_locale)) {
+                    $market_name = $v->m_name_en;
+                } else {
+                    $market_name = $v->m_name_locale;
+                }
 
                 //取出[賽事+玩法+玩法.base_line]的賠率 ----------------------------
                 $market_bet_data = DB::table('lsport_market_bet as mb')
@@ -994,7 +999,13 @@ class LsportApiController extends Controller {
                     // 加總 market_bet_count
                     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['market_bet_count'] += 1;
 
-                    $market_bet_name = $v2->mb_name_locale;
+                    // $market_bet_name = $v2->mb_name_locale;
+                    // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                    if (!strlen($v2->mb_name_locale)) {
+                        $market_bet_name = $v2->mb_name_en;
+                    } else {
+                        $market_bet_name = $v2->mb_name_locale;
+                    }
 
                     // 包入 market_bet 賠率資料 ---------------
                     //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
