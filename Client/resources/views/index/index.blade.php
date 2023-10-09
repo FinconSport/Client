@@ -389,6 +389,8 @@
                     baseText = v3.periods.Bases.replaceAll('/','')
                     let baseCont = card.find('img[alt="base"]')
                     baseCont.attr('src', `/image/base/${baseText}.png`)
+                } else {
+                    baseCont.attr('src', `/image/base/000.png`)
                 }
 
                 // balls
