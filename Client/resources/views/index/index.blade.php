@@ -109,7 +109,16 @@
         </div>
         <div class="baseballSpan" key='baseball'>
             <div class="timer"></div>
-            <div class="baseCon"></div>
+            <div class="baseCon row m-0">
+                <div class="col p-0">
+                    <img src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
+                </div>
+                <div class="col p-0" key='balls'>
+                    <img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike">
+                    <img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball">
+                    <img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out">
+                </div>
+            </div>
         </div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
@@ -364,7 +373,18 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-            if( sport === 154914 ) v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+            // exception baseball
+            if( sport === 154914 ) {
+                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+
+                // base
+                let baseText = v3.periods.Bases.replace('/','')
+                let baseCont = card.find('img[alt="base"]')
+                baseCont.attr('src', `/public/image/base/${baseText}.png`)
+            }
+
             time.html(timerStr)
         }
         // ready to start

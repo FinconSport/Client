@@ -162,6 +162,7 @@
 .baseballSpan .timer {
     height: 2.5rem;
     line-height: 2.5rem;
+    font-weight: 600;
 }
 .baseballSpan .baseCon {
     height: 2.5rem;
