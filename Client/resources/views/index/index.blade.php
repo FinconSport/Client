@@ -110,13 +110,13 @@
         <div class="baseballSpan" key='baseball'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
-                <div class="col p-0 h-100 w-100">
+                <div class="col-6 h-100 p-0">
                     <img class="h-100" src="{{ asset('image/base/000.png?v=' . $system_config['version']) }}" alt="base">
                 </div>
-                <div class="col h-100 p-0 w-100">
-                    <img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike">
-                    <img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball">
-                    <img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out">
+                <div class="col-6 h-100 p-0" key='balls'>
+                    <div><img src="{{ asset('image/balls/s0.png?v=' . $system_config['version']) }}" alt="strike"></div>
+                    <div><img src="{{ asset('image/balls/b0.png?v=' . $system_config['version']) }}" alt="ball"></div>
+                    <div><img src="{{ asset('image/balls/o0.png?v=' . $system_config['version']) }}" alt="out"></div>
                 </div>
             </div>
         </div>
