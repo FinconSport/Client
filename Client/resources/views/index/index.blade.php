@@ -392,13 +392,13 @@
                 // balls
                 let strike = card.find('img[alt="strike"]')
                 let strikeText = v3.periods.Strikes
-                strike.attr('src', `/image/base/s${strikeText}.png`)
+                strike.attr('src', `/image/balls/s${strikeText}.png`)
                 let ball = card.find('img[alt="ball"]')
                 let ballText = v3.periods.Balls
-                ball.attr('src', `/image/base/b${ballText}.png`)
+                ball.attr('src', `/image/balls/b${ballText}.png`)
                 let out = card.find('img[alt="out"]')
                 let outText = v3.periods.Outs
-                out.attr('src', `/image/base/o${outText}.png`)
+                out.attr('src', `/image/balls/o${outText}.png`)
             }
 
             time.html(timerStr)
@@ -657,13 +657,13 @@
                                 // balls
                                 let strike = card.find('img[alt="strike"]')
                                 let strikeText = v3.periods.Strikes
-                                strike.attr('src', `/image/base/s${strikeText}.png`)
+                                strike.attr('src', `/image/balls/s${strikeText}.png`)
                                 let ball = card.find('img[alt="ball"]')
                                 let ballText = v3.periods.Balls
-                                ball.attr('src', `/image/base/b${ballText}.png`)
+                                ball.attr('src', `/image/balls/b${ballText}.png`)
                                 let out = card.find('img[alt="out"]')
                                 let outText = v3.periods.Outs
-                                out.attr('src', `/image/base/o${outText}.png`)
+                                out.attr('src', `/image/balls/o${outText}.png`)
                             } 
                             time.html(timerStr)
                         }
