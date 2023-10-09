@@ -449,8 +449,6 @@
 			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
 					if( !sport ) sport = sportListD.data[0].sport_id // default sport
-					console.log('common')
-					console.log(sport)
 					isReadyCommon = true
 					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking

@@ -313,7 +313,6 @@
     }
 
     function createLeague(k, k2, v2) {
-        console.log(v2.league_id)
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -349,6 +348,7 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
+
         let card = $('div[template="fixtureCardTemplate"]').clone()
 
         // 壘包 好壞球 只有 滾球 棒球有
@@ -369,8 +369,10 @@
         away_team_info.find('.teamSpan').html(v3.away_team_name)
         away_team_info.find('.scoreSpan').html()
 
+
         // living score
         if( v3.status === 2 ) {
+
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
@@ -380,15 +382,14 @@
             // exception baseball
             if( sport === 154914 ) {
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-
-
                 // base
+                console.log(v3.periods)
                 let baseText = v3.periods.Bases
-                if( !baseText) return;
-                baseText = v3.periods.Bases.replaceAll('/','')
-                console.log(baseText)
-                let baseCont = card.find('img[alt="base"]')
-                baseCont.attr('src', `/image/base/${baseText}.png`)
+                if( baseText) {
+                    baseText = v3.periods.Bases.replaceAll('/','')
+                    let baseCont = card.find('img[alt="base"]')
+                    baseCont.attr('src', `/image/base/${baseText}.png`)
+                }
 
                 // balls
                 let strike = card.find('div[key="strike"]')
@@ -458,8 +459,6 @@
                         item.removeAttr('onclick')
                     }
 
-                    
-
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
@@ -486,6 +485,7 @@
             bet_div.removeAttr('template')
             card.find('.indexBetCardTable').append(bet_div)
         });
+
 
         card.removeAttr('hidden')
         card.removeAttr('template')
@@ -522,7 +522,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView()
+                    // renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -610,7 +610,6 @@
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
                         let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
-                        // console.log(k3 + ' isSwitch ->' + isSwitchCate + ' newStatus = ' + v3.status)
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
@@ -644,6 +643,8 @@
 
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+
+                            // exception baseball
                             if( sport === 154914 ) {
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
@@ -651,7 +652,6 @@
                                 let baseText = v3.periods.Bases
                                 if( !baseText) return;
                                 baseText = v3.periods.Bases.replaceAll('/','')
-                                console.log(baseText)
                                 let baseCont = card.find('img[alt="base"]')
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
 
@@ -665,7 +665,8 @@
                                 let out = card.find('div[key="out"]')
                                 let outText = v3.periods.Outs
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
-                            } 
+                            }
+
                             time.html(timerStr)
                         }
                         // ready to start
