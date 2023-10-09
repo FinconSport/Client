@@ -172,6 +172,10 @@
     height: 33.33333%;
     background-size: 100% 100%;
 }
+.baseballSpan .baseCon div[key="base"] img{
+    height: 80%;
+    margin-top: 5%;
+}
 
 .indexBetCardTable {
     width: 60%;
