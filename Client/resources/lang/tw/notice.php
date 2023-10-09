@@ -34,11 +34,11 @@ return [
         'title:Fixture Status Corrected' => '比分資料錯誤-:sport_name/:league_name',
         
         'Event Cancelled' => '賽事已取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Invalid Event' => '賽事資料來源不正確取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Wrong League' => '賽事聯盟錯誤取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Participants Swapped' => '已賽事選手錯序取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Home/Away Team Corrected' => '賽事主客隊伍錯誤取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Duplication of' => '賽事與:fixture_id重複取消: :fixture_start_time :home_team_name vs. :away_team_name',
-        'Fixture Status Corrected' => '賽事即時比分不正確取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Invalid Event' => '賽事資料來源不正確故取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Wrong League' => '賽事聯盟錯誤故取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Participants Swapped' => '已賽事選手錯序故取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Home/Away Team Corrected' => '賽事主客隊伍錯誤故取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Duplication of' => '賽事與:fixture_id重複故取消: :fixture_start_time :home_team_name vs. :away_team_name',
+        'Fixture Status Corrected' => '賽事即時比分不正確故取消: :fixture_start_time :home_team_name vs. :away_team_name',
     ]
 ];
