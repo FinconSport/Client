@@ -782,6 +782,7 @@
         // delay_order
         if( msg.action === 'delay_order' ){
             showSuccessToast(msg.order_id)
+            refreshBalence()
         }
         // delay_order
     }
@@ -1059,8 +1060,6 @@
         //     return;
         // }
 
-        console.log(sendOrderData)
-
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
@@ -1068,13 +1067,13 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
-                if (res.message === 'SUCCESS_API_GAME_BET_01') {
-                    // 餘額更新
-                    refreshBalence()
-                    showSuccessToast(res.message)
-                } else {
-                    showErrorToast(res.message)
-                }
+                // if (res.message === 'SUCCESS_API_GAME_BET_01') {
+                //     // 餘額更新
+                //     refreshBalence()
+                //     showSuccessToast(res.message)
+                // } else {
+                //     showErrorToast(res.message)
+                // }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
