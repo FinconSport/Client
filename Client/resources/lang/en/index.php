@@ -13,7 +13,7 @@ return [
 		'bet' => 'Bet', // "投注"
 		'cancel' => 'Cancel', // "取消"
 		'limit' => 'Betting Limit', // "限額"
-		'loading' => 'Loading', // "加载中"
+		'loading' => 'Loading...', // "加载中"
 	],
 	'mainArea' => [
 		'early' => 'Early Odds', // "早盤"
