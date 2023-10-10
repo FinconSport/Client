@@ -24,7 +24,7 @@ class TestController extends PcController {
       // $dd = LsportSport::getESQuery($sql);
       //$dd = LsportSport::getESAgg($sql);
 
-      $mPlayer = Player::where("status",1)->whereIn("player_id",[1,2]);
+      $mPlayer = Player::where("status",1)->whereIn("id",[1,2]);
 
     // Cache::reember() {  
       // select * from player where status = 1
