@@ -217,7 +217,7 @@
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
 		betDataBetWayContainer.append(
-			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betIt1em.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
+			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
 		);
 
 		const betDataResultID = `betDataDetailsResult_${orderItem.id}`; 
