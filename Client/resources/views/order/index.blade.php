@@ -305,7 +305,8 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
 			const dynamicId = 'additionalTr_' + betIndex + betItem.league_name;
-			const targetElements = $(`#${dynamicId}.hide-betaDetcon`);
+			console.log(dynamicId);
+			const targetElements = $(`#${dynamicId}.orderData_expand`);
 
 			function toggleContainers() {
 				targetElements.slideToggle();
