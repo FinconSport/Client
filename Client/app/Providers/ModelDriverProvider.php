@@ -21,16 +21,38 @@ class ModelDriverProvider extends ServiceProvider {
 
             // Build ES SQL
             $bindings = $this->getBindings();
-            $modelSql = $this->toSql();
-            $sql = vsprintf(str_replace('?', "'%s'", $modelSql), $bindings);
-            $sql = str_replace($tableName, $esTableName, $sql);
-            $sql = str_replace("'", "", $sql);
-            $sql = str_replace("`", "", $sql);
+            $rawSql = $this->toSql();
+            $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);
+            $esSql = str_replace($tableName, $esTableName, $esSql);
+            $esSql = str_replace("'", "", $esSql);
+            $esSql = str_replace("`", "", $esSql);
 
-            $cacheKey = MD5($sql);
+            $cacheKey = MD5($esSql);
 
             $data = Cache::remember($cacheKey, $cacheAliveTime, function () {
-                return $this->get();
+                
+                // create URL
+                $url = 'http://72.167.135.22:29200/_sql?sql=' . $esSql . '&pretty';
+
+                $esUser = env("ES_USER");
+                $esPass = env("ES_PASS");
+
+                // Basic Auth
+                $response = Http::withBasicAuth($esUser, $esPass)->get($url);
+                
+                // check successful
+                if ($response->successful()) {
+                    // json decode
+                    $data = $response->json();
+                    $list = array();
+                    foreach ($data['hits']['hits'] as $k => $v) {
+                        $list[] = $v['_source'];
+                    }
+
+                    return $list;
+                } 
+
+                return false;
             });
 
             return $data;
