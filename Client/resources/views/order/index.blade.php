@@ -309,8 +309,9 @@
 			}
 
 			toggleButton.on('click', toggleContainers);
+			const parentElement = orderDataBetEvent.parent();
+			parentElement.find('.orderData_mOrder').append(toggleButton);
 			// toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
-			toggleButton.appendTo('.orderData_mOrder');
 		}
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
