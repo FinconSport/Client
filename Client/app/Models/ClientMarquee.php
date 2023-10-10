@@ -13,7 +13,7 @@ class ClientMarquee extends CacheModel
 	public $timestamps = false;
 	protected $table = "client_marquee";
 
-    public static function getData(
+    public static function getActiveMarquee(
         array $data = null  // data=參數
     ) {
 

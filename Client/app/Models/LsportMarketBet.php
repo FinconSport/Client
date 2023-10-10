@@ -53,9 +53,9 @@ class LsportMarketBet extends CacheModel
             return $return;
         });
     }
-    public static function getData(
-        array $data,  // data=參數, 
-        string $id_col = 'bet_id'  // id_col=主鍵或是搜尋的欄位名
+
+    public static function findData(
+        array $data  // data=參數
     ) {
 
         // 緩存時間
@@ -64,10 +64,11 @@ class LsportMarketBet extends CacheModel
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data, $id_col) {
-            $id = $data[$id_col];
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
+            $fixture_id = $data['fixture_id'];
+            $bet_id = $data['bet_id'];
 
-            $data = self::where($id_col, $id)->first();
+            $data = self::where('fixture_id', $fixture_id)->where('bet_id', $bet_id)->first();
             $return = $data;
 
             return $return;

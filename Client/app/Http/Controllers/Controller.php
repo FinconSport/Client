@@ -86,7 +86,9 @@ class Controller extends BaseController
 
     // system_config
     protected function system_config() {
-    	$return = SystemConfig::where("status",1)->get();
+    	// $return = SystemConfig::where("status",1)->get();
+        // cache
+        $return = SystemConfig::getActiveSystemConfig();
     	$data = array();
     	foreach ($return as $k => $v) {
 
@@ -129,50 +131,6 @@ class Controller extends BaseController
 
 		return $api_lang;
 	}
-
-	
-    // // 取得體育種類列表
-    // protected function getGameList($lang = 'cn') {
-      
-	// 	$lang_key = "name_" . $lang;
-  
-	// 	$list = array();
-	// 	$return = AntGameList::where("status",1)->get();
-	// 	if ($return === false) {
-	// 	  return false;
-	// 	}
-  
-	// 	foreach ($return as $k => $v) {
-	// 	  $list[$v['id']] = $v[$lang_key];
-	// 	}
-  
-	// 	$this->assign("sport_list",$list);
-  
-	//   }
-  
-	// 	// 取得熱門聯賽列表
-	//   protected function getHotSeriesList($sport_type, $lang = 'cn') {
-  
-	// 	$lang_key = "name_" . $lang;
-  
-	// 	$list = array();
-	// 	//  $return = AntSeriesList::where("game_id",$sport_type)->where("is_hot",1)->get();
-	// 	$return = AntSeriesList::join('ant_game_list', 'ant_series_list.game_id', '=', 'ant_game_list.id')
-	// 	->where('ant_series_list.is_hot', 1)
-	// 	->where('ant_game_list.status', 1)
-	// 	->select('ant_series_list.*')
-	// 	->get();
-	// 	if ($return === false) {
-	// 	  return false;
-	// 	}
-  
-	// 	foreach ($return as $k => $v) {
-	// 	  $list[$v['game_id']][$v['series_id']] = $v[$lang_key];
-	// 	}
-  
-	// 	$this->assign("series_list",$list);
-  
-	//   }
 
 	///////////////////////////////////////////
     
@@ -330,7 +288,9 @@ class Controller extends BaseController
 	// 取得用戶資料並輸出至頁面
 	protected function setPlayerInfo($session) {
 		$player_id = $session['player']['id'];
-		$return = Player::where("id",$player_id)->first();
+		// $return = Player::where("id",$player_id)->first();
+        // cache
+        $return = Player::findData(['id'=>$player_id]);
 		$player = array();
 		$player['account'] = $return['account'];
 		$player['balance'] = $return['balance'];
