@@ -284,8 +284,7 @@
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 
-			// Remove all .betaDetcon elements within the created <td> except the first child
-			orderDataBetEvent.children('.betaDetcon:not(:first-child)').remove();
+			$('.orderData_betData_Event').children('.betaDetcon:not(:first-child)').remove();
 		}
 
 
