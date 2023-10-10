@@ -225,10 +225,10 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
-		orderDataBetEvent.empty();
-
+		
 		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
+		orderDataBetEvent.empty();
 		const betDataEventContainer = $(`<div class='betaDetcon'>`);
 		betDataEventContainer.append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
