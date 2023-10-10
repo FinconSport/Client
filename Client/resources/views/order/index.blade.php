@@ -88,7 +88,15 @@
                         </td>
                         <td class="no-border-right orderData_status"></td>
                     </tr>
-
+                    <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
+						<td style="width: 5%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 30%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
+                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
+                        <td style="width: 10%;"></td>
+                    </tr>
                 </tbody>
             </table>
 			<div id="loader" style="display: none; margin-top: 2rem;">
