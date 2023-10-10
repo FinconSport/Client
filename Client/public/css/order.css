@@ -77,8 +77,12 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tbody tr:last-child td{
+/* #orderTable tbody tr:last-child td{
     border-right: 2px solid rgb(65, 91, 90);
+} */
+
+#orderTable tbody tr:nth-child(even) {
+    background-color: #e2f0f0;
 }
 
 #orderTable thead {
