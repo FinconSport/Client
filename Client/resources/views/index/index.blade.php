@@ -407,6 +407,8 @@
             time.html(langTrans.mainArea.readyToStart)
         }
 
+
+
         // living
         if( v3.status === 2 ) {
             // score
@@ -415,6 +417,8 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+            console.log(v3)
+            console.log('timerStr->' + timerStr)
 
             // exception baseball
             if( sport === 154914 ) {
@@ -451,7 +455,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 

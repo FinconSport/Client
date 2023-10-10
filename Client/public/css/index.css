@@ -133,9 +133,9 @@
     float: left;
 }
 
-[key="homeTeamInfo"] .teamSpan {
+[key="homeTeamInfo"] .teamSpan,
+[key="homeTeamInfo2"] .teamSpan {
     margin-top: 0.5rem;
-    /* line-height: 1.5rem; */
 }
 .teamSpan{
     font-size: 1.1rem;
