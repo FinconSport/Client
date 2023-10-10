@@ -255,7 +255,7 @@
 			// Create additional <td> elements for betItems other than the first one
 			const additionalTds = $('<td style="width: 8%;"></td>' +
 				'<td style="width: 9%;"></td>' +
-				'<td style="width: 21%;" class="orderData_betData_Events"></td>' +
+				'<td style="width: 21%;text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
@@ -272,7 +272,7 @@
 
 			    // Append the data to the created additional <td> elements except for the first one
 				const betDataEventContainer = $(`#additionalTr_${betIndex}${betItem.league_name}`);
-				betDataEventContainer.find('.orderData_betData_Events').html(`
+				betDataEventContainer.find('.orderData_betData_Event').html(`
 					${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
 					${betItem.home_team_name} VS ${betItem.away_team_name} 
 					<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
