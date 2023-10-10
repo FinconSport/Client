@@ -59,7 +59,7 @@ class LsportApiController extends Controller {
         'wait_for_result' => 2,  // 等待開獎的注單
         'wait_for_payment' => 3,  // 等待派彩的注單
         'finished' => 4,  // 已派彩的注單 (結束)
-        'wait_for_audit' => 5,  // 等待審核的注單
+        'wait_for_audit' => 5,  // 等待審核的注單(風控大單)
     );
 
     /**
@@ -2571,7 +2571,8 @@ class LsportApiController extends Controller {
             1 => "等待審核",
             2 => "等待開獎",
             3 => "等待派獎",
-            4 => "已開獎"
+            4 => "已開獎",
+            5 => "風控大單",
         );
 
         $data = array();
