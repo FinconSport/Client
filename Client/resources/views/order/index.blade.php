@@ -275,7 +275,7 @@
 			});
 
 			// Add the class .additionalTr_${betIndex} to the element with class .orderData_betData_Event
-			$(`#${dynamicId} .orderData_betData_Event`).addClass(`additionalTr_${betIndex}`);
+			$(`.${dynamicId} .orderData_betData_Event`).append(`.additionalTr_${betIndex}`);
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
