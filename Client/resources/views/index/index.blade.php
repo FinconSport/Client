@@ -745,8 +745,8 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
 
-                                console.log('newStagePriorityArr')
-                                console.log(newStagePriorityArr)
+                                console.log('stagePriorityArr')
+                                console.log(stagePriorityArr)
 
                                 console.log('newStagePriorityArr')
                                 console.log(newStagePriorityArr, v3.period)
