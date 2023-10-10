@@ -212,7 +212,14 @@ div[key="matchSportMenu"]{
     word-wrap: normal;
     border: none;
     background: none;
+    -moz-appearance: none;
+    -webkit-appearance: none; 
 }
+
+/* for IE10 */ 
+.search-statistic-container select::-ms-expand { 
+    display: none; 
+} 
 
 .datecalendar-con .date-divider {
     margin: 0px 0.7rem;
