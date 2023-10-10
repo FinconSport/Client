@@ -265,7 +265,7 @@ class LsportApiController extends Controller {
             // $sport = LsportSport::where('sport_id', $sport_id)->first();
 
             // cache
-            $sport_name = LsportSport::getName(['sport_id'=>$sport_id,'api_lang'=>$agent_lang]);
+            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
             // $sport_name = $sport[$lang_col];
 
             // league -----
@@ -277,7 +277,7 @@ class LsportApiController extends Controller {
             // }
 
             // cache
-            $league_name = LsportLeague::getName(['league_id'=>$league_id,'api_lang'=>$agent_lang]);
+            $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
 
             //對於跑馬燈只要抓前後一天內的賽事資料就好
             $fixture_start_time = date('Y-m-d H:i:s', time()-60*60*24);
@@ -308,7 +308,7 @@ class LsportApiController extends Controller {
                 // }
 
                 // cache
-                $home_team_name = LsportTeam::getName(['team_id'=>$home_team_id,'api_lang'=>$agent_lang]);
+                $home_team_name = LsportTeam::getName(['team_id'=>$home_team_id, 'api_lang'=>$agent_lang]);
 
                 // team: away team -----
                 // $away_team = LsportTeam::where('team_id', $away_team_id)->first();
@@ -320,7 +320,7 @@ class LsportApiController extends Controller {
                 // }
 
                 // cache
-                $away_team_name = LsportTeam::getName(['team_id'=>$away_team_id,'api_lang'=>$agent_lang]);
+                $away_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
 
                 // 處理 Duplication of <FIXTURE_ID> 的翻譯問題
                 if (strpos($notice_type, 'Duplication of') !== false) {
@@ -422,11 +422,12 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 自DB取出LsportNotice
-        $return = LsportNotice::orderBy(
-            'sport_id', 'ASC'
-        )->orderBy(
-            'create_time', 'DESC'
-        )->get();
+        // $return = LsportNotice::orderBy(
+        //     'sport_id', 'ASC'
+        // )->orderBy(
+        //     'create_time', 'DESC'
+        // )->get();
+        $return = LsportNotice::getData();
         if ($return === false) {
             $this->ApiError("02");
         }
@@ -438,41 +439,48 @@ class LsportApiController extends Controller {
             $notice_type = $v['type'];
 
             // sport -----
-            $sport = LsportSport::where('sport_id', $sport_id)->first();
-            $sport_name = $sport[$lang_col];
+            // $sport = LsportSport::where('sport_id', $sport_id)->first();
+            // $sport_name = $sport[$lang_col];
+            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
 
             // league -----
-            $league = LsportLeague::where('league_id', $league_id)->first();
-            $league_name = $league[$lang_col];
-            if (empty($league[$lang_col])) {
-                $league_name = $league['name_en'];
-            } else {
-                $league_name = $league[$lang_col];
-            }
+            // $league = LsportLeague::where('league_id', $league_id)->first();
+            // $league_name = $league[$lang_col];
+            // if (empty($league[$lang_col])) {
+            //     $league_name = $league['name_en'];
+            // } else {
+            //     $league_name = $league[$lang_col];
+            // }
+            $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
+
             // fixture -----
-            $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
+            // $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
+            $fixture = LsportFixture::findData(['fixture_id'=>$fixture_id]);
+
             if ($fixture) {
                 $fixture_start_time = $fixture['start_time'];
                 $home_team_id = $fixture['home_id'];
                 $away_team_id = $fixture['away_id'];
 
                 // team: home team -----
-                $home_team = LsportTeam::where('team_id', $home_team_id)->first();
-                // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (empty($home_team[$lang_col])) {  // sport name
-                    $home_team_name = $home_team['name_en'];
-                } else {
-                    $home_team_name = $home_team[$lang_col];
-                }
+                // $home_team = LsportTeam::where('team_id', $home_team_id)->first();
+                // // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+                // if (empty($home_team[$lang_col])) {  // sport name
+                //     $home_team_name = $home_team['name_en'];
+                // } else {
+                //     $home_team_name = $home_team[$lang_col];
+                // }
+                $home_team_name = LsportTeam::getName(['team_id'=>$home_team_id, 'api_lang'=>$agent_lang]);
 
                 // team: away team -----
-                $away_team = LsportTeam::where('team_id', $away_team_id)->first();
-                // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (empty($away_team[$lang_col])) {  // sport name
-                    $away_team_name = $away_team['name_en'];
-                } else {
-                    $away_team_name = $away_team[$lang_col];
-                }
+                // $away_team = LsportTeam::where('team_id', $away_team_id)->first();
+                // // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+                // if (empty($away_team[$lang_col])) {  // sport name
+                //     $away_team_name = $away_team['name_en'];
+                // } else {
+                //     $away_team_name = $away_team[$lang_col];
+                // }
+                $away_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
 
                 // 處理 Duplication of <FIXTURE_ID> 的翻譯問題
                 if (strpos($notice_type, 'Duplication of') !== false) {
