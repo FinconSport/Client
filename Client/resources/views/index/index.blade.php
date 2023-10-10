@@ -161,9 +161,9 @@
     <div class="col text-right p-0">
         <span class="bet_name"></span>
     </div>
-    <div class="col m-0 row text-right p-0">
+    <div class="col m-0 row text-right p-0" key='oddAndLock'>
         <div class="odd col-4 p-0"></div>
-        <div class="col-8 text-left p-0">
+        <div class="col-8 text-left">
             <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
