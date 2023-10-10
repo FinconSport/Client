@@ -20,6 +20,12 @@ class TestController extends PcController {
       if ($return === false) {
         
       }
+
+      // fetch 方法
+      $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
+      if ($return === false) {
+        
+      }
       dd($return);
       
 
