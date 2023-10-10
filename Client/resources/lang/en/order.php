@@ -29,6 +29,18 @@ return [
 		"close" => "Close",  //  "收起",
 		"sport" => "Sports betting", // 体育博彩
     	"morder" => "Cross match betting", //交叉比赛投注
+		"select_sport" => "Please Select Sports",  //  "請選擇體育"
+		"last_month" => "Last Month",  //  "上月",
+		"last_week" => "Last Week",  //  "上週",
+		"yesterday" => "Yesterday",  //  "昨日",
+		"today" => "Today",  //  "今日",
+		"this_week" => "This Week",  //  "本週",
+		"this_month" => "This Month",  //  "本月",
+		"total_bet_count" => "Total count of bets",  //  "總注單數",
+		"total_bet_amount" => "Total bet amount",  //  "投注金額",
+		"total_effective_amount" => "Total effective amount",  //  "總計有效",
+		"total_result_amount" => "Total result amount",  //  "總計派獎",
+		"total_win_amount" => "Total win amount",  //  "總計輸贏",
 	],  //  
 	'sportPriority' => [
 		1 => 'Full Match Win',

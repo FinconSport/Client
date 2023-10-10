@@ -5,7 +5,7 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 				<select id="selectOption" name="selectOption">
-					<option value="">Please Select Sports</option>
+					<option value="">{{ trans('order.main.select_sport') }}</option>
 					<option value="baseball">Baseball</option>
 					<option value="football">Football</option>
 					<option value="basketball">Basketball</option>
@@ -15,24 +15,45 @@
 				<div class="datepicker-con">
 					<div class="input-group date">
 						<input type="text" class="form-control" id="datepicker_from">
-						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
+						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
 					</div>
 					<span class="date-divider"> ~ </span>
 					<div class="input-group date">
 						<input type="text" class="form-control" id="datepicker_to">
-						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
+						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
 					</div>
 				</div>
 				<div class="datebutton-cons">
-
+					<button class="dateCalendarBtn">{{ trans('order.main.last_month') }}</button>
+					<button class="dateCalendarBtn">{{ trans('order.main.last_week') }}</button>
+					<button class="dateCalendarBtn">{{ trans('order.main.yesterday') }}</button>
+					<button class="dateCalendarBtn">{{ trans('order.main.today') }}</button>
+					<button class="dateCalendarBtn">{{ trans('order.main.this_week') }}</button>
+					<button class="dateCalendarBtn">{{ trans('order.main.this_month') }}</button>
 				</div>
 			</div>
 		</div>
-		<div class="statistic-containe"></div>
+		<div class="statistic-container">
+			<div class="stats-container total-bet-count">
+				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
+			</div>
+			<div class="stats-container total-bet-amount">
+				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
+			</div>
+			<div class="stats-container total-effective-amount">
+				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
+			</div>
+			<div class="stats-container total-result-amount">
+				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
+			</div>
+			<div class="stats-container total-win-amount">
+				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
+			</div>
+		</div>
 	</div>
     <div id="orderContainer">
         <div id="tableContainer" style="overflow: auto;">
-            <table id="orderTable" class="cell-border w-100 text-center">
+            <!-- <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
                         <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
@@ -92,7 +113,7 @@
 			</div>  
 			<div id="noMoreData" style="display: none; margin-top: 2rem;">
 				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
-			</div>
+			</div> -->
         </div>
     </div>
 

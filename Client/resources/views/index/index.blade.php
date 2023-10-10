@@ -142,7 +142,23 @@
             <p></p>
         </div>
     </div>
+    <!-- 籃球單節投注 -->
+    <div class="indexBetCard" key='basketBallQuaterBet'>
+        <div class="timeSpan"></div>
+        <div class="indexBetCardInfo">
+            <div key='homeTeamInfo2'>
+                <div class="textOverFlow teamSpan text-right"></div>
+            </div>
+            <div key='awayTeamInfo2'>
+                <div class="textOverFlow teamSpan text-right"></div>
+            </div>
+        </div>
+        <div class="indexBetCardTable row m-0 text-center">
+        </div>
+    </div>
 </div>
+
+
 
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
@@ -199,10 +215,13 @@
     var ws = null
     var heartbeatTimer = null
 
-    // 需要把bet_name替換成主客隊名的priority
-    const convertTeamPriArr = [1, 3]
+    
     // 獨贏系列
     const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
+    // 讓球系列
+    const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
+    // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
+    const convertTeamPriArr = allWinArr.concat(hcapArr)
 
     /* ===== DATA LAYER ===== */
     /*  
@@ -248,6 +267,7 @@
 
     // game priority and gameTitle
     var mainPriorityArr = null
+    var stagePriorityArr = null
     var gameTitle = null
 
     
@@ -349,11 +369,22 @@
         let card = $('div[template="fixtureCardTemplate"]').clone()
 
         // 壘包 好壞球 只有 滾球 棒球有
-        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
+        if( sport === 154914 && v3.status === 2 ) {
+            card.find('[key="not-show-baseCon"]').hide()
+            card.find('[key="show-baseCon"]').show()
+        } else {
+            card.find('[key="not-show-baseCon"]').show()
+            card.find('[key="show-baseCon"]').hide()
+        }
+
+        // 單節選項 只有 滾球 籃球有
+        sport === 48242 && v3.status === 2 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
+        let home_team_info2 = card.find('[key="homeTeamInfo2"]')
+        let away_team_info2 = card.find('[key="awayTeamInfo2"]')
         let market_count = card.find('.otherBetWay p')
 
         card.attr('id', k3)
@@ -364,14 +395,20 @@
         market_count.html(v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
-        home_team_info.find('.scoreSpan').html()
+        home_team_info.find('.scoreSpan').html('')
         away_team_info.find('.teamSpan').html(v3.away_team_name)
-        away_team_info.find('.scoreSpan').html()
+        away_team_info.find('.scoreSpan').html('')
 
+        // bet area
+        createBetArea(mainPriorityArr, v3, k3, league_name, card)
+
+        // ready to start
+        if( v3.status === 9 ) {
+            time.html(langTrans.mainArea.readyToStart)
+        }
 
         // living
         if( v3.status === 2 ) {
-
             // score
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
@@ -404,15 +441,28 @@
 
             // stage text
             time.html(timerStr)
+
+            if( sport === 48242 ) {
+                let card2 = card.find('[key="basketBallQuaterBet"]')
+                home_team_info2 = card2.find('[key="homeTeamInfo2"]')
+                away_team_info2 = card2.find('[key="awayTeamInfo2"]')
+                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
+                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+
+                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                // bet area
+                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+            }
         }
 
-        // ready to start
-        if( v3.status === 9 ) {
-            time.html(langTrans.mainArea.readyToStart)
-        }
+        card.removeAttr('hidden')
+        card.removeAttr('template')
+        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+        league_toggle_content.append(card)
+    }
 
-        // bet area
-        mainPriorityArr.forEach(( i, j ) => {
+    function createBetArea(priorityArr, v3, k3, league_name, card) {
+        priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
@@ -425,7 +475,7 @@
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if( mainPriorityArr.length === 4 ) {
+                        if( priorityArr.length === 4 ) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
                         }
                     }
@@ -448,16 +498,16 @@
                     item.find('.odd').html(v4.price)
                     // 按照不同體育種類、玩法 顯示相對應內容
                     switch ( i ) {
-                        case 3:case 203:case 204:case 103:case 104:  // 讓球
+                        case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
                             item.find('.bet_name').html( v4.line )
                             break;
-                        case 5:case 205:case 206:case 105:case 106: // 大小
+                        case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
                             item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                             break;
-                        case 7:
+                        case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
                             item.find('.bet_name').html( v4.market_bet_name )
                             break;
-                        default:
+                        default: // 獨贏
                             break;
                     }
 
@@ -495,12 +545,6 @@
             bet_div.removeAttr('template')
             card.find('.indexBetCardTable').append(bet_div)
         });
-
-
-        card.removeAttr('hidden')
-        card.removeAttr('template')
-        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
-        league_toggle_content.append(card)
     }
    
     $(document).ready(function() {
@@ -634,7 +678,16 @@
                         card.find('.otherBetWay p').html(v3.market_bet_count)
 
                         // 壘包 好壞球 只有 滾球 棒球有
-                        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
+                        if( sport === 154914 && v3.status === 2 ) {
+                            card.find('[key="not-show-baseCon"]').hide()
+                            card.find('[key="show-baseCon"]').show()
+                        } else {
+                            card.find('[key="not-show-baseCon"]').show()
+                            card.find('[key="show-baseCon"]').hide()
+                        }
+
+                        // 單節選項 只有 滾球 籃球有
+                        sport === 48242 && v3.status === 2 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // living
                         if( v3.status === 2 ) {
@@ -682,6 +735,17 @@
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
                             }
 
+
+                            if( sport === 48242 ) {
+                                let card2 = card.find('[key="basketBallQuaterBet"]')
+                                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                                home_team_info2 = card2.find('[key="homeTeamInfo2"]')
+                                away_team_info2 = card2.find('[key="awayTeamInfo2"]')
+                                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
+                                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+                                mainPriorityArr = mainPriorityArr.concat(stagePriorityArr)
+                            }
+
                             time.html(timerStr)
                         }
                         // ready to start
@@ -690,9 +754,6 @@
                         mainPriorityArr.forEach(( i, j ) => {
                             let bet_div = $(`#${k3} div[priority=${i}]`)
                             let betData = Object.values(v3.list).find(m => m.priority === i)
-                            let firstDiv = bet_div.find('div[index=0]')
-                            let secondDiv = bet_div.find('div[index=1]')
-                            let thirdDiv = bet_div.find('div[index=2]')
                             let item = null
                             if( betData && Object.keys(betData.list).length > 0 ) {
                                 Object.entries(betData.list).map(([k4, v4], s) => { 

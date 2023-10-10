@@ -31,7 +31,7 @@ div[key="matchSportMenu"]{
     border-radius: 30px;
     padding: 1rem 0rem 1rem 1rem;
     /* height: 100%; */
-    height: calc(100% - 4rem);
+    height: calc(100% - 11rem);
     overflow: hidden;
     margin-bottom: 1rem;
     color: rgb(65, 91, 90);
@@ -129,7 +129,7 @@ div[key="matchSportMenu"]{
 
 
 #orderContainer {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 .orderData_betDataDetails {
     position: relative;
@@ -177,6 +177,9 @@ div[key="matchSportMenu"]{
 /* search bar and statistic css */
 .search-statistic-container{
     margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .search-statistic-container .search-bar-container {
@@ -197,24 +200,39 @@ div[key="matchSportMenu"]{
 }
 
 .search-statistic-container .datecalendar-con {
-    width: 69%;
+    width: 72%;
 }
 
 .search-statistic-container .select-con {
-    background: white;
-    padding: 0.5rem;
-    border: 1px solid #415b5a;
-    border-radius: 15px;
-    width: 29%;
+    width: 26%;
+    position: relative;
+}
+
+.search-statistic-container .select-con::after {
+    position: absolute;
+    content: '⏷';
+    height: auto;
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
 }
 
 .search-statistic-container select {
+    background: white;
     word-wrap: normal;
-    border: none;
-    background: none;
+    padding: 0.5rem;
+    border: 1px solid #415b5a;
+    border-radius: 15px;
     -moz-appearance: none;
     -webkit-appearance: none; 
+    position: relative;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    color: #415b5a;
 }
+
+
 
 /* for IE10 */ 
 .search-statistic-container select::-ms-expand { 
@@ -222,8 +240,10 @@ div[key="matchSportMenu"]{
 } 
 
 .datecalendar-con .date-divider {
-    margin: 0px 0.7rem;
+    margin: 0px 0.5rem;
     color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .custom-datepicker-class {
@@ -251,11 +271,46 @@ div[key="matchSportMenu"]{
 
 .datepicker-con .input-group-text{
     border-radius: 0px!important;
-    padding: 1rem!important;
     background: #ffffff;
+    border: none;
+    position: relative;
 }
 
 .datepicker-con .input-group.date {
     border-radius: 15px;
     overflow: hidden;
+}
+
+.datebutton-cons {
+    margin-top: 0.8rem;
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 0.5rem;
+}
+
+button.dateCalendarBtn {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    padding: 0.5rem 0.8rem;
+    margin: 0px 0px 0.5rem 0px;
+    color: #415b5a;
+}
+
+.statistic-container {
+    width: 58%;
+    display: grid;
+    grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
+    justify-content: space-between;
+    align-items: start;
+    padding-left: 1%;
+}
+
+.stats-container {
+    height: 100%;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 2px solid #415b5a;
 }

@@ -45,7 +45,7 @@ class CacheModel extends Model {
     }
     
     // ES 統計操作
-    protected static function getESSum($sql) {
+    protected static function getESAgg($sql) {
         
         $sql = "select agent_id , SUM(bet_amount) as bet_amount from es_game_order group by agent_id";
         // 获取要发送请求的URL
@@ -62,11 +62,7 @@ class CacheModel extends Model {
             // 解码JSON响应
             $data = $response->json();
 
-            dd($data);
-            $list = array();
-            foreach ($data['hits']['hits'] as $k => $v) {
-                $list[] = $v['_source'];
-            }
+            $list = $data['aggregations'];
 
             return $list;
         } else {
