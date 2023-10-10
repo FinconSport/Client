@@ -18,10 +18,9 @@ class ModelDriverProvider extends ServiceProvider {
             // 緩存時間
             $cacheAliveTime = 1;
 
-            // 緩存Key
-            $tableName = (new static)->getTable();
+            $sql = $this->toSql();
 
-            dd($tableName);
+            dd($sql);
             //
             return $this->get();
         });
