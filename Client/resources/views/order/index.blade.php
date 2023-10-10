@@ -4,7 +4,7 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<label for="selectOption">PLease Select Sports:</label>
+				<label for="selectOption">Please Select Sports:</label>
 				<select id="selectOption" name="selectOption">
 					<option value="baseball">Baseball</option>
 					<option value="football">Football</option>
@@ -14,12 +14,12 @@
 			<div class="datecalendar-con">
 				<div class="datepicker-con">
 					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker">
+						<input type="text" class="form-control" id="datepicker_from">
 						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
 					</div>
 					<span> ~ </span>
 					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker">
+						<input type="text" class="form-control" id="datepicker_to">
 						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
 					</div>
 				</div>
@@ -299,7 +299,8 @@
 	}
 
 	$(document).ready(function() {
-        $('#datepicker').datepicker();
+        $('#datepicker_from').datepicker();
+		$('#datepicker_to').datepicker();
     });
 </script>
 @endpush
