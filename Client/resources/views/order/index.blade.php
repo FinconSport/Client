@@ -163,8 +163,9 @@
 				});
 
 				// Validate and accumulate total
-				totalResultAmount += parseFloat(orderItem.result_amount);
-				totalBetAmount += parseFloat(orderItem.bet_amount);
+				totalResultAmount += resultAmount;
+				totalBetAmount += betAmount;
+				totalResultAmount += winLoss;
 
 				// Accumulate the total WinLoss
 				WinLoss += winLoss;
@@ -212,7 +213,6 @@
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss);
-		console.log('WINLOSS' + winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
