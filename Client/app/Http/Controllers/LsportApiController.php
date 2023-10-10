@@ -771,11 +771,12 @@ class LsportApiController extends Controller {
 
         $fixture_data = $return;
         foreach ($fixture_data as $k => $v) {
-
-            dd($v);
             // 參數
             $sport_id = $v['sport_id'];
             // 取得球類名稱
+            $sport_name = LsportSport::getName($sport_id, $api_lang);
+            dd($sport_name);
+            
             
         }
 
