@@ -407,6 +407,8 @@
             time.html(langTrans.mainArea.readyToStart)
         }
 
+        console.log(v3, v3.status)
+
         // living
         if( v3.status === 2 ) {
             // score
@@ -451,7 +453,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 
@@ -462,6 +464,7 @@
     }
 
     function createBetArea(priorityArr, v3, k3, league_name, card) {
+        console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)

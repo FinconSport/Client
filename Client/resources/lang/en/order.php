@@ -10,6 +10,9 @@ return [
 		"index" => "ID",  //  "編號"
 		"sport_type" => "Sports Type",  //  "體育種類",
 		"order_type" => "Bet Type",  //  "注單種類",
+
+		"event" => "Event",  //  "賽事",
+		
 		"bet_type" => "Betting Method",  //  "玩法",
 		"detail" => "Betting Details",  //  "賽事投注詳情",
 		"bet_money" => "Bet Amount",  //  "投注金額",
