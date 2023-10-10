@@ -202,9 +202,9 @@ div[key="matchSportMenu"]{
 
 .search-statistic-container .select-con {
     background: white;
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid #415b5a;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 29%;
 }
 
@@ -238,4 +238,9 @@ div[key="matchSportMenu"]{
 
 #datepicker_from,#datepicker_to {
     outline: none;
+    border-radius: 0px;
+}
+
+.datepicker-con .input-group-text{
+    border-radius: 0px!important;
 }
