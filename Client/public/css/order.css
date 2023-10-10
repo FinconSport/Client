@@ -160,14 +160,6 @@ div[key="matchSportMenu"]{
     padding: 0.5rem 0rem;
 }
 
-.orderData_expand{
-    display: table-row;
-}
-
-.orderData_expand.hide-betaDetcon {
-    display: none;
-}
-
 .order-toggleButton{
     display: none;
 }
@@ -348,4 +340,22 @@ button.dateCalendarBtn {
 .orderData_betData_Result,
 .orderData_mOrder{
     position: relative;
+}
+
+.orderData_expand .orderData_betData_Event{
+    border-left: none;
+    border-right: none;
+    padding: 0rem;
+}
+
+.orderData_expand {
+    border-left: 2px solid rgb(65, 91, 90);
+    border-right: 2px solid rgb(65, 91, 90);
+    padding: 1rem;
+    font-weight: 600;
+    display: block;
+}
+
+.orderData_expand.hide-betaDetcon {
+    display: none;
 }
