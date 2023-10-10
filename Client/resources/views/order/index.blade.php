@@ -227,7 +227,10 @@
 		// Function to create an HTML element with a class name and content
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
 
-		// Create td elements for each container
+		// Create a new tr element for this orderItem
+		const orderTr = $('<tr>');
+
+		// Create td elements for each container within this tr
 		const eventTd = $('<td style="width: 17%;" class="orderData_betData_Event">');
 		const betWayTd = $('<td style="width: 10%;" class="orderData_betData_BetWay">');
 		const resultTd = $('<td style="width: 10%;" class="orderData_betData_Result">');
@@ -258,20 +261,20 @@
 			betDataEventContainer.addClass('hide-betaDetcon');
 			betDataBetWayContainer.addClass('hide-betaDetcon');
 			betDataResultContainer.addClass('hide-betaDetcon');
-			$(`#betDataDetailsEvent_${orderItem.id} .order-toggleButton`).addClass('showbutton');
-			$(`betDataDetailsBetWay_${orderItem.id} .order-toggleButton`).addClass('showbutton');
-			$(`#betDataDetailsResult_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 		}
 
-		// Append containers to the corresponding td elements
+		// Append containers to the corresponding td elements within the tr
 		eventTd.append(betDataEventContainer);
 		betWayTd.append(betDataBetWayContainer);
 		resultTd.append(betDataResultContainer);
 
-		// Append td elements to the tr element with ID 'orderTr'
-		$('#orderTr').append(eventTd);
-		$('#orderTr').append(betWayTd);
-		$('#orderTr').append(resultTd);
+		// Append td elements to the tr
+		orderTr.append(eventTd);
+		orderTr.append(betWayTd);
+		orderTr.append(resultTd);
+
+		// Append the tr to the tbody with ID 'orderDataTemp'
+		$('#orderDataTemp').append(orderTr);
 
 		const betDataLength = orderItem.bet_data.length;
 
@@ -288,7 +291,6 @@
 			button.appendTo(resultTd);
 		}
 	}
-
 
 	
 	function createTotal() {
