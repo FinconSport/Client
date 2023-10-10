@@ -231,7 +231,7 @@
 		const betDataEventContainer = $(`<div class='betaDetcon'>`);
 		betDataEventContainer.append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
-			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
+			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} 
 									<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
 									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
@@ -241,7 +241,7 @@
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
 		betDataBetWayContainer.append(
-			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
+			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
 		);
 
 		const betDataResultID = `betDataDetailsResult_${orderItem.id}`;
@@ -257,7 +257,7 @@
 				'<td style="width: 9%;"></td>' +
 				'<td style="width: 21%;text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%;text-align:left;" class="orderData_betData_BetWay"></td>' +
-				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;text-align:right;" class="orderData_betData_Result"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
@@ -282,6 +282,10 @@
 
 			betDataEventContainer.find('.orderData_betData_BetWay').html(`
 				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+			);
+
+			betDataEventContainer.find('.orderData_betData_Result').html(`
+				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
 			['Event', 'BetWay', 'Result'].forEach(key => {
@@ -310,6 +314,7 @@
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
+		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
 	}
 
 	
