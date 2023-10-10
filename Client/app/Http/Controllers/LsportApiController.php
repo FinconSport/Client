@@ -753,39 +753,36 @@ class LsportApiController extends Controller {
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
         //////////////////////////////////////////
-        // DB取出賽事
-
-        $data = DB::table('lsport_league as l')
-            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
-            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
-            ->join('lsport_team as th', function ($join) {
-                $join->on('f.home_id', '=', 'th.team_id')
-                ->on('l.league_id', '=', 'th.league_id');
-            })
-            ->join('lsport_team as ta', function ($join) {
-                $join->on('f.away_id', '=', 'ta.team_id')
-                ->on('l.league_id', '=', 'ta.league_id');
-            })
-            ->select(
-                'l.name_en AS l_name_en', 'l.'.$lang_col.' AS l_name_locale',
-                's.name_en AS s_name_en', 's.'.$lang_col.' AS s_name_locale',
-                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',
-                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
-                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
-            )
-            ->where('s.status', 1)
-            ->where('l.status', 1)
-            ->where('l.sport_id', $sport_id)
-            ->whereIn('f.status', [1, 2, 9])  //可區分:未開賽及走地中. 9=即將開賽(大概半小時內)
-            ->where('f.start_time', "<=", $after_tomorrow)
-            ->orderBy('l.league_id', 'ASC')
-            ->orderBy('f.fixture_id', 'ASC')
-            // ->orderBy('m.market_id', 'ASC')
-            ->get();
-
-        if ($data === false) {
+        // 取出賽事
+        $return = LsportFixtrue::select('f.*')
+        ->from('es_lsport_fixture as f')
+        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id') // join sport
+        ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id') // join league
+        ->whereIn('f.status', '=', [1,2,9])
+        ->where('s.status', '=', 1)
+        ->where('f.start_time', "<=", $after_tomorrow)
+        ->orderBy('l.league_id', 'ASC')
+        ->orderBy('f.fixture_id', 'ASC')
+        ->orderBy("f.start_time","DESC")
+        ->get();
+        if ($return === false) {
             $this->ApiError('02');
         }
+
+        $fixture_data = $return;
+        foreach ($fixture_data as $k => $v) {
+
+            dd($v);
+            // 參數
+            $sport_id = $v['sport_id'];
+            // 取得球類名稱
+            
+        }
+
+
+        //////////////////////////
+        //    REWRTIE
+        //////////////////////////
 
         //儲存league-fixture-market的階層資料
         $arrLeagues = array(
@@ -793,40 +790,13 @@ class LsportApiController extends Controller {
             $this::FIXTURE_STATUS['living'] => array(),  // 走地
             // $this::FIXTURE_STATUS['about_to_start'] => array(),  // 即將開賽
         );
-        //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
+        
         $sport_name = null;  //儲存球種名稱
-
-/*
-{
-    early : {
-        Sport_id : { 
-            League_id : {
-                Fixture_id: {
-                    Fixture.*,
-                    Market : [
-                        Market_id : {
-                            Market.id,
-                            Market.name : *LANG*,
-                            Bet : [
-                                Bet_id : {
-                                    Bet.*
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-    },
-    living : {
-        ... 結構同上
-    }
-}
-*/
 
         //////////////////////////////////////////
         // 開始loop 賽事資料
 
-        foreach ($data as $dk => $dv) {
+        foreach ($fixture_data as $dk => $dv) {
             $league_id = $dv->league_id;
             $fixture_id = $dv->fixture_id;
 
