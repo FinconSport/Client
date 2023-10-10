@@ -24,11 +24,10 @@ class ModelDriverProvider extends ServiceProvider {
             $fullSql = vsprintf(str_replace('?', "'%s'", $sql), $bindings);
             $cacheKey = MD5($fullSql);
 
-            // 输出包含参数值的 SQL 查询语句
-            dd($cacheKey);
-
-            //
-            return $this->get();
+            return Cache::remember($cacheKey, $cacheAliveTime, function() {
+                return $this->get();
+            });
+            
         });
     }
     
