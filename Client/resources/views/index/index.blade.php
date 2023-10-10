@@ -720,7 +720,7 @@
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
 
                             // bet data
-                            renderBetArea(mainPriorityArr, v3, k3, league_name, card)
+                            renderBetArea(mainPriorityArr, v3, k3)
 
                             // exception baseball
                             if( sport === 154914 ) {
@@ -752,7 +752,7 @@
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
                                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-                                renderBetArea(stagePriorityArr, v3, k3, league_name, card)
+                                renderBetArea(stagePriorityArr, v3, k3)
                             }
 
                             time.html(timerStr)
@@ -760,7 +760,7 @@
                        
                         
 
-                        function renderBetArea(priorityArr, v3, k3, league_name, card) {
+                        function renderBetArea(priorityArr, v3, k3) {
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
