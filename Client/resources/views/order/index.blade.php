@@ -283,6 +283,8 @@
 			['Event', 'BetWay', 'Result'].forEach(key => {
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
+
+			betDataEventContainer.detach();
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
