@@ -30,6 +30,7 @@ class LsportFixture extends CacheModel
             return $return;
         });
     }
+
     public static function findData(
         array $data,  // data=參數, 
         string $id_col = 'fixture_id'  // id_col=主鍵或是搜尋的欄位名

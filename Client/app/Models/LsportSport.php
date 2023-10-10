@@ -76,7 +76,7 @@ class LsportSport extends CacheModel
     }
 
     public static function getActiveSport(
-        array $data = null,  // data=參數
+        array $data = null  // data=參數
     ) {
 
         // 緩存時間
