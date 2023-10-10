@@ -308,7 +308,7 @@
 			console.log(dynamicId);
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('slow');
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('smooth');
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
