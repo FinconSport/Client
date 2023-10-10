@@ -160,6 +160,13 @@ div[key="matchSportMenu"]{
     padding: 0.5rem 0rem;
 }
 
+.orderData_expand{
+    display: table-row;
+}
+.hide-betaDetcon {
+    display: none;
+}
+
 .order-toggleButton{
     display: none;
 }
@@ -169,7 +176,7 @@ div[key="matchSportMenu"]{
 }
 
 .order-toggleButton {
-    background-color: transparent;
+    background-color: none;
     border-radius: 0px;
     transition: all 0.5s ease 0s;
     /* width: 4.5rem;
@@ -340,22 +347,4 @@ button.dateCalendarBtn {
 .orderData_betData_Result,
 .orderData_mOrder{
     position: relative;
-}
-
-.orderData_expand td{
-    border-left: none;
-    border-right: none;
-    padding: 0rem;
-}
-
-.orderData_expand .parent_span{
-    border-left: 2px solid rgb(65, 91, 90);
-    border-right: 2px solid rgb(65, 91, 90);
-    padding: 1rem;
-    font-weight: 600;
-    display: block;
-}
-
-.orderData_expand.hide-betaDetcon .parent_span{
-    display: none;
 }
