@@ -270,16 +270,16 @@
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
 
-			['Event', 'BetWay', 'Result'].forEach(key => {
-				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
-			});
-
+			// Append the data from betItem to the created additional <td> elements with class 'orderData_betData_Event'
+			const betDataEventContainer = $(`.additionalTr_${betIndex}`);
+			betDataEventContainer.find('.orderData_betData_Event').text(`${betItem.property1} (${betItem.property2})`); // Adjust property names as needed
 		}
+
+
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
 		orderDataResult.append(betDataResultContainer);
-		$(`#additionalTr_1 td.orderData_betData_Event`).append(`.additionalTr_1`);
 
 		const betDataLength = orderItem.bet_data.length;
 
