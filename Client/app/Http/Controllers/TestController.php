@@ -16,7 +16,7 @@ class TestController extends PcController {
     public function index(Request $request) {
     
       // list 方法
-      $return = Player::where("status",1)->whereIn("id",[1,2])->list();
+      $return = Player::where("status",1)->list();
       dd($return);
       
 
