@@ -256,7 +256,7 @@
 			const additionalTds = $('<td style="width: 8%;"></td>' +
 				'<td style="width: 9%;"></td>' +
 				'<td style="width: 21%;text-align:left;" class="orderData_betData_Event"></td>' +
-				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;text-align:left;" class="orderData_betData_BetWay"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
 				'<td style="width: 10%;"></td>' +
@@ -278,6 +278,10 @@
 				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
 				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
 				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+			);
+
+			betDataEventContainer.find('.orderData_betData_BetWay').html(`
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
 
 			['Event', 'BetWay', 'Result'].forEach(key => {
@@ -305,6 +309,7 @@
 		}
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
+		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
 	}
 
 	
