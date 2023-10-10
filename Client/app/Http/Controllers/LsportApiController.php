@@ -755,9 +755,9 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 取出賽事
         $return = LsportFixture::select('f.*')
-        ->from('es_lsport_fixture as f')
-        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id') // join sport
-        ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id') // join league
+        ->from('lsport_fixture as f')
+        ->join('lsport_sport as s', 'f.sport_id', '=', 's.sport_id') // join sport
+        ->join('lsport_league as l', 'f.league_id', '=', 'l.league_id') // join league
         ->whereIn('f.status', [1,2,9])
         ->where('s.status', 1)
         ->where('f.start_time', "<=", $after_tomorrow)
