@@ -398,7 +398,7 @@
         away_team_info.find('.scoreSpan').html('')
 
         // bet area
-        createBetArea(mainPriorityArr, v3, k3, league_name, 0)
+        createBetArea(mainPriorityArr, v3, k3, league_name, 0, card)
 
         // ready to start
         if( v3.status === 9 ) {
@@ -452,7 +452,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                createBetArea(stagePriorityArr, v3, k3, league_name, 1)
+                createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
             }
         }
 
@@ -462,7 +462,7 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, s) {
+    function createBetArea(priorityArr, v3, k3, league_name, s, card) {
         console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
