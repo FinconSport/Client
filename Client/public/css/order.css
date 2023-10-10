@@ -201,28 +201,29 @@ div[key="matchSportMenu"]{
 }
 
 .search-statistic-container .select-con {
-    background: white;
-    padding: 0.5rem;
-    border: 1px solid #415b5a;
-    border-radius: 15px;
     width: 29%;
 }
 
-.search-statistic-container .select-con::after {
+.search-statistic-container select {
+    background: white;
+    word-wrap: normal;
+    padding: 0.5rem;
+    border: 1px solid #415b5a;
+    border-radius: 15px;
+    background: none;
+    -moz-appearance: none;
+    -webkit-appearance: none; 
+    position: relative;
+    width: 100%;
+}
+
+.search-statistic-container select::after {
     position: absolute;
     content: '⏷';
     height: auto;
     top: 50%;
     right: 0%;
     transform: translate(-50%, -50%);
-}
-
-.search-statistic-container select {
-    word-wrap: normal;
-    border: none;
-    background: none;
-    -moz-appearance: none;
-    -webkit-appearance: none; 
 }
 
 /* for IE10 */ 
@@ -262,6 +263,7 @@ div[key="matchSportMenu"]{
     border-radius: 0px!important;
     padding: 1rem!important;
     background: #ffffff;
+    border: none;
     position: relative;
 }
 
