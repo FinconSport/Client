@@ -69,6 +69,8 @@ class CacheModel extends Model {
             return $list;
         } else {
             // 处理请求失败的情况
+
+            dd($response);
             return response()->json(['error' => '请求失败'], 500);
         }
     }
