@@ -304,10 +304,8 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
 			function toggleContainers() {
-				const expandedElements = parentElement.find('.hide-betaDetcon');
-				expandedElements.slideToggle();
-				const isExpanded = expandedElements.is(':visible');
-				toggleButton.text(isExpanded ? '▼' : '▶');
+				parentElement.find('.hide-betaDetcon').slideToggle();
+				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
 			toggleButton.on('click', toggleContainers);
