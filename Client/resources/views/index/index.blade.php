@@ -448,9 +448,9 @@
                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
 
-                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
                 // bet area
-                createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
+                if(stagePriorityArr[v3.periods.period]) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
             }
         }
 
