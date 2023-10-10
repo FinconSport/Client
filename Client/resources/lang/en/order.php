@@ -29,6 +29,13 @@ return [
 		"close" => "Close",  //  "收起",
 		"sport" => "Sports betting", // 体育博彩
     	"morder" => "Cross match betting", //交叉比赛投注
+		"select_sport" => "Please Select Sports",  //  "請選擇體育"
+		"last_month" => "Last Month",  //  "上月",
+		"last_week" => "Last Week",  //  "上週",
+		"yesterday" => "Yesterday",  //  "昨日",
+		"today" => "Today",  //  "今日",
+		"this week" => "This Week",  //  "本週",
+		"this month" => "This Month",  //  "本月",
 	],  //  
 	'sportPriority' => [
 		1 => 'Full Match Win',

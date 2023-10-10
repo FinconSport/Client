@@ -29,6 +29,13 @@ return [
 		"close" => "收起",
 		"sport" => "體育投注",
     	"morder" => "串關投注",
-	]
+		"select_sport" => "請選擇體育",
+		"last_month" => "上月",
+		"last_week" => "上週",
+		"yesterday" => "昨日",
+		"today" => "今日",
+		"this week" => "本週", 
+		"this month" => "本月",
+	],
 	// 後端
 ];
