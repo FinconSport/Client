@@ -237,6 +237,8 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
+		orderDataBetEvent.children('.betaDetcon:not(:first-child)').remove();
+
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
@@ -283,8 +285,6 @@
 			['Event', 'BetWay', 'Result'].forEach(key => {
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
-
-			$('.orderData_betData_Event').children('.betaDetcon:not(:first-child)').remove();
 		}
 
 
