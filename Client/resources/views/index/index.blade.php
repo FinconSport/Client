@@ -447,6 +447,7 @@
             time.html(timerStr)
 
             if( sport === 48242 ) {
+                console.log(v3, v3.status)
                 let card2 = card.find('[key="basketBallQuaterBet"]')
                 home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                 away_team_info2 = card2.find('[key="awayTeamInfo2"]')
@@ -455,7 +456,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 
