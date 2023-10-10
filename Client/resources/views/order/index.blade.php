@@ -290,8 +290,6 @@
 				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
-			const parentElement = betDataEventContainer.parent();
-
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			parentElement.find('.betadata_expand').addClass('hide-betaDetcon');
 		}
@@ -306,8 +304,10 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
 			function toggleContainers() {
-				parentElement.find('.hide-betaDetcon').slideToggle();
-				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
+				const expandedElements = parentElement.find('.hide-betaDetcon');
+				expandedElements.slideToggle();
+				const isExpanded = expandedElements.is(':visible');
+				toggleButton.text(isExpanded ? '▼' : '▶');
 			}
 
 			toggleButton.on('click', toggleContainers);
