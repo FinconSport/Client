@@ -178,8 +178,15 @@ div[key="matchSportMenu"]{
 .search-statistic-container{
     margin-top: 60px;
 }
+
 .search-statistic-container .search-bar-container {
     width: 52%;
+}
+
+.search-statistic-container .search-bar-container {
+    padding: 1rem;
+    background: #415b5a;
+    border-radius: 10px;
 }
 
 .search-statistic-container .search-bar-container,
@@ -189,8 +196,27 @@ div[key="matchSportMenu"]{
     justify-content: space-between;
 }
 
+.search-statistic-container .datecalendar-con {
+    width: 69%;
+}
+
+.search-statistic-container .select-con {
+    background: white;
+    padding: 0.5rem;
+    border: 1px solid #415b5a;
+    border-radius: 15px;
+    width: 29%;
+}
+
+.search-statistic-container select {
+    word-wrap: normal;
+    border: none;
+    background: none;
+}
+
 .datecalendar-con .date-divider {
     margin: 0px 0.7rem;
+    color: #ffffff;
 }
 
 .custom-datepicker-class {
@@ -212,4 +238,17 @@ div[key="matchSportMenu"]{
 
 #datepicker_from,#datepicker_to {
     outline: none;
+    border-radius: 0px;
+    border: none;
+}
+
+.datepicker-con .input-group-text{
+    border-radius: 0px!important;
+    padding: 1rem!important;
+    background: #ffffff;
+}
+
+.datepicker-con .input-group.date {
+    border-radius: 15px;
+    overflow: hidden;
 }

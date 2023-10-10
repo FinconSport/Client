@@ -311,17 +311,9 @@
     color: red;
     position: absolute;
     font-size: 1rem;
+    -webkit-text-stroke: 0!important;
 }
 
-.teamScore {
-    position: relative;
-    font-style: italic;
-}
-.teamScore.raiseScore::after{
-    /* top: -0.5rem; */
-    /* right: -0.5rem; */
-    font-size: 1.2rem!important;
-}
 
 
 
@@ -404,11 +396,12 @@ div[key="sizeSmallRate"]:hover {
 }
 .scoreSpan {
     text-align: right;
-    color: #c79e42;
-    font-weight: 600;
+    color: #0085ff;
+    font-weight: 900;
     font-size: 1.2rem;
     position: relative;
     padding-right: 1.5rem;
+    -webkit-text-stroke: 1px #0085ff;
 }
 
 
