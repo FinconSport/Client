@@ -225,6 +225,7 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
+		orderDataBetEvent.empty();
 
 		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
@@ -236,8 +237,6 @@
 									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
-
-		orderDataBetEvent.empty();
 
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
