@@ -774,7 +774,7 @@ class LsportApiController extends Controller {
             // 參數
             $sport_id = $v['sport_id'];
             // 取得球類名稱
-            $sport_name = LsportSport::getName($sport_id, $agent_lang);
+            $sport_name = LsportSport::getName(['sport_id' => $sport_id, "api_lang" => $agent_lang]);
             dd($sport_name);
             
             
