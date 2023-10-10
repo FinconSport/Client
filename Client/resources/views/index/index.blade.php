@@ -424,9 +424,8 @@
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
-                        console.log(Object.keys(betData.list).length)
                         // 四格的時候調整寬度
-                        if( Object.keys(betData.list).length === 4 ) {
+                        if( mainPriorityArr.length === 4 ) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
                             item.find('div[key="changeCol"] .col').eq(1).addClass('col-8').removeClass('col')
                         }
