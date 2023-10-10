@@ -144,6 +144,21 @@
     </div>
 </div>
 
+<!-- 籃球單節投注 -->
+<div class="indexBetCard" template='basketBallQuaterBet' hidden>
+    <div class="timeSpan"></div>
+    <div class="indexBetCardInfo">
+        <div key='homeTeamInfo2'>
+            <div class="textOverFlow teamSpan text-right"></div>
+        </div>
+        <div key='awayTeamInfo2'>
+            <div class="textOverFlow teamSpan text-right"></div>
+        </div>
+    </div>
+    <div class="indexBetCardTable row m-0 text-center">
+    </div>
+</div>
+
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
 </div>
@@ -347,14 +362,20 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
+        let card2 = null
 
         // 壘包 好壞球 只有 滾球 棒球有
         sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
+
+        // 單節選項 只有 滾球 籃球有
+        if( sport === 48242 && v3.status === 2 ) card2 = $('div[template="basketBallQuaterBet"]').clone()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
         let market_count = card.find('.otherBetWay p')
+
+       
 
         card.attr('id', k3)
         card.attr('cate', k)
@@ -364,14 +385,12 @@
         market_count.html(v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
-        home_team_info.find('.scoreSpan').html()
+        home_team_info.find('.scoreSpan').html('')
         away_team_info.find('.teamSpan').html(v3.away_team_name)
-        away_team_info.find('.scoreSpan').html()
-
+        away_team_info.find('.scoreSpan').html('')
 
         // living
         if( v3.status === 2 ) {
-
             // score
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
@@ -404,6 +423,13 @@
 
             // stage text
             time.html(timerStr)
+
+            if( card2 ) {
+                let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
+                let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
+                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
+                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+            }
         }
 
         // ready to start
@@ -412,6 +438,16 @@
         }
 
         // bet area
+        createBetArea(mainPriorityArr, v3, k3, league_name, card)
+
+        card.removeAttr('hidden')
+        card.removeAttr('template')
+
+        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+        league_toggle_content.append(card)
+    }
+
+    function createBetArea(mainPriorityArr, v3, k3, league_name, card) {
         mainPriorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
@@ -494,13 +530,9 @@
             bet_div.removeAttr('hidden')
             bet_div.removeAttr('template')
             card.find('.indexBetCardTable').append(bet_div)
+
+            return card;
         });
-
-
-        card.removeAttr('hidden')
-        card.removeAttr('template')
-        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
-        league_toggle_content.append(card)
     }
    
     $(document).ready(function() {
