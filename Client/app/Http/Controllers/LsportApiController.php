@@ -754,7 +754,7 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
         // 取出賽事
-        $return = LsportFixtrue::select('f.*')
+        $return = LsportFixture::select('f.*')
         ->from('es_lsport_fixture as f')
         ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id') // join sport
         ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id') // join league
