@@ -226,7 +226,7 @@
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
 
-		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`; 
+		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
 		const betDataEventContainer = $('<div class="betaDetcon">');
 		betDataEventContainer.append(
@@ -237,25 +237,26 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
+		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
 		betDataBetWayContainer.append(
 			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
 		);
 
-		const betDataResultID = `betDataDetailsResult_${orderItem.id}`; 
+		const betDataResultID = `betDataDetailsResult_${orderItem.id}`;
 		const orderDataResult = $(`#${betDataResultID}`);
 		const betDataResultContainer = $('<div class="betaDetcon">');
 		betDataResultContainer.append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`),
 		);
 
-		
 		if (betIndex > 0) {
-			[betDataEventContainer, betDataBetWayContainer, betDataResultContainer].forEach(container => {
-				container.addClass('hide-betaDetcon');
-			});
+			// Create additional <td> elements for betItems other than the first one
+			const additionalTds = $('<td style="width: 8%;"></td><td style="width: 9%;text-align:left;"><span></span><br><span class="orderData_mOrder"></span></td><td style="width: 21%;" class="orderData_betData_Event"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td>');
+
+			// Append the additional <td> elements to the existing row
+			orderDataBetEvent.append(additionalTds);
 
 			['Event', 'BetWay', 'Result'].forEach(key => {
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
@@ -270,7 +271,7 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">{{ trans("order.main.expand") }} (' + betDataLength + ')</button>');
-			
+
 			function toggleContainers() {
 				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
 				toggleButton.text(toggleButton.text() === '{{ trans("order.main.expand") }} (' + betDataLength + ')' ? '{{ trans("order.main.close") }}' : '{{ trans("order.main.expand") }} (' + betDataLength + ')');
@@ -279,7 +280,6 @@
 			toggleButton.on('click', toggleContainers);
 			toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
 		}
-
 	}
 
 	
