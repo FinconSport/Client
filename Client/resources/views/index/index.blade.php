@@ -215,10 +215,13 @@
     var ws = null
     var heartbeatTimer = null
 
-    // 需要把bet_name替換成主客隊名的priority
-    const convertTeamPriArr = [1, 3]
+    
     // 獨贏系列
     const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
+    // 讓球系列
+    const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
+    // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
+    const convertTeamPriArr = allWinArr.concat(hcapArr)
 
     /* ===== DATA LAYER ===== */
     /*  
