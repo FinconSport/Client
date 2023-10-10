@@ -96,10 +96,7 @@ class LsportApiController extends Controller {
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        // $return = Player::where("id", $player_id)->first();
-
-        // cache
-        $return = Player::findData(['id'=>$player_id]);
+        $return = Player::where("id", $player_id)->first();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -228,17 +225,11 @@ class LsportApiController extends Controller {
         $notice_list = array();
 
         // 系統公告
-        // $return = ClientMarquee::where(
-        //     "status", 1
-        // )->orderBy(
-        //     'create_time', 'DESC'
-        // )->get();
-
-        // cache
-        $return = ClientMarquee::getActiveMarquee();
-        if ($return === false) {
-            $this->ApiError("01");
-        }
+        $return = ClientMarquee::where(
+            "status", 1
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
 
         foreach ($return as $k => $v) {
             $notice_list[] = $v['marquee'];
@@ -246,12 +237,11 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 自DB取出LsportNotice
-        // $return = LsportNotice::orderBy(
-        //     'sport_id', 'ASC'
-        // )->orderBy(
-        //     'create_time', 'DESC'
-        // )->get();
-        $return = LsportNotice::getData();
+        $return = LsportNotice::orderBy(
+            'sport_id', 'ASC'
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
         if ($return === false) {
             $this->ApiError("02");
         }
@@ -284,16 +274,13 @@ class LsportApiController extends Controller {
             $fixture_start_time = date('Y-m-d H:i:s', time()-60*60*24);
             // $fixture_end_time = date('Y-m-d H:i:s', time()+60*60*24);
             // fixture -----
-            // $fixture = LsportFixture::where(
-            //     'fixture_id', $fixture_id
-            // // )->where(
-            // //     'start_time', '>=', $fixture_start_time
-            // // )->where(
-            // //     'start_time', '<=', $fixture_end_time
-            // )->first();
-
-            // cache
-            $fixture = LsportFixture::findData(['fixture_id'=>$fixture_id]);
+            $fixture = LsportFixture::where(
+                'fixture_id', $fixture_id
+            // )->where(
+            //     'start_time', '>=', $fixture_start_time
+            // )->where(
+            //     'start_time', '<=', $fixture_end_time
+            )->first();
 
             if ($fixture) {
                 $fixture_start_time = $fixture['start_time'];
@@ -395,14 +382,11 @@ class LsportApiController extends Controller {
         $notice_list = array();
 
         // 系統公告
-        // $return = ClientMarquee::where(
-        //     "status", 1
-        // )->orderBy(
-        //     'create_time', 'DESC'
-        // )->get();
-
-        //cache
-        $return = ClientMarquee::getActiveMarquee();
+        $return = ClientMarquee::where(
+            "status", 1
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -424,12 +408,11 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 自DB取出LsportNotice
-        // $return = LsportNotice::orderBy(
-        //     'sport_id', 'ASC'
-        // )->orderBy(
-        //     'create_time', 'DESC'
-        // )->get();
-        $return = LsportNotice::getData();
+        $return = LsportNotice::orderBy(
+            'sport_id', 'ASC'
+        )->orderBy(
+            'create_time', 'DESC'
+        )->get();
         if ($return === false) {
             $this->ApiError("02");
         }
@@ -458,9 +441,7 @@ class LsportApiController extends Controller {
             $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
 
             // fixture -----
-            // $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
-            // cache
-            $fixture = LsportFixture::findData(['fixture_id'=>$fixture_id]);
+            $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
 
             if ($fixture) {
                 $fixture_start_time = $fixture['start_time'];
@@ -704,15 +685,12 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 取得球種資料
-        // $sports = LsportSport::where('status', 1)
-        //     ->select(
-        //         'sport_id', 'name_en AS name_en', $lang_col.' AS name_locale', 'status'
-        //     )
-        //     ->orderBy('id', 'ASC')
-        //     ->get();
-
-        // cache
-        $sports = LsportSport::getActiveSport();
+        $sports = LsportSport::where('status', 1)
+            ->select(
+                'sport_id', 'name_en AS name_en', $lang_col.' AS name_locale', 'status'
+            )
+            ->orderBy('id', 'ASC')
+            ->get();
         if ($sports === false) {
             $this->ApiError("01");
         }
@@ -720,12 +698,7 @@ class LsportApiController extends Controller {
         $arr_sports = array();
         foreach ($sports as $sk => $sv) {
 
-            // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-            // if (empty($sv->name_locale)) {  // sport name
-            //     $sport_name = $sv->name_en;
-            // } else {
-                $sport_name = $sv->$lang_col;
-            // }
+            $sport_name = $sv->name_locale;
 
             $arr_sports[] = array(
                 'sport_id' => $sv->sport_id,
@@ -929,14 +902,10 @@ class LsportApiController extends Controller {
 
                 // 包入 fixture 賽事資料 ---------------
                 $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id] = array(
-                    //'sport_id' => $dv->sport_id,
-                    //'league_id' => $dv->league_id,
-                    //'home_id' => $dv->home_id,
-                    //'away_id' => $dv->away_id,
                     'fixture_id' => $dv->fixture_id,
                     'start_time' => $dv->start_time,
                     'order_by' => strtotime($dv->start_time),
-                    'status' => $real_fixture_status,  // $fixture_status,
+                    'status' => $real_fixture_status,
                     'last_update' => $dv->f_last_update,
                     'home_team_id' => $dv->th_team_id,
                     'home_team_name' => $home_team_name,
@@ -1140,10 +1109,7 @@ class LsportApiController extends Controller {
         }
 
         // 取得用戶資料
-        // $return = Player::where("id", $player_id)->first();
-
-        // cache
-        $return = Player::findData(['id'=>$player_id]);
+        $return = Player::where("id", $player_id)->first();
         if ($return == false) {
             $this->ApiError("04");
         }
@@ -1173,10 +1139,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得商戶資料
-        // $return = Agent::where("id", $agent_id)->first();
-
-        // cache
-        $return = Agent::findData(['id'=>$agent_id]);
+        $return = Agent::where("id", $agent_id)->first();
         if ($return == false) {
             $this->ApiError("07");
         }
@@ -1195,10 +1158,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得賽事資料
-        // $return = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
-
-        // cache
-        $return = LsportFixture::findData(['fixture_id'=>$fixture_id]);
+        $return = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
         if ($return == false) {
             $this->ApiError("09");
         }
@@ -1215,10 +1175,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得聯賽資料
-        // $return = LsportLeague::where("league_id", $league_id)->where("sport_id", $sport_id)->first();
-
-        // cache
-        $return = LsportLeague::findData(['league_id'=>$league_id]);
+        $return = LsportLeague::where("league_id", $league_id)->where("sport_id", $sport_id)->first();
         if ($return == false) {
             $this->ApiError("10");
         }
@@ -1238,10 +1195,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         
         // 主隊
-        // $return = LsportTeam::where("team_id", $home_team_id)->first();
-
-        // cache
-        $return = LsportTeam::findData(['team_id'=>$home_team_id]);
+        $return = LsportTeam::where("team_id", $home_team_id)->first();
         if ($return === false) {
             $this->ApiError("11");
         }
@@ -1256,9 +1210,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         
         // 客隊
-        // $return = LsportTeam::where("team_id", $away_team_id)->first();
-        // cache
-        $return = LsportTeam::findData(['team_id'=>$away_team_id]);
+        $return = LsportTeam::where("team_id", $away_team_id)->first();
         if ($return === false) {
             $this->ApiError("12");
         }
@@ -1274,13 +1226,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 取得玩法
-        // $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
-
-        // cache
-        $market_data = LSportMarket::findData([
-            'fixture_id'=>$fixture_id,
-            'market_id'=>$market_id]
-        );
+        $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
         if ($market_data == false) {
             $this->ApiError("13");
         }
@@ -1345,17 +1291,11 @@ class LsportApiController extends Controller {
         }
 
         // 取得賠率
-        // $market_bet_data = LSportMarketBet::where(
-        //     "fixture_id", $fixture_id
-        // )->where(
-        //     "bet_id", $market_bet_id
-        // )->first();
-
-        // cache
-        $market_bet_data = LSportMarketBet::findData([
-            'fixture_id'=>$fixture_id,
-            'bet_id'=>$market_bet_id,
-        ]);
+        $market_bet_data = LSportMarketBet::where(
+            "fixture_id", $fixture_id
+        )->where(
+            "bet_id", $market_bet_id
+        )->first();
         if ($market_bet_data == false) {
             $this->ApiError("14");
         }
@@ -1539,10 +1479,7 @@ class LsportApiController extends Controller {
         }
 
         // 取得用戶資料
-        // $return = Player::where("id", $player_id)->first();
-
-        // cache
-        $return = Player::findData(['id'=>$player_id]);
+        $return = Player::where("id", $player_id)->first();
         if ($return == false) {
             $this->ApiError("05");
         }
@@ -1568,10 +1505,7 @@ class LsportApiController extends Controller {
         // ...
         
         // 取得商戶資料
-        // $return = Agent::where("id", $agent_id)->first();
-
-        // cache
-        $return = Agent::findData(['id'=>$agent_id]);
+        $return = Agent::where("id", $agent_id)->first();
         if ($return == false) {
             $this->ApiError("08");
         }
@@ -1695,10 +1629,7 @@ class LsportApiController extends Controller {
 
             /////////////////////////////
             // 取得賽事資料
-            // $fixture_data = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
-
-            // cache
-            $fixture_data = LsportFixture::findData(['fixture_id'=>$fixture_id]);
+            $fixture_data = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
             if ($fixture_data == false) {
                 $this->ApiError("11");
             }
@@ -1767,7 +1698,7 @@ class LsportApiController extends Controller {
             // }
 
             // cache
-            $home_team_name = LsportTeam::findData(['team_id'=>$home_team_id]);
+            $home_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
             $order['home_team_id'] = $home_team_id;
             $order['home_team_name'] = $home_team_name;
             
@@ -1786,36 +1717,24 @@ class LsportApiController extends Controller {
             // }
             
             // cache
-            $away_team_name = LsportTeam::findData(['team_id'=>$away_team_id]);
+            $away_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
             $order['away_team_id'] = $away_team_id;
             $order['away_team_name'] = $away_team_name;
 
             //////////////////////////////////////////
             // 取得玩法
-            // $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
-
-            // cache
-            $market_data = LSportMarket::findData([
-                'fixture_id'=>$fixture_id,
-                'market_id'=>$market_id
-            ]);
+            $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
             if ($market_data === false) {
                 $this->ApiError("17");
             }
             $market_priority = $market_data['priority'];
 
             // 取得賠率
-            // $market_bet_data = LSportMarketBet::where(
-            //     "fixture_id", $fixture_id
-            // )->where(
-            //     "bet_id", $market_bet_id
-            // )->first();
-
-            // cache
-            $market_bet_data = LSportMarketBet::findData([
-                'fixture_id'=>$fixture_id,
-                'bet_id'=>$market_bet_id
-            ]);
+            $market_bet_data = LSportMarketBet::where(
+                "fixture_id", $fixture_id
+            )->where(
+                "bet_id", $market_bet_id
+            )->first();
             if ($market_bet_data == false) {
                 $this->ApiError("18");
             }
@@ -2351,10 +2270,6 @@ class LsportApiController extends Controller {
 
         // 包入 fixture 賽事資料 ---------------
         $arrFixture['list'] = array(
-            //'sport_id' => $data->sport_id,
-            //'league_id' => $data->league_id,
-            //'home_id' => $data->home_id,
-            //'away_id' => $data->away_id,
             'fixture_id' => $data->fixture_id,
             'home_team_id' => $data->th_team_id,
             'home_team_name' => $home_team_name,
@@ -2488,7 +2403,6 @@ class LsportApiController extends Controller {
 
         }
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////
         // gzip
         $data = $arrFixture;
@@ -2601,7 +2515,6 @@ class LsportApiController extends Controller {
             $sport_id = $v["sport_id"];
             $home_team_id = $v["home_team_id"];
             $away_team_id = $v["away_team_id"];
-
 
             // 有串關資料
             if ($v['m_order'] == 1) {
@@ -2893,18 +2806,16 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $token = $input['token'];
 
-        // $checkToken = PlayerOnline::where("player_id", $player_id)
-        //     ->where("token", $token)
-        //     ->where("status", 1)
-        //     ->count();
+        $checkToken = PlayerOnline::where("player_id", $player_id)
+            ->where("token", $token)
+            ->where("status", 1)
+            ->count();
 
-        // cache
-        $is_player_online = PlayerOnline::isPlayerOnline([
-            'player_id' => $player_id,
-            'token' => $token,
-        ]);
+        if ($checkToken) {
+            return true;
+        }
 
-        return $is_player_online;
+        return false;
     }
 
     /**

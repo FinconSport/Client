@@ -398,14 +398,12 @@
         away_team_info.find('.scoreSpan').html('')
 
         // bet area
-        createBetArea(mainPriorityArr, v3, k3, league_name, card)
+        createBetArea(mainPriorityArr, v3, k3, league_name, 0, card)
 
         // ready to start
         if( v3.status === 9 ) {
             time.html(langTrans.mainArea.readyToStart)
         }
-
-
 
         // living
         if( v3.status === 2 ) {
@@ -415,8 +413,6 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-            console.log(v3)
-            console.log('timerStr->' + timerStr)
 
             // exception baseball
             if( sport === 154914 ) {
@@ -452,9 +448,12 @@
                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
 
-                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                // createBetArea(stagePriorityArr, v3, k3, league_name, card2)
+                if( v3?.periods?.period ) {
+                    stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
+                }
+
             }
         }
 
@@ -464,13 +463,12 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, card) {
+    function createBetArea(priorityArr, v3, k3, league_name, s, card) {
         console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     let item = null
@@ -547,7 +545,7 @@
 
             bet_div.removeAttr('hidden')
             bet_div.removeAttr('template')
-            card.find('.indexBetCardTable').append(bet_div)
+            card.find('.indexBetCardTable').eq(s).append(bet_div)
         });
     }
    
@@ -748,20 +746,30 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+
+                                // 換節了 重新渲染單節投注區塊
+                                if( v3?.periods?.period ) {
+                                    newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+
+                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
+                                        stagePriorityArr = newStagePriorityArr
+                                        card.find('.indexBetCardTable').eq(1).html('')
+                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                    }
+                                }
+
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
                                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-                                renderBetArea(stagePriorityArr, v3, k3)
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
                             }
-
                             time.html(timerStr)
                         }
                        
-                        
 
                         function renderBetArea(priorityArr, v3, k3) {
+                            console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
