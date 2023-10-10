@@ -756,7 +756,7 @@
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
                                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-                                renderBetArea(stagePriorityArr, v3, k3)
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
                             }
                             time.html(timerStr)
                         }
