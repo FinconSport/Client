@@ -54,43 +54,4 @@ class LsportSport extends CacheModel
         });
     }
 
-    public static function findData(
-        array $data,  // data=參數, 
-        string $id_col = 'sport_id'  // id_col=主鍵或是搜尋的欄位名
-    ) {
-
-        // 緩存時間
-        $cacheAliveTime = 3600;
-
-        // 緩存Key
-        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
-
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data, $id_col) {
-            $id = $data[$id_col];
-
-            $data = self::where($id_col, $id)->first();
-            $return = $data;
-
-            return $return;
-        });
-    }
-
-    public static function getActiveSport(
-        array $data = null  // data=參數
-    ) {
-
-        // 緩存時間
-        $cacheAliveTime = 3600;
-
-        // 緩存Key
-        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
-
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-
-            $data = self::where('status', 1)->orderBy('id', 'ASC')->get();
-            $return = $data;
-
-            return $return;
-        });
-    }
 }

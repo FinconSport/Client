@@ -86,9 +86,7 @@ class Controller extends BaseController
 
     // system_config
     protected function system_config() {
-    	// $return = SystemConfig::where("status",1)->get();
-        // cache
-        $return = SystemConfig::getActiveSystemConfig();
+    	$return = SystemConfig::where("status",1)->get();
     	$data = array();
     	foreach ($return as $k => $v) {
 
@@ -110,18 +108,14 @@ class Controller extends BaseController
 
 	// 取得 商戶語系
 	protected function getAgentLang($player_id) {
-		// $return = Player::where("id",$player_id)->first();
-        // cache
-        $return = Player::findData(['id'=>$player_id]);
+		$return = Player::where("id",$player_id)->first();
 		if ($return === false) {
 			return false;
 		}
 
 		$agent_id = $return['agent_id'];
 
-		// $return = Agent::where("id",$agent_id)->first();
-        // cache
-        $return = Agent::findData(['id'=>$agent_id]);
+		$return = Agent::where("id",$agent_id)->first();
 		if ($return === false) {
 			return false;
 		}
@@ -288,9 +282,7 @@ class Controller extends BaseController
 	// 取得用戶資料並輸出至頁面
 	protected function setPlayerInfo($session) {
 		$player_id = $session['player']['id'];
-		// $return = Player::where("id",$player_id)->first();
-        // cache
-        $return = Player::findData(['id'=>$player_id]);
+		$return = Player::where("id",$player_id)->first();
 		$player = array();
 		$player['account'] = $return['account'];
 		$player['balance'] = $return['balance'];

@@ -13,26 +13,4 @@ class LsportNotice extends CacheModel
 	public $timestamps = false;
 	protected $table = "lsport_notice";
 
-    public static function getData(
-        array $data = null  // data=參數
-    ) {
-
-        // 緩存時間
-        $cacheAliveTime = 60;
-
-        // 緩存Key
-        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
-
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-
-            $data = self::orderBy(
-                'sport_id', 'ASC'
-            )->orderBy(
-                'create_time', 'DESC'
-            )->get();
-            $return = $data;
-
-            return $return;
-        });
-    }
 }
