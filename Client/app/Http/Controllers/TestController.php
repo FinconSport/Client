@@ -16,7 +16,10 @@ class TestController extends PcController {
       $data['sport_id'] = 154914;
       $data['api_lang'] = 'tw';
 
-      $dd = LsportSport::getName($data);
+      //$dd = LsportSport::getName($data);
+
+      $sql = "select * from es_player";
+      $dd = LsportSport::getESQuery($sql);
       dd($dd);
 
     }
