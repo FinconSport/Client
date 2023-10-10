@@ -237,6 +237,8 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
+		$(`.betaDetcon additionalTr_${betIndex}${betItem.league_name}:not(:first-child)`).remove();
+
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
@@ -284,7 +286,6 @@
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 
-			betDataEventContainer.detach();
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
