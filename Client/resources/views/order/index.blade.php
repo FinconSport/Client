@@ -308,13 +308,16 @@
 			console.log(dynamicId);
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideToggle(); // Toggle only the specific elements
+				const targetElements = $(`#${dynamicId}.hide-betaDetcon`);
+				targetElements.css('display', 'table-row'); // Ensure the elements are displayed as table rows
+				targetElements.slideToggle('fast'); // Add 'fast' for a smooth transition
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
+
 
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
