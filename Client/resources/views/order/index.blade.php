@@ -17,7 +17,7 @@
 						<input type="text" class="form-control" id="datepicker_from">
 						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
 					</div>
-					<span> ~ </span>
+					<span class="date-divider"> ~ </span>
 					<div class="input-group date">
 						<input type="text" class="form-control" id="datepicker_to">
 						<span class="input-group-text"><i class="bi bi-calendar"></i></span>

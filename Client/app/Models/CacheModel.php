@@ -27,15 +27,17 @@ class CacheModel extends Model {
 
         // 发送请求，并使用Basic Auth认证
         $response = Http::withBasicAuth($esUser, $esPass)->get($url);
-        dd($response);
+        
         // 检查响应是否成功
         if ($response->successful()) {
             // 解码JSON响应
             $data = $response->json();
+            $list = array();
+            foreach ($data['hits']['hits'] as $k => $v) {
+                $list[] = $v['_source'];
+            }
 
-            // 在这里对$data执行您的操作
-            // $data 包含解码后的JSON数据
-            return response()->json($data);
+            return $list;
         } else {
             // 处理请求失败的情况
             return response()->json(['error' => '请求失败'], 500);
