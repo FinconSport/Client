@@ -15,12 +15,12 @@
 				<div class="datepicker-con">
 					<div class="input-group date">
 						<input type="text" class="form-control" id="datepicker_from">
-						<span class="input-group-text"></span>
+						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
 					</div>
 					<span class="date-divider"> ~ </span>
 					<div class="input-group date">
 						<input type="text" class="form-control" id="datepicker_to">
-						<span class="input-group-text"></span>
+						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
 					</div>
 				</div>
 				<div class="datebutton-cons">
@@ -35,19 +35,19 @@
 		</div>
 		<div class="statistic-container">
 			<div class="stats-container total-bet-count">
-				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i> {{ trans('order.main.total_bet_count') }}</span>
+				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
 			</div>
 			<div class="stats-container total-bet-amount">
-				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i> {{ trans('order.main.total_bet_amount') }}</span>
+				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
 			</div>
 			<div class="stats-container total-effective-amount">
-				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i> {{ trans('order.main.total_effective_amount') }}</span>
+				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
 			</div>
 			<div class="stats-container total-result-amount">
-				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i> {{ trans('order.main.total_result_amount') }}</span>
+				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
 			</div>
 			<div class="stats-container total-win-amount">
-				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i> {{ trans('order.main.total_win_amount') }}</span>
+				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
 			</div>
 		</div>
 	</div>
