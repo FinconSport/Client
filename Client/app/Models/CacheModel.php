@@ -16,21 +16,21 @@ class CacheModel extends Model {
         return $cacheKey;
     }
 
-    // ES Query 操作
+    // ES Query操作
     protected static function getESQuery($sql) {
         
-        // 获取要发送请求的URL
+        // create URL
         $url = 'http://72.167.135.22:29200/_sql?sql=' . $sql . '&pretty';
 
         $esUser = env("ES_USER");
         $esPass = env("ES_PASS");
 
-        // 发送请求，并使用Basic Auth认证
+        // Basic Auth
         $response = Http::withBasicAuth($esUser, $esPass)->get($url);
         
-        // 检查响应是否成功
+        // check successful
         if ($response->successful()) {
-            // 解码JSON响应
+            // json decode
             $data = $response->json();
             $list = array();
             foreach ($data['hits']['hits'] as $k => $v) {
@@ -39,12 +39,12 @@ class CacheModel extends Model {
 
             return $list;
         } else {
-            // 处理请求失败的情况
-            return response()->json(['error' => '请求失败'], 500);
+            // if fail
+            return response()->json(['error' => 'request fail'], 500);
         }
     }
     
-    // ES 統計操作
+    // ES 聚合操作
     protected static function getESAgg($sql) {
         
         $sql = "select agent_id , SUM(bet_amount) as bet_amount from es_game_order group by agent_id";
