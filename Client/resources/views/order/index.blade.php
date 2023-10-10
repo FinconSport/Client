@@ -36,7 +36,7 @@
 		<div class="statistic-container" id="countTr" template="orderTotalTemplate" hidden>
 			<div class="stats-container">
 				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
-				<p class="total-bet-count"></p>
+				<p class="orderData_totalBetCount"></p>
 			</div>
 			<div class="stats-container">
 				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
@@ -145,6 +145,7 @@
 	let totalResultAmount = 0;
 	let totalBetAmount = 0;
 	let totalWinLoss = 0;
+	let totalBetItemCount = 0;
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -156,6 +157,7 @@
 				const resultAmount = parseFloat(orderItem.result_amount);
 				const betAmount = parseFloat(orderItem.bet_amount);
 				const winLoss = resultAmount - betAmount;
+				const betItemCounter = orderItem.bet_data.length; 
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -167,6 +169,7 @@
 				totalBetAmount += betAmount;
 				totalResultAmount += winLoss;
 				totalWinLoss += winLoss;
+				totalBetItemCount += betItemCounter;
 
 			});
 
@@ -282,24 +285,28 @@
 	
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
+		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		$('.search-bar-container').after(orderDataTotal);
+		
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
+
+		$('.search-bar-container').after(orderDataTotal);
 	}
 
 	//updateTotal when new data is loaded
 	function updateTotal() {
+		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount);
+
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
-
 		totalWinAmountElement.text(totalWinLoss);
 
 		// Check if the color needs to be updated
