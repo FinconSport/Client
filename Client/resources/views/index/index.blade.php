@@ -369,7 +369,7 @@
         sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
 
         // 單節選項 只有 滾球 籃球有 
-        if( sport === 48242 && v3.status === 1 ) card2 = $('div[template="basketBallQuaterBet"]').clone()
+        if( sport === 48242 && v3.status === 2 ) card2 = $('div[template="basketBallQuaterBet"]').clone()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
