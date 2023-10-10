@@ -70,7 +70,7 @@
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td style="width: 10%;" class="orderData_id"></td>
-                        <td style="width: 10%;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
+                        <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
                         <td style="width: 17%;" class="orderData_betDataEvent"></td>
                         <td style="width: 10%;" class=""></td>
                         <td style="width: 10%;" class="text-right"></td>
@@ -180,7 +180,7 @@
 		const orderDataMOrder = orderData.find('.orderData_mOrder');
 		const orderDataBetAmount = orderData.find('.orderData_betAmount');
 		const orderDataBetDataDetails = orderData.find('.orderData_betDataEvent');
-		const orderDataCreatedTime = orderData.find('.orderData_createdTime');
+		// const orderDataCreatedTime = orderData.find('.orderData_createdTime');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataStatus = orderData.find('.orderData_status');
@@ -197,7 +197,7 @@
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
-		orderDataCreatedTime.html(orderItem.create_time);
+		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataStatus.html(orderItem.status);
@@ -213,8 +213,8 @@
 		const createHtmlElement = (className, content) => $('<div>').html(`<span>${content}</span>`).addClass(className);
 		
 		betDataDetailsContainer.append(
-			createHtmlElement('mb-3', `${betItem.league_name} (${betItem.create_time})`),
-			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span>(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`}</span>`)
+			createHtmlElement('mb-3', `${betItem.league_name} (${orderItem.create_time})`),
+			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
 		// createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
