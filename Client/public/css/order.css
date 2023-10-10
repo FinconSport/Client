@@ -202,6 +202,16 @@ div[key="matchSportMenu"]{
 
 .search-statistic-container .select-con {
     width: 29%;
+    position: relative;
+}
+
+.search-statistic-container .select-con::after {
+    position: absolute;
+    content: '⏷';
+    height: auto;
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
 }
 
 .search-statistic-container select {
@@ -210,21 +220,15 @@ div[key="matchSportMenu"]{
     padding: 0.5rem;
     border: 1px solid #415b5a;
     border-radius: 15px;
-    background: none;
     -moz-appearance: none;
     -webkit-appearance: none; 
     position: relative;
     width: 100%;
+    outline: none;
+    cursor: pointer;
 }
 
-.search-statistic-container select::after {
-    position: absolute;
-    content: '⏷';
-    height: auto;
-    top: 50%;
-    right: 0%;
-    transform: translate(-50%, -50%);
-}
+
 
 /* for IE10 */ 
 .search-statistic-container select::-ms-expand { 
