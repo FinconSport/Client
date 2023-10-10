@@ -31,7 +31,6 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
-            dd($esSql);
             // use Cache
             return Cache::remember($cacheKey, $cacheAliveTime, function () use ($esSql) {
                 $url = 'http://72.167.135.22:29200/_sql?sql=' . $esSql . '&pretty';
