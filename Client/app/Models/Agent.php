@@ -45,9 +45,6 @@ class Agent extends CacheModel
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data, $id_col) {
-            if (!strlen($id_col)) {
-                $id_col = 'id';
-            }
             $id = $data[$id_col];
 
             $data = self::where($id_col, $id)->first();
