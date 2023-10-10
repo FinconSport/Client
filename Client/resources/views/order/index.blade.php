@@ -271,21 +271,24 @@
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
 
-			    // Append the data to the created additional <td> elements except for the first one
-				const betDataEventContainer = $(`#additionalTr_${betIndex}${betItem.league_name}`);
-				betDataEventContainer.find('.orderData_betData_Event').html(`
-					${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-					${betItem.home_team_name} VS ${betItem.away_team_name} 
-					<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-					${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-					${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
-				);
+			// Append the data to the created additional <td> elements except for the first one
+			const betDataEventContainer = $(`#additionalTr_${betIndex}${betItem.league_name}`);
+			betDataEventContainer.find('.orderData_betData_Event').html(`
+				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
+				${betItem.home_team_name} VS ${betItem.away_team_name} 
+				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
+				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+			);
 
 			['Event', 'BetWay', 'Result'].forEach(key => {
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 
+			// Remove all .betaDetcon elements within the created <td> except the first child
+			betDataEventContainer.find('.betaDetcon:not(:first-child)').remove();
 		}
+
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
