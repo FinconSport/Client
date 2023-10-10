@@ -297,11 +297,19 @@
 	function updateTotal() {
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount);
-		$('.orderData_totalWinAmount').text(totalWinLoss);
-		if (totalWinLoss >= 0) {
-			totalWinAmountElement.css('color', 'red');
-		} else {
-			totalWinAmountElement.css('color', 'green');
+		const totalWinAmountElement = $('.orderData_totalWinAmount');
+		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
+
+		totalWinAmountElement.text(totalWinLoss);
+
+		// Check if the color needs to be updated
+		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
+			// Update text color based on totalWinLoss
+			if (totalWinLoss >= 0) {
+				totalWinAmountElement.css('color', 'red'); // Set text color to red
+			} else {
+				totalWinAmountElement.css('color', 'green'); // Set text color to green
+			}
 		}
 	}
 
