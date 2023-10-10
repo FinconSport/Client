@@ -188,3 +188,15 @@ div[key="matchSportMenu"]{
     align-items: center;
     justify-content: space-between;
 }
+
+.datecalendar-con span {
+    margin: 0px 0.7rem;
+}
+
+.datecalendar-con #ui-datepicker-div {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #415b5a;
+    border-radius: 5px;
+    top: 133px;
+}
