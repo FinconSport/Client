@@ -228,7 +228,7 @@
 
 		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
-		const betDataEventContainer = $(`<div class='betaDetcon'>`);
+		const betDataEventContainer = $(`<div class='betaDetcon event-con'>`);
 		betDataEventContainer.append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
@@ -237,7 +237,7 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		orderDataBetEvent.children('.betaDetcon:not(:first-child)').remove();
+		orderDataBetEvent.children('.event-con:not(:first-child)').remove();
 
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
