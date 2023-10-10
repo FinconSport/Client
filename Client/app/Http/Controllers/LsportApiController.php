@@ -3100,7 +3100,7 @@ class LsportApiController extends Controller {
             // 如果參數是字串則json_decoe看看
             $arr_scoreboard = json_decode($scoreboard, true);
             // de不出東西就回傳false
-            if (!$arr_scoreboard) {
+            if (!is_array($arr_scoreboard) && !$arr_scoreboard) {
                 return false;
             }
         }
@@ -3111,7 +3111,7 @@ class LsportApiController extends Controller {
             // 如果參數是字串則json_decoe看看
             $arr_livescore_extradata = json_decode($livescore_extradata, true);
             // de不出東西就回傳false
-            if (!$arr_livescore_extradata) {
+            if (!is_array($arr_livescore_extradata) && !$arr_livescore_extradata) {
                 return false;
             }
         }

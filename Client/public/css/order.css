@@ -331,6 +331,14 @@ button.dateCalendarBtn {
     padding: 0.5rem;
     border-radius: 10px;
     border: 2px solid #415b5a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stats-container p{
+    text-align: end;
+    font-size: 1.5rem;
 }
 
 .orderData_betData_Event,

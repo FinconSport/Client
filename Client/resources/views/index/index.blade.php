@@ -456,7 +456,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 
