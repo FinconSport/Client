@@ -268,11 +268,14 @@
 			const dynamicId = 'additionalTr_' + betIndex; // You can use a unique identifier here
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).append(additionalTds);
 
-			// Append the additional <tr> to the tbody of the table
-			$('#orderDataTemp').append(additionalTr);
+			// Find the orderItem row by its ID (replace 'orderItemId' with the actual ID of the orderItem row)
+			const orderItemRow = $(`#orderItemId`); // Replace 'orderItemId' with the actual ID of the orderItem row
+
+			// Insert the additional <tr> immediately after the orderItem row
+			orderItemRow.after(additionalTr);
 
 			// Append the data from betItem to the created additional <td> elements except for the first one
-			const betDataEventContainer = $(`#additionalTr_${betIndex}`);
+			const betDataEventContainer = $(`#${dynamicId}`);
 			betDataEventContainer.find('.orderData_betData_Events').html(`
 				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
 				${betItem.home_team_name} VS ${betItem.away_team_name} 
@@ -285,6 +288,7 @@
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 		}
+
 
 
 		orderDataBetEvent.append(betDataEventContainer);
