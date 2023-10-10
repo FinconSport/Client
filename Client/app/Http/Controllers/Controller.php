@@ -109,7 +109,8 @@ class Controller extends BaseController
 	// 取得 商戶語系
 	protected function getAgentLang($player_id) {
 		// $return = Player::where("id",$player_id)->first();
-        $return = Player::getData(['id'=>$player_id]);
+        // cache
+        $return = Player::findData(['id'=>$player_id]);
 		if ($return === false) {
 			return false;
 		}
@@ -117,7 +118,8 @@ class Controller extends BaseController
 		$agent_id = $return['agent_id'];
 
 		// $return = Agent::where("id",$agent_id)->first();
-        $return = Agent::getData(['id'=>$agent_id]);
+        // cache
+        $return = Agent::findData(['id'=>$agent_id]);
 		if ($return === false) {
 			return false;
 		}
