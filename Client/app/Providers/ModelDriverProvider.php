@@ -24,6 +24,8 @@ class ModelDriverProvider extends ServiceProvider {
             $sql = $this->toSql();
             $fullSql = vsprintf(str_replace('?', "'%s'", $sql), $bindings);
             $fullSql = str_replace($tableName, $esTableName, $fullSql);
+            $fullSql = str_replace("'", "", $fullSql);
+            $fullSql = str_replace("`", "", $fullSql);
 
             dd($fullSql);
             $cacheKey = MD5($fullSql);
