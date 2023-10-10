@@ -81,8 +81,8 @@
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
-						<td style="width: 10%;"><span class="orderData_resultAmount"></span></td>
-						<td style="width: 10%;"><span class="orderData_WinLoss"></span></td>
+						<td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span></td>
+						<td style="width: 10%;" class="text-right"><span class="orderData_WinLoss"></span></td>
                     </tr>
                 </tbody>
             </table>
