@@ -400,13 +400,14 @@
         away_team_info.find('.scoreSpan').html('')
 
         // bet area
-        console.log(1)
         createBetArea(mainPriorityArr, v3, k3, league_name, card)
 
         // ready to start
         if( v3.status === 9 ) {
             time.html(langTrans.mainArea.readyToStart)
         }
+
+        console.log(v3, v3.status)
 
         // living
         if( v3.status === 2 ) {
@@ -452,8 +453,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                console.log(2)
-                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 
