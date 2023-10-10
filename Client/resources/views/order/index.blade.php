@@ -256,15 +256,15 @@
 
 		if (betIndex > 0) {
 			// Create additional <td> elements for betItems other than the first one
-			const additionalTds = $('<td style="width: 8%;"></td>' +
-				'<td style="width: 9%;"></td>' +
+			const additionalTds = $('<td style="width: 8%;"><span class="parent_span"></span></td>' +
+				'<td style="width: 9%;"><span class="parent_span"></span></td>' +
 				'<td style="width: 21%;text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%;text-align:left;" class="orderData_betData_BetWay"></td>' +
 				'<td style="width: 10%;text-align:right;" class="orderData_betData_Result"></td>' +
-				'<td style="width: 10%;"></td>' +
-				'<td style="width: 10%;"></td>' +
-				'<td style="width: 10%;"></td>' +
-				'<td style="width: 10%;"></td>');
+				'<td style="width: 10%;"><span class="parent_span"></span></td>' +
+				'<td style="width: 10%;"><span class="parent_span"></span></td>' +
+				'<td style="width: 10%;"><span class="parent_span"></span></td>' +
+				'<td style="width: 10%;"><span class="parent_span"></span></td>');
 
 			// Create a new <tr> for the additional <td> elements with a dynamic ID
 			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;

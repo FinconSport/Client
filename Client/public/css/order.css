@@ -342,7 +342,7 @@ button.dateCalendarBtn {
     position: relative;
 }
 
-.orderData_expand .orderData_betData_Event{
+.orderData_expand td{
     border-left: none;
     border-right: none;
     padding: 0rem;
