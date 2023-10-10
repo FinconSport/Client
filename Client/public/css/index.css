@@ -283,6 +283,11 @@
     width: 1.5rem;
     height: 1.5rem;
 }
+
+#submitOrder.disabled {
+    background-color: red;
+}
+
 #leftSlideOrder button {
     background-color: #c79e42;
     color: white;
