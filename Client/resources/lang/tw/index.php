@@ -11,6 +11,7 @@ return [
 		'maxwin' => '最高可贏',
 		'better_rate' => '自動接受更好賠率',
 		'bet' => '投注',
+		'disabled' => '已失效',
 		'cancel' => '取消',
 		'limit' => '限額',
 		'loading' => '確認中...',

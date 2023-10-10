@@ -11,6 +11,7 @@ return [
 		'maxwin' => 'Maximum Potential Winnings', // "最高可贏"
 		'better_rate' => 'Accept better odds', // "自動接受更好賠率"
 		'bet' => 'Bet', // "投注"
+		'disabled' => 'Disabled',
 		'cancel' => 'Cancel', // "取消"
 		'limit' => 'Betting Limit', // "限額"
 		'loading' => 'Processing...', // "加载中"

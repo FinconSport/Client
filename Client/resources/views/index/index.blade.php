@@ -51,7 +51,7 @@
                 <input type="checkbox" name="better_rate" id="better_rate">
                 <label for="better_rate">{{ trans('index.bet_area.better_rate') }}</label>
             </div>
-            <button onclick="sendOrder()">{{ trans('index.bet_area.bet') }}</button>
+            <button id="submitOrder" onclick="sendOrder()">{{ trans('index.bet_area.bet') }}</button>
             <button id="cancelOrder">{{ trans('index.bet_area.cancel') }}</button>
         </div>
     </div>
@@ -455,7 +455,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                // card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
             }
         }
 
@@ -826,15 +826,29 @@
                                     } else {
                                         calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
                                     }
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+                                    $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
 
                                     // 狀態 鎖頭
                                     if( v4.status === 1 ) {
                                         item.find('.fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
+
+                                        // 左邊選中的剛好鎖起來了 -> 復原
+                                        if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            $('#submitOrder').html(langTrans.bet_area.bet)
+                                            $('#submitOrder').removeClass('disabled')
+                                            $('#submitOrder').removeAttr('disabled')
+                                        }
                                     } else {
                                         item.find('.fa-lock').show()
                                         item.removeAttr('onclick')
+
+                                        // 左邊選中的剛好鎖起來了
+                                        if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            $('#submitOrder').html(langTrans.bet_area.disabled)
+                                            $('#submitOrder').addClass('disabled')
+                                            $('#submitOrder').attr('disabled', true)
+                                        }
                                     }
                                 })
                             } else {
@@ -1145,6 +1159,11 @@
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
         $('div').removeClass('m_order_on')
+
+        // 左邊選中的剛好鎖起來了 -> 復原
+        $('#submitOrder').html(langTrans.bet_area.bet)
+        $('#submitOrder').removeClass('disabled')
+        $('#submitOrder').removeAttr('disabled')
     }
 
     // 金額快速鍵
