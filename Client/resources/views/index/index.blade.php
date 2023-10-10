@@ -123,15 +123,15 @@
         </div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: 20%;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
             <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: 20%;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
         </div>
@@ -427,7 +427,6 @@
                         // 四格的時候調整寬度
                         if( mainPriorityArr.length === 4 ) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
-                            item.find('div[key="changeCol"] .col').eq(1).addClass('col-8').removeClass('col')
                         }
                     }
 
