@@ -38,16 +38,15 @@ class CacheModel extends Model {
             }
 
             return $list;
-        } else {
-            // if fail
-            return response()->json(['error' => 'request fail'], 500);
-        }
+        } 
+
+        return false;
     }
     
     // ES 聚合操作
     protected static function getESAgg($sql) {
         
-        // 获取要发送请求的URL
+        // create URL
         $url = 'http://72.167.135.22:29200/_sql?sql=' . $sql . '&pretty';
 
         $esUser = env("ES_USER");
