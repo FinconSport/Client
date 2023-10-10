@@ -56,15 +56,15 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 11%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.bet_type') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.event') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.bet_way') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.result') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.bet_amount') }}</th>
-                        <th style="width: 11%;">{{ trans('order.main.effective_amount') }}</th>
-						<th style="width: 11%;">{{ trans('order.main.result_amount') }}</th>
-						<th style="width: 11%;" class="no-border-right">{{ trans('order.main.win_amount') }}</th>
+                        <th style="width: 10%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
+                        <th style="width: 17%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.result') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.effective_amount') }}</th>
+						<th style="width: 10%;">{{ trans('order.main.result_amount') }}</th>
+						<th style="width: 10%;" class="no-border-right">{{ trans('order.main.win_amount') }}</th>
                     </tr>
                 </thead>
                 <!-- <tbody id="orderDataTemp">
