@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
-class ModelDriverProvider extends ServiceProvider {
+class ElasticSearchDriverProvider extends ServiceProvider {
 
     public function register() {
         // ...
