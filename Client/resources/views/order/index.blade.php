@@ -274,9 +274,9 @@
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 
-			$('#additionalTr_1 .orderData_betData_Event').append(".additionalTr_1");
+			// Add the class .additionalTr_${betIndex} to the element with class .orderData_betData_Event
+			$(`#${dynamicId} .orderData_betData_Event`).addClass(`additionalTr_${betIndex}`);
 		}
-
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
