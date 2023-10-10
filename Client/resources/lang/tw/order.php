@@ -34,8 +34,8 @@ return [
 		"last_week" => "上週",
 		"yesterday" => "昨日",
 		"today" => "今日",
-		"this week" => "本週", 
-		"this month" => "本月",
+		"this_week" => "本週", 
+		"this_month" => "本月",
 	],
 	// 後端
 ];

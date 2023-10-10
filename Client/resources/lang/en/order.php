@@ -34,8 +34,8 @@ return [
 		"last_week" => "Last Week",  //  "上週",
 		"yesterday" => "Yesterday",  //  "昨日",
 		"today" => "Today",  //  "今日",
-		"this week" => "This Week",  //  "本週",
-		"this month" => "This Month",  //  "本月",
+		"this_week" => "This Week",  //  "本週",
+		"this_month" => "This Month",  //  "本月",
 	],  //  
 	'sportPriority' => [
 		1 => 'Full Match Win',
