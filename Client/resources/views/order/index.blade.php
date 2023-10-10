@@ -168,6 +168,7 @@
 
 				// Accumulate the total WinLoss
 				WinLoss += winLoss;
+				console.log('WINLOSS' + winLoss);
 
 			});
 
