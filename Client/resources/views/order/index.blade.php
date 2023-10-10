@@ -158,13 +158,17 @@
 				});
 
 				// Validate and accumulate total
-				totalResultAmount += parseFloat(orderItem.result_amount) || 0;
-				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
+				totalResultAmount += parseFloat(orderItem.result_amount).toFixed(2) || 0;
+				totalBetAmount += parseFloat(orderItem.bet_amount).toFixed(2) || 0;
 			});
 
+			// After accumulating the totals, round them to two decimal places
+			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+        	totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
+
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
-			isLastPage && $('#noMoreData').show()
-		}
+				isLastPage && $('#noMoreData').show()
+			}
 	}
 
 	function createList(orderItem, orderIndex) {
