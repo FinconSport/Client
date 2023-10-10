@@ -70,16 +70,24 @@
 				<tbody>
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
-                        <td style="width: 10%;" class="orderData_id"></td>
-                        <td style="width: 10%;" ><span class="orderData_sportType"></span></td>
-                        <td style="width: 17%;" class="orderData_mOrder"></td>
-                        <td style="width: 10%;" class="orderData_betDataDetails"></td>
-                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span class="text-muted orderData_createdTime"></span></td>
-                        <td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span><br><span class="text-muted orderData_resultTime"></span></td>
-                        <td style="width: 10%;" class="orderData_status"></td>
-						<td style="width: 10%;" class=""></td>
-						<td style="width: 10%;" class=""></td>
-                    </tr>
+                        <td class="no-border-left orderData_id"></td>
+                        <td>
+                            <span class="orderData_sportType"></span>
+                        </td>
+                        <td class="orderData_mOrder"></td>
+                        <td class="orderData_betDataDetails">
+						</td>
+                        <td class="text-right">
+                            <span class="orderData_betAmount"></span>
+                            <br>
+                            <span class="text-muted orderData_createdTime"></span>
+                        </td>
+                        <td class="text-right">
+                            <span class="orderData_resultAmount"></span>
+                            <br>
+                            <span class="text-muted orderData_resultTime"></span>
+                        </td>
+                        <td class="no-border-right orderData_status"></td>
                 </tbody>
             </table>
 			<div id="loader" style="display: none; margin-top: 2rem;">
