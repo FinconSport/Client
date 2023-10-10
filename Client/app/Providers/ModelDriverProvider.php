@@ -28,7 +28,7 @@ class ModelDriverProvider extends ServiceProvider {
         });
     }
 
-    protected getCacheKey() {
+    protected function getCacheKey() {
         // getSQL
         $bindings = $this->getBindings();
         $sql = $this->toSql();
