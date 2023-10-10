@@ -34,19 +34,19 @@
 			</div>
 		</div>
 		<div class="statistic-container">
-			<div class="stats-total-bet-count">
+			<div class="stats-container total-bet-count">
 				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;"></i> {{ trans('order.main.total_bet_count') }}</span>
 			</div>
-			<div class="stats-total-bet-amount">
+			<div class="stats-container total-bet-amount">
 				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;"></i> {{ trans('order.main.total_bet_amount') }}</span>
 			</div>
-			<div class="stats-total-effective-amount">
+			<div class="stats-container total-effective-amount">
 				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;"></i> {{ trans('order.main.total_effective_amount') }}</span>
 			</div>
-			<div class="stats-total-result-amount">
+			<div class="stats-container total-result-amount">
 				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;"></i> {{ trans('order.main.total_result_amount') }}</span>
 			</div>
-			<div class="stats-total-win-amount">
+			<div class="stats-container total-win-amount">
 				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;"></i> {{ trans('order.main.total_win_amount') }}</span>
 			</div>
 		</div>

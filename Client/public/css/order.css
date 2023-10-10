@@ -177,6 +177,9 @@ div[key="matchSportMenu"]{
 /* search bar and statistic css */
 .search-statistic-container{
     margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .search-statistic-container .search-bar-container {
@@ -307,4 +310,17 @@ button.dateCalendarBtn {
 
 .statistic-container {
     width: 58%;
+    display: grid;
+    grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
+    justify-content: space-between;
+    align-items: start;
+    padding-left: 1%;
+}
+
+.stats-container {
+    height: 100%;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 2px solid #415b5a;
 }
