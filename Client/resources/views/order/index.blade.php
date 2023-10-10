@@ -5,7 +5,7 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 				<select id="selectOption" name="selectOption">
-					<option value="">Please Select Sports:</option>
+					<option value="">Please Select Sports</option>
 					<option value="baseball">Baseball</option>
 					<option value="football">Football</option>
 					<option value="basketball">Basketball</option>
