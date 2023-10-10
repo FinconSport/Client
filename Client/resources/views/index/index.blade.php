@@ -763,6 +763,7 @@
                        
 
                         function renderBetArea(priorityArr, v3, k3) {
+                            console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
