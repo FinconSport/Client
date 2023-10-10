@@ -96,7 +96,8 @@ class LsportApiController extends Controller {
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->first();
+        // $return = Player::where("id", $player_id)->first();
+        $return = Player::getData(['player_id'=>$player_id]);
         if ($return === false) {
           $this->ApiError("01");
         }

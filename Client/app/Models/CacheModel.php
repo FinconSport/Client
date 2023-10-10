@@ -3,8 +3,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CacheModel extends Model {
-
+class CacheModel extends Model
+{
     // 設定cacheKey
     protected static function getCacheKey($data, $funcName) {
 
