@@ -133,7 +133,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                             $buckets = $vv['buckets'];
                             foreach ($buckets as $kkk => $vvv) {
                                 $tmp = array();
-                                $tmp['agent_id'] = $vvv['key'];
+                                $tmp[$kk] = $vvv['key'];
                                 $count = 0; // 用於計算欄位順序
                                 foreach ($vvv as $kkkk => $vvvv) {
                                    if ($count >= 2) {
