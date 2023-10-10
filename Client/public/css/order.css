@@ -195,13 +195,17 @@ div[key="matchSportMenu"]{
 
 .custom-datepicker-class {
     background: white;
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid #415b5a;
     border-radius: 5px;
     top: 133px!important;
 }
 
-.ui-datepicker td span, 
-.ui-datepicker td a {
+.custom-datepicker-class .ui-datepicker td span, 
+.custom-datepicker-class .ui-datepicker td a {
     color: rgb(65, 91, 90)!important;
+}
+
+.ui-datepicker-today a, .ui-datepicker-today span{
+    font-weight: 600!important;
 }
