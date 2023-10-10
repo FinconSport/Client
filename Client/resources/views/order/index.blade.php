@@ -54,7 +54,7 @@
     <div id="orderContainer">
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
-                <thead>
+				<thead>
                     <tr class="no-border-top">
                         <th style="width: 10%;">{{ trans('order.main.index') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
@@ -67,28 +67,18 @@
 						<th style="width: 10%;">{{ trans('order.main.win_amount') }}</th>
                     </tr>
                 </thead>
-				<tbody id="orderDataTemp">
+				<tbody>
+                <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td style="width: 10%;" class="orderData_id"></td>
-                        <td style="width: 10%;">
-                            <span class="orderData_sportType"></span>
-                        </td>
-                        <td style="width: 10%;" class="orderData_mOrder"></td>
-                        <td style="width: 17%;" class="orderData_betDataDetails">
-						</td>
-                        <td style="width: 10%;" class="text-right">
-                            <span class="orderData_betAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_createdTime"></span>
-                        </td>
-                        <td style="width: 10%;" class="text-right">
-                            <span class="orderData_resultAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_resultTime"></span>
-                        </td>
+                        <td style="width: 10%;" ><span class="orderData_sportType"></span></td>
+                        <td style="width: 17%;" class="orderData_mOrder"></td>
+                        <td style="width: 10%;" class="orderData_betDataDetails"></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span class="text-muted orderData_createdTime"></span></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span><br><span class="text-muted orderData_resultTime"></span></td>
                         <td style="width: 10%;" class="orderData_status"></td>
-						<td style="width: 10%;" class="orderData_result_amount"></td>
-						<td style="width: 10%;" class="orderData_win_amount"></td>
+						<td style="width: 10%;" class=""></td>
+						<td style="width: 10%;" class=""></td>
                     </tr>
                 </tbody>
             </table>
