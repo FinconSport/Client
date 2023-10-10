@@ -317,10 +317,9 @@
 				$element.slideToggle('fast');
 			}
 
-			toggleButton.on('click', toggleContainers);
+			toggleButton.on('click', toggleTableRow); // Changed from toggleContainers to toggleTableRow
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
