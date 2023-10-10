@@ -20,7 +20,7 @@ class TestController extends PcController {
 
       $sql = "select * from es_player";
       // $dd = LsportSport::getESQuery($sql);
-      $dd = LsportSport::getESSum($sql);
+      $dd = LsportSport::getESAgg($sql);
       
      dd($dd);
 
