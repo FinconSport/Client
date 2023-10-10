@@ -743,10 +743,10 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                                newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
 
                                 // 換節了 重新渲染單節投注區塊
-                                if( !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
+                                if( newStagePriorityArr[v3.periods.period] && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
                                     stagePriorityArr = newStagePriorityArr
                                     card.find('.indexBetCardTable').eq(1).html('')
                                     createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
