@@ -77,7 +77,7 @@
                         <td style="width: 10%;" class="orderData_id"></td>
                         <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
                         <td style="width: 17%;" class="orderData_betData_Event"></td>
-                        <td style="width: 10%;" class=""></td>
+                        <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="text-right"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
@@ -174,6 +174,7 @@
 		const orderDataMOrder = orderData.find('.orderData_mOrder');
 		const orderDataBetAmount = orderData.find('.orderData_betAmount');
 		const orderDataBetEvent = orderData.find('.orderData_betData_Event');
+		const orderDataBetBetWay = orderData.find('.orderData_betData_BetWay');
 		// const orderDataCreatedTime = orderData.find('.orderData_createdTime');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
@@ -190,6 +191,7 @@
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
+		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
 		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
@@ -200,7 +202,7 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
+		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`; 
 		const orderDataBetEvent = $(`#${betDataEventID}`);
 		const betDataEventContainer = $('<div class="betaDetcon">');
 		
@@ -211,7 +213,15 @@
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		// createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
+		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
+		const orderDataBetWay = $(`#${betDataBetWayID}`);
+		const betDataBetWayContainer = $('<div class="betaDetcon">');
+
+		betDataBetWayContainer.append(
+			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
+		);
+
+		
 
 		if (betIndex > 0) {
 			betDataEventContainer.addClass('hide-betaDetcon');
@@ -219,6 +229,7 @@
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
+		orderDataBetWay.append(betDataBetWayContainer);
 
 		const betDataLength = orderItem.bet_data.length;
 
