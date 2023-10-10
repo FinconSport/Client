@@ -17,13 +17,15 @@ class ModelDriverProvider extends ServiceProvider {
             
             // 获取模型的表名
             $tableName = $this->getModel()->getTable();
-
-            dd($tableName);
+            $esTableName = "es_" . $tableName;
 
             // getSQL
             $bindings = $this->getBindings();
             $sql = $this->toSql();
             $fullSql = vsprintf(str_replace('?', "'%s'", $sql), $bindings);
+            $fullSql = str_replace($tableName, $esTableName, $fullSql);
+
+            dd($fullSql);
             $cacheKey = MD5($fullSql);
 
             $data = Cache::remember($cacheKey, $cacheAliveTime, function () {
