@@ -223,17 +223,10 @@
 		$('#orderDataTemp').append(orderData);
 	}
 
-	function createHtmlElement(className, content) {
-    	return $('<div>').html(`${content}`).addClass(className);
-	}
-
-	function toggleBetDataVisibility(orderData, betDataLength, buttonText) {
-		orderData.find('.hide-betaDetcon').slideToggle();
-		buttonText.text(buttonText.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
-	}
-
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
+		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
+
+		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`; 
 		const orderDataBetEvent = $(`#${betDataEventID}`);
 		const betDataEventContainer = $('<div class="betaDetcon">');
 		betDataEventContainer.append(
@@ -244,47 +237,50 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
+		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
 		const betDataBetWayContainer = $('<div class="betaDetcon">');
 		betDataBetWayContainer.append(
 			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
 		);
 
-		const betDataResultID = `betDataDetailsResult_${orderItem.id}`;
+		const betDataResultID = `betDataDetailsResult_${orderItem.id}`; 
 		const orderDataResult = $(`#${betDataResultID}`);
 		const betDataResultContainer = $('<div class="betaDetcon">');
 		betDataResultContainer.append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`),
 		);
 
+		
 		if (betIndex > 0) {
-			[betDataEventContainer, betDataBetWayContainer, betDataResultContainer].forEach((element) => {
-				element.addClass('hide-betaDetcon');
+			[betDataEventContainer, betDataBetWayContainer, betDataResultContainer].forEach(container => {
+				container.addClass('hide-betaDetcon');
 			});
 
-			[`#${betDataEventID} .order-toggleButton`, `#betDataDetailsBetWay_${orderItem.id} .order-toggleButton`, `#betDataDetailsResult_${orderItem.id} .order-toggleButton`].forEach((selector) => {
-				$(selector).addClass('showbutton');
+			['Event', 'BetWay', 'Result'].forEach(key => {
+				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 		}
 
-		[betDataEventContainer, betDataBetWayContainer, betDataResultContainer].forEach((element) => {
-			element.appendTo(orderDataBetEvent);
-		});
+		orderDataBetEvent.append(betDataEventContainer);
+		orderDataBetWay.append(betDataBetWayContainer);
+		orderDataResult.append(betDataResultContainer);
+
+		const betDataLength = orderItem.bet_data.length;
 
 		if (betIndex === 0) {
-			const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${orderItem.bet_data.length})</button>`);
-			button.on('click', function () {
-				toggleBetDataVisibility(orderDataBetEvent, orderItem.bet_data.length, button);
-				toggleBetDataVisibility(orderDataBetWay, orderItem.bet_data.length, button);
-				toggleBetDataVisibility(orderDataResult, orderItem.bet_data.length, button);
-			});
-			[button, button.clone(), button.clone()].forEach((btn) => {
-				btn.appendTo(orderDataBetEvent);
-			});
-		}
-	}
+			const toggleButton = $('<button class="order-toggleButton">{{ trans("order.main.expand") }} (' + betDataLength + ')</button>');
+			
+			function toggleContainers() {
+				orderDataBetEvent.find('.hide-betaDetcon, .hide-betaDetcon, .hide-betaDetcon').slideToggle();
+				toggleButton.text(toggleButton.text() === '{{ trans("order.main.expand") }} (' + betDataLength + ')' ? '{{ trans("order.main.close") }}' : '{{ trans("order.main.expand") }} (' + betDataLength + ')');
+			}
 
+			toggleButton.on('click', toggleContainers);
+			toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
+		}
+
+	}
 
 	
 	function createTotal() {
