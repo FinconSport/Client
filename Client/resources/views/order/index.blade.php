@@ -270,19 +270,10 @@
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
 
-			// Append the data from betItem to the created additional <td> elements
-			const betDataEventContainer = $(`.additionalTr_${betIndex}`);
-			betDataEventContainer.find('.orderData_betData_Event').append(
-				createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
-				createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
-					<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-					${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-					${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
-			);
+			['Event', 'BetWay', 'Result'].forEach(key => {
+				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
+			});
 		}
-
-
-
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
