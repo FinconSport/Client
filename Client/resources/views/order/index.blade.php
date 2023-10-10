@@ -4,8 +4,8 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<label for="selectOption">Please Select Sports:</label>
-				<select id="selectOption" name="selectOption">
+				<label for="selectOption"></label>
+					<option value="">Please Select Sports:</option>
 					<option value="baseball">Baseball</option>
 					<option value="football">Football</option>
 					<option value="basketball">Basketball</option>

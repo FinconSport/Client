@@ -173,5 +173,14 @@ div[key="matchSportMenu"]{
     border: none;
   }
 
-  /* search bar and statistic css */
-  
+/* search bar and statistic css */
+.search-statistic-container .search-bar-container {
+    width: 52%;
+}
+
+.search-statistic-container .search-bar-container,
+.search-statistic-container .datepicker-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
