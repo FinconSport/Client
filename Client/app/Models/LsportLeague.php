@@ -22,10 +22,10 @@ class LsportLeague extends CacheModel
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-			$sport_id = $data['sport_id'];
+			$league_id = $data['league_id'];
 			$api_lang = $data['api_lang'];
 			
-            $data = self::where('sport_id', $sport_id)->first();
+            $data = self::where('league_id', $league_id)->first();
             
 			// 預設值
             $name = $data['name_en'];
@@ -45,9 +45,9 @@ class LsportLeague extends CacheModel
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-			$sport_id = $data['sport_id'];
+			$league_id = $data['league_id'];
 
-            $data = self::where('sport_id', $sport_id)->select('status')->first();
+            $data = self::where('league_id', $league_id)->select('status')->first();
             $return = $data;
 
             return $return;
