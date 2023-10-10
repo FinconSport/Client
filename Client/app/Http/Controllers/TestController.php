@@ -17,13 +17,13 @@ class TestController extends PcController {
     public function index(Request $request) {
     
       // list方法 , 同get方法
-      $return = Player::where("status",1)->where("currency_type",1)->list();
+    //  $return = Player::where("status",1)->where("currency_type",1)->list();
 
       // fetch方法 , 同first 方法
-      $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
+    //  $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
 
       // total方法, 專門用於取得統計
-      $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
+    //  $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
 
       // report方法, 包裝統計與list , 用於報表
 
