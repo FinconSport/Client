@@ -54,24 +54,4 @@ class LsportMarketBet extends CacheModel
         });
     }
 
-    public static function findData(
-        array $data  // data=參數
-    ) {
-
-        // 緩存時間
-        $cacheAliveTime = 0.1;
-
-        // 緩存Key
-        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
-
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-            $fixture_id = $data['fixture_id'];
-            $bet_id = $data['bet_id'];
-
-            $data = self::where('fixture_id', $fixture_id)->where('bet_id', $bet_id)->first();
-            $return = $data;
-
-            return $return;
-        });
-    }
 }
