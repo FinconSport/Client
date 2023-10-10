@@ -56,7 +56,7 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 10%;">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;" class="no-border-left">{{ trans('order.main.index') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
                         <th style="width: 17%;">{{ trans('order.main.event') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
@@ -64,53 +64,33 @@
                         <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.effective_amount') }}</th>
 						<th style="width: 10%;">{{ trans('order.main.result_amount') }}</th>
-						<th style="width: 10%;">{{ trans('order.main.win_amount') }}</th>
+						<th style="width: 10%;" class="no-border-right">{{ trans('order.main.win_amount') }}</th>
                     </tr>
                 </thead>
-				<tbody>
-					<tr class="no-border-top">
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 17%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-						<td style="width: 10%;"></td>
-						<td style="width: 10%;"></td>
-                    </tr>
-				</tbody>
-                <!-- <tbody id="orderDataTemp">
+                <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
-                        <td class="no-border-left orderData_id"></td>
-                        <td>
-                            <span class="orderData_sportType"></span>
-                        </td>
-                        <td class="orderData_mOrder"></td>
-                        <td class="orderData_betDataDetails">
-						</td>
-                        <td class="text-right">
-                            <span class="orderData_betAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_createdTime"></span>
-                        </td>
-                        <td class="text-right">
-                            <span class="orderData_resultAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_resultTime"></span>
-                        </td>
-                        <td class="no-border-right orderData_status"></td>
+                        <td style="width: 10%;" class="orderData_id"></td>
+                        <td style="width: 10%;"><span class="orderData_sportType"></span></td>
+                        <td style="width: 17%;" class="orderData_mOrder"></td>
+                        <td style="width: 10%;" class="orderData_betDataDetails"></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span class="text-muted orderData_createdTime"></span></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span><br><span class="text-muted orderData_resultTime"></span></td>
+                        <td style="width: 10%;" class="orderData_status"></td>
+						<td style="width: 10%;"></td>
+						<td style="width: 10%;"></td>
                     </tr>
                     <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-						<td style="width: 5%;"></td>
+						<td style="width: 10%;"></td>
                         <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 30%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
-                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
-                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
+                        <td style="width: 17%;"></td>
+						<td style="width: 10%;"></td>
+						<td style="width: 10%;"></td>
+                        <td style="width: 10%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 10%;" class="text-right orderData_totalBetAmount"></td>
+                        <td style="width: 10%;" class="text-right orderData_totalResultAmount"></td>
                         <td style="width: 10%;"></td>
                     </tr>
-                </tbody> -->
+                </tbody>
             </table>
 			<div id="loader" style="display: none; margin-top: 2rem;">
 				<div colspan="29" class="loading loading04">
