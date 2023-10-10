@@ -153,7 +153,7 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				createList(orderItem, orderIndex, orderItem.winLoss);
+				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 					createBetDataDetails(orderItem, betItem, betIndex);
 				});
