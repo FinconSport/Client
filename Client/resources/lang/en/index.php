@@ -91,26 +91,36 @@ return [
 		'toohigh_bet_amout' => 'maximum bet', // "最高投注"
 	],
 	'priorityArr' => [
-		'allwin' => [1, 2, 101, 102, 201, 202]
+		'allwin' => [1, 2, 101, 102, 109, 113, 117, 121, 201, 202],
+		'hcap' => [3, 4, 103, 104, 110, 114, 118, 122, 203 , 204]
 	],
 	'sportBetData' => [
 		6046 => [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Half-time winner', 'Half-time handicap', 'Half-time over/under'],
 			'mainPriorityArr' => [201, 203, 205, 202, 204, 206],
 			'stage' => ['1st half', '2nd half', 'Overtime)'],
-			'ws' => 'wss://soccer.asgame.net/ws'
 		],
 		48242 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st-half winner', '1st-half handicap', '1st-half over/under'],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
 			'mainPriorityArr' => [101, 103, 105, 107],
+			'stageTitle' => [
+				1 => ['1st quarter winner', '1st quarter hcap', '1st quarter o/u', '1st quarter odd/even'],
+				2 => ['2nd quarter winner', '2nd quarter hcap', '2nd quarter o/u', '2nd quarter odd/even'],
+				3 => ['3rd quarter winner', '3rd quarter hcap', '3rd quarter o/u', '3rd quarter odd/even'],
+				4 => ['4th quarter winner', '4th quarter hcap', '4th quarter o/u', '4th quarter odd/even'],
+			],
+			'stagePriorityArr' => [
+				1 => [109, 110, 111, 112],
+				2 => [113, 114, 115, 116],
+				3 => [117, 118, 119, 120],
+				4 => [121, 122, 123, 124]
+			],
 			'stage' => ['1st quarter', '2nd quarter', '3rd quarter', '4th quarter', 'Overtime'],
-			'ws' => 'wss://basketball.asgame.net/ws'
 		],
 		154914 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', '1st 5 innings winner', '1st 5 innings handicap', '1st 5 innings over/under'],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
 			'mainPriorityArr' => [1, 3, 5, 7],
 			'stage' => ['1st Stage','2nd Stage','3rd Stage','4st Stage','5st Stage','6st Stage','7st Stage','8st Stage','9st Stage','Overtime'],
-			'ws' => 'wss://baseball.asgame.net/ws'
 		],
 	],
 	'tableLivingData' => [
