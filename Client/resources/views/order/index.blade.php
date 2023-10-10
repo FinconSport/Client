@@ -253,10 +253,13 @@
 
 		if (betIndex > 0) {
 			// Create additional <td> elements for betItems other than the first one
-			const additionalTds = $('<td style="width: 8%;"></td><td style="width: 9%;text-align:left;"><span></span><br><span class="orderData_mOrder"></span></td><td style="width: 21%;" class="orderData_betData_Event"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td>');
+			const additionalTds = $('<td style="width: 8%;"></td><td style="width: 9%;text-align:left;"><span></span><br><span></span></td><td style="width: 21%;" class="orderData_betData_Event"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td>');
 
-			// Append the additional <td> elements to the existing row
-			orderDataBetEvent.append(additionalTds);
+			// Create a new <tr> for the additional <td> elements
+			const additionalTr = $('<tr></tr>').append(additionalTds);
+
+			// Append the additional <tr> to the tbody of the table
+			$('#orderDataTemp').append(additionalTr);
 
 			['Event', 'BetWay', 'Result'].forEach(key => {
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
