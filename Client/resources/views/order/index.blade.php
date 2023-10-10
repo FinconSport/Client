@@ -275,20 +275,20 @@
 
 			// Append the data to the created additional <td> elements except for the first one
 			const betDataEventContainer = $(`#additionalTr_${betItem.league_id}${betItem.league_name}`);
-			betDataEventContainer.find('.orderData_betData_Event').html(`
+			betDataEventContainer.find('.orderData_betData_Event').html(`<span>
 				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
 				${betItem.home_team_name} VS ${betItem.away_team_name} 
 				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
 				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span></span>`
 			);
 
-			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+			betDataEventContainer.find('.orderData_betData_BetWay').html(`<span>
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span></span>`
 			);
 
-			betDataEventContainer.find('.orderData_betData_Result').html(`
-				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
+			betDataEventContainer.find('.orderData_betData_Result').html(`<span>
+				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}</span>`
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
@@ -301,20 +301,6 @@
 		orderDataResult.append(betDataResultContainer);
 
 		const betDataLength = orderItem.bet_data.length;
-
-		// if (betIndex === 0) {
-		// 	const toggleButton = $('<button class="order-toggleButton">▼</button>');
-		// 	const targetElements = parentElement.find('.hide-betaDetcon');
-
-		// 	function toggleContainers() {
-		// 		targetElements.slideToggle();
-		// 		toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
-		// 	}
-
-		// 	toggleButton.on('click', toggleContainers);
-		// 	parentElement.find('.orderData_mOrder').append(toggleButton);
-		// }
-
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
