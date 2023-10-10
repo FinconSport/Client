@@ -19,7 +19,7 @@ class ModelDriverProvider extends ServiceProvider {
             $cacheAliveTime = 1;
 
             // 緩存Key
-            $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
+            $cacheKey = (new static)->getCacheKey($data);
 
             dd($cacheKey);
             //
