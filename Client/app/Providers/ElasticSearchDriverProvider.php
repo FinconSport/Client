@@ -26,7 +26,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
+            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
@@ -67,7 +67,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
+            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
@@ -108,7 +108,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
+            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
