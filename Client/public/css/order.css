@@ -348,7 +348,7 @@ button.dateCalendarBtn {
     padding: 0rem;
 }
 
-.orderData_expand {
+.orderData_expand .parent_span{
     border-left: 2px solid rgb(65, 91, 90);
     border-right: 2px solid rgb(65, 91, 90);
     padding: 1rem;
@@ -356,6 +356,6 @@ button.dateCalendarBtn {
     display: block;
 }
 
-.orderData_expand.hide-betaDetcon {
+.orderData_expand.hide-betaDetcon .parent_span{
     display: none;
 }
