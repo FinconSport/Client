@@ -403,11 +403,12 @@ div[key="sizeSmallRate"]:hover {
     cursor: pointer;
 }
 .scoreSpan {
-    text-align: center;
+    text-align: right;
     color: #c79e42;
     font-weight: 600;
     font-size: 1.2rem;
     position: relative;
+    padding-right: 1.5rem;
 }
 
 
