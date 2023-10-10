@@ -137,7 +137,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                                 $count = 0; // 用於計算欄位順序
                                 foreach ($vvv as $kkkk => $vvvv) {
                                    if ($count >= 2) {
-                                        $tmp[$kkkk] = $vvvv;
+                                        $tmp[$kkkk] = $vvvv['value'];
                                    }
                                     $count++;
                                 }   
