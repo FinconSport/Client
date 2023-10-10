@@ -202,7 +202,6 @@
 		// sportList
 		var sportListD = {}
 		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
-		var v = {}
 
 		function caller(url, data, obj, isUpdate = 0) {
 			return new Promise((resolve, reject) => {
