@@ -237,8 +237,10 @@ div[key="matchSportMenu"]{
 } 
 
 .datecalendar-con .date-divider {
-    margin: 0px 0.7rem;
+    margin: 0px 0.5rem;
     color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .custom-datepicker-class {
@@ -301,4 +303,8 @@ button.dateCalendarBtn {
     padding: 0.5rem 0.8rem;
     margin: 0px 0px 0.5rem 0px;
     color: #415b5a;
+}
+
+.statistic-container {
+    width: 58%;
 }

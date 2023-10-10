@@ -36,6 +36,11 @@ return [
 		"today" => "今日",
 		"this_week" => "本週", 
 		"this_month" => "本月",
+		"total_bet_count" => "總注單數",
+		"total_bet_amount" => "投注金額",
+		"total_effective_amount" => "總計有效",
+		"total_result_amount" => "總計派獎",
+		"total_win_amount" => "總計輸贏",
 	],
 	// 後端
 ];
