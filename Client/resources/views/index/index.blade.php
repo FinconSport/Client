@@ -398,7 +398,7 @@
         away_team_info.find('.scoreSpan').html('')
 
         // bet area
-        createBetArea(mainPriorityArr, v3, k3, league_name, card)
+        createBetArea(mainPriorityArr, v3, k3, league_name, 0)
 
         // ready to start
         if( v3.status === 9 ) {
@@ -415,8 +415,6 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-            console.log(v3)
-            console.log('timerStr->' + timerStr)
 
             // exception baseball
             if( sport === 154914 ) {
@@ -454,7 +452,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                // createBetArea(stagePriorityArr, v3, k3, league_name, card2)
+                createBetArea(stagePriorityArr, v3, k3, league_name, 1)
             }
         }
 
@@ -464,13 +462,12 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, card) {
+    function createBetArea(priorityArr, v3, k3, league_name, s) {
         console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     let item = null
@@ -547,7 +544,7 @@
 
             bet_div.removeAttr('hidden')
             bet_div.removeAttr('template')
-            card.find('.indexBetCardTable').append(bet_div)
+            card.find('.indexBetCardTable').eq(s).append(bet_div)
         });
     }
    
