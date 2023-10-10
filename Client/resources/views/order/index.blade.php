@@ -303,7 +303,6 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
-/fgf;
 			function toggleContainers() {
 				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
