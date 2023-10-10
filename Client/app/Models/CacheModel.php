@@ -27,7 +27,6 @@ class CacheModel extends Model {
 
         // 发送请求，并使用Basic Auth认证
         $response = Http::withBasicAuth($esUser, $esPass)->get($url);
-        dd($response);
         // 检查响应是否成功
         if ($response->successful()) {
             // 解码JSON响应
