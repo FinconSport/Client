@@ -308,10 +308,7 @@
 			console.log(dynamicId);
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).animate({
-				height: 'toggle', // Toggle the height to create the slide effect
-				opacity: 'toggle' // Toggle the opacity for a fade effect (optional)
-				}, 'fast'); // You can adjust the speed here ('fast', 'slow', or a duration in milliseconds)
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
