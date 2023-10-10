@@ -33,7 +33,7 @@ class Agent extends CacheModel
     //     });
     // }
 
-    public static function getData(
+    public static function findData(
         array $data,  // data=參數, 
         string $id_col = 'id'  // id_col=主鍵或是搜尋的欄位名
     ) {

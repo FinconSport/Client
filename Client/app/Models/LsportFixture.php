@@ -30,13 +30,13 @@ class LsportFixture extends CacheModel
             return $return;
         });
     }
-    public static function getData(
+    public static function findData(
         array $data,  // data=參數, 
         string $id_col = 'fixture_id'  // id_col=主鍵或是搜尋的欄位名
     ) {
 
         // 緩存時間
-        $cacheAliveTime = 1;
+        $cacheAliveTime = 10;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
