@@ -30,12 +30,12 @@ div[key="matchSportMenu"]{
     border: 2px solid rgb(65, 91, 90);
     border-radius: 15px;
     /* height: 100%; */
-    height: calc(100% - 11rem);
+    height: calc(100% - 10rem);
     overflow: hidden;
-    margin-bottom: 1rem;
     color: rgb(65, 91, 90);
     position: relative;
 }
+
 #tableContainer {
     height: 100%;
     width: 100%;
@@ -61,10 +61,34 @@ div[key="matchSportMenu"]{
 
 #orderTable td,
 #orderTable th {
-    border: 2px solid rgb(196,211,211);
-    padding: 0.5rem;
+    border-left: 2px solid rgb(65, 91, 90);
+    border-right: 2px solid rgb(65, 91, 90);
+    padding: 1rem 0.5rem;
     font-weight: 600;
 }
+
+#orderTable th:first-child,
+#orderTable td:first-child{
+    border-left: none!important;
+}
+
+#orderTable th:last-child,
+#orderTable td:last-child{
+    border-right: none!important;
+}
+
+/* #orderTable tbody tr:last-child td{
+    border-right: 2px solid rgb(65, 91, 90);
+} */
+
+#orderTable tbody tr:nth-child(even) {
+    background-color: #e2f0f0;
+}
+
+#orderTable thead {
+    background: #c4d4d4;
+}
+
 .no-border-left{
     border-left: none!important;
 }
