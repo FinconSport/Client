@@ -236,7 +236,6 @@
 									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
-		orderDataBetEvent.find('.betaDetcon:not(:first-child)').remove();
 
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
@@ -286,7 +285,7 @@
 			});
 
 			// Remove all .betaDetcon elements within the created <td> except the first child
-			betDataEventContainer.children('.betaDetcon:not(:first-child)').remove();
+			orderDataBetEvent.children('.betaDetcon:not(:first-child)').remove();
 		}
 
 
