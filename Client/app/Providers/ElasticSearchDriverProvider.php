@@ -19,14 +19,14 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         Builder::macro('list', function ($cacheAliveTime = 1) {
             
             // get Model TableName
-            $tableName = $this->getModel()->getTable();
-            $esTableName = "es_" . $tableName;
+            $tableName = "`" . $this->getModel()->getTable() . "`";
+            $esTableName = "`es_" . $tableName."`";
 
             // Build ES SQL
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
+            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
@@ -60,14 +60,14 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         Builder::macro('fetch', function ($cacheAliveTime = 1) {
             
             // get Model TableName
-            $tableName = $this->getModel()->getTable();
-            $esTableName = "es_" . $tableName;
+            $tableName = "`" . $this->getModel()->getTable() . "`";
+            $esTableName = "`es_" . $tableName."`";
 
             // Build ES SQL
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
+            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
@@ -101,14 +101,14 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         Builder::macro('total', function ($cacheAliveTime = 1) {
             
             // get Model TableName
-            $tableName = $this->getModel()->getTable();
-            $esTableName = "es_" . $tableName;
+            $tableName = "`" . $this->getModel()->getTable() . "`";
+            $esTableName = "`es_" . $tableName."`";
 
             // Build ES SQL
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
-            $esSql = str_replace(" ".$tableName." ", " ".$esTableName." ", $esSql); // fix es_table_name
+            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
             $cacheKey = MD5($esSql); // create CacheKey by MD5
