@@ -177,7 +177,7 @@ div[key="matchSportMenu"]{
 }
 
 .order-toggleButton {
-    background-color: none;
+    background-color: transparent;
     border-radius: 0px;
     transition: all 0.5s ease 0s;
     /* width: 4.5rem;

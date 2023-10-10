@@ -322,13 +322,14 @@
 			console.log(dynamicId);
 
 			function toggleContainers() {
-				$('.hide-betaDetcon').slideToggle();
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle(); // Toggle only the specific elements
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
+
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
