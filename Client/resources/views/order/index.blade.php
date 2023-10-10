@@ -304,7 +304,7 @@
 			toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
 		}
 
-		$('.orderData_betData_Event:has(.betaDetcon)').remove();
+		$('.orderData_betData_Event .betaDetcon').remove();
 	}
 
 	
