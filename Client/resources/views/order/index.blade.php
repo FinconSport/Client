@@ -35,7 +35,7 @@
 		</div>
 		<div class="statistic-container">
 			<div class="stats-total-bet-count">
-				<span><i class="fa-light fa-rectangle-list" style="color: #415b5a;"></i> {{ trans('order.main.total_bet_count') }}</span>
+				<span><i class="fa-sharp fa-light fa-rectangle-list" style="color: #415b5a;"></i> {{ trans('order.main.total_bet_count') }}</span>
 			</div>
 			<div class="stats-total-bet-amount">
 				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;"></i> {{ trans('order.main.total_bet_amount') }}</span>
