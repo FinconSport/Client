@@ -79,10 +79,10 @@
                         <td style="width: 17%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
-                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
+                        <td style="width: 10%;" class="text-right orderData_betAmount"></td>
                         <td style="width: 10%;"></td>
-						<td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span></td>
-						<td style="width: 10%;" class="text-right"><span class="orderData_WinLoss"></span></td>
+						<td style="width: 10%;" class="text-right orderData_resultAmount"></td>
+						<td style="width: 10%;" class="text-right orderData_WinLoss"></td>
                     </tr>
                 </tbody>
             </table>
@@ -193,6 +193,12 @@
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
+		const winLossValue = parseFloat(winLoss);
+		if (winLossValue >= 0) {
+			orderDataWinLoss.css('color', 'red'); // Set text color to red
+		} else {
+			orderDataWinLoss.css('color', 'green'); // Set text color to green
+		}
 
 		let sportName = '';
 
@@ -207,11 +213,10 @@
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
-		orderDataBetAmount.html(orderItem.bet_amount);
-		// orderDataCreatedTime.html(orderItem.create_time);
-		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
+		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
+		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss);
+		orderDataWinLoss.html(winLoss === null ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -223,8 +228,11 @@
 		const orderDataBetEvent = $(`#${betDataEventID}`);
 		const betDataEventContainer = $('<div class="betaDetcon">');
 		betDataEventContainer.append(
-			createHtmlElement('mb-3', `${betItem.league_name} (${orderItem.create_time})`),
-			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
+			createHtmlElement('mb-3', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
+			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
+									<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
+									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
@@ -238,7 +246,7 @@
 		const orderDataResult = $(`#${betDataResultID}`);
 		const betDataResultContainer = $('<div class="betaDetcon">');
 		betDataResultContainer.append(
-			createHtmlElement('text-right', `${betItem.status}<br> ${orderItem.result_time}`),
+			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`),
 		);
 
 		
@@ -353,5 +361,14 @@
 		$('#ui-datepicker-div').addClass('custom-datepicker-class');
 		$('#datepicker_to').datepicker();
     });
+
+	formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
+    }
 </script>
 @endpush
