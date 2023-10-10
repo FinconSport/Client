@@ -32,12 +32,12 @@ class CacheModel extends Model {
         if ($response->successful()) {
             // 解码JSON响应
             $data = $response->json();
+            $list = array();
+            foreach ($data['hits']['hits'] as $k => $v) {
+                $list[] = $v['_source'];
+            }
 
-            dd($data);
-
-            // 在这里对$data执行您的操作
-            // $data 包含解码后的JSON数据
-            return response()->json($data);
+            return $list;
         } else {
             // 处理请求失败的情况
             return response()->json(['error' => '请求失败'], 500);
