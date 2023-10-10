@@ -300,6 +300,7 @@
 
 	$(document).ready(function() {
         $('#datepicker_from').datepicker();
+		$('#ui-datepicker-div').addClass('custom-datepicker-class');
 		$('#datepicker_to').datepicker();
     });
 </script>
