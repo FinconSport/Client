@@ -52,7 +52,7 @@
 			</div>
 			<div class="stats-container total-win-amount">
 				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
-				<p class="total-win-amount"></p>
+				<p class="orderData_totalWinAmount"></p>
 			</div>
 		</div>
 	</div>
@@ -81,8 +81,8 @@
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
-						<td style="width: 10%;"><span class="orderData_resultAmount"></span></td>
-						<td style="width: 10%;"></td>
+						<td style="width: 10%;" class="text-right"><span class="orderData_resultAmount"></span></td>
+						<td style="width: 10%;" class="text-right"><span class="orderData_WinLoss"></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -144,6 +144,7 @@
 
 	let totalResultAmount = 0;
 	let totalBetAmount = 0;
+	let totalWinLoss = 0;
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -152,22 +153,35 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				createList(orderItem, orderIndex);
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const winLoss = resultAmount - betAmount;
+
+				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 					createBetDataDetails(orderItem, betItem, betIndex);
 				});
 
 				// Validate and accumulate total
-				totalResultAmount += parseFloat(orderItem.result_amount) || 0;
-				totalBetAmount += parseFloat(orderItem.bet_amount) || 0;
+				totalResultAmount += resultAmount;
+				totalBetAmount += betAmount;
+				totalResultAmount += winLoss;
+				totalWinLoss += winLoss;
+
 			});
 
+			// After accumulating the totals, round them to two decimal places
+			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
-			isLastPage && $('#noMoreData').show()
-		}
+				isLastPage && $('#noMoreData').show()
+			}
 	}
 
-	function createList(orderItem, orderIndex) {
+
+	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		const orderDataId = orderData.find('.orderData_id');
 		const orderDataSportType = orderData.find('.orderData_sportType');
@@ -178,7 +192,7 @@
 		const orderDataBetResult = orderData.find('.orderData_betData_Result');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
-		const orderDataStatus = orderData.find('.orderData_status');
+		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
 
 		let sportName = '';
 
@@ -197,7 +211,7 @@
 		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataStatus.html(orderItem.status);
+		orderDataWinLoss.html(winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -262,6 +276,7 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
+		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
@@ -269,6 +284,7 @@
 	function updateTotal() {
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount);
+		$('.orderData_totalWinAmount').text(totalWinLoss);
 	}
 
 	// 下拉更多資料
