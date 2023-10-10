@@ -224,34 +224,36 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
+		// Function to create an HTML element with a class name and content
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
 
-		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`; 
-		const orderDataBetEvent = $(`#${betDataEventID}`);
+		// Create td elements for each container
+		const eventTd = $('<td style="width: 17%;" class="orderData_betData_Event">');
+		const betWayTd = $('<td style="width: 10%;" class="orderData_betData_BetWay">');
+		const resultTd = $('<td style="width: 10%;" class="orderData_betData_Result">');
+
+		// Create containers and append content
 		const betDataEventContainer = $('<div class="betaDetcon">');
+		const betDataBetWayContainer = $('<div class="betaDetcon">');
+		const betDataResultContainer = $('<div class="betaDetcon">');
+
 		betDataEventContainer.append(
 			createHtmlElement('mb-3', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
 									<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
+									${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
-		const orderDataBetWay = $(`#${betDataBetWayID}`);
-		const betDataBetWayContainer = $('<div class="betaDetcon">');
 		betDataBetWayContainer.append(
 			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
 		);
 
-		const betDataResultID = `betDataDetailsResult_${orderItem.id}`; 
-		const orderDataResult = $(`#${betDataResultID}`);
-		const betDataResultContainer = $('<div class="betaDetcon">');
 		betDataResultContainer.append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`),
 		);
 
-		
+		// Hide elements if betIndex > 0
 		if (betIndex > 0) {
 			betDataEventContainer.addClass('hide-betaDetcon');
 			betDataBetWayContainer.addClass('hide-betaDetcon');
@@ -261,25 +263,32 @@
 			$(`#betDataDetailsResult_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 		}
 
-		orderDataBetEvent.append(betDataEventContainer);
-		orderDataBetWay.append(betDataBetWayContainer);
-		orderDataResult.append(betDataResultContainer);
+		// Append containers to the corresponding td elements
+		eventTd.append(betDataEventContainer);
+		betWayTd.append(betDataBetWayContainer);
+		resultTd.append(betDataResultContainer);
+
+		// Append td elements to the tr element with ID 'orderTr'
+		$('#orderTr').append(eventTd);
+		$('#orderTr').append(betWayTd);
+		$('#orderTr').append(resultTd);
 
 		const betDataLength = orderItem.bet_data.length;
 
 		if (betIndex === 0) {
 			const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${betDataLength})</button>`);
 			button.on('click', function () {
-			orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
-			orderDataBetWay.find('.hide-betaDetcon').slideToggle();
-			orderDataResult.find('.hide-betaDetcon').slideToggle();
-			button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
+				eventTd.find('.hide-betaDetcon').slideToggle();
+				betWayTd.find('.hide-betaDetcon').slideToggle();
+				resultTd.find('.hide-betaDetcon').slideToggle();
+				button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
 			});
-			button.appendTo(orderDataBetEvent);
-			button.appendTo(orderDataBetWay);
-			button.appendTo(orderDataResult);
+			button.appendTo(eventTd);
+			button.appendTo(betWayTd);
+			button.appendTo(resultTd);
 		}
 	}
+
 
 	
 	function createTotal() {
@@ -288,13 +297,11 @@
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
-
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
@@ -307,14 +314,12 @@
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
 		totalWinAmountElement.text(totalWinLoss);
-
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
-			// Update text color based on totalWinLoss
 			if (totalWinLoss >= 0) {
-				totalWinAmountElement.css('color', 'red'); // Set text color to red
+				totalWinAmountElement.css('color', 'red');
 			} else {
-				totalWinAmountElement.css('color', 'green'); // Set text color to green
+				totalWinAmountElement.css('color', 'green');
 			}
 		}
 	}
