@@ -293,6 +293,7 @@
 			});
 		}
 
+
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
 		orderDataResult.append(betDataResultContainer);
@@ -308,7 +309,8 @@
 			}
 
 			toggleButton.on('click', toggleContainers);
-			orderData.find('.orderData_mOrder').append(toggleButton);
+			// toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
+			toggleButton.appendTo('.orderData_mOrder');
 		}
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
