@@ -698,7 +698,7 @@ class LsportApiController extends Controller {
         $arr_sports = array();
         foreach ($sports as $sk => $sv) {
 
-            $sport_name = $sv->$lang_col;
+            $sport_name = $sv->name_locale;
 
             $arr_sports[] = array(
                 'sport_id' => $sv->sport_id,
