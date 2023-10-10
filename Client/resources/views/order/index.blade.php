@@ -228,7 +228,7 @@
 
 		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
-		const betDataEventContainer = $("<div class='betaDetcon additionalTr_" + betIndex + ">");
+		const betDataEventContainer = $(`<div class='betaDetcon additionalTr_${betIndex}'>`);
 		betDataEventContainer.append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
