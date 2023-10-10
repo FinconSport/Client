@@ -339,6 +339,7 @@ button.dateCalendarBtn {
 .stats-container p{
     text-align: end;
     font-size: 1.5rem;
+    word-wrap: break-word;
 }
 
 .orderData_betData_Event,
