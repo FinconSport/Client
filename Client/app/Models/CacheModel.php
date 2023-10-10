@@ -62,10 +62,9 @@ class CacheModel extends Model {
             // 解码JSON响应
             $data = $response->json();
 
-            dd($data);
             $list = array();
-            foreach ($data['hits']['hits'] as $k => $v) {
-                $list[] = $v['_source'];
+            foreach ($data['aggregations'] as $k => $v) {
+                $list[$k] = $v['value'];
             }
 
             return $list;
