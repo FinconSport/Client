@@ -344,6 +344,7 @@ button.dateCalendarBtn {
 
 .orderData_betData_Event,
 .orderData_betData_BetWay,
-.orderData_betData_Result{
+.orderData_betData_Result,
+.orderData_mOrder{
     position: relative;
 }
