@@ -47,7 +47,6 @@ class CacheModel extends Model {
     // ES 聚合操作
     protected static function getESAgg($sql) {
         
-        $sql = "select agent_id , SUM(bet_amount) as bet_amount from es_game_order group by agent_id";
         // 获取要发送请求的URL
         $url = 'http://72.167.135.22:29200/_sql?sql=' . $sql . '&pretty';
 
@@ -59,17 +58,11 @@ class CacheModel extends Model {
         
         // 检查响应是否成功
         if ($response->successful()) {
-            // 解码JSON响应
             $data = $response->json();
-
             $list = $data['aggregations'];
-
             return $list;
-        } else {
-            // 处理请求失败的情况
-
-            dd($response);
-            return response()->json(['error' => '请求失败'], 500);
-        }
+        } 
+        
+        return false;
     }
 }
