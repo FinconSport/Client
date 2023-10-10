@@ -142,10 +142,11 @@
 	var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
 
-	let totalResultAmount = 0;
-	let totalBetAmount = 0;
-	let totalWinLoss = 0;
 	let totalBetItemCount = 0;
+	let totalBetAmount = 0;
+	let totalResultAmount = 0;
+	let totalWinLoss = 0;
+	
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -154,10 +155,10 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				const resultAmount = parseFloat(orderItem.result_amount);
-				const betAmount = parseFloat(orderItem.bet_amount);
-				const winLoss = resultAmount - betAmount;
 				const betItemCounter = orderItem.bet_data.length; 
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -165,12 +166,10 @@
 				});
 
 				// Validate and accumulate total
-				totalResultAmount += resultAmount;
-				totalBetAmount += betAmount;
-				totalResultAmount += winLoss;
-				totalWinLoss += winLoss;
 				totalBetItemCount += betItemCounter;
-
+				totalBetAmount += betAmount;
+				totalResultAmount += resultAmount;
+				totalWinLoss += winLoss;
 			});
 
 			// After accumulating the totals, round them to two decimal places
