@@ -128,7 +128,7 @@ div[key="matchSportMenu"]{
 
 
 #orderContainer {
-    margin-top: 60px;
+    margin-top: 2rem;
 }
 .orderData_betDataDetails {
     position: relative;
@@ -172,3 +172,18 @@ div[key="matchSportMenu"]{
     line-height: 1.5rem;
     border: none;
   }
+
+/* search bar and statistic css */
+.search-statistic-container{
+    margin-top: 60px;
+}
+.search-statistic-container .search-bar-container {
+    width: 52%;
+}
+
+.search-statistic-container .search-bar-container,
+.search-statistic-container .datepicker-con {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
