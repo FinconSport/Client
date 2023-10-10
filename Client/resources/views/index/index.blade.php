@@ -407,7 +407,7 @@
             time.html(langTrans.mainArea.readyToStart)
         }
 
-        console.log(v3, v3.status)
+
 
         // living
         if( v3.status === 2 ) {
@@ -417,6 +417,8 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+            console.log(v3)
+            console.log('timerStr->' + timerStr)
 
             // exception baseball
             if( sport === 154914 ) {
@@ -464,7 +466,6 @@
     }
 
     function createBetArea(priorityArr, v3, k3, league_name, card) {
-        console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
