@@ -115,7 +115,8 @@ class Controller extends BaseController
 
 		$agent_id = $return['agent_id'];
 
-		$return = Agent::where("id",$agent_id)->first();
+		// $return = Agent::where("id",$agent_id)->first();
+        $return = Agent::getData(['id'=>$agent_id]);
 		if ($return === false) {
 			return false;
 		}
