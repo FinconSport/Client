@@ -454,7 +454,7 @@
 
                 stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                 // bet area
-                card.append(createBetArea(stagePriorityArr, v3, k3, league_name, card2))
+                createBetArea(stagePriorityArr, v3, k3, league_name, card2)
             }
         }
 
@@ -465,6 +465,7 @@
     }
 
     function createBetArea(priorityArr, v3, k3, league_name, card) {
+        console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
