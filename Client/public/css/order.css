@@ -189,7 +189,7 @@ div[key="matchSportMenu"]{
     justify-content: space-between;
 }
 
-.datecalendar-con span {
+.datecalendar-con .date-divider {
     margin: 0px 0.7rem;
 }
 
@@ -208,4 +208,8 @@ div[key="matchSportMenu"]{
 
 .ui-datepicker-today a, .ui-datepicker-today span{
     font-weight: 600!important;
+}
+
+#datepicker_from,#datepicker_to {
+    outline: none;
 }
