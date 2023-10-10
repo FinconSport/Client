@@ -104,10 +104,10 @@
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
-        <div class="timeSpan" key='not-baseball'>
+        <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
         </div>
-        <div class="baseballSpan" key='baseball'>
+        <div class="baseballSpan" key='show-baseCon'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-1 h-100 p-0"></div>
@@ -139,7 +139,7 @@
         </div>
         <div class="otherBetWay">
             <i class="fa-solid fa-play"></i>
-            <p>+123</p>
+            <p></p>
         </div>
     </div>
 </div>
@@ -346,21 +346,22 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
-
         let card = $('div[template="fixtureCardTemplate"]').clone()
 
         // 壘包 好壞球 只有 滾球 棒球有
-        sport === 154914 && v3.status === 2 ? card.find('[key="not-baseball"]').remove() : card.find('[key="baseball"]').remove()
+        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
+        let market_count = card.find('.otherBetWay p')
 
         card.attr('id', k3)
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(formatDateTime(v3.start_time))
+        market_count.html(v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
@@ -368,9 +369,10 @@
         away_team_info.find('.scoreSpan').html()
 
 
-        // living score
+        // living
         if( v3.status === 2 ) {
 
+            // score
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
@@ -379,33 +381,31 @@
 
             // exception baseball
             if( sport === 154914 ) {
+                // stage
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
                 // base
                 let baseCont = card.find('img[alt="base"]')
-                let baseText = v3.periods.Bases
-                if( baseText ) {
-                    baseText = v3.periods.Bases.replaceAll('/','')
-                } else {
-                    baseText = '000'
-                }
+                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
                 baseCont.attr('src', `/image/base/${baseText}.png`)
 
 
                 // balls
                 let strike = card.find('div[key="strike"]')
-                let strikeText = v3.periods.Strikes
+                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
                 strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                 let ball = card.find('div[key="ball"]')
-                let ballText = v3.periods.Balls
+                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
                 ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                 let out = card.find('div[key="out"]')
-                let outText = v3.periods.Outs
+                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
             }
 
+            // stage text
             time.html(timerStr)
         }
+
         // ready to start
         if( v3.status === 9 ) {
             time.html(langTrans.mainArea.readyToStart)
@@ -621,6 +621,12 @@
                             card.attr('status', v3.status)
                         }   
 
+                        // 玩法統計
+                        card.find('.otherBetWay p').html(v3.market_bet_count)
+
+                        // 壘包 好壞球 只有 滾球 棒球有
+                        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
+
                         // living
                         if( v3.status === 2 ) {
                             // score
@@ -651,24 +657,19 @@
 
                                 // base
                                 let baseCont = card.find('img[alt="base"]')
-                                let baseText = v3.periods.Bases
-                                if( baseText ) {
-                                    baseText = v3.periods.Bases.replaceAll('/','')
-                                } else {
-                                    baseText = '000'
-                                }
+                                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
 
 
                                 // balls
                                 let strike = card.find('div[key="strike"]')
-                                let strikeText = v3.periods.Strikes
+                                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
                                 strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                                 let ball = card.find('div[key="ball"]')
-                                let ballText = v3.periods.Balls
+                                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
                                 ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                                 let out = card.find('div[key="out"]')
-                                let outText = v3.periods.Outs
+                                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
                             }
 
