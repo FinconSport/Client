@@ -267,14 +267,14 @@
 				'<td style="width: 10%;"></td>');
 
 			// Create a new <tr> for the additional <td> elements with a dynamic ID
-			const dynamicId = 'additionalTr_' + betIndex + betItem.league_name;
+			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(additionalTds);
 
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
 
 			// Append the data to the created additional <td> elements except for the first one
-			const betDataEventContainer = $(`#additionalTr_${betIndex}${betItem.league_name}`);
+			const betDataEventContainer = $(`#additionalTr_${betItem.league_id}${betItem.league_name}`);
 			betDataEventContainer.find('.orderData_betData_Event').html(`
 				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
 				${betItem.home_team_name} VS ${betItem.away_team_name} 
@@ -304,7 +304,7 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
-			const dynamicId = 'additionalTr_' + betIndex + betItem.league_name;
+			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
 			console.log(dynamicId);
 			const targetElements = $(`#${dynamicId}.orderData_expand`);
 
