@@ -123,15 +123,15 @@
         </div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: 20%;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
             <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 80%;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: 20%;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
         </div>
@@ -161,9 +161,9 @@
     <div class="col text-right p-0">
         <span class="bet_name"></span>
     </div>
-    <div class="col m-0 row text-right p-0">
-        <div class="odd col-4 p-0"></div>
-        <div class="col-8 text-left p-0">
+    <div class="col m-0 row text-right p-0" key='changeCol'>
+        <div class="odd col p-0"></div>
+        <div class="col text-left p-0">
             <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -420,7 +420,16 @@
             if( betData && Object.keys(betData.list).length > 0 ) {
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     let item = null
-                    allWinArr.indexOf(i) !== -1 ? item = $(`div[template="betItem-1"]`).clone() : item = $(`div[template="betItem"]`).clone()
+                    if (allWinArr.indexOf(i) !== -1 ) {
+                        item = $(`div[template="betItem-1"]`).clone()
+                    } else {
+                        item = $(`div[template="betItem"]`).clone()
+                        // 四格的時候調整寬度
+                        if( mainPriorityArr.length === 4 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                        }
+                    }
+
                     // set attribute
                     item.attr('priority', i)
                     item.attr('fixture_id', k3)
