@@ -18,9 +18,14 @@ class ModelDriverProvider extends ServiceProvider {
             // 緩存時間
             $cacheAliveTime = 1;
 
+            // getSQL
+            $bindings = $this->getBindings();
             $sql = $this->toSql();
+            $fullSql = vsprintf(str_replace('?', "'%s'", $sql), $bindings);
 
-            dd($sql);
+            // 输出包含参数值的 SQL 查询语句
+            dd($fullSql);
+
             //
             return $this->get();
         });
