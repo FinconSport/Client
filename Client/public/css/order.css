@@ -62,7 +62,7 @@ div[key="matchSportMenu"]{
 #orderTable td,
 #orderTable th {
     border: 2px solid rgb(65, 91, 90);
-    padding: 0.5rem 1rem;
+    padding: 1rem 0.5rem;
     font-weight: 600;
 }
 
