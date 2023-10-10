@@ -82,7 +82,7 @@
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
 						<td style="width: 10%;"><span class="orderData_resultAmount"></span></td>
-						<td style="width: 10%;"></td>
+						<td style="width: 10%;"><span class="orderData_WinLoss"></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -144,6 +144,7 @@
 
 	let totalResultAmount = 0;
 	let totalBetAmount = 0;
+	let WinLoss = 0;
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -152,7 +153,7 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				createList(orderItem, orderIndex);
+				createList(orderItem, orderIndex, orderItem.winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 					createBetDataDetails(orderItem, betItem, betIndex);
 				});
@@ -160,6 +161,14 @@
 				// Validate and accumulate total
 				totalResultAmount += parseFloat(orderItem.result_amount);
 				totalBetAmount += parseFloat(orderItem.bet_amount);
+
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const winLoss = resultAmount - betAmount;
+
+				// Accumulate the total WinLoss
+				WinLoss += winLoss;
+
 			});
 
 			// After accumulating the totals, round them to two decimal places
@@ -172,7 +181,7 @@
 	}
 
 
-	function createList(orderItem, orderIndex) {
+	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		const orderDataId = orderData.find('.orderData_id');
 		const orderDataSportType = orderData.find('.orderData_sportType');
@@ -183,7 +192,7 @@
 		const orderDataBetResult = orderData.find('.orderData_betData_Result');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
-		const orderDataStatus = orderData.find('.orderData_status');
+		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
 
 		let sportName = '';
 
@@ -202,7 +211,7 @@
 		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataStatus.html(orderItem.status);
+		orderDataWinLoss.html(winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
