@@ -33,7 +33,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="no-border-bottom" id="countTr" template="orderTotalTemplate" hidden>
+		<div class="statistic-container" id="countTr" template="orderTotalTemplate" hidden>
 			<div class="stats-container">
 				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
 				<p class="total-bet-count"></p>
