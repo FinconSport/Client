@@ -131,12 +131,15 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                     foreach ($data['aggregations'] as $k => $v) { 
                         foreach ($data['aggregations'] as $kk => $vv) {
                             $buckets = $vv['buckets'];
+                            $count = 0; // 用於計算欄位順序
                             foreach ($buckets as $kkk => $vvv) {
                                 $tmp = array();
                                 $tmp['agent_id'] = $vvv['key'];
-                                if (isset($vvv['total'])) {
-                                    $tmp['total'] = $vvv['total'];
+                                if ($count == 2) {
+                                    $tmp['value'] = $vvv[$kkk]['value'];
                                 }
+                                $count++;
+                                
                                 $list[] = $tmp;
                             }
                         }
