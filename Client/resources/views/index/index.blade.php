@@ -746,8 +746,8 @@
                                 newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
 
                                 // 換節了 重新渲染單節投注區塊
-                                if( newStagePriorityArr[v3.periods.period] && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
-                                    stagePriorityArr = newStagePriorityArr
+                                if( newStagePriorityArr[v3.periods.period] && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[v3.periods.period][index]) ) {
+                                    stagePriorityArr = newStagePriorityArr[v3.periods.period]
                                     card.find('.indexBetCardTable').eq(1).html('')
                                     createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                 }
