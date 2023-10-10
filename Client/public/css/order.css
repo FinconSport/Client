@@ -208,6 +208,15 @@ div[key="matchSportMenu"]{
     width: 29%;
 }
 
+.search-statistic-container .select-con::after {
+    position: absolute;
+    content: '⏷';
+    height: auto;
+    top: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+}
+
 .search-statistic-container select {
     word-wrap: normal;
     border: none;
@@ -253,6 +262,16 @@ div[key="matchSportMenu"]{
     border-radius: 0px!important;
     padding: 1rem!important;
     background: #ffffff;
+    position: relative;
+}
+
+.datepicker-con .input-group-text::after {
+    position: absolute;
+    content: '📅';
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .datepicker-con .input-group.date {
