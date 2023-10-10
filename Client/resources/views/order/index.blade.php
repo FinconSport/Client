@@ -219,23 +219,23 @@
 
 		// createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
 
-		// if (betIndex > 0) {
-		// 	betDataDetailsContainer.addClass('hide-betaDetcon');
-		// 	$(`#betDataDetails_${orderItem.id} .order-toggleButton`).addClass('showbutton');
-		// }
+		if (betIndex > 0) {
+			betDataDetailsContainer.addClass('hide-betaDetcon');
+			$(`#betDataDetails_${orderItem.id} .order-toggleButton`).addClass('showbutton');
+		}
 
-		// orderDataBetDataDetails.append(betDataDetailsContainer);
+		orderDataBetDataDetails.append(betDataDetailsContainer);
 
-		// const betDataLength = orderItem.bet_data.length;
+		const betDataLength = orderItem.bet_data.length;
 
-		// if (betIndex === 0) {
-		// 	const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${betDataLength})</button>`);
-		// 	button.on('click', function () {
-		// 	orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
-		// 	button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
-		// 	});
-		// 	button.appendTo(orderDataBetDataDetails);
-		// }
+		if (betIndex === 0) {
+			const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${betDataLength})</button>`);
+			button.on('click', function () {
+			orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
+			button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
+			});
+			button.appendTo(orderDataBetDataDetails);
+		}
 	}
 
 	
