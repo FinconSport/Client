@@ -135,8 +135,15 @@
 
 [key="homeTeamInfo"] .teamSpan {
     margin-top: 0.5rem;
-    /* line-height: 1.5rem; */
 }
+[key="homeTeamInfo2"] {
+    padding-top: 0.5rem;
+}
+
+/* [key="basketBallQuaterBet"] .teamSpan {
+    border-left: none!important
+} */
+
 .teamSpan{
     font-size: 1.1rem;
     font-weight: 600;
