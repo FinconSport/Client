@@ -332,3 +332,7 @@ button.dateCalendarBtn {
     border-radius: 10px;
     border: 2px solid #415b5a;
 }
+
+.orderData_betData_Event{
+    position: relative;
+}
