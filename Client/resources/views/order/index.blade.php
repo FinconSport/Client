@@ -253,10 +253,19 @@
 
 		if (betIndex > 0) {
 			// Create additional <td> elements for betItems other than the first one
-			const additionalTds = $('<td style="width: 8%;"></td><td style="width: 9%;text-align:left;"><span></span><br><span></span></td><td style="width: 21%;" class="orderData_betData_Event"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td><td style="width: 10%;"></td>');
+			const additionalTds = $('<td style="width: 8%;"></td>' +
+				'<td style="width: 9%;"></td>' +
+				'<td style="width: 21%;" class="orderData_betData_Event"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>');
 
-			// Create a new <tr> for the additional <td> elements
-			const additionalTr = $('<tr></tr>').append(additionalTds);
+			// Create a new <tr> for the additional <td> elements with a dynamic ID
+			const dynamicId = 'additionalTr_' + betIndex; // You can use a unique identifier here
+			const additionalTr = $('<tr></tr>').attr('id', dynamicId).append(additionalTds);
 
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
@@ -265,6 +274,7 @@
 				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 			});
 		}
+
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
