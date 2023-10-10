@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use DB;
+use App\Models\Player;
+
 
 use App\Models\LsportSport;
 
@@ -20,10 +22,14 @@ class TestController extends PcController {
 
       $sql = "select * from es_player";
       // $dd = LsportSport::getESQuery($sql);
-      $dd = LsportSport::getESAgg($sql);
-      
-     dd($dd);
+      //$dd = LsportSport::getESAgg($sql);
 
+      $return = Player::where("status",1);
+      $return = $return->list();
+      dd($return);
+      
+
+      
     }
 
 

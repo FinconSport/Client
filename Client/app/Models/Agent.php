@@ -47,7 +47,7 @@ class Agent extends CacheModel
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data, $id_col) {
             $id = $data[$id_col];
 
-            $data = self::where($id_col, $id)->first();
+            $data = self::where($data)->first();
             $return = $data;
 
             return $return;

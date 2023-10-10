@@ -33,21 +33,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="statistic-container">
-			<div class="stats-container total-bet-count">
+		<div class="statistic-container" id="countTr" template="orderTotalTemplate" hidden>
+			<div class="stats-container">
 				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
+				<p class="total-bet-count"></p>
 			</div>
-			<div class="stats-container total-bet-amount">
+			<div class="stats-container">
 				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
+				<p class="orderData_totalBetAmount"></p>
 			</div>
-			<div class="stats-container total-effective-amount">
+			<div class="stats-container">
 				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
+				<p class="total-effective-amount"></p>
 			</div>
-			<div class="stats-container total-result-amount">
+			<div class="stats-container">
 				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
+				<p class="orderData_totalResultAmount"></p>
 			</div>
 			<div class="stats-container total-win-amount">
 				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
+				<p class="total-win-amount"></p>
 			</div>
 		</div>
 	</div>
@@ -71,24 +76,13 @@
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td style="width: 10%;" class="orderData_id"></td>
                         <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
-                        <td style="width: 17%;" class="orderData_betDataEvent"></td>
-                        <td style="width: 10%;" class=""></td>
-                        <td style="width: 10%;" class="text-right"></td>
+                        <td style="width: 17%;" class="orderData_betData_Event"></td>
+                        <td style="width: 10%;" class="orderData_betData_BetWay"></td>
+                        <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
-						<td style="width: 10%;"><span class="orderData_resultAmount"></span><br><span class="text-muted orderData_resultTime"></span></td>
+						<td style="width: 10%;"><span class="orderData_resultAmount"></span></td>
 						<td style="width: 10%;"></td>
-                    </tr>
-                    <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-						<td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 17%;"></td>
-						<td style="width: 10%;"></td>
-						<td style="width: 10%;"></td>
-                        <td style="width: 10%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
-                        <td style="width: 10%;" class="text-right orderData_totalBetAmount"></td>
-                        <td style="width: 10%;" class="text-right orderData_totalResultAmount"></td>
-                        <td style="width: 10%;"></td>
                     </tr>
                 </tbody>
             </table>
@@ -179,8 +173,9 @@
 		const orderDataSportType = orderData.find('.orderData_sportType');
 		const orderDataMOrder = orderData.find('.orderData_mOrder');
 		const orderDataBetAmount = orderData.find('.orderData_betAmount');
-		const orderDataBetDataDetails = orderData.find('.orderData_betDataEvent');
-		// const orderDataCreatedTime = orderData.find('.orderData_createdTime');
+		const orderDataBetEvent = orderData.find('.orderData_betData_Event');
+		const orderDataBetBetWay = orderData.find('.orderData_betData_BetWay');
+		const orderDataBetResult = orderData.find('.orderData_betData_Result');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataStatus = orderData.find('.orderData_status');
@@ -195,46 +190,70 @@
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
-		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
+		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
+		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
+		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
 		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataStatus.html(orderItem.status);
 
-		$('#countTr').before(orderData);
+		$('#orderDataTemp').append(orderData);
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		const betDataDetailsId = `betDataDetails_${orderItem.id}`;
-		const orderDataBetDataDetails = $(`#${betDataDetailsId}`);
-		const betDataDetailsContainer = $('<div class="betaDetcon">');
-		
-		const createHtmlElement = (className, content) => $('<div>').html(`<span>${content}</span>`).addClass(className);
-		
-		betDataDetailsContainer.append(
+		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
+
+		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`; 
+		const orderDataBetEvent = $(`#${betDataEventID}`);
+		const betDataEventContainer = $('<div class="betaDetcon">');
+		betDataEventContainer.append(
 			createHtmlElement('mb-3', `${betItem.league_name} (${orderItem.create_time})`),
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		// createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
+		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`; 
+		const orderDataBetWay = $(`#${betDataBetWayID}`);
+		const betDataBetWayContainer = $('<div class="betaDetcon">');
+		betDataBetWayContainer.append(
+			createHtmlElement('', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`),
+		);
 
+		const betDataResultID = `betDataDetailsResult_${orderItem.id}`; 
+		const orderDataResult = $(`#${betDataResultID}`);
+		const betDataResultContainer = $('<div class="betaDetcon">');
+		betDataResultContainer.append(
+			createHtmlElement('text-right', `${betItem.status}<br> ${orderItem.result_time}`),
+		);
+
+		
 		if (betIndex > 0) {
-			betDataDetailsContainer.addClass('hide-betaDetcon');
-			$(`#betDataDetails_${orderItem.id} .order-toggleButton`).addClass('showbutton');
+			betDataEventContainer.addClass('hide-betaDetcon');
+			betDataBetWayContainer.addClass('hide-betaDetcon');
+			betDataResultContainer.addClass('hide-betaDetcon');
+			$(`#betDataDetailsEvent_${orderItem.id} .order-toggleButton`).addClass('showbutton');
+			$(`betDataDetailsBetWay_${orderItem.id} .order-toggleButton`).addClass('showbutton');
+			$(`#betDataDetailsResult_${orderItem.id} .order-toggleButton`).addClass('showbutton');
 		}
 
-		orderDataBetDataDetails.append(betDataDetailsContainer);
+		orderDataBetEvent.append(betDataEventContainer);
+		orderDataBetWay.append(betDataBetWayContainer);
+		orderDataResult.append(betDataResultContainer);
 
 		const betDataLength = orderItem.bet_data.length;
 
 		if (betIndex === 0) {
 			const button = $(`<button class='order-toggleButton'>{{ trans('order.main.expand') }} (${betDataLength})</button>`);
 			button.on('click', function () {
-			orderDataBetDataDetails.find('.hide-betaDetcon').slideToggle();
+			orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
+			orderDataBetWay.find('.hide-betaDetcon').slideToggle();
+			orderDataResult.find('.hide-betaDetcon').slideToggle();
 			button.text(button.text() === '{{ trans('order.main.expand') }} (' + betDataLength + ')' ? '{{ trans('order.main.close') }}' : '{{ trans('order.main.expand') }} (' + betDataLength + ')');
 			});
-			button.appendTo(orderDataBetDataDetails);
+			button.appendTo(orderDataBetEvent);
+			button.appendTo(orderDataBetWay);
+			button.appendTo(orderDataResult);
 		}
 	}
 
@@ -243,7 +262,7 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-		$('#orderDataTemp').append(orderDataTotal);
+		$('.search-bar-container').after(orderDataTotal);
 	}
 
 	//updateTotal when new data is loaded

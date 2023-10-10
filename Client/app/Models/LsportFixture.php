@@ -24,10 +24,11 @@ class LsportFixture extends CacheModel
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
 			$sport_id = $data['sport_id'];
 
-            $data = self::where('sport_id', $sport_id)->select('status')->first();
+            $data = self::where($data)->select('status')->first();
             $return = $data;
 
             return $return;
+
         });
     }
 
