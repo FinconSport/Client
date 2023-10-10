@@ -24,8 +24,8 @@ class TestController extends PcController {
       // $dd = LsportSport::getESQuery($sql);
       //$dd = LsportSport::getESAgg($sql);
 
-      $model = Player::where("status",1);
-      $return = $model->list();
+      $return = Player::where("status",1)->list();
+  
       dd($return);
       
 
