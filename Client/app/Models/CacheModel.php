@@ -67,10 +67,9 @@ class CacheModel extends Model {
 
 
     // getList
-    protected static function list() {
-        $sql = self::toSql();
-
-        dd($sql);
+    public function list() {
+        $return = self::get();
+        return $return;
     }
 }
 

@@ -2974,7 +2974,7 @@ class LsportApiController extends Controller {
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
         // 如果還未開賽就回傳null
-        if ($fixture_status < 2) {
+        if ($fixture_status < $this::FIXTURE_STATUS['living']) {
             return null;
         }
 
@@ -2993,7 +2993,7 @@ class LsportApiController extends Controller {
             // 如果參數是字串則json_decoe看看
             $arr_periods = json_decode($periods, true);
             // de不出東西就回傳false
-            if (!$arr_periods) {
+            if (!is_array($arr_periods) && !$arr_periods) {
                 return false;
             }
         }
@@ -3004,7 +3004,7 @@ class LsportApiController extends Controller {
             // 如果參數是字串則json_decoe看看
             $arr_scoreboard = json_decode($scoreboard, true);
             // de不出東西就回傳false
-            if (!$arr_scoreboard) {
+            if (!is_array($arr_scoreboard) && !$arr_scoreboard) {
                 return false;
             }
         }
