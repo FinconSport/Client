@@ -29,7 +29,7 @@ class ModelDriverProvider extends ServiceProvider {
 
             $cacheKey = MD5($esSql);
 
-            $data = Cache::remember($cacheKey, $cacheAliveTime, function use ($esSql) {
+            $data = Cache::remember($cacheKey, $cacheAliveTime, function ($esSql) {
                 
                 // create URL
                 $url = 'http://72.167.135.22:29200/_sql?sql=' . $esSql . '&pretty';
