@@ -1,6 +1,35 @@
 @extends('layout.app')
 
 @section('content')
+	<div class="search-statistic-container">
+		<div class="search-bar-container">
+			<div class="select-con">
+				<label for="selectOption">PLease Select Sports:</label>
+				<select id="selectOption" name="selectOption">
+					<option value="baseball">Baseball</option>
+					<option value="football">Football</option>
+					<option value="basketball">Basketball</option>
+				</select>
+			</div>
+			<div class="datecalendar-con">
+				<div class="datepicker-con">
+					<div class="input-group date">
+						<input type="text" class="form-control" id="datepicker">
+						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
+					</div>
+					<span> ~ </span>
+					<div class="input-group date">
+						<input type="text" class="form-control" id="datepicker">
+						<span class="input-group-text"><i class="bi bi-calendar"></i></span>
+					</div>
+				</div>
+				<div class="datebutton-cons">
+
+				</div>
+			</div>
+		</div>
+		<div class="statistic-containe"></div>
+	</div>
     <div id="orderContainer">
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
@@ -87,6 +116,8 @@
 @endSection
 
 @push('main_js')
+<script src="{{ asset('js/jquery.min.js?v=' . $current_time) }}"></script>
+<script src="{{ asset('js/bootstrap.min.js?v=' . $current_time) }}"></script>
 <script>
 
 	// 語系
@@ -267,5 +298,9 @@
 		$(e).html(switchStr)
 		$(e).attr('isopen', isopen)
 	}
+
+	$(document).ready(function() {
+        $('#datepicker').datepicker();
+    });
 </script>
 @endpush
