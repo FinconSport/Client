@@ -56,16 +56,18 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-                        <th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
-                        <th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
-                        <th style="width: 30%;">{{ trans('order.main.detail') }}</th>
-                        <th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
-                        <th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
-                        <th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
+                        <th style="width: 10%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
+                        <th style="width: 17%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.result') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.effective_amount') }}</th>
+						<th style="width: 10%;">{{ trans('order.main.result_amount') }}</th>
+						<th style="width: 10%;" class="no-border-right">{{ trans('order.main.win_amount') }}</th>
                     </tr>
                 </thead>
-                <tbody id="orderDataTemp">
+                <!-- <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td class="no-border-left orderData_id"></td>
                         <td>
@@ -95,7 +97,7 @@
                         <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
                         <td style="width: 10%;"></td>
                     </tr>
-                </tbody>
+                </tbody> -->
             </table>
 			<div id="loader" style="display: none; margin-top: 2rem;">
 				<div colspan="29" class="loading loading04">
