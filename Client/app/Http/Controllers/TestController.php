@@ -22,7 +22,7 @@ class TestController extends PcController {
       $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
 
       // total方法, 專門用於取得統計
-      $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'))->groupBy('agent_id')->total();
+      $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
       // report方法, 包裝統計與list , 用於報表
 
       dd($return);
