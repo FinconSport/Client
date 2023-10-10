@@ -74,6 +74,7 @@ return [
 		"game_result"=>"Winning",  //  "派獎",
 		"recharge"=>"Deposit",  //  "入金",
 		"withdraw"=>"Withdraw", //  "提出",
+        "delay_bet_refund"=>"Delay-bet refund",
 	],  //   
 
 

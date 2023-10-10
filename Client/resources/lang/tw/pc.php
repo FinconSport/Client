@@ -73,7 +73,8 @@ return [
 		"game_bet"=>"投注",
 		"game_result"=>"派獎",
 		"recharge"=>"入金",
-		"withdraw"=>"提出"
+		"withdraw"=>"提出",
+		"delay_bet_refund"=>"延注退款",
 	], 
 
 
