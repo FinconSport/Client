@@ -14,7 +14,7 @@ class Agent extends CacheModel
 	protected $table = "agent";
 
     public static function getApiLang(
-        array $data,  // data=參數
+        array $data  // data=參數
     ) {
 
         // 緩存時間
