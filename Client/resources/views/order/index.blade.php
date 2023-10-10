@@ -272,7 +272,7 @@
 			const toggleButton = $('<button class="order-toggleButton">{{ trans("order.main.expand") }} (' + betDataLength + ')</button>');
 			
 			function toggleContainers() {
-				orderDataBetEvent.find('.hide-betaDetcon, .hide-betaDetcon, .hide-betaDetcon').slideToggle();
+				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
 				toggleButton.text(toggleButton.text() === '{{ trans("order.main.expand") }} (' + betDataLength + ')' ? '{{ trans("order.main.close") }}' : '{{ trans("order.main.expand") }} (' + betDataLength + ')');
 			}
 
