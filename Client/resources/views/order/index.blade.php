@@ -225,6 +225,7 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(`${content}`).addClass(className);
+		const parentElement = createHtmlElement.parent();
 		
 		const betDataEventID = `betDataDetailsEvent_${orderItem.id}`;
 		const orderDataBetEvent = $(`#${betDataEventID}`);
@@ -250,6 +251,8 @@
 		betDataResultContainer.append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`),
 		);
+
+		
 
 		if (betIndex > 0) {
 			// Create additional <td> elements for betItems other than the first one
@@ -288,9 +291,7 @@
 				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
-			['Event', 'BetWay', 'Result'].forEach(key => {
-				$(`#betDataDetails${key}_${orderItem.id} .order-toggleButton`).addClass('showbutton');
-			});
+			parentElement.find('.order-toggleButton').addClass('showbutton');
 		}
 
 
@@ -309,7 +310,6 @@
 			}
 
 			toggleButton.on('click', toggleContainers);
-			const parentElement = orderDataBetEvent.parent();
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 			// toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
 		}
