@@ -201,8 +201,8 @@ div[key="matchSportMenu"]{
     top: 133px!important;
 }
 
-.custom-datepicker-class .ui-datepicker td span, 
-.custom-datepicker-class .ui-datepicker td a {
+.custom-datepicker-class td span, 
+.custom-datepicker-class td a {
     color: rgb(65, 91, 90)!important;
 }
 
