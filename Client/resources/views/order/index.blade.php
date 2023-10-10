@@ -308,16 +308,16 @@
 			console.log(dynamicId);
 
 			function toggleContainers() {
-				const targetElements = $(`#${dynamicId}.hide-betaDetcon`);
-				targetElements.css('display', 'table-row'); // Ensure the elements are displayed as table rows
-				targetElements.slideToggle('fast'); // Add 'fast' for a smooth transition
+				$(`#${dynamicId}.hide-betaDetcon`).animate({
+				height: 'toggle', // Toggle the height to create the slide effect
+				opacity: 'toggle' // Toggle the opacity for a fade effect (optional)
+				}, 'fast'); // You can adjust the speed here ('fast', 'slow', or a duration in milliseconds)
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-
 
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
