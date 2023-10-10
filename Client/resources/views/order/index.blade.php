@@ -286,7 +286,7 @@
 			});
 
 			// Remove all .betaDetcon elements within the created <td> except the first child
-			betDataEventContainer.find('.betaDetcon:not(:first-child)').remove();
+			betDataEventContainer.children('.betaDetcon:not(:first-child)').remove();
 		}
 
 
