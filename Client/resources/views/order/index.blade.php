@@ -307,19 +307,15 @@
 			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
 			console.log(dynamicId);
 
-			function toggleTableRow() {
-				const $element = $(`#${dynamicId}.hide-betaDetcon`);
-				const isVisible = $element.is(":visible");
-
-				$element.css("transition", "opacity 0.3s, height 0.3s");
-				$element.css("opacity", isVisible ? 0 : 1);
-				toggleButton.text(isVisible ? '▶' : '▼');
-				$element.slideToggle('fast');
+			function toggleContainers() {
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('slow');
+				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
-			toggleButton.on('click', toggleTableRow); // Changed from toggleContainers to toggleTableRow
+			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
+
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
