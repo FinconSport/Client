@@ -22,10 +22,10 @@ class LsportTeam extends CacheModel
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-			$sport_id = $data['sport_id'];
+			$team_id = $data['team_id'];
 			$api_lang = $data['api_lang'];
 			
-            $data = self::where('sport_id', $sport_id)->first();
+            $data = self::where('team_id', $team_id)->first();
             
 			// 預設值
             $name = $data['name_en'];
