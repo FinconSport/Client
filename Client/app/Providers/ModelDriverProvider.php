@@ -13,7 +13,7 @@ class ModelDriverProvider extends ServiceProvider {
     }
 
     public function boot() {
-        Builder::macro('list', function use ($cacheAliveTime = 3600) {
+        Builder::macro('list', function ($cacheAliveTime = 3600) {
         
             // getSQL
             $bindings = $this->getBindings();
