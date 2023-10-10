@@ -52,8 +52,8 @@
 		</div>
 	</div>
     <div id="orderContainer">
-        <!-- <div id="tableContainer" style="overflow: auto;">
-            <table id="orderTable" class="cell-border w-100 text-center">
+        <div id="tableContainer" style="overflow: auto;">
+            <!-- <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
                         <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
@@ -113,8 +113,8 @@
 			</div>  
 			<div id="noMoreData" style="display: none; margin-top: 2rem;">
 				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
-			</div>
-        </div> -->
+			</div> -->
+        </div>
     </div>
 
 	
