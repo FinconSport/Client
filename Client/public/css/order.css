@@ -77,6 +77,10 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
+#orderTable tbody tr:last-child td{
+    border-right: 2px solid rgb(65, 91, 90);
+}
+
 #orderTable thead {
     background: #c4d4d4;
 }
