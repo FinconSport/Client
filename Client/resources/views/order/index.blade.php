@@ -303,6 +303,8 @@
 			toggleButton.on('click', toggleContainers);
 			toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
 		}
+
+		$('.orderData_betData_Event:has(.betaDetcon)').remove();
 	}
 
 	
