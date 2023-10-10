@@ -267,7 +267,8 @@
 				'<td style="width: 10%;"></td>');
 
 			// Create a new <tr> for the additional <td> elements with a dynamic ID
-			const additionalTr = $('<tr class="betadata_expand"></tr>');
+			const dynamicId = 'additionalTr_' + betIndex + betItem.league_name;
+			const additionalTr = $('<tr class="betadata_expand"></tr>').attr('id', dynamicId).append(additionalTds);
 
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
