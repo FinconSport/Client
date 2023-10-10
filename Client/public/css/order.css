@@ -193,10 +193,15 @@ div[key="matchSportMenu"]{
     margin: 0px 0.7rem;
 }
 
-.datecalendar-con #ui-datepicker-div {
+#ui-datepicker-div.custom-datepicker-class {
     background: white;
     padding: 1rem;
     border: 1px solid #415b5a;
     border-radius: 5px;
-    top: 133px;
+    top: 133px!important;
+}
+
+#ui-datepicker-div.custom-datepicker-class a{
+    color: #415b5a!important;
+    text-decoration: none!important;
 }
