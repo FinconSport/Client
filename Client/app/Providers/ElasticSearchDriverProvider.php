@@ -135,7 +135,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                             foreach ($buckets as $kkk => $vvv) {
                                 $tmp = array();
                                 $tmp['agent_id'] = $vvv['key'];
-                                if ($count == 2) {
+                                if ($count >= 1) {
 
                                     dd($vvv);
                                     $tmp['value'] = $vvv[$kkk]['value'];
