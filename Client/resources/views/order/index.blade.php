@@ -292,7 +292,7 @@
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
-			parentElement.addClass('hide-betaDetcon');
+			$(`#${dynamicId}`).addClass('hide-betaDetcon');
 		}
 
 
