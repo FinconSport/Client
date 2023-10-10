@@ -27,7 +27,7 @@ class TestController extends PcController {
 
       // report方法, 包裝統計與list , 用於報表
 
-      $return = LsportFixture::join('es_lsport_sport', 'es_lsport_fixture.sport_id', '=', 'es_lsport_sport.sport_id')->where('es_lsport_sport.status', '=', 1)->list();
+      $return = LsportFixture::join('es_lsport_sport', 'lsport_fixture.sport_id', 'es_lsport_sport.sport_id')->where('es_lsport_sport.status', 1)->list();
       dd($return);
       
       // success => array , fail => false
