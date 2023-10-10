@@ -14,7 +14,12 @@ class ModelDriverProvider extends ServiceProvider {
 
     public function boot() {
         Builder::macro('list', function ($cacheAliveTime = 3600) {
-        
+            
+            // 获取模型的表名
+            $tableName = $this->getModel()->getTable();
+
+            dd($tableName);
+
             // getSQL
             $bindings = $this->getBindings();
             $sql = $this->toSql();
