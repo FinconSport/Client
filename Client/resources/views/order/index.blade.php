@@ -302,18 +302,18 @@
 
 		const betDataLength = orderItem.bet_data.length;
 
-		if (betIndex === 0) {
-			const toggleButton = $('<button class="order-toggleButton">▼</button>');
-			const targetElements = parentElement.find('.hide-betaDetcon'); // Select target elements
+		// if (betIndex === 0) {
+		// 	const toggleButton = $('<button class="order-toggleButton">▼</button>');
+		// 	const targetElements = parentElement.find('.hide-betaDetcon');
 
-			function toggleContainers() {
-				targetElements.slideToggle(); // Toggle visibility of target elements
-				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
-			}
+		// 	function toggleContainers() {
+		// 		targetElements.slideToggle();
+		// 		toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
+		// 	}
 
-			toggleButton.on('click', toggleContainers);
-			parentElement.find('.orderData_mOrder').append(toggleButton);
-		}
+		// 	toggleButton.on('click', toggleContainers);
+		// 	parentElement.find('.orderData_mOrder').append(toggleButton);
+		// }
 
 
 		if (betIndex === 0) {
@@ -328,7 +328,6 @@
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
-			// toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
 		}
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
