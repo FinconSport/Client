@@ -758,8 +758,8 @@ class LsportApiController extends Controller {
         ->from('es_lsport_fixture as f')
         ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id') // join sport
         ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id') // join league
-        ->whereIn('f.status', '=', [1,2,9])
-        ->where('s.status', '=', 1)
+        ->whereIn('f.status', [1,2,9])
+        ->where('s.status', 1)
         ->where('f.start_time', "<=", $after_tomorrow)
         ->orderBy('l.league_id', 'ASC')
         ->orderBy('f.fixture_id', 'ASC')
