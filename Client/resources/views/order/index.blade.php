@@ -24,7 +24,12 @@
 					</div>
 				</div>
 				<div class="datebutton-cons">
-
+					<button class="dateCalendarBtn">last month</button>
+					<button class="dateCalendarBtn">last week</button>
+					<button class="dateCalendarBtn">yesterday</button>
+					<button class="dateCalendarBtn">today</button>
+					<button class="dateCalendarBtn">this week</button>
+					<button class="dateCalendarBtn">this month</button>
 				</div>
 			</div>
 		</div>
