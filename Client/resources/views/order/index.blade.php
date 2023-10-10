@@ -78,7 +78,7 @@
                         <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
                         <td style="width: 17%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
-                        <td style="width: 10%;" class="text-right orderData_betData_Result"></td>
+                        <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
                         <td style="width: 10%;"></td>
 						<td style="width: 10%;"><span class="orderData_resultAmount"></span></td>
@@ -224,7 +224,7 @@
 		const orderDataResult = $(`#${betDataResultID}`);
 		const betDataResultContainer = $('<div class="betaDetcon">');
 		betDataResultContainer.append(
-			createHtmlElement('', `${betItem.status}<br> ${orderItem.result_time}>`),
+			createHtmlElement('text-right', `${betItem.status}<br> ${orderItem.result_time}`),
 		);
 
 		
