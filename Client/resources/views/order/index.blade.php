@@ -56,43 +56,38 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 5%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-                        <th style="width: 10%;">{{ trans('order.main.sport_type') }}</th>
-                        <th style="width: 10%;">{{ trans('order.main.order_type') }}</th>
-                        <th style="width: 30%;">{{ trans('order.main.detail') }}</th>
-                        <th style="width: 12%;">{{ trans('order.main.bet_money') }}</th>
-                        <th style="width: 12.5%;">{{ trans('order.main.return_money') }}</th>
-                        <th style="width: 10%;" class="no-border-right">{{ trans('order.main.status') }}</th>
+                        <th style="width: 10%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
+                        <th style="width: 17%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.result') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.effective_amount') }}</th>
+						<th style="width: 10%;">{{ trans('order.main.result_amount') }}</th>
+						<th style="width: 10%;" class="no-border-right">{{ trans('order.main.win_amount') }}</th>
                     </tr>
                 </thead>
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
-                        <td class="no-border-left orderData_id"></td>
-                        <td>
-                            <span class="orderData_sportType"></span>
-                        </td>
-                        <td class="orderData_mOrder"></td>
-                        <td class="orderData_betDataDetails">
-						</td>
-                        <td class="text-right">
-                            <span class="orderData_betAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_createdTime"></span>
-                        </td>
-                        <td class="text-right">
-                            <span class="orderData_resultAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_resultTime"></span>
-                        </td>
-                        <td class="no-border-right orderData_status"></td>
+                        <td style="width: 10%;" class="orderData_id"></td>
+                        <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
+                        <td style="width: 17%;" class="orderData_betDataEvent"></td>
+                        <td style="width: 10%;" class=""></td>
+                        <td style="width: 10%;" class="text-right"></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span></td>
+                        <td style="width: 10%;"></td>
+						<td style="width: 10%;"><span class="orderData_resultAmount"></span><br><span class="text-muted orderData_resultTime"></span></td>
+						<td style="width: 10%;"></td>
                     </tr>
                     <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-						<td style="width: 5%;"></td>
+						<td style="width: 10%;"></td>
                         <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 30%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
-                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
-                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
+                        <td style="width: 17%;"></td>
+						<td style="width: 10%;"></td>
+						<td style="width: 10%;"></td>
+                        <td style="width: 10%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
+                        <td style="width: 10%;" class="text-right orderData_totalBetAmount"></td>
+                        <td style="width: 10%;" class="text-right orderData_totalResultAmount"></td>
                         <td style="width: 10%;"></td>
                     </tr>
                 </tbody>
@@ -184,8 +179,8 @@
 		const orderDataSportType = orderData.find('.orderData_sportType');
 		const orderDataMOrder = orderData.find('.orderData_mOrder');
 		const orderDataBetAmount = orderData.find('.orderData_betAmount');
-		const orderDataBetDataDetails = orderData.find('.orderData_betDataDetails');
-		const orderDataCreatedTime = orderData.find('.orderData_createdTime');
+		const orderDataBetDataDetails = orderData.find('.orderData_betDataEvent');
+		// const orderDataCreatedTime = orderData.find('.orderData_createdTime');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataStatus = orderData.find('.orderData_status');
@@ -202,7 +197,7 @@
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetDataDetails.attr('id', `betDataDetails_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount);
-		orderDataCreatedTime.html(orderItem.create_time);
+		// orderDataCreatedTime.html(orderItem.create_time);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataStatus.html(orderItem.status);
@@ -218,12 +213,11 @@
 		const createHtmlElement = (className, content) => $('<div>').html(`<span>${content}</span>`).addClass(className);
 		
 		betDataDetailsContainer.append(
-			createHtmlElement('mb-3', betItem.league_name),
-			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name}`),
-			createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
-			createHtmlElement('', `${betItem.home_team_name}${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}`),
-			createHtmlElement('', `${betItem.away_team_name}${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`}`),
+			createHtmlElement('mb-3', `${betItem.league_name} (${orderItem.create_time})`),
+			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}-${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
+
+		// createHtmlElement('', `${betItem.market_name} (${betItem.market_bet_name}${betItem.market_bet_line})<span> @${betItem.bet_rate}</span>`),
 
 		if (betIndex > 0) {
 			betDataDetailsContainer.addClass('hide-betaDetcon');

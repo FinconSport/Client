@@ -9,11 +9,14 @@ return [
 	"main" => [
 		"index" => "ID",  //  "編號"
 		"sport_type" => "Sports Type",  //  "體育種類",
-		"order_type" => "Bet Type",  //  "注單種類",
-
+		"bet_type" => "Bet Type", // "注單類型",
 		"event" => "Event",  //  "賽事",
-		
-		"bet_type" => "Betting Method",  //  "玩法",
+		"bet_way" => "How to play", //"玩法",
+		"result" => "Result", //"結果",
+		"bet_amount" => "Bet Amount", //"投注",
+		"effective_amount" => "Effective Amount", //"有效投注",
+		"result_amount" => "Result Amount", //"派獎",
+		"win_amount" => "Win Amount", //"輸贏",
 		"detail" => "Betting Details",  //  "賽事投注詳情",
 		"bet_money" => "Bet Amount",  //  "投注金額",
 		"return_money" => "Prize Amount",  //  "派獎金額",

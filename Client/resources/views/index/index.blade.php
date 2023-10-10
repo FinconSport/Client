@@ -51,7 +51,7 @@
                 <input type="checkbox" name="better_rate" id="better_rate">
                 <label for="better_rate">{{ trans('index.bet_area.better_rate') }}</label>
             </div>
-            <button onclick="sendOrder()">{{ trans('index.bet_area.bet') }}</button>
+            <button id="submitOrder" onclick="sendOrder()">{{ trans('index.bet_area.bet') }}</button>
             <button id="cancelOrder">{{ trans('index.bet_area.cancel') }}</button>
         </div>
     </div>
@@ -407,7 +407,7 @@
             time.html(langTrans.mainArea.readyToStart)
         }
 
-        console.log(v3, v3.status)
+
 
         // living
         if( v3.status === 2 ) {
@@ -417,6 +417,8 @@
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+            console.log(v3)
+            console.log('timerStr->' + timerStr)
 
             // exception baseball
             if( sport === 154914 ) {
@@ -445,6 +447,7 @@
             time.html(timerStr)
 
             if( sport === 48242 ) {
+                console.log(v3, v3.status)
                 let card2 = card.find('[key="basketBallQuaterBet"]')
                 home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                 away_team_info2 = card2.find('[key="awayTeamInfo2"]')
@@ -464,7 +467,6 @@
     }
 
     function createBetArea(priorityArr, v3, k3, league_name, card) {
-        console.log(priorityArr)
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
@@ -825,15 +827,29 @@
                                     } else {
                                         calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
                                     }
-                                    $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+                                    $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
 
                                     // 狀態 鎖頭
                                     if( v4.status === 1 ) {
                                         item.find('.fa-lock').hide()
                                         item.attr('onclick', 'openCal($(this))')
+
+                                        // 左邊選中的剛好鎖起來了 -> 復原
+                                        if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            $('#submitOrder').html(langTrans.bet_area.bet)
+                                            $('#submitOrder').removeClass('disabled')
+                                            $('#submitOrder').removeAttr('disabled')
+                                        }
                                     } else {
                                         item.find('.fa-lock').show()
                                         item.removeAttr('onclick')
+
+                                        // 左邊選中的剛好鎖起來了
+                                        if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            $('#submitOrder').html(langTrans.bet_area.disabled)
+                                            $('#submitOrder').addClass('disabled')
+                                            $('#submitOrder').attr('disabled', true)
+                                        }
                                     }
                                 })
                             } else {
@@ -1144,6 +1160,11 @@
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
         $('div').removeClass('m_order_on')
+
+        // 左邊選中的剛好鎖起來了 -> 復原
+        $('#submitOrder').html(langTrans.bet_area.bet)
+        $('#submitOrder').removeClass('disabled')
+        $('#submitOrder').removeAttr('disabled')
     }
 
     // 金額快速鍵
