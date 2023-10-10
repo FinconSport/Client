@@ -40,7 +40,7 @@ class LsportMarket extends CacheModel
     ) {
 
         // 緩存時間
-        $cacheAliveTime = 1;
+        $cacheAliveTime = 0.1;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);

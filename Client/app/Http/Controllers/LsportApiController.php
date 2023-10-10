@@ -97,7 +97,8 @@ class LsportApiController extends Controller {
         // 獲取用戶資料
         $player_id = $input['player'];
         // $return = Player::where("id", $player_id)->first();
-        $return = Player::getData(['id'=>$player_id]);
+        // cache
+        $return = Player::findData(['id'=>$player_id]);
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -226,11 +227,14 @@ class LsportApiController extends Controller {
         $notice_list = array();
 
         // 系統公告
-        $return = ClientMarquee::where(
-            "status", 1
-        )->orderBy(
-            'create_time', 'DESC'
-        )->get();
+        // $return = ClientMarquee::where(
+        //     "status", 1
+        // )->orderBy(
+        //     'create_time', 'DESC'
+        // )->get();
+
+        // cache
+        $return = ClientMarquee::getData();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -239,14 +243,14 @@ class LsportApiController extends Controller {
             $notice_list[] = $v['marquee'];
         }
 
-
         //---------------------------------
         // 自DB取出LsportNotice
-        $return = LsportNotice::orderBy(
-            'sport_id', 'ASC'
-        )->orderBy(
-            'create_time', 'DESC'
-        )->get();
+        // $return = LsportNotice::orderBy(
+        //     'sport_id', 'ASC'
+        // )->orderBy(
+        //     'create_time', 'DESC'
+        // )->get();
+        $return = LsportNotice::getData();
         if ($return === false) {
             $this->ApiError("02");
         }
@@ -374,11 +378,14 @@ class LsportApiController extends Controller {
         $notice_list = array();
 
         // 系統公告
-        $return = ClientMarquee::where(
-            "status", 1
-        )->orderBy(
-            'create_time', 'DESC'
-        )->get();
+        // $return = ClientMarquee::where(
+        //     "status", 1
+        // )->orderBy(
+        //     'create_time', 'DESC'
+        // )->get();
+
+        //cache
+        $return = ClientMarquee::getActiveMarquee();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -2867,17 +2874,19 @@ class LsportApiController extends Controller {
       
         $player_id = $input['player'];
         $token = $input['token'];
-        
-        $checkToken = PlayerOnline::where("player_id", $player_id)
-            ->where("token", $token)
-            ->where("status", 1)
-            ->count();
 
-        if ($checkToken) {
-            return true;
-        }
+        // $checkToken = PlayerOnline::where("player_id", $player_id)
+        //     ->where("token", $token)
+        //     ->where("status", 1)
+        //     ->count();
 
-        return false;
+        // cache
+        $is_player_online = PlayerOnline::isPlayerOnline([
+            'player_id' => $player_id,
+            'token' => $token,
+        ]);
+
+        return $is_player_online;
     }
 
     /**

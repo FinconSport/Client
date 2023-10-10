@@ -59,7 +59,7 @@ class LsportLeague extends CacheModel
     ) {
 
         // 緩存時間
-        $cacheAliveTime = 1;
+        $cacheAliveTime = 30;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
