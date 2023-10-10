@@ -69,35 +69,15 @@
                 </thead>
 				<tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
-                        <td style="width: 10%;" class="orderData_id"></td>
-                        <td style="width: 10%;">
-                            <span class="orderData_sportType"></span>
-                        </td>
-                        <td style="width: 10%;" class="orderData_mOrder"></td>
-                        <td style="width: 17%;" class="orderData_betDataDetails">
-						</td>
-                        <td style="width: 10%;" class="text-right">
-                            <span class="orderData_betAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_createdTime"></span>
-                        </td>
-                        <td style="width: 10%;" class="text-right">
-                            <span class="orderData_resultAmount"></span>
-                            <br>
-                            <span class="text-muted orderData_resultTime"></span>
-                        </td>
-                        <td style="width: 10%;" class="orderData_status"></td>
-						<td style="width: 10%;" class="orderData_result_amount"></td>
+						<td style="width: 10%;" class="orderData_id"><span class="orderData_id"></span></td>
+						<td style="width: 10%;" class="orderData_bet_type"><span class="orderData_sportType"></span></td>
+						<td style="width: 17%;" class="orderData_event orderData_betDataDetails"></td>
+						<td style="width: 10%;" class="orderData_bet_way"><span class="orderData_mOrder"></span></td>
+						<td style="width: 10%;" class="orderData_result"></td>
+						<td style="width: 10%;" class="orderData_bet_amount"><span class="orderData_betAmount"></span></td>
+						<td style="width: 10%;" class="orderData_effective_amount"></td>
+						<td style="width: 10%;" class="orderData_result_amount"><span class="orderData_resultAmount"></span></td>
 						<td style="width: 10%;" class="orderData_win_amount"></td>
-                    </tr>
-                    <tr id="countTr" class="no-border-bottom" template="orderTotalTemplate" hidden>
-						<td style="width: 5%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 30%;" class="p-0"><div class="text-white bg-deepgreen" id="orderCountTotal">{{ trans('order.main.total') }}</div></td>
-                        <td style="width: 12%;" class="text-right orderData_totalBetAmount"></td>
-                        <td style="width: 12.5%;" class="text-right orderData_totalResultAmount"></td>
-                        <td style="width: 10%;"></td>
                     </tr>
                 </tbody>
             </table>
