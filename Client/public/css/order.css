@@ -197,11 +197,11 @@ div[key="matchSportMenu"]{
 }
 
 .search-statistic-container .datecalendar-con {
-    width: 69%;
+    width: 72%;
 }
 
 .search-statistic-container .select-con {
-    width: 29%;
+    width: 26%;
     position: relative;
 }
 
@@ -283,4 +283,20 @@ div[key="matchSportMenu"]{
 .datepicker-con .input-group.date {
     border-radius: 15px;
     overflow: hidden;
+}
+
+.datebutton-cons {
+    margin-top: 0.8rem;
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 0.5rem;
+}
+
+button.dateCalendarBtn {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    padding: 0.5rem 0.8rem;
+    margin: 0px 0px 0.5rem 0px;
 }
