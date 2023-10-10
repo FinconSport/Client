@@ -304,12 +304,25 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
-			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
-			console.log(dynamicId);
-			const targetElements = $(`#${dynamicId}.orderData_expand`);
+			const targetElements = parentElement.find('.hide-betaDetcon'); // Select target elements
 
 			function toggleContainers() {
-				targetElements.slideToggle();
+				targetElements.slideToggle(); // Toggle visibility of target elements
+				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
+			}
+
+			toggleButton.on('click', toggleContainers);
+			parentElement.find('.orderData_mOrder').append(toggleButton);
+		}
+
+
+		if (betIndex === 0) {
+			const toggleButton = $('<button class="order-toggleButton">▼</button>');
+			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
+			console.log(dynamicId);
+
+			function toggleContainers() {
+				$('.hide-betaDetcon').slideToggle();
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
