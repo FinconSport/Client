@@ -237,7 +237,7 @@
 									${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 
-		orderDataBetEvent.children('.betaDetcon').remove();
+		orderDataBetEvent.empty();
 
 		const betDataBetWayID = `betDataDetailsBetWay_${orderItem.id}`;
 		const orderDataBetWay = $(`#${betDataBetWayID}`);
