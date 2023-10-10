@@ -649,10 +649,10 @@
                             if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
                             if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
 
-                            setTimeout(() => {
-                                homeScore.removeClass('raiseScore')
-                                awayScore.removeClass('raiseScore')
-                            }, 3000);
+                            // setTimeout(() => {
+                            //     homeScore.removeClass('raiseScore')
+                            //     awayScore.removeClass('raiseScore')
+                            // }, 3000);
 
                             homeScore.html( v3.scoreboard[1][0] )
                             awayScore.html( v3.scoreboard[2][0] )
