@@ -17,24 +17,30 @@ class TestController extends PcController {
     public function index(Request $request) {
     
       // list方法 , 同get方法
-    //  $return = Player::where("status",1)->where("currency_type",1)->list();
+      $return = Player::where("status",1)->where("currency_type",1)->list();
 
       // fetch方法 , 同first 方法
-    //  $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
+      $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
 
       // total方法, 專門用於取得統計
-    //  $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
+      $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
 
       // report方法, 包裝統計與list , 用於報表
 
+      // 多表關聯搜尋 , 需要用別名
       $return = LsportFixture::select('f.*')
       ->from('es_lsport_fixture as f')
       ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
       ->where('s.status', '=', 1)
+      ->skip(100)  // 跳過前 100 條記錄
+      ->take(10)   // 檢索 10 條記錄
+      ->orderBy("f.start_time","DESC")
       ->list();
+
+      ////////////////////////
+
       dd($return);
-      
-      // success => array , fail => false
+  
       if ($return === false) {
 
       }
