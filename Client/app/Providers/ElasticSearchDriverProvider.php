@@ -111,8 +111,6 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
-
-            dd($esSql);
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
@@ -130,8 +128,10 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                     // json decode
                     $data = $response->json();
                     $list = array();
-                    foreach ($data['hits']['hits'] as $k => $v) {
-                        $list = $v['_source'];
+                    foreach ($data['aggregations'] as $k => $v) { 
+                        foreach ($data['aggregations'] as $kk => $vv) {
+                            dd($k,$kk,$vv);
+                        }
                     }
                     return $list;
                 } 
