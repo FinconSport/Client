@@ -24,8 +24,28 @@ class TestController extends PcController {
       // $dd = LsportSport::getESQuery($sql);
       //$dd = LsportSport::getESAgg($sql);
 
-      $return = Player::where("status",1)->list();
+      $mPlayer = Player::where("status",1)->whereIn("player",[1,2]);
+
+    // Cache::reember() {  
+      // select * from player where status = 1
+      // player => es_player 
+      // select * from es_player where status = 1
+      // -> ES . 
+    // }
+      $return = $mPlayer->list();
+      $return = $mPlayer->total();
   
+      foreach ($return as $k => $v) {
+
+        $sport_id = $v['sport_id'];
+        $sport_nanme = xxxx::getName($sport_id);
+
+        $columns = ["sport, league , team"];
+        foreach ($columns as $kk => $vv) {
+          $$vv = $v[$vv];
+          $sport_nanme = xxxx::getName($sport_id);
+        }
+      }
       dd($return);
       
 
