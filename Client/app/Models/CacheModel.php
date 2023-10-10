@@ -33,6 +33,8 @@ class CacheModel extends Model {
             // 解码JSON响应
             $data = $response->json();
 
+            dd($data);
+
             // 在这里对$data执行您的操作
             // $data 包含解码后的JSON数据
             return response()->json($data);
