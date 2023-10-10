@@ -91,19 +91,19 @@ class LsportApiController extends Controller {
 
         $checkToken = $this->checkToken($input);
         if ($checkToken === false) {
-          $this->ApiError("PLAYER_RELOGIN", true);
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->first();
-        // $return = Player::getData(['player_id'=>$player_id]);
+        // $return = Player::where("id", $player_id)->first();
+        $return = Player::getData(['id'=>$player_id]);
         if ($return === false) {
-          $this->ApiError("01");
+            $this->ApiError("01");
         }
 
         if ($return['status'] != 1) {
-          $this->ApiError("02");
+            $this->ApiError("02");
         }
 
         ///////////////////////////////////
