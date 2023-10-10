@@ -67,7 +67,7 @@ class CacheModel extends Model {
 
 
     // getList
-    protected static function list() {
+    public function list() {
         $return = self::get();
         return $return;
     }
