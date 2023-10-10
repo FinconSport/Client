@@ -61,9 +61,9 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 10%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-                        <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
-                        <th style="width: 17%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 8%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 9%;">{{ trans('order.main.bet_type') }}</th>
+                        <th style="width: 20%;">{{ trans('order.main.event') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.result') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
@@ -74,9 +74,9 @@
                 </thead>
                 <tbody id="orderDataTemp">
                     <tr id="orderTr" template="orderTemplate" hidden>
-                        <td style="width: 10%;" class="orderData_id"></td>
-                        <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
-                        <td style="width: 17%;" class="orderData_betData_Event"></td>
+                        <td style="width: 8%;" class="orderData_id"></td>
+                        <td style="width: 9%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
+                        <td style="width: 20%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right orderData_betAmount"></td>
@@ -230,7 +230,7 @@
 		const orderDataBetEvent = $(`#${betDataEventID}`);
 		const betDataEventContainer = $('<div class="betaDetcon">');
 		betDataEventContainer.append(
-			createHtmlElement('mb-3', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
+			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('', `${betItem.home_team_name} VS ${betItem.away_team_name} 
 									<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
 									${betItem.away_team_score === null & betItem.home_team_score === null ? '' : `-`}
