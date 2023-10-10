@@ -448,9 +448,12 @@
                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
 
-                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
                 // bet area
-                if(stagePriorityArr[v3.periods.period]) createBetArea(stagePriorityArr[v3.periods.period], v3, k3, league_name, 1, card)
+                if( v3?.periods?.period ) {
+                    stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
+                }
+
             }
         }
 
@@ -743,19 +746,16 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
-
-                                console.log('stagePriorityArr')
-                                console.log(stagePriorityArr)
-
-                                console.log('newStagePriorityArr')
-                                console.log(newStagePriorityArr, v3.period)
 
                                 // 換節了 重新渲染單節投注區塊
-                                if( newStagePriorityArr[v3.periods.period] && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[v3.periods.period][index]) ) {
-                                    stagePriorityArr = newStagePriorityArr[v3.periods.period]
-                                    card.find('.indexBetCardTable').eq(1).html('')
-                                    createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                if( v3?.periods?.period ) {
+                                    newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+
+                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
+                                        stagePriorityArr = newStagePriorityArr
+                                        card.find('.indexBetCardTable').eq(1).html('')
+                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                    }
                                 }
 
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
