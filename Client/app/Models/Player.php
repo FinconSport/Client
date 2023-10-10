@@ -12,8 +12,8 @@ class Player extends CacheModel
 	
 	public $timestamps = false;
 	protected $table = "player";
-    
-    public static function getData($data) {
+
+    public static function getData($data, $col = null) {
 
         // 緩存時間
         $cacheAliveTime = 1;
@@ -21,10 +21,14 @@ class Player extends CacheModel
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
-        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data, $col) {
 			$player_id = $data['player_id'];
 
-            $data = self::where('id', $player_id)->first();
+            if ($col && strlen($col)) {
+                $data = self::where('id', $player_id)->select($col)->first();
+            } else {
+                $data = self::where('id', $player_id)->first();
+            }
             $return = $data;
 
             return $return;
