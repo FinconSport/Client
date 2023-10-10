@@ -66,10 +66,20 @@ class CacheModel extends Model {
     }
 
 
-    // getList
-    public function list() {
-        $return = self::get();
-        return $return;
+    // 自訂的 list 方法，包含取得 SQL 查詢語句的功能
+    public function list()
+    {
+        // 建立查詢 Builder
+        $queryBuilder = $this->where("status", 1);
+
+        // 取得底層查詢生成器
+        $query = $queryBuilder->getQuery();
+
+        // 取得 SQL 查詢語句
+        $sql = $query->toSql();
+
+        // 在這裡您可以對 SQL 查詢語句進行其他操作或返回它
+        return $sql;
     }
 }
 
