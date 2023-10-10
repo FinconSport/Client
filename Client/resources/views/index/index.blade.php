@@ -263,6 +263,7 @@
 
     // game priority and gameTitle
     var mainPriorityArr = null
+    var stagePriorityArr = null
     var gameTitle = null
 
     
@@ -367,8 +368,8 @@
         // 壘包 好壞球 只有 滾球 棒球有
         sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
 
-        // 單節選項 只有 滾球 籃球有
-        if( sport === 48242 && v3.status === 2 ) card2 = $('div[template="basketBallQuaterBet"]').clone()
+        // 單節選項 只有 滾球 籃球有 
+        if( sport === 48242 && v3.status === 1 ) card2 = $('div[template="basketBallQuaterBet"]').clone()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -429,6 +430,7 @@
                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
             }
         }
 
@@ -439,16 +441,22 @@
 
         // bet area
         createBetArea(mainPriorityArr, v3, k3, league_name, card)
-
         card.removeAttr('hidden')
         card.removeAttr('template')
+
+        if( card2 ) {
+            createBetArea(stagePriorityArr, v3, k3, league_name, card2, true)
+            card2.removeAttr('hidden')
+            card2.removeAttr('template')
+            card.append(card2)
+        }
 
         let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
         league_toggle_content.append(card)
     }
 
-    function createBetArea(mainPriorityArr, v3, k3, league_name, card) {
-        mainPriorityArr.forEach(( i, j ) => {
+    function createBetArea(priorityArr, v3, k3, league_name, card, isCard2 = false) {
+        priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
@@ -461,7 +469,7 @@
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if( mainPriorityArr.length === 4 ) {
+                        if( priorityArr.length === 4 ) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
                         }
                     }
