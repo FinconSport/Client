@@ -27,7 +27,7 @@ class ModelDriverProvider extends ServiceProvider {
             $sql = str_replace("'", "", $sql);
             $sql = str_replace("`", "", $sql);
 
-            $cacheKey = MD5($fullSql);
+            $cacheKey = MD5($sql);
 
             $data = Cache::remember($cacheKey, $cacheAliveTime, function () {
                 return $this->get();
