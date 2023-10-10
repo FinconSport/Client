@@ -333,6 +333,8 @@ button.dateCalendarBtn {
     border: 2px solid #415b5a;
 }
 
-.orderData_betData_Event{
+.orderData_betData_Event,
+.orderData_betData_BetWay,
+.orderData_betData_Result{
     position: relative;
 }
