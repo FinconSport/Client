@@ -68,16 +68,18 @@
                     </tr>
                 </thead>
 				<tbody>
-					<tr class="no-border-top">
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 17%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 10%;"></td>
-						<td style="width: 10%;"></td>
-						<td style="width: 10%;"></td>
+					<tr id="orderTr" template="orderTemplate" hidden>
+                        <td style="width: 10%;" class="orderData_id"></td>
+                        <td style="width: 10%;" class="orderData_bet_type"></td>
+                        <td style="width: 17%;" class="orderData_event">
+							<span class=""></span>
+						</td>
+                        <td style="width: 10%;" class="orderData_bet_way"></td>
+                        <td style="width: 10%;" class="orderData_result"></td>
+                        <td style="width: 10%;" class="orderData_bet_amount"></td>
+                        <td style="width: 10%;" class="orderData_effective_amount"></td>
+						<td style="width: 10%;" class="orderData_result_amount"></td>
+						<td style="width: 10%;" class="orderData_win_amount"></td>
                     </tr>
 				</tbody>
                 <!-- <tbody id="orderDataTemp">
