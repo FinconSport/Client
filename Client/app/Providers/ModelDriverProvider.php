@@ -87,7 +87,7 @@ class ModelDriverProvider extends ServiceProvider {
                     $data = $response->json();
                     $list = array();
                     foreach ($data['hits']['hits'] as $k => $v) {
-                        $list[] = $v['_source'];
+                        $list = $v['_source'];
                     }
                     return $list;
                 } 
