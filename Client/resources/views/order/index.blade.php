@@ -63,7 +63,7 @@
                     <tr class="no-border-top">
                         <th style="width: 8%;" class="no-border-left">{{ trans('order.main.index') }}</th>
                         <th style="width: 9%;">{{ trans('order.main.bet_type') }}</th>
-                        <th style="width: 20%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 21%;">{{ trans('order.main.event') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.result') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
@@ -76,7 +76,7 @@
                     <tr id="orderTr" template="orderTemplate" hidden>
                         <td style="width: 8%;" class="orderData_id"></td>
                         <td style="width: 9%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
-                        <td style="width: 20%;" class="orderData_betData_Event"></td>
+                        <td style="width: 21%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right orderData_betAmount"></td>
