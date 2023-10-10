@@ -153,6 +153,10 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const winLoss = resultAmount - betAmount;
+
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 					createBetDataDetails(orderItem, betItem, betIndex);
@@ -161,10 +165,6 @@
 				// Validate and accumulate total
 				totalResultAmount += parseFloat(orderItem.result_amount);
 				totalBetAmount += parseFloat(orderItem.bet_amount);
-
-				const resultAmount = parseFloat(orderItem.result_amount);
-				const betAmount = parseFloat(orderItem.bet_amount);
-				const winLoss = resultAmount - betAmount;
 
 				// Accumulate the total WinLoss
 				WinLoss += winLoss;
