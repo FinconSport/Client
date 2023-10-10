@@ -19,15 +19,14 @@ class ModelDriverProvider extends ServiceProvider {
             $tableName = $this->getModel()->getTable();
             $esTableName = "es_" . $tableName;
 
-            // getSQL
+            // Build ES SQL
             $bindings = $this->getBindings();
-            $sql = $this->toSql();
-            $fullSql = vsprintf(str_replace('?', "'%s'", $sql), $bindings);
-            $fullSql = str_replace($tableName, $esTableName, $fullSql);
-            $fullSql = str_replace("'", "", $fullSql);
-            $fullSql = str_replace("`", "", $fullSql);
+            $modelSql = $this->toSql();
+            $sql = vsprintf(str_replace('?', "'%s'", $modelSql), $bindings);
+            $sql = str_replace($tableName, $esTableName, $sql);
+            $sql = str_replace("'", "", $sql);
+            $sql = str_replace("`", "", $sql);
 
-            dd($fullSql);
             $cacheKey = MD5($fullSql);
 
             $data = Cache::remember($cacheKey, $cacheAliveTime, function () {
