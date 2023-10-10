@@ -110,7 +110,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    border-radius: 15px;
+    border-radius: 5px;
     overflow: hidden;
     position: relative;
 }
@@ -243,7 +243,7 @@ div.submenu-btn {
 
 .sportSelect {
     border: 1px solid #415b5a;
-    border-radius: 25px;
+    border-radius: 5px;
     padding: 0.5rem;
     background: #415b5a;
     color: white;
@@ -303,7 +303,7 @@ a.sportSelect:hover,
 
 #logoutBtn {
     width: 100%;
-    border-radius: 25px;
+    border-radius: 5px;
     text-align: center;
     height: auto;
     line-height: 2rem;
@@ -390,7 +390,7 @@ a.sportSelect:hover,
     height: 2rem;
     width: calc(100% - 12rem);
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 0.8rem;
     line-height: 1.7rem;
@@ -409,7 +409,7 @@ a.sportSelect:hover,
 #searchArea {
     background-color: white;
     box-shadow: 3px 3px 3px rgb(200, 200, 200);
-    border-radius: 30px;
+    border-radius: 5px;
     padding: 0.5rem;
     width: 100%;
     height: 11rem;
@@ -518,7 +518,7 @@ a.sportSelect:hover,
     margin-top: 1.25rem;
     width: 18%;
     margin-left: 1%;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 #searchBtn {
@@ -553,7 +553,7 @@ a.sportSelect:hover,
     margin-top: 0.5rem;
     background: white;
     padding: 0.5rem 2rem;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 #searchCondition div:first-child {
@@ -572,7 +572,7 @@ a.sportSelect:hover,
 
 #searchCondition div {
     padding: 0.5rem 1rem;
-    border-radius: 25px;
+    border-radius: 5px;
     margin-left: 0.5rem;
     font-weight: 600;
     height: 2rem;
@@ -724,13 +724,13 @@ a.sportSelect:hover,
 
 #marqModal .modal-content {
     background-color: #e2f0f0;
-    border-radius: 15px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 #marqModal .modal-body {
     background: #415b5a;
-    border-radius: 20px 20px 0 0;
+    border-radius: 5px 5px 0 0;
     padding-top: 20px;
 }
 
@@ -764,13 +764,13 @@ a.sportSelect:hover,
 
 .marquee-modal-content {
     background-color: white;
-    padding: 20px 35px;
+    padding: 20px 35px 30px 35px;
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
-    height: 20%;
+    height: fit-content;
     width: auto;
     display: flex;
     flex-direction: column;
@@ -791,6 +791,7 @@ a.sportSelect:hover,
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .marquee-modal-content .modal-body h5{
@@ -799,7 +800,7 @@ a.sportSelect:hover,
 
 /* toast message */
 #toast {
-    z-index: 3;
+    z-index: 4;
     position: absolute;
     top: 10px;
     right: 10px;

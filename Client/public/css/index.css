@@ -3,17 +3,21 @@
     background: rgb(184, 214, 212);
     border: 2px solid rgb(65,91,90);
     border-radius: 5px;
-    padding: 0.5rem 1rem;
-    height: 3rem;
+    padding: 0.35rem 1rem;
+    height: 2.5rem;
     font-size: 1.2rem;
     font-weight: 600;
     position: sticky;
     top: 0;
     z-index: 2;
-    /* margin-bottom: 0.5rem; */
+    margin-bottom: 0.2rem;
 }
 .catWrapperContent{
     overflow: auto;
+}
+
+#catWrapperTitle_living {
+    background: #FFCB9C!important;
 }
 
 .catWrapperTitle span {
@@ -24,19 +28,19 @@
     background: white;
     border: 2px solid rgb(65,91,90);
     border-radius: 5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     border-top: none;
 }
 
 .seriesWrapperTitle{
-    padding: 0.5rem 1rem;
-    height: 3rem;
+    padding: 0.25rem 1rem;
+    height: 2.5rem;
     font-size: 1.2rem;
     font-weight: 600;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
     display: flex;
     position: sticky;
-    top: 3rem;
+    top: 2.5rem;
     background-color: white;
     z-index: 1;
     border-top: 2px solid rgb(65,91,90);
@@ -181,11 +185,11 @@
     width: 60%;
 }
 .indexBetCardTable div:first-child .betItemDiv {
-    border-left: 2px solid rgb(220,220,220);
+    border-left: 1px solid rgb(220,220,220);
 }
 
 .indexBetCardTable div .betItemDiv:last-child {
-    border-bottom: 2px solid rgb(220,220,220);
+    border-bottom: 1px solid rgb(220,220,220);
 }
 
 
@@ -205,16 +209,16 @@
     line-height: 2.5rem;
 }
 .betItemDiv {
-    border-top: 2px solid rgb(220, 220, 220);
-    border-right: 2px solid rgb(220, 220, 220);
-    padding: 0.5rem;
+    border-top: 1px solid rgb(220, 220, 220);
+    border-right: 1px solid rgb(220, 220, 220);
+    padding: 0.5rem 0.25rem;
     z-index: 0;
     position: relative;
 }
 
 .betItemDiv, .labelItem {
     height: 2.5rem;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
     font-size: 0.9rem;
     overflow: hidden;
 }
@@ -458,6 +462,17 @@ div[key="sizeSmallRate"]:hover {
     padding: 5rem 2rem;
     color: white;
     font-weight: 600;
+}
+
+#leftSlideOrderLoadingContainer::after{
+    position: fixed;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: transparent;
 }
 
 #leftSlideOrderLoadingContainer span {

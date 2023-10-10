@@ -91,18 +91,19 @@ class LsportApiController extends Controller {
 
         $checkToken = $this->checkToken($input);
         if ($checkToken === false) {
-          $this->ApiError("PLAYER_RELOGIN", true);
+            $this->ApiError("PLAYER_RELOGIN", true);
         }
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->first();
+        // $return = Player::where("id", $player_id)->first();
+        $return = Player::getData(['id'=>$player_id]);
         if ($return === false) {
-          $this->ApiError("01");
+            $this->ApiError("01");
         }
 
         if ($return['status'] != 1) {
-          $this->ApiError("02");
+            $this->ApiError("02");
         }
 
         ///////////////////////////////////
@@ -262,7 +263,11 @@ class LsportApiController extends Controller {
 
             // league -----
             $league = LsportLeague::where('league_id', $league_id)->first();
-            $league_name = $league[$lang_col];
+            if (empty($league[$lang_col])) {
+                $league_name = $league['name_en'];
+            } else {
+                $league_name = $league[$lang_col];
+            }
 
             //對於跑馬燈只要抓前後一天內的賽事資料就好
             $fixture_start_time = date('Y-m-d H:i:s', time()-60*60*24);
@@ -283,7 +288,7 @@ class LsportApiController extends Controller {
                 // team: home team -----
                 $home_team = LsportTeam::where('team_id', $home_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($home_team[$lang_col])) {  // sport name
+                if (empty($home_team[$lang_col])) {  // sport name
                     $home_team_name = $home_team['name_en'];
                 } else {
                     $home_team_name = $home_team[$lang_col];
@@ -292,7 +297,7 @@ class LsportApiController extends Controller {
                 // team: away team -----
                 $away_team = LsportTeam::where('team_id', $away_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($away_team[$lang_col])) {  // sport name
+                if (empty($away_team[$lang_col])) {  // sport name
                     $away_team_name = $away_team['name_en'];
                 } else {
                     $away_team_name = $away_team[$lang_col];
@@ -417,7 +422,11 @@ class LsportApiController extends Controller {
             // league -----
             $league = LsportLeague::where('league_id', $league_id)->first();
             $league_name = $league[$lang_col];
-
+            if (empty($league[$lang_col])) {
+                $league_name = $league['name_en'];
+            } else {
+                $league_name = $league[$lang_col];
+            }
             // fixture -----
             $fixture = LsportFixture::where('fixture_id', $fixture_id)->first();
             if ($fixture) {
@@ -428,7 +437,7 @@ class LsportApiController extends Controller {
                 // team: home team -----
                 $home_team = LsportTeam::where('team_id', $home_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($home_team[$lang_col])) {  // sport name
+                if (empty($home_team[$lang_col])) {  // sport name
                     $home_team_name = $home_team['name_en'];
                 } else {
                     $home_team_name = $home_team[$lang_col];
@@ -437,7 +446,7 @@ class LsportApiController extends Controller {
                 // team: away team -----
                 $away_team = LsportTeam::where('team_id', $away_team_id)->first();
                 // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($away_team[$lang_col])) {  // sport name
+                if (empty($away_team[$lang_col])) {  // sport name
                     $away_team_name = $away_team['name_en'];
                 } else {
                     $away_team_name = $away_team[$lang_col];
@@ -544,9 +553,33 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
+        // $sss = LsportFixture::whereIn("status",[1,2])->get();
+        // $list = array();
+        // foreach ($sss as $kk => $vv) {
+
+        //     $tmp = array();
+        //     // SPORT NAME
+        //     $sport_id = $vv['sport_id'];
+        //     $data = array(
+        //         "sport_id" => $sport_id,
+        //         "api_lang" => $agent_lang
+        //     );
+        //     $sport_name = LsportSport::getName($data);
+        //     $tmp['name'] = 321312
+
+        //     // SPORT STATUS
+        //     $sport_status = LsportSport::where(xxxx)->first();
+        //     if ($sport_status != 1) {
+        //         continue;
+        //     }
+
+
+        //     $list[] = $tmp;
+        // }
+
         $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
             ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
-            ->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
+            //->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
             ->selectRaw(
                 "lsport_sport.sport_id,
                 lsport_sport.{$lang_col} as sport_name_locale,
@@ -564,6 +597,8 @@ class LsportApiController extends Controller {
         }
 
         // dd($data);
+
+        
 
     	//---------------------------------
         $ret = array(
@@ -677,7 +712,7 @@ class LsportApiController extends Controller {
         foreach ($Sports as $dk => $sv) {
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($sv->name_locale)) {  // sport name
+            if (empty($sv->name_locale)) {  // sport name
                 $sport_name = $sv->name_en;
             } else {
                 $sport_name = $sv->name_locale;
@@ -743,7 +778,7 @@ class LsportApiController extends Controller {
         $data = DB::table('lsport_league as l')
             ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
             ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
-            ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
+            // ->join('lsport_market as m', 'f.fixture_id', '=', 'm.fixture_id')
             ->join('lsport_team as th', function ($join) {
                 $join->on('f.home_id', '=', 'th.team_id')
                 ->on('l.league_id', '=', 'th.league_id');
@@ -756,7 +791,7 @@ class LsportApiController extends Controller {
                 'l.name_en AS l_name_en', 'l.'.$lang_col.' AS l_name_locale',
                 's.name_en AS s_name_en', 's.'.$lang_col.' AS s_name_locale',
                 'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',
-                'm.market_id', 'm.name_en AS m_name_en', 'm.'.$lang_col.' AS m_name_locale', 'm.priority', 'm.main_line',
+                // 'm.market_id', 'm.name_en AS m_name_en', 'm.'.$lang_col.' AS m_name_locale', 'm.priority', 'm.main_line',
                 'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
                 'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
             )
@@ -770,7 +805,7 @@ class LsportApiController extends Controller {
             // ->where("th.sport_id", $sport_id)
             ->orderBy('l.league_id', 'ASC')
             ->orderBy('f.fixture_id', 'ASC')
-            ->orderBy('m.market_id', 'ASC')
+            // ->orderBy('m.market_id', 'ASC')
             ->get();
 
         if ($data === false) {
@@ -784,7 +819,7 @@ class LsportApiController extends Controller {
             // $this::FIXTURE_STATUS['about_to_start'] => array(),  // 即將開賽
         );
         //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
-        $sport_name = '';  //儲存球種名稱
+        $sport_name = null;  //儲存球種名稱
 
 /*
 {
@@ -828,13 +863,13 @@ class LsportApiController extends Controller {
                 $fixture_status = $this::FIXTURE_STATUS['living'];
             }
 
-            $market_id = $dv->market_id;
-            $market_priority = $dv->priority;
-            $market_main_line = $dv->main_line;
+            // $market_id = $dv->market_id;
+            // $market_priority = $dv->priority;
+            // $market_main_line = $dv->main_line;
 
             // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($sport_name)) {  //只須設定一次
-                if (!strlen($dv->s_name_locale)) {  // sport name
+            if (empty($sport_name)) {  //只須設定一次
+                if (empty($dv->s_name_locale)) {  // sport name
                     $sport_name = $dv->s_name_en;
                 } else {
                     $sport_name = $dv->s_name_locale;
@@ -847,7 +882,7 @@ class LsportApiController extends Controller {
                 ) {
 
                 // league_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->l_name_locale)) {  // league name
+                if (empty($dv->l_name_locale)) {  // league name
                     $league_name = $dv->l_name_en;
                 } else {
                     $league_name = $dv->l_name_locale;
@@ -867,13 +902,13 @@ class LsportApiController extends Controller {
                 ) {
 
                 // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->th_name_locale)) {  // home team
+                if (empty($dv->th_name_locale)) {  // home team
                     $home_team_name = $dv->th_name_en;
                 } else {
                     $home_team_name = $dv->th_name_locale;
                 }
                 // away_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($dv->ta_name_locale)) {  // away_team
+                if (empty($dv->ta_name_locale)) {  // away_team
                     $away_team_name = $dv->ta_name_en;
                 } else {
                     $away_team_name = $dv->ta_name_locale;
@@ -911,20 +946,36 @@ class LsportApiController extends Controller {
             }
 
             //market 層 ----------------------------
-            if (!isset($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])
-                || !sizeof($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+            //取出[賽事]的賠率 ----------------------------
+            $market_data = DB::table('lsport_market as m')
+            ->select(
+                'm.market_id',
+                'm.name_en AS m_name_en',
+                'm.'.$lang_col.' AS m_name_locale',
+                'm.priority',
+                'm.main_line',
+            )
+            ->where('m.fixture_id', $fixture_id)
+            ->orderBy('m.market_id', 'ASC')
+            ->get();
 
-                $market_name = $dv->m_name_locale;
+            if ($market_data === false) {
+                $this->ApiError('03');
+            }
 
-                // 包入 market 玩法資料 ---------------
-                $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
-                    'market_id' => $market_id,
-                    'market_name' => $market_name,
-                    'priority' => $market_priority,
-                    'main_line' => $market_main_line,
-                    'list' => array(),
-                );
- 
+            // 開始繞玩法資料
+            foreach ($market_data as $k => $v) {
+                $market_id = $v->market_id;
+                $market_priority = $v->priority;
+                $market_main_line = $v->main_line;
+
+                // market_name: 判斷用戶語系資料是否為空,若是則用en就好
+                if (empty($v->m_name_locale)) {
+                    $market_name = $v->m_name_en;
+                } else {
+                    $market_name = $v->m_name_locale;
+                }
+
                 //取出[賽事+玩法+玩法.base_line]的賠率 ----------------------------
                 $market_bet_data = DB::table('lsport_market_bet as mb')
                 ->select(
@@ -945,32 +996,113 @@ class LsportApiController extends Controller {
                 ->get();
 
                 if ($market_bet_data === false) {
-                    $this->ApiError('03');
+                    $this->ApiError('04');
                 }
 
+                $arr_market_bet = array();
+
                 // 開始繞賠率資料
-                foreach ($market_bet_data as $bk => $bv) {
-                    $market_bet_id = $bv->bet_id;
+                foreach ($market_bet_data as $k2 => $v2) {
+                    $market_bet_id = $v2->bet_id;
 
                     // 加總 market_bet_count
                     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['market_bet_count'] += 1;
 
-                    $market_bet_name = $bv->mb_name_locale;
+                    // $market_bet_name = $v2->mb_name_locale;
+                    // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                    if (empty($v2->mb_name_locale)) {
+                        $market_bet_name = $v2->mb_name_en;
+                    } else {
+                        $market_bet_name = $v2->mb_name_locale;
+                    }
 
                     // 包入 market_bet 賠率資料 ---------------
                     //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
-                    $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
+                    $arr_market_bet[] = array(
                         'market_bet_id' => $market_bet_id,
                         'market_bet_name' => $market_bet_name,
-                        'market_bet_name_en' => $bv->mb_name_en,
-                        //'base_line' => $bv->base_line,
-                        'line' => $bv->line,
-                        'price' => $bv->price,
-                        'status' => $bv->status,
-                        'last_update' => $bv->last_update,
+                        'market_bet_name_en' => $v2->mb_name_en,
+                        //'base_line' => $v2->base_line,
+                        'line' => $v2->line,
+                        'price' => $v2->price,
+                        'status' => $v2->status,
+                        'last_update' => $v2->last_update,
                     );
                 }
+
+                // 包入 market_bet 賠率資料 ---------------
+                //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+                    'market_id' => $market_id,
+                    'market_name' => $market_name,
+                    'priority' => $market_priority,
+                    'main_line' => $market_main_line,
+                    'list' => $arr_market_bet,
+                );
+
             }
+
+            //market 層 ----------------------------
+            // if (!isset($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])
+            //     || !sizeof($arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+
+                // $market_name = $dv->m_name_locale;
+
+                // // 包入 market 玩法資料 ---------------
+                // $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+                //     'market_id' => $market_id,
+                //     'market_name' => $market_name,
+                //     'priority' => $market_priority,
+                //     'main_line' => $market_main_line,
+                //     'list' => array(),
+                // );
+ 
+                // //取出[賽事+玩法+玩法.base_line]的賠率 ----------------------------
+                // $market_bet_data = DB::table('lsport_market_bet as mb')
+                // ->select(
+                //     'mb.bet_id',
+                //     'mb.base_line',
+                //     'mb.line',
+                //     'mb.name_en AS mb_name_en',
+                //     'mb.'.$lang_col.' AS mb_name_locale',
+                //     'mb.price',
+                //     'mb.status AS status',
+                //     'mb.last_update AS last_update',
+                // )
+                // ->where('mb.fixture_id', $fixture_id)
+                // ->where('mb.market_id', $market_id)
+                // ->where('mb.base_line', $market_main_line)  //這邊用 base_line 或 line 都可以
+                // //->orderBy('mb.bet_id', 'ASC')  //注意排序
+                // ->orderBy('mb.name_en', 'ASC')  //注意排序
+                // ->get();
+
+                // // if ($market_bet_data === false) {
+                // //     $this->ApiError('03');
+                // // }
+
+                // // 開始繞賠率資料
+                // foreach ($market_bet_data as $bk => $bv) {
+                //     $market_bet_id = $bv->bet_id;
+
+                //     // 加總 market_bet_count
+                //     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['market_bet_count'] += 1;
+
+                //     $market_bet_name = $bv->mb_name_locale;
+
+                //     // 包入 market_bet 賠率資料 ---------------
+                //     //$arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = array(
+                //     $arrLeagues[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = array(
+                //         'market_bet_id' => $market_bet_id,
+                //         'market_bet_name' => $market_bet_name,
+                //         'market_bet_name_en' => $bv->mb_name_en,
+                //         //'base_line' => $bv->base_line,
+                //         'line' => $bv->line,
+                //         'price' => $bv->price,
+                //         'status' => $bv->status,
+                //         'last_update' => $bv->last_update,
+                //     );
+                // }
+            // }
         }
 
         ///////////////////////////////
@@ -1014,620 +1146,6 @@ class LsportApiController extends Controller {
      *                          # *player: 玩家的ID。 Required. Represents the player ID.
      * @return ApiSuccess($data = ???) | ApiError
      */
-    // public function GameBet(Request $request) {
-      
-    // 	$input = $this->getRequest($request);
-
-    //     $return = $this->checkToken($input);
-    //     if ($return === false) {
-    //         $this->ApiError("PLAYER_RELOGIN",true);
-    //     }
-
-    //     /////////////////////////
-
-    //     $columns = array(
-    //         "token","player","sport_id","fixture_id","market_id","market_bet_id","bet_rate","bet_amount","better_rate"
-    //     );
-
-    //     foreach ($columns as $k => $v) {
-    //         if (!isset($input[$v])) {
-    //             $this->ApiError("01");
-    //         }
-    //     }
-
-    //     /////////////////
-
-    //     // 取得語系
-    //     $player_id = $input['player'];
-    //     $api_lang = $this->getAgentLang($player_id);
-    //     if ($api_lang === false) {
-    //       $this->ApiError("01");
-    //     }
-        
-    //     $lang_col = "name_".$api_lang;
-
-    //     //////////////////////////////////////////
-
-    //     // 取得系統參數
-    //     $risk_order = $this->system_config['risk_order'];
-    //     if ($risk_order > 0) {
-    //         $default_order_status = 1;
-    //         $default_approval_time = null;
-    //     } else {
-    //         // 預設通過
-    //         $default_order_status = 2;
-    //         $default_approval_time = date("Y-m-d H:i:s");
-    //     }
-
-    //     // 取得必要參數
-    //     $player_id = $input['player'];
-    //     $fixture_id = $input['fixture_id'];  
-    //     $market_id = $input['market_id'];  
-    //     $market_bet_id = $input['market_bet_id'];
-    //     $player_rate = $input['bet_rate'];  //前端傳來的賠率
-    //     $bet_amount = $input['bet_amount'];  //投注金額
-    //     $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
-
-    //     $sport_id = $this::DEFAULT_SPORT_ID ;  //球種ID
-    //     if (isset($input['sport_id'])) {
-    //         $sport_id = $input['sport_id'];
-    //     }
-        
-    //     $order = array();
-        
-    //     // 參數檢查 TODO - 初步 隨便弄弄
-    //     if ($bet_amount <= 0) {
-    //         $this->ApiError("02");
-    //     }
-
-    //     // 取得用戶資料
-    //     $return = Player::where("id", $player_id)->first();
-    //     if ($return == false) {
-    //         $this->ApiError("03");
-    //     }
-
-    //     // 如果用戶已停用
-    //     if ($return['status'] == 0) {
-    //         $this->ApiError("04");
-    //     }
-
-    //     $player_account = $return['account'];
-    //     $currency_type = $return['currency_type'];
-    //     $agent_id = $return['agent_id'];
-
-    //     // 判斷餘額是否足夠下注
-    //     $player_balance = $return['balance'];
-    //     if ($player_balance < $bet_amount) {
-    //         $this->ApiError("05");
-    //     }
-        
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['player_id'] = $player_id;
-    //     $order['player_name'] = $player_account;
-    //     $order['currency_type'] = $currency_type;
-    //     //////////////////////////////////////////
-
-    //     // 取得商戶資料
-    //     $return = Agent::where("id", $agent_id)->first();
-    //     if ($return == false) {
-    //         $this->ApiError("06");
-    //     }
-
-    //     // 如果商戶已停用
-    //     if ($return['status'] == 0) {
-    //         $this->ApiError("07");
-    //     }
-
-    //     $agent_account = $return['account'];
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['agent_id'] = $agent_id;
-    //     $order['agent_name'] = $agent_account;
-    //     //////////////////////////////////////////
-
-    //     // 取得賽事資料
-    //     $return = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
-    //     if ($return == false) {
-    //         $this->ApiError("08");
-    //     }
-
-    //     $fixture_data = $return;
-    //     $league_id = $fixture_data['league_id'];
-    //     $home_team_id = $fixture_data['home_id'];
-    //     $away_team_id = $fixture_data['away_id'];
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['fixture_id'] = $fixture_id;
-    //     $order['sport_id'] = $fixture_data['sport_id'];
-    //     //////////////////////////////////////////
-
-    //     // 取得聯賽資料
-    //     $return = LsportLeague::where("league_id", $league_id)->where("sport_id", $sport_id)->first();
-    //     if ($return == false) {
-    //         $this->ApiError("08");
-    //     }
-
-    //     $league_data = $return;
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['league_id'] = $league_data['league_id'];
-    //     $order['league_name'] = $league_data[$lang_col];
-    //     $order['fixture_id'] = $fixture_id;
-    //     $order['sport_id'] = $league_data['sport_id'];
-    //     //////////////////////////////////////////
-        
-    //     // 主隊
-    //     $return = LsportTeam::where("team_id", $home_team_id)->first();
-    //     if ($return === false) {
-    //             $this->ApiError("11");
-    //     }
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['home_team_id'] = $return['team_id'];
-    //     $order['home_team_name'] = $return[$lang_col];
-    //     //////////////////////////////////////////
-        
-    //     // 客隊
-    //     $return = LsportTeam::where("team_id", $away_team_id)->first();
-    //     if ($return === false) {
-    //             $this->ApiError("11");
-    //     }
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['away_team_id'] = $return['team_id'];
-    //     $order['away_team_name'] = $return[$lang_col];
-
-    //     //////////////////////////////////////////
-
-    //     // 取得玩法
-    //     $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
-    //     if ($market_data == false) {
-    //         $this->ApiError("13");
-    //     }
-
-    //     $market_priority = $market_data['priority'];
-
-    //     // 取得賠率
-    //     $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)->where("bet_id", $market_bet_id)->first();
-    //     if ($market_bet_data == false) {
-    //       $this->ApiError("14");
-    //     }
-
-    //     $current_market_bet_status = $market_bet_data['status'];
-    //     $current_market_bet_rate = $market_bet_data['price'];
-    //     $market_bet_line = $market_bet_data['line'];
-
-    //     // 賠率非開盤狀態 1开、2锁、3结算
-    //     if (($current_market_bet_status != 1)) {
-    //         $this->ApiError("15");
-    //     }
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['market_id'] = $market_id;
-    //     $order['market_bet_id'] = $market_bet_id;
-    //     $order['market_bet_line'] = $market_bet_line;
-
-    //     $order['market_name'] = $market_data[$lang_col];
-    //     $order['market_bet_name'] = $market_bet_data[$lang_col];
-    //     $order['market_priority'] = $market_priority;
-    //     $order['bet_rate'] = $current_market_bet_rate;
-        
-    //     $order['player_rate'] = $player_rate;
-    //     $order['better_rate'] = $is_better_rate;
-        
-    //     //////////////////////////////////////////
-
-    //     // 判斷 is_better_rate
-    //     if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-    //         $this->ApiError("16");
-    //     }
-
-    //     //////////////////////////////////////////
-    //     // order data
-    //     $order['bet_amount'] = $bet_amount;
-    //     $order['status'] = $default_order_status;
-    //     $order['create_time'] = date("Y-m-d H:i:s");
-    //     $order['approval_time'] = $default_approval_time;
-        
-    //     //////////////////////////////////////////
-
-    //     // 新增注單資料
-    //     $return = GameOrder::insertGetId($order);      
-    //     if ($return == false) {
-    //         $this->ApiError("17");
-    //     }
-
-    //     $order_id = $return;
-    //     // 設定m_id 
-    //     $return = GameOrder::where("id", $order_id)->update([
-    //         "m_id" => $order_id
-    //     ]);      
-    //     if ($return == false) {
-    //         $this->ApiError("18");
-    //     }
-        
-    //     // 扣款
-    //     $before_amount = $player_balance;
-    //     $change_amount = $bet_amount;
-    //     $after_amount = $before_amount - $change_amount;
-
-    //     $return = Player::where("id", $player_id)->update([
-    //         "balance" => $after_amount
-    //     ]);      
-    //     if ($return == false) {
-    //         $this->ApiError("19");
-    //     }
-        
-    //     // 帳變
-    //     $tmp = array();
-    //     $tmp['agent_id'] = $agent_id;
-    //     $tmp['player_id'] = $player_id;
-    //     $tmp['player'] = $player_account;
-    //     $tmp['currency_type'] = $currency_type;
-    //     $tmp['type'] = "game_bet";
-    //     $tmp['change_balance'] = $change_amount;
-    //     $tmp['before_balance'] = $before_amount;
-    //     $tmp['after_balance'] = $after_amount;
-    //     $tmp['create_time'] = date("Y-m-d H:i:s");
-    //     PlayerBalanceLogs::insert($tmp);
-
-    //     $this->ApiSuccess($return,"01");
-
-    // }
-
-    // /**
-    //  * mGameBet
-    //  *
-    //  * 串關投注接口
-    //  * 
-    //  * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-    //  *                          # *player: 玩家的ID。 Required. Represents the player ID.
-    //  *                          # *bet_amount: 投注金額。
-    //  *                          # *better_rate: 是否接受較佳賠率。
-    //  *                          # sport_id: 球種ID。有預設值(棒球)。
-    //  *                          # *bet_data: 串關注單資料的陣列。
-    //  * @return ApiSuccess($data = ???) | ApiError
-    //  */
-    // public function mGameBet(Request $request) {
-      
-    // 	$input = $this->getRequest($request);
-
-    //     $checkToken = $this->checkToken($input);
-    //     if ($checkToken === false) {
-    //         $this->ApiError("PLAYER_RELOGIN", true);
-    //     }
-        
-    //     /////////////////////////
-
-    //     $columns = array(
-    //         "token","player","sport_id","bet_data","bet_amount",
-    //     );
-
-    //     foreach ($columns as $k => $v) {
-    //         if (!isset($input[$v])) {
-    //             $this->ApiError("01");
-    //         }
-    //     }
-
-    //     //---------------------------------
-    //     // 取得代理的語系
-    //     $player_id = $input['player'];
-    //     $agent_lang = $this->getAgentLang($player_id);
-    //     $lang_col = 'name_' . $agent_lang;
-
-    //     // 取得系統參數
-    //     $risk_order = $this->system_config['risk_order'];
-    //     if ($risk_order > 0) {
-    //         $default_order_status = 1;
-    //         $default_approval_time = null;
-    //     } else {
-    //         // 預設通過
-    //         $default_order_status = 2;
-    //         $default_approval_time = date("Y-m-d H:i:s");
-    //     }
-
-    //     // 取得必要參數
-    //     $player_id = $input['player'];
-    //     $bet_amount = $input['bet_amount'];  //投注金額
-    //     $is_better_rate = (empty($input['better_rate']) == false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
-
-    //     $sport_id = $this::DEFAULT_SPORT_ID;
-    //     if (isset($input['sport_id'])) {
-    //         $sport_id = $input['sport_id'];
-    //     }
-
-    //     $arr_bet_data = json_decode($input['bet_data'], true);
-
-    //     //串關的注單數不能低於2
-    //     if (sizeof($arr_bet_data) < 2) {
-    //         $this->ApiError("20");
-    //     }
-
-    //     //$order = array();
-        
-    //     // 參數檢查 TODO - 初步 隨便弄弄
-    //     if ($bet_amount <= 0) {
-    //         $this->ApiError("01");
-    //     }
-
-    //     // 取得用戶資料
-    //     $arr_player_data = Player::where("id", $player_id)->first();
-    //     if ($arr_player_data == false) {
-    //         $this->ApiError("02");
-    //     }
-
-    //     // 如果用戶已停用
-    //     if ($arr_player_data['status'] == 0) {
-    //         $this->ApiError("03");
-    //     }
-
-    //     $player_account = $arr_player_data['account'];
-    //     $player_currency_type = $arr_player_data['currency_type'];
-    //     $agent_id = $arr_player_data['agent_id'];
-
-    //     // 判斷餘額是否足夠下注
-    //     $player_balance = $arr_player_data['balance'];
-    //     if ($player_balance < $bet_amount) {
-    //         $this->ApiError("04");
-    //     }
-
-    //     // 判斷下注額度是否超過限額
-    //     // ...
-        
-    //     // 取得商戶資料
-    //     $arr_agent_data = Agent::where("id", $agent_id)
-    //         ->first();
-    //     if ($arr_agent_data == false) {
-    //         $this->ApiError("05");
-    //     }
-
-    //     // 如果商戶已停用
-    //     if ($arr_agent_data['status'] == 0) {
-    //         $this->ApiError("06");
-    //     }
-
-    //     $agent_account = $arr_agent_data['account'];
-
-    //     // 取第一筆注單ID做為串關注單ID
-    //     $m_order_id = false;
-
-    //     // 取第一筆串關注單的 sport_id
-    //     //用來檢查串關注單是否都是同球種
-    //     $m_sport_id = false;
-
-    //     // 串關批量處理訂單
-    //     foreach ($arr_bet_data AS $bk => $bet) {
-    //         // 取得必要參數
-    //         $fixture_id = $bet['fixture_id'];
-    //         $market_id = $bet['market_id'];  
-    //         $market_bet_id = $bet['market_bet_id'];
-    //         $player_rate = $bet['bet_rate'];  //前端傳來的賠率
-
-    //         $columns = array(
-    //             "fixture_id", "market_id", "market_bet_id", "bet_rate"
-    //         );
-    
-    //         foreach ($columns as $k => $v) {
-    //             if (!isset($bet[$v])) {
-    //                 $this->ApiError("07");
-    //             }
-    //         }
-
-    //         //////////////////////////////////////////
-    //         // order data
-    //         $order = array(
-    //             'player_id' => $player_id,
-    //             'player_name' => $player_account,
-    //             'currency_type' => $player_currency_type,
-    //             'agent_id' => $agent_id,
-    //             'agent_name' => $agent_account,
-    //             'sport_id' => null,
-    //             'league_id' => null,
-    //             'league_name' => null,
-    //             'fixture_id' => null,
-    //             'home_team_id' => null,
-    //             'home_team_name' => null,
-    //             'away_team_id' => null,
-    //             'away_team_name' => null,
-    //             'market_id' => null,
-    //             'market_name' => null,
-    //             'market_priority' => null,
-    //             'market_bet_id' => null,
-    //             'market_bet_name' => null,
-    //             'market_bet_line' => null,
-    //             'bet_rate' => null,
-    //             'player_rate' => null,
-    //             'better_rate' => null,
-    //             'bet_amount' => $bet_amount,
-    //             'status' => $default_order_status,
-    //             'create_time' => date("Y-m-d H:i:s"),
-    //             'approval_time' => $default_approval_time,
-    //         );
-
-    //         /////////////////////////////
-
-    //         // 取得賽事資料
-    //         $fixture_data = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->first();
-    //         if ($fixture_data == false) {
-    //             $this->ApiError("13");
-    //         }
-
-    //         // 判斷注單 是否為同一sport_id
-    //         if ($m_sport_id === false) {
-    //             $m_sport_id = $fixture_data['sport_id'];
-    //         }
-
-    //         //串關注單全部的sport_id都要一樣 (不能跨球種)
-    //         if ($m_sport_id != $fixture_data['sport_id']) {
-    //             $this->ApiError("14");
-    //         } else {
-    //             //////////////////////////////////////////
-    //             // order data
-    //             $order['sport_id'] = $fixture_data['sport_id'];
-    //         }
-
-    //         //fixture status : 1未开始、2进行中 
-    //         // 串關只能賽前注單,不得是走地滾球
-    //         if ($fixture_data['status'] != 1) {
-    //             $this->ApiError("15");
-    //         }
-    
-    //         $league_id = $fixture_data['league_id'];
-    //         $home_team_id = $fixture_data['home_id']; 
-    //         $away_team_id = $fixture_data['away_id']; 
-    
-    //         // 取得聯賽
-    //         $league_data = LsportLeague::where("league_id", $league_id)->first();
-    //         if ($league_data['status'] != 1) {
-    //             $this->ApiError("10");
-    //         }
-
-    //         //////////////////////////////////////////
-    //         // order data
-    //         $order['league_id'] = $league_id;
-    //         $order['league_name'] = $league_data[$lang_col];
-    //         if (!strlen($league_data[$lang_col])) {
-    //             $order['league_name'] = $league_data['name_en'];
-    //         }
-    //         $order['fixture_id'] = $fixture_id;
-
-    //         //////////////////////////////////////////
-    //         // 取得隊伍資料
-    //         // 主隊
-    //         $home_team_data = LsportTeam::where("team_id", $home_team_id)->first();
-    //         if ($home_team_data === false) {
-    //             $this->ApiError("11");
-    //         }
-    //         // order data
-    //         $order['home_team_id'] = $home_team_id;
-    //         $order['home_team_name'] = $home_team_data[$lang_col];
-    //         // 語系
-    //         if (!strlen($home_team_data[$lang_col])) {
-    //             $order['home_team_name'] = $home_team_data['name_en'];
-    //         }
-            
-    //         // 客隊
-    //         $away_team_data = LsportTeam::where("team_id", $away_team_id)->first();
-    //         if ($away_team_data === false) {
-    //             $this->ApiError("12");
-    //         }
-    //         // order data
-    //         $order['away_team_id'] = $away_team_id;
-    //         $order['away_team_name'] = $away_team_data[$lang_col];
-    //         // 語系
-    //         if (!strlen($away_team_data[$lang_col])) {
-    //             $order['away_team_name'] = $away_team_data['name_en'];
-    //         }
-
-    //         //////////////////////////////////////////
-    //         // 取得玩法
-    //         $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->first();
-    //         if ($market_data === false) {
-    //             $this->ApiError("13");
-    //         }
-    //         $market_priority = $market_data['priority'];
-
-    //         // 取得賠率
-    //         $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)->where("bet_id", $market_bet_id)->first();
-    //         if ($market_bet_data === false) {
-    //           $this->ApiError("14");
-    //         }
-    //         $current_market_bet_status = $market_bet_data['status'];
-    //         $current_market_bet_rate = $market_bet_data['price'];
-    //         $market_bet_line = $market_bet_data['line'];
-
-    //         // 賠率非開盤狀態 1开、2锁、3结算
-    //         if (($current_market_bet_status != 1)) {
-    //             $this->ApiError("15");
-    //         }
-
-    //         //////////////////////////////////////////
-    //         // order data
-
-    //         $order['m_order'] = 1;  //1=屬於串關注單
-    //         $order['market_id'] = $market_id;
-    //         $order['market_bet_id'] = $market_bet_id;
-    //         $order['market_bet_line'] = $market_bet_line;
-        
-    //         $order['market_name'] = $market_data[$lang_col];
-    //         $order['market_bet_name'] = $market_bet_data[$lang_col];
-    //         $order['market_priority'] = $market_priority;
-    //         $order['bet_rate'] = $current_market_bet_rate;
-            
-    //         $order['player_rate'] = $player_rate;
-    //         $order['better_rate'] = $is_better_rate;
-            
-    //         //////////////////////////////////////////
-    //         // 判斷 is_better_rate
-    //         if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-    //             $this->ApiError("16");
-    //         }
-
-    //         //////////////////////////////////////////
-    //         //
-
-    //         if ($m_order_id !== false) { 
-    //             $order['m_id'] = $m_order_id;  // 同一串關注單m_id均相同(第一筆寫入的注單ID)
-    //         }
-
-    //         //////////////////////////////////////////
-    //         // 新增注單
-    //         $new_order_id = GameOrder::insertGetId($order);      
-    //         if ($new_order_id == false) {
-    //             $this->ApiError("18");
-    //         }
-
-    //         // 若是第一筆注單設定m_id
-    //         if ($m_order_id === false) {
-    //             $m_order_id = $new_order_id;
-    //             //更新第一筆注單的m_id = 自己的id
-    //             $return = GameOrder::where("id", $m_order_id)
-    //                 ->update([
-    //                     "m_id" => $m_order_id
-    //                 ]);
-    //             if ($return == false) {
-    //                 $this->ApiError("19");
-    //             }
-    //         } 
-               
-    //     }
-      
-    //     //////////////////////////////////////////
-
-    //     // 扣款
-    //     $before_amount = $player_balance;
-    //     $change_amount = $bet_amount;
-    //     $after_amount = $before_amount - $change_amount;
-
-    //     $return = Player::where("id", $player_id)->update([
-    //         "balance" => $after_amount
-    //     ]);      
-    //     if ($return == false) {
-    //         $this->ApiError("20");
-    //     }
-        
-    //     // 帳變
-    //     $tmp = array();
-    //     $tmp['agent_id'] = $agent_id;
-    //     $tmp['player_id'] = $player_id;
-    //     $tmp['player'] = $player_account;
-    //     $tmp['currency_type'] = $player_currency_type;
-    //     $tmp['type'] = "game_bet";
-    //     $tmp['change_balance'] = $change_amount;
-    //     $tmp['before_balance'] = $before_amount;
-    //     $tmp['after_balance'] = $after_amount;
-    //     $tmp['create_time'] = date("Y-m-d H:i:s");
-    //     PlayerBalanceLogs::insert($tmp);
-
-    //     $this->ApiSuccess($return, "01");
-
-    // }
 
     public function GameBet(Request $request) {
       
@@ -1760,7 +1278,12 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['league_id'] = $league_data['league_id'];
-        $order['league_name'] = $league_data[$lang_col];
+        
+        if (empty($league_data[$lang_col])) {
+            $order['league_name'] = $league_data['name_en'];
+        } else {
+            $order['league_name'] = $league_data[$lang_col];
+        }
         $order['fixture_id'] = $fixture_id;
         $order['sport_id'] = $league_data['sport_id'];
         //////////////////////////////////////////
@@ -1773,7 +1296,11 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['home_team_id'] = $return['team_id'];
-        $order['home_team_name'] = $return[$lang_col];
+        if (empty($return[$lang_col])) {
+            $order['home_team_name'] = $return['name_en'];
+        } else {
+            $order['home_team_name'] = $return[$lang_col];
+        }
         //////////////////////////////////////////
         
         // 客隊
@@ -1785,7 +1312,11 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['away_team_id'] = $return['team_id'];
-        $order['away_team_name'] = $return[$lang_col];
+        if (empty($return[$lang_col])) {
+            $order['away_team_name'] = $return['name_en'];
+        } else {
+            $order['away_team_name'] = $return[$lang_col];
+        }
         //////////////////////////////////////////
 
         // 取得玩法
@@ -1799,7 +1330,11 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // order data
         $order['market_id'] = $market_id;
-        $order['market_name'] = $market_data[$lang_col];
+        if (empty($market_data[$lang_col])) {
+            $order['market_name'] = $market_data['name_en'];
+        } else {
+            $order['market_name'] = $market_data[$lang_col];
+        }
         $order['market_priority'] = $market_priority;
         $order['player_rate'] = $player_rate;
         $order['better_rate'] = ($is_better_rate)?(1):(0);
@@ -1863,7 +1398,11 @@ class LsportApiController extends Controller {
         // order data
         $market_bet_line = $market_bet_data['line'];
         $order['market_bet_line'] = $market_bet_line;
-        $order['market_bet_name'] = $market_bet_data[$lang_col];
+        if (empty($market_bet_data[$lang_col])) {
+            $order['market_bet_name'] = $market_bet_data['name_en'];
+        } else {
+            $order['market_bet_name'] = $market_bet_data[$lang_col];
+        }
         //////////////////////////////////////////
 
 
@@ -2226,9 +1765,10 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // order data
             $order['league_id'] = $league_id;
-            $order['league_name'] = $league_data[$lang_col];
-            if (!strlen($league_data[$lang_col])) {
+            if (empty($league_data[$lang_col])) {
                 $order['league_name'] = $league_data['name_en'];
+            } else {
+                $order['league_name'] = $league_data[$lang_col];
             }
             $order['fixture_id'] = $fixture_id;
 
@@ -2241,10 +1781,11 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['home_team_id'] = $home_team_id;
-            $order['home_team_name'] = $home_team_data[$lang_col];
             // 語系
-            if (!strlen($home_team_data[$lang_col])) {
+            if (empty($home_team_data[$lang_col])) {
                 $order['home_team_name'] = $home_team_data['name_en'];
+            } else {
+                $order['home_team_name'] = $home_team_data[$lang_col];
             }
             
             // 客隊
@@ -2254,10 +1795,11 @@ class LsportApiController extends Controller {
             }
             // order data
             $order['away_team_id'] = $away_team_id;
-            $order['away_team_name'] = $away_team_data[$lang_col];
             // 語系
-            if (!strlen($away_team_data[$lang_col])) {
+            if (empty($away_team_data[$lang_col])) {
                 $order['away_team_name'] = $away_team_data['name_en'];
+            } else {
+                $order['away_team_name'] = $away_team_data[$lang_col];
             }
 
             //////////////////////////////////////////
@@ -2280,8 +1822,11 @@ class LsportApiController extends Controller {
 
             $market_bet_line = $market_bet_data['line'];
             $order['market_bet_line'] = $market_bet_line;
-            $order['market_bet_name'] = $market_bet_data[$lang_col];
-
+            if (empty($market_bet_data[$lang_col])) {
+                $order['market_bet_name'] = $market_bet_data['name_en'];
+            } else {
+                $order['market_bet_name'] = $market_bet_data[$lang_col];
+            }
             //////////////////////////////////////////
             // 建立延時注單時或風控大單以下欄位應該留空: approval_time, bet_rate
             // 風控大單啟動 --> '不'取賠率資料寫入注單, 賠率資料留到運營審核通過當下才會取
@@ -2340,7 +1885,11 @@ class LsportApiController extends Controller {
 
             //////////////////////////////////////////
             // order data
-            $order['market_name'] = $market_data[$lang_col];
+            if (empty($market_data[$lang_col])) {
+                $order['market_name'] = $market_data['name_en'];
+            } else {
+                $order['market_name'] = $market_data[$lang_col];
+            }
             $order['market_priority'] = $market_priority;
 
             //////////////////////////////////////////
@@ -2502,7 +2051,11 @@ class LsportApiController extends Controller {
                 $this->ApiError('03');
             }
             $tmp['league_id'] = $league_id;
-            $tmp['league_name'] = $return[$lang_col];
+            if (empty($return[$lang_col])) {
+                $tmp['league_name'] = $return['name_en'];
+            } else {
+                $tmp['league_name'] = $return[$lang_col];
+            }
 
             // sport_name: 
             $sport_id = $v['sport_id'];
@@ -2511,7 +2064,11 @@ class LsportApiController extends Controller {
                 $this->ApiError('04');
             }
             $tmp['sport_id'] = $sport_id;
-            $tmp['sport_name'] = $return[$lang_col];
+            if (empty($return[$lang_col])) {
+                $tmp['sport_name'] = $return['name_en'];
+            } else {
+                $tmp['sport_name'] = $return[$lang_col];
+            }
 
             // home_team_name: 
             $team_id = $v['home_id'];
@@ -2520,8 +2077,11 @@ class LsportApiController extends Controller {
                 $this->ApiError('05');
             }
             $tmp['home_team_id'] = $team_id;
-            $tmp['home_team_name'] = $return[$lang_col];
-
+            if (empty($return[$lang_col])) {
+                $tmp['home_team_name'] = $return['name_en'];
+            } else {
+                $tmp['home_team_name'] = $return[$lang_col];
+            }
             // away_team_name: 
             $team_id = $v['away_id'];
             $return = LsportTeam::where("team_id", $team_id)->first();
@@ -2529,8 +2089,11 @@ class LsportApiController extends Controller {
                 $this->ApiError('05');
             }
             $tmp['away_team_id'] = $team_id;
-            $tmp['away_team_name'] = $return[$lang_col];
-
+            if (empty($return[$lang_col])) {
+                $tmp['away_team_name'] = $return['name_en'];
+            } else {
+                $tmp['away_team_name'] = $return[$lang_col];
+            }
             //////////////
 
             $scoreboard = array();
@@ -2659,7 +2222,7 @@ class LsportApiController extends Controller {
 
         // dd($data);
 
-        $sport_name = '';  //儲存球種名稱
+        $sport_name = null;  //儲存球種名稱
 
         //////////////////////////////////////////
         // 開始loop 賽事資料
@@ -2672,8 +2235,8 @@ class LsportApiController extends Controller {
         $arrFixture = array();
 
         // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($sport_name)) {  //只須設定一次
-            if (!strlen($data->s_name_locale)) {  // sport name
+        if (empty($sport_name)) {  //只須設定一次
+            if (empty($data->s_name_locale)) {  // sport name
                 $sport_name = $data->s_name_en;
             } else {
                 $sport_name = $data->s_name_locale;
@@ -2683,7 +2246,7 @@ class LsportApiController extends Controller {
         // league 層 ----------------------------
 
         // league_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->l_name_locale)) {  // league name
+        if (empty($data->l_name_locale)) {  // league name
             $league_name = $data->l_name_en;
         } else {
             $league_name = $data->l_name_locale;
@@ -2699,13 +2262,13 @@ class LsportApiController extends Controller {
         // fixture 層 ----------------------------
 
         // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->th_name_locale)) {  // home team
+        if (empty($data->th_name_locale)) {  // home team
             $home_team_name = $data->th_name_en;
         } else {
             $home_team_name = $data->th_name_locale;
         }
         // away_team_name: 判斷用戶語系資料是否為空,若是則用en就好
-        if (!strlen($data->ta_name_locale)) {  // away_team
+        if (empty($data->ta_name_locale)) {  // away_team
             $away_team_name = $data->ta_name_en;
         } else {
             $away_team_name = $data->ta_name_locale;
@@ -2835,7 +2398,7 @@ class LsportApiController extends Controller {
             $main_line = $v->main_line;
 
             // // market_name: 判斷用戶語系資料是否為空,若是則用en就好
-            if (!strlen($v->m_name_locale)) {  // market name
+            if (empty($v->m_name_locale)) {  // market name
                 $market_name = $v->m_name_en;
             } else {
                 $market_name = $v->m_name_locale;
@@ -2871,7 +2434,7 @@ class LsportApiController extends Controller {
                 $market_bet_id = $bv->bet_id;
 
                 // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
-                if (!strlen($bv->mb_name_locale)) {  // market name
+                if (empty($bv->mb_name_locale)) {  // market name
                     $market_bet_name = $bv->mb_name_en;
                 } else {
                     $market_bet_name = $bv->mb_name_locale;

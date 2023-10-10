@@ -104,10 +104,10 @@
 <!-- fixture card template -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
-        <div class="timeSpan" key='not-baseball'>
+        <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
         </div>
-        <div class="baseballSpan" key='baseball'>
+        <div class="baseballSpan" key='show-baseCon'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-1 h-100 p-0"></div>
@@ -139,7 +139,7 @@
         </div>
         <div class="otherBetWay">
             <i class="fa-solid fa-play"></i>
-            <p>+123</p>
+            <p></p>
         </div>
     </div>
 </div>
@@ -162,8 +162,8 @@
         <span class="bet_name"></span>
     </div>
     <div class="col m-0 row text-right p-0">
-        <div class="odd col-4 p-0"></div>
-        <div class="col-8 text-left p-0">
+        <div class="odd col p-0"></div>
+        <div class="col text-left p-0">
             <i class="fa-solid fa-lock" style="display: none;"></i>
             <i class="fa-solid fa-caret-up" style="display: none;"></i>
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -324,7 +324,6 @@
         league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
         league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
         league_toggle.attr('league_id', v2.league_id)
-        league_toggle.attr('leagueText', `${k}${v2.league_id}`)
         league_toggle_name.html(v2.league_name)
         league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
         league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
@@ -337,7 +336,6 @@
         // content
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-        league_toggle_content.attr('leagueText', `${k}${v2.league_id}`)
 
         league_wrapper.removeAttr('hidden')
         league_wrapper.removeAttr('template')
@@ -348,21 +346,22 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
-
         let card = $('div[template="fixtureCardTemplate"]').clone()
 
         // 壘包 好壞球 只有 滾球 棒球有
-        sport === 154914 && v3.status === 2 ? card.find('[key="not-baseball"]').remove() : card.find('[key="baseball"]').remove()
+        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
+        let market_count = card.find('.otherBetWay p')
 
         card.attr('id', k3)
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(formatDateTime(v3.start_time))
+        market_count.html(v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html()
@@ -370,9 +369,10 @@
         away_team_info.find('.scoreSpan').html()
 
 
-        // living score
+        // living
         if( v3.status === 2 ) {
 
+            // score
             home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
             away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
 
@@ -381,32 +381,31 @@
 
             // exception baseball
             if( sport === 154914 ) {
+                // stage
                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
                 // base
-                console.log(v3.periods)
-                let baseText = v3.periods.Bases
-                if( baseText) {
-                    baseText = v3.periods.Bases.replaceAll('/','')
-                    let baseCont = card.find('img[alt="base"]')
-                    baseCont.attr('src', `/image/base/${baseText}.png`)
-                } else {
-                    baseCont.attr('src', `/image/base/000.png`)
-                }
+                let baseCont = card.find('img[alt="base"]')
+                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
+                baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                 // balls
                 let strike = card.find('div[key="strike"]')
-                let strikeText = v3.periods.Strikes
+                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
                 strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                 let ball = card.find('div[key="ball"]')
-                let ballText = v3.periods.Balls
+                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
                 ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                 let out = card.find('div[key="out"]')
-                let outText = v3.periods.Outs
+                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
             }
 
+            // stage text
             time.html(timerStr)
         }
+
         // ready to start
         if( v3.status === 9 ) {
             time.html(langTrans.mainArea.readyToStart)
@@ -524,7 +523,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView()
+                    renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -622,6 +621,12 @@
                             card.attr('status', v3.status)
                         }   
 
+                        // 玩法統計
+                        card.find('.otherBetWay p').html(v3.market_bet_count)
+
+                        // 壘包 好壞球 只有 滾球 棒球有
+                        sport === 154914 && v3.status === 2 ? card.find('[key="not-show-baseCon"]').hide() : card.find('[key="show-baseCon"]').hide()
+
                         // living
                         if( v3.status === 2 ) {
                             // score
@@ -651,21 +656,20 @@
                                 v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
                                 // base
-                                let baseText = v3.periods.Bases
-                                if( !baseText) return;
-                                baseText = v3.periods.Bases.replaceAll('/','')
                                 let baseCont = card.find('img[alt="base"]')
+                                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
                                 baseCont.attr('src', `/image/base/${baseText}.png`)
+
 
                                 // balls
                                 let strike = card.find('div[key="strike"]')
-                                let strikeText = v3.periods.Strikes
+                                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
                                 strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
                                 let ball = card.find('div[key="ball"]')
-                                let ballText = v3.periods.Balls
+                                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
                                 ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
                                 let out = card.find('div[key="out"]')
-                                let outText = v3.periods.Outs
+                                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
                                 out.css('background-image', `url(/image/balls/o${outText}.png)`)
                             }
 
@@ -816,7 +820,7 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
-        let hasTenSecondsPassed = false;
+        
 
         // delay_order
         if (msg.action === 'delay_order') {
@@ -827,22 +831,17 @@
                 hideLoading();
                 closeCal();
             }, 1000);
-
-            // if the msg is not getting in 10 sec, hide the loading and close the betting area
-            setTimeout(function() {
-                hasTenSecondsPassed = true;
-            }, 10000); 
-
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal();
-            }
         }
         // delay_order
     }
 
+    $('#mask, #cancelOrder').click(function() {
+        closeCal();
+    })
+
     // 註冊賽事id
     function wsRegisterMatch() {
+        console.log(socket_status)
         const wsMsg = {
             "action": "register",
             "sport_id": sport,
@@ -868,19 +867,18 @@
         var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
         
         // 获取当前高度
-        var currentHeight = $toggleContent.height();
-        
-        if (currentHeight === 49) {
+        var currentHeight = $toggleContent.height().toFixed(2);
+        if (currentHeight == 37.8) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
-            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 1000, function() {
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
                 // 动画完成后，将高度设置为 'auto'
                 $toggleContent.removeAttr('style')
             });
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '49px' }, 1000);
+            $toggleContent.animate({ height: '37.8px' }, 700);
         }
 
         // 切换图标方向
@@ -895,7 +893,7 @@
 
     // 聯賽分類收合
     function toggleSeries( key ) {
-        $('#seriesWrapperContent_' + key).slideToggle( "slow" );
+        $('#seriesWrapperContent_' + key).slideToggle( 700 );
         if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
@@ -1059,7 +1057,7 @@
     }
 
     // 關閉左邊投注區塊
-    $('#cancelOrder').click(function() {
+    $('#mask, #cancelOrder').click(function() {
         closeCal();
     })
 
@@ -1068,6 +1066,7 @@
             direction: "left"
         }, 500);
         $('#mask').fadeOut()
+        // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
@@ -1146,11 +1145,17 @@
             }
         });
 
-        // 金額歸零
-        $('#moneyInput').val('');
-        $('#moneyInput').trigger('change');
-        // 隱藏計算機
-        // closeCal()
+        
+
+        let hasTenSecondsPassed = false;
+        // if the msg is not getting in 10 sec, hide the loading and close the betting area
+        setTimeout(function() {
+            hasTenSecondsPassed = true;
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal();
+            }
+        }, 10000);
     }
 
     // 統計
@@ -1167,11 +1172,7 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) {
-                let leagueText = idArr[1] + idArr[2]
-                $(`.seriesWrapperTitle[leagueText="${leagueText}"]`).remove()
-                $(`.seriesWrapperContent[leagueText="${leagueText}"]`).remove()
-            }
+            if( count === 0 ) $(this).closest('.leagueWrapper').remove()
         })
 
         // is no data
