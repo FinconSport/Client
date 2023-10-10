@@ -151,6 +151,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                 return false;
             });
         });
+
     }
     
 }
