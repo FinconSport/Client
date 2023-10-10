@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
-class ClientMarquee extends Model
+class ClientMarquee extends CacheModel
 {
 	use HasFactory;
 	
