@@ -32,10 +32,10 @@ div[key="matchSportMenu"]{
     /* height: 100%; */
     height: calc(100% - 11rem);
     overflow: hidden;
-    margin-bottom: 1rem;
     color: rgb(65, 91, 90);
     position: relative;
 }
+
 #tableContainer {
     height: 100%;
     width: 100%;
