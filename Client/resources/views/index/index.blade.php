@@ -745,6 +745,12 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr']
 
+                                console.log('newStagePriorityArr')
+                                console.log(newStagePriorityArr)
+
+                                console.log('newStagePriorityArr')
+                                console.log(newStagePriorityArr, v3.period)
+
                                 // 換節了 重新渲染單節投注區塊
                                 if( newStagePriorityArr[v3.periods.period] && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[v3.periods.period][index]) ) {
                                     stagePriorityArr = newStagePriorityArr[v3.periods.period]
