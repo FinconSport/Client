@@ -405,8 +405,6 @@
             time.html(langTrans.mainArea.readyToStart)
         }
 
-
-
         // living
         if( v3.status === 2 ) {
             // score
@@ -745,18 +743,24 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+                                newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+
+                                // 換節了 重新渲染單節投注區塊
+                                if( !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
+                                    stagePriorityArr = newStagePriorityArr
+                                    card.find('.indexBetCardTable').eq(1).html('')
+                                    createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                }
+
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
                                 home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
                                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
                                 renderBetArea(stagePriorityArr, v3, k3)
                             }
-
                             time.html(timerStr)
                         }
                        
-                        
 
                         function renderBetArea(priorityArr, v3, k3) {
                             priorityArr.forEach(( i, j ) => {
