@@ -22,19 +22,6 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $tableName = "`" . $this->getModel()->getTable() . "`";
             $esTableName = "`es_" . $tableName."`";
 
-            
-    // 使用正則表達式獲取所有 JOIN 表格的名稱
-    preg_match_all('/`(\w+)`/', $this->toSql(), $matches);
-
-    // 第一個元素是主表格，其餘是 JOIN 表格
-    $joinTableNames = array_slice($matches[1], 1);
-
-    // $mainTableName 是主表格名稱
-    echo "主表格名稱: " . $mainTableName . "<br>";
-
-    // $joinTableNames 是所有 JOIN 表格名稱的數組
-    echo "JOIN 表格名稱: " . implode(", ", $joinTableNames) . "<br>";
-
             // Build ES SQL
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
