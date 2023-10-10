@@ -268,7 +268,7 @@
 
 			// Create a new <tr> for the additional <td> elements with a dynamic ID
 			const dynamicId = 'additionalTr_' + betIndex + betItem.league_name;
-			const additionalTr = $('<tr></tr>').attr('id', dynamicId).append(additionalTds);
+			cconst additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(additionalTds);
 
 			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
@@ -292,6 +292,7 @@
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
+			parentElement.find('.orderData_expand').addClass('hide-betaDetcon');
 		}
 
 
@@ -304,7 +305,7 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
 			function toggleContainers() {
-				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
+				parentElement.find('.hide-betaDetcon').slideToggle();
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 

@@ -160,11 +160,11 @@ div[key="matchSportMenu"]{
     padding: 0.5rem 0rem;
 }
 
-.betadata_expand{
+.orderData_expand{
     display: block;
 }
 
-.betadata_expand.hide-betaDetcon {
+.orderData_expand.hide-betaDetcon {
     display: none;
 }
 
