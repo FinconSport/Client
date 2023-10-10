@@ -286,6 +286,11 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		$('.search-bar-container').after(orderDataTotal);
+		if (totalWinLoss >= 0) {
+			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
+		} else {
+			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
+		}
 	}
 
 	//updateTotal when new data is loaded
@@ -293,6 +298,11 @@
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount);
 		$('.orderData_totalWinAmount').text(totalWinLoss);
+		if (totalWinLoss >= 0) {
+			totalWinAmountElement.css('color', 'red');
+		} else {
+			totalWinAmountElement.css('color', 'green');
+		}
 	}
 
 	// 下拉更多資料
