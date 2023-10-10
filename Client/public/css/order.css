@@ -179,17 +179,14 @@ div[key="matchSportMenu"]{
 }
 
 .order-toggleButton {
-    background-color: rgb(65, 91, 90);
-    color: white;
-    border-radius: 25px;
-    position: absolute;
-    right: 0.5rem;
+    background-color: none;
+    border-radius: 0px;
     transition: all 0.5s ease 0s;
-    width: 4.5rem;
-    top: 2.2rem;
+    /* width: 4.5rem;
     height: 1.5rem;
-    line-height: 1.5rem;
+    line-height: 1.5rem; */
     border: none;
+    padding: 0px;
   }
 
 /* search bar and statistic css */

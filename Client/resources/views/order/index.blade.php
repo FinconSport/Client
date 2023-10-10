@@ -302,11 +302,11 @@
 		const betDataLength = orderItem.bet_data.length;
 
 		if (betIndex === 0) {
-			const toggleButton = $('<button class="order-toggleButton">{{ trans("order.main.expand") }} (' + betDataLength + ')</button>');
+			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-caret-down fa-2xs" style="color: #cf2a28;"></i></button>');
 
 			function toggleContainers() {
 				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
-				toggleButton.text(toggleButton.text() === '{{ trans("order.main.expand") }} (' + betDataLength + ')' ? '{{ trans("order.main.close") }}' : '{{ trans("order.main.expand") }} (' + betDataLength + ')');
+				toggleButton.text(toggleButton.text() === '<i class="fa-sharp fa-solid fa-caret-down fa-2xs" style="color: #cf2a28;"></i>' ? '<i class="fa-sharp fa-solid fa-play fa-2xs" style="color:#cf2a28;"></i>' : '<i class="fa-sharp fa-solid fa-caret-down fa-2xs" style="color: #cf2a28;"></i>');
 			}
 
 			toggleButton.on('click', toggleContainers);
