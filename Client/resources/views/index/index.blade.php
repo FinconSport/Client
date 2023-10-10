@@ -1159,6 +1159,11 @@
         $('#moneyInput').trigger('change')
         // 移除所有選中樣式
         $('div').removeClass('m_order_on')
+
+        // 左邊選中的剛好鎖起來了 -> 復原
+        $('#submitOrder').html(langTrans.bet_area.bet)
+        $('#submitOrder').removeClass('disabled')
+        $('#submitOrder').removeAttr('disabled')
     }
 
     // 金額快速鍵
