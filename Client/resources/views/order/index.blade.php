@@ -168,7 +168,6 @@
 
 				// Accumulate the total WinLoss
 				WinLoss += winLoss;
-				console.log('WINLOSS' + winLoss);
 
 			});
 
@@ -213,6 +212,7 @@
 		orderDataResultAmount.html(orderItem.result_amount === null ? '' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss);
+		console.log('WINLOSS' + winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
