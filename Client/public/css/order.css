@@ -212,7 +212,14 @@ div[key="matchSportMenu"]{
     word-wrap: normal;
     border: none;
     background: none;
+    -moz-appearance: none;
+    -webkit-appearance: none; 
 }
+
+/* for IE10 */ 
+.search-statistic-container select::-ms-expand { 
+    display: none; 
+} 
 
 .datecalendar-con .date-divider {
     margin: 0px 0.7rem;
@@ -239,8 +246,16 @@ div[key="matchSportMenu"]{
 #datepicker_from,#datepicker_to {
     outline: none;
     border-radius: 0px;
+    border: none;
 }
 
 .datepicker-con .input-group-text{
     border-radius: 0px!important;
+    padding: 1rem!important;
+    background: #ffffff;
+}
+
+.datepicker-con .input-group.date {
+    border-radius: 15px;
+    overflow: hidden;
 }
