@@ -17,6 +17,9 @@ class TestController extends PcController {
     
       // list 方法
       $return = Player::where("status",1)->where("currency_type",1)->list();
+      if ($return === false) {
+        
+      }
       dd($return);
       
 

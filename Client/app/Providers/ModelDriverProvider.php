@@ -16,23 +16,21 @@ class ModelDriverProvider extends ServiceProvider {
     public function boot() {
         Builder::macro('list', function ($cacheAliveTime = 1) {
             
-            // 获取模型的表名
+            // get Model TableName
             $tableName = $this->getModel()->getTable();
             $esTableName = "es_" . $tableName;
 
             // Build ES SQL
             $bindings = $this->getBindings();
             $rawSql = $this->toSql();
-            $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);
-            $esSql = str_replace($tableName, $esTableName, $esSql);
-            $esSql = str_replace("'", "", $esSql);
-            $esSql = str_replace("`", "", $esSql);
+            $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
+            $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
+            $esSql = str_replace("'", "", $esSql);  // remove '
+            $esSql = str_replace("`", "", $esSql);  // remove `
+            $cacheKey = MD5($esSql); // create CacheKey by MD5
 
-            $cacheKey = MD5($esSql);
-
-            $data = Cache::remember($cacheKey, $cacheAliveTime, function () use ($esSql) {
-                
-                // create URL
+            // use Cache
+            return Cache::remember($cacheKey, $cacheAliveTime, function () use ($esSql) {
                 $url = 'http://72.167.135.22:29200/_sql?sql=' . $esSql . '&pretty';
 
                 $esUser = env("ES_USER");
@@ -49,15 +47,11 @@ class ModelDriverProvider extends ServiceProvider {
                     foreach ($data['hits']['hits'] as $k => $v) {
                         $list[] = $v['_source'];
                     }
-
                     return $list;
                 } 
-
+                // fail , return false
                 return false;
             });
-
-            return $data;
-            
         });
     }
     
