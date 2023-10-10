@@ -47,7 +47,7 @@ class CacheModel extends Model {
     // ES 統計操作
     protected static function getESSum($sql) {
         
-        $sql = "select agent_id , SUM(bet_amount) as bet_amount from game_order group by agent_id";
+        $sql = "select agent_id , SUM(bet_amount) as bet_amount from es_game_order group by agent_id";
         // 获取要发送请求的URL
         $url = 'http://72.167.135.22:29200/_sql?sql=' . $sql . '&pretty';
 
@@ -61,6 +61,8 @@ class CacheModel extends Model {
         if ($response->successful()) {
             // 解码JSON响应
             $data = $response->json();
+
+            dd($data);
             $list = array();
             foreach ($data['hits']['hits'] as $k => $v) {
                 $list[] = $v['_source'];
