@@ -290,6 +290,8 @@
 				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
+			const parentElement = betDataEventContainer.parent();
+
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			parentElement.find('.betadata_expand').addClass('hide-betaDetcon');
 		}
