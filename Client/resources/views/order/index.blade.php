@@ -116,8 +116,6 @@
 @endSection
 
 @push('main_js')
-<script src="{{ asset('js/jquery.min.js?v=' . $current_time) }}"></script>
-<script src="{{ asset('js/jquery-ui.min.js?v=' . $current_time) }}"></script>
 <script src="{{ asset('js/bootstrap.min.js?v=' . $current_time) }}"></script>
 <script>
 
