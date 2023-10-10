@@ -309,7 +309,7 @@
 
 			toggleButton.on('click', toggleContainers);
 			// toggleButton.appendTo(orderDataBetEvent).appendTo(orderDataBetWay).appendTo(orderDataResult);
-			orderItem.find('.orderData_mOrder').append(toggleButton);
+			$(orderItem).find('.orderData_mOrder').append(toggleButton);
 		}
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
