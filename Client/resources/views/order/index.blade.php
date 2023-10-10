@@ -292,7 +292,7 @@
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
-			parentElement.find('.orderData_expand').addClass('hide-betaDetcon');
+			parentElement.addClass('hide-betaDetcon');
 		}
 
 
@@ -304,8 +304,10 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton">▼</button>');
+			const targetElements = $(`#${dynamicId}.hide-betaDetcon`);
+
 			function toggleContainers() {
-				orderDataBetEvent.find('.hide-betaDetcon').slideToggle();
+				targetElements.slideToggle();
 				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
 			}
 
