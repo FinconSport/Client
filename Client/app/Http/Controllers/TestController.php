@@ -21,10 +21,10 @@ class TestController extends PcController {
       $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->fetch();
 
       // cc方法 , 同first 方法
-      $return = Player::where("status",1)->where("id",1)->where("currency_type",1)->cc();
+      $return = Player::where("status",1)->where("currency_type",1)->cc();
 
       dd($return);
-      
+
       // total方法, 專門用於取得統計
       $return = Player::select('agent_id', DB::raw('SUM(balance) as total_balance'), DB::raw('COUNT(*) as player_count'))->groupBy('agent_id')->total();
 
