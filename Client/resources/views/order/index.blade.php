@@ -302,7 +302,6 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
-			console.log('dynamic' + dynamicClass)
 
 			function toggleContainers() {
 				$(`.${dynamicClass}`).toggleClass("show-betaDetcon");
@@ -453,7 +452,7 @@
 	}
 
 	var div = document.getElementById('orderTr');
-	var table = document.getElementById('orderDataTemp'); // Replace with your table's ID
+	var table = document.getElementById('orderTable'); // Replace with your table's ID
 
 	if (window.getComputedStyle(div).display === 'none') {
 		// The div is hidden, so don't include the count of even rows
