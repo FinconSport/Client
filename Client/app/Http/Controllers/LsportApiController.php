@@ -2499,7 +2499,7 @@ class LsportApiController extends Controller {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
 
-            $tmp[$k]['status'] = $order_status[$v['status']];
+            $tmp[$k]['status'] = $v['status'];
             $tmp[$k]['m_order'] = $v['m_order'];
 
             $sport_id = $v["sport_id"];
