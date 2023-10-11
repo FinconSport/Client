@@ -452,22 +452,18 @@
 		}
 	}
 
-	// const rows = document.querySelectorAll("tr:not(.orderData_expand)");
+	var div = document.getElementById('orderTr');
+	var table = document.getElementById('orderDataTemp'); // Replace with your table's ID
 
-	// rows.forEach((row, index) => {
-	// if (index % 2 === 0) {
-	// 	// Even row
-	// 	const tds = row.querySelectorAll("td");
-	// 	tds.forEach(td => {
-	// 	td.style.backgroundColor = "#e2f0f0";
-	// 	});
-	// } else {
-	// 	// Odd row
-	// 	const tds = row.querySelectorAll("td");
-	// 	tds.forEach(td => {
-	// 	td.style.backgroundColor = "#ffffff";
-	// 	});
-	// }
-	// });
+	if (window.getComputedStyle(div).display === 'none') {
+		// The div is hidden, so don't include the count of even rows
+	} else if (window.getComputedStyle(div).display === 'table-row') {
+		// The div is displayed, so include the count of even rows
+		var evenRows = table.querySelectorAll('tr:nth-child(even)');
+
+		for (var i = 0; i < evenRows.length; i++) {
+			evenRows[i].style.backgroundColor = '#e2f0f0'; // Change background color
+		}
+	}
 </script>
 @endpush
