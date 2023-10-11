@@ -65,24 +65,18 @@ class ElasticSearchDriverProvider extends ServiceProvider {
 
             // Build ES SQL
             $bindings = $this->getBindings(); 
-            
+
             // 获取原始查询构建器
             $queryBuilder = $this->toBase();
-        
-            // 构建 count() 查询
             $countQueryBuilder = clone $queryBuilder;
             $countQueryBuilder->selectRaw('COUNT(*) as aggregate');
-        
-            // 获取 count() 查询的原始 SQL
-            $countRawSql = $countQueryBuilder->toSql();
-        
-            dd($countRawSql);
-            $rawSql = $this->toSql();
+            $rawSql = $countQueryBuilder->toSql();
+
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
-            dd($esSql);
+ 
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
@@ -99,11 +93,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                 if ($response->successful()) {
                     // json decode
                     $data = $response->json();
-                    $list = array();
-                    foreach ($data['hits']['hits'] as $k => $v) {
-                        $list = $v['_source'];
-                    }
-                    return $list;
+                    return $data['aggregations']['aggregate']['value'];
                 } 
                 // fail , return false
                 return false;
