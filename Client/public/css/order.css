@@ -170,7 +170,7 @@ div[key="matchSportMenu"]{
 .hide-betaDetcon {
     display: none;
     transform: scaleY(0);
-    transition: display 0.3s, transform 0.3s;
+    transition: display 0.3s, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .show-betaDetcon {
