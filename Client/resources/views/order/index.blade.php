@@ -251,7 +251,7 @@
 				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
 				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
 				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status}` + `<br>${formatDateTime(orderItem.result_time)}`
+				`${betItem.status}` `<br>${formatDateTime(orderItem.result_time)}`
 			)
 		);
 
