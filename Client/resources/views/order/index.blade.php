@@ -414,10 +414,31 @@
 		$(e).attr('isopen', isopen)
 	}
 
+	// Function to update row colors based on position and display property
+	function updateRowColors() {
+		var allRows = document.querySelectorAll('tr');
+		var displayedRows = Array.from(allRows).filter(row => {
+			return row.classList.contains('show-betaDetcon');
+		});
+		
+		for (var i = 0; i < displayedRows.length; i++) {
+			if (displayedRows[i].classList.contains('show-betaDetcon') || i % 2 === 0) {
+				displayedRows[i].classList.add('green-bg'); // Even rows or rows with class show-betaDetcon are green
+				displayedRows[i].classList.remove('white-bg');
+				console.log("even");
+			} else {
+				displayedRows[i].classList.remove('green-bg');
+				displayedRows[i].classList.add('white-bg'); // Odd rows are blue
+				console.log("odd");
+			}
+		}
+	}
+
 	$(document).ready(function() {
         $('#datepicker_from').datepicker();
 		$('#ui-datepicker-div').addClass('custom-datepicker-class');
 		$('#datepicker_to').datepicker();
+		updateRowColors();
     });
 
 	formatDateTime = (dateTimeString) => {
@@ -450,28 +471,6 @@
 			window.location.search = link;
 		}
 	}
-
-	// Function to update row colors based on position and display property
-	function updateRowColors() {
-		var allRows = document.querySelectorAll('tr');
-		var displayedRows = Array.from(allRows).filter(row => {
-			return row.classList.contains('show-betaDetcon');
-		});
-		
-		for (var i = 0; i < displayedRows.length; i++) {
-			if (displayedRows[i].classList.contains('show-betaDetcon') || i % 2 === 0) {
-				displayedRows[i].classList.add('green-bg'); // Even rows or rows with class show-betaDetcon are green
-				displayedRows[i].classList.remove('white-bg');
-				console.log("even");
-			} else {
-				displayedRows[i].classList.remove('green-bg');
-				displayedRows[i].classList.add('white-bg'); // Odd rows are blue
-				console.log("odd");
-			}
-		}
-	}
-
-	updateRowColors();
 
 </script>
 @endpush
