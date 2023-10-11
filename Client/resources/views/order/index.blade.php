@@ -248,14 +248,13 @@
 			createHtmlElement('text-right', 
 				betItem.status === 0 ? `<span style="color: green;">Lose</span>` :
 				betItem.status === 1 ? `<span style="color: red;">Win</span>` :
-				betItem.status === 2 ? `<span style="color: red;">Win half </span>` :
-				betItem.status === 3 ? `<span style="color: green;">lose half</span>` :
+				betItem.status === 2 ? `<span style="color: red;">Win half</span>` :
+				betItem.status === 3 ? `<span style="color: green;">Lose half</span>` :
 				betItem.status === 4 ? `<span style="color: #c79e42;">Chargeback</span>` :
 				`${betItem.status}`
-				+ `<br>${formatDateTime(orderItem.result_time)}`
 			)
+			+ `<br>${formatDateTime(orderItem.result_time)}`
 		);
-
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
