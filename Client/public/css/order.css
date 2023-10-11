@@ -260,6 +260,7 @@ span.orderData_mOrder {
     padding: 0.5rem;
     background-color: #fff;
     outline: none;
+    cursor: pointer;
 }
 
 .search-statistic-container select option:focus,
