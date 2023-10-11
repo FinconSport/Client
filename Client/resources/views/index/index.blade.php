@@ -189,7 +189,6 @@
 
 <!-- no data betItem template -->
 <div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
-    <i class="fa-solid fa-lock"></i>
 </div>
 
 
@@ -555,7 +554,7 @@
 
             // 足球 讓球、大小 補空格
             if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
-                let item = $(`div[template="betItem"]`).clone()
+                let item = $('div[template="betItem-no"]').clone()
                 item.removeAttr('hidden')
                 item.removeAttr('template')
                 bet_div.append(item)
