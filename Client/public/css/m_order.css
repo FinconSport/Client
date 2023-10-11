@@ -42,7 +42,7 @@
 
 /* 左側投注slider */
 #leftSlideOrder{
-    padding: 5rem 1rem!important;
+    padding: 2rem 1rem!important;
 }
 #leftSlideOrderCardBetArea{
     background-color: rgb(226, 240, 240);
@@ -65,7 +65,7 @@
 #leftSlideOrderCardContainer {
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 15rem;
+    max-height: 25rem;
 }
 
 #leftSlideOrderCardContainer::-webkit-scrollbar {

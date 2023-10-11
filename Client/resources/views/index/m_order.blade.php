@@ -26,7 +26,7 @@
                     </p>
                 </div>
                 <div class="col-12 row m-0 bg-lightgreen orderInfo">
-                    <div class="col-12"><span key='rate_name'></span></div>
+                    <div class="col-12"><span key='bet_type'></span></div>
                     <div class="col-8 mt-2"><span key='bet_name'></span></div>
                     <div class="col-4 mt-2 text-right" key='oddContainer'>
                         <span key='odd' class="odd"></span>
@@ -1217,6 +1217,9 @@
         //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
         //     return;
         // }
+
+        // Show loading spinner while submitting
+        showLoading();
 
         var jsonData = {
             ...sendOrderData
