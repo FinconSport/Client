@@ -406,8 +406,9 @@
         // living
         if( v3.status === 2 ) {
             // score
-            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            if( v3.scoreboard[1] && v3.scoreboard[1][0] ) home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+            if( v3.scoreboard[2] && v3.scoreboard[2][0] ) away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
