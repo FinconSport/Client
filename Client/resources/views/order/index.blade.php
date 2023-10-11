@@ -462,9 +462,11 @@
 			if (displayedRows[i].classList.contains('show-betaDetcon') || i % 2 === 0) {
 				displayedRows[i].classList.add('green-bg'); // Even rows or rows with class show-betaDetcon are green
 				displayedRows[i].classList.remove('white-bg');
+				console.log("even");
 			} else {
 				displayedRows[i].classList.remove('green-bg');
 				displayedRows[i].classList.add('white-bg'); // Odd rows are blue
+				console.log("odd");
 			}
 		}
 	}
