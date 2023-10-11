@@ -40,9 +40,11 @@ class OrderController extends PcController {
       }
 
       // 輸入判定
+      
       if ((!isset($input['menu'])) || ($input['menu'] == "")) {
+
         $input['menu'] = 0;  // 預設未結算
-      }
+      } 
 
       if ((!isset($input['sport'])) || ($input['sport'] == "")) {
         $input['sport'] = 1;  // 預設1 , 足球
@@ -77,7 +79,7 @@ class OrderController extends PcController {
       $player_id = $session['player']['id'];
       $api_lang = $this->getAgentLang($player_id);
       if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "02");
+        $this->error(__CLASS__, __FUNCTION__, "02");   
       }
       $this->assign("lang",$api_lang);
 

@@ -1291,11 +1291,10 @@ class LsportApiController extends Controller {
         }
 
         // 取得賠率
-        $market_bet_data = LSportMarketBet::where(
-            "fixture_id", $fixture_id
-        )->where(
-            "bet_id", $market_bet_id
-        )->first();
+        $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
+        ->where("bet_id", $market_bet_id)
+        ->first();
+        
         if ($market_bet_data == false) {
             $this->ApiError("14");
         }
@@ -2500,7 +2499,7 @@ class LsportApiController extends Controller {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
 
-            $tmp[$k]['status'] = $order_status[$v['status']];
+            $tmp[$k]['status'] = $v['status'];
             $tmp[$k]['m_order'] = $v['m_order'];
 
             $sport_id = $v["sport_id"];

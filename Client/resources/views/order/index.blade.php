@@ -301,8 +301,8 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
-		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
+		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
+		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss === null ? '0' : totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
@@ -315,11 +315,11 @@
 	function updateTotal() {
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
-		$('.orderData_totalResultAmount').text(totalResultAmount);
+		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
-		totalWinAmountElement.text(totalWinLoss);
+		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
 			if (totalWinLoss >= 0) {
