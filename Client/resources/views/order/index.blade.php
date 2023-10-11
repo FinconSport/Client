@@ -452,19 +452,18 @@
 		}
 	}
 
-	// Get all the table rows in the tbody of the #orderTable
 	const rows = document.querySelectorAll("#orderTable tbody tr");
 
 	// Iterate through each row and apply the background color
 	rows.forEach((row, index) => {
-	// Check if it's an even row and does not have the class .orderData_expand
-	if (index % 2 === 0 && !row.classList.contains("orderData_expand")) {
-		// Apply the background color to the row
-		const tds = row.querySelectorAll("td");
-		tds.forEach(td => {
+		// Check if it's an even row (0-based index) and does not have the class .orderData_expand
+		if (index % 2 === 0 && !row.classList.contains("orderData_expand")) {
+			// Apply the background color to the row
+			const tds = row.querySelectorAll("td");
+			tds.forEach(td => {
 			td.style.backgroundColor = "#e2f0f0";
-		});
-	}
+			});
+		}
 	});
 </script>
 @endpush
