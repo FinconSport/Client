@@ -414,16 +414,17 @@
 			window.location.href = link;
 		}
 	}
-
-	// Get the query parameter from the current URL
-	const urlParams = new URLSearchParams(window.location.search);
 	// Get the current URL path
 	const urlPath = window.location.pathname;
-	// Check both URL path and query parameters
-	if (urlPath === '/order' || (urlPath === '/order' && urlParams.get('result') === '0')) {
-		document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
-	} else if (urlPath === '/order' && urlParams.get('result') === '1') {
-		document.getElementById('selectOption').value = 'Settled';
+	const select = document.getElementById("selectOption");
+	const unsettledOption = select.querySelector("option[value='Unsettled']");
+	const settledOption = select.querySelector("option[value='Settled']");
+
+	// Set the selected option based on the query parameter or URL path
+	if (urlPath === '/order' && urlPath === '/order?result=0') {
+		unsettledOption.setAttribute("selected", "selected");
+	} else if (urlPath === '/order' && urlPath === '/order?result=1') {
+		settledOption.setAttribute("selected", "selected");
 	}
 </script>
 @endpush
