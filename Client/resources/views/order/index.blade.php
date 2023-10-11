@@ -311,9 +311,7 @@
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
 
-		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
+		$('.betaDetcon:not(:first-child)').remove();
 	}
 
 	function createTotal() {
