@@ -309,7 +309,12 @@
 
 			function toggleContainers() {
 				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('smooth');
-				toggleButton.text(toggleButton.text() === '<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>' ? '<i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i>' : '<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>');
+				// Check if the button currently displays the first icon, and change it to the second icon, and vice versa.
+				if (toggleButton.find('i').hasClass('fa-rotate-90')) {
+					toggleButton.html('<i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i>');
+				} else {
+					toggleButton.html('<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>');
+				}
 			}
 
 			toggleButton.on('click', toggleContainers);
