@@ -215,7 +215,7 @@
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss === null ? '-' : winLoss);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -230,11 +230,11 @@
 		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
-			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
+			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`)
+			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> ${betItem.bet_rate === null ? '' : ` @<span style="color:#c79e42;">${betItem.bet_rate}`}</span>`)
 		);
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
@@ -299,6 +299,10 @@
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
+
+		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+    	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
+
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
@@ -311,15 +315,19 @@
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
+
 	//updateTotal when new data is loaded
 	function updateTotal() {
+		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+    	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
+
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
-		$('.orderData_totalResultAmount').text(totalResultAmount);
+		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
-		totalWinAmountElement.text(totalWinLoss);
+		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
 			if (totalWinLoss >= 0) {
