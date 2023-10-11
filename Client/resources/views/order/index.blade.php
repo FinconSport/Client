@@ -216,6 +216,7 @@
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss === null ? '-' : winLoss);
+		console.log("WINLOSS " + winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -303,12 +304,9 @@
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		
-		if (totalResultAmount === undefined || totalWinLoss === undefined) {
-			totalResultAmount = '0';
-			totalWinLoss = '0';
-		}
-		
+		console.log("totalResultAmount" + totalResultAmount);
+		console.log("totalWinLoss" + totalWinLoss);
+
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
