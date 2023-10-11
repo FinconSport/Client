@@ -452,22 +452,22 @@
 		}
 	}
 
-	const rows = document.querySelectorAll("tr:not(.orderData_expand)");
+	// const rows = document.querySelectorAll("tr:not(.orderData_expand)");
 
-	rows.forEach((row, index) => {
-	if (index % 2 === 0) {
-		// Even row
-		const tds = row.querySelectorAll("td");
-		tds.forEach(td => {
-		td.style.backgroundColor = "#e2f0f0";
-		});
-	} else {
-		// Odd row
-		const tds = row.querySelectorAll("td");
-		tds.forEach(td => {
-		td.style.backgroundColor = "#ffffff";
-		});
-	}
-	});
+	// rows.forEach((row, index) => {
+	// if (index % 2 === 0) {
+	// 	// Even row
+	// 	const tds = row.querySelectorAll("td");
+	// 	tds.forEach(td => {
+	// 	td.style.backgroundColor = "#e2f0f0";
+	// 	});
+	// } else {
+	// 	// Odd row
+	// 	const tds = row.querySelectorAll("td");
+	// 	tds.forEach(td => {
+	// 	td.style.backgroundColor = "#ffffff";
+	// 	});
+	// }
+	// });
 </script>
 @endpush
