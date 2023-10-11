@@ -848,7 +848,8 @@ class LsportApiController extends Controller {
                 $market_priority = $vv['priority'];
                 $market_main_line = $vv['main_line'];
 
-                // 取得marke_name
+                // 取得marke_name  TODO
+                $market_name = $vv['name_en'];
 
                 $data[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
                     'market_id' => $market_id,
