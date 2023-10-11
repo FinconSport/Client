@@ -1195,14 +1195,11 @@
 
     // 投注
     function sendOrder() {
-        console.log(sendOrderData, sendOrderData.bet_data.length, parseInt(sendOrderData.bet_amount) > 0)
         if (sendOrderData.bet_data.length === 1) {
-            console.log('error 2')
             showErrorToast(langTrans.m_order.at_least_two);
             return;
         }
-        if ( parseInt(sendOrderData.bet_amount) > 0 ) {
-            console.log('error no money')
+        if ( !parseInt(sendOrderData.bet_amount) > 0 ) {
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
