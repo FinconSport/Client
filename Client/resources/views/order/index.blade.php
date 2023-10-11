@@ -458,7 +458,7 @@
 	// Iterate through each row and apply the background color
 	rows.forEach((row, index) => {
 	// Check if it's an even row and does not have the class .orderData_expand
-	if (index % 2 === 1 && !row.classList.contains("orderData_expand")) {
+	if (index % 2 === 0 && !row.classList.contains("orderData_expand")) {
 		// Apply the background color to the row
 		const tds = row.querySelectorAll("td");
 		tds.forEach(td => {
