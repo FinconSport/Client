@@ -253,26 +253,40 @@
 		);
 
 		if (betIndex > 0) {
-			const additionalTds = $('<td style="width: 8%;"></td>'.repeat(9));
-			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
-			const additionalTr = $(`<tr id="${dynamicId}" class="orderData_expand"></tr>`).append(additionalTds);
+			// Create additional <td> elements for betItems other than the first one
+			const additionalTds = $('<td style="width: 8%;"></td>' +
+				'<td style="width: 9%;"></td>' +
+				'<td style="width: 21%;text-align:left;" class="orderData_betData_Event"></td>' +
+				'<td style="width: 10%;text-align:left;" class="orderData_betData_BetWay"></td>' +
+				'<td style="width: 10%;text-align:right;" class="orderData_betData_Result"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>' +
+				'<td style="width: 10%;"></td>');
+
+			// Create a new <tr> for the additional <td> elements with a dynamic ID
+			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
+			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(additionalTds);
+
+			// Append the additional <tr> to the tbody of the table
 			$('#orderDataTemp').append(additionalTr);
 
-			const betDataEventContainer = $(`#${dynamicId}`);
+			// Append the data to the created additional <td> elements except for the first one
+			const betDataEventContainer = $(`#additionalTr_${betItem.league_id}${betItem.league_name}`);
 			betDataEventContainer.find('.orderData_betData_Event').html(`
-			${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-			${betItem.home_team_name} VS ${betItem.away_team_name} 
-			<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-			${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-			${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
+				${betItem.home_team_name} VS ${betItem.away_team_name} 
+				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
+				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
 
 			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-			${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
 
 			betDataEventContainer.find('.orderData_betData_Result').html(`
-			${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
+				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
