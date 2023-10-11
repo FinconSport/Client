@@ -427,11 +427,6 @@
         $('#datepicker_from').datepicker();
 		$('#ui-datepicker-div').addClass('custom-datepicker-class');
 		$('#datepicker_to').datepicker();
-		$('#orderTable tbody tr:visible').each(function(index) {
-			if (index % 2 === 0) {
-				$(this).find('td').css('background-color', '#e2f0f0');
-			}
-		});
     });
 
 	formatDateTime = (dateTimeString) => {
