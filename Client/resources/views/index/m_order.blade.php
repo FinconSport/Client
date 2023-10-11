@@ -26,7 +26,7 @@
                     </p>
                 </div>
                 <div class="col-12 row m-0 bg-lightgreen orderInfo">
-                    <div class="col-12"><span key='rate_name'></span></div>
+                    <div class="col-12"><span key='bet_type'></span></div>
                     <div class="col-8 mt-2"><span key='bet_name'></span></div>
                     <div class="col-4 mt-2 text-right" key='oddContainer'>
                         <span key='odd' class="odd"></span>
@@ -220,7 +220,7 @@
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
-<link href="{{ asset('css/m_order.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/m_order.css?v=' . $current_time) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
@@ -787,25 +787,11 @@
                                             item.find('.odd').show()
                                             item.find('.bet_name').show()
                                             item.attr('onclick', 'selectMOrderBet($(this))')
-
-                                            // 左邊選中的剛好鎖起來了 -> 復原
-                                            if ($(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0) {
-                                                $('#submitOrder').html(langTrans.bet_area.bet)
-                                                $('#submitOrder').removeClass('disabled')
-                                                $('#submitOrder').removeAttr('disabled')
-                                            }
                                         } else {
                                             item.find('.fa-lock').show()
                                             item.find('.odd').hide()
                                             item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
-
-                                            // 左邊選中的剛好鎖起來了
-                                            if ($(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0) {
-                                                $('#submitOrder').html(langTrans.bet_area.disabled)
-                                                $('#submitOrder').addClass('disabled')
-                                                $('#submitOrder').attr('disabled', true)
-                                            }
                                         }
                                     })
                                 } else {
@@ -1073,9 +1059,12 @@
                 bet_rate: bet_rate,
                 bet_type: bet_type,
                 bet_name: bet_name,
+                bet_name_en: bet_name_en,
+                bet_name_line: bet_name_line,
                 league: league,
                 home: home,
-                away: away
+                away: away,
+                priority: priority
             })
         }
 
@@ -1115,16 +1104,28 @@
         $('#mask').fadeIn()
         mOrderRate = 1
         sendOrderData.bet_data.forEach(function(item, index) {
+
+            console.log(item)
+
             mOrderRate = parseFloat(item.bet_rate) * mOrderRate
             let leftSlideOrderCard = $('#leftSlideOrderCardTemplate').clone();
             leftSlideOrderCard.attr('key', 'generateCard')
             leftSlideOrderCard.removeAttr('id')
             leftSlideOrderCard.removeAttr('style')
+
             leftSlideOrderCard.find('div[key="index"]').html(index + 1)
-            leftSlideOrderCard.find('span[key="bet_type"]').html(item.bet_type)
-            leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
-            leftSlideOrderCard.find('span[key="odd"]').html(item.bet_rate)
             leftSlideOrderCard.find('p[key="league"]').html(item.league)
+            leftSlideOrderCard.find('span[key="bet_type"]').html(item.bet_type)
+
+            if( convertTeamPriArr.indexOf(item.priority) === -1 ) {
+                leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
+            } else {
+                let str = item.bet_name_en == 1 ? item.home : item.away
+                str += ' ' + item.bet_name_line
+                leftSlideOrderCard.find('span[key="bet_name"]').html(str)
+            }
+            
+            leftSlideOrderCard.find('span[key="odd"]').html(item.bet_rate)
             leftSlideOrderCard.find('span[key="home"]').html(item.home)
             leftSlideOrderCard.find('span[key="away"]').html(item.away)
             leftSlideOrderCard.find('div[key="oddContainer"]').attr('fixture_id', item.fixture_id)
@@ -1201,6 +1202,8 @@
 
     // 投注
     function sendOrder() {
+        
+        console.log(sendOrderData)
         if (sendOrderData.bet_data.length === 1) {
             showErrorToast(langTrans.m_order.at_least_two);
             return;
@@ -1217,6 +1220,9 @@
         //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
         //     return;
         // }
+
+        // Show loading spinner while submitting
+        showLoading();
 
         var jsonData = {
             ...sendOrderData
