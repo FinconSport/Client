@@ -261,12 +261,14 @@ span.orderData_mOrder {
     background-color: #fff;
     outline: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .search-statistic-container #selectOption option:focus,
 .search-statistic-container #selectOption option:checked,
 .search-statistic-container #selectOption option:hover  {
-    background-color: #c4d4d4;
+    background-color: #c4d4d4!important;
+    box-shadow: 0 0 10px 100px #c4d4d4 inset;
 }
 
 /* for IE10 */ 
