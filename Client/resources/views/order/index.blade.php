@@ -301,15 +301,17 @@
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
+			const tdRow = $(`#${dynamicId}`);
 
 			function toggleContainers() {
-			$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
-			toggleButton.find('i').toggleClass('fa-rotate-90');
+				tableRow.toggleClass('hide-betaDetcon');
+				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
+
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
