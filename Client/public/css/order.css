@@ -258,12 +258,25 @@ span.orderData_mOrder {
     align-items: center;
 }
 
+.search-statistic-container #selectOption option:first-child{
+    padding: 0px;
+    background-color: transparent;
+    border-radius: 0px;
+}
+
 .search-statistic-container #selectOption option{
     padding: 0.5rem;
     background-color: #fff;
     outline: none;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.search-statistic-container #selectOption option:first-child:focus,
+.search-statistic-container #selectOption option:first-child:checked,
+.search-statistic-container #selectOption option:first-child:hover  {
+    background-color: transparent!important;
+    box-shadow: 0 0 10px 100px transparent inset;
 }
 
 .search-statistic-container #selectOption option:focus,
