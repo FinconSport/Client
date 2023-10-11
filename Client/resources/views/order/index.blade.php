@@ -226,26 +226,27 @@
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) =>
 			$('<div>').html(content).addClass(className);
-
+		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
-
+		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
-
+		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`)
 		);
-
+		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`)
 		);
 
 		if (betIndex > 0) {
+			//append in another td if have another bet_item
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
@@ -297,8 +298,6 @@
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
 	}
-
-
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
