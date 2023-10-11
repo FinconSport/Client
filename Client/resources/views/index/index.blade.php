@@ -367,7 +367,6 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
-
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 ) {
             card.find('[key="not-show-baseCon"]').hide()
@@ -515,9 +514,13 @@
 
                     if( v4.status === 1 ) {
                         item.find('.fa-lock').hide()
+                        item.find('.odd').show()
+                        item.find('.bet_name').show()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
                         item.find('.fa-lock').show()
+                        item.find('.odd').hide()
+                        item.find('.bet_name').hide()
                         item.removeAttr('onclick')
                     }
 
@@ -527,20 +530,30 @@
 
                 })
             } else {
-                for (let j = 0; j < 2; j++) {
-                    let item = $('div[template="betItem-no"]').clone()
+                for (let j = 0; j < 3; j++) {
+                    // 足球 讓球、大小 補空格
+                    if( !(sport === 6046 && allWinArr.indexOf(i) === -1) && j === 2 ) break;
+
+                    let item = null
+                    if (allWinArr.indexOf(i) !== -1 ) {
+                        item = $(`div[template="betItem-1"]`).clone()
+                    } else {
+                        item = $(`div[template="betItem"]`).clone()
+                        // 四格的時候調整寬度
+                        if( priorityArr.length === 4 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                        }
+                    }
+
+                    item.find('.fa-lock').show()
+                    item.find('.odd').hide()
+                    item.find('.bet_name').hide()
+                    item.removeAttr('onclick')
+
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
                 }
-            }
-
-            // 足球 讓球、大小 補空格
-            if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
-                let item = $('div[template="betItem-no"]').clone()
-                item.removeAttr('hidden')
-                item.removeAttr('template')
-                bet_div.append(item)
             }
 
             bet_div.removeAttr('hidden')
@@ -786,19 +799,14 @@
                                         if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                             // 判斷賠率是否有改變
                                             if( parseFloat(price) > parseFloat(v4.price) ) {
-                                                // console.log('賠率::' + price + ' ->' + v4.price)
                                                 // 賠率下降
                                                 lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
                                             if( parseFloat(price) < parseFloat(v4.price) ) {
-                                                // console.log('賠率::' + price + ' ->' + v4.price)
                                                 // 賠率上升
                                                 raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
-                                        } else {
-                                            // console.log(item.attr('home') + ' VS ' + item.attr('away'))
-                                            // console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
-                                        }
+                                        } 
 
                                         // set attribute
                                         if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
@@ -846,6 +854,8 @@
                                         // 狀態 鎖頭
                                         if( v4.status === 1 ) {
                                             item.find('.fa-lock').hide()
+                                            item.find('.odd').show()
+                                            item.find('.bet_name').show()
                                             item.attr('onclick', 'openCal($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
@@ -856,6 +866,8 @@
                                             }
                                         } else {
                                             item.find('.fa-lock').show()
+                                            item.find('.odd').hide()
+                                            item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
@@ -868,9 +880,26 @@
                                     })
                                 } else {
                                     bet_div.html('')
-                                    let i = sport === 6046 ? 3 : 2
-                                    for (let j = 0; j < i; j++) {
-                                        let item = $('div[template="betItem-no"]').clone()
+                                    for (let j = 0; j < 3; j++) {
+                                        // 足球 讓球、大小 補空格
+                                        if( !(sport === 6046 && allWinArr.indexOf(i) === -1) && j === 2 ) break;
+
+                                        let item = null
+                                        if (allWinArr.indexOf(i) !== -1 ) {
+                                            item = $(`div[template="betItem-1"]`).clone()
+                                        } else {
+                                            item = $(`div[template="betItem"]`).clone()
+                                            // 四格的時候調整寬度
+                                            if( priorityArr.length === 4 ) {
+                                                item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                                            }
+                                        }
+
+                                        item.find('.fa-lock').show()
+                                        item.find('.odd').hide()
+                                        item.find('.bet_name').hide()
+                                        item.removeAttr('onclick')
+
                                         item.removeAttr('hidden')
                                         item.removeAttr('template')
                                         bet_div.append(item)

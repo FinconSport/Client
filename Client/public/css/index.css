@@ -240,12 +240,12 @@
 [key='betItemDiv-1'] i, 
 [key='betItemDiv'] i {
     position: absolute;
-    top: 0.3rem;
+    top: 0.2rem;
     margin-left: 0.5rem;
 }
 
 [key="betItemDiv-no"] i {
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
 }
 
 .labelItem{
