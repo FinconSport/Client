@@ -4,11 +4,9 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<select id="selectOption" name="selectOption">
-					<option value="">{{ trans('order.main.select_sport') }}</option>
-					<option value="baseball">Baseball</option>
-					<option value="football">Football</option>
-					<option value="basketball">Basketball</option>
+				<select id="selectOption" name="selectOption" onchange="redirectToPage(this)">
+					<option value="Unsettled" data-link="?result=0">Unsettled</option>
+					<option value="Settled" data-link="?result=1">Settled</option>
 				</select>
 			</div>
 			<div class="datecalendar-con">
@@ -407,5 +405,26 @@
         const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
         return `${month}-${day} ${hour}:${minute}`;
     }
+
+	//redirent select settled/unsettled
+	function redirectToPage(select) {
+		var selectedOption = select.options[select.selectedIndex];
+		var link = selectedOption.getAttribute('data-link');
+		if (link) {
+			window.location.href = link;
+		}
+	}
+
+	// Get the query parameter from the current URL
+	const urlParams = new URLSearchParams(window.location.search);
+	const result = urlParams.get('result');
+	// Get the current URL path
+	const urlPath = window.location.pathname;
+	// Set the selected option based on the query parameter or URL path
+	if (urlPath === '/order') {
+	document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
+	} else if (result === '0' || result === '1') {
+	document.getElementById('selectOption').value = result;
+}
 </script>
 @endpush
