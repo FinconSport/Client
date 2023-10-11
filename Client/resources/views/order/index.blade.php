@@ -417,13 +417,12 @@
 
 	// Get the query parameter from the current URL
 	const urlParams = new URLSearchParams(window.location.search);
-	const result = urlParams.get('result');
 	// Get the current URL path
 	const urlPath = window.location.pathname;
 	// Set the selected option based on the query parameter or URL path
-	if (urlPath === '/order' || result === '0') {
+	if (urlPath === '/order' || urlPath === '/order?result=0') {
 		document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
-	} else if (result === '1') {
+	} else if (urlPath === '/order?result=1') {
 		document.getElementById('selectOption').value = 'Settled';
 	}
 </script>
