@@ -1245,27 +1245,24 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
-                if (res.message === 'SUCCESS_API_M_GAME_BET_01') {
-                    // 餘額更新
-                    refreshBalence()
-                    showSuccessToast(res.message)
-                } else {
-                    showErrorToast(res.message)
-                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
+                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });
 
-        // 金額歸零
-        $('#moneyInput').val('')
-        $('#moneyInput').trigger('change')
-        // 隱藏計算機
-        closeCal(1)
-        // 取消全部所選玩法
-        closeOrderDetail()
+        let hasTenSecondsPassed = false;
+        // if the msg is not getting in 10 sec, hide the loading and close the betting area
+        setTimeout(function() {
+            hasTenSecondsPassed = true;
+            if (hasTenSecondsPassed) {
+                hideLoading();
+                closeCal(1);
+                closeOrderDetail()
+            }
+        }, 10000);
     }
 
     // 統計

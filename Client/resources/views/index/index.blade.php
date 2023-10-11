@@ -1246,15 +1246,6 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
-                // if (res.message === 'SUCCESS_API_GAME_BET_01') {
-                //     // 餘額更新
-                //     refreshBalence()
-                //     showSuccessToast(res.message)
-                // } else {
-                //     showErrorToast(res.message)
-                // }
-
-                // hideLoading();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
