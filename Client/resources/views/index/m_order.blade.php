@@ -1233,6 +1233,8 @@
         });
         jsonData.bet_data = JSON.stringify(jsonData.bet_data)
 
+        console.log(jsonData)
+
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/m_game_bet',
             method: 'POST',
