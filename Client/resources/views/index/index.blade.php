@@ -406,41 +406,43 @@
         // living
         if( v3.status === 2 ) {
             // score
-            if( v3.scoreboard[1] && v3.scoreboard[1][0] ) home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-            if( v3.scoreboard[2] && v3.scoreboard[2][0] ) away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            if( v3.scoreboard ) {
+                home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+                away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            }
+            
+            let timerStr = null
+            if( v3.periods ) {
+                // stage
+                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                // exception baseball
+                if( sport === 154914 ) {
+                    // stage
+                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+                    // base
+                    let baseCont = card.find('img[alt="base"]')
+                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
+                    baseCont.attr('src', `/image/base/${baseText}.png`)
+
+
+                    // balls
+                    let strike = card.find('div[key="strike"]')
+                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
+                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
+                    let ball = card.find('div[key="ball"]')
+                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
+                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
+                    let out = card.find('div[key="out"]')
+                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
+                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
+                }
+                // stage text
+                time.html(timerStr)
+            }
             
 
-            // stage
-            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-
-            // exception baseball
-            if( sport === 154914 ) {
-                // stage
-                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-
-                // base
-                let baseCont = card.find('img[alt="base"]')
-                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
-                baseCont.attr('src', `/image/base/${baseText}.png`)
-
-
-                // balls
-                let strike = card.find('div[key="strike"]')
-                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
-                strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
-                let ball = card.find('div[key="ball"]')
-                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
-                ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
-                let out = card.find('div[key="out"]')
-                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
-                out.css('background-image', `url(/image/balls/o${outText}.png)`)
-            }
-
-            // stage text
-            time.html(timerStr)
-
             if( sport === 48242 ) {
-                console.log(v3, v3.status)
                 let card2 = card.find('[key="basketBallQuaterBet"]')
                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
@@ -448,7 +450,7 @@
                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
 
                 // bet area
-                if( v3?.periods?.period ) {
+                if( v3.periods ) {
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                     if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
                 }
@@ -714,56 +716,54 @@
 
                         // living
                         if( v3.status === 2 ) {
-
-                            console.log(v3.scoreboard)
                             // score
-                            let homeScore = home_team_info.find('.scoreSpan')
-                            let awayScore = away_team_info.find('.scoreSpan')
-                            let nowHomeScore = parseInt(homeScore.html())
-                            let nowAwayScore = parseInt(awayScore.html())
-                            let updateHome = null
-                            let updateAway = null
+                            if( v3.scoreboard ) {
+                                let homeScore = home_team_info.find('.scoreSpan')
+                                let awayScore = away_team_info.find('.scoreSpan')
+                                let nowHomeScore = parseInt(homeScore.html())
+                                let nowAwayScore = parseInt(awayScore.html())
+                                let updateHome = parseInt(v3.scoreboard[1][0])
+                                let updateAway = parseInt(v3.scoreboard[2][0])
+                                if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
+                                if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
 
-                            if( v3.scoreboard && v3.scoreboard[1] && v3.scoreboard[1][0] ) updateHome = parseInt(v3.scoreboard[1][0])
-                            if( v3.scoreboard && v3.scoreboard[2] && v3.scoreboard[2][0] ) updateAway = parseInt(v3.scoreboard[2][0])
+                                setTimeout(() => {
+                                    homeScore.removeClass('raiseScore')
+                                    awayScore.removeClass('raiseScore')
+                                }, 3000);
 
-                            if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
-                            if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
-
-                            setTimeout(() => {
-                                homeScore.removeClass('raiseScore')
-                                awayScore.removeClass('raiseScore')
-                            }, 3000);
-
-                            if( updateHome ) homeScore.html( v3.scoreboard[1][0] )
-                            if( updateAway ) awayScore.html( v3.scoreboard[2][0] )
+                                homeScore.html( v3.scoreboard[1][0] )
+                                awayScore.html( v3.scoreboard[2][0] )
+                            }
 
                             // stage
-                            let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                            let timerStr = null
+                            if( v3.periods ) {
+                                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                                // bet data
+                                renderBetArea(mainPriorityArr, v3, k3)
+                                // exception baseball
+                                if( sport === 154914 ) {
+                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
-                            // bet data
-                            renderBetArea(mainPriorityArr, v3, k3)
+                                    // base
+                                    let baseCont = card.find('img[alt="base"]')
+                                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
+                                    baseCont.attr('src', `/image/base/${baseText}.png`)
 
-                            // exception baseball
-                            if( sport === 154914 ) {
-                                v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                                    // balls
+                                    let strike = card.find('div[key="strike"]')
+                                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
+                                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
+                                    let ball = card.find('div[key="ball"]')
+                                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
+                                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
+                                    let out = card.find('div[key="out"]')
+                                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
+                                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
+                                }
 
-                                // base
-                                let baseCont = card.find('img[alt="base"]')
-                                let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
-                                baseCont.attr('src', `/image/base/${baseText}.png`)
-
-
-                                // balls
-                                let strike = card.find('div[key="strike"]')
-                                let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
-                                strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
-                                let ball = card.find('div[key="ball"]')
-                                let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
-                                ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
-                                let out = card.find('div[key="out"]')
-                                let outText = v3.periods.Outs ? v3.periods.Outs : '0'
-                                out.css('background-image', `url(/image/balls/o${outText}.png)`)
+                                time.html(timerStr)
                             }
 
                             // exception basketball
@@ -771,7 +771,7 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
 
                                 // 換節了 重新渲染單節投注區塊
-                                if( v3?.periods?.period ) {
+                                if( v3.periods ) {
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
 
                                     if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
@@ -787,10 +787,9 @@
                                 away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
                                 if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
                             }
-                            time.html(timerStr)
+                            
                         }
                        
-
                         function renderBetArea(priorityArr, v3, k3) {
                             console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
