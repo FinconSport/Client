@@ -452,29 +452,25 @@
 		}
 	}
 
-    function changeBackgroundColor() {
-        var table = document.getElementById('orderTable');
-        var rows = table.querySelectorAll('tbody tr');
+	// Function to update row colors based on position and display property
+	function updateRowColors() {
+		var allRows = document.querySelectorAll('tr');
+		for (var i = 0; i < allRows.length; i++) {
+			if (window.getComputedStyle(allRows[i]).display === 'table-row') {
+				if (i % 2 === 0) {
+					allRows[i].classList.add('green-bg'); // Even displayed rows are green
+					allRows[i].classList.remove('white-bg');
+				} else {
+					allRows[i].classList.remove('green-bg');
+					allRows[i].classList.add('white-bg'); // Odd displayed rows are blue
+				}
+			}
+		}
+	}
 
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows[i];
-            var computedStyle = window.getComputedStyle(row);
-
-            if (computedStyle.display === 'table-row' && !row.classList.contains('orderData_expand')) {
-                if (i % 2 === 0) {
-                    row.style.backgroundColor = '#e2f0f0';
-                } else {
-                    row.style.backgroundColor = '';
-                }
-            } else {
-                row.style.backgroundColor = '';
-            }
-        }
-
-        console.log('Button clicked, background changed.');
-    }
-
-	document.getElementById('changeBackground').addEventListener('click', changeBackgroundColor);
+	updateRowColors();
+	var observer = new MutationObserver(updateRowColors);
+    observer.observe(document.getElementById('orderDataTemp'), { attributes: true, subtree: true, childList: true });
 
 </script>
 @endpush
