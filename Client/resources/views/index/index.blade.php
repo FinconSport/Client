@@ -530,10 +530,7 @@
 
                 })
             } else {
-                for (let j = 0; j < 3; j++) {
-                    // 足球 讓球、大小 補空格
-                    if( !(sport === 6046 && allWinArr.indexOf(i) === -1) && j === 2 ) break;
-
+                for (let j = 0; j < 2; j++) {
                     let item = null
                     if (allWinArr.indexOf(i) !== -1 ) {
                         item = $(`div[template="betItem-1"]`).clone()
@@ -554,6 +551,14 @@
                     item.removeAttr('template')
                     bet_div.append(item)
                 }
+            }
+
+            // 足球 讓球、大小 補空格
+            if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
+                let item = $('div[template="betItem-no"]').clone()
+                item.removeAttr('hidden')
+                item.removeAttr('template')
+                bet_div.append(item)
             }
 
             bet_div.removeAttr('hidden')
@@ -879,30 +884,15 @@
                                         }
                                     })
                                 } else {
-                                    bet_div.html('')
-                                    for (let j = 0; j < 3; j++) {
-                                        // 足球 讓球、大小 補空格
-                                        if( !(sport === 6046 && allWinArr.indexOf(i) === -1) && j === 2 ) break;
-
-                                        let item = null
-                                        if (allWinArr.indexOf(i) !== -1 ) {
-                                            item = $(`div[template="betItem-1"]`).clone()
-                                        } else {
-                                            item = $(`div[template="betItem"]`).clone()
-                                            // 四格的時候調整寬度
-                                            if( priorityArr.length === 4 ) {
-                                                item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
-                                            }
-                                        }
+                                    let k = 2
+                                    if( sport === 6046 ) k = 3
+                                    for (let j = 0; j < k; j++) {
+                                        let item = bet_div.find('.betItemDiv').eq(j)
 
                                         item.find('.fa-lock').show()
                                         item.find('.odd').hide()
                                         item.find('.bet_name').hide()
                                         item.removeAttr('onclick')
-
-                                        item.removeAttr('hidden')
-                                        item.removeAttr('template')
-                                        bet_div.append(item)
                                     }
                                 }
                             });
