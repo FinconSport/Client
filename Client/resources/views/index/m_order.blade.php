@@ -1165,10 +1165,6 @@
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
         if (n === 0) $('#m_order_detail').fadeIn()
-        // 左邊選中的剛好鎖起來了 -> 復原
-        $('#submitOrder').html(langTrans.bet_area.bet)
-        $('#submitOrder').removeClass('disabled')
-        $('#submitOrder').removeAttr('disabled')
     }
 
     // 金額快速鍵
