@@ -246,7 +246,7 @@
 				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>
 				${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
 		);
-		
+
 		// Result column 
 		function getBetStatusContent(betItem) {
 			const statusText = {
@@ -290,8 +290,8 @@
 				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> 
 				@<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
-			
-			const betDataEventContainer = $('<div class="orderData_betData_Result">').html(
+
+			betDataEventContainer.find('.orderData_betData_Result').html(
 				getBetStatusContent(betItem)
 			).append(`<br>${formatDateTime(orderItem.result_time)}`);
 
