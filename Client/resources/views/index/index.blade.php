@@ -189,7 +189,6 @@
 
 <!-- no data betItem template -->
 <div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
-    <i class="fa-solid fa-lock"></i>
 </div>
 
 
@@ -367,7 +366,6 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
-
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 ) {
             card.find('[key="not-show-baseCon"]').hide()
@@ -408,8 +406,9 @@
         // living
         if( v3.status === 2 ) {
             // score
-            home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-            away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            if( v3.scoreboard[1] && v3.scoreboard[1][0] ) home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
+            if( v3.scoreboard[2] && v3.scoreboard[2][0] ) away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
+            
 
             // stage
             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
@@ -515,9 +514,13 @@
 
                     if( v4.status === 1 ) {
                         item.find('.fa-lock').hide()
+                        item.find('.odd').show()
+                        item.find('.bet_name').show()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
                         item.find('.fa-lock').show()
+                        item.find('.odd').hide()
+                        item.find('.bet_name').hide()
                         item.removeAttr('onclick')
                     }
 
@@ -528,7 +531,22 @@
                 })
             } else {
                 for (let j = 0; j < 2; j++) {
-                    let item = $('div[template="betItem-no"]').clone()
+                    let item = null
+                    if (allWinArr.indexOf(i) !== -1 ) {
+                        item = $(`div[template="betItem-1"]`).clone()
+                    } else {
+                        item = $(`div[template="betItem"]`).clone()
+                        // 四格的時候調整寬度
+                        if( priorityArr.length === 4 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                        }
+                    }
+
+                    item.find('.fa-lock').show()
+                    item.find('.odd').hide()
+                    item.find('.bet_name').hide()
+                    item.removeAttr('onclick')
+
                     item.removeAttr('hidden')
                     item.removeAttr('template')
                     bet_div.append(item)
@@ -696,13 +714,18 @@
 
                         // living
                         if( v3.status === 2 ) {
+
+                            console.log(v3.scoreboard)
                             // score
                             let homeScore = home_team_info.find('.scoreSpan')
                             let awayScore = away_team_info.find('.scoreSpan')
                             let nowHomeScore = parseInt(homeScore.html())
                             let nowAwayScore = parseInt(awayScore.html())
-                            let updateHome = parseInt(v3.scoreboard[1][0])
-                            let updateAway = parseInt(v3.scoreboard[2][0])
+                            let updateHome = null
+                            let updateAway = null
+
+                            if( v3.scoreboard && v3.scoreboard[1] && v3.scoreboard[1][0] ) updateHome = parseInt(v3.scoreboard[1][0])
+                            if( v3.scoreboard && v3.scoreboard[2] && v3.scoreboard[2][0] ) updateAway = parseInt(v3.scoreboard[2][0])
 
                             if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
                             if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
@@ -712,8 +735,8 @@
                                 awayScore.removeClass('raiseScore')
                             }, 3000);
 
-                            homeScore.html( v3.scoreboard[1][0] )
-                            awayScore.html( v3.scoreboard[2][0] )
+                            if( updateHome ) homeScore.html( v3.scoreboard[1][0] )
+                            if( updateAway ) awayScore.html( v3.scoreboard[2][0] )
 
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
@@ -786,19 +809,14 @@
                                         if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
                                             // 判斷賠率是否有改變
                                             if( parseFloat(price) > parseFloat(v4.price) ) {
-                                                // console.log('賠率::' + price + ' ->' + v4.price)
                                                 // 賠率下降
                                                 lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
                                             if( parseFloat(price) < parseFloat(v4.price) ) {
-                                                // console.log('賠率::' + price + ' ->' + v4.price)
                                                 // 賠率上升
                                                 raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
-                                        } else {
-                                            // console.log(item.attr('home') + ' VS ' + item.attr('away'))
-                                            // console.log('盤口改變:: ' + item.attr('bet_type') + ' ' + item.attr('bet_name') + ' -> ' + v4.market_bet_name + ' ' + v4.line)
-                                        }
+                                        } 
 
                                         // set attribute
                                         if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
@@ -817,18 +835,17 @@
 
 
                                         // 賦值
-                                        $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
                                         switch ( i ) {
-                                            case 1:
-                                                item.find('.bet_name').html('')
-                                                break;
-                                            case 3:
+                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
                                                 item.find('.bet_name').html( v4.line )
                                                 break;
-                                            case 5:case 7:
-                                                item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                                                 break;
-                                            default:
+                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+                                                item.find('.bet_name').html( v4.market_bet_name )
+                                                break;
+                                            default: // 獨贏
                                                 break;
                                         }
 
@@ -846,6 +863,8 @@
                                         // 狀態 鎖頭
                                         if( v4.status === 1 ) {
                                             item.find('.fa-lock').hide()
+                                            item.find('.odd').show()
+                                            item.find('.bet_name').show()
                                             item.attr('onclick', 'openCal($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
@@ -856,6 +875,8 @@
                                             }
                                         } else {
                                             item.find('.fa-lock').show()
+                                            item.find('.odd').hide()
+                                            item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
@@ -867,13 +888,15 @@
                                         }
                                     })
                                 } else {
-                                    bet_div.html('')
-                                    let i = sport === 6046 ? 3 : 2
-                                    for (let j = 0; j < i; j++) {
-                                        let item = $('div[template="betItem-no"]').clone()
-                                        item.removeAttr('hidden')
-                                        item.removeAttr('template')
-                                        bet_div.append(item)
+                                    let k = 2
+                                    if( sport === 6046 ) k = 3
+                                    for (let j = 0; j < k; j++) {
+                                        let item = bet_div.find('.betItemDiv').eq(j)
+
+                                        item.find('.fa-lock').show()
+                                        item.find('.odd').hide()
+                                        item.find('.bet_name').hide()
+                                        item.removeAttr('onclick')
                                     }
                                 }
                             });

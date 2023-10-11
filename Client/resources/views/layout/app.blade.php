@@ -56,22 +56,9 @@
 
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<div class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
-								<div id="orderSportCon" class="submenu-toggle-list">
-									<a class="sportSelect" id="result_settled" href="/order?result=1">
-										<div class="sportname-con">
-											<span><p>{{ trans('common.left_menu.settled') }}</p></span>
-										</div>
-									</a>
-									<a class="sportSelect" id="result_unsettled" href="/order?result=0">
-										<div class="sportname-con">
-											<span><p>{{ trans('common.left_menu.unsettled') }}</p></span>
-										</div>
-									</a>
-								</div>
+								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
 							</div>
 						</div>
-						
 
 						<div class="submenu-main" id="lf_match">
 							<div class="submenu-inner">
@@ -339,13 +326,7 @@
 					currentPage = 'lf_mOrder'
 					break;
 				case '/order':
-					if (window.location.search === '?result=1') {
-						currentResult = 'result_settled';
-						currentPage = 'lf_order';
-					} else if (window.location.search === '?result=0') {
-						currentResult = 'result_unsettled';
-						currentPage = 'lf_order';
-					}
+					currentPage = 'lf_order';
 					break;
 				case '/match':
 					currentPage = 'lf_match'

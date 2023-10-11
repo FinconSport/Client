@@ -4,12 +4,10 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<select id="selectOption" name="selectOption">
-					<option value="">{{ trans('order.main.select_sport') }}</option>
-					<option value="baseball">Baseball</option>
-					<option value="football">Football</option>
-					<option value="basketball">Basketball</option>
-				</select>
+			<select id="selectOption" name="selectOption"  onchange="redirectToPage(this)">
+				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
+				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
+			</select>
 			</div>
 			<div class="datecalendar-con">
 				<div class="datepicker-con">
@@ -182,7 +180,6 @@
 			}
 	}
 
-
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		const orderDataId = orderData.find('.orderData_id');
@@ -224,28 +221,28 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		const createHtmlElement = (className, content) =>
-			$('<div>').html(content).addClass(className);
-
+		const createHtmlElement = (className, content) => $('<div>').html(content).addClass(className);
+		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
-
+		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
-
+		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`)
 		);
-
+		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-right', `${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`)
 		);
 
 		if (betIndex > 0) {
+			//append in another td if have another bet_item
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
@@ -254,22 +251,24 @@
 				'<td style="width: 10%; text-align:right;" class="orderData_betData_Result"></td>' +
 				'<td style="width: 10%;"></td>'.repeat(4)
 			);
-
 			$('#orderDataTemp').append(additionalTr);
 
 			const betDataEventContainer = $(`#${dynamicId}`);
+			//append event additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Event').html(`
-			${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-			${betItem.home_team_name} VS ${betItem.away_team_name} 
-			<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-			${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-			${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
+				${betItem.home_team_name} VS ${betItem.away_team_name} 
+				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
+				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
+			//append bet way additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-			${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
+			//append result additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Result').html(`
-			${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
+				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
@@ -297,8 +296,6 @@
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
 	}
-
-
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
@@ -357,8 +354,6 @@
 		}
 	});
 
-
-
   	// 寫入頁面限定JS
   	$(document).ready(function() {
 		// ===== DATA LATER =====
@@ -408,5 +403,27 @@
         const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
         return `${month}-${day} ${hour}:${minute}`;
     }
+
+	// function of selected unsettled and settled
+	const urlParams = new URLSearchParams(window.location.search);
+	const select = document.getElementById("selectOption");
+	const unsettledOption = select.querySelector("option[value='{{ trans('common.left_menu.unsettled') }}']");
+	const settledOption = select.querySelector("option[value='{{ trans('common.left_menu.settled') }}']");
+	// Check for the 'result' query parameter in the URL
+	const resultParam = urlParams.get("result");
+
+	if (resultParam === "0") {
+		unsettledOption.setAttribute("selected", "selected");
+	} else if (resultParam === "1") {
+		settledOption.setAttribute("selected", "selected");
+	}
+
+	function redirectToPage(select) {
+		var selectedOption = select.options[select.selectedIndex];
+		var link = selectedOption.getAttribute('data-link');
+		if (link) {
+			window.location.search = link;
+		}
+	}
 </script>
 @endpush
