@@ -421,10 +421,10 @@
 	// Get the current URL path
 	const urlPath = window.location.pathname;
 	// Set the selected option based on the query parameter or URL path
-	if (urlPath === '/order') {
-	document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
-	} else if (result === '0' || result === '1') {
-	document.getElementById('selectOption').value = result;
-}
+	if (urlPath === '/order' || result === '0') {
+		document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
+	} else if (result === '1') {
+		document.getElementById('selectOption').value = 'Settled';
+	}
 </script>
 @endpush
