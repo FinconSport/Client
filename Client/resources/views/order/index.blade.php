@@ -303,12 +303,16 @@
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideUp('fast', function () {
-					$(this).css('transform', 'scale(0)');
-					$(this).hide();
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast', function () {
+					if ($(this).is(':visible')) {
+						$(this).css('transform', 'scale(1)');
+					} else {
+						$(this).css('transform', 'scale(0)');
+					}
 				});
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
+
 
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
