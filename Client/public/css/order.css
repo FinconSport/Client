@@ -248,6 +248,8 @@ div[key="matchSportMenu"]{
     outline: none;
     cursor: pointer;
     color: #415b5a;
+    overflow: visible;
+    max-height: 31.7px;
 }
 
 span.orderData_mOrder {
