@@ -215,7 +215,7 @@
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss;);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -318,6 +318,9 @@
 
 	//updateTotal when new data is loaded
 	function updateTotal() {
+		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+    	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
+		
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
