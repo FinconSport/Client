@@ -829,6 +829,43 @@ class LsportApiController extends Controller {
             // Market 
             $return = LsportMarket::where('fixture_id', $fixture_id)->orderBy("market_id","ASC")->get();
             if ($return === false) {
+                $this->ApiError('03');
+            }
+
+            $market_data = $return;
+
+            // market_bet 總玩法統計
+            $return = LsportMarketBet::where('fixture_id', $fixture_id)->count();
+            if ($return === false) {
+                $this->ApiError('04');
+            }
+
+            $market_bet_count = $return;
+
+            dd($market_bet_count);
+
+            foreach ($market_data as $kk => $vv) {
+                
+                $market_id = $vv['market_id'];
+                $market_priority = $vv['priority'];
+                $market_main_line = $vv['main_line'];
+
+                // 取得market_bet
+                $return = LsportMarketBet::where('fixture_id', $fixture_id)
+                ->where('market_id', $market_id)
+                ->where('base_line', $market_main_line)  
+                ->orderBy('mb.name_en', 'ASC')
+                ->get();
+                if ($return === false) {
+                    $this->ApiError('04');
+                }
+
+                $market_bet_data = $return;
+
+                
+
+
+
 
             }
 
