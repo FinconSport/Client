@@ -419,10 +419,10 @@
 	const urlParams = new URLSearchParams(window.location.search);
 	// Get the current URL path
 	const urlPath = window.location.pathname;
-	// Set the selected option based on the query parameter or URL path
-	if (urlPath === '/order' || urlPath === '/order?result=0') {
+	// Check both URL path and query parameters
+	if (urlPath === '/order' || (urlPath === '/order' && urlParams.get('result') === '0')) {
 		document.getElementById('selectOption').value = 'Unsettled'; // Set "Unsettled" as default
-	} else if (urlPath === '/order?result=1') {
+	} else if (urlPath === '/order' && urlParams.get('result') === '1') {
 		document.getElementById('selectOption').value = 'Settled';
 	}
 </script>
