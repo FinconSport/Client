@@ -28,8 +28,7 @@ class TestController extends PcController {
       ->from('es_lsport_fixture as f')
       ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
       ->where('s.status', '=', 1)
-      ->skip(100)
-      ->take(10)
+      ->skip(100)->take(10)  // Limit 100,10
       ->orderBy("f.start_time","DESC")
       ->list();
 

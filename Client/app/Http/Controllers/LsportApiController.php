@@ -2480,15 +2480,6 @@ class LsportApiController extends Controller {
             $this->ApiError("01");
         }
 
-        $order_status = array(
-            0 => "已取消",
-            1 => "等待審核",
-            2 => "等待開獎",
-            3 => "等待派獎",
-            4 => "已開獎",
-            5 => "風控大單",
-        );
-
         $data = array();
         $tmp = array();
 
@@ -2547,7 +2538,7 @@ class LsportApiController extends Controller {
                     $tmp_bet_data['away_team_score'] = $vvv['away_team_score'];
                     
                     $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
-                    $tmp_bet_data['status'] = $order_status[$vvv['status']];
+                    $tmp_bet_data['status'] = $vvv['status'];
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
@@ -2574,7 +2565,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['away_team_score'] = $v['away_team_score'];
                 
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
-                $tmp_bet_data['status'] = $order_status[$v['status']];
+                $tmp_bet_data['status'] = $v['status'];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
