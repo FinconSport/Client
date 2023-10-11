@@ -268,9 +268,9 @@
 			);
 			$('#orderDataTemp').append(additionalTr);
 
-			const betDataDynamicCon = $(`#${dynamicId}`);
+			const betDataEventContainer = $(`#${dynamicId}`);
 			//append event additional bet item data to created td
-			betDataDynamicCon.find('.orderData_betData_Event').html(`
+			betDataEventContainer.find('.orderData_betData_Event').html(`
 				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
 				${betItem.home_team_name} VS ${betItem.away_team_name} 
 				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
@@ -278,11 +278,11 @@
 				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
 			//append bet way additional bet item data to created td
-			betDataDynamicCon.find('.orderData_betData_BetWay').html(`
+			betDataEventContainer.find('.orderData_betData_BetWay').html(`
 				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
 			//append result additional bet item data to created td
-			betDataDynamicCon.find('.orderData_betData_Result').html(
+			betDataEventContainer.find('.orderData_betData_Result').html(
 				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
 				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
 				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
@@ -295,9 +295,9 @@
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
 		}
 
-		orderDataBetEvent.append(betDataDynamicCon);
-		orderDataBetWay.append(betDataDynamicCon);
-		orderDataResult.append(betDataDynamicCon);
+		orderDataBetEvent.append(betDataEventContainer);
+		orderDataBetWay.append(betDataBetWayContainer);
+		orderDataResult.append(betDataResultContainer);
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
