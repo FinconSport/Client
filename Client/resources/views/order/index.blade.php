@@ -55,7 +55,6 @@
 		</div>
 	</div>
     <div id="orderContainer">
-		<button id="changeBackground">Change Background</button>
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
@@ -72,7 +71,7 @@
                     </tr>
                 </thead>
                 <tbody id="orderDataTemp">
-                    <tr id="orderTr" template="orderTemplate" hidden>
+                    <tr class="orderData_main" template="orderTemplate" hidden>
                         <td style="width: 8%;" class="orderData_id"></td>
                         <td style="width: 9%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
                         <td style="width: 21%;" class="orderData_betData_Event"></td>
@@ -451,25 +450,5 @@
 			window.location.search = link;
 		}
 	}
-
-	var div = document.getElementById('orderTr');
-        var table = document.getElementById('orderTable');
-
-        function changeBackgroundColor() {
-            if (window.getComputedStyle(div).display === 'none') {
-                // The div is hidden, so don't include the count of even rows
-            } else if (window.getComputedStyle(div).display === 'table-row') {
-                // The div is displayed, so include the count of even rows
-                var evenRows = table.querySelectorAll('tbody tr:nth-child(even)');
-
-                for (var i = 0; i < evenRows.length; i++) {
-                    evenRows[i].style.backgroundColor = '#e2f0f0';
-                }
-            }
-			console.log('Button clicked, background changed.');
-        }
-
-        // Add an event listener to the button to trigger the change
-        document.getElementById('changeBackground').addEventListener('click', changeBackgroundColor);
 </script>
 @endpush
