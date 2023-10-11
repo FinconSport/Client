@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use DB;
 
 class ElasticSearchDriverProvider extends ServiceProvider {
 
@@ -66,14 +65,9 @@ class ElasticSearchDriverProvider extends ServiceProvider {
 
             // Build ES SQL
             $bindings = $this->getBindings();
-            $countSql = $this->count();
-
-            $rawSql = DB::table(DB::raw("({$countSql->toSql()}) as sub"))
-                ->mergeBindings($countSql)
-                ->toSql();
-            dd($rawSql);   
-
-            $rawSql = $this->getQuery()->toSql();
+            $countRawSql = $this->toBase()->getCountForPagination()->toSql(); // 获取count()查询的原始SQL
+            dd($countRawSql);
+            $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
