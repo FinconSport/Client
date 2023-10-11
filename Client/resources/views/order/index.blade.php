@@ -303,13 +303,13 @@
 		const betDataLength = orderItem.bet_data.length;
 
 		if (betIndex === 0) {
-			const toggleButton = $('<button class="order-toggleButton">▼</button>');
+			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
 			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
 			console.log(dynamicId);
 
 			function toggleContainers() {
 				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('smooth');
-				toggleButton.text(toggleButton.text() === '▼' ? '▶' : '▼');
+				toggleButton.text(toggleButton.text() === '<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>' ? '<i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i>' : '<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>');
 			}
 
 			toggleButton.on('click', toggleContainers);
