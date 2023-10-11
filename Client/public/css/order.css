@@ -264,39 +264,13 @@ span.orderData_mOrder {
     outline: none;
     cursor: pointer;
     color: #415b5a!important;
-}
-
-.search-statistic-container #selectOption option:nth-child(1){
-    padding: 0px;
-    background-color: transparent;
-    border-radius: 0px;
-}
-
-.search-statistic-container #selectOption option:nth-child(2),
-.search-statistic-container #selectOption option:nth-child(3){
-    border-left: 1px solid #415b5a;
-    border-right: 1px solid #415b5a;
-    top: 3px;
-    position: relative;
-}
-
-.search-statistic-container #selectOption option:nth-child(2) {
-    border-top: 1px solid #415b5a;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.search-statistic-container #selectOption option:nth-child(3) {
-    border-bottom: 1px solid #415b5a;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 10px 100px #ffffff inset!important;
 }
 
 .search-statistic-container #selectOption option:focus,
 .search-statistic-container #selectOption option:checked,
 .search-statistic-container #selectOption option:hover  {
-    color: #415b5a!important;
-    box-shadow: 0 0 10px 100px #ffffff inset;
+    box-shadow: 0 0 10px 100px #ffffff inset!important;
 }
 
 /* for IE10 */ 
