@@ -65,7 +65,8 @@ class ElasticSearchDriverProvider extends ServiceProvider {
 
             // Build ES SQL
             $bindings = $this->getBindings();
-            $rawSql = $this->count()->toSql();
+            $countSql = $this->count();
+            $rawSql = $this->getQuery()->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
