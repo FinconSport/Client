@@ -1075,7 +1075,8 @@
                 bet_name: bet_name,
                 league: league,
                 home: home,
-                away: away
+                away: away,
+                bet_name_line: bet_name_line
             })
         }
 
@@ -1115,6 +1116,9 @@
         $('#mask').fadeIn()
         mOrderRate = 1
         sendOrderData.bet_data.forEach(function(item, index) {
+
+            console.lgo(item)
+
             mOrderRate = parseFloat(item.bet_rate) * mOrderRate
             let leftSlideOrderCard = $('#leftSlideOrderCardTemplate').clone();
             leftSlideOrderCard.attr('key', 'generateCard')
@@ -1122,7 +1126,15 @@
             leftSlideOrderCard.removeAttr('style')
             leftSlideOrderCard.find('div[key="index"]').html(index + 1)
             leftSlideOrderCard.find('span[key="bet_type"]').html(item.bet_type)
-            leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
+
+            if( convertTeamPriArr.indexOf(priority) === -1 ) {
+                leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
+            } else {
+                let str = item.bet_name_en == 1 ? home : away
+                str += ' ' + item.bet_name_line
+                $('#leftSlideOrder span[key="bet_name"]').html(str)
+            }
+            
             leftSlideOrderCard.find('span[key="odd"]').html(item.bet_rate)
             leftSlideOrderCard.find('p[key="league"]').html(item.league)
             leftSlideOrderCard.find('span[key="home"]').html(item.home)
