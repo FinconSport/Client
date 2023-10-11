@@ -305,10 +305,17 @@
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 
 			function toggleContainers() {
-				// $(`.${dynamicClass}`).toggleClass("show-betaDetcon");
-				$(`.${dynamicClass}`).css('display', 'table-row');
-				toggleButton.find('i').toggleClass('fa-rotate-90');
+				const elements = $(`.${dynamicClass}`);
+
+				if (elements.css('display') === 'none') {
+					elements.css('display', 'table-row');
+					toggleButton.find('i').addClass('fa-rotate-90');
+				} else {
+					elements.css('display', 'none');
+					toggleButton.find('i').removeClass('fa-rotate-90');
+				}
 			}
+			
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
