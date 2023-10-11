@@ -76,11 +76,7 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tr:not([style*="display: none"]):nth-child(odd) td {
-    background-color: #e2f0f0;
-}
-
-#orderTable tr:not([style*="display: none"]):nth-child(even) td {
+#orderTable tr[style*="display: table-row"]:nth-child(even) td {
     background-color: #e2f0f0;
 }
 
