@@ -300,7 +300,7 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
-			const dynamicId = `additionalTr_${betItem.league_id}_${betItem.league_name}_${betIndex}`;
+			var dynamicId = `additionalTr_${betItem.league_id}_${betItem.league_name}_${betIndex}`;
 
 			function toggleContainers() {
 				$(`#${dynamicId}`).toggleClass("show-betaDetcon");
