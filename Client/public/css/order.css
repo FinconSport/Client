@@ -76,12 +76,9 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-/* #orderTable tbody tr:nth-child(even) td {
+#orderTable tbody .orderData_main:nth-child(even) td {
     background-color: #e2f0f0;
-} */
-
-.green-bg { background-color: #e2f0f0; }
-.white-bg { background-color: #ffffff; }
+}
 
 #orderTable tbody{
     border-bottom: 2px solid rgb(65, 91, 90);
