@@ -4,10 +4,10 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<select id="selectOption" name="selectOption" onchange="redirectToPage(this)">
-					<option value="Unsettled" data-link="?result=0">Unsettled</option>
-					<option value="Settled" data-link="?result=1">Settled</option>
-				</select>
+			<select id="selectOption" name="selectOption" onchange="redirectToPage(this)">
+				<option value="Unsettled" data-link="?result=0">Unsettled</option>
+				<option value="Settled" data-link="?result=1">Settled</option>
+			</select>
 			</div>
 			<div class="datecalendar-con">
 				<div class="datepicker-con">
@@ -406,14 +406,6 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-	//redirent select settled/unsettled
-	function redirectToPage(select) {
-		var selectedOption = select.options[select.selectedIndex];
-		var link = selectedOption.getAttribute('data-link');
-		if (link) {
-			window.location.href = link;
-		}
-	}
 	// Get the current URL path
 	const urlPath = window.location.pathname;
 	const select = document.getElementById("selectOption");
@@ -421,10 +413,18 @@
 	const settledOption = select.querySelector("option[value='Settled']");
 
 	// Set the selected option based on the query parameter or URL path
-	if (urlPath === '/order' && urlPath === '/order?result=0') {
+	if (urlPath === '/order' || urlPath === '/order?result=0') {
 		unsettledOption.setAttribute("selected", "selected");
-	} else if (urlPath === '/order' && urlPath === '/order?result=1') {
+	} else if (urlPath === '/order?result=1') {
 		settledOption.setAttribute("selected", "selected");
+	}
+
+	function redirectToPage(select) {
+		var selectedOption = select.options[select.selectedIndex];
+		var link = selectedOption.getAttribute('data-link');
+		if (link) {
+			window.location.search = link;
+		}
 	}
 </script>
 @endpush
