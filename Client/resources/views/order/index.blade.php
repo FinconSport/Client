@@ -247,8 +247,12 @@
 
 		if (betIndex > 0) {
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
-			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(
-			$('<td style="width: 8%;"></td>'.repeat(9))
+			const additionalTds = $(
+				'<td style="width: 8%;"></td>'.repeat(2) +
+				'<td style="width: 21%; text-align:left;" class="orderData_betData_Event"></td>' +
+				'<td style="width: 10%; text-align:left;" class="orderData_betData_BetWay"></td>' +
+				'<td style="width: 10%; text-align:right;" class="orderData_betData_Result"></td>' +
+				'<td style="width: 10%;"></td>'.repeat(4)
 			);
 
 			$('#orderDataTemp').append(additionalTr);
