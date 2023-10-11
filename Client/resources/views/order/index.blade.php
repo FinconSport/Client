@@ -240,11 +240,19 @@
 			</span>`)
 		);
 		// bet way column
-		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `
+		function generateBetWayContent(betItem) {
+			const betRateContent = betItem.bet_rate !== null
+				? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				: '';
+
+			return `
 				${betItem.market_name}<br>
 				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>
-				${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+				${betRateContent}
+			`;
+		}
+		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
+			createHtmlElement('text-leftt', generateBetWayContent(betItem))
 		);
 
 		// Result column 
@@ -261,7 +269,7 @@
 		
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-right', getBetStatusContent(betItem))
-		).append(`<br>${formatDateTime(orderItem.result_time)}`);
+		).append(`${formatDateTime(orderItem.result_time)}`);
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
@@ -285,15 +293,11 @@
 				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
 			//append bet way additional bet item data to created td
-			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-				${betItem.market_name}<br> 
-				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> 
-				@<span style="color:#c79e42;">${betItem.bet_rate}</span>`
-			);
+			betDataEventContainer.find('.orderData_betData_BetWay').html(generateBetWayContent(betItem));
 
 			betDataEventContainer.find('.orderData_betData_Result').html(
 				getBetStatusContent(betItem)
-			).append(`${formatDateTime(orderItem.result_time)}`);
+			).append(`<br>${formatDateTime(orderItem.result_time)}`);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
