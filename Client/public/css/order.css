@@ -264,7 +264,6 @@ span.orderData_mOrder {
     outline: none;
     cursor: pointer;
     color: #415b5a!important;
-    font-weight: 600;
 }
 
 .search-statistic-container #selectOption option:nth-child(1){
