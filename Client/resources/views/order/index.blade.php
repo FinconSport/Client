@@ -55,7 +55,6 @@
 		</div>
 	</div>
     <div id="orderContainer">
-		<button id="changeBackground">Change Background</button>
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
@@ -451,6 +450,24 @@
 			window.location.search = link;
 		}
 	}
+
+	// Function to update row colors based on position and display property
+	function updateRowColors() {
+		var allRows = document.querySelectorAll('tr');
+		var displayedRows = Array.from(allRows).filter(row => window.getComputedStyle(row).display !== 'none');
+		
+		for (var i = 0; i < displayedRows.length; i++) {
+			if (i % 2 === 0) {
+				displayedRows[i].classList.add('green-bg'); // Even displayed rows are green
+				displayedRows[i].classList.remove('white-bg');
+			} else {
+				displayedRows[i].classList.remove('green-bg');
+				displayedRows[i].classList.add('white-bg'); // Odd displayed rows are blue
+			}
+		}
+	}
+
+	updateRowColors();
 
 </script>
 @endpush
