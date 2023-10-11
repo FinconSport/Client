@@ -822,7 +822,8 @@
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
 
-
+                                        // rate
+                                        item.find('.odd').html(v4.price)
                                         // 賦值
                                         switch ( i ) {
                                             case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
