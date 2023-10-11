@@ -300,13 +300,16 @@
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
+
+		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+    	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
+
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		console.log("totalResultAmount" + totalResultAmount);
 		console.log("totalWinLoss" + totalWinLoss);
-
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
