@@ -863,7 +863,8 @@
             // after the msg pop up delay 1 second to hide the loading and close the betting area
             setTimeout(function() {
                 hideLoading();
-                closeCal();
+                closeCal(1);
+                closeOrderDetail()
             }, 1000);
         }
         // delay_order
