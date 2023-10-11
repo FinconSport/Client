@@ -55,6 +55,7 @@
 		</div>
 	</div>
     <div id="orderContainer">
+		<button id="changeBackground">Change Background</button>
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
@@ -452,17 +453,22 @@
 	}
 
 	var div = document.getElementById('orderTr');
-	var table = document.getElementById('orderTable');
+        var table = document.getElementById('orderTable');
 
-	if (window.getComputedStyle(div).display === 'none') {
-		// The div is hidden, so don't include the count of even rows
-	} else if (window.getComputedStyle(div).display === 'table-row') {
-		// The div is displayed, so include the count of even rows
-		var evenRows = table.querySelectorAll('tbody tr:nth-child(even)');
+        function changeBackgroundColor() {
+            if (window.getComputedStyle(div).display === 'none') {
+                // The div is hidden, so don't include the count of even rows
+            } else if (window.getComputedStyle(div).display === 'table-row') {
+                // The div is displayed, so include the count of even rows
+                var evenRows = table.querySelectorAll('tbody tr:nth-child(even)');
 
-		for (var i = 0; i < evenRows.length; i++) {
-			evenRows[i].style.backgroundColor = '#e2f0f0'; // Change background color
-		}
-	}
+                for (var i = 0; i < evenRows.length; i++) {
+                    evenRows[i].style.backgroundColor = '#e2f0f0';
+                }
+            }
+        }
+
+        // Add an event listener to the button to trigger the change
+        document.getElementById('changeBackground').addEventListener('click', changeBackgroundColor);
 </script>
 @endpush
