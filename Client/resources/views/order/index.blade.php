@@ -275,7 +275,7 @@
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndex}`;
-			const dynamicClass = `additionalTr_${orderItem.m_id}`;
+			const dynamicClass = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
 				'<td style="width: 21%; text-align:left;" class="orderData_betData_Event"></td>' +
@@ -301,7 +301,7 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
-			const dynamicClass = `additionalTr_${orderItem.m_id}}`;
+			const dynamicClass = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
 				$(`.${dynamicClass}`).toggleClass("show-betaDetcon");
