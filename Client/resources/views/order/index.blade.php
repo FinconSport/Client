@@ -226,7 +226,6 @@
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
-
 		// event column 
 		function createBetDataEventContent(betItem, orderItem) {
 			return `${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
@@ -245,7 +244,6 @@
 			const marketBetName = betItem.market_bet_name;
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
-
 			const content = `${marketName}<br><span style="color:green;">(${marketBetName})${marketBetLine}</span>`;
 			if (betRate !== null) {
 				return `${content} @<span style="color:#c79e42;">${betRate}</span>`;
@@ -253,7 +251,6 @@
 				return content;
 			}
 		}
-
 		//result column
 		function createResultContent(betItem, orderItem) {
 			const resultText =
@@ -263,16 +260,14 @@
 				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
 				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
 				`${betItem.status}`;
-
 			const resultTime = formatDateTime(orderItem.result_time);
-
 			return createHtmlElement('text-right', `${resultText}<br>${resultTime}`);
 		}
 		
 		const BetDataEventContent = createBetDataEventContent(betItem, orderItem);
 		const betWayContent = createBetWayContent(betItem);
 		const resultContent = createResultContent(betItem, orderItem);
-
+		//content event ,bet way , result
 		const betDataEventContainer = $('<div class="betaDetcon">').append(createHtmlElement('', BetDataEventContent));
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(createHtmlElement('text-leftt', betWayContent));
 		const betDataResultContainer = $('<div class="betaDetcon">').append(resultContent);
@@ -291,7 +286,7 @@
 			$('#orderDataTemp').append(additionalTr);
 
 			const betDataEventContainer = $(`#${dynamicId}`);
-
+			//content event ,bet way , result
 			betDataEventContainer.find('.orderData_betData_Event').html(BetDataEventContent);
 			betDataEventContainer.find('.orderData_betData_BetWay').html(betWayContent);
 			betDataEventContainer.find('.orderData_betData_Result').html(resultContent);
