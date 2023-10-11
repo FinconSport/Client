@@ -297,6 +297,7 @@ span.orderData_mOrder {
 .search-statistic-container #selectOption option:checked,
 .search-statistic-container #selectOption option:hover  {
     color: #415b5a!important;
+    box-shadow: 0 0 10px 100px #ffffff inset;
 }
 
 /* for IE10 */ 
