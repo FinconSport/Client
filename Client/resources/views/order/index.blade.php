@@ -241,7 +241,7 @@
 		);
 		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? `@<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+			createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
 		);
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
@@ -251,7 +251,7 @@
 				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
 				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
 				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status} <br>${formatDateTime(orderItem.result_time)}`
+				`${betItem.status}` + `<br>${formatDateTime(orderItem.result_time)}`
 			)
 		);
 
