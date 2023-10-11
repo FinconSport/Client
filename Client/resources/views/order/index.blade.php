@@ -298,6 +298,7 @@
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
 		}
+		
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
@@ -314,7 +315,7 @@
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-		
+
 		$('.betaDetcon:not(:first-child)').remove();
 	}
 
