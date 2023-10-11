@@ -76,7 +76,7 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tbody tr[style*="display: table-row"]:nth-child(even) td {
+#orderTable tbody #orderTr:nth-child(even) td {
     background-color: #e2f0f0;
 }
 
