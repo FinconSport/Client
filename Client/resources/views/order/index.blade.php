@@ -226,7 +226,6 @@
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
-
 		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 		createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
@@ -241,10 +240,7 @@
 		);
 		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `
-				${betItem.market_name}<br>
-				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>
-				${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+			createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
 		);
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
@@ -281,9 +277,7 @@
 			);
 			//append bet way additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-				${betItem.market_name}<br> 
-				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> 
-				@<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
 			//append result additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Result').html(
