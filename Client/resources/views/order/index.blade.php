@@ -450,5 +450,34 @@
 			window.location.search = link;
 		}
 	}
+
+
+	function updateBackground() {
+        var table = document.getElementById("orderTable");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row, index) {
+            var computedStyle = window.getComputedStyle(row);
+            if (computedStyle.display === "table-row") {
+                if (index % 2 === 0) {
+                    // Even rows
+                    row.style.backgroundColor = "#e2f0f0";
+                } else {
+                    // Odd rows
+                    row.style.backgroundColor = "";
+                }
+            } else {
+                // Set background color to none for rows with "display: none"
+                row.style.backgroundColor = "";
+            }
+        });
+    }
+
+	// Call the updateBackground function initially
+    updateBackground();
+
+    // Add an event listener for changes in the "display" property
+    window.addEventListener("resize", updateBackground);
+	
 </script>
 @endpush
