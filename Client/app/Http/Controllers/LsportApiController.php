@@ -905,8 +905,6 @@ class LsportApiController extends Controller {
 
             }
 
-            dd($data);
-
         }
 
         ///////////////////////////////
