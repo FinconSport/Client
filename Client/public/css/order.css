@@ -76,7 +76,7 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tbody tr:not(.orderData_expand):nth-child(even) td {
+#orderTable tbody tr:not(.orderData_expand):nth-child(odds) td {
     background-color: #e2f0f0;
 }
 
