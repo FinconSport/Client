@@ -262,10 +262,12 @@ span.orderData_mOrder {
     outline: none;
 }
 
-.search-statistic-container select option:hover,
 .search-statistic-container select option:checked {
     background-color: #c4d4d4;
-    outline: none;
+}
+
+.search-statistic-container select option:hover {
+    background-color: #c4d4d4!important;
 }
 
 /* for IE10 */ 
