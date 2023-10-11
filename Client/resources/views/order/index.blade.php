@@ -469,8 +469,6 @@
 	}
 
 	updateRowColors();
-	var observer = new MutationObserver(updateRowColors);
-    observer.observe(document.getElementById('orderDataTemp'), { attributes: true, subtree: true, childList: true });
 
 </script>
 @endpush
