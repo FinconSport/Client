@@ -326,13 +326,7 @@
 					currentPage = 'lf_mOrder'
 					break;
 				case '/order':
-					if (window.location.search === '?result=1') {
-						currentResult = 'result_settled';
-						currentPage = 'lf_order';
-					} else if (window.location.search === '?result=0') {
-						currentResult = 'result_unsettled';
-						currentPage = 'lf_order';
-					}
+					currentPage = 'lf_order';
 					break;
 				case '/match':
 					currentPage = 'lf_match'
