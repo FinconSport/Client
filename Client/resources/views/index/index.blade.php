@@ -714,13 +714,18 @@
 
                         // living
                         if( v3.status === 2 ) {
+
+                            console.log(v3.scoreboard)
                             // score
                             let homeScore = home_team_info.find('.scoreSpan')
                             let awayScore = away_team_info.find('.scoreSpan')
                             let nowHomeScore = parseInt(homeScore.html())
                             let nowAwayScore = parseInt(awayScore.html())
-                            let updateHome = parseInt(v3.scoreboard[1][0])
-                            let updateAway = parseInt(v3.scoreboard[2][0])
+                            let updateHome = null
+                            let updateAway = null
+
+                            if( v3.scoreboard && v3.scoreboard[1] && v3.scoreboard[1][0] ) updateHome = parseInt(v3.scoreboard[1][0])
+                            if( v3.scoreboard && v3.scoreboard[2] && v3.scoreboard[2][0] ) updateAway = parseInt(v3.scoreboard[2][0])
 
                             if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
                             if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
@@ -730,8 +735,8 @@
                                 awayScore.removeClass('raiseScore')
                             }, 3000);
 
-                            homeScore.html( v3.scoreboard[1][0] )
-                            awayScore.html( v3.scoreboard[2][0] )
+                            if( updateHome ) homeScore.html( v3.scoreboard[1][0] )
+                            if( updateAway ) awayScore.html( v3.scoreboard[2][0] )
 
                             // stage
                             let timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
