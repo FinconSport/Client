@@ -256,6 +256,15 @@ span.orderData_mOrder {
     align-items: center;
 }
 
+.search-statistic-container select option{
+    padding: 0.5rem;
+}
+
+.search-statistic-container select option:hover,
+.search-statistic-container select option:checked {
+    background-color: #c4d4d4;
+}
+
 /* for IE10 */ 
 .search-statistic-container select::-ms-expand { 
     display: none; 
