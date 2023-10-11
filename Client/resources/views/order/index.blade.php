@@ -299,13 +299,16 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
-			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
+			const dynamicId = 'additionalTr_' + betItem.league_id + betItem.league_name;
+			console.log(dynamicId);
 
 			function toggleContainers() {
-			$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
-			const icon = toggleButton.find('i');
-			icon.toggleClass('fa-rotate-90');
-			toggleButton.html(icon.hasClass('fa-rotate-90') ? '<i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i>' : '<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>');
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
+				if (toggleButton.find('i').hasClass('fa-rotate-90')) {
+					toggleButton.html('<i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i>');
+				} else {
+					toggleButton.html('<i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i>');
+				}
 			}
 
 			toggleButton.on('click', toggleContainers);
