@@ -789,6 +789,7 @@ class LsportApiController extends Controller {
             // sport 
             $sport_name = LsportSport::getName(['sport_id' => $sport_id, "api_lang" => $agent_lang]);
             
+        
             // league 
             $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
      
@@ -909,26 +910,6 @@ class LsportApiController extends Controller {
         }
 
         ///////////////////////////////
-
-        $arrRet = array();  //用於回傳結果
-
-        // early 早盤
-        $arrRet['early'][$sport_id] = array(
-            'sport_id' => $sport_id,
-            'sport_name' => $sport_name,
-            'list' => $data[$this::FIXTURE_STATUS['early']],
-        );
-
-        // living 走地
-        $arrRet['living'][$sport_id] = array(
-            'sport_id' => $sport_id,
-            'sport_name' => $sport_name,
-            'list' => $data[$this::FIXTURE_STATUS['living']],
-        );
-
-
-        ///////////////////////////////
-        $data = $arrRet;
 
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
