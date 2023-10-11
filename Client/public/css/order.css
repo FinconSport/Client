@@ -263,6 +263,7 @@ span.orderData_mOrder {
     background-color: #fff;
     outline: none;
     cursor: pointer;
+    color: #415b5a!important;
 }
 
 .search-statistic-container #selectOption option:nth-child(1){
@@ -282,6 +283,8 @@ span.orderData_mOrder {
 .search-statistic-container #selectOption option:nth-child(3){
     border-left: 1px solid #415b5a;
     border-right: 1px solid #415b5a;
+    top: 3px;
+    position: relative;
 }
 
 .search-statistic-container #selectOption option:nth-child(2) {
@@ -301,6 +304,7 @@ span.orderData_mOrder {
 .search-statistic-container #selectOption option:hover  {
     background-color: #c4d4d4!important;
     box-shadow: 0 0 10px 100px #c4d4d4 inset;
+    color: #415b5a!important;
 }
 
 /* for IE10 */ 
