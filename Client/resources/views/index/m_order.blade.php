@@ -37,7 +37,7 @@
         <div class="col-12 row m-0">
             <div id="leftSlideOrderCardBetArea" class="row m-0">
                 <div class="col-12">
-                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="{{ trans('index.bet_area.limit') }}0-10000" >
+                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="{{ trans('index.bet_area.limit') }}0-10000">
                 </div>
                 <p class="fs-4 mb-0" id="m_order_rate"></p>
                 <div class="col-6 mb-2">{{ trans('index.bet_area.maxwin') }}</div>
@@ -77,7 +77,9 @@
     <button onclick="closeOrderDetail()">{{ trans('index.m_order.clear_all_order') }}</button>
 </div>
 <div id="leftSlideOrderLoadingContainer" class="hidden">
-    <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
+    <div id="leftSlideOrderLoadingSpinner">
+        <div class="inner-spinner"></div>
+    </div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
 <div id='searchCondition'>
@@ -85,8 +87,8 @@
 </div>
 <div id="indexContainer">
     <div id="indexContainerLeft">
-         <!-- no data -->
-         <div id="noData" style="display: none;">
+        <!-- no data -->
+        <div id="noData" style="display: none;">
             <i class="fa-solid fa-circle-exclamation"></i>
             <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
         </div>
@@ -99,7 +101,7 @@
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
         <span class="elToggleDir" style="float: left;padding-right: 1rem;">
-            <i class="fa-solid fa-chevron-down"></i> 
+            <i class="fa-solid fa-chevron-down"></i>
         </span>
     </div>
 </div>
@@ -109,7 +111,7 @@
     <div class="seriesWrapperTitle">
         <div style="width: 35%;">
             <span class="legToggleDir" style="padding-right: 1rem;">
-                <i class="fa-solid fa-chevron-down"></i> 
+                <i class="fa-solid fa-chevron-down"></i>
             </span>
             <span class="legToggleName"></span>
             (<span class="legToggleCount"></span>)
@@ -224,7 +226,6 @@
 @push('main_js')
 
 <script>
-    
     var m_order_count = 0 // 串關比數
     var mOrderRate = 1 // 串關賠率
     const maxRetunMoney = 1000000 //最高反水金額
@@ -238,15 +239,15 @@
     var socket_status = false;
     var ws = null
     var heartbeatTimer = null
-    
-    
+
+
     // 獨贏系列
     const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
     // 讓球系列
     const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
-    
+
     /* ===== DATA LAYER ===== */
     /*  
         1. 現在大部份資料都api化，通過call ajax來loading
@@ -281,7 +282,11 @@
     // match list data
     var matchListD = {}
     var oldMatchListD = {}
-    var callMatchListData = { token: token, player: player, sport_id: sport }
+    var callMatchListData = {
+        token: token,
+        player: player,
+        sport_id: sport
+    }
     const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
 
     // bet limitation data
@@ -294,9 +299,9 @@
     var stagePriorityArr = null
     var gameTitle = null
 
-    
+
     /* ===== DATA LAYER ===== */
-    
+
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
 
@@ -304,8 +309,8 @@
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            if( k === 'living' ) return; 
+        Object.entries(matchListD.data).map(([k, v]) => { // living early toggle
+            if (k === 'living') return;
             createCate(k, v)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 createLeague(k, k2, v2)
@@ -319,7 +324,7 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
-                listKeys.forEach( ele => {
+                listKeys.forEach(ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
             })
@@ -332,166 +337,119 @@
     }
     /* ===== VIEW LAYER ===== */
 
+    function createCate(k, v) {
+        let el_toggle = $('div[template="elToggleTemplate"]').clone()
+        let el_toggle_title = el_toggle.find('.catWrapperTitle')
+        let el_toggle_text = el_toggle.find('.elToggleText')
+        let el_toggle_count = el_toggle.find('.elToggleCount')
+        let el_toggle_dir = el_toggle.find('.elToggleDir')
 
-        function createCate(k, v) {
-            let el_toggle = $('div[template="elToggleTemplate"]').clone()
-            let el_toggle_title = el_toggle.find('.catWrapperTitle')
-            let el_toggle_text = el_toggle.find('.elToggleText')
-            let el_toggle_count = el_toggle.find('.elToggleCount')
-            let el_toggle_dir = el_toggle.find('.elToggleDir')
+        el_toggle.attr('id', 'toggleContent_' + k)
+        el_toggle_title.attr('id', `catWrapperTitle_${k}`)
+        el_toggle_title.attr('onclick', `toggleCat('${k}')`)
+        el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
+        el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
+        el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
 
-            el_toggle.attr('id', 'toggleContent_' + k)
-            el_toggle_title.attr('id', `catWrapperTitle_${k}`)
-            el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-            el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
-            el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
-            el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
+        el_toggle.removeAttr('hidden')
+        el_toggle.removeAttr('template')
 
-            el_toggle.removeAttr('hidden')
-            el_toggle.removeAttr('template')
+        $('#indexContainerLeft').append(el_toggle)
+    }
 
-            $('#indexContainerLeft').append(el_toggle)
+    function createLeague(k, k2, v2) {
+        // title
+        let league_wrapper = $('div[template="leagueWrapper"]').clone()
+        let league_toggle = league_wrapper.find('.seriesWrapperTitle')
+        let league_toggle_name = league_toggle.find('.legToggleName')
+        let league_toggle_count = league_toggle.find('.legToggleCount')
+        let league_toggle_dir = league_toggle.find('.legToggleDir')
+        let league_bet_title = league_toggle.find('.betLabelContainer')
+
+        league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
+        league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
+        league_toggle.attr('league_id', v2.league_id)
+        league_toggle_name.html(v2.league_name)
+        league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
+        league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
+
+        // bet title
+        mainPriorityArr.forEach((i, j) => {
+            league_bet_title.append('<div class="labelItem col"><div>' + gameTitle[j] + '</div></div>')
+        })
+
+        // content
+        let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
+        league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
+
+        league_wrapper.removeAttr('hidden')
+        league_wrapper.removeAttr('template')
+
+        let el_toggle_content = $(`#toggleContent_${k}`)
+        el_toggle_content.append(league_wrapper)
+
+    }
+
+    function createFixtureCard(k, league_id, league_name, k3, v3) {
+        let card = $('div[template="fixtureCardTemplate"]').clone()
+
+        // 壘包 好壞球 只有 滾球 棒球有
+        if (sport === 154914 && v3.status === 2) {
+            card.find('[key="not-show-baseCon"]').hide()
+            card.find('[key="show-baseCon"]').show()
+        } else {
+            card.find('[key="not-show-baseCon"]').show()
+            card.find('[key="show-baseCon"]').hide()
         }
 
-        function createLeague(k, k2, v2) {
-            // title
-            let league_wrapper = $('div[template="leagueWrapper"]').clone()
-            let league_toggle = league_wrapper.find('.seriesWrapperTitle')
-            let league_toggle_name = league_toggle.find('.legToggleName')
-            let league_toggle_count = league_toggle.find('.legToggleCount')
-            let league_toggle_dir = league_toggle.find('.legToggleDir')
-            let league_bet_title = league_toggle.find('.betLabelContainer')
-
-            league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
-            league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
-            league_toggle.attr('league_id', v2.league_id)
-            league_toggle_name.html(v2.league_name)
-            league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
-            league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
-
-            // bet title
-            mainPriorityArr.forEach(( i, j ) => {
-                league_bet_title.append('<div class="labelItem col"><div>' + gameTitle[j] + '</div></div>')
-            })
-
-            // content
-            let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
-            league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-
-            league_wrapper.removeAttr('hidden')
-            league_wrapper.removeAttr('template')
-
-            let el_toggle_content = $(`#toggleContent_${k}`)
-            el_toggle_content.append(league_wrapper)
-
-            }
-
-        function createFixtureCard(k, league_id, league_name, k3, v3) {
-            let card = $('div[template="fixtureCardTemplate"]').clone()
-            // 單節選項 只有 滾球 籃球有
+        // 單節選項 只有 滾球 籃球有
         sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
-            let time = card.find('.timer');
-            let home_team_info = card.find('[key="homeTeamInfo"]')
-            let away_team_info = card.find('[key="awayTeamInfo"]')
-            let market_count = card.find('.otherBetWay p')
+        let time = card.find('.timer');
+        let home_team_info = card.find('[key="homeTeamInfo"]')
+        let away_team_info = card.find('[key="awayTeamInfo"]')
+        let market_count = card.find('.otherBetWay p')
 
-            card.attr('id', k3)
-            card.attr('cate', k)
-            card.attr('status', v3.status)
-            card.attr('league_id', league_id)
-            time.html(formatDateTime(v3.start_time))
-            market_count.html(v3.market_bet_count)
-            
-            home_team_info.find('.teamSpan').html(v3.home_team_name)
-            home_team_info.find('.scoreSpan').html('')
-            away_team_info.find('.teamSpan').html(v3.away_team_name)
-            away_team_info.find('.scoreSpan').html('')
+        card.attr('id', k3)
+        card.attr('cate', k)
+        card.attr('status', v3.status)
+        card.attr('league_id', league_id)
+        time.html(formatDateTime(v3.start_time))
+        market_count.html(v3.market_bet_count)
 
-            // bet area
+        home_team_info.find('.teamSpan').html(v3.home_team_name)
+        home_team_info.find('.scoreSpan').html('')
+        away_team_info.find('.teamSpan').html(v3.away_team_name)
+        away_team_info.find('.scoreSpan').html('')
+
+        // bet area
         createBetArea(mainPriorityArr, v3, k3, league_name, 0, card)
 
         // ready to start
-        if( v3.status === 9 ) {
-            time.html(langTrans.mainArea.readyToStart)
-        }
-
-        // living
-        if( v3.status === 2 ) {
-            // score
-            if( v3.scoreboard ) {
-                home_team_info.find('.scoreSpan').html( v3.scoreboard[1][0] )
-                away_team_info.find('.scoreSpan').html( v3.scoreboard[2][0] )
-            }
-            
-            let timerStr = null
-            if( v3.periods ) {
-                // stage
-                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-                // exception baseball
-                if( sport === 154914 ) {
-                    // stage
-                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-
-                    // base
-                    let baseCont = card.find('img[alt="base"]')
-                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
-                    baseCont.attr('src', `/image/base/${baseText}.png`)
-
-
-                    // balls
-                    let strike = card.find('div[key="strike"]')
-                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
-                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
-                    let ball = card.find('div[key="ball"]')
-                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
-                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
-                    let out = card.find('div[key="out"]')
-                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
-                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
-                }
-                // stage text
-                time.html(timerStr)
-            }
-            
-
-            if( sport === 48242 ) {
-                let card2 = card.find('[key="basketBallQuaterBet"]')
-                let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
-                let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-
-                // bet area
-                if( v3.periods ) {
-                    stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
-                }
-
-            }
+        if (v3.status === 9) {
+            closeFixture(k3)
         }
 
         card.removeAttr('hidden')
         card.removeAttr('template')
         let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
         league_toggle_content.append(card)
-        }
+    }
 
-        function createBetArea(priorityArr, v3, k3, league_name, s, card) {
-        console.log(priorityArr)
-        priorityArr.forEach(( i, j ) => {
+    function createBetArea(priorityArr, v3, k3, league_name, s, card) {
+        priorityArr.forEach((i, j) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
-            if( betData && Object.keys(betData.list).length > 0 ) {
-                Object.entries(betData.list).map(([k4, v4], s) => { 
+            if (betData && Object.keys(betData.list).length > 0) {
+                Object.entries(betData.list).map(([k4, v4], s) => {
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1 ) {
+                    if (allWinArr.indexOf(i) !== -1) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if( priorityArr.length === 4 ) {
+                        if (priorityArr.length === 4) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
                         }
                     }
@@ -513,25 +471,46 @@
                     // rate
                     item.find('.odd').html(v4.price)
                     // 按照不同體育種類、玩法 顯示相對應內容
-                    switch ( i ) {
-                        case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                            item.find('.bet_name').html( v4.line )
+                    switch (i) {
+                        case 3:
+                        case 203:
+                        case 204:
+                        case 103:
+                        case 104:
+                        case 110:
+                        case 114:
+                        case 118:
+                        case 122: // 讓球
+                            item.find('.bet_name').html(v4.line)
                             break;
-                        case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                        case 5:
+                        case 205:
+                        case 206:
+                        case 105:
+                        case 106:
+                        case 111:
+                        case 115:
+                        case 119:
+                        case 123: // 大小
                             item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                             break;
-                        case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                            item.find('.bet_name').html( v4.market_bet_name )
+                        case 7:
+                        case 107:
+                        case 112:
+                        case 116:
+                        case 120:
+                        case 124: // 單雙
+                            item.find('.bet_name').html(v4.market_bet_name)
                             break;
                         default: // 獨贏
                             break;
                     }
 
-                    if( v4.status === 1 ) {
+                    if (v4.status === 1) {
                         item.find('.fa-lock').hide()
                         item.find('.odd').show()
                         item.find('.bet_name').show()
-                        item.attr('onclick', 'openCal($(this))')
+                        item.attr('onclick', 'selectMOrderBet($(this))')
                     } else {
                         item.find('.fa-lock').show()
                         item.find('.odd').hide()
@@ -547,12 +526,12 @@
             } else {
                 for (let j = 0; j < 2; j++) {
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1 ) {
+                    if (allWinArr.indexOf(i) !== -1) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if( priorityArr.length === 4 ) {
+                        if (priorityArr.length === 4) {
                             item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
                         }
                     }
@@ -569,7 +548,7 @@
             }
 
             // 足球 讓球、大小 補空格
-            if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
+            if (sport === 6046 && allWinArr.indexOf(i) === -1) {
                 let item = $('div[template="betItem-no"]').clone()
                 item.removeAttr('hidden')
                 item.removeAttr('template')
@@ -580,14 +559,14 @@
             bet_div.removeAttr('template')
             card.find('.indexBetCardTable').eq(s).append(bet_div)
         });
-        }
+    }
 
     $(document).ready(function() {
         // ===== DATA LATER =====
 
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
-            if( isReadyCommon ) {
+            if (isReadyCommon) {
                 callMatchListData.sport_id = sport // default sport
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
@@ -600,8 +579,10 @@
 
         // check if api are all loaded every 500 ms 
         isReadyIndexInt = setInterval(() => {
-            if (matchListD.status === 1) { isReadyIndex = true; }
-            if( isReadyIndex && isReadyCommon) {
+            if (matchListD.status === 1) {
+                isReadyIndex = true;
+            }
+            if (isReadyIndex && isReadyCommon) {
                 // game priority and gameTitle
                 mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
@@ -614,7 +595,7 @@
                     renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
-                
+
 
                 // websocket -> mark now
                 WebSocketDemo(); // ws connection
@@ -623,10 +604,10 @@
             }
         }, 500);
 
-        
+
         // ===== DATA LATER =====
     });
-    
+
     ///game bet loading
     function showLoading() {
         document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
@@ -637,7 +618,7 @@
     }
 
     // websocket
-   function WebSocketDemo() {
+    function WebSocketDemo() {
         console.log('WebSocketDemo')
         if ("WebSocket" in window) {
             try {
@@ -675,30 +656,30 @@
 
     // render view layer here
     function renderView() {
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            if( k === 'living' ) return; 
+        Object.entries(matchListD.data).map(([k, v]) => { // living early toggle
+            if (k === 'living') return;
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
+                Object.entries(v2.list).map(([k3, v3]) => { // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-                    if( isExist ) {
-                        let card = $(`#${k3}`) 
+                    if (isExist) {
+                        let card = $(`#${k3}`)
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
-                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
-                        if( isSwitchCate ) {
+                        let isSwitchCate = !isStatusSame && v3.status !== 1 // is changing early to living
+                        if (isSwitchCate || v3.status === 9) {
                             closeFixture(k3)
-                        }   
-                        
+                        }
+
                         // 玩法統計
                         card.find('.otherBetWay p').html(v3.market_bet_count)
 
                         // 壘包 好壞球 只有 滾球 棒球有
-                        if( sport === 154914 && v3.status === 2 ) {
+                        if (sport === 154914 && v3.status === 2) {
                             card.find('[key="not-show-baseCon"]').hide()
                             card.find('[key="show-baseCon"]').show()
                         } else {
@@ -709,93 +690,15 @@
                         // 單節選項 只有 滾球 籃球有
                         sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
-                        // ready to start
-                        if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
-
-                        // living
-                        if( v3.status === 2 ) {
-                            // score
-                            if( v3.scoreboard ) {
-                                let homeScore = home_team_info.find('.scoreSpan')
-                                let awayScore = away_team_info.find('.scoreSpan')
-                                let nowHomeScore = parseInt(homeScore.html())
-                                let nowAwayScore = parseInt(awayScore.html())
-                                let updateHome = parseInt(v3.scoreboard[1][0])
-                                let updateAway = parseInt(v3.scoreboard[2][0])
-                                if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
-                                if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
-
-                                setTimeout(() => {
-                                    homeScore.removeClass('raiseScore')
-                                    awayScore.removeClass('raiseScore')
-                                }, 3000);
-
-                                homeScore.html( v3.scoreboard[1][0] )
-                                awayScore.html( v3.scoreboard[2][0] )
-                            }
-
-                            // stage
-                            let timerStr = null
-                            if( v3.periods ) {
-                                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-                                // bet data
-                                renderBetArea(mainPriorityArr, v3, k3)
-                                // exception baseball
-                                if( sport === 154914 ) {
-                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-
-                                    // base
-                                    let baseCont = card.find('img[alt="base"]')
-                                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
-                                    baseCont.attr('src', `/image/base/${baseText}.png`)
-
-                                    // balls
-                                    let strike = card.find('div[key="strike"]')
-                                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
-                                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
-                                    let ball = card.find('div[key="ball"]')
-                                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
-                                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
-                                    let out = card.find('div[key="out"]')
-                                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
-                                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
-                                }
-
-                                time.html(timerStr)
-                            }
-
-                            // exception basketball
-                            if( sport === 48242 ) {
-                                let card2 = card.find('[key="basketBallQuaterBet"]')
-
-                                // 換節了 重新渲染單節投注區塊
-                                if( v3.periods ) {
-                                    newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-
-                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
-                                        stagePriorityArr = newStagePriorityArr
-                                        card.find('.indexBetCardTable').eq(1).html('')
-                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
-                                    }
-                                }
-
-                                let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
-                                let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
-                            }
-                            
-                        }
 
                         function renderBetArea(priorityArr, v3, k3) {
                             console.log(priorityArr)
-                            priorityArr.forEach(( i, j ) => {
+                            priorityArr.forEach((i, j) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
                                 let item = null
-                                if( betData && Object.keys(betData.list).length > 0 ) {
-                                    Object.entries(betData.list).map(([k4, v4], s) => { 
+                                if (betData && Object.keys(betData.list).length > 0) {
+                                    Object.entries(betData.list).map(([k4, v4], s) => {
                                         item = bet_div.find('.betItemDiv').eq(s)
                                         // old attribute
                                         let market_bet_id = item.attr('market_bet_id')
@@ -803,20 +706,20 @@
                                         let isSelected = item.hasClass('m_order_on')
 
                                         // 判斷盤口存在+是否有改變且狀態為1
-                                        if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
+                                        if (market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1) {
                                             // 判斷賠率是否有改變
-                                            if( parseFloat(price) > parseFloat(v4.price) ) {
+                                            if (parseFloat(price) > parseFloat(v4.price)) {
                                                 // 賠率下降
                                                 lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
-                                            if( parseFloat(price) < parseFloat(v4.price) ) {
+                                            if (parseFloat(price) < parseFloat(v4.price)) {
                                                 // 賠率上升
                                                 raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
-                                        } 
+                                        }
 
                                         // set attribute
-                                        if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
+                                        if (isSelected) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
                                         item.attr('priority', i)
                                         item.attr('fixture_id', k3)
                                         item.attr('market_id', betData.market_id)
@@ -832,15 +735,36 @@
 
 
                                         // 賦值
-                                        switch ( i ) {
-                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                                                item.find('.bet_name').html( v4.line )
+                                        switch (i) {
+                                            case 3:
+                                            case 203:
+                                            case 204:
+                                            case 103:
+                                            case 104:
+                                            case 110:
+                                            case 114:
+                                            case 118:
+                                            case 122: // 讓球
+                                                item.find('.bet_name').html(v4.line)
                                                 break;
-                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                                            case 5:
+                                            case 205:
+                                            case 206:
+                                            case 105:
+                                            case 106:
+                                            case 111:
+                                            case 115:
+                                            case 119:
+                                            case 123: // 大小
                                                 item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                                                 break;
-                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                                                item.find('.bet_name').html( v4.market_bet_name )
+                                            case 7:
+                                            case 107:
+                                            case 112:
+                                            case 116:
+                                            case 120:
+                                            case 124: // 單雙
+                                                item.find('.bet_name').html(v4.market_bet_name)
                                                 break;
                                             default: // 獨贏
                                                 break;
@@ -850,7 +774,7 @@
                                         let calBetNameStr = ''
                                         let home = item.attr('home')
                                         let away = item.attr('away')
-                                        if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                        if (convertTeamPriArr.indexOf(i) === -1) {
                                             calBetNameStr = v4.market_bet_name + ' ' + v4.line
                                         } else {
                                             calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
@@ -858,14 +782,14 @@
                                         $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
 
                                         // 狀態 鎖頭
-                                        if( v4.status === 1 ) {
+                                        if (v4.status === 1) {
                                             item.find('.fa-lock').hide()
                                             item.find('.odd').show()
                                             item.find('.bet_name').show()
-                                            item.attr('onclick', 'openCal($(this))')
+                                            item.attr('onclick', 'selectMOrderBet($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            if ($(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0) {
                                                 $('#submitOrder').html(langTrans.bet_area.bet)
                                                 $('#submitOrder').removeClass('disabled')
                                                 $('#submitOrder').removeAttr('disabled')
@@ -877,7 +801,7 @@
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            if ($(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0) {
                                                 $('#submitOrder').html(langTrans.bet_area.disabled)
                                                 $('#submitOrder').addClass('disabled')
                                                 $('#submitOrder').attr('disabled', true)
@@ -886,7 +810,7 @@
                                     })
                                 } else {
                                     let k = 2
-                                    if( sport === 6046 ) k = 3
+                                    if (sport === 6046) k = 3
                                     for (let j = 0; j < k; j++) {
                                         let item = bet_div.find('.betItemDiv').eq(j)
 
@@ -900,8 +824,8 @@
                         }
                     } else {
                         // 新的賽事
-                        if( !isCateExist ) createCate(k, v)
-                        if( !isLeagueExist ) createLeague(k, k2, v2)
+                        if (!isCateExist) createCate(k, v)
+                        if (!isLeagueExist) createLeague(k, k2, v2)
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
                     }
                 })
@@ -915,10 +839,10 @@
             let fixture_id = $(this).attr('id')
             let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
             let result = null
-            if( resultArr ) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
-            if( !result ) {
+            if (resultArr) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
+            if (!result) {
                 closeFixture(fixture_id)
-            } 
+            }
         });
         statistics()
     }
@@ -944,7 +868,7 @@
         const message = messageQueue.shift(); // to get the head pkg
         const msg = JSON.parse(message.data); // convert to json
         console.log(msg);
-        
+
 
         // delay_order
         if (msg.action === 'delay_order') {
@@ -988,20 +912,24 @@
     function toggleCat(key) {
         var $toggleContent = $(`#toggleContent_${key}`);
         var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
-        
+
         // 获取当前高度
         var currentHeight = $toggleContent.height().toFixed(2);
         if (currentHeight == 37.8) {
             // 如果高度为 49px，则展开
             $toggleContent.css('overflow', 'auto');
-            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
+            $toggleContent.animate({
+                height: $toggleContent[0].scrollHeight
+            }, 700, function() {
                 // 动画完成后，将高度设置为 'auto'
                 $toggleContent.removeAttr('style')
             });
         } else {
             // 如果高度不是 49px，则收起
             $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '37.8px' }, 700);
+            $toggleContent.animate({
+                height: '37.8px'
+            }, 700);
         }
 
         // 切换图标方向
@@ -1015,9 +943,9 @@
 
 
     // 聯賽分類收合
-    function toggleSeries( key ) {
-        $('#seriesWrapperContent_' + key).slideToggle( 700 );
-        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
+    function toggleSeries(key) {
+        $('#seriesWrapperContent_' + key).slideToggle(700);
+        if ($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
             $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
             $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
             $('#seriesWrapperTitle_' + key + ' .betLabelContainer').hide()
@@ -1031,7 +959,7 @@
 
     // 內容太長 跑馬燈
     function fixTextOverflow() {
-        $('.textOverFlow').each(function(){
+        $('.textOverFlow').each(function() {
             if ($(this).prop('scrollHeight') > $(this).height()) {
                 $(this).removeClass('textOverFlow')
                 $(this).wrap('<marquee behavior="scroll"><p></p></marquee>');
@@ -1039,8 +967,8 @@
         })
     }
 
-     // 賠率上升
-     function raiseOdd(fixture_id, market_id, market_bet_id) {
+    // 賠率上升
+    function raiseOdd(fixture_id, market_id, market_bet_id) {
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
@@ -1050,7 +978,7 @@
         // 再加上賠率變化樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').show()
-        
+
         // 三秒後移除
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
@@ -1079,23 +1007,22 @@
     }
 
     // 文字太常處理 參考
-    function marqueeLongText(){
+    function marqueeLongText() {
         $("td.home-name, td.away-name").each(function() {
             const $td = $(this);
             const $text = $td.find(".text");
             const $img = $td.find("img");
-            if ($td.width() < ($text.width()+ parseInt($(this).css("padding-left")) + $img.width())) {
+            if ($td.width() < ($text.width() + parseInt($(this).css("padding-left")) + $img.width())) {
                 $text.find("div").addClass("marquee");
                 $text.css("overflow", "hidden");
-            }
-            else{
+            } else {
                 $text.find("div").removeClass("marquee");
                 $text.css("overflow", "auto");
             }
         });
     }
 
-   
+
     // 選擇串關玩法
     var sendOrderData = {}
     sendOrderData.bet_data = []
@@ -1138,7 +1065,7 @@
             let away = e.attr('away')
             let priority = parseInt(e.attr('priority'))
 
-           
+
             sendOrderData.bet_data.push({
                 fixture_id: fixture_id,
                 market_id: market_id,
@@ -1325,7 +1252,7 @@
                 showErrorToast(jqXHR)
             }
         });
-       
+
         // 金額歸零
         $('#moneyInput').val('')
         $('#moneyInput').trigger('change')
@@ -1341,19 +1268,19 @@
             let id = $(this).attr('id').split('_')[1]
             let count = $('#toggleContent_' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.cateWrapper').hide()
+            if (count === 0) $(this).closest('.cateWrapper').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
             let idArr = $(this).attr('id').split('_')
-            let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
+            let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}`
             let count = $('#' + id).find('.indexEachCard').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.leagueWrapper').remove()
+            if (count === 0) $(this).closest('.leagueWrapper').remove()
         })
-    
+
         // is no data
-        if( $('#indexContainer .indexEachCard').length === 0 ) {
+        if ($('#indexContainer .indexEachCard').length === 0) {
             $('#noData').show()
         } else {
             $('#noData').hide()
@@ -1373,7 +1300,7 @@
             $('#refreshIcon').removeClass('rotate-animation');
         }
     }
-    
+
     formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
         const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
@@ -1382,6 +1309,5 @@
         const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
         return `${month}-${day} ${hour}:${minute}`;
     }
-
 </script>
 @endpush
