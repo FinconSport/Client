@@ -40,9 +40,11 @@ class OrderController extends PcController {
       }
 
       // 輸入判定
+      
       if ((!isset($input['menu'])) || ($input['menu'] == "")) {
+
         $input['menu'] = 0;  // 預設未結算
-      }
+      } 
 
       if ((!isset($input['sport'])) || ($input['sport'] == "")) {
         $input['sport'] = 1;  // 預設1 , 足球
