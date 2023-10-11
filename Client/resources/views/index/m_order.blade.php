@@ -1120,7 +1120,7 @@
             if( convertTeamPriArr.indexOf(item.priority) === -1 ) {
                 leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
             } else {
-                let str = item.bet_name_en == 1 ? home : away
+                let str = item.bet_name_en == 1 ? item.home : item.away
                 str += ' ' + item.bet_name_line
                 leftSlideOrderCard.find('span[key="bet_name"]').html(str)
             }
