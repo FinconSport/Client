@@ -452,13 +452,13 @@
 	}
 
 	var div = document.getElementById('orderTr');
-	var table = document.getElementById('orderTable'); // Replace with your table's ID
+	var table = document.getElementById('orderTable');
 
 	if (window.getComputedStyle(div).display === 'none') {
 		// The div is hidden, so don't include the count of even rows
 	} else if (window.getComputedStyle(div).display === 'table-row') {
 		// The div is displayed, so include the count of even rows
-		var evenRows = table.querySelectorAll('tr:nth-child(even)');
+		var evenRows = table.querySelectorAll('tbody tr:nth-child(even)');
 
 		for (var i = 0; i < evenRows.length; i++) {
 			evenRows[i].style.backgroundColor = '#e2f0f0'; // Change background color
