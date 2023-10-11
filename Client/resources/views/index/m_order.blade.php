@@ -1117,7 +1117,7 @@
             leftSlideOrderCard.find('p[key="league"]').html(item.league)
             leftSlideOrderCard.find('span[key="bet_type"]').html(item.bet_type)
 
-            if( convertTeamPriArr.indexOf(priority) === -1 ) {
+            if( convertTeamPriArr.indexOf(item.priority) === -1 ) {
                 leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
             } else {
                 let str = item.bet_name_en == 1 ? home : away
