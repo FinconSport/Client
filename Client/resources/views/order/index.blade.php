@@ -302,8 +302,22 @@
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
+			// function toggleContainers() {
+			// 	$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
+			// 	toggleButton.find('i').toggleClass('fa-rotate-90');
+			// }
+
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
+				const container = $(`#${dynamicId}.hide-betaDetcon`);
+				
+				if (container.is(':visible')) {
+					container.animate({ transform: 'scale(0)' }, 'fast', function() {
+						container.hide();
+					});
+				} else {
+					container.show().css({ transform: 'scale(0)' }).animate({ transform: 'scale(1)' }, 'fast');
+				}
+
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 
