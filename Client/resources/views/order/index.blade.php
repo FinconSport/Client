@@ -221,8 +221,7 @@
 	}
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
-		const createHtmlElement = (className, content) =>
-			$('<div>').html(content).addClass(className);
+		const createHtmlElement = (className, content) => $('<div>').html(content).addClass(className);
 		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
@@ -252,22 +251,24 @@
 				'<td style="width: 10%; text-align:right;" class="orderData_betData_Result"></td>' +
 				'<td style="width: 10%;"></td>'.repeat(4)
 			);
-
 			$('#orderDataTemp').append(additionalTr);
 
 			const betDataEventContainer = $(`#${dynamicId}`);
+			//append event additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Event').html(`
-			${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-			${betItem.home_team_name} VS ${betItem.away_team_name} 
-			<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-			${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-			${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
+				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
+				${betItem.home_team_name} VS ${betItem.away_team_name} 
+				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
+				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
+			//append bet way additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-			${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
+			//append result additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Result').html(`
-			${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
+				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
 			);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
@@ -352,8 +353,6 @@
 			fetchMore()
 		}
 	});
-
-
 
   	// 寫入頁面限定JS
   	$(document).ready(function() {
