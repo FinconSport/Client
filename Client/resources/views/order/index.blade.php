@@ -301,15 +301,23 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
-		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
-		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss === null ? '0' : totalWinLoss);
+		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
+		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
+		
+		if (totalResultAmount === undefined || totalWinLoss === undefined) {
+			totalResultAmount = '0';
+			totalWinLoss = '0';
+		}
+		
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
+		
 		$('.search-bar-container').after(orderDataTotal);
 	}
+
 
 	//updateTotal when new data is loaded
 	function updateTotal() {
