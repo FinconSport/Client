@@ -810,6 +810,14 @@ class LsportApiController extends Controller {
                 'list' => array(),
             );
 
+            // market_bet 總玩法統計
+            $return = LsportMarketBet::where('fixture_id', $fixture_id)->count();
+            if ($return === false) {
+                $this->ApiError('04');
+            }
+
+            $market_bet_count = $return;
+
             $data[$fixture_status][$league_id]['list'][$fixture_id] = array(
                 'fixture_id' => $v['fixture_id'],
                 'start_time' => $v['start_time'],
@@ -822,7 +830,7 @@ class LsportApiController extends Controller {
                 'away_team_name' => $away_team_name,
                 'periods' => $parsed_periods,
                 'scoreboard' => $parsed_scoreboard,
-                'market_bet_count' => 0,
+                'market_bet_count' => $market_bet_count,
                 'list' => array()
             );
 
@@ -834,27 +842,29 @@ class LsportApiController extends Controller {
 
             $market_data = $return;
 
-            // market_bet 總玩法統計
-            $return = LsportMarketBet::where('fixture_id', $fixture_id)->count();
-            if ($return === false) {
-                $this->ApiError('04');
-            }
-
-            $market_bet_count = $return;
-
-            dd($market_bet_count);
-
             foreach ($market_data as $kk => $vv) {
                 
                 $market_id = $vv['market_id'];
                 $market_priority = $vv['priority'];
                 $market_main_line = $vv['main_line'];
 
+                // 取得marke_name
+
+                $data[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id] = array(
+                    'market_id' => $market_id,
+                    'market_name' => $market_name,
+                    'priority' => $market_priority,
+                    'main_line' => $market_main_line,
+                    'list' => array(),
+                );
+
+                /////////////////////////
+
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id', $fixture_id)
                 ->where('market_id', $market_id)
                 ->where('base_line', $market_main_line)  
-                ->orderBy('mb.name_en', 'ASC')
+                ->orderBy('name_en', 'ASC')
                 ->get();
                 if ($return === false) {
                     $this->ApiError('04');
@@ -862,14 +872,31 @@ class LsportApiController extends Controller {
 
                 $market_bet_data = $return;
 
+                $tmp = array();
+                foreach ($market_bet_data as $kkk => $vvv) {
+
+                    $market_bet_id = $vvv['bet_id'];
+
+                    // 取得market_bet 玩法名稱
+
+                    $tmp[] = array(
+                        'market_bet_id' => $market_bet_id,
+                        'market_bet_name' => $market_bet_name,
+                        'market_bet_name_en' => $vvv['name_en'],
+                        'line' => $vvv['line'],
+                        'price' => $vvv['price'],
+                        'status' => $vvv['status'],
+                        'last_update' => $vvv['last_update']
+                    );
+
+                // 包入 market_bet 賠率資料 ---------------
+                }
                 
-
-
-
+                $data[$fixture_status][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$market_bet_id] = $tmp;
 
             }
 
-            dd($return);
+            dd($data);
 
         }
 
