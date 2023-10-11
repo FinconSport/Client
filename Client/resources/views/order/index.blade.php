@@ -303,21 +303,12 @@
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast', function () {
-					if ($(this).is(':visible')) {
-						$(this).css('transform', 'scale(1)');
-					} else {
-						$(this).css('transform', 'scale(0)');
-					}
-				});
+				$(`#${dynamicId}`).toggleClass("show-betaDetcon");
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
-
-
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-
 
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();

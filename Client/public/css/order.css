@@ -169,6 +169,13 @@ div[key="matchSportMenu"]{
 
 .hide-betaDetcon {
     display: none;
+    transform: scaleY(0);
+    transition: display 0.3s, transform 0.3s;
+}
+
+.show-betaDetcon {
+    display: table-row;
+    transform: scaleY(1);
 }
 
 .order-toggleButton{
