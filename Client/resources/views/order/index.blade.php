@@ -4,7 +4,7 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-			<select id="selectOption" name="selectOption" onfocus="this.size=2;" onblur="this.size=0;" onchange="redirectToPage(this)">
+			<select id="selectOption" name="selectOption" onfocus="this.size=2;" onchange="redirectToPage(this)">
 				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
 				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
 			</select>
