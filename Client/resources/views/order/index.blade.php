@@ -5,8 +5,8 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 			<select id="selectOption" name="selectOption" onchange="redirectToPage(this)">
-				<option value="Unsettled" data-link="?result=0">Unsettled</option>
-				<option value="Settled" data-link="?result=1">Settled</option>
+				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
+				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
 			</select>
 			</div>
 			<div class="datecalendar-con">
@@ -179,7 +179,6 @@
 				isLastPage && $('#noMoreData').show()
 			}
 	}
-
 
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
@@ -406,12 +405,11 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-	// Get the current URL search parameters
+	// function of selected unsettled and settled
 	const urlParams = new URLSearchParams(window.location.search);
 	const select = document.getElementById("selectOption");
-	const unsettledOption = select.querySelector("option[value='Unsettled']");
-	const settledOption = select.querySelector("option[value='Settled']");
-
+	const unsettledOption = select.querySelector("option[value='{{ trans('common.left_menu.unsettled') }}']");
+	const settledOption = select.querySelector("option[value='{{ trans('common.left_menu.settled') }}']");
 	// Check for the 'result' query parameter in the URL
 	const resultParam = urlParams.get("result");
 
