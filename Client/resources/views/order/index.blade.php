@@ -222,6 +222,7 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(content).addClass(className);
+		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
@@ -302,13 +303,12 @@
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
-				$(`#${dynamicId}`).toggleClass("show-betaDetcon");
+				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-
 		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
 		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
