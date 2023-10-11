@@ -770,14 +770,70 @@ class LsportApiController extends Controller {
         }
 
         $fixture_data = $return;
+        $data = array();
         foreach ($fixture_data as $k => $v) {
             // 參數
             $sport_id = $v['sport_id'];
-            // 取得球類名稱
+            $league_id = $v['league_id'];
+            $fixture_id = $v['fixture_id'];
+            $fixture_status = $v['status'];
+            $home_id = $v['home_id'];
+            $away_id = $v['away_id'];
+
+            // sport 
             $sport_name = LsportSport::getName(['sport_id' => $sport_id, "api_lang" => $agent_lang]);
-            dd($sport_name);
             
+            // league 
+            $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
+     
+            // HomeTeam
+            $home_team_name = LsportTeam::getName(['team_id' => $home_id, "api_lang" => $agent_lang]);
+
+            // AwayTeam
+            $away_team_name = LsportTeam::getName(['team_id' => $away_id, "api_lang" => $agent_lang]);
+
+            // Score
+            $livescore_extradata = $v['livescore_extradata'];
+            $periods = $v['periods'];
+            $scoreboard = $v['scoreboard'];
+
+            // 解析以回傳
+            $parsed_periods = $this->getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata);
+            $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
             
+            // 包入 fixture 賽事資料 ---------------
+            
+            // 聯賽資料
+            $data[$fixture_status][$league_id] = array(
+                'league_id' => $league_id,
+                'league_name' => $league_name,
+                'list' => array(),
+            );
+
+            $data[$fixture_status][$league_id]['list'][$fixture_id] = array(
+                'fixture_id' => $v['fixture_id'],
+                'start_time' => $v['start_time'],
+                'order_by' => strtotime($v['start_time']),
+                'status' => $v['status'],
+                'last_update' => $v['last_update'],
+                'home_team_id' => $v['home_id'],
+                'home_team_name' => $home_team_name,
+                'away_team_id' => $v['away_id'],
+                'away_team_name' => $away_team_name,
+                'periods' => $parsed_periods,
+                'scoreboard' => $parsed_scoreboard,
+                'market_bet_count' => 0,
+                'list' => array()
+            );
+
+            // Market 
+            $return = LsportMarket::where('fixture_id', $fixture_id)->orderBy("market_id","ASC")->get();
+            if ($return === false) {
+
+            }
+
+            dd($return);
+
         }
 
 
