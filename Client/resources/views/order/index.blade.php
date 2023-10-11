@@ -5,6 +5,7 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 			<select id="selectOption" name="selectOption" onfocus="this.size=2;" onchange="redirectToPage(this)">
+				<option value="" disabled></option>
 				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
 				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
 			</select>
@@ -411,11 +412,14 @@
 	const settledOption = select.querySelector("option[value='{{ trans('common.left_menu.settled') }}']");
 	// Check for the 'result' query parameter in the URL
 	const resultParam = urlParams.get("result");
+	var placeholderOption = select.options[0];
 
 	if (resultParam === "0") {
 		unsettledOption.setAttribute("selected", "selected");
+		placeholderOption.textContent = "{{ trans('common.left_menu.unsettled') }}";
 	} else if (resultParam === "1") {
 		settledOption.setAttribute("selected", "selected");
+		placeholderOption.textContent = "{{ trans('common.left_menu.settled') }}";
 	}
 
 	function redirectToPage(select) {
