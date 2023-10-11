@@ -264,6 +264,7 @@ span.orderData_mOrder {
     outline: none;
     cursor: pointer;
     color: #415b5a!important;
+    font-weight: 600;
 }
 
 .search-statistic-container #selectOption option:nth-child(1){
@@ -275,8 +276,9 @@ span.orderData_mOrder {
 .search-statistic-container #selectOption option:nth-child(1):focus,
 .search-statistic-container #selectOption option:nth-child(1):checked,
 .search-statistic-container #selectOption option:nth-child(1):hover  {
-    background-color: transparent!important;
     box-shadow: 0 0 10px 100px transparent inset;
+    color: #415b5a!important;
+    font-weight: 600;
 }
 
 .search-statistic-container #selectOption option:nth-child(2),
@@ -302,9 +304,9 @@ span.orderData_mOrder {
 .search-statistic-container #selectOption option:focus,
 .search-statistic-container #selectOption option:checked,
 .search-statistic-container #selectOption option:hover  {
-    background-color: #c4d4d4!important;
     box-shadow: 0 0 10px 100px #c4d4d4 inset;
     color: #415b5a!important;
+    font-weight: 700;
 }
 
 /* for IE10 */ 
