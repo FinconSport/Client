@@ -344,7 +344,7 @@ button.dateCalendarBtn {
     color: #415b5a;
 }
 
-.statistic-container {
+.search-statistic-container .statistic-container {
     width: 58%;
     display: grid;
     grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
@@ -353,7 +353,7 @@ button.dateCalendarBtn {
     padding-left: 1%;
 }
 
-.stats-container {
+.search-statistic-container .stats-container {
     height: 100%;
     background: #ffffff;
     padding: 0.5rem;
@@ -364,7 +364,7 @@ button.dateCalendarBtn {
     justify-content: space-between;
 }
 
-.stats-container p{
+.search-statistic-container .stats-container p{
     text-align: end;
     font-size: 1.5rem;
     word-wrap: break-word;
