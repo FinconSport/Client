@@ -258,25 +258,42 @@ span.orderData_mOrder {
     align-items: center;
 }
 
-.search-statistic-container #selectOption option:first-child{
-    padding: 0px;
-    background-color: transparent;
-    border-radius: 0px;
-}
-
 .search-statistic-container #selectOption option{
     padding: 0.5rem;
     background-color: #fff;
     outline: none;
     cursor: pointer;
-    border-radius: 5px;
 }
 
-.search-statistic-container #selectOption option:first-child:focus,
-.search-statistic-container #selectOption option:first-child:checked,
-.search-statistic-container #selectOption option:first-child:hover  {
+.search-statistic-container #selectOption option:nth-child(1){
+    padding: 0px;
+    background-color: transparent;
+    border-radius: 0px;
+}
+
+.search-statistic-container #selectOption option:nth-child(1):focus,
+.search-statistic-container #selectOption option:nth-child(1):checked,
+.search-statistic-container #selectOption option:nth-child(1):hover  {
     background-color: transparent!important;
     box-shadow: 0 0 10px 100px transparent inset;
+}
+
+.search-statistic-container #selectOption option:nth-child(2),
+.search-statistic-container #selectOption option:nth-child(3){
+    border-left: 1px solid #415b5a;
+    border-right: 1px solid #415b5a;
+}
+
+.search-statistic-container #selectOption option:nth-child(2) {
+    border-top: 1px solid #415b5a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-statistic-container #selectOption option:nth-child(3) {
+    border-bottom: 1px solid #415b5a;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .search-statistic-container #selectOption option:focus,
