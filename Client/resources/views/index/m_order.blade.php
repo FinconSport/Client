@@ -1220,7 +1220,6 @@
         };
 
         jsonData.bet_data.forEach(ele => {
-            delete ele.bet_rate;
             delete ele.bet_type;
             delete ele.bet_name;
             delete ele.bet_name_en;
