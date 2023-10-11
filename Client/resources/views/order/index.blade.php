@@ -246,14 +246,13 @@
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-right', 
-				betItem.status === 0 ? `<span style="color: green;">Lose</span>` :
-				betItem.status === 1 ? `<span style="color: red;">Win</span>` :
-				betItem.status === 2 ? `<span style="color: red;">Win half</span>` :
-				betItem.status === 3 ? `<span style="color: green;">Lose half</span>` :
-				betItem.status === 4 ? `<span style="color: #c79e42;">Chargeback</span>` :
-				`${betItem.status}`
+				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
+				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
+				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
+				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
+				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
+				`${betItem.status} <br>${formatDateTime(orderItem.result_time)}`
 			)
-			+ `<br>${formatDateTime(orderItem.result_time)}`
 		);
 
 		if (betIndex > 0) {
