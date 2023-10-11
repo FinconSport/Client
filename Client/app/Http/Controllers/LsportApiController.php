@@ -878,7 +878,8 @@ class LsportApiController extends Controller {
 
                     $market_bet_id = $vvv['bet_id'];
 
-                    // 取得market_bet 玩法名稱
+                    // 取得market_bet 玩法名稱 TODO
+                    $market_bet_name = $vvv['name_en'];
 
                     $tmp[] = array(
                         'market_bet_id' => $market_bet_id,
