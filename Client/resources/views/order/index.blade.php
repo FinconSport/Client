@@ -100,8 +100,8 @@
 					<span>.</span>
 				</div>
 			</div>  
-			<div id="noMoreData" style="display: none; margin-top: 2rem;">
-				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
+			<div id="noMoreData" style="display: none;">
+				<td colspan="16"><p class="mb-0 p-3">{{ trans('match.main.nomoredata') }}</p></td>
 			</div>
         </div>
     </div>
