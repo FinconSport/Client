@@ -55,6 +55,7 @@
 		</div>
 	</div>
     <div id="orderContainer">
+		<button id="changeBackground">Change Background</button>
         <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
@@ -451,33 +452,29 @@
 		}
 	}
 
+    function changeBackgroundColor() {
+        var table = document.getElementById('orderTable');
+        var rows = table.querySelectorAll('tbody tr');
 
-	function updateBackground() {
-        var table = document.getElementById("orderTable");
-        var rows = table.querySelectorAll("tbody tr");
-
-        rows.forEach(function (row, index) {
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
             var computedStyle = window.getComputedStyle(row);
-            if (computedStyle.display === "table-row") {
-                if (index % 2 === 0) {
-                    // Even rows
-                    row.style.backgroundColor = "#e2f0f0";
+
+            if (computedStyle.display === 'table-row' && !row.classList.contains('orderData_expand')) {
+                if (i % 2 === 0) {
+                    row.style.backgroundColor = '#e2f0f0';
                 } else {
-                    // Odd rows
-                    row.style.backgroundColor = "";
+                    row.style.backgroundColor = '';
                 }
             } else {
-                // Set background color to none for rows with "display: none"
-                row.style.backgroundColor = "";
+                row.style.backgroundColor = '';
             }
-        });
+        }
+
+        console.log('Button clicked, background changed.');
     }
 
-	// Call the updateBackground function initially
-    updateBackground();
+	document.getElementById('changeBackground').addEventListener('click', changeBackgroundColor);
 
-    // Add an event listener for changes in the "display" property
-    window.addEventListener("resize", updateBackground);
-	
 </script>
 @endpush
