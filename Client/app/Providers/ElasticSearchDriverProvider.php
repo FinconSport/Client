@@ -64,8 +64,18 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esTableName = "`es_" . $tableName."`";
 
             // Build ES SQL
-            $bindings = $this->getBindings();
-            $countRawSql = $this->toBase()->getCountForPagination()->toSql(); // 获取count()查询的原始SQL
+            $bindings = $this->getBindings(); 
+            
+            // 获取原始查询构建器
+            $queryBuilder = $this->toBase();
+        
+            // 构建 count() 查询
+            $countQueryBuilder = clone $queryBuilder;
+            $countQueryBuilder->selectRaw('COUNT(*) as aggregate');
+        
+            // 获取 count() 查询的原始 SQL
+            $countRawSql = $countQueryBuilder->toSql();
+        
             dd($countRawSql);
             $rawSql = $this->toSql();
             $esSql = vsprintf(str_replace('?', "'%s'", $rawSql), $bindings);    // getRawSQL
