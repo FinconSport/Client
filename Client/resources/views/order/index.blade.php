@@ -215,8 +215,7 @@
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss === null ? '-' : winLoss);
-		console.log("WINLOSS " + winLoss);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss;);
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -308,14 +307,11 @@
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		console.log("totalResultAmount" + totalResultAmount);
-		console.log("totalWinLoss" + totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
-		
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
