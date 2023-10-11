@@ -222,27 +222,50 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(content).addClass(className);
-		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
+
 		// event column 
+		function createBetDataEventContent(betItem, orderItem) {
+			return `${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
+					${betItem.home_team_name} VS ${betItem.away_team_name} 
+					<span style="color:red;">${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
+					${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
+					${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`}</span>`;
+		}
+		// bet way column 
+		function createBetWayContent(betItem) {
+			const marketName = betItem.market_name;
+			const marketBetName = betItem.market_bet_name;
+			const marketBetLine = betItem.market_bet_line;
+			const betRate = betItem.bet_rate;
+
+			const content = `${marketName}<br><span style="color:green;">(${marketBetName})${marketBetLine}</span>`;
+			if (betRate !== null) {
+				return `${content} @<span style="color:#c79e42;">${betRate}</span>`;
+			} else {
+				return content;
+			}
+		}
+
+		const BetDataEventContent = createBetDataEventContent(betItem, orderItem);
+		const betWayContent = createBetWayContent(betItem);
+
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
-		createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
-		createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name}
-			<span style="color:red;white-space:nowrap;">
-			${betItem.home_team_score !== null || betItem.away_team_score !== null ? `(` : ''}
-			${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
-			${betItem.away_team_score !== null && betItem.home_team_score !== null ? '-' : ''}
-			${betItem.away_team_score !== null ? `${betItem.away_team_score}` : ''}
-			${betItem.home_team_score !== null || betItem.away_team_score !== null ? `)` : ''}
-			</span>`)
+			createHtmlElement('', BetDataEventContent)
 		);
+
+
 		// bet way column
+		// const betDataBetWayContainer = $('<div class="betaDetcon">').append(
+		// 	createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+		// );
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+			createHtmlElement('text-leftt', betWayContent)
 		);
+
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('text-right',
@@ -258,7 +281,8 @@
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndex}`;
-			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass('orderData_expand').append(
+			const dynamicClass = `additionalTr_${betItem.league_id}${betItem.league_name}`;
+			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
 				'<td style="width: 21%; text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%; text-align:left;" class="orderData_betData_BetWay"></td>' +
@@ -268,18 +292,17 @@
 			$('#orderDataTemp').append(additionalTr);
 
 			const betDataEventContainer = $(`#${dynamicId}`);
-			//append event additional bet item data to created td
-			betDataEventContainer.find('.orderData_betData_Event').html(`
-				${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-				${betItem.home_team_name} VS ${betItem.away_team_name} 
-				<span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}
-				${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`}
-				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
-			);
+
+			betDataEventContainer.find('.orderData_betData_Event').html(BetDataEventContent);
+
+
 			//append bet way additional bet item data to created td
-			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
-			);
+			// betDataEventContainer.find('.orderData_betData_BetWay').html(`
+			// 	${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+			// );
+			betDataEventContainer.find('.orderData_betData_BetWay').html(betWayContent);
+
+			
 			//append result additional bet item data to created td
 			betDataEventContainer.find('.orderData_betData_Result').html(
 				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
@@ -300,19 +323,17 @@
 
 		if (betIndex === 0) {
 			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
-			var dynamicIds = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndex}`;
+			const dynamicClass = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
-				$(`#${dynamicIds}`).toggleClass("show-betaDetcon");
+				$(`.${dynamicClass}`).toggleClass("show-betaDetcon");
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
 
-		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
+		$('.betaDetcon:not(:first-child)').remove();
 	}
 
 	function createTotal() {
