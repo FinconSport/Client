@@ -281,9 +281,14 @@
 				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
 			);
 			//append result additional bet item data to created td
-			betDataEventContainer.find('.orderData_betData_Result').html(`
-				${betItem.status}<br> ${formatDateTime(orderItem.result_time)}`
-			);
+			betDataEventContainer.find('.orderData_betData_Result').html(
+				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
+				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
+				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
+				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
+				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
+				`${betItem.status}`
+			).append(`<br>${formatDateTime(orderItem.result_time)}`);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
