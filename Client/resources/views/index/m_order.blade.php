@@ -1104,9 +1104,6 @@
         $('#mask').fadeIn()
         mOrderRate = 1
         sendOrderData.bet_data.forEach(function(item, index) {
-
-            console.log(item)
-
             mOrderRate = parseFloat(item.bet_rate) * mOrderRate
             let leftSlideOrderCard = $('#leftSlideOrderCardTemplate').clone();
             leftSlideOrderCard.attr('key', 'generateCard')
@@ -1204,7 +1201,7 @@
             showErrorToast(langTrans.m_order.at_least_two);
             return;
         }
-        if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
+        if ( parseInt(sendOrderData.bet_amount) > 0 ) {
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
@@ -1225,11 +1222,15 @@
         };
 
         jsonData.bet_data.forEach(ele => {
-            delete ele.home;
-            delete ele.away;
+            delete ele.bet_rate;
             delete ele.bet_type;
             delete ele.bet_name;
+            delete ele.bet_name_en;
+            delete ele.bet_name_line;
             delete ele.league;
+            delete ele.home;
+            delete ele.away;
+            delete ele.priority;
             return ele;
         });
         jsonData.bet_data = JSON.stringify(jsonData.bet_data)
