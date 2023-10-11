@@ -315,7 +315,7 @@
 					toggleButton.find('i').removeClass('fa-rotate-90');
 				}
 			}
-			
+
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
@@ -427,6 +427,7 @@
         $('#datepicker_from').datepicker();
 		$('#ui-datepicker-div').addClass('custom-datepicker-class');
 		$('#datepicker_to').datepicker();
+		$('#orderTable tr:visible:even').find('td').css('background-color', '#e2f0f0');
     });
 
 	formatDateTime = (dateTimeString) => {
