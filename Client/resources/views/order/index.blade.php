@@ -230,11 +230,11 @@
 		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 			createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
-			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
+			createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name} <span style="color:red;">(${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`}${betItem.home_team_score === null ? '' : ` ${betItem.home_team_score}`} ${betItem.away_team_score === null && betItem.home_team_score === null ? '' : `-`} ${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`)
 		);
 		// bet way column
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`)
+			createHtmlElement('text-leftt', `${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> ${betItem.bet_rate === null ? '' : ` @<span style="color:#c79e42;">${betItem.bet_rate}`}</span>`)
 		);
 		// Result column 
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
@@ -320,7 +320,7 @@
 	function updateTotal() {
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
-		
+
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
