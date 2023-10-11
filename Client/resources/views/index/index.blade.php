@@ -829,18 +829,17 @@
 
 
                                         // 賦值
-                                        $(`div[fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] .odd`).html(v4.price)
                                         switch ( i ) {
-                                            case 1:
-                                                item.find('.bet_name').html('')
-                                                break;
-                                            case 3:
+                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
                                                 item.find('.bet_name').html( v4.line )
                                                 break;
-                                            case 5:case 7:
-                                                item.find('.bet_name').html(v4.market_bet_name + ' ' + v4.line)
+                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
                                                 break;
-                                            default:
+                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+                                                item.find('.bet_name').html( v4.market_bet_name )
+                                                break;
+                                            default: // 獨贏
                                                 break;
                                         }
 
