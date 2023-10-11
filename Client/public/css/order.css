@@ -235,7 +235,7 @@ div[key="matchSportMenu"]{
     transform: translate(-50%, -50%);
 }
 
-.search-statistic-container select {
+.search-statistic-container #selectOption {
     background: white;
     word-wrap: normal;
     padding: 0.5rem;
@@ -256,21 +256,21 @@ span.orderData_mOrder {
     align-items: center;
 }
 
-.search-statistic-container select option{
+.search-statistic-container #selectOption option{
     padding: 0.5rem;
     background-color: #fff;
     outline: none;
     cursor: pointer;
 }
 
-.search-statistic-container select option:focus,
-.search-statistic-container select option:checked,
-.search-statistic-container select option:hover  {
+.search-statistic-container #selectOption option:focus,
+.search-statistic-container #selectOption option:checked,
+.search-statistic-container #selectOption option:hover  {
     background-color: #c4d4d4;
 }
 
 /* for IE10 */ 
-.search-statistic-container select::-ms-expand { 
+.search-statistic-container #selectOption::-ms-expand { 
     display: none; 
 } 
 
