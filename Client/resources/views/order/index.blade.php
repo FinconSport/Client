@@ -231,11 +231,11 @@
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 		createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
 		createHtmlElement('text-left', `${betItem.home_team_name} VS ${betItem.away_team_name}
-			<span style="color:red;">
+			<span style="color:red;white-space:nowrap;">
 			${betItem.home_team_score !== null || betItem.away_team_score !== null ? `(` : ''}
-			${betItem.home_team_score !== null ? ` ${betItem.home_team_score}` : ''}
+			${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
 			${betItem.away_team_score !== null && betItem.home_team_score !== null ? '-' : ''}
-			${betItem.away_team_score !== null ? ` ${betItem.away_team_score}` : ''}
+			${betItem.away_team_score !== null ? `${betItem.away_team_score}` : ''}
 			${betItem.home_team_score !== null || betItem.away_team_score !== null ? `)` : ''}
 			</span>`)
 		);
