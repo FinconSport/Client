@@ -406,16 +406,18 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-	// Get the current URL path
-	const urlPath = window.location.pathname;
+	// Get the current URL search parameters
+	const urlParams = new URLSearchParams(window.location.search);
 	const select = document.getElementById("selectOption");
 	const unsettledOption = select.querySelector("option[value='Unsettled']");
 	const settledOption = select.querySelector("option[value='Settled']");
 
-	// Set the selected option based on the query parameter or URL path
-	if (urlPath === '/order' || urlPath === '/order?result=0') {
+	// Check for the 'result' query parameter in the URL
+	const resultParam = urlParams.get("result");
+
+	if (resultParam === "0") {
 		unsettledOption.setAttribute("selected", "selected");
-	} else if (urlPath === '/order?result=1') {
+	} else if (resultParam === "1") {
 		settledOption.setAttribute("selected", "selected");
 	}
 
