@@ -304,7 +304,7 @@
 			const tdRow = $(`#${dynamicId}`);
 
 			function toggleContainers() {
-				tableRow.toggleClass('hide-betaDetcon');
+				tdRow.toggleClass('hide-betaDetcon');
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 
