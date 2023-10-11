@@ -222,11 +222,11 @@
 
 	function createBetDataDetails(orderItem, betItem, betIndex) {
 		const createHtmlElement = (className, content) => $('<div>').html(content).addClass(className);
-		// event column
 		const orderDataBetEvent = $(`#betDataDetailsEvent_${orderItem.id}`);
 		const orderDataBetWay = $(`#betDataDetailsBetWay_${orderItem.id}`);
 		const orderDataResult = $(`#betDataDetailsResult_${orderItem.id}`);
 		const parentElement = orderDataBetEvent.parent();
+
 		// event column 
 		const betDataEventContainer = $('<div class="betaDetcon">').append(
 		createHtmlElement('', `${betItem.league_name} (${formatDateTime(orderItem.create_time)})`),
@@ -240,20 +240,36 @@
 			</span>`)
 		);
 		// bet way column
+		function generateBetWayContent(betItem) {
+			const betRateContent = betItem.bet_rate !== null
+				? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
+				: '';
+
+			return `
+				${betItem.market_name}<br>
+				<span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>
+				${betRateContent}
+			`;
+		}
 		const betDataBetWayContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-leftt', `${betItem.market_name}<br><span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span>${betItem.bet_rate !== null ? ` @<span style="color:#c79e42;">${betItem.bet_rate}</span>` : ''}`)
+			createHtmlElement('text-leftt', generateBetWayContent(betItem))
 		);
+
 		// Result column 
+		function getBetStatusContent(betItem) {
+			const statusText = {
+				0: `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>`,
+				1: `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>`,
+				2: `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>`,
+				3: `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>`,
+				4: `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>`,
+			};
+			return betItem.status in statusText ? statusText[betItem.status] : `${betItem.status}`;
+		}
+		
 		const betDataResultContainer = $('<div class="betaDetcon">').append(
-			createHtmlElement('text-right',
-				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
-				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
-				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
-				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
-				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status}`
-			).append(`<br>${formatDateTime(orderItem.result_time)}`)
-		);
+			createHtmlElement('text-right', getBetStatusContent(betItem))
+		).append(`${formatDateTime(orderItem.result_time)}`);
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
@@ -277,22 +293,16 @@
 				${betItem.away_team_score === null ? '' : ` ${betItem.away_team_score}`})</span>`
 			);
 			//append bet way additional bet item data to created td
-			betDataEventContainer.find('.orderData_betData_BetWay').html(`
-				${betItem.market_name}<br> <span style="color:green;">(${betItem.market_bet_name})${betItem.market_bet_line}</span> @<span style="color:#c79e42;">${betItem.bet_rate}</span>`
-			);
-			//append result additional bet item data to created td
+			betDataEventContainer.find('.orderData_betData_BetWay').html(generateBetWayContent(betItem));
+
 			betDataEventContainer.find('.orderData_betData_Result').html(
-				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
-				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
-				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
-				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
-				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status}`
+				getBetStatusContent(betItem)
 			).append(`<br>${formatDateTime(orderItem.result_time)}`);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
 		}
+		
 
 		orderDataBetEvent.append(betDataEventContainer);
 		orderDataBetWay.append(betDataBetWayContainer);
@@ -303,15 +313,14 @@
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}`;
 
 			function toggleContainers() {
-				$(`#${dynamicId}.hide-betaDetcon`).slideToggle('fast');
+				$(`#${dynamicId}`).toggleClass("show-betaDetcon");
 				toggleButton.find('i').toggleClass('fa-rotate-90');
 			}
 			toggleButton.on('click', toggleContainers);
 			parentElement.find('.orderData_mOrder').append(toggleButton);
 		}
-		$('.orderData_betData_Event .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_BetWay .betaDetcon:not(:first-child)').remove();
-		$('.orderData_betData_Result .betaDetcon:not(:first-child)').remove();
+
+		$('.betaDetcon:not(:first-child)').remove();
 	}
 
 	function createTotal() {
