@@ -293,7 +293,7 @@
 
 			betDataEventContainer.find('.orderData_betData_Result').html(
 				getBetStatusContent(betItem)
-			).append(`<br>${formatDateTime(orderItem.result_time)}`);
+			).append(`${formatDateTime(orderItem.result_time)}`);
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			$(`#${dynamicId}`).addClass('hide-betaDetcon');
