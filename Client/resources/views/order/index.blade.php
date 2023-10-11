@@ -466,6 +466,7 @@
                     evenRows[i].style.backgroundColor = '#e2f0f0';
                 }
             }
+			console.log('Button clicked, background changed.');
         }
 
         // Add an event listener to the button to trigger the change
