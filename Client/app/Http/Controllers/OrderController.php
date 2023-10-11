@@ -79,7 +79,7 @@ class OrderController extends PcController {
       $player_id = $session['player']['id'];
       $api_lang = $this->getAgentLang($player_id);
       if ($api_lang === false) {
-        $this->error(__CLASS__, __FUNCTION__, "02");
+        $this->error(__CLASS__, __FUNCTION__, "02");   
       }
       $this->assign("lang",$api_lang);
 
