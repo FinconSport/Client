@@ -970,13 +970,13 @@
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
         
-
         // delay_order
         if (msg.action === 'delay_order') {
-            showSuccessToast(msg.order_id);
-            refreshBalence();
+            clearTimeout(calInter)
             hideLoading();
             closeCal();
+            showSuccessToast(msg.order_id);
+            refreshBalence();
         }
         // delay_order
     }
@@ -1253,6 +1253,7 @@
     })
 
     let isCalOpening = false
+    let calInter = null
     // 投注
     function sendOrder() {
         isCalOpening = true
@@ -1278,7 +1279,7 @@
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
-                setTimeout(function() {
+                calInter = setTimeout(function() {
                     if( isCalOpening ) {
                         hideLoading();
                         closeCal();
