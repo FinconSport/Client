@@ -148,13 +148,13 @@
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo2'>
                 <div class="teamSpan row m-0">
-                    <div class="col text-left"></div>
+                    <div class="col text-left p-0"></div>
                     <div class="col text-right"></div>
                 </div>
             </div>
             <div key='awayTeamInfo2'>
                 <div class="teamSpan row m-0">
-                    <div class="col text-left"></div>
+                    <div class="col text-left p-0"></div>
                     <div class="col text-right"></div>
                 </div>
             </div>
@@ -382,7 +382,7 @@
         }
 
         // 單節選項 只有 滾球 籃球有
-        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -460,7 +460,7 @@
                 // bet area
                 if( v3.periods ) {
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
+                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
                 }
 
             }
@@ -472,14 +472,24 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, s, card) {
-        console.log(priorityArr)
+    function createBetArea(priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
             if( betData && Object.keys(betData.list).length > 0 ) {
+                // 是否有讓方
+                let isHcapTeam = null
+                // 讓分的priority && line不同 && 有盤口
+                j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
                 Object.entries(betData.list).map(([k4, v4], s) => { 
+                    // 判定讓方 -> line值為負
+                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                        let index = parseInt(v4.market_bet_name_en) - 1
+                        stageBet === 0 ? card.find('.teamSpan').eq(index).addClass('hcapTeam') : card.find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
+                    }
+
                     let item = null
                     if (allWinArr.indexOf(i) !== -1 ) {
                         item = $(`div[template="betItem-1"]`).clone()
@@ -707,7 +717,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
@@ -788,19 +798,36 @@
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
 
 
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
                             }
                             
                         }
                        
-                        function renderBetArea(priorityArr, v3, k3) {
+                        function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
                             console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
                                 let item = null
                                 if( betData && Object.keys(betData.list).length > 0 ) {
+                                    // 是否有讓方
+                                    let isHcapTeam = null
+                                    // 讓分的priority && line不同 && 有盤口
+                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
+                                        // 先取消樣式
+                                        bet_div.find('div').removeClass('hcapTeam')
+                                        // 判定讓方 -> line值為負
+                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                            let index = parseInt(v4.market_bet_name_en) - 1
+                                            stageBet === 0 ? 
+                                            bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                            : 
+                                            bet_div.find('[key="basketBallQuaterBet"]').find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
+                                        }
+
+
                                         item = bet_div.find('.betItemDiv').eq(s)
                                         // old attribute
                                         let market_bet_id = item.attr('market_bet_id')

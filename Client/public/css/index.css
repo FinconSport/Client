@@ -133,6 +133,10 @@
     float: left;
 }
 
+.hcapTeam{
+    color: red;
+}
+
 [key="homeTeamInfo"] .teamSpan {
     margin-top: 0.5rem;
 }
