@@ -95,7 +95,7 @@ li {
     /* background: #e2f0f0; */
     background: #415b5a;
     border: 1px solid #415b5a;
-    border-radius: 2rem;
+    border-radius: 5px;
     overflow: hidden;
     height: 100%;
 }
@@ -127,13 +127,13 @@ li {
 /* Track */
 .rule-tab-con::-webkit-scrollbar-track {
   box-shadow: inset 0 0 0px 20px #728685; 
-  border-radius: 10px;
+  border-radius: 5px;
 }
  
 /* Handle */
 .rule-tab-con::-webkit-scrollbar-thumb {
   background: #e3efee; 
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Handle on hover */
