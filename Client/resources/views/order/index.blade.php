@@ -460,21 +460,11 @@
 		}
 	}
 
-	// Get all the rows in the table
-	const allRows = document.querySelectorAll('#orderTable tbody tr:not([style*="display: none"])');
-	let rowCount = 0;
-
-	// Iterate through the rows and add background to the visible ones
-	allRows.forEach((row) => {
-		if (row.style.display !== 'none') {
-			rowCount++;
-			if (rowCount % 2 === 1) {
-				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
-			} else {
-				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
-			}
-		}
-	});
+	const countTR = 3; 
+	const changebg = document.querySelectorAll("#orderTable tbody tr:nth-child(" + count + ")");
+	changebg.forEach(element => {
+        element.style.backgroundColor = "#e2f0f0";
+    });
 
 </script>
 @endpush
