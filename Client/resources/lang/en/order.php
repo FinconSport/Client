@@ -47,6 +47,8 @@ return [
 		"total_effective_amount" => "Total effective amount",  //  "總計有效",
 		"total_result_amount" => "Total result amount",  //  "總計派獎",
 		"total_win_amount" => "Total win amount",  //  "總計輸贏",
+		"home" => "Home", // "主",
+		"waiting" => "Waiting", // "等待開獎",
 	],  //  
 	"result_precent" => [
 		"0" => "Lose", // "輸",
