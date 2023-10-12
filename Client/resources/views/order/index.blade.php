@@ -231,7 +231,7 @@
 			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
 
 			return `${betItem.league_name} <span style="color:#b2b2b2;">(${creatTime})</span><br>
-					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span> VS ${betItem.away_team_name} 
+					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span>&nbsp;VS&nbsp;${betItem.away_team_name}&nbsp;
 					<span style="color:red;white-space:nowrap;">
 						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
 						${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
@@ -246,9 +246,9 @@
 			const marketBetName = betItem.market_bet_name;
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
-			const content = `${marketName}<br><span style="color:green;">(${marketBetName})${marketBetLine}</span>`;
+			const content = `${marketName}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
 			if (betRate !== null) {
-				return `${content} @<span style="color:#c79e42;">${betRate}</span>`;
+				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {
 				return content;
 			}
