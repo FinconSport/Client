@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- 投注計算機 -->
+<h1>我是GAME頁</h1>
 <div id='mask' style="display: none;"></div>
 <div id="leftSlideOrder" style="display: none;">
     <div class="row m-0">
