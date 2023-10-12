@@ -176,6 +176,7 @@
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
+				$('#orderContainer').css('height', 'auto');
 				isLastPage && $('#noMoreData').show()
 			}
 	}
@@ -382,6 +383,7 @@
 	// 下拉更多資料
 	async function fetchMore() {
 		console.log('fetchMore')
+		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
 		$('#loader').show() // loading transition
 		callOrderListData.page += 1
 		await caller(orderList_api, callOrderListData, orderListD, 1) // resultListD
