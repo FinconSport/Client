@@ -314,6 +314,8 @@
 					elements.css('display', 'none');
 					toggleButton.find('i').removeClass('fa-rotate-90');
 				}
+
+				updateRowColors();
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -460,11 +462,26 @@
 		}
 	}
 
-	// const countTR = 3; 
-	// const changebg = document.querySelectorAll("#orderTable tbody tr:nth-child(" + countTR + ")");
-	// changebg.forEach(element => {
-    //     element.style.backgroundColor = "#e2f0f0";
-    // });
+    
+	// Function to update row colors
+	function updateRowColors() {
+		const allRows = document.querySelectorAll('#orderTable tbody tr:not([style*="display: none"])');
+		let rowCount = 0;
+
+		allRows.forEach((row) => {
+			rowCount++;
+			if (rowCount % 2 === 1) {
+				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
+				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
+			} else {
+				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
+				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
+			}
+		});
+	}
+
+	// Initial row coloring
+	updateRowColors();
 
 </script>
 @endpush

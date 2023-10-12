@@ -76,9 +76,9 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tr:not([style*="display: none"]):nth-child(even){
+/* #orderTable tr:not([style*="display: none"]):nth-child(even){
     background-color: #e2f0f0;
-}
+} */
 
 #orderTable tbody{
     border-bottom: 2px solid rgb(65, 91, 90);
