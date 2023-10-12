@@ -472,11 +472,11 @@
 		allRows.forEach((row) => {
 			rowCount++;
 			if (rowCount % 2 === 1) {
-				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
-				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
+				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
+				row.style.backgroundColor =  '#ffffff';// Change '#even-color' to your desired background color for even rows
 			} else {
-				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
-				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
+				row.style.backgroundColor =  '#ffffff';// Change '#even-color' to your desired background color for even rows
+				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
 			}
 		});
 	}
