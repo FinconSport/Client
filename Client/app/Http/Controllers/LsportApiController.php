@@ -2585,7 +2585,6 @@ class LsportApiController extends Controller {
 
         $data['list'] = $tmp;
 
-        dd($data);
         ////////////////////////
         // gzip
         $data = $this->gzip($data);
