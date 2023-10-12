@@ -460,13 +460,14 @@
 		}
 	}
 
-	// Get all the rows in the table
-	const allRows = document.querySelectorAll('#orderTable tr');
+	// Get all the rows under the tbody element
+	const tbody = document.querySelector('#orderTable tbody');
+	const rows = tbody.querySelectorAll('tr');
 
 	// Iterate through the rows and add background to the visible ones
-	allRows.forEach((row) => {
+	rows.forEach((row) => {
 	if (row.style.display !== 'none') {
-		row.style.backgroundColor = '#e2f0f0'; // Change '#your-color' to your desired background color
+		row.style.backgroundColor = '#your-color'; // Change '#your-color' to your desired background color
 	}
 	});
 
