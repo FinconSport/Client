@@ -147,10 +147,16 @@
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left"></div>
+                    <div class="col text-right"></div>
+                </div>
             </div>
             <div key='awayTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left"></div>
+                    <div class="col text-right"></div>
+                </div>
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
@@ -446,8 +452,10 @@
                 let card2 = card.find('[key="basketBallQuaterBet"]')
                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
+                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
+                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
 
                 // bet area
                 if( v3.periods ) {
@@ -773,8 +781,13 @@
 
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+
+                                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
+                                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
+                                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+
+
                                 if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
                             }
                             
