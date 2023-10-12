@@ -2491,7 +2491,6 @@ class LsportApiController extends Controller {
             "result_amount",
             "create_time",
             "result_time",
-            "result_percent",
             "status"
         );
 
@@ -2539,6 +2538,7 @@ class LsportApiController extends Controller {
                     
                     $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
                     $tmp_bet_data['status'] = $vvv['status'];
+                    $tmp_bet_data['result_percent'] = $vvv['result_percent'];
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
@@ -2566,6 +2566,7 @@ class LsportApiController extends Controller {
                 
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
                 $tmp_bet_data['status'] = $v['status'];
+                $tmp_bet_data['result_percent'] = $v['result_percent'];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
