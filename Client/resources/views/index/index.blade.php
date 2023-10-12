@@ -388,7 +388,7 @@
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(formatDateTime(v3.start_time))
-        market_count.html(v3.market_bet_count)
+        market_count.html('+' + v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html('')
@@ -687,7 +687,7 @@
                         }   
 
                         // 玩法統計
-                        card.find('.otherBetWay p').html(v3.market_bet_count)
+                        card.find('.otherBetWay p').html('+' + v3.market_bet_count)
 
                         // 壘包 好壞球 只有 滾球 棒球有
                         if( sport === 154914 && v3.status === 2 ) {
