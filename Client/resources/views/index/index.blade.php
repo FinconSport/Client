@@ -137,7 +137,7 @@
         </div>
         <div class="indexBetCardTable row m-0 text-center">
         </div>
-        <div class="otherBetWay" onclick="navToGame()">
+        <div class="otherBetWay" onclick="navToGame($(this))">
             <i class="fa-solid fa-play"></i>
             <p></p>
         </div>
@@ -634,9 +634,10 @@
     });
 
     // 跳轉獨立賽事頁
-    function navToGame() {
-        let sport_id = $(this).attr('sport_id')   
-        let fixture_id = $(this).attr('fixture_id')   
+    function navToGame(e) {
+        let sport_id = e.attr('sport_id')   
+        let fixture_id = e.attr('fixture_id')
+        
 
         const queryParams = {};
         queryParams.sport_id = sport_id
@@ -644,6 +645,7 @@
 
         const queryString = new URLSearchParams(queryParams).toString();
         const urlWithQuery = `/game?${queryString}`;
+        console.log(urlWithQuery)
         window.location.href = urlWithQuery
     }
 
