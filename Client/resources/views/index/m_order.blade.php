@@ -854,11 +854,12 @@
 
         // delay_order
         if (msg.action === 'delay_order') {
-            showSuccessToast(msg.order_id);
-            refreshBalence();
+            clearTimeout(calInter)
             hideLoading();
             closeCal(1);
             closeOrderDetail()
+            showSuccessToast(msg.order_id);
+            refreshBalence();
         }
         // delay_order
     }
@@ -1091,7 +1092,6 @@
 
     // 打開左邊投注區塊
     function openOrderBet() {
-        isCalOpening = true
         closeOrderDetail(0)
         $('#leftSlideOrder').show("slide", {
             direction: "left"
@@ -1149,7 +1149,6 @@
     })
 
     function closeCal(n = 0) {
-        isCalOpening = false
         $('#leftSlideOrder').hide("slide", {
             direction: "left"
         }, 500);
@@ -1189,7 +1188,7 @@
         sendOrderData.better_rate = bool
     })
 
-    let isCalOpening = false
+    let calInter = null
     // 投注
     function sendOrder() {
         if (sendOrderData.bet_data.length === 1) {
@@ -1237,12 +1236,10 @@
             data: jsonData,
             success: function(response) {
                 let res = JSON.parse(response)
-                setTimeout(function() {
-                    if( isCalOpening ) {
-                        hideLoading();
-                        closeCal(1);
-                        closeOrderDetail()
-                    }
+                calInter = setTimeout(function() {
+                    hideLoading();
+                    closeCal(1);
+                    closeOrderDetail()
                 }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
