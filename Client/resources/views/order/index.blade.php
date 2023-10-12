@@ -55,7 +55,7 @@
 		</div>
 	</div>
     <div id="orderContainer">
-        <div id="tableContainer" style="overflow: auto;">
+        <div id="tableContainer" style="overflow: visible;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
