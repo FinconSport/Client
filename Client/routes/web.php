@@ -40,6 +40,8 @@ Route::get('/test', 'App\Http\Controllers\TestController@index');
 Route::get('/match', 'App\Http\Controllers\MatchController@index');
 Route::post('/match', 'App\Http\Controllers\MatchController@index');
 
+Route::get('/game', 'App\Http\Controllers\GameController@index');
+
 Route::get('/match/list', 'App\Http\Controllers\MatchController@post');
 Route::post('/match/list', 'App\Http\Controllers\MatchController@post');
 
