@@ -461,7 +461,7 @@
 	}
 
 	// Get all the rows in the table
-	const allRows = document.querySelectorAll('#orderTable tbody tr');
+	const allRows = document.querySelectorAll('#orderTable tbody tr:not([style*="display: none"])');
 	let rowCount = 0;
 
 	// Iterate through the rows and add background to the visible ones
