@@ -273,7 +273,7 @@
         player: player,
         sport_id: sport
     }
-    const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
+    const matchList_api = '/api/v2/match_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -1151,6 +1151,7 @@
     })
 
     function closeCal(n = 0) {
+        isCalOpening = false
         $('#leftSlideOrder').hide("slide", {
             direction: "left"
         }, 500);
@@ -1190,8 +1191,10 @@
         sendOrderData.better_rate = bool
     })
 
+    let isCalOpening = false
     // 投注
     function sendOrder() {
+        isCalOpening = true
         if (sendOrderData.bet_data.length === 1) {
             showErrorToast(langTrans.m_order.at_least_two);
             return;
@@ -1232,12 +1235,18 @@
         console.log(jsonData)
 
         $.ajax({
-            url: 'https://sportc.asgame.net/api/v2/m_game_bet',
+            url: '/api/v2/m_game_bet',
             method: 'POST',
             data: jsonData,
             success: function(response) {
                 let res = JSON.parse(response)
-                console.log(res)
+                setTimeout(function() {
+                    if( isCalOpening ) {
+                        hideLoading();
+                        closeCal(1);
+                        closeOrderDetail()
+                    }
+                }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
@@ -1245,17 +1254,6 @@
                 showErrorToast(jqXHR)
             }
         });
-
-        let hasTenSecondsPassed = false;
-        // if the msg is not getting in 10 sec, hide the loading and close the betting area
-        setTimeout(function() {
-            hasTenSecondsPassed = true;
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal(1);
-                closeOrderDetail()
-            }
-        }, 10000);
     }
 
     // 統計
