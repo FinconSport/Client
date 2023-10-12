@@ -486,14 +486,8 @@
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-                        let index = parseInt(v4.market_bet_name_en) - 1
-                        stageBet === 0 ? 
+                        let index = stageBet === 0 ? parseInt(v4.market_bet_name_en) - 1 : parseInt(v4.market_bet_name_en) + 1
                         card.find('.teamSpan').eq(index).addClass('hcapTeam') 
-                        :
-                        (
-                            console.log(card, card.find('.teamSpan'), card.find('.teamSpan').eq(index)),
-                            card.find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
-                        )
                     }
 
                     let item = null
@@ -826,13 +820,9 @@
                                         bet_div.find('div').removeClass('hcapTeam')
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-                                            let index = parseInt(v4.market_bet_name_en) - 1
-                                            stageBet === 0 ? 
+                                            let index = stageBet === 0 ? parseInt(v4.market_bet_name_en) - 1 : parseInt(v4.market_bet_name_en) + 1
                                             bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
-                                            : 
-                                            bet_div.find('[key="basketBallQuaterBet"]').find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
                                         }
-
 
                                         item = bet_div.find('.betItemDiv').eq(s)
                                         // old attribute
