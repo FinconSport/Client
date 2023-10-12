@@ -2516,8 +2516,9 @@ class LsportApiController extends Controller {
 
                 foreach ($cc as $kkk => $vvv) {
 
-
-                    dd($vvv);
+                    $fixture_id = $vvv['fixture_id'];
+                    $tmp = LsportFixture::where("fixture_id",$fixture_id)->first();
+                 
                     $tmp_bet_data = array();
 
                     $tmp_bet_data['sport_id'] = $vvv['sport_id'];
@@ -2542,10 +2543,15 @@ class LsportApiController extends Controller {
                     $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
                     $tmp_bet_data['status'] = $vvv['status'];
                     $tmp_bet_data['result_percent'] = $vvv['result_percent'];
+                    $tmp_bet_data['start_time'] = $tmp['start_time'];
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
             } else {
+                
+                $fixture_id = $v['fixture_id'];
+                $tmp = LsportFixture::where("fixture_id",$fixture_id)->first();
+
                 $tmp_bet_data = array();
 
                 $tmp_bet_data['sport_id'] = $v['sport_id'];
@@ -2570,6 +2576,7 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['bet_rate'] = $v['bet_rate'];
                 $tmp_bet_data['status'] = $v['status'];
                 $tmp_bet_data['result_percent'] = $v['result_percent'];
+                $tmp_bet_data['start_time'] = $tmp['start_time'];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
