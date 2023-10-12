@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- 投注計算機 -->
-<h1>我是GAME頁</h1>
 <div id='mask' style="display: none;"></div>
 <div id="leftSlideOrder" style="display: none;">
     <div class="row m-0">
@@ -218,7 +217,6 @@
     var renderInter = null // timer for refresh view layer
     var socket_status = false;
     var ws = null
-    var heartbeatTimer = null
 
     
     // 獨贏系列
@@ -228,30 +226,6 @@
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
-    /* ===== DATA LAYER ===== */
-    /*  
-        1. 現在大部份資料都api化，通過call ajax來loading
-        2. 在所有所需的api被call完之前，要添加頁面loading樣式，等全部都call好了才顯示頁面
-
-            有哪些api資料共用?
-            1. account
-            2. marquee
-            3. sport_list
-        
-            index有那些需要call api?
-            1. match_list
-            2. bet limitation?
-
-            有哪些需要沿用laravel映射?
-            1. $player 
-            2. $token (先寫死12345，之後正式再來換)
-            3. $system_config['version']
-            4. $current_time?
-    
-        3. 資料接收機制
-            1. ws -> push to queue -> update the globe data (先註解掉)
-            2. ajax -> update the globe data
-    */
 
     // detect ini ajax
     var isReadyIndexInt = null
@@ -259,11 +233,13 @@
 
     var isReadySportInt = null
 
+	// fixture
+	var fixture = parseInt(searchData.fixture)
+
     // match list data
     var matchListD = {}
-    var oldMatchListD = {}
-    var callMatchListData = { token: token, player: player, sport_id: sport }
-    const matchList_api = '/api/v2/match_index'
+    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
+    const matchList_api = '/api/v2/game_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -275,15 +251,13 @@
     var stagePriorityArr = null
     var gameTitle = null
 
+ 
+
     
     /* ===== DATA LAYER ===== */
     
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
-
-        // put the view ini function here  
-        // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
-
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
@@ -596,6 +570,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callMatchListData.sport_id = sport // default sport
+				callMatchListData.fixture_id = fixture // default fixture
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
@@ -613,7 +588,6 @@
                 mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
-                oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
@@ -698,6 +672,7 @@
     
     // render view layer here
     function renderView() {
+		console.log(matchListD)
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
