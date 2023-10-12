@@ -27,9 +27,6 @@ class LsportTeam extends CacheModel
 			
             $data = self::where('team_id', $team_id)->first();
             
-            if (!isset($data['name_cn'])) {
-                dd($data,$team_id);
-            }
 			// 預設值
             $name = $data['name_en'];
             if (isset($data['name_' . $api_lang]) && !empty($data['name_' . $api_lang])) {
