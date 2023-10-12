@@ -389,6 +389,9 @@
 		updateTotal()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
+		if (!fetchMoreLock) {
+			$('#orderContainer').css('height', 'auto');
+		}
 	}
 
 	// scroll to bottom
