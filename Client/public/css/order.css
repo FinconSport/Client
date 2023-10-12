@@ -30,7 +30,8 @@ div[key="matchSportMenu"]{
     border: 2px solid rgb(65, 91, 90);
     border-radius: 5px;
     max-height: calc(100% - 9.5rem);
-    height: auto;
+    min-height: min-content;
+    height: calc(100% - 9.5rem);
     overflow: auto;
     color: rgb(65, 91, 90);
     position: relative;
