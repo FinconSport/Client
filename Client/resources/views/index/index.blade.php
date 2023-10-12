@@ -1279,6 +1279,12 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
+                let hasTenSecondsPassed = false;
+                // if the msg is not getting in 10 sec, hide the loading and close the betting area
+                setTimeout(function() {
+                    hideLoading();
+                    closeCal();
+                }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
@@ -1286,18 +1292,6 @@
                 showErrorToast(jqXHR)
             }
         });
-
-        
-
-        let hasTenSecondsPassed = false;
-        // if the msg is not getting in 10 sec, hide the loading and close the betting area
-        setTimeout(function() {
-            hasTenSecondsPassed = true;
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal();
-            }
-        }, 10000);
     }
 
     // 統計
