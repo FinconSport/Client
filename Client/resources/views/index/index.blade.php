@@ -539,13 +539,9 @@
 
                     if( v4.status === 1 ) {
                         item.find('.fa-lock').hide()
-                        item.find('.odd').show()
-                        item.find('.bet_name').show()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
                         item.find('.fa-lock').show()
-                        item.find('.odd').hide()
-                        item.find('.bet_name').hide()
                         item.removeAttr('onclick')
                     }
 
@@ -568,8 +564,6 @@
                     }
 
                     item.find('.fa-lock').show()
-                    item.find('.odd').hide()
-                    item.find('.bet_name').hide()
                     item.removeAttr('onclick')
 
                     item.removeAttr('hidden')
@@ -899,8 +893,6 @@
                                         // 狀態 鎖頭
                                         if( v4.status === 1 ) {
                                             item.find('.fa-lock').hide()
-                                            item.find('.odd').show()
-                                            item.find('.bet_name').show()
                                             item.attr('onclick', 'openCal($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
@@ -911,8 +903,6 @@
                                             }
                                         } else {
                                             item.find('.fa-lock').show()
-                                            item.find('.odd').hide()
-                                            item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
@@ -930,8 +920,6 @@
                                         let item = bet_div.find('.betItemDiv').eq(j)
 
                                         item.find('.fa-lock').show()
-                                        item.find('.odd').hide()
-                                        item.find('.bet_name').hide()
                                         item.removeAttr('onclick')
                                     }
                                 }
