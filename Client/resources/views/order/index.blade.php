@@ -387,7 +387,6 @@
 		await caller(orderList_api, callOrderListData, orderListD, 1) // resultListD
 		renderView()
 		updateTotal()
-		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 	}
