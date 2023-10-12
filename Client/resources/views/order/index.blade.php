@@ -327,6 +327,7 @@
 				}
 
 				updateRowColors();
+				adjustContainerHeight();
 			}
 
 			toggleButton.on('click', toggleContainers);
