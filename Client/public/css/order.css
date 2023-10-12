@@ -44,6 +44,10 @@ div[key="matchSportMenu"]{
     /* padding-right: 1rem; */
 }
 
+#orderContainer #noMoreData {
+    height: auto;
+}
+
 .pageInfo {
     margin-left: 1rem;
     margin-right: 1rem;
