@@ -1697,7 +1697,7 @@ class LsportApiController extends Controller {
             // }
 
             // cache
-            $home_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
+            $home_team_name = LsportTeam::getName(['team_id'=>$home_team_id, 'api_lang'=>$agent_lang]);
             $order['home_team_id'] = $home_team_id;
             $order['home_team_name'] = $home_team_name;
             
@@ -2491,6 +2491,7 @@ class LsportApiController extends Controller {
             "result_amount",
             "create_time",
             "result_time",
+            "result_percent",
             "status"
         );
 
