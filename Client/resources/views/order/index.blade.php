@@ -364,6 +364,8 @@
 				totalWinAmountElement.css('color', 'green');
 			}
 		}
+
+		updateRowColors();
 	}
 
 	// 下拉更多資料
