@@ -486,8 +486,13 @@
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-                        let index = stageBet === 0 ? parseInt(v4.market_bet_name_en) - 1 : parseInt(v4.market_bet_name_en) + 1
-                        card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                        if( stageBet === 0 ) {
+                            let index = parseInt(v4.market_bet_name_en) - 1
+                            card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                        } else {
+                            let index = parseInt(v4.market_bet_name_en) + 1
+                            card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                        }
                     }
 
                     let item = null
