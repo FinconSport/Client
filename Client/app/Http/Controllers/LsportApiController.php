@@ -2515,6 +2515,9 @@ class LsportApiController extends Controller {
                 }
 
                 foreach ($cc as $kkk => $vvv) {
+
+
+                    dd($vvv);
                     $tmp_bet_data = array();
 
                     $tmp_bet_data['sport_id'] = $vvv['sport_id'];
