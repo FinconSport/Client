@@ -284,10 +284,10 @@
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
 			let betIndexCounter = 0;
-			const dynamicId = `additionalTr_${leagueId}_${leagueName}_${betIndexCounter}`;
+			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndexCounter}`;
 			betIndexCounter++;
 			return dynamicId;
-			
+
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
