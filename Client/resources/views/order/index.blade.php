@@ -177,7 +177,6 @@
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
-				$('#orderContainer').css('height', 'auto');
 			}
 	}
 
@@ -390,6 +389,8 @@
 		updateTotal()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
+
+		adjustContainerHeight();
 	}
 
 	// scroll to bottom
@@ -419,6 +420,7 @@
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
+				adjustContainerHeight();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -493,6 +495,19 @@
 				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
 			}
 		});
+	}
+
+	function adjustContainerHeight() {
+		// Compute the height of #orderTable
+		var orderTableHeight = $('#orderTable').height();
+
+		// Check if the height is less than 877px
+		if (orderTableHeight < 877) {
+			$('#orderContainer').css('height', 'auto');
+		} else {
+			// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
+			$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
+		}
 	}
 
 </script>
