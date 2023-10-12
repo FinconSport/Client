@@ -234,7 +234,7 @@
     var isReadySportInt = null
 
 	// fixture
-	var fixture = parseInt(searchData.fixture)
+	var fixture = searchData.fixture
 
     // match list data
     var matchListD = {}
