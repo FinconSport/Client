@@ -460,5 +460,15 @@
 		}
 	}
 
+	// Get all the rows in the table
+	const allRows = document.querySelectorAll('#orderTable tr');
+
+	// Iterate through the rows and add background to the visible ones
+	allRows.forEach((row) => {
+	if (row.style.display !== 'none') {
+		row.style.backgroundColor = '#e2f0f0'; // Change '#your-color' to your desired background color
+	}
+	});
+
 </script>
 @endpush
