@@ -477,6 +477,8 @@
 		if (link) {
 			window.location.search = link;
 		}
+
+		adjustContainerHeight();
 	}
 
     
@@ -502,7 +504,7 @@
 		var orderTableHeight = $('#orderTable').height();
 
 		// Check if the height is less than 877px
-		if (orderTableHeight < 877) {
+		if (orderTableHeight < 870) {
 			$('#orderContainer').css('height', 'auto');
 		} else {
 			// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
