@@ -106,7 +106,7 @@ class GameController extends PcController {
 
       ////////////////////////////////////
 
-      return view('match.index',$this->data);
+      return view('game.index',$this->data);
     }
 
 }
