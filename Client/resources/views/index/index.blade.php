@@ -203,7 +203,6 @@
 
 
 @section('styles')
-<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
 <link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
 @endSection
 
@@ -315,7 +314,6 @@
         // loop matchListD to generate html element here
     }
     /* ===== VIEW LAYER ===== */
-
 
     function createCate(k, v) {
         let el_toggle = $('div[template="elToggleTemplate"]').clone()
