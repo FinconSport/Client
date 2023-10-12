@@ -1121,7 +1121,6 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
-        isCalOpening = true
         // 先移除樣式
         $('.leftSlideOrderCard').removeClass('raiseOdd')
         $('.leftSlideOrderCard .fa-caret-up').remove()
@@ -1256,6 +1255,7 @@
     let isCalOpening = false
     // 投注
     function sendOrder() {
+        isCalOpening = true
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
             showErrorToast(langTrans.js.no_bet_amout);
             return;
