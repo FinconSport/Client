@@ -460,11 +460,11 @@
 		}
 	}
 
-	const countTR = 3; 
-	const changebg = document.querySelectorAll("#orderTable tbody tr:nth-child(" + countTR + ")");
-	changebg.forEach(element => {
-        element.style.backgroundColor = "#e2f0f0";
-    });
+	// const countTR = 3; 
+	// const changebg = document.querySelectorAll("#orderTable tbody tr:nth-child(" + countTR + ")");
+	// changebg.forEach(element => {
+    //     element.style.backgroundColor = "#e2f0f0";
+    // });
 
 </script>
 @endpush
