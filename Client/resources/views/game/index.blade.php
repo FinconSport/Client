@@ -259,89 +259,11 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            createCate(k, v)
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                createLeague(k, k2, v2)
-                // 获取 list 对象的所有属性，并将它们存储在一个数组中
-                const listKeys = Object.keys(v2.list);
-                // 使用 sort 方法对 listKeys 数组进行排序
-                listKeys.sort((a, b) => {
-                    // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
-                    const orderByA = v2.list[a].order_by;
-                    const orderByB = v2.list[b].order_by;
-                    // 比较 orderByA 和 orderByB，以确定排序顺序
-                    return orderByA - orderByB;
-                });
-                listKeys.forEach( ele => {
-                    createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
-                })
-            })
+        Object.entries(matchListD.list.market).map(([k, v]) => {  // living early toggle
+            console.log(k, v)
         })
-
-        // 滾球移到最上面
-        let parentNode = $('#indexContainerLeft')
-        let livingNode = $('#toggleContent_living')
-        livingNode.prependTo(parentNode);
-
-        // 統計
-        statistics()
-        // loop matchListD to generate html element here
     }
     /* ===== VIEW LAYER ===== */
-
-    function createCate(k, v) {
-        let el_toggle = $('div[template="elToggleTemplate"]').clone()
-        let el_toggle_title = el_toggle.find('.catWrapperTitle')
-        let el_toggle_text = el_toggle.find('.elToggleText')
-        let el_toggle_count = el_toggle.find('.elToggleCount')
-        let el_toggle_dir = el_toggle.find('.elToggleDir')
-
-        el_toggle.attr('id', 'toggleContent_' + k)
-        el_toggle_title.attr('id', `catWrapperTitle_${k}`)
-        el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-        el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
-        el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
-        el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
-
-        el_toggle.removeAttr('hidden')
-        el_toggle.removeAttr('template')
-
-        $('#indexContainerLeft').append(el_toggle)
-    }
-
-    function createLeague(k, k2, v2) {
-        // title
-        let league_wrapper = $('div[template="leagueWrapper"]').clone()
-        let league_toggle = league_wrapper.find('.seriesWrapperTitle')
-        let league_toggle_name = league_toggle.find('.legToggleName')
-        let league_toggle_count = league_toggle.find('.legToggleCount')
-        let league_toggle_dir = league_toggle.find('.legToggleDir')
-        let league_bet_title = league_toggle.find('.betLabelContainer')
-
-        league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
-        league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
-        league_toggle.attr('league_id', v2.league_id)
-        league_toggle_name.html(v2.league_name)
-        league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
-        league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
-
-        // bet title
-        mainPriorityArr.forEach(( i, j ) => {
-            league_bet_title.append('<div class="labelItem col"><div>' + gameTitle[j] + '</div></div>')
-        })
-
-        // content
-        let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
-        league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-
-        league_wrapper.removeAttr('hidden')
-        league_wrapper.removeAttr('template')
-
-        let el_toggle_content = $(`#toggleContent_${k}`)
-        el_toggle_content.append(league_wrapper)
-
-    }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
