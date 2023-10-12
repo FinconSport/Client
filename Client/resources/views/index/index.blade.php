@@ -487,7 +487,13 @@
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
                         let index = parseInt(v4.market_bet_name_en) - 1
-                        stageBet === 0 ? card.find('.teamSpan').eq(index).addClass('hcapTeam') : card.find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
+                        stageBet === 0 ? 
+                        card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                        :
+                        (
+                            console.log(card, card.find('.teamSpan'), card.find('.teamSpan').eq(index)),
+                            card.find('.teamSpan').eq(index).find('div').addClass('hcapTeam')
+                        )
                     }
 
                     let item = null
