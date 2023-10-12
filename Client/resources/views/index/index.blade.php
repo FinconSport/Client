@@ -1206,7 +1206,6 @@
     })
 
     function closeCal() {
-        isCalOpening = false
         $('#leftSlideOrder').hide("slide", {
             direction: "left"
         }, 500);
@@ -1252,11 +1251,9 @@
         sendOrderData.better_rate = bool
     })
 
-    let isCalOpening = false
     let calInter = null
     // 投注
     function sendOrder() {
-        isCalOpening = true
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
             showErrorToast(langTrans.js.no_bet_amout);
             return;
@@ -1280,10 +1277,8 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 calInter = setTimeout(function() {
-                    if( isCalOpening ) {
-                        hideLoading();
-                        closeCal();
-                    }
+                    hideLoading();
+                    closeCal();
                 }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
