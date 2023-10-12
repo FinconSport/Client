@@ -285,7 +285,7 @@
 			//append in another td if have another bet_item
 			const minNumber = 1;const maxNumber = 100;
 			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${randomNumber}`; // <-- make the id generated random
+			const dynamicId = `additionalTr_${betItem.league_id}_${randomNumber}`; // <-- make the id generated random
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
@@ -327,6 +327,7 @@
 				}
 
 				updateRowColors();
+				adjustContainerHeight();
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -389,6 +390,8 @@
 		updateTotal()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
+
+		adjustContainerHeight();
 	}
 
 	// scroll to bottom
@@ -418,6 +421,7 @@
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
+				adjustContainerHeight();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -474,6 +478,8 @@
 		if (link) {
 			window.location.search = link;
 		}
+
+		adjustContainerHeight();
 	}
 
     
@@ -492,6 +498,19 @@
 				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
 			}
 		});
+	}
+
+	function adjustContainerHeight() {
+		// Compute the height of #orderTable
+		var orderTableHeight = $('#orderTable').height();
+
+		// Check if the height is less than 877px
+		if (orderTableHeight < 500) {
+			$('#orderContainer').css('height', 'auto');
+		} else {
+			// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
+			$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
+		}
 	}
 
 </script>
