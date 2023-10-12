@@ -36,11 +36,15 @@ div[key="matchSportMenu"]{
     position: relative;
 }
 
+#orderContainer::-webkit-scrollbar {
+    width: 0px;
+}
+
 #tableContainer {
     height: 100%;
     width: 100%;
-    /* overflow-y: auto;
-    overflow-x: hidden; */
+    overflow-y: auto;
+    overflow-x: hidden;
     /* padding-right: 1rem; */
 }
 

@@ -55,7 +55,7 @@
 		</div>
 	</div>
     <div id="orderContainer">
-        <div id="tableContainer" style="overflow: visible;">
+        <div id="tableContainer" style="overflow: auto;">
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
@@ -283,10 +283,6 @@
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
-			// let betIndexCounter = 0;
-			// const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndexCounter}`;
-			// betIndexCounter++;
-			// return dynamicId;
 			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndex}`;
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
