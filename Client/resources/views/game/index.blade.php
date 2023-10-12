@@ -570,7 +570,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callMatchListData.sport_id = sport // default sport
-				callMatchListData.fixture_id = searchData.fixture // default fixture
+				callMatchListData.fixture_id = searchData.fixture_id // default fixture
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
