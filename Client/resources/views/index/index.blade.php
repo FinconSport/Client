@@ -975,10 +975,15 @@
         if (msg.action === 'delay_order') {
             showSuccessToast(msg.order_id);
             refreshBalence();
-            // after the msg pop up delay 1 second to hide the loading and close the betting area
-            setTimeout(function() {
+            // Set the timeout and store the ID
+            timeoutId = setTimeout(function() {
                 hideLoading();
                 closeCal();
+            }, 1000);
+
+            // Clear the timeout after 1 second
+            setTimeout(function() {
+                clearTimeout(timeoutId);
             }, 1000);
         }
         // delay_order
@@ -1209,6 +1214,9 @@
     })
 
     function closeCal() {
+        clearTimeout(timeoutId);// If the closeCal function is called, cancel the timeout
+        console.log("closeCal is closed");
+
         $('#leftSlideOrder').hide("slide", {
             direction: "left"
         }, 500);
@@ -1255,6 +1263,7 @@
     })
 
     // 投注
+    let timeoutId;
     function sendOrder() {
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
             showErrorToast(langTrans.js.no_bet_amout);
@@ -1272,6 +1281,12 @@
         // Show loading spinner while submitting
         showLoading();
 
+        // Set the 10-second timeout and store the ID
+        timeoutId = setTimeout(function() {
+            hideLoading();
+            closeCal();
+        }, 10000);
+
         $.ajax({
             url: 'https://sportc.asgame.net/api/v2/game_bet',
             method: 'POST',
@@ -1280,11 +1295,6 @@
                 let res = JSON.parse(response)
                 console.log(res)
                 let hasTenSecondsPassed = false;
-                // if the msg is not getting in 10 sec, hide the loading and close the betting area
-                setTimeout(function() {
-                    hideLoading();
-                    closeCal();
-                }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
@@ -1292,6 +1302,8 @@
                 showErrorToast(jqXHR)
             }
         });
+
+        clearTimeout(timeoutId);
     }
 
     // 統計
