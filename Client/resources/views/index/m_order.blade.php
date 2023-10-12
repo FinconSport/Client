@@ -164,20 +164,6 @@
             <p></p>
         </div>
     </div>
-    <!-- 籃球單節投注 -->
-    <div class="indexBetCard" key='basketBallQuaterBet'>
-        <div class="timeSpan"></div>
-        <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
-            </div>
-            <div key='awayTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-        </div>
-    </div>
 </div>
 
 
@@ -392,7 +378,6 @@
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
-
         // 壘包 好壞球 只有 滾球 棒球有
         if (sport === 154914 && v3.status === 2) {
             card.find('[key="not-show-baseCon"]').hide()
@@ -403,7 +388,7 @@
         }
 
         // 單節選項 只有 滾球 籃球有
-        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -442,7 +427,17 @@
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
             if (betData && Object.keys(betData.list).length > 0) {
+                // 是否有讓方
+                let isHcapTeam = null
+                // 讓分的priority && line不同 && 有盤口
+                j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
                 Object.entries(betData.list).map(([k4, v4], s) => {
+                    // 判定讓方 -> line值為負
+                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                        let index = parseInt(v4.market_bet_name_en) - 1
+                        card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                    }
                     let item = null
                     if (allWinArr.indexOf(i) !== -1) {
                         item = $(`div[template="betItem-1"]`).clone()
@@ -508,13 +503,9 @@
 
                     if (v4.status === 1) {
                         item.find('.fa-lock').hide()
-                        item.find('.odd').show()
-                        item.find('.bet_name').show()
                         item.attr('onclick', 'selectMOrderBet($(this))')
                     } else {
                         item.find('.fa-lock').show()
-                        item.find('.odd').hide()
-                        item.find('.bet_name').hide()
                         item.removeAttr('onclick')
                     }
 
@@ -537,8 +528,6 @@
                     }
 
                     item.find('.fa-lock').show()
-                    item.find('.odd').hide()
-                    item.find('.bet_name').hide()
                     item.removeAttr('onclick')
 
                     item.removeAttr('hidden')
@@ -688,7 +677,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
 
                         function renderBetArea(priorityArr, v3, k3) {
@@ -698,7 +687,19 @@
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
                                 let item = null
                                 if (betData && Object.keys(betData.list).length > 0) {
+                                    // 是否有讓方
+                                    let isHcapTeam = null
+                                    // 讓分的priority && line不同 && 有盤口
+                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
                                     Object.entries(betData.list).map(([k4, v4], s) => {
+                                        // 先取消樣式
+                                        bet_div.find('div').removeClass('hcapTeam')
+                                        // 判定讓方 -> line值為負
+                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                            let index = parseInt(v4.market_bet_name_en) - 1
+                                            bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                        }
+
                                         item = bet_div.find('.betItemDiv').eq(s)
                                         // old attribute
                                         let market_bet_id = item.attr('market_bet_id')
@@ -733,7 +734,8 @@
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
 
-
+                                        // rate
+                                        item.find('.odd').html(v4.price)
                                         // 賦值
                                         switch (i) {
                                             case 3:
@@ -784,13 +786,9 @@
                                         // 狀態 鎖頭
                                         if (v4.status === 1) {
                                             item.find('.fa-lock').hide()
-                                            item.find('.odd').show()
-                                            item.find('.bet_name').show()
                                             item.attr('onclick', 'selectMOrderBet($(this))')
                                         } else {
                                             item.find('.fa-lock').show()
-                                            item.find('.odd').hide()
-                                            item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
                                         }
                                     })
@@ -801,8 +799,6 @@
                                         let item = bet_div.find('.betItemDiv').eq(j)
 
                                         item.find('.fa-lock').show()
-                                        item.find('.odd').hide()
-                                        item.find('.bet_name').hide()
                                         item.removeAttr('onclick')
                                     }
                                 }

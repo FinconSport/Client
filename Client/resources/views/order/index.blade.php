@@ -257,13 +257,13 @@
 		function createResultContent(betItem, orderItem) {
 			let resultText = '';
 			if (orderItem.status === 4) {
-					resultText = orderItem.result_percent === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
-					orderItem.result_percent === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
-					orderItem.result_percent === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
-					orderItem.result_percent === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
-					orderItem.result_percent === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-					orderItem.result_percent === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
-					`${orderItem.result_percent}`;
+				resultText = betItem.result_percent === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
+					betItem.result_percent === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
+					betItem.result_percent === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
+					betItem.result_percent === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
+					betItem.result_percent === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
+					betItem.result_percent === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
+					`${betItem.result_percent}`;
 			} else {
 				resultText = `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
 			}
