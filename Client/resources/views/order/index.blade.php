@@ -116,15 +116,14 @@
 @endsection
 
 @section('styles')
-<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
 @endSection
 
 @push('main_js')
-<script src="{{ asset('js/bootstrap.min.js?v=' . $current_time) }}"></script>
+<script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <script>
 
 	// 語系
