@@ -228,8 +228,10 @@
 		const parentElement = orderDataBetEvent.parent();
 		// event column 
 		function createBetDataEventContent(betItem, orderItem) {
-			return `${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-					${betItem.home_team_name}<span style="color:green">({{ trans("order.main.home") }})</span> VS ${betItem.away_team_name} 
+			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
+
+			return `${betItem.league_name} <span style="color:#808080;">(${creatTime})</span><br>
+					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span>&nbsp;VS&nbsp;${betItem.away_team_name}&nbsp;
 					<span style="color:red;white-space:nowrap;">
 						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
 						${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
@@ -244,27 +246,32 @@
 			const marketBetName = betItem.market_bet_name;
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
-			const content = `${marketName}<br><span style="color:green;">(${marketBetName})${marketBetLine}</span>`;
+			const content = `${marketName}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
 			if (betRate !== null) {
-				return `${content} @<span style="color:#c79e42;">${betRate}</span>`;
+				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {
 				return content;
 			}
 		}
 		//result column
 		function createResultContent(betItem, orderItem) {
-			const resultText =
-				orderItem.status == 4 ?
-				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
-				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
-				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
-				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
-				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status}`;
-				: `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
+			let resultText = '';
+			if (orderItem.status === 4) {
+				resultText = betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
+					betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
+					betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
+					betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
+					betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
+					betItem.status === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
+					`${betItem.status}`;
+			} else {
+				resultText = `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
+			}
+
 			const resultTime = orderItem.result_time === null ? '' : formatDateTime(orderItem.result_time);
-			return createHtmlElement('text-right', `${resultText}<br><span style="color:#808080">${resultTime}</span>`);
+			return createHtmlElement('text-right', `${resultText}<br><span style="color:#b2b2b2;">${resultTime}</span>`);
 		}
+
 		
 		const BetDataEventContent = createBetDataEventContent(betItem, orderItem);
 		const betWayContent = createBetWayContent(betItem);
