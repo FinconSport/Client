@@ -147,10 +147,16 @@
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
             <div key='homeTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
+                </div>
             </div>
             <div key='awayTeamInfo2'>
-                <div class="textOverFlow teamSpan text-right"></div>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
+                </div>
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
@@ -376,7 +382,7 @@
         }
 
         // 單節選項 只有 滾球 籃球有
-        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -388,7 +394,7 @@
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
         time.html(formatDateTime(v3.start_time))
-        market_count.html(v3.market_bet_count)
+        market_count.html('+' + v3.market_bet_count)
         
         home_team_info.find('.teamSpan').html(v3.home_team_name)
         home_team_info.find('.scoreSpan').html('')
@@ -446,13 +452,15 @@
                 let card2 = card.find('[key="basketBallQuaterBet"]')
                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
+                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
+                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
+                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
 
                 // bet area
                 if( v3.periods ) {
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card)
+                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
                 }
 
             }
@@ -464,14 +472,29 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, s, card) {
-        console.log(priorityArr)
+    function createBetArea(priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = Object.values(v3.list).find(m => m.priority === i)
             bet_div.attr('priority', i)
             if( betData && Object.keys(betData.list).length > 0 ) {
+                // 是否有讓方
+                let isHcapTeam = null
+                // 讓分的priority && line不同 && 有盤口
+                j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
                 Object.entries(betData.list).map(([k4, v4], s) => { 
+                    // 判定讓方 -> line值為負
+                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                        if( stageBet === 0 ) {
+                            let index = parseInt(v4.market_bet_name_en) - 1
+                            card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                        } else {
+                            let index = parseInt(v4.market_bet_name_en) + 1
+                            card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                        }
+                    }
+
                     let item = null
                     if (allWinArr.indexOf(i) !== -1 ) {
                         item = $(`div[template="betItem-1"]`).clone()
@@ -516,13 +539,9 @@
 
                     if( v4.status === 1 ) {
                         item.find('.fa-lock').hide()
-                        item.find('.odd').show()
-                        item.find('.bet_name').show()
                         item.attr('onclick', 'openCal($(this))')
                     } else {
                         item.find('.fa-lock').show()
-                        item.find('.odd').hide()
-                        item.find('.bet_name').hide()
                         item.removeAttr('onclick')
                     }
 
@@ -545,8 +564,6 @@
                     }
 
                     item.find('.fa-lock').show()
-                    item.find('.odd').hide()
-                    item.find('.bet_name').hide()
                     item.removeAttr('onclick')
 
                     item.removeAttr('hidden')
@@ -687,7 +704,7 @@
                         }   
 
                         // 玩法統計
-                        card.find('.otherBetWay p').html(v3.market_bet_count)
+                        card.find('.otherBetWay p').html('+' + v3.market_bet_count)
 
                         // 壘包 好壞球 只有 滾球 棒球有
                         if( sport === 154914 && v3.status === 2 ) {
@@ -699,7 +716,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
@@ -773,21 +790,44 @@
 
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
                                 let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-                                home_team_info2.find('.teamSpan').html(v3.home_team_name + '-' + timerStr)
-                                away_team_info2.find('.teamSpan').html(v3.away_team_name + '-' + timerStr)
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3)
+
+                                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
+                                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
+                                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+
+
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
                             }
                             
                         }
                        
-                        function renderBetArea(priorityArr, v3, k3) {
+                        function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
                             console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = Object.values(v3.list).find(m => m.priority === i)
                                 let item = null
                                 if( betData && Object.keys(betData.list).length > 0 ) {
+                                    // 是否有讓方
+                                    let isHcapTeam = null
+                                    // 讓分的priority && line不同 && 有盤口
+                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
+                                        // 先取消樣式
+                                        bet_div.find('div').removeClass('hcapTeam')
+                                        // 判定讓方 -> line值為負
+                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                            if( stageBet === 0 ) {
+                                                let index = parseInt(v4.market_bet_name_en) - 1
+                                                bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                            } else {
+                                                let index = parseInt(v4.market_bet_name_en) + 1
+                                                bet_div.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                            }
+                                        }
+
                                         item = bet_div.find('.betItemDiv').eq(s)
                                         // old attribute
                                         let market_bet_id = item.attr('market_bet_id')
@@ -853,8 +893,6 @@
                                         // 狀態 鎖頭
                                         if( v4.status === 1 ) {
                                             item.find('.fa-lock').hide()
-                                            item.find('.odd').show()
-                                            item.find('.bet_name').show()
                                             item.attr('onclick', 'openCal($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
@@ -865,8 +903,6 @@
                                             }
                                         } else {
                                             item.find('.fa-lock').show()
-                                            item.find('.odd').hide()
-                                            item.find('.bet_name').hide()
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
@@ -884,8 +920,6 @@
                                         let item = bet_div.find('.betItemDiv').eq(j)
 
                                         item.find('.fa-lock').show()
-                                        item.find('.odd').hide()
-                                        item.find('.bet_name').hide()
                                         item.removeAttr('onclick')
                                     }
                                 }

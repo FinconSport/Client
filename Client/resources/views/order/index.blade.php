@@ -228,14 +228,16 @@
 		const parentElement = orderDataBetEvent.parent();
 		// event column 
 		function createBetDataEventContent(betItem, orderItem) {
-			return `${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-					${betItem.home_team_name} VS ${betItem.away_team_name} 
+			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
+
+			return `${betItem.league_name} <span style="color:#808080;">(${creatTime})</span><br>
+					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span>&nbsp;VS&nbsp;${betItem.away_team_name}&nbsp;
 					<span style="color:red;white-space:nowrap;">
-						${betItem.home_team_score !== null || betItem.away_team_score !== null ? `(` : ''}
+						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
 						${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
 						${betItem.away_team_score !== null && betItem.home_team_score !== null ? '-' : ''}
 						${betItem.away_team_score !== null ? `${betItem.away_team_score}` : ''}
-						${betItem.home_team_score !== null || betItem.away_team_score !== null ? `)` : ''}
+						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `)` : ''}
 					</span>`;
 		}
 		// bet way column 
@@ -244,25 +246,32 @@
 			const marketBetName = betItem.market_bet_name;
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
-			const content = `${marketName}<br><span style="color:green;">(${marketBetName})${marketBetLine}</span>`;
+			const content = `${marketName}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
 			if (betRate !== null) {
-				return `${content} @<span style="color:#c79e42;">${betRate}</span>`;
+				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {
 				return content;
 			}
 		}
 		//result column
 		function createResultContent(betItem, orderItem) {
-			const resultText =
-				betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
-				betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
-				betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
-				betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
-				betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
-				`${betItem.status}`;
-			const resultTime = formatDateTime(orderItem.result_time);
-			return createHtmlElement('text-right', `${resultText}<br>${resultTime}`);
+			let resultText = '';
+			if (orderItem.status === 4) {
+				resultText = betItem.status === 0 ? `<span style="color: green;">{{ trans("order.result_precent.0") }}</span>` :
+					betItem.status === 1 ? `<span style="color: red;">{{ trans("order.result_precent.1") }}</span>` :
+					betItem.status === 2 ? `<span style="color: red;">{{ trans("order.result_precent.2") }}</span>` :
+					betItem.status === 3 ? `<span style="color: green;">{{ trans("order.result_precent.3") }}</span>` :
+					betItem.status === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
+					betItem.status === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
+					`${betItem.status}`;
+			} else {
+				resultText = `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
+			}
+
+			const resultTime = orderItem.result_time === null ? '' : formatDateTime(orderItem.result_time);
+			return createHtmlElement('text-right', `${resultText}<br><span style="color:#b2b2b2;">${resultTime}</span>`);
 		}
+
 		
 		const BetDataEventContent = createBetDataEventContent(betItem, orderItem);
 		const betWayContent = createBetWayContent(betItem);
@@ -274,7 +283,9 @@
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
-			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${betIndex}`;
+			const minNumber = 1;const maxNumber = 100;
+			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+			const dynamicId = `additionalTr_${betItem.league_id}${betItem.league_name}_${randomNumber}`; // <-- make the id generated random
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
@@ -301,7 +312,7 @@
 		orderDataResult.append(betDataResultContainer);
 
 		if (betIndex === 0) {
-			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-rotate-90 fa-2xs" style="color: #ff0000;"></i></button>');
+			const toggleButton = $('<button class="order-toggleButton"><i class="fa-sharp fa-solid fa-play fa-2xs" style="color: #ff0000;"></i></button>');
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 
 			function toggleContainers() {
@@ -314,6 +325,8 @@
 					elements.css('display', 'none');
 					toggleButton.find('i').removeClass('fa-rotate-90');
 				}
+
+				updateRowColors();
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -362,6 +375,8 @@
 				totalWinAmountElement.css('color', 'green');
 			}
 		}
+
+		updateRowColors();
 	}
 
 	// 下拉更多資料
@@ -402,6 +417,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
+				updateRowColors();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -458,6 +474,24 @@
 		if (link) {
 			window.location.search = link;
 		}
+	}
+
+    
+	// Function to update row colors
+	function updateRowColors() {
+		const allRows = document.querySelectorAll('#orderTable tbody tr:not([style*="display: none"])');
+		let rowCount = 0;
+
+		allRows.forEach((row) => {
+			rowCount++;
+			if (rowCount % 2 === 1) {
+				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
+				row.style.backgroundColor =  '#ffffff';// Change '#even-color' to your desired background color for even rows
+			} else {
+				row.style.backgroundColor =  '#ffffff';// Change '#even-color' to your desired background color for even rows
+				row.style.backgroundColor = '#e2f0f0'; // Change '#odd-color' to your desired background color for odd rows
+			}
+		});
 	}
 
 </script>
