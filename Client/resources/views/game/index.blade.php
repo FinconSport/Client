@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- 投注計算機 -->
-<h1>我是GAME頁</h1>
 <div id='mask' style="display: none;"></div>
 <div id="leftSlideOrder" style="display: none;">
     <div class="row m-0">
@@ -218,7 +217,6 @@
     var renderInter = null // timer for refresh view layer
     var socket_status = false;
     var ws = null
-    var heartbeatTimer = null
 
     
     // 獨贏系列
@@ -228,30 +226,6 @@
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
-    /* ===== DATA LAYER ===== */
-    /*  
-        1. 現在大部份資料都api化，通過call ajax來loading
-        2. 在所有所需的api被call完之前，要添加頁面loading樣式，等全部都call好了才顯示頁面
-
-            有哪些api資料共用?
-            1. account
-            2. marquee
-            3. sport_list
-        
-            index有那些需要call api?
-            1. match_list
-            2. bet limitation?
-
-            有哪些需要沿用laravel映射?
-            1. $player 
-            2. $token (先寫死12345，之後正式再來換)
-            3. $system_config['version']
-            4. $current_time?
-    
-        3. 資料接收機制
-            1. ws -> push to queue -> update the globe data (先註解掉)
-            2. ajax -> update the globe data
-    */
 
     // detect ini ajax
     var isReadyIndexInt = null
@@ -259,11 +233,13 @@
 
     var isReadySportInt = null
 
+	// fixture
+	var fixture = null
+
     // match list data
     var matchListD = {}
-    var oldMatchListD = {}
-    var callMatchListData = { token: token, player: player, sport_id: sport }
-    const matchList_api = '/api/v2/match_index'
+    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
+    const matchList_api = '/api/v2/game_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -275,99 +251,19 @@
     var stagePriorityArr = null
     var gameTitle = null
 
+ 
+
     
     /* ===== DATA LAYER ===== */
     
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
-
-        // put the view ini function here  
-        // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
-
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            createCate(k, v)
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                createLeague(k, k2, v2)
-                // 获取 list 对象的所有属性，并将它们存储在一个数组中
-                const listKeys = Object.keys(v2.list);
-                // 使用 sort 方法对 listKeys 数组进行排序
-                listKeys.sort((a, b) => {
-                    // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
-                    const orderByA = v2.list[a].order_by;
-                    const orderByB = v2.list[b].order_by;
-                    // 比较 orderByA 和 orderByB，以确定排序顺序
-                    return orderByA - orderByB;
-                });
-                listKeys.forEach( ele => {
-                    createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
-                })
-            })
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            console.log(k, v)
         })
-
-        // 滾球移到最上面
-        let parentNode = $('#indexContainerLeft')
-        let livingNode = $('#toggleContent_living')
-        livingNode.prependTo(parentNode);
-
-        // 統計
-        statistics()
-        // loop matchListD to generate html element here
     }
     /* ===== VIEW LAYER ===== */
-
-    function createCate(k, v) {
-        let el_toggle = $('div[template="elToggleTemplate"]').clone()
-        let el_toggle_title = el_toggle.find('.catWrapperTitle')
-        let el_toggle_text = el_toggle.find('.elToggleText')
-        let el_toggle_count = el_toggle.find('.elToggleCount')
-        let el_toggle_dir = el_toggle.find('.elToggleDir')
-
-        el_toggle.attr('id', 'toggleContent_' + k)
-        el_toggle_title.attr('id', `catWrapperTitle_${k}`)
-        el_toggle_title.attr('onclick', `toggleCat('${k}')`)
-        el_toggle_text.html(k === 'early' ? '{{ trans("index.mainArea.early") }}' : '{{ trans("index.mainArea.living") }}');
-        el_toggle_count.attr('id', `catWrapperContent_${k}_total`)
-        el_toggle_dir.attr('id', `catWrapperTitle_${k}_dir`)
-
-        el_toggle.removeAttr('hidden')
-        el_toggle.removeAttr('template')
-
-        $('#indexContainerLeft').append(el_toggle)
-    }
-
-    function createLeague(k, k2, v2) {
-        // title
-        let league_wrapper = $('div[template="leagueWrapper"]').clone()
-        let league_toggle = league_wrapper.find('.seriesWrapperTitle')
-        let league_toggle_name = league_toggle.find('.legToggleName')
-        let league_toggle_count = league_toggle.find('.legToggleCount')
-        let league_toggle_dir = league_toggle.find('.legToggleDir')
-        let league_bet_title = league_toggle.find('.betLabelContainer')
-
-        league_toggle.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}`)
-        league_toggle.attr('onclick', `toggleSeries('${k}_${v2.league_id}')`)
-        league_toggle.attr('league_id', v2.league_id)
-        league_toggle_name.html(v2.league_name)
-        league_toggle_count.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_count`)
-        league_toggle_dir.attr('id', `seriesWrapperTitle_${k}_${v2.league_id}_dir`)
-
-        // bet title
-        mainPriorityArr.forEach(( i, j ) => {
-            league_bet_title.append('<div class="labelItem col"><div>' + gameTitle[j] + '</div></div>')
-        })
-
-        // content
-        let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
-        league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
-
-        league_wrapper.removeAttr('hidden')
-        league_wrapper.removeAttr('template')
-
-        let el_toggle_content = $(`#toggleContent_${k}`)
-        el_toggle_content.append(league_wrapper)
-
-    }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
@@ -596,6 +492,7 @@
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
                 callMatchListData.sport_id = sport // default sport
+				callMatchListData.fixture_id = searchData.fixture_id // default fixture
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
@@ -613,12 +510,11 @@
                 mainPriorityArr = langTrans['sportBetData'][sport]['mainPriorityArr']
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
-                oldMatchListD = matchListD // record
                 $('#dimmer').dimmer('hide'); // hide loading
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView()
+                    // renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -698,6 +594,7 @@
     
     // render view layer here
     function renderView() {
+		console.log(matchListD)
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
