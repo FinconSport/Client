@@ -228,8 +228,10 @@
 		const parentElement = orderDataBetEvent.parent();
 		// event column 
 		function createBetDataEventContent(betItem, orderItem) {
-			return `${betItem.league_name} (${formatDateTime(orderItem.create_time)})<br>
-					${betItem.home_team_name}<span style="color:green">({{ trans("order.main.home") }})</span> VS ${betItem.away_team_name} 
+			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
+
+			return `${betItem.league_name} <span style="color:#b2b2b2;">(${creatTime})</span><br>
+					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span> VS ${betItem.away_team_name} 
 					<span style="color:red;white-space:nowrap;">
 						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
 						${betItem.home_team_score !== null ? `${betItem.home_team_score}` : ''}
@@ -267,7 +269,7 @@
 			}
 
 			const resultTime = orderItem.result_time === null ? '' : formatDateTime(orderItem.result_time);
-			return createHtmlElement('text-right', `${resultText}<br><span style="color:#808080">${resultTime}</span>`);
+			return createHtmlElement('text-right', `${resultText}<br><span style="color:#b2b2b2;">${resultTime}</span>`);
 		}
 
 		
