@@ -1094,6 +1094,7 @@
 
     // 打開左邊投注區塊
     function openOrderBet() {
+        isCalOpening = true
         closeOrderDetail(0)
         $('#leftSlideOrder').show("slide", {
             direction: "left"
@@ -1194,7 +1195,6 @@
     let isCalOpening = false
     // 投注
     function sendOrder() {
-        isCalOpening = true
         if (sendOrderData.bet_data.length === 1) {
             showErrorToast(langTrans.m_order.at_least_two);
             return;
