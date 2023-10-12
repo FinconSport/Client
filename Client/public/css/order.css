@@ -30,8 +30,8 @@ div[key="matchSportMenu"]{
     border: 2px solid rgb(65, 91, 90);
     border-radius: 5px;
     max-height: calc(100% - 9.5rem);
-    height: auto;
-    overflow: auto;
+    height: calc(100% - 9rem);
+    overflow: hidden;
     color: rgb(65, 91, 90);
     position: relative;
 }
@@ -48,9 +48,9 @@ div[key="matchSportMenu"]{
     /* padding-right: 1rem; */
 }
 
-#orderContainer #noMoreData {
+/* #orderContainer #noMoreData {
     height: auto;
-}
+} */
 
 .pageInfo {
     margin-left: 1rem;
