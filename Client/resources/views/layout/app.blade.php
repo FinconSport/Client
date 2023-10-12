@@ -180,15 +180,15 @@
 
 		// 帳號
 		var accountD = {}
-		const account_api = 'https://sportc.asgame.net/api/v2/common_account'
+		const account_api = '/api/v2/common_account'
 
 		// marquee
 		var marqueeD = {}
-		const marquee_api = 'https://sportc.asgame.net/api/v2/index_marquee'
+		const marquee_api = '/api/v2/index_marquee'
 
 		// sportList
 		var sportListD = {}
-		const sportList_api = 'https://sportc.asgame.net/api/v2/match_sport'
+		const sportList_api = '/api/v2/match_sport'
 
 		function caller(url, data, obj, isUpdate = 0) {
 			return new Promise((resolve, reject) => {

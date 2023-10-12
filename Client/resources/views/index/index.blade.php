@@ -262,7 +262,7 @@
     var matchListD = {}
     var oldMatchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
-    const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
+    const matchList_api = '/api/v2/match_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -970,21 +970,13 @@
         const msg = JSON.parse(message.data); // convert to JSON
         console.log(msg);
         
-
         // delay_order
         if (msg.action === 'delay_order') {
+            clearTimeout(calInter)
+            hideLoading();
+            closeCal();
             showSuccessToast(msg.order_id);
             refreshBalence();
-            // Set the timeout and store the ID
-            timeoutId = setTimeout(function() {
-                hideLoading();
-                closeCal();
-            }, 1000);
-
-            // Clear the timeout after 1 second
-            setTimeout(function() {
-                clearTimeout(timeoutId);
-            }, 1000);
         }
         // delay_order
     }
@@ -1214,9 +1206,6 @@
     })
 
     function closeCal() {
-        clearTimeout(timeoutId);// If the closeCal function is called, cancel the timeout
-        console.log("closeCal is closed");
-
         $('#leftSlideOrder').hide("slide", {
             direction: "left"
         }, 500);
@@ -1262,8 +1251,8 @@
         sendOrderData.better_rate = bool
     })
 
+    let calInter = null
     // 投注
-    let timeoutId;
     function sendOrder() {
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
             showErrorToast(langTrans.js.no_bet_amout);
@@ -1281,20 +1270,16 @@
         // Show loading spinner while submitting
         showLoading();
 
-        // Set the 10-second timeout and store the ID
-        timeoutId = setTimeout(function() {
-            hideLoading();
-            closeCal();
-        }, 10000);
-
         $.ajax({
-            url: 'https://sportc.asgame.net/api/v2/game_bet',
+            url: '/api/v2/game_bet',
             method: 'POST',
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
-                console.log(res)
-                let hasTenSecondsPassed = false;
+                calInter = setTimeout(function() {
+                    hideLoading();
+                    closeCal();
+                }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
@@ -1302,8 +1287,6 @@
                 showErrorToast(jqXHR)
             }
         });
-
-        clearTimeout(timeoutId);// If the closeCal function is called, cancel the timeout
     }
 
     // 統計

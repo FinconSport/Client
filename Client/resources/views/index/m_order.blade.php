@@ -273,7 +273,7 @@
         player: player,
         sport_id: sport
     }
-    const matchList_api = 'https://sportc.asgame.net/api/v2/match_index'
+    const matchList_api = '/api/v2/match_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -854,14 +854,12 @@
 
         // delay_order
         if (msg.action === 'delay_order') {
+            clearTimeout(calInter)
+            hideLoading();
+            closeCal(1);
+            closeOrderDetail()
             showSuccessToast(msg.order_id);
             refreshBalence();
-            // after the msg pop up delay 1 second to hide the loading and close the betting area
-            setTimeout(function() {
-                hideLoading();
-                closeCal(1);
-                closeOrderDetail()
-            }, 1000);
         }
         // delay_order
     }
@@ -1190,6 +1188,7 @@
         sendOrderData.better_rate = bool
     })
 
+    let calInter = null
     // 投注
     function sendOrder() {
         if (sendOrderData.bet_data.length === 1) {
@@ -1232,12 +1231,16 @@
         console.log(jsonData)
 
         $.ajax({
-            url: 'https://sportc.asgame.net/api/v2/m_game_bet',
+            url: '/api/v2/m_game_bet',
             method: 'POST',
             data: jsonData,
             success: function(response) {
                 let res = JSON.parse(response)
-                console.log(res)
+                calInter = setTimeout(function() {
+                    hideLoading();
+                    closeCal(1);
+                    closeOrderDetail()
+                }, 10000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
@@ -1245,17 +1248,6 @@
                 showErrorToast(jqXHR)
             }
         });
-
-        let hasTenSecondsPassed = false;
-        // if the msg is not getting in 10 sec, hide the loading and close the betting area
-        setTimeout(function() {
-            hasTenSecondsPassed = true;
-            if (hasTenSecondsPassed) {
-                hideLoading();
-                closeCal(1);
-                closeOrderDetail()
-            }
-        }, 10000);
     }
 
     // 統計

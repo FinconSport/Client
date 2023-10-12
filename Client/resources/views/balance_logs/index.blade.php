@@ -58,7 +58,7 @@
 
 	var logsListD = {}
     var callLogsListData = { token: token, player: player, page: 1 }
-    const logsList_api = 'https://sportc.asgame.net/api/v2/balance_logs'
+    const logsList_api = '/api/v2/balance_logs'
 
 	$(document).ready(function() {
 

@@ -137,7 +137,7 @@
     var orderListD = {}
 
 	var callOrderListData = { token: token, player: player, result: 0, page: 1 }
-    const orderList_api = 'https://sportc.asgame.net/api/v2/common_order'
+    const orderList_api = '/api/v2/common_order'
 
 	let totalBetItemCount = 0;
 	let totalBetAmount = 0;

@@ -65,7 +65,7 @@
 
 	// notice list data
 	var noticeListD = {}
-	const noticeList_api = 'https://sportc.asgame.net/api/v2/index_notice'
+	const noticeList_api = '/api/v2/index_notice'
 
 	$(document).ready(function() {
 
