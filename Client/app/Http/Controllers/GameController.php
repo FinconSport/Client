@@ -8,7 +8,7 @@ use DB;
 
 // use App\Models\GameOrder;
 
-class MatchController extends PcController {
+class GameController extends PcController {
     
     // 首頁
     public function index(Request $request) {
