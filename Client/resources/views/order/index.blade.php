@@ -462,17 +462,16 @@
 
 	// Get all the rows in the table
 	const allRows = document.querySelectorAll('#orderTable tbody tr');
+	let rowCount = 0;
 
 	// Iterate through the rows and add background to the visible ones
 	allRows.forEach((row) => {
 		if (row.style.display !== 'none') {
 			rowCount++;
 			if (rowCount % 2 === 1) {
-			// Odd row
-			row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
+				row.style.backgroundColor = '#ffffff'; // Change '#odd-color' to your desired background color for odd rows
 			} else {
-			// Even row
-			row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
+				row.style.backgroundColor = '#e2f0f0'; // Change '#even-color' to your desired background color for even rows
 			}
 		}
 	});
