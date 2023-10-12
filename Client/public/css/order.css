@@ -76,7 +76,11 @@ div[key="matchSportMenu"]{
     border-right: none!important;
 }
 
-#orderTable tbody tr:nth-child(even) td{
+/* #orderTable tr:not([style*="display: none"]):nth-child(even) td {
+    background-color: #e2f0f0;
+} */
+
+#orderTable tbody tr:nth-child(even){
     background-color: #e2f0f0;
 }
 
@@ -169,6 +173,13 @@ div[key="matchSportMenu"]{
 
 .hide-betaDetcon {
     display: none;
+    transform: scaleY(0);
+    transition: display 0.3s, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.show-betaDetcon {
+    display: table-row;
+    transform: scaleY(1);
 }
 
 .order-toggleButton{
@@ -337,7 +348,7 @@ button.dateCalendarBtn {
     color: #415b5a;
 }
 
-.statistic-container {
+.search-statistic-container .statistic-container {
     width: 58%;
     display: grid;
     grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
@@ -346,7 +357,7 @@ button.dateCalendarBtn {
     padding-left: 1%;
 }
 
-.stats-container {
+.search-statistic-container .stats-container {
     height: 100%;
     background: #ffffff;
     padding: 0.5rem;
@@ -357,7 +368,7 @@ button.dateCalendarBtn {
     justify-content: space-between;
 }
 
-.stats-container p{
+.search-statistic-container .stats-container p{
     text-align: end;
     font-size: 1.5rem;
     word-wrap: break-word;

@@ -629,25 +629,16 @@
         if ("WebSocket" in window) {
             try {
                 let ws_url = 'wss://broadcast.asgame.net/ws'
-
                 ws = new WebSocket(ws_url); // websocket 連線
                 ws.onopen = function() {
                     wsRegisterMatch() // 註冊id
                     socket_status = true; // for reconnection
-                    // heartbeatTimer = setInterval(() => { // 心跳 
-                    //     const heartbeat = {
-                    //         "action": "heartbeat",
-                    //     }
-                    //     console.log(heartbeat)
-                    //     ws.send(JSON.stringify(heartbeat));
-                    // }, 10000);
                 };
 
                 // websocket is closed
                 ws.onclose = function(event) {
                     console.log('Connection closed with code: ', event.code);
                     socket_status = false;
-                    // clearInterval(heartbeatTimer) // 移除心跳timer
                 };
 
                 // websocket is getting message
@@ -669,7 +660,6 @@
         }
     }
     
-
     // render view layer here
     function renderView() {
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
@@ -832,7 +822,8 @@
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
 
-
+                                        // rate
+                                        item.find('.odd').html(v4.price)
                                         // 賦值
                                         switch ( i ) {
                                             case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
@@ -900,7 +891,6 @@
                                 }
                             });
                         }
-                        
                     } else {
                         // 新的賽事
                         if( !isCateExist ) createCate(k, v)
@@ -968,7 +958,6 @@
 
     // 註冊賽事id
     function wsRegisterMatch() {
-        console.log(socket_status)
         const wsMsg = {
             "action": "register",
             "sport_id": sport,
@@ -1045,7 +1034,6 @@
 
     // 賠率上升
     function raiseOdd(fixture_id, market_id, market_bet_id) {
-        // console.log('raiseOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
@@ -1214,7 +1202,6 @@
         $('#moneyInput').trigger('change')
     })
     
-
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
@@ -1260,15 +1247,6 @@
             success: function(response) {
                 let res = JSON.parse(response)
                 console.log(res)
-                // if (res.message === 'SUCCESS_API_GAME_BET_01') {
-                //     // 餘額更新
-                //     refreshBalence()
-                //     showSuccessToast(res.message)
-                // } else {
-                //     showErrorToast(res.message)
-                // }
-
-                // hideLoading();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');

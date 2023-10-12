@@ -48,26 +48,11 @@ return [
 		"total_result_amount" => "Total result amount",  //  "總計派獎",
 		"total_win_amount" => "Total win amount",  //  "總計輸贏",
 	],  //  
-	'sportPriority' => [
-		1 => 'Full Match Win',
-		2 => 'First Five Innings Win',
-		3 => 'Full Match Handicap',
-		4 => 'First Five Innings Handicap',
-		5 => 'Full Match Over/Under',
-		6 => 'First Five Innings Over/Under',
-		7 => 'Full Match Win',
-		8 => 'First Half Win',
-		9 => 'Full Match Spread',
-		10 => 'First Half Spread',
-		11 => 'Full Match Over/Under',
-		12 => 'First Half Over/Under',
-		13 => 'Full Match Win',
-		14 => 'First Half Win',
-		15 => 'Full Match Handicap',
-		16 => 'First Half Handicap',
-		17 => 'Full Match Over/Under',
-		18 => 'First Half Over/Under',
-	]
-	
-	// 後端
+	"result_precent" => [
+		"0" => "Lose", // "輸",
+		"1" => "Win", //"贏",
+		"2" => "Win half", // "贏半",
+		"3" => "Lose half", // "輸半",
+		"4" => "Chargeback", // "退單",
+	],
 ];

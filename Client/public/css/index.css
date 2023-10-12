@@ -407,12 +407,12 @@ div[key="sizeSmallRate"]:hover {
 }
 .scoreSpan {
     text-align: right;
-    color: #0085ff;
+    color: #ac00ff;
     font-weight: 900;
     font-size: 1.2rem;
     position: relative;
     padding-right: 1.5rem;
-    -webkit-text-stroke: 1px #0085ff;
+    -webkit-text-stroke: 1px #ac00ff;
 }
 
 
