@@ -77,7 +77,7 @@
                         <td style="width: 21%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
-                        <td style="width: 10%;" class="text-right orderData_betAmount"></td>
+                        <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span style="color:#b2b2b2;" class="orderData_createTime"></span></td>
                         <td style="width: 10%;"></td>
 						<td style="width: 10%;" class="text-right orderData_resultAmount"></td>
 						<td style="width: 10%;" class="text-right orderData_WinLoss"></td>
@@ -186,6 +186,7 @@
 		const orderDataSportType = orderData.find('.orderData_sportType');
 		const orderDataMOrder = orderData.find('.orderData_mOrder');
 		const orderDataBetAmount = orderData.find('.orderData_betAmount');
+		const orderDataCreateTime = orderData.find('.orderData_createTime');
 		const orderDataBetEvent = orderData.find('.orderData_betData_Event');
 		const orderDataBetBetWay = orderData.find('.orderData_betData_BetWay');
 		const orderDataBetResult = orderData.find('.orderData_betData_Result');
@@ -213,6 +214,7 @@
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
+		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
@@ -228,9 +230,9 @@
 		const parentElement = orderDataBetEvent.parent();
 		// event column 
 		function createBetDataEventContent(betItem, orderItem) {
-			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
+			const startTime = betItem.start_time === null ? '' : formatDateTime(betItem.start_time);
 
-			return `${betItem.league_name} <span style="color:#808080;">(${creatTime})</span><br>
+			return `${betItem.league_name} <span style="color:#808080;">(${startTime})</span><br>
 					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span>&nbsp;VS&nbsp;${betItem.away_team_name}&nbsp;
 					<span style="color:red;white-space:nowrap;">
 						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
@@ -272,7 +274,6 @@
 			return createHtmlElement('text-right', `${resultText}<br><span style="color:#b2b2b2;">${resultTime}</span>`);
 		}
 
-		
 		const BetDataEventContent = createBetDataEventContent(betItem, orderItem);
 		const betWayContent = createBetWayContent(betItem);
 		const resultContent = createResultContent(betItem, orderItem);
@@ -326,6 +327,7 @@
 					toggleButton.find('i').removeClass('fa-rotate-90');
 				}
 
+				// update the row colors and height when toggle containers
 				updateRowColors();
 				adjustContainerHeight();
 			}
@@ -354,7 +356,6 @@
 		}
 		$('.search-bar-container').after(orderDataTotal);
 	}
-
 
 	//updateTotal when new data is loaded
 	function updateTotal() {
@@ -390,8 +391,8 @@
 		updateTotal()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
-
-		adjustContainerHeight();
+		
+		adjustContainerHeight(); // update height when fetching more data's
 	}
 
 	// scroll to bottom
@@ -478,8 +479,7 @@
 		if (link) {
 			window.location.search = link;
 		}
-
-		adjustContainerHeight();
+		adjustContainerHeight(); // update height
 	}
 
     
@@ -487,7 +487,6 @@
 	function updateRowColors() {
 		const allRows = document.querySelectorAll('#orderTable tbody tr:not([style*="display: none"])');
 		let rowCount = 0;
-
 		allRows.forEach((row) => {
 			rowCount++;
 			if (rowCount % 2 === 1) {
