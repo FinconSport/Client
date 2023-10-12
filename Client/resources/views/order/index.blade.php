@@ -177,6 +177,7 @@
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
+				$('#orderContainer').css('height', 'auto');
 			}
 	}
 
@@ -389,9 +390,6 @@
 		updateTotal()
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
-		if (!fetchMoreLock) {
-			$('#orderContainer').css('height', 'auto');
-		}
 	}
 
 	// scroll to bottom
