@@ -230,7 +230,7 @@
 		function createBetDataEventContent(betItem, orderItem) {
 			const creatTime = orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time);
 
-			return `${betItem.league_name} <span style="color:#b2b2b2;">(${creatTime})</span><br>
+			return `${betItem.league_name} <span style="color:#808080;">(${creatTime})</span><br>
 					${betItem.home_team_name}<span style="color:green">[{{ trans("order.main.home") }}]</span>&nbsp;VS&nbsp;${betItem.away_team_name}&nbsp;
 					<span style="color:red;white-space:nowrap;">
 						${betItem.home_team_score !== null && betItem.away_team_score !== null ? `(` : ''}
