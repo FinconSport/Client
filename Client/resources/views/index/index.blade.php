@@ -1303,7 +1303,7 @@
             }
         });
 
-        clearTimeout(timeoutId);
+        clearTimeout(timeoutId);// If the closeCal function is called, cancel the timeout
     }
 
     // 統計
