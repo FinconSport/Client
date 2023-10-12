@@ -48,9 +48,9 @@ div[key="matchSportMenu"]{
     /* padding-right: 1rem; */
 }
 
-/* #orderContainer #noMoreData {
-    height: auto;
-} */
+#orderContainer #noMoreData {
+    height: fit-content;
+}
 
 .pageInfo {
     margin-left: 1rem;
