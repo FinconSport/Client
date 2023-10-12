@@ -404,6 +404,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
+				updateRowColors();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -479,9 +480,6 @@
 			}
 		});
 	}
-
-	// Initial row coloring
-	updateRowColors();
 
 </script>
 @endpush
