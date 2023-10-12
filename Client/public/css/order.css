@@ -29,7 +29,7 @@ div[key="matchSportMenu"]{
     background-color: white;
     border: 2px solid rgb(65, 91, 90);
     border-radius: 5px;
-    /* height: calc(100% - 9.5rem); */
+    height: calc(100% - 9.5rem);
     overflow: auto;
     color: rgb(65, 91, 90);
     position: relative;
