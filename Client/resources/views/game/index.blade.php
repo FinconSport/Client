@@ -1357,7 +1357,7 @@
 
     const formatDateTimeV2 = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
-        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dateTime);
+        const month = new Intl.DateTimeFormat('zh-CN', { month: 'long' }).format(dateTime);
         const day = dateTime.getDate();
         const suffix = getDaySuffix(day);
         const hour = dateTime.getHours().toString().padStart(2, '0');
