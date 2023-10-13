@@ -8,7 +8,7 @@
     <link href="{{ asset('css/jquery-ui.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <!-- COMM CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
-    <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
     <link href="{{ asset('css/icon/all.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css?v=' . $system_config['version']) }}" rel="stylesheet">
 
@@ -424,16 +424,7 @@
 
 			// view layer
 			// check if api are all loaded every 500 ms 
-			// isReadyCommonInt = setInterval(() => {
-			// 	if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
-			// 		if( !sport ) sport = sportListD.data[0].sport_id // default sport
-			// 		isReadyCommon = true
-			// 		viewCommonIni() // excute all common view layer ini function
-			// 		clearInterval(isReadyCommonInt); // stop checking
-			// 	}
-			// }, 500);
-
-			setTimeout(() => {
+			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
 					if( !sport ) sport = sportListD.data[0].sport_id // default sport
 					isReadyCommon = true
@@ -441,7 +432,6 @@
 					clearInterval(isReadyCommonInt); // stop checking
 				}
 			}, 500);
-
 			// view layer
 
 
