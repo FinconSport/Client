@@ -31,3 +31,10 @@
     background: #ffffff;
     color: #415b5a;
 }
+
+
+.bettingtype-container table thead th{
+    width: 100%;
+    padding: 1rem;
+    background-color: #ffca9b;
+}
