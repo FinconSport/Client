@@ -718,7 +718,9 @@
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
 
+
         $('#marketRateDataTemp').append(marketBetRateTemp);
+        $('div.market-rate[hidden]').remove();
     }
 
     function createScoreBoard(data) {
