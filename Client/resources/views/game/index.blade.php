@@ -699,11 +699,12 @@
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
         }
+
         createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+            let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
             if( isExist ) {
-                let bettingTypeContainerTemp = $(`#${k3}`) 
+                let bettingTypeContainerTemp = $(`#${k}`) 
                 let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
             } else {
                 createMarketContainer(k, v)
