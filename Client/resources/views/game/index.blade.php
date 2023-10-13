@@ -619,10 +619,10 @@
         // early fixture
         if (data.list.status == 1) {
             const earlyFixtureContainerTemp = $('div[template="earlyFixtureContainerTemplate"]').clone();
-            arlyFixtureContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            arlyFixtureContainerTemp.find('.league_name').text(data.series.name);
-            arlyFixtureContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
-            arlyFixtureContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            earlyFixtureContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            earlyFixtureContainerTemp.find('.league_name').text(data.series.name);
+            earlyFixtureContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            earlyFixtureContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             scoreBoardContainerTemp.after(earlyFixtureContainerTemp);
         }
         
