@@ -65,12 +65,13 @@
 </div> -->
 
 <div id="scoreboard-con">
-    <div template='fixtureCardTemplate_v2' hidden class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
+    <div class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
         <div class="fixture-card">
-            <p></p>
-            <div key="LeagueNameStartTimeCard">
-                <p class="leauge_name"></p>
-                <p class="start_time"></p>
+            <div template='fixtureCardTemplate_v2' hidden>
+                <div key="LeagueNameStartTimeCard">
+                    <p class="leauge_name"></p>
+                    <p class="start_time"></p>
+                </div>
             </div>
         </div>
     </div>
