@@ -703,7 +703,7 @@
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
-        bettingTypeContainerTemp.find('.market_name').text(v.market_name);
+        bettingTypeContainerTemp.find('.market_name').text('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>' + v.market_name);
         $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
