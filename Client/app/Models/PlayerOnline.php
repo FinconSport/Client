@@ -13,5 +13,20 @@ class PlayerOnline extends CacheModel
 	public $timestamps = false;
 	protected $table = "player_online";
 
+    public static function getCount($data) {
+
+        // 緩存時間
+        $cacheAliveTime = 5;
+
+        // 緩存Key
+        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
+
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
+
+            $data = self::where($data)->first();
+            
+            return $data;
+        });
+    }
 }
 
