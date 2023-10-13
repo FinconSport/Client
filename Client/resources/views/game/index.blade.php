@@ -65,7 +65,7 @@
 </div> -->
 
 <div id="scoreboard-con">
-    <div template='fixtureCardTemplate_v2' hidden>
+    <div template='fixtureCardTemplate_v2' class="fixture-card" hidden>
         <div class="fixture-card">
             <p></p>
             <div key="LeagueNameCard">
@@ -608,20 +608,22 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
+        const scoreBoardContainer = $(`#scoreboard-con`);
+        scoreBoardContainer.empty(); // Clear the container
         Object.entries(matchListD.data).map(([sk, sv]) => { 
             console.log("render data")
             console.log(sk,sv) // living early toggle
             // Object.entries(v.series).map(([sk2, sv2]) => {
             //     createLeagueNameCard(k, sk2, sv2)
             // })
-            createLeagueNameCard(sk, sv)
+            createLeagueNameCard(sk, sv, scoreBoardContainer);
         })
     }
 
-    function createLeagueNameCard(sk, sv) {
+    function createLeagueNameCard(sk, sv, scoreBoardContainer) {
         let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
         let scoreBoardContainer = $(`#scoreboard-con`)
-        
+
         Leaguecard.removeAttr('hidden')
         Leaguecard.removeAttr('template')
         
