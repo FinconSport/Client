@@ -768,18 +768,18 @@
             marketPriceElement.hide();
         }
 
-        const fixture_id = matchListD.data.list.fixture_id;
-        if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
-            // 判斷賠率是否有改變
-            if( parseFloat(v2.price) > parseFloat(v2.price) ) {
-                // 賠率下降
-                lowerOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-            }
-            if( parseFloat(price) < parseFloat(v2.price) ) {
-                // 賠率上升
-                raiseOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-            }
-        } 
+        // const fixture_id = matchListD.data.list.fixture_id;
+        // if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
+        //     // 判斷賠率是否有改變
+        //     if( parseFloat(v2.price) > parseFloat(v2.price) ) {
+        //         // 賠率下降
+        //         lowerOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
+        //     }
+        //     if( parseFloat(price) < parseFloat(v2.price) ) {
+        //         // 賠率上升
+        //         raiseOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
+        //     }
+        // } 
 
         marketBetLineElement.text(v2.line);
         marketPriceElement.text(v2.price);
