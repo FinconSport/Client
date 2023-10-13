@@ -263,7 +263,7 @@ class LsportApiController extends Controller {
                 $this->ApiError("02");
             }
 
-            $fixture = $retrun;
+            $fixture = $return;
 
             $fixture_start_time = $fixture['start_time'];
             $home_team_id = $fixture['home_id'];
