@@ -86,9 +86,12 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate" template="marketBetRateTemplate" hidden>
-            <span class="market_bet_name"></span>
-            <span class="market_line"></span>
+        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden>
+            <div class="">
+                <span class="market_bet_name"></span>
+                <span class="market_line"></span>
+            </div>
+                <span class="market_price"></span>
         </div>
     </div>
 </div>
