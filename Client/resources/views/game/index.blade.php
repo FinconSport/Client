@@ -610,7 +610,7 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        Object.entries(matchListD.data).map(([sk, sv]) => { 
+        Object.entries(matchListD.data.list).map(([sk, sv]) => { 
             console.log("render data")
             console.log(sk,sv) // living early toggle
             // Object.entries(v.series).map(([sk2, sv2]) => {
@@ -620,30 +620,30 @@
         })
     }
 
-    function createScoreBoard(sk, sv) {
-        let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
-        let homeTeamName = $('div[template="homeTeamNameTemp"]').clone()
-        let awayTeamName = $('div[template="awayTeamNameTemp"]').clone()
+    // function createScoreBoard(sk, sv) {
+    //     let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
+    //     let homeTeamName = $('div[template="homeTeamNameTemp"]').clone()
+    //     let awayTeamName = $('div[template="awayTeamNameTemp"]').clone()
 
-        LeagueNameStartTime.removeAttr('hidden')
-        LeagueNameStartTime.removeAttr('template')
-        homeTeamName.removeAttr('hidden')
-        homeTeamName.removeAttr('template')
-        awayTeamName.removeAttr('hidden')
-        awayTeamName.removeAttr('template')
+    //     LeagueNamSeStartTime.removeAttr('hidden')
+    //     LeagueNameStartTime.removeAttr('template')
+    //     homeTeamName.removeAttr('hidden')
+    //     homeTeamName.removeAttr('template')
+    //     awayTeamName.removeAttr('hidden')
+    //     awayTeamName.removeAttr('template')
 
-        let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
+    //     let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
 
-        leauge_name_startTime.find('.leauge_name').html(sv.name)
-        leauge_name_startTime.find('.start_time').html(sv.start_time)
+    //     // leauge_name_startTime.find('.leauge_name').html(sv.name)
+    //     leauge_name_startTime.find('.start_time').html(sv.start_time)
 
-        homeTeamName.find('.home_team_name').html(sv.home_team_name)
-        awayTeamName.find('.away_team_name').html(sv.away_team_name)
+    //     homeTeamName.find('.home_team_name').html(sv.home_team_name)
+    //     awayTeamName.find('.away_team_name').html(sv.away_team_name)
 
-        $(`#LeagueNameStartTime`).before(homeTeamName)
-        $(`#homeTeamName`).after(LeagueNameStartTime)
-        $(`#LeagueNameStartTime`).after(awayTeamName)
-    }
+    //     $(`#LeagueNameStartTime`).before(homeTeamName)
+    //     $(`#homeTeamName`).after(LeagueNameStartTime)
+    //     $(`#LeagueNameStartTime`).after(awayTeamName)
+    // }
 
 
 
