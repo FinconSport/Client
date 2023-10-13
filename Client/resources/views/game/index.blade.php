@@ -771,7 +771,7 @@
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
 
-        $('#' + marketBetRateId).remove();
+        $('#' + marketBetRateId).empty();
     
         // Append the new element to the correct container
         $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
