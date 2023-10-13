@@ -635,7 +635,7 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 取得球種資料
-        $return = LsportSport::where('status', 1)->orderBy('id', 'ASC')->fetch();
+        $return = LsportSport::where('status', 1)->orderBy('id', 'ASC')->list();
         if ($return === false) {
             $this->ApiError("01");
         }
