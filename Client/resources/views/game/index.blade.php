@@ -608,18 +608,18 @@
     function renderViewV2() {
 		console.log(matchListD)
         Object.entries(matchListD.data).map(([sk, sv]) => { 
-            createScoreBoard(sk)
+            createScoreBoard(sk, sv)
         })
     }
 
-    function createScoreBoard(sk) {
+    function createScoreBoard(sk, sv) {
         console.log("render data")
-        console.log(sk)
+        console.log(sk, sv)
         let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
-        LeagueNameStartTime.find('.leauge_name').html(sk.name)
+        LeagueNameStartTime.find('.leauge_name').html(sv.name)
 
         $(`#homeTeamName`).after(LeagueNameStartTime)
     }
