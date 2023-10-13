@@ -609,7 +609,6 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        $('#scoreboard-con').empty();
         Object.entries(matchListD.data).map(([sk, sv]) => { 
             console.log("render data")
             console.log(sk,sv) // living early toggle
