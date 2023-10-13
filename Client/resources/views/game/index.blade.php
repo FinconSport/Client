@@ -732,7 +732,7 @@
 
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        $('#' + v.market_id + ' #marketRateDataTemp').empty();
+        // $('#' + v.market_id + ' #marketRateDataTemp').empty();
         if ($('#' + marketBetRateId).length === 0) {
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
             marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
