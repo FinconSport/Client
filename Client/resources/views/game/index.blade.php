@@ -609,7 +609,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView()
+                    renderView()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -690,13 +690,11 @@
     }
 
     function renderViewV2() {
-        
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
         }
-
         createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
@@ -708,7 +706,6 @@
     }
 
     function createMarketContainer(k, v) {
-        // Clone the template
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
@@ -717,20 +714,15 @@
     }
 
     function createMarketRateContainer(k, k1, v2) {
-        // Clone the template
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');;
-
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
-
-
         $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
     function createScoreBoard(data) {
-        // Clone the template
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         // early fixture
         if (data.list.status == 1) {
@@ -740,6 +732,9 @@
             earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
+        }
+        if (data.list.status == 2) {
+
         }
     }
     
