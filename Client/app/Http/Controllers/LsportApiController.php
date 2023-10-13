@@ -635,30 +635,28 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 取得球種資料
-        $sports = LsportSport::where('status', 1)
-            ->select(
-                'sport_id', 'name_en AS name_en', $lang_col.' AS name_locale', 'status'
-            )
-            ->orderBy('id', 'ASC')
-            ->get();
-        if ($sports === false) {
+        $return = LsportSport::where('status', 1)->orderBy('id', 'ASC')->list();
+        if ($return === false) {
             $this->ApiError("01");
         }
 
-        $arr_sports = array();
-        foreach ($sports as $sk => $sv) {
+        $sports = $return;
 
-            $sport_name = $sv->name_locale;
+        $data = array();
+        foreach ($sports as $k => $v) {
 
-            $arr_sports[] = array(
-                'sport_id' => $sv->sport_id,
-                'name' => $sport_name,
-                //'status' => $sv->status,
+            $sport_name = $v['name_en'];
+            if ($v[$lang_col] != "") {
+                $sport_name = $v[$lang_col];
+            }
+
+            $data[] = array(
+                'sport_id' => $v['sport_id'],
+                'name' => $sport_name
             );
         }
 
         ///////////////////////////////////
-        $data = $arr_sports;
 
         $this->ApiSuccess($data, "01");
 
