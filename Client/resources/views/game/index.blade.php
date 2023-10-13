@@ -699,7 +699,6 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
             Object.entries(v.rate).map(([k1, v2]) => {
-                console.log(k1, v2)
                 createMarketRateContainer(k, k1, v2)
             })
         })
