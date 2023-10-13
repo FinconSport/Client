@@ -615,10 +615,10 @@
 
         const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
         scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
-
+        const earlyFixtureContainerTemp = $('div[template="earlyFixtureContainerTemplate"]').clone();
+        
         // early fixture
         if (data.list.status == 1) {
-            const earlyFixtureContainerTemp = $('div[template="earlyFixtureContainerTemplate"]').clone();
             earlyFixtureContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyFixtureContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyFixtureContainerTemp.find('.league_name').text(data.series.name);
