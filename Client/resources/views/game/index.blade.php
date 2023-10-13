@@ -715,11 +715,12 @@
 
     function createMarketRateContainer(k, k1, v2) {
         // Clone the template
-        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+        const marketBetRateTemp = $('td[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template');
 
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
+
         $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
