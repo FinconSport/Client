@@ -726,6 +726,20 @@
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
+        switch ( v.priority ) {
+            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
+                marketBetRateTemp.find('.market_bet_name').text(v2.line);
+                break;
+            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
+                break;
+            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+                break;
+            default: // 獨贏
+                break;
+        }
+
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
