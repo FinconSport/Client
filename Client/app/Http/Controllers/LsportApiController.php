@@ -38,22 +38,22 @@ class LsportApiController extends Controller {
 
     protected $agent_lang;  // 玩家的代理的語系. 選擇相對應的DB翻譯欄位時會用到.
 
-    protected DEFAULT_SPORT_ID = 154914;  //預設的 sport_id (棒球)
-    protected LSPORT_SPORT_ID = array(
+    protected $default_sport_id = 154914;  //預設的 sport_id (棒球)
+    protected $lsport_sport_id = array(
         'baseball' => 154914,
         'basketball' => 48242,
         'football' => 6046,
     );
     
     //lsport_fixture.status 賽事狀態
-    protected FIXTURE_STATUS = array(
+    protected $fixture_status = array(
         'early' => 1,  // 未開賽
         'living' => 2,  // 賽事中
         'about_to_start' => 9,  // 即將開賽
     );
     
     //game_order.status 賽事狀態
-    protected GAME_ORDER_STATUS = array(
+    protected $game_order_status = array(
         'delay_bet' => 1,  // 新的延時注單
         'wait_for_result' => 2,  // 等待開獎的注單
         'wait_for_payment' => 3,  // 等待派彩的注單
@@ -574,7 +574,7 @@ class LsportApiController extends Controller {
             $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
 
             // 處理即將開賽歸類於走地的問題
-            if ($fixture_status == $this::FIXTURE_STATUS['about_to_start']) {
+            if ($fixture_status == $this->fixture_status['about_to_start']) {
                 $living_key = 'living';
             }
 
@@ -739,9 +739,9 @@ class LsportApiController extends Controller {
 
         //儲存league-fixture-market的階層資料
         $arrLeagues = array(
-            $this::FIXTURE_STATUS['early'] => array(),  // 早盤
-            $this::FIXTURE_STATUS['living'] => array(),  // 走地
-            // $this::FIXTURE_STATUS['about_to_start'] => array(),  // 即將開賽
+            $this->fixture_status['early'] => array(),  // 早盤
+            $this->fixture_status['living'] => array(),  // 走地
+            // $this->fixture_status['about_to_start'] => array(),  // 即將開賽
         );
         //$arrFixtureAndMarkets = array();  //將用於稍後SQL查詢market_bet資料
         $sport_name = null;  //儲存球種名稱
@@ -759,8 +759,8 @@ class LsportApiController extends Controller {
             $real_fixture_status = $fixture_status;  // 傳遞給前端讓前端知道賽事真實狀態
 
             // 處理即將開賽歸類於走地的問題
-            if ($fixture_status == $this::FIXTURE_STATUS['about_to_start']) {
-                $fixture_status = $this::FIXTURE_STATUS['living'];
+            if ($fixture_status == $this->fixture_status['about_to_start']) {
+                $fixture_status = $this->fixture_status['living'];
             }
 
             // $market_id = $dv->market_id;
@@ -948,14 +948,14 @@ class LsportApiController extends Controller {
         $arrRet['early'][$sport_id] = array(
             'sport_id' => $sport_id,
             'sport_name' => $sport_name,
-            'list' => $arrLeagues[$this::FIXTURE_STATUS['early']],
+            'list' => $arrLeagues[$this->fixture_status['early']],
         );
 
         // living 走地
         $arrRet['living'][$sport_id] = array(
             'sport_id' => $sport_id,
             'sport_name' => $sport_name,
-            'list' => $arrLeagues[$this::FIXTURE_STATUS['living']],
+            'list' => $arrLeagues[$this->fixture_status['living']],
         );
 
 
@@ -1019,7 +1019,7 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
-        $sport_id = $this->DEFAULT_SPORT_ID ;  //球種ID
+        $sport_id = $this->default_sport_id ;  //球種ID
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1184,7 +1184,7 @@ class LsportApiController extends Controller {
         $is_bet_delay = (!empty($bet_delay) && !empty($arr_bet_delay));
 
         if ($is_risk_order) {  // 風控大單功能已啟動
-            $default_order_status = $this::GAME_ORDER_STATUS['wait_for_audit'];
+            $default_order_status = $this->game_order_status['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
         }
@@ -1192,7 +1192,7 @@ class LsportApiController extends Controller {
         else {
             // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
-                $default_order_status = $this::GAME_ORDER_STATUS['delay_bet'];
+                $default_order_status = $this->game_order_status['delay_bet'];
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
@@ -1207,7 +1207,7 @@ class LsportApiController extends Controller {
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
-                $default_order_status = $this::GAME_ORDER_STATUS['wait_for_result'];
+                $default_order_status = $this->game_order_status['wait_for_result'];
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
             }
@@ -1381,7 +1381,7 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = (empty($input['better_rate']) == false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
-        $sport_id = $this->DEFAULT_SPORT_ID;
+        $sport_id = $this->default_sport_id;
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1788,7 +1788,7 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 輸入判定
         if (!isset($input['sport']) || ($input['sport'] == "")) {
-            $input['sport'] = $this::DEFAULT_SPORT_ID;  // 預設1 , 足球
+            $input['sport'] = $this::default_sport_id;  // 預設1 , 足球
         }
 
         if (!isset($input['page']) || ($input['page'] == "")) {
@@ -2769,13 +2769,13 @@ class LsportApiController extends Controller {
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
         // 如果還未開賽就回傳null
-        if ($fixture_status < $this::FIXTURE_STATUS['living']) {
+        if ($fixture_status < $this->fixture_status['living']) {
             return null;
         }
 
         // 目前只處理特定類型
-        //if ($sport_id != DEFAULT_SPORT_ID) {
-        if (!in_array($sport_id, $this::LSPORT_SPORT_ID)) {
+        //if ($sport_id != default_sport_id) {
+        if (!in_array($sport_id, $this->lsport_sport_id)) {
             return null;
         }
 
@@ -2876,13 +2876,13 @@ class LsportApiController extends Controller {
 
         // 如果還未開賽就回傳null
         $fixture_status = intval($fixture_status);
-        if ($fixture_status < $this::FIXTURE_STATUS['living']) {
+        if ($fixture_status < $this->fixture_status['living']) {
             return null;
         }
 
         // 目前只處理特定類型
-        //if ($sport_id != DEFAULT_SPORT_ID) {
-        if (!in_array($sport_id, $this::LSPORT_SPORT_ID)) {
+        //if ($sport_id != default_sport_id) {
+        if (!in_array($sport_id, $this->lsport_sport_id)) {
             return null;
         }
 
