@@ -699,7 +699,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
             Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(k, k1, v2)
+                createMarketRateContainer(k, v, k1, v2)
             })
         })
     }
@@ -715,15 +715,15 @@
         $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
-    function createMarketRateContainer(k, k1, v2) {
+    function createMarketRateContainer(k, v, k1, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
-        marketBetRateTemp.attr('priority', k.priority);
-        marketBetRateTemp.attr('market_id', k.market_id);
+        marketBetRateTemp.attr('priority', v.priority);
+        marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
         marketBetRateTemp.attr('bet_rate', v2.main_line);
-        marketBetRateTemp.attr('bet_type', k.market_name);
+        marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
