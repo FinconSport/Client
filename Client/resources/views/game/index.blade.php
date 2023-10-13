@@ -740,28 +740,26 @@
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
-        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
-
-        marketBetRateTemp.attr('priority', v.priority);
-        marketBetRateTemp.attr('market_id', v.market_id);
-        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
-        marketBetRateTemp.attr('bet_rate', v2.main_line);
-        marketBetRateTemp.attr('bet_type', v.market_name);
-        marketBetRateTemp.attr('bet_name', v2.market_bet_name);
-
-        const marketBetRateNameElement = marketBetRateTemp.find('.market_bet_name');
-        const marketBetLineElement = marketBetRateTemp.find('.market_line');
-        const marketPriceElement = marketBetRateTemp.find('.market_price');
-
-        // Check if the element with this market_bet_id already exists in local storage
-        const existingElementData = localStorage.getItem(v2.market_bet_id);
+        let marketBetRateTemp = $(`div[market_bet_id="${v2.market_bet_id}"]`);
         
-        if (existingElementData) {
-            // Element data exists in local storage, update the content
-            marketBetRateNameElement.text(existingElementData);
-        } else {
-            // Element data doesn't exist in local storage, create and append it
+        if (marketBetRateTemp.length === 0) {
+            // The card does not exist, create it
+            marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+            marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
+            // Set attributes and content
+            marketBetRateTemp.attr('priority', v.priority);
+            marketBetRateTemp.attr('market_id', v.market_id);
+            marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+            marketBetRateTemp.attr('bet_rate', v2.main_line);
+            marketBetRateTemp.attr('bet_type', v.market_name);
+            marketBetRateTemp.attr('bet_name', v2.market_bet_name);
+
+            const marketBetRateNameElement = marketBetRateTemp.find('.market_bet_name');
+            const marketBetLineElement = marketBetRateTemp.find('.market_line');
+            const marketPriceElement = marketBetRateTemp.find('.market_price');
+
+            // Set other properties, text, and actions
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateNameElement.text(v2.line);
@@ -773,7 +771,7 @@
                     marketBetRateNameElement.text(v2.market_bet_name);
                     break;
                 default:
-                    // For other cases, handle as needed
+                    // Handle other cases as needed
                     break;
             }
 
@@ -791,9 +789,40 @@
             marketPriceElement.text(v2.price);
 
             $('#marketRateDataTemp').append(marketBetRateTemp);
+        } else {
+            // The card already exists, update its text content
+            const marketBetRateNameElement = marketBetRateTemp.find('.market_bet_name');
+            const marketBetLineElement = marketBetRateTemp.find('.market_line');
+            const marketPriceElement = marketBetRateTemp.find('.market_price');
 
-            // Store the element data in local storage for future retrieval
-            localStorage.setItem(v2.market_bet_id, marketBetRateNameElement.text());
+            // Set other properties, text, and actions
+            switch (v.priority) {
+                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                    marketBetRateNameElement.text(v2.line);
+                    break;
+                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                    marketBetRateNameElement.text(v2.market_bet_name + '  ' + v2.line);
+                    break;
+                case 7: case 107: case 112: case 116: case 120: case 124:
+                    marketBetRateNameElement.text(v2.market_bet_name);
+                    break;
+                default:
+                    // Handle other cases as needed
+                    break;
+            }
+
+            if (v2.status === 1) {
+                marketBetRateTemp.find('.fa-lock').hide();
+                marketBetRateTemp.attr('onclick', 'openCal($(this))');
+                marketPriceElement.show();
+            } else {
+                marketBetRateTemp.find('.fa-lock').show();
+                marketBetRateTemp.removeAttr('onclick');
+                marketPriceElement.hide();
+            }
+
+            marketBetLineElement.text(v2.line);
+            marketPriceElement.text(v2.price);
         }
     }
 
