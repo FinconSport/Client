@@ -6,10 +6,16 @@ body {
     background-color: rgb(196, 211, 211) !important;
 }
 
+/* 在某个地方定义图像 URL 变量 */
+:root {
+    --soccer-ball-url: url(../image/ball-soccer.png);
+    --baseball-ball-url: url(../image/ball-baseball.png);
+}
+
+/* 使用这些变量作为背景图像 */
 #wrap {
     display: inline-flex;
-    background-image: url(../image/ball-soccer.png),
-        url(../image/ball-baseball.png);
+    background-image: var(--soccer-ball-url), var(--baseball-ball-url);
     background-position: top -13% left -5%, bottom 10% right -5%;
     background-repeat: no-repeat;
     background-size: 23%, 25%;

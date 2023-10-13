@@ -81,18 +81,19 @@
     </div>
 </div>
 
-<!-- <div class="bettingtype-container" template="bettingTypeContainer" hidden> -->
-<div class="bettingtype-container">
-    <table>
+<div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
+    <table class="cell-border w-100">
         <thead>
             <tr>
-                <th class="market_name"></th>
+                <th style="width: 100%;" class="market_name"></th>
             </tr>
         </thead>
-        <tbody id="orderDataTemp">
-            <tr>
-                <td style="width: 50%;" class="market_bet_name"></td>
-                <td style="width: 50%;" class="market_line"></td>
+        <tbody>
+            <tr id="marketRateDataTemp">
+                <td style="width: 50%;" class="market_bet_rate" template="marketBetRateTemplate" hidden>
+                    <span class="market_bet_name"></span>
+                    <span class="market_line"></span>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -695,9 +696,32 @@
         createScoreBoard(matchListD.data)
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            // createMarketContainer(k, v)
-            console.log(k, v)
+            createMarketContainer(k, v)
+            Object.entries(v.rate).map(([k1, v2]) => {
+                console.log(k1, v2)
+                createMarketRateContainer(k, k1, v2)
+            })
         })
+    }
+
+    function createMarketContainer(k, v) {
+        // Clone the template
+        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+
+        bettingTypeContainerTemp.find('.market_name').text(v.market_name);
+        $('#scoreboardContainer').after(bettingTypeContainerTemp);
+    }
+
+    function createMarketRateContainer(k, k1, v2) {
+        // Clone the template
+        const marketBetRateTemp = $('td[template="marketBetRateTemplate"]').clone();
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template');
+
+        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+        marketBetRateTemp.find('.market_line').text(v2.line);
+
+        $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
     function createScoreBoard(data) {
