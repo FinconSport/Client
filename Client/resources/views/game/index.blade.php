@@ -102,12 +102,12 @@
 </div>
 
 <!-- fixture card template -->
-<div template='fixtureCardTemplate' class="indexEachCard" hidden>
+<div template='fixtureCardTemplate' class="indexEachCard">
     <div class="indexBetCard">
-        <div class="timeSpan" key='not-show-baseCon'>
+        <div class="timeSpan" key='not-show-baseCon' hidden>
             <span class="timer"></span>
         </div>
-        <div class="baseballSpan" key='show-baseCon'>
+        <div class="baseballSpan" key='show-baseCon' hidden>
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-1 h-100 p-0"></div>
@@ -135,9 +135,9 @@
                 </div>
             </div>
         </div>
-        <div class="indexBetCardTable row m-0 text-center">
+        <div class="indexBetCardTable row m-0 text-center" hidden>
         </div>
-        <div class="otherBetWay" onclick="navToGame($(this))">
+        <div class="otherBetWay" onclick="navToGame($(this))" hidden>
             <i class="fa-solid fa-play"></i>
             <p></p>
         </div>
