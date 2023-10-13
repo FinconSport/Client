@@ -14,6 +14,7 @@
 .scoreboard-container p {
     background-size: cover;
     margin: 0px;
+    text-align: center;
 }
 
 .scoreboard-container .fixture-card{
