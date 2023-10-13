@@ -707,7 +707,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
             Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(k, v, k1, v2)
+                createMarketRateContainer(v, k1, v2)
             })
             
         })
@@ -735,7 +735,7 @@
         
     }
 
-    function createMarketRateContainer(k, v, k1, v2) {
+    function createMarketRateContainer(v, k1, v2) {
         const existingMarketRate = $(`#${k1}_${v2.market_bet_id}`);
 
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
