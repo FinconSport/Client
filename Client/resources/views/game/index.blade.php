@@ -86,7 +86,7 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden style="display:none!important;">
+        <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
             <div class="">
                 <span class="market_bet_name"></span>
                 <span class="market_line"></span>
@@ -613,6 +613,7 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
+                    renderViewV2()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -622,7 +623,7 @@
                 setInterval(reconnent, 5000); // detect ws connetion state
                 processMessageQueueAsync(); // detect if there's pkg in messageQueue
 
-                renderViewV2()
+                
             }
         }, 500);
 
@@ -700,12 +701,17 @@
         }
         createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            console.log('console')
-            console.log(k)
-            createMarketContainer(k, v)
-            Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(k, v, k1, v2)
-            })
+            let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+            if( isExist ) {
+                let bettingTypeContainerTemp = $(`#${k3}`) 
+                let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
+            } else {
+                createMarketContainer(k, v)
+                Object.entries(v.rate).map(([k1, v2]) => {
+                    createMarketRateContainer(k, v, k1, v2)
+                })
+            }
+            
         })
     }
 
@@ -713,6 +719,7 @@
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
+        bettingTypeContainerTemp.attr('id', k);
         bettingTypeContainerTemp.attr('priority', v.priority);
 
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
@@ -724,7 +731,6 @@
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
-        marketBetRateTemp.attr('id',k);
         marketBetRateTemp.attr('priority', v.priority);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
