@@ -38,22 +38,22 @@ class LsportApiController extends Controller {
 
     protected $agent_lang;  // 玩家的代理的語系. 選擇相對應的DB翻譯欄位時會用到.
 
-    const DEFAULT_SPORT_ID = 154914;  //預設的 sport_id (棒球)
-    const LSPORT_SPORT_ID = array(
+    protected DEFAULT_SPORT_ID = 154914;  //預設的 sport_id (棒球)
+    protected LSPORT_SPORT_ID = array(
         'baseball' => 154914,
         'basketball' => 48242,
         'football' => 6046,
     );
     
     //lsport_fixture.status 賽事狀態
-    const FIXTURE_STATUS = array(
+    protected FIXTURE_STATUS = array(
         'early' => 1,  // 未開賽
         'living' => 2,  // 賽事中
         'about_to_start' => 9,  // 即將開賽
     );
     
     //game_order.status 賽事狀態
-    const GAME_ORDER_STATUS = array(
+    protected GAME_ORDER_STATUS = array(
         'delay_bet' => 1,  // 新的延時注單
         'wait_for_result' => 2,  // 等待開獎的注單
         'wait_for_payment' => 3,  // 等待派彩的注單
