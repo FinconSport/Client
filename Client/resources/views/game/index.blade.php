@@ -608,6 +608,7 @@
     function renderViewV2() {
 		console.log(matchListD)
         Object.entries(matchListD.data).map(([k, v]) => { 
+            console.log("render data")
             console.log(k,v) // living early toggle
             // Object.entries(v.series).map(([sk2, sv2]) => {
             //     createLeagueNameCard(k, sk2, sv2)
