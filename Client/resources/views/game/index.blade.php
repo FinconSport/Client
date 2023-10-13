@@ -712,15 +712,24 @@
     }
 
     function createMarketContainer(k, v) {
-        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
-        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+        const existingElement = $(`#${k}`);
+        if (existingElement.length === 0) {
+            // Element doesn't exist, create and append it
+            const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+            bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
-        bettingTypeContainerTemp.attr('id', k);
-        bettingTypeContainerTemp.attr('priority', v.priority);
+            bettingTypeContainerTemp.attr('id', k);
+            bettingTypeContainerTemp.attr('priority', v.priority);
 
-        const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-        marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-        $('#scoreboardContainer').after(bettingTypeContainerTemp);
+            const marketNameElement = bettingTypeContainerTemp.find('.market_name');
+            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+            $('#scoreboardContainer').after(bettingTypeContainerTemp);
+        } else {
+            // Element already exists, update its properties or text content
+            existingElement.attr('priority', v.priority);
+            const marketNameElement = existingElement.find('.market_name');
+            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+        }
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
