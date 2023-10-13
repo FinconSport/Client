@@ -606,10 +606,20 @@
 
     // render view layer here
     function renderViewV2() {
-		console.log(matchListD)
-        Object.entries(matchListD.data.series[name]).map(([sk, sv]) => { 
-            createScoreBoard(sk, sv)
-        })
+        console.log(matchListD);
+        
+        // Assuming matchListD.data.series is an object
+        const seriesObject = matchListD.data.series;
+
+        // Iterate over the properties (keys) of the seriesObject
+        for (const name in seriesObject) {
+            if (seriesObject.hasOwnProperty(name)) {
+                const seriesData = seriesObject[name];
+                
+                // Now you can call createScoreBoard with 'name' and 'seriesData'
+                createScoreBoard(sk, sv);
+            }
+        }
     }
 
     function createScoreBoard(sk, sv) {
