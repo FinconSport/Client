@@ -695,7 +695,7 @@
         createScoreBoard(matchListD.data)
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            createMarketContainer(k, v)
+            // createMarketContainer(k, v)
             console.log(k, v)
         })
     }
