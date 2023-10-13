@@ -55,6 +55,10 @@
     border-right: none;
 }
 
+.bettingtype-container .market-rate:nth-last-child(-n+2){
+    border-bottom: none;
+}
+
 div#bettingTypeContainer {
     height: calc(100% - 1rem);
     overflow: auto;
