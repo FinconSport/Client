@@ -238,6 +238,7 @@
 
     // match list data
     var matchListD = {}
+    console.log(matchListD)
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index'
 
