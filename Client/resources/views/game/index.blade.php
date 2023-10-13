@@ -615,15 +615,15 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+        const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         // early fixture
         if (data.list.status == 1) {
-            scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
-            scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            scoreBoardContainerTemp.find('.league_name').text(data.series.name);
-            scoreBoardContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
-            scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.scoreboard-container').append(scoreBoardContainerTemp);
+            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            earlyContainerTemp.find('.league_name').text(data.series.name);
+            earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            $('.scoreboard-container').append(earlyContainerTemp);
         }
     }
 
