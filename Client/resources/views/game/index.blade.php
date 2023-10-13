@@ -747,12 +747,12 @@
 
         if( v2.status === 1 ) {
             marketBetRateTemp.find('.fa-lock').hide()
-            marketBetRateTemp.find('.market_price').show()
             marketBetRateTemp.attr('onclick', 'openCal($(this))')
+            marketBetRateTemp.find('.market_price').show()
         } else {
             marketBetRateTemp.find('.fa-lock').show()
-            marketBetRateTemp.find('.market_price').hide()
             marketBetRateTemp.removeAttr('onclick')
+            marketBetRateTemp.find('.market_price').hide()
         }
 
         $('#marketRateDataTemp').append(marketBetRateTemp);
