@@ -25,7 +25,6 @@ use App\Models\ClientMarquee;
 // use App\Models\SystemConfig;
 
 
-
 /**
  * LsportApiController
  * 
@@ -96,7 +95,7 @@ class LsportApiController extends Controller {
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->first();
+        $return = Player::where("id", $player_id)->fetch();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -2808,16 +2807,20 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $token = $input['token'];
 
-        $checkToken = PlayerOnline::where("player_id", $player_id)
+        $return = PlayerOnline::where("player_id", $player_id)
             ->where("token", $token)
             ->where("status", 1)
-            ->count();
+            ->fetch();
 
-        if ($checkToken) {
-            return true;
+        if ($return === false) {
+            return false;
+        }
+        
+        if ($return == null) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
