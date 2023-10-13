@@ -613,14 +613,14 @@
         })
     }
 
-    function createScoreBoard(sk, sv) {
+    function createScoreBoard(matchListD) {
         console.log("render data")
-        console.log(sk, sv)
+        console.log(matchListD.data.series.name)
         let LeagueNameTemplate = $('p[template="LeagueNameTemplate"]').clone()
 
         LeagueNameTemplate.removeAttr('hidden')
         LeagueNameTemplate.removeAttr('template')
-        LeagueNameTemplate.find('.leauge_name').html(sv.name)
+        LeagueNameTemplate.find('.leauge_name').html(matchListD.data.series.name)
 
         $(`#LeagueNameStartTime`).append(LeagueNameTemplate)
     }
