@@ -728,7 +728,7 @@
         }
     }
 
-    function createMarketRateContainer(k, v, k1, v2) {
+    function createMarketRateContainer(v, k1, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         if (!$('#' + marketBetRateId).length) {
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
@@ -770,7 +770,8 @@
             marketBetRateTemp.find('.market_line').text(v2.line);
             marketBetRateTemp.find('.market_price').text(v2.price);
 
-            $('#' + k + ' #marketRateDataTemp').append(marketBetRateTemp);
+            // Append to the correct container
+            $('#' + k1 + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
     }
 
