@@ -607,7 +607,6 @@
 
     // render view layer here
     function renderViewV2() {
-		console.log(matchListD)
         Object.entries(matchListD.data).map(([sk, sv]) => { 
             Object.entries(sv[sport].series).map(([sk, sk1, sv1]) => { 
                 createLeagueNameCard(sk, sv)
