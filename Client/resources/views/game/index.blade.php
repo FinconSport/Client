@@ -616,7 +616,7 @@
     function createScoreBoard(sk, sv) {
         console.log("render data")
         console.log(sk, sv)
-        let LeagueNameTemplate = $('div[template="LeagueNameTemplate"]').clone()
+        let LeagueNameTemplate = $('p[template="LeagueNameTemplate"]').clone()
 
         LeagueNameTemplate.removeAttr('hidden')
         LeagueNameTemplate.removeAttr('template')
