@@ -728,6 +728,7 @@
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
         marketBetRateTemp.attr('priority', v.priority);
+        marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
         marketBetRateTemp.attr('bet_rate', v2.main_line);
