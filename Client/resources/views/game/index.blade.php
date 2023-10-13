@@ -728,18 +728,6 @@
     }
 
     function createMarketRateContainer(v, k1, v2) {
-        // Check if the container with ID k already exists
-        if (!$('#' + k).length) {
-            const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
-            bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-            bettingTypeContainerTemp.attr('id', k);
-            bettingTypeContainerTemp.attr('priority', v.priority);
-
-            const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
-        }
-
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
