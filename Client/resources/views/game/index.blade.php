@@ -742,9 +742,6 @@
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
-        const marketBetRateTempAtr = marketBetRateTemp.attr('id');
-        console.log(matchListD.data.series.league_name + " ID:" + marketBetRateTempAtr);
-
         switch (v.priority) {
             case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                 marketBetRateTemp.find('.market_bet_name').text(v2.line);
@@ -772,7 +769,9 @@
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
 
-        // Append to the correct container
+        $('#' + marketBetRateId).remove();
+    
+        // Append the new element to the correct container
         $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
     }
 
