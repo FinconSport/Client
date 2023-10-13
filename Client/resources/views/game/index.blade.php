@@ -690,8 +690,14 @@
     }
 
     function renderViewV2() {
-        createScoreBoard(matchListD.data)
+        
+        if (matchListD.data.list.status === 1) {
+            $('.marketName').css('background-color', '#c4d4d4');
+        } else if (matchListD.data.list.status === 2) {
+            $('.marketName').css('background-color', '#ffca9b');
+        }
 
+        createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
             Object.entries(v.rate).map(([k1, v2]) => {
