@@ -2810,7 +2810,7 @@ class LsportApiController extends Controller {
         $return = PlayerOnline::where("player_id", $player_id)
             ->where("token", $token)
             ->where("status", 1)
-            ->fetch();
+            ->first();
 
         if ($return === false) {
             return false;
