@@ -1762,7 +1762,7 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 輸入判定
         if (!isset($input['sport']) || ($input['sport'] == "")) {
-            $input['sport'] = $this::default_sport_id;  // 預設1 , 足球
+            $input['sport'] = $this->default_sport_id;  // 預設1 , 足球
         }
 
         if (!isset($input['page']) || ($input['page'] == "")) {
@@ -1795,13 +1795,10 @@ class LsportApiController extends Controller {
 
         /////////////////////////
         // 取得比賽資料
-        $return = LsportFixture::where(
-            "sport_id", $sport_id
-        )->whereIn(
-            "status", [3,4,5,6,7]
-        )->orderBy(
-            "start_time","DESC"
-        )->get();
+        $return = LsportFixture::where("sport_id", $sport_id)
+        ->whereIn("status", [3,4,5,6,7])
+        ->orderBy("start_time","DESC")
+        ->list();
         if ($return === false) {
             $this->ApiError('02');
         }
@@ -1821,74 +1818,26 @@ class LsportApiController extends Controller {
             ///////////////////////
 
             // 語系套用
-            // league_name: 
+            // league
             $league_id = $v['league_id'];
-            // $return = LsportLeague::where("league_id", $league_id)->first();
-            // if ($return === false) {
-            //     $this->ApiError('03');
-            // }
-            // $tmp['league_id'] = $league_id;
-            // if (empty($return[$lang_col])) {
-            //     $tmp['league_name'] = $return['name_en'];
-            // } else {
-            //     $tmp['league_name'] = $return[$lang_col];
-            // }
-
-            // cache
             $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
             $tmp['league_id'] = $league_id;
             $tmp['league_name'] = $league_name;
 
-            // sport_name: 
+            // sport: 
             $sport_id = $v['sport_id'];
-            // $return = LsportSport::where("sport_id", $sport_id)->first();
-            // if ($return === false) {
-            //     $this->ApiError('04');
-            // }
-            // $tmp['sport_id'] = $sport_id;
-            // if (empty($return[$lang_col])) {
-            //     $tmp['sport_name'] = $return['name_en'];
-            // } else {
-            //     $tmp['sport_name'] = $return[$lang_col];
-            // }
-
-            // cache
             $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
             $tmp['sport_id'] = $sport_id;
             $tmp['sport_name'] = $sport_name;
 
-            // home_team_name: 
+            // home_team: 
             $home_team_id = $v['home_id'];
-            // $return = LsportTeam::where("team_id", $home_team_id)->first();
-            // if ($return === false) {
-            //     $this->ApiError('05');
-            // }
-            // $tmp['home_team_id'] = $home_team_id;
-            // if (empty($return[$lang_col])) {
-            //     $tmp['home_team_name'] = $return['name_en'];
-            // } else {
-            //     $tmp['home_team_name'] = $return[$lang_col];
-            // }
-
-            // cache
             $home_team_name = LsportTeam::getName(['team_id'=>$home_team_id, 'api_lang'=>$agent_lang]);
             $tmp['home_team_id'] = $home_team_id;
             $tmp['home_team_name'] = $home_team_name;
 
-            // away_team_name: 
+            // away_team: 
             $away_team_id = $v['away_id'];
-            // $return = LsportTeam::where("team_id", $team_id)->first();
-            // if ($return === false) {
-            //     $this->ApiError('05');
-            // }
-            // $tmp['away_team_id'] = $team_id;
-            // if (empty($return[$lang_col])) {
-            //     $tmp['away_team_name'] = $return['name_en'];
-            // } else {
-            //     $tmp['away_team_name'] = $return[$lang_col];
-            // }
-
-            // cache
             $away_team_name = LsportTeam::getName(['team_id'=>$away_team_id, 'api_lang'=>$agent_lang]);
             $tmp['away_team_id'] = $away_team_id;
             $tmp['away_team_name'] = $away_team_name;
