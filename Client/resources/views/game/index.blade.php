@@ -617,6 +617,8 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
+                    renderViewV2()
+                    console.log("refresh")
                     
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
@@ -626,7 +628,7 @@
                 WebSocketDemo(); // ws connection
                 setInterval(reconnent, 5000); // detect ws connetion state
                 processMessageQueueAsync(); // detect if there's pkg in messageQueue
-                renderViewV2()
+                
 
                 
             }
