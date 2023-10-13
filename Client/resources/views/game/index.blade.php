@@ -63,7 +63,7 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div class="scoreboard-container" style="background-image: url('image/gameBg.jpg');">
+<div class="scoreboard-container" style="background-image: url('image/gameBg.jpg');" template='scoreBoardContainerTemplate' hidden>
     <div template='earlyContainerTemplate' hidden>
         <div class="fixture-card row">
             <p class="home_team_name col-3"></p>
@@ -615,6 +615,8 @@
 
     function createScoreBoard(data) {
         // Clone the template
+        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
+        scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         // early fixture
         if (data.list.status == 1) {
@@ -623,8 +625,9 @@
             earlyContainerTemp.find('.league_name').text(data.series.name);
             earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.scoreboard-container').append(earlyContainerTemp);
+            scoreBoardContainerTemp.append(earlyContainerTemp);
         }
+        $("#searchCondition").after(scoreBoardContainerTemp);
     }
 
     // 跳轉獨立賽事頁
