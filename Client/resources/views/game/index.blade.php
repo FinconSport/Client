@@ -64,7 +64,7 @@
     {{ trans('common.search_area.search') }}
 </div>
 <div id="scoreboard-con">
-    <div class="fixture-con" template='scoreBoardTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
+    <div class="fixture-con" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
         <div class="fixture-card">
             <p class="home_team_name"></p>
             <div id="LeagueNameStartTime">
@@ -614,19 +614,19 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardContainer = $('div[template="scoreBoardTemplate"]').clone();
+        const scoreBoardContainer = $('div[template="scoreBoardContainerTemplate"]').clone();
 
         // Remove the 'hidden' and 'template' attributes
-        scoreBoardContainer.removeAttr('hidden').removeAttr('template');
+        scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
 
         // Find elements and update their content
-        scoreBoardContainer.find('.home_team_name').text(data.list.home_team_name);
-        scoreBoardContainer.find('.league_name').text(data.series.name);
-        scoreBoardContainer.find('.start_time').text(data.list.start_time);
-        scoreBoardContainer.find('.away_team_name').text(data.list.away_team_name);
+        scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+        scoreBoardContainerTemp.find('.league_name').text(data.series.name);
+        scoreBoardContainerTemp.find('.start_time').text(formatDateTime(data.list.start_time));
+        scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
 
         // Append the modified template to the container with ID 'scoreboard-con'
-        $('#scoreboard-con').append(scoreBoardContainer);
+        $('#scoreboard-con').append(scoreBoardContainerTemp);
     }
 
     // 跳轉獨立賽事頁
