@@ -66,12 +66,14 @@
 
 <div id="scoreboard-con" class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
     <div class="fixture-card">
-        <div template='fixtureCardTemplate_v2' hidden>
+        <div id="homeTeamName" template="homeTeamNameTemp" hidden><p class="home_team_name"></p></div>
+        <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
             <div key="LeagueNameStartTimeCard">
                 <p class="leauge_name"></p>
                 <p class="start_time"></p>
             </div>
         </div>
+        <div id="awayTeamName" template="awayTeamNameTemp" hidden><p class="away_team_name"></p></div>
     </div>
 </div>
 
@@ -614,22 +616,25 @@
             // Object.entries(v.series).map(([sk2, sv2]) => {
             //     createLeagueNameCard(k, sk2, sv2)
             // })
-            createLeagueNameCard(sk, sv)
+            createScoreBoard(sk, sv)
         })
     }
 
-    function createLeagueNameCard(sk, sv) {
-        let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
-        Leaguecard.removeAttr('hidden')
-        Leaguecard.removeAttr('template')
+    function createScoreBoard(sk, sv) {
+        let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
+        let homeTeamName = $('div[template="homeTeamNameTemp"]').clone()
+        LeagueNameStartTime.removeAttr('hidden')LeagueNameStartTime.removeAttr('template')
+        homeTeamName.removeAttr('hidden')homeTeamName.removeAttr('template')
 
-        let leauge_name_startTime = Leaguecard.find('[key="LeagueNameStartTimeCard"]')
+        let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
 
         leauge_name_startTime.find('.leauge_name').html(sv.name)
         leauge_name_startTime.find('.start_time').html(sv.start_time)
+        homeTeamName.find('.home_team_name').html(sv.home_team_name)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
-        scoreBoardContainer.append(Leaguecard)
+        scoreBoardContainer.append(LeagueNameStartTime)
+        LeagueNameStartTime.before(homeTeamName)
     }
 
 
