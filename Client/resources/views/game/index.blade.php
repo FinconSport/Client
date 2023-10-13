@@ -67,8 +67,8 @@
 <div id="scoreboard-con" class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
     <div class="fixture-card">
         <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
-        <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
-            <p class="leauge_name"></p>
+        <div id="LeagueName">
+            <p class="leauge_name" template='LeagueNameTemp' hidden></p>
         </div>
         <div id="awayTeamName" template="awayTeamNameTemp"><p class="away_team_name"></p></div>
     </div>
@@ -615,13 +615,13 @@
     function createScoreBoard(sk, sv) {
         console.log("render data")
         console.log(sk, sv)
-        let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
+        let LeagueNameStartTime = $('p[template="LeagueNameTemp"]').clone()
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
         LeagueNameStartTime.find('.leauge_name').html(sv)
 
-        $(`#homeTeamName`).after(LeagueNameStartTime)
+        $(`#LeagueName`).append(LeagueNameStartTime)
     }
 
     // function createScoreBoard(sk) {
