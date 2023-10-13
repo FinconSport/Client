@@ -614,19 +614,19 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardTemplate = $('p[template="scoreBoardTemplate"]').clone();
+        const scoreBoardContainer = $('p[template="scoreBoardTemplate"]').clone();
 
         // Remove the 'hidden' and 'template' attributes
-        scoreBoardTemplate.removeAttr('hidden').removeAttr('template');
+        scoreBoardContainer.removeAttr('hidden').removeAttr('template');
 
         // Find elements and update their content
-        scoreBoardTemplate.find('.home_team_name').text(data.list.home_team_name);
-        scoreBoardTemplate.find('.league_name').text(data.series.name);
-        scoreBoardTemplate.find('.start_time').text(data.list.start_time);
-        scoreBoardTemplate.find('.away_team_name').text(data.list.away_team_name);
+        scoreBoardContainer.find('.home_team_name').text(data.list.home_team_name);
+        scoreBoardContainer.find('.league_name').text(data.series.name);
+        scoreBoardContainer.find('.start_time').text(data.list.start_time);
+        scoreBoardContainer.find('.away_team_name').text(data.list.away_team_name);
 
         // Append the modified template to the container with ID 'scoreboard-con'
-        $('#scoreboard-con').append(scoreBoardTemplate);
+        $('#scoreboard-con').append(scoreBoardContainer);
     }
 
     // 跳轉獨立賽事頁
