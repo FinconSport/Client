@@ -424,7 +424,16 @@
 
 			// view layer
 			// check if api are all loaded every 500 ms 
-			isReadyCommonInt = setInterval(() => {
+			// isReadyCommonInt = setInterval(() => {
+			// 	if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
+			// 		if( !sport ) sport = sportListD.data[0].sport_id // default sport
+			// 		isReadyCommon = true
+			// 		viewCommonIni() // excute all common view layer ini function
+			// 		clearInterval(isReadyCommonInt); // stop checking
+			// 	}
+			// }, 500);
+
+			setTimeout(() => {
 				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
 					if( !sport ) sport = sportListD.data[0].sport_id // default sport
 					isReadyCommon = true
@@ -432,6 +441,7 @@
 					clearInterval(isReadyCommonInt); // stop checking
 				}
 			}, 500);
+
 			// view layer
 
 
