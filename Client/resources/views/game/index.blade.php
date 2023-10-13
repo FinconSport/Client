@@ -611,6 +611,7 @@
         Object.entries(matchListD.data.series).map(([sk, sv]) => { 
             createScoreBoard(sk, sv)
         })
+        createScoreBoard(matchListD)
     }
 
     function createScoreBoard(matchListD) {
