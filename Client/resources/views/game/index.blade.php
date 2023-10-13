@@ -612,7 +612,7 @@
 		console.log(matchListD)
         Object.entries(matchListD.data).map(([sk, sv]) => { 
             console.log("render data")
-            console.log(sk) // living early toggle
+            console.log(sv) // living early toggle
             // Object.entries(v.series).map(([sk2, sv2]) => {
             //     createLeagueNameCard(k, sk2, sv2)
             // })
