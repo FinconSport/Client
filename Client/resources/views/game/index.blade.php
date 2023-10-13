@@ -702,18 +702,18 @@
             $('.marketName').css('background-color', '#ffca9b');
         }
 
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
-            if( isExist ) {
-                let bettingTypeContainerTemp = $(`#${k}`) 
-                let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
-            } else {
-                createMarketContainer(k, v)
-                Object.entries(v.rate).map(([k1, v2]) => {
+        Object.entries(matchListD.data.list.market).map(([k, v]) => { 
+            Object.entries(v.rate).map(([k1, v2]) => {
+                let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
+                if( isExist ) {
+                    let bettingTypeContainerTemp = $(`#${k}`) 
+                    let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
+                    updateMarketRateContainer(k, v, k1, v2);
+                } else {
+                    createMarketContainer(k, v)
                     createMarketRateContainer(k, v, k1, v2)
-                })
-            }
-            
+                }
+            })            
         })
     }
 
@@ -758,6 +758,12 @@
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
 
+        updateMarketRateContainer();
+
+        $('#marketRateDataTemp').append(marketBetRateTemp);
+    }
+
+    function updateMarketRateContainer(k, v, k1, v2){
         if( v2.status === 1 ) {
             marketBetRateTemp.find('.fa-lock').hide()
             marketBetRateTemp.attr('onclick', 'openCal($(this))')
@@ -767,9 +773,8 @@
             marketBetRateTemp.removeAttr('onclick')
             marketBetRateTemp.find('.market_price').hide()
         }
-
-        $('#marketRateDataTemp').append(marketBetRateTemp);
     }
+
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
