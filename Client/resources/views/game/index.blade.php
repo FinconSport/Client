@@ -82,21 +82,15 @@
 </div>
 
 <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
-    <table class="cell-border w-100">
-        <thead>
-            <tr>
-                <th style="width: 100%;" class="market_name"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="marketRateDataTemp">
-                <td style="width: 50%;" class="market_bet_rate" template="marketBetRateTemplate" hidden>
-                    <span class="market_bet_name"></span>
-                    <span class="market_line"></span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="marketName">
+        <p class="market_name"></p>
+    </div>
+    <div id="marketRateDataTemp" class="marketBetRateContainer">
+        <div template="marketBetRateTemplate" hidden>
+            <span class="market_bet_name"></span>
+            <span class="market_line"></span>
+        </div>
+    </div>
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
@@ -715,7 +709,7 @@
 
     function createMarketRateContainer(k, k1, v2) {
         // Clone the template
-        const marketBetRateTemp = $('td[template="marketBetRateTemplate"]').clone();
+        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template');
 
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
@@ -736,7 +730,6 @@
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-
     }
     
     // render view layer here

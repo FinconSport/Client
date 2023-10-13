@@ -33,9 +33,13 @@
     margin-top: 0.5rem;
 }
 
-
-.bettingtype-container table thead th{
+.marketName {
     width: 100%;
     padding: 1rem;
     background-color: #ffca9b;
+}
+
+.marketBetRateContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
