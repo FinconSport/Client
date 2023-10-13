@@ -707,6 +707,9 @@
     function createMarketContainer(k, v) {
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+
+        bettingTypeContainerTemp.attr('priority', k.priority)
+
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
         $('#scoreboardContainer').after(bettingTypeContainerTemp);
@@ -714,7 +717,7 @@
 
     function createMarketRateContainer(k, k1, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');;
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
