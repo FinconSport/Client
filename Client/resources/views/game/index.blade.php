@@ -64,7 +64,7 @@
     {{ trans('common.search_area.search') }}
 </div>
 <div id="scoreboard-con">
-    <div class="fixture-con" style="color:#ffffff;margin-top:60px;background-image: url('image/gameBg.jpg');">
+    <div class="fixture-con" style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');">
         <div class="fixture-card">
             <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
             <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
