@@ -703,27 +703,10 @@
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
-            if( isExist ) {
-                let bettingTypeContainerTemp = $(`#${k}`) 
-                let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
-                Object.entries(v.rate).map(([k1, v2]) => {
-                    if( v2.status === 1 ) {
-                        marketBetRateTemp.find('.fa-lock').hide()
-                        marketBetRateTemp.attr('onclick', 'openCal($(this))')
-                        marketBetRateTemp.find('.market_price').show()
-                    } else {
-                        marketBetRateTemp.find('.fa-lock').show()
-                        marketBetRateTemp.removeAttr('onclick')
-                        marketBetRateTemp.find('.market_price').hide()
-                    }
-                })
-            } else {
-                createMarketContainer(k, v)
+            createMarketContainer(k, v)
                 Object.entries(v.rate).map(([k1, v2]) => {
                     createMarketRateContainer(k, v, k1, v2)
                 })
-            }
             
         })
     }
