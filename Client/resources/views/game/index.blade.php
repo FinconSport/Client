@@ -732,7 +732,8 @@
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         const existingContainers = $('div[id="' + marketBetRateId + '"]');
         if (existingContainers.length > 1) {
-            existingContainers.slice(0, -1).remove(); // Remove all but the last duplicate container.
+            // existingContainers.slice(0, -1).remove(); // Remove all but the last duplicate container.
+            existingContainers.remove();
         }
 
         if (!$('#' + marketBetRateId).length) {
