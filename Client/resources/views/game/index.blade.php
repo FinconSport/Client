@@ -64,14 +64,14 @@
     {{ trans('common.search_area.search') }}
 </div>
 <div class="scoreboard-container" template='scoreBoardContainerTemplate' style="background-image: url('image/gameBg.jpg');" hidden>
-</div>
-<div class="fixture-card row" template='earlyFixtureContainerTemplate' hidden>
-    <p class="home_team_name col-3"></p>
-    <div id="LeagueNameStartTime" class="col-4">
-        <p class="league_name"></p>
-        <p class="start_time"></p>
+    <div class="fixture-card row" template='earlyFixtureContainerTemplate' hidden>
+        <p class="home_team_name col-3"></p>
+        <div id="LeagueNameStartTime" class="col-4">
+            <p class="league_name"></p>
+            <p class="start_time"></p>
+        </div>
+        <p class="away_team_name col-3"></p>
     </div>
-    <p class="away_team_name col-3"></p>
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
@@ -619,6 +619,7 @@
         // early fixture
         if (data.list.status == 1) {
             const earlyFixtureContainerTemp = $('div[template="earlyFixtureContainerTemplate"]').clone();
+            earlyFixtureContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyFixtureContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyFixtureContainerTemp.find('.league_name').text(data.series.name);
             earlyFixtureContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
