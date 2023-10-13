@@ -715,24 +715,16 @@
     }
 
     function createMarketContainer(k, v) {
-        const existingElement = $(`#${k}`);
-        if (existingElement.length === 0) {
-            // Element doesn't exist, create and append it
-            const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
-            bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
-            bettingTypeContainerTemp.attr('id', k);
-            bettingTypeContainerTemp.attr('priority', v.priority);
+        bettingTypeContainerTemp.attr('id', k);
+        bettingTypeContainerTemp.attr('priority', v.priority);
 
-            const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
-        } else {
-            // Element already exists, update its properties or text content
-            existingElement.attr('priority', v.priority);
-            const marketNameElement = existingElement.find('.market_name');
-            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-        }
+        const marketNameElement = bettingTypeContainerTemp.find('.market_name');
+        marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+        $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
@@ -751,66 +743,48 @@
         const marketBetLineElement = marketBetRateTemp.find('.market_line');
         const marketPriceElement = marketBetRateTemp.find('.market_price');
 
-        // Check if the element with this market_bet_id already exists
-        const existingElement = $(`[market_bet_id="${v2.market_bet_id}"]`);
-        if (existingElement.length === 0) {
-            // Element doesn't exist, create and append it
-            switch (v.priority) {
-                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                    marketBetRateNameElement.text(v2.line);
-                    break;
-                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                    marketBetRateNameElement.text(v2.market_bet_name + '  ' + v2.line);
-                    break;
-                case 7: case 107: case 112: case 116: case 120: case 124:
-                    marketBetRateNameElement.text(v2.market_bet_name);
-                    break;
-                default:
-                    // For other cases, handle as needed
-                    break;
-            }
-
-            if (v2.status === 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketPriceElement.show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketPriceElement.hide();
-            }
-
-            const fixture_id = matchListD.data.list.fixture_id;
-            if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
-                // 判斷賠率是否有改變
-                if( parseFloat(v2.price) > parseFloat(v2.price) ) {
-                    // 賠率下降
-                    lowerOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-                }
-                if( parseFloat(price) < parseFloat(v2.price) ) {
-                    // 賠率上升
-                    raiseOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-                }
-            } 
-
-            marketBetLineElement.text(v2.line);
-            marketPriceElement.text(v2.price);
-
-            $('#marketRateDataTemp').append(marketBetRateTemp);
-        } else {
-            // Element already exists, update its text content
-            marketBetLineElement.text(v2.line);
-            marketPriceElement.text(v2.price);
-            if (v2.status === 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketPriceElement.show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketPriceElement.hide();
-            }
+        switch (v.priority) {
+            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                marketBetRateNameElement.text(v2.line);
+                break;
+            case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                marketBetRateNameElement.text(v2.market_bet_name + '  ' + v2.line);
+                break;
+            case 7: case 107: case 112: case 116: case 120: case 124:
+                marketBetRateNameElement.text(v2.market_bet_name);
+                break;
+            default:
+                // For other cases, handle as needed
+                break;
         }
+
+        if (v2.status === 1) {
+            marketBetRateTemp.find('.fa-lock').hide();
+            marketBetRateTemp.attr('onclick', 'openCal($(this))');
+            marketPriceElement.show();
+        } else {
+            marketBetRateTemp.find('.fa-lock').show();
+            marketBetRateTemp.removeAttr('onclick');
+            marketPriceElement.hide();
+        }
+
+        const fixture_id = matchListD.data.list.fixture_id;
+        if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
+            // 判斷賠率是否有改變
+            if( parseFloat(v2.price) > parseFloat(v2.price) ) {
+                // 賠率下降
+                lowerOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
+            }
+            if( parseFloat(price) < parseFloat(v2.price) ) {
+                // 賠率上升
+                raiseOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
+            }
+        } 
+
+        marketBetLineElement.text(v2.line);
+        marketPriceElement.text(v2.price);
+
+        $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
     function createScoreBoard(data) {
