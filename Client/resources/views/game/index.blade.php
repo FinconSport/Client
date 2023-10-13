@@ -707,7 +707,7 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-            Object.entries(v.rate).map(([k1, v2]) => {
+            Object.entries(v.rate).map(([k2, v2]) => {
                 createMarketRateContainer(k, v, k1, v2);
             });
         });
@@ -715,10 +715,10 @@
 
     function createMarketContainer(k, v) {
         // Check if the container with ID k already exists
-        if (!$('#' + k).length) {
+        if (!$('#' + v.market_id).length) {
             const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
             bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-            bettingTypeContainerTemp.attr('id', k);
+            bettingTypeContainerTemp.attr('id', v.market_id);
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
@@ -728,7 +728,7 @@
         }
     }
 
-    function createMarketRateContainer(v, k1, v2) {
+    function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         if (!$('#' + marketBetRateId).length) {
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
@@ -771,7 +771,7 @@
             marketBetRateTemp.find('.market_price').text(v2.price);
 
             // Append to the correct container
-            $('#' + k1 + ' #marketRateDataTemp').append(marketBetRateTemp);
+            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
     }
 
