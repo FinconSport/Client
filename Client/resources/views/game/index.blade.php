@@ -624,7 +624,7 @@
 
         let series_name_card = Leaguecard.find('[key="LeagueNameCard"]')
 
-        series_name_card.find('.leauge_name').html(v2.name)
+        series_name_card.find('.leauge_name').html(sv.name)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
         scoreBoardContainer.append(Leaguecard)
