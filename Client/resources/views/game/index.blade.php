@@ -705,7 +705,7 @@
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
         bettingTypeContainerTemp.find('.market_name').text(v.market_name);
-        $('.scoreboardContainer').after(bettingTypeContainerTemp);
+        $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
     function createScoreBoard(data) {
