@@ -743,7 +743,7 @@
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
         const marketBetRateTempAtr = marketBetRateTemp.attr('id');
-        console.log(matchListD.data.league_name + " ID:" + marketBetRateTempAtr);
+        console.log(matchListD.data.series.league_name + " ID:" + marketBetRateTempAtr);
 
         switch (v.priority) {
             case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
