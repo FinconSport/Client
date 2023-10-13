@@ -616,6 +616,7 @@
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
                     renderViewV2()
+                    console.log("refresh")
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
