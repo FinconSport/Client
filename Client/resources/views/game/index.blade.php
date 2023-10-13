@@ -64,14 +64,14 @@
     {{ trans('common.search_area.search') }}
 </div>
 <div class="scoreboard-container" template='scoreBoardContainerTemplate' style="background-image: url('image/gameBg.jpg');" hidden>
-    <div class="fixture-card row" template='earlyFixtureContainerTemplate' hidden>
-        <p class="home_team_name col-3"></p>
-        <div id="LeagueNameStartTime" class="col-4">
-            <p class="league_name"></p>
-            <p class="start_time"></p>
-        </div>
-        <p class="away_team_name col-3"></p>
+</div>
+<div class="fixture-card row" template='earlyFixtureContainerTemplate' hidden>
+    <p class="home_team_name col-3"></p>
+    <div id="LeagueNameStartTime" class="col-4">
+        <p class="league_name"></p>
+        <p class="start_time"></p>
     </div>
+    <p class="away_team_name col-3"></p>
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
