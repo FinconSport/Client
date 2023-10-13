@@ -74,7 +74,28 @@
             </div>
             <p class="away_team_name col-3"></p>
         </div>
+        <!-- living fixture -->
+        <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
+
+        </div>
     </div>
+</div>
+
+<!-- <div class="bettingtype-container" template="bettingTypeContainer" hidden> -->
+<div class="bettingtype-container">
+    <table>
+        <thead>
+            <tr>
+                <th class="market_name"></th>
+            </tr>
+        </thead>
+        <tbody id="orderDataTemp">
+            <tr>
+                <td style="width: 50%;" class="market_bet_name"></td>
+                <td style="width: 50%;" class="market_line"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
@@ -335,9 +356,9 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            console.log(k, v)
-        })
+        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+        //     console.log(k, v)
+        // })
     }
     /* ===== VIEW LAYER ===== */
 
@@ -608,27 +629,6 @@
         // ===== DATA LATER =====
     });
 
-    // render view layer here
-    function renderViewV2() {
-		console.log(matchListD.data.series.name)
-        createScoreBoard(matchListD.data)
-    }
-
-    function createScoreBoard(data) {
-        // Clone the template
-        const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        // early fixture
-        if (data.list.status == 1) {
-            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.series.name);
-            earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
-            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.scoreboardCon').append(earlyContainerTemp);
-        }
-
-    }
-
     // 跳轉獨立賽事頁
     function navToGame(e) {
         let sport_id = e.attr('sport_id')   
@@ -689,6 +689,30 @@
         if (socket_status === false) {
             WebSocketDemo();
         }
+    }
+
+    function renderViewV2() {
+        createScoreBoard(matchListD.data)
+
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            // createMarketContainer(k, v)
+            console.log(k, v)
+        })
+    }
+
+    function createScoreBoard(data) {
+        // Clone the template
+        const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+        // early fixture
+        if (data.list.status == 1) {
+            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            earlyContainerTemp.find('.league_name').text(data.series.name);
+            earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            $('.scoreboardCon').append(earlyContainerTemp);
+        }
+
     }
     
     // render view layer here
