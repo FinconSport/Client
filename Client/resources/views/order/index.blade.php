@@ -103,16 +103,6 @@
 			</div>
         </div>
     </div>
-
-	
-
-	<!-- <div id="pagination">
-		<button onclick="navPage(0)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.first_page') }}</button>
-		<button onclick="navPage(1)" class="ui button" @if($pagination['current_page'] == 1) disabled @endif>{{ trans('order.main.pre_page') }}</button>
-		<p>{{ $pagination['current_page'] }} /  {{ $pagination['max_page'] }}</p>
-		<button onclick="navPage(2)" class="ui button" @if($pagination['current_page'] == $pagination['max_page'] || $pagination['max_page'] == 0 ) disabled @endif>{{ trans('order.main.next_page') }}</button>
-		<button onclick="navPage(3)" class="ui button"@if($pagination['current_page'] == $pagination['max_page'] || $pagination['max_page'] == 0 ) disabled @endif>{{ trans('order.main.last_page') }}</button>
-	</div> -->
 @endsection
 
 @section('styles')
@@ -265,6 +255,8 @@
 					betItem.result_percent === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
 					betItem.result_percent === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
 					`${betItem.result_percent}`;
+			} else if( status === 0 ) {
+				resultText = `<span style="color: #000000;">{{ trans("order.main.cancel") }}</span>`;
 			} else {
 				resultText = `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
 			}
