@@ -1,13 +1,16 @@
-#scoreboardContainer .fixture-con {
+.scoreboard-container {
     background-size: cover;
     background-position: center;
     width: 100%;
-    padding: 1rem;
     border-radius: 5px;
     overflow: hidden;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 8rem;
 }
-#scoreboardContainer p {
+.scoreboard-container p {
     background-size: cover;
     margin: 0px;
 }
