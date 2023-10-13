@@ -93,6 +93,8 @@
             </div>
             <span class="market_price"></span>
             <i class="fa-solid fa-lock" style="display: none;"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
     </div>
 </div>
@@ -698,6 +700,8 @@
         }
         createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            console.log('console')
+            console.log(k)
             createMarketContainer(k, v)
             Object.entries(v.rate).map(([k1, v2]) => {
                 createMarketRateContainer(k, v, k1, v2)
