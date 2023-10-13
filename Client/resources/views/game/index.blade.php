@@ -708,13 +708,20 @@
                 let bettingTypeContainerTemp = $(`#${k}`) 
                 let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
                 Object.entries(v.rate).map(([k1, v2]) => {
-                    updateMarketRateContainer(v2)
+                    if( v2.status === 1 ) {
+                        marketBetRateTemp.find('.fa-lock').hide()
+                        marketBetRateTemp.attr('onclick', 'openCal($(this))')
+                        marketBetRateTemp.find('.market_price').show()
+                    } else {
+                        marketBetRateTemp.find('.fa-lock').show()
+                        marketBetRateTemp.removeAttr('onclick')
+                        marketBetRateTemp.find('.market_price').hide()
+                    }
                 })
             } else {
                 createMarketContainer(k, v)
                 Object.entries(v.rate).map(([k1, v2]) => {
                     createMarketRateContainer(k, v, k1, v2)
-                    updateMarketRateContainer(v2)
                 })
             }
             
@@ -758,15 +765,6 @@
                 break;
         }
 
-        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-        marketBetRateTemp.find('.market_line').text(v2.line);
-        marketBetRateTemp.find('.market_price').text(v2.price);
-
-        $('#marketRateDataTemp').append(marketBetRateTemp);
-    }
-
-    function updateMarketRateContainer(v2){
-        let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
         if( v2.status === 1 ) {
             marketBetRateTemp.find('.fa-lock').hide()
             marketBetRateTemp.attr('onclick', 'openCal($(this))')
@@ -776,8 +774,13 @@
             marketBetRateTemp.removeAttr('onclick')
             marketBetRateTemp.find('.market_price').hide()
         }
-    }
 
+        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+        marketBetRateTemp.find('.market_line').text(v2.line);
+        marketBetRateTemp.find('.market_price').text(v2.price);
+
+        $('#marketRateDataTemp').append(marketBetRateTemp);
+    }
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
