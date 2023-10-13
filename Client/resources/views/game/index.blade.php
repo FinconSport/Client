@@ -65,7 +65,7 @@
 </div> -->
 
 <div id="scoreboard-con">
-    <div template='fixtureCardTemplate_v2' hidden>
+    <div template='fixtureCardTemplate_v2' hidden class="fixture-con" style="background-image: url('images/gamebg,jpg');">
         <div class="fixture-card">
             <p></p>
             <div key="LeagueNameCard">
