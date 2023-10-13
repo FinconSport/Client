@@ -606,40 +606,22 @@
 
     // render view layer here
     function renderViewV2() {
-        console.log(matchListD);
-
-        // Assuming matchListD.data.series is an object
-        const seriesObject = matchListD.data.series;
-
-        for (const name in seriesObject) {
-            if (seriesObject.hasOwnProperty(name)) {
-                const seriesData = seriesObject[name];
-
-                // Use Object.entries to iterate over properties of seriesData
-                Object.entries(seriesData).map(([sk, sv]) => {
-                    createScoreBoard(sk, sv);
-                });
-            }
-        }
+		console.log(matchListD)
+        Object.entries(matchListD.data.series).map(([sk, sv]) => { 
+            createScoreBoard(sk, sv)
+        })
     }
 
     function createScoreBoard(sk, sv) {
-        console.log("render data");
-        console.log(sk, sv);
+        console.log("render data")
+        console.log(sv[1])
+        let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
 
-        // Clone the LeagueNameStartTimeTemp template
-        let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone();
+        LeagueNameStartTime.removeAttr('hidden')
+        LeagueNameStartTime.removeAttr('template')
+        LeagueNameStartTime.find('.leauge_name').html(sv[1])
 
-        // Remove 'hidden' and 'template' attributes to make it visible and clean it from template-specific attributes
-        LeagueNameStartTime.removeAttr('hidden');
-        LeagueNameStartTime.removeAttr('template');
-
-        // Find the element with the class 'league_name' and set its content to sv
-        LeagueNameStartTime.find('.league_name').html(sv);
-
-        // Insert the cloned element into your HTML at the appropriate location
-        // Replace '#homeTeamName' with the correct selector for your target location
-        $('#homeTeamName').after(LeagueNameStartTime);
+        $(`#homeTeamName`).after(LeagueNameStartTime)
     }
 
     // function createScoreBoard(sk) {
