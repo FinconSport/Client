@@ -86,7 +86,7 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden>
+        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden style="display:none!important;">
             <div class="">
                 <span class="market_bet_name"></span>
                 <span class="market_line"></span>
@@ -713,14 +713,14 @@
     function createMarketRateContainer(k, k1, v2) {
         // Clone the template
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-        marketBetRateTemp.removeAttr('hidden').removeAttr('template');
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');;
 
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
+        marketBetRateTemp.find('.market_price').text(v2.price);
 
 
         $('#marketRateDataTemp').append(marketBetRateTemp);
-        $('div.market-rate[hidden]').remove();
     }
 
     function createScoreBoard(data) {
