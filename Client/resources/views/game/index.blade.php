@@ -622,7 +622,7 @@
         if (data.list.status == 1) {
             scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             scoreBoardContainerTemp.find('.league_name').text(data.series.name);
-            scoreBoardContainerTemp.find('.start_time').text(formatDateTime(data.list.start_time));
+            scoreBoardContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
         }
         
@@ -1354,6 +1354,32 @@
         const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
         return `${month}-${day} ${hour}:${minute}`;
     }
+
+    const formatDateTimeV2 = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dateTime);
+        const day = dateTime.getDate();
+        const suffix = getDaySuffix(day);
+        const hour = dateTime.getHours().toString().padStart(2, '0');
+        const minute = dateTime.getMinutes().toString().padStart(2, '0');
+        return `${month} ${day}${suffix} ${hour}:${minute}`;
+    };
+
+    const getDaySuffix = (day) => {
+        if (day >= 11 && day <= 13) {
+            return 'th';
+        }
+        switch (day % 10) {
+            case 1:
+                return 'st';
+            case 2:
+                return 'nd';
+            case 3:
+                return 'rd';
+            default:
+                return 'th';
+        }
+    };
 
 </script>
 @endpush
