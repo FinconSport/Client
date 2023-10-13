@@ -704,13 +704,12 @@
             $('.marketName').css('background-color', '#ffca9b');
         }
 
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            createMarketContainer(k, v)
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {
+            createMarketContainer(k, v);
             Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(v, k1, v2)
-            })
-            
-        })
+                createMarketRateContainer(v, k1, v2);
+            });
+        });
     }
 
     function createMarketContainer(k, v) {
@@ -732,11 +731,10 @@
             const marketNameElement = existingElement.find('.market_name');
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
         }
-        
     }
 
     function createMarketRateContainer(v, k1, v2) {
-        const existingMarketRate = $(`#${k1}_${v2.market_bet_id}`);
+        const existingMarketRate = $(`#marketRateDataTemp #${k1}_${v2.market_bet_id}`);
 
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
@@ -747,17 +745,22 @@
         marketBetRateTemp.attr('bet_rate', v2.main_line);
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
-        switch ( v.priority ) {
-            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
+
+        switch (v.priority) {
+            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.line);
                 break;
-            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+            case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
                 break;
-            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+            case 7: case 107: case 112: case 116: case 120: case 124:
+                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                 break;
-            default: // 獨贏
+            default:
+                // Handle the default case
                 break;
         }
 
@@ -775,6 +778,7 @@
         }
 
         if (existingMarketRate.length === 0) {
+            // Append marketBetRateTemp to marketRateDataTemp
             $('#marketRateDataTemp').append(marketBetRateTemp);
         } else {
             // Update existing element instead of appending
