@@ -610,8 +610,6 @@
 		console.log(matchListD)
         Object.entries(matchListD.data).map(([sk, sv]) => { 
             Object.entries(sv[sport].series).map(([sk, sk1, sv1]) => { 
-                console.log("render data")
-                console.log(sk1, sv1)
                 createLeagueNameCard(sk, sv)
             })
         })
