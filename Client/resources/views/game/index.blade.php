@@ -607,21 +607,20 @@
 
     // render view layer here
     function renderViewV2() {
-		console.log(matchListD)
+		console.log(matchListD.data.series.name)
         Object.entries(matchListD.data.series).map(([sk, sv]) => { 
             createScoreBoard(sk, sv)
         })
-        createScoreBoard(matchListD)
     }
 
-    function createScoreBoard(matchListD) {
+    function createScoreBoard(sk, sv) {
         console.log("render data")
-        console.log(matchListD.data.series.name)
+        console.log(sk, sv)
         let LeagueNameTemplate = $('p[template="LeagueNameTemplate"]').clone()
 
         LeagueNameTemplate.removeAttr('hidden')
         LeagueNameTemplate.removeAttr('template')
-        LeagueNameTemplate.find('.leauge_name').html(matchListD.data.series.name)
+        LeagueNameTemplate.find('.leauge_name').html(sv)
 
         $(`#LeagueNameStartTime`).append(LeagueNameTemplate)
     }
