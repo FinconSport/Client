@@ -733,44 +733,90 @@
         }
     }
 
-    function createMarketRateContainer(k, v, k1, v2, container) {
-        // Find the existing element within the container using the market_bet_id
-        const marketBetRateTemp = container.find(`[market_bet_id="${v2.market_bet_id}"]`);
+    // function createMarketRateContainer(k, v, k1, v2) {
+    //     const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+    //     marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
-        if (marketBetRateTemp.length) {
-            // Update the text of existing elements
-            switch (v.priority) {
-                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.line);
-                    break;
-                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
-                    break;
-                case 7: case 107: case 112: case 116: case 120: case 124:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-                    break;
-                default:
-                    // Handle other cases if needed
-                    break;
-            }
+    //     marketBetRateTemp.attr('priority', v.priority);
+    //     marketBetRateTemp.attr('market_id', v.market_id);
+    //     marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+    //     marketBetRateTemp.attr('bet_rate', v2.main_line);
+    //     marketBetRateTemp.attr('bet_type', v.market_name);
+    //     marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
-            if (v2.status === 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketBetRateTemp.find('.market_price').show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketBetRateTemp.find('.market_price').hide();
-            }
+    //     switch ( v.priority ) {
+    //         case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
+    //             marketBetRateTemp.find('.market_bet_name').text(v2.line);
+    //             break;
+    //         case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+    //             marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
+    //             break;
+    //         case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+    //             marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+    //             break;
+    //         default: // 獨贏
+    //             break;
+    //     }
 
-            // Update other properties if necessary
-            marketBetRateTemp.attr('bet_rate', v2.main_line);
-            marketBetRateTemp.attr('market_type', v.market_name);
-            marketBetRateTemp.attr('market_name', v2.market_bet_name);
-            marketBetRateTemp.find('.market_line').text(v2.line);
-            marketBetRateTemp.find('.market_price').text(v2.price);
+    //     if( v2.status === 1 ) {
+    //         marketBetRateTemp.find('.fa-lock').hide()
+    //         marketBetRateTemp.attr('onclick', 'openCal($(this))')
+    //         marketBetRateTemp.find('.market_price').show()
+    //     } else {
+    //         marketBetRateTemp.find('.fa-lock').show()
+    //         marketBetRateTemp.removeAttr('onclick')
+    //         marketBetRateTemp.find('.market_price').hide()
+    //     }
+
+    //     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+    //     marketBetRateTemp.find('.market_line').text(v2.line);
+    //     marketBetRateTemp.find('.market_price').text(v2.price);
+
+    //     $('#marketRateDataTemp').append(marketBetRateTemp);
+    // }
+    
+    function createMarketRateContainer(k, v, k1, v2, marketContainer) {
+        // Clone the marketBetRateTemplate
+        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
+        marketBetRateTemp.attr('priority', v.priority);
+        marketBetRateTemp.attr('market_id', v.market_id);
+        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_type', v.market_name);
+        marketBetRateTemp.attr('bet_name', v2.market_bet_name);
+
+        switch (v.priority) {
+            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                marketBetRateTemp.find('.market_bet_name').text(v2.line);
+                break;
+            case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
+                break;
+            case 7: case 107: case 112: case 116: case 120: case 124:
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+                break;
+            default:
+                // Handle other cases if needed
+                break;
         }
+
+        if (v2.status === 1) {
+            marketBetRateTemp.find('.fa-lock').hide();
+            marketBetRateTemp.attr('onclick', 'openCal($(this))');
+            marketBetRateTemp.find('.market_price').show();
+        } else {
+            marketBetRateTemp.find('.fa-lock').show();
+            marketBetRateTemp.removeAttr('onclick');
+            marketBetRateTemp.find('.market_price').hide();
+        }
+
+        marketBetRateTemp.find('.market_line').text(v2.line);
+        marketBetRateTemp.find('.market_price').text(v2.price);
+
+        // Append the marketBetRateTemp to the specified marketContainer
+        marketContainer.append(marketBetRateTemp);
     }
 
     function createScoreBoard(data) {
