@@ -24,3 +24,10 @@
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
 }
+
+.bettingtype-container {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #415b5a;
+}

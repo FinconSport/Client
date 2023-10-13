@@ -82,10 +82,10 @@
 </div>
 
 <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
-    <table>
+    <table class="cell-border w-100">
         <thead>
             <tr>
-                <th class="market_name"></th>
+                <th style="width: 100%;" class="market_name"></th>
             </tr>
         </thead>
         <tbody id="orderDataTemp">
