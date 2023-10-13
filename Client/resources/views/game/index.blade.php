@@ -63,7 +63,7 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div id="scoreboard-con">
+<div id="scoreboardContainer">
     <div class="fixture-con" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
         <div class="fixture-card">
             <p class="home_team_name"></p>

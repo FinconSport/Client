@@ -1,4 +1,4 @@
-#scoreboard-con .fixture-con {
+#scoreboardContainer .fixture-con {
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -6,4 +6,8 @@
     border-radius: 5px;
     overflow: hidden;
     color: white;
+}
+#scoreboardContainer p {
+    background-size: cover;
+    margin: 0px;
 }
