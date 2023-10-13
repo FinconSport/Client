@@ -63,8 +63,8 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div class="scoreboard-container" style="background-image: url('image/gameBg.jpg');" template='scoreBoardContainerTemplate' hidden>
-    <div template='earlyContainerTemplate' hidden>
+<div id="scoreboardContainer" class="scoreboard-container" style="background-image: url('image/gameBg.jpg');" template='scoreBoardContainerTemplate' hidden>
+    <div id="earlyContainer" template='earlyContainerTemplate' hidden>
         <div class="fixture-card row">
             <p class="home_team_name col-3"></p>
             <div id="LeagueNameStartTime" class="col-4">
@@ -625,7 +625,7 @@
             earlyContainerTemp.find('.league_name').text(data.series.name);
             earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            scoreBoardContainerTemp.append(earlyContainerTemp);
+            $("#scoreboardContainer").append(earlyContainerTemp);
         }
         $("#searchCondition").after(scoreBoardContainerTemp);
     }
