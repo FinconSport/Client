@@ -190,7 +190,6 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         $this->ApiSuccess($data, "01");
-
     }
 
     /**
@@ -2807,10 +2806,7 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $token = $input['token'];
 
-        $return = PlayerOnline::where("player_id", $player_id)
-            ->where("token", $token)
-            ->where("status", 1)
-            ->first();
+        $return = PlayerOnline::getToken(["player_id"=>$player_id, "token"=>$token]);
 
         if ($return === false) {
             return false;
