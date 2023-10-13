@@ -614,12 +614,12 @@
 
     function createScoreBoard(sk, sv) {
         console.log("render data")
-        console.log(sv[1])
+        console.log(sk, sv)
         let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
-        LeagueNameStartTime.find('.leauge_name').html(sv[1])
+        LeagueNameStartTime.find('.leauge_name').html(sv)
 
         $(`#homeTeamName`).after(LeagueNameStartTime)
     }
