@@ -81,8 +81,7 @@
     </div>
 </div>
 
-<!-- <div class="bettingtype-container" template="bettingTypeContainer" hidden> -->
-<div class="bettingtype-container">
+<div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
     <table>
         <thead>
             <tr>
@@ -695,9 +694,18 @@
         createScoreBoard(matchListD.data)
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            // createMarketContainer(k, v)
+            createMarketContainer(k, v)
             console.log(k, v)
         })
+    }
+
+    function createMarketContainer(k, v) {
+        // Clone the template
+        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+
+        bettingTypeContainerTemp.find('.market_name').text(v.market_name);
+        $('.scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
     function createScoreBoard(data) {
