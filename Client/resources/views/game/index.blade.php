@@ -618,12 +618,14 @@
         // Remove the 'hidden' and 'template' attributes
         scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
 
-        // Find elements and update their content
-        scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-        scoreBoardContainerTemp.find('.league_name').text(data.series.name);
-        scoreBoardContainerTemp.find('.start_time').text(formatDateTime(data.list.start_time));
-        scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-
+        // early fixture
+        if (data.list.status == 1) {
+            scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            scoreBoardContainerTemp.find('.league_name').text(data.series.name);
+            scoreBoardContainerTemp.find('.start_time').text(formatDateTime(data.list.start_time));
+            scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+        }
+        
         // Append the modified template to the container with ID 'scoreboard-con'
         $('#searchCondition').after(scoreBoardContainerTemp);
     }
