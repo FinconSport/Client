@@ -636,9 +636,8 @@
 
         homeTeamName.find('.home_team_name').html(sv.home_team_name)
 
-        let scoreBoardContainer = $(`#scoreboard-con`)
-        scoreBoardContainer.append(LeagueNameStartTime)
         $(`#LeagueNameStartTime`).before(homeTeamName)
+        $(`#homeTeamName`).after(LeagueNameStartTime)
     }
 
 
