@@ -743,35 +743,48 @@
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
-        switch ( v.priority ) {
-            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                marketBetRateTemp.find('.market_bet_name').text(v2.line);
-                break;
-            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
-                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
-                break;
-            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-                break;
-            default: // 獨贏
-                break;
-        }
+        const marketBetRateNameElement = marketBetRateTemp.find('.market_bet_name');
+        const marketBetLineElement = marketBetRateTemp.find('.market_line');
+        const marketPriceElement = marketBetRateTemp.find('.market_price');
 
-        if( v2.status === 1 ) {
-            marketBetRateTemp.find('.fa-lock').hide()
-            marketBetRateTemp.attr('onclick', 'openCal($(this))')
-            marketBetRateTemp.find('.market_price').show()
+        // Check if the element with this market_bet_id already exists
+        const existingElement = $(`[market_bet_id="${v2.market_bet_id}"]`);
+        if (existingElement.length === 0) {
+            // Element doesn't exist, create and append it
+            switch (v.priority) {
+                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                    marketBetRateNameElement.text(v2.line);
+                    break;
+                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                    marketBetRateNameElement.text(v2.market_bet_name + '  ' + v2.line);
+                    break;
+                case 7: case 107: case 112: case 116: case 120: case 124:
+                    marketBetRateNameElement.text(v2.market_bet_name);
+                    break;
+                default:
+                    // For other cases, handle as needed
+                    break;
+            }
+
+            if (v2.status === 1) {
+                marketBetRateTemp.find('.fa-lock').hide();
+                marketBetRateTemp.attr('onclick', 'openCal($(this))');
+                marketPriceElement.show();
+            } else {
+                marketBetRateTemp.find('.fa-lock').show();
+                marketBetRateTemp.removeAttr('onclick');
+                marketPriceElement.hide();
+            }
+
+            marketBetLineElement.text(v2.line);
+            marketPriceElement.text(v2.price);
+
+            $('#marketRateDataTemp').append(marketBetRateTemp);
         } else {
-            marketBetRateTemp.find('.fa-lock').show()
-            marketBetRateTemp.removeAttr('onclick')
-            marketBetRateTemp.find('.market_price').hide()
+            // Element already exists, update its text content
+            marketBetLineElement.text(v2.line);
+            marketPriceElement.text(v2.price);
         }
-
-        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-        marketBetRateTemp.find('.market_line').text(v2.line);
-        marketBetRateTemp.find('.market_price').text(v2.price);
-
-        $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
     function createScoreBoard(data) {
