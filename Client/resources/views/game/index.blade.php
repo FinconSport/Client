@@ -629,7 +629,7 @@
                 setInterval(reconnent, 5000); // detect ws connetion state
                 processMessageQueueAsync(); // detect if there's pkg in messageQueue
                 
-
+                renderViewV2()
                 
             }
         }, 500);
