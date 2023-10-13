@@ -60,9 +60,84 @@
     <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<div id='searchCondition'>
+<!-- <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
+</div> -->
+
+<div id="scoreboard-con">
+    <div template='fixtureCardTemplate_v2' class="indexEachCard" hidden>
+        <div class="fixture-card">
+            <p></p>
+            <div key="LeagueNameCard">
+                <p class="leauge_name"></p>
+                <p class="start_time"></p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div template='fixtureCardTemplate' class="indexEachCard" hidden>
+    <div class="indexBetCard">
+        <div class="timeSpan" key='not-show-baseCon'>
+            <span class="timer"></span>
+        </div>
+        <div class="baseballSpan" key='show-baseCon'>
+            <div class="timer"></div>
+            <div class="baseCon row m-0">
+                <div class="col-1 h-100 p-0"></div>
+                <div class="col-6 h-100 p-0" key='base'>
+                    <img alt="base">
+                </div>
+                <div class="col-3 h-100 p-0" key='balls'>
+                    <div key='strike'></div>
+                    <div key='ball'></div>
+                    <div key='out'></div>
+                </div>
+            </div>
+        </div>
+        <div class="indexBetCardInfo">
+            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
+                </div>
+                <div class="scoreSpan" style="width: 15%;">
+                </div>
+            </div>
+            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
+                </div>
+                <div class="scoreSpan" style="width: 15%;">
+                </div>
+            </div>
+        </div>
+        <div class="indexBetCardTable row m-0 text-center">
+        </div>
+        <div class="otherBetWay" onclick="navToGame($(this))">
+            <i class="fa-solid fa-play"></i>
+            <p></p>
+        </div>
+    </div>
+    <!-- 籃球單節投注 -->
+    <div class="indexBetCard" key='basketBallQuaterBet'>
+        <div class="timeSpan"></div>
+        <div class="indexBetCardInfo">
+            <div key='homeTeamInfo2'>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
+                </div>
+            </div>
+            <div key='awayTeamInfo2'>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="indexBetCardTable row m-0 text-center">
+        </div>
+    </div>
+</div>
+
 <div id="indexContainer">
     <div id="indexContainerLeft">
         <!-- no data -->
@@ -163,8 +238,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- bet div template -->
 <div class="col p-0" template='betDiv' hidden>
@@ -515,6 +588,7 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
+                    renderViewV2()
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -529,6 +603,32 @@
         
         // ===== DATA LATER =====
     });
+
+    // render view layer here
+    function renderViewV2() {
+		console.log(matchListD)
+        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            Object.entries(v.series).map(([sk2, sv2]) => {
+                createLeagueNameCard(k, sk2, sv2)
+            })
+        })
+    }
+
+    function createLeagueNameCard(k, sk2, sv2) {
+        let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
+        Leaguecard.removeAttr('hidden')
+        Leaguecard.removeAttr('template')
+
+        let series_name_card = Leaguecard.find('[key="LeagueNameCard"]')
+
+        series_name_card.find('.leauge_name').html(sv2.name)
+        series_name_card.find('.start_time').html(k.list.start_time)
+
+        let scoreBoardContainer = $(`#scoreboard-con`)
+        scoreBoardContainer.append(Leaguecard)
+    }
+
+
 
     // 跳轉獨立賽事頁
     function navToGame(e) {
