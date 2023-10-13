@@ -354,9 +354,9 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-        //     console.log(k, v)
-        // })
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            console.log(k, v)
+        })
     }
     /* ===== VIEW LAYER ===== */
 
