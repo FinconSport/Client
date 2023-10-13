@@ -88,10 +88,12 @@
                 <th style="width: 100%;" class="market_name"></th>
             </tr>
         </thead>
-        <tbody id="orderDataTemp">
-            <tr>
-                <td style="width: 50%;" class="market_bet_name"></td>
-                <td style="width: 50%;" class="market_line"></td>
+        <tbody>
+            <tr id="marketRateDataTemp">
+                <td style="width: 50%;" class="market_bet_rate" template="marketBetRateTemplate" hidden>
+                    <span class="market_bet_name"></span>
+                    <span class="market_line"></span>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -695,7 +697,10 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
-            console.log(k, v)
+            Object.entries(matchListD.data.list.market.rate).map(([k1, v2]) => {
+                console.log(k1, v2)
+                createMarketRateContainer(k, k1, v2)
+            })
         })
     }
 
@@ -706,6 +711,16 @@
 
         bettingTypeContainerTemp.find('.market_name').text(v.market_name);
         $('#scoreboardContainer').after(bettingTypeContainerTemp);
+    }
+
+    function createMarketRateContainer(k, k1, v2) {
+        // Clone the template
+        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template');
+
+        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+        marketBetRateTemp.find('.market_line').text(v2.line);
+        $('#marketRateDataTemp').append(bettingTypeContainerTemp);
     }
 
     function createScoreBoard(data) {
