@@ -235,7 +235,6 @@ class LsportApiController extends Controller {
         //---------------------------------
         // 自DB取出LsportNotice
         $week_before =  date('Y-m-d 00:00:00', strtotime('-1 week'));
-        dd($week_before);
         $return = LsportNotice::getList(["create_time" => $week_before]);
         if ($return === false) {
             $this->ApiError("02");
@@ -259,7 +258,7 @@ class LsportApiController extends Controller {
             $fixture_start_time = date('Y-m-d H:i:s', time()-60*60*24);
             
             // fixture -----
-            $return = LsportFixture::where('fixture_id', $fixture_id)->first();
+            $return = LsportFixture::where('fixture_id', $fixture_id)->fetch();
             if ($return === false) {
                 $this->ApiError("02");
             }
