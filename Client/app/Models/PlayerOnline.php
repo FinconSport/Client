@@ -13,7 +13,7 @@ class PlayerOnline extends CacheModel
 	public $timestamps = false;
 	protected $table = "player_online";
 
-    public static function getCache($data) {
+    public static function getToken($data) {
 
         // 緩存時間
         $cacheAliveTime = 5;
