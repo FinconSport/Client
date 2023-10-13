@@ -63,16 +63,17 @@
 <!-- <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div> -->
-
-<div id="scoreboard-con" class="fixture-con" style="color:#ffffff;margin-top:60px;background-image: url('image/gameBg.jpg');">
-    <div class="fixture-card">
-        <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
-        <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
-            <p class="leauge_name"></p>
+<div id="scoreboard-con">
+    <div class="fixture-con" style="color:#ffffff;margin-top:60px;background-image: url('image/gameBg.jpg');">
+        <div class="fixture-card">
+            <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
+            <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
+                <p class="leauge_name"></p>
+            </div>
+            <div id="awayTeamName" template="awayTeamNameTemp"><p class="away_team_name"></p></div>
         </div>
-        <div id="awayTeamName" template="awayTeamNameTemp"><p class="away_team_name"></p></div>
     </div>
-</div>
+<div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
