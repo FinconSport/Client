@@ -701,21 +701,18 @@
     }
 
     function renderViewV2() {
-        if (matchListD.data && matchListD.data.list.market) {
-            matchListD.data.forEach((k, v) => {
-                createMarketContainer(k, v);
-                matchListD.data.list.market.forEach((v, k2, v2) => {
-                    createMarketRateContainer(v, k2, v2);
-                });
-            });
-        }
-		
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
         }
-        
+
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {
+            createMarketContainer(k, v);
+            Object.entries(v.rate).map(([k2, v2]) => {
+                createMarketRateContainer(v, k2, v2);
+            });
+        });
     }
 
     function createMarketContainer(k, v) {
@@ -736,9 +733,8 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         $('#' + marketBetRateId).remove();
-        const existingElement = $('#' + marketBetRateId);
-        
-        if (existingElement.length === 0) {
+  
+        if ($('#' + marketBetRateId).length === 0) {
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
             marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
@@ -778,10 +774,8 @@
             marketBetRateTemp.find('.market_line').text(v2.line);
             marketBetRateTemp.find('.market_price').text(v2.price);
 
-            
-        
             // Append the new element to the correct container
-            
+            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
     }
 
