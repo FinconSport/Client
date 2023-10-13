@@ -190,7 +190,6 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         $this->ApiSuccess($data, "01");
-
     }
 
     /**
