@@ -607,7 +607,7 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        Object.entries(matchListD.data.series).map(([sk, sv]) => { 
+        Object.entries(matchListD.data).map(([sk, sv]) => { 
             createScoreBoard(sk, sv)
         })
     }
@@ -619,7 +619,7 @@
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
-        LeagueNameStartTime.find('.leauge_name').html(sv)
+        LeagueNameStartTime.find('.leauge_name').html(sv.series.name)
 
         $(`#homeTeamName`).after(LeagueNameStartTime)
     }
