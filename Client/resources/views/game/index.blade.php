@@ -724,6 +724,7 @@
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
+        marketBetRateTemp.attr('id',k);
         marketBetRateTemp.attr('priority', v.priority);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
