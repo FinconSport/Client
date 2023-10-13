@@ -357,10 +357,9 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            console.log(k, v)
-        })
-        console.log(fixture_id)
+        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+        //     console.log(k, v)
+        // })
 
         createScoreBoard(matchListD.data)
     }
@@ -706,6 +705,7 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             createMarketContainer(k, v)
+            console.log(k, v)
                 Object.entries(v.rate).map(([k1, v2]) => {
                     createMarketRateContainer(k, v, k1, v2)
             })
