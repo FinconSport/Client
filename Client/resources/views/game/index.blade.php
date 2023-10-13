@@ -64,14 +64,12 @@
     {{ trans('common.search_area.search') }}
 </div> -->
 
-<div id="scoreboard-con">
-    <div class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
-        <div class="fixture-card">
-            <div template='fixtureCardTemplate_v2' hidden>
-                <div key="LeagueNameStartTimeCard">
-                    <p class="leauge_name"></p>
-                    <p class="start_time"></p>
-                </div>
+<div id="scoreboard-con" class="fixture-con" style="color:#ffffff;background-image: url('image/gameBg.jpg');">
+    <div class="fixture-card">
+        <div template='fixtureCardTemplate_v2' hidden>
+            <div key="LeagueNameStartTimeCard">
+                <p class="leauge_name"></p>
+                <p class="start_time"></p>
             </div>
         </div>
     </div>
