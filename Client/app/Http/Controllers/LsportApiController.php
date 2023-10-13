@@ -475,25 +475,6 @@ class LsportApiController extends Controller {
      * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
      */
     // 首頁賽事
-/*
-回傳格式:
-{
-    "living": {
-        "items": {
-            "154914": {"name": "棒球","count": 8}
-        },
-        "total": 8
-    },
-    "early": {
-        "items": {
-            "6046": {"name": "足球","count": 83},
-            "48242": {"name": "籃球","count": 20},
-            "154914": {"name": "棒球","count": 17}
-        },
-        "total": 120
-    }
-}
-*/
     public function IndexMatchList(Request $request) {
         
         $input = $this->getRequest($request);
@@ -1033,7 +1014,7 @@ class LsportApiController extends Controller {
 
         // 取得用戶資料
         $return = Player::where("id", $player_id)->first();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("04");
         }
 
@@ -1063,7 +1044,7 @@ class LsportApiController extends Controller {
 
         // 取得商戶資料
         $return = Agent::where("id", $agent_id)->fetch();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("07");
         }
 
@@ -1082,7 +1063,7 @@ class LsportApiController extends Controller {
 
         // 取得賽事資料
         $return = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->fetch();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("09");
         }
 
@@ -1099,7 +1080,7 @@ class LsportApiController extends Controller {
 
         // 取得聯賽資料
         $return = LsportLeague::where("league_id", $league_id)->where("sport_id", $sport_id)->fetch();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("10");
         }
 
@@ -1150,7 +1131,7 @@ class LsportApiController extends Controller {
 
         // 取得玩法
         $market_data = LSportMarket::where("market_id", $market_id)->where("fixture_id", $fixture_id)->fetch();
-        if ($market_data == false) {
+        if ($market_data === false) {
             $this->ApiError("13");
         }
 
@@ -1187,9 +1168,8 @@ class LsportApiController extends Controller {
             $default_order_status = $this->game_order_status['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
-        }
-        // 風控大單功能未啟動
-        else {
+        } else { // 風控大單功能未啟動
+
             // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
                 $default_order_status = $this->game_order_status['delay_bet'];
@@ -1217,8 +1197,7 @@ class LsportApiController extends Controller {
         $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
         ->where("bet_id", $market_bet_id)
         ->fetch();
-        
-        if ($market_bet_data == false) {
+        if ($market_bet_data === false) {
             $this->ApiError("14");
         }
 
@@ -1303,7 +1282,7 @@ class LsportApiController extends Controller {
 
         // 新增注單資料
         $return = GameOrder::insertGetId($order);      
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("17");
         }
 
@@ -1312,7 +1291,7 @@ class LsportApiController extends Controller {
         $return = GameOrder::where("id", $order_id)->update([
             "m_id" => $order_id
         ]);
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("18");
         }
         
@@ -1324,7 +1303,7 @@ class LsportApiController extends Controller {
         $return = Player::where("id", $player_id)->update([
             "balance" => $after_amount
         ]);
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("19");
         }
 
@@ -1379,7 +1358,7 @@ class LsportApiController extends Controller {
         // 取得必要參數
         $player_id = $input['player'];
         $bet_amount = $input['bet_amount'];  //投注金額
-        $is_better_rate = (empty($input['better_rate']) == false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
+        $is_better_rate = (empty($input['better_rate']) === false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
         $sport_id = $this->default_sport_id;
         if (isset($input['sport_id'])) {
@@ -1402,7 +1381,7 @@ class LsportApiController extends Controller {
 
         // 取得用戶資料
         $return = Player::where("id", $player_id)->fetch();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("05");
         }
 
@@ -1428,7 +1407,7 @@ class LsportApiController extends Controller {
         
         // 取得商戶資料
         $return = Agent::where("id", $agent_id)->fetch();
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("08");
         }
 
@@ -1454,15 +1433,13 @@ class LsportApiController extends Controller {
         $is_bet_delay = (!empty($bet_delay) && !empty($arr_bet_delay));
 
         if ($is_risk_order) {  // 風控大單功能已啟動
-            $default_order_status = $this->GAME_ORDER_STATUS['wait_for_audit'];
+            $default_order_status = $this->game_order_status['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
-        }
-        // 風控大單功能未啟動
-        else {
+        } else { // 風控大單功能未啟動
             // 延時投注功能(風控大單優先於延時投注)
             if ($is_bet_delay) {  // 延時投注功能已啟動
-                $default_order_status = $this->GAME_ORDER_STATUS['delay_bet'];
+                $default_order_status = $this->game_order_status['delay_bet'];
                 //建立延時注單時以下欄位應該留空: approval_time, bet_rate
                 $default_approval_time = null;
 
@@ -1482,7 +1459,7 @@ class LsportApiController extends Controller {
                 $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
-                $default_order_status = $this->GAME_ORDER_STATUS['wait_for_result'];
+                $default_order_status = $this->game_order_status['wait_for_result'];
                 $default_approval_time = date("Y-m-d H:i:s");
                 $default_delay_datetime = null;
             }
@@ -1496,24 +1473,24 @@ class LsportApiController extends Controller {
         $m_sport_id = false;
 
         // 串關批量處理訂單
-        foreach ($arr_bet_data AS $bk => $bet) {
+        foreach ($arr_bet_data AS $k => $v) {
 
             // 檢查必要欄位
             $columns = array(
                 "fixture_id", "market_id", "market_bet_id", "bet_rate"
             );
     
-            foreach ($columns as $k => $v) {
-                if (!isset($bet[$v])) {
+            foreach ($columns as $kk => $vv) {
+                if (!isset($v[$vv])) {
                     $this->ApiError("10");
                 }
             }
 
             // 取得必要參數
-            $fixture_id = $bet['fixture_id'];
-            $market_id = $bet['market_id'];  
-            $market_bet_id = $bet['market_bet_id'];
-            $player_rate = $bet['bet_rate'];  //前端傳來的賠率
+            $fixture_id = $v['fixture_id'];
+            $market_id = $v['market_id'];  
+            $market_bet_id = $v['market_bet_id'];
+            $player_rate = $v['bet_rate'];  //前端傳來的賠率
 
             //////////////////////////////////////////
             // order data
@@ -1557,7 +1534,7 @@ class LsportApiController extends Controller {
             /////////////////////////////
             // 取得賽事資料
             $fixture_data = LsportFixture::where("fixture_id", $fixture_id)->where("sport_id", $sport_id)->fetch();
-            if ($fixture_data == false) {
+            if ($fixture_data === false) {
                 $this->ApiError("11");
             }
             //////////////////////////////////////////
@@ -1613,10 +1590,8 @@ class LsportApiController extends Controller {
             $market_priority = $market_data['priority'];
 
             // 取得賠率
-            $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
-            ->where("bet_id", $market_bet_id)
-            ->fetch();
-            if ($market_bet_data == false) {
+            $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)->where("bet_id", $market_bet_id)->fetch();
+            if ($market_bet_data === false) {
                 $this->ApiError("18");
             }
 
@@ -1707,7 +1682,7 @@ class LsportApiController extends Controller {
             //////////////////////////////////////////
             // 新增注單
             $new_order_id = GameOrder::insertGetId($order);      
-            if ($new_order_id == false) {
+            if ($new_order_id === false) {
                 $this->ApiError("22");
             }
 
@@ -1715,9 +1690,8 @@ class LsportApiController extends Controller {
             if ($m_order_id === false) {
                 $m_order_id = $new_order_id;
                 //更新第一筆注單的m_id = 自己的id
-                $return = GameOrder::where("id", $m_order_id)
-                    ->update(["m_id" => $m_order_id]);
-                if ($return == false) {
+                $return = GameOrder::where("id", $m_order_id)->update(["m_id" => $m_order_id]);
+                if ($return === false) {
                     $this->ApiError("23");
                 }
             }
@@ -1733,7 +1707,7 @@ class LsportApiController extends Controller {
         $return = Player::where("id", $player_id)->update([
             "balance" => $after_amount
         ]);      
-        if ($return == false) {
+        if ($return === false) {
             $this->ApiError("24");
         }
         
