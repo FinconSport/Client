@@ -617,7 +617,7 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
-                    renderViewV2()
+                    
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -626,6 +626,7 @@
                 WebSocketDemo(); // ws connection
                 setInterval(reconnent, 5000); // detect ws connetion state
                 processMessageQueueAsync(); // detect if there's pkg in messageQueue
+                renderViewV2()
 
                 
             }
@@ -720,9 +721,6 @@
 
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-
-        $(`#${k}`).remove();
-
         $('#bettingTypeContainer').append(bettingTypeContainerTemp);
     }
 
@@ -763,9 +761,6 @@
             marketBetRateTemp.removeAttr('onclick');
             marketBetRateTemp.find('.market_price').hide();
         }
-
-        // Remove the existing element with the same ID in marketRateDataTemp
-        $(`#marketRateDataTemp #${k1}_${v2.market_bet_id}`).remove();
 
         // Append the modified marketBetRateTemp to marketRateDataTemp
         $('#marketRateDataTemp').append(marketBetRateTemp);
