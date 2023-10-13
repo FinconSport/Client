@@ -2807,10 +2807,8 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $token = $input['token'];
 
-        $return = PlayerOnline::where("player_id", $player_id)
-            ->where("token", $token)
-            ->where("status", 1)
-            ->first();
+        $return = PlayerOnline::getCache(["player_id"=>$player_id, "token"=>$token]);
+        dd($return);
 
         if ($return === false) {
             return false;
