@@ -86,7 +86,7 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden style="display:none;">
+        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden style="display:none!important;">
             <div class="">
                 <span class="market_bet_name"></span>
                 <span class="market_line"></span>
