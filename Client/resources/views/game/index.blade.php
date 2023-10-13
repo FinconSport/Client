@@ -607,7 +607,7 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        Object.entries(matchListD.data.series).map(([sk, sv]) => { 
+        Object.entries(matchListD.data.series[name]).map(([sk, sv]) => { 
             createScoreBoard(sk, sv)
         })
     }
