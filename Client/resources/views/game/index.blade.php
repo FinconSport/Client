@@ -713,9 +713,17 @@
     }
 
     function createMarketContainer(k, v) {
-        const existingElement = $(`#${k}`);
-        if (existingElement.length === 0) {
-            // Element doesn't exist, create and append it
+        // Check if an element with this 'k' (id) already exists in local storage
+        const existingElementData = localStorage.getItem(k);
+        
+        if (existingElementData) {
+            // Element data exists in local storage, update the content
+            const existingElement = $(`#${k}`);
+            existingElement.attr('priority', v.priority);
+            const marketNameElement = existingElement.find('.market_name');
+            marketNameElement.html(existingElementData);
+        } else {
+            // Element data doesn't exist in local storage, create and append it
             const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
             bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
 
@@ -725,11 +733,9 @@
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
             $('#scoreboardContainer').after(bettingTypeContainerTemp);
-        } else {
-            // Element already exists, update its properties or text content
-            existingElement.attr('priority', v.priority);
-            const marketNameElement = existingElement.find('.market_name');
-            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+
+            // Store the element data in local storage for future retrieval
+            localStorage.setItem(k, marketNameElement.html());
         }
     }
 
@@ -748,10 +754,14 @@
         const marketBetLineElement = marketBetRateTemp.find('.market_line');
         const marketPriceElement = marketBetRateTemp.find('.market_price');
 
-        // Check if the element with this market_bet_id already exists
-        const existingElement = $(`[market_bet_id="${v2.market_bet_id}"]`);
-        if (existingElement.length === 0) {
-            // Element doesn't exist, create and append it
+        // Check if the element with this market_bet_id already exists in local storage
+        const existingElementData = localStorage.getItem(v2.market_bet_id);
+        
+        if (existingElementData) {
+            // Element data exists in local storage, update the content
+            marketBetRateNameElement.text(existingElementData);
+        } else {
+            // Element data doesn't exist in local storage, create and append it
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateNameElement.text(v2.line);
@@ -781,19 +791,9 @@
             marketPriceElement.text(v2.price);
 
             $('#marketRateDataTemp').append(marketBetRateTemp);
-        } else {
-            // Element already exists, update its text content
-            marketBetLineElement.text(v2.line);
-            marketPriceElement.text(v2.price);
-            if (v2.status === 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketPriceElement.show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketPriceElement.hide();
-            }
+
+            // Store the element data in local storage for future retrieval
+            localStorage.setItem(v2.market_bet_id, marketBetRateNameElement.text());
         }
     }
 
