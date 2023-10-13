@@ -22,9 +22,7 @@
 	<div id="toast"></div>
 	<!-- loader -->
     <div class="ui dimmer" id="dimmer">
-        <div class="ui massive text loader">
-            <h3>Loading</h3>
-        </div>
+		<img src="{{ asset('image/loading.png?v=' . $system_config['version']) }}" alt="Logo">
     </div>
 	<div id='wrap' class="h-100 pb-3 w-100" style="opacity: 0">
 		<div class="leftArea">
