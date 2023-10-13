@@ -707,7 +707,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(k, v, k1, v2);
+                const marketBetRateTemp = createMarketRateContainer(k, v, k1, v2);
                 // Store references to elements in the object for later updates.
                 elementsToUpdate[v2.market_bet_id] = {
                     marketBetRateTemp: marketBetRateTemp,
@@ -723,18 +723,6 @@
             elementsToUpdate[betId].marketBetRateTemp.find('.market_bet_name').text(newText);
             elementsToUpdate[betId].v2.market_bet_name = newText; // Update the data object as well if needed.
         }
-    }
-
-    function createMarketContainer(k, v) {
-        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
-        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-
-        bettingTypeContainerTemp.attr('id', k);
-        bettingTypeContainerTemp.attr('priority', v.priority);
-
-        const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-        marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-        $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
@@ -777,6 +765,8 @@
         marketBetRateTemp.find('.market_price').text(v2.price);
 
         $('#marketRateDataTemp').append(marketBetRateTemp);
+
+        return marketBetRateTemp;
     }
 
     function createScoreBoard(data) {
@@ -794,6 +784,8 @@
 
         }
     }
+
+    // --------------------------------------------------------------
     
     // render view layer here
     function renderView() {
