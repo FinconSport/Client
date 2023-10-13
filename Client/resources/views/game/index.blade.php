@@ -752,7 +752,7 @@
             let isStatusSame = nowStatus === v.status ? true : false; // is status the same
             let isSwitchCate = !isStatusSame && v.status !== 1; // is changing early to living
             if (isSwitchCate) {
-                if (!$(`#toggleContent_${k}`).length) createCate(k, v);
+                if (!$(`#toggleContent_${k}`).length);
                 if (!$(`#seriesWrapperContent_${k}_${v.league_id}`).length) createLeague(k, k2, v.league_name);
                 let parentNode = $(`#seriesWrapperContent_${k}_${v.league_id}`);
                 let livingNode = $(`#${fixture_id}`);
