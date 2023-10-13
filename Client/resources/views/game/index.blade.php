@@ -707,7 +707,7 @@
     function createMarketContainer(k, v) {
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-aa
+
         bettingTypeContainerTemp.attr('priority', v.priority);
 
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
