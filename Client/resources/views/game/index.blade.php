@@ -360,6 +360,8 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             console.log(k, v)
         })
+
+        createScoreBoard(matchListD.data)
     }
     /* ===== VIEW LAYER ===== */
 
@@ -700,7 +702,6 @@
             $('.marketName').css('background-color', '#ffca9b');
         }
 
-        createScoreBoard(matchListD.data)
         Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
             let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
             if( isExist ) {
