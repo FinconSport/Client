@@ -734,8 +734,6 @@
     }
 
     function createMarketRateContainer(v, k1, v2) {
-        const existingMarketRate = $(`#marketRateDataTemp #${k1}_${v2.market_bet_id}`);
-
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         marketBetRateTemp.attr('id', k1 + '_' + v2.market_bet_id);
@@ -748,19 +746,15 @@
 
         switch (v.priority) {
             case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.line);
                 break;
             case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
                 break;
             case 7: case 107: case 112: case 116: case 120: case 124:
-                // Handle cases for different priorities
                 marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                 break;
             default:
-                // Handle the default case
                 break;
         }
 
@@ -777,14 +771,13 @@
             marketBetRateTemp.find('.market_price').hide();
         }
 
-        if (existingMarketRate.length === 0) {
-            // Append marketBetRateTemp to marketRateDataTemp
-            $('#marketRateDataTemp').append(marketBetRateTemp);
-        } else {
-            // Update existing element instead of appending
-            existingMarketRate.replaceWith(marketBetRateTemp);
-        }
+        // Remove the existing element with the same ID in marketRateDataTemp
+        $(`#marketRateDataTemp #${k1}_${v2.market_bet_id}`).remove();
+
+        // Append the modified marketBetRateTemp to marketRateDataTemp
+        $('#marketRateDataTemp').append(marketBetRateTemp);
     }
+
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
