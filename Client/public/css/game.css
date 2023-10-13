@@ -1,24 +1,21 @@
-.scoreboard-container {
+.scoreboardCon {
     background-size: cover;
     background-position: center;
     width: 100%;
     border-radius: 5px;
     overflow: hidden;
     color:#ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 2rem 9rem;
     margin-top:20px;
 }
 
-.scoreboard-container p {
+.scoreboardCon p {
     background-size: cover;
     margin: 0px;
     text-align: center;
 }
 
-.scoreboard-container .fixture-card{
+.scoreboardCon .earlyFixture-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
