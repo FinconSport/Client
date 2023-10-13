@@ -81,20 +81,22 @@
     </div>
 </div>
 
-<div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
-    <div class="marketName">
-        <p class="market_name"></p>
-    </div>
-    <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
-            <div class="">
-                <span class="market_bet_name"></span>
-                <span class="market_line"></span>
+<div id="bettingTypeContainer">
+    <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
+        <div class="marketName">
+            <p class="market_name"></p>
+        </div>
+        <div id="marketRateDataTemp" class="marketBetRateContainer">
+            <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
+                <div class="">
+                    <span class="market_bet_name"></span>
+                    <span class="market_line"></span>
+                </div>
+                <span class="market_price"></span>
+                <i class="fa-solid fa-lock" style="display: none;"></i>
+                <i class="fa-solid fa-caret-up" style="display: none;"></i>
+                <i class="fa-solid fa-caret-down" style="display: none;"></i>
             </div>
-            <span class="market_price"></span>
-            <i class="fa-solid fa-lock" style="display: none;"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
     </div>
 </div>
@@ -720,7 +722,7 @@
 
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-        $('#scoreboardContainer').after(bettingTypeContainerTemp);
+        $('#bettingTypeContainer').append(bettingTypeContainerTemp);
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
