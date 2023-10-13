@@ -64,18 +64,17 @@
     {{ trans('common.search_area.search') }}
 </div> -->
 
-<div id="indexContainer">
+<!-- <div id="indexContainer">
     <div id="indexContainerLeft">
-        <!-- no data -->
         <div id="noData" style="display: none;">
             <i class="fa-solid fa-circle-exclamation"></i>
             <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- early living toggle template -->
-<div class="cateWrapper" template='elToggleTemplate' hidden>
+<!-- <div class="cateWrapper" template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
@@ -83,10 +82,10 @@
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
-</div>
+</div> -->
 
 <!-- league toggle template -->
-<div class="leagueWrapper" template='leagueWrapper' hidden>
+<!-- <div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
         <div style="width: 35%;">
             <span class="legToggleDir" style="padding-right: 1rem;">
@@ -100,7 +99,7 @@
     </div>
     <div class="seriesWrapperContent">
     </div>
-</div>
+</div> -->
 
 <!-- fixture card template -->
 <div  class="indexEachCard" hidden>
@@ -164,6 +163,7 @@
         </div>
     </div>
 </div>
+
 <div id="scoreBoardCard">
     <div template='fixtureCardTemplate' class="fixture-con" hidden>
     <div class="indexBetCardInfo">
