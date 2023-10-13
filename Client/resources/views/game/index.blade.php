@@ -766,6 +766,7 @@
     }
 
     function updateMarketRateContainer(v2){
+        let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
         if( v2.status === 1 ) {
             marketBetRateTemp.find('.fa-lock').hide()
             marketBetRateTemp.attr('onclick', 'openCal($(this))')
