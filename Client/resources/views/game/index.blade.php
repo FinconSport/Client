@@ -63,6 +63,7 @@
 <!-- <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div> -->
+
 <div id="indexContainer">
     <div id="indexContainerLeft">
         <!-- no data -->
@@ -102,12 +103,12 @@
 </div>
 
 <!-- fixture card template -->
-<div template='fixtureCardTemplate' class="indexEachCard">
+<div  class="indexEachCard" hidden>
     <div class="indexBetCard">
-        <div class="timeSpan" key='not-show-baseCon' hidden>
+        <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
         </div>
-        <div class="baseballSpan" key='show-baseCon' hidden>
+        <div class="baseballSpan" key='show-baseCon'>
             <div class="timer"></div>
             <div class="baseCon row m-0">
                 <div class="col-1 h-100 p-0"></div>
@@ -135,9 +136,9 @@
                 </div>
             </div>
         </div>
-        <div class="indexBetCardTable row m-0 text-center" hidden>
+        <div class="indexBetCardTable row m-0 text-center">
         </div>
-        <div class="otherBetWay" onclick="navToGame($(this))" hidden>
+        <div class="otherBetWay" onclick="navToGame($(this))">
             <i class="fa-solid fa-play"></i>
             <p></p>
         </div>
@@ -160,6 +161,24 @@
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
+        </div>
+    </div>
+</div>
+<div id="scoreBoardCard">
+    <div template='fixtureCardTemplate' class="fixture-con" hidden>
+    <div class="indexBetCardInfo">
+            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
+                </div>
+                <div class="scoreSpan" style="width: 15%;">
+                </div>
+            </div>
+            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
+                </div>
+                <div class="scoreSpan" style="width: 15%;">
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -368,7 +387,8 @@
 
         card.removeAttr('hidden')
         card.removeAttr('template')
-        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+        // let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
+        let scoreBoardCard = $(`#scoreBoardCard`)
         league_toggle_content.append(card)
     }
 
