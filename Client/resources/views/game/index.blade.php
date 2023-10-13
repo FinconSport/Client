@@ -699,8 +699,7 @@
             WebSocketDemo();
         }
     }
-
-    let fixture_id = matchListD.data.list.fixture_id;
+    
     function renderViewV2() {
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
