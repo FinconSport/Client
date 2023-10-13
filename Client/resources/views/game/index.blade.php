@@ -359,9 +359,9 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-            console.log(k, v)
-        })
+        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+        //     console.log(k, v)
+        // })
 
         createScoreBoard(matchListD.data)
     }
@@ -733,7 +733,7 @@
         const existingContainers = $('div[id="' + marketBetRateId + '"]');
         if (existingContainers.length > 1) {
             // existingContainers.slice(0, -1).remove(); // Remove all but the last duplicate container.
-            existingContainers.remove();
+            console.log("dupliecated ID" + marketBetRateId);
         }
 
         if (!$('#' + marketBetRateId).length) {
