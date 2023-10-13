@@ -732,9 +732,6 @@
 
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        // Append the new element to the correct container
-        $('#' + marketBetRateId).remove();
-        
         if ($('#' + marketBetRateId).length === 0) {
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
             marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
@@ -775,7 +772,9 @@
             marketBetRateTemp.find('.market_line').text(v2.line);
             marketBetRateTemp.find('.market_price').text(v2.price);
 
-            $('#' + marketBetRateId + ' #marketRateDataTemp').append(marketBetRateTemp);
+            // Append the new element to the correct container
+            $('#' + v.market_id + ' #marketRateDataTemp').empty();
+            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
     }
 
