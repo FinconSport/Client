@@ -702,18 +702,22 @@
             $('.marketName').css('background-color', '#ffca9b');
         }
 
-        Object.entries(matchListD.data.list.market).map(([k, v]) => { 
-            Object.entries(v.rate).map(([k1, v2]) => {
-                let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
-                if( isExist ) {
-                    let bettingTypeContainerTemp = $(`#${k}`) 
-                    let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
-                    updateMarketRateContainer(k, v, k1, v2);
-                } else {
-                    createMarketContainer(k, v)
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            let isExist = $(`#${k}`).length > 0 ? true : false // isExist already
+            if( isExist ) {
+                let bettingTypeContainerTemp = $(`#${k}`) 
+                let marketBetRateTemp = bettingTypeContainerTemp.find('[key="marketBetRateKey"]')
+                Object.entries(v.rate).map(([k1, v2]) => {
+                    updateMarketRateContainer(v2)
+                })
+            } else {
+                createMarketContainer(k, v)
+                Object.entries(v.rate).map(([k1, v2]) => {
                     createMarketRateContainer(k, v, k1, v2)
-                }
-            })            
+                    updateMarketRateContainer(v2)
+                })
+            }
+            
         })
     }
 
@@ -758,12 +762,10 @@
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
 
-        updateMarketRateContainer();
-
         $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
-    function updateMarketRateContainer(k, v, k1, v2){
+    function updateMarketRateContainer(v2){
         if( v2.status === 1 ) {
             marketBetRateTemp.find('.fa-lock').hide()
             marketBetRateTemp.attr('onclick', 'openCal($(this))')
