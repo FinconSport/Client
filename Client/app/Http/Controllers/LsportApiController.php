@@ -645,7 +645,6 @@ class LsportApiController extends Controller {
         $data = array();
         foreach ($sports as $k => $v) {
 
-            dd($v);
             $sport_name = $v['name_en'];
             if ($v[$lang_col] != "") {
                 $sport_name = $v[$lang_col];
