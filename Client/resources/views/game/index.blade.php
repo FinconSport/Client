@@ -610,9 +610,6 @@
     function renderViewV2() {
 		console.log(matchListD.data.series.name)
         createScoreBoard(matchListD.data)
-        // Object.entries(matchListD.data.series).map(([sk, sv]) => { 
-        //     createScoreBoard(sk, sv)
-        // })
     }
 
     function createScoreBoard(data) {
