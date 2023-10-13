@@ -708,7 +708,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             Object.entries(v.rate).map(([k1, v2]) => {
-                createMarketRateContainer(v, k1, v2);
+                createMarketRateContainer(k, v, k1, v2);
             });
         });
     }
@@ -723,18 +723,18 @@
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+
             $('#bettingTypeContainer').append(bettingTypeContainerTemp);
         }
     }
 
-    function createMarketRateContainer(v, k1, v2) {      
-        const marketBetRateId = v.market_id + '_' + v2.market_bet_id;  
+    function createMarketRateContainer(k, v, k1, v2) {
+        const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         if (!$('#' + marketBetRateId).length) {
-            
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
             marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
-            marketBetRateTemp.attr('id', marketBetRateId); 
+            marketBetRateTemp.attr('id', marketBetRateId);
             marketBetRateTemp.attr('priority', v.priority);
             marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
             marketBetRateTemp.attr('market_id', v.market_id);
@@ -764,15 +764,18 @@
             } else {
                 marketBetRateTemp.find('.fa-lock').show();
                 marketBetRateTemp.removeAttr('onclick');
-                marketBetRateTemp.find('.market_price').hide(); 
+                marketBetRateTemp.find('.market_price').hide();
             }
 
             marketBetRateTemp.find('.market_line').text(v2.line);
             marketBetRateTemp.find('.market_price').text(v2.price);
 
-            $('#marketRateDataTemp').append(marketBetRateTemp);
+            $('#' + k + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
     }
+
+
+
 
 
     function createScoreBoard(data) {
