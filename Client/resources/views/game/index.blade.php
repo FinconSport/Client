@@ -728,7 +728,18 @@
     }
 
     function createMarketRateContainer(v, k1, v2) {
-        // You can use a similar approach to check if the marketBetRate element already exists
+        // Check if the container with ID k already exists
+        if (!$('#' + k).length) {
+            const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+            bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+            bettingTypeContainerTemp.attr('id', k);
+            bettingTypeContainerTemp.attr('priority', v.priority);
+
+            const marketNameElement = bettingTypeContainerTemp.find('.market_name');
+            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+        }
+
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id;
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
@@ -756,9 +767,6 @@
                 break;
         }
 
-        marketBetRateTemp.find('.market_line').text(v2.line);
-        marketBetRateTemp.find('.market_price').text(v2.price);
-
         if (v2.status === 1) {
             marketBetRateTemp.find('.fa-lock').hide();
             marketBetRateTemp.attr('onclick', 'openCal($(this))');
@@ -768,22 +776,14 @@
             marketBetRateTemp.removeAttr('onclick');
             marketBetRateTemp.find('.market_price').hide(); 
         }
-        
+
+        marketBetRateTemp.find('.market_line').text(v2.line);
+        marketBetRateTemp.find('.market_price').text(v2.price);
         $('#marketRateDataTemp').append(marketBetRateTemp);
-        
         if (!$('#' + marketBetRateId).length) {
             // Append the modified marketBetRateTemp to marketRateDataTemp
             
         }
-    }
-
-    function createMarketRateContainer(v, k1, v2) {
-        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
-
-        
-
-        
     }
 
 
