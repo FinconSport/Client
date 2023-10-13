@@ -6,11 +6,18 @@
     overflow: hidden;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1rem 8rem;
 }
+
 .scoreboard-container p {
     background-size: cover;
     margin: 0px;
+}
+
+.scoreboard-container .fixture-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
