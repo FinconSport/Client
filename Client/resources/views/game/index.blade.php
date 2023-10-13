@@ -63,17 +63,21 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div id="scoreboardContainer" class="scoreboard-container" style="background-image: url('image/gameBg.jpg');" template='scoreBoardContainerTemplate' hidden>
-    <div id="earlyContainer" template='earlyContainerTemplate' hidden>
-        <div class="fixture-card row">
-            <p class="home_team_name col-3"></p>
-            <div id="LeagueNameStartTime" class="col-4">
-                <p class="league_name"></p>
-                <p class="start_time"></p>
+<div class="scoreboard-container"  style="background-image: url('image/gameBg.jpg');">
+    <div id="earlyFixtureContainer">
+        <div template='earlyContainerTemplate' hidden>
+            <div class="fixture-card row">
+                <p class="home_team_name col-3"></p>
+                <div id="LeagueNameStartTime" class="col-4">
+                    <p class="league_name"></p>
+                    <p class="start_time"></p>
+                </div>
+                <p class="away_team_name col-3"></p>
             </div>
-            <p class="away_team_name col-3"></p>
-        </div>
-    <div>
+        <div>
+    </div>  
+</div>
+
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
@@ -615,8 +619,6 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
-        scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         // early fixture
         if (data.list.status == 1) {
@@ -625,9 +627,8 @@
             earlyContainerTemp.find('.league_name').text(data.series.name);
             earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $("#scoreboardContainer").append(earlyContainerTemp);
+            $("#earlyFixtureContainer").append(earlyContainerTemp);
         }
-        $("#searchCondition").after(scoreBoardContainerTemp);
     }
 
     // 跳轉獨立賽事頁
