@@ -65,6 +65,7 @@
 </div>
 <div id="scoreboardContainer">
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
+        <!-- early fixture -->
         <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
             <p class="home_team_name col-3"></p>
             <div class="col-4">
