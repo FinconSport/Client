@@ -49,6 +49,7 @@ return [
 		"total_win_amount" => "總計輸贏",
 		"home" => "主",
 		"waiting" => "等待開獎",
+		"cancel" => "取消",
 	],
 	// 後端
 	"result_precent" => [
