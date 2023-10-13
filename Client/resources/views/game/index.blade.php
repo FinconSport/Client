@@ -701,18 +701,21 @@
     }
 
     function renderViewV2() {
+        if (matchListD.data && matchListD.data.list.market) {
+            matchListD.data.forEach((k, v) => {
+                createMarketContainer(k, v);
+                matchListD.data.list.market.forEach((v, k2, v2) => {
+                    createMarketRateContainer(v, k2, v2);
+                });
+            });
+        }
+		
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
         }
-
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            createMarketContainer(k, v);
-            Object.entries(v.rate).map(([k2, v2]) => {
-                createMarketRateContainer(v, k2, v2);
-            });
-        });
+        
     }
 
     function createMarketContainer(k, v) {
@@ -778,7 +781,7 @@
             
         
             // Append the new element to the correct container
-            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
+            
         }
     }
 
