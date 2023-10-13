@@ -784,6 +784,15 @@
             // Element already exists, update its text content
             marketBetLineElement.text(v2.line);
             marketPriceElement.text(v2.price);
+            if (v2.status === 1) {
+                marketBetRateTemp.find('.fa-lock').hide();
+                marketBetRateTemp.attr('onclick', 'openCal($(this))');
+                marketPriceElement.show();
+            } else {
+                marketBetRateTemp.find('.fa-lock').show();
+                marketBetRateTemp.removeAttr('onclick');
+                marketPriceElement.hide();
+            }
         }
     }
 
