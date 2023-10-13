@@ -607,24 +607,24 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        Object.entries(matchListD.data).map(([k, v]) => { 
+        Object.entries(matchListD.data).map(([sk, sv]) => { 
             console.log("render data")
             console.log(k,v) // living early toggle
             // Object.entries(v.series).map(([sk2, sv2]) => {
             //     createLeagueNameCard(k, sk2, sv2)
             // })
+            createLeagueNameCard(sk, sv)
         })
     }
 
-    function createLeagueNameCard(k, sk2, sv2) {
+    function createLeagueNameCard(sk, sv) {
         let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
         Leaguecard.removeAttr('hidden')
         Leaguecard.removeAttr('template')
 
         let series_name_card = Leaguecard.find('[key="LeagueNameCard"]')
 
-        series_name_card.find('.leauge_name').html(sv2.name)
-        series_name_card.find('.start_time').html(k.list.start_time)
+        series_name_card.find('.leauge_name').html(v2.name)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
         scoreBoardContainer.append(Leaguecard)
