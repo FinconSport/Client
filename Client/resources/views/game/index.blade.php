@@ -718,6 +718,14 @@
     function createMarketRateContainer(k, k1, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
+        marketBetRateTemp.attr('priority', k.priority);
+        marketBetRateTemp.attr('market_id', k.market_id);
+        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_type', k.market_name);
+        marketBetRateTemp.attr('bet_name', v2.market_bet_name);
+
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
