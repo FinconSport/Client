@@ -516,13 +516,3 @@ div[key="sizeSmallRate"]:hover {
 }
 
 @keyframes s4 {to{transform: rotate(1turn)}}
-
-.fixture-con {
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    padding: 1rem;
-    border-radius: 5px;
-    overflow: hidden;
-    color: white;
-}
