@@ -81,22 +81,20 @@
     </div>
 </div>
 
-<div id="bettingTypeContainer">
-    <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
-        <div class="marketName">
-            <p class="market_name"></p>
-        </div>
-        <div id="marketRateDataTemp" class="marketBetRateContainer">
-            <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
-                <div class="">
-                    <span class="market_bet_name"></span>
-                    <span class="market_line"></span>
-                </div>
-                <span class="market_price"></span>
-                <i class="fa-solid fa-lock" style="display: none;"></i>
-                <i class="fa-solid fa-caret-up" style="display: none;"></i>
-                <i class="fa-solid fa-caret-down" style="display: none;"></i>
+<div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
+    <div class="marketName">
+        <p class="market_name"></p>
+    </div>
+    <div id="marketRateDataTemp" class="marketBetRateContainer">
+        <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
+            <div class="">
+                <span class="market_bet_name"></span>
+                <span class="market_line"></span>
             </div>
+            <span class="market_price"></span>
+            <i class="fa-solid fa-lock" style="display: none;"></i>
+            <i class="fa-solid fa-caret-up" style="display: none;"></i>
+            <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
     </div>
 </div>
@@ -359,9 +357,9 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         // loop matchListD to generate html element here
-        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-        //     console.log(k, v)
-        // })
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
+            console.log(k, v)
+        })
 
         createScoreBoard(matchListD.data)
     }
@@ -618,7 +616,6 @@
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
                     renderViewV2()
-                    console.log("refresh")
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -697,7 +694,7 @@
             WebSocketDemo();
         }
     }
-    
+
     function renderViewV2() {
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
@@ -723,8 +720,7 @@
 
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-        $('#bettingTypeContainer').append(bettingTypeContainerTemp);
-
+        $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
     function createMarketRateContainer(k, v, k1, v2) {
@@ -732,60 +728,43 @@
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
         marketBetRateTemp.attr('priority', v.priority);
-        marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
         marketBetRateTemp.attr('bet_rate', v2.main_line);
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name);
 
-        const marketBetRateNameElement = marketBetRateTemp.find('.market_bet_name');
-        const marketBetLineElement = marketBetRateTemp.find('.market_line');
-        const marketPriceElement = marketBetRateTemp.find('.market_price');
-
-        switch (v.priority) {
-            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                marketBetRateNameElement.text(v2.line);
+        switch ( v.priority ) {
+            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
+                marketBetRateTemp.find('.market_bet_name').text(v2.line);
                 break;
-            case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                marketBetRateNameElement.text(v2.market_bet_name + '  ' + v2.line);
+            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
                 break;
-            case 7: case 107: case 112: case 116: case 120: case 124:
-                marketBetRateNameElement.text(v2.market_bet_name);
+            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                 break;
-            default:
-                // For other cases, handle as needed
+            default: // 獨贏
                 break;
         }
 
-        if (v2.status === 1) {
-            marketBetRateTemp.find('.fa-lock').hide();
-            marketBetRateTemp.attr('onclick', 'openCal($(this))');
-            marketPriceElement.show();
+        marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+        marketBetRateTemp.find('.market_line').text(v2.line);
+        marketBetRateTemp.find('.market_price').text(v2.price);
+
+        if( v2.status === 1 ) {
+            marketBetRateTemp.find('.fa-lock').hide()
+            marketBetRateTemp.attr('onclick', 'openCal($(this))')
+            marketBetRateTemp.find('.market_price').show()
         } else {
-            marketBetRateTemp.find('.fa-lock').show();
-            marketBetRateTemp.removeAttr('onclick');
-            marketPriceElement.hide();
+            marketBetRateTemp.find('.fa-lock').show()
+            marketBetRateTemp.removeAttr('onclick')
+            marketBetRateTemp.find('.market_price').hide()
         }
-
-        // const fixture_id = matchListD.data.list.fixture_id;
-        // if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
-        //     // 判斷賠率是否有改變
-        //     if( parseFloat(v2.price) > parseFloat(v2.price) ) {
-        //         // 賠率下降
-        //         lowerOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-        //     }
-        //     if( parseFloat(price) < parseFloat(v2.price) ) {
-        //         // 賠率上升
-        //         raiseOdd(fixture_id, k1, betData.market_id, v2.market_bet_id)
-        //     }
-        // } 
-
-        marketBetLineElement.text(v2.line);
-        marketPriceElement.text(v2.price);
 
         $('#marketRateDataTemp').append(marketBetRateTemp);
     }
+
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
