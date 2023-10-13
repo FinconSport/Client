@@ -624,9 +624,10 @@
         Leaguecard.removeAttr('hidden')
         Leaguecard.removeAttr('template')
 
-        let series_name_card = Leaguecard.find('[key="LeagueNameCard"]')
+        let leauge_name_card = Leaguecard.find('[key="LeagueNameCard"]')
 
-        series_name_card.find('.leauge_name').html(sv.name)
+        leauge__name_card.find('.leauge_name').html(sv.name)
+        leauge__start_time.find('.start_time').html(sv.start_time)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
         scoreBoardContainer.append(Leaguecard)
