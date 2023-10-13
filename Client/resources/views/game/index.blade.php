@@ -60,21 +60,21 @@
     <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<!-- <div id='searchCondition'>
+<div id='searchCondition'>
     {{ trans('common.search_area.search') }}
-</div> -->
-
-<!-- <div id="indexContainer">
+</div>
+<div id="indexContainer">
     <div id="indexContainerLeft">
+        <!-- no data -->
         <div id="noData" style="display: none;">
             <i class="fa-solid fa-circle-exclamation"></i>
             <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- early living toggle template -->
-<!-- <div class="cateWrapper" template='elToggleTemplate' hidden>
+<div class="cateWrapper" template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
@@ -82,10 +82,10 @@
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
-</div> -->
+</div>
 
 <!-- league toggle template -->
-<!-- <div class="leagueWrapper" template='leagueWrapper' hidden>
+<div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
         <div style="width: 35%;">
             <span class="legToggleDir" style="padding-right: 1rem;">
@@ -99,10 +99,10 @@
     </div>
     <div class="seriesWrapperContent">
     </div>
-</div> -->
+</div>
 
 <!-- fixture card template -->
-<div  class="indexEachCard" hidden>
+<div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
         <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
@@ -160,25 +160,6 @@
             </div>
         </div>
         <div class="indexBetCardTable row m-0 text-center">
-        </div>
-    </div>
-</div>
-
-<div id="scoreBoardCard">
-    <div template='fixtureCardTemplate' class="fixture-con" hidden>
-    <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -257,7 +238,6 @@
 
     // match list data
     var matchListD = {}
-    console.log(matchListD)
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index'
 
@@ -387,8 +367,7 @@
 
         card.removeAttr('hidden')
         card.removeAttr('template')
-        // let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
-        let scoreBoardCard = $(`#scoreBoardCard`)
+        let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
         league_toggle_content.append(card)
     }
 
