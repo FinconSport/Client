@@ -619,20 +619,17 @@
     }
 
     function createLeagueNameCard(sk, sv) {
-        let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone();
-        Leaguecard.removeAttr('hidden');
-        Leaguecard.removeAttr('template');
+        let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
+        Leaguecard.removeAttr('hidden')
+        Leaguecard.removeAttr('template')
 
-        if (sv.status === 1) {
-            let league_name_startTime = Leaguecard.find('[key="LeagueNameStartTimeCard"]');
-            league_name_startTime.find('.league_name').html(sv.name);
-            league_name_startTime.find('.start_time').html(sv.start_time);
-        } else if (sv.status === 2) {
-            // Handle sv.status 2 if needed.
-        }
+        let leauge_name_startTime = Leaguecard.find('[key="LeagueNameStartTimeCard"]')
 
-        let scoreBoardContainer = $('#scoreboard-con');
-        scoreBoardContainer.append(Leaguecard);
+        leauge_name_startTime.find('.leauge_name').html(sv.name)
+        leauge_name_startTime.find('.start_time').html(sv.start_time)
+
+        let scoreBoardContainer = $(`#scoreboard-con`)
+        scoreBoardContainer.append(Leaguecard)
     }
 
 
