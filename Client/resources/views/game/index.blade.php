@@ -60,9 +60,9 @@
     <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<!-- <div id='searchCondition'>
+<div id='searchCondition'>
     {{ trans('common.search_area.search') }}
-</div> -->
+</div>
 <div id="scoreboard-con">
     <div class="fixture-con" style="color:#ffffff;margin-top:60px;background-image: url('image/gameBg.jpg');">
         <div class="fixture-card">
