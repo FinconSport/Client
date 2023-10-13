@@ -91,7 +91,8 @@
                 <span class="market_bet_name"></span>
                 <span class="market_line"></span>
             </div>
-                <span class="market_price"></span>
+            <span class="market_price"></span>
+            <i class="fa-solid fa-lock" style="display: none;"></i>
         </div>
     </div>
 </div>
@@ -743,6 +744,15 @@
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
         marketBetRateTemp.find('.market_price').text(v2.price);
+
+        if( v2.status === 1 ) {
+            marketBetRateTemp.find('.fa-lock').hide()
+            marketBetRateTemp.attr('onclick', 'openCal($(this))')
+        } else {
+            marketBetRateTemp.find('.fa-lock').show()
+            marketBetRateTemp.removeAttr('onclick')
+        }
+
         $('#marketRateDataTemp').append(marketBetRateTemp);
     }
 
