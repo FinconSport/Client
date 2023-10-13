@@ -8,8 +8,8 @@ body {
 
 #wrap {
     display: inline-flex;
-    background-image: url(../image/ball-soccer.png),
-        url(../image/ball-baseball.png);
+    /* background-image: url(../image/ball-soccer.png), */
+        /* url(../image/ball-baseball.png); */
     background-position: top -13% left -5%, bottom 10% right -5%;
     background-repeat: no-repeat;
     background-size: 23%, 25%;
