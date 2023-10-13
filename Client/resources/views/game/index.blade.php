@@ -622,7 +622,6 @@
 
     function createLeagueNameCard(sk, sv, scoreBoardContainer) {
         let Leaguecard = $('div[template="fixtureCardTemplate_v2"]').clone()
-        let scoreBoardContainer = $(`#scoreboard-con`)
 
         Leaguecard.removeAttr('hidden')
         Leaguecard.removeAttr('template')
