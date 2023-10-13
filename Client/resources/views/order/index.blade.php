@@ -255,7 +255,7 @@
 					betItem.result_percent === 4 ? `<span style="color: #c79e42;">{{ trans("order.result_precent.4") }}</span>` :
 					betItem.result_percent === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
 					`${betItem.result_percent}`;
-			} else if( status === 0 ) {
+			} else if( orderItem.status === 0 ) {
 				resultText = `<span style="color: #000000;">{{ trans("order.main.cancel") }}</span>`;
 			} else {
 				resultText = `<span style="color: #000000;">{{ trans("order.main.waiting") }}</span>`;
