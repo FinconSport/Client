@@ -614,7 +614,7 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardContainer = $('div[template="scoreBoardContainerTemplate"]').clone();
+        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
 
         // Remove the 'hidden' and 'template' attributes
         scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
