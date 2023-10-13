@@ -607,11 +607,9 @@
 
     // render view layer here
     function renderViewV2() {
-        Object.entries(matchListD.data).map(([sk, sv]) => { 
-            Object.entries(sv.series).map(([sk, sk1, sv1]) => { 
+        Object.entries(matchListD.data.series).map(([sk, sv]) => { 
                 createLeagueNameCard(sk, sv)
             })
-        })
     }
 
     function createLeagueNameCard(sk, sv) {
