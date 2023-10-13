@@ -620,7 +620,7 @@
     function createScoreBoard(sk) {
         let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
 
-        LeagueNamSeStartTime.removeAttr('hidden')
+        LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
         let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
 
