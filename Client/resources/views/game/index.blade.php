@@ -68,7 +68,7 @@
     <div template='fixtureCardTemplate_v2' hidden class="fixture-con" style="background-image: url('image/gameBg.jpg');">
         <div class="fixture-card">
             <p></p>
-            <div key="LeagueNameCard">
+            <div key="LeagueNameStartTimeCard">
                 <p class="leauge_name"></p>
                 <p class="start_time"></p>
             </div>
@@ -624,10 +624,10 @@
         Leaguecard.removeAttr('hidden')
         Leaguecard.removeAttr('template')
 
-        let leauge_name_card = Leaguecard.find('[key="LeagueNameCard"]')
+        let leauge_name_startTime = Leaguecard.find('[key="LeagueNameStartTimeCard"]')
 
-        leauge__name_card.find('.leauge_name').html(sv.name)
-        leauge__start_time.find('.start_time').html(sv.start_time)
+        leauge_name_startTime.find('.leauge_name').html(sv.name)
+        leauge_name_startTime.find('.start_time').html(sv.start_time)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
         scoreBoardContainer.append(Leaguecard)
