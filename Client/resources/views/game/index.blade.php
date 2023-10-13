@@ -277,6 +277,7 @@
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/game.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
