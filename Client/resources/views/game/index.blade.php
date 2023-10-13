@@ -86,7 +86,7 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div template="marketBetRateTemplate" hidden>
+        <div class="market-rate" template="marketBetRateTemplate" hidden>
             <span class="market_bet_name"></span>
             <span class="market_line"></span>
         </div>
