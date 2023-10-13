@@ -701,7 +701,6 @@
     }
 
     function renderViewV2() {
-        $('#' + v.market_id + ' #marketRateDataTemp').empty();
         
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
@@ -711,6 +710,7 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
+            $('#' + v.market_id + ' #marketRateDataTemp').empty();
             Object.entries(v.rate).map(([k2, v2]) => {
                 createMarketRateContainer(v, k2, v2);
             });
