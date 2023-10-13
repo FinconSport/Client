@@ -619,7 +619,7 @@
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
-        LeagueNameStartTime.find('.leauge_name').html(sv)
+        LeagueNameStartTime.find('.leauge_name').html(sk.sv)
 
         $(`#homeTeamName`).after(LeagueNameStartTime)
     }
