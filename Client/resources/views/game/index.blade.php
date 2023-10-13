@@ -66,7 +66,7 @@
 <div class="scoreboard-container" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
     <div class="fixture-card row">
         <p class="home_team_name col-3"></p>
-        <div id="LeagueNameStartTime col-6">
+        <div id="LeagueNameStartTime col-4">
             <p class="league_name"></p>
             <p class="start_time"></p>
         </div>
