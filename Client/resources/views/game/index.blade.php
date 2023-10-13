@@ -607,8 +607,8 @@
     // render view layer here
     function renderViewV2() {
 		console.log(matchListD)
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            Object.entries(v.series).map(([sk2, sv2]) => {
+        matchListD.data.forEach((k, v) => { 
+            matchListD.data.series.forEach((sk2, sv2) => { // living early toggle
                 createLeagueNameCard(k, sk2, sv2)
             })
         })
