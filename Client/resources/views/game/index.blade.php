@@ -63,15 +63,17 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div class="scoreboard-container" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
-    <div class="fixture-card row">
-        <p class="home_team_name col-3"></p>
-        <div id="LeagueNameStartTime" class="col-4">
-            <p class="league_name"></p>
-            <p class="start_time"></p>
+<div class="scoreboard-container" style="background-image: url('image/gameBg.jpg');" hidden>
+    <div template='earlyContainerTemplate' hidden>
+        <div class="fixture-card row">
+            <p class="home_team_name col-3"></p>
+            <div id="LeagueNameStartTime" class="col-4">
+                <p class="league_name"></p>
+                <p class="start_time"></p>
+            </div>
+            <p class="away_team_name col-3"></p>
         </div>
-        <p class="away_team_name col-3"></p>
-    </div>
+    <div>
 </div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
@@ -613,21 +615,16 @@
 
     function createScoreBoard(data) {
         // Clone the template
-        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
-
-        // Remove the 'hidden' and 'template' attributes
-        scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
-
+        const scoreBoardContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         // early fixture
         if (data.list.status == 1) {
+            scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             scoreBoardContainerTemp.find('.league_name').text(data.series.name);
             scoreBoardContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            $('.scoreboard-container').append(scoreBoardContainerTemp);
         }
-        
-        // Append the modified template to the container with ID 'scoreboard-con'
-        $('#searchCondition').after(scoreBoardContainerTemp);
     }
 
     // 跳轉獨立賽事頁
