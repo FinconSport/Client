@@ -54,3 +54,8 @@
 .bettingtype-container .market-rate:nth-child(odd) {
     border-right: none;
 }
+
+div#bettingTypeContainer {
+    height: calc(100% - 1rem);
+    overflow: auto;
+}
