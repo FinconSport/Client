@@ -68,10 +68,7 @@
     <div class="fixture-card">
         <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
         <div id="LeagueNameStartTime" template='LeagueNameStartTimeTemp' hidden>
-            <div key="LeagueNameStartTimeCard">
-                <p class="leauge_name"></p>
-                <p class="start_time"></p>
-            </div>
+            <p class="leauge_name"></p>
         </div>
         <div id="awayTeamName" template="awayTeamNameTemp"><p class="away_team_name"></p></div>
     </div>
@@ -611,22 +608,20 @@
     function renderViewV2() {
 		console.log(matchListD)
         Object.entries(matchListD.data).map(([sk, sv]) => { 
-            console.log("render data")
-            console.log(sk,sv) // living early toggle
             createScoreBoard(sk)
         })
     }
 
     function createScoreBoard(sk) {
+        console.log("render data")
+        console.log(sk)
         let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
 
         LeagueNameStartTime.removeAttr('hidden')
         LeagueNameStartTime.removeAttr('template')
-        let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
+        LeagueNameStartTime.find('.leauge_name').html(sk.name)
 
-        leauge_name_startTime.find('.leauge_name').html(sk.name)
-
-        $(`#LeagueNameStartTime`).before(homeTeamName)
+        $(`#homeTeamName`).after(LeagueNameStartTime)
     }
 
     // function createScoreBoard(sk) {
