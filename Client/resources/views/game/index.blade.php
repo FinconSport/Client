@@ -64,13 +64,14 @@
     {{ trans('common.search_area.search') }}
 </div>
 <div id="scoreboard-con">
-    <div class="fixture-con" style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');">
+    <div class="fixture-con" template='scoreBoardTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
         <div class="fixture-card">
-            <div id="homeTeamName" template="homeTeamNameTemp"><p class="home_team_name"></p></div>
+            <p class="home_team_name"></p>
             <div id="LeagueNameStartTime">
-                <p template='LeagueNameTemplate' hidden><span class="leauge_name"></span></p>
+                <p class="league_name"></p>
+                <p class="start_time"></p>
             </div>
-            <div id="awayTeamName" template="awayTeamNameTemp"><p class="away_team_name"></p></div>
+            <p class="away_team_name"></p>
         </div>
     </div>
 <div>
@@ -615,44 +616,17 @@
     }
 
     function createScoreBoard(data) {
-        console.log(data)
-        // console.log("render data")
-        // console.log(sk, sv)
-        let LeagueNameTemplate = $('p[template="LeagueNameTemplate"]').clone()
+        let scoreBoardTemplate = $('p[template="scoreBoardTemplate"]').clone()
 
-        LeagueNameTemplate.removeAttr('hidden')
-        LeagueNameTemplate.removeAttr('template')
-        LeagueNameTemplate.find('.leauge_name').html(data.series.name)
+        scoreBoardTemplate.removeAttr('hidden')
+        scoreBoardTemplate.removeAttr('template')
+        scoreBoardTemplate.find('.home_team_name').html(data.list.home_team_name)
+        scoreBoardTemplate.find('.league_name').html(data.series.name)
+        scoreBoardTemplate.find('.start_time').html(data.list.start_time)
+        scoreBoardTemplate.find('.away_team_name').html(data.list.away_team_name)
 
-        $(`#LeagueNameStartTime`).append(LeagueNameTemplate)
+        $(`#scoreboard-con`).append(scoreBoardTemplate)
     }
-
-    // function createScoreBoard(sk) {
-    //     let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
-    //     let homeTeamName = $('div[template="homeTeamNameTemp"]').clone()
-    //     let awayTeamName = $('div[template="awayTeamNameTemp"]').clone()
-
-    //     LeagueNamSeStartTime.removeAttr('hidden')
-    //     LeagueNameStartTime.removeAttr('template')
-    //     homeTeamName.removeAttr('hidden')
-    //     homeTeamName.removeAttr('template')
-    //     awayTeamName.removeAttr('hidden')
-    //     awayTeamName.removeAttr('template')
-
-    //     let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
-
-    //     // leauge_name_startTime.find('.leauge_name').html(sv.name)
-    //     leauge_name_startTime.find('.start_time').html(sv.start_time)
-
-    //     homeTeamName.find('.home_team_name').html(sv.home_team_name)
-    //     awayTeamName.find('.away_team_name').html(sv.away_team_name)
-
-    //     $(`#LeagueNameStartTime`).before(homeTeamName)
-    //     $(`#homeTeamName`).after(LeagueNameStartTime)
-    //     $(`#LeagueNameStartTime`).after(awayTeamName)
-    // }
-
-
 
     // 跳轉獨立賽事頁
     function navToGame(e) {
