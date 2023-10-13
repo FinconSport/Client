@@ -63,8 +63,8 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div class="scoreboard-container" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
-    <div class="fixture-card row">
+<div class="scoreboard-container" template='scoreBoardContainerTemplate' style="background-image: url('image/gameBg.jpg');" hidden>
+    <div class="fixture-card row" template='earlyFixtureContainerTemplate' hidden>
         <p class="home_team_name col-3"></p>
         <div id="LeagueNameStartTime" class="col-4">
             <p class="league_name"></p>
@@ -612,18 +612,18 @@
     }
 
     function createScoreBoard(data) {
-        // Clone the template
-        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
 
-        // Remove the 'hidden' and 'template' attributes
+        const scoreBoardContainerTemp = $('div[template="scoreBoardContainerTemplate"]').clone();
         scoreBoardContainerTemp.removeAttr('hidden').removeAttr('template');
 
         // early fixture
         if (data.list.status == 1) {
-            scoreBoardContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            scoreBoardContainerTemp.find('.league_name').text(data.series.name);
-            scoreBoardContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
-            scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            const earlyFixtureContainerTemp = $('div[template="earlyFixtureContainerTemplate"]').clone();
+            arlyFixtureContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            arlyFixtureContainerTemp.find('.league_name').text(data.series.name);
+            arlyFixtureContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            arlyFixtureContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            scoreBoardContainerTemp.after(earlyFixtureContainerTemp);
         }
         
         // Append the modified template to the container with ID 'scoreboard-con'
