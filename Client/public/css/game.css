@@ -33,14 +33,13 @@
     margin-top: 0.5rem;
 }
 
-
-.bettingtype-container .marketName{
+.marketName {
     width: 100%;
     padding: 1rem;
     background-color: #ffca9b;
 }
 
-.bettingtype-container .marketBetRate{
+.marketBetRateContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
