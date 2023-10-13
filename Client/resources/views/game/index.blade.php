@@ -63,18 +63,16 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
-<div id="scoreboardContainer">
-    <div class="fixture-con" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
-        <div class="fixture-card">
-            <p class="home_team_name"></p>
-            <div id="LeagueNameStartTime">
-                <p class="league_name"></p>
-                <p class="start_time"></p>
-            </div>
-            <p class="away_team_name"></p>
+<div class="fixture-con" template='scoreBoardContainerTemplate' style="color:#ffffff;margin-top:20px;background-image: url('image/gameBg.jpg');" hidden>
+    <div class="fixture-card">
+        <p class="home_team_name"></p>
+        <div id="LeagueNameStartTime">
+            <p class="league_name"></p>
+            <p class="start_time"></p>
         </div>
+        <p class="away_team_name"></p>
     </div>
-<div>
+</div>
 
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
@@ -627,7 +625,7 @@
         scoreBoardContainerTemp.find('.away_team_name').text(data.list.away_team_name);
 
         // Append the modified template to the container with ID 'scoreboard-con'
-        $('#scoreboard-con').append(scoreBoardContainerTemp);
+        $('#searchCondition').after(scoreBoardContainerTemp);
     }
 
     // 跳轉獨立賽事頁
