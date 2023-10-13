@@ -86,9 +86,12 @@
         <p class="market_name"></p>
     </div>
     <div id="marketRateDataTemp" class="marketBetRateContainer">
-        <div class="market-rate" template="marketBetRateTemplate" hidden>
-            <span class="market_bet_name"></span>
-            <span class="market_line"></span>
+        <div class="market-rate d-flex justify-content-between" template="marketBetRateTemplate" hidden>
+            <div class="">
+                <span class="market_bet_name"></span>
+                <span class="market_line"></span>
+            </div>
+                <span class="market_price"></span>
         </div>
     </div>
 </div>
@@ -702,8 +705,8 @@
         // Clone the template
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-
-        bettingTypeContainerTemp.find('.market_name').text(v.market_name);
+        const marketNameElement = bettingTypeContainerTemp.find('.market_name');
+        marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
         $('#scoreboardContainer').after(bettingTypeContainerTemp);
     }
 
@@ -715,7 +718,9 @@
         marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
         marketBetRateTemp.find('.market_line').text(v2.line);
 
+
         $('#marketRateDataTemp').append(marketBetRateTemp);
+        $('div.market-rate[hidden]').remove();
     }
 
     function createScoreBoard(data) {
