@@ -613,16 +613,20 @@
     }
 
     function createScoreBoard(data) {
-        let scoreBoardTemplate = $('p[template="scoreBoardTemplate"]').clone()
+        // Clone the template
+        const scoreBoardTemplate = $('p[template="scoreBoardTemplate"]').clone();
 
-        scoreBoardTemplate.removeAttr('hidden')
-        scoreBoardTemplate.removeAttr('template')
-        scoreBoardTemplate.find('.home_team_name').html(data.list.home_team_name)
-        scoreBoardTemplate.find('.league_name').html(data.series.name)
-        scoreBoardTemplate.find('.start_time').html(data.list.start_time)
-        scoreBoardTemplate.find('.away_team_name').html(data.list.away_team_name)
+        // Remove the 'hidden' and 'template' attributes
+        scoreBoardTemplate.removeAttr('hidden').removeAttr('template');
 
-        $(`#scoreboard-con`).append(scoreBoardTemplate)
+        // Find elements and update their content
+        scoreBoardTemplate.find('.home_team_name').text(data.list.home_team_name);
+        scoreBoardTemplate.find('.league_name').text(data.series.name);
+        scoreBoardTemplate.find('.start_time').text(data.list.start_time);
+        scoreBoardTemplate.find('.away_team_name').text(data.list.away_team_name);
+
+        // Append the modified template to the container with ID 'scoreboard-con'
+        $('#scoreboard-con').append(scoreBoardTemplate);
     }
 
     // 跳轉獨立賽事頁
