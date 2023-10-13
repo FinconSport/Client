@@ -623,18 +623,22 @@
     function createScoreBoard(sk, sv) {
         let LeagueNameStartTime = $('div[template="LeagueNameStartTimeTemp"]').clone()
         let homeTeamName = $('div[template="homeTeamNameTemp"]').clone()
-        LeagueNameStartTime.removeAttr('hidden')LeagueNameStartTime.removeAttr('template')
-        homeTeamName.removeAttr('hidden')homeTeamName.removeAttr('template')
+
+        LeagueNameStartTime.removeAttr('hidden')
+        LeagueNameStartTime.removeAttr('template')
+        homeTeamName.removeAttr('hidden')
+        homeTeamName.removeAttr('template')
 
         let leauge_name_startTime = LeagueNameStartTime.find('[key="LeagueNameStartTimeCard"]')
 
         leauge_name_startTime.find('.leauge_name').html(sv.name)
         leauge_name_startTime.find('.start_time').html(sv.start_time)
+
         homeTeamName.find('.home_team_name').html(sv.home_team_name)
 
         let scoreBoardContainer = $(`#scoreboard-con`)
         scoreBoardContainer.append(LeagueNameStartTime)
-        LeagueNameStartTime.before(homeTeamName)
+        $(`#LeagueNameStartTime`).before(homeTeamName)
     }
 
 
