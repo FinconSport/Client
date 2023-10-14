@@ -493,10 +493,6 @@ class LsportApiController extends Controller {
         ->whereIn("status",[1,2,9])
         ->groupBy('sport_id', 'status')
         ->total();
-        if ($return === false) {
-            $this->ApiError("03");
-        }
-            dd($return);
 
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
