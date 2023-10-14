@@ -243,24 +243,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                 if ($response->successful()) {
                     // json decode
                     $data = $response->json();
-                    $list = array();
-                    foreach ($data['aggregations'] as $k => $v) { 
-                        foreach ($vvv as $kk => $vv) {
-                            $buckets = $vv['buckets'];
-                            foreach ($buckets as $kkk => $vvv) {
-                                $tmp = array();
-                                $tmp[$kk] = $vvv['key'];
-                                $count = 0; // 用於計算欄位順序
-                                foreach ($vvv as $kkkk => $vvvv) {
-                                   if ($count >= 2) {
-                                        $tmp[$kkkk] = $vvvv['value'];
-                                   }
-                                    $count++;
-                                }   
-                                $list[] = $tmp;
-                            }
-                        }
-                    }
+                    $list = $data['aggregations'];
                     return $list;
                 } 
                 // fail , return false
