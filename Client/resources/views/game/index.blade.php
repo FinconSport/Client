@@ -89,8 +89,7 @@
                         <th style="width:30%;text-align:center;" key="bf_head_totalScore"></th>
                     </tr>
                      <!-- if sport === 154914(baseball) -->
-                    <tr template="BaseballHeadTemplate" hidden>
-                    </tr>
+                    <tr template="BaseballHeadTemplate" hidden></tr>
                 </thead>
                 <!-- if sport === 48242(basketball) && sport === 6046(football) -->
                 <tbody template="BasketBallFootballBodyTemplate" hidden>
@@ -112,27 +111,8 @@
                     </tr>
                 </tbody>
                 <!-- if sport === 154914(baseball) -->
-                <tbody template="baseballBodyTemplate" hidden>
-                    <tr>
-                        <td style="width:30%;text-align:left;"key="b_bodyhome_TeamName"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyhome_g1"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyhome_g2"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyhome_g3"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyhome_g4"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyhome_g5"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyhome_g6"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyhome_totalScore"></td>
-                    </tr>
-                    <tr>
-                        <td style="width:30%;text-align:left;"key="b_bodyaway_TeamName"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyaway_g1"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyaway_g2"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyaway_g3"></td>
-                        <td style="width:10%;text-align:center;" key="b_bodyaway_g4"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyaway_g5"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyaway_g6"></td>
-                        <td style="width:30%;text-align:center;" key="b_bodyaway_totalScore"></td>
-                    </tr>
+                <tbody id="livingtableBody">
+                    <tr template="baseballBodyTemplate_home" hidden></tr>
                 </tbody>
             </table>
         </div>
@@ -840,9 +820,10 @@
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
-        const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
         const BasketBallFootballBodyTemp = $('tbody[template="BasketBallFootballBodyTemplate"]').clone();
-        const baseballBodyTemp = $('tbody[template="baseballBodyTemplate"]').clone();
+
+        const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
+        const baseballBodyTemp_home = $('tr[template="baseballBodyTemplate_home"]').clone();
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
@@ -886,8 +867,10 @@
             } else if (data.series.sport_id == 154914) {
 
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                baseballBodyTemp.removeAttr('hidden').removeAttr('template');   
+                baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');   
                 const scoresLengths = data.list.teams.map((team) => team.scores.length);
+                const homeTeam = data.find(team => team.index === 1);
+                const awayTeam = data.find(team => team.index === 2);
                 let baseballData = [];
                 let gameTitle = [];
 
@@ -906,19 +889,30 @@
                 }
 
                 const TeamNameHead = $('<th style="width:20%;text-align:left;">').text('Name');
+                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
                 BaseballHeadTemp.append(TeamNameHead);
+                BaseballHeadTemp.append(totalScoreHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
                     // Create a new <th> element
-                    const th = $('<th style="width:10%;text-align:center;">').text(gameTitle[i]);
+                    const thHead = $('<th style="width:10%;text-align:center;">').text(gameTitle[i]);
                     // Append the <th> element to the cloned row
-                    BaseballHeadTemp.append(th);
+                    BaseballHeadTemp.append(thHead);
                 }
 
-                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
-                BaseballHeadTemp.append(totalScoreHead);
+                const homeTeamName = $('<th style="width:20%;text-align:left;">').text(data.list.home_team_name);
+                const homeTotalScore = $('<th style="width:20%;text-align:center;>').text(homeTeam.total_score);
+                baseballBodyTemp_home.append(TeamNameHead);
+                baseballBodyTemp_home.append(totalScoreHead);
+                for (let i = 0; i < baseballData.length; i++) {
+                    // Create a new <th> element
+                    const thHome = $('<th style="width:10%;text-align:center;">').text(homeTeam.scores[i].score);
+                    // Append the <th> element to the cloned row
+                    baseballBodyTemp_homeappend(thHome);
+                }
 
                 $('#livingtableHead').append(BaseballHeadTemp);
+                $('#livingtableBody').append(baseballBodyTemp_home);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
