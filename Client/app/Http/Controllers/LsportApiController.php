@@ -488,14 +488,9 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
-        $return = LsportFixture::select('f.sport_id', DB::raw('COUNT(*) as count'))
-        ->from('es_lsport_fixture as f') 
-        ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id')
-        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
-        ->where('l.status', '=', 1) 
-        ->where('s.status', '=', 1) 
-        ->whereIn('f.status', [1, 2, 9]) 
-        ->groupBy('f.sport_id')
+        $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
+        ->whereIn("status",[1,2,9])
+        ->groupBy('sport_id', 'status')
         ->list();
         
         dd($return);
