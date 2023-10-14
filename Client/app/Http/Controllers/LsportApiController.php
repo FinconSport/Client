@@ -480,14 +480,15 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
-            $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-            $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
+        $today = time();
+        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
 
             $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
             ->whereIn("status",[1,2,9])
             ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
             ->groupBy('sport_id', 'status')
-            ->total(10);    // cache 10sec
+            ->total(10);    
 
             if ($return === false) {
                 $this->ApiError("02");
