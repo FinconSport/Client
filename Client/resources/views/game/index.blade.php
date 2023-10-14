@@ -822,6 +822,7 @@
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = [];
             var scoreaway = [];
+            const scoresLengths = data.list.teams.map((team) => team.scores.length);
             const homeTeam = data.list.teams.find(item => item.index === 1)
             const awayTeam = data.list.teams.find(item => item.index === 2)
             if (homeTeam) {
