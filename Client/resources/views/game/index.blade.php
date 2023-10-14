@@ -133,7 +133,7 @@
                 </div>
                 <span class="market_price" style="color:#c79e42;"></span>
                 <i class="fa-solid fa-lock" style="display: none;"></i>
-                <i class="fa-solid fa-caret-up" style="display: none;"></i>
+                <i class="fa-solid fa-caret-up"></i>
                 <i class="fa-solid fa-caret-down" style="display: none;"></i>
             </div>
         </div>
@@ -927,7 +927,7 @@
                     baseballBodyTemp_home.append(thHome);
                 }
                 const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
-                $('#livingtableBody').append(homeTotalScore); // <- append home team data
+                baseballBodyTemp_home.append(homeTotalScore); // <- append home team data
 
                 // away team W
                 const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
