@@ -866,7 +866,7 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                $('#' + livingContainerTemp.attr('id') + ' .livingtableHead').append(BasketBallFootballHeadTemp);
+                $('#livingtableHead').find('#' + livingContainerTemp.attr('id')).append(BasketBallFootballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
