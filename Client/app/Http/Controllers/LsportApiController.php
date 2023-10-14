@@ -487,16 +487,27 @@ class LsportApiController extends Controller {
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
     	//---------------------------------
-            
-        $return = LsportFixture::select('f.sport_id', DB::raw('COUNT(*) as fixture_count'))
-        ->from('es_lsport_fixture as f')
-        ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id')
-        ->where('l.status', '=', 1)
-        ->whereIn('f.status', [1,2,9])
-        ->groupBy("f.sport_id")
-        ->total();
 
+        $return = DB::table('es_lsport_fixture') // 设置表名前缀为 "es_"
+        ->join('es_lsport_league', 'es_lsport_fixture.league_id', '=', 'es_lsport_league.league_id')
+        ->where('es_lsport_league.status', '=', 1) // 添加条件
+        ->whereIn('es_lsport_fixture.status', [1, 2, 9]) // 添加条件
+        ->select('es_lsport_fixture.sport_id', DB::raw('COUNT(*) as count'))
+        ->groupBy('es_lsport_fixture.sport_id')
+        ->list();
+        
         dd($return);
+
+
+        /*
+
+        select f.sport_id, COUNT(*) as fixture_count 
+        from es_lsport_fixture as f 
+        inner join es_lsport_league as l on f.league_id = l.league_id 
+        where l.status = 1 and f.status in (1, 2, 9) 
+        group by f.sport_id
+
+        */
 
     	//---------------------------------
 
