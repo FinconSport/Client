@@ -930,6 +930,7 @@
                 baseballBodyTemp_home.append(homeTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
+                    console.log(scorehome);
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]]);
                     baseballBodyTemp_home.append(thHome);
                 }
@@ -942,6 +943,7 @@
                 baseballBodyTemp_away.append(awayTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
+                    console.log(scoreaway);
                     const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]]);
                     baseballBodyTemp_away.append(thAway);
                 }
