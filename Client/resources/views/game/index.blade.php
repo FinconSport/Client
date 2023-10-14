@@ -910,16 +910,17 @@
 
                 // thead data game title
                 const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
-                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
                 BaseballHeadTemp.append(TeamNameHead);
-                BaseballHeadTemp.append(totalScoreHead);
-
+                
                 // Append the game titles to the header row
                 for (let i = 0; i < gameTitle.length; i++) {
                     BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
                 }
 
-                // Append the header row to the #livingtableHead table
+                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
+                BaseballHeadTemp.append(totalScoreHead);
+
+
                 $('#livingtableHead').append(BaseballHeadTemp);
 
                 // Create and append home team data row
