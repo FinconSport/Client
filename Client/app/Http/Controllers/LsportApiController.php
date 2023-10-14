@@ -485,7 +485,9 @@ class LsportApiController extends Controller {
         $today = time();
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
-        $after_tomorrow_es = date('Y-m-dT00:00:00', $after_tomorrow);
+
+        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow_es = date('Y-m-dT00:00:00', $after_tomorrow_es);
 
     	//---------------------------------
         
