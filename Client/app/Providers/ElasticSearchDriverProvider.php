@@ -19,7 +19,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
     public function boot() {
 
         // list() method 
-        Builder::macro('list', function ($cacheAliveTime=1) {
+        Builder::macro('list', function ($cacheAliveTime=1,$dd=false) {
             
             // get Model TableName
             $tableName = "`" . $this->getModel()->getTable() . "`";
@@ -32,7 +32,9 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
-            dd($esSql);
+            if ($dd !== false) {
+                dd($esSql);
+            }
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
@@ -209,7 +211,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         });
 
         // total() method 
-        Builder::macro('total', function ($cacheAliveTime=1) {
+        Builder::macro('total', function ($cacheAliveTime=1,$dd=false) {
             
             // get Model TableName
             $tableName = "`" . $this->getModel()->getTable() . "`";
@@ -222,7 +224,9 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
-            dd($esSql);
+            if ($dd !== false) {
+                dd($esSql);
+            }
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
