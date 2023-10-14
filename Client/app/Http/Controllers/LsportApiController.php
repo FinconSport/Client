@@ -502,14 +502,14 @@ class LsportApiController extends Controller {
             if ($return === false) {
                 $this->ApiError("02");
             }
-            
+
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
             $status_name = ["","early","living"];
 
             foreach ($return as $k => $v) {
                 foreach ($v['buckets'] as $kk => $vv) {
-                    $sport_id = $vv['key'];
+                    $sport_id = $vv['key']."";  // 轉string
                     foreach ($vv as $kkk => $vvv) {
                         if (!in_array($kkk,['key','doc_count'])) {
                             foreach ($vvv['buckets'] as $kkkk => $vvvv) {
