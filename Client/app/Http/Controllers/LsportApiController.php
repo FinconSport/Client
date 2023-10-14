@@ -491,7 +491,7 @@ class LsportApiController extends Controller {
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
         ->groupBy('sport_id', 'status')
-        ->list();
+        ->total();
         
         dd($return);
 
