@@ -497,7 +497,7 @@ class LsportApiController extends Controller {
             ->whereIn("status",[1,2,9])
             ->where("start_time","<=", '"'.$after_tomorrow_es.'"')
             ->groupBy('sport_id', 'status')
-            ->total(1,true);
+            ->total();
 
             dd($return);
             // 整理統計 , 回傳格式取決於SQL
