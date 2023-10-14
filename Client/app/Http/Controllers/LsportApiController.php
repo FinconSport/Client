@@ -488,12 +488,12 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
-        $return = DB::table('es_lsport_fixture') // 设置表名前缀为 "es_"
-        ->join('es_lsport_league', 'es_lsport_fixture.league_id', '=', 'es_lsport_league.league_id')
-        ->where('es_lsport_league.status', '=', 1) // 添加条件
-        ->whereIn('es_lsport_fixture.status', [1, 2, 9]) // 添加条件
-        ->select('es_lsport_fixture.sport_id', DB::raw('COUNT(*) as count'))
-        ->groupBy('es_lsport_fixture.sport_id')
+        $return = LsportFixture::select('f.sport_id', DB::raw('COUNT(*) as count'))
+        ->from('es_lsport_fixture as f') 
+        ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id')
+        ->where('l.status', '=', 1) 
+        ->whereIn('f.status', [1, 2, 9]) 
+        ->groupBy('f.sport_id')
         ->list();
         
         dd($return);
