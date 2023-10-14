@@ -51,12 +51,12 @@
     border-bottom: 1px solid #415b5a;
 }
 
-.bettingtype-container .market-rate:nth-child(odd) {
+/* .bettingtype-container .market-rate:nth-child(even) {
     border-right: none;
-}
+} */
 
 .bettingtype-container .market-rate:nth-last-child(-n+2),
-.bettingtype-container .market-rate:only-child{
+.bettingtype-container .market-rate:only-child {
     border-bottom: none;
 }
 
