@@ -499,7 +499,9 @@ class LsportApiController extends Controller {
             ->groupBy('sport_id', 'status')
             ->total();
 
-            dd($return);
+            if ($return === false) {
+                $this->ApiError("02");
+            }
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
             foreach ($return as $k => $v) {
@@ -523,52 +525,9 @@ class LsportApiController extends Controller {
                 }
             }
 
-        }
 
-
- /*
- {
-    "status": 1,
-    "data": {
-        "living": {
-            "items": {
-                "6046": {
-                    "name": "足球",
-                    "count": 1
-                },
-                "48242": {
-                    "name": "籃球",
-                    "count": 2
-                }
-            },
-            "total": 3
-        },
-        "early": {
-            "items": {
-                "6046": {
-                    "name": "足球",
-                    "count": 3
-                },
-                "48242": {
-                    "name": "籃球",
-                    "count": 15
-                },
-                "154914": {
-                    "name": "棒球",
-                    "count": 5
-                }
-            },
-            "total": 23
-        },
-        "about_to_start": {
-            "items": [],
-            "total": 0
+            dd($list);
         }
-    },
-    "message": "SUCCESS_API_INDEX_MATCH_LIST_01",
-    "gzip": false
-}
-*/
 
     	//---------------------------------
 
