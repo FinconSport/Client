@@ -478,14 +478,6 @@ class LsportApiController extends Controller {
         $agent_lang = $this->getAgentLang($player_id);
         $lang_col = 'name_' . $agent_lang;
 
-        //---------------------------------
-
-        ///////////////////////////////////
-        //取2天內賽事
-        $today = time();
-        $after_tomorrow = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow = date('Y-m-d', $after_tomorrow);
-
     	//---------------------------------
 
             $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
@@ -495,7 +487,7 @@ class LsportApiController extends Controller {
             ->whereIn("status",[1,2,9])
             ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
             ->groupBy('sport_id', 'status')
-            ->total();
+            ->total(10);    // cache 10sec
 
             if ($return === false) {
                 $this->ApiError("02");
