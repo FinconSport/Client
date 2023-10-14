@@ -118,6 +118,29 @@
                         <td style="width:30%;text-align:center;" key="bf_bodyaway_totalScore"></td>
                     </tr>
                 </tbody>
+                <!-- if sport === 154914(baseball) -->
+                <tbody template="baseballBodyTemplate" hidden>
+                    <tr>
+                        <td style="width:30%;text-align:left;"key="b_bodyhome_TeamName"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyhome_g1"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyhome_g2"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyhome_g3"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyhome_g4"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyhome_g5"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyhome_g6"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyhome_totalScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%;text-align:left;"key="b_bodyaway_TeamName"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyaway_g1"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyaway_g2"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyaway_g3"></td>
+                        <td style="width:10%;text-align:center;" key="b_bodyaway_g4"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyaway_g5"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyaway_g6"></td>
+                        <td style="width:30%;text-align:center;" key="b_bodyaway_totalScore"></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -635,7 +658,7 @@
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
-                callMatchListData.sport_id = sport // default sport
+                callMatchListData.sport_id = searchData.sport_id // default sport
 				callMatchListData.fixture_id = searchData.fixture_id // default fixture
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
@@ -840,10 +863,11 @@
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
         const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
         const BasketBallFootballBodyTemp = $('tbody[template="BasketBallFootballBodyTemplate"]').clone();
+        const baseballBodyTemp = $('tbody[template="baseballBodyTemplate"]').clone();
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
-        if (data.list.status == 2) {
+        if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -852,11 +876,11 @@
             $('.scoreboardCon').append(earlyContainerTemp);
         }
         // Living fixture (status == 2)
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
-            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 || data.series.sport_id == 154914) {
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
 
@@ -887,6 +911,7 @@
                 console.log("Basketball & Football: " + data.series.sport_id);
             } else if (data.series.sport_id == 154914) {
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
+                baseballBodyTemp.removeAttr('hidden').removeAttr('template');
                 
                 BaseballHeadTemp.find('[key="b_head_gameName"]').text("");
                 BaseballHeadTemp.find('[key="b_head_gameTitleOne"]').text("{{ trans('game.scoreBoard.gameOne') }}");
@@ -896,6 +921,27 @@
                 BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
                 BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
                 BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+                $('#livingtableHead').append(BaseballHeadTemp);
+
+                BaseballHeadTemp.find('[key="b_bodyhome_TeamName"]').text(data.list.home_team_name);
+                BaseballHeadTemp.find('[key="b_bodyhome_g1"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_g2"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_g3"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_g4"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_g5"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_g6"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyhome_totalScore"]').text("");
+
+                BaseballHeadTemp.find('[key="b_bodyaway_TeamName"]').text(data.list.away_team_name);
+                BaseballHeadTemp.find('[key="b_bodyaway__g1"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__g2"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__g3"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__g4"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__g5"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__g6"]').text("");
+                BaseballHeadTemp.find('[key="b_bodyaway__totalScore"]').text("");
+
+                $('#livingtableHead').after(BaseballHeadTemp);
 
                 console.log("Baseball: " + data.series.sport_id);
             }
