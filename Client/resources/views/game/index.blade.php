@@ -141,7 +141,7 @@
 </div>
 
 <!-- --- -------------start index page---------- ------ -->
-<div template='fixtureCardTemplate' class="indexEachCard" hidden>
+<!-- <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
         <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
@@ -181,7 +181,6 @@
             <p></p>
         </div>
     </div>
-    <!-- 籃球單節投注 -->
     <div class="indexBetCard" key='basketBallQuaterBet'>
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
@@ -201,20 +200,19 @@
         <div class="indexBetCardTable row m-0 text-center">
         </div>
     </div>
-</div>
+</div> -->
 
-<div id="indexContainer">
+<!-- <div id="indexContainer">
     <div id="indexContainerLeft">
-        <!-- no data -->
         <div id="noData" style="display: none;">
             <i class="fa-solid fa-circle-exclamation"></i>
             <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- early living toggle template -->
-<div class="cateWrapper" template='elToggleTemplate' hidden>
+<!-- <div class="cateWrapper" template='elToggleTemplate' hidden>
     <div class="catWrapperTitle">
         <span class="elToggleText"></span>
         (<span class="elToggleCount"></span>)
@@ -222,10 +220,10 @@
             <i class="fa-solid fa-chevron-down"></i> 
         </span>
     </div>
-</div>
+</div> -->
 
 <!-- league toggle template -->
-<div class="leagueWrapper" template='leagueWrapper' hidden>
+<!-- <div class="leagueWrapper" template='leagueWrapper' hidden>
     <div class="seriesWrapperTitle">
         <div style="width: 35%;">
             <span class="legToggleDir" style="padding-right: 1rem;">
@@ -239,10 +237,10 @@
     </div>
     <div class="seriesWrapperContent">
     </div>
-</div>
+</div> -->
 
 <!-- fixture card template -->
-<div template='fixtureCardTemplate' class="indexEachCard" hidden>
+<!-- <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
         <div class="timeSpan" key='not-show-baseCon'>
             <span class="timer"></span>
@@ -282,7 +280,7 @@
             <p></p>
         </div>
     </div>
-    <!-- 籃球單節投注 -->
+
     <div class="indexBetCard" key='basketBallQuaterBet'>
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
@@ -302,22 +300,22 @@
         <div class="indexBetCardTable row m-0 text-center">
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- bet div template -->
-<div class="col p-0" template='betDiv' hidden>
-</div>
+<!-- <div class="col p-0" template='betDiv' hidden>
+</div> -->
 <!-- betItem template -->
-<div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
+<!-- <div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
     <div class="col-7 p-0 text-right">
         <span class="odd"></span>
         <i class="fa-solid fa-lock" style="display: none;"></i>
         <i class="fa-solid fa-caret-up" style="display: none;"></i>
         <i class="fa-solid fa-caret-down" style="display: none;"></i>
     </div>
-</div>
+</div> -->
 
-<div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
+<!-- <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
     <div class="col text-right p-0">
         <span class="bet_name"></span>
     </div>
@@ -329,7 +327,7 @@
             <i class="fa-solid fa-caret-down" style="display: none;"></i>
         </div>
     </div>
-</div>
+</div> -->
 <!-- --- -------------end index page---------- ------ -->
 
 <!-- no data betItem template -->
