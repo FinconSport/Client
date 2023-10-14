@@ -493,9 +493,6 @@ class LsportApiController extends Controller {
         ->where('start_time', "<=", $after_tomorrow)
         ->groupBy('sport_id', 'status')
         ->total();
-        if ($return === false) {
-            $this->ApiError("03");
-        }
         if ($input['debug'] == 1) {
             dd($return);
         }
