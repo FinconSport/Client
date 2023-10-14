@@ -489,10 +489,10 @@ class LsportApiController extends Controller {
     	//---------------------------------
         
         if (isset($input['debug'])) {
-        $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
-        ->whereIn("status",[1,2,9])
-        ->groupBy('sport_id', 'status')
-        ->total();
+            $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
+            ->whereIn("status",[1,2,9])
+            ->groupBy('sport_id', 'status')
+            ->total();
 
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
