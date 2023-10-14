@@ -925,26 +925,26 @@
 
                 // Create and append home team data row
                 const homeTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.home_team_name);
-                const homeTotalScore = $('<td style="width:20%;text-align:center;">').text(homeTeam.total_score);
+                // const homeTotalScore = $('<td style="width:20%;text-align:center;">').text(homeTeam.total_score);
                 baseballBodyTemp_home.append(homeTeamName);
-                baseballBodyTemp_home.append(homeTotalScore);
+                // baseballBodyTemp_home.append(homeTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]]);
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "-");
                     baseballBodyTemp_home.append(thHome);
                 }
                 $('#livingtableBody').append(baseballBodyTemp_home);
 
                 // Create and append away team data row
                 const awayTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.away_team_name);
-                const awayTotalScore = $('<td style="width:20%;text-align:center;">').text(awayTeam.total_score);
+                // const awayTotalScore = $('<td style="width:20%;text-align:center;">').text(awayTeam.total_score);
                 baseballBodyTemp_away.append(awayTeamName);
-                baseballBodyTemp_away.append(awayTotalScore);
+                // baseballBodyTemp_away.append(awayTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]]);
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "-");
                     baseballBodyTemp_away.append(thAway);
                 }
 
