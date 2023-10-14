@@ -502,8 +502,11 @@ class LsportApiController extends Controller {
             if ($return === false) {
                 $this->ApiError("02");
             }
+            
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
+            $status_name = ["","early","living"];
+
             foreach ($return as $k => $v) {
                 foreach ($v['buckets'] as $kk => $vv) {
                     $sport_id = $vv['key'];
@@ -515,17 +518,19 @@ class LsportApiController extends Controller {
                                     $status = 2;
                                 }
 
+                                $current_status_name = $status_name[$status];
+
                                 $tmp_count = $vvvv['count']['value'];
-                                $list[$status]['items'][$sport_id]['count'] = $tmp_count;
-                                if (isset($list[$status]['total'])) {
-                                    $list[$status]['total'] += $tmp_count;
+                                $list[$current_status_name]['items'][$sport_id]['count'] = $tmp_count;
+                                if (isset($list[$current_status_name]['total'])) {
+                                    $list[$current_status_name]['total'] += $tmp_count;
                                 } else {
-                                    $list[$status]['total'] = $tmp_count;
+                                    $list[$current_status_name]['total'] = $tmp_count;
                                 }
 
                                 // 取得體育名稱
                                 $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
-                                $list[$status]['items'][$sport_id]['name'] = $sport_name;
+                                $list[$current_status_name]['items'][$sport_id]['name'] = $sport_name;
                             }
                         }
                     }
