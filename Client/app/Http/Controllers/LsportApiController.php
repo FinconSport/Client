@@ -497,32 +497,30 @@ class LsportApiController extends Controller {
             $this->ApiError("03");
         }
             dd($return);
-        }
 
-        // 整理統計 , 回傳格式取決於SQL
-        $list = array();
-        foreach ($return as $k => $v) {
-            foreach ($v['buckets'] as $kk => $vv) {
-                $sport_id = $vv['key'];
-                foreach ($vv as $kkk => $vvv) {
-                    if (!in_array($kkk,['key','doc_count'])) {
-                        foreach ($vvv['buckets'] as $kkkk => $vvvv) {
-                            $status = $vvvv['key'];
-                            if ($status == 9) { // 即將開始視為滾球
-                                $status = 2;
+            // 整理統計 , 回傳格式取決於SQL
+            $list = array();
+            foreach ($return as $k => $v) {
+                foreach ($v['buckets'] as $kk => $vv) {
+                    $sport_id = $vv['key'];
+                    foreach ($vv as $kkk => $vvv) {
+                        if (!in_array($kkk,['key','doc_count'])) {
+                            foreach ($vvv['buckets'] as $kkkk => $vvvv) {
+                                $status = $vvvv['key'];
+                                if ($status == 9) { // 即將開始視為滾球
+                                    $status = 2;
+                                }
+                                $list[$status]['items'][$sport_id]['count'] = $vvvv['count']['value'];
+
+                                // 取得體育名稱
+                                $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
+                                $list[$status]['items'][$sport_id]['name'] = $sport_name;
                             }
-                            $list[$status]['items'][$sport_id]['count'] = $vvvv['count']['value'];
-
-                            // 取得體育名稱
-                            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
-                            $list[$status]['items'][$sport_id]['name'] = $sport_name;
                         }
                     }
                 }
             }
-        }
 
-        if (isset($input['debug'])) {
             dd($return);
         }
 
