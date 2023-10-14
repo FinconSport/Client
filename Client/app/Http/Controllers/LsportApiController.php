@@ -488,6 +488,17 @@ class LsportApiController extends Controller {
 
     	//---------------------------------
 
+        $return = LsportFixture::select('f.*')
+        ->from('es_lsport_fixture as f')
+        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
+        ->join('es_lsport_league as l', 'f.sport_id', '=', 'l.sport_id')
+        ->where('s.status', '=', 1)
+        ->where('l.status', '=', 1)
+        ->orderBy("f.start_time","DESC")
+        ->list(1,true);
+
+        dd($return);
+        
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
         ->groupBy('sport_id', 'status')
@@ -505,7 +516,14 @@ class LsportApiController extends Controller {
                     if (!in_array($kkk,['key','doc_count'])) {
                         foreach ($vvv['buckets'] as $kkkk => $vvvv) {
                             $status = $vvvv['key'];
-                            $list[$status]['items'][$sport_id] = $vvvv['count']['value'];
+                            if ($status == 9) { // 即將開始視為滾球
+                                $status = 2;
+                            }
+                            $list[$status]['items'][$sport_id]['count'] = $vvvv['count']['value'];
+
+                            // 取得體育名稱
+                            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
+                            $list[$status]['items'][$sport_id]['name'] = $sport_name;
                         }
                     }
                 }
