@@ -2131,6 +2131,7 @@ class LsportApiController extends Controller {
                 $market_bet_id = $bv->bet_id;
 
                 // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                $market_bet_name_en = $bv->mb_name_en;
                 if (empty($bv->mb_name_locale)) {  // market name
                     $market_bet_name = $bv->mb_name_en;
                 } else {
@@ -2141,6 +2142,7 @@ class LsportApiController extends Controller {
                 $arr_market_bet[] = array(
                     'market_bet_id' => $market_bet_id,
                     'market_bet_name' => $market_bet_name,
+                    'market_bet_name_en' => $market_bet_name_en,
                     //'base_line' => $bv->base_line,
                     'line' => $bv->line,
                     'price' => $bv->price,
