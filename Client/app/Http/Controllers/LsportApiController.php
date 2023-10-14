@@ -818,6 +818,7 @@ class LsportApiController extends Controller {
                         'mb.last_update AS last_update',
                     )
                     ->where('mb.fixture_id', $fixture_id)
+                    ->where('mb.provder_bet_id', 8) // 號源
                     ->where('mb.market_id', $market_id)
                     ->where('mb.base_line', $market_main_line)  //這邊用 base_line 或 line 都可以
                     //->orderBy('mb.bet_id', 'ASC')  //注意排序
@@ -1148,6 +1149,7 @@ class LsportApiController extends Controller {
         // 取得賠率
         $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
         ->where("bet_id", $market_bet_id)
+        ->where('provder_bet_id', 8) // 號源
         ->fetch();
         if ($market_bet_data === false) {
             $this->ApiError("14");
@@ -1542,7 +1544,7 @@ class LsportApiController extends Controller {
             $market_priority = $market_data['priority'];
 
             // 取得賠率
-            $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)->where("bet_id", $market_bet_id)->fetch();
+            $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)->where("provder_bet_id", 8)->where("bet_id", $market_bet_id)->fetch();
             if ($market_bet_data === false) {
                 $this->ApiError("18");
             }
@@ -1837,10 +1839,9 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         // gzip
-       // $data = $this->gzip($data);
+        $data = $this->gzip($data);
 
-       // $this->ApiSuccess($data, "01", true); 
-        $this->ApiSuccess($data, "01"); 
+        $this->ApiSuccess($data, "01", true); 
     }
 
 
@@ -2113,6 +2114,7 @@ class LsportApiController extends Controller {
             )
             ->where('mb.fixture_id', $fixture_id)
             ->where('mb.market_id', $market_id)
+            ->where("mb.provder_bet_id", 8)
             ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
             ->orderBy('mb.bet_id', 'ASC')  //注意排序
             ->get();
