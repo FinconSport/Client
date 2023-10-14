@@ -795,160 +795,78 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const isEarlyFixture = data.list.status === 1;
+        const isLivingFixture = data.list.status === 2;
 
-        const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
-        const BasketBallFootballBodyTemp_home = $('tr[template="basktFootballBodyTemplate_home"]').clone();
-        const BasketBallFootballBodyTemp_away = $('tr[template="basktFootballBodyTemplate_away"]').clone();
-
-        const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
-        const baseballBodyTemp_home = $('tr[template="baseballBodyTemplate_home"]').clone();
-        const baseballBodyTemp_away = $('tr[template="baseballBodyTemplate_away"]').clone();
-
-        livingContainerTemp.attr('id', "livingFixture");
-        // Early fixture (status == 1)
-        if (data.list.status == 1) {
-            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+        if (isEarlyFixture) {
+            const earlyContainerTemp = $('.earlyFixture-container[template="earlyContainerTemplate"]').clone();
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
             earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-        // Living fixture (status == 2)
-        if (data.list.status == 2) {
-            livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-            var scorehome = [];
-            var scoreaway = [];
-            const scoresLengths = data.list.teams.map((team) => team.scores.length);
-            const homeTeam = data.list.teams.find(item => item.index === 1)
-            const awayTeam = data.list.teams.find(item => item.index === 2)
-            if (homeTeam) {
-                homeTeam.scores
-                .sort((a, b) => a.stage - b.stage)
-                .forEach(el => {
-                scorehome.push(el.score);
-                });
+
+        if (isLivingFixture) {
+            const livingContainerTemp = $('.livingFixture-container[key="livingContainerTemplate"]').clone();
+            const tableHead = livingContainerTemp.find('#livingtableHead');
+            const tableBody = livingContainerTemp.find('#livingtableBody');
+            const scores = data.list.teams.map(team => {
+                return team.scores
+                    .sort((a, b) => a.stage - b.stage)
+                    .map(score => score.score);
+            });
+
+            const sportId = data.series.sport_id;
+
+            const isBasketballOrFootball = sportId === 48242 || sportId === 6046;
+            const isBaseball = sportId === 154914;
+
+            if (isBasketballOrFootball || isBaseball) {
+                const headTemplate = isBasketballOrFootball ? 'BasketBallFootballHeadTemplate' : 'BaseballHeadTemplate';
+                const bodyTemplateHome = isBasketballOrFootball ? 'basktFootballBodyTemplate_home' : 'baseballBodyTemplate_home';
+                const bodyTemplateAway = isBasketballOrFootball ? 'basktFootballBodyTemplate_away' : 'baseballBodyTemplate_away';
+
+                const gameTitles = isBasketballOrFootball
+                    ? ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.q1') }}', '{{ trans('game.scoreBoard.q2') }}', '{{ trans('game.scoreBoard.q3') }}', '{{ trans('game.scoreBoard.q4') }}']
+                    : ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.firstRound') }}', '{{ trans('game.scoreBoard.gameTwo') }}', '{{ trans('game.scoreBoard.gameThree') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}'];
+
+                const dataLength = scores[0].length;
+
+                const tableHeadRow = tableHead.find(`tr[template="${headTemplate}"]`).clone();
+                tableHeadRow.removeAttr('hidden').removeAttr('template');
+
+                const teamNames = [data.list.home_team_name, data.list.away_team_name];
+
+                const teamDataRow = [tableBody.find(`tr[template="${bodyTemplateHome}"]`).clone(), tableBody.find(`tr[template="${bodyTemplateAway}"]`).clone()];
+
+                for (let i = 0; i < 2; i++) {
+                    const teamNameElement = $(`<th style="width:20%;text-align:left;">${teamNames[i]}</th>`);
+                    teamDataRow[i].append(teamNameElement);
+                    for (let j = 0; j < dataLength; j++) {
+                        const score = scores[i][j] || '';
+                        const scoreElement = $(`<td style="width:10%;text-align:center;">`).text(score);
+                        teamDataRow[i].append(scoreElement);
+                    }
+                    const totalScoreElement = $(`<th style="width:20%;text-align:center;">${data.list.teams[i].total_score}</th>`);
+                    teamDataRow[i].append(totalScoreElement);
+                }
+
+                if (isBasketballOrFootball) {
+                    const gameTitlesElement = gameTitles.map(title => $(`<th style="width:10%;text-align:center;">`).text(title));
+                    tableHeadRow.append(gameTitlesElement);
+                }
+
+                tableHead.append(tableHeadRow);
+
+                teamDataRow[0].after(teamDataRow[1]);
+
+                $('.scoreboardCon').append(livingContainerTemp);
             }
-            if (awayTeam) {
-                awayTeam.scores
-                .sort((a, b) => a.stage - b.stage)
-                .forEach(el => {
-                scoreaway.push(el.score);
-                });
-            }
-
-            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) {
-                BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
-                BasketBallFootballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
-                BasketBallFootballBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
-
-                ballData = [0, 1, 2, 3, 4];
-                gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.q1') }}', '{{ trans('game.scoreBoard.q2') }}', '{{ trans('game.scoreBoard.q3') }}', '{{ trans('game.scoreBoard.q4') }}'];
-
-                // thead data game title
-                const TeamNameHead = $(`<th style="width:30%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`); // <- game on title
-                BasketBallFootballHeadTemp.append(TeamNameHead);
-                for (let i = 0; i < gameTitle.length; i++) {
-                    BasketBallFootballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i])); // <- game titles
-                }
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
-                BasketBallFootballHeadTemp.append(totalScoreHead);
-                $('#livingtableHead').append(BasketBallFootballHeadTemp); // <- append thead to table
-
-                // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`); // <- home team name
-                BasketBallFootballBodyTemp_home.append(homeTeamName);
-                for (let i = 0; i < ballData.length; i++) {
-                    console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[ballData[i]] || "");// <- home team scores
-                    BasketBallFootballBodyTemp_home.append(thHome);
-                }
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
-                BasketBallFootballBodyTemp_home.append(homeTotalScore);
-                $('#livingtableBody').append(BasketBallFootballBodyTemp_home); // <- append home team data
-
-                // away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
-                BasketBallFootballBodyTemp_away.append(awayTeamName);
-                for (let i = 0; i < ballData.length; i++) {
-                    console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[ballData[i]] || ""); // <- away team scores
-                    BasketBallFootballBodyTemp_away.append(thAway);
-                }
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`); // <- away team total scores
-                BasketBallFootballBodyTemp_away.append(awayTotalScore); // <- append away team data
-
-                BasketBallFootballBodyTemp_home.after(BasketBallFootballBodyTemp_away)// <- append away team after home team to table
-
-                console.log("Basketball & Football: " + data.series.sport_id);
-
-            } else if (data.series.sport_id == 154914) {
-
-                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
-                baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
-
-                let baseballData = [];
-                let gameTitle = [];
-
-                if (scoresLengths.length < 6) {
-                    baseballData = [0, 1, 2, 3, 4, 5];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.firstRound') }}', '{{ trans('game.scoreBoard.gameTwo') }}', '{{ trans('game.scoreBoard.gameThree') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}'];
-                    console.log('less than 6');
-                } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
-                    baseballData = [4, 5, 6, 7, 8, 9];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}', '{{ trans('game.scoreBoard.gameSix') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}'];
-                    console.log('between 6 and 9');
-                } else if (scoresLengths.length > 9) {
-                    baseballData = [7, 8, 9, 10, 11, 12];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}', '{{ trans('game.scoreBoard.gameTen') }}', '{{ trans('game.scoreBoard.gameEleven') }}', '{{ trans('game.scoreBoard.gameTwelve') }}'];
-                    console.log('more than 9');
-                }
-
-                // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`); // <- game on title
-                BaseballHeadTemp.append(TeamNameHead);
-                for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i])); // <- game titles
-                }
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
-                BaseballHeadTemp.append(totalScoreHead);
-                $('#livingtableHead').append(BaseballHeadTemp); // <- append thead to table
-
-                // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`); // <- home team name
-                baseballBodyTemp_home.append(homeTeamName);
-                for (let i = 0; i < baseballData.length; i++) {
-                    console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");// <- home team scores
-                    baseballBodyTemp_home.append(thHome);
-                }
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
-                baseballBodyTemp_home.append(homeTotalScore);
-                $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
-
-                // away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
-                baseballBodyTemp_away.append(awayTeamName);
-                for (let i = 0; i < baseballData.length; i++) {
-                    console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || ""); // <- away team scores
-                    baseballBodyTemp_away.append(thAway);
-                }
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`); // <- away team total scores
-                baseballBodyTemp_away.append(awayTotalScore); // <- append away team data
-
-                baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append away team after home team to table
-
-                console.log("Baseball: " + data.series.sport_id);
-            }
-
-            $('.scoreboardCon').append(livingContainerTemp);
         }
     }
+
 
     // detect if there's still package need to be processed
     async function processMessageQueueAsync() {
