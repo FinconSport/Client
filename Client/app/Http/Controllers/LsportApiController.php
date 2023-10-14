@@ -489,11 +489,17 @@ class LsportApiController extends Controller {
     	//---------------------------------
         
         if (isset($input['debug'])) {
+
+            $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+            $after_tomorrow_es = date('Y-m-d 00:00:00', $after_tomorrow_es);
+
             $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
             ->whereIn("status",[1,2,9])
+            ->where("start_time","<=", $after_tomorrow_es)
             ->groupBy('sport_id', 'status')
             ->total();
 
+            dd($return);
             // 整理統計 , 回傳格式取決於SQL
             $list = array();
             foreach ($return as $k => $v) {
@@ -517,7 +523,6 @@ class LsportApiController extends Controller {
                 }
             }
 
-            dd($return);
         }
 
 
