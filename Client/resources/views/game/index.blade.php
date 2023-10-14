@@ -840,7 +840,7 @@
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
-        
+
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
         if (data.list.status == 2) {
@@ -861,7 +861,7 @@
             } else if (data.series.sport_id == 154914) {
                 
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
-                BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
+                BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");

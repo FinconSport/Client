@@ -6,7 +6,7 @@
  */
 return [
     "scoreBoard" => [
-        "fullTimeScore" => "Full-Time Score",
+        "fullTimeScore" => "Total Score",
         "firstRound" => "First Round",
         "q1" => "Q1",
         "q2" => "Q2",
