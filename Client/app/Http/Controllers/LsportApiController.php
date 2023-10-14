@@ -492,6 +492,7 @@ class LsportApiController extends Controller {
         ->from('es_lsport_fixture as f')
         ->join('es_lsport_league as l', 'f.league_id', '=', 'l.league_id')
         ->where('l.status', '=', 1)
+        ->whereIn('f.status', [1,2,9])
         ->groupBy("f.sport_id")
         ->list();
 
