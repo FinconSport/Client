@@ -839,6 +839,7 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        livingContainerTemp.attr('id', "livingFixture");
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
 
         // Early fixture (status == 1)
@@ -865,7 +866,7 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                $('.livingtableHead').append(BasketBallFootballHeadTemp);
+                $('#' + livingContainerTemp.attr('id') + ' .livingtableHead').append(BasketBallFootballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
