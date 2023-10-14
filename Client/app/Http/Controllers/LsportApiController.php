@@ -517,7 +517,11 @@ class LsportApiController extends Controller {
 
                                 $tmp_count = $vvvv['count']['value'];
                                 $list[$status]['items'][$sport_id]['count'] = $tmp_count;
-                                $list[$status]['total'] += $tmp_count;
+                                if (isset($list[$status]['total'])) {
+                                    $list[$status]['total'] += $tmp_count;
+                                } else {
+                                    $list[$status]['total'] = $tmp_count;
+                                }
 
                                 // 取得體育名稱
                                 $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
