@@ -887,7 +887,7 @@
 
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
                 baseballBodyTemp.removeAttr('hidden').removeAttr('template');   
-                const scoresLengths = data.teams.map((team) => team.scores.length);
+                const scoresLengths = data.list.teams.map((team) => team.scores.length);
                 const baseballData = [];
                 const gameTitle = [];
 
