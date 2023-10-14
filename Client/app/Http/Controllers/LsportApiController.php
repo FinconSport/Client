@@ -500,7 +500,7 @@ class LsportApiController extends Controller {
         foreach ($return as $k => $v) {
             foreach ($v['buckets'] as $kk => $vv) {
                 foreach ($vv as $kkk => $vvv) {
-                    if (!in_array(['key','doc_count'],$kkk)) {
+                    if (!in_array($kkk,['key','doc_count'])) {
                         dd($vvv[$kkk]);
                     }
                 }
