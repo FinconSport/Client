@@ -871,6 +871,7 @@
                     break;
                     
                 case sportType.sport_id ===154914:
+                    console.log('154914')
                     BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
 
                     BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
