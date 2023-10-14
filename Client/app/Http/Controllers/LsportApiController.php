@@ -496,19 +496,21 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        // 整理統計
+        // 整理統計 , 回傳格式取決於SQL
+        $list = array();
         foreach ($return as $k => $v) {
             foreach ($v['buckets'] as $kk => $vv) {
                 foreach ($vv as $kkk => $vvv) {
                     if (!in_array($kkk,['key','doc_count'])) {
                         foreach ($vvv['buckets'] as $kkkk => $vvvv) {
-                            dd($vvvv);
+                            $list[$vvvv['key']] = $vvvv['count']['value'];
                         }
                     }
                 }
             }
         }
-        dd($return);
+        
+        dd($list);
 
 
         /*
