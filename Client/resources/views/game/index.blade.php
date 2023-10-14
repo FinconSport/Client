@@ -75,18 +75,17 @@
             <p class="away_team_name col-3"></p>
         </div>
         <!-- living fixture -->
-        <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
-            
+        <div class="livingFixture-container row" key="livingContainerTemplate" hidden>
             <table>
                 <thead id="livingtableHead">
                     <!-- if sport === 48242 && sport === 6046 -->
                     <tr template="BasketBallFootballHeadTemplate" hidden>
-                        <th key="bf_head_gameName"></th>
-                        <th key="bf_head_q1"></th>
-                        <th key="bf_head_q2"></th>
-                        <th key="bf_head_q3"></th>
-                        <th key="bf_head_q4"></th>
-                        <th key="bf_head_totalScore"></th>
+                        <th style="width:30%;text-align:left;" key="bf_head_gameName"></th>
+                        <th style="width:10%;text-align:center;" key="bf_head_q1"></th>
+                        <th style="width:10%;text-align:center;" key="bf_head_q2"></th>
+                        <th style="width:10%;text-align:center;" key="bf_head_q3"></th>
+                        <th style="width:10%;text-align:center;" key="bf_head_q4"></th>
+                        <th style="width:30%;text-align:center;" key="bf_head_totalScore"></th>
                     </tr>
                     <!-- if sport === 48242 && sport === 6046 -->
                     <tr template="BaseballHeadTemplate" hidden>
@@ -839,6 +838,8 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
         if (data.list.status == 2) {
@@ -853,13 +854,14 @@
         // Living fixture (status == 2)
         if (data.list.status == 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
+            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
             if (data.series.sport_id == 48242 || data.series.sport_id == 6046) {
                 console.log("Basketball & Football: " + data.series.sport_id);
             } else if (data.series.sport_id == 154914) {
-                const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+                
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
-                BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
+                BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
