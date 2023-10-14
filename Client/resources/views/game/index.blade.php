@@ -795,9 +795,6 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        const isEarlyFixture = data.list.status === 1;
-        const isLivingFixture = data.list.status === 2;
-
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
 
@@ -811,7 +808,7 @@
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
-        if (isEarlyFixture) {
+        if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -820,7 +817,7 @@
             $('.scoreboardCon').append(earlyContainerTemp);
         }
         // Living fixture (status == 2)
-        if (isLivingFixture) {
+        if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = [];
@@ -843,10 +840,7 @@
                 });
             }
 
-            const isBasketballOrFootball = sportId === 48242 || sportId === 6046;
-            const isBaseball = sportId === 154914;
-
-            if (isBasketballOrFootball || isBaseball) {
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
                 BasketBallFootballBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
@@ -891,7 +885,7 @@
 
                 console.log("Basketball & Football: " + data.series.sport_id);
 
-            } else if (isBaseball) {
+            } else if (data.series.sport_id == 154914) {
 
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
                 baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -954,8 +948,7 @@
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
-    } 
-
+    }
 
     // detect if there's still package need to be processed
     async function processMessageQueueAsync() {
