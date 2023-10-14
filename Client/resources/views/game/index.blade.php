@@ -877,7 +877,7 @@
                 BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
                 BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
                 BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                $('#livingtableHead').append(BasketBallFootballHeadTemp);
+                $('#livingtableHead').append(BaseballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
