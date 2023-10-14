@@ -494,7 +494,7 @@ class LsportApiController extends Controller {
         ->where('l.status', '=', 1)
         ->whereIn('f.status', [1,2,9])
         ->groupBy("f.sport_id")
-        ->list();
+        ->total();
 
         dd($return);
 
