@@ -907,52 +907,80 @@
 
                 if (scoresLengths.length < 6) {
                     baseballData = [0, 1, 2, 3, 4, 5];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.firstRound') }}', '{{ trans('game.scoreBoard.gameTwo') }}', '{{ trans('game.scoreBoard.gameThree') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}'];
+                    gameTitle = [
+                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+                        '{{ trans('game.scoreBoard.firstRound') }}', 
+                        '{{ trans('game.scoreBoard.gameTwo') }}', 
+                        '{{ trans('game.scoreBoard.gameThree') }}', 
+                        '{{ trans('game.scoreBoard.gameFour') }}', 
+                        '{{ trans('game.scoreBoard.gameFive') }}'
+                    ];
                     console.log('less than 6');
                 } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
                     baseballData = [4, 5, 6, 7, 8, 9];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}', '{{ trans('game.scoreBoard.gameSix') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}'];
+                    gameTitle = [
+                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+                        '{{ trans('game.scoreBoard.gameFour') }}', 
+                        '{{ trans('game.scoreBoard.gameFive') }}', 
+                        '{{ trans('game.scoreBoard.gameSix') }}', 
+                        '{{ trans('game.scoreBoard.gameSeven') }}', 
+                        '{{ trans('game.scoreBoard.gameEight') }}', 
+                        '{{ trans('game.scoreBoard.gameNine') }}'
+                    ];
                     console.log('between 6 and 9');
                 } else if (scoresLengths.length > 9) {
                     baseballData = [7, 8, 9, 10, 11, 12];
-                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}', '{{ trans('game.scoreBoard.gameTen') }}', '{{ trans('game.scoreBoard.gameEleven') }}', '{{ trans('game.scoreBoard.gameTwelve') }}'];
+                    gameTitle = [
+                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+                        '{{ trans('game.scoreBoard.gameSeven') }}', 
+                        '{{ trans('game.scoreBoard.gameEight') }}', 
+                        '{{ trans('game.scoreBoard.gameNine') }}', 
+                        '{{ trans('game.scoreBoard.gameTen') }}', 
+                        '{{ trans('game.scoreBoard.gameEleven') }}', 
+                        '{{ trans('game.scoreBoard.gameTwelve') }}'
+                    ];
                     console.log('more than 9');
                 }
 
                 // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`); // <- game on title
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
                 BaseballHeadTemp.append(TeamNameHead);
+
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i])); // <- game titles
+                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
                 }
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
+
+                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
                 BaseballHeadTemp.append(totalScoreHead);
-                $('#livingtableHead').append(BaseballHeadTemp); // <- append thead to table
+                $('#livingtableHead').append(BaseballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`); // <- home team name
+                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`);
                 baseballBodyTemp_home.append(homeTeamName);
+
                 for (let i = 0; i < baseballData.length; i++) {
-                    console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");// <- home team scores
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");
                     baseballBodyTemp_home.append(thHome);
                 }
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
+
+                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
                 baseballBodyTemp_home.append(homeTotalScore);
-                $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
+                $('#livingtableBody').append(baseballBodyTemp_home);
 
                 // away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
+                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`);
                 baseballBodyTemp_away.append(awayTeamName);
+
                 for (let i = 0; i < baseballData.length; i++) {
-                    console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || ""); // <- away team scores
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "");
                     baseballBodyTemp_away.append(thAway);
                 }
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`); // <- away team total scores
-                baseballBodyTemp_away.append(awayTotalScore); // <- append away team data
 
-                baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append away team after home team to table
+                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                baseballBodyTemp_away.append(awayTotalScore);
+
+                // Append away team after home team to table
+                baseballBodyTemp_home.after(baseballBodyTemp_away)
 
                 console.log("Baseball: " + data.series.sport_id);
             }
