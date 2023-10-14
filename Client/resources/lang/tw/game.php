@@ -24,5 +24,6 @@ return [
         "gameTen" => "10",
         "gameEleven" => "11",
         "gameTwelve" => "12",
+        "gamesOn" => "局上",
     ],
 ];

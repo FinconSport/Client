@@ -909,7 +909,7 @@
                 }
 
                 // thead data game title
-                const TeamNameHead = $('<th style="width:20%;text-align:left;">').text('Name');
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
                 const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
                 BaseballHeadTemp.append(TeamNameHead);
                 BaseballHeadTemp.append(totalScoreHead);
