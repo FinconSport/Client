@@ -113,6 +113,7 @@
                 <!-- if sport === 154914(baseball) -->
                 <tbody id="livingtableBody">
                     <tr template="baseballBodyTemplate_home" hidden></tr>
+                    <tr template="baseballBodyTemplate_away" hidden></tr>
                 </tbody>
             </table>
         </div>
@@ -824,6 +825,7 @@
 
         const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
         const baseballBodyTemp_home = $('tr[template="baseballBodyTemplate_home"]').clone();
+        const baseballBodyTemp_away = $('tr[template="baseballBodyTemplate_away"]').clone();
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
@@ -867,10 +869,13 @@
             } else if (data.series.sport_id == 154914) {
 
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');   
+                baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
+                baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
+
                 const scoresLengths = data.list.teams.map((team) => team.scores.length);
-                const homeTeam = data.find(team => team.index === 1);
-                const awayTeam = data.find(team => team.index === 2);
+                const homeData = data.teams.find(item => item.index === 1)
+                const awayTeam = data.teams.find(item => item.index === 2)
+
                 let baseballData = [];
                 let gameTitle = [];
 
@@ -887,32 +892,40 @@
                     gameTitle = ['Full Time Score', 'Game 7', 'Game 8', 'Game 9', 'Game 10', 'Game 11', 'Game 12'];
                     console.log('more than 9');
                 }
-
+                // thead data game title
                 const TeamNameHead = $('<th style="width:20%;text-align:left;">').text('Name');
                 const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
                 BaseballHeadTemp.append(TeamNameHead);
                 BaseballHeadTemp.append(totalScoreHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    // Create a new <th> element
                     const thHead = $('<th style="width:10%;text-align:center;">').text(gameTitle[i]);
-                    // Append the <th> element to the cloned row
                     BaseballHeadTemp.append(thHead);
                 }
 
+                // tbody home team data
                 const homeTeamName = $('<th style="width:20%;text-align:left;">').text(data.list.home_team_name);
                 const homeTotalScore = $('<th style="width:20%;text-align:center;>').text(homeTeam.total_score);
                 baseballBodyTemp_home.append(TeamNameHead);
                 baseballBodyTemp_home.append(totalScoreHead);
                 for (let i = 0; i < baseballData.length; i++) {
-                    // Create a new <th> element
                     const thHome = $('<th style="width:10%;text-align:center;">').text(homeTeam.scores[i].score);
-                    // Append the <th> element to the cloned row
-                    baseballBodyTemp_homeappend(thHome);
+                    baseballBodyTemp_home.append(thHome);
+                }
+
+                // tbody away team data
+                const awayTeamName = $('<th style="width:20%;text-align:left;">').text(data.list.away_team_name);
+                const awayTotalScore = $('<th style="width:20%;text-align:center;>').text(awayTeam.total_score);
+                baseballBodyTemp_away.append(awayTeamName);
+                baseballBodyTemp_away.append(awayTotalScore);
+                for (let i = 0; i < baseballData.length; i++) {
+                    const thAway = $('<th style="width:10%;text-align:center;">').text(awayTeam.scores[i].score);
+                    baseballBodyTemp_away.append(thAway);
                 }
 
                 $('#livingtableHead').append(BaseballHeadTemp);
                 $('#livingtableBody').append(baseballBodyTemp_home);
+                baseballBodyTemp_home.after(baseballBodyTemp_away);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
