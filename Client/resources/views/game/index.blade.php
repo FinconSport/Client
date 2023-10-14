@@ -888,21 +888,22 @@
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
                 baseballBodyTemp.removeAttr('hidden').removeAttr('template');   
                 const scoresLengths = data.list.teams.map((team) => team.scores.length);
+                console.log("scorelengths " + scoresLengths.length < 6)
                 const baseballData = [];
                 const gameTitle = [];
 
                 if (scoresLengths.length < 6) {
-                    baseballData = [0, 1, 2, 3, 4, 5, 6];
-                    gameTitle = ['Full Time Score', 'First Round', 'Game 2', 'Game 3', 'Game 4', 'Game 5', 'Game 6'];
-                    console.log('less than 6');
+                    const baseballData = [0, 1, 2, 3, 4, 5, 6];
+                    const gameTitle = ['Full Time Score', 'First Round', 'Game 2', 'Game 3', 'Game 4', 'Game 5', 'Game 6'];
+                    console.log('less than 6')
                 } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
-                    baseballData = [4, 5, 6, 7, 8, 9];
-                    gameTitle = ['Full Time Score', 'Game 4', 'Game 5', 'Game 6', 'Game 7', 'Game 8', 'Game 9'];
-                    console.log('more than six');
+                    const baseballData = [4, 5, 6, 7, 8, 9];
+                    const gameTitle = ['Full Time Score', 'Game 4', 'Game 5', 'Game 6', 'Game 7', 'Game 8', 'Game 9'];
+                    console.log('more than six')
                 } else if (scoresLengths.length > 9) {
-                    baseballData = [7, 8, 9, 10, 11, 12];
-                    gameTitle = ['Full Time Score', 'Game 7', 'Game 8', 'Game 9', 'Game 10', 'Game 11', 'Game 12'];
-                    console.log('more than 9');
+                    const baseballData = [7, 8, 9, 10, 11, 12];
+                    const gameTitle = ['Full Time Score', 'Game 7', 'Game 8', 'Game 9', 'Game 10', 'Game 11', 'Game 12'];
+                    console.log('more than 9')
                 }
 
                 const TeamNameHead = $('<th style="width:20%;text-align:left;>').text('Name');
