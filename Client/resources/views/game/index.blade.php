@@ -841,8 +841,8 @@
 
             if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
-                BasketBallFootballHeadTemp_home.removeAttr('hidden').removeAttr('template');  
-                BasketBallFootballHeadTemp_away.removeAttr('hidden').removeAttr('template'); 
+                BasketBallFootballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
+                BasketBallFootballBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
 
                 ballData = [0, 1, 2, 3, 4];
                 gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.q1') }}', '{{ trans('game.scoreBoard.q2') }}', '{{ trans('game.scoreBoard.q3') }}', '{{ trans('game.scoreBoard.q4') }}'];
