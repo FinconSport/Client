@@ -15,15 +15,34 @@
     text-align: center;
 }
 
+.earlyFixture-container p.league_name {
+    margin-bottom: 0.5rem;
+}
+
 .scoreboardCon .earlyFixture-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 65%;
     padding: 2rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
 }
+
+.livingFixture-container.row {
+    width: 65%;
+    padding: 2rem 2rem;
+    border-radius: 5px;
+    background: rgb(0 0 0 / 50%);
+    margin: auto;
+}
+
+@media screen and (max-width:1227px) {
+    .livingFixture-container.row,
+    .scoreboardCon .earlyFixture-container {
+        width: 87%;
+    }
+  }
 
 .bettingtype-container {
     border: 2px solid #415b5a;
@@ -73,16 +92,3 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 0rem 0rem;
 }
 
-.livingFixture-container.row {
-    width: 65%;
-    padding: 2rem 2rem;
-    border-radius: 5px;
-    background: rgb(0 0 0 / 50%);
-    margin: auto;
-}
-
-@media screen and (max-width:1227px) {
-    .livingFixture-container.row {
-        width: 87%;
-    }
-  }
