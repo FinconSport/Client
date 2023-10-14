@@ -909,7 +909,7 @@
                 baseballBodyTemp_home.append(TeamNameHead);
                 baseballBodyTemp_home.append(totalScoreHead);
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thHome = $('<th style="width:10%;text-align:center;">').text(homeTeam.scores[baseballData[i]].score);
+                    const thHome = $('<th style="width:10%;text-align:center;">').text(homeTeam.scores[i].score);
                     baseballBodyTemp_home.append(thHome);
                 }
 
@@ -919,7 +919,7 @@
                 baseballBodyTemp_away.append(awayTeamName);
                 baseballBodyTemp_away.append(awayTotalScore);
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thAway = $('<th style="width:10%;text-align:center;">').text(awayTeam.scores[baseballData[i]].score);
+                    const thAway = $('<th style="width:10%;text-align:center;">').text(awayTeam.scores[i].score);
                     baseballBodyTemp_away.append(thAway);
                 }
 
