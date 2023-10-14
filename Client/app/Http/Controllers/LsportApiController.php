@@ -492,7 +492,7 @@ class LsportApiController extends Controller {
         ->whereIn("status",[1,2,9])
         ->where('start_time', "<=", $after_tomorrow)
         ->groupBy('sport_id', 'status')
-        ->total();
+        ->total(1,true);
         if ($return === false) {
             $this->ApiError("03");
         }
@@ -521,7 +521,6 @@ class LsportApiController extends Controller {
         }
 
         if ($input['debug'] == 1) {
-
             dd($list);
         }
 
