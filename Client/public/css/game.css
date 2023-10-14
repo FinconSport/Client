@@ -68,3 +68,10 @@ div#bettingTypeContainer {
 .livingtableHead th{
     padding: 0.5rem 0rem;
 }
+
+.livingFixture-container.row {
+    width: 100%;
+    padding: 2rem 2rem;
+    border-radius: 5px;
+    background: rgb(0 0 0 / 50%);
+}
