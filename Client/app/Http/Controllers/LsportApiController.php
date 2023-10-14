@@ -495,7 +495,7 @@ class LsportApiController extends Controller {
         if ($return === false) {
             $this->ApiError("03");
         }
-        if ($input['debug'] == 1) {
+        if (isset($input['debug'])) {
             dd($return);
         }
 
@@ -522,8 +522,8 @@ class LsportApiController extends Controller {
             }
         }
 
-        if ($input['debug'] == 1) {
-            dd($list);
+        if (isset($input['debug'])) {
+            dd($return);
         }
 
 
