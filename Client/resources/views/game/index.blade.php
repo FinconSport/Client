@@ -913,7 +913,7 @@
                 baseballBodyTemp_home.append(homeTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
-                    console.log(homeTeam.scores[baseballData[i]].score)
+                    console.log("Score: " + homeTeam.scores[baseballData[i]].score)
                     const thHome = $('<td style="width:10%;text-align:center;">').text(homeTeam.scores[baseballData[i]].score);
                     baseballBodyTemp_home.append(thHome);
                 }
