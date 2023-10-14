@@ -63,6 +63,7 @@
 <div id='searchCondition'>
     {{ trans('common.search_area.search') }}
 </div>
+<!-- early & living scoreboard-->
 <div id="scoreboardContainer">
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <!-- early fixture -->
@@ -166,6 +167,7 @@
     </div>
 </div>
 
+<!-- --- -------------start index page---------- ------ -->
 <div template='fixtureCardTemplate' class="indexEachCard" hidden>
     <div class="indexBetCard">
         <div class="timeSpan" key='not-show-baseCon'>
@@ -355,6 +357,7 @@
         </div>
     </div>
 </div>
+<!-- --- -------------end index page---------- ------ -->
 
 <!-- no data betItem template -->
 <div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
@@ -362,8 +365,6 @@
 
 
 @endsection
-
-
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
@@ -416,9 +417,7 @@
     var stagePriorityArr = null
     var gameTitle = null
 
- 
 
-    
     /* ===== DATA LAYER ===== */
     
     /* ===== VIEW LAYER ===== */
@@ -703,22 +702,6 @@
         // ===== DATA LATER =====
     });
 
-    // 跳轉獨立賽事頁
-    function navToGame(e) {
-        let sport_id = e.attr('sport_id')   
-        let fixture_id = e.attr('fixture_id')
-        
-
-        const queryParams = {};
-        queryParams.sport_id = sport_id
-        queryParams.fixture_id = fixture_id
-
-        const queryString = new URLSearchParams(queryParams).toString();
-        const urlWithQuery = `/game?${queryString}`;
-        console.log(urlWithQuery)
-        window.location.href = urlWithQuery
-    }
-
     ///game bet loading
     function showLoading() {
         document.getElementById("leftSlideOrderLoadingContainer").classList.remove("hidden");
@@ -765,6 +748,7 @@
         }
     }
 
+    // ------- render function to game page market_data-----------
     function renderViewV2() {
         
         if (matchListD.data.list.status === 1) {
@@ -782,6 +766,7 @@
         });
     }
 
+    // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
         // Check if the container with ID k already exists
         if (!$('#' + v.market_id).length) {
@@ -797,6 +782,7 @@
         }
     }
 
+     // ------- game page create market data rate container-----------
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         if ($('#' + marketBetRateId).length === 0) {
@@ -857,6 +843,7 @@
         }
     }
 
+    // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
@@ -950,281 +937,6 @@
         }
     }
 
-    
-    // render view layer here
-    function renderView() {
-		console.log(matchListD)
-        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
-                    let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
-                    let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-                    if( isExist ) {
-                        let card = $(`#${k3}`) 
-                        let time = card.find('.timer');
-                        let home_team_info = card.find('[key="homeTeamInfo"]')
-                        let away_team_info = card.find('[key="awayTeamInfo"]')
-                        let nowStatus = parseInt(card.attr('status'))
-                        let isStatusSame = nowStatus === v3.status ? true : false // is status the same
-                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
-                        if( isSwitchCate ) {
-                            if( !isCateExist ) createCate(k, v)
-                            if( !isLeagueExist ) createLeague(k, k2, v2)
-                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
-                            let livingNode = $(`#${k3}`)
-                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
-                            card.attr('cate', k)
-                            card.attr('status', v3.status)
-                        }   
-
-                        // 玩法統計
-                        card.find('.otherBetWay p').html('+' + v3.market_bet_count)
-
-                        // 壘包 好壞球 只有 滾球 棒球有
-                        if( sport === 154914 && v3.status === 2 ) {
-                            card.find('[key="not-show-baseCon"]').hide()
-                            card.find('[key="show-baseCon"]').show()
-                        } else {
-                            card.find('[key="not-show-baseCon"]').show()
-                            card.find('[key="show-baseCon"]').hide()
-                        }
-
-                        // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
-
-                        // ready to start
-                        if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
-
-                        // living
-                        if( v3.status === 2 ) {
-                            // score
-                            if( v3.scoreboard ) {
-                                let homeScore = home_team_info.find('.scoreSpan')
-                                let awayScore = away_team_info.find('.scoreSpan')
-                                let nowHomeScore = parseInt(homeScore.html())
-                                let nowAwayScore = parseInt(awayScore.html())
-                                let updateHome = parseInt(v3.scoreboard[1][0])
-                                let updateAway = parseInt(v3.scoreboard[2][0])
-                                if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
-                                if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
-
-                                setTimeout(() => {
-                                    homeScore.removeClass('raiseScore')
-                                    awayScore.removeClass('raiseScore')
-                                }, 3000);
-
-                                homeScore.html( v3.scoreboard[1][0] )
-                                awayScore.html( v3.scoreboard[2][0] )
-                            }
-
-                            // stage
-                            let timerStr = null
-                            if( v3.periods ) {
-                                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
-                                // bet data
-                                renderBetArea(mainPriorityArr, v3, k3)
-                                // exception baseball
-                                if( sport === 154914 ) {
-                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
-
-                                    // base
-                                    let baseCont = card.find('img[alt="base"]')
-                                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
-                                    baseCont.attr('src', `/image/base/${baseText}.png`)
-
-                                    // balls
-                                    let strike = card.find('div[key="strike"]')
-                                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
-                                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
-                                    let ball = card.find('div[key="ball"]')
-                                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
-                                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
-                                    let out = card.find('div[key="out"]')
-                                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
-                                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
-                                }
-
-                                time.html(timerStr)
-                            }
-
-                            // exception basketball
-                            if( sport === 48242 ) {
-                                let card2 = card.find('[key="basketBallQuaterBet"]')
-
-                                // 換節了 重新渲染單節投注區塊
-                                if( v3.periods ) {
-                                    newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-
-                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
-                                        stagePriorityArr = newStagePriorityArr
-                                        card.find('.indexBetCardTable').eq(1).html('')
-                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
-                                    }
-                                }
-
-                                let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
-                                let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
-
-                                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
-                                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-                                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
-                                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-
-
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
-                            }
-                            
-                        }
-                       
-                        function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
-                            console.log(priorityArr)
-                            priorityArr.forEach(( i, j ) => {
-                                let bet_div = $(`#${k3} div[priority=${i}]`)
-                                let betData = Object.values(v3.list).find(m => m.priority === i)
-                                let item = null
-                                if( betData && Object.keys(betData.list).length > 0 ) {
-                                    // 是否有讓方
-                                    let isHcapTeam = null
-                                    // 讓分的priority && line不同 && 有盤口
-                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
-
-                                    Object.entries(betData.list).map(([k4, v4], s) => { 
-                                        // 先取消樣式
-                                        bet_div.find('div').removeClass('hcapTeam')
-                                        // 判定讓方 -> line值為負
-                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-                                            if( stageBet === 0 ) {
-                                                let index = parseInt(v4.market_bet_name_en) - 1
-                                                bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
-                                            } else {
-                                                let index = parseInt(v4.market_bet_name_en) + 1
-                                                bet_div.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
-                                            }
-                                        }
-
-                                        item = bet_div.find('.betItemDiv').eq(s)
-                                        // old attribute
-                                        let market_bet_id = item.attr('market_bet_id')
-                                        let price = item.attr('bet_rate')
-                                        let isSelected = item.hasClass('m_order_on')
-
-                                        // 判斷盤口存在+是否有改變且狀態為1
-                                        if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
-                                            // 判斷賠率是否有改變
-                                            if( parseFloat(price) > parseFloat(v4.price) ) {
-                                                // 賠率下降
-                                                lowerOdd(k3, betData.market_id, v4.market_bet_id)
-                                            }
-                                            if( parseFloat(price) < parseFloat(v4.price) ) {
-                                                // 賠率上升
-                                                raiseOdd(k3, betData.market_id, v4.market_bet_id)
-                                            }
-                                        } 
-
-                                        // set attribute
-                                        if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
-                                        item.attr('priority', i)
-                                        item.attr('fixture_id', k3)
-                                        item.attr('market_id', betData.market_id)
-                                        item.attr('market_bet_id', v4.market_bet_id)
-                                        item.attr('bet_rate', v4.price)
-                                        item.attr('bet_type', betData.market_name)
-                                        item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
-                                        item.attr('bet_name_en', v4.market_bet_name_en)
-                                        item.attr('line', v4.line)
-                                        item.attr('league', v2.league_name)
-                                        item.attr('home', v3.home_team_name)
-                                        item.attr('away', v3.away_team_name)
-
-                                        // rate
-                                        item.find('.odd').html(v4.price)
-                                        // 賦值
-                                        switch ( i ) {
-                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                                                item.find('.bet_name').html( v4.line )
-                                                break;
-                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
-                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
-                                                break;
-                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                                                item.find('.bet_name').html( v4.market_bet_name )
-                                                break;
-                                            default: // 獨贏
-                                                break;
-                                        }
-
-                                        // 左邊投注區塊
-                                        let calBetNameStr = ''
-                                        let home = item.attr('home')
-                                        let away = item.attr('away')
-                                        if( convertTeamPriArr.indexOf(i) === -1 ) {
-                                            calBetNameStr = v4.market_bet_name + ' ' + v4.line
-                                        } else {
-                                            calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
-                                        }
-                                        $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-
-                                        // 狀態 鎖頭
-                                        if( v4.status === 1 ) {
-                                            item.find('.fa-lock').hide()
-                                            item.attr('onclick', 'openCal($(this))')
-
-                                            // 左邊選中的剛好鎖起來了 -> 復原
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
-                                                $('#submitOrder').html(langTrans.bet_area.bet)
-                                                $('#submitOrder').removeClass('disabled')
-                                                $('#submitOrder').removeAttr('disabled')
-                                            }
-                                        } else {
-                                            item.find('.fa-lock').show()
-                                            item.removeAttr('onclick')
-
-                                            // 左邊選中的剛好鎖起來了
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
-                                                $('#submitOrder').html(langTrans.bet_area.disabled)
-                                                $('#submitOrder').addClass('disabled')
-                                                $('#submitOrder').attr('disabled', true)
-                                            }
-                                        }
-                                    })
-                                } else {
-                                    let k = 2
-                                    if( sport === 6046 ) k = 3
-                                    for (let j = 0; j < k; j++) {
-                                        let item = bet_div.find('.betItemDiv').eq(j)
-
-                                        item.find('.fa-lock').show()
-                                        item.removeAttr('onclick')
-                                    }
-                                }
-                            });
-                        }
-                    } else {
-                        // 新的賽事
-                        if( !isCateExist ) createCate(k, v)
-                        if( !isLeagueExist ) createLeague(k, k2, v2)
-                        createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
-                    }
-                })
-            })
-        })
-
-        // 找移除的
-        $('#indexContainerLeft .indexEachCard').each(function() {
-            let cate = $(this).attr('cate')
-            let league_id = $(this).attr('league_id')
-            let fixture_id = $(this).attr('id')
-            let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
-            let result = null
-            if( resultArr ) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
-            if( !result ) {
-                closeFixture(fixture_id)
-            } 
-        });
-        statistics()
-    }
-
     // detect if there's still package need to be processed
     async function processMessageQueueAsync() {
         while (true) {
@@ -1281,52 +993,6 @@
             $(`#${id}`).remove()
         }, 1000);
     }
-
-
-    // 大分類收合
-    function toggleCat(key) {
-        var $toggleContent = $(`#toggleContent_${key}`);
-        var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
-        
-        // 获取当前高度
-        var currentHeight = $toggleContent.height().toFixed(2);
-        if (currentHeight == 37.8) {
-            // 如果高度为 49px，则展开
-            $toggleContent.css('overflow', 'auto');
-            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
-                // 动画完成后，将高度设置为 'auto'
-                $toggleContent.removeAttr('style')
-            });
-        } else {
-            // 如果高度不是 49px，则收起
-            $toggleContent.css('overflow', 'hidden');
-            $toggleContent.animate({ height: '37.8px' }, 700);
-        }
-
-        // 切换图标方向
-        if ($icon.hasClass('fa-chevron-down')) {
-            $icon.removeClass('fa-chevron-down').addClass('fa-chevron-right');
-        } else {
-            $icon.removeClass('fa-chevron-right').addClass('fa-chevron-down');
-        }
-    }
-
-
-
-    // 聯賽分類收合
-    function toggleSeries( key ) {
-        $('#seriesWrapperContent_' + key).slideToggle( 700 );
-        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
-            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').hide()
-        } else {
-            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
-            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
-            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').show()
-        }
-    }
-
 
     // 內容太長 跑馬燈
     function fixTextOverflow() {
@@ -1639,6 +1305,340 @@
                 return 'th';
         }
     };
+
+
+// ----------index page function--------------
+    // 跳轉獨立賽事頁
+    function navToGame(e) {
+        let sport_id = e.attr('sport_id')   
+        let fixture_id = e.attr('fixture_id')
+        
+
+        const queryParams = {};
+        queryParams.sport_id = sport_id
+        queryParams.fixture_id = fixture_id
+
+        const queryString = new URLSearchParams(queryParams).toString();
+        const urlWithQuery = `/game?${queryString}`;
+        console.log(urlWithQuery)
+        window.location.href = urlWithQuery
+    }
+
+    // render view layer here
+    function renderView() {
+		console.log(matchListD)
+        Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
+                    let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
+                    let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
+                    let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
+                    if( isExist ) {
+                        let card = $(`#${k3}`) 
+                        let time = card.find('.timer');
+                        let home_team_info = card.find('[key="homeTeamInfo"]')
+                        let away_team_info = card.find('[key="awayTeamInfo"]')
+                        let nowStatus = parseInt(card.attr('status'))
+                        let isStatusSame = nowStatus === v3.status ? true : false // is status the same
+                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
+                        if( isSwitchCate ) {
+                            if( !isCateExist ) createCate(k, v)
+                            if( !isLeagueExist ) createLeague(k, k2, v2)
+                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
+                            let livingNode = $(`#${k3}`)
+                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
+                            card.attr('cate', k)
+                            card.attr('status', v3.status)
+                        }   
+
+                        // 玩法統計
+                        card.find('.otherBetWay p').html('+' + v3.market_bet_count)
+
+                        // 壘包 好壞球 只有 滾球 棒球有
+                        if( sport === 154914 && v3.status === 2 ) {
+                            card.find('[key="not-show-baseCon"]').hide()
+                            card.find('[key="show-baseCon"]').show()
+                        } else {
+                            card.find('[key="not-show-baseCon"]').show()
+                            card.find('[key="show-baseCon"]').hide()
+                        }
+
+                        // 單節選項 只有 滾球 籃球有
+                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+
+                        // ready to start
+                        if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
+
+                        // living
+                        if( v3.status === 2 ) {
+                            // score
+                            if( v3.scoreboard ) {
+                                let homeScore = home_team_info.find('.scoreSpan')
+                                let awayScore = away_team_info.find('.scoreSpan')
+                                let nowHomeScore = parseInt(homeScore.html())
+                                let nowAwayScore = parseInt(awayScore.html())
+                                let updateHome = parseInt(v3.scoreboard[1][0])
+                                let updateAway = parseInt(v3.scoreboard[2][0])
+                                if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
+                                if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
+
+                                setTimeout(() => {
+                                    homeScore.removeClass('raiseScore')
+                                    awayScore.removeClass('raiseScore')
+                                }, 3000);
+
+                                homeScore.html( v3.scoreboard[1][0] )
+                                awayScore.html( v3.scoreboard[2][0] )
+                            }
+
+                            // stage
+                            let timerStr = null
+                            if( v3.periods ) {
+                                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                                // bet data
+                                renderBetArea(mainPriorityArr, v3, k3)
+                                // exception baseball
+                                if( sport === 154914 ) {
+                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+
+                                    // base
+                                    let baseCont = card.find('img[alt="base"]')
+                                    let baseText = v3.periods.Bases ? v3.periods.Bases.replaceAll('/','') : '000'
+                                    baseCont.attr('src', `/image/base/${baseText}.png`)
+
+                                    // balls
+                                    let strike = card.find('div[key="strike"]')
+                                    let strikeText = v3.periods.Strikes ? v3.periods.Strikes : '0'
+                                    strike.css('background-image', `url(/image/balls/s${strikeText}.png)`)
+                                    let ball = card.find('div[key="ball"]')
+                                    let ballText = v3.periods.Balls ? v3.periods.Balls : '0'
+                                    ball.css('background-image', `url(/image/balls/b${ballText}.png)`)
+                                    let out = card.find('div[key="out"]')
+                                    let outText = v3.periods.Outs ? v3.periods.Outs : '0'
+                                    out.css('background-image', `url(/image/balls/o${outText}.png)`)
+                                }
+
+                                time.html(timerStr)
+                            }
+
+                            // exception basketball
+                            if( sport === 48242 ) {
+                                let card2 = card.find('[key="basketBallQuaterBet"]')
+
+                                // 換節了 重新渲染單節投注區塊
+                                if( v3.periods ) {
+                                    newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
+
+                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
+                                        stagePriorityArr = newStagePriorityArr
+                                        card.find('.indexBetCardTable').eq(1).html('')
+                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                    }
+                                }
+
+                                let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
+                                let away_team_info2 = card2.find('[key="awayTeamInfo2"]')
+
+                                home_team_info2.find('.teamSpan div').eq(0).html(v3.home_team_name)
+                                home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                                away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
+                                away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+
+
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
+                            }
+                            
+                        }
+                       
+                        function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
+                            console.log(priorityArr)
+                            priorityArr.forEach(( i, j ) => {
+                                let bet_div = $(`#${k3} div[priority=${i}]`)
+                                let betData = Object.values(v3.list).find(m => m.priority === i)
+                                let item = null
+                                if( betData && Object.keys(betData.list).length > 0 ) {
+                                    // 是否有讓方
+                                    let isHcapTeam = null
+                                    // 讓分的priority && line不同 && 有盤口
+                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
+                                    Object.entries(betData.list).map(([k4, v4], s) => { 
+                                        // 先取消樣式
+                                        bet_div.find('div').removeClass('hcapTeam')
+                                        // 判定讓方 -> line值為負
+                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                            if( stageBet === 0 ) {
+                                                let index = parseInt(v4.market_bet_name_en) - 1
+                                                bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                            } else {
+                                                let index = parseInt(v4.market_bet_name_en) + 1
+                                                bet_div.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                            }
+                                        }
+
+                                        item = bet_div.find('.betItemDiv').eq(s)
+                                        // old attribute
+                                        let market_bet_id = item.attr('market_bet_id')
+                                        let price = item.attr('bet_rate')
+                                        let isSelected = item.hasClass('m_order_on')
+
+                                        // 判斷盤口存在+是否有改變且狀態為1
+                                        if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1 ) {
+                                            // 判斷賠率是否有改變
+                                            if( parseFloat(price) > parseFloat(v4.price) ) {
+                                                // 賠率下降
+                                                lowerOdd(k3, betData.market_id, v4.market_bet_id)
+                                            }
+                                            if( parseFloat(price) < parseFloat(v4.price) ) {
+                                                // 賠率上升
+                                                raiseOdd(k3, betData.market_id, v4.market_bet_id)
+                                            }
+                                        } 
+
+                                        // set attribute
+                                        if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
+                                        item.attr('priority', i)
+                                        item.attr('fixture_id', k3)
+                                        item.attr('market_id', betData.market_id)
+                                        item.attr('market_bet_id', v4.market_bet_id)
+                                        item.attr('bet_rate', v4.price)
+                                        item.attr('bet_type', betData.market_name)
+                                        item.attr('bet_name', v4.market_bet_name + ' ' + v4.line)
+                                        item.attr('bet_name_en', v4.market_bet_name_en)
+                                        item.attr('line', v4.line)
+                                        item.attr('league', v2.league_name)
+                                        item.attr('home', v3.home_team_name)
+                                        item.attr('away', v3.away_team_name)
+
+                                        // rate
+                                        item.find('.odd').html(v4.price)
+                                        // 賦值
+                                        switch ( i ) {
+                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
+                                                item.find('.bet_name').html( v4.line )
+                                                break;
+                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
+                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                                                break;
+                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
+                                                item.find('.bet_name').html( v4.market_bet_name )
+                                                break;
+                                            default: // 獨贏
+                                                break;
+                                        }
+
+                                        // 左邊投注區塊
+                                        let calBetNameStr = ''
+                                        let home = item.attr('home')
+                                        let away = item.attr('away')
+                                        if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                            calBetNameStr = v4.market_bet_name + ' ' + v4.line
+                                        } else {
+                                            calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                        }
+                                        $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+
+                                        // 狀態 鎖頭
+                                        if( v4.status === 1 ) {
+                                            item.find('.fa-lock').hide()
+                                            item.attr('onclick', 'openCal($(this))')
+
+                                            // 左邊選中的剛好鎖起來了 -> 復原
+                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                                $('#submitOrder').html(langTrans.bet_area.bet)
+                                                $('#submitOrder').removeClass('disabled')
+                                                $('#submitOrder').removeAttr('disabled')
+                                            }
+                                        } else {
+                                            item.find('.fa-lock').show()
+                                            item.removeAttr('onclick')
+
+                                            // 左邊選中的剛好鎖起來了
+                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                                $('#submitOrder').html(langTrans.bet_area.disabled)
+                                                $('#submitOrder').addClass('disabled')
+                                                $('#submitOrder').attr('disabled', true)
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    let k = 2
+                                    if( sport === 6046 ) k = 3
+                                    for (let j = 0; j < k; j++) {
+                                        let item = bet_div.find('.betItemDiv').eq(j)
+
+                                        item.find('.fa-lock').show()
+                                        item.removeAttr('onclick')
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        // 新的賽事
+                        if( !isCateExist ) createCate(k, v)
+                        if( !isLeagueExist ) createLeague(k, k2, v2)
+                        createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
+                    }
+                })
+            })
+        })
+
+        // 找移除的
+        $('#indexContainerLeft .indexEachCard').each(function() {
+            let cate = $(this).attr('cate')
+            let league_id = $(this).attr('league_id')
+            let fixture_id = $(this).attr('id')
+            let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
+            let result = null
+            if( resultArr ) result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
+            if( !result ) {
+                closeFixture(fixture_id)
+            } 
+        });
+        statistics()
+    }
+
+    // 大分類收合
+    function toggleCat(key) {
+        var $toggleContent = $(`#toggleContent_${key}`);
+        var $icon = $(`#toggleContent_${key} #catWrapperTitle_${key}_dir i`);
+        
+        // 获取当前高度
+        var currentHeight = $toggleContent.height().toFixed(2);
+        if (currentHeight == 37.8) {
+            // 如果高度为 49px，则展开
+            $toggleContent.css('overflow', 'auto');
+            $toggleContent.animate({ height: $toggleContent[0].scrollHeight }, 700, function() {
+                // 动画完成后，将高度设置为 'auto'
+                $toggleContent.removeAttr('style')
+            });
+        } else {
+            // 如果高度不是 49px，则收起
+            $toggleContent.css('overflow', 'hidden');
+            $toggleContent.animate({ height: '37.8px' }, 700);
+        }
+
+        // 切换图标方向
+        if ($icon.hasClass('fa-chevron-down')) {
+            $icon.removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        } else {
+            $icon.removeClass('fa-chevron-right').addClass('fa-chevron-down');
+        }
+    }
+
+    // 聯賽分類收合
+    function toggleSeries( key ) {
+        $('#seriesWrapperContent_' + key).slideToggle( 700 );
+        if($('#seriesWrapperTitle_' + key + '_dir i').hasClass('fa-chevron-down')) {
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').hide()
+        } else {
+            $('#seriesWrapperTitle_' + key + '_dir i').addClass('fa-chevron-down')
+            $('#seriesWrapperTitle_' + key + '_dir i').removeClass('fa-chevron-right')
+            $('#seriesWrapperTitle_' + key + ' .betLabelContainer').show()
+        }
+    }
 
 </script>
 @endpush
