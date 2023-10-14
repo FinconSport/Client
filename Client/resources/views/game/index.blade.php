@@ -856,8 +856,10 @@
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
-            if (data.series.sport_id == 48242 || data.series.sport_id == 6046) {
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 || data.series.sport_id == 154914) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
+                BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
+
                 BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
@@ -865,19 +867,6 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
-                console.log("Basketball & Football: " + data.series.sport_id);
-            } else if (data.series.sport_id == 154914) {
-                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
-
-                BaseballHeadTemp.find('[key="b_head_gameName"]').text("");
-                BaseballHeadTemp.find('[key="b_head_gameTitleOne"]').text("{{ trans('game.scoreBoard.gameOne') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleTwo"]').text("{{ trans('game.scoreBoard.gameTwo') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleThree"]').text("{{ trans('game.scoreBoard.gameThree') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleFour"]').text("{{ trans('game.scoreBoard.gameFour') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
-                BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
 
                 BasketBallFootballBodyTemp.find('[key="bf_bodyhome_TeamName"]').text(data.list.home_team_name);
                 BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q1"]').text("");
@@ -893,7 +882,21 @@
                 BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q4"]').text("");
                 BasketBallFootballBodyTemp.find('[key="bf_bodyaway_totalScore"]').text("");
 
-                $('#livingtableHead').after(BaseballHeadTemp);
+                $('#livingtableHead').after(BasketBallFootballBodyTemp);
+
+                console.log("Basketball & Football: " + data.series.sport_id);
+            } else if (data.series.sport_id == 154914) {
+                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
+                
+                BaseballHeadTemp.find('[key="b_head_gameName"]').text("");
+                BaseballHeadTemp.find('[key="b_head_gameTitleOne"]').text("{{ trans('game.scoreBoard.gameOne') }}");
+                BaseballHeadTemp.find('[key="b_head_gameTitleTwo"]').text("{{ trans('game.scoreBoard.gameTwo') }}");
+                BaseballHeadTemp.find('[key="b_head_gameTitleThree"]').text("{{ trans('game.scoreBoard.gameThree') }}");
+                BaseballHeadTemp.find('[key="b_head_gameTitleFour"]').text("{{ trans('game.scoreBoard.gameFour') }}");
+                BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
+                BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
+                BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+
                 console.log("Baseball: " + data.series.sport_id);
             }
 
