@@ -27,4 +27,8 @@ return [
         "gamesOn" => "局上",
         "totalScore" => "總分",
     ],
+    "index" => [
+        "th" => "日",
+        "dateTimezone" => "zh-CN",
+    ],
 ];

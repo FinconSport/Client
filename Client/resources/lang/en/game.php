@@ -26,5 +26,11 @@ return [
         "gameTwelve" => "12",
         "gamesOn" => "games on",
         "totalScore" => "Total Score",
+        "th" => "th",
+        "dateTimezone" => "en-US",
+    ],
+    "index" => [
+        "th" => "th",
+        "dateTimezone" => "en-US",
     ],
 ];

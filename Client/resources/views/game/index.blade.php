@@ -1334,12 +1334,12 @@
 
     const formatDateTimeV2 = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
-        const month = new Intl.DateTimeFormat('zh-CN', { month: 'long' }).format(dateTime);
+        const month = new Intl.DateTimeFormat('{{ trans('game.index.dateTimezone') }}', { month: 'long' }).format(dateTime);
         const day = dateTime.getDate();
         const suffix = getDaySuffix(day);
         const hour = dateTime.getHours().toString().padStart(2, '0');
         const minute = dateTime.getMinutes().toString().padStart(2, '0');
-        return `${month} ${day}${suffix}\n${hour}:${minute}`;
+        return `<span>${month} ${day}${suffix}</span><br><span>${hour}:${minute}</span>`;
     };
 
     const getDaySuffix = (day) => {
@@ -1348,13 +1348,13 @@
         }
         switch (day % 10) {
             case 1:
-                return 'st';
+                return '{{ trans('game.index.th') }}';
             case 2:
-                return 'nd';
+                return '{{ trans('game.index.th') }}';
             case 3:
-                return 'rd';
+                return '{{ trans('game.index.th') }}';
             default:
-                return 'th';
+                return '{{ trans('game.index.th') }}'; // th
         }
     };
 
