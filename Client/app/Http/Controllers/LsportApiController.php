@@ -490,6 +490,7 @@ class LsportApiController extends Controller {
         
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
+        ->where('start_time', "<=", $after_tomorrow)
         ->groupBy('sport_id', 'status')
         ->total();
         if ($return === false) {
