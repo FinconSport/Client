@@ -512,7 +512,11 @@ class LsportApiController extends Controller {
             }
         }
 
-        dd($list);
+        if ($input['debug'] == 1) {
+
+            dd($list);
+        }
+
 
  /*
  {
