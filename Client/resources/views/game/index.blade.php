@@ -89,14 +89,14 @@
                     </tr>
                     <!-- if sport === 48242 && sport === 6046 -->
                     <tr template="BaseballHeadTemplate" hidden>
-                        <th key="b_head_gameName"></th>
-                        <th key="b_head_gameTitleOne"></th>
-                        <th key="b_head_gameTitleTwo"></th>
-                        <th key="b_head_gameTitleThree"></th>
-                        <th key="b_head_gameTitleFour"></th>
-                        <th key="b_head_gameTitleFive"></th>
-                        <th key="b_head_gameTitleSix"></th>
-                        <th key="b_head_totalScore"></th>
+                        <th style="width:20%;text-align:left;" key="b_head_gameName"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleOne"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleTwo"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleThree"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleFour"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleFive"></th>
+                        <th style="width:10%;text-align:center;" key="b_head_gameTitleSix"></th>
+                        <th style="width:20%;text-align:center;" key="b_head_totalScore"></th>
                     </tr>
                 </thead>
                 <tbody>
