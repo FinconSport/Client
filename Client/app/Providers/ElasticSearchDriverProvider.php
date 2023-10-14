@@ -245,7 +245,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                     $data = $response->json();
                     $list = array();
                     foreach ($data['aggregations'] as $k => $v) { 
-                        foreach ($data['aggregations'] as $kk => $vv) {
+                        foreach ($v as $kk => $vv) {
                             $buckets = $vv['buckets'];
                             foreach ($buckets as $kkk => $vvv) {
                                 $tmp = array();
