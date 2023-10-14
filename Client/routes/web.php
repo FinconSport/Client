@@ -71,8 +71,7 @@ Route::get('/mobile/m_404', 'App\Http\Controllers\MobileController@index');
 Route::get('/mobile/m_ip', 'App\Http\Controllers\MobileController@index');
 Route::get('/mobile/m_500', 'App\Http\Controllers\MobileController@index');
 
-// ClientApi
-//API V2, LSport
+//API V2
 Route::post('/api/v2/common_account',   'App\Http\Controllers\LsportApiController@CommonAccount');
 Route::post('/api/v2/index_carousel',   'App\Http\Controllers\LsportApiController@IndexCarousel');
 Route::post('/api/v2/index_marquee',    'App\Http\Controllers\LsportApiController@IndexMarquee');
@@ -86,15 +85,3 @@ Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
 Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
 Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiController@CommonOrder');
-
-//for test
-// Route::get('/api/v2/gms_caller', 'App\Http\Controllers\LsportApiController@getMatchScoreboard_caller');
-// Route::get('/api/v2/gmp_caller', 'App\Http\Controllers\LsportApiController@getMatchPeriods_caller');
-// Route::get('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
-// Route::post('/api/v2/game_index2', 'App\Http\Controllers\LsportApiController@GameIndex2');
-// Route::get('/api/v2/index_match_list2', 'App\Http\Controllers\LsportApiController@IndexMatchList2');
-// Route::get('/api/v2/game_bet2', 'App\Http\Controllers\LsportApiController@GameBet2');
-// Route::get('/api/v2/m_game_bet2', 'App\Http\Controllers\LsportApiController@mGameBet2');
-
-//for dev usage
-//Route::get('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');

@@ -366,7 +366,6 @@ class LsportApiController extends Controller {
             ];
         }
 
-
         //---------------------------------
         // 自DB取出LsportNotice
         $week_before =  date('Y-m-d 00:00:00', strtotime('-1 week'));
@@ -384,20 +383,9 @@ class LsportApiController extends Controller {
             $notice_type = $v['type'];
 
             // sport -----
-            // $sport = LsportSport::where('sport_id', $sport_id)->first();
-            // $sport_name = $sport[$lang_col];
-            // cache
             $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
 
             // league -----
-            // $league = LsportLeague::where('league_id', $league_id)->first();
-            // $league_name = $league[$lang_col];
-            // if (empty($league[$lang_col])) {
-            //     $league_name = $league['name_en'];
-            // } else {
-            //     $league_name = $league[$lang_col];
-            // }
-            // cache
             $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
 
             // fixture -----
@@ -497,6 +485,19 @@ class LsportApiController extends Controller {
         $today = time();
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
+
+    	//---------------------------------
+            
+        $return = LsportFixture::select('f.sport_id', DB::raw('COUNT(*) as fixture_count'))
+        ->from('es_lsport_fixture as f')
+        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
+        ->join('lsport_league as l', 'f.league_id', '=', 'l.league_id')
+        ->where('s.status', '=', 1)
+        ->where('l.status', '=', 1)
+        ->groupBy("f.sport_id")
+        ->list();
+
+        dd($return);
 
     	//---------------------------------
 
