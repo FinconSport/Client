@@ -476,7 +476,6 @@ class LsportApiController extends Controller {
         // 取得代理的語系
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
 
     	//---------------------------------
 
@@ -484,49 +483,51 @@ class LsportApiController extends Controller {
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
         $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
 
-            $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
-            ->whereIn("status",[1,2,9])
-            ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
-            ->groupBy('sport_id', 'status')
-            ->total(10);    
+    	//---------------------------------
 
-            if ($return === false) {
-                $this->ApiError("02");
-            }
+        $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
+        ->whereIn("status",[1,2,9])
+        ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
+        ->groupBy('sport_id', 'status')
+        ->total();    
 
-            // 整理統計 , 回傳格式取決於SQL
-            $list = array();
-            $status_name = ["","early","living"];
+        if ($return === false) {
+            $this->ApiError("01");
+        }
 
-            foreach ($return as $k => $v) {
-                foreach ($v['buckets'] as $kk => $vv) {
-                    $sport_id = $vv['key'];  
-                    foreach ($vv as $kkk => $vvv) {
-                        if (!in_array($kkk,['key','doc_count'])) {
-                            foreach ($vvv['buckets'] as $kkkk => $vvvv) {
-                                $status = $vvvv['key'];
-                                if ($status == 9) { // 即將開始視為滾球
-                                    $status = 2;
-                                }
+        // 整理統計 , 回傳格式取決於SQL
+        $list = array();
+        $status_name = ["","early","living"];
 
-                                $current_status_name = $status_name[$status];
-
-                                $tmp_count = $vvvv['count']['value'];
-                                $list[$current_status_name]['items'][$sport_id]['count'] = $tmp_count;
-                                if (isset($list[$current_status_name]['total'])) {
-                                    $list[$current_status_name]['total'] += $tmp_count;
-                                } else {
-                                    $list[$current_status_name]['total'] = $tmp_count;
-                                }
-
-                                // 取得體育名稱
-                                $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
-                                $list[$current_status_name]['items'][$sport_id]['name'] = $sport_name;
+        foreach ($return as $k => $v) {
+            foreach ($v['buckets'] as $kk => $vv) {
+                $sport_id = $vv['key'];  
+                foreach ($vv as $kkk => $vvv) {
+                    if (!in_array($kkk,['key','doc_count'])) {
+                        foreach ($vvv['buckets'] as $kkkk => $vvvv) {
+                            $status = $vvvv['key'];
+                            if ($status == 9) { // 即將開始視為滾球
+                                $status = 2;
                             }
+
+                            $current_status_name = $status_name[$status];
+
+                            $tmp_count = $vvvv['count']['value'];
+                            $list[$current_status_name]['items'][$sport_id]['count'] = $tmp_count;
+                            if (isset($list[$current_status_name]['total'])) {
+                                $list[$current_status_name]['total'] += $tmp_count;
+                            } else {
+                                $list[$current_status_name]['total'] = $tmp_count;
+                            }
+
+                            // 取得體育名稱
+                            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
+                            $list[$current_status_name]['items'][$sport_id]['name'] = $sport_name;
                         }
                     }
                 }
             }
+        }
 
         ///////////////////////////////////
         $data = $list;
