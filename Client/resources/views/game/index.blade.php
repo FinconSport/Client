@@ -873,8 +873,8 @@
                 baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
 
                 const scoresLengths = data.list.teams.map((team) => team.scores.length);
-                const homeData = data.teams.find(item => item.index === 1)
-                const awayTeam = data.teams.find(item => item.index === 2)
+                const homeData = data.list.teams.find(item => item.index === 1)
+                const awayTeam = data.list.teams.find(item => item.index === 2)
 
                 let baseballData = [];
                 let gameTitle = [];
