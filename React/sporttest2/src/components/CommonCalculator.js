@@ -200,7 +200,6 @@ const CalInfoCardIcon = {
     marginRight: '0.25rem'
 }
 
-const drfaultImg = 'https://sporta.asgame.net/uploads/default.png'
 
 class CommonCalculator extends React.Component {
     constructor(props){
@@ -358,6 +357,7 @@ class CommonCalculator extends React.Component {
     render() {
         const sendOrderData = this.props.data
         const res = this.props.accountD
+
         if(res && sendOrderData) {
                 return (
                     <>
@@ -408,17 +408,19 @@ class CommonCalculator extends React.Component {
                                 <CalHeight8>
                                     <CalInfoCardWrapper id='calInfoCardWrapper'>
                                         <div className='row' style={CalInfoCard}>
-                                            <div className='col-10'>{ sendOrderData.market_name }</div>
+                                            <div>{ sendOrderData.series_name }</div>
+                                            <div className='col-12'>
+                                                { sendOrderData.home_team_name }
+                                                <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
+                                                { sendOrderData.away_team_name }
+                                            </div>
+                                            <div className='col-12'>{ sendOrderData.market_name }</div>
+                                            <div style={BetItemStyle} className='row m-0'>
+                                                <div className='col-10 p-0'>{ sendOrderData.bet_item_name }</div>
                                                 <div className='col-2 p-0 text-center calCardInfo'>
                                                     <span className='odd'>{ sendOrderData.bet_rate }</span>
                                                 </div>
-                                                <div style={BetItemStyle}>{ sendOrderData.bet_item_name }</div>
-                                                <div>{ sendOrderData.series_name }</div>
-                                                <div className='col-12'>
-                                                    { sendOrderData.home_team_name }
-                                                    <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
-                                                    { sendOrderData.away_team_name }
-                                                </div>
+                                            </div>
                                         </div>
                                     </CalInfoCardWrapper>
                                 </CalHeight8>

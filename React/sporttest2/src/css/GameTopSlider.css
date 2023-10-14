@@ -47,10 +47,13 @@
     background-color: #ffffff29;
 }
 
+#gameTopSlider table th,
+#gameTopSlider table td {
+    padding: 0.25rem 0.25rem;
+    text-align: center;
+}
+
 #gameTopSlider .swiper-button-disabled{
     opacity: 0;
 }
 
-#gameTopSlider #scoreBoard th{
-    font-size: 16px!important;
-}

@@ -108,10 +108,11 @@ const CountSpan = {
 }
 
 
-const menuArr = ['early', 'living']
+const menuArr = ['early', 'living', 'about_to_start']
 const mapping = {
     'living': [langText.MatchMenuNav.living, 1],
     'early': [langText.MatchMenuNav.early, 0],
+    'about_to_start': ['about_to_start', 2]
 }
 
 class MatchMenuNav extends React.Component {
@@ -122,12 +123,14 @@ class MatchMenuNav extends React.Component {
             sport_id: window.sport,
             objTage: menuArr[window.menu],
             isMenuOpen: false,
-            api_res: this.props.api_res
+            api_res: this.props.api_res,
+            isNoData: false
         }
     }
 
     componentDidMount() {
         let res = this.state.api_res
+        
         for (const category in res.data) {
             if (res.data[category].items) {
                 for (const key in res.data[category].items) {
@@ -137,12 +140,14 @@ class MatchMenuNav extends React.Component {
                 }
             }
         }
+
+
         // default menu
         let rKey = null
         for (const key in res.data) {
             if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
                 rKey = key
-                if(window.menu === null || res.data[menuArr[window.menu]] === undefined) {
+                if(window.menu === null || res.data[menuArr[window.menu]] === undefined || res.data[menuArr[window.menu]].total === 0) {
                     this.setState({
                         menu_id: mapping[key][1],
                         objTage: rKey
@@ -153,9 +158,15 @@ class MatchMenuNav extends React.Component {
             }
         }
 
-        // console.log(rKey)
-        // console.log(res.data[rKey].items[window.sport])
-        // console.log(res)
+
+        if( rKey === null ) {
+            this.setState({
+                isNoData: true
+            })
+
+            return;
+        }
+
         // default sport
         if(window.sport === null || res.data[rKey].items[window.sport] === undefined) {
             let itemData = res.data[rKey].items
@@ -211,7 +222,8 @@ class MatchMenuNav extends React.Component {
                         <Link to="/mobile">
                             <FaChevronLeft style={backIcon} />
                         </Link>
-                        {
+                        {   
+                            !this.state.isNoData && 
                             Object.entries(res.data).map(([key, value], i) => {
                                 return (
                                     value['total'] !== 0 &&
@@ -225,6 +237,7 @@ class MatchMenuNav extends React.Component {
                     </div>
                     <div style={MatchSportBar}>
                         {
+                            !this.state.isNoData && 
                             Object.entries(res.data[this.state.objTage].items).map(([k, v],i) => {
                                 return(
                                     <MatchSportItem key={k} style={ this.state.sport_id == k ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>

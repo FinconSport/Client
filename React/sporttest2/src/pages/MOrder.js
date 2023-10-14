@@ -102,25 +102,29 @@ class MOrder extends React.Component {
 		}
 	}
 
-	// 初始化
+	componentWillUnmount() {
+		clearInterval(this.renderInterval); // 清除定时器以防止内存泄漏
+	}
+
+	// 頁面初始
 	componentDidMount() {
+		clearInterval(this.renderInterval); // 清除定时器以防止内存泄漏
+
 		setTimeout(() => { // 有時候loading太快，閃一下就過了畫面不好看，故至少執行一秒
 			this.setState({
 				ready: true
 			})
 		}, 1000);
-		this.caller(this.state.accout_api, 'account_res')
-		// this.caller(this.state.betRecord_api, 'betRecord_res')
-		this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
-		
 
-		// 連線
-        // if( window.ws ) {
-		// 	window.wsInt = null
-		// 	window.ws.close()
-		// 	window.ws = null
-		// }
-		// window.WebSocketDemo( window.sport );
+		// 呼叫所需api
+		this.caller(this.state.accout_api, 'account_res')
+		this.caller(this.state.betRecord_api, 'betRecord_res')
+		this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
+
+
+		this.renderInterval = setInterval(() => {
+			this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
+		}, 5000);
 	}
 
 	// 刷新錢包餘額

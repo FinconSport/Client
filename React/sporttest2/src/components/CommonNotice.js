@@ -186,7 +186,6 @@ class CommonNotice extends React.Component {
 
 
 
-      console.log(notice_list)
       return (
         <div
           style={{

@@ -128,8 +128,8 @@ class MatchContentCard extends React.Component {
 	}
 
     // 加入星號 並設定cookie
-	setStarState = (matchId) => {
-        Cookies.set(matchId, !this.state.isSetStar, { path: '/' })
+	setStarState = (fixture_id) => {
+        Cookies.set(fixture_id, !this.state.isSetStar, { path: '/' })
 		this.setState({
 			isSetStar: !this.state.isSetStar
 		})
@@ -203,6 +203,16 @@ class MatchContentCard extends React.Component {
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
         if ( v !== undefined ){
+            let hcapTeam = null
+            if( v.list && Object.keys(v.list).length > 0 ) {
+                let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[0]?.line
+                let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[1]?.line
+
+                if( h !== a ) {
+                    hcapTeam = h < 0 ? 1 : 2
+                }
+            }
+
             return (
                 <div style={{ ...MatchCard, ...(this.props.isOpen ? CardShow : CardHide) }} cardid={v.fixture_id}>
                     <SlideToggle duration={500} ref={this.slideToggleRef} collapsed={false} >
@@ -235,16 +245,16 @@ class MatchContentCard extends React.Component {
                                                 </p>
                                             </div>
                                         </div>
-                                        {/* <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} > */}
+                                        <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} >
                                             <div className='row m-0' style={rowHeight2}>
                                                 <div className='col-10 p-0 teamSpan' style={TeamName}>
                                                     <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
+                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false} style={hcapTeam === 1 ? {color: 'red'} : null}>
                                                             { v.home_team_name }&emsp;&emsp;&emsp;
                                                         </Marquee>
                                                     </div>
-                                                    <span className="teamSpanSpan">
-                                                    { v.home_team_name }
+                                                    <span className="teamSpanSpan" style={hcapTeam === 1 ? {color: 'red'} : null}>
+                                                        {v.home_team_name}
                                                     </span>
                                                 </div>
                                                 <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
@@ -254,11 +264,11 @@ class MatchContentCard extends React.Component {
                                             <div className='row m-0' style={rowHeight2}>
                                                 <div className='col-10 p-0 teamSpan' style={TeamName}>
                                                     <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false}>
+                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false} style={hcapTeam === 2 ? {color: 'red'} : null}>
                                                             { v.away_team_name }&emsp;&emsp;&emsp;
                                                         </Marquee>
                                                     </div>
-                                                    <span className="teamSpanSpan">
+                                                    <span className="teamSpanSpan" style={hcapTeam === 2 ? {color: 'red'} : null}>
                                                     { v.away_team_name }
                                                     </span>
                                                 </div>
@@ -266,10 +276,87 @@ class MatchContentCard extends React.Component {
                                                     { v?.scoreboard && v.scoreboard[2][0] }
                                                 </div>
                                             </div>
-                                        {/* </Link> */}
-                                        <div style={rowHeight2}>
-                                            <RiVideoLine style={{ fontSize: '1.5rem'}} />
-                                            <AiOutlineAreaChart style={{ fontSize: '1.5rem', marginLeft: '0.5rem'}} />
+                                        </Link>
+                                        <div className="row m-0" style={rowHeight2}>
+                                            <div className="col p-0">+{v.market_bet_count}</div>
+                                            <div className="col" style={{ height: '2rem' }}>
+                                            {
+                                                window.sport === 154914 && v.status === 2 ? (
+                                                    v?.periods?.Bases ?
+                                                    <img className="w-100" src={require(`../image/baseball/base/${v.periods.Bases.replaceAll('/', '')}.png`)} alt="base" />
+                                                    :
+                                                    <img className="w-100" src={require('../image/baseball/base/000.png')} alt="base"/>
+                                                ) : null
+                                            }
+                                            </div>
+                                            <div className="col p-0" style={{ height: '2rem' }}>
+                                            {
+                                                window.sport === 154914 && v.status === 2 ? (
+                                                    <>
+                                                    {v?.periods?.Strikes ? (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/s${v.periods.Strikes}.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    ) : (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/s0.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    )}
+                                                  
+                                                    {v?.periods?.Balls ? (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/b${v.periods.Balls}.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    ) : (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/b0.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    )}
+                                                  
+                                                    {v?.periods?.Outs ? (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/o${v.periods.Outs}.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    ) : (
+                                                      <div
+                                                        className="w-100"
+                                                        style={{
+                                                          backgroundImage: `url(${require(`../image/baseball/balls/o0.png`)}`,
+                                                          height: '33.33333%',
+                                                          backgroundSize: '100% 100%',
+                                                        }}
+                                                      ></div>
+                                                    )}
+                                                  </>
+                                                  
+                                                ) : null
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                     <div className='col-55 text-center' style={{ paddingLeft: 0}}>
@@ -303,7 +390,7 @@ class MatchContentCard extends React.Component {
                                                                                     tt && Object.keys(tt.list).length > 0 ? 
                                                                                     Object.entries(tt.list).map(([r,s]) => {
                                                                                         return(
-                                                                                            k === 13 || k === 14 ?
+                                                                                            k === 201 || k === 202 ?
                                                                                             <SliderBrickHeight3 key={r} onClick={()=>this.getBetData(
                                                                                                 sport, 
                                                                                                 v.fixture_id,
@@ -313,24 +400,24 @@ class MatchContentCard extends React.Component {
                                                                                                 tt.market_name,
                                                                                                 v.home_team_name,
                                                                                                 v.away_team_name,
-                                                                                                (k === 1 || k === 2) ?
-                                                                                                (s.market_bet_name === "1" ? v.home_team_name : v.away_team_name) :
-                                                                                                (k === 3 || k === 4) ?
-                                                                                                (s.market_bet_name === "1" ? v.home_team_name + s.line : v.away_team_name + s.line) :
-                                                                                                (k === 5 || k === 6) ?
-                                                                                                (s.market_bet_name + ' ' + s.line) :
-                                                                                                null,
+                                                                                                langText.MatchContent.allWinPriority.indexOf(k) !== -1 ?
+                                                                                                s.market_bet_name_en === "1" ? v.home_team_name : (
+                                                                                                    s.market_bet_name_en === "2" ?
+                                                                                                    v.away_team_name
+                                                                                                    :
+                                                                                                    langText.MatchContentCard.tie
+                                                                                                )
+                                                                                                :
+                                                                                                s.market_bet_name + ' ' + s.line
+                                                                                                ,
                                                                                                 s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
-                                                                                                    {
-                                                                                                        s.market_bet_name === '' ?
-                                                                                                        langText.MatchContentCard.tie + s.line
-                                                                                                        :
-                                                                                                        s.market_bet_name + s.line
+                                                                                                    {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
+                                                                                                        s.market_bet_name + s.line :
+                                                                                                        (s.line === '' ? '\u00A0' : s.line)
                                                                                                     }
-                                                                                                    
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
@@ -354,18 +441,19 @@ class MatchContentCard extends React.Component {
                                                                                                 tt.market_name,
                                                                                                 v.home_team_name,
                                                                                                 v.away_team_name,
-                                                                                                (k === 1 || k === 2) ?
-                                                                                                (s.market_bet_name === "1" ? v.home_team_name : v.away_team_name) :
-                                                                                                (k === 3 || k === 4) ?
-                                                                                                (s.market_bet_name === "1" ? v.home_team_name + s.line : v.away_team_name + s.line) :
-                                                                                                (k === 5 || k === 6) ?
-                                                                                                (s.market_bet_name + ' ' + s.line) :
-                                                                                                null,
+                                                                                                langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1  ?
+                                                                                                (s.market_bet_name_en === "1" ? v.home_team_name : v.away_team_name) + ' ' + s.line
+                                                                                                :
+                                                                                                (s.market_bet_name + ' ' + s.line)
+                                                                                                ,
                                                                                                 s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
-                                                                                                    { s.market_bet_name + s.line }
+                                                                                                    {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
+                                                                                                        s.market_bet_name + s.line :
+                                                                                                        (s.line === '' ? '\u00A0' : s.line)
+                                                                                                    }
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
@@ -382,7 +470,7 @@ class MatchContentCard extends React.Component {
                                                                                         )
                                                                                     })
                                                                                     :
-                                                                                    k === 13 || k === 14 ?
+                                                                                    k === 201 || k === 202 ?
                                                                                     <div key={k}>
                                                                                         <SliderBrickHeight3>
                                                                                             <AiFillLock style={{ marginTop:'1rem'}} />
@@ -403,7 +491,6 @@ class MatchContentCard extends React.Component {
                                                                                             <AiFillLock style={{ marginTop:'1rem'}} />
                                                                                         </SliderBrickHeight2>
                                                                                     </div>
-                                                                                    
                                                                                 }
                                                                             </div>
                                                                         )

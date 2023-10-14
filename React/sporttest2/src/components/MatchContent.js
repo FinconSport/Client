@@ -150,6 +150,10 @@ class MatchContent extends React.Component {
 		})
 	}
 
+	componentWillUnmount() {
+		clearInterval(window.ajaxInt)
+	}
+
 	// ws function 
 	// detect if there's still package need to be processed
 	async processMessageQueueAsync() {
@@ -171,20 +175,14 @@ class MatchContent extends React.Component {
 	processMessageQueue = () => {
 		const message = window.messageQueue.shift(); // to get the head pkg
 		const msg = JSON.parse(message.data); // convert to json
-		// setState to rerender
-
-
-
-
-		// setState to rerender
+		
 	}
-	// ws function
 	
 	// 初始化資料 + ws handler
 	componentDidMount() {
+		clearInterval(window.ajaxInt)
 		this.caller(this.props.apiUrl + '&sport_id=' + window.sport)
 
-		// ws
 		
 	}
 				
