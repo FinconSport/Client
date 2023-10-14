@@ -61,12 +61,12 @@
 }
 
 div#bettingTypeContainer {
-    height: calc(100% - 9.5rem);
+    height: calc(100% - 14.5rem);
     overflow: auto;
 }
 
-.livingtableHead th{
-    padding: 0.5rem 0rem;
+#scoreboardContainer th{
+    padding: 0rem 0rem 0.5rem 0rem;
 }
 
 .livingFixture-container.row {

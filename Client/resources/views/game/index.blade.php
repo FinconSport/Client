@@ -914,7 +914,7 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i])); // <- game titles
                 }
-                const totalScoreHead = $(`<th style="width:20%;text-align:left;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
+                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
                 BaseballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BaseballHeadTemp); // <- append thead to table
 
@@ -926,7 +926,7 @@
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");// <- home team scores
                     baseballBodyTemp_home.append(thHome);
                 }
-                const homeTotalScore = $(`<th style="width:20%;text-align:left;">${homeTeam.total_score}</th>`);// <- home team total scores
+                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
                 $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
 
                 // away team 
@@ -937,7 +937,7 @@
                     const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || ""); // <- away team scores
                     baseballBodyTemp_away.append(thAway);
                 }
-                const awayTotalScore = $(`<th style="width:20%;text-align:left;">${awayTeam.total_score}</th>`); // <- away team total scores
+                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`); // <- away team total scores
                 baseballBodyTemp_away.append(awayTotalScore); // <- append away team data
 
                 baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append tbodyto table
