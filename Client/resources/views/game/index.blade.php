@@ -855,6 +855,7 @@
 
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             const sportType = matchListD.data.series;
+            console.log(sportType.sport_id);
 
             switch (true) {
                 case sportType.sport_id === 48242 || sportType.sport_id === 6046 :
@@ -871,7 +872,6 @@
                     break;
                     
                 case sportType.sport_id ===154914:
-                    console.log('154914')
                     BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
 
                     BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
