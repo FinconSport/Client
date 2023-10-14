@@ -710,9 +710,11 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             $('#' + v.market_id + ' #marketRateDataTemp').empty();
-            Object.entries(v.rate).map(([k2, v2]) => {
-                createMarketRateContainer(v, k2, v2);
-            });
+            if(v.rate){
+                Object.entries(v.rate).map(([k2, v2]) => {
+                    createMarketRateContainer(v, k2, v2);
+                });
+            }
         });
     }
 
@@ -727,8 +729,11 @@
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-
-            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+            
+            //  If v.rate is empty or undefined, the append operation will not be performed.
+            if (v.rate && Object.keys(v.rate).length > 0) {
+                $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+            }
         }
     }
 
