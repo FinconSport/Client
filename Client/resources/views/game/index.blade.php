@@ -75,8 +75,7 @@
             <p class="away_team_name col-3"></p>
         </div>
         <!-- living fixture -->
-        <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
-            
+        <div class="livingFixture-container row" key="livingContainerTemplate" hidden>
             <table>
                 <thead id="livingtableHead">
                     <!-- if sport === 48242 && sport === 6046 -->
@@ -855,6 +854,7 @@
         // Living fixture (status == 2)
         if (data.list.status == 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
+            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
             if (data.series.sport_id == 48242 || data.series.sport_id == 6046) {
                 console.log("Basketball & Football: " + data.series.sport_id);
@@ -867,7 +867,7 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                livingContainerTemp.append(BasketBallFootballHeadTemp, $("thead"));
+                $('#livingtableHead').append(BasketBallFootballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
