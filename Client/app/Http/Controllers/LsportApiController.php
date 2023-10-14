@@ -500,16 +500,18 @@ class LsportApiController extends Controller {
         $list = array();
         foreach ($return as $k => $v) {
             foreach ($v['buckets'] as $kk => $vv) {
+                $sport_id = $vv['key'];
                 foreach ($vv as $kkk => $vvv) {
                     if (!in_array($kkk,['key','doc_count'])) {
                         foreach ($vvv['buckets'] as $kkkk => $vvvv) {
-                            $list[$vvvv['key']] = $vvvv['count']['value'];
+                            $status = $vvvv['key'];
+                            $list[$sport_id][$status] = $vvvv['count']['value'];
                         }
                     }
                 }
             }
         }
-        
+
         dd($list);
 
 
