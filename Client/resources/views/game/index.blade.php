@@ -131,10 +131,12 @@
                     <span class="market_bet_name"></span>
                     <span class="market_line"></span>
                 </div>
-                <span class="market_price" style="color:#c79e42;"></span>
-                <i class="fa-solid fa-lock" style="display: none;"></i>
-                <i class="fa-solid fa-caret-up"></i>
-                <i class="fa-solid fa-caret-down" style="display: none;"></i>
+                <div>
+                    <span class="market_price" style="color:#c79e42;"></span>
+                    <i class="fa-solid fa-lock" style="display: none;"></i>
+                    <i class="fa-solid fa-caret-up" style="display: none;"></i>
+                    <i class="fa-solid fa-caret-down" style="display: none;"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -927,9 +929,10 @@
                     baseballBodyTemp_home.append(thHome);
                 }
                 const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
-                baseballBodyTemp_home.append(homeTotalScore); // <- append home team data
+                baseballBodyTemp_home.append(homeTotalScore);
+                $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
 
-                // away team W
+                // away team
                 const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
                 baseballBodyTemp_away.append(awayTeamName);
                 for (let i = 0; i < baseballData.length; i++) {
@@ -940,7 +943,7 @@
                 const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`); // <- away team total scores
                 baseballBodyTemp_away.append(awayTotalScore); // <- append away team data
 
-                baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append tbodyto table
+                baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append away team after home team to table
 
                 console.log("Baseball: " + data.series.sport_id);
             }
