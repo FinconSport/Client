@@ -267,3 +267,11 @@ class ElasticSearchDriverProvider extends ServiceProvider {
     }
     
 }
+
+select 
+f.sport_id, 
+COUNT(f.*) as fixture_count 
+from es_lsport_fixture as f 
+inner join es_lsport_league as l on f.league_id = l.league_id 
+where l.status = 1 and f.status in (1, 2, 9) 
+group by f.sport_id
