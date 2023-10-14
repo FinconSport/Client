@@ -843,7 +843,7 @@
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
-        if (data.list.status == 2) {
+        if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -852,7 +852,7 @@
             $('.scoreboardCon').append(earlyContainerTemp);
         }
         // Living fixture (status == 2)
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
