@@ -839,6 +839,8 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+
         // early fixture
         if (data.list.status == 2) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
@@ -856,7 +858,7 @@
 
             switch (true) {
                 case sportType.sport_id === 48242 || sportType.sport_id === 6046 :
-                    const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+                    
                     BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
 
                     BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
@@ -869,7 +871,6 @@
                     break;
                     
                 case sportType.sport_id ===154914:
-                    const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
                     BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
 
                     BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
