@@ -856,7 +856,7 @@
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
-            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 || data.series.sport_id == 154914) {
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
 
