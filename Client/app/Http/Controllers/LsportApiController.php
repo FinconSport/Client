@@ -2234,10 +2234,11 @@ class LsportApiController extends Controller {
             }
         }
             
-        $return = $GameOrder::groupBy('m_id')
-        ->skip($skip)
+        $return = $GameOrder::skip($skip)
         ->take($page_limit)
-        ->orderBy('m_id', 'DESC')->list();
+        ->orderBy('m_id', 'DESC')
+        ->groupBy('m_id')
+        ->list();
         if ($return === false) {
             $this->ApiError("01");
         }
