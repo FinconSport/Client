@@ -76,7 +76,51 @@
         </div>
         <!-- living fixture -->
         <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
-
+            
+            <table>
+                <thead id="livingtableHead">
+                    <!-- if sport === 48242 && sport === 6046 -->
+                    <tr template="BasketBallFootballHeadTemplate" hidden>
+                        <th key="bf_head_gameName"></th>
+                        <th key="bf_head_q1"></th>
+                        <th key="bf_head_q2"></th>
+                        <th key="bf_head_q3"></th>
+                        <th key="bf_head_q4"></th>
+                        <th key="bf_head_totalScore"></th>
+                    </tr>
+                    <!-- if sport === 48242 && sport === 6046 -->
+                    <tr template="BaseballHeadTemplate" hidden>
+                        <th key="b_head_gameName"></th>
+                        <th key="b_head_gameFour"></th>
+                        <th key="b_head_gameFive"></th>
+                        <th key="b_head_gameSix"></th>
+                        <th key="b_head_gameSeven"></th>
+                        <th key="b_head_gameEight"></th>
+                        <th key="b_head_gameNine"></th>
+                        <th key="b_head_totalScore"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr template="BasketBallFootballBodyTemplate" hidden>
+                        <td key="bf_body_gameName"></td>
+                        <td key="bf_body_q1"></td>
+                        <td key="bf_body_q2"></td>
+                        <td key="bf_body_q3"></td>
+                        <td key="bf_body_q4"></td>
+                        <td key="bf_body_totalScore"></td>
+                    </tr>
+                    <tr template="BaseballBodyTemplate" hidden>
+                        <td key="b_body_gameName"></td>
+                        <td key="b_body_gameFour"></td>
+                        <td key="b_body_gameFive"></td>
+                        <td key="b_body_gameSix"></td>
+                        <td key="b_body_gameSeven"></td>
+                        <td key="b_body_gameSeven"></td>
+                        <td key="b_body_gameNine"></td>
+                        <td key="b_body_totalScore"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -794,8 +838,9 @@
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
         // early fixture
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -803,8 +848,40 @@
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-        if (data.list.status == 2) {
+        // living fixture
+        if (data.list.status == 1) {
 
+            livingContainerTemp.removeAttr('hidden').removeAttr('template');
+            const sportType = matchListD.data.series;
+
+            switch (true) {
+                case sportType.sport_id === 48242 || sportType.sport_id === 6046 :
+                    const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+                    BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
+
+                    BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+                    $('.livingtableHead').append(BasketBallFootballHeadTemp);
+                    break;
+                    
+                case sportType.sport_id ===154914:
+                    const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
+                    BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
+
+                    BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
+                    BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+                    $('.livingtableHead').append(BasketBallFootballHeadTemp);
+                    break;
+            }
+            $('.scoreboardCon').append(livingContainerTemp);
         }
     }
     
