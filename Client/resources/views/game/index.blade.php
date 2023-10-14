@@ -842,7 +842,7 @@
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
 
         // early fixture
-        if (data.list.status == 2) {
+        if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -851,7 +851,7 @@
             $('.scoreboardCon').append(earlyContainerTemp);
         }
         // living fixture
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
 
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             const sportType = matchListD.data.series;
