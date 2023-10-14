@@ -76,3 +76,9 @@ div#bettingTypeContainer {
     background: rgb(0 0 0 / 50%);
     margin: auto;
 }
+
+@media screen and (max-width:1024px) {
+    .livingFixture-container.row {
+        width: 87%;
+    }
+  }
