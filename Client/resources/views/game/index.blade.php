@@ -1332,29 +1332,34 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
+    const translations = {
+        dateTimezone: @json(trans('game.index.dateTimezone')),
+        th: @json(trans('game.index.th')),
+    };
+    
     const formatDateTimeV2 = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
-        const month = new Intl.DateTimeFormat('{{ trans('game.index.dateTimezone') }}', { month: 'long' }).format(dateTime);
+        const month = new Intl.DateTimeFormat(translations.dateTimezone, { month: 'long' }).format(dateTime);
         const day = dateTime.getDate();
         const suffix = getDaySuffix(day);
         const hour = dateTime.getHours().toString().padStart(2, '0');
         const minute = dateTime.getMinutes().toString().padStart(2, '0');
-        return `<span>${month} ${day}${suffix}</span><br><span>${hour}:${minute}</span>`;
+        return `${month} ${day}${suffix}<br>${hour}:${minute}`;
     };
 
     const getDaySuffix = (day) => {
         if (day >= 11 && day <= 13) {
-            return 'th';
+            return translations.th;
         }
         switch (day % 10) {
             case 1:
-                return '{{ trans('game.index.th') }}';
+                return translations.th;
             case 2:
-                return '{{ trans('game.index.th') }}';
+                return translations.th;
             case 3:
-                return '{{ trans('game.index.th') }}';
+                return translations.th;
             default:
-                return '{{ trans('game.index.th') }}'; // th
+                return translations.th;
         }
     };
 
