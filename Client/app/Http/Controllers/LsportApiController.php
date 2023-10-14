@@ -509,7 +509,7 @@ class LsportApiController extends Controller {
 
             foreach ($return as $k => $v) {
                 foreach ($v['buckets'] as $kk => $vv) {
-                    $sport_id = $vv['key']."";  // 轉string
+                    $sport_id = $vv['key'];  
                     foreach ($vv as $kkk => $vvv) {
                         if (!in_array($kkk,['key','doc_count'])) {
                             foreach ($vvv['buckets'] as $kkkk => $vvvv) {
@@ -537,91 +537,8 @@ class LsportApiController extends Controller {
                 }
             }
 
-
-            dd($list);
-        }
-
-    	//---------------------------------
-
-        $data = LsportSport::join('lsport_league', 'lsport_sport.sport_id', '=', 'lsport_league.sport_id')
-            ->join('lsport_fixture', 'lsport_league.league_id', '=', 'lsport_fixture.league_id')
-            //->join('lsport_market', 'lsport_fixture.fixture_id', '=', 'lsport_market.fixture_id')
-            ->selectRaw(
-                "lsport_sport.sport_id,
-                lsport_sport.{$lang_col} as sport_name_locale,
-                lsport_fixture.status as fixture_status,
-                COUNT(DISTINCT lsport_fixture.fixture_id) as fixture_cnt"
-            )
-            ->where('lsport_sport.status', 1)
-            ->where('lsport_league.status', 1)
-            ->whereIn('lsport_fixture.status', [1, 2, 9])  //可區分:未開賽及走地中. 9=即將開賽(大概半小時內)
-            ->where('lsport_fixture.start_time', "<=", $after_tomorrow)
-            ->groupBy('lsport_sport.sport_id', "lsport_sport.{$lang_col}", 'lsport_fixture.status')
-            ->get();
-        if ($data === false) {
-            $this->ApiError("02");
-        }
-
-    	//---------------------------------
-        $ret = array(
-            'living' => array(
-                'items' => array(),
-                'total' => 0
-            ),
-            'early' => array(
-                'items' => array(),
-                'total' => 0
-            ),
-            'about_to_start' => array(  // 即將開賽,歸類於走地=living
-                'items' => array(),
-                'total' => 0
-            )
-        );
-
-        $living_types = [
-            1 => "early",  //早盤
-            2 => "living",  //走地
-            9 => "about_to_start",  //走地
-        ];
-
-        // 繞賽事數量結果
-        $totals = array(
-            'living' => 0,
-            'early' => 0,
-            //'about_to_start' => 0,
-        );
-        foreach ($data as $k3 => $v3) {
-            $sport_id = $v3->sport_id;
-            $sport_name = $v3->sport_name_locale;  // 球種名稱
-            $fixture_status = $v3->fixture_status;  // 賽事狀態:1,2,9
-            $fixture_count = $v3->fixture_cnt;  // 該球種賽事數量
-            $living_key = $living_types[$fixture_status];  //living_type[0]=living, living_type[1]=early
-
-            // 處理即將開賽歸類於走地的問題
-            if ($fixture_status == $this->fixture_status['about_to_start']) {
-                $living_key = 'living';
-            }
-
-            // 算living及early的total
-            $totals[$living_key] += $fixture_count;
-
-            if (!isset($ret[$living_key]['items'][$sport_id])) {
-                $ret[$living_key]['items'][$sport_id] = array('name'=>null,'count'=>null);
-            }
-
-            // 置入賽事數量
-            $ret[$living_key]['items'][$sport_id]['name'] = $sport_name;
-            $ret[$living_key]['items'][$sport_id]['count'] = $fixture_count;
-            
-        }
-
-        // 加總
-        foreach ($totals as $living_key => $total) {
-            $ret[$living_key]['total'] = $total;
-        }
-
         ///////////////////////////////////
-        $data = $ret;
+        $data = $list;
 
         $this->ApiSuccess($data, "01"); 
     }
