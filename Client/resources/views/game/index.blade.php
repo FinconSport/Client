@@ -78,7 +78,7 @@
         <div class="livingFixture-container row" key="livingContainerTemplate" hidden>
             <table>
                 <thead id="livingtableHead">
-                    <!-- if sport === 48242 && sport === 6046 -->
+                    <!-- if sport === 48242(basketball) && sport === 6046(football) -->
                     <tr template="BasketBallFootballHeadTemplate" hidden>
                         <th style="width:30%;text-align:left;" key="bf_head_gameName"></th>
                         <th style="width:10%;text-align:center;" key="bf_head_q1"></th>
@@ -87,7 +87,7 @@
                         <th style="width:10%;text-align:center;" key="bf_head_q4"></th>
                         <th style="width:30%;text-align:center;" key="bf_head_totalScore"></th>
                     </tr>
-                    <!-- if sport === 48242 && sport === 6046 -->
+                     <!-- if sport === 154914(baseball) -->
                     <tr template="BaseballHeadTemplate" hidden>
                         <th style="width:20%;text-align:left;" key="b_head_gameName"></th>
                         <th style="width:10%;text-align:center;" key="b_head_gameTitleOne"></th>
@@ -100,14 +100,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                     <!-- if sport === 48242(basketball) && sport === 6046(football) -->
                     <tr template="BasketBallFootballBodyTemplate" hidden>
-                        <td key="bf_body_gameName"></td>
-                        <td key="bf_body_q1"></td>
-                        <td key="bf_body_q2"></td>
-                        <td key="bf_body_q3"></td>
-                        <td key="bf_body_q4"></td>
-                        <td key="bf_body_totalScore"></td>
+                        <td style="width:30%;text-align:left;"key="bf_body_gameName"></td>
+                        <td style="width:10%;text-align:center;" key="bf_body_q1"></td>
+                        <td style="width:10%;text-align:center;" key="bf_body_q2"></td>
+                        <td style="width:10%;text-align:center;" key="bf_body_q3"></td>
+                        <td style="width:10%;text-align:center;" key="bf_body_q4"></td>
+                        <td style="width:30%;text-align:center;" key="bf_body_totalScore"></td>
                     </tr>
+                    <!-- if sport === 154914(baseball) -->
                     <tr template="BaseballBodyTemplate" hidden>
                         <td key="b_body_gameName"></td>
                         <td key="b_body_gameFour"></td>
@@ -843,7 +845,7 @@
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
-        if (data.list.status == 2) {
+        if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -853,7 +855,7 @@
         }
 
         // Living fixture (status == 2)
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
