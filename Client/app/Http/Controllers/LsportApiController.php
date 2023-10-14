@@ -491,13 +491,13 @@ class LsportApiController extends Controller {
         if (isset($input['debug'])) {
 
             $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-            $after_tomorrow_es = date('Y-m-d 00:00:00', $after_tomorrow_es);
+            $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
 
             $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
             ->whereIn("status",[1,2,9])
-            ->where("start_time","<=", '"'.$after_tomorrow_es.'"')
+            ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
             ->groupBy('sport_id', 'status')
-            ->total(1,true);
+            ->total();
 
             dd($return);
             // 整理統計 , 回傳格式取決於SQL
