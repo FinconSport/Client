@@ -1769,7 +1769,6 @@ class LsportApiController extends Controller {
 
             ///////////////////////
 
-            // 語系套用
             // league
             $league_id = $v['league_id'];
             $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
@@ -1838,9 +1837,10 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         // gzip
-        $data = $this->gzip($data);
+       // $data = $this->gzip($data);
 
-        $this->ApiSuccess($data, "01", true); 
+       // $this->ApiSuccess($data, "01", true); 
+        $this->ApiSuccess($data, "01"); 
     }
 
 
