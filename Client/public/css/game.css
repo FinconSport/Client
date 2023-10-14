@@ -70,7 +70,7 @@ div#bettingTypeContainer {
 }
 
 .livingFixture-container.row {
-    width: 100%;
+    width: 65%;
     padding: 2rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
