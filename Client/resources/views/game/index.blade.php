@@ -909,47 +909,38 @@
                 }
 
                 // thead data game title
-                // const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
-                // BaseballHeadTemp.append(TeamNameHead);
-                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
-                BaseballHeadTemp.append(totalScoreHead);
-                
-                // Append the game titles to the header row
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`); // <- game on title
+                BaseballHeadTemp.append(TeamNameHead);
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
+                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i])); // <- game titles
                 }
+                const totalScoreHead = $(`<th style="width:20%;text-align:left;">{{ trans('game.scoreBoard.totalScore') }}</th>`); // <- total score title
+                BaseballHeadTemp.append(totalScoreHead);
+                $('#livingtableHead').append(BaseballHeadTemp); // <- append thead to table
 
-                
-
-
-                $('#livingtableHead').append(BaseballHeadTemp);
-
-                // Create and append home team data row
-                const homeTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.home_team_name);
-                // const homeTotalScore = $('<td style="width:20%;text-align:center;">').text(homeTeam.total_score);
+                // Home team
+                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`); // <- home team name
                 baseballBodyTemp_home.append(homeTeamName);
-                // baseballBodyTemp_home.append(homeTotalScore);
-
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");// <- home team scores
                     baseballBodyTemp_home.append(thHome);
                 }
-                $('#livingtableBody').append(baseballBodyTemp_home);
+                const homeTotalScore = $(`<th style="width:20%;text-align:left;">${homeTeam.total_score}</th>`);// <- home team total scores
+                $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
 
-                // Create and append away team data row
-                const awayTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.away_team_name);
-                // const awayTotalScore = $('<td style="width:20%;text-align:center;">').text(awayTeam.total_score);
+                // away team 
+                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
                 baseballBodyTemp_away.append(awayTeamName);
-                // baseballBodyTemp_away.append(awayTotalScore);
-
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "");
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || ""); // <- away team scores
                     baseballBodyTemp_away.append(thAway);
                 }
+                const awayTotalScore = $(`<th style="width:20%;text-align:left;">${awayTeam.total_score}</th>`); // <- away team total scores
+                baseballBodyTemp_away.append(awayTotalScore); // <- append away team data
 
-                baseballBodyTemp_home.after(baseballBodyTemp_away);
+                baseballBodyTemp_home.after(baseballBodyTemp_away)// <- append tbodyto table
 
                 console.log("Baseball: " + data.series.sport_id);
             }

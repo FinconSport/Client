@@ -25,5 +25,6 @@ return [
         "gameEleven" => "11",
         "gameTwelve" => "12",
         "gamesOn" => "局上",
+        "totalScore" => "總分",
     ],
 ];

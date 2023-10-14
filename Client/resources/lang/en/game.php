@@ -24,6 +24,7 @@ return [
         "gameTen" => "10",
         "gameEleven" => "11",
         "gameTwelve" => "12",
-        "gamesOn" => "games on"
+        "gamesOn" => "games on",
+        "totalScore" => "Total Score",
     ],
 ];
