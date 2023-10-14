@@ -1344,7 +1344,8 @@
         const suffix = getDaySuffix(day);
         const hour = dateTime.getHours().toString().padStart(2, '0');
         const minute = dateTime.getMinutes().toString().padStart(2, '0');
-        return `${month} ${day}${suffix}\n${hour}:${minute}`;
+        const formattedDateTime = `<span>${month} ${day}${suffix}</span><br><span>${hour}:${minute}</span>`;
+        return formattedDateTime;
     };
 
     const getDaySuffix = (day) => {
