@@ -845,7 +845,7 @@
                 BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
 
                 const baseballData = [0, 1, 2, 3, 4, 0];
-                const gameTitle = ['Full Time Score', 'Q1', 'Q2', 'Q3', 'Q4', ];
+                const gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.q1') }}', '{{ trans('game.scoreBoard.q2') }}', '{{ trans('game.scoreBoard.q3') }}', '{{ trans('game.scoreBoard.q4') }}'];
                 for (let i = 0; i < gameTitle.length; i++) {
                     BasketBallFootballHeadTemp.find(`[key="bf_head_q${i + 1}"]`).text(gameTitle[i]);
                 }
@@ -895,18 +895,19 @@
                 let gameTitle = [];
 
                 if (scoresLengths.length < 6) {
-                    baseballData = [0, 1, 2, 3, 4, 5, 6];
-                    gameTitle = ['Full Time Score', 'First Round', 'Game 2', 'Game 3', 'Game 4', 'Game 5', 'Game 6'];
+                    baseballData = [0, 1, 2, 3, 4, 5];
+                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.firstRound') }}', '{{ trans('game.scoreBoard.gameTwo') }}', '{{ trans('game.scoreBoard.gameThree') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}'];
                     console.log('less than 6');
                 } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
                     baseballData = [4, 5, 6, 7, 8, 9];
-                    gameTitle = ['Full Time Score', 'Game 4', 'Game 5', 'Game 6', 'Game 7', 'Game 8', 'Game 9'];
-                    console.log('more than six');
+                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameFour') }}', '{{ trans('game.scoreBoard.gameFive') }}', '{{ trans('game.scoreBoard.gameSix') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}'];
+                    console.log('between 6 and 9');
                 } else if (scoresLengths.length > 9) {
                     baseballData = [7, 8, 9, 10, 11, 12];
-                    gameTitle = ['Full Time Score', 'Game 7', 'Game 8', 'Game 9', 'Game 10', 'Game 11', 'Game 12'];
+                    gameTitle = ['{{ trans('game.scoreBoard.fullTimeScore') }}', '{{ trans('game.scoreBoard.gameSeven') }}', '{{ trans('game.scoreBoard.gameEight') }}', '{{ trans('game.scoreBoard.gameNine') }}', '{{ trans('game.scoreBoard.gameTen') }}', '{{ trans('game.scoreBoard.gameEleven') }}', '{{ trans('game.scoreBoard.gameTwelve') }}'];
                     console.log('more than 9');
                 }
+
                 // thead data game title
                 const TeamNameHead = $('<th style="width:20%;text-align:left;">').text('Name');
                 const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
