@@ -2220,20 +2220,17 @@ class LsportApiController extends Controller {
 
         // 獲取注單資料
         $GameOrder = GameOrder::where("player_id", $input['player']);
-        $groupedData = GameOrder::select('m_id')->where("player_id", $input['player']);
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
             // 未結算
             if ($input['result'] == 0) {
                 $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
-                $groupedData = $groupedData->whereIn("status",[0,1,2,3]);
             }
             
             // 已派獎
             if ($input['result'] == 1) {
                 $GameOrder = $GameOrder->where("status",4);
-                $groupedData = $groupedData->where("status",4);
             }
         }
             
