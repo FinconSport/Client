@@ -839,10 +839,9 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
-        const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
-
-        // early fixture
-        if (data.list.status == 1) {
+        livingContainerTemp.attr('id', "livingFixture");
+        // Early fixture (status == 1)
+        if (data.list.status == 2) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -850,18 +849,15 @@
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-        // living fixture
-        if (data.list.status == 2) {
 
+        // Living fixture (status == 2)
+        if (data.list.status == 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            const sportType = matchListD.data.series;
-            
-            switch (true) {
-            case sportType.sport_id === 48242 || sportType.sport_id === 6046:
-                console.log("BAsketball & Football :" + sportType.sport_id);
-                break;
-            case sportType.sport_id === 154914:
-                console.log("Baseball :" + sportType.sport_id);
+
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046) {
+                console.log("Basketball & Football: " + data.series.sport_id);
+            } else if (data.series.sport_id == 154914) {
+                const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
@@ -869,13 +865,14 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                $('.livingtableHead').append(BasketBallFootballHeadTemp);
-                break;
-        }
+                $('#livingtableHead').append(BasketBallFootballHeadTemp);
+                console.log("Baseball: " + data.series.sport_id);
+            }
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
     }
+
     
     // render view layer here
     function renderView() {
