@@ -927,7 +927,7 @@
                 const homeTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.home_team_name);
                 // const homeTotalScore = $('<td style="width:20%;text-align:center;">').text(homeTeam.total_score);
                 baseballBodyTemp_home.append(homeTeamName);
-                baseballBodyTemp_home.append(homeTotalScore);
+                // baseballBodyTemp_home.append(homeTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scorehome);
@@ -940,7 +940,7 @@
                 const awayTeamName = $('<td style="width:20%;text-align:left;">').text(data.list.away_team_name);
                 // const awayTotalScore = $('<td style="width:20%;text-align:center;">').text(awayTeam.total_score);
                 baseballBodyTemp_away.append(awayTeamName);
-                baseballBodyTemp_away.append(awayTotalScore);
+                // baseballBodyTemp_away.append(awayTotalScore);
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scoreaway);
