@@ -852,14 +852,12 @@
         }
 
         // Living fixture (status == 2)
-        if (data.list.status === 1) {
-            const sportType = data.series; // Use data.series directly here
-
+        if (data.list.status == 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
 
-            if (sportType.sport_id === 48242 || sportType.sport_id === 6046) {
-                console.log("Basketball & Football: " + sportType.sport_id);
-            } else if (sportType.sport_id === 154914) {
+            if (data.series.sport_id == 48242 || data.series.sport_id == 6046) {
+                console.log("Basketball & Football: " + data.series.sport_id);
+            } else if (data.series.sport_id == 154914) {
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
@@ -868,7 +866,7 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
                 $('.livingtableHead').append(BasketBallFootballHeadTemp);
-                console.log("Baseball: " + sportType.sport_id);
+                console.log("Baseball: " + data.series.sport_id);
             }
 
             $('.scoreboardCon').append(livingContainerTemp);
