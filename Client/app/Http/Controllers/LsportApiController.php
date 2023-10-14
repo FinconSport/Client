@@ -2592,59 +2592,6 @@ class LsportApiController extends Controller {
      *          # ARRAY
      */
 
-/*
-範例來源字串
-棒球 periods:
-[
-    {
-      "Incidents": null,
-      "IsConfirmed": true,
-      "IsFinished": true,
-      "Results": [
-        {"Position": "1","Value": "0"},
-        {"Position": "2","Value": "0"}
-      ],
-      "SequenceNumber": 1,
-      "SubPeriods": null,
-      "Type": 1
-    },
-    {
-      "Incidents": [
-        {
-          "IncidentType": 27,
-          "ParticipantPosition": "1",
-          "Period": 2,
-          "Results": [
-            {"Position": "1","Value": "2"},
-            {"Position": "2","Value": "0"}
-          ],
-          "Seconds": -1
-        }
-      ],
-      "IsConfirmed": true,
-      "IsFinished": true,
-      "Results": [
-        {"Position": "1","Value": "2"},
-        {"Position": "2","Value": "0"}
-      ],
-      "SequenceNumber": 2,
-      "SubPeriods": null,
-      "Type": 2
-    },
-
-棒球 scoreboard:
-{
-    "CurrentPeriod": 40,
-    "Results": [
-      {"Position": "1","Value": "2"},
-      {"Position": "2","Value": "2"}
-    ],
-    "Status": 2,
-    "Time": "-1"
-}
-
-*/
-
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
         // 如果還未開賽就回傳null
@@ -2727,30 +2674,6 @@ class LsportApiController extends Controller {
      * @param 
      * @return 
      */
-
-/*
-範例來源字串:
-棒球 scoreboard:
-{
-    "CurrentPeriod": 40,
-    "Results": [
-      {"Position": "1","Value": "2"},
-      {"Position": "2","Value": "2"}
-    ],
-    "Status": 2,
-    "Time": "-1"
-}
-
-棒球 livescore_extradata:
-[
-  {"Name": "Balls","Value": "2"},  // 好球數
-  {"Name": "Turn","Value": "2"},  // 上下半場。1=上半，2=下半
-  {"Name": "Bases","Value": "1/1/0"},  // 壘包狀態
-  {"Name": "Strikes","Value": "2"},  // 打擊數
-  {"Name": "Outs","Value": "1"}  // 出局數
-]
-*/
-
      protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
 
         // 如果還未開賽就回傳null
