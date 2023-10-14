@@ -499,12 +499,11 @@ class LsportApiController extends Controller {
         // 整理統計
         foreach ($return as $k => $v) {
             foreach ($v['buckets'] as $kk => $vv) {
-
-                dd($kk,$vv);
-                if (!in_array(['key','doc_count'],$kk)) {
-                    dd($vv[$kk]);
+                foreach ($vv as $kkk => $vvv) {
+                    if (!in_array(['key','doc_count'],$kkk)) {
+                        dd($vvv[$kkk]);
+                    }
                 }
-                
             }
         }
         dd($return);
