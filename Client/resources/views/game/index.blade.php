@@ -871,65 +871,95 @@
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
 
-                BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("");
-                BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
-                BasketBallFootballHeadTemp.find('[key="bf_head_q2"]').text("{{ trans('game.scoreBoard.q2') }}");
-                BasketBallFootballHeadTemp.find('[key="bf_head_q3"]').text("{{ trans('game.scoreBoard.q3') }}");
-                BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
-                BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+                const baseballData = [1, 2, 3, 4, 0];
+                const gameTitle = ['Q1', 'Q2', 'Q3', 'Q4', 'Full Time Score'];
+                for (let i = 0; i < gameTitle.length; i++) {
+                    BasketBallFootballHeadTemp.find(`[key="bf_head_q${i + 1}"]`).text(gameTitle[i]);
+                }
+
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
 
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_TeamName"]').text(data.list.home_team_name);
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q1"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q2"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q3"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q4"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_totalScore"]').text("");
+                for (let i = 0; i < baseballData.length; i++) {
+                    BasketBallFootballBodyTemp.find(`[key="bf_bodyhome_q${i + 1}"]`).text(baseballData[i]);
+                    BasketBallFootballBodyTemp.find(`[key="bf_bodyaway_q${i + 1}"]`).text(baseballData[i]);
+                }
 
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_TeamName"]').text(data.list.home_team_name);
                 BasketBallFootballBodyTemp.find('[key="bf_bodyaway_TeamName"]').text(data.list.away_team_name);
-                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q1"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q2"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q3"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q4"]').text("");
-                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_totalScore"]').text("");
 
                 $('#livingtableHead').after(BasketBallFootballBodyTemp);
 
                 console.log("Basketball & Football: " + data.series.sport_id);
+
             } else if (data.series.sport_id == 154914) {
-                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                baseballBodyTemp.removeAttr('hidden').removeAttr('template');
                 
-                BaseballHeadTemp.find('[key="b_head_gameName"]').text("");
-                BaseballHeadTemp.find('[key="b_head_gameTitleOne"]').text("{{ trans('game.scoreBoard.gameOne') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleTwo"]').text("{{ trans('game.scoreBoard.gameTwo') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleThree"]').text("{{ trans('game.scoreBoard.gameThree') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleFour"]').text("{{ trans('game.scoreBoard.gameFour') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
-                BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
-                BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
+                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
+                baseballBodyTemp.removeAttr('hidden').removeAttr('template');   
+
+                const scoresLengths = data.teams.map((team) => team.scores.length);
+                const baseballData = [];
+                const gameTitle = [];
+
+                if (scoresLengths.length < 6) {
+                    for (let i = 0; i < 7; i++) {
+                        baseballData.push(i);
+                        gameTitle.push(transGameScoreBoard(i));
+                    }
+                    console.log('less than 6')
+                } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
+                    for (let i = 4; i < 10; i++) {
+                        baseballData.push(i);
+                        gameTitle.push(transGameScoreBoard(i));
+                    }
+                    console.log('more than six')
+                } else if (scoresLengths.length > 9) {
+                    for (let i = 7; i < 13; i++) {
+                        baseballData.push(i);
+                        gameTitle.push(transGameScoreBoard(i));
+                    }
+                    console.log('more than 9')
+                }
+
+                function transGameScoreBoard(index) {
+                    // Replace this with your actual translation function
+                    const titles = [
+                        '{{ trans('game.scoreBoard.fullTimeScore') }}',
+                        '{{ trans('game.scoreBoard.firstRound') }}',
+                        '1'
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        '10',
+                        '11',
+                        '12',
+                    ];
+                    return titles[index];
+                }
+
+                BaseballHeadTemp.find('[key="b_head_gameName"]').text('');
+                BaseballHeadTemp.find('[key^="b_head_gameTitle"]').each(function (index) {
+                    $(this).text(gameTitle[index]);
+                });
+
+                baseballBodyTemp.find('[key="b_bodyhome_TeamName"]').text(data.list.home_team_name);
+                baseballBodyTemp.find('[key^="b_bodyhome_g"]').each(function (index) {
+                    $(this).text(baseballData[index]);
+                });
+
+                baseballBodyTemp.find('[key="b_bodyaway_TeamName"]').text(data.list.away_team_name);
+                baseballBodyTemp.find('[key^="b_bodyaway_g"]').each(function (index) {
+                    $(this).text(baseballData[index]);
+                });
+
+
+
                 $('#livingtableHead').append(BaseballHeadTemp);
-
-                BaseballHeadTemp.find('[key="b_bodyhome_TeamName"]').text(data.list.home_team_name);
-                BaseballHeadTemp.find('[key="b_bodyhome_g1"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_g2"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_g3"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_g4"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_g5"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_g6"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyhome_totalScore"]').text("");
-
-                BaseballHeadTemp.find('[key="b_bodyaway_TeamName"]').text(data.list.away_team_name);
-                BaseballHeadTemp.find('[key="b_bodyaway__g1"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__g2"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__g3"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__g4"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__g5"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__g6"]').text("");
-                BaseballHeadTemp.find('[key="b_bodyaway__totalScore"]').text("");
-
                 $('#livingtableHead').after(BaseballHeadTemp);
-
                 console.log("Baseball: " + data.series.sport_id);
             }
 
