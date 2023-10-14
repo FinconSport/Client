@@ -32,7 +32,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
-            dd($esSql);
+            //dd($esSql);
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
@@ -222,6 +222,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $esSql = str_replace($tableName, $esTableName, $esSql); // fix es_table_name
             $esSql = str_replace("'", "", $esSql);  // remove '
             $esSql = str_replace("`", "", $esSql);  // remove `
+            dd($esSql);
             $cacheKey = MD5($esSql); // create CacheKey by MD5
 
             // use Cache
