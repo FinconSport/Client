@@ -514,7 +514,10 @@ class LsportApiController extends Controller {
                                 if ($status == 9) { // 即將開始視為滾球
                                     $status = 2;
                                 }
-                                $list[$status]['items'][$sport_id]['count'] = $vvvv['count']['value'];
+
+                                $tmp_count = $vvvv['count']['value'];
+                                $list[$status]['items'][$sport_id]['count'] = $tmp_count;
+                                $list[$status]['total'] += $tmp_count;
 
                                 // 取得體育名稱
                                 $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
