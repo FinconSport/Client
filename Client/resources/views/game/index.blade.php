@@ -873,8 +873,25 @@
                 baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
 
                 const scoresLengths = data.list.teams.map((team) => team.scores.length);
+                var scorehome = [];
+                var scoreaway = [];
                 const homeTeam = data.list.teams.find(item => item.index === 1)
                 const awayTeam = data.list.teams.find(item => item.index === 2)
+                if (homeTeam) {
+                    homeTeam.scores
+                    .sort((a, b) => a.stage - b.stage)
+                    .forEach(el => {
+                    scorehome.push(el.score);
+                    });
+                }
+                if (awayTeam) {
+                    awayTeam.scores
+                    .sort((a, b) => a.stage - b.stage)
+                    .forEach(el => {
+                    scoreaway.push(el.score);
+                    });
+                }
+                
 
                 let baseballData = [];
                 let gameTitle = [];
@@ -914,7 +931,7 @@
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log("Score: " + homeTeam.scores[baseballData[i]].score)
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(homeTeam.scores[baseballData[i]].score);
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]]);
                     baseballBodyTemp_home.append(thHome);
                 }
                 $('#livingtableBody').append(baseballBodyTemp_home);
@@ -927,7 +944,7 @@
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(awayTeam.scores[baseballData[i]].score)
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(awayTeam.scores[baseballData[i]].score);
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]]);
                     baseballBodyTemp_away.append(thAway);
                 }
 
