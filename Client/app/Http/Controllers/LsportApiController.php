@@ -2234,7 +2234,10 @@ class LsportApiController extends Controller {
             }
         }
             
-        $return = $GameOrder->groupBy('m_id')->skip($skip)->take($page_limit)->orderBy('m_id', 'DESC')->get();
+        $return = $GameOrder::groupBy('m_id')
+        ->skip($skip)
+        ->take($page_limit)
+        ->orderBy('m_id', 'DESC')->list();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -2269,7 +2272,7 @@ class LsportApiController extends Controller {
             // 有串關資料
             if ($v['m_order'] == 1) {
 
-                $cc = GameOrder::where("m_id", $v['m_id'])->get();
+                $cc = GameOrder::where("m_id", $v['m_id'])->list();
                 if ($cc === false) {
                     $this->error(__CLASS__, __FUNCTION__, "02");
                 }
@@ -2277,7 +2280,7 @@ class LsportApiController extends Controller {
                 foreach ($cc as $kkk => $vvv) {
 
                     $fixture_id = $vvv['fixture_id'];
-                    $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->first();
+                    $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
                  
                     $tmp_bet_data = array();
 
@@ -2310,7 +2313,7 @@ class LsportApiController extends Controller {
             } else {
                 
                 $fixture_id = $v['fixture_id'];
-                $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->first();
+                $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
 
                 $tmp_bet_data = array();
 
