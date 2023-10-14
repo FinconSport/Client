@@ -841,8 +841,9 @@
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
 
-        // early fixture
-        if (data.list.status == 1) {
+        // early fixture 1
+        if (data.list.status == 2) {
+            const sportType = matchListD.data.series;
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -850,18 +851,19 @@
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-        // living fixture
-        if (data.list.status == 2) {
-
+        // living fixture 2
+        if (data.list.status === 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             const sportType = matchListD.data.series;
             
-            switch (true) {
-            case sportType.sport_id === 48242 || sportType.sport_id === 6046:
-                console.log("BAsketball & Football :" + sportType.sport_id);
-                break;
-            case sportType.sport_id === 154914:
-                console.log("Baseball :" + sportType.sport_id);
+            if (sportType.sport_id === 48242 || sportType.sport_id === 6046) {
+
+                console.log("Basketball & Football: " + sportType.sport_id);
+
+            } else if (sportType.sport_id === 154914) {
+
+                console.log("Baseball: " + sportType.sport_id);
+                
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballHeadTemp.find('[key="bf_head_gameName"]').text("{{ trans('game.scoreBoard.firstRound') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_q1"]').text("{{ trans('game.scoreBoard.q1') }}");
@@ -870,11 +872,11 @@
                 BasketBallFootballHeadTemp.find('[key="bf_head_q4"]').text("{{ trans('game.scoreBoard.q4') }}");
                 BasketBallFootballHeadTemp.find('[key="bf_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
                 $('.livingtableHead').append(BasketBallFootballHeadTemp);
-                break;
-        }
+            }
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
+
     }
     
     // render view layer here
