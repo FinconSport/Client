@@ -69,7 +69,7 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 0.5rem 0rem;
 }
 
-#scoreboardContainer tr:last-child th{
+#scoreboardContainer tbody tr:last-child th{
     padding: 0rem 0rem 0rem 0rem;
 }
 
