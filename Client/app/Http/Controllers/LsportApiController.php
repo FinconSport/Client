@@ -487,17 +487,6 @@ class LsportApiController extends Controller {
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
     	//---------------------------------
-
-        $return = LsportFixture::select('f.*')
-        ->from('es_lsport_fixture as f')
-        ->join('es_lsport_sport as s', 'f.sport_id', '=', 's.sport_id')
-        ->join('es_lsport_league as l', 'f.sport_id', '=', 'l.sport_id')
-        ->where('s.status', '=', 1)
-        ->where('l.status', '=', 1)
-        ->orderBy("f.start_time","DESC")
-        ->list(1,true);
-
-        dd($return);
         
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
