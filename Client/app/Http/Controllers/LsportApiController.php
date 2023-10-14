@@ -512,8 +512,51 @@ class LsportApiController extends Controller {
             }
         }
 
- //       dd($list);
+        dd($list);
 
+ /*
+ {
+    "status": 1,
+    "data": {
+        "living": {
+            "items": {
+                "6046": {
+                    "name": "足球",
+                    "count": 1
+                },
+                "48242": {
+                    "name": "籃球",
+                    "count": 2
+                }
+            },
+            "total": 3
+        },
+        "early": {
+            "items": {
+                "6046": {
+                    "name": "足球",
+                    "count": 3
+                },
+                "48242": {
+                    "name": "籃球",
+                    "count": 15
+                },
+                "154914": {
+                    "name": "棒球",
+                    "count": 5
+                }
+            },
+            "total": 23
+        },
+        "about_to_start": {
+            "items": [],
+            "total": 0
+        }
+    },
+    "message": "SUCCESS_API_INDEX_MATCH_LIST_01",
+    "gzip": false
+}
+*/
 
     	//---------------------------------
 
