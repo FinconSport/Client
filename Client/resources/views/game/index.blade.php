@@ -855,6 +855,7 @@
 
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             const sportType = matchListD.data.series;
+            console.log(sportType.sport_id);
 
             switch (true) {
                 case sportType.sport_id === 48242 || sportType.sport_id === 6046 :
