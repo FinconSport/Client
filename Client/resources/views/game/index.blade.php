@@ -90,14 +90,6 @@
                     </tr>
                      <!-- if sport === 154914(baseball) -->
                     <tr template="BaseballHeadTemplate" hidden>
-                        <th style="width:20%;text-align:left;" key="b_head_gameName"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleOne"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleTwo"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleThree"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleFour"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleFive"></th>
-                        <th style="width:10%;text-align:center;" key="b_head_gameTitleSix"></th>
-                        <th style="width:20%;text-align:center;" key="b_head_totalScore"></th>
                     </tr>
                 </thead>
                 <!-- if sport === 48242(basketball) && sport === 6046(football) -->
@@ -871,8 +863,8 @@
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
 
-                const baseballData = [1, 2, 3, 4, 0];
-                const gameTitle = ['Q1', 'Q2', 'Q3', 'Q4', 'Full Time Score'];
+                const baseballData = [0, 1, 2, 3, 4, 0];
+                const gameTitle = ['Full Time Score', 'Q1', 'Q2', 'Q3', 'Q4', ];
                 for (let i = 0; i < gameTitle.length; i++) {
                     BasketBallFootballHeadTemp.find(`[key="bf_head_q${i + 1}"]`).text(gameTitle[i]);
                 }
@@ -892,74 +884,41 @@
                 console.log("Basketball & Football: " + data.series.sport_id);
 
             } else if (data.series.sport_id == 154914) {
-                
+
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
                 baseballBodyTemp.removeAttr('hidden').removeAttr('template');   
-
                 const scoresLengths = data.teams.map((team) => team.scores.length);
                 const baseballData = [];
                 const gameTitle = [];
 
                 if (scoresLengths.length < 6) {
-                    for (let i = 0; i < 7; i++) {
-                        baseballData.push(i);
-                        gameTitle.push(transGameScoreBoard(i));
-                    }
+                    const baseballData = [0, 1, 2, 3, 4, 5, 6];
+                    const gameTitle = ['Full Time Score', 'First Round', 'Game 2', 'Game 3', 'Game 4', 'Game 5', 'Game 6'];
                     console.log('less than 6')
                 } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
-                    for (let i = 4; i < 10; i++) {
-                        baseballData.push(i);
-                        gameTitle.push(transGameScoreBoard(i));
-                    }
+                    const baseballData = [4, 5, 6, 7, 8, 9];
+                    const gameTitle = ['Full Time Score', 'Game 4', 'Game 5', 'Game 6', 'Game 7', 'Game 8', 'Game 9'];
                     console.log('more than six')
                 } else if (scoresLengths.length > 9) {
-                    for (let i = 7; i < 13; i++) {
-                        baseballData.push(i);
-                        gameTitle.push(transGameScoreBoard(i));
-                    }
+                    const baseballData = [7, 8, 9, 10, 11, 12];
+                    const gameTitle = ['Full Time Score', 'Game 7', 'Game 8', 'Game 9', 'Game 10', 'Game 11', 'Game 12'];
                     console.log('more than 9')
                 }
 
-                function transGameScoreBoard(index) {
-                    // Replace this with your actual translation function
-                    const titles = [
-                        '{{ trans('game.scoreBoard.fullTimeScore') }}',
-                        '{{ trans('game.scoreBoard.firstRound') }}',
-                        '1'
-                        '2',
-                        '3',
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9',
-                        '10',
-                        '11',
-                        '12',
-                    ];
-                    return titles[index];
+                const TeamNameHead = $('<th style="width:20%;text-align:left;>').text('Name');
+                BaseballHeadTemp.append(TeamNameHead);
+
+                for (let i = 0; i < gameTitle.length; i++) {
+                    // Create a new <th> element
+                    const th = $('<th style="width:10%;text-align:center;>').text(gameTitle[i]);
+                    // Append the <th> element to the cloned row
+                    BaseballHeadTemp.append(th);
                 }
 
-                BaseballHeadTemp.find('[key="b_head_gameName"]').text('');
-                BaseballHeadTemp.find('[key^="b_head_gameTitle"]').each(function (index) {
-                    $(this).text(gameTitle[index]);
-                });
-
-                baseballBodyTemp.find('[key="b_bodyhome_TeamName"]').text(data.list.home_team_name);
-                baseballBodyTemp.find('[key^="b_bodyhome_g"]').each(function (index) {
-                    $(this).text(baseballData[index]);
-                });
-
-                baseballBodyTemp.find('[key="b_bodyaway_TeamName"]').text(data.list.away_team_name);
-                baseballBodyTemp.find('[key^="b_bodyaway_g"]').each(function (index) {
-                    $(this).text(baseballData[index]);
-                });
-
-
+                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
+                BaseballHeadTemp.append(totalScoreHead);
 
                 $('#livingtableHead').append(BaseballHeadTemp);
-                $('#livingtableHead').after(BaseballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
