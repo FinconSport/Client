@@ -909,16 +909,17 @@
                 }
 
                 // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
-                BaseballHeadTemp.append(TeamNameHead);
+                // const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                // BaseballHeadTemp.append(TeamNameHead);
+                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
+                BaseballHeadTemp.append(totalScoreHead);
                 
                 // Append the game titles to the header row
                 for (let i = 0; i < gameTitle.length; i++) {
                     BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $('<th style="width:20%;text-align:center;>').text('Total');
-                BaseballHeadTemp.append(totalScoreHead);
+                
 
 
                 $('#livingtableHead').append(BaseballHeadTemp);
@@ -931,7 +932,7 @@
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scorehome);
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "-");
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");
                     baseballBodyTemp_home.append(thHome);
                 }
                 $('#livingtableBody').append(baseballBodyTemp_home);
@@ -944,7 +945,7 @@
 
                 for (let i = 0; i < baseballData.length; i++) {
                     console.log(scoreaway);
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "-");
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "");
                     baseballBodyTemp_away.append(thAway);
                 }
 
