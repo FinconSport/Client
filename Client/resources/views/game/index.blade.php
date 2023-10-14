@@ -731,9 +731,7 @@
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
 
             //  If v.rate is empty or undefined, the append operation will not be performed.
-            if (v.rate && Object.keys(v.rate).length > 0) {
-                $('#bettingTypeContainer').append(bettingTypeContainerTemp);
-            }
+            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
         }
     }
 
