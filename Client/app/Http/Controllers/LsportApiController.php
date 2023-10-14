@@ -484,7 +484,7 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = time();
         $after_tomorrow = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
+        $after_tomorrow = date('Y-m-d', $after_tomorrow);
 
     	//---------------------------------
         
