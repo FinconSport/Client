@@ -729,7 +729,7 @@
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-            
+
             //  If v.rate is empty or undefined, the append operation will not be performed.
             if (v.rate && Object.keys(v.rate).length > 0) {
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
@@ -751,7 +751,12 @@
             marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
             marketBetRateTemp.attr('bet_rate', v2.main_line);
             marketBetRateTemp.attr('bet_type', v.market_name);
-            marketBetRateTemp.attr('bet_name', v2.market_bet_name);
+            marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
+            marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
+            marketBetRateTemp.attr('line', v2.line);
+            marketBetRateTemp.attr('league', matchListD.data.series.name);
+            marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
+            marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
@@ -778,13 +783,14 @@
             }
 
             let fixture_id = matchListD.data.list.fixture_id;
+            let price = marketBetRateTemp.attr('bet_rate')
             if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
                 // 判斷賠率是否有改變
-                if( parseFloat(v2.price) > parseFloat(v2.price) ) {
+                if( parseFloat(price) > parseFloat(v2.price) ) {
                     // 賠率下降
                     lowerOdd(k3, v.market_id, v2.market_bet_id, fixture_id)
                 }
-                if( parseFloat(v2.price) < parseFloat(v2.price) ) {
+                if( parseFloat(price) < parseFloat(v2.price) ) {
                     // 賠率上升
                     raiseOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
                 }
