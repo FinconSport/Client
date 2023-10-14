@@ -927,9 +927,9 @@
                     baseballBodyTemp_home.append(thHome);
                 }
                 const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);// <- home team total scores
-                $('#livingtableBody').append(baseballBodyTemp_home); // <- append home team data
+                $('#livingtableBody').append(homeTotalScore); // <- append home team data
 
-                // away team 
+                // away team W
                 const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`); // <- away team name
                 baseballBodyTemp_away.append(awayTeamName);
                 for (let i = 0; i < baseballData.length; i++) {
