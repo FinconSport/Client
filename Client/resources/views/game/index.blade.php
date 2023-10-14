@@ -81,12 +81,12 @@
                 <thead id="livingtableHead">
                     <!-- if sport === 48242 && sport === 6046 -->
                     <tr template="BasketBallFootballHeadTemplate" hidden>
-                        <th key="bf_head_gameName"></th>
-                        <th key="bf_head_q1"></th>
-                        <th key="bf_head_q2"></th>
-                        <th key="bf_head_q3"></th>
-                        <th key="bf_head_q4"></th>
-                        <th key="bf_head_totalScore"></th>
+                        <th style="width:40%;" key="bf_head_gameName"></th>
+                        <th style="width:10%;" key="bf_head_q1"></th>
+                        <th style="width:10%;" key="bf_head_q2"></th>
+                        <th style="width:10%;" key="bf_head_q3"></th>
+                        <th style="width:10%;" key="bf_head_q4"></th>
+                        <th style="width:20%;" key="bf_head_totalScore"></th>
                     </tr>
                     <!-- if sport === 48242 && sport === 6046 -->
                     <tr template="BaseballHeadTemplate" hidden>
