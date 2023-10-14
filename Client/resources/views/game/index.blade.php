@@ -99,26 +99,23 @@
                         <th style="width:20%;text-align:center;" key="b_head_totalScore"></th>
                     </tr>
                 </thead>
-                <tbody>
-                     <!-- if sport === 48242(basketball) && sport === 6046(football) -->
-                    <tr template="BasketBallFootballBodyTemplate" hidden>
-                        <td style="width:30%;text-align:left;"key="bf_body_gameName"></td>
-                        <td style="width:10%;text-align:center;" key="bf_body_q1"></td>
-                        <td style="width:10%;text-align:center;" key="bf_body_q2"></td>
-                        <td style="width:10%;text-align:center;" key="bf_body_q3"></td>
-                        <td style="width:10%;text-align:center;" key="bf_body_q4"></td>
-                        <td style="width:30%;text-align:center;" key="bf_body_totalScore"></td>
+                <!-- if sport === 48242(basketball) && sport === 6046(football) -->
+                <tbody template="BasketBallFootballBodyTemplate" hidden>
+                    <tr>
+                        <td style="width:30%;text-align:left;"key="bf_bodyhome_TeamName"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyhome_q1"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyhome_q2"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyhome_q3"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyhome_q4"></td>
+                        <td style="width:30%;text-align:center;" key="bf_bodyhome_totalScore"></td>
                     </tr>
-                    <!-- if sport === 154914(baseball) -->
-                    <tr template="BaseballBodyTemplate" hidden>
-                        <td key="b_body_gameName"></td>
-                        <td key="b_body_gameFour"></td>
-                        <td key="b_body_gameFive"></td>
-                        <td key="b_body_gameSix"></td>
-                        <td key="b_body_gameSeven"></td>
-                        <td key="b_body_gameSeven"></td>
-                        <td key="b_body_gameNine"></td>
-                        <td key="b_body_totalScore"></td>
+                    <tr>
+                        <td style="width:30%;text-align:left;"key="bf_bodyaway_TeamName"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyaway_q1"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyaway_q2"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyaway_q3"></td>
+                        <td style="width:10%;text-align:center;" key="bf_bodyaway_q4"></td>
+                        <td style="width:30%;text-align:center;" key="bf_bodyaway_totalScore"></td>
                     </tr>
                 </tbody>
             </table>
@@ -842,10 +839,11 @@
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
         const BasketBallFootballHeadTemp = $('tr[template="BasketBallFootballHeadTemplate"]').clone();
         const BaseballHeadTemp = $('tr[template="BaseballHeadTemplate"]').clone();
+        const BasketBallFootballBodyTemp = $('tbody[template="BasketBallFootballBodyTemplate"]').clone();
 
         livingContainerTemp.attr('id', "livingFixture");
         // Early fixture (status == 1)
-        if (data.list.status == 1) {
+        if (data.list.status == 2) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
@@ -853,9 +851,8 @@
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
-
         // Living fixture (status == 2)
-        if (data.list.status == 2) {
+        if (data.list.status == 1) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
@@ -871,6 +868,8 @@
                 console.log("Basketball & Football: " + data.series.sport_id);
             } else if (data.series.sport_id == 154914) {
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
+                BasketBallFootballBodyTemp.removeAttr('hidden').removeAttr('template');
+
                 BaseballHeadTemp.find('[key="b_head_gameName"]').text("");
                 BaseballHeadTemp.find('[key="b_head_gameTitleOne"]').text("{{ trans('game.scoreBoard.gameOne') }}");
                 BaseballHeadTemp.find('[key="b_head_gameTitleTwo"]').text("{{ trans('game.scoreBoard.gameTwo') }}");
@@ -879,7 +878,22 @@
                 BaseballHeadTemp.find('[key="b_head_gameTitleFive"]').text("{{ trans('game.scoreBoard.gameFive') }}");
                 BaseballHeadTemp.find('[key="b_head_gameTitleSix"]').text("{{ trans('game.scoreBoard.gameSix') }}");
                 BaseballHeadTemp.find('[key="b_head_totalScore"]').text("{{ trans('game.scoreBoard.fullTimeScore') }}");
-                $('#livingtableHead').append(BaseballHeadTemp);
+
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_TeamName"]').text(data.list.home_team_name);
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q1"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q2"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q3"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_q4"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyhome_totalScore"]').text("");
+
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_TeamName"]').text(data.list.away_team_name);
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q1"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q2"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q3"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_q4"]').text("");
+                BasketBallFootballBodyTemp.find('[key="bf_bodyaway_totalScore"]').text("");
+
+                $('#livingtableHead').after(BaseballHeadTemp);
                 console.log("Baseball: " + data.series.sport_id);
             }
 
