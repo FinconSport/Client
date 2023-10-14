@@ -891,27 +891,6 @@
                 baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
                 baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
 
-                const scoresLengths = data.list.teams.map((team) => team.scores.length);
-                var scorehome = [];
-                var scoreaway = [];
-                const homeTeam = data.list.teams.find(item => item.index === 1)
-                const awayTeam = data.list.teams.find(item => item.index === 2)
-                if (homeTeam) {
-                    homeTeam.scores
-                    .sort((a, b) => a.stage - b.stage)
-                    .forEach(el => {
-                    scorehome.push(el.score);
-                    });
-                }
-                if (awayTeam) {
-                    awayTeam.scores
-                    .sort((a, b) => a.stage - b.stage)
-                    .forEach(el => {
-                    scoreaway.push(el.score);
-                    });
-                }
-                
-
                 let baseballData = [];
                 let gameTitle = [];
 
