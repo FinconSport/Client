@@ -760,7 +760,7 @@
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
         // if ($('#' + marketBetRateId).length === 0) {
-        if( betData && $('#' + marketBetRateId).length > 0 ) {
+        if( betData > 0 ) {
             marketBetRateTemp.find('.odd').text(v2.price)
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
