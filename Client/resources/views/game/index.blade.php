@@ -735,8 +735,8 @@
             var sportId = matchListD.data.series.sport_id;
             var priority = v.priority;
             var transKey = '';
-            // var transKey = 'game.game_priority.' + sportId + '.' + priority;
-            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
+            // var transKey = ';
+            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.` + sportId + `.` + priority + `) }}`);
             if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed.
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
             }
