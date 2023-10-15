@@ -2284,30 +2284,7 @@ class LsportApiController extends Controller {
                     $fixture_id = $vvv['fixture_id'];
                     $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
                  
-                    $tmp_bet_data = array();
-
-                    $tmp_bet_data['sport_id'] = $vvv['sport_id'];
-                    $tmp_bet_data['market_id'] = $vvv['market_id'];
-                    $tmp_bet_data['market_name'] = $vvv['market_name'];
-                    $tmp_bet_data['market_bet_id'] = $vvv['market_bet_id'];
-                    $tmp_bet_data['market_bet_name'] = $vvv['market_bet_name'];
-                    $tmp_bet_data['market_bet_line'] = $vvv['market_bet_line'];
-                    $tmp_bet_data['market_priority'] = $vvv['market_priority'];
-
-                    ///////////////
-
-                    $tmp_bet_data['home_team_id'] = $vvv['home_team_id'];
-                    $tmp_bet_data['away_team_id'] = $vvv['away_team_id'];
-                    $tmp_bet_data['home_team_name'] = $vvv['home_team_name'];
-                    $tmp_bet_data['away_team_name'] = $vvv['away_team_name'];
-                    $tmp_bet_data['league_id'] = $vvv['league_id'];
-                    $tmp_bet_data['league_name'] = $vvv['league_name'];
-                    $tmp_bet_data['home_team_score'] = $vvv['home_team_score'];
-                    $tmp_bet_data['away_team_score'] = $vvv['away_team_score'];
-                    
-                    $tmp_bet_data['bet_rate'] = $vvv['bet_rate'];
-                    $tmp_bet_data['status'] = $vvv['status'];
-                    $tmp_bet_data['result_percent'] = $vvv['result_percent'];
+                    $tmp_bet_data = $vvv;
                     $tmp_bet_data['start_time'] = $tmp_fixture['start_time'];
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
@@ -2317,30 +2294,7 @@ class LsportApiController extends Controller {
                 $fixture_id = $v['fixture_id'];
                 $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
 
-                $tmp_bet_data = array();
-
-                $tmp_bet_data['sport_id'] = $v['sport_id'];
-                $tmp_bet_data['market_id'] = $v['market_id'];
-                $tmp_bet_data['market_name'] = $v['market_name'];
-                $tmp_bet_data['market_bet_id'] = $v['market_bet_id'];
-                $tmp_bet_data['market_bet_name'] = $v['market_bet_name'];
-                $tmp_bet_data['market_bet_line'] = $v['market_bet_line'];
-                $tmp_bet_data['market_priority'] = $v['market_priority'];
-
-                ///////////////
-
-                $tmp_bet_data['league_id'] = $v['league_id'];
-                $tmp_bet_data['league_name'] = $v['league_name'];
-                $tmp_bet_data['home_team_id'] = $v['home_team_id'];
-                $tmp_bet_data['away_team_id'] = $v['away_team_id'];
-                $tmp_bet_data['home_team_name'] = $v['home_team_name'];
-                $tmp_bet_data['away_team_name'] = $v['away_team_name'];
-                $tmp_bet_data['home_team_score'] = $v['home_team_score'];
-                $tmp_bet_data['away_team_score'] = $v['away_team_score'];
-                
-                $tmp_bet_data['bet_rate'] = $v['bet_rate'];
-                $tmp_bet_data['status'] = $v['status'];
-                $tmp_bet_data['result_percent'] = $v['result_percent'];
+                $tmp_bet_data = $v;
                 $tmp_bet_data['start_time'] = $tmp_fixture['start_time'];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
