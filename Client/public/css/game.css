@@ -87,10 +87,10 @@ div#bettingTypeContainer {
     width: 0px;
 } */
 
-#scoreboardContainer th,
+/* #scoreboardContainer th,
 #scoreboardContainer td{
     padding: 0rem 0rem 1rem 0rem;
-}
+} */
 
 #scoreboardContainer tbody tr:last-child th{
     padding: 0rem 0rem 0rem 0rem;
@@ -128,12 +128,12 @@ div#bettingTypeContainer {
 }
 
 .setHeightDiv{
-    height: 2rem;
+    height: 2.5rem;
     overflow: hidden;
 }
 
 .textOverflowCon {
-    height: 2rem;
+    height: 2.5rem;
     overflow-y: auto;
     overflow-x: hidden;
 }

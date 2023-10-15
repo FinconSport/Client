@@ -885,11 +885,11 @@
                 ];
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:30%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;">').append($('<div class="setHeightDiv">')).text(gameTitle[i]));
+                    BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
                 const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
