@@ -102,14 +102,14 @@
         <div class="marketName">
             <p class="market_name"></p>
         </div>
-        <div id="marketRateDataTemp" class="marketBetRateContainer">
+        <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv">
             <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
                 <div class="">
                     <span class="market_bet_name"></span>
                     <span class="market_line"></span>
                 </div>
                 <div>
-                    <span class="market_price" style="color:#c79e42;"></span>
+                    <span class="market_price odd" style="color:#c79e42;"></span>
                     <i class="fa-solid fa-lock" style="display: none;"></i>
                     <i class="fa-solid fa-caret-up" style="display: none;"></i>
                     <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -737,25 +737,31 @@
 
      // ------- game page create market data rate container-----------
     function createMarketRateContainer(v, k2, v2) {
+        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        if ($('#' + marketBetRateId).length === 0) {
-            const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-            marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+        let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
+        // let betData = Object.values(v3.list).find(m => m.priority === i)
+        let betData = v.priority;
 
-            marketBetRateTemp.attr('id', marketBetRateId);
-            marketBetRateTemp.attr('priority', v.priority);
-            marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
-            marketBetRateTemp.attr('market_id', v.market_id);
-            marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
-            marketBetRateTemp.attr('bet_rate', v2.main_line);
-            marketBetRateTemp.attr('bet_type', v.market_name);
-            marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
-            marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
-            marketBetRateTemp.attr('line', v2.line);
-            marketBetRateTemp.attr('league', matchListD.data.series.name);
-            marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
-            marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
+        marketBetRateTemp.attr('id', marketBetRateId);
+        marketBetRateTemp.attr('priority', v.priority);
+        marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
+        marketBetRateTemp.attr('market_id', v.market_id);
+        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_type', v.market_name);
+        marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
+        marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
+        marketBetRateTemp.attr('line', v2.line);
+        marketBetRateTemp.attr('league', matchListD.data.series.name);
+        marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
+        marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
+        // if ($('#' + marketBetRateId).length === 0) {
+        if( betData && $('#' + marketBetRateId).length > 0 ) {
+            marketBetRateTemp.find('.odd').text(v2.price)
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateTemp.find('.market_bet_name').text(v2.line);
@@ -780,13 +786,15 @@
                 marketBetRateTemp.find('.market_price').hide();
             }
 
+            marketBetRateTemp.find('.market_line').text(v2.line);
+
             let fixture_id = matchListD.data.list.fixture_id;
             let price = marketBetRateTemp.attr('bet_rate')
             if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
                 // 判斷賠率是否有改變
                 if( parseFloat(price) > parseFloat(v2.price) ) {
                     // 賠率下降
-                    lowerOdd(k3, v.market_id, v2.market_bet_id, fixture_id)
+                    lowerOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
                 }
                 if( parseFloat(price) < parseFloat(v2.price) ) {
                     // 賠率上升
@@ -794,12 +802,10 @@
                 }
             } 
 
-            marketBetRateTemp.find('.market_line').text(v2.line);
-            marketBetRateTemp.find('.market_price').text(v2.price);
-
             // Append the new element to the correct container
             $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
+        
     }
 
     // ------- game page scoreboard function-----------
