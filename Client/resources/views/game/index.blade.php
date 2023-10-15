@@ -892,12 +892,12 @@
                     BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
+                const totalScoreHead = $(`<th style="width:30%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
                 BasketBallFootballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
+                const homeTeamName = $(`<th style="width:30%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 BasketBallFootballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
@@ -918,7 +918,7 @@
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                const awayTotalScore = $(`<th style="width:30%;text-align:center;">${awayTeam.total_score}</th>`);
                 BasketBallFootballBodyTemp_away.append(awayTotalScore);
 
                 // Append away team after home team to table
@@ -977,11 +977,10 @@
                 BaseballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<td style="width:10%;text-align:center;">').append($('<div class="setHeightDiv">').text(gameTitle[i])));
-
+                    BaseballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
+                const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
                 BaseballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BaseballHeadTemp);
 
