@@ -30,5 +30,7 @@ return [
     "index" => [
         "th" => "日",
         "dateTimezone" => "zh-CN",
+        "all" => "所有",
+        "hot" => "熱門",
     ],
 ];

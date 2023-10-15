@@ -97,6 +97,10 @@
     </div>
 </div>
 
+<div class="filterBtnContainer">
+    <button class="filterBtn active">{{ trans('game.index.all') }}</button>
+    <button class="filterBtn">{{ trans('game.index.hot') }}</button>
+</div>
 <div id="bettingTypeContainer">
     <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
         <div class="marketName">

@@ -50,7 +50,7 @@
     border-radius: 5px;
     background: #ffffff;
     color: #415b5a;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     overflow: hidden;
 }
 
@@ -99,4 +99,28 @@ div#bettingTypeContainer::-webkit-scrollbar{
     border-right: none;
     padding: 0rem;
     height: auto;
+}
+
+.filterBtnContainer{
+    margin-top: 0.75rem;
+}
+
+.filterBtnContainer button.filterBtn {
+    border: 1px solid #415b5a;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100px;
+    /* background: #415b5a;
+    color: white; */
+    background: #ffffff;
+    color: #415b5a;
+    transition: all 0.2s linear;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.filterBtnContainer button.filterBtn.active {
+    background: #415b5a;
+    color: white;
 }

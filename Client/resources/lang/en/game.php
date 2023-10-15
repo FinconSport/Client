@@ -32,5 +32,7 @@ return [
     "index" => [
         "th" => "th",
         "dateTimezone" => "en-US",
+        "all" => "All",
+        "hot" => "Hot",
     ],
 ];
