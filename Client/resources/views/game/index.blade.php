@@ -735,8 +735,7 @@
             var sportId = matchListD.data.series.sport_id;
             var priority = v.priority;
             var transKey = 'game.game_priority.' + sportId + '.' + priority;
-            var translatedTitle = window.trans[transKey];
-            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${translatedTitle}`);
+            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('${transKey}') }}`);
             if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed.
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
             }
