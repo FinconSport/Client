@@ -5,7 +5,7 @@
     border-radius: 5px;
     overflow: hidden;
     color:#ffffff;
-    padding: 2rem 9rem;
+    padding: 2rem 2rem;
     margin-top:20px;
 }
 
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 65%;
+    width: fit-content;
     padding: 2rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
@@ -31,7 +31,7 @@
 }
 
 .livingFixture-container.row {
-    width: 65%;
+    width: fit-content;
     padding: 2rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
@@ -80,14 +80,16 @@
 div#bettingTypeContainer {
     height: calc(100% - 16rem);
     overflow: auto;
+    padding-right: 0.5rem;
 }
 
 /* div#bettingTypeContainer::-webkit-scrollbar{
     width: 0px;
 } */
 
-#scoreboardContainer th{
-    padding: 0rem 0rem 0.5rem 0rem;
+#scoreboardContainer th,
+#scoreboardContainer td{
+    padding: 0rem 0rem 1rem 0rem;
 }
 
 #scoreboardContainer tbody tr:last-child th{
@@ -130,7 +132,7 @@ div#bettingTypeContainer {
     overflow: hidden;
 }
 
-.textOverFlowCon {
+.textOverflowCon {
     height: 2rem;
     overflow-y: auto;
     overflow-x: hidden;

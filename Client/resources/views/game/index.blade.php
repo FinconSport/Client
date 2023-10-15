@@ -973,11 +973,23 @@
                 }
 
                 // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
                 BaseballHeadTemp.append(TeamNameHead);
 
+                // for (let i = 0; i < gameTitle.length; i++) {
+                //     // BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
+                //     BaseballHeadTemp.append($('<td style="width:10%;text-align:center;">').append($('<div class="setHeightDiv">').text(gameTitle[i])));
+
+                // }
+
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
+                    const cell = $('<td style="text-align:center;">');
+                    const words = gameTitle[i].split(' ');
+
+                    cell.css('width', words.length > 1 ? 'auto' : '10%');
+                    cell.html(words.join('<br>'));
+
+                    BaseballHeadTemp.append(cell);
                 }
 
                 const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
