@@ -794,11 +794,17 @@
                 // 判斷賠率是否有改變
                 if( parseFloat(price) > parseFloat(v2.price) ) {
                     // 賠率下降
-                    lowerOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
+                    // lowerOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
+                    marketBetRateTemp.removeClass('raiseOdd')
+                    marketBetRateTemp.removeClass('lowerOdd')
+                    marketBetRateTemp.addClass('raiseOdd')
                 }
                 if( parseFloat(price) < parseFloat(v2.price) ) {
                     // 賠率上升
-                    raiseOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
+                    // raiseOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
+                    marketBetRateTemp.removeClass('raiseOdd')
+                    marketBetRateTemp.removeClass('lowerOdd')
+                    marketBetRateTemp.addClass('lowerOdd')
                 }
             } 
 
@@ -1087,7 +1093,7 @@
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').hide()
-        }, 3000);
+        }, 000);
     }
     // 賠率下降
     function lowerOdd(fixture_id, market_id, market_bet_id) {
