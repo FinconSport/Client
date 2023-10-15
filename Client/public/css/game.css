@@ -93,7 +93,7 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 0rem 0rem;
 }
 
-#bettingtype-container .betItemDiv {
+#marketRateDataTemp.betItemDiv {
     border-top: none;
     border-right: none;
     padding: 0rem;
