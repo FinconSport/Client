@@ -792,24 +792,25 @@
             let currentPrice = parseFloat(marketBetRateTemp.attr('bet_rate'));
             if (matchListD.data.list.status === 1) {
                 if (currentPrice > parseFloat(v2.price)) {
-                    marketBetRateTemp.removeClass('raiseOdd');
                     marketBetRateTemp.removeClass('lowerOdd');
+                    marketBetRateTemp.find('.fa-caret-down').hide();
+
                     marketBetRateTemp.addClass('raiseOdd');
+                    marketBetRateTemp.find('.fa-caret-up').show();
+
                 } else if (currentPrice < parseFloat(v2.price)) {
                     marketBetRateTemp.removeClass('raiseOdd');
-                    marketBetRateTemp.removeClass('lowerOdd');
+                    marketBetRateTemp.find('.fa-caret-up').hide();
+
                     marketBetRateTemp.addClass('lowerOdd');
-                } else {
-                    marketBetRateTemp.removeClass('raiseOdd');
-                    marketBetRateTemp.removeClass('lowerOdd');
+                    marketBetRateTemp.find('.fa-caret-down').hide();
                 }
             } else {
                 marketBetRateTemp.removeClass('raiseOdd');
                 marketBetRateTemp.removeClass('lowerOdd');
+                marketBetRateTemp.find('.fa-caret-up').hide();
+                marketBetRateTemp.find('.fa-caret-down').hide();
             }
-
-            marketBetRateTemp.addClass('raiseOdd');
-            marketBetRateTemp.find('.fa-caret-up').show();
 
             // Append the new element to the correct container
             $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
