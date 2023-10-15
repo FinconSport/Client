@@ -2244,6 +2244,7 @@ class LsportApiController extends Controller {
             $this->ApiError("01");
         }
 
+        $order_data = $return;
         $data = array();
         $tmp = array();
 
@@ -2259,7 +2260,7 @@ class LsportApiController extends Controller {
             "status"
         );
 
-        foreach ($return as $k => $v) {
+        foreach ($order_data as $k => $v) {
             foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
@@ -2274,28 +2275,34 @@ class LsportApiController extends Controller {
             // 有串關資料
             if ($v['m_order'] == 1) {
 
-                $cc = GameOrder::where("m_id", $v['m_id'])->list();
-                if ($cc === false) {
-                    $this->error(__CLASS__, __FUNCTION__, "02");
+                $return = GameOrder::where("m_id", $v['m_id'])->list();
+                if ($return === false) {
+                    $this->ApiError("02");
                 }
 
-                foreach ($cc as $kkk => $vvv) {
+                foreach ($return as $kkk => $vvv) {
 
                     $fixture_id = $vvv['fixture_id'];
-                    $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
+                    $return = LsportFixture::where("fixture_id",$fixture_id)->fetch();
+                    if ($return === false) {
+                        $this->ApiError("03");
+                    }
                  
                     $tmp_bet_data = $vvv;
-                    $tmp_bet_data['start_time'] = $tmp_fixture['start_time'];
+                    $tmp_bet_data['start_time'] = $return['start_time'];
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
             } else {
                 
                 $fixture_id = $v['fixture_id'];
-                $tmp_fixture = LsportFixture::where("fixture_id",$fixture_id)->fetch();
+                $return = LsportFixture::where("fixture_id",$fixture_id)->fetch();
+                if ($return === false) {
+                    $this->ApiError("04");
+                }
 
                 $tmp_bet_data = $v;
-                $tmp_bet_data['start_time'] = $tmp_fixture['start_time'];
+                $tmp_bet_data['start_time'] = $return['start_time'];
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
