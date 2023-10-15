@@ -732,12 +732,11 @@
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-
-            $sportId = matchListD.data.series.sport_id; 
-            $priority = v.priority; 
-            
-            var translation = @json(__('game.game_priority.' . $sportId . '.' . $priority));
-            marketNameElement.innerHTML = `<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ` + translation;
+            sportId = matchListD.data.series.sport_id;
+            priority = v.priority;
+            const translatedText = trans('game.index.' + sportId + '.' + priority);
+            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ ${translatedText} }}`);
+            // marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.index.'+ sportId +'.'priority ) }}`);
             if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed.
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
             }
