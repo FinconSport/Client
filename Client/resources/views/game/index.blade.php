@@ -892,12 +892,12 @@
                     BasketBallFootballHeadTemp.append($(`<th style="width:10%;text-align:center;">`).text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
+                const totalScoreHead = $(`<th style="width:auto;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
                 BasketBallFootballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`);
+                const homeTeamName = $(`<th style="width:auto;text-align:left;">${data.list.home_team_name}</th>`);
                 BasketBallFootballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
@@ -905,12 +905,12 @@
                     BasketBallFootballBodyTemp_home.append(thHome);
                 }
 
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
+                const homeTotalScore = $(`<th style="width:auto;text-align:center;">${homeTeam.total_score}</th>`);
                 BasketBallFootballBodyTemp_home.append(homeTotalScore);
                 $('#livingtableBody').append(BasketBallFootballBodyTemp_home);
 
                 // Away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`);
+                const awayTeamName = $(`<th style="width:auto;text-align:left;">${data.list.away_team_name}</th>`);
                 BasketBallFootballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
@@ -918,7 +918,7 @@
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                const awayTotalScore = $(`<th style="width:auto;text-align:center;">${awayTeam.total_score}</th>`);
                 BasketBallFootballBodyTemp_away.append(awayTotalScore);
 
                 // Append away team after home team to table
@@ -973,20 +973,19 @@
                 }
 
                 // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                const TeamNameHead = $(`<th style="width:auto;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
                 BaseballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    // BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
-                    BaseballHeadTemp.append ($('<td style="width:10%;text-align:center;">').append($('<div class="setHeightDiv">').text(gameTitle[i])));
+                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
+                const totalScoreHead = $(`<th style="width:auto;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
                 BaseballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BaseballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverFlowCon">${data.list.home_team_name}</div></th>`);
+                const homeTeamName = $(`<td style="width:auto;text-align:left;">${data.list.home_team_name}</th>`);
                 baseballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
@@ -994,12 +993,12 @@
                     baseballBodyTemp_home.append(thHome);
                 }
 
-                const homeTotalScore = $(`<td style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
+                const homeTotalScore = $(`<td style="width:auto;text-align:center;">${homeTeam.total_score}</th>`);
                 baseballBodyTemp_home.append(homeTotalScore);
                 $('#livingtableBody').append(baseballBodyTemp_home);
 
                 // away team
-                const awayTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverFlowCon">${data.list.away_team_name}</div></th>`);
+                const awayTeamName = $(`<td style="width:auto;text-align:left;">${data.list.away_team_name}</th>`);
                 baseballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
@@ -1007,7 +1006,7 @@
                     baseballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<td style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                const awayTotalScore = $(`<td style="width:auto;text-align:center;">${awayTeam.total_score}</th>`);
                 baseballBodyTemp_away.append(awayTotalScore);
 
                 // Append away team after home team to table
