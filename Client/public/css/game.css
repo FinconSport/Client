@@ -124,3 +124,17 @@ div#bettingTypeContainer {
     background: #ffffff;
     color: #415b5a;
 }
+
+.setHeightDiv{
+    height: 2rem;
+    overflow: hidden;
+}
+
+.textOverFlowCon {
+    height: 2rem;
+    overflow-y: auto;
+}
+
+.textOverFlowCon::-webkit-scrollbar{
+    width: 2px;
+}
