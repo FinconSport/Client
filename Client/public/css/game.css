@@ -50,7 +50,7 @@
     border-radius: 5px;
     background: #ffffff;
     color: #415b5a;
-    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
     overflow: hidden;
 }
 
@@ -78,7 +78,7 @@
 }
 
 div#bettingTypeContainer {
-    height: calc(100% - 14.5rem);
+    height: calc(100% - 16rem);
     overflow: auto;
 }
 
@@ -103,6 +103,7 @@ div#bettingTypeContainer::-webkit-scrollbar{
 
 .filterBtnContainer{
     margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 .filterBtnContainer button.filterBtn {
