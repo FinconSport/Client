@@ -32,7 +32,7 @@
 
 .livingFixture-container.row {
     width: 65%;
-    padding: 2rem 2rem;
+    padding: 2rem 2rem 1.8rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
     margin: auto;
@@ -87,10 +87,9 @@ div#bettingTypeContainer {
     width: 0px;
 } */
 
-/* #scoreboardContainer th,
-#scoreboardContainer td{
+#scoreboardContainer thead th{
     padding: 0rem 0rem 1rem 0rem;
-} */
+}
 
 #scoreboardContainer tbody tr:last-child th{
     padding: 0rem 0rem 0rem 0rem;
