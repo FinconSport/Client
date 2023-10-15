@@ -133,8 +133,13 @@ div#bettingTypeContainer {
 .textOverFlowCon {
     height: 2rem;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .textOverFlowCon::-webkit-scrollbar{
-    width: 2px;
+    width: 5px;
 }
+
+.textOverFlowCon::-webkit-scrollbar-thumb {
+    background: #888;
+  }
