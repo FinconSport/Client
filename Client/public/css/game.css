@@ -110,17 +110,16 @@ div#bettingTypeContainer::-webkit-scrollbar{
     border-radius: 5px;
     padding: 0.5rem;
     width: 100px;
-    /* background: #415b5a;
-    color: white; */
-    background: #ffffff;
-    color: #415b5a;
+    background: #415b5a;
+    color: white;
     transition: all 0.2s linear;
     text-align: center;
     font-weight: 600;
     font-size: 1rem;
+    margin-right: 0.7rem;
 }
 
 .filterBtnContainer button.filterBtn.active {
-    background: #415b5a;
-    color: white;
+    background: #ffffff;
+    color: #415b5a;
 }
