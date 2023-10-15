@@ -808,7 +808,7 @@
                 marketBetRateTemp.removeClass('lowerOdd');
             }
 
-            marketBetRateTemp.removeClass('raiseOdd');
+            marketBetRateTemp.addClass('raiseOdd');
 
             // Append the new element to the correct container
             $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
