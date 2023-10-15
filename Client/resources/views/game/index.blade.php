@@ -924,7 +924,7 @@
                 BasketBallFootballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[ballData[i]] || "");
+                    const thAway = $('<td style="text-align:center;">').text(scoreaway[ballData[i]] || "");
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
