@@ -989,7 +989,9 @@
                 baseballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(String(scorehome[baseballData[i]]));
+                    const scoreValue = scorehome[baseballData[i]];
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     baseballBodyTemp_home.append(thHome);
                 }
 
@@ -1002,7 +1004,9 @@
                 baseballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(String(scoreaway[baseballData[i]]));
+                    const scoreValue = scoreaway[baseballData[i]];
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     baseballBodyTemp_away.append(thAway);
                 }
 
