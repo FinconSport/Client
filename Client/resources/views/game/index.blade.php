@@ -1397,7 +1397,7 @@
     };
 
     // Function to handle filter button clicks
-    const filterButtonContainer = document.querySelector('.button-container');
+    const filterButtonContainer = document.querySelector('.filterBtnContainer');
     function handleFilterButtonClick(event) {
       if (event.target.classList.contains('filterBtn')) {
 
