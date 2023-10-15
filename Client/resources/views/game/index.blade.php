@@ -789,8 +789,9 @@
             marketBetRateTemp.find('.market_line').text(v2.line);
 
             let fixture_id = matchListD.data.list.fixture_id;
-            let price = marketBetRateTemp.attr('bet_rate')
-            if(v2.market_bet_id && matchListD.data.list.status === 1) {
+            // let price = marketBetRateTemp.attr('bet_rate');
+            let price = v2.main_line;
+            if(matchListD.data.list.status === 1) {
                 // 判斷賠率是否有改變
                 if( parseFloat(price) > parseFloat(v2.price) ) {
                     // lowerOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
