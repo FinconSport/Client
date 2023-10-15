@@ -2363,18 +2363,15 @@ class LsportApiController extends Controller {
             ->skip($skip)
             ->take($page_limit)
             ->orderBy('id', 'DESC')
-            ->get();  
+            ->list();  
         if ($return === false) {
-            //$this->error(__CLASS__, __FUNCTION__, "04");
             $this->ApiError("01");
         }
 
         $list = array();
         foreach ($return as $k => $v) {
-
             $v['type'] = $typeList[$v['type']];
             $list[] = $v;
-
         } 
 
         $data = array();
