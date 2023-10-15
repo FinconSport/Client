@@ -809,6 +809,7 @@
             }
 
             marketBetRateTemp.addClass('raiseOdd');
+            marketBetRateTemp.find('.fa-caret-up').show();
 
             // Append the new element to the correct container
             $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
