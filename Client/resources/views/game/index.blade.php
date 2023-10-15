@@ -901,7 +901,7 @@
                 BasketBallFootballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[ballData[i]]);
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(String(scorehome[ballData[i]]));
                     BasketBallFootballBodyTemp_home.append(thHome);
                 }
 
@@ -914,7 +914,7 @@
                 BasketBallFootballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[ballData[i]]);
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(String(scoreaway[ballData[i]]));
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
