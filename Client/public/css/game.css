@@ -93,3 +93,9 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 0rem 0rem;
 }
 
+#bettingtype-container .betItemDiv {
+    border-top: none;
+    border-right: none;
+    padding: 0rem;
+    height: auto;
+}
