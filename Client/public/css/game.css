@@ -130,6 +130,8 @@ div#bettingTypeContainer {
 .setHeightDiv{
     height: 2.5rem;
     overflow: hidden;
+    vertical-align: middle;
+    display: contents;
 }
 
 .textOverflowCon {
