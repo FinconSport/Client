@@ -1361,6 +1361,7 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
+    // formatedate display month name
     const translations = {
         dateTimezone: @json(trans('game.index.dateTimezone')),
         th: @json(trans('game.index.th')),
@@ -1395,8 +1396,22 @@
         }
     };
 
+    // Function to handle filter button clicks
+    const filterButtonContainer = document.querySelector('.button-container');
+    function handleFilterButtonClick(event) {
+      if (event.target.classList.contains('filterBtn')) {
 
-// ----------index page function--------------
+        const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
+
+        buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
+        event.target.classList.add('active'); // Add the "active" class to the clicked button
+
+      }
+    }
+
+    filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
+    
+    // ----------index page function--------------
     // 跳轉獨立賽事頁
     function navToGame(e) {
         let sport_id = e.attr('sport_id')   

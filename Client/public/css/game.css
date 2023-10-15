@@ -106,7 +106,7 @@ div#bettingTypeContainer::-webkit-scrollbar{
 }
 
 .filterBtnContainer button.filterBtn {
-    border: 1px solid #415b5a;
+    border: 2px solid #415b5a;
     border-radius: 5px;
     padding: 0.5rem;
     width: 100px;
