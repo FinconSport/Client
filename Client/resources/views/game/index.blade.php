@@ -885,12 +885,22 @@
                 ];
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:30%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BasketBallFootballHeadTemp.append($(`<th style="width:10%;text-align:center;">`).text(gameTitle[i]));
+                    const cell = $('<td style="text-align:center;">');
+                    const words = gameTitle[i].split(' ');
+
+                    cell.css('width', words.length > 1 ? 'auto' : '10%');
+                    cell.html(words.join('<br>'));
+
+                    BasketBallFootballHeadTemp.append(cell);
                 }
+
+                // for (let i = 0; i < gameTitle.length; i++) {
+                //     BasketBallFootballHeadTemp.append($(`<th style="width:10%;text-align:center;">`).text(gameTitle[i]));
+                // }
 
                 const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
                 BasketBallFootballHeadTemp.append(totalScoreHead);
