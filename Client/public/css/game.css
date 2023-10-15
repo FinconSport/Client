@@ -82,6 +82,10 @@ div#bettingTypeContainer {
     overflow: auto;
 }
 
+div#bettingTypeContainer::-webkit-scrollbar{
+    width: 0px;
+}
+
 #scoreboardContainer th{
     padding: 0rem 0rem 0.5rem 0rem;
 }
