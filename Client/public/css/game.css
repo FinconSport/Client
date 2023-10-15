@@ -63,21 +63,18 @@
 .bettingtype-container .marketBetRateContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: relative;
+    right: 1px;
+    bottom: 1px;
 }
 
 .bettingtype-container .market-rate {
     padding: 1rem;
     border-right: 1px solid #415b5a;
     border-bottom: 1px solid #415b5a;
-}
-
-/* .bettingtype-container .market-rate:nth-child(even) {
-    border-right: none;
-} */
-
-.bettingtype-container .market-rate:nth-last-child(-n+2),
-.bettingtype-container .market-rate:only-child {
-    border-bottom: none;
+    position: inherit;
+    left: 1px;
+    bottom: -1px;
 }
 
 div#bettingTypeContainer {

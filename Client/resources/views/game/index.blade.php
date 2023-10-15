@@ -709,7 +709,7 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-            $('#' + v.market_id + ' #marketRateDataTemp').empty();
+            $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
             if(v.rate){
                 Object.entries(v.rate).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
@@ -760,7 +760,7 @@
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
         // if ($('#' + marketBetRateId).length === 0) {
-        if( betData > 0 ) {
+        if( betData > 0 ) { // betData && Object.keys(betData.list).length > 0 
             marketBetRateTemp.find('.odd').text(v2.price)
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
