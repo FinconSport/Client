@@ -2482,17 +2482,18 @@ class LsportApiController extends Controller {
             $market_main_line = $vv['main_line'];
             $market_priority = $vv['priority'];
 
+            $tmp_market_data = array();
             // set data
-            $data['list']['market']['market_id'] = $market_id;
-            $data['list']['market']['priority'] = $market_priority;
-            $data['list']['market']['main_line'] = $market_main_line;
+            $tmp_market_data['market_id'] = $market_id;
+            $tmp_market_data['priority'] = $market_priority;
+            $tmp_market_data['main_line'] = $market_main_line;
 
             // 設定market name
             $market_name = $vv['name_en'];
             if (isset($vv['name_'.$agent_lang]) && ($vv['name_'.$agent_lang] != null) && ($vv['name_'.$agent_lang] != "")) { 
                 $market_name = $vv['name_'.$agent_lang];
             } 
-            $data['list']['market']['market_name'] = $market_name;
+            $tmp_market_data['market_name'] = $market_name;
 
             // 取得market_bet
             $return = LsportMarketBet::where('fixture_id',$fixture_id)
@@ -2524,8 +2525,10 @@ class LsportApiController extends Controller {
                 $tmp_data['last_update'] = $vvv['last_update'];
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
-                $data['list']['market']['market_bet'][] = $tmp_data;
+                $tmp_market_data['market_bet'][] = $tmp_data;
             }
+
+            $data['list']['market'][] = $tmp_market_data;
         }
 
         /////////////////////////////////////////////////////////////////
