@@ -1185,9 +1185,20 @@
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
-            let str = bet_name_en == 1 ? home : away
-            str += ' ' + bet_name_line
+            // let str = bet_name_en == 1 ? home : away
+            // str += ' ' + bet_name_line
+            
+            let str;
+            if (bet_name_en == 1) {
+                str = home+= ' ' + bet_name_line;
+            } else if (bet_name_en == 'X') {
+                str = "{{ trans('game.index.tie') }}";
+            } else {
+                str = away+= ' ' + bet_name_line;
+            }
+
             $('#leftSlideOrder span[key="bet_name"]').html(str)
+
         }
         
 
