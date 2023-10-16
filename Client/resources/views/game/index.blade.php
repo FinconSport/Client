@@ -702,7 +702,7 @@
         
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 14.5rem)');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
