@@ -28,7 +28,7 @@ class Match extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			baseApiUrl: 'https://sportc.asgame.net/api/v2/match_index?token=' + window.token+ '&player=' + window.player+ '',
+			baseApiUrl: 'https://sportc.asgame.net/api/v2/match_index2?token=' + window.token+ '&player=' + window.player+ '',
 			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
 			indexMatchList_api: 'https://sportc.asgame.net/api/v2/index_match_list?token=' + window.token+ '&player=' + window.player+ '',
 			betRecord_api: 'https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&page=1',

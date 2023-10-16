@@ -1,16 +1,10 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.68f87110.js"></script><link href="/static/css/main.28fb2ad3.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="/manifest.json"/><title>React App</title><style>#root,body,html{height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}</style><script defer="defer" src="/static/js/main.c35484d5.js"></script><link href="/static/css/main.28fb2ad3.css" rel="stylesheet"></head><body style="overflow:hidden"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="overflow:hidden"></div><script>// var player = 8 ;
 		// var token = 12345 ;
 		// var lang = 'tw'
 		var player = {{ $player }};
 		var token = {{ $token }};
 		var lang = @json(session('player.lang'));
 
-		const wsUrl = {
-			1: 'wss://soccer.asgame.net/ws',
-			2: 'wss://basketball.asgame.net/ws',
-			3: 'wss://baseball.asgame.net/ws'
-		}
-		
 		// 菜單與體育彩種預設
 		var menu = null
 		var sport = null

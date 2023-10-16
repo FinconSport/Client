@@ -148,6 +148,8 @@ class MatchContent extends React.Component {
 				}, 5000);
 			}
 		})
+
+		console.log(apiUrl, json)
 	}
 
 	componentWillUnmount() {

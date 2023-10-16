@@ -203,15 +203,19 @@ class MatchContentCard extends React.Component {
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
         if ( v !== undefined ){
-            let hcapTeam = null
-            if( v.list && Object.keys(v.list).length > 0 ) {
-                let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[0]?.line
-                let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[1]?.line
 
-                if( h !== a ) {
-                    hcapTeam = h < 0 ? 1 : 2
-                }
-            }
+            console.log(v)
+
+            
+            let hcapTeam = null
+            // if( v.list && Object.keys(v.list).length > 0 ) {
+            //     let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[0]?.line
+            //     let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[1]?.line
+
+            //     if( h !== a ) {
+            //         hcapTeam = h < 0 ? 1 : 2
+            //     }
+            // }
 
             return (
                 <div style={{ ...MatchCard, ...(this.props.isOpen ? CardShow : CardHide) }} cardid={v.fixture_id}>
@@ -235,11 +239,12 @@ class MatchContentCard extends React.Component {
                                                         v.status === 1 ?
                                                         this.formatDateTime(v.start_time)
                                                         :
+                                                        v.status === 9 ? langText.MatchContentCard.readyToStart :
                                                         (
-                                                            v.periods.Turn === '1' ?
-                                                            v.periods.period + langText.MatchContentCard.stage + langText.MatchContentCard.lowerStage
-                                                            :
-                                                            v.periods.period + langText.MatchContentCard.stage + langText.MatchContentCard.upperStage
+                                                            sport === 154914 ? 
+                                                            langText.GameTopSlider.stageStr[sport][v.periods.period] + langText.GameTopSlider.baseballPeriod[v.periods.Turn]
+                                                            : 
+                                                            langText.GameTopSlider.stageStr[sport][v.periods.period]
                                                         )
                                                     }
                                                 </p>
@@ -382,12 +387,13 @@ class MatchContentCard extends React.Component {
                                                             <div className='row m-0'>
                                                                 {
                                                                     gameTitle[n].map(k => {
-                                                                        let tt = Object.values(v.list).find(m => m.priority === k)
+                                                                        let tt = null
+                                                                        if( v.list ) tt = Object.values(v.list).find(m => m.priority === k)
                                                                         return(
                                                                             <div className='col-4' style={Padding01} key={k}>
                                                                                 <div style={SliderTitleDiv}>{ langText.MatchContent.game_priority[window.sport][k] }</div>
                                                                                 {
-                                                                                    tt && Object.keys(tt.list).length > 0 ? 
+                                                                                    tt && tt.list && Object.keys(tt.list).length > 0 ? 
                                                                                     Object.entries(tt.list).map(([r,s]) => {
                                                                                         return(
                                                                                             k === 201 || k === 202 ?

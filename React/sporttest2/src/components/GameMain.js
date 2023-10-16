@@ -109,6 +109,8 @@ class GameMain extends React.Component {
 
     getBetData = (market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, status) => {
         if( status !== 1 ) return;
+
+        console.log(this.props.data.list)
         this.props.getBetDataCallBack(
             {
                 sport_id: window.sport, 
@@ -117,7 +119,7 @@ class GameMain extends React.Component {
                 market_bet_id: market_bet_id, 
                 bet_rate: price, 
                 market_name: market_name, 
-                series_name: this.props.data.series.name, 
+                series_name: this.props.data.list.league_name, 
                 home_team_name: home_team_name, 
                 away_team_name: away_team_name, 
                 bet_item_name: bet_item_name, 
@@ -125,13 +127,18 @@ class GameMain extends React.Component {
         )
     }
 
+    componentDidMount() {
+        console.log('componentDidMount')
+    }
+
     render() {
         const sport = parseInt(window.sport)
-        const data = this.props.data
+        const data = this.props.data.list
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
 
+        console.log(data)
         return (
-            <div style={{ height: '77%' }}>
+            <div style={{ height: '72%' }}>
                 <div className="row m-0">
                     <TabLeft className="col-6" onClick={() => this.changeTab(0)} style={this.state.activeTab === 0 ? TabOnStyle : {}}>{langText.GameMain.bet}</TabLeft>
                     <TabRight className="col-6" onClick={() => this.changeTab(1)} style={this.state.activeTab === 1 ? TabOnStyle : {}}>{langText.GameMain.analyze}</TabRight>
@@ -148,14 +155,14 @@ class GameMain extends React.Component {
                                     }
                                 </GameCat>
                                 <GameBetBody>
-                                    {data.list.market.map((v, k) => {
+                                    {data.market.map((v, k) => {
                                         let t = v.priority
-                                        if ( v.rate.length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1)) {
+                                        if ( v.market_bet.length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1)) {
                                             return (
                                                 <GameBetCard key={k}>
                                                     <GameBetCardBetName>{v.market_name}</GameBetCardBetName>
                                                      {
-                                                        v.rate.map((v1, k1) => {
+                                                        v.market_bet.map((v1, k1) => {
                                                             return(
                                                                 <div className="row m-0" style={{ ...BetBrick, ...(k1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k1}>
                                                                     <div className="col-4 row m-0 p-0">
@@ -170,10 +177,10 @@ class GameMain extends React.Component {
                                                                                 v1.market_bet_id,
                                                                                 v1.price,
                                                                                 v.market_name,
-                                                                                data.list.home_team_name,
-                                                                                data.list.away_team_name,
+                                                                                data.home_team_name,
+                                                                                data.away_team_name,
                                                                                 langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1  ?
-                                                                                (v1.market_bet_name_en === "1" ? data.list.home_team_name : data.list.away_team_name) + ' ' + v1.line
+                                                                                (v1.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v1.line
                                                                                 :
                                                                                 (v1.market_bet_name + ' ' + v1.line),
                                                                                 v1.status
@@ -195,6 +202,9 @@ class GameMain extends React.Component {
                                         return null;
                                     })}
                                 </GameBetBody>
+                                {
+                                    console.log('end')
+                                }
                             </>
                             :
                             langText.GameMain.analyze
