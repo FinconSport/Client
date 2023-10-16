@@ -730,6 +730,10 @@
                     $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove();
                     console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
                 }
+                
+                if (marketRateElements.length > 1) {
+                    marketRateElements.eq(0).remove();
+                }
             });
         });
         
