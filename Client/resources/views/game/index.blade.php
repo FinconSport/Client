@@ -1295,7 +1295,7 @@
         const formattedDate = `${month} ${day}${suffix}`;
         const formattedTime = `${hour}:${minute}`;
         
-        return `${formattedDate}\n${formattedTime}`;
+        return `${formattedDate}<br>${formattedTime}`;
     };
 
     const getDaySuffix = (day) => {
