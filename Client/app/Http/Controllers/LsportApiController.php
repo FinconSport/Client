@@ -2001,8 +2001,7 @@ class LsportApiController extends Controller {
         ->skip($skip)
         ->take($page_limit)
         ->orderBy('m_id', 'DESC')
-        ->groupBy('m_id')
-        ->list(1,true);
+        ->list();
         if ($return === false) {
             $this->ApiError("01");
         }
