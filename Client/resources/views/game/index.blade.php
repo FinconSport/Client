@@ -353,7 +353,7 @@
     // match list data
     var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
-    const matchList_api = '/api/v2/game_index'
+    const matchList_api = '/api/v2/game_index2'
 
     // bet limitation data
     var betLimitationD = {}
@@ -1164,7 +1164,7 @@
         $('#submitOrder').html(langTrans.bet_area.bet)
         $('#submitOrder').removeClass('disabled')
         $('#submitOrder').removeAttr('disabled')
-        
+
         $('.market-rate').removeClass('clickedBet');
     }
 
