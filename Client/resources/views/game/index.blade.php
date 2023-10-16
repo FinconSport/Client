@@ -718,24 +718,25 @@
             // Add the market ID to the set
             existingMarketIds.add(v.market_id);
 
-            if(v.market_bet){
+            if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
                 });
             }
         });
 
-        // Remove bet types that are no longer present
-        $('.bettingtype-container[id]').each(function () {
-            const marketId = this.id;
-            console.log(this.id);
+        // Delay before removing old bet types
+        setTimeout(function () {
+            $('.bettingtype-container[id]').each(function () {
+                const marketId = this.id;
 
-            if (!existingMarketIds.has(marketId)) {
-                // Remove the bet type
-                $(this).remove();
-                console.log('Bet type with ID ' + this.id + ' is no longer present and has been removed.');
-            }
-        });
+                if (!existingMarketIds.has(marketId)) {
+                    // Remove the bet type
+                    // $(this).remove();
+                    console.log('Bet type with ID ' + this.id + ' is no longer present and has been removed.');
+                }
+            });
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
     }
 
     // ------- game page create market data parent container-----------
