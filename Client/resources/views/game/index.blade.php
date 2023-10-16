@@ -709,14 +709,8 @@
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
         }
 
-        // Create a set to keep track of existing market IDs
-        const existingMarketIds = new Set();
-
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-
-            // Add the market ID to the set
-            existingMarketIds.add(v.market_id);
 
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
@@ -725,18 +719,22 @@
             }
         });
 
-        // Delay before removing old bet types
-        setTimeout(function () {
-            $('.bettingtype-container[id]').each(function () {
-                const marketId = this.id;
+         const updatedMarketIds = new Set(); // Create a new set for updated data
+        // Update data and add new market IDs
+        Object.entries(updatedData.list.market).map(([k, v]) => {
+            updatedMarketIds.add(v.market_id);
+        });
+        
+        // Remove bet types that are no longer present
+        $('.bettingtype-container[id]').each(function () {
+            const marketId = this.id;
 
-                if (!existingMarketIds.has(marketId)) {
-                    // Remove the bet type
-                    // $(this).remove();
-                    console.log('Bet type with ID ' + this.id + ' is no longer present and has been removed.');
-                }
-            });
-        }, 1000); // Adjust the delay time (in milliseconds) as needed
+            if (!updatedMarketIds.has(marketId)) {
+                // Remove the bet type
+                // $(this).remove();
+                console.log('Bet type with ID ' + this.id + ' is no longer present and has been removed.');
+            }
+        });
     }
 
     // ------- game page create market data parent container-----------
