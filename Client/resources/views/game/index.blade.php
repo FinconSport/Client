@@ -701,13 +701,6 @@
             $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
         
-        const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = parentContainer.children;
-        if (childElements.length === 4) {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-        } else {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-        }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
@@ -726,15 +719,24 @@
                 updatedMarketIds.add(v2.market_bet_id);
                 // Check if .bettingtype-container[id] exists with the same market_id
                 if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
-                    // .bettingtype-container with this market_id doesn't exist, you can perform some action here.
+                    // .bettingtype-container with this market_id doesn't exist, remove the betting.
                     $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove();
                     console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
                 }
                 
+                if ($(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length % 2 === 0) {
+                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).parent().find('.bettingtype-container').css('grid-template-columns', '1fr');
+                } else {
+                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).parent().find('.bettingtype-container').css('grid-template-columns', '1fr 1fr');
+                }
+
                 const marketRateElements = $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`);
                 if (marketRateElements.length > 1) {
                     marketRateElements.eq(0).remove(); // <-- remove the duplicating append
                 } 
+
+                const parentContainer = marketRateElements.parent;
+                const childElements = parentContainer.children;
             });
         });
         
