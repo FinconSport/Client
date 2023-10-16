@@ -820,15 +820,11 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-
-
                                 if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
                             }
-                            
                         }
                        
                         function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
-                            console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
                                 let betData = null
@@ -865,10 +861,12 @@
                                             // 判斷賠率是否有改變
                                             if( parseFloat(price) > parseFloat(v4.price) ) {
                                                 // 賠率下降
+                                                console.log(`old:${price} -> new:${v4.price}`)
                                                 lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
                                             if( parseFloat(price) < parseFloat(v4.price) ) {
                                                 // 賠率上升
+                                                console.log(`old:${price} -> new:${v4.price}`)
                                                 raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                             }
                                         } 
