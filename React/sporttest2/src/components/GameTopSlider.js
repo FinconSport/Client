@@ -116,19 +116,19 @@ class GameTopSlider extends React.Component {
     textOverFlow = () => {
         $(`p[target="league"]`).each(function(){
             if(this.clientHeight > 40){
-                $(this).wrap('<marquee scrollamount=2>')
+                $(this).wrap('<marquee scrollamount=5>')
             }
         })
 
         $(`p[target="teamName"]`).each(function(){
             if(this.clientHeight > 24){
-                $(this).wrap('<marquee scrollamount=2>')
+                $(this).wrap('<marquee scrollamount=5>')
             }
         })
 
         $(`p[target="scbTeam"]`).each(function(){
             if(this.clientHeight > 19){
-                $(this).wrap('<marquee scrollamount=2>')
+                $(this).wrap('<marquee scrollamount=5>')
             }
         })
 
@@ -165,8 +165,6 @@ class GameTopSlider extends React.Component {
 
         
         if( data ) {
-            console.log(data)
-
             return (
             <div style={{ height: '28%' }}>
                 <Swiper navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
