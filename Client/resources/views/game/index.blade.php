@@ -790,27 +790,18 @@
                     break;
             }
 
-            if (v2.status == 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketBetRateTemp.find('.market_price').show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketBetRateTemp.find('.market_price').hide();
-            }
-
             let fixture_id = matchListD.data.list.fixture_id;
-            let currentPrice = parseFloat(marketBetRateTemp.attr('bet_rate'));
+            let price = parseFloat(marketBetRateTemp.attr('bet_rate'));
             if (matchListD.data.list.status == 1) {
-                if (currentPrice > parseFloat(v2.price)) {
+                marketBetRateTemp.attr('onclick', 'openCal($(this))');
+                if (price > parseFloat(v2.price)) {
                     marketBetRateTemp.removeClass('lowerOdd');
                     marketBetRateTemp.find('.fa-caret-down').hide();
 
                     marketBetRateTemp.addClass('raiseOdd');
                     marketBetRateTemp.find('.fa-caret-up').show();
 
-                } else if (currentPrice < parseFloat(v2.price)) {
+                } else if (price < parseFloat(v2.price)) {
                     marketBetRateTemp.removeClass('raiseOdd');
                     marketBetRateTemp.find('.fa-caret-up').hide();
 
@@ -818,6 +809,8 @@
                     marketBetRateTemp.find('.fa-caret-down').hide();
                 }
             } else {
+                marketBetRateTemp.removeAttr('onclick');
+
                 marketBetRateTemp.removeClass('raiseOdd');
                 marketBetRateTemp.removeClass('lowerOdd');
                 marketBetRateTemp.find('.fa-caret-up').hide();
