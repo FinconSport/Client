@@ -900,10 +900,10 @@
                     break;
                 case 1: case 2: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
                     console.log("Debug: v2.market_bet_name_en =", v2.market_bet_name_en);
-                    if (v2.market_bet_name_en === 1) {
+                    if (v2.market_bet_name_en == 1) {
                         console.log("Debug: Entering the first if block");
                         marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
-                    } else if (v2.market_bet_name_en === 2) {
+                    } else if (v2.market_bet_name_en == 2) {
                         console.log("Debug: Entering the second if block");
                         marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
                     } else {
