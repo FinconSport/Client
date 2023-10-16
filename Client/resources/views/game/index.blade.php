@@ -698,7 +698,7 @@
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
             $('.marketName').css('background', '#ffcb9c');
         } else {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
