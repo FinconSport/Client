@@ -2601,56 +2601,6 @@ class LsportApiController extends Controller {
     }
 
     /**
-     * compareRateValue
-     * 
-     * strcmp比較兩陣列的 $key 的元素的值的大小(字串比較)
-     *
-     * @param a - 比較的陣列
-     * @param b - 被比較的陣列
-     * @param key - 要比較的元素的鍵值
-     * @return INT {
-     *       0=兩者相等時。The two params are equal.
-     *       1=前者大於後者。The first param is bigger than the second.
-     *      -1=前者小於後者。The first param is smaller than the second.
-     * }
-     */
-    private static function compareKeyValue($a, $b, $key) {
-
-        if (isset($key)) {
-            return strcmp($a[$key], $b[$key]);
-        }
-        return null;
-    }
-
-    /**
-     * customExplode
-     * 
-     * 依據傳入字串的三種情況:含空白、含+、含，回傳一陣列，分別包含鍵值filter=0或1或2，及鍵值value=已被拆分(explode)為陣列。
-     *
-     * @param str - 要被拆分的字串
-     * @return ARRAY{filter:0或1或2，value:拆分的字串的陣列}
-     */
-    protected function customExplode($str) {
-
-        $data = array();
-        if (strpos($str, ' ') !== false) {  // 字串包含空白，以空白符分割
-            $data['filter'] = 0;
-            $tmp = explode(' ', $str);
-            $data['value'] = $tmp;
-        } elseif (strpos($str, '+') !== false) {// 以+符分割
-            $data['filter'] = 1;
-            $tmp = explode('+', $str);
-            $data['value'] = $tmp;
-        } elseif (strpos($str, '-') !== false) {// 以-符分割
-            $data['filter'] = 2;
-            $tmp = explode('-', $str);
-            $data['value'] = $tmp;
-        }
-
-        return $data;
-    }
-
-    /**
      * ApiSuccess
      * 
      * 回傳予前端表示後端對前端請求的操作成功，以及所請求的結果。
