@@ -636,7 +636,6 @@
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     // renderView()
                     renderViewV2()
-                    console.log("refresh")
                     
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
@@ -737,25 +736,32 @@
             console.log('sport id: ' +  sportId);
             console.log('priority: ' +  v.priority);
 
-            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-
             if (sportId === 154914) {
-                if (priority === 1) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-                } else if (priority === 3) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
-                } else if (priority === 5) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
-                } else if (priority === 7) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
-                } else if (priority === 2) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
-                } else if (priority === 4) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
-                } else if (priority === 6) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
-                } else if (priority === 8) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
+                switch (priority) {
+                    case 1:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
+                        break;
+                    case 3:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
+                        break;
+                    case 5:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
+                        break;
+                    case 7:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
+                        break;
+                    case 2:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
+                        break;
+                    case 4:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
+                        break;
+                    case 6:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
+                        break;
+                    case 8:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
+                        break;
                 }
             } else if (sportId === 48242) {
                 if (priority === 101) {
@@ -808,18 +814,25 @@
                     marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
                 }
             } else if (sportId === 6046) {
-                if (priority === 201) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
-                } else if (priority === 202) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
-                } else if (priority === 203) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
-                } else if (priority === 204) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
-                } else if (priority === 205) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
-                } else if (priority === 206) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
+                switch (priority) {
+                    case 201:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
+                        break;
+                    case 202:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
+                        break;
+                    case 203:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
+                        break;
+                    case 204:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
+                        break;
+                    case 205:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
+                        break;
+                    case 206:
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
+                        break;
                 }
             }
 
@@ -1017,8 +1030,6 @@
                 // Append away team after home team to table
                 BasketBallFootballBodyTemp_home.after(BasketBallFootballBodyTemp_away);
 
-                console.log("Basketball & Football: " + data.series.sport_id);
-
             } else if (data.series.sport_id == 154914) { // <-- baseball
 
                 BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
@@ -1109,7 +1120,6 @@
                 // Append away team after home team to table
                 baseballBodyTemp_home.after(baseballBodyTemp_away)
 
-                console.log("Baseball: " + data.series.sport_id);
             }
 
             $('.scoreboardCon').append(livingContainerTemp);
@@ -1528,7 +1538,6 @@
 
     // render view layer here
     function renderView() {
-		console.log(matchListD)
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
