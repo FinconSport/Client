@@ -2002,7 +2002,7 @@ class LsportApiController extends Controller {
         ->take($page_limit)
         ->orderBy('m_id', 'DESC')
         ->groupBy('m_id')
-        ->list();
+        ->list(1,true);
         if ($return === false) {
             $this->ApiError("01");
         }
