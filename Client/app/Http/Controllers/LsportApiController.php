@@ -991,7 +991,7 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_id'] = $league_id;
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_name'] = $league_name;
 
-            // fixture
+            // fixture columns
             $columns = ["fixture_id","start_time","status","last_update"];
             foreach ($columns as $kk => $vv) {
                 $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
@@ -1026,10 +1026,27 @@ class LsportApiController extends Controller {
             }
 
             $market_data = $return;
+            foreach ($market_data as $kk => $vv) {
+                $market_id = $vv['market_id'];
+                $market_main_line = $vv['main_line'];
+                $market_priority = $vv['priority'];
 
-            dd($market_data);
+                // 設定market name
+                $market_name = $vv['name_en'];
+                if (isset($vv['name_'.$agent_lang]) && ($vv['name_'.$agent_lang] != null) && ($vv['name_'.$agent_lang] != "")) { 
+                    $market_name = $vv['name_'.$agent_lang];
+                } 
+                // 取得market_bet
+                $return = LsportMarketBet::where('fixture_id',$fixture_id)
+                ->where("market_id",$market_id)
+                ->where("base_line",$market_main_line)
+                ->orderBy("name_en","ASC")
+                ->list();
 
-               // 取得market_bet
+                dd($reutrn);
+
+            }
+
         }
         
         //////////////////////////////////////////
