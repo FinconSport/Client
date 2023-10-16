@@ -731,9 +731,6 @@
                 }
                 
                 console.log($(`.market-rate`).length)
-
-                const parentContainer = marketRateElements.parent;
-                const childElements = parentContainer.children;
             });
         });
         
