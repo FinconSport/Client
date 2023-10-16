@@ -869,7 +869,7 @@
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
         // let betData = Object.values(v3.list).find(m => m.priority === i)
-        let betData = v.priority;
+        let betData = v.priority; 
 
         marketBetRateTemp.attr('id', marketBetRateId);
         marketBetRateTemp.attr('priority', v.priority);
@@ -898,9 +898,20 @@
                 case 7: case 107: case 112: case 116: case 120: case 124:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                     break;
+                case 1: case 2: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+                    switch (v2.market_bet_name_en) {
+                        case 1:
+                            marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
+                            break;
+                        case 2:
+                            marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
+                            break;
+                    }
+                    break;
                 default:
                     break;
             }
+
 
             if (v2.status === 1) {
                 marketBetRateTemp.find('.fa-lock').hide();
