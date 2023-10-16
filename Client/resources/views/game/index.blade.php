@@ -865,15 +865,13 @@
             marketBetRateTemp.find('.fa-caret-down').hide();
             marketBetRateTemp.addClass('raiseOdd');
             marketBetRateTemp.find('.fa-caret-up').show();
+            console.log('raise' price + '>' +newPrice)
         } else if (price < newPrice) {
             marketBetRateTemp.removeClass('raiseOdd');
             marketBetRateTemp.find('.fa-caret-up').hide();
             marketBetRateTemp.addClass('lowerOdd');
             marketBetRateTemp.find('.fa-caret-down').show();
-        } else {
-            marketBetRateTemp.removeClass('raiseOdd lowerOdd');
-            marketBetRateTemp.find('.fa-caret-up').hide();
-            marketBetRateTemp.find('.fa-caret-down').hide();
+            console.log('lower' price + '<' +newPrice)
         }
 
         // Update the price and other attributes
