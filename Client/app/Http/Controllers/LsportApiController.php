@@ -944,7 +944,7 @@ class LsportApiController extends Controller {
         ->whereIn('sport_id', function($query) {
             $query->select('sport_id')
                   ->from('es_lsport_sport')
-                  ->where('sport_id', 154914)
+                  ->where('sport_id', $sport_id)
                   ->where('status', 1);
         })
         ->whereIn('league_id', function($query) {
