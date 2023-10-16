@@ -845,7 +845,7 @@
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
-            earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
