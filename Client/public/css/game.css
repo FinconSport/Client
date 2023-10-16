@@ -79,7 +79,7 @@ p.market_name {
     margin-top: -1px;
 }
 
-.bettingtype-container .marketBetRateContainer > .market-rate:nth-child(2n-1):last-of-type {
+.bettingtype-container .marketBetRateContainer > .market-rate:nth-child(3n-1):last-of-type {
     grid-column: 1 / -1;
   }
 
