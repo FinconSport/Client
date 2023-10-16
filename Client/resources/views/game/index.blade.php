@@ -703,7 +703,7 @@
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
-        if (childElements.length === 3) {
+        if (childElements.length - 1 === 3) { //<-- minus 1 is for the div that has display none template
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
