@@ -262,7 +262,7 @@
     var matchListD = {}
     var oldMatchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
-    const matchList_api = '/api/v2/match_index2'
+    const matchList_api = '/api/v2/match_index'
 
     // bet limitation data
     var betLimitationD = {}
