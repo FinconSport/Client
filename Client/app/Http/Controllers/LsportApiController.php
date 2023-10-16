@@ -941,7 +941,7 @@ class LsportApiController extends Controller {
         ->from('es_lsport_fixture')
         ->where('start_time',"<=", $after_tomorrow_es)
         ->whereIn('status',[1,2,9])
-        ->whereIn('sport_id', function($query,$sport_id) {
+        ->whereIn('sport_id', function($query) use ($sport_id) {
             $query->select('sport_id')
                   ->from('es_lsport_sport')
                   ->where('sport_id', $sport_id)
