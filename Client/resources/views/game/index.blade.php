@@ -786,9 +786,6 @@
                         marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                     }
                     break;
-                case 208:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-                    break;
                 default:
                     break;
             }
