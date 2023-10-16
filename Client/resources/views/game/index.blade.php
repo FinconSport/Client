@@ -723,6 +723,18 @@
             bettingTypeContainerTemp.attr('id', v.market_id);
             bettingTypeContainerTemp.attr('priority', v.priority);
 
+            const bettingContainerParent =  bettingTypeContainerTemp.parent();
+            const parentClassName = bettingContainerParent.attr('id'); 
+            console.log("parent " + parentClassName);
+            // const marketBetRateChildren = marketBetRateParent.children();
+
+            // if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
+            //     // If there are 3 child elements or only 1 child element
+            //     marketBetRateParent.css('grid-template-columns', '1fr');
+            // } else {
+            //     marketBetRateParent.css('grid-template-columns', '1fr 1fr');
+            // }
+
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             var sportId = matchListD.data.series.sport_id;
             var priority = v.priority;
@@ -739,18 +751,6 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
-
-        const marketBetRateParent = marketBetRateTemp.parent();
-        const parentClassName = marketBetRateParent.attr('id'); 
-        console.log("parent " + parentClassName);
-        // const marketBetRateChildren = marketBetRateParent.children();
-
-        // if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
-        //     // If there are 3 child elements or only 1 child element
-        //     marketBetRateParent.css('grid-template-columns', '1fr');
-        // } else {
-        //     marketBetRateParent.css('grid-template-columns', '1fr 1fr');
-        // }
 
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
