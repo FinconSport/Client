@@ -1066,8 +1066,9 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     const scoreValue = scorehome[i];
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-                    BasketBallFootballBodyTemp_home.append(thHome);
-                    console.log(gameTitle[i], scoreValue)
+                    if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
+                        BasketBallFootballBodyTemp_home.append(thHome);
+                    }
                 }
 
                 // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
@@ -1088,7 +1089,9 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     const scoreValue = scoreaway[i];
                     const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-                    BasketBallFootballBodyTemp_away.append(thAway);
+                    if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
+                        BasketBallFootballBodyTemp_away.append(thAway);
+                    }
                 }
 
                 // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
