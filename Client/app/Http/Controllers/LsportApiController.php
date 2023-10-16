@@ -1049,7 +1049,7 @@ class LsportApiController extends Controller {
                 ->where("market_id",$market_id)
                 ->where("base_line",$market_main_line)
                 ->orderBy("name_en","ASC")    // TODO
-                ->list(1,true);
+                ->list();
                 if ($return === false) {
                     $this->ApiError('04');
                 }
