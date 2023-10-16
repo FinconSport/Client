@@ -790,10 +790,19 @@
                     break;
             }
 
+            if (v2.status == 1) {
+                marketBetRateTemp.find('.fa-lock').hide();
+                marketBetRateTemp.attr('onclick', 'openCal($(this))');
+                marketBetRateTemp.find('.market_price').show();
+            } else {
+                marketBetRateTemp.find('.fa-lock').show();
+                marketBetRateTemp.removeAttr('onclick');
+                marketBetRateTemp.find('.market_price').hide();
+            }
+
             let fixture_id = matchListD.data.list.fixture_id;
             let price = parseFloat(marketBetRateTemp.attr('bet_rate'));
             if (matchListD.data.list.status == 1) {
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
                 if (price > parseFloat(v2.price)) {
                     marketBetRateTemp.removeClass('lowerOdd');
                     marketBetRateTemp.find('.fa-caret-down').hide();
@@ -809,8 +818,6 @@
                     marketBetRateTemp.find('.fa-caret-down').hide();
                 }
             } else {
-                marketBetRateTemp.removeAttr('onclick');
-
                 marketBetRateTemp.removeClass('raiseOdd');
                 marketBetRateTemp.removeClass('lowerOdd');
                 marketBetRateTemp.find('.fa-caret-up').hide();
