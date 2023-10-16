@@ -38,6 +38,7 @@ return [
         "dateTimezone" => "zh-CN",
         "all" => "所有",
         "hot" => "熱門",
+        "tie" => "平局",
     ],
     "game_priority" => [
         "154914" => [// Baseball
