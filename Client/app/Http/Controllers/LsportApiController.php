@@ -954,8 +954,7 @@ class LsportApiController extends Controller {
         })
         ->orderBy("start_time","ASC")
         ->orderBy("league_id", "ASC")
-
-        ->list(5);
+        ->list();
         if ($return === false) {
             $this->ApiError('02');
         }
