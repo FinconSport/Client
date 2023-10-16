@@ -736,6 +736,7 @@
             var priority = v.priority;
             
             if (sportId === 154914) {
+                marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
                 switch (priority) {
                     case 1 :
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
@@ -766,6 +767,7 @@
                         break;
                 }
             } else if (sportId === 48242) {
+                marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
                 switch (priority) {
                     case 101 :
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
@@ -841,6 +843,7 @@
                         break;
                 }
             } else if (sportId === 6046) {
+                marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
                 switch (priority) {
                     case 201 :
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
