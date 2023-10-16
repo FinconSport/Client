@@ -1059,7 +1059,7 @@ class LsportApiController extends Controller {
                 ->where("market_id",$market_id)
                 ->where("base_line",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
-                ->list(1,true);
+                ->list();
                 if ($return === false) {
                     $this->ApiError('04');
                 }
@@ -2494,7 +2494,7 @@ class LsportApiController extends Controller {
             $return = LsportMarketBet::where('fixture_id',$fixture_id)
             ->where("market_id",$market_id)
             ->orderBy("name_en","ASC")
-            ->list(1,true);
+            ->list();
 
             if ($return === false) {
                 $this->ApiError('04');
