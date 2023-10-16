@@ -1052,7 +1052,6 @@ class LsportApiController extends Controller {
         // 取得賠率
         $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
         ->where("bet_id", $market_bet_id)
-        ->whereIn('provder_bet_id', [0,8]) // 號源
         ->fetch();
         if ($market_bet_data === false) {
             $this->ApiError("14");
@@ -1448,7 +1447,6 @@ class LsportApiController extends Controller {
 
             // 取得賠率
             $market_bet_data = LSportMarketBet::where("fixture_id", $fixture_id)
-            ->whereIn("provder_bet_id", [0,8])
             ->where("bet_id", $market_bet_id)
             ->fetch();
             if ($market_bet_data === false) {
