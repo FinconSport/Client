@@ -759,6 +759,16 @@
         const price = parseFloat(marketBetRateTemp.attr('bet_rate'));
         const newPrice = parseFloat(v2.price);
 
+        if (v2.status == 1) {
+            marketBetRateTemp.find('.fa-lock').hide();
+            marketBetRateTemp.attr('onclick', 'openCal($(this))');
+            marketBetRateTemp.find('.market_price').show();
+        } else {
+            marketBetRateTemp.find('.fa-lock').show();
+            marketBetRateTemp.removeAttr('onclick');
+            marketBetRateTemp.find('.market_price').hide();
+        }
+
         if (price > newPrice) {
             marketBetRateTemp.removeClass('lowerOdd');
             marketBetRateTemp.find('.fa-caret-down').hide();
