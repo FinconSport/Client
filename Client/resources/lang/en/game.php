@@ -84,8 +84,8 @@ return [
           "204" => "First Half Point Spread", 
           "205" => "Full Game Totals", 
           "206" => "First Half Totals", 
-          "207" => "half match odd/even",
-          "208" => "whole match odd/even",
+          "207" => "Half match odd/even",
+          "208" => "Whole match odd/even",
         ],
     ],
 ];
