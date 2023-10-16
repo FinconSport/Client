@@ -75,8 +75,8 @@ p.market_name {
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
-    right: 1px;
-    bottom: 1px;
+    margin-left: -1px;
+    margin-top: -1px;
 }
 
 .bettingtype-container .market-rate {
