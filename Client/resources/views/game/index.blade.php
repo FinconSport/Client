@@ -729,10 +729,10 @@
         $('.bettingtype-container[id]').each(function () {
             const marketId = this.id;
 
-            if (!updatedMarketIds.has(marketId)) {
+            if (updatedMarketIds.has(marketId)) {
                 // Remove the bet type
                 // $(this).remove();
-                console.log('Bet type with ID ' + this.id + ' is no longer present and has been removed.');
+                console.log('Bet type with ID ' + this.id + ' is still present');
             }
         });
     }
