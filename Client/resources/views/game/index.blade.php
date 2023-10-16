@@ -740,28 +740,20 @@
                 switch (priority) {
                     case 1:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-                        break;
                     case 3:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
-                        break;
                     case 5:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
-                        break;
                     case 7:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
-                        break;
                     case 2:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
-                        break;
                     case 4:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
-                        break;
                     case 6:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
-                        break;
                     case 8:
                         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
-                        break;
                 }
             } else if (sportId === 48242) {
                 if (priority === 101) {
