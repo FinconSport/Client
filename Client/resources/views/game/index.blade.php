@@ -875,9 +875,9 @@
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
-            const scoresLengths = data.list.teams.map((team) => team.scores.length);
-            const homeTeam = data.list.teams.find(item => item.index === 1)
-            const awayTeam = data.list.teams.find(item => item.index === 2)
+            // const scoresLengths = data.list?.scoreboard[1].length - 1;
+            // const homeTeam = data.list.teams.find(item => item.index === 1)
+            // const awayTeam = data.list.teams.find(item => item.index === 2)
 
             // if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) { // <-- basketball and football
                 scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
