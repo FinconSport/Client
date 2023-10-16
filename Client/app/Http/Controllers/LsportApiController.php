@@ -2372,6 +2372,313 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($data, "01", true);
     }
 
+    
+    public function GameIndex2(Request $request) {
+
+    	$input = $this->getRequest($request);
+
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
+        }
+
+        //---------------------------------
+        // 處理輸入
+        $necessary_inputs = array('player', 'sport_id', 'fixture_id');  // 必要輸入欄位名稱
+        foreach ($necessary_inputs as $nk => $input_name) {
+            if (empty($input[$input_name])) {
+                $this->ApiError('01');
+            }
+        }
+        $player_id = $input['player'];
+        $fixture_id = $input['fixture_id'];
+        $sport_id = $input['sport_id'];
+
+        //---------------------------------
+        // 取得代理的語系
+        $agent_lang = $this->getAgentLang($player_id);
+        $lang_col = 'name_' . $agent_lang;
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //依照 sport_id, fixture_id 取出單場"賽事+聯賽+球種+主隊+客隊"資料
+        $data = DB::table('lsport_league as l')
+            ->join('lsport_sport as s', 'l.sport_id', '=', 's.sport_id')
+            ->join('lsport_fixture as f', 'l.league_id', '=', 'f.league_id')
+            ->join('lsport_team as th', function ($join) {
+                $join->on('f.home_id', '=', 'th.team_id')
+                ->on('l.league_id', '=', 'th.league_id');
+            })
+            ->join('lsport_team as ta', function ($join) {
+                $join->on('f.away_id', '=', 'ta.team_id')
+                ->on('l.league_id', '=', 'ta.league_id');
+            })
+            ->select(
+                'l.name_en AS l_name_en', 'l.'.$lang_col.' AS l_name_locale',
+                's.name_en AS s_name_en', 's.'.$lang_col.' AS s_name_locale',
+                'f.fixture_id', 'f.sport_id', 'f.league_id', 'f.start_time', 'f.livescore_extradata', 'f.periods', 'f.scoreboard', 'f.status AS f_status', 'f.last_update AS f_last_update',
+                'th.team_id AS th_team_id', 'th.name_en AS th_name_en', 'th.'.$lang_col.' AS th_name_locale',
+                'ta.team_id AS ta_team_id', 'ta.name_en AS ta_name_en', 'ta.'.$lang_col.' AS ta_name_locale'
+            )
+            ->where('l.status', 1)
+            ->where('l.sport_id', $sport_id)
+            ->where('f.fixture_id', $fixture_id)
+            ->first();
+
+        if ($data === false) {
+            $this->ApiError('02');
+        }
+
+        // dd($data);
+
+        $sport_name = null;  //儲存球種名稱
+
+        //////////////////////////////////////////
+        // 開始loop 賽事資料
+
+        $league_id = $data->league_id;
+        $fixture_id = $data->fixture_id;
+        // $market_id = $data->market_id;
+        // $main_line = $data->main_line;
+        $fixture_status = intval($data->f_status);
+        $arrFixture = array();
+
+        // sport_name: 判斷用戶語系資料是否為空,若是則用en就好
+        if (empty($sport_name)) {  //只須設定一次
+            if (empty($data->s_name_locale)) {  // sport name
+                $sport_name = $data->s_name_en;
+            } else {
+                $sport_name = $data->s_name_locale;
+            }
+        }
+
+        // league 層 ----------------------------
+
+        // league_name: 判斷用戶語系資料是否為空,若是則用en就好
+        if (empty($data->l_name_locale)) {  // league name
+            $league_name = $data->l_name_en;
+        } else {
+            $league_name = $data->l_name_locale;
+        }
+
+        // 包入 league 聯賽資料
+        $arrFixture['series'] = array(
+            'league_id' => $league_id,
+            'sport_id' => $sport_id,
+            'name' => $league_name,
+        );
+
+        // fixture 層 ----------------------------
+
+        // home_team_name: 判斷用戶語系資料是否為空,若是則用en就好
+        if (empty($data->th_name_locale)) {  // home team
+            $home_team_name = $data->th_name_en;
+        } else {
+            $home_team_name = $data->th_name_locale;
+        }
+        // away_team_name: 判斷用戶語系資料是否為空,若是則用en就好
+        if (empty($data->ta_name_locale)) {  // away_team
+            $away_team_name = $data->ta_name_en;
+        } else {
+            $away_team_name = $data->ta_name_locale;
+        }
+
+        // 比分板跟各局得分
+        $livescore_extradata = $data->livescore_extradata;
+        $periods = $data->periods;
+        $scoreboard = $data->scoreboard;
+        //解析以回傳
+        $parsed_periods = $this->getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata);
+        $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard);
+
+        // 主客隊分數
+        $home_team_total_score = null;  //主隊總分
+        $arr_home_team_scores = array();  //主隊比分板
+        $away_team_total_score = null;  //客隊總分
+        $arr_away_team_scores = array();  //客隊比分板
+
+        // for: list.teams.scores & list.teams.total_score
+        if ($parsed_scoreboard) {
+            //主隊---------
+
+            //總分
+            $home_team_total_score = $parsed_scoreboard[1][0];
+
+            //比分板
+            foreach ($parsed_scoreboard[1] as $sk => $sv) {
+                $stage = intval($sk);
+                $score = intval($sv);
+                if (($stage >= 1) && ($stage <= 50)) {
+                    $arr_home_team_scores[] = array(
+                        'stage' => $stage,
+                        'score' => $score,
+                    );
+                }
+            }
+            //客隊---------
+
+            //總分
+            $away_team_total_score = $parsed_scoreboard[2][0];
+
+            //比分板
+            foreach ($parsed_scoreboard[2] as $sk => $sv) {
+                $stage = intval($sk);
+                $score = intval($sv);
+                if (($stage >= 1) && ($stage <= 50)) {
+                    $arr_away_team_scores[] = array(
+                        'stage' => $stage,
+                        'score' => $score,
+                    );
+                }
+            }
+        }
+
+        // 包入 fixture 賽事資料 ---------------
+        $arrFixture['list'] = array(
+            'fixture_id' => $data->fixture_id,
+            'home_team_id' => $data->th_team_id,
+            'home_team_name' => $home_team_name,
+            'away_team_id' => $data->ta_team_id,
+            'away_team_name' => $away_team_name,
+            'start_time' => $data->start_time,
+            'status' => $fixture_status,
+            'last_update' => $data->f_last_update,
+            'periods' => $parsed_periods,
+            'scoreboard' => $parsed_scoreboard,
+            'series' => array(
+                'id' => $data->league_id,
+                'sport_id' => $sport_id,
+                'name' => $league_name,
+            ),
+            'teams' => array(
+                // 主隊
+                array(
+                    'index' => 2,
+                    'total_score' => $home_team_total_score,
+                    'scores' => $arr_home_team_scores,
+                    'team' => array(
+                        'team_id' => $data->th_team_id,
+                        'sport_id' => $sport_id,
+                        'name' => $home_team_name,
+                    )
+                ),
+                // 客隊
+                array(
+                    'index' => 1,
+                    'total_score' => $away_team_total_score,
+                    'scores' => $arr_away_team_scores,
+                    'team' => array(
+                        'team_id' => $data->ta_team_id,
+                        'sport_id' => $sport_id,
+                        'name' => $away_team_name,
+                    )
+                ),
+            ),
+            'market' => array(),
+        );
+
+        //market 層 ----------------------------
+
+        //取出賽事的玩法 ----------------------------
+        $marketData = DB::table('lsport_market as m')
+        ->select(
+            'm.market_id',
+            'm.name_en AS m_name_en',
+            'm.'.$lang_col.' AS m_name_locale',
+            'm.priority',
+            'm.main_line'
+        )
+        ->where('m.fixture_id', $fixture_id)
+        ->orderBy('m.market_id', 'ASC')
+        ->get();
+
+        if ($marketData === false) {
+            $this->ApiError('03');
+        }
+
+        // 開始繞玩法資料
+        foreach ($marketData as $k => $v) {
+
+            $market_id = $v->market_id;
+            $main_line = $v->main_line;
+
+            // // market_name: 判斷用戶語系資料是否為空,若是則用en就好
+            if (empty($v->m_name_locale)) {  // market name
+                $market_name = $v->m_name_en;
+            } else {
+                $market_name = $v->m_name_locale;
+            }
+
+            //取出[賽事+玩法+玩法.base_line]的賠率 ----------------------------
+            $market_bet_data = DB::table('lsport_market_bet as mb')
+            ->select(
+                'mb.bet_id',
+                'mb.base_line',
+                'mb.line',
+                'mb.name_en AS mb_name_en',
+                'mb.'.$lang_col.' AS mb_name_locale',
+                'mb.price',
+                'mb.status AS status',
+                'mb.last_update AS last_update',
+            )
+            ->where('mb.fixture_id', $fixture_id)
+            ->where('mb.market_id', $market_id)
+            ->whereIn("mb.provder_bet_id", [0,8])
+            ->where('mb.base_line', $main_line)  //這邊用 base_line 或 line 都可以
+            ->orderBy('mb.bet_id', 'ASC')  //注意排序
+            ->get();
+
+            if ($market_bet_data === false) {
+                $this->ApiError('04');
+            }
+
+            // 目前賽事的賠率資料
+            $arr_market_bet = array();
+
+            // 開始繞賠率資料
+            foreach ($market_bet_data as $bk => $bv) {
+                $market_bet_id = $bv->bet_id;
+
+                // market_bet_name: 判斷用戶語系資料是否為空,若是則用en就好
+                $market_bet_name_en = $bv->mb_name_en;
+                if (empty($bv->mb_name_locale)) {  // market name
+                    $market_bet_name = $bv->mb_name_en;
+                } else {
+                    $market_bet_name = $bv->mb_name_locale;
+                }
+
+                // 組合 market_bet 賠率資料 ---------------
+                $arr_market_bet[] = array(
+                    'market_bet_id' => $market_bet_id,
+                    'market_bet_name' => $market_bet_name,
+                    'market_bet_name_en' => $market_bet_name_en,
+                    //'base_line' => $bv->base_line,
+                    'line' => $bv->line,
+                    'price' => $bv->price,
+                    'status' => $bv->status,
+                    'last_update' => $bv->last_update,
+                );
+            }
+
+            // 包入 market 玩法資料 (含 market_bet 賠率資料) ---------------
+            $arrFixture['list']['market'][] = array(
+                'market_id' => $v->market_id,
+                'market_name' => $market_name,
+                'priority' => $v->priority,
+                'main_line' => $v->main_line,
+                'rate' => $arr_market_bet,
+            );
+
+        }
+
+        ///////////////////////////////////
+        // gzip
+        $data = $arrFixture;
+        $data = $this->gzip($data);
+
+        $this->ApiSuccess($data, "01", true);
+    }
+
     /**
      * CommonOrder
      *
