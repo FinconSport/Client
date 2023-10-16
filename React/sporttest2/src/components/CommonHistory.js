@@ -284,7 +284,7 @@ class CommonHistory extends React.Component {
                                             <div className='col-4 p-0'>{langText.CommonHistory.winamount}</div>
                                             <div className='col-8 p-0 text-right'>{ val.result_amount }</div>
                                             <div className='col-4 p-0'>{langText.CommonHistory.betstatus}</div>
-                                            <div className='col-8 p-0 text-right'>{ val.status }</div>
+                                            <div className='col-8 p-0 text-right'>{ langText.CommonHistory.statusArr[val.status] }</div>
                                             <div className='col-4 p-0'>{langText.CommonHistory.bettime}</div>
                                             <div className='col-8 p-0 text-right'>{ val.create_time }</div>
                                         </div>

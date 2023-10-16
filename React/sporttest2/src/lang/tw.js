@@ -32,6 +32,21 @@ const twTranslation = {
     betstatus: "注單狀態:",
     bettime: "下注時間:",
     nomoredata: "沒有更多注單了",
+    result: "結果",
+    statusArr: {
+      0: '取消',
+      1: '等待成立',
+      2: '等待開獎',
+      3: '等待派獎',
+      4: '已派獎',
+    },
+    detailStatusArr: {
+      0: '輸',
+      1: '贏',
+      2: '贏半',
+      3: '輸半',
+      4: '退單',
+    }
   },
   CommonHistorySlideToggle: {
     open: "展開",
