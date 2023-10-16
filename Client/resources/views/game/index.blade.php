@@ -741,14 +741,16 @@
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
         const marketBetRateParent = marketBetRateTemp.parent();
-        const marketBetRateChildren = marketBetRateParent.children();
+        const parentClassName = marketBetRateParent.attr('class'); 
+        console.log("parent" + parentClassName);
+        // const marketBetRateChildren = marketBetRateParent.children();
 
-        if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
-            // If there are 3 child elements or only 1 child element
-            marketBetRateParent.css('grid-template-columns', '1fr');
-        } else {
-            marketBetRateParent.css('grid-template-columns', '1fr 1fr');
-        }
+        // if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
+        //     // If there are 3 child elements or only 1 child element
+        //     marketBetRateParent.css('grid-template-columns', '1fr');
+        // } else {
+        //     marketBetRateParent.css('grid-template-columns', '1fr 1fr');
+        // }
 
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
