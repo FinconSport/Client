@@ -763,13 +763,13 @@
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
 
         if (createdElementKeys.has(marketBetRateId)) {
-            updateExistingElement(marketBetRateId, v2);
+            updateExistingElement(v, k2, v2, marketBetRateId);
         } else {
             createNewElement(v, k2, v2, marketBetRateId);
         }
     }
 
-    function updateExistingElement(marketBetRateId, v2) {
+    function updateExistingElement(v, k2, v2, marketBetRateId) {
         const marketBetRateTemp = $('#' + marketBetRateId);
         const price = parseFloat(marketBetRateTemp.attr('bet_rate'));
         const newPrice = parseFloat(v2.price);
