@@ -967,6 +967,10 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
         $data = array();
+        // default
+        $data[$status_type[1]][$sport_id]['list'] = array();
+        $data[$status_type[2]][$sport_id]['list'] = array();
+
         foreach ($fixture_data as $k => $v) {
 
             $sport_id = $v['sport_id'];
@@ -975,10 +979,6 @@ class LsportApiController extends Controller {
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
             $start_time = $v['start_time'];
-
-            // default
-            $data[$status_type[1]][$sport_id]['list'] = array();
-            $data[$status_type[2]][$sport_id]['list'] = array();
 
             // 區分living, early
             $status = $v['status'];
