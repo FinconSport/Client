@@ -700,36 +700,6 @@
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
-        
-        const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = parentContainer.children;
-        if (childElements.length === 3) {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-        } else {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-        }
-
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            createMarketContainer(k, v);
-            
-            if(v.market_bet){
-                Object.entries(v.market_bet).map(([k2, v2]) => {
-                    createMarketRateContainer(v, k2, v2);
-                });
-            }
-        });
-    }
-
-    function renderViewV2() {
-        if (matchListD.data.list.status === 1) {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
-            $('.marketName').css('background', '#b8d6d4');
-        } else if (matchListD.data.list.status === 2) {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
-            $('.marketName').css('background', '#ffcb9c');
-        } else {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
-        }
 
         const parentContainer = document.getElementById('marketRateDataTemp');
         const childElements = parentContainer.children;
@@ -764,7 +734,6 @@
             }
         });
     }
-
 
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
