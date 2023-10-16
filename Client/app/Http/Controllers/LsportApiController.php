@@ -955,7 +955,7 @@ class LsportApiController extends Controller {
         ->orderBy("start_time","ASC")
         ->orderBy("league_id", "ASC")
 
-        ->list();
+        ->list(5);
         if ($return === false) {
             $this->ApiError('02');
         }
@@ -1021,7 +1021,7 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['periods'] = $parsed_periods;
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['scoreboard'] = $parsed_scoreboard;
 
-            // market_bet_count
+            // market_bet_count , set default = 0 
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = 0;
 
             // order_by
@@ -1057,7 +1057,6 @@ class LsportApiController extends Controller {
                 ->orderBy("name_en","ASC")
                 ->list();
                 if ($return === false) {
-
                     $this->ApiError('04');
                 }
 
