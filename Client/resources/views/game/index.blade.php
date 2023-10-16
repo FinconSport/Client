@@ -728,11 +728,11 @@
         // Remove bet types that are no longer present
         $('.bettingtype-container[id]').each(function () {
             const marketId = this.id;
+            console.log(updatedMarketIds.has(marketId));
 
             if (updatedMarketIds.has(marketId)) {
                 // Remove the bet type
                 // $(this).remove();
-                console.log('Bet type with ID ' + this.id + ' is still present');
             }
         });
     }
