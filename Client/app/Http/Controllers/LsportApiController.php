@@ -2437,7 +2437,7 @@ class LsportApiController extends Controller {
         // fixture columns
         $columns = ["fixture_id","start_time","status","last_update"];
         foreach ($columns as $kk => $vv) {
-            $data['list'][$vv] = $v[$vv];
+            $data['list'][$vv] = $fixture_data[$vv];
         }
 
         // home_team_name
@@ -2451,9 +2451,9 @@ class LsportApiController extends Controller {
         $data['list']['away_team_name'] = $team_name;
 
         // 比分版資料
-        $livescore_extradata = $v['livescore_extradata'];
-        $periods = $v['periods'];
-        $scoreboard = $v['scoreboard'];
+        $livescore_extradata = $fixture_data['livescore_extradata'];
+        $periods = $fixture_data['periods'];
+        $scoreboard = $fixture_data['scoreboard'];
 
         $parsed_periods = $this->getMatchPeriods($sport_id, $status, $scoreboard, $livescore_extradata);
         $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $status, $periods, $scoreboard);
