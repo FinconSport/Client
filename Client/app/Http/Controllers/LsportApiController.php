@@ -960,7 +960,6 @@ class LsportApiController extends Controller {
 
         $fixture_data = $return;
 
-        dd($fixture_data);
         //////////////////////////////////////////
         
         $status_type = ["","early","living"];
