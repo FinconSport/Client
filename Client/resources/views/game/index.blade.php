@@ -702,7 +702,10 @@
         }
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = Array.from(parentContainer.children).filter(child => child.style.display !== 'none');
+        const childElements = Array.from(parentContainer.children).filter(child => {
+            return child.style.display !== 'none' && child.style.visibility !== 'hidden';
+        });
+        
         if (childElements.length === 3) { 
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
         } else {
