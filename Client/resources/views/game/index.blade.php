@@ -331,6 +331,7 @@
 <script>
     // 語系
     const langTrans = @json(trans('index'));
+    const langTrans2 = @json(trans('game'));
 
     // websocket用
     const messageQueue = []; // queue to store the package (FIFO)
@@ -734,129 +735,131 @@
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             var sportId = matchListD.data.series.sport_id;
             var priority = v.priority;
+
+            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
             
-            switch (priority) {
-                case 1 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-                    break;
-                case 3 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
-                    break;
-                case 5 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
-                    break;
-                case 7 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
-                    break;
-                case 2 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
-                    break;
-                case 4 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
-                    break;
-                case 6 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
-                    break;
-                case 8 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
-                    break;
-                case 9 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>`);
-                    break;
-                case 101 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-                    break;
-                case 102 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.102') }}`);
-                    break;
-                case 103 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.103') }}`);
-                    break;
-                case 104 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.104') }}`);
-                    break;
-                case 105 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.105') }}`);
-                    break;
-                case 106 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                    break;
-                case 107 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                    break;
-                case 108 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                    break;
-                case 109 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                    break;
-                case 110 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                    break;
-                case 111 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-                    break;
-                case 112 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.112') }}`);
-                    break;
-                case 113 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.113') }}`);
-                    break;
-                case 114 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.114') }}`);
-                    break;
-                case 115 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.115') }}`);
-                    break;
-                case 116 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.116') }}`);
-                    break;
-                case 117 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.117') }}`);
-                    break;
-                case 118 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.118') }}`);
-                    break;
-                case 119 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.119') }}`);
-                    break;
-                case 120 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.120') }}`);
-                    break;
-                case 121 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.121') }}`);
-                    break;
-                case 122 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.122') }}`);
-                    break;
-                case 123 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.123') }}`);
-                    break;
-                case 124 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
-                    break;
-                case 201 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
-                    break;
-                case 202 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
-                    break;
-                case 203 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
-                    break;
-                case 204 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
-                    break;
-                case 205 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
-                    break;
-                case 206 :
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
-                    break;
-                default:
-                    marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-                    break;
-            }
+            // switch (priority) {
+            //     case 1 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
+            //         break;
+            //     case 3 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
+            //         break;
+            //     case 5 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
+            //         break;
+            //     case 7 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
+            //         break;
+            //     case 2 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
+            //         break;
+            //     case 4 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
+            //         break;
+            //     case 6 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
+            //         break;
+            //     case 8 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
+            //         break;
+            //     case 9 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>`);
+            //         break;
+            //     case 101 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
+            //         break;
+            //     case 102 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.102') }}`);
+            //         break;
+            //     case 103 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.103') }}`);
+            //         break;
+            //     case 104 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.104') }}`);
+            //         break;
+            //     case 105 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.105') }}`);
+            //         break;
+            //     case 106 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+            //         break;
+            //     case 107 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+            //         break;
+            //     case 108 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+            //         break;
+            //     case 109 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+            //         break;
+            //     case 110 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+            //         break;
+            //     case 111 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
+            //         break;
+            //     case 112 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.112') }}`);
+            //         break;
+            //     case 113 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.113') }}`);
+            //         break;
+            //     case 114 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.114') }}`);
+            //         break;
+            //     case 115 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.115') }}`);
+            //         break;
+            //     case 116 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.116') }}`);
+            //         break;
+            //     case 117 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.117') }}`);
+            //         break;
+            //     case 118 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.118') }}`);
+            //         break;
+            //     case 119 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.119') }}`);
+            //         break;
+            //     case 120 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.120') }}`);
+            //         break;
+            //     case 121 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.121') }}`);
+            //         break;
+            //     case 122 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.122') }}`);
+            //         break;
+            //     case 123 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.123') }}`);
+            //         break;
+            //     case 124 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
+            //         break;
+            //     case 201 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
+            //         break;
+            //     case 202 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
+            //         break;
+            //     case 203 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
+            //         break;
+            //     case 204 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
+            //         break;
+            //     case 205 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
+            //         break;
+            //     case 206 :
+            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
+            //         break;
+            //     default:
+            //         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
+            //         break;
+            // }
 
             if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
@@ -974,60 +977,67 @@
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-            var scorehome = [];
-            var scoreaway = [];
+            var scorehome = [data.list?.scoreboard[1]];
+            var scoreaway = [data.list?.scoreboard[2]];
             const scoresLengths = data.list.teams.map((team) => team.scores.length);
             const homeTeam = data.list.teams.find(item => item.index === 1)
             const awayTeam = data.list.teams.find(item => item.index === 2)
-            if (homeTeam) {
-                homeTeam.scores
-                .sort((a, b) => a.stage - b.stage)
-                .forEach(el => {
-                scorehome.push(el.score);
-                });
-            }
-            if (awayTeam) {
-                awayTeam.scores
-                .sort((a, b) => a.stage - b.stage)
-                .forEach(el => {
-                scoreaway.push(el.score);
-                });
-            }
+            // if (homeTeam) {
+            //     homeTeam.scores
+            //     .sort((a, b) => a.stage - b.stage)
+            //     .forEach(el => {
+            //     scorehome.push(el.score);
+            //     });
+            // }
+            // if (awayTeam) {
+            //     awayTeam.scores
+            //     .sort((a, b) => a.stage - b.stage)
+            //     .forEach(el => {
+            //     scoreaway.push(el.score);
+            //     });
+            // }
 
-            if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) { // <-- basketball and football
+            // if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) { // <-- basketball and football
                 BasketBallFootballHeadTemp.removeAttr('hidden').removeAttr('template');
                 BasketBallFootballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
                 BasketBallFootballBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
 
-                const ballData = [0, 1, 2, 3, 4];
-                const gameTitle = [
-                    '{{ trans('game.scoreBoard.fullTimeScore') }}',
-                    '{{ trans('game.scoreBoard.q1') }}',
-                    '{{ trans('game.scoreBoard.q2') }}',
-                    '{{ trans('game.scoreBoard.q3') }}',
-                    '{{ trans('game.scoreBoard.q4') }}'
-                ];
+                // const ballData = [0, 1, 2, 3, 4];
+                // const gameTitle = [
+                //     '{{ trans('game.scoreBoard.fullTimeScore') }}',
+                //     '{{ trans('game.scoreBoard.q1') }}',
+                //     '{{ trans('game.scoreBoard.q2') }}',
+                //     '{{ trans('game.scoreBoard.q3') }}',
+                //     '{{ trans('game.scoreBoard.q4') }}'
+                // ];
+                const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
+                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][v3.periods.period]}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
                     BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:25%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
-                BasketBallFootballHeadTemp.append(totalScoreHead);
+                // const totalScoreHead = $(`<th style="width:25%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
+                // BasketBallFootballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
 
                 // Home team
                 const homeTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 BasketBallFootballBodyTemp_home.append(homeTeamName);
 
-                for (let i = 0; i < ballData.length; i++) {
-                    const scoreValue = scorehome[ballData[i]];
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+                // for (let i = 0; i < ballData.length; i++) {
+                //     const scoreValue = scorehome[ballData[i]];
+                //     const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
 
+                //     BasketBallFootballBodyTemp_home.append(thHome);
+                // }
+
+                for (let i = 0; i < gameTitle.length; i++) {
+                    const scoreValue = scorehome[i];
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue || '-');
                     BasketBallFootballBodyTemp_home.append(thHome);
                 }
 
@@ -1039,11 +1049,17 @@
                 const awayTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
                 BasketBallFootballBodyTemp_away.append(awayTeamName);
 
-                for (let i = 0; i < ballData.length; i++) {
-                    const scoreValue = scoreaway[ballData[i]];
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+                // for (let i = 0; i < ballData.length; i++) {
+                //     const scoreValue = scoreaway[ballData[i]];
+                //     const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
 
-                    BasketBallFootballBodyTemp_away.append(thAway);
+                //     BasketBallFootballBodyTemp_away.append(thAway);
+                // }
+
+                for (let i = 0; i < gameTitle.length; i++) {
+                    const scoreValue = scoreaway[i];
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue || '-');
+                    BasketBallFootballBodyTemp_home.append(thAway);
                 }
 
                 const awayTotalScore = $(`<th style="width:25%;text-align:center;">${awayTeam.total_score}</th>`);
@@ -1054,98 +1070,98 @@
 
                 console.log("Basketball & Football: " + data.series.sport_id);
 
-            } else if (data.series.sport_id == 154914) { // <-- baseball
+            // } else if (data.series.sport_id == 154914) { // <-- baseball
 
-                BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
-                baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
-                baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
+            //     BaseballHeadTemp.removeAttr('hidden').removeAttr('template');
+            //     baseballBodyTemp_home.removeAttr('hidden').removeAttr('template');  
+            //     baseballBodyTemp_away.removeAttr('hidden').removeAttr('template');  
 
-                let baseballData = [];
-                let gameTitle = [];
+            //     let baseballData = [];
+            //     let gameTitle = [];
 
-                if (scoresLengths.length < 6) {
-                    baseballData = [0, 1, 2, 3, 4, 5];
-                    gameTitle = [
-                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
-                        '{{ trans('game.scoreBoard.firstRound') }}', 
-                        '{{ trans('game.scoreBoard.gameTwo') }}', 
-                        '{{ trans('game.scoreBoard.gameThree') }}', 
-                        '{{ trans('game.scoreBoard.gameFour') }}', 
-                        '{{ trans('game.scoreBoard.gameFive') }}'
-                    ];
-                    console.log('less than 6');
-                } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
-                    baseballData = [4, 5, 6, 7, 8, 9];
-                    gameTitle = [
-                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
-                        '{{ trans('game.scoreBoard.gameFour') }}', 
-                        '{{ trans('game.scoreBoard.gameFive') }}', 
-                        '{{ trans('game.scoreBoard.gameSix') }}', 
-                        '{{ trans('game.scoreBoard.gameSeven') }}', 
-                        '{{ trans('game.scoreBoard.gameEight') }}', 
-                        '{{ trans('game.scoreBoard.gameNine') }}'
-                    ];
-                    console.log('between 6 and 9');
-                } else if (scoresLengths.length > 9) {
-                    baseballData = [7, 8, 9, 10, 11, 12];
-                    gameTitle = [
-                        '{{ trans('game.scoreBoard.fullTimeScore') }}', 
-                        '{{ trans('game.scoreBoard.gameSeven') }}', 
-                        '{{ trans('game.scoreBoard.gameEight') }}', 
-                        '{{ trans('game.scoreBoard.gameNine') }}', 
-                        '{{ trans('game.scoreBoard.gameTen') }}', 
-                        '{{ trans('game.scoreBoard.gameEleven') }}', 
-                        '{{ trans('game.scoreBoard.gameTwelve') }}'
-                    ];
-                    console.log('more than 9');
-                }
+            //     if (scoresLengths.length < 6) {
+            //         baseballData = [0, 1, 2, 3, 4, 5];
+            //         gameTitle = [
+            //             '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+            //             '{{ trans('game.scoreBoard.firstRound') }}', 
+            //             '{{ trans('game.scoreBoard.gameTwo') }}', 
+            //             '{{ trans('game.scoreBoard.gameThree') }}', 
+            //             '{{ trans('game.scoreBoard.gameFour') }}', 
+            //             '{{ trans('game.scoreBoard.gameFive') }}'
+            //         ];
+            //         console.log('less than 6');
+            //     } else if (scoresLengths.length >= 6 && scoresLengths.length <= 9) {
+            //         baseballData = [4, 5, 6, 7, 8, 9];
+            //         gameTitle = [
+            //             '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+            //             '{{ trans('game.scoreBoard.gameFour') }}', 
+            //             '{{ trans('game.scoreBoard.gameFive') }}', 
+            //             '{{ trans('game.scoreBoard.gameSix') }}', 
+            //             '{{ trans('game.scoreBoard.gameSeven') }}', 
+            //             '{{ trans('game.scoreBoard.gameEight') }}', 
+            //             '{{ trans('game.scoreBoard.gameNine') }}'
+            //         ];
+            //         console.log('between 6 and 9');
+            //     } else if (scoresLengths.length > 9) {
+            //         baseballData = [7, 8, 9, 10, 11, 12];
+            //         gameTitle = [
+            //             '{{ trans('game.scoreBoard.fullTimeScore') }}', 
+            //             '{{ trans('game.scoreBoard.gameSeven') }}', 
+            //             '{{ trans('game.scoreBoard.gameEight') }}', 
+            //             '{{ trans('game.scoreBoard.gameNine') }}', 
+            //             '{{ trans('game.scoreBoard.gameTen') }}', 
+            //             '{{ trans('game.scoreBoard.gameEleven') }}', 
+            //             '{{ trans('game.scoreBoard.gameTwelve') }}'
+            //         ];
+            //         console.log('more than 9');
+            //     }
 
-                // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
-                BaseballHeadTemp.append(TeamNameHead);
+            //     // thead data game title
+            //     const TeamNameHead = $(`<th style="width:20%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
+            //     BaseballHeadTemp.append(TeamNameHead);
 
-                for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-                }
+            //     for (let i = 0; i < gameTitle.length; i++) {
+            //         BaseballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+            //     }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
-                BaseballHeadTemp.append(totalScoreHead);
-                $('#livingtableHead').append(BaseballHeadTemp);
+            //     const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
+            //     BaseballHeadTemp.append(totalScoreHead);
+            //     $('#livingtableHead').append(BaseballHeadTemp);
 
-                // Home team
-                const homeTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
-                baseballBodyTemp_home.append(homeTeamName);
+            //     // Home team
+            //     const homeTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
+            //     baseballBodyTemp_home.append(homeTeamName);
 
-                for (let i = 0; i < baseballData.length; i++) {
-                    const scoreValue = scorehome[baseballData[i]];
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+            //     for (let i = 0; i < baseballData.length; i++) {
+            //         const scoreValue = scorehome[baseballData[i]];
+            //         const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
 
-                    baseballBodyTemp_home.append(thHome);
-                }
+            //         baseballBodyTemp_home.append(thHome);
+            //     }
 
-                const homeTotalScore = $(`<td style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
-                baseballBodyTemp_home.append(homeTotalScore);
-                $('#livingtableBody').append(baseballBodyTemp_home);
+            //     const homeTotalScore = $(`<td style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
+            //     baseballBodyTemp_home.append(homeTotalScore);
+            //     $('#livingtableBody').append(baseballBodyTemp_home);
 
-                // away team
-                const awayTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
-                baseballBodyTemp_away.append(awayTeamName);
+            //     // away team
+            //     const awayTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
+            //     baseballBodyTemp_away.append(awayTeamName);
 
-                for (let i = 0; i < baseballData.length; i++) {
-                    const scoreValue = scoreaway[baseballData[i]];
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+            //     for (let i = 0; i < baseballData.length; i++) {
+            //         const scoreValue = scoreaway[baseballData[i]];
+            //         const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
 
-                    baseballBodyTemp_away.append(thAway);
-                }
+            //         baseballBodyTemp_away.append(thAway);
+            //     }
 
-                const awayTotalScore = $(`<td style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
-                baseballBodyTemp_away.append(awayTotalScore);
+            //     const awayTotalScore = $(`<td style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+            //     baseballBodyTemp_away.append(awayTotalScore);
 
-                // Append away team after home team to table
-                baseballBodyTemp_home.after(baseballBodyTemp_away)
+            //     // Append away team after home team to table
+            //     baseballBodyTemp_home.after(baseballBodyTemp_away)
 
-                console.log("Baseball: " + data.series.sport_id);
-            }
+            //     console.log("Baseball: " + data.series.sport_id);
+            // }
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
