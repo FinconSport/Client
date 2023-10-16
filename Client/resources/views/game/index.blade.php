@@ -774,7 +774,7 @@
                 case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
                     break;
-                case 7: case 8: case 107: case 112: case 116: case 120: case 124:
+                case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                     break;
                 case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
