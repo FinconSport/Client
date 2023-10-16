@@ -388,12 +388,16 @@
         }
 
         // 單節選項 只有 滾球 籃球有
-        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
         let away_team_info = card.find('[key="awayTeamInfo"]')
         let market_count = card.find('.otherBetWay p')
+        
+        // 跳轉獨立遊戲頁面
+        card.find('.otherBetWay').attr('sport_id', sport)
+        card.find('.otherBetWay').attr('fixture_id', k3)
 
         card.attr('id', k3)
         card.attr('cate', k)
@@ -424,8 +428,9 @@
     function createBetArea(priorityArr, v3, k3, league_name, s, card) {
         priorityArr.forEach((i, j) => {
             let bet_div = $('div[template="betDiv"]').clone()
-            let betData = Object.values(v3.list).find(m => m.priority === i)
+            let betData = null
             bet_div.attr('priority', i)
+            if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
             if (betData && Object.keys(betData.list).length > 0) {
                 // 是否有讓方
                 let isHcapTeam = null
@@ -697,16 +702,17 @@
 
 
                         function renderBetArea(priorityArr, v3, k3) {
-                            console.log(priorityArr)
                             priorityArr.forEach((i, j) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
-                                let betData = Object.values(v3.list).find(m => m.priority === i)
+                                let betData = null
                                 let item = null
-                                if (betData && Object.keys(betData.list).length > 0) {
+                                if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
+                                if( betData && Object.keys(betData.list).length > 0 ) {
                                     // 是否有讓方
                                     let isHcapTeam = null
                                     // 讓分的priority && line不同 && 有盤口
                                     j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                                    
                                     Object.entries(betData.list).map(([k4, v4], s) => {
                                         // 先取消樣式
                                         bet_div.find('div').removeClass('hcapTeam')

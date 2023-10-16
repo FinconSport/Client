@@ -17,6 +17,7 @@
 #gameTopSlider .swiper-button-next,
 #gameTopSlider .swiper-button-prev {
    color: #ffffff;
+   opacity: 0.7;
 }
 
 #gameTopSlider .swiper-button-next:after, 
