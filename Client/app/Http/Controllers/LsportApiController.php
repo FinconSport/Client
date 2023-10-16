@@ -918,7 +918,6 @@ class LsportApiController extends Controller {
         // 取得代理的語系
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -936,7 +935,7 @@ class LsportApiController extends Controller {
         $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
-        // ES取出賽事
+        // ES取得賽事
 
         $return = LsportFixture::query()
         ->from('es_lsport_fixture')
@@ -953,7 +952,43 @@ class LsportApiController extends Controller {
                   ->from('es_lsport_league')
                   ->where('status', 1);
         })
+        ->orderBy("start_time","DESC")
         ->list();
+        if ($return === false) {
+            $this->ApiError('02');
+        }
+
+        $fixture_data = $return;
+
+        dd($fixture_data);
+
+        //////////////////////////////////////////
+        
+        foreach ($fixture_data as $k => $v) {
+
+            $sport_id = $v['sport_id'];
+            $league_id = $v['league_id'];
+            $fixture_id = $v['fixture_id'];
+            
+            // 預設填入欄位
+            $columns = [];
+            
+            // 取得聯賽
+            // home_team_name
+            // away_team_name
+
+            // 比分版資料
+
+            // market_bet_count
+            // 取得market 
+               // 取得market_bet
+        }
+        
+        //////////////////////////////////////////
+        
+
+
+
         dd($return);
 
         //////////////////////////////////////////
