@@ -1066,6 +1066,11 @@ class LsportApiController extends Controller {
 
                 $market_bet_data = $return;
                 foreach ($market_bet_data as $kkk => $vvv) {
+
+                    $market_base_line = $vvv['base_line'];
+                    if ($market_base_line != $market_base_line) {
+                        continue; // 粗報解法, 
+                    }
                     $market_bet_id = $vvv['bet_id'];
 
                     // TODO
