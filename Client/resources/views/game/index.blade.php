@@ -693,8 +693,10 @@
     function renderViewV2() {
         if (matchListD.data.list.status === 1) {
             $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
+            $('#marketName').css('background', '#ffcb9c');
         } else if (matchListD.data.list.status === 2) {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+            $('#marketName').css('background', '#b8d6d4');
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
