@@ -15,6 +15,12 @@
     text-align: center;
 }
 
+.scoreboardCon p.start_time {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.5rem;
+}
+
 .earlyFixture-container p.league_name {
     margin-bottom: 0.5rem;
 }
