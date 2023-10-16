@@ -734,6 +734,8 @@
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
             var sportId = matchListD.data.series.sport_id;
             var priority = v.priority;
+            console.log('sport id: ' +  sportId);
+            console.log('priority: ' +  v.priority);
 
             switch (sportId) {
                 case 154914:
