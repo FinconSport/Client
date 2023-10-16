@@ -702,17 +702,6 @@
             $('#quickContainer .quick').css('background-color', '#ffca9b');
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
-        
-        const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = parentContainer.children;
-        if (childElements.length === 3 || childElements.length === 1) {
-            // If there are 3 child elements
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-            console.log("There are 3 or more child elements in the parent container.");
-        } else {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-            console.log("There are less than 3 child elements in the parent container.");
-        }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
@@ -750,6 +739,16 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
+        const marketBetRateParent = marketBetRateTemp.parent();
+        const marketBetRateChildren = marketBetRateParent.children();
+
+        if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
+            // If there are 3 child elements or only 1 child element
+            marketBetRateParent.css('grid-template-columns', '1fr');
+        } else {
+            marketBetRateParent.css('grid-template-columns', '1fr 1fr');
+        }
 
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
