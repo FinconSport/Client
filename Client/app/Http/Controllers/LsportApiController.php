@@ -2433,9 +2433,8 @@ class LsportApiController extends Controller {
         
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
-        $data['list']["league"]['id'] = $league_id;
-        $data['list']["league"]['name'] = $league_name;
-        $data['list']["league"]['sport_id'] = $sport_id;
+        $data['list']["league_id"] = $league_id;
+        $data['list']["league_name"] = $league_name;
 
         // fixture columns
         $columns = ["fixture_id","start_time","status","last_update"];
