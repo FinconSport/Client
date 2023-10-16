@@ -1035,7 +1035,7 @@ class LsportApiController extends Controller {
             ->where("fixture_id",$fixture_id)
             ->orderBy('market_id', 'ASC')
             ->groupBy('fixture_id', 'market_id')
-            ->list();
+            ->list(1,true);
             if ($return === false) {
                 $this->ApiError('03');
             }
