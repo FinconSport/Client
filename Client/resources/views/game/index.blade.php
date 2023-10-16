@@ -1122,7 +1122,8 @@
             str += ' ' + bet_name_line
             $('#leftSlideOrder span[key="bet_name"]').html(str)
         }
-    
+        
+        console.log('cal' + bet_name)
         if (bet_name == 'X') {
             $('#leftSlideOrder span[key="bet_type"]').text("{{ trans('game.index.tie') }}");
         } else {
