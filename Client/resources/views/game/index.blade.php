@@ -692,10 +692,8 @@
     // ------- render function to game page market_data-----------
     function renderViewV2() {
         if (matchListD.data.list.status === 1) {
-            $('.marketName').css('background-color', '#c4d4d4');
             $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
         } else if (matchListD.data.list.status === 2) {
-            $('.marketName').css('background-color', '#ffca9b');
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
@@ -1124,8 +1122,13 @@
             str += ' ' + bet_name_line
             $('#leftSlideOrder span[key="bet_name"]').html(str)
         }
+    
+        if (bet_name == 'X') {
+            $('#leftSlideOrder span[key="bet_type"]').text("{{ trans('game.index.tie') }}");
+        } else {
+            $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
+        }
 
-        $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
