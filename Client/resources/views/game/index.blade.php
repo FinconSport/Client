@@ -728,6 +728,7 @@
         // Remove bet types that are no longer present
         $('#bettingTypeContainer[id]').each(function () {
             const marketId = this.id;
+            console.log(this.id);
 
             if (!existingMarketIds.has(marketId)) {
                 // Remove the bet type
