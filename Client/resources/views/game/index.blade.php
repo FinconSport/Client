@@ -721,7 +721,7 @@
 
          const updatedMarketIds = new Set(); // Create a new set for updated data
         // Update data and add new market IDs
-        Object.entries(updatedData.list.market).map(([k, v]) => {
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {
             updatedMarketIds.add(v.market_id);
         });
         
