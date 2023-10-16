@@ -702,8 +702,10 @@
         
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
@@ -903,7 +905,7 @@
                         marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
                     } else if (v2.market_bet_name_en == 2) {
                         marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
-                    } else if (v2.market_bet_name_en == X) {
+                    } else if (v2.market_bet_name_en == 'X') {
                         marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                     }
                     break;
