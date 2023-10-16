@@ -1185,19 +1185,15 @@
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
-            let str = bet_name_en == 1 ? home : away
-            str += ' ' + bet_name_line
-            $('#leftSlideOrder span[key="bet_name"]').html(str)
+            if (bet_name_en === 'X') {
+                $('#leftSlideOrder span[key="bet_type"]').html("{{ trans('game.index.tie') }}");
+            } else {
+                let str = bet_name_en === '1' ? home : away;
+                str += ' ' + bet_name_line;
+                $('#leftSlideOrder span[key="bet_name"]').html(str);
+            }
         }
-        
-        if (e.attr('bet_name') == 'X') {
-            console.log('cal p ' + e.attr('bet_name'))
-            $('#leftSlideOrder span[key="bet_type"]').text("{{ trans('game.index.tie') }}");
-        } else {
-            console.log('cal s ' + e.attr('bet_name'))
-            $('#leftSlideOrder span[key="bet_type"]').html(bet_type);
-        }
-
+    
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
