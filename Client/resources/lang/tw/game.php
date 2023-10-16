@@ -14,7 +14,6 @@ return [
         'upperStage'=> '上',
         'lowerStage'=> '下',
         "fullTimeScore" => "全場",
-        "firstRound" => "第一局",
         "q1" => "Q1",
         "q2" => "Q2",
         "q3" => "Q3",
