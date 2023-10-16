@@ -57,7 +57,6 @@ class Match extends React.Component {
 			json.data = uncompressed
 		}
 
-
 		// 餘額刷新功能 -> 有時ajax回傳太快導致icon旋轉會閃一下就結束 故至少執行一秒
 		if( type === 1 ) {
 			if (elapsedTime < 1000) { // 小于一秒延迟执行

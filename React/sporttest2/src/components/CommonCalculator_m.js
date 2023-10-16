@@ -442,16 +442,16 @@ class CommonCalculator extends React.Component {
                                         sendOrderData.map((data, i) => (
                                             <div className='row' key={i} style={CalInfoCard}>
                                                 <div className='col-1 text-center p-0 mb-2' style={BetCountStyle}>{i+1}</div>
-                                                <div className='col-9'>{ data.market_name }</div>
-                                                <div className='col-2 p-0 text-center'>
-                                                    <span className='odd'>{ data.bet_rate }</span>
-                                                </div>
-                                                <div style={BetItemStyle}>{ data.bet_item_name }</div>
-                                                <div>{ data.series_name }</div>
+                                                <div className='col-11'>{ data.series_name }</div>
                                                 <div className='col-12'>
                                                     { data.home_team_name }
                                                     <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
                                                     { data.away_team_name }
+                                                </div>
+                                                <div>{ data.market_name }</div>
+                                                <div style={BetItemStyle} className='row m-0'>
+                                                    <div className='col-10 p-0 text-left'>{ data.bet_item_name }</div>
+                                                    <div className='col-2 p-0 odd text-right'>{ data.bet_rate }</div>
                                                 </div>
                                             </div>
                                         ))

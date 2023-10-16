@@ -148,8 +148,6 @@ class MatchContent extends React.Component {
 				}, 5000);
 			}
 		})
-
-		console.log(apiUrl, json)
 	}
 
 	componentWillUnmount() {
@@ -185,7 +183,6 @@ class MatchContent extends React.Component {
 		clearInterval(window.ajaxInt)
 		this.caller(this.props.apiUrl + '&sport_id=' + window.sport)
 
-		
 	}
 				
 	// 偵測menu改變
@@ -256,8 +253,6 @@ class MatchContent extends React.Component {
 							</>
 						  )}
 						</SlideToggle>
-
-					
 					)) :
 					<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
 					:
