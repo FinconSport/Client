@@ -935,6 +935,7 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es); 
         $after_tomorrow_es = '"'.Carbon::createFromFormat('Y-m-d H:i:s', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
