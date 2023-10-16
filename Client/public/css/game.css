@@ -5,7 +5,7 @@
     border-radius: 5px;
     overflow: hidden;
     color:#ffffff;
-    padding: 2rem 9rem;
+    padding: 2rem 2rem;
     margin-top:20px;
 }
 
@@ -32,7 +32,7 @@
 
 .livingFixture-container.row {
     width: 65%;
-    padding: 2rem 2rem;
+    padding: 2rem 2rem 1.8rem 2rem;
     border-radius: 5px;
     background: rgb(0 0 0 / 50%);
     margin: auto;
@@ -50,7 +50,7 @@
     border-radius: 5px;
     background: #ffffff;
     color: #415b5a;
-    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
     overflow: hidden;
 }
 
@@ -63,33 +63,86 @@
 .bettingtype-container .marketBetRateContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: relative;
+    right: 1px;
+    bottom: 1px;
 }
 
 .bettingtype-container .market-rate {
     padding: 1rem;
     border-right: 1px solid #415b5a;
     border-bottom: 1px solid #415b5a;
-}
-
-/* .bettingtype-container .market-rate:nth-child(even) {
-    border-right: none;
-} */
-
-.bettingtype-container .market-rate:nth-last-child(-n+2),
-.bettingtype-container .market-rate:only-child {
-    border-bottom: none;
+    position: inherit;
+    left: 1px;
+    bottom: -1px;
 }
 
 div#bettingTypeContainer {
-    height: calc(100% - 14.5rem);
+    height: calc(100% - 16rem);
     overflow: auto;
+    padding-right: 0.5rem;
 }
 
-#scoreboardContainer th{
-    padding: 0rem 0rem 0.5rem 0rem;
+/* div#bettingTypeContainer::-webkit-scrollbar{
+    width: 0px;
+} */
+
+#scoreboardContainer thead th{
+    padding: 0rem 0rem 1rem 0rem;
 }
 
 #scoreboardContainer tbody tr:last-child th{
     padding: 0rem 0rem 0rem 0rem;
 }
 
+#marketRateDataTemp.betItemDiv {
+    border-top: none;
+    border-right: none;
+    padding: 0rem;
+    height: auto;
+}
+
+.filterBtnContainer{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.filterBtnContainer button.filterBtn {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100px;
+    background: #415b5a;
+    color: white;
+    transition: all 0.2s linear;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-right: 0.7rem;
+}
+
+.filterBtnContainer button.filterBtn.active {
+    background: #ffffff;
+    color: #415b5a;
+}
+
+.setHeightDiv{
+    height: 2.5rem;
+    overflow: hidden;
+    vertical-align: middle;
+    display: contents;
+}
+
+.textOverflowCon {
+    height: 2.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.textOverFlowCon::-webkit-scrollbar{
+    width: 5px;
+}
+
+.textOverFlowCon::-webkit-scrollbar-thumb {
+    background: #888;
+  }

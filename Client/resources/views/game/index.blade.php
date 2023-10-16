@@ -97,19 +97,23 @@
     </div>
 </div>
 
+<div class="filterBtnContainer">
+    <button class="filterBtn active">{{ trans('game.index.all') }}</button>
+    <button class="filterBtn">{{ trans('game.index.hot') }}</button>
+</div>
 <div id="bettingTypeContainer">
     <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
         <div class="marketName">
             <p class="market_name"></p>
         </div>
-        <div id="marketRateDataTemp" class="marketBetRateContainer">
+        <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv">
             <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
                 <div class="">
                     <span class="market_bet_name"></span>
                     <span class="market_line"></span>
                 </div>
                 <div>
-                    <span class="market_price" style="color:#c79e42;"></span>
+                    <span class="market_price odd" style="color:#c79e42;"></span>
                     <i class="fa-solid fa-lock" style="display: none;"></i>
                     <i class="fa-solid fa-caret-up" style="display: none;"></i>
                     <i class="fa-solid fa-caret-down" style="display: none;"></i>
@@ -709,7 +713,7 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-            $('#' + v.market_id + ' #marketRateDataTemp').empty();
+            $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
             if(v.rate){
                 Object.entries(v.rate).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
@@ -728,34 +732,44 @@
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-            marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-
-            //  If v.rate is empty or undefined, the append operation will not be performed.
-            $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+            var sportId = matchListD.data.series.sport_id;
+            var priority = v.priority;
+            var transKey = '';
+            // var transKey = ';
+            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.` + sportId + `.` + priority + `') }}`);
+            if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed
+                $('#bettingTypeContainer').append(bettingTypeContainerTemp);
+            }
         }
     }
 
      // ------- game page create market data rate container-----------
     function createMarketRateContainer(v, k2, v2) {
+        const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
+        marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        if ($('#' + marketBetRateId).length === 0) {
-            const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-            marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+        let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
+        // let betData = Object.values(v3.list).find(m => m.priority === i)
+        let betData = v.priority;
 
-            marketBetRateTemp.attr('id', marketBetRateId);
-            marketBetRateTemp.attr('priority', v.priority);
-            marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
-            marketBetRateTemp.attr('market_id', v.market_id);
-            marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
-            marketBetRateTemp.attr('bet_rate', v2.main_line);
-            marketBetRateTemp.attr('bet_type', v.market_name);
-            marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
-            marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
-            marketBetRateTemp.attr('line', v2.line);
-            marketBetRateTemp.attr('league', matchListD.data.series.name);
-            marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
-            marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
+        marketBetRateTemp.attr('id', marketBetRateId);
+        marketBetRateTemp.attr('priority', v.priority);
+        marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
+        marketBetRateTemp.attr('market_id', v.market_id);
+        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_type', v.market_name);
+        marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
+        marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
+        marketBetRateTemp.attr('line', v2.line);
+        marketBetRateTemp.attr('league', matchListD.data.series.name);
+        marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
+        marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
+        // if ($('#' + marketBetRateId).length === 0) {
+        if( betData > 0 ) { // betData && Object.keys(betData.list).length > 0 
+            marketBetRateTemp.find('.odd').text(v2.price)
             switch (v.priority) {
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateTemp.find('.market_bet_name').text(v2.line);
@@ -780,26 +794,36 @@
                 marketBetRateTemp.find('.market_price').hide();
             }
 
-            let fixture_id = matchListD.data.list.fixture_id;
-            let price = marketBetRateTemp.attr('bet_rate')
-            if( v2.market_bet_id && v2.market_bet_id.toString() === (v2.market_bet_id).toString() && v2.status === 1 ) {
-                // 判斷賠率是否有改變
-                if( parseFloat(price) > parseFloat(v2.price) ) {
-                    // 賠率下降
-                    lowerOdd(k3, v.market_id, v2.market_bet_id, fixture_id)
-                }
-                if( parseFloat(price) < parseFloat(v2.price) ) {
-                    // 賠率上升
-                    raiseOdd(k2, v.market_id, v2.market_bet_id, fixture_id)
-                }
-            } 
-
             marketBetRateTemp.find('.market_line').text(v2.line);
-            marketBetRateTemp.find('.market_price').text(v2.price);
+
+            let fixture_id = matchListD.data.list.fixture_id;
+            let currentPrice = parseFloat(marketBetRateTemp.attr('bet_rate'));
+            if (matchListD.data.list.status === 1) {
+                if (currentPrice > parseFloat(v2.price)) {
+                    marketBetRateTemp.removeClass('lowerOdd');
+                    marketBetRateTemp.find('.fa-caret-down').hide();
+
+                    marketBetRateTemp.addClass('raiseOdd');
+                    marketBetRateTemp.find('.fa-caret-up').show();
+
+                } else if (currentPrice < parseFloat(v2.price)) {
+                    marketBetRateTemp.removeClass('raiseOdd');
+                    marketBetRateTemp.find('.fa-caret-up').hide();
+
+                    marketBetRateTemp.addClass('lowerOdd');
+                    marketBetRateTemp.find('.fa-caret-down').hide();
+                }
+            } else {
+                marketBetRateTemp.removeClass('raiseOdd');
+                marketBetRateTemp.removeClass('lowerOdd');
+                marketBetRateTemp.find('.fa-caret-up').hide();
+                marketBetRateTemp.find('.fa-caret-down').hide();
+            }
 
             // Append the new element to the correct container
             $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
         }
+        
     }
 
     // ------- game page scoreboard function-----------
@@ -864,40 +888,44 @@
                 ];
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:30%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BasketBallFootballHeadTemp.append($(`<th style="width:10%;text-align:center;">`).text(gameTitle[i]));
+                    BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
+                const totalScoreHead = $(`<th style="width:25%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
                 BasketBallFootballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BasketBallFootballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`);
+                const homeTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 BasketBallFootballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[ballData[i]] || "");
+                    const scoreValue = scorehome[ballData[i]];
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     BasketBallFootballBodyTemp_home.append(thHome);
                 }
 
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
+                const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
                 BasketBallFootballBodyTemp_home.append(homeTotalScore);
                 $('#livingtableBody').append(BasketBallFootballBodyTemp_home);
 
                 // Away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`);
+                const awayTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
                 BasketBallFootballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < ballData.length; i++) {
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[ballData[i]] || "");
+                    const scoreValue = scoreaway[ballData[i]];
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                const awayTotalScore = $(`<th style="width:25%;text-align:center;">${awayTeam.total_score}</th>`);
                 BasketBallFootballBodyTemp_away.append(awayTotalScore);
 
                 // Append away team after home team to table
@@ -952,40 +980,44 @@
                 }
 
                 // thead data game title
-                const TeamNameHead = $(`<th style="width:20%;text-align:left;">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</th>`);
+                const TeamNameHead = $(`<th style="width:20%;text-align:left;"><div class="setHeightDiv">${scoresLengths.length} {{ trans('game.scoreBoard.gamesOn') }}</div></th>`);
                 BaseballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BaseballHeadTemp.append($('<th style="width:10%;text-align:center;">').text(gameTitle[i]));
+                    BaseballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
 
-                const totalScoreHead = $(`<th style="width:20%;text-align:center;">{{ trans('game.scoreBoard.totalScore') }}</th>`);
+                const totalScoreHead = $(`<th style="width:20%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
                 BaseballHeadTemp.append(totalScoreHead);
                 $('#livingtableHead').append(BaseballHeadTemp);
 
                 // Home team
-                const homeTeamName = $(`<th style="width:20%;text-align:left;">${data.list.home_team_name}</th>`);
+                const homeTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 baseballBodyTemp_home.append(homeTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scorehome[baseballData[i]] || "");
+                    const scoreValue = scorehome[baseballData[i]];
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     baseballBodyTemp_home.append(thHome);
                 }
 
-                const homeTotalScore = $(`<th style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
+                const homeTotalScore = $(`<td style="width:20%;text-align:center;">${homeTeam.total_score}</th>`);
                 baseballBodyTemp_home.append(homeTotalScore);
                 $('#livingtableBody').append(baseballBodyTemp_home);
 
                 // away team
-                const awayTeamName = $(`<th style="width:20%;text-align:left;">${data.list.away_team_name}</th>`);
+                const awayTeamName = $(`<td style="width:20%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
                 baseballBodyTemp_away.append(awayTeamName);
 
                 for (let i = 0; i < baseballData.length; i++) {
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreaway[baseballData[i]] || "");
+                    const scoreValue = scoreaway[baseballData[i]];
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? String(scoreValue) : "");
+
                     baseballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<th style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
+                const awayTotalScore = $(`<td style="width:20%;text-align:center;">${awayTeam.total_score}</th>`);
                 baseballBodyTemp_away.append(awayTotalScore);
 
                 // Append away team after home team to table
@@ -1081,7 +1113,7 @@
         setTimeout(() => {
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
             $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + '] .fa-caret-up').hide()
-        }, 3000);
+        }, 000);
     }
     // 賠率下降
     function lowerOdd(fixture_id, market_id, market_bet_id) {
@@ -1341,6 +1373,7 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
+    // formatedate display month name
     const translations = {
         dateTimezone: @json(trans('game.index.dateTimezone')),
         th: @json(trans('game.index.th')),
@@ -1375,8 +1408,22 @@
         }
     };
 
+    // Function to handle filter button clicks
+    const filterButtonContainer = document.querySelector('.filterBtnContainer');
+    function handleFilterButtonClick(event) {
+      if (event.target.classList.contains('filterBtn')) {
 
-// ----------index page function--------------
+        const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
+
+        buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
+        event.target.classList.add('active'); // Add the "active" class to the clicked button
+
+      }
+    }
+
+    filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
+    
+    // ----------index page function--------------
     // 跳轉獨立賽事頁
     function navToGame(e) {
         let sport_id = e.attr('sport_id')   
