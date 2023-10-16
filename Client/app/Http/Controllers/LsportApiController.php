@@ -1048,7 +1048,7 @@ class LsportApiController extends Controller {
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
                 ->where("market_id",$market_id)
                 ->where("base_line",$market_main_line)
-               // ->orderBy("name_en","ASC")    // TODO
+                ->orderBy("name_en","ASC")    // TODO
                 ->list();
                 if ($return === false) {
                     $this->ApiError('04');
