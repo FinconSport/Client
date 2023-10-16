@@ -737,89 +737,131 @@
             console.log('sport id: ' +  sportId);
             console.log('priority: ' +  v.priority);
 
-            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-
             if (sportId === 154914) {
-                if (priority === 1) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-                } else if (priority === 3) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
-                } else if (priority === 5) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
-                } else if (priority === 7) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
-                } else if (priority === 2) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
-                } else if (priority === 4) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
-                } else if (priority === 6) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
-                } else if (priority === 8) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
+                switch (priority) {
+                    case 1 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
+                        break;
+                    case 3 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
+                        break;
+                    case 5 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
+                        break;
+                    case 7 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
+                        break;
+                    case 2 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
+                        break;
+                    case 4 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
+                        break;
+                    case 6 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
+                        break;
+                    case 8 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
+                        break;
+                    case 9 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>`);
+                        break;
                 }
             } else if (sportId === 48242) {
-                if (priority === 101) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-                } else if (priority === 102) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.102') }}`);
-                } else if (priority === 103) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.103') }}`);
-                } else if (priority === 104) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.104') }}`);
-                } else if (priority === 105) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.105') }}`);
-                } else if (priority === 106) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                } else if (priority === 107) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                } else if (priority === 108) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                } else if (priority === 109) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                } else if (priority === 110) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-                } else if (priority === 111) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-                } else if (priority === 112) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.112') }}`);
-                } else if (priority === 113) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.113') }}`);
-                } else if (priority === 114) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.114') }}`);
-                } else if (priority === 115) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.115') }}`);
-                } else if (priority === 116) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.116') }}`);
-                } else if (priority === 117) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.117') }}`);
-                } else if (priority === 118) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.118') }}`);
-                } else if (priority === 119) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.119') }}`);
-                } else if (priority === 120) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.120') }}`);
-                } else if (priority === 121) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.121') }}`);
-                } else if (priority === 122) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.122') }}`);
-                } else if (priority === 123) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.123') }}`);
-                } else if (priority === 124) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
+                switch (priority) {
+                    case 101 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
+                        break;
+                    case 102 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.102') }}`);
+                        break;
+                    case 103 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.103') }}`);
+                        break;
+                    case 104 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.104') }}`);
+                        break;
+                    case 105 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.105') }}`);
+                        break;
+                    case 106 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+                        break;
+                    case 107 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+                        break;
+                    case 108 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+                        break;
+                    case 109 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+                        break;
+                    case 110 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
+                        break;
+                    case 111 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
+                        break;
+                    case 112 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.112') }}`);
+                        break;
+                    case 113 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.113') }}`);
+                        break;
+                    case 114 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.114') }}`);
+                        break;
+                    case 115 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.115') }}`);
+                        break;
+                    case 116 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.116') }}`);
+                        break;
+                    case 117 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.117') }}`);
+                        break;
+                    case 118 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.118') }}`);
+                        break;
+                    case 119 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.119') }}`);
+                        break;
+                    case 120 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.120') }}`);
+                        break;
+                    case 121 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.121') }}`);
+                        break;
+                    case 122 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.122') }}`);
+                        break;
+                    case 123 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.123') }}`);
+                        break;
+                    case 124 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
+                        break;
                 }
             } else if (sportId === 6046) {
-                if (priority === 201) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
-                } else if (priority === 202) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
-                } else if (priority === 203) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
-                } else if (priority === 204) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
-                } else if (priority === 205) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
-                } else if (priority === 206) {
-                    marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
+                switch (priority) {
+                    case 201 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
+                        break;
+                    case 202 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
+                        break;
+                    case 203 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
+                        break;
+                    case 204 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
+                        break;
+                    case 205 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
+                        break;
+                    case 206 :
+                        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
+                        break;
                 }
             }
 
