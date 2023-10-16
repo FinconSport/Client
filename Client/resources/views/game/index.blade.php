@@ -723,14 +723,19 @@
         // Update data and add new market IDs
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             updatedMarketIds.add(v.market_id);
+
+            // Check if .bettingtype-container[id] exists with the same market_id
+            if (!$(`.bettingtype-container[id="${v.market_id}"]`).length) {
+                // .bettingtype-container with this market_id doesn't exist, you can perform some action here.
+                console.log(`No .bettingtype-container found for market_id ${v.market_id}`);
+            }
         });
         
         // Remove bet types that are no longer present
         $('.bettingtype-container[id]').each(function () {
             const marketId = this.id;
-            console.log(updatedMarketIds.has(marketId));
 
-            if (updatedMarketIds.has(marketId)) {
+            if (!updatedMarketIds.has(marketId)) {
                 // Remove the bet type
                 // $(this).remove();
             }
