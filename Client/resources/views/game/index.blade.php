@@ -712,7 +712,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
-            if(v.rate){
+            if(v.market_bet){
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
                 });
