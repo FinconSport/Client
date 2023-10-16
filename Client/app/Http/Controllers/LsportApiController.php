@@ -1057,7 +1057,7 @@ class LsportApiController extends Controller {
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
                 ->where("market_id",$market_id)
-                ->where("base_line",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
+                ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
                 ->list();
                 if ($return === false) {
