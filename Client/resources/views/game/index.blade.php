@@ -700,15 +700,16 @@
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
-        
+
         const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
-        if (childElements.length == 4) {
+
+        if (childElements.length % 2 === 0) {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
         }
-
+        
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
 
@@ -821,6 +822,7 @@
         marketBetRateTemp.attr('line', v2.line);
         
         marketBetRateTemp.find('.odd').text(newPrice);
+        
     }
 
     function createNewElement(v, k2, v2, marketBetRateId) {
