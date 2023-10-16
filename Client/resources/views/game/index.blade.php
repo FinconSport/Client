@@ -770,15 +770,23 @@
         if (price > newPrice) {
             marketBetRateTemp.removeClass('lowerOdd');
             marketBetRateTemp.find('.fa-caret-down').hide();
+
             marketBetRateTemp.addClass('raiseOdd');
             marketBetRateTemp.find('.fa-caret-up').show();
-            console.log('raise', price + ' > ' + newPrice);
+            setTimeout(() => {
+                marketBetRateTemp.removeClass('raiseOdd')
+                marketBetRateTemp.find('.fa-caret-up').hide()
+            }, 000);
         } else if (price < newPrice) {
             marketBetRateTemp.removeClass('raiseOdd');
             marketBetRateTemp.find('.fa-caret-up').hide();
+
             marketBetRateTemp.addClass('lowerOdd');
             marketBetRateTemp.find('.fa-caret-down').show();
-            console.log('lower', price + ' < ' + newPrice);
+            setTimeout(() => {
+                marketBetRateTemp.removeClass('lowerOdd')
+                marketBetRateTemp.find('.fa-caret-down').hide()
+            }, 3000);
         }
 
         // Update the price and other attributes
