@@ -1031,7 +1031,7 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
             // 取得market 
-            $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->groupBy("fixture_id", "market_id")->list();
+            $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
                 $this->ApiError('03');
             }
