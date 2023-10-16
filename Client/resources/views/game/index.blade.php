@@ -353,7 +353,7 @@
     // match list data
     var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
-    const matchList_api = '/api/v2/game_index2'
+    const matchList_api = '/api/v2/game_index'
 
     // bet limitation data
     var betLimitationD = {}
@@ -743,12 +743,42 @@
     
      // ------- game page create market data rate container-----------
      
-
+    const createdElementKeys = new Set();
     function createMarketRateContainer(v, k2, v2) {
-        const createdElementKeys = new Set();
+        
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
 
         if (createdElementKeys.has(marketBetRateId)) {
+            const marketBetRateTemp = $('#' + marketBetRateId); // Get the existing element
+            const price = parseFloat(marketBetRateTemp.attr('bet_rate'));
+            const newPrice = parseFloat(v2.price);
+
+            if (price > newPrice) {
+                marketBetRateTemp.removeClass('lowerOdd');
+                marketBetRateTemp.find('.fa-caret-down').hide();
+
+                marketBetRateTemp.addClass('raiseOdd');
+                marketBetRateTemp.find('.fa-caret-up').show();
+            } else if (price < newPrice) {
+                marketBetRateTemp.removeClass('raiseOdd');
+                marketBetRateTemp.find('.fa-caret-up').hide();
+
+                marketBetRateTemp.addClass('lowerOdd');
+                marketBetRateTemp.find('.fa-caret-down').show();
+            } else {
+                // Prices are equal, no need to show up or down arrows
+                marketBetRateTemp.removeClass('raiseOdd lowerOdd');
+                marketBetRateTemp.find('.fa-caret-up').hide();
+                marketBetRateTemp.find('.fa-caret-down').hide();
+            }
+
+            // Update the price
+            marketBetRateTemp.attr('bet_rate', newPrice);
+            marketBetRateTemp.find('.odd').text(newPrice);
+            console.log('existing')
+
+        } else {
+
             const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
             marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
             let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
@@ -808,36 +838,6 @@
                 $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
             }
             console.log('created')
-
-        } else {
-            const marketBetRateTemp = $('#' + marketBetRateId); // Get the existing element
-
-            const price = parseFloat(marketBetRateTemp.attr('bet_rate'));
-            const newPrice = parseFloat(v2.price);
-
-            if (price > newPrice) {
-                marketBetRateTemp.removeClass('lowerOdd');
-                marketBetRateTemp.find('.fa-caret-down').hide();
-
-                marketBetRateTemp.addClass('raiseOdd');
-                marketBetRateTemp.find('.fa-caret-up').show();
-            } else if (price < newPrice) {
-                marketBetRateTemp.removeClass('raiseOdd');
-                marketBetRateTemp.find('.fa-caret-up').hide();
-
-                marketBetRateTemp.addClass('lowerOdd');
-                marketBetRateTemp.find('.fa-caret-down').show();
-            } else {
-                // Prices are equal, no need to show up or down arrows
-                marketBetRateTemp.removeClass('raiseOdd lowerOdd');
-                marketBetRateTemp.find('.fa-caret-up').hide();
-                marketBetRateTemp.find('.fa-caret-down').hide();
-            }
-
-            // Update the price
-            marketBetRateTemp.attr('bet_rate', newPrice);
-            marketBetRateTemp.find('.odd').text(newPrice);
-            console.log('existing')
         }
     }
 
