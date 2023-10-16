@@ -696,12 +696,12 @@
             $('.marketName').css('background', '#b8d6d4');
         } else if (matchListD.data.list.status === 2) {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
-            $('.marketName').css('background', '#ffcb9c');
+            $('.marketName').css('background', '');
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
-
-        const parentContainer = document.getElementById('marketRateDataTemp');
+        
+        const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
         if (childElements.length === 3) {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
@@ -709,28 +709,13 @@
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
         }
 
-        // Create a set to keep track of existing market IDs
-        const existingMarketIds = new Set();
-
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             
-            // Add the market ID to the set
-            existingMarketIds.add(v.market_id);
-
-            if (v.market_bet) {
+            if(v.market_bet){
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
                 });
-            }
-        });
-
-        // Remove bet types that are no longer present
-        $('#bettingTypeContainer div[id]').each(function () {
-            const marketId = this.id;
-            if (!existingMarketIds.has(marketId)) {
-                // Remove the bet type
-                $(this).remove();
             }
         });
     }
