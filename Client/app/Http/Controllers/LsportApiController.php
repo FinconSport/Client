@@ -1041,7 +1041,7 @@ class LsportApiController extends Controller {
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
                 ->where("market_id",$market_id)
                 ->where("base_line",$market_main_line)
-                ->orderBy("name_en","ASC")
+               // ->orderBy("name_en","ASC")    // TODO
                 ->list(1,true);
 
                 dd($return);
