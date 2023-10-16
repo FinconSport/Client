@@ -1191,10 +1191,10 @@
         }
         
         if (e.attr('bet_name') === 'X') {
-            console.log('cal ' + e.attr('bet_name'))
+            console.log('cal p ' + e.attr('bet_name'))
             $('#leftSlideOrder span[key="bet_type"]').text("{{ trans('game.index.tie') }}");
         } else {
-            console.log('cal ' + e.attr('bet_name'))
+            console.log('cal s ' + e.attr('bet_name'))
             $('#leftSlideOrder span[key="bet_type"]').html(bet_type);
         }
 
