@@ -704,15 +704,9 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-            
+
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
-                    const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-                    const marketRateElements = $(`.market-rate[market_bet_id="${marketBetRateId}"]`);
-                    if (marketRateElements.length > 1) {
-                        marketRateElements.eq(0).remove(); // <-- remove the duplicating append
-                    } 
-
                     createMarketRateContainer(v, k2, v2);
                 });
             }
@@ -730,7 +724,15 @@
                     console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
                 }
                 
-                console.log($(`.market-rate`).length)
+                console.log($(`.market-rate`).length )
+
+                const marketRateElements = $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`);
+                if (marketRateElements.length > 1) {
+                    marketRateElements.eq(0).remove(); // <-- remove the duplicating append
+                } 
+
+                const parentContainer = marketRateElements.parent;
+                const childElements = parentContainer.children;
             });
         });
         
