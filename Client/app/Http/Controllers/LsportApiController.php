@@ -1031,32 +1031,32 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
             // 取得market 
-            $return = LsportMarket::select('fixture_id', 'market_id','main_line','priority','name_en','name_tw','name_cn')
-            ->where("fixture_id",$fixture_id)
-            ->orderBy('market_id', 'ASC')
-            ->groupBy('fixture_id', 'market_id')
-            ->list(1,true);
+            $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
                 $this->ApiError('03');
             }
-            
+
             $market_data = $return;
             foreach ($market_data as $kk => $vv) {
                 $market_id = $vv['market_id'];
                 $market_main_line = $vv['main_line'];
                 $market_priority = $vv['priority'];
 
-                // set data
-                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_id'] = $market_id;
-                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['priority'] = $market_priority;
-                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['main_line'] = $market_main_line;
-
                 // 設定market name
                 $market_name = $vv['name_en'];
                 if (isset($vv['name_'.$agent_lang]) && ($vv['name_'.$agent_lang] != null) && ($vv['name_'.$agent_lang] != "")) { 
                     $market_name = $vv['name_'.$agent_lang];
                 } 
-                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_name'] = $market_name;
+
+                // set data
+                $tmp_market = array();
+                $tmp_market['market_id'] = $market_id;
+                $tmp_market['priority'] = $market_priority;
+                $tmp_market['main_line'] = $market_main_line;
+                $tmp_market['market_name'] = $market_name;
+                $tmp_market['list'] = array();
+                
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id] = $tmp_market;
 
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
