@@ -939,20 +939,20 @@ class LsportApiController extends Controller {
         // ES取出賽事
 
         $return = LsportFixture::query()
-        ->from('es_lsport_fixture as f')
-        ->whereIn('f.status',[1,2,9])
-        ->whereIn('f.sport_id', function($query) {
+        ->from('es_lsport_fixture')
+        ->whereIn('status',[1,2,9])
+        ->whereIn('sport_id', function($query) {
             $query->select('sport_id')
                   ->from('es_lsport_sport')
                   ->where('sport_id', 154914)
                   ->where('status', 1);
         })
-        ->whereIn('f.league_id', function($query) {
+        ->whereIn('league_id', function($query) {
             $query->select('league_id')
                   ->from('es_lsport_league')
                   ->where('status', 1);
         })
-        ->list(1,true);
+        ->list();
         dd($return);
 
         //////////////////////////////////////////
