@@ -936,6 +936,12 @@ class LsportApiController extends Controller {
         $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
 
         //////////////////////////////////////////
+        // ES取出賽事
+
+        $return = LsportFixture::whereIn("status",[1,2,9])->list();
+        dd($return);
+
+        //////////////////////////////////////////
         // DB取出賽事
 
         $data = DB::table('lsport_league as l')
