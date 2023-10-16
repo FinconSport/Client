@@ -724,11 +724,7 @@
                     console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
                 }
                 
-                if ($(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length === 3) {
-                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).parent().find('.bettingtype-container').css('grid-template-columns', '1fr');
-                } else {
-                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).parent().find('.bettingtype-container').css('grid-template-columns', '1fr 1fr');
-                }
+                console.log($(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length )
 
                 const marketRateElements = $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`);
                 if (marketRateElements.length > 1) {
