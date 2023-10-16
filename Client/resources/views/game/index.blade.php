@@ -703,7 +703,7 @@
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
-        if (childElements.length === 4) {
+        if (childElements.length == 4) {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
