@@ -900,6 +900,7 @@
                     break;
                 case 1: case 2: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
                     setMarketBetName(v2.market_bet_name_en);
+                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name_en);
                     break;
                 default:
                     break;
