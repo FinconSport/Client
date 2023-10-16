@@ -991,24 +991,24 @@ class LsportApiController extends Controller {
 
             // 取得聯賽
             $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_id'] = $league_id;
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_name'] = $league_name;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['league_id'] = $league_id;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['league_name'] = $league_name;
 
             // fixture columns
             $columns = ["fixture_id","start_time","status","last_update"];
             foreach ($columns as $kk => $vv) {
-                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
             }
 
             // home_team_name
             $team_name = LsportTeam::getName(['team_id' => $home_team_id, "api_lang" => $agent_lang]);
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_id'] = $home_team_id;
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_name'] = $team_name;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_id'] = $home_team_id;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_name'] = $team_name;
 
             // away_team_name
             $team_name = LsportTeam::getName(['team_id' => $away_team_id, "api_lang" => $agent_lang]);
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_id'] = $away_team_id;
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_name'] = $team_name;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_id'] = $away_team_id;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_name'] = $team_name;
 
             // 比分版資料
             $livescore_extradata = $v['livescore_extradata'];
@@ -1018,14 +1018,14 @@ class LsportApiController extends Controller {
             $parsed_periods = $this->getMatchPeriods($sport_id, $status, $scoreboard, $livescore_extradata);
             $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $status, $periods, $scoreboard);
 
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['periods'] = $parsed_periods;
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['scoreboard'] = $parsed_scoreboard;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['periods'] = $parsed_periods;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['scoreboard'] = $parsed_scoreboard;
 
             // market_bet_count , set default = 0 
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = 0;
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = 0;
 
             // order_by
-            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
+            $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
@@ -1040,9 +1040,9 @@ class LsportApiController extends Controller {
                 $market_priority = $vv['priority'];
 
                 // set data
-                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_id'] = $market_id;
-                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['priority'] = $market_priority;
-                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['main_line'] = $market_main_line;
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_id'] = $market_id;
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['priority'] = $market_priority;
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['main_line'] = $market_main_line;
 
                 // 設定market name
                 $market_name = $vv['name_en'];
@@ -1065,7 +1065,7 @@ class LsportApiController extends Controller {
                     $market_bet_id = $vvv['bet_id'];
 
                     // TODO
-                    $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count']++;
+                    $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count']++;
 
                     // 設定market_bet_name
                     $market_bet_name = $vvv['name_en'];
@@ -1082,7 +1082,7 @@ class LsportApiController extends Controller {
                     $tmp_data['status'] = $vvv['status'];
                     $tmp_data['last_update'] = $vvv['last_update'];
                     
-                    $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = $tmp_data;
+                    $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = $tmp_data;
                 }
 
             }
