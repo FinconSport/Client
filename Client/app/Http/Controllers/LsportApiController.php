@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Session;
 use DB;
-// use Exception;
+
 
 // LSport
 use App\Models\LsportFixture;
@@ -481,13 +481,13 @@ class LsportApiController extends Controller {
 
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
+        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
 
     	//---------------------------------
 
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
-        ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
+        ->where("start_time","<=", $after_tomorrow_es)   
         ->groupBy('sport_id', 'status')
         ->total();    
 
@@ -918,7 +918,6 @@ class LsportApiController extends Controller {
         // 取得代理的語系
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -932,14 +931,15 @@ class LsportApiController extends Controller {
 
         //取2天內賽事
         $today = time();
-        $after_tomorrow = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
+        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
-        // ES取出賽事
+        // ES取得賽事
 
         $return = LsportFixture::query()
         ->from('es_lsport_fixture')
+        ->where('start_time',"<=", $after_tomorrow_es)
         ->whereIn('status',[1,2,9])
         ->whereIn('sport_id', function($query) {
             $query->select('sport_id')
@@ -952,7 +952,43 @@ class LsportApiController extends Controller {
                   ->from('es_lsport_league')
                   ->where('status', 1);
         })
+        ->orderBy("start_time","ASC")
         ->list();
+        if ($return === false) {
+            $this->ApiError('02');
+        }
+
+        $fixture_data = $return;
+
+        dd($fixture_data);
+
+        //////////////////////////////////////////
+        
+        foreach ($fixture_data as $k => $v) {
+
+            $sport_id = $v['sport_id'];
+            $league_id = $v['league_id'];
+            $fixture_id = $v['fixture_id'];
+            
+            // 預設填入欄位
+            $columns = [];
+            
+            // 取得聯賽
+            // home_team_name
+            // away_team_name
+
+            // 比分版資料
+
+            // market_bet_count
+            // 取得market 
+               // 取得market_bet
+        }
+        
+        //////////////////////////////////////////
+        
+
+
+
         dd($return);
 
         //////////////////////////////////////////
