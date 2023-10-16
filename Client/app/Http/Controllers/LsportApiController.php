@@ -1048,6 +1048,7 @@ class LsportApiController extends Controller {
                 if (isset($vv['name_'.$agent_lang]) && ($vv['name_'.$agent_lang] != null) && ($vv['name_'.$agent_lang] != "")) { 
                     $market_name = $vv['name_'.$agent_lang];
                 } 
+                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_name'] = $market_name;
 
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
