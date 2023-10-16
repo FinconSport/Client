@@ -807,6 +807,8 @@
                                         stagePriorityArr = newStagePriorityArr
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                    } else {
+                                        card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
                                 }
 
