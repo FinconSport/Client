@@ -713,7 +713,7 @@
             createMarketContainer(k, v);
             $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
             if(v.rate){
-                Object.entries(v.rate).map(([k2, v2]) => {
+                Object.entries(v.market_bet).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
                 });
             }
@@ -730,12 +730,12 @@
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-            var sportId = matchListD.data.series.sport_id;
+            var sportId = sport;
             var priority = v.priority;
 
             marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
             
-            if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed
+            if (v.market_bet !== undefined && v.market_bet.length > 0) { //  If v.market_bet is empty or undefined, the append operation will not be performed
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
             }
         }
@@ -761,7 +761,7 @@
         marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
         marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
         marketBetRateTemp.attr('line', v2.line);
-        marketBetRateTemp.attr('league', matchListD.data.series.name);
+        marketBetRateTemp.attr('league', matchListD.data.list.league_name);
         marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
@@ -845,7 +845,7 @@
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.series.name);
+            earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
