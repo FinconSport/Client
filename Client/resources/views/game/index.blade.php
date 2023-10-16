@@ -927,7 +927,10 @@
             }
 
             // Append the new element to the correct container
-            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
+            if (marketBetRateTemp.length === 0) {
+                $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
+            }
+            
         }
 
         createdElementKeys.add(marketBetRateId);
