@@ -1008,6 +1008,15 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_name'] = $team_name;
 
             // 比分版資料
+            $livescore_extradata = $v['livescore_extradata'];
+            $periods = $v['periods'];
+            $scoreboard = $v['scoreboard'];
+
+            $parsed_periods = $this->getMatchPeriods($sport_id, $status, $scoreboard, $livescore_extradata);
+            $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $status, $periods, $scoreboard);
+
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['periods'] = $parsed_periods;
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['scoreboard'] = $parsed_scoreboard;
 
             // market_bet_count
             // 取得market 
