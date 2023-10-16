@@ -2427,6 +2427,8 @@ class LsportApiController extends Controller {
         $league_id = $fixture_data['league_id'];
         $fixture_id = $fixture_data['fixture_id'];
         $fixture_status = $fixture_data['status'];
+        $home_team_id = $fixture_data['home_id'];
+        $away_team_id = $fixture_data['away_id'];
         
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
