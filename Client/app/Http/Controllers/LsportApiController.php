@@ -982,12 +982,12 @@ class LsportApiController extends Controller {
             $status_type_name = $status_type[$status];
             
             // 取得球類
-            $sport_name = LsportSport::getName($sport_id,$agent_lang);
+            $sport_name = LsportSport::getName(['sport_id' => $sport_id, "api_lang" => $agent_lang]);
             $data[$status_type_name][$sport_id]['sport_id'] = $sport_id;
             $data[$status_type_name][$sport_id]['sport_name'] = $sport_name;
 
             // 取得聯賽
-            $league_name = LsportLeague::getName($league_id,$agent_lang);
+            $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_id'] = $league_id;
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_name'] = $league_name;
 
@@ -998,11 +998,12 @@ class LsportApiController extends Controller {
             }
 
             // home_team_name
-            $team_name = LsportTeam::getName($home_team_id,$agent_lang);
+            $team_name = LsportTeam::getName(['team_id' => $home_team_id, "api_lang" => $agent_lang]);
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_id'] = $home_team_id;
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_name'] = $team_name;
+
             // away_team_name
-            $team_name = LsportTeam::getName($away_team_id,$agent_lang);
+            $team_name = LsportTeam::getName(['team_id' => $away_team_id, "api_lang" => $agent_lang]);
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_id'] = $away_team_id;
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_name'] = $team_name;
 
