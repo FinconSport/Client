@@ -1019,6 +1019,8 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['scoreboard'] = $parsed_scoreboard;
 
             // market_bet_count
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = 0;
+
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
@@ -1030,6 +1032,11 @@ class LsportApiController extends Controller {
                 $market_id = $vv['market_id'];
                 $market_main_line = $vv['main_line'];
                 $market_priority = $vv['priority'];
+
+                // set data
+                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['market_id'] = $market_id;
+                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['priority'] = $market_priority;
+                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['main_line'] = $market_main_line;
 
                 // 設定market name
                 $market_name = $vv['name_en'];
@@ -1043,8 +1050,34 @@ class LsportApiController extends Controller {
                 ->where("base_line",$market_main_line)
                // ->orderBy("name_en","ASC")    // TODO
                 ->list(1,true);
+                if ($return === false) {
+                    $this->ApiError('04');
+                }
 
-                dd($return);
+                $market_bet_data = $return;
+                foreach ($market_bet_data as $kkk => $vvv) {
+                    $market_bet_id = $vvv['bet_id'];
+
+                    // TODO
+                    $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count']++;
+
+                    // 設定market_bet_name
+                    $market_bet_name = $vvv['name_en'];
+                    if (isset($vvv['name_'.$agent_lang]) && ($vvv['name_'.$agent_lang] != null) && ($vvv['name_'.$agent_lang] != "")) { 
+                        $market_bet_name = $vvv['name_'.$agent_lang];
+                    } 
+
+                    $tmp_data = array();
+                    $tmp_data['market_bet_id'] = $market_bet_id;
+                    $tmp_data['market_bet_name'] = $market_bet_name;
+                    $tmp_data['market_bet_name_en'] = $vvv['name_en'];
+                    $tmp_data['line'] = $vvv['line'];
+                    $tmp_data['price'] = $vvv['price'];
+                    $tmp_data['status'] = $vvv['status'];
+                    $tmp_data['last_update'] = $vvv['last_update'];
+                    
+                    $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = $tmp_data;
+                }
 
             }
 
