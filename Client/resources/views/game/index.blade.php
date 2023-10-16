@@ -697,6 +697,8 @@
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+        } else {
+            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
@@ -848,10 +850,8 @@
 
         if (createdElementKeys.has(marketBetRateId)) {
             updateExistingElement(marketBetRateId, v2);
-            console.log('existing');
         } else {
             createNewElement(v, k2, v2, marketBetRateId);
-            console.log('created');
         }
     }
 
@@ -943,7 +943,6 @@
         }
 
         createdElementKeys.add(marketBetRateId);
-        console.log('created')
     }
 
     // ------- game page scoreboard function-----------
