@@ -942,15 +942,15 @@ class LsportApiController extends Controller {
         ->from('es_lsport_fixture as f')
         ->whereIn('f.status',[1,2,9])
         ->whereIn('f.sport_id', function($query) {
-            $query->select('s.sport_id')
-                  ->from('es_lsport_sport as s')
-                  ->where('s.sport_id', 154914)
-                  ->where('s.status', 1);
+            $query->select('sport_id')
+                  ->from('es_lsport_sport')
+                  ->where('sport_id', 154914)
+                  ->where('status', 1);
         })
         ->whereIn('f.league_id', function($query) {
-            $query->select('l.league_id')
-                  ->from('es_lsport_league as l')
-                  ->where('l.status', 1);
+            $query->select('league_id')
+                  ->from('es_lsport_league')
+                  ->where('status', 1);
         })
         ->list(1,true);
         dd($return);
