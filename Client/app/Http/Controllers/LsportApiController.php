@@ -961,21 +961,51 @@ class LsportApiController extends Controller {
         $fixture_data = $return;
 
         dd($fixture_data);
-
         //////////////////////////////////////////
         
+        $status_type = ["","early","living"];
+
+        //////////////////////////////////////////
+        $data = array();
         foreach ($fixture_data as $k => $v) {
 
             $sport_id = $v['sport_id'];
             $league_id = $v['league_id'];
             $fixture_id = $v['fixture_id'];
+            $home_team_id = $v['home_id'];
+            $away_team_id = $v['away_id'];
+
+            // 區分living, early
+            $status = $v['status'];
+            if ($status == 9) {
+                $status = 2;
+            }
+            $status_type_name = $status_type[$status];
             
-            // 預設填入欄位
-            $columns = [];
-            
+            // 取得球類
+            $sport_name = LsportSport::getName($sport_id,$agent_lang);
+            $data[$status_type_name][$sport_id]['sport_id'] = $sport_id;
+            $data[$status_type_name][$sport_id]['sport_name'] = $sport_name;
+
             // 取得聯賽
+            $league_name = LsportLeague::getName($league_id,$agent_lang);
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_id'] = $league_id;
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['league_name'] = $league_name;
+
+            // fixture
+            $columns = ["fixture_id","start_time","status","last_update"];
+            foreach ($columns as $kk => $vv) {
+                $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
+            }
+
             // home_team_name
+            $team_name = LsportTeam::getName($home_team_id,$agent_lang);
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_id'] = $home_team_id;
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['home_team_name'] = $team_name;
             // away_team_name
+            $team_name = LsportTeam::getName($away_team_id,$agent_lang);
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_id'] = $away_team_id;
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['away_team_name'] = $team_name;
 
             // 比分版資料
 
@@ -985,11 +1015,9 @@ class LsportApiController extends Controller {
         }
         
         //////////////////////////////////////////
-        
+    
 
-
-
-        dd($return);
+        dd($data);
 
         //////////////////////////////////////////
         // DB取出賽事
