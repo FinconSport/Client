@@ -722,14 +722,15 @@
          const updatedMarketIds = new Set(); // Create a new set for updated data
         // Update data and add new market IDs
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            updatedMarketIds.add(v.market_id);
-
-            // Check if .bettingtype-container[id] exists with the same market_id
-            if (!$(`.bettingtype-container[id="${v.market_id}"]`).length) {
-                // .bettingtype-container with this market_id doesn't exist, you can perform some action here.
-                $(`.bettingtype-container[id="${v.market_id}"]`).remove();
-                console.log(`No .bettingtype-container found for market_id ${v.market_id}`);
-            }
+            Object.entries(v.market_bet).map(([k2, v2]) => {
+                updatedMarketIds.add(v2.market_bet_id);
+                // Check if .bettingtype-container[id] exists with the same market_id
+                if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
+                    // .bettingtype-container with this market_id doesn't exist, you can perform some action here.
+                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove();
+                    console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
+                }
+            });
         });
         
     }
