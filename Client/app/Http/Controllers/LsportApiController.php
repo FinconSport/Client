@@ -481,13 +481,13 @@ class LsportApiController extends Controller {
 
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = date('Y-m-d', $after_tomorrow_es);
+        $after_tomorrow_es = '"'.date('Y-m-d 00:00:00', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
 
     	//---------------------------------
 
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
         ->whereIn("status",[1,2,9])
-        ->where("start_time","<=", '"'.$after_tomorrow_es.'"')   // 這個「"」不能拿掉, es會報錯
+        ->where("start_time","<=", $after_tomorrow_es)   
         ->groupBy('sport_id', 'status')
         ->total();    
 
@@ -932,14 +932,15 @@ class LsportApiController extends Controller {
 
         //取2天內賽事
         $today = time();
-        $after_tomorrow = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow = date('Y-m-d 00:00:00', $after_tomorrow);
+        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
+        $after_tomorrow_es = '"'.date('Y-m-d 00:00:00', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
         // ES取出賽事
 
         $return = LsportFixture::query()
         ->from('es_lsport_fixture')
+        ->where('start_time',"<=", $after_tomorrow_es)
         ->whereIn('status',[1,2,9])
         ->whereIn('sport_id', function($query) {
             $query->select('sport_id')
