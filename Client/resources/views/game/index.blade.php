@@ -371,7 +371,34 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         createScoreBoard(matchListD.data)
-        renderViewV2()
+
+        if (matchListD.data.list.status === 1) {
+            $('.marketName').css('background-color', '#c4d4d4');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
+        } else if (matchListD.data.list.status === 2) {
+            $('.marketName').css('background-color', '#ffca9b');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+        }
+        
+        const parentContainer = document.getElementById('marketRateDataTemp'); 
+        const childElements = parentContainer.children;
+        if (childElements.length === 3) {
+            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
+            console.log("There are 3 child elements in the parent container.");
+        } else {
+            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
+            console.log("There are less than 3 child elements in the parent container.");
+        }
+
+        Object.entries(matchListD.data.list.market).map(([k, v]) => {
+            createMarketContainer(k, v);
+            
+            if(v.market_bet){
+                Object.entries(v.market_bet).map(([k2, v2]) => {
+                    createMarketRateContainer(v, k2, v2);
+                });
+            }
+        });
     }
     /* ===== VIEW LAYER ===== */
 
@@ -625,7 +652,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderViewV2()
+                    updateExistingElement(v, v2, marketBetRateId);
                     console.log("refresh")
                     
                 }, 5000);
@@ -691,33 +718,7 @@
 
     // ------- render function to game page market_data-----------
     function renderViewV2() {
-        if (matchListD.data.list.status === 1) {
-            $('.marketName').css('background-color', '#c4d4d4');
-            $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
-        } else if (matchListD.data.list.status === 2) {
-            $('.marketName').css('background-color', '#ffca9b');
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
-        }
         
-        const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = parentContainer.children;
-        if (childElements.length === 3) {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-            console.log("There are 3 child elements in the parent container.");
-        } else {
-            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-            console.log("There are less than 3 child elements in the parent container.");
-        }
-
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            createMarketContainer(k, v);
-            
-            if(v.market_bet){
-                Object.entries(v.market_bet).map(([k2, v2]) => {
-                    createMarketRateContainer(v, k2, v2);
-                });
-            }
-        });
     }
 
     // ------- game page create market data parent container-----------
@@ -818,56 +819,35 @@
     }
 
     function updateExistingElement(v, v2, marketBetRateId) {
-        marketBetRateTemp.find('.odd').text(v2.price)
-        if( betData > 0 ) {
-            switch (v.priority) {
-                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.line);
-                    break;
-                case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
-                    break;
-                case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-                    break;
-                case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
-                    if (v2.market_bet_name_en == 1) {
-                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
-                    } else if (v2.market_bet_name_en == 2) {
-                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
-                    } else if (v2.market_bet_name_en == 'X') {
-                        marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+        const marketBetRateTemp = $('#' + marketBetRateId); // Get the existing element
 
-        let fixture_id = matchListD.data.list.fixture_id;
-        let price = parseFloat(marketBetRateTemp.attr('bet_rate'));
-        if (matchListD.data.list.status == 1) {
-            if (price > parseFloat(v2.price)) {
-                marketBetRateTemp.removeClass('lowerOdd');
-                marketBetRateTemp.find('.fa-caret-down').hide();
+        const price = parseFloat(marketBetRateTemp.attr('bet_rate'));
+        const newPrice = parseFloat(v2.price);
 
-                marketBetRateTemp.addClass('raiseOdd');
-                marketBetRateTemp.find('.fa-caret-up').show();
-
-            } else if (price < parseFloat(v2.price)) {
-                marketBetRateTemp.removeClass('raiseOdd');
-                marketBetRateTemp.find('.fa-caret-up').hide();
-
-                marketBetRateTemp.addClass('lowerOdd');
-                marketBetRateTemp.find('.fa-caret-down').hide();
-            }
-        } else {
-            marketBetRateTemp.removeClass('raiseOdd');
+        if (price > newPrice) {
             marketBetRateTemp.removeClass('lowerOdd');
+            marketBetRateTemp.find('.fa-caret-down').hide();
+
+            marketBetRateTemp.addClass('raiseOdd');
+            marketBetRateTemp.find('.fa-caret-up').show();
+        } else if (price < newPrice) {
+            marketBetRateTemp.removeClass('raiseOdd');
+            marketBetRateTemp.find('.fa-caret-up').hide();
+
+            marketBetRateTemp.addClass('lowerOdd');
+            marketBetRateTemp.find('.fa-caret-down').show();
+        } else {
+            // Prices are equal, no need to show up or down arrows
+            marketBetRateTemp.removeClass('raiseOdd lowerOdd');
             marketBetRateTemp.find('.fa-caret-up').hide();
             marketBetRateTemp.find('.fa-caret-down').hide();
         }
+
+        // Update the price
+        marketBetRateTemp.attr('bet_rate', newPrice);
+        marketBetRateTemp.find('.odd').text(newPrice);
     }
+
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
