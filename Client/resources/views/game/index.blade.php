@@ -703,14 +703,11 @@
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
-        const calculatedChildLength = childElements.length - 1;//<-- minus 1 is for the div that has display none template
-        console.log(calculatedChildLength);
-
-        // if (calculatedChildLength === 3) { 
-        //     $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-        // } else {
-        //     $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-        // }
+        if (childElements.length === 4) {
+            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
+        } else {
+            $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
+        }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
