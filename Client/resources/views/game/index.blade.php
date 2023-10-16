@@ -1013,7 +1013,7 @@
                 const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][v3.periods.period]}</div></th>`);
+                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 for (let i = 0; i < gameTitle.length; i++) {
