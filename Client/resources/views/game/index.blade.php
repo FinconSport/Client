@@ -1014,7 +1014,7 @@
                 const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
                 // Thead data game title
-                let stageStr = null
+                let stageStr = ''
                 if( sport === 154914 ) {
                     data.list.periods.Turn === '1' ? stageStr = langTrans2.scoreBoard.lowerStage : stageStr = langTrans2.scoreBoard.upperStage
                 }
@@ -1065,8 +1065,9 @@
 
                 for (let i = 0; i < gameTitle.length; i++) {
                     const scoreValue = scorehome[i];
-                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue || '-');
+                    const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                     BasketBallFootballBodyTemp_home.append(thHome);
+                    console.log(gameTitle, scoreValue)
                 }
 
                 // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
