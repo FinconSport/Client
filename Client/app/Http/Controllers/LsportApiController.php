@@ -938,8 +938,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // ES取出賽事
 
-        $return = LsportFixture::query()
-        ->from('lsport_fixture as f')
+        $return = LsportFixture::from('lsport_fixture as f')
         ->whereIn('f.sport_id', function($query) {
             $query->select('sport_id')
                   ->from('lsport_sport as s')
