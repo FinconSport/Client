@@ -808,6 +808,13 @@
 
         // Update the price and other attributes
         marketBetRateTemp.attr('bet_rate', newPrice);
+        marketBetRateTemp.attr('market_id', v.market_id);
+        marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
+        marketBetRateTemp.attr('bet_type', v.market_name);
+        marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
+        marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
+        marketBetRateTemp.attr('line', v2.line);
+        
         marketBetRateTemp.find('.odd').text(newPrice);
     }
 
