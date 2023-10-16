@@ -612,6 +612,7 @@
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
             if( isReadyCommon ) {
+                sport = parseInt(searchData.sport_id)
                 callMatchListData.sport_id = searchData.sport_id // default sport
 				callMatchListData.fixture_id = searchData.fixture_id // default fixture
                 clearInterval(isReadySportInt)
@@ -977,8 +978,8 @@
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-            var scorehome = [data.list?.scoreboard[1]];
-            var scoreaway = [data.list?.scoreboard[2]];
+            var scorehome = data.list?.scoreboard[1]
+            var scoreaway = data.list?.scoreboard[2]
             const scoresLengths = data.list.teams.map((team) => team.scores.length);
             const homeTeam = data.list.teams.find(item => item.index === 1)
             const awayTeam = data.list.teams.find(item => item.index === 2)
@@ -1016,8 +1017,31 @@
                 const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
+                let baseballShowStage = []
                 for (let i = 0; i < gameTitle.length; i++) {
-                    BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                    if( sport === 154914 ) {
+                        const scbLen = data.list?.scoreboard[1].length - 1;
+                        switch (true) {
+                            case scbLen < 6:
+                                baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
+                            break;
+                            case scbLen >= 6 && scbLen <= 9:
+                                baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
+                            break;
+                            case scbLen > 9:
+                                baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
+                            break;
+                            default:
+                            break;
+                        }
+
+                        if(baseballShowStage.indexOf(i) !== -1) {
+                            BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                        }
+                    } else {
+                        BasketBallFootballHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                    }
+                    
                 }
 
                 // const totalScoreHead = $(`<th style="width:25%;text-align:center;"><div class="setHeightDiv">{{ trans('game.scoreBoard.totalScore') }}</div></th>`);
