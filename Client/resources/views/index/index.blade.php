@@ -380,7 +380,7 @@
         }
 
         // 單節選項 只有 滾球 籃球有
-        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
         let time = card.find('.timer');
         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -462,7 +462,11 @@
                 // bet area
                 if( v3.periods ) {
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-                    if(stagePriorityArr) createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
+                    if(stagePriorityArr) {
+                        createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
+                    } else {
+                        card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
+                    }
                 }
 
             }
