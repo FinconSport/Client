@@ -693,22 +693,17 @@
     function renderViewV2() {
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
-            $('#moneyInput').css('background-color', '#c4d4d4');
-            $('#quickContainer .quick').css('background-color', '#c4d4d4');
             $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
-            $('#moneyInput').css('background-color', '#ffca9b');
-            $('#quickContainer .quick').css('background-color', '#ffca9b');
             $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
         const childElements = parentContainer.children;
-        if (childElements.length === 3 || childElements.length === 1) {
-            // If there are 3 child elements
+        if (childElements.length === 3) {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-            console.log("There are 3 or more child elements in the parent container.");
+            console.log("There are 3 child elements in the parent container.");
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
             console.log("There are less than 3 child elements in the parent container.");
@@ -1075,6 +1070,7 @@
         $('.leftSlideOrderCard').removeClass('lowerOdd')
         $('.leftSlideOrderCard .fa-caret-down').remove()
 
+        e.addClass('clickedBet'); 
 
         let fixture_id = e.attr('fixture_id')
         let market_id = e.attr('market_id')
@@ -1168,6 +1164,8 @@
         $('#submitOrder').html(langTrans.bet_area.bet)
         $('#submitOrder').removeClass('disabled')
         $('#submitOrder').removeAttr('disabled')
+        
+        $('.market-rate').removeClass('clickedBet');
     }
 
     // 金額快速鍵

@@ -157,3 +157,11 @@ div#bettingTypeContainer {
 .textOverFlowCon::-webkit-scrollbar-thumb {
     background: #888;
   }
+
+.market-rate.clickedBet {
+    background-color: #415b5a;
+}
+
+.market-rate.clickedBet .market_bet_name{
+    color: #ffffff;
+}
