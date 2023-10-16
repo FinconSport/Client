@@ -973,6 +973,7 @@ class LsportApiController extends Controller {
             $fixture_id = $v['fixture_id'];
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
+            $start_time = $v['start_time'];
 
             // 區分living, early
             $status = $v['status'];
@@ -1021,6 +1022,9 @@ class LsportApiController extends Controller {
             // market_bet_count
             $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = 0;
 
+            // order_by
+            $data[$status_type_name][$sport_id][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
+
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
@@ -1047,17 +1051,11 @@ class LsportApiController extends Controller {
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
                 ->where("market_id",$market_id)
-                ->where("base_line",'"'.$market_main_line.'"')
+                ->where("base_line",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
                 ->list();
                 if ($return === false) {
 
-                    LsportMarketBet::where('fixture_id',$fixture_id)
-                    ->where("market_id",$market_id)
-                    ->where("base_line",'"'.$market_main_line.'"')
-                    ->orderBy("name_en","ASC")
-                    ->list(1,true);
-                    
                     $this->ApiError('04');
                 }
 
