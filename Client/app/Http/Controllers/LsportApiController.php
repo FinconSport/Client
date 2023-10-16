@@ -950,7 +950,7 @@ class LsportApiController extends Controller {
                   ->from('es_lsport_league as l')
                   ->where('l.status', 1);
         })
-        ->list();
+        ->list(1,true);
         dd($return);
 
         //////////////////////////////////////////
