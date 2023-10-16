@@ -700,16 +700,7 @@
         } else {
             $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
-
-        const parentDiv = document.getElementById('marketRateDataTemp');
-        const childDivs = parentDiv.querySelectorAll('div');
-        if (childDivs.length === 4) {
-            $('.marketBetRateContainer').css('grid-template-columns', '1fr');
-        } else {
-            $('.marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-        }
         
-
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
 

@@ -79,6 +79,10 @@ p.market_name {
     margin-top: -1px;
 }
 
+.bettingtype-container .marketBetRateContainer > .market-rate:last-of-type {
+    grid-column: 1 / -1;
+  }
+
 .bettingtype-container .market-rate {
     padding: 1rem;
     border-right: 1px solid #415b5a;
