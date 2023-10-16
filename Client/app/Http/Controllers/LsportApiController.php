@@ -2478,10 +2478,19 @@ class LsportApiController extends Controller {
         }
 
         $market_data = $return;
+        $before_market_id = 0;
         foreach ($market_data as $kk => $vv) {
             $market_id = $vv['market_id'];
             $market_main_line = $vv['main_line'];
             $market_priority = $vv['priority'];
+
+            
+            // 暴力處理 重複數據問題
+            if ($before_market_id != $market_id) {
+                $before_market_id = $market_id;
+            } else {
+                continue;
+            }
 
             $tmp_market_data = array();
             // set data
