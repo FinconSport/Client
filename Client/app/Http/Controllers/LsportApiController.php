@@ -1088,9 +1088,7 @@ class LsportApiController extends Controller {
                     
                     $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][] = $tmp_data;
                 }
-
             }
-
         }
         
         //////////////////////////////////////////
@@ -2403,7 +2401,7 @@ class LsportApiController extends Controller {
         // 取得代理的語系
         $agent_lang = $this->getAgentLang($player_id);
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
 
         $return = LsportFixture::where("sport_id",$sport_id)
         ->where("fixture_id",$fixture_id)
@@ -2420,6 +2418,10 @@ class LsportApiController extends Controller {
         })
         ->fetch();
 
+        dd($return);
+
+
+        /////////////////////////////////////////////////////////////////
 
         //依照 sport_id, fixture_id 取出單場"賽事+聯賽+球種+主隊+客隊"資料
         $data = DB::table('lsport_league as l')
