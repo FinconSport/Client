@@ -709,13 +709,30 @@
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
         }
 
+        // Create a set to keep track of existing market IDs
+        const existingMarketIds = new Set();
+
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-            
+
+            // Add the market ID to the set
+            existingMarketIds.add(v.market_id);
+
             if(v.market_bet){
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     createMarketRateContainer(v, k2, v2);
                 });
+            }
+        });
+
+        // Remove bet types that are no longer present
+        $('#bettingTypeContainer div[id]').each(function () {
+            const marketId = this.id;
+            
+            if (!existingMarketIds.has(marketId)) {
+                // Remove the bet type
+                // $(this).remove();
+                console.log('this' + this.id + 'no longer present');
             }
         });
     }
