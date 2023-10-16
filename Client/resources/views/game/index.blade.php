@@ -705,10 +705,8 @@
         const childElements = parentContainer.children;
         if (childElements.length === 3) {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
-            console.log("There are 3 child elements in the parent container.");
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
-            console.log("There are less than 3 child elements in the parent container.");
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
