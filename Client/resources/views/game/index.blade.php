@@ -755,7 +755,7 @@
         marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
-        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_rate', v2.price);
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
         marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
