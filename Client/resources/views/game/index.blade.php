@@ -611,7 +611,7 @@
 
         // detest is sport List is ready
         isReadySportInt = setInterval(() => {
-            if( isReadyCommon ) {a
+            if( isReadyCommon ) {
                 sport = parseInt(searchData.sport_id)
                 callMatchListData.sport_id = searchData.sport_id // default sport
 				callMatchListData.fixture_id = searchData.fixture_id // default fixture
