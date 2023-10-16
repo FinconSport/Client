@@ -1067,7 +1067,7 @@
                     const scoreValue = scorehome[i];
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                     BasketBallFootballBodyTemp_home.append(thHome);
-                    console.log(gameTitle, scoreValue)
+                    console.log(gameTitle[i], scoreValue)
                 }
 
                 // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
@@ -1087,7 +1087,7 @@
 
                 for (let i = 0; i < gameTitle.length; i++) {
                     const scoreValue = scoreaway[i];
-                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue || '-');
+                    const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                     BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
