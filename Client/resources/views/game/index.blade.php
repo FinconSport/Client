@@ -972,8 +972,6 @@
 
     $('#mask, #cancelOrder').click(function() {
         closeCal();
-        e.addClass('clickedBet'); 
-        $('.market-rate').removeClass('clickedBet');
     })
 
     // 註冊賽事id
@@ -1166,6 +1164,8 @@
         $('#submitOrder').html(langTrans.bet_area.bet)
         $('#submitOrder').removeClass('disabled')
         $('#submitOrder').removeAttr('disabled')
+        
+        $('.market-rate').removeClass('clickedBet');
     }
 
     // 金額快速鍵
