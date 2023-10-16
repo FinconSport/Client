@@ -1124,10 +1124,10 @@
         }
         
         console.log('cal' + bet_name)
-        if (bet_name === 'X') {
+        if (e.attr('bet_name') === 'X') {
             $('#leftSlideOrder span[key="bet_type"]').text("{{ trans('game.index.tie') }}");
         } else {
-            $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
+            $('#leftSlideOrder span[key="bet_type"]').html(bet_type);
         }
 
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
