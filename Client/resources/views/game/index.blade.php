@@ -702,11 +702,10 @@
         }
         
         const parentContainer = document.getElementById('marketRateDataTemp'); 
-        const childElements = Array.from(parentContainer.children).filter(child => {
-            return !child.hasAttribute('template') && child.style.display !== 'none' && child.style.visibility !== 'hidden';
-        });
+        const childElements = parentContainer.children;
+        const calculatedChildLength = childElements.length - 1;//<-- minus 1 is for the div that has display none template
 
-        if (childElements.length === 3) { 
+        if (calculatedChildLength === 3) { 
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr');
         } else {
             $('.bettingtype-container .marketBetRateContainer').css('grid-template-columns', '1fr 1fr');
