@@ -1020,6 +1020,15 @@ class LsportApiController extends Controller {
 
             // market_bet_count
             // 取得market 
+            $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
+            if ($return === false) {
+                $this->ApiError('03');
+            }
+
+            $market_data = $return;
+
+            dd($market_data);
+
                // 取得market_bet
         }
         
