@@ -741,8 +741,8 @@
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
 
         const marketBetRateParent = marketBetRateTemp.parent();
-        const parentClassName = marketBetRateParent.attr('class'); 
-        console.log("parent" + parentClassName);
+        const parentClassName = marketBetRateParent.attr('id'); 
+        console.log("parent " + parentClassName);
         // const marketBetRateChildren = marketBetRateParent.children();
 
         // if (marketBetRateChildren.length === 3 || marketBetRateChildren.length === 1) {
