@@ -2504,9 +2504,6 @@ class LsportApiController extends Controller {
             foreach ($market_bet_data as $kkk => $vvv) {
                 $market_bet_id = $vvv['bet_id'];
 
-                // TODO
-                $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count']++;
-
                 // 設定market_bet_name
                 $market_bet_name = $vvv['name_en'];
                 if (isset($vvv['name_'.$agent_lang]) && ($vvv['name_'.$agent_lang] != null) && ($vvv['name_'.$agent_lang] != "")) { 
