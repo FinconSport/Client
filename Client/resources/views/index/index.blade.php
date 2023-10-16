@@ -481,8 +481,9 @@
     function createBetArea(priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
-            let betData = Object.values(v3.list).find(m => m.priority === i)
+            let betData = null
             bet_div.attr('priority', i)
+            if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
             if( betData && Object.keys(betData.list).length > 0 ) {
                 // 是否有讓方
                 let isHcapTeam = null
@@ -830,8 +831,9 @@
                             console.log(priorityArr)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $(`#${k3} div[priority=${i}]`)
-                                let betData = Object.values(v3.list).find(m => m.priority === i)
+                                let betData = null
                                 let item = null
+                                if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
                                 if( betData && Object.keys(betData.list).length > 0 ) {
                                     // 是否有讓方
                                     let isHcapTeam = null
