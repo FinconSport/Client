@@ -32,7 +32,6 @@ return [
 		"next_page" => "Next Page",  // "下一頁",
 		"last_page" => "Last Page",  //  "最後一頁",
 		"expand" => "Expand",  // "展開",
-		"close" => "Close",  //  "收起",
 		"sport" => "Sports betting", // 体育博彩
     	"morder" => "Cross match betting", //交叉比赛投注
 		"select_sport" => "Please Select Sports",  //  "請選擇體育"
@@ -48,8 +47,10 @@ return [
 		"total_result_amount" => "Total result amount",  //  "總計派獎",
 		"total_win_amount" => "Total win amount",  //  "總計輸贏",
 		"home" => "Home", // "主",
-		"waiting" => "Waiting", // "等待開獎",
-		"cancel" => "Canceled",
+		"cancel" => "Cancel",
+		"waitToCreate" => "Pending",
+		"waitToOpen" => "Awaiting Draw",
+		"waitToPrize" => "Awaiting Payout",
 	],  //  
 	"result_precent" => [
 		"0" => "Lose", // "輸",
