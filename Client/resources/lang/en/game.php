@@ -38,6 +38,7 @@ return [
         "dateTimezone" => "en-US",
         "all" => "All",
         "hot" => "Hot",
+        "tie" => "Tie",
     ],
     "game_priority" => [
         "154914" => [// Baseball

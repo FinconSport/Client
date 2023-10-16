@@ -702,8 +702,10 @@
         
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 14.5rem)');
         } else if (matchListD.data.list.status === 2) {
             $('.marketName').css('background-color', '#ffca9b');
+            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
@@ -732,129 +734,6 @@
 
             marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
             
-            // switch (priority) {
-            //     case 1 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.1') }}`);
-            //         break;
-            //     case 3 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.3') }}`);
-            //         break;
-            //     case 5 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.5') }}`);
-            //         break;
-            //     case 7 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.7') }}`);
-            //         break;
-            //     case 2 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.2') }}`);
-            //         break;
-            //     case 4 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.4') }}`);
-            //         break;
-            //     case 6 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.6') }}`);
-            //         break;
-            //     case 8 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.154914.8') }}`);
-            //         break;
-            //     case 9 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>`);
-            //         break;
-            //     case 101 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-            //         break;
-            //     case 102 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.102') }}`);
-            //         break;
-            //     case 103 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.103') }}`);
-            //         break;
-            //     case 104 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.104') }}`);
-            //         break;
-            //     case 105 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.105') }}`);
-            //         break;
-            //     case 106 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-            //         break;
-            //     case 107 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-            //         break;
-            //     case 108 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-            //         break;
-            //     case 109 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-            //         break;
-            //     case 110 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.106') }}`);
-            //         break;
-            //     case 111 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.101') }}`);
-            //         break;
-            //     case 112 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.112') }}`);
-            //         break;
-            //     case 113 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.113') }}`);
-            //         break;
-            //     case 114 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.114') }}`);
-            //         break;
-            //     case 115 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.115') }}`);
-            //         break;
-            //     case 116 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.116') }}`);
-            //         break;
-            //     case 117 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.117') }}`);
-            //         break;
-            //     case 118 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.118') }}`);
-            //         break;
-            //     case 119 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.119') }}`);
-            //         break;
-            //     case 120 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.120') }}`);
-            //         break;
-            //     case 121 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.121') }}`);
-            //         break;
-            //     case 122 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.122') }}`);
-            //         break;
-            //     case 123 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.123') }}`);
-            //         break;
-            //     case 124 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.48242.124') }}`);
-            //         break;
-            //     case 201 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.201') }}`);
-            //         break;
-            //     case 202 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.202') }}`);
-            //         break;
-            //     case 203 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.203') }}`);
-            //         break;
-            //     case 204 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.204') }}`);
-            //         break;
-            //     case 205 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.205') }}`);
-            //         break;
-            //     case 206 :
-            //         marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> {{ trans('game.game_priority.6046.206') }}`);
-            //         break;
-            //     default:
-            //         marketNameElement.html('<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i>' + v.market_name);
-            //         break;
-            // }
-
             if (v.rate !== undefined && v.rate.length > 0) { //  If v.rate is empty or undefined, the append operation will not be performed
                 $('#bettingTypeContainer').append(bettingTypeContainerTemp);
             }
@@ -876,7 +755,7 @@
         marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
-        marketBetRateTemp.attr('bet_rate', v2.main_line);
+        marketBetRateTemp.attr('bet_rate', v2.price);
         marketBetRateTemp.attr('bet_type', v.market_name);
         marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
         marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
@@ -892,26 +771,24 @@
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateTemp.find('.market_bet_name').text(v2.line);
                     break;
-                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + '  ' + v2.line);
+                case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
                     break;
-                case 7: case 107: case 112: case 116: case 120: case 124:
+                case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                     break;
-                case 1: case 2: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
-                    switch (v2.market_bet_name_en) {
-                        case 1:
-                            marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
-                            break;
-                        case 2:
-                            marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
-                            break;
+                case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+                    if (v2.market_bet_name_en == 1) {
+                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
+                    } else if (v2.market_bet_name_en == 2) {
+                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
+                    } else if (v2.market_bet_name_en == 'X') {
+                        marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                     }
                     break;
                 default:
                     break;
             }
-
 
             if (v2.status === 1) {
                 marketBetRateTemp.find('.fa-lock').hide();
@@ -968,7 +845,7 @@
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.series.name);
-            earlyContainerTemp.find('.start_time').text(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
@@ -1418,7 +1295,7 @@
         const formattedDate = `${month} ${day}${suffix}`;
         const formattedTime = `${hour}:${minute}`;
         
-        return `${formattedDate}\n${formattedTime}`;
+        return `${formattedDate}<br>${formattedTime}`;
     };
 
     const getDaySuffix = (day) => {
