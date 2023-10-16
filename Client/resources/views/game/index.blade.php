@@ -762,9 +762,14 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
 
-        if (createdElementKeys.has(marketBetRateId)) {
-            updateExistingElement(v, k2, v2, marketBetRateId);
+        // Check if the element with the same ID already exists
+        const marketBetRateTemp = $('#' + marketBetRateId);
+
+        if (marketBetRateTemp.length) {
+            console.log(marketBetRateTemp + " Element already exists, update it");
+            updateExistingElement(v, k2, v2, marketBetRateId, marketBetRateTemp);
         } else {
+            console.log(marketBetRateTemp + " Element doesn't exist, create a new one");
             createNewElement(v, k2, v2, marketBetRateId);
         }
     }
