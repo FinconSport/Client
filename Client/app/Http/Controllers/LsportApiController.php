@@ -2518,6 +2518,7 @@ class LsportApiController extends Controller {
                 $tmp_data['price'] = $vvv['price'];
                 $tmp_data['status'] = $vvv['status'];
                 $tmp_data['last_update'] = $vvv['last_update'];
+                $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
                 $data['list']['market']['market_bet'][] = $tmp_data;
             }
