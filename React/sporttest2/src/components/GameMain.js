@@ -110,7 +110,6 @@ class GameMain extends React.Component {
     getBetData = (market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, status) => {
         if( status !== 1 ) return;
 
-        console.log(this.props.data.list)
         this.props.getBetDataCallBack(
             {
                 sport_id: window.sport, 
@@ -127,16 +126,13 @@ class GameMain extends React.Component {
         )
     }
 
-    componentDidMount() {
-        console.log('componentDidMount')
-    }
+    
 
     render() {
         const sport = parseInt(window.sport)
         const data = this.props.data.list
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
 
-        console.log(data)
         return (
             <div style={{ height: '72%' }}>
                 <div className="row m-0">
@@ -202,9 +198,7 @@ class GameMain extends React.Component {
                                         return null;
                                     })}
                                 </GameBetBody>
-                                {
-                                    console.log('end')
-                                }
+                                
                             </>
                             :
                             langText.GameMain.analyze

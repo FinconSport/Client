@@ -181,7 +181,6 @@ class Game extends React.Component {
 		const data = this.state?.game_res
 		const betData = this.state.betData
 
-		console.log(data)
 
 		return (
 			data !== undefined ?

@@ -97,6 +97,7 @@ const SliderRightArrow = {
 
 const TeamName = {
     lineHeight: '2rem',
+    paddingLeft: 0
 }
 
 const CardShow = {
@@ -203,19 +204,19 @@ class MatchContentCard extends React.Component {
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
         if ( v !== undefined ){
-
-            console.log(v)
-
-            
             let hcapTeam = null
-            // if( v.list && Object.keys(v.list).length > 0 ) {
-            //     let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[0]?.line
-            //     let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list[1]?.line
+            if( v?.list && Object.keys(v.list).length > 0 ) {
+                let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list
+                let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list
+                if( h && a) {
+                    h = h[0]?.line
+                    a = a[1]?.line
 
-            //     if( h !== a ) {
-            //         hcapTeam = h < 0 ? 1 : 2
-            //     }
-            // }
+                    if( h !== a ) {
+                        hcapTeam = h < 0 ? 1 : 2
+                    }
+                }
+            }
 
             return (
                 <div style={{ ...MatchCard, ...(this.props.isOpen ? CardShow : CardHide) }} cardid={v.fixture_id}>
@@ -252,9 +253,9 @@ class MatchContentCard extends React.Component {
                                         </div>
                                         <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} >
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 p-0 teamSpan' style={TeamName}>
+                                                <div className='col-10 teamSpan' style={TeamName}>
                                                     <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false} style={hcapTeam === 1 ? {color: 'red'} : null}>
+                                                        <Marquee className='matchCardMarquee' speed={20} gradient={false} style={hcapTeam === 1 ? {color: 'red'} : null}>
                                                             { v.home_team_name }&emsp;&emsp;&emsp;
                                                         </Marquee>
                                                     </div>
@@ -267,9 +268,9 @@ class MatchContentCard extends React.Component {
                                                 </div>
                                             </div>
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 p-0 teamSpan' style={TeamName}>
+                                                <div className='col-10 teamSpan' style={TeamName}>
                                                     <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee mt-1' speed={20} gradient={false} style={hcapTeam === 2 ? {color: 'red'} : null}>
+                                                        <Marquee className='matchCardMarquee' speed={20} gradient={false} style={hcapTeam === 2 ? {color: 'red'} : null}>
                                                             { v.away_team_name }&emsp;&emsp;&emsp;
                                                         </Marquee>
                                                     </div>
