@@ -104,7 +104,6 @@
             <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
                 <div class="">
                     <span class="market_bet_name"></span>
-                    <span class="market_line"></span>
                 </div>
                 <div>
                     <span class="market_price odd" style="color:#c79e42;"></span>
@@ -912,8 +911,6 @@
                 marketBetRateTemp.removeAttr('onclick');
                 marketBetRateTemp.find('.market_price').hide();
             }
-
-            marketBetRateTemp.find('.market_line').text(v2.line);
 
             let fixture_id = matchListD.data.list.fixture_id;
             let currentPrice = parseFloat(marketBetRateTemp.attr('bet_rate'));
