@@ -66,6 +66,11 @@
     border-bottom: 2px solid #415b5a;
 }
 
+p.market_name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
 .bettingtype-container .marketBetRateContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
