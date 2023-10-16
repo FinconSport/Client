@@ -1195,6 +1195,11 @@
         $('#leftSlideOrder div[key="slideOrderCard"]').attr('market_id', market_id)
         $('#leftSlideOrder div[key="slideOrderCard"]').attr('market_bet_id', market_bet_id)
 
+        // 可以打開表示沒有鎖頭 -> 復原
+        $('#submitOrder').html(langTrans.bet_area.bet)
+        $('#submitOrder').removeClass('disabled')
+        $('#submitOrder').removeAttr('disabled')
+
         $('#leftSlideOrder').show("slide", {
             direction: "left"
         }, 500);
