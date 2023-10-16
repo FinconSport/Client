@@ -15,7 +15,7 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            game_api: 'https://sportc.asgame.net/api/v2/game_index?token=' + window.token+ '&player=' + window.player+ '&sport_id=' + window.sport + '&fixture_id='+Cookies.get('GameMatchId', { path: '/' }),
+            game_api: 'https://sportc.asgame.net/api/v2/game_index2?token=' + window.token+ '&player=' + window.player+ '&sport_id=' + window.sport + '&fixture_id='+Cookies.get('GameMatchId', { path: '/' }),
 			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
 			betData: null,
 			isOpenCal: false,
@@ -180,6 +180,8 @@ class Game extends React.Component {
 	render() {
 		const data = this.state?.game_res
 		const betData = this.state.betData
+
+		console.log(data)
 
 		return (
 			data !== undefined ?

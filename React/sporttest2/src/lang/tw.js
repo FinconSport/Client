@@ -208,6 +208,7 @@ const twTranslation = {
     stage: '局',
     upperStage: '上',
     lowerStage: '下',
+    readyToStart: '即將開賽',
     gameTitle: {
       154914: [[1, 3, 5],[2, 4, 6]],
       48242: [[101, 103, 105],[102, 104, 106]],

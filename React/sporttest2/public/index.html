@@ -56,12 +56,6 @@
 		var token = {{ $token }};
 		var lang = @json(session('player.lang'));
 
-		const wsUrl = {
-			1: 'wss://soccer.asgame.net/ws',
-			2: 'wss://basketball.asgame.net/ws',
-			3: 'wss://baseball.asgame.net/ws'
-		}
-		
 		// 菜單與體育彩種預設
 		var menu = null
 		var sport = null

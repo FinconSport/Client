@@ -13,10 +13,12 @@ import GameBg from '../image/gameBg.jpg'
 import ScoreBoardBg from '../image/gameStatus.jpg'
 import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.css';
+import $ from 'jquery';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import "swiper/css/pagination";
 import '../css/GameTopSlider.css'
+
 
 const teamIconStyle = {
     width: '2.5rem',
@@ -110,6 +112,36 @@ class GameTopSlider extends React.Component {
 		})
 	}
 
+    // 文字太長變成跑馬燈
+    textOverFlow = () => {
+        $(`p[target="league"]`).each(function(){
+            if(this.clientHeight > 40){
+                $(this).wrap('<marquee scrollamount=2>')
+            }
+        })
+
+        $(`p[target="teamName"]`).each(function(){
+            if(this.clientHeight > 24){
+                $(this).wrap('<marquee scrollamount=2>')
+            }
+        })
+
+        $(`p[target="scbTeam"]`).each(function(){
+            if(this.clientHeight > 19){
+                $(this).wrap('<marquee scrollamount=2>')
+            }
+        })
+
+
+
+        
+        
+    }
+
+    componentDidMount() {
+        this.textOverFlow()
+    } 
+
     refreshGame = () => {
         this.props.refreshGame()
     }
@@ -133,10 +165,10 @@ class GameTopSlider extends React.Component {
 
         
         if( data ) {
-            
+            console.log(data)
 
             return (
-            <div style={{ height: '23%' }}>
+            <div style={{ height: '28%' }}>
                 <Swiper navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
                     <SwiperSlide style={{ backgroundImage: `url(${GameBg})`, backgroundSize: '100% 100%'}}>
                         <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
@@ -147,14 +179,7 @@ class GameTopSlider extends React.Component {
                             </div>
                             <div className='col-8 row m-0'>
                                 <div className="col-11 p-0">
-                                    {
-                                        data.series.name.length > 8 ?
-                                        <Marquee speed={20} gradient={false}>
-                                            <p className="m-0">{data.series.name}</p>
-                                        </Marquee>
-                                        :
-                                        data.series.name
-                                    }
+                                    <p target='league'>{data.list.league_name}</p>
                                 </div>
                             </div>
                             <div className={this.props.isGameRefreshing === true ? 'rotateRefresh col-2' : 'col-2'} onClick={this.refreshGame}>
@@ -163,7 +188,7 @@ class GameTopSlider extends React.Component {
                         </MainInfoSlider>
                         <MainInfoSlider className='row' style={{ margin:'1rem 0.5rem 0 0.5rem'}}>
                             <div className='col-4'>
-                                <p className="fs-6 mt-2 mb-0">{fixture.home_team_name}</p>
+                                <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.home_team_name}</p>
                             </div>
                             <div className='col-4'>
                                 {
@@ -180,7 +205,7 @@ class GameTopSlider extends React.Component {
                                         </span>
                                     </>
                                     :
-                                    <span>{ fixture.start_time }</span>
+                                    <span>{this.formatDateTime(fixture.start_time)}</span>
                                 }
                                 <div onClick={() => this.setStarState(fixture.fixture_id)} className="mt-2">
                                     { this.state.isSetStar === true ?
@@ -192,13 +217,13 @@ class GameTopSlider extends React.Component {
                                 </div>
                             </div>
                             <div className='col-4'>
-                                <p className="fs-6 mt-2 mb-0">{fixture.away_team_name}</p>
+                                <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.away_team_name}</p>
                             </div>
                         </MainInfoSlider>
                     </SwiperSlide>
                     {fixture.status === 2 && 
                         <SwiperSlide id="scoreBoard" style={{ backgroundImage: `url(${ScoreBoardBg})`, backgroundSize: '100% 100%', paddingBottom: '52px'}}>
-                            <MainInfoSlider className='row m-0' style={{ height: '3rem', lineHeight: '3rem' }}>
+                            <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
                                 <div className='col-2 gametopslider'>
                                     <Link to="/mobile/match">
                                         <FaChevronLeft style={backIcon} />
@@ -206,14 +231,7 @@ class GameTopSlider extends React.Component {
                                 </div>
                                 <div className='col-8 row m-0'>
                                     <div className="col-11 p-0">
-                                        {
-                                            data.series.name.length > 8 ?
-                                            <Marquee speed={20} gradient={false}>
-                                                <p className="m-0">{data.series.name}</p>
-                                            </Marquee>
-                                            :
-                                            data.series.name
-                                        }
+                                        <p target='league'>{data.list.league_name}</p>
                                     </div>
                                 </div>
                                 <div className={this.props.isGameRefreshing === true ? 'rotateRefresh col-2' : 'col-2'} onClick={this.refreshGame}>
@@ -223,7 +241,7 @@ class GameTopSlider extends React.Component {
                             <div style={maintablebpard}>
                                 <div style={scoreBoardSeries}>
                                     <div style={scoreBoardseriesLogoCon}>
-                                        <p>{data.series.name}</p>
+                                        <p>{data.list.league_name}</p>
                                     </div>
                                     <p>
                                         {sport === 154914 ? 
@@ -253,8 +271,7 @@ class GameTopSlider extends React.Component {
                                     })()}
                                     <thead>
                                         <tr>
-                                            <th></th>
-                                            
+                                            <th style={{ width: '20%'}}></th>
                                             {
                                                 langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                     return(
@@ -267,7 +284,7 @@ class GameTopSlider extends React.Component {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                {fixture.home_team_name}
+                                                <p className="mb-0" target='scbTeam'>{fixture.home_team_name}</p>
                                             </td>
                                             {
                                                 langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
@@ -279,7 +296,7 @@ class GameTopSlider extends React.Component {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <p className="mb-0">{fixture.away_team_name}</p>
+                                                <p className="mb-0" target='scbTeam'>{fixture.away_team_name}</p>
                                             </td>
                                             {
                                                 langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
