@@ -1014,7 +1014,11 @@
                 const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
                 // Thead data game title
-                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}</div></th>`);
+                let stageStr = null
+                if( sport === 154914 ) {
+                    data.list.periods.Turn === '1' ? stageStr = langTrans2.scoreBoard.lowerStage : stageStr = langTrans2.scoreBoard.upperStage
+                }
+                const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
                 BasketBallFootballHeadTemp.append(TeamNameHead);
 
                 let baseballShowStage = []
@@ -1065,8 +1069,8 @@
                     BasketBallFootballBodyTemp_home.append(thHome);
                 }
 
-                const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
-                BasketBallFootballBodyTemp_home.append(homeTotalScore);
+                // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
+                // BasketBallFootballBodyTemp_home.append(homeTotalScore);
                 $('#livingtableBody').append(BasketBallFootballBodyTemp_home);
 
                 // Away team
@@ -1083,11 +1087,11 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     const scoreValue = scoreaway[i];
                     const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue || '-');
-                    BasketBallFootballBodyTemp_home.append(thAway);
+                    BasketBallFootballBodyTemp_away.append(thAway);
                 }
 
-                const awayTotalScore = $(`<th style="width:25%;text-align:center;">${awayTeam.total_score}</th>`);
-                BasketBallFootballBodyTemp_away.append(awayTotalScore);
+                // const homeTotalScore = $(`<th style="width:25%;text-align:center;">${homeTeam.total_score}</th>`);
+                // BasketBallFootballBodyTemp_home.append(homeTotalScore);
 
                 // Append away team after home team to table
                 BasketBallFootballBodyTemp_home.after(BasketBallFootballBodyTemp_away);
