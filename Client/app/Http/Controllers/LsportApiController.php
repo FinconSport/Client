@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Session;
 use DB;
-// use Exception;
+use Carbon\Carbon;
+
 
 // LSport
 use App\Models\LsportFixture;
@@ -481,7 +482,8 @@ class LsportApiController extends Controller {
 
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = '"'.date('Y-m-d 00:00:00', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
+        $after_tomorrow_es = '"'.Carbon::createFromFormat('Y-m-d H:i:s', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
+
 
     	//---------------------------------
 
@@ -933,7 +935,7 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
+        $after_tomorrow_es = '"'.Carbon::createFromFormat('Y-m-d H:i:s', $after_tomorrow_es).'"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
         // ES取出賽事
