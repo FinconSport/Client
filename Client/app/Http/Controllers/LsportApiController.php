@@ -940,11 +940,11 @@ class LsportApiController extends Controller {
 
         $return = LsportFixture::query()
         ->from('es_lsport_fixture as f')
-        ->where("f.sport_id",154914)
         ->whereIn('f.status',[1,2,9])
         ->whereIn('f.sport_id', function($query) {
             $query->select('s.sport_id')
                   ->from('es_lsport_sport as s')
+                  ->where('s.sport_id', 154914)
                   ->where('s.status', 1);
         })
         ->whereIn('f.league_id', function($query) {
