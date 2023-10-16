@@ -117,6 +117,20 @@ class CommonHistory extends React.Component {
                             {val.m_order === 0 || this.state.isOpen === true ? `@${val.bet_data[0]?.bet_rate}` : null}
                         </div>
                     </div>
+                    
+                    {
+                        val.status === 4 &&
+                        <div className='row m-0'>
+                            <div className='col-9 p-0'>{langText.CommonHistory.result}</div>
+                            <div className='col-3 p-0 text-right' style={
+                                val.bet_data[0].status === 0 || val.bet_data[0].status === 3 ?
+                                {color: 'green'} : (
+                                    val.bet_data[0].status === 1 || val.bet_data[0].status === 2 ?
+                                    {color: 'red'} : null
+                                )
+                            }>{langText.CommonHistory.detailStatusArr[val.bet_data[0].status]}</div>
+                        </div>
+                    }
                     {
                         val.bet_data[0].home_team_score && val.bet_data[0].away_team_score &&
                         <>
@@ -182,6 +196,19 @@ class CommonHistory extends React.Component {
                                         </span>
                                     </div>
                                 </div>
+                                {
+                                    val.status === 4 &&
+                                    <div className='row m-0'>
+                                        <div className='col-9 p-0'>{langText.CommonHistory.result}</div>
+                                        <div className='col-3 p-0 text-right' style={
+                                            v.status === 0 || v.status === 3 ?
+                                            {color: 'green'} : (
+                                                v.status === 1 || v.status === 2 ?
+                                                {color: 'red'} : null
+                                            )
+                                        }>{langText.CommonHistory.detailStatusArr[v.status]}</div>
+                                    </div>
+                                }
                                 {
                                     v.home_team_score && v.away_team_score &&
                                     <>
