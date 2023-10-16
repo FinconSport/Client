@@ -771,13 +771,13 @@
                 case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                     marketBetRateTemp.find('.market_bet_name').text(v2.line);
                     break;
-                case 5: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
                     break;
-                case 7: case 107: case 112: case 116: case 120: case 124:
+                case 7: case 8: case 107: case 112: case 116: case 120: case 124:
                     marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
                     break;
-                case 1: case 2: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+                case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
                     if (v2.market_bet_name_en == 1) {
                         marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
                     } else if (v2.market_bet_name_en == 2) {
