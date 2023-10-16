@@ -1059,7 +1059,7 @@ class LsportApiController extends Controller {
                 ->where("market_id",$market_id)
                 ->where("base_line",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
-                ->list();
+                ->list(1,true);
                 if ($return === false) {
                     $this->ApiError('04');
                 }
@@ -2402,9 +2402,24 @@ class LsportApiController extends Controller {
         //---------------------------------
         // 取得代理的語系
         $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        $return = LsportFixture::where("sport_id",$sport_id)
+        ->where("fixture_id",$fixture_id)
+        ->whereIn('sport_id', function($query) use ($sport_id) {
+            $query->select('sport_id')
+                  ->from('es_lsport_sport')
+                  ->where('sport_id', $sport_id)
+                  ->where('status', 1);
+        })
+        ->whereIn('league_id', function($query) {
+            $query->select('league_id')
+                  ->from('es_lsport_league')
+                  ->where('status', 1);
+        })
+        ->fetch();
+
 
         //依照 sport_id, fixture_id 取出單場"賽事+聯賽+球種+主隊+客隊"資料
         $data = DB::table('lsport_league as l')
@@ -2679,7 +2694,7 @@ class LsportApiController extends Controller {
         ///////////////////////////////////
         // gzip
         $data = $arrFixture;
-        
+
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
