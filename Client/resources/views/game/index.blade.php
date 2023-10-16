@@ -370,12 +370,8 @@
     
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
-        // loop matchListD to generate html element here
-        // Object.entries(matchListD.data.list.market).map(([k, v]) => {  // living early toggle
-        //     console.log(k, v)
-        // })
-
         createScoreBoard(matchListD.data)
+        renderViewV2()
     }
     /* ===== VIEW LAYER ===== */
 
@@ -629,7 +625,6 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView()
                     renderViewV2()
                     console.log("refresh")
                     
@@ -641,9 +636,6 @@
                 WebSocketDemo(); // ws connection
                 setInterval(reconnent, 5000); // detect ws connetion state
                 processMessageQueueAsync(); // detect if there's pkg in messageQueue
-                
-                renderViewV2()
-                
             }
         }, 500);
 
@@ -699,7 +691,6 @@
 
     // ------- render function to game page market_data-----------
     function renderViewV2() {
-        
         if (matchListD.data.list.status === 1) {
             $('.marketName').css('background-color', '#c4d4d4');
             $('#bettingTypeContainer').css('height', 'calc(100% - 14.5rem)');
