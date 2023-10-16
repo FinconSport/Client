@@ -32,7 +32,6 @@ return [
 		"next_page" => "下一頁",
 		"last_page" => "最後一頁",
 		"expand" => "展開",
-		"close" => "收起",
 		"sport" => "體育投注",
     	"morder" => "串關投注",
 		"select_sport" => "請選擇體育",
@@ -48,8 +47,10 @@ return [
 		"total_result_amount" => "總計派獎",
 		"total_win_amount" => "總計輸贏",
 		"home" => "主",
-		"waiting" => "等待開獎",
 		"cancel" => "取消",
+		"waitToCreate" => "等待成立",
+		"waitToOpen" => "等待開獎",
+		"waitToPrize" => "等待派獎",
 	],
 	// 後端
 	"result_precent" => [
