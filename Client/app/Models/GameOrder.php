@@ -101,7 +101,14 @@ class GameOrder extends Model
 
 		$return = self::queries($DSKQueryStr);
 
-		dd($DSKQueryStr,$return);
+		if ($return === false) {
+			return false;
+		}
+
+		// 重整格式
+		$data = $return['hits']['hits'];
+
+		dd($DSKQueryStr,$data);
 
 	}
 
