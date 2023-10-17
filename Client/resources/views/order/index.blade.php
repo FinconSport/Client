@@ -135,7 +135,7 @@
 	// let totalResultAmount = 0;
 	let totalResultAmount = BigInt(0);
 	// let totalEffectivetAmount = 0;
-	let totalEffectiveAmount = BigInt(0);
+	let totalEffectivetAmount = BigInt(0);
 	// let totalWinLoss = 0;
 	let totalWinLoss = BigInt(0);
 	
