@@ -61,7 +61,9 @@ class GameOrder extends Model
 
 		$DSKQueryStr = json_encode($DSLQuery,true);
 
-		dd($DSKQueryStr);
+		$return = self::queries($DSLQuery);
+
+		dd($DSKQueryStr,$return);
 
 	}
 
