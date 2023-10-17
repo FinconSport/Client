@@ -658,7 +658,7 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        const scoreboardCon = $('.scoreboardCon');
+        const scoreboardCon = $('.scoreboardCon div:not([template])');
         scoreboardCon.empty();
 
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
