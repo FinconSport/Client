@@ -251,6 +251,47 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             });
         });
 
+        
+        // queries () method 
+        Builder::macro('queries', function ($JSON, $cacheAliveTime=1,$dd=false) {
+
+            // get Model TableName
+            $tableName = "`" . $this->getModel()->getTable() . "`";
+            $esTableName = "`es_" . $tableName."`";
+
+            // use Cache
+            return Cache::remember($cacheKey, $cacheAliveTime, function () use ($esTableName, $JSON) {
+                $url = 'http://72.167.135.22:29200/' . $esTableName . '_search';
+
+                $esUser = env("ES_USER");
+                $esPass = env("ES_PASS");
+
+                // 构建请求头，根据 Elasticsearch 的要求设置适当的头部信息
+                $headers = [
+                    'Authorization' => 'Basic ' . base64_encode("$esUser:$esPass"),
+                    'Content-Type' => 'application/json', // 设置请求内容类型为 JSON
+                ];
+        
+                // 发送原始 POST 请求
+                $response = Http::withHeaders($headers)
+                ->send('POST', $url, [
+                    'body' => $JSON // 将原始查询内容作为请求主体发送
+                ]);
+        
+                // 检查响应并处理它
+                if ($response->successful()) {
+                    return $response->json(); // 如果请求成功，返回 JSON 响应
+                } else {
+                    // 处理错误
+                    // $response->status() 可以获取 HTTP 状态码
+                    // $response->body() 可以获取响应内容
+                    // 这里可以根据需要处理错误情况
+                    return false; // 或者抛出异常，具体取决于您的需求
+                }
+            });
+        });
+
+
     }
     
 }
