@@ -144,9 +144,9 @@
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
-				const betAmount = parseFloat(orderItem.bet_amount);
-				const resultAmount = parseFloat(orderItem.result_amount);
-				const effectiveAmount = parseFloat(orderItem.active_bet);
+				const betAmount = BigInt(orderItem.bet_amount);
+				const resultAmount = BigInt(orderItem.result_amount);
+				const effectiveAmount = BigInt(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
