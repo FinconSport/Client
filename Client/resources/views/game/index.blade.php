@@ -604,7 +604,6 @@
     
 
     function createNewElement(v, v3) {
-        console.log(v, v3)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
@@ -624,8 +623,8 @@
 
         marketBetRateTemp.find('.odd').text(v3.price)
 
-        let pri = parseInt(v.priority)
-        console.log(langTrans2.betTypePriority.hcapPriority, langTrans2.betTypePriority.hcapPriority.indexOf(pri))
+        let pri = v.priority
+        console.log(pri, langTrans2.betTypePriority.hcapPriority, langTrans2.betTypePriority.hcapPriority.indexOf(pri))
         switch (pri) {
             case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.line);
