@@ -371,6 +371,7 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         createScoreBoard(matchListD.data)
+        $('#marketRateDataTemp').empty();
         renderViewV2()
     }
     /* ===== VIEW LAYER ===== */
