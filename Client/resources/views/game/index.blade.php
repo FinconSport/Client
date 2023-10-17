@@ -702,18 +702,10 @@
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            
-            
-            
             createMarketContainer(k, v);
 
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
-                    const marketRateElements = $(`.market-rate[market_bet_id="${v.market_bet_id}"]`);
-                    if (marketRateElements.length > 1) {
-                        marketRateElements.eq(0).remove(); // <-- remove the duplicating append
-                    } 
-
                     createMarketRateContainer(v, k2, v2);
 
                     // Check if .bettingtype-container[id] exists with the same market_id
@@ -756,11 +748,14 @@
     
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
+        const existingDiv = $('#' + marketBetRateId);
 
         if (createdElementKeys.has(marketBetRateId)) {
             updateExistingElement(v, k2, v2, marketBetRateId);
         } else {
-            createNewElement(v, k2, v2, marketBetRateId);
+            if (existingDiv.length === 0) {
+                createNewElement(v, k2, v2, marketBetRateId);
+            }
         }
     }
 
@@ -849,7 +844,6 @@
     }
 
     function createNewElement(v, k2, v2, marketBetRateId) {
-
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
