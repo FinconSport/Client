@@ -2000,7 +2000,7 @@ class LsportApiController extends Controller {
         $GameOrder = $GameOrder->skip($skip)->take($page_limit);
         
         // 先取得m_id list 
-        $return = $GameOrder->orderBy("m_id","ASC")->list();
+        $return = $GameOrder->orderBy("m_id","DESC")->list();
         if ($return === false) {
             $this->ApiError("01");
         }
