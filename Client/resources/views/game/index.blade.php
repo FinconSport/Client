@@ -489,17 +489,17 @@
             const line = $(this).attr('line')
             const market_bet_id = parseInt($(this).attr('market_bet_id'))
             const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            var result = null
 
-            if( resultArr?.market_bet[line] ) {
-                result = resultArr?.market_bet[line].find(item => item.market_bet_id === market_bet_id)
-            }
+            // 遍历 market_bet 属性
+            var result = Object.values(resultArr.market_bet).find(marketBets => {
+                // 在每个 market_bet 数组中查找匹配的 market_bet_id
+                return marketBets.find(item => item.market_bet_id === market_bet_id);
+            });
 
-            console.log(resultArr, line, market_bet_id, result)
             
-            // if (!result) {
-            //     $(this).remove();
-            // }
+            if (!result) {
+                $(this).remove();
+            }
         });
     
 
