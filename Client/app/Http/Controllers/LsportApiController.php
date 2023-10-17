@@ -1996,12 +1996,24 @@ class LsportApiController extends Controller {
                 $GameOrder = $GameOrder->where("status",4);
             }
         }
-            
-        $return = $GameOrder
+        
+        // 先取得m_id list 
+        $return = $GameOrder->->select('m_id')
+        ->from('es_game_order')
+        ->groupBy('m_id')
+        ->total();
+
+        dd($return);
+
+        $return = $GameOrder->whereIn('m_id', function($query) {
+            $query->select('m_id')
+                  ->from('es_game_order')
+                  ->groupBy('m_id');
+        })
         ->skip($skip)
         ->take($page_limit)
         ->orderBy('m_id', 'DESC')
-        ->list();
+        ->list(1,true);
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -2017,6 +2029,7 @@ class LsportApiController extends Controller {
             "m_id",
             "bet_amount",
             "result_amount",
+            "active_bet",
             "create_time",
             "result_time",
             "status"
