@@ -397,9 +397,12 @@
 
     // ajax update
     function renderView() {
+        console.log('Before empty: ', $('.scoreboardCon').html());
         $('.scoreboardCon').empty();
+        console.log('After empty: ', $('.scoreboardCon').html());
         // scoreboad update
         createScoreBoard(matchListD.data);
+        console.log('After createScoreBoard: ', $('.scoreboardCon').html());
     
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
