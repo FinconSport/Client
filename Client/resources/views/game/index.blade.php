@@ -732,7 +732,7 @@
         if (!$('#' + v.market_id).length) {
             const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
             bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-            bettingTypeContainerTemp.attr('id', v.market_id);
+            bettingTypeContainerTemp.attr('market_id', v.market_id);
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
