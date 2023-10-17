@@ -613,7 +613,6 @@
     
 
     function createNewElement(v, v3) {
-        console.log(v, v3)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
