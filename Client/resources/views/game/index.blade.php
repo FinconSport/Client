@@ -447,21 +447,21 @@
                             let pri = v.priority
                             switch (true) {
                                 case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
-                                    bet_div.find('.market_bet_name').text(v3.line);
+                                    bet_item.find('.market_bet_name').text(v3.line);
                                     break;
                                 case langTrans2.betTypePriority.sizePriority.indexOf(pri) !== -1:
-                                    bet_div.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
+                                    bet_item.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                                     break;
                                 case langTrans2.betTypePriority.oddEvenPriority.indexOf(pri) !== -1:
-                                    bet_div.find('.market_bet_name').text(v3.market_bet_name);
+                                    bet_item.find('.market_bet_name').text(v3.market_bet_name);
                                     break;
                                 case langTrans2.betTypePriority.allWinPriority.indexOf(pri) !== -1:
                                     if (v3.market_bet_name_en === 1) {
-                                        bet_div.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
+                                        bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                                     } else if (v3.market_bet_name_en === 2) {
-                                        bet_div.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
+                                        bet_item.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
                                     } else if (v3.market_bet_name_en === 'X') {
-                                        bet_div.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
+                                        bet_item.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                                     }
                                     break;
                                 default:
@@ -614,6 +614,7 @@
     
 
     function createNewElement(v, v3) {
+        console.log(v, v3)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
