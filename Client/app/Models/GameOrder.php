@@ -18,31 +18,31 @@ class GameOrder extends Model
 			"query" => [
 				"bool" => [
 					"must" => [
-						"script" : [
-							"script" : [
+						"script" => [
+							"script" => [
 								"source" => 'doc["m_id"].value == doc["id"].value'
 							]
 						],
-						"term" : [
+						"term" => [
 							"player_id" => [
-								"value" : 9 
+								"value" => 9 
 							]
 						]
 					],
 					"should" => [
-						"term" : [
+						"term" => [
 							"status" => [
-								"value" : 4
+								"value" => 4
 							]
 						]
 					]
 				]
 			],
 			"sort" => [
-				["id" : "desc"]
+				["id" => "desc"]
 			],
-			"from" : 0,
-			"size" : 0
+			"from" => 0,
+			"size" => 25
 		];
 
 		echo json_encode($DSLQuery);
