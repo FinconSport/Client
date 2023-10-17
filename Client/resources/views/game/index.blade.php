@@ -80,7 +80,7 @@
     <p class="away_team_name col-3"></p>
 </div>
 <!-- living fixture -->
-<div class="livingFixture-container row" key="livingContainerTemplate" hidden>
+<div class="livingFixture-container row" template="livingContainerTemplate" hidden>
     <table>
         <thead id="livingtableHead">
             <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -686,7 +686,6 @@
         // Living fixture (status == 2)
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             // const scoresLengths = data.list?.scoreboard[1].length - 1;
