@@ -487,15 +487,11 @@
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
             const line = $(this).attr('line')
+            const market_bet_id = $(this).attr(market_bet_id)
             const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
             var result = null
 
-            if( resultArr?.market_bet[line] ) {
-                result = Object.entries(resultArr?.market_bet[line]).map(item => item.market_bet_id);
-                console.log(result)
-            } else {
-                console.log('nan')
-            }
+            console.log(resultArr, line, market_bet_id)
             
             if (!result) {
                 $(this).remove();
