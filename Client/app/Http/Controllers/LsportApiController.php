@@ -1998,12 +1998,25 @@ class LsportApiController extends Controller {
         }
         
         // 先取得m_id list 
-        $return = $GameOrder->select('m_id')
-        ->from('es_game_order')
-        ->groupBy('m_id')
-        ->total();
+        $return = $GameOrder->orderBy("m_id","ASC")->list();
+        if ($return === false) {
 
-        dd($return);
+        }
+
+        $m_id_list = array();
+        $tmp_m_id = 0;
+        foreach ($return as $k => $v) {
+            if ($tmp_m_id == 0) {
+                $tmp_m_id = $v['m_id'];
+            }
+            if ($tmp_m_id != $v['m_id']) {
+                $tmp_m_id = $v['m_id'];
+                $m_id_list[] = $tmp_m_id;
+            }
+        }
+
+        dd($m_id_list);
+
 
         $return = $GameOrder->whereIn('m_id', function($query) {
             $query->select('m_id')
