@@ -491,7 +491,7 @@
             let resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
             
             if (resultArr && resultArr.market_bet) {
-                result = resultArr.market_bet.find(item => item.market_bet_id === market_bet_id);
+                result = resultArr.market_bet[1].find(item => item.market_bet_id === market_bet_id);
             }
             
             if (!result) {
