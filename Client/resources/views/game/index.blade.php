@@ -654,6 +654,9 @@
                     marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                 }
                 break;
+            case langTrans2.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
+                marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.correct_score') }}");
+                break;
             default:
                 break;
         }
