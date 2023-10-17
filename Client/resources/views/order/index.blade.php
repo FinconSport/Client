@@ -313,7 +313,8 @@
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			// $(`#${dynamicId}`).addClass('hide-betaDetcon');
-			$(`#${dynamicId}`).css('display', 'none');
+			// $(`#${dynamicId}`).css('display', 'none');
+			$(`.${dynamicId}.orderData_expand`).css('display', 'none');
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
