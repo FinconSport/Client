@@ -398,7 +398,7 @@
     // ajax update
     function renderView() {
         // $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
-        // createScoreBoard(matchListD.data);
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
