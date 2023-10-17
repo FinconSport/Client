@@ -2039,7 +2039,7 @@ class LsportApiController extends Controller {
             "status"
         );
 
-        $round_columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
+        $round_columns = ['bet_amount','result_amount','active_bet'];
 
         foreach ($order_data as $k => $v) {
             foreach ($columns as $kk => $vv) {
@@ -2055,7 +2055,7 @@ class LsportApiController extends Controller {
             
             // 關於小數點處理
             foreach ($round_columns as $kkkk => $vvvv) {
-                if (isset($tmp[$k][$vvvv])) {
+                if (isset($tmp[$k][$vvvv]) && ($tmp[$k][$vvvv] != null)) {
                     $tmp[$k][$vvvv] = round($tmp[$k][$vvvv],2);
                 }
             }
@@ -2081,7 +2081,7 @@ class LsportApiController extends Controller {
 
                     // 關於小數點處理
                     foreach ($round_columns as $kkkk => $vvvv) {
-                        if (isset($tmp_bet_data[$vvvv])) {
+                        if (isset($tmp_bet_data[$vvvv]) && ($tmp_bet_data[$vvvv] != null)) {
                             $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
                         }
                     }
@@ -2101,7 +2101,7 @@ class LsportApiController extends Controller {
 
                 // 關於小數點處理
                 foreach ($round_columns as $kkkk => $vvvv) {
-                    if (isset($tmp_bet_data[$vvvv])) {
+                    if (isset($tmp_bet_data[$vvvv]) && ($tmp_bet_data[$vvvv] != null)) {
                         $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
                     }
                 }
