@@ -623,17 +623,20 @@
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
         marketBetRateTemp.find('.odd').text(v3.price)
-        switch (v.priority) {
-            case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
+
+        let pri = parseInt(v.priority)
+        console.log(langTrans2.betTypePriority.hcapPriority, langTrans2.betTypePriority.hcapPriority.indexOf(pri))
+        switch (pri) {
+            case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.line);
                 break;
-            case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
+            case langTrans2.betTypePriority.sizePriority.indexOf(pri) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
-            case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
+            case langTrans2.betTypePriority.oddEvenPriority.indexOf(pri) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
                 break;
-            case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
+            case langTrans2.betTypePriority.allWinPriority.indexOf(pri) !== -1:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 2) {
