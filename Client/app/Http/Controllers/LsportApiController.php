@@ -1910,6 +1910,8 @@ class LsportApiController extends Controller {
                     $market_bet_name = $vvv['name_'.$agent_lang];
                 } 
 
+                $base_line = $vvv['base_line'];
+
                 $tmp_data = array();
                 $tmp_data['market_bet_id'] = $market_bet_id;
                 $tmp_data['market_bet_name'] = $market_bet_name;
@@ -1920,7 +1922,7 @@ class LsportApiController extends Controller {
                 $tmp_data['last_update'] = $vvv['last_update'];
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
-                $tmp_market_data['market_bet'][$market_id][] = $tmp_data;
+                $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
         
             }
 
