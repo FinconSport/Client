@@ -658,10 +658,11 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        $('.scoreboardCon > *:not([template]):not([key])').empty();
-
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+
+        earlyContainerTemp.remove();
+        livingContainerTemp.remove();
 
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
