@@ -1998,7 +1998,7 @@ class LsportApiController extends Controller {
         }
         
         // 先取得m_id list 
-        $return = $GameOrder->->select('m_id')
+        $return = $GameOrder->select('m_id')
         ->from('es_game_order')
         ->groupBy('m_id')
         ->total();
