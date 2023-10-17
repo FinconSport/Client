@@ -752,9 +752,8 @@
     
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        const existingDiv = $('#' + marketBetRateId);
         
-        if (existingDiv.length === 0) {
+        if (!$('#' + marketBetRateId).length) {
             if (createdElementKeys.has(marketBetRateId)) {
                 updateExistingElement(v, k2, v2, marketBetRateId);
             } else {
