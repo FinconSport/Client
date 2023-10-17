@@ -486,9 +486,11 @@
         // check exist bet item is still exist in the data
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
-            const line = Math.abs($(this).attr('line'))
+            const line = $(this).attr('line').replace('-','')
             const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
             const result = resultArr?.market_bet[line].map(item => item.market_bet_id);
+
+            console.log(resultArr?.market_bet, line)
             
             if (!result) {
                 $(this).remove();
