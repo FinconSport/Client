@@ -1991,6 +1991,9 @@ class LsportApiController extends Controller {
             ->total();
 
             $ccc = $return;
+            foreach ($ccc['m_id'] as $k => $v) {
+                $buckets = $v['buckets'];
+            }
 
             dd($ccc);
         }
