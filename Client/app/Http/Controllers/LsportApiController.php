@@ -1999,8 +1999,8 @@ class LsportApiController extends Controller {
         }
 
         // 獲取注單資料
-      //  $GameOrder = GameOrder::where("player_id", $input['player']);
-        $GameOrder = GameOrder::where("id", ">", 0);
+       // $GameOrder = GameOrder::where("player_id", $input['player']);
+        $GameOrder = GameOrder::where("id", ">", 0)->where('m_id','id');
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
@@ -2016,25 +2016,8 @@ class LsportApiController extends Controller {
         }
 
         $GameOrder = $GameOrder->skip($skip)->take($page_limit);
-        
-        // 先取得m_id list 
-        $return = $GameOrder->orderBy("m_id","DESC")->list();
-        if ($return === false) {
-            $this->ApiError("01");
-        }
 
-        $m_id_list = array();
-        $tmp_m_id = 0;
-        foreach ($return as $k => $v) {
-            if (($tmp_m_id == 0) || ($tmp_m_id != $v['m_id'])) {
-                $tmp_m_id = $v['m_id'];
-                $m_id_list[] = $tmp_m_id;
-            }
-        }
-
-        $return = $GameOrder->whereIn('m_id', $m_id_list)
-        ->orderBy('m_id', 'DESC')
-        ->list();
+        $return = $GameOrder->orderBy('m_id', 'DESC')->list();
         if ($return === false) {
             $this->ApiError("01");
         }
