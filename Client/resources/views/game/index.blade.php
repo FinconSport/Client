@@ -432,8 +432,8 @@
                             bet_item.find('.fa-lock').hide()
                             bet_item.attr('onclick', 'openCal($(this))')
                         } else {
-                            bet_item.find('.fa-lock').hide()
-                            bet_item.attr('onclick', 'openCal($(this))')
+                            bet_item.find('.fa-lock').show()
+                            bet_item.removeAttr('onclick')
                         }
 
                         // set new attribute
@@ -651,11 +651,9 @@
         if (v2.status == 1) {
             marketBetRateTemp.find('.fa-lock').hide();
             marketBetRateTemp.attr('onclick', 'openCal($(this))');
-            marketBetRateTemp.find('.market_price').show();
         } else {
             marketBetRateTemp.find('.fa-lock').show();
             marketBetRateTemp.removeAttr('onclick');
-            marketBetRateTemp.find('.market_price').show();
         }
 
         // Append the new element to the correct container
