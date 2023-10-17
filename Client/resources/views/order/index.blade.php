@@ -132,6 +132,7 @@
 	let totalBetItemCount = 0;
 	let totalBetAmount = 0;
 	let totalResultAmount = 0;
+	let totalEffectivetAmount = 0;
 	let totalWinLoss = 0;
 	
 
@@ -145,6 +146,7 @@
 				const betItemCounter = orderItem.bet_data.length; 
 				const betAmount = parseFloat(orderItem.bet_amount);
 				const resultAmount = parseFloat(orderItem.result_amount);
+				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
@@ -156,11 +158,13 @@
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
+				totalEffectivetAmount += effectiveAmount;
 				totalWinLoss += winLoss;
 			});
 
 			// After accumulating the totals, round them to two decimal places
 			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 
@@ -205,8 +209,8 @@
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
-		orderDataEffectiveAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
-		orderDataResultAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet);
+		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet);
+		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
 
@@ -347,11 +351,13 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
 
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
+		orderDataTotal.find('.orderData_effectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
@@ -369,6 +375,7 @@
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
+		$('.orderData_effectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
