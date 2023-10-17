@@ -671,7 +671,7 @@
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             const fixtureID = data.list.fixture_id;
-            const existingFixture = $(`div[id="${fixtureID}"]`);
+            $(`div[id="${fixtureID}"]`).remove();
 
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.attr('id', data.list.fixture_id);
@@ -679,9 +679,7 @@
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            if (existingFixture.length === 0) {
-                $('.scoreboardCon').append(earlyContainerTemp);
-            }
+            $('.scoreboardCon').append(earlyContainerTemp);
         }
         // Living fixture (status == 2)
         if (data.list.status == 2) {
@@ -694,12 +692,10 @@
             // const awayTeam = data.list.teams.find(item => item.index === 2)
 
             // if (data.series.sport_id == 48242 || data.series.sport_id == 6046 ) { // <-- basketball and football
-                
-                const fixtureID = data.list.fixture_id;
-                const existingFixtureId = $(`tr[id="${fixtureID}"]`);
-
                 const leagueID = data.list.league_id;
-                const existingleagueId= $(`tr[id="${leagueID}"]`);
+                const fixtureID = data.list.fixture_id;
+                $(`tr[id="${fixtureID}"]`).remove();
+                $(`tr[id="${leagueID}"]`).remove();
 
                 scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
                 scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -717,9 +713,7 @@
                     data.list.periods.Turn === '1' ? stageStr = langTrans2.scoreBoard.lowerStage : stageStr = langTrans2.scoreBoard.upperStage
                 }
                 const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
-                if (leagueID.length === 0) {
-                    scoreBoardHeadTemp.append(TeamNameHead);
-                }
+                scoreBoardHeadTemp.append(TeamNameHead);
 
                 let baseballShowStage = []
                 for (let i = 0; i < gameTitle.length; i++) {
@@ -762,9 +756,7 @@
                     }
                 }
 
-                if (fixtureID.length === 0) {
-                    $('#livingtableBody').append(scoreBoardBodyTemp_home);
-                }
+                $('#livingtableBody').append(scoreBoardBodyTemp_home);
 
                 // Away team
                 const awayTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -779,9 +771,7 @@
                 }
 
                 // Append away team after home team to table
-                if (fixtureID.length === 0) {
-                    scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-                }
+                scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
