@@ -624,16 +624,16 @@
 
         marketBetRateTemp.find('.odd').text(v3.price)
         switch (v.priority) {
-            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+            case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.line);
                 break;
-            case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+            case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
-            case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
+            case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
                 break;
-            case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+            case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 2) {
