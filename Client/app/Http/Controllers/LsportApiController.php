@@ -1985,8 +1985,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         if (isset($input['debug'])) {
-            $return = GameOrder::select('m_id')
-            ->groupBy('m_id')
+            $return = GameOrder::where('m_id','id')
             ->orderBy('m_id', 'desc')
             ->skip($skip)->take($page_limit)
             ->total(1,true);
