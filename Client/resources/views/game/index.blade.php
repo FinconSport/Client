@@ -397,13 +397,7 @@
 
     // ajax update
     function renderView() {
-        console.log('Before empty: ', $('.scoreboardCon').html());
-        $('.scoreboardCon').empty();
-        console.log('After empty: ', $('.scoreboardCon').html());
-        // scoreboad update
         createScoreBoard(matchListD.data);
-        console.log('After createScoreBoard: ', $('.scoreboardCon').html());
-    
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -664,6 +658,8 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
+        $('.scoreboardCon').empty();
+
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
 
