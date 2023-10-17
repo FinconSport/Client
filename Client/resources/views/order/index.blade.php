@@ -134,8 +134,8 @@
 	let totalBetAmount = BigInt(0);
 	// let totalResultAmount = 0;
 	let totalResultAmount = BigInt(0);
-	// let totalEffectivetAmount = 0;
-	let totalEffectivetAmount = BigInt(0);
+	// let totalEffectiveAmount = 0;
+	let totalEffectiveAmount = BigInt(0);
 	// let totalWinLoss = 0;
 	let totalWinLoss = BigInt(0);
 	
@@ -165,14 +165,14 @@
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount || BigInt(0);
-				totalEffectivetAmount += effectiveAmount;
+				totalEffectiveAmount += effectiveAmount;
 				totalWinLoss += winLoss || BigInt(0);
 			});
 
 			// After accumulating the totals, round them to two decimal places
 			// totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
 			totalResultAmount = (totalResultAmount / BigInt(100)).toString();
-			// totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
+			// totalEffectiveAmount = parseFloat(totalEffectiveAmount.toFixed(2));
 			totalEffectiveAmount = (totalEffectiveAmount / BigInt(100)).toString();
 			// totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalBetAmount = (totalBetAmount / BigInt(100)).toString();
@@ -365,13 +365,13 @@
 		
 
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
-		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
+		totalEffectiveAmount = isNaN(totalEffectiveAmount) ? 0 : totalEffectiveAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
 
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
+		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectiveAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
@@ -389,7 +389,7 @@
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
-		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
+		$('.orderData_totalEffectiveAmount').text(totalEffectiveAmount === null ? '0' : totalEffectiveAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
