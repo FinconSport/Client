@@ -388,8 +388,10 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
-                v.market_bet.map((v2, k2) => {
-                    createNewElement(v, k2, v2);
+                Object.entries(v.market_bet).map((v2, k2) => {
+                    v2[1].map((v3, k3) => {
+                        createNewElement(v, v2);
+                    });
                 });
             }
         });
@@ -525,7 +527,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView();
+                    // renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -601,7 +603,7 @@
     }
     
 
-    function createNewElement(v, k2, v2) {
+    function createNewElement(v, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
