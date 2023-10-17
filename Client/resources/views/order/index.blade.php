@@ -167,7 +167,7 @@
 					let roundedAmountBigInt = BigInt(Math.round(resultAmount1 * 100)); // Round to two decimal places as BigInt
 					resultAmount1 = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
 				}
-				console.log(resultAmount1); 
+				console.log(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id + ' ' + resultAmount1); 
 			});
 
 			// After accumulating the totals, round them to two decimal places
