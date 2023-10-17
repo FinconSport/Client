@@ -658,8 +658,10 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        const scoreboardCon = $('.scoreboardCon div:not([template])');
-        scoreboardCon.empty();
+        const scoreboardConEarly = $('.scoreboardCon .earlyFixture-container:not([template])');
+        const scoreboardConLiving = $('.scoreboardCon .livingFixture-container:not([template])');
+        scoreboardConEarly.empty();
+        scoreboardConLiving.empty();
 
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
