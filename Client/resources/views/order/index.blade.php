@@ -178,15 +178,14 @@
 			const [integerPartStr, decimalPartStr] = totalResultAmountStr.split('.');
 			// Convert the integer part to a BigInt
 			const integerPartBigInt = BigInt(integerPartStr);
-			console.log(totalBigInt);
-
 			// Convert the decimal part to a number, round it, and add to the BigInt
 			const decimalPart = parseFloat(`0.${decimalPartStr}`);
 			const roundedDecimalPart = Math.round(decimalPart);
 			const decimalPartBigInt = BigInt(Math.round(decimalPart * 100)); // Multiplied by 100 to handle two decimal places
 			const totalBigInt = integerPartBigInt + decimalPartBigInt;
-			
-			console.log(totalBigInt);
+
+			console.log(totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
+
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
