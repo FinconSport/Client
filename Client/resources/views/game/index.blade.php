@@ -707,7 +707,7 @@
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     // const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
                     // createMarketRateContainer(v, k2, v2);
-                    createNewElement(v, k2, v2, marketBetRateId);
+                    createNewElement(v, k2, v2);
 
 
                     // const lengthOfId = marketBetRateId.length;
@@ -852,7 +852,7 @@
         marketBetRateTemp.attr('line', v2.line);
     }
 
-    function createNewElement(v, k2, v2, marketBetRateId) {
+    function createNewElement(v, k2, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`div[market_id=${v.market_id}][priority=${v.priority}]`)
