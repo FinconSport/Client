@@ -475,25 +475,15 @@
         });
 
 
-        // check exist bet type content is still exist in the data
-        $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            if( !result ) $(this).remove()
-        });
-
         // check exist bet item is still exist in the data
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
             const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
             const result = resultArr?.market_bet?.map(item => item.market_bet_id);
-            
             if (!result) {
                 $(this).remove();
             }
         });
-    
 
     }
    
