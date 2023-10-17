@@ -728,6 +728,7 @@
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`div[market_id=${v.market_id}][priority=${v.priority}]`)
+        console.log(bet_div)
 
         marketBetRateTemp.attr('priority', v.priority);
         marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
@@ -775,6 +776,8 @@
             marketBetRateTemp.removeAttr('onclick');
             marketBetRateTemp.find('.market_price').show();
         }
+
+        console.log(marketBetRateTemp)
 
         // Append the new element to the correct container
         bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
