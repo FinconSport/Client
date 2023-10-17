@@ -78,7 +78,7 @@
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span style="color:#b2b2b2;" class="orderData_createTime"></span></td>
-                        <td style="width: 10%;"></td>
+                        <td style="width: 10%;" class="text-right orderData_effectiveAmount"></td>
 						<td style="width: 10%;" class="text-right orderData_resultAmount"></td>
 						<td style="width: 10%;" class="text-right orderData_WinLoss"></td>
                     </tr>
@@ -179,6 +179,7 @@
 		const orderDataBetEvent = orderData.find('.orderData_betData_Event');
 		const orderDataBetBetWay = orderData.find('.orderData_betData_BetWay');
 		const orderDataBetResult = orderData.find('.orderData_betData_Result');
+		const orderDataEffectiveAmount = orderData.find('.orderData_effectiveAmount');
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
@@ -204,7 +205,8 @@
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount);
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
-		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
+		orderDataEffectiveAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
+		orderDataResultAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
 
