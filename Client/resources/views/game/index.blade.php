@@ -488,7 +488,7 @@
             const priority = parseInt($(this).attr('priority'));
             const line = $(this).attr('line')
             const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            const result = null
+            var result = null
 
             if( resultArr?.market_bet[line] ) {
                 result = Object.entries(resultArr?.market_bet[line]).map(item => item.market_bet_id);
