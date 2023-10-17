@@ -167,6 +167,7 @@
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+			console.log(totalResultAmount);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
@@ -349,7 +350,7 @@
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
-		console.log(totalResultAmount);
+		
 
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
 		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
