@@ -411,7 +411,7 @@
             if( !bet_div ) createMarketContainer(k, v);
             
             if (v.market_bet) {
-                v.market_bet.map((v2, k2) => {
+                Object.entries(v.market_bet).map((v2, k2) => {
                     v2[1].map((v3, k3) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
 
