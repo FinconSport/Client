@@ -1985,12 +1985,17 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         if (isset($input['debug'])) {
-            $return = GameOrder::select('m_id')
+            $return = GameOrder::select("id",'m_id')
             ->groupBy('m_id')
             ->orderBy('m_id', 'desc')
             ->total();
 
-            dd($return);
+            $ccc = $return 
+            foreach ($ccc['m_id'] as $k => $v) {
+                $buckets = $v['buckets'];
+            }
+
+            dd($ccc);
         }
 
         // 獲取注單資料
