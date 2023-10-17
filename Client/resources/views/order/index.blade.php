@@ -145,15 +145,6 @@
 				const betItemCounter = orderItem.bet_data.length; 
 				const betAmount = parseFloat(orderItem.bet_amount);
 				const resultAmount = parseFloat(orderItem.result_amount);
-				// Step 1: Multiply by 100 to shift the decimal point two places to the right
-				let shiftedAmount = resultAmount * 100;
-
-				// Step 2: Convert to BigInt
-				let bigIntAmount = BigInt(Math.round(shiftedAmount));
-
-				// Step 3: Divide by 100 to shift the decimal point back two places to the left
-				resultAmount = Number(bigIntAmount) / 100;
-
 				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
@@ -168,10 +159,18 @@
 				totalResultAmount += resultAmount || 0;
 				totalEffectivetAmount += effectiveAmount;
 				totalWinLoss += winLoss || 0;
+
+
+				// Check if resultAmount is NaN or null
+				let resultAmount1 = parseFloat(orderItem.result_amount) || 0;
+				if (!isNaN(resultAmount1)) {
+					resultAmount1 = Number(BigInt(Math.round(resultAmount1 * 100)) / 100); // Round to two decimal places
+				}
+				console.log(resultAmount1); 
 			});
 
 			// After accumulating the totals, round them to two decimal places
-			totalResultAmount = parseFloat(totalResultAmount);
+			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
