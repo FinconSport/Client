@@ -151,7 +151,6 @@
 				let betAmount = parseFloat(orderItem.bet_amount) || 0;
 				let activeBet = parseFloat(orderItem.active_bet) || 0;
 				let resultAmount = parseFloat(orderItem.result_amount) || 0;
-				const winLoss = resultAmount - betAmount;
 
 				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
 					// Round to two decimal places as BigInt
@@ -163,6 +162,7 @@
 					betAmount = Number(roundedBetBigInt) / 100;
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
+					winLoss = resultAmount - betAmount;
 				}
 
 				createList(orderItem, orderIndex, winLoss);
