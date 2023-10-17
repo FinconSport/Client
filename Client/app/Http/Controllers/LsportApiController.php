@@ -1743,7 +1743,7 @@ class LsportApiController extends Controller {
 
         ///////////////////////////////////
         // gzip
-     //   $data = $this->gzip($data);
+        $data = $this->gzip($data);
 
         $this->ApiSuccess($data, "01", true); 
     }
