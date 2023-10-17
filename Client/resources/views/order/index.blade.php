@@ -184,7 +184,7 @@
 			const decimalPartBigInt = BigInt(Math.round(decimalPart * 100)); // Multiplied by 100 to handle two decimal places
 			const totalBigInt = integerPartBigInt + decimalPartBigInt;
 
-			console.log(totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
+			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
 
 	}
 
