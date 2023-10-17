@@ -604,6 +604,7 @@
     
 
     function createNewElement(v, v3) {
+        console.log(v, v3)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
@@ -622,20 +623,17 @@
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
         marketBetRateTemp.find('.odd').text(v3.price)
-
-        let pri = v.priority
-        console.log(pri, langTrans2.betTypePriority.hcapPriority, langTrans2.betTypePriority.hcapPriority.indexOf(pri))
-        switch (pri) {
-            case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
+        switch (v.priority) {
+            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                 marketBetRateTemp.find('.market_bet_name').text(v3.line);
                 break;
-            case langTrans2.betTypePriority.sizePriority.indexOf(pri) !== -1:
+            case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
-            case langTrans2.betTypePriority.oddEvenPriority.indexOf(pri) !== -1:
+            case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
                 break;
-            case langTrans2.betTypePriority.allWinPriority.indexOf(pri) !== -1:
+            case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 2) {
