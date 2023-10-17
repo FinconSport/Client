@@ -144,12 +144,11 @@
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
 				const betAmount = parseFloat(orderItem.bet_amount);
-				
+				const resultAmount = parseFloat(orderItem.result_amount);
 				// Check if resultAmount is null or NaN
 				if (isNaN(resultAmount) || resultAmount === null) {
-				resultAmount = 0; // Set resultAmount to 0 in this case
+					resultAmount = 0; // Set resultAmount to 0 in this case
 				} else {
-				const resultAmount = parseFloat(orderItem.result_amount);
 				// Step 1: Multiply by 100 to shift the decimal point two places to the right
 				let shiftedAmount = resultAmount * 100;
 
