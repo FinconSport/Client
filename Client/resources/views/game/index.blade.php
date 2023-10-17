@@ -479,7 +479,7 @@
         $('#bettingTypeContainer .bettingtype-container').each(function() {
             let priority = parseInt($(this).attr('priority'))
             let result = null
-            result = matchListD.data?.list?.market.find(item => (item.priority) === priority)
+            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
             if( !result ) $(this).remove()
         });
 
@@ -488,8 +488,8 @@
             let priority = parseInt($(this).attr('priority'))
             let market_bet_id = parseInt($(this).attr('market_bet_id'))
             let result = null
-            let resultArr = matchListD.data?.list?.market?.market_bet.find(item => (item.priority) === priority)
-            if( resultArr.market_bet[1] ) result = resultArr.market_bet[1].find(item => (item.market_bet_id) === market_bet_id)
+            let resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
+            if( resultArr.market_bet ) result = resultArr.market_bet?.find(item => item.market_bet_id === market_bet_id);
             if( !result ) $(this).remove()
         });
 
