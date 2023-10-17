@@ -12,7 +12,7 @@ class GameOrder extends Model
 	public $timestamps = false;
 	protected $table = "game_order";
 
-	protected static function getOrderTotal($input) {
+	protected static function getOrderList($input) {
 
 		$DSLQuery = [
 			"query" => [
@@ -60,6 +60,8 @@ class GameOrder extends Model
 		];
 
 		$DSKQueryStr = json_encode($DSLQuery,true);
+
+		dd($DSKQueryStr);
 
 	}
 
