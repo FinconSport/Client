@@ -1901,7 +1901,6 @@ class LsportApiController extends Controller {
             }
 
             $market_bet_data = $return;
-            $bet_id_count = 0;
             foreach ($market_bet_data as $kkk => $vvv) {
                 $market_bet_id = $vvv['bet_id'];
 
@@ -1912,17 +1911,17 @@ class LsportApiController extends Controller {
                 } 
 
                 $tmp_data = array();
-                $tmp_data[$bet_id_count]['market_bet_id'] = $market_bet_id;
-                $tmp_data[$bet_id_count]['market_bet_name'] = $market_bet_name;
-                $tmp_data[$bet_id_count]['market_bet_name_en'] = $vvv['name_en'];
-                $tmp_data[$bet_id_count]['line'] = $vvv['line'];
-                $tmp_data[$bet_id_count]['price'] = $vvv['price'];
-                $tmp_data[$bet_id_count]['status'] = $vvv['status'];
-                $tmp_data[$bet_id_count]['last_update'] = $vvv['last_update'];
-                $tmp_data[$bet_id_count]['provder_bet_id'] = $vvv['provder_bet_id'];
+                $tmp_data['market_bet_id'] = $market_bet_id;
+                $tmp_data['market_bet_name'] = $market_bet_name;
+                $tmp_data['market_bet_name_en'] = $vvv['name_en'];
+                $tmp_data['line'] = $vvv['line'];
+                $tmp_data['price'] = $vvv['price'];
+                $tmp_data['status'] = $vvv['status'];
+                $tmp_data['last_update'] = $vvv['last_update'];
+                $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
                 $tmp_market_data['market_bet'][$market_id][] = $tmp_data;
-                $bet_id_count++;
+        
             }
 
             $data['list']['market'][] = $tmp_market_data;
