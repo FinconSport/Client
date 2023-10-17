@@ -778,7 +778,7 @@
         }
 
         console.log(marketBetRateTemp)
-
+        console.log(bet_div.find('.marketBetRateContainer'))
         // Append the new element to the correct container
         bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
 
