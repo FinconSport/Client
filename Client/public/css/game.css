@@ -62,7 +62,7 @@
 
 .bettingtype-container .marketName {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-bottom: 2px solid #415b5a;
 }
 
@@ -72,12 +72,13 @@ p.market_name {
 }
 
 .bettingtype-container .marketBetRateContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
-    right: 1px;
-    bottom: 1px;
+    margin-left: -1px;
+    margin-top: -1px;
 }
+
 
 .bettingtype-container .market-rate {
     padding: 1rem;
@@ -86,6 +87,10 @@ p.market_name {
     position: inherit;
     left: 1px;
     bottom: -1px;
+    width: 50%;
+    flex-grow: 1;
+    justify-content: space-between;
+    text-align: center;
 }
 
 div#bettingTypeContainer {
