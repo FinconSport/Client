@@ -220,6 +220,12 @@
 			orderDataSportType.html(sportName);
 		}
 
+		let resultAmount = parseFloat(orderItem.result_amount) || 0;
+		if (!isNaN(resultAmount)) {
+			let roundedAmountBigInt = BigInt(Math.round(resultAmount * 100)); // Round to two decimal places as BigInt
+			resultAmount = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
+		}
+
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
 		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
@@ -228,7 +234,7 @@
 		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount.toFixed(2));
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet.toFixed(2));
-		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount.toFixed(2));
+		orderDataResultAmount.html(resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss.toFixed(2));
 
