@@ -1997,6 +1997,8 @@ class LsportApiController extends Controller {
                 $GameOrder = $GameOrder->where("status",4);
             }
         }
+
+        $GameOrder = $GameOrder->skip($skip)->take($page_limit);
         
         // 先取得m_id list 
         $return = $GameOrder->orderBy("m_id","ASC")->list();
@@ -2014,10 +2016,8 @@ class LsportApiController extends Controller {
         }
 
         $return = $GameOrder->whereIn('m_id', $m_id_list)
-        ->skip($skip)
-        ->take($page_limit)
         ->orderBy('m_id', 'DESC')
-        ->list(1,true);
+        ->list();
         if ($return === false) {
             $this->ApiError("01");
         }
