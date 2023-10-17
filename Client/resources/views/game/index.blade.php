@@ -384,9 +384,6 @@
     
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
-
-        createScoreBoard(matchListD.data)
-
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
@@ -400,7 +397,8 @@
     // ajax update
     function renderView() {
         // scoreboad update
-        // $('.scoreboardCon').empty()
+        $('.scoreboardCon').empty()
+        createScoreBoard(matchListD.data)
     
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status)
