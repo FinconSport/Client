@@ -384,7 +384,8 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
-                v.market_bet.map((k2, v2) => {
+                v.market_bet.map((v2, k2) => {
+                    console.log(v2)
                     createNewElement(v, k2, v2);
                 });
             }
@@ -722,7 +723,8 @@
     
 
     function createNewElement(v, k2, v2) {
-        console.log(v, k2, v2)
+        console.log('createNewElement -> ')
+        console.log(v2.market_bet_id)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`div[market_id=${v.market_id}][priority=${v.priority}]`)
