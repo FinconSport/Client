@@ -51,6 +51,7 @@ const twTranslation = {
   CommonHistorySlideToggle: {
     open: "展開",
     close: "收起",
+    effectiveAmount: '有效投注'
   },
   CommonLogs: {
     record: "帳變紀錄",
@@ -87,6 +88,7 @@ const twTranslation = {
     cancel: "取消",
     submit: "投注",
     limit: "限額",
+    pending: "確認中",
   },
   GameTopSlider: {
     collect: "收藏",
