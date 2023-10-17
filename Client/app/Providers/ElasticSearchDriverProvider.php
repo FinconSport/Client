@@ -256,14 +256,14 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         Builder::macro('queries', function ($JSON, $cacheAliveTime=1,$dd=false) {
 
             // get Model TableName
-            $tableName = "`" . $this->getModel()->getTable() . "`";
-            $esTableName = "`es_" . $tableName."`";
+            $tableName = $this->getModel()->getTable();
+            $esTableName = "es_" . $tableName;
 
             $cacheKey = MD5($esTableName . "_" . $JSON); // create CacheKey by MD5
 
             // use Cache
             return Cache::remember($cacheKey, $cacheAliveTime, function () use ($esTableName, $JSON) {
-                $url = 'http://72.167.135.22:29200/' . $esTableName . '_search';
+                $url = 'http://72.167.135.22:29200/' . $esTableName . '/_search';
 
                 $esUser = env("ES_USER");
                 $esPass = env("ES_PASS");
