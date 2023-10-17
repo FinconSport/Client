@@ -2050,6 +2050,12 @@ class LsportApiController extends Controller {
             $sport_id = $v["sport_id"];
             $home_team_id = $v["home_team_id"];
             $away_team_id = $v["away_team_id"];
+            
+            // 關於小數點處理
+            $columns = ['bet_amount','result_amount','active_bet'];
+            foreach ($columns as $kkkk => $vvvv) {
+                $tmp[$k][$vvvv] = round( $tmp[$k][$vvvv],2);
+            }
 
             // 有串關資料
             if ($v['m_order'] == 1) {
@@ -2058,6 +2064,7 @@ class LsportApiController extends Controller {
                 if ($return === false) {
                     $this->ApiError("02");
                 }
+
 
                 foreach ($return as $kkk => $vvv) {
 
@@ -2088,7 +2095,7 @@ class LsportApiController extends Controller {
 
                 $tmp_bet_data = $v;
                 $tmp_bet_data['start_time'] = $return['start_time'];
-                
+
                 // 關於小數點處理
                 $columns = ['bet_amount','result_amount','active_bet'];
                 foreach ($columns as $kkkk => $vvvv) {
