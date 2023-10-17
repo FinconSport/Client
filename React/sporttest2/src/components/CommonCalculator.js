@@ -209,7 +209,7 @@ class CommonCalculator extends React.Component {
             inputMoney: '',
             maxMoney: '0.00',
             isBetterRate: false,
-            isPending: false,
+            isPending: false
         }
     }
 
@@ -235,9 +235,10 @@ class CommonCalculator extends React.Component {
             if(window.socket_status) {
                 window.ws.onmessage = (event) => {
                     const message = JSON.parse(event.data)
-                    if( message.action === 'delay_order') {
+                    console.log(message)
+                    if( message.action === 'delay_order' && this.state.isPending ) {
                         this.setState({
-                            isPending: false,
+                            isPending: false
                         }, ()=>{
                             // 關閉計算機
                             this.CloseCal()
@@ -366,6 +367,19 @@ class CommonCalculator extends React.Component {
         }
         const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
         this.caller(queryString , 'afterBet')
+
+        setTimeout(() => {
+            console.log(this.state.isPending)
+            if( this.state.isPending ) {
+                this.setState({
+                    isPending: false,
+                }, ()=>{
+                    // 關閉計算機
+                    this.CloseCal()
+                    this.props.callBack() // 投注後餘額
+                })
+            }
+        }, 100000);
     }
 
     notifySuccess = (msg) => {

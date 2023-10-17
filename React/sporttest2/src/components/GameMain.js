@@ -1,6 +1,7 @@
 import React from "react";
 import { langText } from "../pages/LanguageContext";
 import { AiFillLock } from 'react-icons/ai';
+import Cookies from 'js-cookie';
 import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'swiper/css';
@@ -129,7 +130,7 @@ class GameMain extends React.Component {
     
 
     render() {
-        const sport = parseInt(window.sport)
+        const sport = parseInt(Cookies.get('sport', { path: '/' }))
         const data = this.props.data.list
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
         return (

@@ -143,6 +143,7 @@ class MatchContentCard extends React.Component {
 
     setGameMatchId = (matchId) => {
         Cookies.set('GameMatchId', matchId, { path: '/' })
+        Cookies.set('sport', window.sport, { path: '/' })
     }
 
 

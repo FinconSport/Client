@@ -73,14 +73,25 @@
 		var wsStatus = null
 
 		// websocket
-		function WebSocketDemo( sport ) {
+		function WebSocketDemo( ) {
 			console.log('WebSocketDemo')
 			if ("WebSocket" in window) {
 				try {
-					ws = new WebSocket(wsUrl[sport]); // 連線
+					ws = new WebSocket('wss://broadcast.asgame.net/ws'); // 連線
 					ws.onopen = function() {
 						wsInt = setInterval(reconnent, 5000); // detect ws connetion state
-						wsRegisterMatch() // 註冊id
+						
+						// register
+						const wsMsg = {
+							"action": "register",
+							"sport_id": sport,
+							"player": player,
+						}
+						console.log('ws match send -> ')
+						console.log(wsMsg)
+						ws.send(JSON.stringify(wsMsg));
+
+
 						socket_status = true; // for reconnection
 						heartbeatTimer = setInterval(() => { // 心跳 
 							const heartbeat = {
