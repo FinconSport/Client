@@ -39,6 +39,7 @@ return [
         "all" => "All",
         "hot" => "Hot",
         "tie" => "Tie",
+        "correct_score" => "Correct Score",
     ],
     'betTypePriority' => [
       'sizePriority'=>  [5, 6, 105, 106, 111, 115, 119, 123, 205, 206],

@@ -39,6 +39,7 @@ return [
         "all" => "所有",
         "hot" => "熱門",
         "tie" => "平局",
+        "correct_score" => "波膽",
     ],
     'betTypePriority' => [
       'sizePriority'=>  [5, 6, 105, 106, 111, 115, 119, 123, 205, 206],
