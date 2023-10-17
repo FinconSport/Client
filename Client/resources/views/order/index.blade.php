@@ -177,7 +177,11 @@
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
 				totalEffectivetAmount += activeBet;
-				totalWinLoss += winLoss || 0;
+				totalWinLossVal += winLoss || 0;
+
+				let totalWinLoss = totalWinLossVal;
+				let roundedtotalWinLossBigInt = BigInt(Math.round(totalWinLoss * 100)); 
+				totalWinLoss = Number(roundedtotalWinLossBigInt) / 100; 
 
 			});
 
