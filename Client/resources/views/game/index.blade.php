@@ -661,6 +661,8 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        earlyContainerTemp.attr('id', data.list.fixture_id);
+        livingContainerTemp.attr('id', data.list.fixture_id);
 
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
@@ -670,7 +672,6 @@
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.attr('fixture_id', data.list.fixture_id);
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
@@ -681,7 +682,6 @@
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-            livingContainerTemp.attr('fixture_id', data.list.fixture_id);
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             // const scoresLengths = data.list?.scoreboard[1].length - 1;
