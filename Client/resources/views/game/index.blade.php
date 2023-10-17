@@ -668,11 +668,11 @@
 
         // Early fixture (status == 1)
         if (data.list.status == 1) {
-            const leagueID = data.list.leagueID;
+            const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
 
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.attr('id', data.list.fixture_id);
+            earlyContainerTemp.attr('id', data.list.league_id);
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
