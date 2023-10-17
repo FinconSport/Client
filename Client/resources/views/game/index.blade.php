@@ -397,7 +397,7 @@
     // ajax update
     function renderView() {
         // scoreboad update
-        $('.scoreboardCon').empty();
+        // $('.scoreboardCon').empty();
         createScoreBoard(matchListD.data);
     
         // set color of bet title update
