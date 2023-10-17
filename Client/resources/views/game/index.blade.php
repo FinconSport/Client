@@ -912,6 +912,8 @@
             better_rate: 0,
         }
 
+        $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
+
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
@@ -947,28 +949,6 @@
 
         // 選中樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
-
-        // 判斷滾球or早盤
-        // const start_time = new Date(result.start_time).getTime();
-        // const now = new Date().getTime();
-        // let placeholderStr = langTrans.js.limit
-
-        // if (now > start_time) {
-        //     // 滾球
-        //     min = parseInt(limit.living[sport].min)
-        //     max = parseInt(limit.living[sport].max)
-        // } else {
-        //     // 早盤
-        //     min = parseInt(limit.early[sport].min)
-        //     max = parseInt(limit.early[sport].max)
-        // }
-        // placeholderStr += min
-        // placeholderStr += '-'
-        // placeholderStr += max
-        // $('#moneyInput').attr('placeholder', placeholderStr)
-        // $('#moneyInput').val(min)
-        // $('#moneyInput').trigger('change')
-        // $('#moneyInput').focus()
     }
 
     // 關閉左邊投注區塊
