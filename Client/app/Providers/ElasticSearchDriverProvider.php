@@ -259,6 +259,8 @@ class ElasticSearchDriverProvider extends ServiceProvider {
             $tableName = "`" . $this->getModel()->getTable() . "`";
             $esTableName = "`es_" . $tableName."`";
 
+            $cacheKey = MD5($JSON); // create CacheKey by MD5
+            
             // use Cache
             return Cache::remember($cacheKey, $cacheAliveTime, function () use ($esTableName, $JSON) {
                 $url = 'http://72.167.135.22:29200/' . $esTableName . '_search';
