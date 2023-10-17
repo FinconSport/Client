@@ -705,16 +705,20 @@
             createMarketContainer(k, v);
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
-                    const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-                    createMarketRateContainer(v, k2, v2);
+                    // const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
+                    // createMarketRateContainer(v, k2, v2);
+                    createNewElement(v, k2, v2);
 
-                    // Check if .bettingtype-container[id] exists with the same market_id
-                    if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
-                        $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove(); // .bettingtype-container with this market_id doesn't exist, remove the betting.
-                        // console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
-                    } else {
-                        // console.log(`.market-rate found for market_id ${v2.market_bet_id}`);
-                    }
+
+                    // const lengthOfId = marketBetRateId.length;
+                    // console.log(`Length of marketBetRateId ${marketBetRateId}: ${lengthOfId}`);
+                    // // Check if .bettingtype-container[id] exists with the same market_id
+                    // if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
+                    //     $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove(); // .bettingtype-container with this market_id doesn't exist, remove the betting.
+                    //     console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
+                    // } else {
+                    //     console.log(`.market-rate found for market_id ${v2.market_bet_id}`);
+                    // }
 
                 });
             }
@@ -728,7 +732,7 @@
         if (!$('#' + v.market_id).length) {
             const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
             bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-            bettingTypeContainerTemp.attr('id', v.market_id);
+            bettingTypeContainerTemp.attr('market_id', v.market_id);
             bettingTypeContainerTemp.attr('priority', v.priority);
 
             const marketNameElement = bettingTypeContainerTemp.find('.market_name');
@@ -747,7 +751,9 @@
     const createdElementKeys = new Set();
     
     function createMarketRateContainer(v, k2, v2) {
-        console.log(v, k2, v2)
+        let market_id = v.market_id
+        let priority = v.priority
+        let market_bet_id = v2.market_bet_id
 
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         const marketRateElements = $(`.market-rate[market_bet_id="${v.market_bet_id}"]`);
@@ -846,14 +852,11 @@
         marketBetRateTemp.attr('line', v2.line);
     }
 
-    function createNewElement(v, k2, v2, marketBetRateId) {
+    function createNewElement(v, k2, v2) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
-        let bet_div = $(`#${marketBetRateId} div[priority=${v.priority}]`)
-        // let betData = Object.values(v3.list).find(m => m.priority === i)
-        let betData = v.priority; 
+        let bet_div = $(`div[market_id=${v.market_id}][priority=${v.priority}]`)
 
-        marketBetRateTemp.attr('id', marketBetRateId);
         marketBetRateTemp.attr('priority', v.priority);
         marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
@@ -867,46 +870,44 @@
         marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
 
-        if( betData > 0 ) { 
-            marketBetRateTemp.find('.odd').text(v2.price)
-            switch (v.priority) {
-                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.line);
-                    break;
-                case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
-                    break;
-                case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
-                    marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
-                    break;
-                case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
-                    if (v2.market_bet_name_en == 1) {
-                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
-                    } else if (v2.market_bet_name_en == 2) {
-                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
-                    } else if (v2.market_bet_name_en == 'X') {
-                        marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            if (v2.status == 1) {
-                marketBetRateTemp.find('.fa-lock').hide();
-                marketBetRateTemp.attr('onclick', 'openCal($(this))');
-                marketBetRateTemp.find('.market_price').show();
-            } else {
-                marketBetRateTemp.find('.fa-lock').show();
-                marketBetRateTemp.removeAttr('onclick');
-                marketBetRateTemp.find('.market_price').hide();
-            }
-
-            // Append the new element to the correct container
-            $('#' + v.market_id + ' #marketRateDataTemp').append(marketBetRateTemp);
+        marketBetRateTemp.find('.odd').text(v2.price)
+        switch (v.priority) {
+            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                marketBetRateTemp.find('.market_bet_name').text(v2.line);
+                break;
+            case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
+                break;
+            case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
+                marketBetRateTemp.find('.market_bet_name').text(v2.market_bet_name);
+                break;
+            case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+                if (v2.market_bet_name_en == 1) {
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name);
+                } else if (v2.market_bet_name_en == 2) {
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name);
+                } else if (v2.market_bet_name_en == 'X') {
+                    marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
+                }
+                break;
+            default:
+                break;
         }
 
-        createdElementKeys.add(marketBetRateId);
+        if (v2.status == 1) {
+            marketBetRateTemp.find('.fa-lock').hide();
+            marketBetRateTemp.attr('onclick', 'openCal($(this))');
+            marketBetRateTemp.find('.market_price').show();
+        } else {
+            marketBetRateTemp.find('.fa-lock').show();
+            marketBetRateTemp.removeAttr('onclick');
+            marketBetRateTemp.find('.market_price').show();
+        }
+
+        // Append the new element to the correct container
+        bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+
+        // createdElementKeys.add(marketBetRateId);
     }
 
     // ------- game page scoreboard function-----------
