@@ -144,7 +144,13 @@
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
 				const betAmount = parseFloat(orderItem.bet_amount);
-				const resultAmount = parseFloat(orderItem.result_amount);
+				// const resultAmount = parseFloat(orderItem.result_amount);
+				let resultAmount = parseFloat(orderItem.result_amount) || 0;
+				if (!isNaN(resultAmount)) {
+					let roundedAmountBigInt = BigInt(Math.round(resultAmount * 100)); // Round to two decimal places as BigInt
+					resultAmount = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
+				}
+
 				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
@@ -156,22 +162,19 @@
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
-				totalResultAmount += resultAmount || 0;
+				totalResultAmount += resultAmount;
 				totalEffectivetAmount += effectiveAmount;
 				totalWinLoss += winLoss || 0;
 
 
 				// Check if resultAmount is NaN or null
 				let resultAmount1 = parseFloat(orderItem.result_amount) || 0;
-				if (!isNaN(resultAmount)) {
-					let roundedAmountBigInt = BigInt(Math.round(resultAmount1 * 100)); // Round to two decimal places as BigInt
-					resultAmount1 = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
-				}
+				
 				console.log(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id + ' ' + resultAmount1); 
 			});
 
 			// After accumulating the totals, round them to two decimal places
-			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
