@@ -2068,7 +2068,6 @@ class LsportApiController extends Controller {
                     $this->ApiError("02");
                 }
 
-
                 foreach ($return as $kkk => $vvv) {
 
                     $fixture_id = $vvv['fixture_id'];
