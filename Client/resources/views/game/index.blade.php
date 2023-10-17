@@ -384,7 +384,7 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
-                Object.entries(v.market_bet).map(([k2, v2]) => {
+                v.market_bet.map((k2, v2) => {
                     createNewElement(v, k2, v2);
                 });
             }
@@ -707,27 +707,22 @@
 
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
-        // Check if the container with ID k already exists
-        if (!$('#' + v.market_id).length) {
-            const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
-            bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
-            bettingTypeContainerTemp.attr('market_id', v.market_id);
-            bettingTypeContainerTemp.attr('priority', v.priority);
+        console.log(v.market_name)
+        const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
+        bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
+        bettingTypeContainerTemp.attr('market_id', v.market_id);
+        bettingTypeContainerTemp.attr('priority', v.priority);
 
-            const marketNameElement = bettingTypeContainerTemp.find('.market_name');
-            var sportId = sport;
-            var priority = v.priority;
+        const marketNameElement = bettingTypeContainerTemp.find('.market_name');
+        var priority = v.priority;
 
-            marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
-            
-            if (v.market_bet !== undefined && v.market_bet.length > 0) { //  If v.market_bet is empty or undefined, the append operation will not be performed
-                $('#bettingTypeContainer').append(bettingTypeContainerTemp);
-            }
-        }
+        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
+        $('#bettingTypeContainer').append(bettingTypeContainerTemp);
     }
     
 
     function createNewElement(v, k2, v2) {
+        console.log(v, k2, v2)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         let bet_div = $(`div[market_id=${v.market_id}][priority=${v.priority}]`)
