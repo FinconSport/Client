@@ -186,6 +186,12 @@
 
 			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
 
+
+			const ResultAmountStr1 = BigInt(totalResultAmount);
+			// Sum the BigInt values
+			const totalResultAmountStr1 = ResultAmountStr1.reduce((acc, value) => acc + value, BigInt(0));
+			console.log(totalResultAmountStr1.toString()); // This will print -17
+
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
