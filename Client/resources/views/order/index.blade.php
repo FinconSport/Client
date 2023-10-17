@@ -144,10 +144,11 @@
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
-				const betAmount = orderItem.bet_amount ? BigInt(orderItem.bet_amount) : 0
-				const resultAmount = orderItem.result_amount ? BigInt(orderItem.result_amount) : 0
-				const effectiveAmount = orderItem.active_bet ? BigInt(orderItem.active_bet) : 0
-				const winLoss = resultAmount && betAmount ? resultAmount - betAmount : 0
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const effectiveAmount = parseFloat(orderItem.active_bet);
+				const winLoss = (resultAmount - betAmount).toFixed(2);
+
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -187,7 +188,7 @@
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
-		const winLossValue = winLoss;
+		const winLossValue = parseFloat(winLoss);
 		if (winLossValue >= 0) {
 			orderDataWinLoss.css('color', 'red'); // Set text color to red
 		} else {
@@ -212,7 +213,7 @@
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss = winLoss);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
