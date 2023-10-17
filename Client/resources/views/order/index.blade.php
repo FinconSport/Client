@@ -171,12 +171,8 @@
 				isLastPage && $('#noMoreData').show()
 			}
 
-			const totalResultAmount1 = BigInt(Math.round(totalResultAmount * 100));
-			console.log(totalResultAmount1.toString());
-
 			const toBigInt = (totalResultAmount) => totalResultAmount ? BigInt(totalResultAmount) : BigInt(0);
-			// Calculate the total result amount using reduce
-			const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => {
+			const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => { // Calculate the total result amount using reduce
 				return acc + toBigInt(obj.result_amount);
 			}, BigInt(0));
 
