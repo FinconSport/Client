@@ -147,8 +147,7 @@
 				const betAmount = parseFloat(orderItem.bet_amount);
 				const resultAmount = parseFloat(orderItem.result_amount);
 				const effectiveAmount = parseFloat(orderItem.active_bet);
-				const winLoss = (resultAmount - betAmount).toFixed(2);
-
+				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
