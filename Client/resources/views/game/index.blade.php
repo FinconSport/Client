@@ -383,7 +383,7 @@
 
     
     function viewIni() { // view ini
-        // createScoreBoard(matchListD.data)
+        createScoreBoard(matchListD.data)
         setBettypeColor(matchListD.data.list.status)
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
