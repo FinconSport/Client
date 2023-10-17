@@ -397,7 +397,8 @@
 
     // ajax update
     function renderView() {
-        createScoreBoard(matchListD.data);
+        // $('#' + v.market_id + ' #marketRateDataTemp').empty(); // <-- every 5 seconds refresh will remove the old market rate container and will update the new one
+        // createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -658,9 +659,6 @@
 
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
-        $('.earlyFixture-container:not([template])').remove();
-        $('.livingFixture-container:not([template])').remove();
-
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
 
@@ -672,6 +670,7 @@
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+            earlyContainerTemp.attr('fixture_id', data.list.fixture_id);
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
@@ -682,6 +681,7 @@
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+            livingContainerTemp.attr('fixture_id', data.list.fixture_id);
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             // const scoresLengths = data.list?.scoreboard[1].length - 1;
