@@ -19,6 +19,7 @@
 		var heartbeatTimer = null
 		var registerMatchList = []
 		var wsInt = null
+		var wsStatus = null
 
 		// websocket
 		function WebSocketDemo( sport ) {
@@ -52,7 +53,6 @@
 						messageQueue.push(message); // push package to messageQueue
 					}
 				} catch (error) {
-					console.error(langTrans.js.websocket_connect_err, error);
 				}
 			} else {
 				console.log("WebSocket NOT supported by your Browser!");
