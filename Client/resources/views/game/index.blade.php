@@ -668,8 +668,8 @@
 
         // Early fixture (status == 1)
         if (data.list.status == 1) {
-            const fixtureID = data.list.fixture_id;
-            $(`div[id="${fixtureID}"]`).remove();
+            const leagueID = data.list.leagueID;
+            $(`div[id="${leagueID}"]`).remove();
 
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.attr('id', data.list.fixture_id);
@@ -686,18 +686,18 @@
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
 
-            const leagueID = data.list.league_id;
-            const fixtureID = data.list.fixture_id;
-            $(`tr[id="${fixtureID}"]`).remove();
-            $(`tr[id="${leagueID}"]`).remove();
+            const headTr = data.list.fixture_id + '_head';
+            const bodyTr = data.list.fixture_id + '_body';
+            $(`tr[id="${headTr}"]`).remove();
+            $(`tr[id="${bodyTr}"]`).remove();
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
 
-            scoreBoardHeadTemp.attr('id', data.list.league_id);
-            scoreBoardBodyTemp_home.attr('id', data.list.fixture_id);
-            scoreBoardBodyTemp_away.attr('id', data.list.fixture_id);
+            scoreBoardHeadTemp.attr('id', headTr);
+            scoreBoardBodyTemp_home.attr('id', bodyTr);
+            scoreBoardBodyTemp_away.attr('id', bodyTr);
 
             const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
