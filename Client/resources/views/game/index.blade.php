@@ -408,6 +408,7 @@
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
+            console.log(bet_div)
             // if not exist -> create
             if( !bet_div ) createMarketContainer(k, v);
             
@@ -473,6 +474,26 @@
                 });
             }
         });
+
+
+        // check exist bet type content is still exist in the data
+        $('#bettingTypeContainer .bettingtype-container').each(function() {
+            let priority = parseInt($(this).attr('priority'))
+            let result = null
+            result = matchListD.data?.list?.market.find(item => (item.priority) === priority)
+            if( !result ) $(this).remove()
+        });
+
+        // check exist bet item is still exist in the data
+        $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
+            let priority = parseInt($(this).attr('priority'))
+            let market_bet_id = parseInt($(this).attr('market_bet_id'))
+            let result = null
+            let resultArr = matchListD.data?.list?.market.find(item => (item.priority) === priority)
+            if( resultArr.market_bet ) result = resultArr.market_bet.find(item => (item.market_bet_id) === market_bet_id)
+            if( !result ) $(this).remove()
+        });
+
     }
    
    
@@ -571,6 +592,7 @@
 
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
+        console.log(k, v)
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
         bettingTypeContainerTemp.attr('market_id', v.market_id);
