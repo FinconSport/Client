@@ -143,16 +143,27 @@
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
-				const betAmount = parseFloat(orderItem.bet_amount);
+				// const betAmount = parseFloat(orderItem.bet_amount);
 				// const resultAmount = parseFloat(orderItem.result_amount);
-				let resultAmount = parseFloat(orderItem.result_amount) || 0;
-				if (!isNaN(resultAmount)) {
-					let roundedAmountBigInt = BigInt(Math.round(resultAmount * 100)); // Round to two decimal places as BigInt
-					resultAmount = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
-				}
+				// const effectiveAmount = parseFloat(orderItem.active_bet);
 
-				const effectiveAmount = parseFloat(orderItem.active_bet);
+				// if the amount is null make it 0
+				let betAmount = parseFloat(orderItem.bet_amount) || 0;
+				let activeBet = parseFloat(orderItem.active_bet) || 0;
+				let resultAmount = parseFloat(orderItem.result_amount) || 0;
 				const winLoss = resultAmount - betAmount;
+
+				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
+					// Round to two decimal places as BigInt
+					let roundedBetBigInt = BigInt(Math.round(betAmount * 100));
+					let roundedActiveBetBigInt = BigInt(Math.round(activeBet * 100)); 
+					let roundedResultBigInt = BigInt(Math.round(resultAmount * 100)); 
+
+					// Convert the BigInt result back to a number
+					betAmount = Number(roundedBetBigInt) / 100;
+					activeBet = Number(roundedActiveBetBigInt) / 100; 
+					resultAmount = Number(roundedResultBigInt) / 100; 
+				}
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -163,32 +174,20 @@
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
-				totalEffectivetAmount += effectiveAmount;
+				totalEffectivetAmount += activeBet;
 				totalWinLoss += winLoss || 0;
 
-
-				// Check if resultAmount is NaN or null
-				let resultAmount1 = parseFloat(orderItem.result_amount) || 0;
-				
-				console.log(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id + ' ' + resultAmount1); 
 			});
 
-			// After accumulating the totals, round them to two decimal places
+			// After accumulating the totals
 			totalResultAmount = parseFloat(totalResultAmount);
-			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
-			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
-			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+			totalEffectivetAmount = parseFloat(totalEffectivetAmount);
+			totalBetAmount = parseFloat(totalBetAmount);
+			totalWinLoss = parseFloat(totalWinLoss);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
 			}
-
-			// const toBigInt = (totalResultAmount) => totalResultAmount ? BigInt(totalResultAmount) : BigInt(0);
-			// const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => { // Calculate the total result amount using reduce
-			// 	return acc + toBigInt(obj.result_amount);
-			// }, BigInt(0));
-
-			// console.log(totalResultAmount.toString());
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
@@ -220,10 +219,21 @@
 			orderDataSportType.html(sportName);
 		}
 
+		// if the amount is null make it 0
+		let betAmount = parseFloat(orderItem.bet_amount) || 0;
+		let activeBet = parseFloat(orderItem.active_bet) || 0;
 		let resultAmount = parseFloat(orderItem.result_amount) || 0;
-		if (!isNaN(resultAmount)) {
-			let roundedAmountBigInt = BigInt(Math.round(resultAmount * 100)); // Round to two decimal places as BigInt
-			resultAmount = Number(roundedAmountBigInt) / 100; // Convert the BigInt result back to a number
+
+		if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
+			// Round to two decimal places as BigInt
+			let roundedBetBigInt = BigInt(Math.round(betAmount * 100));
+			let roundedActiveBetBigInt = BigInt(Math.round(activeBet * 100)); 
+			let roundedResultBigInt = BigInt(Math.round(resultAmount * 100)); 
+
+			// Convert the BigInt result back to a number
+			betAmount = Number(roundedBetBigInt) / 100;
+			activeBet = Number(roundedActiveBetBigInt) / 100; 
+			resultAmount = Number(roundedResultBigInt) / 100; 
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
@@ -231,12 +241,12 @@
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
-		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : orderItem.bet_amount.toFixed(2));
+		orderDataBetAmount.html(betAmount);
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
-		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet.toFixed(2));
+		orderDataEffectiveAmount.html(activeBet);
 		orderDataResultAmount.html(resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss.toFixed(2));
+		orderDataWinLoss.html(winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
