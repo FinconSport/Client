@@ -1985,18 +1985,18 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 獲取注單資料
        // $GameOrder = GameOrder::where("player_id", $input['player']);
-        $GameOrder = GameOrder::where('m_id','id')->skip($skip)->take($page_limit);
+        $GameOrder = GameOrder::where('m_id','id');
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
             // 未結算
             if ($input['result'] == 0) {
-                $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
+            //    $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
             }
             
             // 已派獎
             if ($input['result'] == 1) {
-                $GameOrder = $GameOrder->where("status",4);
+            //    $GameOrder = $GameOrder->where("status",4);
             }
         }
 
@@ -2004,7 +2004,7 @@ class LsportApiController extends Controller {
             $return = $GameOrder->orderBy('m_id', 'DESC')->list(1,true);
         }
 
-        $return = $GameOrder->orderBy('m_id', 'DESC')->get();
+        $return = $GameOrder->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list();
         if ($return === false) {
             $this->ApiError("01");
         }
