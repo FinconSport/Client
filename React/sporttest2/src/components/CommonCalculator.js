@@ -231,19 +231,24 @@ class CommonCalculator extends React.Component {
         if(window.ws) window.ws.close()
         window.WebSocketDemo()
 
-        window.ws.onmessage = (event) => {
-            const message = JSON.parse(event.data)
-            if( message.action === 'delay_order') {
-                this.setState({
-                    isPending: false,
-                }, ()=>{
-                    // 關閉計算機
-                    this.CloseCal()
-                    this.notifySuccess(message.order_id)
-                    this.props.callBack() // 投注後餘額
-                })
+        window.wsStatus = setInterval(() => {
+            if(window.socket_status) {
+                window.ws.onmessage = (event) => {
+                    const message = JSON.parse(event.data)
+                    if( message.action === 'delay_order') {
+                        this.setState({
+                            isPending: false,
+                        }, ()=>{
+                            // 關閉計算機
+                            this.CloseCal()
+                            this.notifySuccess(message.order_id)
+                            this.props.callBack() // 投注後餘額
+                        })
+                    }
+                };
+                clearInterval(window.wsStatus)
             }
-        };
+        }, 500);
     }
     
     // 關閉計算機
