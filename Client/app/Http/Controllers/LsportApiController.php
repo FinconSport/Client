@@ -2039,6 +2039,8 @@ class LsportApiController extends Controller {
             "status"
         );
 
+        $round_columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
+
         foreach ($order_data as $k => $v) {
             foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
@@ -2052,9 +2054,10 @@ class LsportApiController extends Controller {
             $away_team_id = $v["away_team_id"];
             
             // 關於小數點處理
-            $columns = ['bet_amount','result_amount','active_bet'];
-            foreach ($columns as $kkkk => $vvvv) {
-                $tmp[$k][$vvvv] = round( $tmp[$k][$vvvv],2);
+            foreach ($round_columns as $kkkk => $vvvv) {
+                if (isset($tmp[$k][$vvvv])) {
+                    $tmp[$k][$vvvv] = round($tmp[$k][$vvvv],2);
+                }
             }
 
             // 有串關資料
@@ -2064,7 +2067,6 @@ class LsportApiController extends Controller {
                 if ($return === false) {
                     $this->ApiError("02");
                 }
-
 
                 foreach ($return as $kkk => $vvv) {
 
@@ -2078,9 +2080,10 @@ class LsportApiController extends Controller {
                     $tmp_bet_data['start_time'] = $return['start_time'];
 
                     // 關於小數點處理
-                    $columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
-                    foreach ($columns as $kkkk => $vvvv) {
-                        $tmp_bet_data[$vvvv] = round($tmp_bet_data[$vvvv],2);
+                    foreach ($round_columns as $kkkk => $vvvv) {
+                        if (isset($tmp_bet_data[$vvvv])) {
+                            $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                        }
                     }
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
@@ -2097,9 +2100,10 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['start_time'] = $return['start_time'];
 
                 // 關於小數點處理
-                $columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
-                foreach ($columns as $kkkk => $vvvv) {
-                    $tmp_bet_data[$vvvv] = round($tmp_bet_data[$vvvv],2);
+                foreach ($round_columns as $kkkk => $vvvv) {
+                    if (isset($tmp_bet_data[$vvvv])) {
+                        $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                    }
                 }
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
