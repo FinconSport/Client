@@ -390,7 +390,6 @@
             createMarketContainer(k, v);
             if (v.market_bet) {
                 v.market_bet.map((v2, k2) => {
-                    console.log(v2)
                     createNewElement(v, k2, v2);
                 });
             }
@@ -572,7 +571,6 @@
 
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
-        console.log(v.market_name)
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
         bettingTypeContainerTemp.attr('market_id', v.market_id);
@@ -638,8 +636,6 @@
             marketBetRateTemp.find('.market_price').show();
         }
 
-        console.log(marketBetRateTemp)
-        console.log(bet_div.find('.marketBetRateContainer'))
         // Append the new element to the correct container
         bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
 
