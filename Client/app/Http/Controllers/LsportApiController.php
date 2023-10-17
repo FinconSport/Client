@@ -2021,6 +2021,7 @@ class LsportApiController extends Controller {
             "m_id",
             "bet_amount",
             "result_amount",
+            "active_bet",
             "create_time",
             "result_time",
             "status"
