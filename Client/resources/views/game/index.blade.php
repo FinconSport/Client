@@ -634,6 +634,7 @@
         marketBetRateTemp.find('.odd').text(v3.price)
         let pri = v.priority
         switch (true) {
+            case langTrans2.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
             case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
