@@ -2000,7 +2000,7 @@ class LsportApiController extends Controller {
         // 先取得m_id list 
         $return = $GameOrder->orderBy("m_id","ASC")->list();
         if ($return === false) {
-
+            $this->ApiError("01");
         }
 
         $m_id_list = array();
@@ -2015,7 +2015,7 @@ class LsportApiController extends Controller {
             }
         }
 
-        dd($m_id_list);
+        dd($return,$m_id_list);
 
 
         $return = $GameOrder->whereIn('m_id', function($query) {
