@@ -1989,7 +1989,7 @@ class LsportApiController extends Controller {
             ->groupBy('m_id')
             ->orderBy('m_id', 'desc')
             ->skip($skip)->take($page_limit)
-            ->total();
+            ->total(1,true);
 
             $ccc = $return;
             foreach ($ccc['m_id']['buckets'] as $k => $v) {
