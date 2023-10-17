@@ -175,14 +175,14 @@
 			// Example totalResultAmount as a string
 			const totalResultAmountStr = totalResultAmount.toFixed(2);
 			// Extract the integer and decimal parts
-			const [integerPartStr, decimalPartStr] = totalResultAmountStr.split('.');
+			const [sign, integerPartStr, decimalPartStr] = totalResultAmountStr.match(/(-?)(\d+)\.(\d+)/);
 			// Convert the integer part to a BigInt
 			const integerPartBigInt = BigInt(integerPartStr);
 			// Convert the decimal part to a number, round it, and add to the BigInt
 			const decimalPart = parseFloat(`0.${decimalPartStr}`);
 			const roundedDecimalPart = Math.round(decimalPart);
 			const decimalPartBigInt = BigInt(Math.round(decimalPart * 100)); // Multiplied by 100 to handle two decimal places
-			const totalBigInt = integerPartBigInt + decimalPartBigInt;
+			const totalBigInt = sign === '-' ? -(integerPartBigInt + decimalPartBigInt) : (integerPartBigInt + decimalPartBigInt);
 
 			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
 
