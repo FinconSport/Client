@@ -1985,7 +1985,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 獲取注單資料
        // $GameOrder = GameOrder::where("player_id", $input['player']);
-        $GameOrder = GameOrder::where("id", ">", 0)->where('m_id','id');
+        $GameOrder = GameOrder::where('m_id','id')->skip($skip)->take($page_limit);
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
@@ -1999,8 +1999,6 @@ class LsportApiController extends Controller {
                 $GameOrder = $GameOrder->where("status",4);
             }
         }
-
-        $GameOrder = $GameOrder->skip($skip)->take($page_limit);
 
 
         if (isset($input['debug'])) {
