@@ -1996,7 +1996,15 @@ class LsportApiController extends Controller {
                 $GameOrder = $GameOrder->where("status",4);
             }
         }
-            
+        
+        // 先取得m_id list 
+        $return = $GameOrder->->select('m_id')
+        ->from('es_game_order')
+        ->groupBy('m_id')
+        ->total();
+
+        dd($return);
+
         $return = $GameOrder->whereIn('m_id', function($query) {
             $query->select('m_id')
                   ->from('es_game_order')
