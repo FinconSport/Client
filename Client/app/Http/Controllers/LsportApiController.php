@@ -1921,7 +1921,7 @@ class LsportApiController extends Controller {
                 $tmp_data[$bet_id_count]['last_update'] = $vvv['last_update'];
                 $tmp_data[$bet_id_count]['provder_bet_id'] = $vvv['provder_bet_id'];
                     
-                $tmp_market_data['market_bet'][] = $tmp_data;
+                $tmp_market_data['market_bet'][$market_bet_id][] = $tmp_data;
                 $bet_id_count++;
             }
 
