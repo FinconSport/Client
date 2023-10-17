@@ -164,7 +164,7 @@
 				// Check if resultAmount is NaN or null
 				let resultAmount1 = parseFloat(orderItem.result_amount) || 0;
 				if (!isNaN(resultAmount1)) {
-					resultAmount1 = Number(BigInt(Math.round(resultAmount1 * 100)) / 100); // Round to two decimal places
+					resultAmount1 = Number(BigInt(Math.round(resultAmount1 * 100)) / 100); // Round to two decimal places and convert back to a number
 				}
 				console.log(resultAmount1); 
 			});
