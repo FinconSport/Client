@@ -445,7 +445,6 @@
                             // new rate
                             bet_item.find('.odd').text(v3.price)
                             let pri = v.priority
-                            console.log(pri, langTrans2.betTypePriority.hcapPriority, langTrans2.betTypePriority.hcapPriority.indexOf(pri))
                             switch (pri) {
                                 case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
                                     marketBetRateTemp.find('.market_bet_name').text(v3.line);
