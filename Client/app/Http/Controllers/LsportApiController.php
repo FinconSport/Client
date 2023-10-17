@@ -2028,7 +2028,6 @@ class LsportApiController extends Controller {
 
         $round_columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
 
-
         foreach ($order_data as $k => $v) {
             foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
