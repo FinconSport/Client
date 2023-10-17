@@ -669,6 +669,7 @@
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+            earlyContainerTemp.attr('id', data.list.fixture_id);
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
@@ -689,6 +690,10 @@
                 scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
                 scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
                 scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
+
+                scoreBoardHeadTemp.attr('id', data.list.league_id);
+                scoreBoardBodyTemp_home.attr('id', data.list.fixture_id);
+                scoreBoardBodyTemp_away.attr('id', data.list.fixture_id);
 
                 const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
 
