@@ -1964,7 +1964,6 @@ class LsportApiController extends Controller {
         // 取得代理的語系
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
-        $lang_col = 'name_' . $agent_lang;
 
         //////////////////////////////////////////
 
@@ -1984,27 +1983,12 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
         // 獲取注單資料
-       // $GameOrder = GameOrder::where("player_id", $input['player']);
-        $GameOrder = GameOrder::where('m_id','id')->skip($skip)->take($page_limit);
-
-        if (isset($input['result']) && ($input['result'] != "")) {
-            
-            // 未結算
-            if ($input['result'] == 0) {
-                $GameOrder = $GameOrder->whereIn("status",[0,1,2,3]);
-            }
-            
-            // 已派獎
-            if ($input['result'] == 1) {
-                $GameOrder = $GameOrder->where("status",4);
-            }
-        }
 
         if (isset($input['debug'])) {
-            $return = $GameOrder->orderBy('m_id', 'DESC')->list(1,true);
+            $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list(1,true);
         }
 
-        $return = $GameOrder->orderBy('m_id', 'DESC')->get();
+        $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -2068,7 +2052,6 @@ class LsportApiController extends Controller {
                     $tmp_bet_data = $vvv;
                     $tmp_bet_data['start_time'] = $return['start_time'];
                     
-
                     // 關於小數點處理
                     foreach ($round_columns as $kkkk => $vvvv) {
                         if (isset($tmp_bet_data[$vvvv])) {
