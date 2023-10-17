@@ -661,14 +661,13 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
-        earlyContainerTemp.attr('id', data.list.fixture_id);
-        livingContainerTemp.attr('id', data.list.fixture_id);
 
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
         livingContainerTemp.attr('id', "livingFixture");
+        livingContainerTemp.attr('id', "earlyFixture");
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
