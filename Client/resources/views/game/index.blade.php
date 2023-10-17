@@ -457,9 +457,9 @@
                                     break;
                                 case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
-                                        bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name + v3.line);
+                                        bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                                     } else if (v3.market_bet_name_en == 2) {
-                                        bet_item.find('.market_bet_name').text(matchListD.data.list.away_team_name + v3.line);
+                                        bet_item.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
                                     } else if (v3.market_bet_name_en == 'X') {
                                         bet_item.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                                     }
@@ -647,9 +647,9 @@
                 break;
             case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
-                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + v3.line);
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 2) {
-                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name + v3.line);
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 'X') {
                     marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                 }
