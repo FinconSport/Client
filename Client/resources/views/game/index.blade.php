@@ -412,63 +412,65 @@
             
             if (v.market_bet) {
                 v.market_bet.map((v2, k2) => {
-                    let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v2.market_bet_id}"]`)
+                    v2[1].map((v3, k3) => {
+                        let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
 
-                    // if not exist -> create / if exists -> update
-                    if( !bet_item ) {
-                        createNewElement(v, k2, v2);
-                    } else {
-                        let oldRate = parseFloat(bet_item.attr('bet_rate'))
-                        let newRate = parseFloat(v2.price)
-
-                        // rate compare
-                        if( oldRate > newRate ) lowerOdd(v.priority, v2.market_bet_id)
-                        if( oldRate < newRate ) raiseOdd(v.priority, v2.market_bet_id)
-
-                        // status
-                        if( v2.status === 1 ) {
-                            bet_item.find('.fa-lock').hide()
-                            bet_item.attr('onclick', 'openCal($(this))')
+                        // if not exist -> create / if exists -> update
+                        if( !bet_item ) {
+                            createNewElement(v, v3);
                         } else {
-                            bet_item.find('.fa-lock').show()
-                            bet_item.removeAttr('onclick')
+                            let oldRate = parseFloat(bet_item.attr('bet_rate'))
+                            let newRate = parseFloat(v3.price)
+
+                            // rate compare
+                            if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id)
+                            if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id)
+
+                            // status
+                            if( v3.status === 1 ) {
+                                bet_item.find('.fa-lock').hide()
+                                bet_item.attr('onclick', 'openCal($(this))')
+                            } else {
+                                bet_item.find('.fa-lock').show()
+                                bet_item.removeAttr('onclick')
+                            }
+
+                            // set new attribute
+                            bet_item.attr('bet_rate', v3.price);
+                            bet_item.attr('bet_type', v.market_name);
+                            bet_item.attr('bet_name', v3.market_bet_name + ' ' + v3.line);
+                            bet_item.attr('bet_name_en', v3.market_bet_name_en);
+                            bet_item.attr('line', v3.line);
+
+                            // new rate
+                            bet_item.find('.odd').text(v3.price)
+
+                            // market_bet_name
+                            switch (v.priority) {
+                                case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
+                                    marketBetRateTemp.find('.market_bet_name').text(v3.line);
+                                    break;
+                                case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
+                                    marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
+                                    break;
+                                case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
+                                    marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
+                                    break;
+                                case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
+                                    if (v3.market_bet_name_en == 1) {
+                                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
+                                    } else if (v3.market_bet_name_en == 2) {
+                                        marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
+                                    } else if (v3.market_bet_name_en == 'X') {
+                                        marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+
                         }
-
-                        // set new attribute
-                        bet_item.attr('bet_rate', v2.price);
-                        bet_item.attr('bet_type', v.market_name);
-                        bet_item.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
-                        bet_item.attr('bet_name_en', v2.market_bet_name_en);
-                        bet_item.attr('line', v2.line);
-
-                        // new rate
-                        bet_item.find('.odd').text(v2.price)
-
-                        // market_bet_name
-                        switch (v.priority) {
-                            case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
-                                bet_item.find('.market_bet_name').text(v2.line);
-                                break;
-                            case 5: case 6: case 205: case 206: case 105: case 106: case 111: case 115: case 119: case 123:
-                                bet_item.find('.market_bet_name').text(v2.market_bet_name + ' ' + v2.line);
-                                break;
-                            case 7: case 8: case 107: case 108: case 112: case 116: case 120: case 124: case 207: case 208:
-                                bet_item.find('.market_bet_name').text(v2.market_bet_name);
-                                break;
-                            case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
-                                if (v2.market_bet_name_en == 1) {
-                                    bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name);
-                                } else if (v2.market_bet_name_en == 2) {
-                                    bet_item.find('.market_bet_name').text(matchListD.data.list.away_team_name);
-                                } else if (v2.market_bet_name_en == 'X') {
-                                    bet_item.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-
-                    }
+                    });
                 });
             }
         });
@@ -527,7 +529,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView();
+                    renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
