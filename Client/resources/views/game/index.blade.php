@@ -701,38 +701,26 @@
             $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
 
+        const updatedMarketIds = new Set(); // Create a new set for updated data
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
 
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
+                    const marketRateElements = $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`);
+                    updatedMarketIds.add(v2.market_bet_id);
+                    if (marketRateElements.length > 1) {
+                        marketRateElements.eq(0).remove(); // <-- remove the duplicating append
+                    } 
+
                     createMarketRateContainer(v, k2, v2);
+                    
+                    if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
+                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove(); // .bettingtype-container with this market_id doesn't exist, remove the betting.
+                }
                 });
             }
         });
-
-        const updatedMarketIds = new Set(); // Create a new set for updated data
-        // Update data and add new market IDs
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            Object.entries(v.market_bet).map(([k2, v2]) => {
-                updatedMarketIds.add(v2.market_bet_id);
-                // Check if .bettingtype-container[id] exists with the same market_id
-                if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
-                    // .bettingtype-container with this market_id doesn't exist, remove the betting.
-                    $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove();
-                    console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
-                }
-
-                const marketRateElements = $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`);
-                if (marketRateElements.length > 1) {
-                    marketRateElements.eq(0).remove(); // <-- remove the duplicating append
-                } 
-
-                const parentContainer = marketRateElements.parent;
-                const childElements = parentContainer.children;
-            });
-        });
-        
     }
 
     // ------- game page create market data parent container-----------
