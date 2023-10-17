@@ -187,7 +187,7 @@
 			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
 
 
-			const totalResultAmount = BigInt(Math.round(11.33 * 100)) + BigInt(Math.round(33.00 * 100)) + BigInt(Math.round(-100.00 * 100)) + BigInt(Math.round(39.00 * 100));
+			const totalResultAmount = BigInt(Math.round(totalResultAmount * 100));
 			console.log(totalResultAmount.toString());
 	}
 
