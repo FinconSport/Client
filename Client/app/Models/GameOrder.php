@@ -99,7 +99,7 @@ class GameOrder extends Model
 
 		$DSKQueryStr = json_encode($DSLQuery,true);
 
-		$return = self::queries($DSLQuery);
+		$return = self::queries($DSKQueryStr);
 
 		dd($DSKQueryStr,$return);
 
