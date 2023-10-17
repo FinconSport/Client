@@ -2069,6 +2069,12 @@ class LsportApiController extends Controller {
                  
                     $tmp_bet_data = $vvv;
                     $tmp_bet_data['start_time'] = $return['start_time'];
+
+                    // 關於小數點處理
+                    $columns = ['bet_amount','result_amount','active_bet'];
+                    foreach ($columns as $kkkk => $vvvv) {
+                        $tmp_bet_data[$vvvv] = round($tmp_bet_data[$vvvv],2);
+                    }
                     
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
@@ -2082,6 +2088,12 @@ class LsportApiController extends Controller {
 
                 $tmp_bet_data = $v;
                 $tmp_bet_data['start_time'] = $return['start_time'];
+                
+                // 關於小數點處理
+                $columns = ['bet_amount','result_amount','active_bet'];
+                foreach ($columns as $kkkk => $vvvv) {
+                    $tmp_bet_data[$vvvv] = round($tmp_bet_data[$vvvv],2);
+                }
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
