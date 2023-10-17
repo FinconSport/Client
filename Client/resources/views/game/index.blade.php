@@ -608,7 +608,7 @@
         const marketNameElement = bettingTypeContainerTemp.find('.market_name');
         var priority = v.priority;
 
-        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${langTrans2.game_priority[sport][priority]}`);
+        marketNameElement.html(`<i class="fa-sharp fa-solid fa-star" style="color: #415a5b; margin-right: 0.5rem;"></i> ${v.market_name}`);
         $('#bettingTypeContainer').append(bettingTypeContainerTemp);
     }
     
