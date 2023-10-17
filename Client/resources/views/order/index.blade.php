@@ -158,14 +158,19 @@
 					let roundedBetBigInt = BigInt(Math.round(betAmount * 100));
 					let roundedActiveBetBigInt = BigInt(Math.round(activeBet * 100)); 
 					let roundedResultBigInt = BigInt(Math.round(resultAmount * 100)); 
-					let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
-
 					// Convert the BigInt result back to a number
 					betAmount = Number(roundedBetBigInt) / 100;
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
-					winLoss = Number(roundedWinLossBigInt) / 100; 
+				} else {
+					betAmount = 0;
+					activeBet = 0;
+					resultAmount = 0;
 				}
+
+				let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
+				winLoss = Number(roundedWinLossBigInt) / 100; 
+
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -179,16 +184,13 @@
 				totalEffectivetAmount += activeBet;
 				totalWinLoss += winLoss || 0;
 
-				let roundedtotalWinLossBigInt = BigInt(Math.round(totalWinLoss * 100)); 
-				let totalWinLoss = Number(roundedtotalWinLossBigInt) / 100;
-
 			});
 
 			// After accumulating the totals
 			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount);
 			totalBetAmount = parseFloat(totalBetAmount);
-			totalWinLoss = parseFloat(totalWinLoss);
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
