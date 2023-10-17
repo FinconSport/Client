@@ -134,7 +134,6 @@
 	let totalResultAmount = 0;
 	let totalEffectivetAmount = 0;
 	let totalWinLoss = 0;
-	
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -172,23 +171,16 @@
 				isLastPage && $('#noMoreData').show()
 			}
 
-			// Example totalResultAmount as a string
-			const totalResultAmountStr = totalResultAmount.toFixed(2);
-			// Extract the integer and decimal parts
-			const [sign, integerPartStr, decimalPartStr] = totalResultAmountStr.match(/(-?)(\d+)\.(\d+)/);
-			// Convert the integer part to a BigInt
-			const integerPartBigInt = BigInt(integerPartStr);
-			// Convert the decimal part to a number, round it, and add to the BigInt
-			const decimalPart = parseFloat(`0.${decimalPartStr}`);
-			const roundedDecimalPart = Math.round(decimalPart);
-			const decimalPartBigInt = BigInt(Math.round(decimalPart * 100)); // Multiplied by 100 to handle two decimal places
-			const totalBigInt = sign === '-' ? -(integerPartBigInt + decimalPartBigInt) : (integerPartBigInt + decimalPartBigInt);
-
-			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
-
-
 			const totalResultAmount1 = BigInt(Math.round(totalResultAmount * 100));
 			console.log(totalResultAmount1.toString());
+
+			const toBigInt = (totalResultAmount) => totalResultAmount ? BigInt(totalResultAmount) : BigInt(0);
+			// Calculate the total result amount using reduce
+			const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => {
+				return acc + toBigInt(obj.result_amount);
+			}, BigInt(0));
+
+			console.log(totalResultAmount.toString());
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
