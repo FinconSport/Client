@@ -268,7 +268,6 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                 $esUser = env("ES_USER");
                 $esPass = env("ES_PASS");
 
-                dd($url);
                 // 构建请求头，根据 Elasticsearch 的要求设置适当的头部信息
                 $headers = [
                     'Cache-Control' => 'no-cache',
