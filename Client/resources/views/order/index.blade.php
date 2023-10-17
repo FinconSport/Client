@@ -157,9 +157,9 @@
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
-				totalResultAmount += resultAmount;
+				totalResultAmount += resultAmount || 0;
 				totalEffectivetAmount += effectiveAmount;
-				totalWinLoss += winLoss;
+				totalWinLoss += winLoss || 0;
 			});
 
 			// After accumulating the totals, round them to two decimal places
