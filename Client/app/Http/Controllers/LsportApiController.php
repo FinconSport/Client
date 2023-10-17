@@ -2052,7 +2052,7 @@ class LsportApiController extends Controller {
             $away_team_id = $v["away_team_id"];
             
             // 關於小數點處理
-            $columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
+            $columns = ['bet_amount','result_amount','active_bet'];
             foreach ($columns as $kkkk => $vvvv) {
                 $tmp[$k][$vvvv] = round( $tmp[$k][$vvvv],2);
             }
