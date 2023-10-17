@@ -256,8 +256,8 @@ class ElasticSearchDriverProvider extends ServiceProvider {
         Builder::macro('queries', function ($JSON, $cacheAliveTime=1,$dd=false) {
 
             // get Model TableName
-            $tableName = "" . $this->getModel()->getTable() . "";
-            $esTableName = "es_" . $tableName."";
+            $tableName = $this->getModel()->getTable();
+            $esTableName = "es_" . $tableName;
 
             $cacheKey = MD5($esTableName . "_" . $JSON); // create CacheKey by MD5
 
