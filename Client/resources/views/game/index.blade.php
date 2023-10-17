@@ -84,7 +84,6 @@
                 <tbody id="livingtableBody">
                     <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                     <tr template="scoreBoardBodyTemplate_away" hidden></tr>
-
                 </tbody>
             </table>
         </div>
@@ -96,23 +95,27 @@
     <button class="filterBtn">{{ trans('game.index.hot') }}</button>
 </div>
 <div id="bettingTypeContainer">
-    <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
-        <div class="marketName">
-            <p class="market_name"></p>
-        </div>
-        <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv">
-            <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
-                <div class="">
-                    <span class="market_bet_name"></span>
-                </div>
-                <div>
-                    <span class="market_price odd" style="color:#c79e42;"></span>
-                    <i class="fa-solid fa-lock" style="display: none;"></i>
-                    <i class="fa-solid fa-caret-up" style="display: none;"></i>
-                    <i class="fa-solid fa-caret-down" style="display: none;"></i>
-                </div>
-            </div>
-        </div>
+    
+</div>
+
+<div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
+    <div class="marketName">
+        <p class="market_name"></p>
+    </div>
+    <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv">
+        
+    </div>
+</div>
+
+<div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
+    <div class="">
+        <span class="market_bet_name"></span>
+    </div>
+    <div>
+        <span class="market_price odd" style="color:#c79e42;"></span>
+        <i class="fa-solid fa-lock" style="display: none;"></i>
+        <i class="fa-solid fa-caret-up" style="display: none;"></i>
+        <i class="fa-solid fa-caret-down" style="display: none;"></i>
     </div>
 </div>
 
