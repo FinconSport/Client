@@ -1984,6 +1984,15 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
 
+        if ($input['debug'] == 1) {
+            $return = GameOrder->select('m_id')
+            ->groupBy('m_id')
+            ->orderBy('m_id', 'desc')
+            ->total();
+
+            dd($return);
+        }
+
         // 獲取注單資料
       //  $GameOrder = GameOrder::where("player_id", $input['player']);
         $GameOrder = GameOrder::where("id", ">", 0);
