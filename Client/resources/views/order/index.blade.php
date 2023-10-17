@@ -134,7 +134,6 @@
 	let totalResultAmount = 0;
 	let totalEffectivetAmount = 0;
 	let totalWinLoss = 0;
-	let totalWinLossVal = 0;
 
 	// infinite scroll control
 	var fetchMoreLock = false
@@ -178,11 +177,10 @@
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
 				totalEffectivetAmount += activeBet;
-				totalWinLossVal += winLoss || 0;
+				totalWinLoss += winLoss || 0;
 
-				let totalWinLoss = totalWinLossVal;
 				let roundedtotalWinLossBigInt = BigInt(Math.round(totalWinLoss * 100)); 
-				totalWinLoss = Number(roundedtotalWinLossBigInt) / 100; 
+				let totalWinLoss = Number(roundedtotalWinLossBigInt) / 100;
 
 			});
 
