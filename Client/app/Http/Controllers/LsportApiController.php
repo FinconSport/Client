@@ -1983,21 +1983,6 @@ class LsportApiController extends Controller {
         $skip = ($page-1)*$page_limit;
 
         //////////////////////////////////////////
-
-        if (isset($input['debug'])) {
-            $return = GameOrder::where('m_id','id')
-            ->orderBy('m_id', 'desc')
-            ->skip($skip)->take($page_limit)
-            ->total(1,true);
-
-            $ccc = $return;
-            foreach ($ccc['m_id']['buckets'] as $k => $v) {
-               $m_id = $v['key'];
-            }
-
-            dd($ccc);
-        }
-
         // 獲取注單資料
        // $GameOrder = GameOrder::where("player_id", $input['player']);
         $GameOrder = GameOrder::where("id", ">", 0)->where('m_id','id');
@@ -2016,6 +2001,12 @@ class LsportApiController extends Controller {
         }
 
         $GameOrder = $GameOrder->skip($skip)->take($page_limit);
+
+
+        if (isset($input['debug'])) {
+
+            $return = $GameOrder->orderBy('m_id', 'DESC')->list(1,true);
+        }
 
         $return = $GameOrder->orderBy('m_id', 'DESC')->list();
         if ($return === false) {
