@@ -18,16 +18,16 @@ class GameOrder extends Model
 			"query" => [
 				"bool" => [
 					"must" => [
-						"script" => [
+						["script" => [
 							"script" => [
 								"source" => 'doc["m_id"].value == doc["id"].value'
 							]
-						],
-						"term" => [
+						]],
+						["term" => [
 							"player_id" => [
 								"value" => 9 
 							]
-						]
+						]]
 					],
 					"should" => [
 						"term" => [
