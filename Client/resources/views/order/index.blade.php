@@ -130,14 +130,10 @@
     const orderList_api = '/api/v2/common_order'
 
 	let totalBetItemCount = 0;
-	// let totalBetAmount = 0;
-	let totalBetAmount = BigInt(0);
-	// let totalResultAmount = 0;
-	let totalResultAmount = BigInt(0);
-	// let totalEffectiveAmount = 0;
-	let totalEffectiveAmount = BigInt(0);
-	// let totalWinLoss = 0;
-	let totalWinLoss = BigInt(0);
+	let totalBetAmount = 0;
+	let totalResultAmount = 0;
+	let totalEffectivetAmount = 0;
+	let totalWinLoss = 0;
 	
 
 	// infinite scroll control
@@ -148,12 +144,9 @@
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
-				// const betAmount = parseFloat(orderItem.bet_amount);
-				const betAmount = BigInt(Math.round(orderItem.bet_amount * 100));
-				// const resultAmount = parseFloat(orderItem.result_amount);
-				const resultAmount = BigInt(Math.round(orderItem.result_amount * 100));
-				// const effectiveAmount = parseFloat(orderItem.active_bet);
-				const effectiveAmount = BigInt(Math.round(orderItem.active_bet * 100));
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
@@ -164,21 +157,16 @@
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
-				totalResultAmount += resultAmount || BigInt(0);
-				totalEffectiveAmount += effectiveAmount;
-				totalWinLoss += winLoss || BigInt(0);
+				totalResultAmount += resultAmount || 0;
+				totalEffectivetAmount += effectiveAmount;
+				totalWinLoss += winLoss || 0;
 			});
 
 			// After accumulating the totals, round them to two decimal places
-			// totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
-			totalResultAmount = (totalResultAmount / BigInt(100)).toString();
-			// totalEffectiveAmount = parseFloat(totalEffectiveAmount.toFixed(2));
-			totalEffectiveAmount = (totalEffectiveAmount / BigInt(100)).toString();
-			// totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
-			totalBetAmount = (totalBetAmount / BigInt(100)).toString();
-			// totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
-			totalWinLoss = (totalWinLoss / BigInt(100)).toString();
-        	totalWinLoss = (Math.round(parseFloat(totalWinLoss) * 100) / 100).toFixed(2);
+			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
+			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 			console.log(totalResultAmount);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
@@ -225,7 +213,7 @@
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet.toFixed(2));
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount.toFixed(2));
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss.toFixed(2));
 
 		$('#orderDataTemp').append(orderData);
 	}
@@ -365,13 +353,13 @@
 		
 
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
-		totalEffectiveAmount = isNaN(totalEffectiveAmount) ? 0 : totalEffectiveAmount;
+		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
 
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectiveAmount);
+		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
@@ -389,7 +377,7 @@
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
-		$('.orderData_totalEffectiveAmount').text(totalEffectiveAmount === null ? '0' : totalEffectiveAmount);
+		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
