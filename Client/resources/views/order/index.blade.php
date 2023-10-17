@@ -178,6 +178,7 @@
 			totalBetAmount = (totalBetAmount / BigInt(100)).toString();
 			// totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 			totalWinLoss = (totalWinLoss / BigInt(100)).toString();
+        	totalWinLoss = (Math.round(parseFloat(totalWinLoss) * 100) / 100).toFixed(2);
 			console.log(totalResultAmount);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
