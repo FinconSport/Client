@@ -349,6 +349,7 @@
 
 	function createTotal() {
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
+		console.log(totalResultAmount);
 
 		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
 		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
