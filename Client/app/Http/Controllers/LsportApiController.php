@@ -2024,7 +2024,6 @@ class LsportApiController extends Controller {
             "active_bet",
             "create_time",
             "result_time",
-            "result_percent",
             "status"
         );
 
