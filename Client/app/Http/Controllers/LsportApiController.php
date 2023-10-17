@@ -1985,7 +1985,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         if ($input['debug'] == 1) {
-            $return = GameOrder->select('m_id')
+            $return = GameOrder::select('m_id')
             ->groupBy('m_id')
             ->orderBy('m_id', 'desc')
             ->total();
