@@ -1982,8 +1982,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
 
         // 獲取注單資料
-        $GameOrder = GameOrder::where("id",">",0);
-        //$GameOrder = GameOrder::where("player_id", $input['player']);
+        $GameOrder = GameOrder::where("player_id", $input['player']);
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
