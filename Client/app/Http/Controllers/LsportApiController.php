@@ -2056,8 +2056,10 @@ class LsportApiController extends Controller {
             
             // 關於小數點處理
             foreach ($round_columns as $kkkk => $vvvv) {
-                if (isset($tmp[$k][$vvvv]) || ($tmp[$k][$vvvv] != null)) {
-                    $tmp[$k][$vvvv] = round($tmp[$k][$vvvv],2);
+                if (isset($v[$vvvv]) {
+                    if ($tmp[$k][$vvvv] != null) {
+                        $tmp[$k][$vvvv] = round($tmp[$k][$vvvv],2);
+                    }
                 }
             }
 
@@ -2082,8 +2084,10 @@ class LsportApiController extends Controller {
 
                     // 關於小數點處理
                     foreach ($round_columns as $kkkk => $vvvv) {
-                        if (isset($tmp_bet_data[$vvvv]) || ($tmp_bet_data[$vvvv] != null)) {
-                            $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                        if (isset($tmp_bet_data[$vvvv]) {
+                            if ($tmp_bet_data[$vvvv] != null) {
+                                $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                            }
                         }
                     }
                     
@@ -2101,11 +2105,13 @@ class LsportApiController extends Controller {
                 $tmp_bet_data['start_time'] = $return['start_time'];
 
                 // 關於小數點處理
-                foreach ($round_columns as $kkkk => $vvvv) {
-                    if (isset($tmp_bet_data[$vvvv]) || ($tmp_bet_data[$vvvv] != null)) {
-                        $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                    foreach ($round_columns as $kkkk => $vvvv) {
+                        if (isset($tmp_bet_data[$vvvv]) {
+                            if ($tmp_bet_data[$vvvv] != null) {
+                                $tmp_bet_data[$vvvv] = round($tmp[$k][$vvvv],2);
+                            }
+                        }
                     }
-                }
 
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
