@@ -225,7 +225,7 @@
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet.toFixed(2));
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount.toFixed(2));
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss);
+		orderDataWinLoss.html(winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
