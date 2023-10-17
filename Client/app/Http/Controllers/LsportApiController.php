@@ -1985,7 +1985,9 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 獲取注單資料
        // $GameOrder = GameOrder::where("player_id", $input['player']);
-        $GameOrder = GameOrder::where('m_id','id')->skip($skip)->take($page_limit);
+        $GameOrder = GameOrder::where("player_id", $input['player'])
+        ->where('m_id','id')
+        ->skip($skip)->take($page_limit);
 
         if (isset($input['result']) && ($input['result'] != "")) {
             
@@ -2000,13 +2002,11 @@ class LsportApiController extends Controller {
             }
         }
 
-
         if (isset($input['debug'])) {
-
             $return = $GameOrder->orderBy('m_id', 'DESC')->list(1,true);
         }
 
-        $return = $GameOrder->orderBy('m_id', 'DESC')->list();
+        $return = $GameOrder->orderBy('m_id', 'DESC')->get();
         if ($return === false) {
             $this->ApiError("01");
         }
