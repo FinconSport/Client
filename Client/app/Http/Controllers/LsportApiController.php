@@ -2039,7 +2039,7 @@ class LsportApiController extends Controller {
             "status"
         );
 
-        $round_columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
+        $round_columns = ['bet_amount','result_amount','active_bet'];
 
 
         foreach ($order_data as $k => $v) {
