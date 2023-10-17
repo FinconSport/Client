@@ -66,33 +66,29 @@
 <!-- early & living scoreboard-->
 <div id="scoreboardContainer">
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        
+        <!-- early fixture -->
+        <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
+            <p class="home_team_name col-3"></p>
+            <div class="col-4">
+                <p class="league_name"></p>
+                <p class="start_time"></p>
+            </div>
+            <p class="away_team_name col-3"></p>
+        </div>
+        <!-- living fixture -->
+        <div class="livingFixture-container row" key="livingContainerTemplate" hidden>
+            <table>
+                <thead id="livingtableHead">
+                    <tr template="scoreBoardHeadTemplate" hidden></tr>
+                </thead>
+                <tbody id="livingtableBody">
+                    <tr template="scoreBoardBodyTemplate_home" hidden></tr>
+                    <tr template="scoreBoardBodyTemplate_away" hidden></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
-<!-- early fixture -->
-<div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
-    <p class="home_team_name col-3"></p>
-    <div class="col-4">
-        <p class="league_name"></p>
-        <p class="start_time"></p>
-    </div>
-    <p class="away_team_name col-3"></p>
-</div>
-<!-- living fixture -->
-<div class="livingFixture-container row" template="livingContainerTemplate" hidden>
-    <table>
-        <thead id="livingtableHead">
-            
-        </thead>
-        <tbody id="livingtableBody">
-           
-        </tbody>
-    </table>
-</div>
-<tr template="scoreBoardHeadTemplate" hidden></tr>
-<tr template="scoreBoardBodyTemplate_home" hidden></tr>
-<tr template="scoreBoardBodyTemplate_away" hidden></tr>
 
 <div class="filterBtnContainer">
     <button class="filterBtn active">{{ trans('game.index.all') }}</button>
@@ -412,7 +408,6 @@
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
-            console.log(bet_div)
             // if not exist -> create
             if( !bet_div ) createMarketContainer(k, v);
             
@@ -596,7 +591,6 @@
 
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
-        console.log(k, v)
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
         bettingTypeContainerTemp.removeAttr('hidden').removeAttr('template');
         bettingTypeContainerTemp.attr('market_id', v.market_id);
@@ -688,6 +682,7 @@
         // Living fixture (status == 2)
         if (data.list.status == 2) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
+            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             // const scoresLengths = data.list?.scoreboard[1].length - 1;
