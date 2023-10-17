@@ -706,8 +706,12 @@
 
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
+                    const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
+
                     createMarketRateContainer(v, k2, v2);
 
+                    const lengthOfId = marketBetRateId.length;
+                    console.log(`Length of marketBetRateId ${marketBetRateId}: ${lengthOfId}`);
                     // Check if .bettingtype-container[id] exists with the same market_id
                     if (!$(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).length) {
                         $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove(); // .bettingtype-container with this market_id doesn't exist, remove the betting.
@@ -748,10 +752,6 @@
     
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-        const lengthOfId = marketBetRateId.length;
-
-        console.log(lengthOfId);
-        
         const existingDiv = $('#' + marketBetRateId);
         
         if (existingDiv.length === 0) {
