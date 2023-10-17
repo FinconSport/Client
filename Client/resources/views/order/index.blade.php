@@ -167,11 +167,26 @@
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
-			console.log(totalResultAmount);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
 				isLastPage && $('#noMoreData').show()
 			}
+
+			// Example totalResultAmount as a string
+			const totalResultAmountStr = totalResultAmount.toFixed(2);
+			// Extract the integer and decimal parts
+			const [integerPartStr, decimalPartStr] = totalResultAmountStr.split('.');
+			// Convert the integer part to a BigInt
+			const integerPartBigInt = BigInt(integerPartStr);
+			console.log(totalBigInt);
+
+			// Convert the decimal part to a number, round it, and add to the BigInt
+			const decimalPart = parseFloat(`0.${decimalPartStr}`);
+			const roundedDecimalPart = Math.round(decimalPart);
+			const decimalPartBigInt = BigInt(Math.round(decimalPart * 100)); // Multiplied by 100 to handle two decimal places
+			const totalBigInt = integerPartBigInt + decimalPartBigInt;
+			
+			console.log(totalBigInt);
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
