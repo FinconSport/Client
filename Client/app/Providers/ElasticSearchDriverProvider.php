@@ -272,6 +272,7 @@ class ElasticSearchDriverProvider extends ServiceProvider {
                 $headers = [
                     'Authorization' => 'Basic ' . base64_encode("$esUser:$esPass"),
                     'Content-Type' => 'application/json', // 设置请求内容类型为 JSON
+                    'Host' => 'sportc.asgame.net', // 添加 Elasticsearch 主机信息
                 ];
         
                 // 发送原始 POST 请求
