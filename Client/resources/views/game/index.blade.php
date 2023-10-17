@@ -666,10 +666,6 @@
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
-        livingContainerTemp.attr('id', data.list.fixture_id);
-        earlyContainerTemp.attr('id', data.list.fixture_id);
-        const fixtureID = data.list.fixture_id;
-        const existingFixture = $('.scoreboardCon').find(`[id="${fixtureID}"]`);
         // Early fixture (status == 1)
         if (data.list.status == 1) {
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
@@ -677,9 +673,7 @@
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            if (existingFixture.length > 0) {
-                $('.scoreboardCon').append(earlyContainerTemp);
-            }
+            $('.scoreboardCon').append(earlyContainerTemp);
         }
         // Living fixture (status == 2)
         if (data.list.status == 2) {
@@ -733,9 +727,7 @@
                     
                 }
 
-                if (existingFixture.length > 0) {
-                    $('#livingtableHead').append(scoreBoardHeadTemp);
-                }
+                $('#livingtableHead').append(scoreBoardHeadTemp);
 
                 // Home team
                 const homeTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -748,10 +740,8 @@
                         scoreBoardBodyTemp_home.append(thHome);
                     }
                 }
-                
-                if (existingFixture.length > 0) {
-                    $('#livingtableBody').append(scoreBoardBodyTemp_home);
-                }
+
+                $('#livingtableBody').append(scoreBoardBodyTemp_home);
 
                 // Away team
                 const awayTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -766,12 +756,9 @@
                 }
 
                 // Append away team after home team to table
-                if (existingFixture.length > 0) {
-                    scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-                }
+                scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
             $('.scoreboardCon').append(livingContainerTemp);
-            
         }
     }
 
