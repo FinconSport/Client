@@ -489,7 +489,7 @@
             let market_bet_id = parseInt($(this).attr('market_bet_id'))
             let result = null
             let resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            if( resultArr.market_bet ) result = result = resultArr.market_bet?.find(item => item.market_bet_id === market_bet_id);
+            if( resultArr.market_bet ) result = resultArr.market_bet.map(item => item.market_bet_id);
             if( !result ) $(this).remove()
         });
 
