@@ -2006,23 +2006,13 @@ class LsportApiController extends Controller {
         $m_id_list = array();
         $tmp_m_id = 0;
         foreach ($return as $k => $v) {
-            if ($tmp_m_id == 0) {
-                $tmp_m_id = $v['m_id'];
-            }
-            if ($tmp_m_id != $v['m_id']) {
+            if (($tmp_m_id == 0) || ($tmp_m_id != $v['m_id'])) {
                 $tmp_m_id = $v['m_id'];
                 $m_id_list[] = $tmp_m_id;
             }
         }
 
-        dd($return,$m_id_list);
-
-
-        $return = $GameOrder->whereIn('m_id', function($query) {
-            $query->select('m_id')
-                  ->from('es_game_order')
-                  ->groupBy('m_id');
-        })
+        $return = $GameOrder->whereIn('m_id', $m_id_list)
         ->skip($skip)
         ->take($page_limit)
         ->orderBy('m_id', 'DESC')
