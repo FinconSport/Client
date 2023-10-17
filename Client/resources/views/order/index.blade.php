@@ -42,7 +42,7 @@
 			</div>
 			<div class="stats-container">
 				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
-				<p class="total-effective-amount"></p>
+				<p class="orderData_totalEffectiveAmount"></p>
 			</div>
 			<div class="stats-container">
 				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
@@ -357,7 +357,7 @@
 		orderDataTotal.find('.orderData_totalBetCount').text(totalBetItemCount);
 		orderDataTotal.find('.orderData_totalBetAmount').text(totalBetAmount);
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
-		orderDataTotal.find('.orderData_effectiveAmount').text(totalEffectivetAmount);
+		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
@@ -375,7 +375,7 @@
 		$('.orderData_totalBetCount').text(totalBetItemCount);
 		$('.orderData_totalBetAmount').text(totalBetAmount);
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
-		$('.orderData_effectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
+		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
