@@ -2008,6 +2008,7 @@ class LsportApiController extends Controller {
         foreach ($return as $k => $v) {
             if ($tmp_m_id == 0) {
                 $tmp_m_id = $v['m_id'];
+                $m_id_list[] = $tmp_m_id;
             }
             if ($tmp_m_id != $v['m_id']) {
                 $tmp_m_id = $v['m_id'];
