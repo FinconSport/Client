@@ -445,22 +445,22 @@
                             // new rate
                             bet_item.find('.odd').text(v3.price)
                             let pri = v.priority
-                            switch (true) {
-                                case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
+                            switch (pri) {
+                                case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').text(v3.line);
                                     break;
-                                case langTrans2.betTypePriority.sizePriority.indexOf(pri) !== -1:
+                                case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                                     break;
-                                case langTrans2.betTypePriority.oddEvenPriority.indexOf(pri) !== -1:
+                                case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').text(v3.market_bet_name);
                                     break;
-                                case langTrans2.betTypePriority.allWinPriority.indexOf(pri) !== -1:
-                                    if (v3.market_bet_name_en === 1) {
+                                case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
+                                    if (v3.market_bet_name_en == 1) {
                                         bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
-                                    } else if (v3.market_bet_name_en === 2) {
+                                    } else if (v3.market_bet_name_en == 2) {
                                         bet_item.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
-                                    } else if (v3.market_bet_name_en === 'X') {
+                                    } else if (v3.market_bet_name_en == 'X') {
                                         bet_item.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                                     }
                                     break;
@@ -635,22 +635,22 @@
 
         marketBetRateTemp.find('.odd').text(v3.price)
         let pri = v.priority
-        switch (true) {
-            case langTrans2.betTypePriority.hcapPriority.indexOf(pri) !== -1:
+        switch (pri) {
+            case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.line);
                 break;
-            case langTrans2.betTypePriority.sizePriority.indexOf(pri) !== -1:
+            case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
-            case langTrans2.betTypePriority.oddEvenPriority.indexOf(pri) !== -1:
+            case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
                 break;
-            case langTrans2.betTypePriority.allWinPriority.indexOf(pri) !== -1:
-                if (v3.market_bet_name_en === 1) {
+            case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
+                if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
-                } else if (v3.market_bet_name_en === 2) {
+                } else if (v3.market_bet_name_en == 2) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v3.line);
-                } else if (v3.market_bet_name_en === 'X') {
+                } else if (v3.market_bet_name_en == 'X') {
                     marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                 }
                 break;
