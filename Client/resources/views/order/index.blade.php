@@ -147,7 +147,7 @@
 				const betAmount = orderItem.bet_amount ? BigInt(orderItem.bet_amount) : 0
 				const resultAmount = orderItem.result_amount ? BigInt(orderItem.result_amount) : 0
 				const effectiveAmount = orderItem.active_bet ? BigInt(orderItem.active_bet) : 0
-				const winLoss = (resultAmount - betAmount)
+				const winLoss = resultAmount && betAmount ? resultAmount - betAmount : 0
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
