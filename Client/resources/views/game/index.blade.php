@@ -371,17 +371,6 @@
     /* ===== VIEW LAYER ===== */
     function viewIni() { // view ini
         createScoreBoard(matchListD.data)
-
-         // <-- remove the duplicating append
-        Object.entries(matchListD.data.list.market).map(([i, x]) => {
-                Object.entries(x.market_bet).map(([x2, x2]) => {
-                    const marketRateElements = $(`.market-rate[market_bet_id="${x2.market_bet_id}"]`);
-                    if (marketRateElements.length > 1) {
-                        marketRateElements.eq(0).remove();
-                    } 
-                });
-        });
-
         renderViewV2()
     }
     /* ===== VIEW LAYER ===== */
