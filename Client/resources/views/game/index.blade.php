@@ -702,13 +702,17 @@
         }
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            const marketRateElements = $(`.market-rate`);
-            marketRateElements.eq(0).remove(); // <-- remove the duplicating append
-
+            
+            
+            
             createMarketContainer(k, v);
 
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
+                    const marketRateElements = $(`.market-rate[market_bet_id="${v.market_bet_id}"]`);
+                    if (marketRateElements.length > 1) {
+                        marketRateElements.eq(0).remove(); // <-- remove the duplicating append
+                    } 
 
                     createMarketRateContainer(v, k2, v2);
 
@@ -717,7 +721,7 @@
                         $(`.market-rate[market_bet_id="${v2.market_bet_id}"]`).remove(); // .bettingtype-container with this market_id doesn't exist, remove the betting.
                         console.log(`No .market-rate found for market_id ${v2.market_bet_id}`);
                     } else {
-                        console.log(`still .market-rate found for market_id ${v2.market_bet_id}`);
+                        console.log(`.market-rate found for market_id ${v2.market_bet_id}`);
                     }
 
                 });
