@@ -753,7 +753,7 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         
-        if (!$('#' + marketBetRateId).length) {
+        if (!$('#' + marketBetRateId).length) { // Check if the container with ID k already exists
             if (createdElementKeys.has(marketBetRateId)) {
                 updateExistingElement(v, k2, v2, marketBetRateId);
             } else {
