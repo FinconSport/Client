@@ -14,6 +14,7 @@ class GameOrder extends Model
 
 	protected static function getOrderTotal($input) {
 
+		$player_id = $input['player'];
 		$DSLQuery = [
 			"query" => [
 				"bool" => [
