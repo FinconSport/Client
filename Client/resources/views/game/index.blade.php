@@ -749,6 +749,7 @@
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         const existingDiv = $('#' + marketBetRateId);
+        
         if (existingDiv.length === 0) {
             if (createdElementKeys.has(marketBetRateId)) {
                 updateExistingElement(v, k2, v2, marketBetRateId);
@@ -795,8 +796,8 @@
             }, 3000);
         }
 
-
-        marketBetRateTemp.find('.odd').text(v2.price)
+        marketBetRateTemp.find('.odd').text(v2.price);
+        
         switch (v.priority) {
             case 3: case 203: case 204: case 103: case 104: case 110: case 114: case 118: case 122:
                 marketBetRateTemp.find('.market_bet_name').text(v2.line);
@@ -830,7 +831,7 @@
             marketBetRateTemp.find('.market_price').hide();
         }
 
-        // Update the price and other attributes
+        // Update the attributes
         marketBetRateTemp.attr('bet_rate', newPrice);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v2.market_bet_id);
@@ -838,8 +839,6 @@
         marketBetRateTemp.attr('bet_name', v2.market_bet_name + ' ' + v2.line);
         marketBetRateTemp.attr('bet_name_en', v2.market_bet_name_en);
         marketBetRateTemp.attr('line', v2.line);
-        
-        marketBetRateTemp.find('.odd').text(newPrice);
     }
 
     function createNewElement(v, k2, v2, marketBetRateId) {
