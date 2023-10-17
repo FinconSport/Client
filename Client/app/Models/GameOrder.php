@@ -57,7 +57,7 @@ class GameOrder extends Model
 			],
 			"from" => 0,
 			"size" => 25,
-			"_source": [
+			"_source" => [
 				"id",
 				"m_id",
 				"m_order",
