@@ -1985,7 +1985,7 @@ class LsportApiController extends Controller {
         // 獲取注單資料
 
         if (isset($input['debug'])) {
-            $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list(1,true);
+            $return = GameOrder::getOrderTotal($input);
         }
 
         $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list();
