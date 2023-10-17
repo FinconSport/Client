@@ -144,7 +144,22 @@
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
 				const betAmount = parseFloat(orderItem.bet_amount);
+				
+				// Check if resultAmount is null or NaN
+				if (isNaN(resultAmount) || resultAmount === null) {
+				resultAmount = 0; // Set resultAmount to 0 in this case
+				} else {
 				const resultAmount = parseFloat(orderItem.result_amount);
+				// Step 1: Multiply by 100 to shift the decimal point two places to the right
+				let shiftedAmount = resultAmount * 100;
+
+				// Step 2: Convert to BigInt
+				let bigIntAmount = BigInt(Math.round(shiftedAmount));
+
+				// Step 3: Divide by 100 to shift the decimal point back two places to the left
+				resultAmount = Number(bigIntAmount) / 100;
+				}
+
 				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
@@ -162,7 +177,7 @@
 			});
 
 			// After accumulating the totals, round them to two decimal places
-			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
 			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
@@ -357,7 +372,7 @@
 		const orderDataTotal = $('#countTr').clone().removeAttr('hidden').removeAttr('template');
 		
 
-		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+		// totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
 		totalEffectivetAmount = isNaN(totalEffectivetAmount) ? 0 : totalEffectivetAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
 
@@ -376,7 +391,7 @@
 
 	//updateTotal when new data is loaded
 	function updateTotal() {
-		totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
+		// totalResultAmount = isNaN(totalResultAmount) ? 0 : totalResultAmount;
     	totalWinLoss = isNaN(totalWinLoss) ? 0 : totalWinLoss;
 
 		$('.orderData_totalBetCount').text(totalBetItemCount);
