@@ -171,12 +171,12 @@
 				isLastPage && $('#noMoreData').show()
 			}
 
-			const toBigInt = (totalResultAmount) => totalResultAmount ? BigInt(totalResultAmount) : BigInt(0);
-			const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => { // Calculate the total result amount using reduce
-				return acc + toBigInt(obj.result_amount);
-			}, BigInt(0));
+			// const toBigInt = (totalResultAmount) => totalResultAmount ? BigInt(totalResultAmount) : BigInt(0);
+			// const totalResultAmount2 = orderListD.data.list.reduce((acc, obj) => { // Calculate the total result amount using reduce
+			// 	return acc + toBigInt(obj.result_amount);
+			// }, BigInt(0));
 
-			console.log(totalResultAmount.toString());
+			// console.log(totalResultAmount.toString());
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
