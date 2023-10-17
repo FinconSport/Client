@@ -38,6 +38,20 @@ class GameOrder extends Model
 					]
 				]
 			],
+			"script_fields" => [
+				"formatted_price" => [
+					"script" => [
+				  		"source" => "Math.round(doc['bet_rate'].value * 100) / 100",
+				  		"lang" => "painless"
+					]
+				],
+				"formatted_price" => [
+					"script" => [
+				  		"source" => "Math.round(doc['player_rate'].value * 100) / 100",
+				  		"lang" => "painless"
+					]
+				],
+			],
 			"sort" => [
 				["id" => "desc"]
 			],
@@ -45,7 +59,7 @@ class GameOrder extends Model
 			"size" => 25
 		];
 
-		echo json_encode($DSLQuery);
+		$DSKQueryStr = json_encode($DSLQuery,true);
 
 	}
 
