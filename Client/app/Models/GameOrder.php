@@ -14,44 +14,35 @@ class GameOrder extends Model
 
 	protected static function getOrderTotal($input) {
 
-		$player_id = $input['player'];
 		$DSLQuery = [
 			"query" => [
 				"bool" => [
 					"must" => [
-						"script" => [
-							"script" => [
+						"script" : [
+							"script" : [
 								"source" => 'doc["m_id"].value == doc["id"].value'
 							]
 						],
-						"term" => [
+						"term" : [
 							"player_id" => [
-								"value" => $player_id
+								"value" : 9 
 							]
 						]
 					],
 					"should" => [
-						"term" => [
+						"term" : [
 							"status" => [
-								"value" => 4
+								"value" : 4
 							]
 						]
 					]
 				]
 			],
-			"aggs" => [
-				"total_bet_amount" => [
-					"sum" => [
-						"field" => "bet_amount"
-					]
-				],
-				"total_result_amount" => [
-					"sum" => [
-						"field" => "result_amount"
-					]
-				]
+			"sort" => [
+				["id" : "desc"]
 			],
-			"size" => 0
+			"from" : 0,
+			"size" : 0
 		];
 
 		echo json_encode($DSLQuery);
