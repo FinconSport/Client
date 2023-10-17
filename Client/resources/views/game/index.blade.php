@@ -83,14 +83,16 @@
 <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
     <table>
         <thead id="livingtableHead">
-            <tr template="scoreBoardHeadTemplate" hidden></tr>
+            
         </thead>
         <tbody id="livingtableBody">
-            <tr template="scoreBoardBodyTemplate_home" hidden></tr>
-            <tr template="scoreBoardBodyTemplate_away" hidden></tr>
+           
         </tbody>
     </table>
 </div>
+<tr template="scoreBoardHeadTemplate" hidden></tr>
+<tr template="scoreBoardBodyTemplate_home" hidden></tr>
+<tr template="scoreBoardBodyTemplate_away" hidden></tr>
 
 <div class="filterBtnContainer">
     <button class="filterBtn active">{{ trans('game.index.all') }}</button>
@@ -531,7 +533,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView();
+                    renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
