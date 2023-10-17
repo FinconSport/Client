@@ -129,63 +129,24 @@
 	var callOrderListData = { token: token, player: player, result: 0, page: 1 }
     const orderList_api = '/api/v2/common_order'
 
-	// let totalBetItemCount = 0;
-	// let totalBetAmount = 0;
-	// let totalResultAmount = 0;
-	// let totalEffectivetAmount = 0;
-	// let totalWinLoss = 0;
-
 	let totalBetItemCount = 0;
-	let totalBetAmount = 0n; // Initialize as BigInt
-	let totalResultAmount = 0n; // Initialize as BigInt
-	let totalEffectivetAmount = 0n; // Initialize as BigInt
-	let totalWinLoss = 0n; // Initialize as BigInt
+	let totalBetAmount = 0;
+	let totalResultAmount = 0;
+	let totalEffectivetAmount = 0;
+	let totalWinLoss = 0;
 	
 
 	// infinite scroll control
 	var fetchMoreLock = false
 	var isLastPage = false
 
-	// function renderView() {
-	// 	if (orderListD && orderListD.data.list) {
-	// 		orderListD.data.list.forEach((orderItem, orderIndex) => {
-	// 			const betItemCounter = orderItem.bet_data.length; 
-	// 			const betAmount = parseFloat(orderItem.bet_amount);
-	// 			const resultAmount = parseFloat(orderItem.result_amount);
-	// 			const effectiveAmount = parseFloat(orderItem.active_bet);
-	// 			const winLoss = resultAmount - betAmount;
-
-	// 			createList(orderItem, orderIndex, winLoss);
-	// 			orderItem.bet_data.forEach((betItem, betIndex) => {
-	// 				createBetDataDetails(orderItem, betItem, betIndex);
-	// 			});
-
-	// 			// Validate and accumulate total
-	// 			totalBetItemCount += betItemCounter;
-	// 			totalBetAmount += betAmount;
-	// 			totalResultAmount += resultAmount || 0;
-	// 			totalEffectivetAmount += effectiveAmount;
-	// 			totalWinLoss += winLoss || 0;
-	// 		});
-
-	// 		// After accumulating the totals, round them to two decimal places
-	// 		totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
-	// 		totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
-	// 		totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
-	// 		totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
-	// 		console.log(totalResultAmount);
-
-	// 		if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
-	// 			isLastPage && $('#noMoreData').show()
-	// 		}
-	// }
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				const betItemCounter = orderItem.bet_data.length;
-				const betAmount = orderItem.bet_amount != null && !isNaN(orderItem.bet_amount) ? BigInt(orderItem.bet_amount) : 0n; // Convert to BigInt with a default value of 0
-				const resultAmount = orderItem.result_amount != null && !isNaN(orderItem.result_amount) ? BigInt(orderItem.result_amount) : 0n; // Convert to BigInt with a default value of 0
-				const effectiveAmount = orderItem.active_bet != null && !isNaN(orderItem.active_bet) ? BigInt(orderItem.active_bet) : 0n; // Convert to BigInt with a default value of 0
+				const betItemCounter = orderItem.bet_data.length; 
+				const betAmount = parseFloat(orderItem.bet_amount);
+				const resultAmount = parseFloat(orderItem.result_amount);
+				const effectiveAmount = parseFloat(orderItem.active_bet);
 				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
@@ -196,28 +157,22 @@
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
-				totalResultAmount += resultAmount;
+				totalResultAmount += resultAmount || 0;
 				totalEffectivetAmount += effectiveAmount;
-				totalWinLoss += winLoss;
+				totalWinLoss += winLoss || 0;
 			});
 
-			// After accumulating the totals, round them to two decimal places for display purposes
-			totalResultAmount = parseFloat(totalResultAmount) // Convert to float for display purposes
-				.toFixed(2);
-			totalEffectivetAmount = parseFloat(totalEffectivetAmount) // Convert to float for display purposes
-				.toFixed(2);
-			totalBetAmount = parseFloat(totalBetAmount) // Convert to float for display purposes
-				.toFixed(2);
-			totalWinLoss = parseFloat(totalWinLoss) // Convert to float for display purposes
-				.toFixed(2);
+			// After accumulating the totals, round them to two decimal places
+			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
+			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 			console.log(totalResultAmount);
 
-			if (orderListD.data.list.length !== 20 || orderListD.data.list.length === 0) isLastPage = true;
-			isLastPage && $('#noMoreData').show();
-		}
+			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
+				isLastPage && $('#noMoreData').show()
+			}
 	}
-
-
 
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
@@ -258,7 +213,7 @@
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : orderItem.active_bet.toFixed(2));
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : orderItem.result_amount.toFixed(2));
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss);
+		orderDataWinLoss.html(winLoss = isNaN(winLoss) ? '-' : winLoss.toFixed(2));
 
 		$('#orderDataTemp').append(orderData);
 	}
