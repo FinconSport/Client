@@ -1990,9 +1990,9 @@ class LsportApiController extends Controller {
             ->orderBy('m_id', 'desc')
             ->total();
 
-            $ccc = $return 
-            foreach ($ccc['m_id'] as $k => $v) {
-                $buckets = $v['buckets'];
+            $ccc = $return;
+            foreach ($ccc['m_id']['buckets'] as $k => $v) {
+               dd($v);
             }
 
             dd($ccc);
