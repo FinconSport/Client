@@ -66,28 +66,30 @@
 <!-- early & living scoreboard-->
 <div id="scoreboardContainer">
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        <!-- early fixture -->
-        <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
-            <p class="home_team_name col-3"></p>
-            <div class="col-4">
-                <p class="league_name"></p>
-                <p class="start_time"></p>
-            </div>
-            <p class="away_team_name col-3"></p>
-        </div>
-        <!-- living fixture -->
-        <div class="livingFixture-container row" key="livingContainerTemplate" hidden>
-            <table>
-                <thead id="livingtableHead">
-                    <tr template="scoreBoardHeadTemplate" hidden></tr>
-                </thead>
-                <tbody id="livingtableBody">
-                    <tr template="scoreBoardBodyTemplate_home" hidden></tr>
-                    <tr template="scoreBoardBodyTemplate_away" hidden></tr>
-                </tbody>
-            </table>
-        </div>
+        
     </div>
+</div>
+
+<!-- early fixture -->
+<div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
+    <p class="home_team_name col-3"></p>
+    <div class="col-4">
+        <p class="league_name"></p>
+        <p class="start_time"></p>
+    </div>
+    <p class="away_team_name col-3"></p>
+</div>
+<!-- living fixture -->
+<div class="livingFixture-container row" key="livingContainerTemplate" hidden>
+    <table>
+        <thead id="livingtableHead">
+            <tr template="scoreBoardHeadTemplate" hidden></tr>
+        </thead>
+        <tbody id="livingtableBody">
+            <tr template="scoreBoardBodyTemplate_home" hidden></tr>
+            <tr template="scoreBoardBodyTemplate_away" hidden></tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="filterBtnContainer">
