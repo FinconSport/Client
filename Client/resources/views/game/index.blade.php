@@ -752,6 +752,10 @@
     
     function createMarketRateContainer(v, k2, v2) {
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
+        const marketRateElements = $(`.market-rate[market_bet_id="${v.market_bet_id}"]`);
+        if (marketRateElements.length > 1) {
+            marketRateElements.eq(0).remove(); // <-- remove the duplicating append
+        } 
         
         if (!$('#' + marketBetRateId).length) { // Check if the container with ID k already exists
             if (createdElementKeys.has(marketBetRateId)) {
