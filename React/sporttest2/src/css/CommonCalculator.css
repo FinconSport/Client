@@ -1,24 +1,27 @@
-.Toastify__toast-theme--colored.Toastify__toast--success{
+.Toastify__toast-theme--colored.Toastify__toast--success {
     background-color: rgb(184, 214, 212);
     color: rgb(65, 91, 90);
 }
 
-.Toastify__toast-theme--colored.Toastify__toast--error{
+.Toastify__toast-theme--colored.Toastify__toast--error {
     background-color: rgb(254, 182, 183);
     color: red;
 }
+
 .Toastify__close-button {
     line-height: 2rem;
 }
-.Toastify__close-button > svg{
+
+.Toastify__close-button>svg {
     width: 1.2rem;
     height: 1.2rem;
 }
 
-.Toastify__toast-theme--colored.Toastify__toast--success .Toastify__close-button{
+.Toastify__toast-theme--colored.Toastify__toast--success .Toastify__close-button {
     color: rgb(65, 91, 90);
 }
-.Toastify__toast-theme--colored.Toastify__toast--error .Toastify__close-button{
+
+.Toastify__toast-theme--colored.Toastify__toast--error .Toastify__close-button {
     color: red;
 }
 
@@ -30,7 +33,8 @@
 }
 
 #calInfoCardWrapper::-webkit-scrollbar {
-    width: 5px; /* Adjust the width of the scrollbar */
+    width: 5px;
+    /* Adjust the width of the scrollbar */
 }
 
 #calInfoCardWrapper::-webkit-scrollbar-track {
@@ -38,6 +42,42 @@
 }
 
 #calInfoCardWrapper::-webkit-scrollbar-thumb {
-    background-color: rgba(65,91,90,0.5); /* Set the color of the scrollbar thumb */
-    border-radius: 25px; /* Add border-radius for a rounded thumb */
+    background-color: rgba(65, 91, 90, 0.5);
+    /* Set the color of the scrollbar thumb */
+    border-radius: 25px;
+    /* Add border-radius for a rounded thumb */
+}
+
+
+#pendingLoad {
+    border: 0.2rem solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 0.2rem solid #3498db;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 5rem;
+    bottom: 1.2rem;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

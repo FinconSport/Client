@@ -167,7 +167,6 @@ const FooterLeftBtn = {
 }
 
 const FooterRightBtn = {
-    background: 'rgb(196, 152, 53)',
     borderRadius: '1rem',
     color: 'white',
     lineHeight: '2.5rem',
@@ -209,7 +208,8 @@ class CommonCalculator extends React.Component {
             game_bet: 'https://sportc.asgame.net/api/v2/game_bet',
             inputMoney: '',
             maxMoney: '0.00',
-            isBetterRate: false
+            isBetterRate: false,
+            isPending: false,
         }
     }
 
@@ -221,14 +221,34 @@ class CommonCalculator extends React.Component {
 		})
 
         // 訊息
-        if(api_res === 'afterBet') {
-            json.message === 'SUCCESS_API_GAME_BET_01' ? this.notifySuccess(json.message) : this.notifyError(json.message)
-            this.props.callBack() // 投注後餘額
-        }
+        // if(api_res === 'afterBet') {
+        //     json.message === 'SUCCESS_API_GAME_BET_01' ? this.notifySuccess(json.message) : this.notifyError(json.message)
+        //     this.props.callBack() // 投注後餘額
+        // }
 	}
+
+    componentDidMount() {
+        if(window.ws) window.ws.close()
+        window.WebSocketDemo()
+
+        window.ws.onmessage = (event) => {
+            const message = JSON.parse(event.data)
+            if( message.action === 'delay_order') {
+                this.setState({
+                    isPending: false,
+                }, ()=>{
+                    // 關閉計算機
+                    this.CloseCal()
+                    this.notifySuccess(message.order_id)
+                    this.props.callBack() // 投注後餘額
+                })
+            }
+        };
+    }
     
     // 關閉計算機
     CloseCal = () => {
+        if(this.state.isPending) return;
         this.setState({
             inputMoney: '',
             maxMoney: '0.00'
@@ -263,6 +283,8 @@ class CommonCalculator extends React.Component {
 
     // 鍵盤
     CalMoneyBrick = (num, type = 0) => {
+        if(this.state.isPending) return;
+
         var money = ''
         if( type === 1 ) {
             money = parseInt(this.state.inputMoney)
@@ -290,6 +312,8 @@ class CommonCalculator extends React.Component {
     
     // 是否接受更加賠率
     handleBetterRate = () =>{
+        if(this.state.isPending) return;
+
         this.setState({
             isBetterRate: !this.state.isBetterRate
         })
@@ -323,11 +347,11 @@ class CommonCalculator extends React.Component {
         betData.bet_amount = this.state.inputMoney
         betData.player = window.player
         betData.token = window.token
-        delete betData.home_team_name;
-        delete betData.away_team_name;
-        delete betData.market_name;
-        delete betData.series_name;
-        delete betData.bet_item_name;
+        
+
+        this.setState({
+            isPending: true
+        })
 
         const queryParams = [];
         for (const key in betData) {
@@ -337,9 +361,6 @@ class CommonCalculator extends React.Component {
         }
         const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
         this.caller(queryString , 'afterBet')
-
-        // 關閉計算機
-        this.CloseCal()
     }
 
     notifySuccess = (msg) => {
@@ -453,7 +474,15 @@ class CommonCalculator extends React.Component {
                                     <div className='row' style={{ height: '3rem'}}>
                                         <div className='col-3 text-center' onClick={this.CloseCal} style={FooterLeftBtn}>{langText.CommonCalculator.cancel}</div>
                                         <div className='col-1'></div>
-                                        <div className='col-8 text-center' onClick={this.submitBet} style={FooterRightBtn}>{langText.CommonCalculator.submit}</div>
+                                        {
+                                            this.state.isPending ?
+                                            <div className='col-8 text-center' style={{...FooterRightBtn, backgroundColor: '#978b8b'}}>
+                                                {langText.CommonCalculator.pending}
+                                                <div id='pendingLoad'></div>
+                                            </div>
+                                            :
+                                            <div className='col-8 text-center' onClick={this.submitBet} style={{...FooterRightBtn, backgroundColor: 'rgb(196, 152, 53)'}}>{langText.CommonCalculator.submit}</div>
+                                        }
                                     </div>
                                 </div>   
                             </div>

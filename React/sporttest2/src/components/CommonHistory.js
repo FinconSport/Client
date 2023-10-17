@@ -143,6 +143,8 @@ class CommonHistory extends React.Component {
             const uncompressed = JSON.parse(pako.inflate(buffer, { to: 'string' }));
             json.data = uncompressed
         }
+
+
         const newData = json.data.list
         var data = []
 		switch (callerType) {
@@ -220,10 +222,16 @@ class CommonHistory extends React.Component {
         this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + status + '&page=1')
     }
 
-    // 圖片毀損
-    handleError(event) {
-        event.target.src = 'https://sporta.asgame.net/uploads/default.png';
+     // 日期格式
+     formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
     }
+      
 
     render() {
         const { data, hasMore} = this.state
@@ -286,7 +294,7 @@ class CommonHistory extends React.Component {
                                             <div className='col-4 p-0'>{langText.CommonHistory.betstatus}</div>
                                             <div className='col-8 p-0 text-right'>{ langText.CommonHistory.statusArr[val.status] }</div>
                                             <div className='col-4 p-0'>{langText.CommonHistory.bettime}</div>
-                                            <div className='col-8 p-0 text-right'>{ val.create_time }</div>
+                                            <div className='col-8 p-0 text-right'>{ this.formatDateTime(val.create_time) }</div>
                                         </div>
                                     </div>
                                 )

@@ -132,7 +132,6 @@ class GameMain extends React.Component {
         const sport = parseInt(window.sport)
         const data = this.props.data.list
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
-
         return (
             <div style={{ height: '72%' }}>
                 <div className="row m-0">
@@ -153,45 +152,48 @@ class GameMain extends React.Component {
                                 <GameBetBody>
                                     {data.market.map((v, k) => {
                                         let t = v.priority
-                                        if ( v.market_bet.length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1)) {
+                                        if ( Object.keys(v.market_bet).length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1)) {
                                             return (
                                                 <GameBetCard key={k}>
                                                     <GameBetCardBetName>{v.market_name}</GameBetCardBetName>
-                                                     {
-                                                        v.market_bet.map((v1, k1) => {
-                                                            return(
-                                                                <div className="row m-0" style={{ ...BetBrick, ...(k1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k1}>
-                                                                    <div className="col-4 row m-0 p-0">
-                                                                        <div className="col-5 p-0" style={{textAlign:'right'}}>{v1.market_bet_name}</div>
-                                                                        <div className="col-5 p-0" style={{textAlign:'right'}}>{v1.line}</div>
-                                                                    </div>
-                                                                    <div className="col-8 row m-0 p-0">
-                                                                        <div className="col-11" style={{textAlign:'right'}}>
-                                                                            <div market_bet_id={v1.market_bet_id} 
-                                                                                onClick={()=>this.getBetData(
-                                                                                v.market_id,
-                                                                                v1.market_bet_id,
-                                                                                v1.price,
-                                                                                v.market_name,
-                                                                                data.home_team_name,
-                                                                                data.away_team_name,
-                                                                                langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1  ?
-                                                                                (v1.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v1.line
-                                                                                :
-                                                                                (v1.market_bet_name + ' ' + v1.line),
-                                                                                v1.status
-                                                                            )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem'}} >
-                                                                                {v1.price}
+                                                    {
+                                                        Object.entries(v.market_bet).map((v1, k1) => (
+                                                            <div key={k1}>
+                                                                {v1[1].map((v2, k2) => (
+                                                                    <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && k1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
+                                                                        <div className="col-4 row m-0 p-0">
+                                                                            <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
+                                                                            <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                        </div>
+                                                                        <div className="col-8 row m-0 p-0">
+                                                                            <div className="col-11" style={{ textAlign: 'right' }}>
+                                                                                <div market_bet_id={v2.market_bet_id}
+                                                                                    onClick={() => this.getBetData(
+                                                                                        v.market_id,
+                                                                                        v2.market_bet_id,
+                                                                                        v2.price,
+                                                                                        v.market_name,
+                                                                                        data.home_team_name,
+                                                                                        data.away_team_name,
+                                                                                        langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1 ?
+                                                                                            (v2.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v2.line
+                                                                                            :
+                                                                                            (v2.market_bet_name + ' ' + v2.line),
+                                                                                        v2.status
+                                                                                    )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
+                                                                                    {v2.price}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="col-1 p-0" style={{ textAlign: 'left' }}>
+                                                                                <AiFillLock style={v2.status === 1 ? { display: 'none' } : { display: 'initial' }} />
                                                                             </div>
                                                                         </div>
-                                                                        <div className="col-1 p-0" style={{textAlign:'left'}}>
-                                                                            <AiFillLock style={ v1.status === 1 ? {display: 'none'} : {display: 'initial'} }/>
-                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            )
-                                                        })
+                                                                ))}
+                                                            </div>
+                                                        ))
                                                     }
+
                                                 </GameBetCard>
                                             );
                                         }
