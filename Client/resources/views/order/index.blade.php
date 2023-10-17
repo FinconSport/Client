@@ -186,6 +186,9 @@
 
 			console.log('bigInt ' + totalBigInt); // This is the totalResultAmount as a BigInt rounded to the nearest integer.
 
+
+			const totalResultAmount1 = BigInt(Math.round(totalResultAmount * 100));
+			console.log(totalResultAmount1.toString());
 	}
 
 	function createList(orderItem, orderIndex, winLoss) {
