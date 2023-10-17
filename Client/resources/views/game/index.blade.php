@@ -397,11 +397,11 @@
     // ajax update
     function renderView() {
         // scoreboad update
-        $('.scoreboardCon').empty()
-        createScoreBoard(matchListD.data)
+        $('.scoreboardCon').empty();
+        createScoreBoard(matchListD.data);
     
         // set color of bet title update
-        setBettypeColor(matchListD.data.list.status)
+        setBettypeColor(matchListD.data.list.status);
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
