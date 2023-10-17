@@ -632,9 +632,9 @@
                 break;
             case 1: case 2: case 4: case 101: case 102: case 109: case 113: case 117: case 121: case 201: case 202:
                 if (v2.market_bet_name_en == 1) {
-                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name  ' ' + v2.line);
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v2.line);
                 } else if (v2.market_bet_name_en == 2) {
-                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name  ' ' + v2.line);
+                    marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.away_team_name + ' ' + v2.line);
                 } else if (v2.market_bet_name_en == 'X') {
                     marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                 }
