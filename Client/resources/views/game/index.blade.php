@@ -494,10 +494,12 @@
             if( resultArr?.market_bet[line] ) {
                 result = resultArr?.market_bet[line].find(item => item.market_bet_id === market_bet_id)
             }
+
+            console.log(resultArr, line, market_bet_id, result)
             
-            if (!result) {
-                $(this).remove();
-            }
+            // if (!result) {
+            //     $(this).remove();
+            // }
         });
     
 
