@@ -607,7 +607,7 @@
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                    // caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
@@ -703,11 +703,9 @@
 
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-
             if (v.market_bet) {
                 Object.entries(v.market_bet).map(([k2, v2]) => {
                     const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
-
                     createMarketRateContainer(v, k2, v2);
 
                     const lengthOfId = marketBetRateId.length;
@@ -751,6 +749,8 @@
     const createdElementKeys = new Set();
     
     function createMarketRateContainer(v, k2, v2) {
+        console.log(v, k2, v2)
+
         const marketBetRateId = v.market_id + '_' + v2.market_bet_id + '_' + k2;
         const marketRateElements = $(`.market-rate[market_bet_id="${v.market_bet_id}"]`);
         if (marketRateElements.length > 1) {
