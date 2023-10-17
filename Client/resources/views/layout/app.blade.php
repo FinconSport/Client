@@ -280,6 +280,11 @@
 				modalContainer.append(modal);
 			});
 
+			// dimmer onclickable
+			$('#dimmer').dimmer({
+				closable: false
+			});
+
 			// 将跑马灯容器添加到页面中
 			$('.rightNavTag').before(marqueeContainer);
 			marqueeContainer.after(modalContainer);
