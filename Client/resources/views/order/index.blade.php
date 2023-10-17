@@ -130,10 +130,14 @@
     const orderList_api = '/api/v2/common_order'
 
 	let totalBetItemCount = 0;
-	let totalBetAmount = 0;
-	let totalResultAmount = 0;
-	let totalEffectivetAmount = 0;
-	let totalWinLoss = 0;
+	// let totalBetAmount = 0;
+	let totalBetAmount = BigInt(0);
+	// let totalResultAmount = 0;
+	let totalResultAmount = BigInt(0);
+	// let totalEffectivetAmount = 0;
+	let totalEffectiveAmount = BigInt(0);
+	// let totalWinLoss = 0;
+	let totalWinLoss = BigInt(0);
 	
 
 	// infinite scroll control
@@ -144,9 +148,12 @@
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				const betItemCounter = orderItem.bet_data.length; 
-				const betAmount = parseFloat(orderItem.bet_amount);
-				const resultAmount = parseFloat(orderItem.result_amount);
-				const effectiveAmount = parseFloat(orderItem.active_bet);
+				// const betAmount = parseFloat(orderItem.bet_amount);
+				const betAmount = BigInt(Math.round(orderItem.bet_amount * 100));
+				// const resultAmount = parseFloat(orderItem.result_amount);
+				const resultAmount = BigInt(Math.round(orderItem.result_amount * 100));
+				// const effectiveAmount = parseFloat(orderItem.active_bet);
+				const effectiveAmount = BigInt(Math.round(orderItem.active_bet * 100));
 				const winLoss = resultAmount - betAmount;
 
 				createList(orderItem, orderIndex, winLoss);
@@ -157,16 +164,20 @@
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
-				totalResultAmount += resultAmount || 0;
+				totalResultAmount += resultAmount || BigInt(0);
 				totalEffectivetAmount += effectiveAmount;
-				totalWinLoss += winLoss || 0;
+				totalWinLoss += winLoss || BigInt(0);
 			});
 
 			// After accumulating the totals, round them to two decimal places
-			totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
-			totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
-			totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
-			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+			// totalResultAmount = parseFloat(totalResultAmount.toFixed(2));
+			totalResultAmount = (totalResultAmount / BigInt(100)).toString();
+			// totalEffectivetAmount = parseFloat(totalEffectivetAmount.toFixed(2));
+			totalEffectiveAmount = (totalEffectiveAmount / BigInt(100)).toString();
+			// totalBetAmount = parseFloat(totalBetAmount.toFixed(2));
+			totalBetAmount = (totalBetAmount / BigInt(100)).toString();
+			// totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+			totalWinLoss = (totalWinLoss / BigInt(100)).toString();
 			console.log(totalResultAmount);
 
 			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
