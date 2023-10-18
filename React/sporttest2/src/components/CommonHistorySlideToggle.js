@@ -38,28 +38,12 @@ class CommonHistory extends React.Component {
 
     // 收合
     toggleCard = () => {
-        this.textOverFlow(this.props.data.id)
+        // this.textOverFlow(this.props.data.id)
         // if( !this.state.isOpen ) this.textOverFlow(this.props.data.id)
         this.setState({
             isOpen: !this.state.isOpen
         })
     }
-
-    // 文字太長變成跑馬燈
-    textOverFlow = (id) => {
-        $('div[historyid="' + id + '"] .textoverflow').each(function(){
-            // 太長有換行
-            if(this.clientHeight > 22) {
-                $(this).wrap('<marquee scrollamount=5>')
-            }
-        })
-    }
-
-    // 初始化
-    componentDidMount() {
-        this.textOverFlow(this.props.data.id)
-        
-    } 
 
     // 偵測改變結算按鈕
 	componentDidUpdate(prevProps) {
@@ -68,7 +52,6 @@ class CommonHistory extends React.Component {
             this.setState({
                 isOpen: false
             })
-            this.textOverFlow(this.props.data.match_id)
         }
 	}
 

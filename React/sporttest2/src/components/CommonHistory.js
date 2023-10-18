@@ -7,6 +7,8 @@ import CommonHistorySlideToggle from './CommonHistorySlideToggle'
 import pako from 'pako'
 import { AiFillCloseCircle } from "react-icons/ai";
 import { TbArrowBigUpFilled } from 'react-icons/tb';
+import $ from 'jquery';
+
 
 const ToTopStyle = {
 	right: '0.5rem',
@@ -208,22 +210,35 @@ class CommonHistory extends React.Component {
 
     // 每次點進來都撈一次
 	componentDidUpdate(prevProps) {
-        // console.log('componentDidUpdate')
 		if (prevProps.isShow !== this.props.isShow ) {
+            this.textOverFlow()
             this.componentDidMount()
 		}
 	}
+    
 
     // 以接算 未結算 切換
     StatusBtn = (status) => {
         this.setState({
             searchStatus: status
+        },() => {
+            this.textOverFlow(); // 调用 textOverFlow 方法
         })
         this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + status + '&page=1')
     }
 
-     // 日期格式
-     formatDateTime = (dateTimeString) => {
+    // 文字太長變成跑馬燈
+    textOverFlow = () => {
+        $('.textoverflow').each(function(){
+            // 太長有換行
+            if(this.clientHeight > 22) {
+                $(this).wrap('<marquee scrollamount=5>')
+            }
+        })
+    }
+
+    // 日期格式
+    formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
         const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
         const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed

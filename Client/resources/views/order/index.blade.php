@@ -335,7 +335,7 @@
 			//append in another td if have another bet_item
 			const minNumber = 1;const maxNumber = 100;
 			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-			const dynamicId = `additionalTr_${betItem.league_id}_${randomNumber}`; // <-- make the id generated random
+			const dynamicId = `${betItem.market_bet_id}`;
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
@@ -354,7 +354,7 @@
 
 			parentElement.find('.order-toggleButton').addClass('showbutton');
 			// $(`#${dynamicId}`).addClass('hide-betaDetcon');
-			$(`#${dynamicId}`).css('display', 'none');
+			$(`#${dynamicId}.orderData_expand`).css('display', 'none');
 		}
 
 		orderDataBetEvent.append(betDataEventContainer);
