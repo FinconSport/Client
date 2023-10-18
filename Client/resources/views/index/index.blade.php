@@ -1238,6 +1238,13 @@
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
                         let isSwitchCate = !isStatusSame && v3.status === 2// is changing early to living
+
+                        console.log(k3)
+                        console.log('nowStatus-> ' + nowStatus)
+                        console.log('v3.status-> ' + v3.status, v3.status === 2)
+                        console.log('isStatusSame-> ' + isStatusSame)
+                        console.log('isSwitchCate-> ' + isSwitchCate)
+
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
