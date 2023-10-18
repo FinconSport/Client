@@ -852,8 +852,8 @@
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
-                                                card.find('.hcapTeam').eq(0).removeClass('hcapTeam');
-                                                card.find('.hcapTeam').eq(1).removeClass('hcapTeam');
+                                                card.find('.teamSpan').eq(0).removeClass('hcapTeam');
+                                                card.find('.teamSpan').eq(1).removeClass('hcapTeam');
 
 
                                                 let index = parseInt(v4.market_bet_name_en) - 1
@@ -861,8 +861,8 @@
                                                 console.log(card.find('.teamSpan').eq(index))
                                             } else {
                                                 // 先取消樣式
-                                                card.find('.hcapTeam').eq(2).removeClass('hcapTeam');
-                                                card.find('.hcapTeam').eq(3).removeClass('hcapTeam');
+                                                card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
+                                                card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
