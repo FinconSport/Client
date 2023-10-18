@@ -228,9 +228,9 @@
 		}
 
 		// if the amount is null make it 0
-		let betAmount = parseFloat(orderItem.bet_amount) || 0;
-		let activeBet = parseFloat(orderItem.active_bet) || 0;
-		let resultAmount = parseFloat(orderItem.result_amount) || 0;
+		let betAmount = parseFloat(orderItem.bet_amount)
+		let activeBet = parseFloat(orderItem.active_bet);
+		let resultAmount = parseFloat(orderItem.result_amount);
 
 		if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
 			// Round to two decimal places as BigInt
@@ -242,6 +242,10 @@
 			betAmount = Number(roundedBetBigInt) / 100;
 			activeBet = Number(roundedActiveBetBigInt) / 100; 
 			resultAmount = Number(roundedResultBigInt) / 100; 
+		} else {
+			betAmount = null;
+			activeBet = null;
+			resultAmount = null;
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
@@ -249,12 +253,12 @@
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
-		orderDataBetAmount.html(betAmount);
+		orderDataBetAmount.html(betAmount === null ? '-' : betAmount);
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
-		orderDataEffectiveAmount.html(activeBet);
-		orderDataResultAmount.html(resultAmount);
+		orderDataEffectiveAmount.html(activeBet === null ? '-' : activeBet);
+		orderDataResultAmount.html(resultAmount === null ? '-' : resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss);
+		orderDataWinLoss.html(winLoss === null ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
