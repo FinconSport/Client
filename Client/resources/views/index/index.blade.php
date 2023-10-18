@@ -826,7 +826,7 @@
                        
                         function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
                             priorityArr.forEach(( i, j ) => {
-                                let bet_div = $(`#${k3} div[priority=${i}]`)[0]
+                                let bet_div = $($(`#${k3} div[priority=${i}]`)[0])
                                 
                                 console.log(bet_div)
 
@@ -839,8 +839,7 @@
                                     // 讓分的priority && line不同 && 有盤口
                                     j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
                                     // 先取消樣式
-                                    let teamSpanContainer = bet_div.closest('.indexBetCardTable').previousElementSibling
-                                    $(teamSpanContainer).find('div').removeClass('hcapTeam')
+                                    bet_div.closest('.indexBetCardTable').prev().find('div').removeClass('hcapTeam')
 
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
