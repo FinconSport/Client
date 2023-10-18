@@ -162,7 +162,7 @@
 					resultAmount = Number(roundedResultBigInt) / 100; 
 
 					winLoss = resultAmount - betAmount;
-					if (resultAmount !== null && resultAmount !== 0) {
+					if (resultAmount !== null) {
 						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
 						winLoss = Number(roundedWinLossBigInt) / 100;
 					} else {
