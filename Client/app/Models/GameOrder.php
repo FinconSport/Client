@@ -14,6 +14,14 @@ class GameOrder extends Model
 
 	protected static function getOrderList($input) {
 
+		$player_id = $input['player'];
+		$result = $input['result'];
+		$page = $input['page'];
+		$skip = $input['skip'];
+		$page_limit = $input['page_limit'];
+
+		dd($page, $skip, $page_limit);
+		
 		$DSLQuery = [
 			"query" => [
 				"bool" => [
