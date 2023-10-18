@@ -105,7 +105,7 @@ class GameOrder extends Model
 				]];
 
 		} else {
-			$DSLQuery['query']['bool']['should'][] = ["term"=>"status"=>["value" => 4]];
+			$DSLQuery['query']['bool']['should'] = ["term"=>"status"=>["value" => 4]];
 		}
 		
 
