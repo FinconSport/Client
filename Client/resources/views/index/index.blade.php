@@ -802,7 +802,7 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 let period = card.attr('period').toString()
                                 // 換節了 重新渲染單節投注區塊
-                                if( (v3.periods).toString() !== period ) {
+                                if( (v3?.periods?.period).toString() !== period ) {
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                                     if( newStagePriorityArr ) {
                                         stagePriorityArr = newStagePriorityArr
