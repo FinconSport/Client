@@ -702,12 +702,12 @@
     
     // render view layer here
     function renderView() {
-
+        console.log('renderView')
         // fake data
         matchListD = {
             "status": 1,
             "data": {
-                "early": {
+                "living": {
                     "6046": {
                         "list": {
                             "1543": {
