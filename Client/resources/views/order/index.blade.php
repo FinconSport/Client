@@ -143,12 +143,13 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
+				let winLoss = 0; // Initialize winLoss to a default value
+
 				const betItemCounter = orderItem.bet_data.length; 
-				// if the amount is null make it 0
+				// if the amount is null, make it 0
 				let betAmount = parseFloat(orderItem.bet_amount) || 0;
 				let activeBet = parseFloat(orderItem.active_bet) || 0;
 				let resultAmount = parseFloat(orderItem.result_amount) || 0;
-				
 
 				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
 					// Round to two decimal places as BigInt
@@ -160,7 +161,7 @@
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
 
-					let winLoss = resultAmount - betAmount;
+					winLoss = resultAmount - betAmount;
 					if (resultAmount !== null) {
 						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
 						winLoss = Number(roundedWinLossBigInt) / 100;
@@ -172,10 +173,6 @@
 					activeBet = 0;
 					resultAmount = 0;
 				}
-
-				// let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
-				// winLoss = Number(roundedWinLossBigInt) / 100; 
-
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
@@ -195,12 +192,15 @@
 			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount);
 			totalBetAmount = parseFloat(totalBetAmount);
-			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2);
 
-			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
-				isLastPage && $('#noMoreData').show()
+			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) {
+				isLastPage = true;
+				isLastPage && $('#noMoreData').show();
 			}
+		}
 	}
+
 
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
