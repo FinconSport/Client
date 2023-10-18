@@ -394,6 +394,7 @@
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
+        card.attr('period', v3?.periods?.period)
         time.html(formatDateTime(v3.start_time))
         market_count.html('+' + v3.market_bet_count)
         
@@ -799,22 +800,15 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-
+                                let period = card.attr('period').toString()
                                 // 換節了 重新渲染單節投注區塊
-                                if( v3.periods ) {
-                                    console.log(v3.periods.period)
+                                if( (v3.periods).toString() !== period ) {
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                                     if( newStagePriorityArr ) {
-                                        console.log('case1 ' + k3)
-                                        if(!stagePriorityArr.every((value, index) => value === newStagePriorityArr[index])) {
-                                            console.log('case2 ' + k3)
-                                            console.log(stagePriorityArr, newStagePriorityArr)
-                                            stagePriorityArr = newStagePriorityArr
-                                            card.find('.indexBetCardTable').eq(1).html('')
-                                            createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
-                                        }
+                                        stagePriorityArr = newStagePriorityArr
+                                        card.find('.indexBetCardTable').eq(1).html('')
+                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                     } else {
-                                        console.log('case3 ' + k3)
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
                                 }
@@ -833,8 +827,6 @@
                         function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $($(`#${k3} div[priority=${i}]`)[0])
-                                
-
                                 let betData = null
                                 let item = null
                                 if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
@@ -845,9 +837,6 @@
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1) {
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
-
-                                        console.log(card, card.find('.teamSpan'))
-
                                     }
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
@@ -861,7 +850,7 @@
 
 
                                                 let index = parseInt(v4.market_bet_name_en) - 1
-                                                // card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                                             } else {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
@@ -869,7 +858,7 @@
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 // console.log(v4.market_bet_name_en, card.find('.teamSpan').eq(index).find('div'))
-                                                // card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                                             }
                                         }
 
