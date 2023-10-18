@@ -93,12 +93,12 @@ class GameOrder extends Model
 
 		$DSLQuery['from'] = $skip;
 		$DSLQuery['size'] = $page_limit;
-		$DSLQuery['query']['bool']['must'] = ["term" => ["player_id" => ["value" => $player_id]]];
+		$DSLQuery['query']['bool']['must'][] = ["term" => ["player_id" => ["value" => $player_id]]];
 		
 		if ($result == 0) {
-			$DSLQuery['query']['bool']['must'] = ["term" => ["status" => [0,1,2,3]]];
+			$DSLQuery['query']['bool']['must'][] = ["term" => ["status" => [0,1,2,3]]];
 		} else {
-			$DSLQuery['query']['bool']['must'] = ["term" => ["status" => ["value" => 4]]];
+			$DSLQuery['query']['bool']['must'][] = ["term" => ["status" => ["value" => 4]]];
 		}
 		
 		$DSLQueryStr = json_encode($DSLQuery,true);
