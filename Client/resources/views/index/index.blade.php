@@ -841,10 +841,10 @@
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
 
                                         // 先取消樣式
-                                        bet_div.parent().prev().find('.hcapTeam').removeClass('hcapTeam')
+                                        let teamSpanContainer = bet_div.parent().prev()
+                                        $(teamSpanContainer).find('.hcapTeam').removeClass('hcapTeam');
 
-                                        console.log(bet_div, k3, i, bet_div.parent(), bet_div.parent().prev(), bet_div.parent().prev().find('.hcapTeam'))
-
+                                        console.log(bet_div, k3, i, $(teamSpanContainer).find('.hcapTeam'))
                                     }
                                     
 
