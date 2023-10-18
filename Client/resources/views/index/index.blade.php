@@ -835,12 +835,13 @@
                                 if( betData && Object.keys(betData.list).length > 0 ) {
                                     // 是否有讓方
                                     let isHcapTeam = null
+                                    
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1) {
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
 
                                         // 先取消樣式
-                                        bet_div.closest('.indexBetCardTable').prev().find('div').removeClass('hcapTeam')
+                                        bet_div.parent().prev().find('div').removeClass('hcapTeam')
 
                                         console.log(bet_div, k3, i)
 
