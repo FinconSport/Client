@@ -1350,7 +1350,7 @@
             let count = $('#toggleContent_' + id).find('.indexEachCard').length
             console.log(id, count)
             $(this).html(count)
-            // if( count === 0 ) $(this).closest('.cateWrapper').hide()
+            if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
