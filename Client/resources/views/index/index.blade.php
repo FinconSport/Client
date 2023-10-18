@@ -849,14 +849,14 @@
                                                 card.find('.teamSpan').eq(1).removeClass('hcapTeam');
 
                                                 let index = parseInt(v4.market_bet_name_en) - 1
-                                                // card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                                             } else {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
                                                 card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
-                                                // card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                                             }
                                         }
 
