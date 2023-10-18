@@ -841,10 +841,9 @@
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
 
                                         // 先取消樣式
-                                        let teamSpanContainer = bet_div.parent().prev()
-                                        $(teamSpanContainer).find('.hcapTeam').removeClass('hcapTeam');
-
-                                        console.log(bet_div, k3, i, $(teamSpanContainer).find('.hcapTeam'))
+                                        // let teamSpanContainer = bet_div.parent().prev()
+                                        // $(teamSpanContainer).find('.hcapTeam').removeClass('hcapTeam');
+                                        card.find('.hcapTeam').removeClass('hcapTeam');
                                     }
                                     
 
@@ -854,9 +853,11 @@
                                             if( stageBet === 0 ) {
                                                 let index = parseInt(v4.market_bet_name_en) - 1
                                                 card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                                console.log(card.find('.teamSpan').eq(index))
                                             } else {
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                console.log(card.find('.teamSpan').eq(index).find('div').eq(0))
                                             }
                                         }
 
