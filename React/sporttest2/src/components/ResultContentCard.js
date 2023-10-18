@@ -30,7 +30,6 @@ const SliderTitleDiv = {
     textAlign: 'center'
 }
 const rowHeight2 = {
-	height: '2.5rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -89,13 +88,17 @@ class ResultContentCard extends React.Component {
     
     // 文字太長變成跑馬燈
     textOverFlow = (id) => {
-        $('div[cardid="' + id + '"] .textoverflow').each(function(){
+        $('div[cardid="' + id + '"] .teamSpan').each(function(){
+            $(this).find('.teamSpanMarquee').hide()
+            $(this).find('.teamSpanSpan').show()
             // 太長有換行
-            if(this.clientHeight > 24) {
-                $(this).wrap('<marquee scrollamount=5>')
+            if(this.clientHeight > 40) {
+                $(this).find('.teamSpanMarquee').show()
+                $(this).find('.teamSpanSpan').hide()
             }
         })
     }
+
 
     componentDidMount() {
         this.textOverFlow(this.props.data.fixture_id)
@@ -163,11 +166,26 @@ class ResultContentCard extends React.Component {
                                         }
                                     </p>
                                 </div>
-                                <div style={rowHeight2}>
-                                    <p className="textoverflow p-0">{ v.home_team_name }</p>
+
+                                <div className='teamSpan' style={rowHeight2}>
+                                    <div className="teamSpanMarquee w-100">
+                                        <Marquee className='matchCardMarquee' speed={20} gradient={false}>
+                                            { v.home_team_name }&emsp;&emsp;&emsp;
+                                        </Marquee>
+                                    </div>
+                                    <span className="teamSpanSpan">
+                                        { v.home_team_name }
+                                    </span>
                                 </div>
-                                <div style={rowHeight2}>
-                                    <p className="textoverflow p-0">{ v.away_team_name }</p>
+                                <div className='teamSpan' style={{...rowHeight2, marginTop: '1.5rem'}}>
+                                    <div className="teamSpanMarquee w-100">
+                                        <Marquee className='matchCardMarquee' speed={20} gradient={false}>
+                                            { v.away_team_name }&emsp;&emsp;&emsp;
+                                        </Marquee>
+                                    </div>
+                                    <span className="teamSpanSpan">
+                                        { v.away_team_name }
+                                    </span>
                                 </div>
                             </div>
                             {/* right part */}
