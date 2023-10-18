@@ -143,57 +143,56 @@
 	function renderView() {
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
-				const betItemCounter = orderItem.bet_data.length;
-
+				const betItemCounter = orderItem.bet_data.length; 
+				// if the amount is null make it 0
 				let betAmount = parseFloat(orderItem.bet_amount) || 0;
 				let activeBet = parseFloat(orderItem.active_bet) || 0;
 				let resultAmount = parseFloat(orderItem.result_amount) || 0;
+				let winLoss = resultAmount - betAmount;
 
-				if (!isNaN(betAmount) || !isNaN(activeBet) || !isNaN(resultAmount)) {
+				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
+					// Round to two decimal places as BigInt
 					let roundedBetBigInt = BigInt(Math.round(betAmount * 100));
-					let roundedActiveBetBigInt = BigInt(Math.round(activeBet * 100));
-					let roundedResultBigInt = BigInt(Math.round(resultAmount * 100));
-
+					let roundedActiveBetBigInt = BigInt(Math.round(activeBet * 100)); 
+					let roundedResultBigInt = BigInt(Math.round(resultAmount * 100)); 
+					// Convert the BigInt result back to a number
 					betAmount = Number(roundedBetBigInt) / 100;
-					activeBet = Number(roundedActiveBetBigInt) / 100;
-					resultAmount = Number(roundedResultBigInt) / 100;
-
-					let winLoss = resultAmount - betAmount;
-					let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
-					winLoss = Number(roundedWinLossBigInt) / 100;
+					activeBet = Number(roundedActiveBetBigInt) / 100; 
+					resultAmount = Number(roundedResultBigInt) / 100; 
 				} else {
 					betAmount = 0;
 					activeBet = 0;
 					resultAmount = 0;
-					// Don't calculate winLoss if resultAmount is null or empty
-					let winLoss = 0;
 				}
+
+				let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
+				winLoss = Number(roundedWinLossBigInt) / 100; 
+
 
 				createList(orderItem, orderIndex, winLoss);
 				orderItem.bet_data.forEach((betItem, betIndex) => {
 					createBetDataDetails(orderItem, betItem, betIndex);
 				});
 
+				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
 				totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
 				totalEffectivetAmount += activeBet;
 				totalWinLoss += winLoss || 0;
+
 			});
 
+			// After accumulating the totals
 			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount);
 			totalBetAmount = parseFloat(totalBetAmount);
 			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 
-			if (orderListD.data.list.length !== 20 || orderListD.data.list.length === 0) {
-				isLastPage = true;
-				isLastPage && $('#noMoreData').show();
+			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) isLastPage = true
+				isLastPage && $('#noMoreData').show()
 			}
-		}
 	}
-
-
 
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
