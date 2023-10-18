@@ -162,7 +162,7 @@
 					resultAmount = Number(roundedResultBigInt) / 100; 
 
 					winLoss = resultAmount - betAmount;
-					if (resultAmount !== null && resultAmount !== 0) {
+					if (resultAmount !== null) {
 						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
 						winLoss = Number(roundedWinLossBigInt) / 100;
 					} else {
@@ -223,10 +223,8 @@
 
 			if (winLossValue >= 0) {
 				orderDataWinLoss.css('color', 'red'); // Set text color to red
-			} else if (winLoss === '-') {
-				orderDataWinLoss.css('color', '#415b5a'); // Set text color to green
 			} else {
-				orderDataWinLoss.css('color', 'green'); // Set text color to greeny
+				orderDataWinLoss.css('color', 'green'); // Set text color to green
 			}
 		}
 
@@ -265,7 +263,7 @@
 		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : activeBet);
 		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss === 0 ? '-' : winLoss);
+		orderDataWinLoss.html(winLoss === 0 ? '<span style="color:#415b5a!important;">-</span>' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
