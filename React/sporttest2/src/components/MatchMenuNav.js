@@ -67,7 +67,7 @@ const MatchSportItem = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        transform: scale(0.75);
+        transform: scale(0.8);
     }
 `
 
