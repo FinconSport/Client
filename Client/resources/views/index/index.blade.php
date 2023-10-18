@@ -1209,6 +1209,7 @@
 
         // 選中樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
+        console.log(fixture_id, market_id, market_bet_id)
 
         // 判斷滾球or早盤
         // const start_time = new Date(result.start_time).getTime();
