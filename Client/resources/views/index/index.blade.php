@@ -839,14 +839,8 @@
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1) {
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
-
-                                        // 先取消樣式
-                                        // let teamSpanContainer = bet_div.parent().prev()
-                                        // $(teamSpanContainer).find('.hcapTeam').removeClass('hcapTeam');
-                                        // card.find('.hcapTeam').removeClass('hcapTeam');
                                     }
                                     
-
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
@@ -858,15 +852,14 @@
 
                                                 let index = parseInt(v4.market_bet_name_en) - 1
                                                 card.find('.teamSpan').eq(index).addClass('hcapTeam') 
-                                                console.log(card.find('.teamSpan').eq(index))
                                             } else {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
                                                 card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
-                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
-                                                console.log(card.find('.teamSpan').eq(index).find('div').eq(0))
+                                                console.log(v4.market_bet_name_en, card.find('.teamSpan').eq(index).find('div'))
+                                                // card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                                             }
                                         }
 
