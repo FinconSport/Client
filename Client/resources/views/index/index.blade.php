@@ -802,11 +802,12 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 let period = card.attr('period').toString()
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
-                                console.log('basketball-> ', (v3?.periods?.period).toString(), period)
+                                console.log('basketball-> ',k3, (v3?.periods?.period).toString(), period)
                                 // 換節了 重新渲染單節投注區塊
                                 if( (v3?.periods?.period).toString() !== period ) {
                                     if( stagePriorityArr ) {
                                         card.find('.indexBetCardTable').eq(1).html('')
+                                        console.log('createBetArea->' + k3)
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
