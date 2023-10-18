@@ -258,10 +258,10 @@
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
-		orderDataBetAmount.html(betAmount);
+		orderDataBetAmount.html(orderItem.bet_amount === null ? '-' : betAmount);
 		orderDataCreateTime.html( orderItem.create_time === null ? '' : formatDateTime(orderItem.create_time));
-		orderDataEffectiveAmount.html(activeBet);
-		orderDataResultAmount.html(resultAmount);
+		orderDataEffectiveAmount.html(orderItem.active_bet === null ? '-' : activeBet);
+		orderDataResultAmount.html(orderItem.result_amount === null ? '-' : resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
 		orderDataWinLoss.html(winLoss === 0 ? '-' : winLoss);
 
