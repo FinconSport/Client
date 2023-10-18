@@ -803,11 +803,14 @@
                                 // 換節了 重新渲染單節投注區塊
                                 if( v3.periods ) {
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-
-                                    if( newStagePriorityArr && !stagePriorityArr.every((value, index) => value === newStagePriorityArr[index]) ) {
-                                        stagePriorityArr = newStagePriorityArr
-                                        card.find('.indexBetCardTable').eq(1).html('')
-                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                    console.log(newStagePriorityArr)
+                                    console.log(stagePriorityArr)
+                                    if( newStagePriorityArr ) {
+                                        if(!stagePriorityArr.every((value, index) => value === newStagePriorityArr[index])) {
+                                            stagePriorityArr = newStagePriorityArr
+                                            card.find('.indexBetCardTable').eq(1).html('')
+                                            createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                        }
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
@@ -839,11 +842,15 @@
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1) {
                                         (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+
+                                        console.log(card, card.find('.teamSpan'))
+
                                     }
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(0).removeClass('hcapTeam');
@@ -859,7 +866,7 @@
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 // console.log(v4.market_bet_name_en, card.find('.teamSpan').eq(index).find('div'))
-                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                // card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                                             }
                                         }
 
