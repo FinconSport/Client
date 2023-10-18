@@ -223,10 +223,10 @@
 
 			if (winLossValue >= 0) {
 				orderDataWinLoss.css('color', 'red'); // Set text color to red
-			} elseif (winLoss === '-') {
-				orderDataWinLoss.css('color', 'green'); // Set text color to green
+			} else if (winLoss === '-') {
+				orderDataWinLoss.css('color', '#415b5a'); // Set text color to green
 			} else {
-				orderDataWinLoss.css('color', 'green'); // Set text color to greeny
+				orderDataWinLoss.css('color', 'greeny'); // Set text color to greeny
 			}
 		}
 
