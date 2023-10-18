@@ -1003,7 +1003,7 @@ class LsportApiController extends Controller {
         }
         $order['market_priority'] = $market_priority;
         $order['player_rate'] = $player_rate;
-        $order['better_rate'] = ($is_better_rate)?(1):(0);
+        $order['better_rate'] = $is_better_rate;
         $order['market_bet_id'] = $market_bet_id;
         //////////////////////////////////////////
 
@@ -1214,7 +1214,7 @@ class LsportApiController extends Controller {
         // 取得必要參數
         $player_id = $input['player'];
         $bet_amount = $input['bet_amount'];  //投注金額
-        $is_better_rate = (empty($input['better_rate']) === false);  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
+        $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
         $sport_id = $this->default_sport_id;
         if (isset($input['sport_id'])) {
@@ -1379,7 +1379,7 @@ class LsportApiController extends Controller {
                 'bet_rate' => null,
 
                 'player_rate' => $player_rate,
-                'better_rate' => ($is_better_rate)?(1):(0),
+                'better_rate' => $is_better_rate,
                 'bet_amount' => $bet_amount,
                 'status' => $default_order_status,
                 'create_time' => date("Y-m-d H:i:s"),
