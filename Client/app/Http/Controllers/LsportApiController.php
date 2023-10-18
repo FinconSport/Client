@@ -1975,17 +1975,15 @@ class LsportApiController extends Controller {
         // 獲取注單資料
 
         if (isset($input['debug'])) {
-            $return = GameOrder::getOrderList([
-                "player_id"=>$player_id, 
-                "result"=> $input['result'],
-                "skip"=> $skip, 
-                "page_limit"=> $page_limit
-            ]);
 
-            dd($return);
         }
-
-        $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list();
+        
+        $return = GameOrder::getOrderList([
+            "player_id"=>$player_id, 
+            "result"=> $input['result'],
+            "skip"=> $skip, 
+            "page_limit"=> $page_limit
+        ]);
         if ($return === false) {
             $this->ApiError("01");
         }
