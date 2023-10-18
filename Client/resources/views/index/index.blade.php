@@ -494,9 +494,17 @@
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
                         if( stageBet === 0 ) {
+                            // 先取消樣式
+                            card.find('.teamSpan').eq(0).removeClass('hcapTeam');
+                            card.find('.teamSpan').eq(1).removeClass('hcapTeam');
+
                             let index = parseInt(v4.market_bet_name_en) - 1
                             card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                         } else {
+                            // 先取消樣式
+                            card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
+                            card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
+
                             let index = parseInt(v4.market_bet_name_en) + 1
                             card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                         }
@@ -809,6 +817,7 @@
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         console.log('createBetArea->' + k3)
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                        card.attr('period', v3.periods.period)
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
@@ -844,28 +853,20 @@
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-                                            console.log('=====' + stageBet + '=====')
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(0).removeClass('hcapTeam');
                                                 card.find('.teamSpan').eq(1).removeClass('hcapTeam');
-                                                console.log(card.find('.teamSpan').eq(0).html(), card.find('.teamSpan').eq(1).html(), 
-                                                '移除樣式')
 
                                                 let index = parseInt(v4.market_bet_name_en) - 1
                                                 card.find('.teamSpan').eq(index).addClass('hcapTeam') 
-                                                console.log(card.find('.teamSpan').eq(index).html(), v4.line, '增加樣式')
                                             } else {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(2).find('div').eq(0).removeClass('hcapTeam');
                                                 card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
 
-                                                console.log(card.find('.teamSpan').eq(2).find('div').eq(0).html(), card.find('.teamSpan').eq(3).find('div').eq(0).html(), 
-                                                '移除樣式')
-
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam')
-                                                console.log(card.find('.teamSpan').eq(index).find('div').eq(0).html(), v4.line, '增加樣式')
                                             }
                                         }
 
