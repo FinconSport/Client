@@ -12,7 +12,36 @@ class GameOrder extends Model
 	public $timestamps = false;
 	protected $table = "game_order";
 
-	protected static function getOrderList($input) {
+	protected static function getOrderList($data) {
+
+        // 緩存時間
+        $cacheAliveTime = 10;
+
+        // 緩存Key
+        $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
+
+        return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
+			
+			$player_id = $data['player_id'];
+			$result = $data['result'];
+			$skip = $data['skip'];
+			$page_limit = $data['page_limit'];
+			
+            $model = self::where('player_id', $player_id);
+
+			if ($result == 0) {
+				$model = $model->whereIn('status', [0,1,2,3]);
+			} else {
+				$model = $model->whereIn('status', 4);
+			}
+
+			$return = $model->skip($skip)->take($page_limit)->get();
+            
+            return $return;
+        });
+	}
+
+	protected static function ddddgetOrderList($input) {
 
 		$player_id = $input['player_id'];
 		$result = $input['result'];
