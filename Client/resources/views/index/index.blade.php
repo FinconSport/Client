@@ -700,19 +700,13 @@
     
     // render view layer here
     function renderView() {
-        console.log('renderView')
-
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            console.log(k, v)
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
-                console.log(k2, v2)
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    console.log(k3, v3)
                     
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-                    console.log(isExist)
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
@@ -721,12 +715,6 @@
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
                         let isSwitchCate = !isStatusSame && v3.status === 2// is changing early to living
-
-                        console.log(k3)
-                        console.log('nowStatus-> ' + nowStatus)
-                        console.log('v3.status-> ' + v3.status, v3.status === 2)
-                        console.log('isStatusSame-> ' + isStatusSame)
-                        console.log('isSwitchCate-> ' + isSwitchCate)
 
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
@@ -783,7 +771,7 @@
                             if( v3.periods ) {
                                 timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                                 // bet data
-                                renderBetArea(mainPriorityArr, v3, k3)
+                                renderBetArea(mainPriorityArr, v3, k3, card)
                                 // exception baseball
                                 if( sport === 154914 ) {
                                     v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
@@ -832,13 +820,16 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, 1)
+                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, card, 1)
                             }
                         }
                        
-                        function renderBetArea(priorityArr, v3, k3, stageBet = 0) {
+                        function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
                             priorityArr.forEach(( i, j ) => {
-                                let bet_div = $(`#${k3} div[priority=${i}]`)
+                                let bet_div = $(`#${k3} div[priority=${i}]`)[0]
+                                
+                                console.log(bet_div)
+
                                 let betData = null
                                 let item = null
                                 if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
@@ -847,18 +838,18 @@
                                     let isHcapTeam = null
                                     // 讓分的priority && line不同 && 有盤口
                                     j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                                    // 先取消樣式
+                                    bet_div.closest('.indexBetCardTable').prev().find('div').removeClass('hcapTeam')
 
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
-                                        // 先取消樣式
-                                        bet_div.find('div').removeClass('hcapTeam')
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
                                             if( stageBet === 0 ) {
                                                 let index = parseInt(v4.market_bet_name_en) - 1
-                                                bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                                             } else {
                                                 let index = parseInt(v4.market_bet_name_en) + 1
-                                                bet_div.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                                             }
                                         }
 
@@ -936,12 +927,10 @@
                                                 // 判斷賠率是否有改變
                                                 if( parseFloat(price) > parseFloat(v4.price) ) {
                                                     // 賠率下降
-                                                    console.log(`old:${price} -> new:${v4.price}`)
                                                     lowerOdd(k3, betData.market_id, v4.market_bet_id)
                                                 }
                                                 if( parseFloat(price) < parseFloat(v4.price) ) {
                                                     // 賠率上升
-                                                    console.log(`old:${price} -> new:${v4.price}`)
                                                     raiseOdd(k3, betData.market_id, v4.market_bet_id)
                                                 }
                                             } 
