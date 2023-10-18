@@ -1477,9 +1477,7 @@ class LsportApiController extends Controller {
                     // order data
                     $order['bet_rate'] = null;
                     //////////////////////////////////////////
-                }
-                // $is_risk_order: false AND $is_bet_delay=true
-                else {
+                } else {
                     //////////////////////////////////////////
                     // order data
                     $order['bet_rate'] = null;
@@ -1493,11 +1491,8 @@ class LsportApiController extends Controller {
                     // order data
                     $order['bet_rate'] = null;
                     //////////////////////////////////////////
-                }
-                // $is_risk_order: false AND $is_bet_delay=false
-                else {
+                } else {
                     $current_market_bet_status = $market_bet_data['status'];
-                    dd($market_bet_data);
                     $current_market_bet_rate = $market_bet_data['price'];
     
                     // 賠率非開盤狀態 1开、2锁、3结算
@@ -1525,12 +1520,6 @@ class LsportApiController extends Controller {
                 $order['market_name'] = $market_data[$lang_col];
             }
             $order['market_priority'] = $market_priority;
-
-            //////////////////////////////////////////
-            // 判斷 is_better_rate
-            if (($is_better_rate == 1) && ($current_market_bet_rate < $player_rate)) {
-                $this->ApiError("21");
-            }
 
             //////////////////////////////////////////
             // m_id
