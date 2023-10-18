@@ -811,13 +811,11 @@
                                 let period = card.attr('period').toString()
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
-                                console.log('basketball-> ',k3, (v3?.periods?.period).toString(), period)
                                 // 換節了 重新渲染單節投注區塊
                                 if( (v3?.periods?.period).toString() !== period ) {
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
                                         card.find('.indexBetCardTable').eq(1).html('')
-                                        console.log('createBetArea->' + k3)
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
                                     } else {
@@ -837,7 +835,6 @@
                         }
                        
                         function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
-                            console.log('renderBetArea->' + stageBet)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $($(`#${k3} div[priority=${i}]`)[0])
                                 let betData = null
@@ -1237,7 +1234,6 @@
 
         // 選中樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
-        console.log(fixture_id, market_id, market_bet_id)
 
         // 判斷滾球or早盤
         // const start_time = new Date(result.start_time).getTime();
