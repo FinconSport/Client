@@ -841,7 +841,7 @@
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
-                                        if( k3 === 11533223 ) {
+                                        if( k3 === 11533470 ) {
                                             console.log(isHcapTeam)
                                             console.log(parseFloat(betData.list[0].line), parseFloat(betData.list[1].line))
                                             console.log(parseFloat(v4.line), parseFloat(v4.line) < 0)
@@ -860,7 +860,8 @@
                                                 card.find('.teamSpan').eq(3).find('div').eq(0).removeClass('hcapTeam');
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
-                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                                                card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam')
+                                                console.log(card.find('.teamSpan').eq(index).find('div').eq(0)) 
                                             }
                                         }
 
