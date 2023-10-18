@@ -149,9 +149,9 @@
 				// const effectiveAmount = parseFloat(orderItem.active_bet);
 
 				// if the amount is null make it 0
-				let betAmount = parseFloat(orderItem.bet_amount) || 0;
-				let activeBet = parseFloat(orderItem.active_bet) || 0;
-				let resultAmount = parseFloat(orderItem.result_amount) || 0;
+				let betAmount = parseFloat(orderItem.bet_amount);
+				let activeBet = parseFloat(orderItem.active_bet);
+				let resultAmount = parseFloat(orderItem.result_amount);
 				let winLoss = resultAmount - betAmount;
 
 				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
@@ -163,10 +163,6 @@
 					betAmount = Number(roundedBetBigInt) / 100;
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
-				} else {
-					betAmount = null;
-					activeBet = null;
-					resultAmount = null;
 				}
 
 				let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
