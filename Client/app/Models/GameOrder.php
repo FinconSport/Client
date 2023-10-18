@@ -33,7 +33,7 @@ class GameOrder extends CacheModel
 			if ($result == 0) {
 				$model = $model->whereIn('status', [0,1,2,3]);
 			} else {
-				$model = $model->whereIn('status', 4);
+				$model = $model->where('status', 4);
 			}
 
 			$return = $model->skip($skip)->take($page_limit)->get();
