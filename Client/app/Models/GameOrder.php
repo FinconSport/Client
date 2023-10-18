@@ -30,7 +30,9 @@ class GameOrder extends CacheModel
 			
             $model = self::where('player_id', $player_id)->whereColumn('m_id', '=', 'id');
 
-			if ($result == 0) {
+			if ($result == -1) {
+				// do nothing
+			} elseif ($result == 0) {
 				$model = $model->whereIn('status', [0,1,2,3]);
 			} else {
 				$model = $model->where('status', 4);

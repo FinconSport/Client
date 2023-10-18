@@ -1962,7 +1962,7 @@ class LsportApiController extends Controller {
         }
 
         if (!isset($input['result'])) {
-            $input['result'] = 0;
+            $input['result'] = -1;
         }
 
         //////////////////////////////////////////
