@@ -984,10 +984,10 @@
             let cate = $(this).attr('cate')
             let league_id = $(this).attr('league_id')
             let fixture_id = $(this).attr('id')
-            let resultArr = matchListD.data[cate]
+            let resultArr = matchListD.data[cate][sport]?.list[league_id]?.list
             let result = null
-            if( resultArr && resultArr[sport]?.list[league_id]?.list ) {
-                result = Object.keys(resultArr).map(key => resultArr[key]).find(item => (item.fixture_id).toString() === fixture_id.toString())
+            if( resultArr ) {
+                result = Object.keys(resultArr).map(key => resultArr[key]).find(item => item.fixture_id == fixture_id)
             } 
             if( !result ) {
                 closeFixture(fixture_id)
