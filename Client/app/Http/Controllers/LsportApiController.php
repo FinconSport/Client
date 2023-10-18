@@ -1991,6 +1991,8 @@ class LsportApiController extends Controller {
                 "skip"=> $skip, 
                 "page_limit"=> $page_limit
             ]);
+
+            dd($return);
         }
 
         $return = GameOrder::where('m_id','id')->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->list();
