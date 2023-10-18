@@ -715,7 +715,7 @@
                         let away_team_info = card.find('[key="awayTeamInfo"]')
                         let nowStatus = parseInt(card.attr('status'))
                         let isStatusSame = nowStatus === v3.status ? true : false // is status the same
-                        let isSwitchCate = !isStatusSame && v3.status !== 1// is changing early to living
+                        let isSwitchCate = !isStatusSame && v3.status === 2// is changing early to living
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) createLeague(k, k2, v2)
@@ -856,10 +856,6 @@
                                         let price = item.attr('bet_rate')
                                         let isSelected = item.hasClass('m_order_on')
 
-                                        
-
-                                        // set attribute
-                                        if( isSelected ) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
                                         item.attr('priority', i)
                                         item.attr('fixture_id', k3)
                                         item.attr('market_id', betData.market_id)
@@ -872,9 +868,9 @@
                                         item.attr('league', v2.league_name)
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
-
                                         // rate
                                         item.find('.odd').html(v4.price)
+
                                         // 賦值
                                         switch ( i ) {
                                             case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
@@ -891,15 +887,23 @@
                                         }
 
                                         // 左邊投注區塊
-                                        let calBetNameStr = ''
-                                        let home = item.attr('home')
-                                        let away = item.attr('away')
-                                        if( convertTeamPriArr.indexOf(i) === -1 ) {
-                                            calBetNameStr = v4.market_bet_name + ' ' + v4.line
-                                        } else {
-                                            calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                        if( isSelected ) {
+                                            $('div[key="slideOrderCard"]').attr('market_id', betData.market_id)
+                                            $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
+
+                                            let calBetNameStr = ''
+                                            let home = item.attr('home')
+                                            let away = item.attr('away')
+                                            if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                                calBetNameStr = v4.market_bet_name + ' ' + v4.line
+                                            } else {
+                                                calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                            }
+
+                                            $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+
+                                            $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="odd"]`).html(v4.price)
                                         }
-                                        $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
 
                                         // 狀態 鎖頭
                                         if( v4.status === 1 ) {
@@ -907,14 +911,14 @@
                                             item.attr('onclick', 'openCal($(this))')
 
                                             // 左邊選中的剛好鎖起來了 -> 復原
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            if( isSelected ) {
                                                 $('#submitOrder').html(langTrans.bet_area.bet)
                                                 $('#submitOrder').removeClass('disabled')
                                                 $('#submitOrder').removeAttr('disabled')
                                             }
 
                                             // 判斷盤口存在+是否有改變且狀態為1
-                                            if( market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString()) {
+                                            if( market_bet_id && (market_bet_id.toString() === (v4.market_bet_id).toString())) {
                                                 // 判斷賠率是否有改變
                                                 if( parseFloat(price) > parseFloat(v4.price) ) {
                                                     // 賠率下降
@@ -932,7 +936,7 @@
                                             item.removeAttr('onclick')
 
                                             // 左邊選中的剛好鎖起來了
-                                            if( $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_bet_id="${v4.market_bet_id}"]`).length > 0 ) {
+                                            if( isSelected ) {
                                                 $('#submitOrder').html(langTrans.bet_area.disabled)
                                                 $('#submitOrder').addClass('disabled')
                                                 $('#submitOrder').attr('disabled', true)
@@ -1328,8 +1332,9 @@
         $('#indexContainer .elToggleCount').each(function() {
             let id = $(this).attr('id').split('_')[1]
             let count = $('#toggleContent_' + id).find('.indexEachCard').length
+            console.log(id, count)
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.cateWrapper').hide()
+            // if( count === 0 ) $(this).closest('.cateWrapper').hide()
         })
 
         $('#indexContainer .legToggleCount').each(function() {
