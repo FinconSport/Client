@@ -192,14 +192,15 @@
 			totalResultAmount = parseFloat(totalResultAmount);
 			totalEffectivetAmount = parseFloat(totalEffectivetAmount);
 			totalBetAmount = parseFloat(totalBetAmount);
-			totalWinLoss = parseFloat(totalWinLoss.toFixed(2);
+			totalWinLoss = parseFloat(totalWinLoss.toFixed(2));
 
-			if( orderListD.data.list.length !== 20 || orderListD.data.list.length === 0 ) {
+			if (orderListD.data.list.length !== 20 || orderListD.data.list.length === 0) {
 				isLastPage = true;
 				isLastPage && $('#noMoreData').show();
 			}
 		}
 	}
+
 
 
 	function createList(orderItem, orderIndex, winLoss) {
