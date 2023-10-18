@@ -128,12 +128,12 @@ class CommonHistory extends React.Component {
                         <div className='row m-0'>
                             <div className='col-9 p-0'>{langText.CommonHistory.result}</div>
                             <div className='col-3 p-0 text-right' style={
-                                val.bet_data[0].status === 0 || val.bet_data[0].status === 3 ?
+                                val.bet_data[0].result_percent === 0 || val.bet_data[0].result_percent === 3 ?
                                 {color: 'green'} : (
-                                    val.bet_data[0].status === 1 || val.bet_data[0].status === 2 ?
+                                    val.bet_data[0].result_percent === 1 || val.bet_data[0].result_percent === 2 ?
                                     {color: 'red'} : null
                                 )
-                            }>{langText.CommonHistory.detailStatusArr[val.bet_data[0].status]}</div>
+                            }>{langText.CommonHistory.detailStatusArr[val.bet_data[0].result_percent]}</div>
                         </div>
                     }
                     {
@@ -219,12 +219,12 @@ class CommonHistory extends React.Component {
                                     <div className='row m-0'>
                                         <div className='col-9 p-0'>{langText.CommonHistory.result}</div>
                                         <div className='col-3 p-0 text-right' style={
-                                            v.status === 0 || v.status === 3 ?
+                                            v.result_percent === 0 || v.result_percent === 3 ?
                                             {color: 'green'} : (
-                                                v.status === 1 || v.status === 2 ?
+                                                v.result_percent === 1 || v.result_percent === 2 ?
                                                 {color: 'red'} : null
                                             )
-                                        }>{langText.CommonHistory.detailStatusArr[v.status]}</div>
+                                        }>{langText.CommonHistory.detailStatusArr[v.result_percent]}</div>
                                     </div>
                                 }
                                 {
