@@ -38,7 +38,7 @@ class GameOrder extends CacheModel
 				$model = $model->where('status', 4);
 			}
 
-			$return = $model->skip($skip)->take($page_limit)->get();
+			$return = $model->skip($skip)->take($page_limit)->orderBy("id","DESC")->get();
             
             return $return;
         });
