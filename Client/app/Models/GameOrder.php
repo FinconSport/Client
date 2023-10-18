@@ -14,7 +14,7 @@ class GameOrder extends Model
 
 	protected static function getOrderList($input) {
 
-		$player_id = $input['player'];
+		$player_id = $input['player_id'];
 		$result = $input['result'];
 		$page = $input['page'];
 		$skip = $input['skip'];
