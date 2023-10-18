@@ -164,9 +164,9 @@
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
 				} else {
-					betAmount = 0;
-					activeBet = 0;
-					resultAmount = 0;
+					betAmount = null;
+					activeBet = null;
+					resultAmount = null;
 				}
 
 				let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
