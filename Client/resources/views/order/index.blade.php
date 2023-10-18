@@ -148,7 +148,7 @@
 				let betAmount = parseFloat(orderItem.bet_amount) || 0;
 				let activeBet = parseFloat(orderItem.active_bet) || 0;
 				let resultAmount = parseFloat(orderItem.result_amount) || 0;
-				let winLoss = resultAmount - betAmount;
+				
 
 				if ((!isNaN(betAmount)) || (!isNaN(activeBet)) || (!isNaN(resultAmount))) {
 					// Round to two decimal places as BigInt
@@ -159,14 +159,22 @@
 					betAmount = Number(roundedBetBigInt) / 100;
 					activeBet = Number(roundedActiveBetBigInt) / 100; 
 					resultAmount = Number(roundedResultBigInt) / 100; 
+
+					let winLoss = resultAmount - betAmount;
+					if (resultAmount !== null) {
+						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
+						winLoss = Number(roundedWinLossBigInt) / 100;
+					} else {
+						winLoss = 0;
+					}
 				} else {
 					betAmount = 0;
 					activeBet = 0;
 					resultAmount = 0;
 				}
 
-				let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
-				winLoss = Number(roundedWinLossBigInt) / 100; 
+				// let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100)); 
+				// winLoss = Number(roundedWinLossBigInt) / 100; 
 
 
 				createList(orderItem, orderIndex, winLoss);
