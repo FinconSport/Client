@@ -808,9 +808,6 @@
                                         stagePriorityArr = newStagePriorityArr
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
-
-                                        console.log('createBetArea')
-                                        console.log((v3.periods).toString(), period)
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
@@ -844,8 +841,12 @@
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
+                                        if( k3 === 11533223 ) {
+                                            console.log(isHcapTeam)
+                                            console.log(parseFloat(betData.list[0].line), parseFloat(betData.list[1].line))
+                                            console.log(parseFloat(v4.line), parseFloat(v4.line) < 0)
+                                        }
                                         if( isHcapTeam && parseFloat(v4.line) < 0 ) {
-
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(0).removeClass('hcapTeam');
