@@ -106,6 +106,8 @@ class GameOrder extends Model
 		$return = self::queries($DSLQueryStr);
 
 		if ($return === false) {
+			
+		dd($DSLQueryStr);
 			return false;
 		}
 
