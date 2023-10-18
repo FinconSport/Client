@@ -162,7 +162,7 @@
 					resultAmount = Number(roundedResultBigInt) / 100; 
 
 					winLoss = resultAmount - betAmount;
-					if (resultAmount !== null) {
+					if (resultAmount !== null && resultAmount !== 0) {
 						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
 						winLoss = Number(roundedWinLossBigInt) / 100;
 					} else {
@@ -223,10 +223,8 @@
 
 			if (winLossValue >= 0) {
 				orderDataWinLoss.css('color', 'red'); // Set text color to red
-			} else if (winLoss === '-') {
-				orderDataWinLoss.css('color', '#415b5a'); // Set text color to green
 			} else {
-				orderDataWinLoss.css('color', 'greeny'); // Set text color to greeny
+				orderDataWinLoss.css('color', 'green'); // Set text color to green
 			}
 		}
 
