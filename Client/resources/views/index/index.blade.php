@@ -270,7 +270,6 @@
 
     // game priority and gameTitle
     var mainPriorityArr = null
-    var stagePriorityArr = null
     var gameTitle = null
 
     
@@ -461,6 +460,7 @@
 
                 // bet area
                 if( v3.periods ) {
+                    let stagePriorityArr = null
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                     if(stagePriorityArr) {
                         createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
@@ -801,6 +801,8 @@
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 let period = card.attr('period').toString()
+                                let stagePriorityArr = null
+                                console.log('basketball-> ', (v3?.periods?.period).toString(), period)
                                 // 換節了 重新渲染單節投注區塊
                                 if( (v3?.periods?.period).toString() !== period ) {
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
@@ -825,6 +827,7 @@
                         }
                        
                         function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
+                            console.log('renderBetArea->' + stageBet)
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $($(`#${k3} div[priority=${i}]`)[0])
                                 let betData = null
@@ -861,7 +864,6 @@
 
                                                 let index = parseInt(v4.market_bet_name_en) + 1
                                                 card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam')
-                                                console.log(card.find('.teamSpan').eq(index).find('div').eq(0)) 
                                             }
                                         }
 
