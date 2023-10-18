@@ -216,11 +216,15 @@
 		const orderDataResultAmount = orderData.find('.orderData_resultAmount');
 		const orderDataResultTime = orderData.find('.orderData_resultTime');
 		const orderDataWinLoss = orderData.find('.orderData_WinLoss');
-		const winLossValue = parseFloat(winLoss);
-		if (winLossValue >= 0) {
-			orderDataWinLoss.css('color', 'red'); // Set text color to red
-		} else {
-			orderDataWinLoss.css('color', 'green'); // Set text color to green
+		let winLossValue = 0; // Default to 0 if winLoss is not defined
+		if (winLoss !== null && winLoss !== undefined) {
+			winLossValue = parseFloat(winLoss);
+
+			if (winLossValue >= 0) {
+				orderDataWinLoss.css('color', 'red'); // Set text color to red
+			} else {
+				orderDataWinLoss.css('color', 'green'); // Set text color to green
+			}
 		}
 
 		let sportName = '';
