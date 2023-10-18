@@ -839,7 +839,8 @@
                                     // 讓分的priority && line不同 && 有盤口
                                     j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
                                     // 先取消樣式
-                                    bet_div.closest('.indexBetCardTable').prev().find('div').removeClass('hcapTeam')
+                                    let teamSpanContainer = bet_div.closest('.indexBetCardTable').previousElementSibling
+                                    $(teamSpanContainer).find('div').removeClass('hcapTeam')
 
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
