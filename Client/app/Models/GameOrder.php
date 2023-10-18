@@ -94,17 +94,11 @@ class GameOrder extends Model
 				"is_result",
 				"status"]
 		];
-
 		
 		if ($result == 0) {
-			$DSLQuery['query']['bool']['should'] = ["range" =>[
-					"status"=>[
-						"gte" => 0,
-						"lte" => 3
-					]
-				]];
+			$DSLQuery['query']['bool']['should'] = ["term" => ["status" => [0,1,2,3]]];
 		} else {
-			$DSLQuery['query']['bool']['should'] = ["term" => ["status"=>["value" => 4]]];
+			$DSLQuery['query']['bool']['should'] = ["term" => ["status" => ["value" => 4]]];
 		}
 		
 		$DSLQueryStr = json_encode($DSLQuery,true);
