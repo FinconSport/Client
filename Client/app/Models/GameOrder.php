@@ -106,7 +106,10 @@ class GameOrder extends Model
 		}
 
 		// 重整格式
-		$data = $return['hits']['hits'];
+		$data = array();
+		foreach ($return['hits']['hits'] as $k => $v) {
+			$data[] = $v['_source'];
+		}
 
 		dd($DSKQueryStr,$data);
 
