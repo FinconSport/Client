@@ -28,7 +28,7 @@ class GameOrder extends CacheModel
 			$skip = $data['skip'];
 			$page_limit = $data['page_limit'];
 			
-            $model = self::where('player_id', $player_id);
+            $model = self::where('player_id', $player_id)->whereColumn('m_id', '=', 'id');
 
 			if ($result == 0) {
 				$model = $model->whereIn('status', [0,1,2,3]);
