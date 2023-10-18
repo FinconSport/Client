@@ -104,10 +104,22 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
+        $player_data = $return;
+
+        // 獲取agent的limit資料
+        $agent_id = $return['agent_id'];
+        $return = Agent::where("id",$agent_id)->fetch();
+        if ($return === false) {
+            $this->ApiError("03");
+        }
+
+        $limit = json_decode($return['limit_data'],true);
+
         ///////////////////////////////////
         $data = array(
-            'account' => $return['account'],
-            'balance' => $return['balance'],
+            'account' => $player_data['account'],
+            'balance' => $player_data['balance'],
+            'limit'   => $limit
         );
         
         $this->ApiSuccess($data, "01");
