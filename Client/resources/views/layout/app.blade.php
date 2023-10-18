@@ -8,7 +8,8 @@
     <link href="{{ asset('css/jquery-ui.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <!-- COMM CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
-    <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+	<link href="{{ asset('css/common.css?v=' . $current_time) }}" rel="stylesheet">
     <link href="{{ asset('css/icon/all.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css?v=' . $system_config['version']) }}" rel="stylesheet">
 
@@ -364,7 +365,7 @@
 						fontawesome = 'basketball';
 					}
 
-					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i> <i class='fa-solid icon-'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
 
 					container.appendChild(sportSelect);
 				}
