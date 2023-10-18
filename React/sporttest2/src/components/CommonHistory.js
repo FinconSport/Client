@@ -211,7 +211,6 @@ class CommonHistory extends React.Component {
     // 每次點進來都撈一次
 	componentDidUpdate(prevProps) {
 		if (prevProps.isShow !== this.props.isShow ) {
-            this.textOverFlow()
             this.componentDidMount()
 		}
 	}
@@ -221,21 +220,11 @@ class CommonHistory extends React.Component {
     StatusBtn = (status) => {
         this.setState({
             searchStatus: status
-        },() => {
-            this.textOverFlow(); // 调用 textOverFlow 方法
         })
         this.caller('https://sportc.asgame.net/api/v2/common_order?token=' + window.token+ '&player=' + window.player+ '&result=' + status + '&page=1')
     }
 
-    // 文字太長變成跑馬燈
-    textOverFlow = () => {
-        $('.textoverflow').each(function(){
-            // 太長有換行
-            if(this.clientHeight > 22) {
-                $(this).wrap('<marquee scrollamount=5>')
-            }
-        })
-    }
+
 
     // 日期格式
     formatDateTime = (dateTimeString) => {
