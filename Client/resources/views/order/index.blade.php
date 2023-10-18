@@ -333,8 +333,8 @@
 
 		if (betIndex > 0) {
 			//append in another td if have another bet_item
-			const minNumber = 1;const maxNumber = 100;
-			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+			// const minNumber = 1;const maxNumber = 100;
+			// const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
 			const dynamicId = `${betItem.id}`;
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
