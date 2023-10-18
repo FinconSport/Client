@@ -103,15 +103,11 @@ class GameOrder extends Model
 						"lte" => 3
 					]
 				]];
-
 		} else {
 			$DSLQuery['query']['bool']['should'] = ["term" => ["status"=>["value" => 4]]];
 		}
 		
-
 		$DSLQueryStr = json_encode($DSLQuery,true);
-
-		dd($DSLQueryStr);
 
 		$return = self::queries($DSLQueryStr);
 
