@@ -163,6 +163,15 @@ div.submenu-btn {
 
 .submenu-main .submenu-btn i {
     color:#c79e42;
+    position: absolute;
+    top: 50%;
+    left: -7px;
+    transform: translate(0%, -50%);
+}
+
+.submenu-btn{
+    position: relative;
+    padding-left: 1.1rem;
 }
 
 .submenu-main i {

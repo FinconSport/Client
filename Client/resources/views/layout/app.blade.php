@@ -356,7 +356,16 @@
 					sportSelect.setAttribute("key", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect");
 					sportSelect.setAttribute("href", url + x.sport_id);
-					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+					if (x.sport_id === 154914) {
+						fontawesome = 'baseball';
+					} else if (x.sport_id === 6046) {
+						fontawesome = 'futbol';
+					} else if (x.sport_id === 48242) {
+						fontawesome = 'basketball';
+					}
+
+					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i> <i class='fa-solid icon-'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+
 					container.appendChild(sportSelect);
 				}
 
