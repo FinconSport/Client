@@ -1497,6 +1497,7 @@ class LsportApiController extends Controller {
                 // $is_risk_order: false AND $is_bet_delay=false
                 else {
                     $current_market_bet_status = $market_bet_data['status'];
+                    dd($market_bet_data);
                     $current_market_bet_rate = $market_bet_data['price'];
     
                     // 賠率非開盤狀態 1开、2锁、3结算
