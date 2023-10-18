@@ -162,7 +162,7 @@
 					resultAmount = Number(roundedResultBigInt) / 100; 
 
 					winLoss = resultAmount - betAmount;
-					if (resultAmount !== null && resultAmount !== 0) {
+					if (resultAmount !== null) {
 						let roundedWinLossBigInt = BigInt(Math.round(winLoss * 100));
 						winLoss = Number(roundedWinLossBigInt) / 100;
 					} else {
@@ -222,9 +222,9 @@
 			winLossValue = parseFloat(winLoss);
 
 			if (winLossValue >= 0) {
-				orderDataWinLoss.css('color', 'red'); // Set text color to red
-			} else {
 				orderDataWinLoss.css('color', 'green'); // Set text color to green
+			} else {
+				orderDataWinLoss.css('color', 'red'); // Set text color to red
 			}
 		}
 
@@ -412,9 +412,9 @@
 		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
-			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
-		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
+		} else {
+			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		}
 		$('.search-bar-container').after(orderDataTotal);
 	}
