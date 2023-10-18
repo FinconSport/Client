@@ -5,6 +5,7 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 			<select id="selectOption" name="selectOption"  onchange="redirectToPage(this)">
+				<option value="{{ trans('common.left_menu.all') }}" data-link="?result=-1">{{ trans('common.left_menu.all') }}</option>
 				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
 				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
 			</select>
@@ -126,7 +127,7 @@
 	// order list data
     var orderListD = {}
 
-	var callOrderListData = { token: token, player: player, result: 0, page: 1 }
+	var callOrderListData = { token: token, player: player, result: -1, page: 1 }
     const orderList_api = '/api/v2/common_order'
 
 	let totalBetItemCount = 0;
