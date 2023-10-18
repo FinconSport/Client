@@ -27,11 +27,6 @@ class GameOrder extends Model
 							"script" => [
 								"source" => 'doc["m_id"].value == doc["id"].value'
 							]
-						]],
-						["term" => [
-							"player_id" => [
-								"value" => $player_id 
-							]
 						]]
 					]
 				]
@@ -95,10 +90,15 @@ class GameOrder extends Model
 				"status"]
 		];
 		
+
+		$DSLQuery['from'] = $skip;
+		$DSLQuery['size'] = $page_limit;
+		$DSLQuery['query']['bool']['must'] = ["term" => ["player_id" => ["value" => $player_id]]];
+		
 		if ($result == 0) {
-			$DSLQuery['query']['bool']['should'] = ["term" => ["status" => [0,1,2,3]]];
+			$DSLQuery['query']['bool']['must'] = ["term" => ["status" => [0,1,2,3]]];
 		} else {
-			$DSLQuery['query']['bool']['should'] = ["term" => ["status" => ["value" => 4]]];
+			$DSLQuery['query']['bool']['must'] = ["term" => ["status" => ["value" => 4]]];
 		}
 		
 		$DSLQueryStr = json_encode($DSLQuery,true);
