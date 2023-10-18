@@ -222,9 +222,11 @@
 			winLossValue = parseFloat(winLoss);
 
 			if (winLossValue >= 0) {
+				orderDataWinLoss.css('color', 'red'); // Set text color to red
+			} elseif (winLoss === '-') {
 				orderDataWinLoss.css('color', 'green'); // Set text color to green
 			} else {
-				orderDataWinLoss.css('color', 'red'); // Set text color to red
+				orderDataWinLoss.css('color', 'green'); // Set text color to greeny
 			}
 		}
 
@@ -412,9 +414,9 @@
 		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
 		if (totalWinLoss >= 0) {
-			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
-		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
+		} else {
+			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
 		$('.search-bar-container').after(orderDataTotal);
 	}
