@@ -810,6 +810,7 @@
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
                                 let period = card.attr('period').toString()
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
+                                let isNewGenerate = false
                                 console.log('basketball-> ',k3, (v3?.periods?.period).toString(), period)
                                 // 換節了 重新渲染單節投注區塊
                                 if( (v3?.periods?.period).toString() !== period ) {
@@ -818,6 +819,7 @@
                                         console.log('createBetArea->' + k3)
                                         createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         card.attr('period', v3.periods.period)
+                                        isNewGenerate = true
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
@@ -830,7 +832,7 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-                                if( stagePriorityArr ) renderBetArea(stagePriorityArr, v3, k3, card, 1)
+                                if( stagePriorityArr && !isNewGenerate ) renderBetArea(stagePriorityArr, v3, k3, card, 1)
                             }
                         }
                        
