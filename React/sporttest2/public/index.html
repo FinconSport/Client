@@ -49,12 +49,12 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 	<script>
-		var player = 8 ;
-		var token = 12345 ;
-		var lang = 'tw'
-		// var player = {{ $player }};
-		// var token = {{ $token }};
-		// var lang = @json(session('player.lang'));
+		// var player = 8 ;
+		// var token = 12345 ;
+		// var lang = 'tw'
+		var player = {{ $player }};
+		var token = {{ $token }};
+		var lang = @json(session('player.lang'));
 
 		// 菜單與體育彩種預設
 		var menu = null

@@ -2,18 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { langText } from "../pages/LanguageContext";
 import 'bootstrap/dist/css/bootstrap.css';
-import basketball from "../image/ball/ball-basketball.png";
-import tennis from "../image/ball/ball-tennis.png";
-import soccer from "../image/ball/ball-soccer.png";
-import baseball from "../image/ball/ball-baseball.png";
-
-const imgArr = {
-	6046: soccer,
-	48242: basketball,
-	154914: baseball
-};
-  
-
 
 const MatchMenuPanelStyle = {
 	width: '100%',
@@ -57,7 +45,7 @@ class IndexMatchMenuPanel extends React.Component {
 	render() {
 		return(
 			<Link to="/mobile/match">
-				<div style={{ ...MatchMenuPanelStyle, backgroundImage: `url(${imgArr[this.props.sport]})` }}>
+				<div style={{ ...MatchMenuPanelStyle, backgroundImage: `url(${require(`../image/ball/ball-${this.props.sport}.png`)})` }}>
 					<p style={PanelTextStyle}>{this.props.name}</p>
 					<div style={PanelTextStyle2}>
 						<div style={PanelSpanStyle}>{langText.IndexMatchMenuPanel.availlableCount}</div>

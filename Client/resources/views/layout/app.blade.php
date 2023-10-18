@@ -357,12 +357,20 @@
 					sportSelect.setAttribute("key", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect");
 					sportSelect.setAttribute("href", url + x.sport_id);
-					if (x.sport_id === 154914) {
-						fontawesome = 'baseball';
-					} else if (x.sport_id === 6046) {
-						fontawesome = 'futbol';
-					} else if (x.sport_id === 48242) {
-						fontawesome = 'basketball';
+
+					switch (x.sport_id) {
+						case 154914:
+							fontawesome = 'baseball';
+							break;
+						case 6046:
+							fontawesome = 'futbol';
+							break;
+						case 48242:
+							fontawesome = 'basketball';
+							break;
+						case 35232:
+							fontawesome = 'hockey-puck';
+							break;
 					}
 
 					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";

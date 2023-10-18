@@ -51,7 +51,7 @@ const MatchSportItem = styled.div`
     color: white;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 1px;
-    width: 3rem;
+    width: 3.2rem;
     text-align: center;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
@@ -60,6 +60,15 @@ const MatchSportItem = styled.div`
     font-weight: 600;
     position: relative;
     padding-bottom: 0.2rem;
+
+    p {
+        font-size: 0.7rem;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0.75);
+    }
 `
 
 const backIcon = {
@@ -242,7 +251,7 @@ class MatchMenuNav extends React.Component {
                                 return(
                                     <MatchSportItem key={k} style={ this.state.sport_id == k ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
                                         <img style={MatchSportImg} alt={ v.name } src={ parseInt(this.state.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
-                                        <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v.name }</p>
+                                        <p className="mb-0">{ v.name }</p>
                                         <div style={CountSpan}>{ v.count }</div>
                                     </MatchSportItem>
                                 )

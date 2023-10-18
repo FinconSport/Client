@@ -40,8 +40,6 @@ class CommonHistory extends React.Component {
     toggleCard = () => {
         this.setState({
             isOpen: !this.state.isOpen
-        }, () => {
-            this.textOverFlow(this.props.data.id)
         })
     }
 
