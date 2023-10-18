@@ -495,10 +495,10 @@
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
                         if( stageBet === 0 ) {
                             let index = parseInt(v4.market_bet_name_en) - 1
-                            card.find('.teamSpan').eq(index).addClass('hcapTeam') 
+                            // card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                         } else {
                             let index = parseInt(v4.market_bet_name_en) + 1
-                            card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
+                            // card.find('.teamSpan').eq(index).find('div').eq(0).addClass('hcapTeam') 
                         }
                     }
 
