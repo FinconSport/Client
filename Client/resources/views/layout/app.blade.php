@@ -8,7 +8,8 @@
     <link href="{{ asset('css/jquery-ui.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <!-- COMM CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
-    <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+	<link href="{{ asset('css/common.css?v=' . $current_time) }}" rel="stylesheet">
     <link href="{{ asset('css/icon/all.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css?v=' . $system_config['version']) }}" rel="stylesheet">
 
@@ -90,9 +91,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="subMenuLogoutCon">
-					<button id="logoutBtn">{{ trans('common.left_menu.logout') }}</button>
 				</div>
 			</div>
 		</div>
@@ -359,7 +357,16 @@
 					sportSelect.setAttribute("key", x.sport_id);
 					sportSelect.setAttribute("class", "sportSelect");
 					sportSelect.setAttribute("href", url + x.sport_id);
-					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid icon-" + key + "'></i><span><p>" + x.name + "</p></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+					if (x.sport_id === 154914) {
+						fontawesome = 'baseball';
+					} else if (x.sport_id === 6046) {
+						fontawesome = 'futbol';
+					} else if (x.sport_id === 48242) {
+						fontawesome = 'basketball';
+					}
+
+					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+
 					container.appendChild(sportSelect);
 				}
 

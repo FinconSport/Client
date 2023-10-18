@@ -728,18 +728,7 @@
                                         let price = item.attr('bet_rate')
                                         let isSelected = item.hasClass('m_order_on')
 
-                                        // 判斷盤口存在+是否有改變且狀態為1
-                                        if (market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1) {
-                                            // 判斷賠率是否有改變
-                                            if (parseFloat(price) > parseFloat(v4.price)) {
-                                                // 賠率下降
-                                                lowerOdd(k3, betData.market_id, v4.market_bet_id)
-                                            }
-                                            if (parseFloat(price) < parseFloat(v4.price)) {
-                                                // 賠率上升
-                                                raiseOdd(k3, betData.market_id, v4.market_bet_id)
-                                            }
-                                        }
+                                        
 
                                         // set attribute
                                         if (isSelected) $('div[key="slideOrderCard"]').attr('market_bet_id', v4.market_bet_id)
@@ -809,6 +798,19 @@
                                         if (v4.status === 1) {
                                             item.find('.fa-lock').hide()
                                             item.attr('onclick', 'selectMOrderBet($(this))')
+
+                                            // 判斷盤口存在+是否有改變且狀態為1
+                                            if (market_bet_id && market_bet_id.toString() === (v4.market_bet_id).toString() && v4.status === 1) {
+                                                // 判斷賠率是否有改變
+                                                if (parseFloat(price) > parseFloat(v4.price)) {
+                                                    // 賠率下降
+                                                    lowerOdd(k3, betData.market_id, v4.market_bet_id)
+                                                }
+                                                if (parseFloat(price) < parseFloat(v4.price)) {
+                                                    // 賠率上升
+                                                    raiseOdd(k3, betData.market_id, v4.market_bet_id)
+                                                }
+                                            }
                                         } else {
                                             item.find('.fa-lock').show()
                                             item.removeAttr('onclick')
