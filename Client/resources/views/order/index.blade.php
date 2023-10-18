@@ -263,7 +263,7 @@
 		orderDataEffectiveAmount.html(activeBet);
 		orderDataResultAmount.html(resultAmount);
 		orderDataResultTime.html(orderItem.result_time === null ? '' : orderItem.result_time);
-		orderDataWinLoss.html(winLoss);
+		orderDataWinLoss.html(winLoss === '0' ? '-' : winLoss);
 
 		$('#orderDataTemp').append(orderData);
 	}
