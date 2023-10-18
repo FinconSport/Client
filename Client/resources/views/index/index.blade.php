@@ -802,16 +802,19 @@
 
                                 // 換節了 重新渲染單節投注區塊
                                 if( v3.periods ) {
+                                    console.log(v3.periods.period)
                                     newStagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
-                                    console.log(newStagePriorityArr)
-                                    console.log(stagePriorityArr)
                                     if( newStagePriorityArr ) {
+                                        console.log('case1 ' + k3)
                                         if(!stagePriorityArr.every((value, index) => value === newStagePriorityArr[index])) {
+                                            console.log('case2 ' + k3)
+                                            console.log(stagePriorityArr, newStagePriorityArr)
                                             stagePriorityArr = newStagePriorityArr
                                             card.find('.indexBetCardTable').eq(1).html('')
                                             createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         }
                                     } else {
+                                        console.log('case3 ' + k3)
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
                                 }
