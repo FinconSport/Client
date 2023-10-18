@@ -19,7 +19,6 @@ class GameOrder extends Model
 		$skip = $input['skip'];
 		$page_limit = $input['page_limit'];
 
-		
 		$DSLQuery = [
 			"query" => [
 				"bool" => [
@@ -34,13 +33,6 @@ class GameOrder extends Model
 								"value" => $player_id 
 							]
 						]]
-					],
-					"should" => [
-						"term" => [
-							"status" => [
-								"value" => 4
-							]
-						]
 					]
 				]
 			],
@@ -103,9 +95,22 @@ class GameOrder extends Model
 				"status"]
 		];
 
-		$DSKQueryStr = json_encode($DSLQuery,true);
+		
+		if ($result == 0) {
+			$DSLQuery['query']['bool']['should'][] = ["range"=>"status"=>[
+				"gte" => 0,
+				"lte" => 3
+			]];
+		} else {
+			$DSLQuery['query']['bool']['should'][] = ["term"=>"status"=>["value" => 4]];
+		}
+		
 
-		$return = self::queries($DSKQueryStr);
+		$DSLQueryStr = json_encode($DSLQuery,true);
+
+		dd($DSLQueryStr);
+
+		$return = self::queries($DSLQueryStr);
 
 		if ($return === false) {
 			return false;
@@ -117,7 +122,7 @@ class GameOrder extends Model
 			$data[] = $v['_source'];
 		}
 
-		dd($DSKQueryStr,$data);
+		dd($DSLQueryStr,$data);
 
 	}
 
