@@ -97,10 +97,13 @@ class GameOrder extends Model
 
 		
 		if ($result == 0) {
-			$DSLQuery['query']['bool']['should'][] = ["range"=>"status"=>[
-				"gte" => 0,
-				"lte" => 3
-			]];
+			$DSLQuery['query']['bool']['should'] = ["range" =>[
+					"status"=>[
+						"gte" => 0,
+						"lte" => 3
+					]
+				]];
+
 		} else {
 			$DSLQuery['query']['bool']['should'][] = ["term"=>"status"=>["value" => 4]];
 		}
