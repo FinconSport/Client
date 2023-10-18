@@ -335,7 +335,7 @@
 			//append in another td if have another bet_item
 			const minNumber = 1;const maxNumber = 100;
 			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-			const dynamicId = `${betItem.market_bet_id}`;
+			const dynamicId = `${betItem.id}`;
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 8%;"></td>'.repeat(2) +
