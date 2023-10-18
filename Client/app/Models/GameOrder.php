@@ -16,11 +16,9 @@ class GameOrder extends Model
 
 		$player_id = $input['player_id'];
 		$result = $input['result'];
-		$page = $input['page'];
 		$skip = $input['skip'];
 		$page_limit = $input['page_limit'];
 
-		dd($page, $skip, $page_limit);
 		
 		$DSLQuery = [
 			"query" => [
@@ -33,7 +31,7 @@ class GameOrder extends Model
 						]],
 						["term" => [
 							"player_id" => [
-								"value" => 9 
+								"value" => $player_id 
 							]
 						]]
 					],
@@ -63,8 +61,8 @@ class GameOrder extends Model
 			"sort" => [
 				["id" => "desc"]
 			],
-			"from" => 0,
-			"size" => 25,
+			"from" => $skip,
+			"size" => $page_limit,
 			"_source" => [
 				"id",
 				"m_id",
