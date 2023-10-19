@@ -2074,7 +2074,7 @@ class LsportApiController extends Controller {
 
                     // 滾球/早盤字樣判定
                     $market_type = 0;
-                    if ($return['start_time'] < $return['create_time']) {
+                    if ($return['start_time'] < $vvv['create_time']) {
                         $market_type = 1;
                     }
                     $tmp_bet_data['market_type'] = $market_type;
@@ -2101,10 +2101,10 @@ class LsportApiController extends Controller {
 
                 $tmp_bet_data = $v;
                 $tmp_bet_data['start_time'] = $return['start_time'];
-                
+
                 // 滾球/早盤字樣判定
                 $market_type = 0;
-                if ($return['start_time'] < $return['create_time']) {
+                if ($return['start_time'] < $vvv['create_time']) {
                     $market_type = 1;
                 }
                 $tmp_bet_data['market_type'] = $market_type;
