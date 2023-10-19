@@ -612,7 +612,7 @@
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
                     caller(matchList_api, callMatchListData, matchListD, 1) // update 
-                }, 5000);
+                }, 3000);
             }
         }, 100);
 
@@ -630,7 +630,7 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     renderView()
-                }, 5000);
+                }, 3000);
                 clearInterval(isReadyIndexInt); // stop checking
 
 
