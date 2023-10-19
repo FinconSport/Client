@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zn-tw">
   <head>
-    <!--     Fonts and icons     -->
+    <!--  Fonts and icons  -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200|Open+Sans+Condensed:700" rel="stylesheet">
     <!-- Jquery -->
     <link href="{{ asset('css/jquery-ui.css?v=' . $system_config['version']) }}" rel="stylesheet">
@@ -400,8 +400,8 @@
 			// 搜尋框ui
 			$('.searchSelect').dropdown('hide others');
 			$('.searchSelect.clearSearch').dropdown({clearable: true});
-			$('select[name="sport"]').val(searchData.sport)
-			$('select[name="sport"]').trigger('change')
+			// $('select[name="sport"]').val(searchData.sport)
+			// $('select[name="sport"]').trigger('change')
 			$('.ui.calendar').calendar();
 			$('#rangestart').calendar({
 				type: 'date',

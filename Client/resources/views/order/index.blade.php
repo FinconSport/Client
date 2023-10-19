@@ -11,15 +11,26 @@
 			</select>
 			</div>
 			<div class="datecalendar-con">
-				<div class="datepicker-con">
-					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker_from">
-						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
-					</div>
-					<span class="date-divider"> ~ </span>
-					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker_to">
-						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
+				<div class="ui form">
+					<div class="two fields">
+						<div class="field">
+						<label>{{ trans('common.search_area.start_time') }}</label>
+						<div class="ui calendar" id="rangestart">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="Start">
+							</div>
+						</div>
+						</div>
+						<div class="field">
+						<label>{{ trans('common.search_area.end_time') }}</label>
+						<div class="ui calendar" id="rangeend">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="End">
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 				<div class="datebutton-cons">
