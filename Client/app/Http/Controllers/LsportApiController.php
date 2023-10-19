@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Session;
 use DB;
 
-
 // LSport
 use App\Models\LsportFixture;
 use App\Models\LsportLeague;
@@ -23,7 +22,6 @@ use App\Models\GameOrder;
 use App\Models\PlayerBalanceLogs;
 use App\Models\ClientMarquee;
 // use App\Models\SystemConfig;
-
 
 /**
  * LsportApiController
@@ -2265,15 +2263,6 @@ class LsportApiController extends Controller {
      * 
      * 回傳予前端表示後端對前端請求的操作成功，以及所請求的結果。
      *
-     * @param data - 請求的結果。
-     * @param message -  操作成功訊息。
-     * @param gzip -  {true | false, 預設值=false。} 參數data是否已經過gzip壓縮及base64編碼處理。
-     * @return JSON {
-     *      status = 狀態(恆為1),
-     *      data = 欲回傳給前端的資料,
-     *      message = 經過拼裝可給前端翻譯顯示的包含控制器、方法、訊息的代碼字串。
-     *      gzip = BOOL: 參數data是否已經過gzip壓縮及base64編碼處理。
-     * }
      */
     protected function ApiSuccess($data, $message, $is_gzip = false) {
 
