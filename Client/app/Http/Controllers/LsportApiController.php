@@ -578,6 +578,14 @@ class LsportApiController extends Controller {
         $agent_lang = $this->getAgentLang($player_id);
         $lang_col = 'name_' . $agent_lang;
 
+        ///////////////////////////////////
+        //  夾帶聯賽資料
+
+        $league_mode = false;
+        if (isset($input['league_mode '])) {
+            $league_mode = true;
+        }
+
         //---------------------------------
         // 取得球種資料
         $return = LsportSport::where('status', 1)->orderBy('id', 'ASC')->list();
@@ -595,10 +603,28 @@ class LsportApiController extends Controller {
                 $sport_name = $v[$lang_col];
             }
 
-            $data[] = array(
-                'sport_id' => $v['sport_id'],
-                'name' => $sport_name
-            );
+            if ($league_mode) {
+
+                // 取得聯賽資料
+                $return = LsportLeague::where("sport_id",$v['sport_id'])->where('status', 1)->orderBy('id', 'ASC')->list();
+                if ($return === false) {
+                    $this->ApiError("02");
+                }
+
+                dd($return);
+        
+                $data[] = array(
+                    'sport_id' => $v['sport_id'],
+                    'name' => $sport_name
+                );
+            } else {
+
+                $data[] = array(
+                    'sport_id' => $v['sport_id'],
+                    'name' => $sport_name
+                );
+            }
+
         }
 
         ///////////////////////////////////
