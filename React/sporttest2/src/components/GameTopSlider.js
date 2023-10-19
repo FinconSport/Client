@@ -175,8 +175,8 @@ class GameTopSlider extends React.Component {
                                         <p target='league'>{data.list.league_name}</p>
                                     </div>
                                 </div>
-                                <div className={this.props.isGameRefreshing === true ? 'rotateRefresh col-2' : 'col-2'} onClick={this.refreshGame}>
-                                    <MdAutorenew className="fs-1"/>
+                                <div className='col-2' onClick={this.refreshGame}>
+                                    <MdAutorenew className={this.props.isGameRefreshing === true ? 'rotateRefresh fs-1' : 'fs-1'}/>
                                 </div>
                             </MainInfoSlider>
                             <MainInfoSlider className='row' style={{ margin:'1rem 0.5rem 0 0.5rem'}}>
@@ -227,8 +227,8 @@ class GameTopSlider extends React.Component {
                                             <p target='league'>{data.list.league_name}</p>
                                         </div>
                                     </div>
-                                    <div className={this.props.isGameRefreshing === true ? 'rotateRefresh col-2' : 'col-2'} onClick={this.refreshGame}>
-                                        <MdAutorenew className="fs-1"/>
+                                    <div className='col-2' onClick={this.refreshGame}>
+                                        <MdAutorenew className={this.props.isGameRefreshing === true ? 'rotateRefresh fs-1' : 'fs-1'}/>
                                     </div>
                                 </MainInfoSlider>
                                 <div style={maintablebpard}>
