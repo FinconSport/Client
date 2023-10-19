@@ -1980,11 +1980,11 @@ class LsportApiController extends Controller {
         }
         
         if (!isset($input['start_time'])) {
-            $input['start_time'] = date('Y-m-d', strtotime('-7 day'));
+            $input['start_time'] = date('Y-m-d', strtotime('-6 day'));
         }
 
         if (!isset($input['end_time'])) {
-            $input['end_time'] = date('Y-m-d');
+            $input['end_time'] = date('Y-m-d', strtotime('+1 day'));
         }
 
         //////////////////////////////////////////
