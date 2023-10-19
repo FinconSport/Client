@@ -582,7 +582,7 @@ class LsportApiController extends Controller {
         //  夾帶聯賽資料
 
         $league_mode = false;
-        if (isset($input['league_mode '])) {
+        if (isset($input['league_mode'])) {
             $league_mode = true;
         }
 
