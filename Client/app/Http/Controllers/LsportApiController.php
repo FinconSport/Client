@@ -611,11 +611,22 @@ class LsportApiController extends Controller {
                     $this->ApiError("02");
                 }
 
-                dd($return);
+                // league data
+                $league_list = array();
+                foreach ($return as $kk => $vv) {
+                    $tmp = array();
+                    $tmp['league_id'] = $vv['league_id'];
+                    $tmp['name'] = $vv['name_en'];
+                    if ($vv[$lang_col] != "") {
+                        $tmp['name'] = $vv[$lang_col];
+                    }
+                    $league_list[] = $tmp;
+                }
         
                 $data[] = array(
                     'sport_id' => $v['sport_id'],
-                    'name' => $sport_name
+                    'name' => $sport_name,
+                    'league' => $league_list
                 );
             } else {
 
