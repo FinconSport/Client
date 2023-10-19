@@ -194,8 +194,16 @@
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
-                Object.entries(v.market_bet).map((v2, k2) => {
-                    v2[1].map((v3, k3) => {
+                // Object.entries(v.market_bet).map((v2, k2) => {
+                //     v2[1].map((v3, k3) => {
+                //         createNewElement(v, v3);
+                //     });
+                // });
+
+                const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
+                // 遍历排序后的数组
+                sortedKeys.forEach((key) => {
+                    v.market_bet[key].forEach((v3) => {
                         createNewElement(v, v3);
                     });
                 });
