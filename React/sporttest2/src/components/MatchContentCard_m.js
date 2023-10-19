@@ -209,7 +209,7 @@ class MatchContentCard extends React.Component {
 		const v = this.props.data
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
-        if ( v !== undefined ){
+        if ( v !== undefined && gameTitle ){
             let hcapTeam = null
             if( v?.list && Object.keys(v.list).length > 0 ) {
                 let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list

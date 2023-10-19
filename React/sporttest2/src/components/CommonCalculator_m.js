@@ -487,7 +487,7 @@ class CommonCalculator extends React.Component {
                                                 <div>{ data.market_name }</div>
                                                 <div style={BetItemStyle} className='row m-0'>
                                                     <div className='col-10 p-0 text-left'>{ data.bet_item_name }</div>
-                                                    <div className='col-2 p-0 odd text-right'>{ data.bet_rate }</div>
+                                                    <div className='col-2 p-0 odd text-right mcalCardInfo' market_bet_id={data.market_bet_id}>{ data.bet_rate }</div>
                                                 </div>
                                             </div>
                                         ))

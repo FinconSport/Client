@@ -81,10 +81,14 @@ class MatchContent extends React.Component {
 					let uRate = u.price
 					let oRate = o.price
 					if( status === 1 ) {
+						// 計算機
+						$('.calCardInfo[market_bet_id=' + market_bet_id + '] .odd').html(uRate)
+						
 						if(uRate > oRate) {
 							this.removeRateStyle(market_bet_id)
 							// 賠率上升
 							$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
+							
 						}
 
 						if(uRate < oRate) {
