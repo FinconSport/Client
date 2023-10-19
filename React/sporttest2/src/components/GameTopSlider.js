@@ -190,7 +190,7 @@ class GameTopSlider extends React.Component {
                             <MainInfoSlider className='row' style={{ margin:'1rem 0.5rem 0 0.5rem'}}>
                                 <div className='col-4'>
                                     <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.home_team_name}</p>
-                                    <p style={{ display: 'none' }}>
+                                    <p className="fs-6 mt-2 mb-0" style={{ display: 'none' }}>
                                         <Marquee speed={20} gradient={false}>
                                             {fixture.home_team_name}&emsp;&emsp;&emsp;
                                         </Marquee>
@@ -224,7 +224,7 @@ class GameTopSlider extends React.Component {
                                 </div>
                                 <div className='col-4'>
                                     <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.away_team_name}</p>
-                                    <p style={{ display: 'none' }}>
+                                    <p className="fs-6 mt-2 mb-0" style={{ display: 'none' }}>
                                         <Marquee speed={20} gradient={false}>
                                             {fixture.away_team_name}&emsp;&emsp;&emsp;
                                         </Marquee>
