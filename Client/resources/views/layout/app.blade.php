@@ -187,6 +187,10 @@
 		const sportList_api = '/api/v2/match_sport'
 
 		function caller(url, data, obj, isUpdate = 0) {
+			if(window.location.pathname === '/match') {
+				data.league_mode = 1
+			}
+
 			return new Promise((resolve, reject) => {
 				$.ajax({
 					url: url,

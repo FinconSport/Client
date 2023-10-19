@@ -295,7 +295,7 @@
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
 			const market_type = betItem.market_type === 1 ? langTrans.main.living : langTrans.main.early
-			const content = `${marketName} ${market_type}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
+			const content = `${marketName}  ${market_type}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
 			if (betRate !== null) {
 				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {
