@@ -406,7 +406,7 @@ class CommonCalculator extends React.Component {
                     this.props.callBack() // 投注後餘額
                 })
             }
-        }, 100000);
+        }, 10000);
     }
 
     notifySuccess = (msg) => {

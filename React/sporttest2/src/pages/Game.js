@@ -43,7 +43,10 @@ class Game extends React.Component {
 		if( isUpdate === 1 ) {
 			var oldData = this.state.game_res?.data?.list
 			var updateData = json.data?.list
-			if( updateData ) this.findDifferences(oldData, updateData)
+			if( updateData ) {
+				this.removeRateStyle(0)
+				this.findDifferences(oldData, updateData)
+			} 
 		}
 
 		// 餘額刷新功能 -> 有時ajax回傳太快導致icon旋轉會閃一下就結束 故至少執行一秒
@@ -89,14 +92,14 @@ class Game extends React.Component {
 					let status = u.status
 					let uRate = u.price
 					let oRate = o.price
+
+
 					if( status === 1 ) {
 						if(uRate > oRate) {
-							this.removeRateStyle(market_bet_id)
 							// 賠率上升
 							$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
 						}
 						if(uRate < oRate) {
-							this.removeRateStyle(market_bet_id)
 							// 賠率下降
 							$('div[market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
 						}
@@ -110,8 +113,14 @@ class Game extends React.Component {
 	}
 
 	removeRateStyle = (market_bet_id) => {
-		$('div[market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
-		$('div[market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+		if(market_bet_id === 0) {
+			$('div').removeClass('raiseOdd')
+			$('div').removeClass('lowerOdd')
+		} else {
+			$('div[market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
+			$('div[market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')
+		}
+		
 	}
 
 	componentWillUnmount() {
