@@ -158,35 +158,37 @@ class GameMain extends React.Component {
                                                 <GameBetCard key={k}>
                                                     <GameBetCardBetName>{v.market_name}</GameBetCardBetName>
                                                     {
-                                                        Object.entries(v.market_bet).map((v1, k1) => (
-                                                            <div key={k1}>
-                                                                {v1[1].map((v2, k2) => (
-                                                                    <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && k1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
-                                                                        <div className="col-4 row m-0 p-0">
-                                                                            <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
-                                                                            <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
-                                                                        </div>
-                                                                        <div className="col-8 row m-0 p-0">
-                                                                            <div className="col-11" style={{ textAlign: 'right' }}>
-                                                                                <div market_bet_id={v2.market_bet_id}
-                                                                                    onClick={() => this.getBetData(
-                                                                                        v.market_id,
-                                                                                        v2.market_bet_id,
-                                                                                        v2.price,
-                                                                                        v.market_name,
-                                                                                        data.home_team_name,
-                                                                                        data.away_team_name,
-                                                                                        langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1 ?
-                                                                                            (v2.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v2.line
-                                                                                            :
-                                                                                            (v2.market_bet_name + ' ' + v2.line),
-                                                                                        v2.status
-                                                                                    )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
-                                                                                    {v2.price}
-                                                                                </div>
+                                                        Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b)).map((key, v1) => (
+                                                            <div key={key}>
+                                                                {v.market_bet[key].map((v2, k2) => (
+                                                                    <div key={k2}>
+                                                                        <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
+                                                                            <div className="col-4 row m-0 p-0">
+                                                                                <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
+                                                                                <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
                                                                             </div>
-                                                                            <div className="col-1 p-0" style={{ textAlign: 'left' }}>
-                                                                                <AiFillLock style={v2.status === 1 ? { display: 'none' } : { display: 'initial' }} />
+                                                                            <div className="col-8 row m-0 p-0">
+                                                                                <div className="col-11" style={{ textAlign: 'right' }}>
+                                                                                    <div market_bet_id={v2.market_bet_id}
+                                                                                        onClick={() => this.getBetData(
+                                                                                            v.market_id,
+                                                                                            v2.market_bet_id,
+                                                                                            v2.price,
+                                                                                            v.market_name,
+                                                                                            data.home_team_name,
+                                                                                            data.away_team_name,
+                                                                                            langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1 ?
+                                                                                                (v2.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v2.line
+                                                                                                :
+                                                                                                (v2.market_bet_name + ' ' + v2.line),
+                                                                                            v2.status
+                                                                                        )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
+                                                                                        {v2.price}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col-1 p-0" style={{ textAlign: 'left' }}>
+                                                                                    <AiFillLock style={v2.status === 1 ? { display: 'none' } : { display: 'initial' }} />
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -194,14 +196,12 @@ class GameMain extends React.Component {
                                                             </div>
                                                         ))
                                                     }
-
                                                 </GameBetCard>
                                             );
                                         }
                                         return null;
                                     })}
                                 </GameBetBody>
-                                
                             </>
                             :
                             langText.GameMain.analyze

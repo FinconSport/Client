@@ -237,22 +237,25 @@ class MatchContent extends React.Component {
 						<SlideToggle key={k} duration={500}>
 						  {({ toggle, setCollapsibleElement }) => (
 							<>
-							  <div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
-								{ v.league_name }({ Object.keys(v.list).length })
-								{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
-							  </div>
-							  <div className='row m-0' ref={setCollapsibleElement}>
-								{Object.entries(v.list).map(([k2, v2]) => (
-									<MatchContentCard
-										series_name = { v.league_name }
-										key={v2.fixture_id}
-										swiperIndex={this.state.swiperIndex}
-										swiperTabCallBack={this.swiperTabHandler}
-										getBetDataCallBack={this.getBetData}
-										data={v2}
-										isOpen={this.state.toggleStates[k] ? false : true}
-									/>
-								))}
+								<div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
+									{ v.league_name }({ Object.keys(v.list).length })
+									{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
+								</div>
+								<div className='row m-0' ref={setCollapsibleElement}>
+									{Object.entries(v.list)
+										.sort(([, a], [, b]) => a.order_by - b.order_by) // 根据 order_by 属性排序
+										.map(([k2, v2]) => (
+											<MatchContentCard
+											series_name={v.league_name}
+											key={v2.fixture_id}
+											swiperIndex={this.state.swiperIndex}
+											swiperTabCallBack={this.swiperTabHandler}
+											getBetDataCallBack={this.getBetData}
+											data={v2}
+											isOpen={this.state.toggleStates[k] ? false : true}
+											/>
+										))
+									}
 								</div>
 							</>
 						  )}

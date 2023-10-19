@@ -243,7 +243,7 @@ class MatchContent extends React.Component {
 									{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
 								</div>
 								<div className='row m-0' ref={setCollapsibleElement}>
-									{Object.entries(v.list).map(([k2, v2]) => {
+									{Object.entries(v.list).sort(([, a], [, b]) => a.order_by - b.order_by).map(([k2, v2]) => {
 										const selectedM = bet_data.find(item => item.fixture_id === v2.fixture_id)
 										return (
 											<MatchContentCard
