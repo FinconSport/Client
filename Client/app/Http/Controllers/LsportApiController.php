@@ -1978,6 +1978,14 @@ class LsportApiController extends Controller {
         if (!isset($input['result'])) {
             $input['result'] = -1;
         }
+        
+        if (!isset($input['start_time'])) {
+            $input['start_time'] = date('Y-m-d', strtotime('-7 day'));
+        }
+
+        if (!isset($input['end_time'])) {
+            $input['end_time'] = date('Y-m-d');
+        }
 
         //////////////////////////////////////////
 
@@ -1993,10 +2001,12 @@ class LsportApiController extends Controller {
         }
         
         $return = GameOrder::getOrderList([
-            "player_id"=>$player_id, 
-            "result"=> $input['result'],
-            "skip"=> $skip, 
-            "page_limit"=> $page_limit
+            "player_id"     => $player_id, 
+            "result"        => $input['result'],
+            "start_time"    => $input['start_time'],
+            "end_time"      => $input['end_time'],
+            "skip"          => $skip, 
+            "page_limit"    => $page_limit
         ]);
         if ($return === false) {
             $this->ApiError("01");

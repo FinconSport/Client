@@ -25,18 +25,35 @@ class GameOrder extends CacheModel
 			
 			$player_id = $data['player_id'];
 			$result = $data['result'];
+			$start_time = $data['start_time'];
+			$end_time = $data['end_time'];
 			$skip = $data['skip'];
 			$page_limit = $data['page_limit'];
 			
             $model = self::where('player_id', $player_id)->whereColumn('m_id', '=', 'id');
 
-			if ($result == -1) {
+			//////////////////////////////
+			// Search 
+
+			// start time 
+			if ($start_time != "") {
+				$model = $model->where('create_time', ">=", $start_time);
+			}
+			// end time 
+			if ($end_time != "") {
+				$model = $model->where('create_time', "<=", $end_time);
+			}
+
+			// result
+			if ($result == -1) {		// 全部
 				// do nothing
-			} elseif ($result == 0) {
+			} elseif ($result == 0) {	// 未結
 				$model = $model->whereIn('status', [0,1,2,3]);
-			} else {
+			} else {					// 已結
 				$model = $model->where('status', 4);
 			}
+
+			//////////////////////////////
 
 			$return = $model->skip($skip)->take($page_limit)->orderBy("id","DESC")->get();
             
@@ -44,6 +61,7 @@ class GameOrder extends CacheModel
         });
 	}
 
+	// DSL for Test
 	protected static function ddddgetOrderList($input) {
 
 		$player_id = $input['player_id'];
