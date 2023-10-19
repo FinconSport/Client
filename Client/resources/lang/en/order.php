@@ -51,7 +51,9 @@ return [
 		"waitToCreate" => "Pending",
 		"waitToOpen" => "Awaiting Draw",
 		"waitToPrize" => "Awaiting Payout",
-	],  //  
+		'living' => 'living',
+		'early' => 'early',
+	],
 	"result_precent" => [
 		"0" => "Lose", // "輸",
 		"1" => "Win", //"贏",

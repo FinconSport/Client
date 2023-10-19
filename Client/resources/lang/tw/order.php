@@ -51,6 +51,8 @@ return [
 		"waitToCreate" => "等待成立",
 		"waitToOpen" => "等待開獎",
 		"waitToPrize" => "等待派獎",
+		'living' => '滾球',
+		'early' => '早盤',
 	],
 	// 後端
 	"result_precent" => [
