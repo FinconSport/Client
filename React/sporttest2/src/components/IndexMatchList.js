@@ -90,7 +90,7 @@ class IndexMatchList extends React.Component {
                             {
                                 Object.entries(res.data).map(([key, value]) => {
                                     return(
-                                        <div style={{ paddingBottom: '1rem', overflowY: 'auto'}}>
+                                        <div style={{ overflowY: 'auto'}}>
                                             {
                                                 value.total !== 0 &&
                                                 this.state.menu_id === mapping[key][1] &&
