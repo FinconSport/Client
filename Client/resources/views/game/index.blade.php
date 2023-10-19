@@ -94,17 +94,14 @@
     <button class="filterBtn active">{{ trans('game.index.all') }}</button>
     <button class="filterBtn">{{ trans('game.index.hot') }}</button>
 </div>
-<div id="bettingTypeContainer">
-    
-</div>
+
+<div id="bettingTypeContainer"></div>
 
 <div class="bettingtype-container" template="bettingTypeContainerTemplate" hidden>
     <div class="marketName">
         <p class="market_name"></p>
     </div>
-    <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv">
-        
-    </div>
+    <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv"></div>
 </div>
 
 <div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
@@ -119,196 +116,6 @@
     </div>
 </div>
 
-<!-- --- -------------start index page---------- ------ -->
-<!-- <div template='fixtureCardTemplate' class="indexEachCard" hidden>
-    <div class="indexBetCard">
-        <div class="timeSpan" key='not-show-baseCon'>
-            <span class="timer"></span>
-        </div>
-        <div class="baseballSpan" key='show-baseCon'>
-            <div class="timer"></div>
-            <div class="baseCon row m-0">
-                <div class="col-1 h-100 p-0"></div>
-                <div class="col-6 h-100 p-0" key='base'>
-                    <img alt="base">
-                </div>
-                <div class="col-3 h-100 p-0" key='balls'>
-                    <div key='strike'></div>
-                    <div key='ball'></div>
-                    <div key='out'></div>
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-        </div>
-        <div class="otherBetWay" onclick="navToGame($(this))">
-            <i class="fa-solid fa-play"></i>
-            <p></p>
-        </div>
-    </div>
-    <div class="indexBetCard" key='basketBallQuaterBet'>
-        <div class="timeSpan"></div>
-        <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
-                </div>
-            </div>
-            <div key='awayTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-        </div>
-    </div>
-</div> -->
-
-<!-- <div id="indexContainer">
-    <div id="indexContainerLeft">
-        <div id="noData" style="display: none;">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="mb-0">{{ trans('index.mainArea.nogame') }}</p>
-        </div>
-    </div>
-</div> -->
-
-<!-- early living toggle template -->
-<!-- <div class="cateWrapper" template='elToggleTemplate' hidden>
-    <div class="catWrapperTitle">
-        <span class="elToggleText"></span>
-        (<span class="elToggleCount"></span>)
-        <span class="elToggleDir" style="float: left;padding-right: 1rem;">
-            <i class="fa-solid fa-chevron-down"></i> 
-        </span>
-    </div>
-</div> -->
-
-<!-- league toggle template -->
-<!-- <div class="leagueWrapper" template='leagueWrapper' hidden>
-    <div class="seriesWrapperTitle">
-        <div style="width: 35%;">
-            <span class="legToggleDir" style="padding-right: 1rem;">
-                <i class="fa-solid fa-chevron-down"></i> 
-            </span>
-            <span class="legToggleName"></span>
-            (<span class="legToggleCount"></span>)
-        </div>
-        <div class="betLabelContainer">
-        </div>
-    </div>
-    <div class="seriesWrapperContent">
-    </div>
-</div> -->
-
-<!-- fixture card template -->
-<!-- <div template='fixtureCardTemplate' class="indexEachCard" hidden>
-    <div class="indexBetCard">
-        <div class="timeSpan" key='not-show-baseCon'>
-            <span class="timer"></span>
-        </div>
-        <div class="baseballSpan" key='show-baseCon'>
-            <div class="timer"></div>
-            <div class="baseCon row m-0">
-                <div class="col-1 h-100 p-0"></div>
-                <div class="col-6 h-100 p-0" key='base'>
-                    <img alt="base">
-                </div>
-                <div class="col-3 h-100 p-0" key='balls'>
-                    <div key='strike'></div>
-                    <div key='ball'></div>
-                    <div key='out'></div>
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
-                </div>
-                <div class="scoreSpan" style="width: 15%;">
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-        </div>
-        <div class="otherBetWay" onclick="navToGame($(this))">
-            <i class="fa-solid fa-play"></i>
-            <p></p>
-        </div>
-    </div>
-
-    <div class="indexBetCard" key='basketBallQuaterBet'>
-        <div class="timeSpan"></div>
-        <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
-                </div>
-            </div>
-            <div key='awayTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
-                </div>
-            </div>
-        </div>
-        <div class="indexBetCardTable row m-0 text-center">
-        </div>
-    </div>
-</div> -->
-
-<!-- bet div template -->
-<!-- <div class="col p-0" template='betDiv' hidden>
-</div> -->
-<!-- betItem template -->
-<!-- <div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
-    <div class="col-7 p-0 text-right">
-        <span class="odd"></span>
-        <i class="fa-solid fa-lock" style="display: none;"></i>
-        <i class="fa-solid fa-caret-up" style="display: none;"></i>
-        <i class="fa-solid fa-caret-down" style="display: none;"></i>
-    </div>
-</div> -->
-
-<!-- <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
-    <div class="col text-right p-0">
-        <span class="bet_name"></span>
-    </div>
-    <div class="col m-0 row text-right p-0" key='changeCol'>
-        <div class="odd col p-0"></div>
-        <div class="col text-left p-0">
-            <i class="fa-solid fa-lock" style="display: none;"></i>
-            <i class="fa-solid fa-caret-up" style="display: none;"></i>
-            <i class="fa-solid fa-caret-down" style="display: none;"></i>
-        </div>
-    </div>
-</div> -->
-<!-- --- -------------end index page---------- ------ -->
-
 <!-- no data betItem template -->
 <div class="betItemDiv row m-0 text-center" key='betItemDiv-no' template='betItem-no' hidden>
 </div>
@@ -318,8 +125,8 @@
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<link href="{{ asset('css/game.css?v=' . $current_time) }}" rel="stylesheet">
-<!-- <link href="{{ asset('css/game.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<!-- <link href="{{ asset('css/game.css?v=' . $current_time) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/game.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
@@ -381,7 +188,6 @@
         }
     }
 
-    
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
@@ -597,7 +403,6 @@
         }
     }
 
-
     // ------- game page create market data parent container-----------
     function createMarketContainer(k, v) {
         const bettingTypeContainerTemp = $('div[template="bettingTypeContainerTemplate"]').clone();
@@ -668,8 +473,6 @@
 
         // Append the new element to the correct container
         bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
-
-        // createdElementKeys.add(marketBetRateId);
     }
 
     // ------- game page scoreboard function-----------
@@ -1098,17 +901,12 @@
     const filterButtonContainer = document.querySelector('.filterBtnContainer');
     function handleFilterButtonClick(event) {
       if (event.target.classList.contains('filterBtn')) {
-
         const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
-
         buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
         event.target.classList.add('active'); // Add the "active" class to the clicked button
-
       }
     }
-
     filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
     
-
 </script>
 @endpush
