@@ -7,6 +7,7 @@ import '../css/IndexMatchList.css';
 
 const MatchListStyle = {
     width: '100%',
+    height: 'calc(100% - 21.5rem)',
     display: 'flex',
     padding: '0 0.5rem'
 }
@@ -85,13 +86,13 @@ class IndexMatchList extends React.Component {
                                 })
                             }
                         </div>
-                        <div style={{width: '76%', marginLeft: '4%'}}>
+                        <div style={{width: '76%', marginLeft: '4%', overflowY: 'auto'}}>
                             {
                                 Object.entries(res.data).map(([key, value]) => {
                                     return(
-                                        value.total !== 0 &&
-                                        <div key={key}>
+                                        <div style={{ paddingBottom: '1rem', overflowY: 'auto'}}>
                                             {
+                                                value.total !== 0 &&
                                                 this.state.menu_id === mapping[key][1] &&
                                                 Object.entries(value.items).map(([key2, e]) => {
                                                     return(
