@@ -48,7 +48,7 @@ div[key="matchSportMenu"]{
 }
 
 #orderContainer #noMoreData {
-    height: auto;
+    height: 6px;
     position: relative;
     width: 100%;
     position: relative;
