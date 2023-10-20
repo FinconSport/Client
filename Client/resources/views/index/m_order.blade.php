@@ -227,10 +227,12 @@
     var heartbeatTimer = null
 
 
-    // 獨贏系列
     const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
-    // 讓球系列
-    const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
+    const hcapArr = langTrans.priorityArr.hcap // 讓球系列
+    const sizeArr = langTrans.priorityArr.size // 大小系列
+    const oddEvenArr = langTrans.priorityArr.oddeven // 單雙系列
+
+    
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
@@ -725,7 +727,7 @@
 
                                         // rate
                                         item.find('.odd').html(v4.price)
-                                        
+
                                         // 賦值
                                         if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
                                         if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
