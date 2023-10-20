@@ -710,7 +710,7 @@ a.sportSelect:hover,
     color: white;
     border: 1px solid rgba(65, 91, 90, 0.9);
 }
-.indexBetCardTable .m_order_on .odd{
+.indexBetCardTable .m_order_on span{
     color: white!important;
 }
 
