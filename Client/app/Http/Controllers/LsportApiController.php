@@ -1672,8 +1672,8 @@ class LsportApiController extends Controller {
         }
 
         // 結束時間
-        if (!isset($input['start_time']) || ($input['start_time'] == "")) {
-            $input['start_time'] = date("Y-m-d"); // 預設今天
+        if (!isset($input['end_time']) || ($input['end_time'] == "")) {
+            $input['end_time'] = date("Y-m-d", strtotime("+1 day")); // 預設明天
         }
 
         // 聯賽
@@ -1711,18 +1711,22 @@ class LsportApiController extends Controller {
         // 取得比賽資料
         
         if ($league_id !== false) {
-            $model = LsportFixture::where("sport_id", $sport_id)->where("league_id",$league_id);
+            $return = LsportFixture::where("league_id",$league_id)
+            ->where("start_time", ">=", $start_time)
+            ->where("start_time", "<", $end_time)
+            ->where("sport_id", $sport_id)
+            ->whereIn("status", [3,4,5,6,7])
+            ->orderBy("start_time","DESC")
+            ->list();
         } else {
-            $model = LsportFixture::where("sport_id", $sport_id);
+            $return = LsportFixture::where("start_time", $start_time)
+            ->where("start_time", $end_time)
+            ->where("sport_id", $sport_id)
+            ->whereIn("status", [3,4,5,6,7])
+            ->orderBy("start_time","DESC")
+            ->list();
         }
 
-        $model = $model->where("sport_id", $sport_id)
-        ->where("start_time", $start_time)
-        ->where("start_time", $end_time);
-
-        $return = $model->whereIn("status", [3,4,5,6,7])
-        ->orderBy("start_time","DESC")
-        ->list();
         if ($return === false) {
             $this->ApiError('02');
         }
