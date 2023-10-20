@@ -435,7 +435,7 @@
 		function adjustFontSize(element) {
 			const content = element.text();
 			if (content.replace('.', '').length > 10) {
-				element.css('font-size', '1.2rem');
+				element.css('font-size', '1.4rem');
 			}
 		}
 
@@ -473,7 +473,7 @@
 		function adjustFontSize(element) {
 			const content = element.text();
 			if (content.replace('.', '').length > 10) {
-				element.css('font-size', '1.2rem');
+				element.css('font-size', '1.4rem');
 			}
 		}
 
