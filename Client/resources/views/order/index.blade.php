@@ -467,27 +467,30 @@
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
 		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
+		const totalBetAmountElement = $('.orderData_totalBetAmount');
+		const totalResultAmountElement = $('.orderData_totalResultAmount'); // Fixed the typo
+		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount'); // Fixed the typo
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
 
-		// if amount is more than 9 digit font size smaller
-		var totalBetAmountLength = $('.orderData_totalBetAmount').text().length;
-		var totalResultAmountLength = $('.orderData_totalBetAmount').text().length;
-		var totalEffectivetAmountLength = $('.orderData_totalEffectiveAmount').text().length;
-		var totalWinLossLength = $('.orderData_totalWinAmount').text().length;
+		// if amount is more than 9 digits, reduce font size
+		var totalBetAmountLength = totalBetAmountElement.text().length;
+		var totalResultAmountLength = totalResultAmountElement.text().length;
+		var totalEffectiveAmountLength = totalEffectiveAmountElement.text().length; // Fixed the variable name
+		var totalWinAmountLength = totalWinAmountElement.text().length; // Fixed the variable name
 
 		if (
 			totalBetAmountLength > 9 ||
 			totalResultAmountLength > 9 ||
-			totalEffectivetAmountLength > 9 ||
-			totalWinLossLength > 9
+			totalEffectiveAmountLength > 9 ||
+			totalWinAmountLength > 9
 		) {
-			totalBetAmount.css('font-size', '1.2rem');
-			totalResultAmount.css('font-size', '1.2rem');
-			totalEffectivetAmount.css('font-size', '1.2rem');
-			totalWinLoss.css('font-size', '1.2rem');
-			console.log("amount is more than 9 characters");
+			totalBetAmountElement.css('font-size', '1.2rem');
+			totalResultAmountElement.css('font-size', '1.2rem');
+			totalEffectiveAmountElement.css('font-size', '1.2rem');
+			totalWinAmountElement.css('font-size', '1.2rem');
 		}
+
 
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
