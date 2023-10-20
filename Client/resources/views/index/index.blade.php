@@ -401,7 +401,7 @@
         away_team_info.find('.scoreSpan').html('')
 
         // bet area
-        createBetArea(mainPriorityArr, v3, k3, league_name, 0, card)
+        createBetArea(k, mainPriorityArr, v3, k3, league_name, 0, card)
 
         // ready to start
         if( v3.status === 9 ) {
@@ -461,7 +461,7 @@
                     let stagePriorityArr = null
                     stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3.periods.period]
                     if(stagePriorityArr) {
-                        createBetArea(stagePriorityArr, v3, k3, league_name, 1, card, 1)
+                        createBetArea(k, stagePriorityArr, v3, k3, league_name, 1, card, 1)
                     } else {
                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                     }
@@ -476,7 +476,7 @@
         league_toggle_content.append(card)
     }
 
-    function createBetArea(priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
+    function createBetArea(k, priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
         priorityArr.forEach(( i, j ) => {
             let bet_div = $('div[template="betDiv"]').clone()
             let betData = null
@@ -532,6 +532,7 @@
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
+                    item.attr('cate', k)
 
                     // rate
                     item.find('.odd').html(v4.price)
@@ -778,7 +779,7 @@
                             if( v3.periods ) {
                                 timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
                                 // bet data
-                                renderBetArea(mainPriorityArr, v3, k3, card)
+                                renderBetArea(k, mainPriorityArr, v3, k3, card)
                                 // exception baseball
                                 if( sport === 154914 ) {
                                     v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
@@ -814,7 +815,7 @@
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
                                         card.find('.indexBetCardTable').eq(1).html('')
-                                        createBetArea(stagePriorityArr, v3, k3, v2.league_name, 1, card)
+                                        createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
                                     } else {
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
@@ -828,11 +829,11 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
-                                if( stagePriorityArr && !isNewGenerate ) renderBetArea(stagePriorityArr, v3, k3, card, 1)
+                                if( stagePriorityArr && !isNewGenerate ) renderBetArea(k, stagePriorityArr, v3, k3, card, 1)
                             }
                         }
                        
-                        function renderBetArea(priorityArr, v3, k3, card, stageBet = 0) {
+                        function renderBetArea(k, priorityArr, v3, k3, card, stageBet = 0) {
                             priorityArr.forEach(( i, j ) => {
                                 let bet_div = $($(`#${k3} div[priority=${i}]`)[0])
                                 let betData = null
@@ -885,6 +886,7 @@
                                         item.attr('league', v2.league_name)
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
+                                        item.attr('cate', k)
                                         // rate
                                         item.find('.odd').html(v4.price)
 
