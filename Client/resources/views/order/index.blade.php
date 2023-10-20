@@ -434,7 +434,7 @@
 		// Function to check and adjust font size based on the length of the content
 		function adjustFontSize(element) {
 			const content = element.text();
-			if (content.replace('.', '').length > 9) {
+			if (content.replace('.', '').length > 10) {
 				element.css('font-size', '1.2rem');
 			}
 		}
@@ -472,7 +472,7 @@
 		// Function to check and adjust font size based on the length of the content
 		function adjustFontSize(element) {
 			const content = element.text();
-			if (content.replace('.', '').length > 9) {
+			if (content.replace('.', '').length > 10) {
 				element.css('font-size', '1.2rem');
 			}
 		}
