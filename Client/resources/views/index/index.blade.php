@@ -220,10 +220,12 @@
     var heartbeatTimer = null
 
     
-    // 獨贏系列
     const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
-    // 讓球系列
-    const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
+    const hcapArr = langTrans.priorityArr.hcap // 讓球系列
+    const sizeArr = langTrans.priorityArr.size // 大小系列
+    const oddEvenArr = langTrans.priorityArr.oddeven // 單雙系列
+
+
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
@@ -509,7 +511,7 @@
                     }
 
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1 ) {
+                    if (allWinArr.indexOf(i) !== -1 && sport !== 6046 ) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
@@ -536,20 +538,13 @@
 
                     // rate
                     item.find('.odd').html(v4.price)
+
                     // 按照不同體育種類、玩法 顯示相對應內容
-                    switch ( i ) {
-                        case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                            item.find('.bet_name').html( v4.line )
-                            break;
-                        case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
-                            item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
-                            break;
-                        case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                            item.find('.bet_name').html( v4.market_bet_name )
-                            break;
-                        default: // 獨贏
-                            break;
-                    }
+                    if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
+                    if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                    if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
+                    if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
+                    
 
                     if( v4.status === 1 ) {
                         item.find('.fa-lock').hide()
@@ -891,19 +886,10 @@
                                         item.find('.odd').html(v4.price)
 
                                         // 賦值
-                                        switch ( i ) {
-                                            case 3:case 203:case 204:case 103:case 104:case 110:case 114:case 118:case 122:  // 讓球
-                                                item.find('.bet_name').html( v4.line )
-                                                break;
-                                            case 5:case 205:case 206:case 105:case 106:case 111:case 115:case 119:case 123: // 大小
-                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
-                                                break;
-                                            case 7:case 107:case 112:case 116:case 120:case 124: // 單雙
-                                                item.find('.bet_name').html( v4.market_bet_name )
-                                                break;
-                                            default: // 獨贏
-                                                break;
-                                        }
+                                        if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
+                                        if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                                        if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
+                                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
 
                                         // 左邊投注區塊
                                         if( isSelected ) {
