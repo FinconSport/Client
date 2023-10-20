@@ -1716,7 +1716,7 @@ class LsportApiController extends Controller {
             $model = LsportFixture::where("sport_id", $sport_id);
         }
 
-        $model = LsportFixture::where("sport_id", $sport_id)
+        $model = $model->where("sport_id", $sport_id)
         ->where("start_time", $start_time)
         ->where("start_time", $end_time);
 
