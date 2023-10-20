@@ -7,7 +7,7 @@
 return [
 	// 前端
 	"left_menu" => [
-		"sport_bet" => "Sports Betting", // "體育投注"
+		"sport_bet" => "Match Betting", // "體育投注"
 		"m_bet" => "Parlay Betting", // "串關投注"
 		"record" => "Betting Record", // "注單紀錄"
 		"all" => "All",

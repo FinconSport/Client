@@ -7,7 +7,7 @@
 return [
 	// 前端
 	"left_menu" => [
-		"sport_bet" => "體育投注",
+		"sport_bet" => "賽事投注",
 		"m_bet" => "串關投注",
 		"record" => "注單紀錄",
 		"all" => "全部",
