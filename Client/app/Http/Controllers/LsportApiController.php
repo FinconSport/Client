@@ -1997,7 +1997,9 @@ class LsportApiController extends Controller {
             }
 
             if ($active_market_bet > 0) {
-                $data['list']['market'][] = $tmp_market_data;
+                if ($check_market_bet_lines[$base_line]) {
+                    $data['list']['market'][] = $tmp_market_data;
+                }
             }
         }
 
