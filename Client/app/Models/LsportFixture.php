@@ -45,7 +45,7 @@ class LsportFixture extends CacheModel
 			
             $sport_id = $data['sport'];
             $page = $data['page'];
-            $start_time = $indataput['start_time'];
+            $start_time = $data['start_time'];
             $end_time = $data['end_time'];
             $league_id = $data['league_id'];
             dd($league_id);
