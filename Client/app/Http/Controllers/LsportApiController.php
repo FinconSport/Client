@@ -1996,7 +1996,9 @@ class LsportApiController extends Controller {
                 $active_market_bet++;
             }
 
-            dd($check_market_bet_lines);
+            foreach ($tmp_market_data['market_bet'] as $k => $v) {
+                dd($v);
+            }
 
             if ($active_market_bet > 0) {
                 $data['list']['market'][] = $tmp_market_data;
