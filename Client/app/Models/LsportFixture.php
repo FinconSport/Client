@@ -48,7 +48,6 @@ class LsportFixture extends CacheModel
             $start_time = $data['start_time'];
             $end_time = $data['end_time'];
             $league_id = $data['league_id'];
-            dd($league_id);
         
             if ($league_id !== false) {
                 $return = LsportFixture::where("sport_id", $sport_id)
@@ -67,7 +66,6 @@ class LsportFixture extends CacheModel
                 ->get();
             }
     
-            $data = self::where($data)->select('status')->first();
             $return = $data;
 
             return $return;
