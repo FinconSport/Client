@@ -1905,6 +1905,8 @@ class LsportApiController extends Controller {
         $market_data = $return;
         $before_market_id = 0;
         foreach ($market_data as $kk => $vv) {
+            $active_market_bet = 0;
+
             $market_id = $vv['market_id'];
             $market_main_line = $vv['main_line'];
             $market_priority = $vv['priority'];
@@ -1963,10 +1965,11 @@ class LsportApiController extends Controller {
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
                 $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
-        
+                $active_market_bet++;
             }
-
-            $data['list']['market'][] = $tmp_market_data;
+            if ($active_market_bet > 0) {
+                $data['list']['market'][] = $tmp_market_data;
+            }
         }
 
         /////////////////////////////////////////////////////////////////
