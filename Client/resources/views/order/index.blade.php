@@ -471,15 +471,10 @@
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
 
 		// if amount is more than 9 digit font size smaller
-		var totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
-		var totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
-		var totalEffectivetAmount = orderDataTotal.find('.orderData_totalEffectiveAmount');
-		var totalWinLoss = orderDataTotal.find('.orderData_totalWinAmount');
-
-		var totalBetAmountLength = totalBetAmount.text().length;
-		var totalResultAmountLength = totalResultAmount.text().length;
-		var totalEffectivetAmountLength = totalEffectivetAmount.text().length;
-		var totalWinLossLength = totalWinLoss.text().length;
+		var totalBetAmountLength = $('.orderData_totalBetAmount').text().length;
+		var totalResultAmountLength = $('.orderData_totalBetAmount').text().length;
+		var totalEffectivetAmountLength = $('.orderData_totalEffectiveAmount').text().length;
+		var totalWinLossLength = $('.orderData_totalWinAmount').text().length;
 
 		if (
 			totalBetAmountLength > 9 ||
