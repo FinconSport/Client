@@ -16,7 +16,7 @@ class PlayerBalanceLogs extends CacheModel
     public static function getBalanceLogsList($data) {
 
         // 緩存時間
-        $cacheAliveTime = 60;
+        $cacheAliveTime = 1;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
