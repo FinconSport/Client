@@ -539,18 +539,8 @@
     }
 
 	// function of selected unsettled and settled
-	const urlParams = new URLSearchParams(window.location.search);
-	const select = document.getElementById("selectOption");
-	const unsettledOption = select.querySelector("option[value='{{ trans('common.left_menu.unsettled') }}']");
-	const settledOption = select.querySelector("option[value='{{ trans('common.left_menu.settled') }}']");
-	// Check for the 'result' query parameter in the URL
-	const resultParam = urlParams.get("result");
-
-	if (resultParam === "0") {
-		unsettledOption.setAttribute("selected", "selected");
-	} else if (resultParam === "1") {
-		settledOption.setAttribute("selected", "selected");
-	}
+	$('#selectOption').val(searchData.result || -1 )
+	
 
 	function redirectToPage() {
 		let result = $('#selectOption').val()
