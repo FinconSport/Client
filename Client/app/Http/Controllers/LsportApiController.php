@@ -1711,17 +1711,17 @@ class LsportApiController extends Controller {
         // 取得比賽資料
         
         if ($league_id !== false) {
-            $return = LsportFixture::where("league_id",$league_id)
+            $return = LsportFixture::where("sport_id", $sport_id)
+            ->where("league_id",$league_id)
             ->where("start_time", ">=", $start_time)
             ->where("start_time", "<", $end_time)
-            ->where("sport_id", $sport_id)
             ->whereIn("status", [3,4,5,6,7])
             ->orderBy("start_time","DESC")
             ->list();
         } else {
-            $return = LsportFixture::where("start_time", $start_time)
-            ->where("start_time", $end_time)
-            ->where("sport_id", $sport_id)
+            $return = LsportFixture::where("sport_id", $sport_id)
+            ->where("start_time", ">=", $start_time)
+            ->where("start_time", "<", $end_time)
             ->whereIn("status", [3,4,5,6,7])
             ->orderBy("start_time","DESC")
             ->list();
