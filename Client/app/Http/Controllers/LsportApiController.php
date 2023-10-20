@@ -1720,6 +1720,7 @@ class LsportApiController extends Controller {
         $reponse = array();
         foreach ($fixture_data as $k => $v) {
 
+            dd($v);
             $tmp = array();
             $tmp['fixture_id'] = $v['fixture_id'];
             $tmp['start_time'] = $v['start_time'];
