@@ -1668,17 +1668,17 @@ class LsportApiController extends Controller {
 
         // 開始時間
         if (!isset($input['start_time']) || ($input['start_time'] == "")) {
-            $input['start_time'] = date("Y-m-d", strtotime("-1 day")); // 預設昨天
+            $input['start_time'] = date("Y-m-d 00:00:00", strtotime("-1 day")); // 預設昨天
         }
 
         // 結束時間
         if (!isset($input['end_time']) || ($input['end_time'] == "")) {
             $input['end_time'] = date("Y-m-d", strtotime("+1 day")); // 預設明天
-        } else {
-            
-            $input['end_time'] = date("Y-m-d", strtotime($input['end_time'],"+1 day")); 
+        } else {    
+            $input['end_time'] = date("Y-m-d", strtotime($input['end_time'] . " +1 day")); // 預設明天
         }
 
+        dd($input);
         // 聯賽
         if (!isset($input['league_id']) || ($input['league_id'] == "")) {
             $input['league_id'] = false; // 預設1 
