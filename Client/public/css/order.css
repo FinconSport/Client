@@ -223,7 +223,7 @@ div[key="matchSportMenu"]{
 }
 
 .search-statistic-container .search-bar-container {
-    padding: 1rem;
+    padding: 0.5rem;
     background: #415b5a;
     border-radius: 5px;
 }
@@ -346,13 +346,23 @@ span.orderData_mOrder {
     grid-column-gap: 0.5rem;
 }
 
+.datecalendar-con .ui.form .fields{
+    margin: 0 -0.5em 0.5em;
+}
+
+.datecalendar-con input {
+    height: 2rem;
+}
+
 button.dateCalendarBtn {
     border: none;
     border-radius: 5px;
     background: #ffffff;
-    padding: 0.5rem;
-    margin: 0px 0px 0.5rem 0px;
+    padding: 0.2rem 0rem;
+    /* margin: 0px 0px 0.5rem 0px; */
     color: #415b5a;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .search-statistic-container .statistic-container {
