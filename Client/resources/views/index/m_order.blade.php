@@ -442,13 +442,17 @@
                         card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                     }
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1) {
+                    if (allWinArr.indexOf(i) !== -1 && sport !== 6046 ) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if (priorityArr.length === 4) {
-                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                        if( priorityArr.length === 4 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                        }
+                        // 足球 調整col
+                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
+                            item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
 
@@ -468,41 +472,13 @@
 
                     // rate
                     item.find('.odd').html(v4.price)
+
                     // 按照不同體育種類、玩法 顯示相對應內容
-                    switch (i) {
-                        case 3:
-                        case 203:
-                        case 204:
-                        case 103:
-                        case 104:
-                        case 110:
-                        case 114:
-                        case 118:
-                        case 122: // 讓球
-                            item.find('.bet_name').html(v4.line)
-                            break;
-                        case 5:
-                        case 205:
-                        case 206:
-                        case 105:
-                        case 106:
-                        case 111:
-                        case 115:
-                        case 119:
-                        case 123: // 大小
-                            item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
-                            break;
-                        case 7:
-                        case 107:
-                        case 112:
-                        case 116:
-                        case 120:
-                        case 124: // 單雙
-                            item.find('.bet_name').html(v4.market_bet_name)
-                            break;
-                        default: // 獨贏
-                            break;
-                    }
+                    if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
+                    if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                    if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
+                    if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
+
 
                     if (v4.status === 1) {
                         item.find('.fa-lock').hide()
@@ -520,13 +496,17 @@
             } else {
                 for (let j = 0; j < 2; j++) {
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1) {
+                    if (allWinArr.indexOf(i) !== -1 && sport !== 6046 ) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
-                        if (priorityArr.length === 4) {
-                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                        if( priorityArr.length === 4 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                        }
+                        // 足球 調整col
+                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
+                            item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
 
@@ -540,7 +520,7 @@
             }
 
             // 足球 讓球、大小 補空格
-            if (sport === 6046 && allWinArr.indexOf(i) === -1) {
+            if( sport === 6046 && allWinArr.indexOf(i) === -1 ) {
                 let item = $('div[template="betItem-no"]').clone()
                 item.removeAttr('hidden')
                 item.removeAttr('template')
@@ -745,41 +725,12 @@
 
                                         // rate
                                         item.find('.odd').html(v4.price)
+                                        
                                         // 賦值
-                                        switch (i) {
-                                            case 3:
-                                            case 203:
-                                            case 204:
-                                            case 103:
-                                            case 104:
-                                            case 110:
-                                            case 114:
-                                            case 118:
-                                            case 122: // 讓球
-                                                item.find('.bet_name').html(v4.line)
-                                                break;
-                                            case 5:
-                                            case 205:
-                                            case 206:
-                                            case 105:
-                                            case 106:
-                                            case 111:
-                                            case 115:
-                                            case 119:
-                                            case 123: // 大小
-                                                item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
-                                                break;
-                                            case 7:
-                                            case 107:
-                                            case 112:
-                                            case 116:
-                                            case 120:
-                                            case 124: // 單雙
-                                                item.find('.bet_name').html(v4.market_bet_name)
-                                                break;
-                                            default: // 獨贏
-                                                break;
-                                        }
+                                        if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
+                                        if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                                        if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
+                                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
 
                                         // 左邊投注區塊
                                         let calBetNameStr = ''
