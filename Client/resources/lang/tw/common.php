@@ -7,7 +7,7 @@
 return [
 	// 前端
 	"left_menu" => [
-		"sport_bet" => "體育投注",
+		"sport_bet" => "賽事投注",
 		"m_bet" => "串關投注",
 		"record" => "注單紀錄",
 		"all" => "全部",
@@ -39,6 +39,12 @@ return [
 		'total' => '共',
 		'game' => '場',
 		'all' => '全部',
+		"last_month" => "上月",
+		"last_week" => "上週",
+		"yesterday" => "昨日",
+		"today" => "今日",
+		"this_week" => "本週", 
+		"this_month" => "本月",
 	],
 	'js' => [
 		'loginFirst' => '請先登入!',

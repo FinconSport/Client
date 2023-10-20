@@ -397,11 +397,14 @@
 			// msg
 			if( errormsg ) showErrorToast(errormsg)
 			if( successmsg ) showSuccessToast(successmsg)
+
 			// 搜尋框ui
 			$('.searchSelect').dropdown('hide others');
 			$('.searchSelect.clearSearch').dropdown({clearable: true});
 			// $('select[name="sport"]').val(searchData.sport)
 			// $('select[name="sport"]').trigger('change')
+			
+			// 日曆
 			$('.ui.calendar').calendar();
 			$('#rangestart').calendar({
 				type: 'date',
@@ -430,6 +433,8 @@
 				},
 				startCalendar: $('#rangestart')
 			});
+
+			
 		}
 		// ===== VIEW LAYER ======
 
@@ -476,6 +481,62 @@
 				// 增加一秒
 				timestamp++;
 			}, 1000);
+
+
+			// calendar
+			// 获取当前日期
+			function getCurrentDate() {
+				const today = new Date();
+				today.setHours(0, 0, 0, 0);
+				return today;
+			}
+
+			// 设置日期范围
+			function setRange(startDate, endDate) {
+				$('#rangestart').calendar('set date', startDate);
+				$('#rangeend').calendar('set date', endDate);
+			}
+
+			// 处理按钮点击事件
+			$('.dateCalendarBtn').click(function() {
+				const button = $(this);
+				const dataRange = button.data('range');
+				const currentDate = getCurrentDate();
+
+				let startDate = new Date(currentDate);
+				let endDate = new Date(currentDate);
+
+				switch(dataRange) {
+					case 'lastMonth':
+						startDate.setMonth(startDate.getMonth() - 1);
+						startDate.setDate(1);
+						endDate.setDate(0);
+						break;
+					case 'lastWeek':
+						startDate.setDate(currentDate.getDate() - currentDate.getDay() - 6 );
+						endDate = new Date(startDate);
+						endDate.setDate(currentDate.getDate() - currentDate.getDay());
+						break;
+					case 'yesterday':
+						startDate.setDate(currentDate.getDate() - 1);
+						endDate = new Date(startDate);
+						break;
+					case 'today':
+						// 默认是今天
+						break;
+					case 'thisWeek':
+						startDate.setDate(currentDate.getDate() - currentDate.getDay() + 1 );
+						break;
+					case 'thisMonth':
+						startDate.setDate(1);
+						break;
+					default:
+						break;
+				}
+
+				setRange(startDate, endDate);
+			});
+
 		});
 
 		

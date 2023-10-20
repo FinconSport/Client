@@ -7,7 +7,7 @@
 return [
 	// 前端
 	"left_menu" => [
-		"sport_bet" => "Sports Betting", // "體育投注"
+		"sport_bet" => "Match Betting", // "體育投注"
 		"m_bet" => "Parlay Betting", // "串關投注"
 		"record" => "Betting Record", // "注單紀錄"
 		"all" => "All",
@@ -39,6 +39,12 @@ return [
 		'total' => 'Total', // "共"
 		'game' => '', // "場"
 		'all' => 'All', // "全部"
+		"last_month" => "Last Month",  //  "上月",
+		"last_week" => "Last Week",  //  "上週",
+		"yesterday" => "Yesterday",  //  "昨日",
+		"today" => "Today",  //  "今日",
+		"this_week" => "This Week",  //  "本週",
+		"this_month" => "This Month",  //  "本月",
 	],
 	'js' => [
 		'loginFirst' => 'Please log in first!', // "請先登入!"
