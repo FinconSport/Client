@@ -34,12 +34,12 @@
 					</div>
 				</div>
 				<div class="datebutton-cons">
-					<button class="dateCalendarBtn">{{ trans('order.main.last_month') }}</button>
-					<button class="dateCalendarBtn">{{ trans('order.main.last_week') }}</button>
-					<button class="dateCalendarBtn">{{ trans('order.main.yesterday') }}</button>
-					<button class="dateCalendarBtn">{{ trans('order.main.today') }}</button>
-					<button class="dateCalendarBtn">{{ trans('order.main.this_week') }}</button>
-					<button class="dateCalendarBtn">{{ trans('order.main.this_month') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.last_month') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.last_week') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.yesterday') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.today') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.this_week') }}</button>
+					<button class="dateCalendarBtn">{{ trans('common.search_area.this_month') }}</button>
 				</div>
 			</div>
 		</div>

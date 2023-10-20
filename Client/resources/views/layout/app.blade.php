@@ -397,11 +397,14 @@
 			// msg
 			if( errormsg ) showErrorToast(errormsg)
 			if( successmsg ) showSuccessToast(successmsg)
+
 			// 搜尋框ui
 			$('.searchSelect').dropdown('hide others');
 			$('.searchSelect.clearSearch').dropdown({clearable: true});
 			// $('select[name="sport"]').val(searchData.sport)
 			// $('select[name="sport"]').trigger('change')
+			
+			// 日曆
 			$('.ui.calendar').calendar();
 			$('#rangestart').calendar({
 				type: 'date',
@@ -429,6 +432,67 @@
 					date: 'YYYY-MM-DD',
 				},
 				startCalendar: $('#rangestart')
+			});
+
+			// 获取当前日期
+			var today = new Date();
+			var currentDate = today.toISOString().split('T')[0];
+
+			// 给每个按钮添加点击事件处理程序
+			$('.dateCalendarBtn').click(function() {
+				var button = $(this);
+				var startInput = $('#rangestart');
+				var endInput = $('#rangeend');
+				
+				// 根据按钮的文本来设置日期范围
+				var buttonText = button.text();
+				var startDate = '';
+				var endDate = currentDate; // 默认结束日期为今天
+				
+				switch(buttonText) {
+					case "{{ trans('common.search_area.last_month') }}":
+						// 上个月的日期范围
+						var lastMonth = new Date(today);
+						lastMonth.setMonth(lastMonth.getMonth() - 1);
+						startDate = lastMonth.toISOString().split('T')[0];
+						endDate = currentDate;
+						break;
+					case "{{ trans('common.search_area.last_week') }}":
+						// 上周的日期范围
+						var lastWeek = new Date(today);
+						lastWeek.setDate(lastWeek.getDate() - 7);
+						startDate = lastWeek.toISOString().split('T')[0];
+						endDate = currentDate;
+						break;
+					case "{{ trans('common.search_area.yesterday') }}":
+						// 昨天的日期范围
+						var yesterday = new Date(today);
+						yesterday.setDate(yesterday.getDate() - 1);
+						startDate = endDate = yesterday.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.today') }}":
+						// 今天的日期范围已经默认
+						startDate = endDate = currentDate;
+						break;
+					case "{{ trans('common.search_area.this_week') }}":
+						// 本周的日期范围
+						var startOfWeek = new Date(today);
+						startOfWeek.setDate(today.getDate() - today.getDay());
+						startDate = startOfWeek.toISOString().split('T')[0];
+						endDate = currentDate;
+						break;
+					case "{{ trans('common.search_area.this_month') }}":
+						// 本月的日期范围
+						var startOfMonth = new Date(today);
+						startOfMonth.setDate(1);
+						startDate = startOfMonth.toISOString().split('T')[0];
+						endDate = currentDate;
+						break;
+				}
+				
+				// 更新输入字段的值
+				startInput.val(startDate);
+				endInput.val(endDate);
 			});
 		}
 		// ===== VIEW LAYER ======

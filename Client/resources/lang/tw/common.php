@@ -39,6 +39,12 @@ return [
 		'total' => '共',
 		'game' => '場',
 		'all' => '全部',
+		"last_month" => "上月",
+		"last_week" => "上週",
+		"yesterday" => "昨日",
+		"today" => "今日",
+		"this_week" => "本週", 
+		"this_month" => "本月",
 	],
 	'js' => [
 		'loginFirst' => '請先登入!',
