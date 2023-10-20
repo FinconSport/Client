@@ -1717,14 +1717,14 @@ class LsportApiController extends Controller {
             ->where("start_time", "<", $end_time)
             ->whereIn("status", [3,4,5,6,7])
             ->orderBy("start_time","DESC")
-            ->list();
+            ->get();
         } else {
             $return = LsportFixture::where("sport_id", $sport_id)
             ->where("start_time", ">=", $start_time)
             ->where("start_time", "<", $end_time)
             ->whereIn("status", [3,4,5,6,7])
             ->orderBy("start_time","DESC")
-            ->list();
+            ->get();
         }
 
         if ($return === false) {
