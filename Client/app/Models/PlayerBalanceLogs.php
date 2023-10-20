@@ -23,8 +23,6 @@ class PlayerBalanceLogs extends CacheModel
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
 			
-
-			dd($data);
 			if ($data['type'] === false) {
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
 				->where("create_time", ">=", $data['start_time'])
