@@ -153,6 +153,12 @@
 	var isLastPage = false
 
 	function renderView() {
+
+		// search area
+		$('#selectOption').val(searchData.result || -1 )
+		$('#rangestart .input').val(searchData.start_time || '' )
+		$('#rangeend .input').val(searchData.end_time || '' )
+
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
 				let winLoss = 0; // Initialize winLoss to a default value
@@ -212,8 +218,6 @@
 			}
 		}
 	}
-
-
 
 	function createList(orderItem, orderIndex, winLoss) {
 		const orderData = $('tr[template="orderTemplate"]').clone().removeAttr('hidden').removeAttr('template');
@@ -523,12 +527,6 @@
 		$(e).attr('isopen', isopen)
 	}
 
-	$(document).ready(function() {
-        $('#datepicker_from').datepicker();
-		$('#ui-datepicker-div').addClass('custom-datepicker-class');
-		$('#datepicker_to').datepicker();
-    });
-
 	formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
         const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
@@ -538,8 +536,7 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-	// function of selected unsettled and settled
-	$('#selectOption').val(searchData.result || -1 )
+	
 	
 
 	function redirectToPage() {
