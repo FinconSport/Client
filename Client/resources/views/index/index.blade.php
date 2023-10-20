@@ -1239,7 +1239,7 @@
         // 限額
         betLimitationD = accountD.data.limit[cate][sport]
         $('#submitOrder').attr('min', betLimitationD.min)
-        $('#submitOrder').attr('min', betLimitationD.max)
+        $('#submitOrder').attr('max', betLimitationD.max)
         $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
         $('#moneyInput').val(betLimitationD.min)
         $('#moneyInput').trigger('change')
@@ -1280,9 +1280,11 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        // if (inputMoney < min) inputMoney = min
-        // if (inputMoney > max) inputMoney = max
+        if (inputMoney < min) inputMoney = min
+        if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
         let maxMoney = (inputMoney * odd).toFixed(2);
         $('#maxWinning').html(maxMoney)
