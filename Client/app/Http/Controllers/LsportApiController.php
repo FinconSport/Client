@@ -679,26 +679,26 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
-        $today_tomorrow_es = '"'.date('Y-m-d', $today).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
+        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).' 00:00:00"'; // 這個「"」不能拿掉, es會報錯
+        $today_tomorrow_es = '"'.date('Y-m-d', $today).' 00:00:00"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
         // ES取得賽事
 
         $return = LsportFixture::query()
-        ->from('es_lsport_fixture')
+     //   ->from('es_lsport_fixture')
         ->where('start_time',">=", $today_tomorrow_es)
         ->where('start_time',"<", $after_tomorrow_es)
         ->whereIn('status',[1,2,9])
         ->whereIn('sport_id', function($query) use ($sport_id) {
             $query->select('sport_id')
-                  ->from('es_lsport_sport')
+                  ->from('lsport_sport')
                   ->where('sport_id', $sport_id)
                   ->where('status', 1);
         })
         ->whereIn('league_id', function($query) {
             $query->select('league_id')
-                  ->from('es_lsport_league')
+                  ->from('lsport_league')
                   ->where('status', 1);
         })
         ->orderBy("league_id", "ASC")
