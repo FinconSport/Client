@@ -33,7 +33,7 @@ class LsportFixture extends CacheModel
     }
 
     // result_index , 取得列表
-    public function getResultList($data) {
+    public static function getResultList($data) {
 
         // 緩存時間
         $cacheAliveTime = 60;
