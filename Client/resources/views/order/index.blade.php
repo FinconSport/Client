@@ -12,14 +12,27 @@
 			</div>
 			<div class="datecalendar-con">
 				<div class="datepicker-con">
-					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker_from">
-						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
-					</div>
-					<span class="date-divider"> ~ </span>
-					<div class="input-group date">
-						<input type="text" class="form-control" id="datepicker_to">
-						<span class="input-group-text"><i class="fa-sharp fa-regular fa-calendar-days" style="color: #415a5b;"></i></span>
+					<div class="ui form">
+						<div class="two fields">
+							<div class="field">
+							<label>{{ trans('common.search_area.start_time') }}</label>
+							<div class="ui calendar" id="rangestart">
+								<div class="ui input left icon">
+								<i class="calendar icon"></i>
+								<input type="text" placeholder="{{ trans('common.search_area.start_time') }}">
+								</div>
+							</div>
+							</div>
+							<div class="field">
+							<label>{{ trans('common.search_area.end_time') }}</label>
+							<div class="ui calendar" id="rangeend">
+								<div class="ui input left icon">
+								<i class="calendar icon"></i>
+								<input type="text" placeholder="{{ trans('common.search_area.end_time') }}">
+								</div>
+							</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="datebutton-cons">
@@ -254,7 +267,7 @@
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataMOrder.html(orderItem.m_order === 0 ? '{{ trans("order.main.sport") }}' : '{{ trans("order.main.morder") }}');
+		orderDataMOrder.html(orderItem.m_order === 0 ? orderItem.bet_data[0].market_type : '{{ trans("order.main.morder") }}');
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
