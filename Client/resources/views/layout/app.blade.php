@@ -485,67 +485,66 @@
 
 			// calendar
 			$('.dateCalendarBtn').click(function() {
-			var button = $(this);
-			var startInput = $('#rangestart');
-			var endInput = $('#rangeend');
-			
-			// 获取当前日期
-			var today = new Date();
-			today.setHours(0, 0, 0, 0); // 去掉时间部分
-			
-			// 根据按钮的文本来设置日期范围
-			var buttonText = button.text();
-			var startDate = '';
-			var endDate = today.toISOString().split('T')[0]; // 默认结束日期为今天
-			
-			switch(buttonText) {
-				case "{{ trans('common.search_area.last_month') }}":
-					// 上个月的日期范围
-					var lastMonth = new Date(today);
-					lastMonth.setMonth(lastMonth.getMonth() - 1);
-					lastMonth.setDate(1); // 设置为月初
-					startDate = lastMonth.toISOString().split('T')[0];
-					break;
-				case "{{ trans('common.search_area.last_week') }}":
-					// 上周的日期范围
-					var lastWeek = new Date(today);
-					lastWeek.setDate(today.getDate() - 7);
-					var lastSunday = new Date(lastWeek);
-					lastSunday.setDate(lastWeek.getDate() - lastWeek.getDay()); // 找到上周日
-					lastWeek.setDate(lastSunday.getDate() + 1); // 设置为上周一
-					startDate = lastWeek.toISOString().split('T')[0];
-					break;
-				case "{{ trans('common.search_area.yesterday') }}":
-					// 昨天的日期范围
-					var yesterday = new Date(today);
-					yesterday.setDate(today.getDate() - 1);
-					startDate = endDate = yesterday.toISOString().split('T')[0];
-					break;
-				case "{{ trans('common.search_area.today') }}":
-					// 今天的日期范围
-					startDate = endDate = today.toISOString().split('T')[0];
-					break;
-				case "{{ trans('common.search_area.this_week') }}":
-					// 本周的日期范围
-					var startOfWeek = new Date(today);
-					startOfWeek.setDate(today.getDate() - today.getDay());
-					startDate = startOfWeek.toISOString().split('T')[0];
-					break;
-				case "{{ trans('common.search_area.this_month') }}":
-					// 本月的日期范围
-					var startOfMonth = new Date(today);
-					startOfMonth.setDate(1);
-					startDate = startOfMonth.toISOString().split('T')[0];
-					break;
-			}
+				var button = $(this);
+				var startInput = $('#rangestart');
+				var endInput = $('#rangeend');
+				
+				// 获取当前日期
+				var today = new Date().toLocaleString("en-US", { timeZone: "Asia/Taipei" });
+				today.setHours(0, 0, 0, 0); // 去掉时间部分
+				
+				// 根据按钮的文本来设置日期范围
+				var buttonText = button.text();
+				var startDate = '';
+				var endDate = today.toISOString().split('T')[0]; // 默认结束日期为今天
+				
+				switch(buttonText) {
+					case "{{ trans('common.search_area.last_month') }}":
+						// 上个月的日期范围
+						var lastMonth = new Date(today);
+						lastMonth.setMonth(lastMonth.getMonth() - 1);
+						lastMonth.setDate(1); // 设置为月初
+						startDate = lastMonth.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.last_week') }}":
+						// 上周的日期范围
+						var lastWeek = new Date(today);
+						lastWeek.setDate(today.getDate() - 7);
+						var lastSunday = new Date(lastWeek);
+						lastSunday.setDate(lastWeek.getDate() - lastWeek.getDay()); // 找到上周日
+						lastWeek.setDate(lastSunday.getDate() + 1); // 设置为上周一
+						startDate = lastWeek.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.yesterday') }}":
+						// 昨天的日期范围
+						var yesterday = new Date(today);
+						yesterday.setDate(today.getDate() - 1);
+						startDate = endDate = yesterday.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.today') }}":
+						// 今天的日期范围
+						startDate = endDate = today.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.this_week') }}":
+						// 本周的日期范围
+						var startOfWeek = new Date(today);
+						startOfWeek.setDate(today.getDate() - today.getDay());
+						startDate = startOfWeek.toISOString().split('T')[0];
+						break;
+					case "{{ trans('common.search_area.this_month') }}":
+						// 本月的日期范围
+						var startOfMonth = new Date(today);
+						startOfMonth.setDate(1);
+						startDate = startOfMonth.toISOString().split('T')[0];
+						break;
+				}
 
-			console.log(startDate, endDate);
-			
-			// 更新输入字段的值
-			startInput.val(startDate);
-			endInput.val(endDate);
-		});
-
+				console.log(startDate, endDate);
+				
+				// 更新输入字段的值
+				startInput.val(startDate);
+				endInput.val(endDate);
+			});
 		});
 
 		
