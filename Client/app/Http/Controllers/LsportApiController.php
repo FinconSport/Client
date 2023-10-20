@@ -1675,7 +1675,7 @@ class LsportApiController extends Controller {
         if (!isset($input['end_time']) || ($input['end_time'] == "")) {
             $input['end_time'] = date("Y-m-d 00:00:00", strtotime("+1 day")); // 預設明天
         } else {    
-            $input['end_time'] = date("Y-m-d 00:00:00", strtotime($input['end_time'], "+1 day")); // 預設明天
+            $input['end_time'] = date("Y-m-d 00:00:00", strtotime($input['end_time'] . " +1 day")); // 預設明天
         }
 
         dd($input);
