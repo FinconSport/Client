@@ -425,7 +425,31 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		if (totalWinLoss >= 0) {
+
+		var totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
+		var totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
+		var totalEffectivetAmount = orderDataTotal.find('.orderData_totalEffectiveAmount');
+		var totalWinLoss = orderDataTotal.find('.orderData_totalWinAmount');
+
+		var totalBetAmountLength = totalBetAmount.text().length;
+		var totalResultAmountLength = totalResultAmount.text().length;
+		var totalEffectivetAmountLength = totalEffectivetAmount.text().length;
+		var totalWinLossLength = totalWinLoss.text().length;
+
+		if (
+			totalBetAmountLength > 9 ||
+			totalResultAmountLength > 9 ||
+			totalEffectivetAmountLength > 9 ||
+			totalWinLossLength > 9
+		) {
+			totalBetAmount.css('font-size', '1.2rem');
+			totalResultAmount.css('font-size', '1.2rem');
+			totalEffectivetAmount.css('font-size', '1.2rem');
+			totalWinLoss.css('font-size', '1.2rem');
+			console.log("Text is more than 9 characters");
+		}
+
+		if (totalWinLossLength >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
@@ -445,6 +469,31 @@
 
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
+
+		// if amount is more than 9 digit font size smaller
+		var totalBetAmount = orderDataTotal.find('.orderData_totalBetAmount');
+		var totalResultAmount = orderDataTotal.find('.orderData_totalResultAmount');
+		var totalEffectivetAmount = orderDataTotal.find('.orderData_totalEffectiveAmount');
+		var totalWinLoss = orderDataTotal.find('.orderData_totalWinAmount');
+
+		var totalBetAmountLength = totalBetAmount.text().length;
+		var totalResultAmountLength = totalResultAmount.text().length;
+		var totalEffectivetAmountLength = totalEffectivetAmount.text().length;
+		var totalWinLossLength = totalWinLoss.text().length;
+
+		if (
+			totalBetAmountLength > 9 ||
+			totalResultAmountLength > 9 ||
+			totalEffectivetAmountLength > 9 ||
+			totalWinLossLength > 9
+		) {
+			totalBetAmount.css('font-size', '1.2rem');
+			totalResultAmount.css('font-size', '1.2rem');
+			totalEffectivetAmount.css('font-size', '1.2rem');
+			totalWinLoss.css('font-size', '1.2rem');
+			console.log("amount is more than 9 characters");
+		}
+
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
