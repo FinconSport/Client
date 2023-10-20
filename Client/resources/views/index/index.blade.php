@@ -211,6 +211,7 @@
 <script>
     // 語系
     const langTrans = @json(trans('index'));
+    const commonLangTrans = @json(trans('common'));
 
     // websocket用
     const messageQueue = []; // queue to store the package (FIFO)
@@ -220,10 +221,10 @@
     var heartbeatTimer = null
 
     
-    const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
-    const hcapArr = langTrans.priorityArr.hcap // 讓球系列
-    const sizeArr = langTrans.priorityArr.size // 大小系列
-    const oddEvenArr = langTrans.priorityArr.oddeven // 單雙系列
+    const allWinArr = commonLangTrans.priorityArr.allwin // 獨贏系列
+    const hcapArr = commonLangTrans.priorityArr.hcap // 讓球系列
+    const sizeArr = commonLangTrans.priorityArr.size // 大小系列
+    const oddEvenArr = commonLangTrans.priorityArr.oddeven // 單雙系列
 
 
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
@@ -421,7 +422,7 @@
             let timerStr = null
             if( v3.periods ) {
                 // stage
-                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                 // exception baseball
                 if( sport === 154914 ) {
                     // stage
@@ -780,7 +781,7 @@
                             // stage
                             let timerStr = null
                             if( v3.periods ) {
-                                timerStr = langTrans.mainArea.stageArr[sport][v3.periods.period]
+                                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                                 // bet data
                                 renderBetArea(k, mainPriorityArr, v3, k3, card)
                                 // exception baseball

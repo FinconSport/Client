@@ -116,8 +116,7 @@
 @endsection
 
 @section('styles')
-<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -129,6 +128,7 @@
 
 	// 語系
     var langTrans = @json(trans('order'));
+    var commonLangTrans = @json(trans('common'));
 
 	// detect ini ajax
     var isReadyOrderInt = null
@@ -308,7 +308,18 @@
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
 			const market_type = betItem.market_type === 1 ? langTrans.main.living : langTrans.main.early
-			const content = `${market_type}-${marketName}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
+
+			let content = null
+			let teamStr = null
+
+			// 獨贏 / 讓球系列 -> 顯示主客隊名稱
+			if((commonLangTrans.priorityArr.allwin).indexOf(betItem.market_priority) !== -1 || (commonLangTrans.priorityArr.hcap).indexOf(betItem.market_priority) !== -1 ) {
+				if(betItem.market_bet_name_en === '1') teamStr = betItem.home_team_name
+				if(betItem.market_bet_name_en === '2') teamStr = betItem.away_team_name
+			}
+
+			content = `${market_type}-${marketName}<br><span style="color:green;">${teamStr}[${marketBetName}] ${marketBetLine}</span>`;
+			
 			if (betRate !== null) {
 				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {

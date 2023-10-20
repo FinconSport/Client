@@ -60,9 +60,6 @@
     <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<div id='searchCondition'>
-    {{ trans('common.search_area.search') }}
-</div>
 <!-- early & living scoreboard-->
 <div id="scoreboardContainer">
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
@@ -125,7 +122,6 @@
 
 @section('styles')
 <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<!-- <link href="{{ asset('css/game.css?v=' . $current_time) }}" rel="stylesheet"> -->
 <link href="{{ asset('css/game.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
@@ -134,7 +130,8 @@
 <script>
     // 語系
     const langTrans = @json(trans('index'));
-    const langTrans2 = @json(trans('game'));
+    const commonLangTrans = @json(trans('common'));
+    const gameLangTrans = @json(trans('game'));
 
     // websocket用
     const messageQueue = []; // queue to store the package (FIFO)
@@ -144,9 +141,9 @@
 
     
     // 獨贏系列
-    const allWinArr = langTrans.priorityArr.allwin // 獨贏系列
+    const allWinArr = commonLangTrans.priorityArr.allwin // 獨贏系列
     // 讓球系列
-    const hcapArr = langTrans.priorityArr.hcap // 獨贏系列
+    const hcapArr = commonLangTrans.priorityArr.hcap // 獨贏系列
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
@@ -258,15 +255,15 @@
                             bet_item.find('.odd').text(v3.price)
                             let pri = v.priority
                             switch (true) {
-                                case langTrans2.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
-                                case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
+                                case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
+                                case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                                     break;
-                                case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
+                                case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').text(v3.market_bet_name);
                                     break;
-                                case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
-                                case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
+                                case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
+                                case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
                                         bet_item.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                                     } else if (v3.market_bet_name_en == 2) {
@@ -445,15 +442,15 @@
         marketBetRateTemp.find('.odd').text(v3.price)
         let pri = v.priority
         switch (true) {
-            case langTrans2.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
-            case langTrans2.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name + ' ' + v3.line);
                 break;
-            case langTrans2.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text(v3.market_bet_name);
                 break;
-            case langTrans2.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
-            case langTrans2.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').text(matchListD.data.list.home_team_name + ' ' + v3.line);
                 } else if (v3.market_bet_name_en == 2) {
@@ -462,7 +459,7 @@
                     marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.tie') }}");
                 }
                 break;
-            case langTrans2.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
+            case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').text("{{ trans('game.index.correct_score') }}");
                 break;
             default:
@@ -523,14 +520,14 @@
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
 
-            const gameTitle = langTrans2.scoreBoard.gameTitle[sport]
+            const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
 
             // Thead data game title
             let stageStr = ''
             if( sport === 154914 ) {
-                data.list.periods.Turn === '1' ? stageStr = langTrans2.scoreBoard.lowerStage : stageStr = langTrans2.scoreBoard.upperStage
+                data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
-            const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${langTrans.mainArea.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
+            const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${commonLangTrans.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
             let baseballShowStage = []

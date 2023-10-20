@@ -46,6 +46,64 @@ return [
 		"this_week" => "This Week",  //  "本週",
 		"this_month" => "This Month",  //  "本月",
 	],
+	'stageArr' => [
+		154914 => [
+			1 => '1st Inning',
+			2 => '2nd Inning',
+			3 => '3rd Inning',
+			4 => '4th Inning',
+			5 => '5th Inning',
+			6 => '6th Inning',
+			7 => '7th Inning',
+			8 => '8th Inning',
+			9 => '9th Inning',
+			40 => 'Extra Innings',
+			62 => 'Error',
+			80 => 'Break Time',
+			100 => 'Full Time',
+			101 => 'Full Time After Extra Time',
+		],
+		48242 => [
+			1 => '1st Quarter',
+			2 => '2nd Quarter',
+			3 => '3rd Quarter',
+			4 => '4th Quarter',
+			40 => 'Overtime',
+			80 => 'Break Time',
+			100 => 'Full Time',
+			101 => 'Full Time After Overtime',
+		],
+		6046 => [
+			10 => '1st Half',
+			20 => '2nd Half',
+			25 => '3rd Half',
+			30 => 'Overtime 1st Half',
+			35 => 'Overtime 2nd Half',
+			50 => 'Penalties',
+			80 => 'Break Time',
+			100 => 'Full Time',
+			101 => 'Full Time After Overtime',
+			102 => 'Full Time After Penalties',
+		],
+		35232 => [
+			1 => '1st Inning',
+			2 => '2nd Inning',
+			3 => '3rd Inning',
+			40 => 'Overtime',
+			50 => 'Penalties',
+			80 => 'Break Time',
+			100 => 'Full Time',
+			101 => 'Full Time After Overtime',
+			102 => 'Full Time After Penalties',
+		]
+	],
+	'priorityArr' => [
+		'allwin' => [1, 2, 9, 101, 102, 109, 113, 117, 121, 201, 202, 301],
+		'hcap' => [3, 4, 103, 104, 110, 114, 118, 122, 203 , 204, 302],
+		'oddeven' => [7, 107, 112, 116, 120, 124, 304],
+		'size' => [5, 205, 206, 105, 106, 111, 115, 119, 123, 303]
+	],
+	
 	'js' => [
 		'loginFirst' => 'Please log in first!', // "請先登入!"
 		'sun' => 'Sun', // "日"
