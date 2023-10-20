@@ -396,6 +396,11 @@ button.dateCalendarBtn {
     word-wrap: break-word;
 }
 
+.search-statistic-container .stats-container span{
+   font-size: small;
+   font-weight: 600;
+}
+
 .orderData_betData_Event,
 .orderData_betData_BetWay,
 .orderData_betData_Result,
