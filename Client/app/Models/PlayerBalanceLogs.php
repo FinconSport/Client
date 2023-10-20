@@ -16,16 +16,14 @@ class PlayerBalanceLogs extends CacheModel
     public static function getBalanceLogsList($data) {
 
         // 緩存時間
-        $cacheAliveTime = 60;
+        $cacheAliveTime = 1;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
 			
-			if ($data['type'] === false) {
-
-				dd($data);
+			if ($data['balance_type'] === false) {
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
 				->where("create_time", ">=", $data['start_time'])
 				->where("create_time", "<", $data['end_time'])
@@ -34,15 +32,14 @@ class PlayerBalanceLogs extends CacheModel
 				->orderBy('id', 'DESC')
 				->get();  
 			} else {
-				dd($data);
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
 				->where("create_time",">=",$data['start_time'])
 				->where("create_time","<",$data['start_time'])
-				->where("type", "=", $data['type'])
+				->where("balance_type", $data['balance_type'])
 				->skip($data['skip'])
 				->take($data['page_limit'])
 				->orderBy('id', 'DESC')
-				->get();  
+				->get();
 			}
 			
             return $return;

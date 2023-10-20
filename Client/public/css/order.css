@@ -29,11 +29,9 @@ div[key="matchSportMenu"]{
     background-color: white;
     border: 2px solid rgb(65, 91, 90);
     border-radius: 5px;
-    height: calc(100% - 9.5rem);
     overflow: auto;
     color: rgb(65, 91, 90);
     position: relative;
-    height: calc(100% - 6rem);
 }
 
 #orderContainer::-webkit-scrollbar {
@@ -46,10 +44,15 @@ div[key="matchSportMenu"]{
     overflow-y: auto;
     overflow-x: hidden;
     /* padding-right: 1rem; */
+    position: relative;
+    padding-bottom: 53.71px;
 }
 
 #orderContainer #noMoreData {
     height: fit-content;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
 }
 
 .pageInfo {
@@ -366,7 +369,7 @@ button.dateCalendarBtn {
     padding: 0.2rem 0rem;
     /* margin: 0px 0px 0.5rem 0px; */
     color: #415b5a;
-    font-size: 12px;
+    font-size: small;
     font-weight: 600;
 }
 
