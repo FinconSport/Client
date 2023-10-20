@@ -65,8 +65,6 @@ class LsportFixture extends CacheModel
                 ->orderBy("start_time","DESC")
                 ->get();
             }
-    
-            $return = $data;
 
             return $return;
 
