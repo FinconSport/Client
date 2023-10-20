@@ -14,7 +14,6 @@
 				<div class="ui form">
 					<div class="two fields">
 						<div class="field">
-						<label class="text-white">{{ trans('common.search_area.start_time') }}</label>
 						<div class="ui calendar" id="rangestart">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
@@ -23,7 +22,6 @@
 						</div>
 						</div>
 						<div class="field">
-						<label class="text-white">{{ trans('common.search_area.end_time') }}</label>
 						<div class="ui calendar" id="rangeend">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
