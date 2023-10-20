@@ -2228,7 +2228,7 @@ class LsportApiController extends Controller {
 
         // 開始時間
         if (!isset($input['start_time']) || ($input['start_time'] == "")) {
-            $input['start_time'] = date("Y-m-d 00:00:00", strtotime("-1 day")); // 預設昨天
+            $input['start_time'] = date("Y-m-d", strtotime("-1 day")); // 預設昨天
         }
 
         // 結束時間
