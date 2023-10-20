@@ -169,3 +169,31 @@ div#bettingTypeContainer {
 .market-rate.clickedBet .market_bet_name{
     color: #ffffff;
 }
+
+.market_bet_name {
+    font-weight: normal;
+    color: #ff7000;
+}
+.market_bet_name .bet_name_item {
+    color: black;
+    margin-right: 0.5rem;
+}
+
+.market-rate.clickedBet .market_bet_name,
+.market-rate.clickedBet .bet_name_item,
+.market-rate.clickedBet .odd{
+    color: white!important
+}
+
+span.market_price.odd {
+    margin-right: 2rem;
+}
+
+.bettingtype-container .market-rate i {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.25rem;
+}
+#bettingTypeContainer {
+    height: calc(100% - 16.5rem);
+}

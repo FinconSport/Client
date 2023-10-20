@@ -173,13 +173,13 @@
 
     function setBettypeColor(status) {
         if (status === 1) {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
+            // $('#bettingTypeContainer').css('height', 'calc(100% - 15.5rem)');
             $('.marketName').css('background', '#b8d6d4');
         } else if (status === 2) {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
+            // $('#bettingTypeContainer').css('height', 'calc(100% - 18.5rem)');
             $('.marketName').css('background', '#ffcb9c');
         } else {
-            $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
+            // $('#bettingTypeContainer').css('height', 'calc(100% - 7rem)');
         }
     }
 
@@ -275,6 +275,8 @@
                                 default:
                                     break;
                             }
+
+                            
 
                         }
                     });
