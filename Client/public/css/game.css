@@ -86,10 +86,10 @@ p.market_name {
     position: inherit;
     left: 1px;
     bottom: -1px;
-    width: 50%;
+    /* width: 50%;
     flex-grow: 1;
     justify-content: space-between;
-    text-align: center;
+    text-align: center; */
 }
 
 div#bettingTypeContainer {

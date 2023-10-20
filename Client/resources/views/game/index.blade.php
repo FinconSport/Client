@@ -101,12 +101,12 @@
     <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv"></div>
 </div>
 
-<div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
-    <div class="">
+<div class="market-rate d-flex" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
+    <div class="col-8 d-flex">
         <div class="market_bet_name"></div>
         <div class="line"></div>
     </div>
-    <div>
+    <div class="col-4 text-right">
         <span class="market_price odd"></span>
         <i class="fa-solid fa-lock" style="display: none;"></i>
         <i class="fa-solid fa-caret-up" style="display: none;"></i>
@@ -263,10 +263,10 @@
                                 case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
                                         bet_item.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
-                                        bet_item.find('.line').html('')
+                                        bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 2) {
                                         bet_item.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
-                                        bet_item.find('.line').html('')
+                                        bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 'X') {
                                         bet_item.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
                                         bet_item.find('.line').html('')
@@ -459,10 +459,10 @@
             case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
-                    marketBetRateTemp.find('.line').html('')
+                    marketBetRateTemp.find('.line').html(`${v3.line}`)
                 } else if (v3.market_bet_name_en == 2) {
                     marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
-                    marketBetRateTemp.find('.line').html('')
+                    marketBetRateTemp.find('.line').html(`${v3.line}`)
                 } else if (v3.market_bet_name_en == 'X') {
                     marketBetRateTemp.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
                     marketBetRateTemp.find('.line').html('')
