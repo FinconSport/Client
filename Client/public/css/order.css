@@ -45,14 +45,15 @@ div[key="matchSportMenu"]{
     overflow-x: hidden;
     /* padding-right: 1rem; */
     position: relative;
-    padding-bottom: 53.71px;
 }
 
 #orderContainer #noMoreData {
-    height: 53.71px;
-    position: absolute;
+    height: auto;
+    position: relative;
     width: 100%;
-    bottom: 0px;
+    position: relative;
+    bottom: 0%;
+    transform: translateY(100%);
 }
 
 .pageInfo {
