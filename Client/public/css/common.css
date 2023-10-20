@@ -705,11 +705,14 @@ a.sportSelect:hover,
 }
 
 /* 選中 */
-.indexBetCardTable .m_order_on,
-.tabCardContent .m_order_on {
+.indexBetCardTable .m_order_on {
     background: rgba(65, 91, 90, 0.9);
     color: white;
     border: 1px solid rgba(65, 91, 90, 0.9);
+}
+.indexBetCardTable .m_order_on span,
+.indexBetCardTable .m_order_on .odd{
+    color: white!important;
 }
 
 /* 左邊menu 體育種類選擇 */

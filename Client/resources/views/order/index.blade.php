@@ -402,7 +402,7 @@
 
 				// update the row colors and height when toggle containers
 				updateRowColors();
-				//adjustContainerHeight();
+				adjustPositionBottomNoData()
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -425,6 +425,26 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
+
+		const totalBetAmountElement = $('.orderData_totalBetAmount');
+		const totalResultAmountElement = $('.orderData_totalResultAmount');
+		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
+		const totalWinAmountElement = $('.orderData_totalWinAmount');
+
+		// Function to check and adjust font size based on the length of the content
+		function adjustFontSize(element) {
+			const content = element.text();
+			if (content.replace('.', '').length > 10) {
+				element.css('font-size', '1.4rem');
+			}
+		}
+
+		// Call the function for each element individually
+		adjustFontSize(totalBetAmountElement);
+		adjustFontSize(totalResultAmountElement);
+		adjustFontSize(totalEffectiveAmountElement);
+		adjustFontSize(totalWinAmountElement);
+
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
@@ -443,8 +463,27 @@
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
 		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
+		const totalBetAmountElement = $('.orderData_totalBetAmount');
+		const totalResultAmountElement = $('.orderData_totalResultAmount');
+		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
-		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
+		const currentColor = totalWinAmountElement.css('color');
+
+		// Function to check and adjust font size based on the length of the content
+		function adjustFontSize(element) {
+			const content = element.text();
+			if (content.replace('.', '').length > 10) {
+				element.css('font-size', '1.4rem');
+			}
+		}
+
+		// Call the function for each element individually
+		adjustFontSize(totalBetAmountElement);
+		adjustFontSize(totalResultAmountElement);
+		adjustFontSize(totalEffectiveAmountElement);
+		adjustFontSize(totalWinAmountElement);
+
+
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
@@ -469,7 +508,7 @@
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 		
-		//adjustContainerHeight(); // update height when fetching more data's
+		adjustPositionBottomNoData();
 	}
 
 	// scroll to bottom
@@ -503,6 +542,7 @@
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
 				adjustContainerHeight();
+				adjustPositionBottomNoData();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -568,18 +608,17 @@
 		});
 	}
 
-	// function adjustContainerHeight() {
-	// 	// Compute the height of #orderTable
-	// 	var orderTableHeight = $('#orderTable').height();
+	const tableContainer = document.getElementById('tableContainer');
 
-	// 	// Check if the height is less than 877px
-	// 	if (orderTableHeight < 500) {
-	// 		$('#orderContainer').css('height', 'auto');
-	// 	} else {
-	// 		// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
-	// 		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
-	// 	}
-	// }
+	function adjustPositionBottomNoData() {
+	if (tableContainer.scrollHeight > tableContainer.offsetHeight) {
+		console.log('Scroll bar is currently showing.');
+		$('#noMoreData').css('position', 'relative');
+	} else {
+		console.log('Scroll bar is not showing.');
+		$('#noMoreData').css({ position: 'absolute', bottom: '0' });
+	}
+	}
 
 	function adjustContainerHeight() {
 		// Adjust height based on the langText
@@ -589,6 +628,8 @@
 		} else if (langText === 'tw') {
 			$('#orderContainer').css('height', 'calc(100% - 6rem)');
 		}
+
+		
 	}
 
 	
