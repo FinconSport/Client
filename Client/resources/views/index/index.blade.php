@@ -180,7 +180,7 @@
 </div>
 
 <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
-    <div class="col text-right p-0">
+    <div class="col text-right p-0" key='betItemDiv_name'>
         <span class="bet_name"></span>
     </div>
     <div class="col m-0 row text-right p-0" key='changeCol'>
@@ -517,7 +517,11 @@
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
                         if( priorityArr.length === 4 ) {
-                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                        }
+                        // 足球 調整col
+                        if( sport === 6046 ) {
+                            item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
 
@@ -562,13 +566,17 @@
             } else {
                 for (let j = 0; j < 2; j++) {
                     let item = null
-                    if (allWinArr.indexOf(i) !== -1 ) {
+                    if (allWinArr.indexOf(i) !== -1 && sport !== 6046 ) {
                         item = $(`div[template="betItem-1"]`).clone()
                     } else {
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
                         if( priorityArr.length === 4 ) {
-                            item.find('div[key="changeCol"] .col').eq(0).addClass('col-4').removeClass('col')
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                        }
+                        // 足球 調整col
+                        if( sport === 6046 ) {
+                            item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
 
