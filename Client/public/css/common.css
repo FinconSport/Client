@@ -561,7 +561,7 @@ a.sportSelect:hover,
     position: absolute;
     top: 1rem;
 }
-.ui.calendar.today {
+.ui.calendar .today {
     background: rgb(226, 240, 240);
 }
 
