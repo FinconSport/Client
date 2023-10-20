@@ -109,7 +109,7 @@
 				</div>
 			</div>  
 			<div id="noMoreData" style="display: none;">
-				<td colspan="16"><p class="mb-0 p-3">{{ trans('match.main.nomoredata') }}</p></td>
+				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 			</div>
         </div>
     </div>
@@ -310,7 +310,7 @@
 			const market_type = betItem.market_type === 1 ? langTrans.main.living : langTrans.main.early
 
 			let content = null
-			let teamStr = null
+			let teamStr = ''
 
 			// 獨贏 / 讓球系列 -> 顯示主客隊名稱
 			if((commonLangTrans.priorityArr.allwin).indexOf(betItem.market_priority) !== -1 || (commonLangTrans.priorityArr.hcap).indexOf(betItem.market_priority) !== -1 ) {

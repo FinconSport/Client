@@ -24,7 +24,7 @@
     <div class="ui dimmer" id="dimmer">
 		<img src="{{ asset('image/loading.png?v=' . $system_config['version']) }}" alt="Logo">
     </div>
-	<div id='wrap' class="h-100 pb-3 w-100" style="opacity: 0">
+	<div id='wrap' class="h-100 pb-2 w-100" style="opacity: 0">
 		<div class="leftArea">
 			<div id='logoArea'>
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">

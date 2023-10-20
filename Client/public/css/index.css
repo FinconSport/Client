@@ -310,6 +310,7 @@
 /* 賠率變化樣式 */
 .odd{
     color: black ;
+    font-weight: 600;
 }
 .bet_name {
     font-weight: normal;
