@@ -434,12 +434,63 @@
 				startCalendar: $('#rangestart')
 			});
 
+			
+		}
+		// ===== VIEW LAYER ======
+
+
+		$(document).ready(function() {
+
+			// loading page
+			$('#dimmer').dimmer('show');
+
+			// data layer
+			caller(account_api, commonCallData, accountD) // account
+			caller(marquee_api, commonCallData, marqueeD) // marquee
+			caller(sportList_api, commonCallData, sportListD) // sportList
+			// data layer
+
+
+			// view layer
+			// check if api are all loaded every 500 ms 
+			isReadyCommonInt = setInterval(() => {
+				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
+					if( !sport ) sport = sportListD.data[0].sport_id // default sport
+					isReadyCommon = true
+					viewCommonIni() // excute all common view layer ini function
+					clearInterval(isReadyCommonInt); // stop checking
+				}
+			}, 500);
+			// view layer
+
+
+			// time update
+			var timestamp = parseInt('{{ $current_time }}');
+			setInterval(function() {
+				// 計算目前時間
+				var date = new Date(timestamp * 1000);
+				var hours = date.getHours();
+				var minutes = date.getMinutes();
+				var seconds = date.getSeconds();
+				// 格式化時間，補零以達到固定長度
+				hours = ("0" + hours).slice(-2);
+				minutes = ("0" + minutes).slice(-2);
+				seconds = ("0" + seconds).slice(-2);
+				// 更新顯示的時間
+				$('#timer').html(hours + ':' + minutes + ':' + seconds)
+				// 增加一秒
+				timestamp++;
+			}, 1000);
+
+
+			// calendar
 			// 获取当前日期
 			var today = new Date();
 			var currentDate = today.toISOString().split('T')[0];
 
 			// 给每个按钮添加点击事件处理程序
 			$('.dateCalendarBtn').click(function() {
+				console.log('dateCalendarBtn')
 				var button = $(this);
 				var startInput = $('#rangestart');
 				var endInput = $('#rangeend');
@@ -494,52 +545,6 @@
 				startInput.val(startDate);
 				endInput.val(endDate);
 			});
-		}
-		// ===== VIEW LAYER ======
-
-
-		$(document).ready(function() {
-
-			// loading page
-			$('#dimmer').dimmer('show');
-
-			// data layer
-			caller(account_api, commonCallData, accountD) // account
-			caller(marquee_api, commonCallData, marqueeD) // marquee
-			caller(sportList_api, commonCallData, sportListD) // sportList
-			// data layer
-
-
-			// view layer
-			// check if api are all loaded every 500 ms 
-			isReadyCommonInt = setInterval(() => {
-				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
-					if( !sport ) sport = sportListD.data[0].sport_id // default sport
-					isReadyCommon = true
-					viewCommonIni() // excute all common view layer ini function
-					clearInterval(isReadyCommonInt); // stop checking
-				}
-			}, 500);
-			// view layer
-
-
-			// time update
-			var timestamp = parseInt('{{ $current_time }}');
-			setInterval(function() {
-				// 計算目前時間
-				var date = new Date(timestamp * 1000);
-				var hours = date.getHours();
-				var minutes = date.getMinutes();
-				var seconds = date.getSeconds();
-				// 格式化時間，補零以達到固定長度
-				hours = ("0" + hours).slice(-2);
-				minutes = ("0" + minutes).slice(-2);
-				seconds = ("0" + seconds).slice(-2);
-				// 更新顯示的時間
-				$('#timer').html(hours + ':' + minutes + ':' + seconds)
-				// 增加一秒
-				timestamp++;
-			}, 1000);
 		});
 
 		
