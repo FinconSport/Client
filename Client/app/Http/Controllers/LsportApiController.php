@@ -1995,16 +1995,11 @@ class LsportApiController extends Controller {
             }
 
             // 移除已鎖的盤口
-            if (count($tmp_market_data['market_bet']) == 0) {
-                continue;
-            }
             foreach ($tmp_market_data['market_bet'] as $k => $v) {
                 if ($check_market_bet_lines[$k] === false) {
                     unset($tmp_market_data['market_bet'][$k]);
                 }
             }
-
-            dd($tmp_market_data);
 
             if ($active_market_bet > 0) {
                 $data['list']['market'][] = $tmp_market_data;
