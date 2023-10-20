@@ -402,7 +402,7 @@
 
 				// update the row colors and height when toggle containers
 				updateRowColors();
-				//adjustContainerHeight();
+				adjustPositionBottomNoData()
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -469,7 +469,7 @@
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 		
-		//adjustContainerHeight(); // update height when fetching more data's
+		adjustPositionBottomNoData();
 	}
 
 	// scroll to bottom
@@ -503,6 +503,7 @@
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
 				adjustContainerHeight();
+				adjustPositionBottomNoData();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -568,18 +569,17 @@
 		});
 	}
 
-	// function adjustContainerHeight() {
-	// 	// Compute the height of #orderTable
-	// 	var orderTableHeight = $('#orderTable').height();
+	const tableContainer = document.getElementById('tableContainer');
 
-	// 	// Check if the height is less than 877px
-	// 	if (orderTableHeight < 500) {
-	// 		$('#orderContainer').css('height', 'auto');
-	// 	} else {
-	// 		// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
-	// 		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
-	// 	}
-	// }
+	function adjustPositionBottomNoData() {
+	if (tableContainer.scrollHeight > tableContainer.offsetHeight) {
+		console.log('Scroll bar is currently showing.');
+		$('#tableContainer').css('position', 'relative');
+	} else {
+		console.log('Scroll bar is not showing.');
+		$('#tableContainer').css({ position: 'absolute', bottom: '0' });
+	}
+	}
 
 	function adjustContainerHeight() {
 		// Adjust height based on the langText
@@ -589,6 +589,8 @@
 		} else if (langText === 'tw') {
 			$('#orderContainer').css('height', 'calc(100% - 6rem)');
 		}
+
+		
 	}
 
 	
