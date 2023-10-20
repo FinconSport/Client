@@ -35,7 +35,7 @@ class PlayerBalanceLogs extends CacheModel
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
 				->where("create_time",">=",$data['start_time'])
 				->where("create_time","<",$data['start_time'])
-				->where("balance_type", $data['balance_type'])
+				->where("balance_type", "=", $data['balance_type'])
 				->skip($data['skip'])
 				->take($data['page_limit'])
 				->orderBy('id', 'DESC')
