@@ -510,9 +510,12 @@
 					case 'lastMonth':
 						startDate.setMonth(startDate.getMonth() - 1);
 						startDate.setDate(1);
+						endDate.setDate(0);
 						break;
 					case 'lastWeek':
-						startDate.setDate(currentDate.getDate() - (currentDate.getDay() + 6) % 7);
+						startDate.setDate(currentDate.getDate() - currentDate.getDay() - 6 );
+						endDate = new Date(startDate);
+						endDate.setDate(currentDate.getDate() - currentDate.getDay());
 						break;
 					case 'yesterday':
 						startDate.setDate(currentDate.getDate() - 1);
@@ -522,7 +525,7 @@
 						// 默认是今天
 						break;
 					case 'thisWeek':
-						startDate.setDate(currentDate.getDate() - currentDate.getDay());
+						startDate.setDate(currentDate.getDate() - (currentDate.getDay() - 6) % 7);
 						break;
 					case 'thisMonth':
 						startDate.setDate(1);
