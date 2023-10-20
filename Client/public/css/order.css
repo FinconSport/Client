@@ -45,6 +45,7 @@ div[key="matchSportMenu"]{
     overflow-x: hidden;
     /* padding-right: 1rem; */
     position: relative;
+    padding-bottom: 53.71px;
 }
 
 #orderContainer #noMoreData {
