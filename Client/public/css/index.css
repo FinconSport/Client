@@ -317,6 +317,7 @@
 }
 .bet_name .bet_name_item {
     color: black;
+    margin-right: 0.5rem;
 }
 
 #leftSlideOrder .raiseOdd,
