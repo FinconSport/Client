@@ -350,8 +350,8 @@ span.orderData_mOrder {
     margin: 0 -0.5em 0.5em;
 }
 
-.datecalendar-con input {
-    height: 2rem;
+.datecalendar-con .calendar .input input {
+    height: 2rem!important;
 }
 
 button.dateCalendarBtn {
