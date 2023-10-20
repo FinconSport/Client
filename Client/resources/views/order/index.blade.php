@@ -445,13 +445,11 @@
 		adjustFontSize(totalEffectiveAmountElement);
 		adjustFontSize(totalWinAmountElement);
 
-
 		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
-
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
@@ -469,6 +467,7 @@
 		const totalResultAmountElement = $('.orderData_totalResultAmount');
 		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
+		const currentColor = totalWinAmountElement.css('color');
 
 		// Function to check and adjust font size based on the length of the content
 		function adjustFontSize(element) {
