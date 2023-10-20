@@ -1962,6 +1962,7 @@ class LsportApiController extends Controller {
                 $this->ApiError('04');
             }
 
+            $check_market_bet_lines = [];
             $market_bet_data = $return;
             foreach ($market_bet_data as $kkk => $vvv) {
                 $market_bet_id = $vvv['bet_id'];
@@ -1973,6 +1974,7 @@ class LsportApiController extends Controller {
                 } 
 
                 $base_line = $vvv['base_line'];
+                $check_market_bet_lines[$base_line] = false;
 
                 $tmp_data = array();
                 $tmp_data['market_bet_id'] = $market_bet_id;
@@ -1985,9 +1987,16 @@ class LsportApiController extends Controller {
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
                 $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
+                
+                // 只要其中一個賠率status 為1 , 則顯示
+                if ($vvv['status'] == 1) { 
+                    $check_market_bet_lines[$base_line] = true;
+                }
+                
                 $active_market_bet++;
             }
-            if ($active_market_bet > 0) {
+            
+            if (($active_market_bet > 0) && ($check_market_bet_lines[$base_line])) {
                 $data['list']['market'][] = $tmp_market_data;
             }
         }
