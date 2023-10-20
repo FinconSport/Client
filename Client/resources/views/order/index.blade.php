@@ -4,34 +4,32 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-			<select id="selectOption" name="selectOption"  onchange="redirectToPage(this)">
-				<option value="{{ trans('common.left_menu.all') }}" data-link="?result=-1">{{ trans('common.left_menu.all') }}</option>
-				<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
-				<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
-			</select>
+				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage(this)">
+					<option value="{{ trans('common.left_menu.all') }}" data-link="?result=-1">{{ trans('common.left_menu.all') }}</option>
+					<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
+					<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
+				</select>
 			</div>
 			<div class="datecalendar-con">
-				<div class="datepicker-con">
-					<div class="ui form">
-						<div class="two fields">
-							<div class="field">
-							<label>{{ trans('common.search_area.start_time') }}</label>
-							<div class="ui calendar" id="rangestart">
-								<div class="ui input left icon">
-								<i class="calendar icon"></i>
-								<input type="text" placeholder="{{ trans('common.search_area.start_time') }}">
-								</div>
+				<div class="ui form">
+					<div class="two fields">
+						<div class="field">
+						<label class="text-white">{{ trans('common.search_area.start_time') }}</label>
+						<div class="ui calendar" id="rangestart">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="{{ trans('common.search_area.start_time') }}">
 							</div>
+						</div>
+						</div>
+						<div class="field">
+						<label class="text-white">{{ trans('common.search_area.end_time') }}</label>
+						<div class="ui calendar" id="rangeend">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="{{ trans('common.search_area.end_time') }}">
 							</div>
-							<div class="field">
-							<label>{{ trans('common.search_area.end_time') }}</label>
-							<div class="ui calendar" id="rangeend">
-								<div class="ui input left icon">
-								<i class="calendar icon"></i>
-								<input type="text" placeholder="{{ trans('common.search_area.end_time') }}">
-								</div>
-							</div>
-							</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -120,7 +118,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
