@@ -33,7 +33,7 @@ class PlayerBalanceLogs extends CacheModel
 				->orderBy('id', 'DESC')
 				->get();  
 			} else {
-				$return = PlayerBalanceLogs::where("player_id", $player_id)
+				$return = PlayerBalanceLogs::where("player_id", $data['player'])
 				->where("start_time","<=",$input['start_time'])
 				->where("start_time","<=",$input['start_time'])
 				->skip($data['skip'])
