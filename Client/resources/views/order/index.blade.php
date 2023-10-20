@@ -482,8 +482,7 @@
 		adjustFontSize(totalBetAmountElement);
 		adjustFontSize(totalResultAmountElement);
 		adjustFontSize(totalEffectiveAmountElement);
-		adjustFontSize(totalWinAmountElement);totalWinAmountElement.css('font-size', '1.2rem');
-		}
+		adjustFontSize(totalWinAmountElement);
 
 
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
