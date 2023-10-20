@@ -402,7 +402,7 @@
 
 				// update the row colors and height when toggle containers
 				updateRowColors();
-				//adjustContainerHeight();
+				adjustPositionBottomNoData()
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -425,7 +425,31 @@
 		orderDataTotal.find('.orderData_totalResultAmount').text(totalResultAmount);
 		orderDataTotal.find('.orderData_totalEffectiveAmount').text(totalEffectivetAmount);
 		orderDataTotal.find('.orderData_totalWinAmount').text(totalWinLoss);
-		if (totalWinLoss >= 0) {
+
+		const totalBetAmountElement = $('.orderData_totalBetAmount');
+		const totalResultAmountElement = $('.orderData_totalResultAmount');
+		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
+		const totalWinAmountElement = $('.orderData_totalWinAmount');
+
+		// if amount is more than 9 digits, reduce font size
+		var totalBetAmountLength = totalBetAmountElement.text().length;
+		var totalResultAmountLength = totalResultAmountElement.text().length;
+		var totalEffectiveAmountLength = totalEffectiveAmountElement.text().length;
+		var totalWinAmountLength = totalWinAmountElement.text().length; 
+
+		if (
+			totalBetAmountLength > 9 ||
+			totalResultAmountLength > 9 ||
+			totalEffectiveAmountLength > 9 ||
+			totalWinAmountLength > 9
+		) {
+			totalBetAmountElement.css('font-size', '1.2rem');
+			totalResultAmountElement.css('font-size', '1.2rem');
+			totalEffectiveAmountElement.css('font-size', '1.2rem');
+			totalWinAmountElement.css('font-size', '1.2rem');
+		}
+
+		if (totalWinLossLength >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
@@ -443,8 +467,31 @@
 		$('.orderData_totalResultAmount').text(totalResultAmount === null ? '0' : totalResultAmount);
 		$('.orderData_totalEffectiveAmount').text(totalEffectivetAmount === null ? '0' : totalEffectivetAmount);
 
+		const totalBetAmountElement = $('.orderData_totalBetAmount');
+		const totalResultAmountElement = $('.orderData_totalResultAmount');
+		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
+
+		// if amount is more than 9 digits, reduce font size
+		var totalBetAmountLength = totalBetAmountElement.text().length;
+		var totalResultAmountLength = totalResultAmountElement.text().length;
+		var totalEffectiveAmountLength = totalEffectiveAmountElement.text().length;
+		var totalWinAmountLength = totalWinAmountElement.text().length;
+
+		if (
+			totalBetAmountLength > 9 ||
+			totalResultAmountLength > 9 ||
+			totalEffectiveAmountLength > 9 ||
+			totalWinAmountLength > 9
+		) {
+			totalBetAmountElement.css('font-size', '1.2rem');
+			totalResultAmountElement.css('font-size', '1.2rem');
+			totalEffectiveAmountElement.css('font-size', '1.2rem');
+			totalWinAmountElement.css('font-size', '1.2rem');
+		}
+
+
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
 		// Check if the color needs to be updated
 		if ((totalWinLoss >= 0 && currentColor !== 'red') || (totalWinLoss < 0 && currentColor !== 'green')) {
@@ -469,7 +516,7 @@
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 		
-		//adjustContainerHeight(); // update height when fetching more data's
+		adjustPositionBottomNoData();
 	}
 
 	// scroll to bottom
@@ -503,6 +550,7 @@
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
 				adjustContainerHeight();
+				adjustPositionBottomNoData();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -568,18 +616,17 @@
 		});
 	}
 
-	// function adjustContainerHeight() {
-	// 	// Compute the height of #orderTable
-	// 	var orderTableHeight = $('#orderTable').height();
+	const tableContainer = document.getElementById('tableContainer');
 
-	// 	// Check if the height is less than 877px
-	// 	if (orderTableHeight < 500) {
-	// 		$('#orderContainer').css('height', 'auto');
-	// 	} else {
-	// 		// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
-	// 		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
-	// 	}
-	// }
+	function adjustPositionBottomNoData() {
+	if (tableContainer.scrollHeight > tableContainer.offsetHeight) {
+		console.log('Scroll bar is currently showing.');
+		$('#noMoreData').css('position', 'relative');
+	} else {
+		console.log('Scroll bar is not showing.');
+		$('#noMoreData').css({ position: 'absolute', bottom: '0' });
+	}
+	}
 
 	function adjustContainerHeight() {
 		// Adjust height based on the langText
@@ -589,6 +636,8 @@
 		} else if (langText === 'tw') {
 			$('#orderContainer').css('height', 'calc(100% - 6rem)');
 		}
+
+		
 	}
 
 	

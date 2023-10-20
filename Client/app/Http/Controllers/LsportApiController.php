@@ -2127,14 +2127,6 @@ class LsportApiController extends Controller {
 
                     $tmp_bet_data = $vvv;
 
-                    // 取得賽事開始時間
-                    $fixture_id = $vvv['fixture_id'];
-                    $return = LsportFixture::where("fixture_id",$fixture_id)->fetch();
-                    if ($return === false) {
-                        $this->ApiError("03");
-                    }
-                    $tmp_bet_data['start_time'] = $return['start_time'];
-
                     // 取得market_bet name_en
                     $market_bet_id = $vvv['market_bet_id'];
                     $return = LsportMarketBet::where("bet_id",$market_bet_id)->fetch();
@@ -2142,6 +2134,14 @@ class LsportApiController extends Controller {
                         $this->ApiError("04");
                     }
                     $tmp_bet_data['market_bet_name_en'] = $return['name_en'];
+
+                    // 取得賽事開始時間
+                    $fixture_id = $vvv['fixture_id'];
+                    $return = LsportFixture::where("fixture_id",$fixture_id)->fetch();
+                    if ($return === false) {
+                        $this->ApiError("03");
+                    }
+                    $tmp_bet_data['start_time'] = $return['start_time'];
                     
                     // 滾球/早盤字樣判定
                     $market_type = 0;
