@@ -156,8 +156,7 @@
 
 		// search area
 		$('#selectOption').val(searchData.result || -1 )
-		$('#rangestart .input').val(searchData.start_time || '' )
-		$('#rangeend .input').val(searchData.end_time || '' )
+		setRange(searchData.start_time || '', searchData.end_time || '')
 
 		if (orderListD && orderListD.data.list) {
 			orderListD.data.list.forEach((orderItem, orderIndex) => {
