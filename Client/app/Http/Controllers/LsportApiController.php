@@ -2263,6 +2263,8 @@ class LsportApiController extends Controller {
         
         ///////////////////////////////////////////
 
+        dd($input);
+
         $return = PlayerBalanceLogs::getBalanceLogsList($input);
         if ($return === false) {
             $this->ApiError("01");
