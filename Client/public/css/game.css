@@ -174,6 +174,7 @@ div#bettingTypeContainer {
     font-weight: normal;
     color: #ff7000;
     margin-left: 1rem;
+    text-align: right;
     min-width: 3rem;
 }
 .market_bet_name {
