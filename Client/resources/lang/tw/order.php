@@ -21,8 +21,6 @@ return [
 		"bet_money" => "投注金額",
 		"return_money" => "派獎金額",
 		"status" => "狀態",
-		"m_bet" => "串關投注",
-		"sport_bet" => "體育投注",
 		"open" => "展開",
 		"close" => "收起",
 		"nodata" => "暫無資料",
@@ -33,7 +31,7 @@ return [
 		"last_page" => "最後一頁",
 		"expand" => "展開",
 		"sport" => "體育投注",
-    	"morder" => "串關投注",
+    	"morder" => "串關",
 		"select_sport" => "請選擇體育",
 		"total_bet_count" => "總注單數",
 		"total_bet_amount" => "投注金額",
@@ -47,6 +45,7 @@ return [
 		"waitToPrize" => "等待派獎",
 		'living' => '滾球',
 		'early' => '早盤',
+		'parlay' => '串'
 	],
 	// 後端
 	"result_precent" => [

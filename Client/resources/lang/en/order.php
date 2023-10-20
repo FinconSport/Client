@@ -21,8 +21,6 @@ return [
 		"bet_money" => "Bet Amount",  //  "投注金額",
 		"return_money" => "Prize Amount",  //  "派獎金額",
 		"status" => "Status",  //  "狀態",
-		"m_bet" => "Parlay Bet",  //  "串關投注",
-		"sport_bet" => "Sports Betting",  //  "體育投注",
 		"open" => "Expand",  //  "展開",
 		"close" => "Collapse",  //  "收起",
 		"nodata" => "No Data Currently",  //  "暫無資料",
@@ -33,7 +31,7 @@ return [
 		"last_page" => "Last Page",  //  "最後一頁",
 		"expand" => "Expand",  // "展開",
 		"sport" => "Sports betting", // 体育博彩
-    	"morder" => "Cross match betting", //交叉比赛投注
+    	"morder" => "", //交叉比赛投注
 		"select_sport" => "Please Select Sports",  //  "請選擇體育"
 		"total_bet_count" => "Total count of bets",  //  "總注單數",
 		"total_bet_amount" => "Total bet amount",  //  "投注金額",
@@ -47,6 +45,7 @@ return [
 		"waitToPrize" => "Awaiting Payout",
 		'living' => 'living',
 		'early' => 'early',
+		'parlay' => 'Parlay'
 	],
 	"result_precent" => [
 		"0" => "Lose", // "輸",

@@ -266,7 +266,7 @@
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataMOrder.html(orderItem.m_order === 0 ? orderItem.bet_data[0].market_type : '{{ trans("order.main.morder") }}');
+		orderDataMOrder.html(orderItem.m_order === 0 ? orderItem.bet_data[0].market_type === 1 ? langTrans.main.living : langTrans.main.early : `{{ trans("order.main.morder") }} - ${orderItem.bet_data.length} {{ trans("order.main.parlay") }} 1`);
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
