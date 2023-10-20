@@ -489,6 +489,7 @@
 		if( searchData.result ) callOrderListData.result = parseInt(searchData.result) // get result params
 		if( searchData.start_time ) callOrderListData.start_time = searchData.start_time // get start_time params
 		if( searchData.end_time ) callOrderListData.end_time = searchData.end_time // get end_time params
+
         caller(orderList_api, callOrderListData, orderListD) // orderListD
 		
 		// check if api are all loaded every 500 ms 
@@ -557,11 +558,12 @@
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
+		queryParams.result = result
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
 		
 		const queryString = new URLSearchParams(queryParams).toString();
-		const urlWithQuery = `/${result}?${queryString}`;
+		const urlWithQuery = `?${queryString}`;
 		window.location.href = urlWithQuery
 	}
 

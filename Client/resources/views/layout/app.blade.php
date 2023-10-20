@@ -535,8 +535,8 @@
 				}
 
 				setRange(startDate, endDate);
+				redirectToPage()
 			});
-
 		});
 
 		
