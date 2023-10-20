@@ -33,6 +33,7 @@ div[key="matchSportMenu"]{
     overflow: auto;
     color: rgb(65, 91, 90);
     position: relative;
+    height: calc(100% - 6rem);
 }
 
 #orderContainer::-webkit-scrollbar {
@@ -223,7 +224,7 @@ div[key="matchSportMenu"]{
 }
 
 .search-statistic-container .search-bar-container {
-    padding: 1rem;
+    padding: 0.5rem;
     background: #415b5a;
     border-radius: 5px;
 }
@@ -231,7 +232,7 @@ div[key="matchSportMenu"]{
 .search-statistic-container .search-bar-container,
 .search-statistic-container .datepicker-con {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
@@ -267,7 +268,11 @@ div[key="matchSportMenu"]{
     cursor: pointer;
     color: #415b5a;
     overflow: visible;
-    max-height: 31.7px;
+    max-height: 2rem
+}
+
+.select-con .ui.selection.dropdown{
+    min-height: 2rem;
 }
 
 span.orderData_mOrder {
@@ -339,20 +344,30 @@ span.orderData_mOrder {
 }
 
 .datebutton-cons {
-    margin-top: 0.8rem;
+    /* margin-top: 0.8rem; */
     justify-content: space-around;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 0.5rem;
 }
 
+.datecalendar-con .ui.form .fields{
+    margin: 0 -0.5em 0.5em;
+}
+
+.datecalendar-con .calendar .input input {
+    height: 2rem!important;
+}
+
 button.dateCalendarBtn {
     border: none;
     border-radius: 5px;
     background: #ffffff;
-    padding: 0.5rem;
-    margin: 0px 0px 0.5rem 0px;
+    padding: 0.2rem 0rem;
+    /* margin: 0px 0px 0.5rem 0px; */
     color: #415b5a;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .search-statistic-container .statistic-container {

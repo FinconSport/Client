@@ -28,7 +28,7 @@
                     <span key='odd' class="odd"></span>
                 </div>
                 <div class="col-12">
-                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="{{ trans('index.bet_area.limit') }}0-10000" >
+                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="" >
                 </div>
                 <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
                 <div class="col-6 mb-2 mt-2 text-right" id="maxWinning">0.00</div>
@@ -265,8 +265,6 @@
 
     // bet limitation data
     var betLimitationD = {}
-    var callLimitationData = {}
-    const betLimitation_api = ''
 
     // game priority and gameTitle
     var mainPriorityArr = null
@@ -1193,6 +1191,7 @@
         let home = e.attr('home')
         let away = e.attr('away')
         let priority = parseInt(e.attr('priority'))
+        let cate = e.attr('cate')
 
         sendOrderData = {
             token: token,
@@ -1235,27 +1234,14 @@
         // 選中樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
 
-        // 判斷滾球or早盤
-        // const start_time = new Date(result.start_time).getTime();
-        // const now = new Date().getTime();
-        // let placeholderStr = langTrans.js.limit
-
-        // if (now > start_time) {
-        //     // 滾球
-        //     min = parseInt(limit.living[sport].min)
-        //     max = parseInt(limit.living[sport].max)
-        // } else {
-        //     // 早盤
-        //     min = parseInt(limit.early[sport].min)
-        //     max = parseInt(limit.early[sport].max)
-        // }
-        // placeholderStr += min
-        // placeholderStr += '-'
-        // placeholderStr += max
-        // $('#moneyInput').attr('placeholder', placeholderStr)
-        // $('#moneyInput').val(min)
-        // $('#moneyInput').trigger('change')
-        // $('#moneyInput').focus()
+        // 限額
+        betLimitationD = accountD.data.limit[cate][sport]
+        $('#submitOrder').attr('min', betLimitationD.min)
+        $('#submitOrder').attr('min', betLimitationD.max)
+        $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
+        $('#moneyInput').val(betLimitationD.min)
+        $('#moneyInput').trigger('change')
+        $('#moneyInput').focus()
     }
 
     // 關閉左邊投注區塊
@@ -1316,14 +1302,19 @@
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
-        // if (sendOrderData.bet_amount < min) {
-        //     showErrorToast(langTrans.js.tooless_bet_amout + min);
-        //     return;
-        // }
-        // if (sendOrderData.bet_amount > max) {
-        //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
-        //     return;
-        // }
+
+        // limit
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
+
+        if (sendOrderData.bet_amount < min) {
+            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            return;
+        }
+        if (sendOrderData.bet_amount > max) {
+            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            return;
+        }
 
         // Show loading spinner while submitting
         showLoading();
