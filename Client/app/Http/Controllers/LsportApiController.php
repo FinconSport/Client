@@ -2001,6 +2001,7 @@ class LsportApiController extends Controller {
                 }
             }
 
+            dd($tmp_market_data);
             if ($active_market_bet > 0) {
                 $data['list']['market'][] = $tmp_market_data;
             }
