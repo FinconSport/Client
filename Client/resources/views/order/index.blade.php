@@ -266,7 +266,7 @@
 		}
 
 		orderDataId.html(orderItem.m_order === 1 ? orderItem.m_id : orderItem.id);
-		orderDataMOrder.html(orderItem.m_order === 0 ? orderItem.bet_data[0].market_type === 1 ? langTrans.main.living : langTrans.main.early : `{{ trans("order.main.morder") }} - ${orderItem.bet_data.length} {{ trans("order.main.parlay") }} 1`);
+		orderDataMOrder.html(orderItem.m_order === 0 ? orderItem.bet_data[0].market_type === 1 ? langTrans.main.living : langTrans.main.early : `{{ trans("order.main.morder") }}  ${orderItem.bet_data.length}{{ trans("order.main.parlay") }}1`);
 		orderDataBetEvent.attr('id', `betDataDetailsEvent_${orderItem.id}`);
 		orderDataBetBetWay.attr('id', `betDataDetailsBetWay_${orderItem.id}`);
 		orderDataBetResult.attr('id', `betDataDetailsResult_${orderItem.id}`);
@@ -307,7 +307,7 @@
 			const marketBetLine = betItem.market_bet_line;
 			const betRate = betItem.bet_rate;
 			const market_type = betItem.market_type === 1 ? langTrans.main.living : langTrans.main.early
-			const content = `${marketName}  ${market_type}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
+			const content = `${market_type}-${marketName}<br><span style="color:green;">[${marketBetName}] ${marketBetLine}</span>`;
 			if (betRate !== null) {
 				return `${content} @ <span style="color:#c79e42;">${betRate}</span>`;
 			} else {

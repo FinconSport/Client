@@ -31,7 +31,7 @@ return [
 		"last_page" => "Last Page",  //  "最後一頁",
 		"expand" => "Expand",  // "展開",
 		"sport" => "Sports betting", // 体育博彩
-    	"morder" => "", //交叉比赛投注
+    	"morder" => "Parlay Betting", //交叉比赛投注
 		"select_sport" => "Please Select Sports",  //  "請選擇體育"
 		"total_bet_count" => "Total count of bets",  //  "總注單數",
 		"total_bet_amount" => "Total bet amount",  //  "投注金額",
@@ -45,7 +45,7 @@ return [
 		"waitToPrize" => "Awaiting Payout",
 		'living' => 'living',
 		'early' => 'early',
-		'parlay' => 'Parlay'
+		'parlay' => 'X'
 	],
 	"result_precent" => [
 		"0" => "Lose", // "輸",
