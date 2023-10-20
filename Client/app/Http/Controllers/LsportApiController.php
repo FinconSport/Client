@@ -703,14 +703,13 @@ class LsportApiController extends Controller {
         })
         ->orderBy("league_id", "ASC")
         ->orderBy("start_time","ASC")
-        ->list(1,true);
+        ->list();
         if ($return === false) {
             $this->ApiError('02');
         }
 
         $fixture_data = $return;
 
-        dd($fixture_data);
         //////////////////////////////////////////
         
         $status_type = ["","early","living"];
