@@ -141,7 +141,7 @@
     const orderList_api = '/api/v2/common_order'
 
 	$langFilePath = resource_path('lang/' . app()->getLocale() . '/order.php');
-    $parentFolder = basename(dirname($langFilePath));
+    $parentFolder = basename(dirname(dirname($langFilePath)));
 	const langParentFolder = '{{$parentFolder}}';
     console.log(langParentFolder);
 
