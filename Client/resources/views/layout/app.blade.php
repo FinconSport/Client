@@ -486,11 +486,11 @@
 			// calendar
 			$('.dateCalendarBtn').click(function() {
 				var button = $(this);
-				var startInput = $('#rangestart');
-				var endInput = $('#rangeend');
+				var startInput = $('#rangestart').find('input');
+				var endInput = $('#rangeend').find('input');
 				
 				// 获取当前日期
-				var today = new Date().toLocaleString("en-US", { timeZone: "Asia/Taipei" });
+				var today = new Date();
 				today.setHours(0, 0, 0, 0); // 去掉时间部分
 				
 				// 根据按钮的文本来设置日期范围
