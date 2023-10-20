@@ -525,7 +525,7 @@
 						// 默认是今天
 						break;
 					case 'thisWeek':
-						startDate.setDate(currentDate.getDate() - (currentDate.getDay() - 6) % 7);
+						startDate.setDate(currentDate.getDate() - currentDate.getDay() + 1 );
 						break;
 					case 'thisMonth':
 						startDate.setDate(1);
