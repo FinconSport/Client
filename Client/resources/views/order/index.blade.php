@@ -142,8 +142,8 @@
 
 	$langFilePath = resource_path('lang/' . app()->getLocale() . '/order.php');
     $parentFolder = basename(dirname($langFilePath));
-	const langParentFolder = @json($parentFolder);
-	console.log(langParentFolder);
+	const langParentFolder = '{{$parentFolder}}';
+    console.log(langParentFolder);
 
 	let totalBetItemCount = 0;
 	let totalBetAmount = 0;
