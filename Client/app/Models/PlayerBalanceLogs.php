@@ -25,21 +25,21 @@ class PlayerBalanceLogs extends CacheModel
 			
 			if ($data['balance_type'] === false) {
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
-				->where("create_time", ">=", $data['start_time'])
-				->where("create_time", "<", $data['end_time'])
-				->skip($data['skip'])
-				->take($data['page_limit'])
-				->orderBy('id', 'DESC')
-				->get();  
+					->where("create_time", ">=", $data['start_time'])
+					->where("create_time", "<", $data['end_time'])
+					->skip($data['skip'])
+					->take($data['page_limit'])
+					->orderBy('id', 'DESC')
+					->get();  
 			} else {
 				$return = PlayerBalanceLogs::where("player_id", $data['player'])
-				->where("create_time",">=",$data['start_time'])
-				->where("create_time","<",$data['start_time'])
-				->where("balance_type", "=", $data['balance_type'])
-				->skip($data['skip'])
-				->take($data['page_limit'])
-				->orderBy('id', 'DESC')
-				->get();
+					->where("create_time", ">=", $data['start_time'])
+					->where("create_time", "<", $data['end_time'])
+					->where("balance_type", "=", $data['balance_type'])
+					->skip($data['skip'])
+					->take($data['page_limit'])
+					->orderBy('id', 'DESC')
+					->get();
 			}
 			
             return $return;
