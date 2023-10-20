@@ -101,9 +101,10 @@
     <div id="marketRateDataTemp" class="marketBetRateContainer betItemDiv"></div>
 </div>
 
-<div class="market-rate d-flex justify-content-between" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
+<div class="market-rate d-flex justify-content-between col" key="marketBetRateKey" template="marketBetRateTemplate" hidden style="display:none!important;">
     <div class="">
-        <span class="market_bet_name"></span>
+        <div class="market_bet_name"></div>
+        <div class="line"></div>
     </div>
     <div>
         <span class="market_price odd"></span>
@@ -257,27 +258,29 @@
                             switch (true) {
                                 case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
                                 case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
-                                    bet_item.find('.market_bet_name').html(`<span class="bet_name_item">${v3.market_bet_name}</span>${v3.line}`)
+                                    bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
+                                    bet_item.find('.line').html(`${v3.line}`)
                                     break;
                                 case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
-                                    bet_item.find('.market_bet_name').html(`<span class="bet_name_item">${v3.market_bet_name}</span>`);
+                                    bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
+                                    bet_item.find('.line').html('')
                                     break;
                                 case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
                                 case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
-                                        bet_item.find('.market_bet_name').html(`<span class="bet_name_item">${matchListD.data.list.home_team_name}</span>${v3.line}`);
+                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
+                                        bet_item.find('.line').html('')
                                     } else if (v3.market_bet_name_en == 2) {
-                                        bet_item.find('.market_bet_name').html(`<span class="bet_name_item">${matchListD.data.list.away_team_name}</span>${v3.line}`);
+                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
+                                        bet_item.find('.line').html('')
                                     } else if (v3.market_bet_name_en == 'X') {
-                                        bet_item.find('.market_bet_name').html('<span class="bet_name_item">{{ trans("game.index.tie") }}</span>');
+                                        bet_item.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
+                                        bet_item.find('.line').html('')
                                     }
                                     break;
                                 default:
                                     break;
                             }
-
-                            
-
                         }
                     });
                 });
@@ -446,19 +449,24 @@
         switch (true) {
             case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
             case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
-                marketBetRateTemp.find('.market_bet_name').html(`<span class="bet_name_item">${v3.market_bet_name}</span>${v3.line}`)
+                marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
+                marketBetRateTemp.find('.line').html(`${v3.line}`)
                 break;
             case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
-                marketBetRateTemp.find('.market_bet_name').html(`<span class="bet_name_item">${v3.market_bet_name}</span>`);
+                marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
+                marketBetRateTemp.find('.line').html('')
                 break;
             case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
             case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
-                    marketBetRateTemp.find('.market_bet_name').html(`<span class="bet_name_item">${matchListD.data.list.home_team_name}</span>${v3.line}`);
+                    marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
+                    marketBetRateTemp.find('.line').html('')
                 } else if (v3.market_bet_name_en == 2) {
-                    marketBetRateTemp.find('.market_bet_name').html(`<span class="bet_name_item">${matchListD.data.list.away_team_name}</span>${v3.line}`);
+                    marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
+                    marketBetRateTemp.find('.line').html('')
                 } else if (v3.market_bet_name_en == 'X') {
-                    marketBetRateTemp.find('.market_bet_name').html('<span class="bet_name_item">{{ trans("game.index.tie") }}</span>');
+                    marketBetRateTemp.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
+                    marketBetRateTemp.find('.line').html('')
                 }
                 break;
             default:

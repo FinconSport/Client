@@ -170,17 +170,20 @@ div#bettingTypeContainer {
     color: #ffffff;
 }
 
-.market_bet_name {
+.line {
     font-weight: normal;
     color: #ff7000;
+    margin-left: 1rem;
+    text-align: right;
 }
-.market_bet_name .bet_name_item {
+.market_bet_name {
+    text-align: left;
     color: black;
     margin-right: 0.5rem;
 }
 
 .market-rate.clickedBet .market_bet_name,
-.market-rate.clickedBet .bet_name_item,
+.market-rate.clickedBet .line,
 .market-rate.clickedBet .odd{
     color: white!important
 }
