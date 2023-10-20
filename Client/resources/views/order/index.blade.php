@@ -431,29 +431,27 @@
 		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
 
-		// if amount is more than 9 digits, reduce font size
-		var totalBetAmountLength = totalBetAmountElement.text().length;
-		var totalResultAmountLength = totalResultAmountElement.text().length;
-		var totalEffectiveAmountLength = totalEffectiveAmountElement.text().length;
-		var totalWinAmountLength = totalWinAmountElement.text().length; 
-
-		if (
-			totalBetAmountLength > 9 ||
-			totalResultAmountLength > 9 ||
-			totalEffectiveAmountLength > 9 ||
-			totalWinAmountLength > 9
-		) {
-			totalBetAmountElement.css('font-size', '1.2rem');
-			totalResultAmountElement.css('font-size', '1.2rem');
-			totalEffectiveAmountElement.css('font-size', '1.2rem');
-			totalWinAmountElement.css('font-size', '1.2rem');
+		// Function to check and adjust font size based on the length of the content
+		function adjustFontSize(element) {
+			const content = element.text();
+			if (content.replace('.', '').length > 9) {
+				element.css('font-size', '1.2rem');
+			}
 		}
 
-		if (totalWinLossLength >= 0) {
+		// Call the function for each element individually
+		adjustFontSize(totalBetAmountElement);
+		adjustFontSize(totalResultAmountElement);
+		adjustFontSize(totalEffectiveAmountElement);
+		adjustFontSize(totalWinAmountElement);
+
+
+		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
+
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
@@ -471,25 +469,20 @@
 		const totalResultAmountElement = $('.orderData_totalResultAmount');
 		const totalEffectiveAmountElement = $('.orderData_totalEffectiveAmount');
 		const totalWinAmountElement = $('.orderData_totalWinAmount');
-		const currentColor = totalWinAmountElement.css('color'); // Get the current text color
 
-		// if amount is more than 9 digits, reduce font size
-		var totalBetAmountLength = totalBetAmountElement.text().length;
-		var totalResultAmountLength = totalResultAmountElement.text().length;
-		var totalEffectiveAmountLength = totalEffectiveAmountElement.text().length;
-		var totalWinAmountLength = totalWinAmountElement.text().length;
-
-		if (
-			totalBetAmountLength > 9 ||
-			totalResultAmountLength > 9 ||
-			totalEffectiveAmountLength > 9 ||
-			totalWinAmountLength > 9
-		) {
-			totalBetAmountElement.css('font-size', '1.2rem');
-			totalResultAmountElement.css('font-size', '1.2rem');
-			totalEffectiveAmountElement.css('font-size', '1.2rem');
-			totalWinAmountElement.css('font-size', '1.2rem');
+		// Function to check and adjust font size based on the length of the content
+		function adjustFontSize(element) {
+			const content = element.text();
+			if (content.replace('.', '').length > 9) {
+				element.css('font-size', '1.2rem');
+			}
 		}
+
+		// Call the function for each element individually
+		adjustFontSize(totalBetAmountElement);
+		adjustFontSize(totalResultAmountElement);
+		adjustFontSize(totalEffectiveAmountElement);
+		adjustFontSize(totalWinAmountElement);
 
 
 		totalWinAmountElement.text(totalWinLoss === null ? '0' : totalWinLoss);
