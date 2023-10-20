@@ -561,6 +561,9 @@ a.sportSelect:hover,
     position: absolute;
     top: 1rem;
 }
+.ui.calendar.today {
+    background: rgb(226, 240, 240);
+}
 
 /* 搜尋條件 */
 #searchCondition {

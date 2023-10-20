@@ -4,10 +4,10 @@
 	<div class="search-statistic-container">
 		<div class="search-bar-container">
 			<div class="select-con">
-				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage(this)">
-					<option value="{{ trans('common.left_menu.all') }}" data-link="?result=-1">{{ trans('common.left_menu.all') }}</option>
-					<option value="{{ trans('common.left_menu.unsettled') }}" data-link="?result=0">{{ trans('common.left_menu.unsettled') }}</option>
-					<option value="{{ trans('common.left_menu.settled') }}" data-link="?result=1">{{ trans('common.left_menu.settled') }}</option>
+				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">
+					<option value=-1>{{ trans('common.left_menu.all') }}</option>
+					<option value=0>{{ trans('common.left_menu.unsettled') }}</option>
+					<option value=1>{{ trans('common.left_menu.settled') }}</option>
 				</select>
 			</div>
 			<div class="datecalendar-con">
@@ -18,7 +18,7 @@
 						<div class="ui calendar" id="rangestart">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
-							<input type="text" placeholder="{{ trans('common.search_area.start_time') }}">
+							<input type="text" placeholder="{{ trans('common.search_area.start_time') }}" onchange="redirectToPage()">
 							</div>
 						</div>
 						</div>
@@ -27,7 +27,7 @@
 						<div class="ui calendar" id="rangeend">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
-							<input type="text" placeholder="{{ trans('common.search_area.end_time') }}">
+							<input type="text" placeholder="{{ trans('common.search_area.end_time') }}" onchange="redirectToPage()">
 							</div>
 						</div>
 						</div>
@@ -487,6 +487,8 @@
   	$(document).ready(function() {
 		// ===== DATA LATER =====
 		if( searchData.result ) callOrderListData.result = parseInt(searchData.result) // get result params
+		if( searchData.start_time ) callOrderListData.start_time = searchData.start_time // get start_time params
+		if( searchData.end_time ) callOrderListData.end_time = searchData.end_time // get end_time params
         caller(orderList_api, callOrderListData, orderListD) // orderListD
 		
 		// check if api are all loaded every 500 ms 
@@ -549,13 +551,18 @@
 		settledOption.setAttribute("selected", "selected");
 	}
 
-	function redirectToPage(select) {
-		var selectedOption = select.options[select.selectedIndex];
-		var link = selectedOption.getAttribute('data-link');
-		if (link) {
-			window.location.search = link;
-		}
-		adjustContainerHeight(); // update height
+	function redirectToPage() {
+		let result = $('#selectOption').val()
+		let start_time = $('#rangestart input').val()
+		let end_time = $('#rangeend input').val()
+
+		const queryParams = {};
+		if( start_time ) queryParams.start_time = start_time;
+		if( end_time ) queryParams.end_time = end_time;
+		
+		const queryString = new URLSearchParams(queryParams).toString();
+		const urlWithQuery = `/${result}?${queryString}`;
+		window.location.href = urlWithQuery
 	}
 
     
