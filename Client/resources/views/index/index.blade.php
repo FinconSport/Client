@@ -520,7 +520,7 @@
                             item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
                         }
                         // 足球 調整col
-                        if( sport === 6046 ) {
+                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
                             item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
@@ -575,7 +575,7 @@
                             item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
                         }
                         // 足球 調整col
-                        if( sport === 6046 ) {
+                        if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
                             item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
