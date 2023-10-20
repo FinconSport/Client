@@ -2267,7 +2267,8 @@ class LsportApiController extends Controller {
         if ($return === false) {
             $this->ApiError("01");
         }
-
+        dd($return);
+        
         $list = array();
         foreach ($return as $k => $v) {
             $v['type'] = $typeList[$v['type']];

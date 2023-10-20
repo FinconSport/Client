@@ -39,9 +39,7 @@ class PlayerBalanceLogs extends CacheModel
 				->skip($data['skip'])
 				->take($data['page_limit'])
 				->orderBy('id', 'DESC')
-				->toSql();
-				
-				dd($return);
+				->get();
 			}
 			
             return $return;
