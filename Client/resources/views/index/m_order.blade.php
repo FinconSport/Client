@@ -182,7 +182,7 @@
 </div>
 
 <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
-    <div class="col text-right p-0">
+    <div class="col text-right p-0" key='betItemDiv_name'>
         <span class="bet_name"></span>
     </div>
     <div class="col m-0 row text-right p-0" key='changeCol'>
@@ -232,7 +232,7 @@
     const sizeArr = langTrans.priorityArr.size // 大小系列
     const oddEvenArr = langTrans.priorityArr.oddeven // 單雙系列
 
-    
+
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
