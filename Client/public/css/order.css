@@ -33,6 +33,7 @@ div[key="matchSportMenu"]{
     overflow: auto;
     color: rgb(65, 91, 90);
     position: relative;
+    height: calc(100% - 6rem);
 }
 
 #orderContainer::-webkit-scrollbar {
@@ -242,7 +243,6 @@ div[key="matchSportMenu"]{
 .search-statistic-container .select-con {
     width: 26%;
     position: relative;
-    margin-top: 1.7rem;
 }
 
 .search-statistic-container .select-con::after {

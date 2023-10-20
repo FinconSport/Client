@@ -402,7 +402,7 @@
 
 				// update the row colors and height when toggle containers
 				updateRowColors();
-				adjustContainerHeight();
+				//adjustContainerHeight();
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -469,7 +469,7 @@
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 		
-		adjustContainerHeight(); // update height when fetching more data's
+		//adjustContainerHeight(); // update height when fetching more data's
 	}
 
 	// scroll to bottom
@@ -502,7 +502,7 @@
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
-				adjustContainerHeight();
+				//adjustContainerHeight();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -568,18 +568,18 @@
 		});
 	}
 
-	function adjustContainerHeight() {
-		// Compute the height of #orderTable
-		var orderTableHeight = $('#orderTable').height();
+	// function adjustContainerHeight() {
+	// 	// Compute the height of #orderTable
+	// 	var orderTableHeight = $('#orderTable').height();
 
-		// Check if the height is less than 877px
-		if (orderTableHeight < 500) {
-			$('#orderContainer').css('height', 'auto');
-		} else {
-			// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
-			$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
-		}
-	}
+	// 	// Check if the height is less than 877px
+	// 	if (orderTableHeight < 500) {
+	// 		$('#orderContainer').css('height', 'auto');
+	// 	} else {
+	// 		// Set the height of #orderContainer to 'calc(100% - 9.5rem)'
+	// 		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
+	// 	}
+	// }
 
 </script>
 @endpush
