@@ -140,12 +140,12 @@
 	var callOrderListData = { token: token, player: player, result: -1, page: 1 }
     const orderList_api = '/api/v2/common_order'
 
-	$locale = app()->getLocale();
-    $langFilePath = resource_path("lang/$locale/order.php");
-    $parentFolder = dirname($langFilePath);
+	// $locale = app()->getLocale();
+    // $langFilePath = resource_path("lang/$locale/order.php");
+    // $parentFolder = dirname($langFilePath);
 
-	const langParentFolder = '{{$parentFolder}}';
-    console.log(langParentFolder);
+	// const langParentFolder = '{{$parentFolder}}';
+    // console.log(langParentFolder);
 
 	let totalBetItemCount = 0;
 	let totalBetAmount = 0;
