@@ -1932,6 +1932,7 @@ class LsportApiController extends Controller {
             // 取得market_bet
             $return = LsportMarketBet::where('fixture_id',$fixture_id)
             ->where("market_id",$market_id)
+            ->where("status",1)
             ->orderBy("name_en","ASC")
             ->list();
 
