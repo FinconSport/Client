@@ -1678,7 +1678,6 @@ class LsportApiController extends Controller {
             $input['end_time'] = date("Y-m-d", strtotime($input['end_time'] . " +1 day")); // 預設明天
         }
 
-        dd($input);
         // 聯賽
         if (!isset($input['league_id']) || ($input['league_id'] == "")) {
             $input['league_id'] = false; // 預設1 
