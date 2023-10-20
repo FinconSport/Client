@@ -277,8 +277,6 @@
 
     // bet limitation data
     var betLimitationD = {}
-    var callLimitationData = {}
-    const betLimitation_api = ''
 
     // game priority and gameTitle
     var mainPriorityArr = null
@@ -1153,18 +1151,14 @@
 
         $('#m_order_rate').html(mOrderRate.toFixed(2))
 
-        // const now = new Date().getTime();
-        // let placeholderStr = langTrans.js.limit
-        // // 早盤
-        // min = parseInt(limit.early[sport].min)
-        // max = parseInt(limit.early[sport].max)
-        // placeholderStr += min
-        // placeholderStr += '-'
-        // placeholderStr += max
-        // $('#moneyInput').attr('placeholder', placeholderStr)
-        // $('#moneyInput').val(min)
-        // $('#moneyInput').trigger('change')
-        // $('#moneyInput').focus()
+        // 限額
+        betLimitationD = accountD.data.limit['early'][sport]
+        $('#submitOrder').attr('min', betLimitationD.min)
+        $('#submitOrder').attr('max', betLimitationD.max)
+        $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
+        $('#moneyInput').val(betLimitationD.min)
+        $('#moneyInput').trigger('change')
+        $('#moneyInput').focus()
     }
 
     // 關閉左邊投注區塊
@@ -1195,9 +1189,11 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        // if (inputMoney < min) inputMoney = min
-        // if (inputMoney > max) inputMoney = max
+        if (inputMoney < min) inputMoney = min
+        if (inputMoney > max) inputMoney = max
         let maxMoney = (inputMoney * mOrderRate).toFixed(2);
         if (maxMoney > maxRetunMoney) maxMoney = maxRetunMoney
         $('#maxWinning').html(maxMoney)
@@ -1219,18 +1215,23 @@
             showErrorToast(langTrans.m_order.at_least_two);
             return;
         }
+
+        // limit
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
+
         if ( !parseInt(sendOrderData.bet_amount) > 0 ) {
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
-        // if (sendOrderData.bet_amount < min) {
-        //     showErrorToast(langTrans.js.tooless_bet_amout + min);
-        //     return;
-        // }
-        // if (sendOrderData.bet_amount > max) {
-        //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
-        //     return;
-        // }
+        if (sendOrderData.bet_amount < min) {
+            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            return;
+        }
+        if (sendOrderData.bet_amount > max) {
+            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            return;
+        }
 
         // Show loading spinner while submitting
         showLoading();
