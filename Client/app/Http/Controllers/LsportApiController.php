@@ -2270,7 +2270,7 @@ class LsportApiController extends Controller {
 
         $list = array();
         foreach ($return as $k => $v) {
-            $v['type'] = $typeList[$v['type']];
+            $v['balance_type'] = $typeList[$v['balance_type']];
             $list[] = $v;
         } 
 
