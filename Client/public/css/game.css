@@ -173,7 +173,7 @@ div#bettingTypeContainer {
 .line {
     font-weight: normal;
     color: #ff7000;
-    margin-left: 1rem;
+    margin-left: -0.5rem;
     text-align: right;
     min-width: 3rem;
 }
