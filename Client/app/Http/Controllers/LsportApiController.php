@@ -2239,8 +2239,8 @@ class LsportApiController extends Controller {
         }
 
         // 聯賽
-        if (!isset($input['type']) || ($input['type'] == "")) {
-            $input['type'] = false; // 預設
+        if (!isset($input['balance_type']) || ($input['balance_type'] == "")) {
+            $input['balance_type'] = false; // 預設
         }
 
         if (!isset($input['page'])) {
@@ -2267,7 +2267,7 @@ class LsportApiController extends Controller {
         if ($return === false) {
             $this->ApiError("01");
         }
-        
+
         $list = array();
         foreach ($return as $k => $v) {
             $v['type'] = $typeList[$v['type']];
