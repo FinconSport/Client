@@ -1666,10 +1666,27 @@ class LsportApiController extends Controller {
             $input['page'] = 1; // 預設1 
         }
 
+        // 開始時間
+        if (!isset($input['start_time']) || ($input['start_time'] == "")) {
+            $input['start_time'] = date("Y-m-d", strtotime("-1 day")); // 預設昨天
+        }
+
+        // 結束時間
+        if (!isset($input['start_time']) || ($input['start_time'] == "")) {
+            $input['start_time'] = date("Y-m-d"); // 預設今天
+        }
+
+        // 聯賽
+        if (!isset($input['league_id']) || ($input['league_id'] == "")) {
+            $input['league_id'] = false; // 預設1 
+        }
     	/////////////////////////
         // Search 區用
         $sport_id = $input['sport'];
         $page = $input['page'];
+        $start_time = $input['start_time'];
+        $end_time = $input['end_time'];
+        $league_id = $input['league_id'];
         
         /////////////////////////
         // 狀態
@@ -1692,8 +1709,18 @@ class LsportApiController extends Controller {
 
         /////////////////////////
         // 取得比賽資料
-        $return = LsportFixture::where("sport_id", $sport_id)
-        ->whereIn("status", [3,4,5,6,7])
+        
+        if ($league_id !== false) {
+            $model = LsportFixture::where("sport_id", $sport_id)->where("league_id",$league_id);
+        } else {
+            $model = LsportFixture::where("sport_id", $sport_id);
+        }
+
+        $model = LsportFixture::where("sport_id", $sport_id)
+        ->where("start_time", $start_time)
+        ->where("start_time", $end_time);
+
+        $return = $model->whereIn("status", [3,4,5,6,7])
         ->orderBy("start_time","DESC")
         ->list();
         if ($return === false) {
@@ -1780,11 +1807,14 @@ class LsportApiController extends Controller {
 
         $data = $reponse;
 
-        ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////
         // gzip
-        $data = $this->gzip($data);
-
-        $this->ApiSuccess($data, "01", true); 
+        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+            $data = $this->gzip($data);
+            $this->ApiSuccess($data, "01", true);
+        } else {
+            $this->ApiSuccess($data, "01", false);
+        }
     }
 
 
