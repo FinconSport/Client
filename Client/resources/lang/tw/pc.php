@@ -72,8 +72,8 @@ return [
 	'BalanceLogs_TypeList' => [
 		"game_bet"=>"投注",
 		"game_result"=>"派獎",
-		"recharge"=>"入金",
-		"withdraw"=>"提出",
+		"recharge"=>"充值",
+		"withdraw"=>"提現",
 		"delay_bet_refund"=>"注單取消",
 	], 
 
