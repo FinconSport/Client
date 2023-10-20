@@ -491,11 +491,7 @@
 				return today;
 			}
 
-			// 设置日期范围
-			function setRange(startDate, endDate) {
-				$('#rangestart').calendar('set date', startDate);
-				$('#rangeend').calendar('set date', endDate);
-			}
+			
 
 			// 处理按钮点击事件
 			$('.dateCalendarBtn').click(function() {
@@ -538,6 +534,12 @@
 				redirectToPage()
 			});
 		});
+
+		// 设置日期范围
+		function setRange(startDate, endDate) {
+			$('#rangestart').calendar('set date', startDate);
+			$('#rangeend').calendar('set date', endDate);
+		}
 
 		
 		// left side menu click function
