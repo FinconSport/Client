@@ -502,7 +502,7 @@
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
-				//adjustContainerHeight();
+				adjustContainerHeight();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);
@@ -580,6 +580,18 @@
 	// 		$('#orderContainer').css('height', 'calc(100% - 9.5rem)');
 	// 	}
 	// }
+
+	function adjustContainerHeight() {
+		// Adjust height based on the langText
+		console.log(langText);
+		if (langText === 'en') {
+			$('#orderContainer').css('height', 'calc(100% - 8.5rem)');
+		} else if (langText === 'tw') {
+			$('#orderContainer').css('height', 'calc(100% - 6rem)');
+		}
+	}
+
+	
 
 </script>
 @endpush
