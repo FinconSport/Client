@@ -309,7 +309,14 @@
 
 /* 賠率變化樣式 */
 .odd{
-    color: #c79e42 ;
+    color: black ;
+}
+.bet_name {
+    font-weight: normal;
+    color: #ff7000;
+}
+.bet_name_item .bet_name_item {
+    color: black!important;
 }
 
 #leftSlideOrder .raiseOdd,
@@ -410,12 +417,12 @@ div[key="sizeSmallRate"]:hover {
 }
 .scoreSpan {
     text-align: right;
-    color: #ac00ff;
+    color: #ff7000;
     font-weight: 900;
     font-size: 1.2rem;
     position: relative;
     padding-right: 1.5rem;
-    -webkit-text-stroke: 1px #ac00ff;
+    -webkit-text-stroke: 1px #ff7000;
 }
 
 

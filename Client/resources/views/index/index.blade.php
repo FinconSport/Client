@@ -545,7 +545,7 @@
 
                     // 按照不同體育種類、玩法 顯示相對應內容
                     if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
-                    if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                    if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html('<span class="bet_name_item">'+v4.market_bet_name+'</span>' + '  ' + v4.line)
                     if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
                     if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
                     
@@ -895,7 +895,7 @@
 
                                         // 賦值
                                         if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
-                                        if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(v4.market_bet_name + '  ' + v4.line)
+                                        if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html('<span class="bet_name_item">'+v4.market_bet_name+'</span>' + '  ' + v4.line)
                                         if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
                                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
 
