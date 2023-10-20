@@ -2042,10 +2042,13 @@ class LsportApiController extends Controller {
             $input['start_time'] = date('Y-m-d', strtotime('-6 day'));
         }
 
-        if (!isset($input['end_time'])) {
-            $input['end_time'] = date('Y-m-d', strtotime('+1 day'));
+        // 結束時間
+        if (!isset($input['end_time']) || ($input['end_time'] == "")) {
+            $input['end_time'] = date("Y-m-d", strtotime("+1 day")); // 預設明天
+        } else {    
+            $input['end_time'] = date("Y-m-d", strtotime($input['end_time'] . " +1 day")); // 預設明天
         }
-
+        
         //////////////////////////////////////////
 
         $page_limit = $this->page_limit;
@@ -2223,24 +2226,45 @@ class LsportApiController extends Controller {
 
         //////////////////////////////////////////
 
+        
+        // 開始時間
+        if (!isset($input['start_time']) || ($input['start_time'] == "")) {
+            $input['start_time'] = date("Y-m-d 00:00:00", strtotime("-1 day")); // 預設昨天
+        }
+
+        // 結束時間
+        if (!isset($input['end_time']) || ($input['end_time'] == "")) {
+            $input['end_time'] = date("Y-m-d", strtotime("+1 day")); // 預設明天
+        } else {    
+            $input['end_time'] = date("Y-m-d", strtotime($input['end_time'] . " +1 day")); // 預設明天
+        }
+
+        // 聯賽
+        if (!isset($input['type']) || ($input['type'] == "")) {
+            $input['type'] = false; // 預設
+        }
+
         if (!isset($input['page'])) {
             $input['page'] = 1;
         }
+
+        ///////////////////////////////////////////
 
         $page_limit = $this->page_limit;
         $page = $input['page'];
         $skip = ($page-1)*$page_limit;
 
+        $input['skip'] = $skip;
+        $input['page_limit'] = $page_limit;
+
+        ///////////////////////////////////////////
+
         // 帳變類型
         $typeList = trans("pc.BalanceLogs_TypeList");
+        
+        ///////////////////////////////////////////
 
-        //////////////////////////
-        $player_id = $input['player'];
-        $return = PlayerBalanceLogs::where("player_id", $player_id)
-            ->skip($skip)
-            ->take($page_limit)
-            ->orderBy('id', 'DESC')
-            ->list();  
+        $return = PlayerBalanceLogs::getBalanceLogsList($input);
         if ($return === false) {
             $this->ApiError("01");
         }
