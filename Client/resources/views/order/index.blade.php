@@ -574,10 +574,10 @@
 	function adjustPositionBottomNoData() {
 	if (tableContainer.scrollHeight > tableContainer.offsetHeight) {
 		console.log('Scroll bar is currently showing.');
-		$('#tableContainer').css('position', 'relative');
+		$('#noMoreData').css('position', 'relative');
 	} else {
 		console.log('Scroll bar is not showing.');
-		$('#tableContainer').css({ position: 'absolute', bottom: '0' });
+		$('#noMoreData').css({ position: 'absolute', bottom: '0' });
 	}
 	}
 
