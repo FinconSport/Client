@@ -449,11 +449,12 @@
 			totalWinAmountElement.css('font-size', '1.2rem');
 		}
 
-		if (totalWinLossLength >= 0) {
+		if (totalWinLoss >= 0) {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'red');
 		} else {
 			orderDataTotal.find('.orderData_totalWinAmount').css('color', 'green');
 		}
+		
 		$('.search-bar-container').after(orderDataTotal);
 	}
 
