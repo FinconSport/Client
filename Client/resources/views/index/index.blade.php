@@ -896,6 +896,7 @@
                                         // 賦值
                                         if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
                                         if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html('<span class="bet_name_item">'+v4.market_bet_name+'</span>' + '  ' + v4.line)
+                                        if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html(`<span class="bet_name_item">${v4.market_bet_name}</span>&ensp;${v4.line}`)
                                         if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.market_bet_name )
                                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( v4.market_bet_name )
 

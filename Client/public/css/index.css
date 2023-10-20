@@ -315,8 +315,8 @@
     font-weight: normal;
     color: #ff7000;
 }
-.bet_name_item .bet_name_item {
-    color: black!important;
+.bet_name .bet_name_item {
+    color: black;
 }
 
 #leftSlideOrder .raiseOdd,
