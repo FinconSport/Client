@@ -28,7 +28,7 @@
                     <span key='odd' class="odd"></span>
                 </div>
                 <div class="col-12">
-                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="{{ trans('index.bet_area.limit') }}0-10000" >
+                    <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="" >
                 </div>
                 <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
                 <div class="col-6 mb-2 mt-2 text-right" id="maxWinning">0.00</div>
@@ -167,8 +167,6 @@
 
     // bet limitation data
     var betLimitationD = {}
-    var callLimitationData = {}
-    const betLimitation_api = ''
 
     // game priority and gameTitle
     var mainPriorityArr = null
@@ -761,6 +759,16 @@
 
         // 選中樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
+
+        // 限額
+        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
+        betLimitationD = accountD.data.limit[cate][sport]
+        $('#submitOrder').attr('min', betLimitationD.min)
+        $('#submitOrder').attr('max', betLimitationD.max)
+        $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
+        $('#moneyInput').val(betLimitationD.min)
+        $('#moneyInput').trigger('change')
+        $('#moneyInput').focus()
     }
 
     // 關閉左邊投注區塊
@@ -799,9 +807,11 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        // if (inputMoney < min) inputMoney = min
-        // if (inputMoney > max) inputMoney = max
+        if (inputMoney < min) inputMoney = min
+        if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
         let maxMoney = (inputMoney * odd).toFixed(2);
         $('#maxWinning').html(maxMoney)
@@ -823,14 +833,19 @@
             showErrorToast(langTrans.js.no_bet_amout);
             return;
         }
-        // if (sendOrderData.bet_amount < min) {
-        //     showErrorToast(langTrans.js.tooless_bet_amout + min);
-        //     return;
-        // }
-        // if (sendOrderData.bet_amount > max) {
-        //     showErrorToast(langTrans.js.toohigh_bet_amout + max);
-        //     return;
-        // }
+
+        // limit
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
+
+        if (sendOrderData.bet_amount < min) {
+            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            return;
+        }
+        if (sendOrderData.bet_amount > max) {
+            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            return;
+        }
 
         // Show loading spinner while submitting
         showLoading();
