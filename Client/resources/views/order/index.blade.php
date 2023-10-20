@@ -587,7 +587,7 @@
 		if (langText === 'en') {
 			$('#orderContainer').css('height', 'calc(100% - 8.5rem)');
 		} else if (langText === 'tw') {
-			$('#orderContainer').css('height', 'calc(100% - 6rem)');
+			$('#orderContainer').css('height', 'calc(100% - 7.5em)');
 		}
 	}
 
