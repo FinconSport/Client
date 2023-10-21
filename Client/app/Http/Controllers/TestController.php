@@ -56,6 +56,7 @@ class TestController extends PcController {
       // 构建 Elasticsearch 查询 DSL
       $fixtureId = $input['fixture_id'];
 
+      // 构建 Elasticsearch 查询 DSL
       $query = [
           'size' => 0,
           'query' => [
@@ -89,6 +90,7 @@ class TestController extends PcController {
                   ],
               ],
           ],
+          'fielddata_fields' => ['price'], // 启用字段数据
       ];
 
       // 构建 Basic Authentication 头部
