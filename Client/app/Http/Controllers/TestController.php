@@ -51,14 +51,14 @@ class TestController extends PcController {
     	$input = $this->getRequest($request);
 
 		  $session = Session::all();
-      
+
       /////////////////////////
       // 构建 Elasticsearch 查询 DSL
       $query = [
         'size' => 0,
         'query' => [
             'term' => [
-                'fixture_id' => $fixtureId,
+                'fixture_id' => $input['fixture_id'],
             ],
         ],
       ];
