@@ -68,20 +68,17 @@ class TestController extends PcController {
       $password = '1hqXxl0YAXd2HAjiTc4X';
       $credentials = base64_encode($username . ':' . $password);
       $headers = [
-        'Authorization' => 'Basic ' . $credentials,
-        'Content-Type'  => 'application/json',
-        'Host'          => 'sportc.asgame.net',
+          'Authorization' => 'Basic ' . $credentials,
+          'Content-Type'  => 'application/json',
+          'Host'          => 'sportc.asgame.net',
       ];
 
       // 发送 Elasticsearch 查询请求，包括身份验证头部
       $response = Http::withHeaders($headers)
-        ->post('http://72.167.135.22:29200/es_lsport_market_bet/_search', [
-            'json' => $query, // 将查询 DSL 放在 'json' 键中
-        ]);
+          ->post('http://72.167.135.22:29200/es_lsport_market_bet/_search', $query);
 
       // 解析 Elasticsearch 响应
       $data = $response->json();
-
       
       dd($headers,$response, $data, $query);
       // 获取 "buckets"
