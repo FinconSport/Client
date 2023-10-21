@@ -1935,7 +1935,7 @@ class LsportApiController extends Controller {
             if ($before_market_id != $market_id) {
                 $before_market_id = $market_id;
             } else {
-                continue;
+           //     continue;
             }
 
             $tmp_market_data = array();
