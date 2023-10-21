@@ -72,9 +72,7 @@ class LsportMarketBet extends CacheModel
             ->where('market_id', '=', $data['market_id'])
             ->groupBy('market_id', 'base_line')
             ->orderBy('different_price', 'asc')
-            ->limit(1)
-            ->offset(0)
-            ->get();
+            ->first();
 
             return $return;
         });
