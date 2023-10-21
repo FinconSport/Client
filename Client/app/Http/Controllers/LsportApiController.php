@@ -729,6 +729,18 @@ class LsportApiController extends Controller {
             $away_team_id = $v['away_id'];
             $start_time = $v['start_time'];
 
+            // 只讀列表所需id
+            $market_list_id = [
+                // 棒
+                154914 => [226,342,28,51],
+                // 籃
+                48242 => [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75],
+                // 足
+                6046 => [1,41,3,64,2,21],
+                // 冰
+                154914 => [226,342,28,51]
+            ];
+
             // 區分living, early
             $status = $v['status'];
             if ($status == 9) {
@@ -780,7 +792,9 @@ class LsportApiController extends Controller {
             $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
             // 取得market 
-            $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
+            $return = LsportMarket::where("fixture_id",$fixture_id)
+            whereIn("market_id",$market_list_id[$sport_id])
+            ->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
                 $this->ApiError('03');
             }
@@ -807,7 +821,7 @@ class LsportApiController extends Controller {
 
                 // 設定main_line
                 $custom_mainline = true;
-                if ($custom_mainline) {
+                if ($custom_mainline) { // 自定義分盤規則
                     $return = LsportMarketBet::getMainLine([
                         "fixture_id" => $fixture_id,
                         "market_id" => $market_id
