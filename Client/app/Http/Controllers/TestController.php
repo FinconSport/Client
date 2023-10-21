@@ -124,7 +124,8 @@ class TestController extends PcController {
     $credentials = base64_encode($username . ':' . $password);
     $headers = [
         'Authorization' => 'Basic ' . $credentials,
-        'Content-Type' => 'application/json',
+        'Content-Type'  => 'application/json',
+        'Host'          => 'sportc.asgame.net',
     ];
 
     // 发送 Elasticsearch 查询请求，包括身份验证头部
