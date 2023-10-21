@@ -131,7 +131,7 @@ class TestController extends PcController {
     // 发送 Elasticsearch 查询请求，包括身份验证头部
     $response = Http::withHeaders($headers)
         ->post('http://72.167.135.22:29200/es_lsport_market_bet/_search', [
-            'json' => $queryJson,
+            'body' => $queryJson,
         ]);
 
 
