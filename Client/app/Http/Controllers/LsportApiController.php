@@ -815,7 +815,7 @@ class LsportApiController extends Controller {
                     if ($return === false) {
                         $this->ApiError('04');
                     }
-
+                    dd($return);
                     $tmp_market['main_line'] = $return['base_line'];
 
                 } else {
