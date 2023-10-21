@@ -55,43 +55,44 @@ class TestController extends PcController {
       /////////////////////////
       // 构建 Elasticsearch 查询 DSL
       $fixtureId = $input['fixture_id'];
-
-      // 构建 Elasticsearch 查询 DSL
-      $query = [
-          'size' => 0,
-          'query' => [
-              'term' => [
-                  'fixture_id' => $fixtureId,
-              ],
+      
+// 构建 Elasticsearch 查询 DSL
+$query = [
+  'size' => 0,
+  'query' => [
+      'term' => [
+          'fixture_id' => $fixtureId,
+      ],
+  ],
+  'aggs' => [
+      'group_by_market' => [
+          'terms' => [
+              'field' => 'market_id',
+              'size' => 10000, // 根据你的数据量适当调整
           ],
           'aggs' => [
-              'group_by_market_base_line' => [
+              'group_by_base_line' => [
                   'terms' => [
-                      'field' => 'market_id',
+                      'field' => 'base_line.keyword',
+                      'size' => 10000, // 根据你的数据量适当调整
                   ],
                   'aggs' => [
-                      'group_by_base_line' => [
-                          'terms' => [
-                              'field' => 'base_line.keyword',
+                      'min_price' => [
+                          'min' => [
+                              'field' => 'price',
                           ],
-                          'aggs' => [
-                              'min_price' => [
-                                  'min' => [
-                                      'field' => 'price',
-                                  ],
-                              ],
-                              'max_price' => [
-                                  'max' => [
-                                      'field' => 'price',
-                                  ],
-                              ],
+                      ],
+                      'max_price' => [
+                          'max' => [
+                              'field' => 'price',
                           ],
                       ],
                   ],
               ],
           ],
-          'fielddata_fields' => ['price'], // 启用字段数据
-      ];
+      ],
+  ],
+];
 
       // 构建 Basic Authentication 头部
       $username = 'devuser';
