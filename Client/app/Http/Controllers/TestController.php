@@ -82,7 +82,7 @@ class TestController extends PcController {
         ],
     ];
 
-    $queryJson = json_encode($query);
+    $queryJson = json_encode($query,true);
       
     // 构建 Basic Authentication 头部
     $username = 'devuser';
