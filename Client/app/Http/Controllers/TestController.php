@@ -59,16 +59,8 @@ class TestController extends PcController {
         'query' => [
             'bool' => [
                 'must' => [
-                    [
-                        'term' => [
-                            'fixture_id' => 11600454,
-                        ],
-                    ],
-                    [
-                        'term' => [
-                            'market_id' => 28,
-                        ],
-                    ],
+                    ['term' => ['fixture_id' => $request->input('fixture_id')]],
+                    ['term' => ['market_id' => $request->input('market_id')]],
                 ],
             ],
         ],
@@ -77,44 +69,18 @@ class TestController extends PcController {
                 'composite' => [
                     'size' => 10000,
                     'sources' => [
-                        [
-                            'fixture_id' => [
-                                'terms' => [
-                                    'field' => 'fixture_id',
-                                ],
-                            ],
-                        ],
-                        [
-                            'market_id' => [
-                                'terms' => [
-                                    'field' => 'market_id',
-                                ],
-                            ],
-                        ],
-                        [
-                            'base_line' => [
-                                'terms' => [
-                                    'field' => 'base_line.keyword',
-                                ],
-                            ],
-                        ],
+                        ['fixture_id' => ['terms' => ['field' => 'fixture_id']]],
+                        ['market_id' => ['terms' => ['field' => 'market_id']]],
+                        ['base_line' => ['terms' => ['field' => 'base_line.keyword']]],
                     ],
                 ],
                 'aggregations' => [
-                    'max_price' => [
-                        'max' => [
-                            'field' => 'price',
-                        ],
-                    ],
-                    'min_price' => [
-                        'min' => [
-                            'field' => 'price',
-                        ],
-                    ],
+                    'max_price' => ['max' => ['field' => 'price']],
+                    'min_price' => ['min' => ['field' => 'price']],
                 ],
             ],
         ],
-      ];
+    ];
 
     $queryJson = json_encode($query);
       
