@@ -81,12 +81,7 @@ class TestController extends PcController {
                                 'min' => [
                                     'field' => 'price', // 使用新的 keyword 字段
                                 ],
-                            ],
-                            'max_price' => [
-                                'max' => [
-                                    'field' => 'price', // 使用新的 keyword 字段
-                                ],
-                            ],
+                            ]
                         ],
                     ],
                 ],
