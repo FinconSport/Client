@@ -54,33 +54,42 @@ class TestController extends PcController {
 
       /////////////////////////
       // 构建 Elasticsearch 查询 DSL
+      $fixtureId = $input['fixture_id'];
+
       $query = [
-        'size' => 0,
-        'query' => [
-            'bool' => [
-                'must' => [
-                    ['term' => ['fixture_id' => $request->input('fixture_id')]],
-                    ['term' => ['market_id' => $request->input('market_id')]],
-                ],
-            ],
-        ],
-        'aggs' => [
-            'composite_agg' => [
-                'composite' => [
-                    'size' => 10000,
-                    'sources' => [
-                        ['fixture_id' => ['terms' => ['field' => 'fixture_id']]],
-                        ['market_id' => ['terms' => ['field' => 'market_id']]],
-                        ['base_line' => ['terms' => ['field' => 'base_line.keyword']]],
-                    ],
-                ],
-                'aggregations' => [
-                    'max_price' => ['max' => ['field' => 'price']],
-                    'min_price' => ['min' => ['field' => 'price']],
-                ],
-            ],
-        ],
-    ];
+          'size' => 0,
+          'query' => [
+              'term' => [
+                  'fixture_id' => $fixtureId,
+              ],
+          ],
+          'aggs' => [
+              'group_by_market_base_line' => [
+                  'terms' => [
+                      'field' => 'market_id',
+                  ],
+                  'aggs' => [
+                      'group_by_base_line' => [
+                          'terms' => [
+                              'field' => 'base_line.keyword',
+                          ],
+                          'aggs' => [
+                              'min_price' => [
+                                  'min' => [
+                                      'field' => 'price',
+                                  ],
+                              ],
+                              'max_price' => [
+                                  'max' => [
+                                      'field' => 'price',
+                                  ],
+                              ],
+                          ],
+                      ],
+                  ],
+              ],
+          ],
+      ];
 
       // 构建 Basic Authentication 头部
       $username = 'devuser';
