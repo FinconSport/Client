@@ -61,7 +61,7 @@ class TestController extends PcController {
                     ],
                     [
                         'term' => [
-                            'market_id' => '64',
+                            'market_id' => '3',
                         ],
                     ],
                 ],
