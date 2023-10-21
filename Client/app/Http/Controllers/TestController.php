@@ -61,12 +61,12 @@ class TestController extends PcController {
                 'must' => [
                     [
                         'term' => [
-                            'fixture_id' => 11475735,
+                            'fixture_id' => $input['fixture_id'],
                         ],
                     ],
                     [
                         'term' => [
-                            'market_id' => 64,
+                            'market_id' => $input['market_id'],
                         ],
                     ],
                 ],
