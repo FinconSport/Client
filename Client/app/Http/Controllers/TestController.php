@@ -139,7 +139,7 @@ class TestController extends PcController {
       $data = $response->json();
 
       
-      dd($response, $data, $queryJson);
+      dd($headers,$response, $data, $queryJson);
       // 获取 "buckets"
       $buckets = $data['aggregations']['composite_agg']['buckets'];
 
