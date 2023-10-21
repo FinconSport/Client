@@ -779,17 +779,22 @@ class LsportApiController extends Controller {
             // order_by
             $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
-            // 只讀列表所需id
+            // 只讀列表所需id , 優化速度
             $market_list_id = [
                 // 棒
                 154914 => [226,342,28,51],
                 // 籃
-                48242 => [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75],
+                48242 => [226,342,28,51],
                 // 足
                 6046 => [1,41,3,64,2,21],
                 // 冰
                 35232 => [226,342,28,51]
             ];
+
+            // 判定籃球是否走地
+            if (($sport_id == '48242') && ($status == 2)) {
+                $market_list_id[$sport_id] = [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75],
+            }
 
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)
