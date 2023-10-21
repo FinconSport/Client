@@ -804,6 +804,23 @@ class LsportApiController extends Controller {
                 $tmp_market['main_line'] = $market_main_line;
                 $tmp_market['market_name'] = $market_name;
                 $tmp_market['list'] = array();
+
+                // 設定main_line
+                $custom_mainline = true;
+                if ($custom_mainline) {
+                    $return = LsportMarketBet::getMainLine([
+                        "fixture_id" => $fixture_id,
+                        "market_id" => $market_id
+                    ]);
+                    if ($return === false) {
+                        $this->ApiError('04');
+                    }
+
+                    dd($return);
+
+                } else {
+                    $tmp_market['main_line'] = $market_main_line;
+                }
                 
                 $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id] = $tmp_market;
 
