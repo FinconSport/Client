@@ -57,11 +57,30 @@ class TestController extends PcController {
       $query = [
         'size' => 0,
         'query' => [
-            'term' => [
-                'fixture_id' => $input['fixture_id'],
+            'bool' => [
+                'must' => [
+                    ['term' => ['fixture_id' => $request->input('fixture_id')]],
+                    ['term' => ['market_id' => $request->input('market_id')]],
+                ],
             ],
         ],
-      ];
+        'aggs' => [
+            'composite_agg' => [
+                'composite' => [
+                    'size' => 10000,
+                    'sources' => [
+                        ['fixture_id' => ['terms' => ['field' => 'fixture_id']]],
+                        ['market_id' => ['terms' => ['field' => 'market_id']]],
+                        ['base_line' => ['terms' => ['field' => 'base_line.keyword']]],
+                    ],
+                ],
+                'aggregations' => [
+                    'max_price' => ['max' => ['field' => 'price']],
+                    'min_price' => ['min' => ['field' => 'price']],
+                ],
+            ],
+        ],
+    ];
 
       // 构建 Basic Authentication 头部
       $username = 'devuser';
