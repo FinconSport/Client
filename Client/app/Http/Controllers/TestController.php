@@ -49,68 +49,66 @@ class TestController extends PcController {
         
       // 构建 Elasticsearch 查询 DSL
       $query = [
-        {
-          "size": 0,
-          "query": {
-            "bool": {
-              "must": [
-                {
-                  "term": {
-                    "fixture_id": "11475735"
-                  }
-                },
-                {
-                  "term": {
-                    "market_id": "64"
-                  }
-                }
-              ]
-            }
-          },
-          "aggs": {
-            "composite_agg": {
-              "composite": {
-                "size": 10000,
-                "sources": [
-                  {
-                    "fixture_id": {
-                      "terms": {
-                        "field": "fixture_id"
-                      }
-                    }
-                  },
-                  {
-                    "market_id": {
-                      "terms": {
-                        "field": "market_id"
-                      }
-                    }
-                  },
-                  {
-                    "base_line": {
-                      "terms": {
-                        "field": "base_line.keyword"
-                      }
-                    }
-                  }
-                ]
-              },
-              "aggregations": {
-                "max_price": {
-                  "max": {
-                    "field": "price"
-                  }
-                },
-                "min_price": {
-                  "min": {
-                    "field": "price"
-                  }
-                }
-              }
-            }
-          }
-        }
-      ];
+        'size' => 0,
+        'query' => [
+            'bool' => [
+                'must' => [
+                    [
+                        'term' => [
+                            'fixture_id' => '11475735',
+                        ],
+                    ],
+                    [
+                        'term' => [
+                            'market_id' => '64',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'aggs' => [
+            'composite_agg' => [
+                'composite' => [
+                    'size' => 10000,
+                    'sources' => [
+                        [
+                            'fixture_id' => [
+                                'terms' => [
+                                    'field' => 'fixture_id',
+                                ],
+                            ],
+                        ],
+                        [
+                            'market_id' => [
+                                'terms' => [
+                                    'field' => 'market_id',
+                                ],
+                            ],
+                        ],
+                        [
+                            'base_line' => [
+                                'terms' => [
+                                    'field' => 'base_line.keyword',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'aggregations' => [
+                    'max_price' => [
+                        'max' => [
+                            'field' => 'price',
+                        ],
+                    ],
+                    'min_price' => [
+                        'min' => [
+                            'field' => 'price',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ];
 
       // 发送 Elasticsearch 查询请求
       $response = Http::post('http://72.167.135.22:29200/es_lsport_market_bet/_search', [
