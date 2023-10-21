@@ -51,55 +51,33 @@ class TestController extends PcController {
     	$input = $this->getRequest($request);
 
 		  $session = Session::all();
-
-    	/////////////////////////
+      
+      /////////////////////////
       // 构建 Elasticsearch 查询 DSL
       $query = [
         'size' => 0,
         'query' => [
-            'bool' => [
-                'must' => [
-                    ['term' => ['fixture_id' => $request->input('fixture_id')]],
-                    ['term' => ['market_id' => $request->input('market_id')]],
-                ],
+            'term' => [
+                'fixture_id' => $fixtureId,
             ],
         ],
-        'aggs' => [
-            'composite_agg' => [
-                'composite' => [
-                    'size' => 10000,
-                    'sources' => [
-                        ['fixture_id' => ['terms' => ['field' => 'fixture_id']]],
-                        ['market_id' => ['terms' => ['field' => 'market_id']]],
-                        ['base_line' => ['terms' => ['field' => 'base_line.keyword']]],
-                    ],
-                ],
-                'aggregations' => [
-                    'max_price' => ['max' => ['field' => 'price']],
-                    'min_price' => ['min' => ['field' => 'price']],
-                ],
-            ],
-        ],
-    ];
+      ];
 
-    $queryJson = json_encode($query,true);
-      
-    // 构建 Basic Authentication 头部
-    $username = 'devuser';
-    $password = '1hqXxl0YAXd2HAjiTc4X';
-    $credentials = base64_encode($username . ':' . $password);
-    $headers = [
+      // 构建 Basic Authentication 头部
+      $username = 'devuser';
+      $password = '1hqXxl0YAXd2HAjiTc4X';
+      $credentials = base64_encode($username . ':' . $password);
+      $headers = [
         'Authorization' => 'Basic ' . $credentials,
         'Content-Type'  => 'application/json',
         'Host'          => 'sportc.asgame.net',
-    ];
+      ];
 
-    // 发送 Elasticsearch 查询请求，包括身份验证头部
-    $response = Http::withHeaders($headers)
+      // 发送 Elasticsearch 查询请求，包括身份验证头部
+      $response = Http::withHeaders($headers)
         ->post('http://72.167.135.22:29200/es_lsport_market_bet/_search', [
-            'body' => $queryJson,
+            'json' => $query, // 将查询 DSL 放在 'json' 键中
         ]);
-
 
       // 解析 Elasticsearch 响应
       $data = $response->json();
