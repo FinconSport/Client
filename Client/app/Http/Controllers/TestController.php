@@ -124,7 +124,9 @@ class TestController extends PcController {
 
       // 解析 Elasticsearch 响应
       $data = $response->json();
-   
+
+      
+      dd($response, $data);
       // 获取 "buckets"
       $buckets = $data['aggregations']['composite_agg']['buckets'];
 
