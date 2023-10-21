@@ -45,5 +45,104 @@ class TestController extends PcController {
       
     }
 
+    public function getMinMaxPrice() {
+        
+      // 构建 Elasticsearch 查询 DSL
+      $query = [
+        {
+          "size": 0,
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "fixture_id": "11475735"
+                  }
+                },
+                {
+                  "term": {
+                    "market_id": "64"
+                  }
+                }
+              ]
+            }
+          },
+          "aggs": {
+            "composite_agg": {
+              "composite": {
+                "size": 10000,
+                "sources": [
+                  {
+                    "fixture_id": {
+                      "terms": {
+                        "field": "fixture_id"
+                      }
+                    }
+                  },
+                  {
+                    "market_id": {
+                      "terms": {
+                        "field": "market_id"
+                      }
+                    }
+                  },
+                  {
+                    "base_line": {
+                      "terms": {
+                        "field": "base_line.keyword"
+                      }
+                    }
+                  }
+                ]
+              },
+              "aggregations": {
+                "max_price": {
+                  "max": {
+                    "field": "price"
+                  }
+                },
+                "min_price": {
+                  "min": {
+                    "field": "price"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ];
+
+      // 发送 Elasticsearch 查询请求
+      $response = Http::post('http://72.167.135.22:29200/es_lsport_market_bet/_search', [
+          'json' => $query,
+      ]);
+
+      // 解析 Elasticsearch 响应
+      $data = $response->json();
+      
+      // 获取 "buckets"
+      $buckets = $data['aggregations']['composite_agg']['buckets'];
+
+      // 处理 "buckets" 数据
+      $results = [];
+      foreach ($buckets as $bucket) {
+          $fixtureId = $bucket['key']['fixture_id'];
+          $marketId = $bucket['key']['market_id'];
+          $baseLine = $bucket['key']['base_line'];
+          $maxPrice = $bucket['max_price']['value'];
+          $minPrice = $bucket['min_price']['value'];
+
+          // 将结果存储在数组中
+          $results[] = [
+              'fixture_id' => $fixtureId,
+              'market_id' => $marketId,
+              'base_line' => $baseLine,
+              'max_price' => $maxPrice,
+              'min_price' => $minPrice,
+          ];
+      }
+
+      dd($results);
+  }
 
 }

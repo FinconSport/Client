@@ -36,6 +36,7 @@ Route::post('/order/m_create', 'App\Http\Controllers\OrderController@m_create_or
 Route::get('/order/m_create', 'App\Http\Controllers\OrderController@m_create_order');
 
 Route::get('/test', 'App\Http\Controllers\TestController@index');
+Route::get('/test/getMinMaxPrice', 'App\Http\Controllers\TestController@getMinMaxPrice');
 
 Route::get('/match', 'App\Http\Controllers\MatchController@index');
 Route::post('/match', 'App\Http\Controllers\MatchController@index');
