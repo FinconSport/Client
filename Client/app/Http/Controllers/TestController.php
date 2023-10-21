@@ -55,43 +55,43 @@ class TestController extends PcController {
       /////////////////////////
       // 构建 Elasticsearch 查询 DSL
       $fixtureId = $input['fixture_id'];
-      
+
 // 构建 Elasticsearch 查询 DSL
 $query = [
-  'size' => 0,
-  'query' => [
-      'term' => [
-          'fixture_id' => $fixtureId,
-      ],
-  ],
-  'aggs' => [
-      'group_by_market' => [
-          'terms' => [
-              'field' => 'market_id',
-              'size' => 10000, // 根据你的数据量适当调整
-          ],
-          'aggs' => [
-              'group_by_base_line' => [
-                  'terms' => [
-                      'field' => 'base_line.keyword',
-                      'size' => 10000, // 根据你的数据量适当调整
-                  ],
-                  'aggs' => [
-                      'min_price' => [
-                          'min' => [
-                              'field' => 'price',
-                          ],
-                      ],
-                      'max_price' => [
-                          'max' => [
-                              'field' => 'price',
-                          ],
-                      ],
-                  ],
-              ],
-          ],
-      ],
-  ],
+    'size' => 0,
+    'query' => [
+        'term' => [
+            'fixture_id' => $fixtureId,
+        ],
+    ],
+    'aggs' => [
+        'group_by_market' => [
+            'terms' => [
+                'field' => 'market_id',
+                'size' => 10000, // 根据你的数据量适当调整
+            ],
+            'aggs' => [
+                'group_by_base_line' => [
+                    'terms' => [
+                        'field' => 'base_line.keyword', // 使用 keyword 类型字段
+                        'size' => 10000, // 根据你的数据量适当调整
+                    ],
+                    'aggs' => [
+                        'min_price' => [
+                            'min' => [
+                                'field' => 'price_keyword', // 使用新的 keyword 字段
+                            ],
+                        ],
+                        'max_price' => [
+                            'max' => [
+                                'field' => 'price_keyword', // 使用新的 keyword 字段
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];
 
       // 构建 Basic Authentication 头部
