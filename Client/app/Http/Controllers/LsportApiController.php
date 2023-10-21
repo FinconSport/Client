@@ -793,7 +793,7 @@ class LsportApiController extends Controller {
 
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)
-            whereIn("market_id",$market_list_id[$sport_id])
+            ->whereIn("market_id",$market_list_id[$sport_id])
             ->orderBy('market_id', 'ASC')->list();
             if ($return === false) {
                 $this->ApiError('03');
