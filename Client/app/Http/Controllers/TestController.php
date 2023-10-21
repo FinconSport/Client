@@ -56,7 +56,7 @@ class TestController extends PcController {
                 'must' => [
                     [
                         'term' => [
-                            'fixture_id' => '11475735',
+                            'fixture_id' => '11600454',
                         ],
                     ],
                     [
