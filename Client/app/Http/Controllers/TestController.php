@@ -48,69 +48,73 @@ class TestController extends PcController {
 
     public function getMinMaxPrice() {
         
+    	$input = $this->getRequest($request);
+
+		  $session = Session::all();
+
+    	/////////////////////////
       // 构建 Elasticsearch 查询 DSL
- // 构建 Elasticsearch 查询 DSL
- $query = [
-  'size' => 0,
-  'query' => [
-      'bool' => [
-          'must' => [
-              [
-                  'term' => [
-                      'fixture_id' => 11475735,
-                  ],
-              ],
-              [
-                  'term' => [
-                      'market_id' => 64,
-                  ],
-              ],
-          ],
-      ],
-  ],
-  'aggs' => [
-      'composite_agg' => [
-          'composite' => [
-              'size' => 10000,
-              'sources' => [
-                  [
-                      'fixture_id' => [
-                          'terms' => [
-                              'field' => 'fixture_id',
-                          ],
-                      ],
-                  ],
-                  [
-                      'market_id' => [
-                          'terms' => [
-                              'field' => 'market_id',
-                          ],
-                      ],
-                  ],
-                  [
-                      'base_line' => [
-                          'terms' => [
-                              'field' => 'base_line.keyword',
-                          ],
-                      ],
-                  ],
-              ],
-          ],
-          'aggregations' => [
-              'max_price' => [
-                  'max' => [
-                      'field' => 'price',
-                  ],
-              ],
-              'min_price' => [
-                  'min' => [
-                      'field' => 'price',
-                  ],
-              ],
-          ],
-      ],
-  ],
-];
+      $query = [
+        'size' => 0,
+        'query' => [
+            'bool' => [
+                'must' => [
+                    [
+                        'term' => [
+                            'fixture_id' => 11475735,
+                        ],
+                    ],
+                    [
+                        'term' => [
+                            'market_id' => 64,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'aggs' => [
+            'composite_agg' => [
+                'composite' => [
+                    'size' => 10000,
+                    'sources' => [
+                        [
+                            'fixture_id' => [
+                                'terms' => [
+                                    'field' => 'fixture_id',
+                                ],
+                            ],
+                        ],
+                        [
+                            'market_id' => [
+                                'terms' => [
+                                    'field' => 'market_id',
+                                ],
+                            ],
+                        ],
+                        [
+                            'base_line' => [
+                                'terms' => [
+                                    'field' => 'base_line.keyword',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'aggregations' => [
+                    'max_price' => [
+                        'max' => [
+                            'field' => 'price',
+                        ],
+                    ],
+                    'min_price' => [
+                        'min' => [
+                            'field' => 'price',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+      ];
 
 
       // 发送 Elasticsearch 查询请求
@@ -120,7 +124,7 @@ class TestController extends PcController {
 
       // 解析 Elasticsearch 响应
       $data = $response->json();
-      dd($data);
+   
       // 获取 "buckets"
       $buckets = $data['aggregations']['composite_agg']['buckets'];
 
