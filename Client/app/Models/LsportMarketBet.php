@@ -70,6 +70,7 @@ class LsportMarketBet extends CacheModel
             $return = self::select('fixture_id', 'market_id', 'base_line', DB::raw('MIN(price) AS min_price'), DB::raw('MAX(price) AS max_price'), DB::raw('ABS(MIN(price) - MAX(price)) as different_price'))
             ->where('fixture_id', '=', $data['fixture_id'])
             ->where('market_id', '=', $data['market_id'])
+            ->where('status',1)
             ->groupBy('market_id', 'base_line')
             ->orderBy('different_price', 'asc')
             ->first();
