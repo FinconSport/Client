@@ -793,7 +793,7 @@ class LsportApiController extends Controller {
 
             // 判定籃球是否走地
             if (($sport_id == '48242') && ($status == 2)) {
-                $market_list_id[$sport_id] = [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75],
+                $market_list_id[$sport_id] = [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75];
             }
 
             // 取得market 
