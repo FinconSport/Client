@@ -46,7 +46,7 @@ class TestController extends PcController {
       
     }
 
-    public function getMinMaxPrice() {
+    public function getMinMaxPrice(Request $request) {
         
     	$input = $this->getRequest($request);
 
