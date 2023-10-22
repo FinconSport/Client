@@ -90,8 +90,11 @@ class BalanceLogsController extends PcController {
 
       $list = array();
       foreach ($return as $k => $v) {
+        
+        if (isset($typeList[$v['type']])) {
+          $v['type'] = $typeList[$v['type']];
+        }
 
-        $v['type'] = $typeList[$v['type']];
         $list[] = $v;
 
       } 
