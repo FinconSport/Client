@@ -703,7 +703,7 @@ class LsportApiController extends Controller {
         })
         ->orderBy("league_id", "ASC")
         ->orderBy("start_time","ASC")
-        ->list();
+        ->list(60);
         if ($return === false) {
             $this->ApiError('02');
         }
@@ -791,7 +791,7 @@ class LsportApiController extends Controller {
                 35232 => [226,342,28,51]
             ];
 
-            // 判定籃球是否走地
+            // 判定籃球是否走地,如果是, 則另外取得第1-4節
             if (($sport_id == '48242') && ($status == 2)) {
                 $market_list_id[$sport_id] = [226,342,28,51,202,64,21,72,203,65,45,73,204,66,46,74,205,67,47,75];
             }
