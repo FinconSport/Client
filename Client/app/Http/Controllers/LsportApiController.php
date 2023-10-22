@@ -779,7 +779,7 @@ class LsportApiController extends Controller {
             // order_by
             $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['order_by'] = strtotime($start_time);
 
-            // 只讀列表所需id , 優化速度
+            // 只讀列表所需id
             $market_list_id = [
                 // 棒
                 154914 => [226,342,28,51],
@@ -799,7 +799,8 @@ class LsportApiController extends Controller {
             // 取得market 
             $return = LsportMarket::where("fixture_id",$fixture_id)
             ->whereIn("market_id",$market_list_id[$sport_id])
-            ->orderBy('market_id', 'ASC')->list();
+            ->orderBy('market_id', 'ASC')
+            ->list();
             if ($return === false) {
                 $this->ApiError('03');
             }
@@ -824,7 +825,9 @@ class LsportApiController extends Controller {
                 $tmp_market['market_name'] = $market_name;
                 $tmp_market['list'] = array();
 
+                /////////////////////////////////////
                 // 設定main_line
+
                 $custom_mainline = true;
                 if ($custom_mainline) { // 自定義分盤規則
                     $return = LsportMarketBet::getMainLine([
@@ -844,6 +847,7 @@ class LsportApiController extends Controller {
                 } else {
                     $tmp_market['main_line'] = $market_main_line;
                 }
+                /////////////////////////////////////
                 
                 $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id] = $tmp_market;
 
