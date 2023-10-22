@@ -63,11 +63,7 @@ class BalanceLogsController extends PcController {
 
       //////////////////////////
 
-      $mBalanceLogs = PlayerBalanceLogs::where("player_id",$session['player']['id']);
-      if (isset($input['id']) && ($input['id'] != "")) {
-        $mBalanceLogs = $mBalanceLogs->where("id",$input['id']);
-      }
-
+      $mBalanceLogs = PlayerBalanceLogs::where("player_id",$player_id);
       if (isset($input['start_time']) && ($input['start_time'] != "")) {
         $mBalanceLogs = $mBalanceLogs->where("create_time",">=",$input['start_time']);
       }
@@ -90,7 +86,7 @@ class BalanceLogsController extends PcController {
 
       $list = array();
       foreach ($return as $k => $v) {
-        
+
         if (isset($typeList[$v['type']])) {
           $v['type'] = $typeList[$v['type']];
         }
