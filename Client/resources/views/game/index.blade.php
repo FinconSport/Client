@@ -282,7 +282,7 @@
                                 }
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early + ' - ' : commonLangTrans.sport_menu.living + ' - ')
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
 
@@ -786,7 +786,7 @@
         let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
 
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early + ' - ' : commonLangTrans.sport_menu.living + ' - ')
+        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {

@@ -1045,3 +1045,7 @@ button.dateCalendarBtn {
     height: 28px;
     width: auto;
 }
+
+span[key="bet_status"]:after{
+    content: '\00a0 - ';
+}

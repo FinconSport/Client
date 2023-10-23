@@ -926,7 +926,7 @@
                                             }
 
                                             $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-                                            $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early + ' - ' : commonLangTrans.sport_menu.living + ' - ')
+                                            $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
 
 
                                             $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="odd"]`).html(v4.price)
