@@ -616,8 +616,6 @@ a.sportSelect:hover,
     width: 100%;
     float: left;
     height: 2rem;
-    position: absolute;
-    bottom: 0;
 }
 
 #noMoreData p {

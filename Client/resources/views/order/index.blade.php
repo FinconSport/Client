@@ -413,7 +413,7 @@
 
 				// update the row colors and height when toggle containers
 				updateRowColors();
-				// adjustPositionBottomNoData()
+				adjustPositionBottomNoData()
 			}
 
 			toggleButton.on('click', toggleContainers);
@@ -519,7 +519,7 @@
 		$('#loader').hide() // loading transition
 		fetchMoreLock = false
 		
-		// adjustPositionBottomNoData();
+		adjustPositionBottomNoData();
 	}
 
 	// scroll to bottom
@@ -553,7 +553,7 @@
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
 				adjustContainerHeight();
-				// adjustPositionBottomNoData();
+				adjustPositionBottomNoData();
                 clearInterval(isReadyOrderInt); // stop checking
             }
         }, 500);

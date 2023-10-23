@@ -66,7 +66,7 @@
 					<span>.</span>
 				</div>
 			</div>  
-			<div id="noMoreData" style="display: none;">
+			<div id="noMoreData" style="display: none; margin-top: 2rem;">
 				<td colspan="16"><p class="mb-0">{{ trans('match.main.nomoredata') }}</p></td>
 			</div>
         </div>
