@@ -22,7 +22,6 @@ const bottomNavRow = {
     zIndex: 0,
     justifyContent: 'space-around',
     background: 'rgb(65, 91, 90)',
-    boxShadow: '10px 0px 10px rgb(0 0 0 / 0.6)',
     padding: '0 0.5rem'
 }
 

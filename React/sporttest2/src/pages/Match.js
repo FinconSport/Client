@@ -183,7 +183,7 @@ class Match extends React.Component {
 						<MatchContent apiUrl={this.state.baseApiUrl} menu_id={this.state.menu_id}  sport_id={this.state.sport_id} callBack={this.getBetData}/>
 						<div onClick={this.handleCallBMethod} style={slideIconStyle}><GrMenu /></div>
 					</PullToRefresh>
-					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.betData} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
+					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 					<CommonFooter index={5} />
 				</div>
 			:

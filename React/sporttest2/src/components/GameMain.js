@@ -133,6 +133,7 @@ class GameMain extends React.Component {
         const sport = parseInt(Cookies.get('sport', { path: '/' }))
         const data = this.props.data.list
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
+
         return (
             <div style={{ height: '72%' }}>
                 <div className="row m-0">
@@ -163,11 +164,16 @@ class GameMain extends React.Component {
                                                                 {v.market_bet[key].map((v2, k2) => (
                                                                     <div key={k2}>
                                                                         <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
-                                                                            <div className="col-4 row m-0 p-0">
-                                                                                <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
-                                                                                <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                            <div className="col-5 row m-0 p-0">
+                                                                                <div className="col-4 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
+                                                                                {
+                                                                                    data.status === 2 && sport === 6046 && langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
+                                                                                    <div className="col-8 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                                    :
+                                                                                    <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                                }
                                                                             </div>
-                                                                            <div className="col-8 row m-0 p-0">
+                                                                            <div className="col-7 row m-0 p-0">
                                                                                 <div className="col-11" style={{ textAlign: 'right' }}>
                                                                                     <div market_bet_id={v2.market_bet_id}
                                                                                         onClick={() => this.getBetData(
@@ -177,8 +183,8 @@ class GameMain extends React.Component {
                                                                                             v.market_name,
                                                                                             data.home_team_name,
                                                                                             data.away_team_name,
-                                                                                            langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1 ?
-                                                                                                (v2.market_bet_name_en === "1" ? data.home_team_name : data.away_team_name) + ' ' + v2.line
+                                                                                            langText.MatchContent.allWinPriority.indexOf(t) !== -1 || langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
+                                                                                                (v2.market_bet_name_en === "1" ? data.home_team_name : (v2.market_bet_name_en === '2' ? data.away_team_name : v2.market_bet_name)) + ' ' + v2.line
                                                                                                 :
                                                                                                 (v2.market_bet_name + ' ' + v2.line),
                                                                                             v2.status

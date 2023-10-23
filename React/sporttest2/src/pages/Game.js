@@ -9,6 +9,7 @@ import PullToRefresh from 'react-simple-pull-to-refresh';
 import CommonLoader from '../components/CommonLoader';
 import CommonCalculator from '../components/CommonCalculator';
 
+const menuArr = ['early', 'living']
 var u = null
 var o = null
 class Game extends React.Component {
@@ -140,6 +141,8 @@ class Game extends React.Component {
 
 		this.caller(this.state.game_api, 'game_res')
 		this.caller(this.state.accout_api, 'account_res', 1)
+
+		window.sport = this.state.sport
 	}
 
 	// 刷新錢包餘額
@@ -152,6 +155,8 @@ class Game extends React.Component {
 
 	// 取得投注所需資料
 	getBetData = (betData) => {
+		window.menu = this.state.game_res.data.list.status === 1 ? 0 : 1
+		betData.cate = menuArr[window.menu]
 		this.setState({
 			betData: betData,
 			isOpenCal: true
@@ -190,7 +195,6 @@ class Game extends React.Component {
 		const data = this.state?.game_res
 		const betData = this.state.betData
 
-
 		return (
 			data !== undefined ?
 				<>
@@ -198,7 +202,7 @@ class Game extends React.Component {
 						<GameTopSlider data={data} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
 						<GameMain data={data.data} getBetDataCallBack={this.getBetData} />
 					</PullToRefresh>
-					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
+					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 				</>
 			:
 			<CommonLoader/>
