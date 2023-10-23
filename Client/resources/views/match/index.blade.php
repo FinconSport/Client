@@ -102,12 +102,12 @@
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
-		queryParams.league_id = league_id
+		if( league_id ) queryParams.league_id = league_id;
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
 		
 		const queryString = new URLSearchParams(queryParams).toString();
-		const urlWithQuery = `?${queryString}`;
+		const urlWithQuery = `${queryString}`;
 		window.location.href = urlWithQuery
 	}
 
@@ -188,6 +188,7 @@
                 callResultListData.sport_id = sport // default sport
 				matchTitle = langTrans.matchTitle[sport]
 				matchTitleAll = matchCommonTitle.concat(langTrans.matchTitle[sport])
+				console.log(callResultListData)
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
