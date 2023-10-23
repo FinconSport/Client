@@ -152,7 +152,7 @@
 			matchTitle.forEach((v2, k2) => {
 			if (v.scoreboard[k2]) {
 				if (k2 === 0) {
-				str += '<td class="scoreResult">' + v.scoreboard[k2][0] + '</td>';
+				str += '<td style="color:red;">' + v.scoreboard[k2][0] + '</td>';
 				} else {
 				str += '<td>' + v.scoreboard[k2][0] + '</td>';
 				}
@@ -172,7 +172,7 @@
 			matchTitle.forEach((v2, k2) => {
 			if (v.scoreboard[k2]) {
 				if (k2 === 0) {
-				str += '<td class="scoreResult">' + v.scoreboard[k2][1] + '</td>';
+				str += '<td style="color:red;">' + v.scoreboard[k2][1] + '</td>';
 				} else {
 				str += '<td>' + v.scoreboard[k2][1] + '</td>';
 				}
