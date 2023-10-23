@@ -282,7 +282,7 @@
                                 }
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
 
@@ -527,11 +527,11 @@
 
 
         // 足球 平局 -> 主平客
-        if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
-            bet_div.find('.marketBetRateContainer').after(bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`));
-        } else {
+        // if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
+        //     bet_div.find('.marketBetRateContainer').after(bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`));
+        // } else {
             bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
-        }
+        // }
         
     }
 
@@ -786,7 +786,7 @@
         let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
 
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
+        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
