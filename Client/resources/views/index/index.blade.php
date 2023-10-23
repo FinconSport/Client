@@ -911,8 +911,7 @@
                                             if( convertTeamPriArr.indexOf(i) === -1 ) {
                                                 calBetNameStr = v4.market_bet_name + ' ' + v4.line
                                             } else {
-                                                calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
-                                                switch (v4.market_bet_name_en) {
+                                                switch (parseInt(v4.market_bet_name_en)) {
                                                     case 1:
                                                         calBetNameStr = home 
                                                         break;
@@ -1194,7 +1193,7 @@
         let bet_rate = e.attr('bet_rate')
         let bet_type = e.attr('bet_type')
         let bet_name = e.attr('bet_name')
-        let bet_name_en = e.attr('bet_name_en')
+        let bet_name_en = parseInt(e.attr('bet_name_en'))
         let bet_name_line = e.attr('line')
         let league = e.attr('league')
         let home = e.attr('home')

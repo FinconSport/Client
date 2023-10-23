@@ -742,7 +742,7 @@
                                         if (convertTeamPriArr.indexOf(i) === -1) {
                                             calBetNameStr = v4.market_bet_name + ' ' + v4.line
                                         } else {
-                                            switch (v4.market_bet_name_en) {
+                                            switch (parseInt(v4.market_bet_name_en)) {
                                                 case 1:
                                                     calBetNameStr = home
                                                     break;
@@ -1099,9 +1099,8 @@
             if( convertTeamPriArr.indexOf(item.priority) === -1 ) {
                 leftSlideOrderCard.find('span[key="bet_name"]').html(item.bet_name)
             } else {
-                let str = item.bet_name_en == 1 ? item.home : item.away
-
-                switch (item.bet_name_en) {
+                let str = ''
+                switch (parseInt(item.bet_name_en)) {
                     case 1:
                         str = item.home
                         break;
