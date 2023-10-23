@@ -855,7 +855,7 @@ a.sportSelect:hover,
 
 .search-main-container.one-line-searchbar .search-bar-container {
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .search-main-container .search-bar-container {
@@ -1009,11 +1009,11 @@ span.orderData_mOrder {
 }
 
 .search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields .field:first-child{
-    padding-right: 0rem;
+    padding-left: 0rem;
 }
 
 .search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields .field{
-    padding-left: 0rem;
+    padding-right: 0rem;
 }
 
 .datecalendar-con .calendar .input input {
@@ -1034,4 +1034,5 @@ button.dateCalendarBtn {
 .search-main-container.one-line-searchbar button.dateCalendarBtn {
     padding: 0.2rem;
     height: 28px;
+    width: 60px;
 }
