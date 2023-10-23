@@ -170,18 +170,18 @@
 				}
 			});
 			str += '</tr>'
-			$('#tableContent').append(str)
 
-			const rowspanTds = document.querySelectorAll('#tableContent td[rowspan="2"]');
-			if (rowspanTds.length > 0) {
-			const lastRowspanTd = rowspanTds[rowspanTds.length - 1];
-			lastRowspanTd.style.color = 'red';
+			const tdsWithRowspan2 = document.querySelectorAll('#tableContent td[rowspan="2"]');
+			if (tdsWithRowspan2.length > 0) {
+			const lastRowspan2Td = tdsWithRowspan2[tdsWithRowspan2.length - 1];
+			const nextSiblingP = lastRowspan2Td.nextElementSibling;
+			nextSiblingP.style.color = 'red';
 			} else {
-			// If no <td> with rowspan="2" is found, set the color of the second child <td> to red
-			const secondChildTd = document.querySelector('#tableContent td:nth-child(2)');
-			if (secondChildTd) secondChildTd.style.color = 'red';
+			const secondChildTd = document.querySelector('tr td:nth-child(2)');
+			secondChildTd.style.color = 'your_other_color';
 			}
-
+			
+			$('#tableContent').append(str)
 
 		})
 
