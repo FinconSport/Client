@@ -203,6 +203,8 @@
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
+        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
+
         // if refresh no data    
         if (Object.keys(matchListD.data.list.market).length === 0) {
             noData();
