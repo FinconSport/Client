@@ -886,7 +886,7 @@ a.sportSelect:hover,
 
 .search-main-container.one-line-searchbar .select-con {
     width: 15%;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .search-main-container .select-con::after {
@@ -997,11 +997,23 @@ span.orderData_mOrder {
 
 .search-main-container.one-line-searchbar .datebutton-cons {
     grid-column-gap: 1rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 
 .datecalendar-con .ui.form .fields{
     margin: 0 -0.5em 0.5em;
+}
+
+.search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields{
+    margin: 0rem;
+}
+
+.search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields .field:first-child{
+    padding-right: 0rem;
+}
+
+.search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields .field{
+    padding-left: 0rem;
 }
 
 .datecalendar-con .calendar .input input {
@@ -1012,7 +1024,7 @@ button.dateCalendarBtn {
     border: none;
     border-radius: 5px;
     background: #ffffff;
-    padding: 0.2rem 0rem;
+    padding: 0.2rem 0.3rem;
     /* margin: 0px 0px 0.5rem 0px; */
     color: #415b5a;
     font-size: small;
