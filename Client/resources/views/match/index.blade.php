@@ -4,7 +4,8 @@
 	<!-- search -->
 	<div class="search-bar-container">
 		<div class="select-con">
-			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">
+			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">	
+				<option value=-1 selected>請選擇聯賽</option>
 			</select>
 		</div>
 		<div class="datecalendar-con">
@@ -103,6 +104,7 @@
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
+		queryParams.sport = sport;
 		if( league_id ) queryParams.league_id = league_id;
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
@@ -127,7 +129,10 @@
 			leagueArr.forEach( e =>{
 				$('#selectOption').append(`<option value=${e.league_id}>${e.name}</option>`)
 			})
-			
+
+			// search condition
+			$('#selectOption').val(searchData.league_id || -1 )
+			setRange(searchData.start_time || '', searchData.end_time || '')
 		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 
