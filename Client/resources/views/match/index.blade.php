@@ -99,7 +99,6 @@
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
 					str += '<td style="color: red;">' + v.scoreboard[k2][1] + '</td>'
-					$('#tableContent tr td:nth-child(4)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
