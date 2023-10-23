@@ -60,6 +60,6 @@ tr.even td:first-child {
     color: black;
 }
 
-tr.even td:first-child span.scoreResult{
-    color: red;
+tr.even .scoreResult{
+    color: red!important;
 }
