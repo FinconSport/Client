@@ -98,7 +98,8 @@
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td style="color: red;">' + v.scoreboard[k2][1] + '</td>'
+					str += '<td>' + v.scoreboard[k2][1] + '</td>'
+					$('#tableContent tr.even td:nth-child(2)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
