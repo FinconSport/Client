@@ -128,6 +128,15 @@
 			})
 			
 		}
+
+		const scoreResults = document.querySelectorAll('.scoreResult');
+		if (scoreResults.length > 0) {
+			scoreResults.forEach((element, index) => {
+				if (index % 2 === 0) {
+				element.style.color = 'red';
+				}
+			});
+		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 
 			let str = '<tr class="odd">'
