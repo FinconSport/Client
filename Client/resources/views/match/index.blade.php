@@ -145,9 +145,7 @@
 			str += '<td>' + v.home_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td>' + v.scoreboard[k2][0] + '</td>'
-					// $('#tableContent tr.even td:nth-child(4)').css('color', 'red');
-					// $('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
+					str += '<td class="scoreResult">' + v.scoreboard[k2][0] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -162,23 +160,12 @@
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td>' + v.scoreboard[k2][1] + '</td>'
-					// $('#tableContent tr.even td:nth-child(4)').css('color', 'red');
-					// $('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
+					str += '<td class="scoreResult">' + v.scoreboard[k2][1] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
 			});
 			str += '</tr>'
-
-			const tdsWithRowspan2 = document.querySelectorAll('td[rowspan="2"]');
-			const targetTd = tdsWithRowspan2.length > 0
-			? tdsWithRowspan2[tdsWithRowspan2.length - 1]
-			: document.querySelector('tr td:nth-child(2)') || document.querySelector('tr td:nth-child(3)');
-
-			const nextSibling = targetTd.nextElementSibling;
-			nextSibling.style.color = tdsWithRowspan2.length > 0 ? 'red' : 'red';
-
 
 			$('#tableContent').append(str)
 
