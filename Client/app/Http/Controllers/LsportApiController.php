@@ -2233,7 +2233,7 @@ class LsportApiController extends Controller {
                 }
                 $tmp_bet_data['market_bet_name_en'] = $return['name_en'];
 
-                $tmp_bet_data['start_time'] = $return['start_time'];
+               // $tmp_bet_data['start_time'] = $return['start_time'];
 
                 // 滾球/早盤字樣判定
                 $market_type = 0;
