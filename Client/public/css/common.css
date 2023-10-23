@@ -886,6 +886,7 @@ a.sportSelect:hover,
 
 .search-main-container.one-line-searchbar .select-con {
     width: 15%;
+    margin-right: 1rem;
 }
 
 .search-main-container .select-con::after {
@@ -992,6 +993,11 @@ span.orderData_mOrder {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 0.5rem;
+}
+
+.search-main-container.one-line-searchbar .datebutton-cons {
+    grid-column-gap: 1rem;
+    margin-left: 1rem;
 }
 
 .datecalendar-con .ui.form .fields{
