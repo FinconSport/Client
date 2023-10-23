@@ -855,6 +855,7 @@ a.sportSelect:hover,
 
 .search-main-container.one-line-searchbar .search-bar-container {
     width: 100%;
+    justify-content: flex-start;
 }
 
 .search-main-container .search-bar-container {
@@ -883,7 +884,7 @@ a.sportSelect:hover,
     position: relative;
 }
 
-.search-main-container.one-line-searchbar.select-con {
+.search-main-container.one-line-searchbar .select-con {
     width: 15%;
 }
 
