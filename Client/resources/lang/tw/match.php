@@ -30,10 +30,7 @@ return [
 		"volleyball" => "排球",
 	],
 	"filter" => [
-		"sport" => "體育種類",
-		"series" => "聯賽名稱",
-		"start_time" => "開始時間",
-		"end_time" => "結束時間",
+		"selectLeague" => "請選擇聯賽",
 	],
 	"basketball" => [
 		"fulltimescore" => "全場比分",

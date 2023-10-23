@@ -18,6 +18,12 @@ return [
 		"next_page" => "下一頁",
 		"last_page" => "最後一頁",
 		"nomoredata" => "沒有更多資料了",
+		"all" => "全部",
+		"game_bet" => "投注",
+		"game_result" => "派獎",
+		"recharge" => "充值",
+		"withdraw" => "提現",
+		"delay_bet_refund" => "投注失敗",
 	],
 
 	// 後端

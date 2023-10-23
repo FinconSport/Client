@@ -5,7 +5,7 @@
 	<div class="search-bar-container">
 		<div class="select-con">
 			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">	
-				<option value=0 selected>請選擇聯賽</option>
+				<option value=0 selected>{{ trans('match.filter.selectLeague') }}</option>
 			</select>
 		</div>
 		<div class="datecalendar-con">
