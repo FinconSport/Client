@@ -531,7 +531,7 @@
             bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`).after(marketBetRateTemp);
         } else {
             bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
-        // }
+        }
         
     }
 
