@@ -109,7 +109,7 @@ div#bettingTypeContainer {
 }
 
 #scoreboardContainer td,
-#scoreboardContainer tbody th div {
+#scoreboardContainer div.textOverflowCon {
     color: #ffffff;
 }
 
