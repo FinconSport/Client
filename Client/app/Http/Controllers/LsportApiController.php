@@ -2223,6 +2223,16 @@ class LsportApiController extends Controller {
                 }
 
                 $tmp_bet_data = $v;
+
+                
+                // 取得market_bet name_en
+                $market_bet_id = $v['market_bet_id'];
+                $return = LsportMarketBet::where("bet_id",$market_bet_id)->fetch();
+                if ($return === false) {
+                    $this->ApiError("04");
+                }
+                $tmp_bet_data['market_bet_name_en'] = $return['name_en'];
+
                 $tmp_bet_data['start_time'] = $return['start_time'];
 
                 // 滾球/早盤字樣判定
