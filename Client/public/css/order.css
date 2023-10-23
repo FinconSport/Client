@@ -1,30 +1,3 @@
-/* 左邊標籤 */
-div[key="order"] {
-    border-bottom-left-radius: 25px;
-    border-top-left-radius: 25px;
-}
-
-div[key="order"] > div {
-    border-bottom-left-radius: 25px;
-    border-top-left-radius: 25px;
-    background-color: rgb(196,211,211);
-    color: rgb(65, 91, 90);
-}
-
-div[key="m_order"] > div {
-    border-bottom-right-radius: 15px;
-}
-
-div[key="match"] > div {
-    border-top-right-radius: 15px;
-}
-
-div[key="indexSportMenu"],
-div[key="mOrderSportMenu"],
-div[key="matchSportMenu"]{
-    display: none;
-}
-
 #orderContainer {
     background-color: white;
     border: 2px solid rgb(65, 91, 90);
@@ -43,7 +16,6 @@ div[key="matchSportMenu"]{
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    /* padding-right: 1rem; */
     position: relative;
 }
 
@@ -84,10 +56,6 @@ div[key="matchSportMenu"]{
 #orderTable td:last-child{
     border-right: none!important;
 }
-
-/* #orderTable tr:not([style*="display: none"]):nth-child(even){
-    background-color: #e2f0f0;
-} */
 
 #orderTable tbody{
     border-bottom: 2px solid rgb(65, 91, 90);
@@ -147,20 +115,6 @@ div[key="matchSportMenu"]{
 }
 
 
-/* pagination */
-#pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#pagination button,
-#pagination p {
-    margin: 0 5px;
-    /* 可根据需要调整按钮和段落之间的间距 */
-}
-
-
 #orderContainer {
     margin-top: 1rem;
 }
@@ -202,9 +156,6 @@ div[key="matchSportMenu"]{
     background-color: transparent;
     border-radius: 0px;
     transition: all 0.5s ease 0s;
-    /* width: 4.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem; */
     border: none;
     padding: 0px;
     color: red;
