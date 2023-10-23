@@ -212,7 +212,7 @@
         }
 
         // nodata
-        $('.bettingTypeContainer .noDataContainer').remove()
+        $('#bettingTypeContainer .noDataContainer').remove()
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
@@ -528,7 +528,12 @@
         if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
             bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`).after(marketBetRateTemp);
         } else {
-            bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+            if(bet_div.find('div[key="marketBetRateKey"]').length === 0) {
+                bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+            } else {
+                bet_div.find('div[key="marketBetRateKey"]:last').append(marketBetRateTemp);
+            }
+            
         }
         
     }
@@ -807,12 +812,9 @@
             } else {
                 str = away+= ' ' + bet_name_line;
             }
-
             $('#leftSlideOrder span[key="bet_name"]').html(str)
-
         }
         
-
         $('#leftSlideOrder span[key="odd"]').html(bet_rate)
         $('#leftSlideOrder p[key="series"]').html(league)
         $('#leftSlideOrder span[key="home"]').html(home)
