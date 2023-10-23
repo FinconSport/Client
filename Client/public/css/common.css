@@ -1008,7 +1008,7 @@ button.dateCalendarBtn {
 }
 
 .search-main-container.one-line-searchbar .search-bar-container {
-    width: auto;
+    width: 100%;
     justify-content: flex-start;
     margin-bottom: 0.5rem;
 }
