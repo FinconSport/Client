@@ -138,13 +138,6 @@
 			if( v.status > 3 && v.status < 9 ) str += v.status_name
 			str += '</p>'
 			str += '</td>'
-			const tds = document.querySelectorAll('#tableContent td[rowspan="2"]');
-			const lastTd = tds[tds.length - 1];
-
-			if (lastTd) {
-			const nextSiblingTd = lastTd.nextElementSibling;
-			if (nextSiblingTd) nextSiblingTd.style.color = 'red';
-			}
 			
 			
 			str += '<td rowspan=2>' + v.league_name + '</td>'
@@ -153,6 +146,8 @@
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
 					str += '<td>' + v.scoreboard[k2][0] + '</td>'
+					// $('#tableContent tr.even td:nth-child(4)').css('color', 'red');
+					// $('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
@@ -168,12 +163,24 @@
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
 					str += '<td>' + v.scoreboard[k2][1] + '</td>'
+					// $('#tableContent tr.even td:nth-child(4)').css('color', 'red');
+					// $('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
 			});
 			str += '</tr>'
 			$('#tableContent').append(str)
+
+			const rowspanTds = document.querySelectorAll('#tableContent td[rowspan="2"]');
+			if (rowspanTds.length > 0) {
+			const lastRowspanTd = rowspanTds[rowspanTds.length - 1];
+			lastRowspanTd.style.color = 'red';
+			} else {
+			// If no <td> with rowspan="2" is found, set the color of the second child <td> to red
+			const secondChildTd = document.querySelector('#tableContent td:nth-child(2)');
+			if (secondChildTd) secondChildTd.style.color = 'red';
+			}
 
 
 		})
