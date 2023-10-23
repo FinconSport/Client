@@ -208,18 +208,20 @@
         // if refresh no data    
         if (Object.keys(matchListD.data.list.market).length === 0) {
             noData();
+            return;
         }
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
+            let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
+            console.log(bet_div, v.priority)
             // if not exist -> create
             if( !bet_div ) createMarketContainer(k, v);
-            
             if (v.market_bet) {
                 Object.entries(v.market_bet).map((v2, k2) => {
                     v2[1].map((v3, k3) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
+                        console.log(bet_item, v3.market_bet_id)
 
                         // if not exist -> create / if exists -> update
                         if( !bet_item ) {
@@ -325,7 +327,11 @@
             let priority = parseInt($(this).attr('priority'))
             let result = null
             result = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            if( !result ) $(this).remove()
+            if( !result ) {
+                $(this).remove()
+                console.log('remove bettingtype-container')
+                console.log(result)
+            }
         });
 
         // check exist bet item is still exist in the data
@@ -344,11 +350,10 @@
             
             if (!result) {
                 $(this).remove();
+                console.log('remove marketBetRateKey')
+                console.log(result)
             }
         });
-        
-    
-
     }
    
    
