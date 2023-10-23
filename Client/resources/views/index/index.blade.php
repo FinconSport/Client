@@ -1142,7 +1142,6 @@
     }
     // 賠率下降
     function lowerOdd(fixture_id, market_id, market_bet_id) {
-        // console.log('lowerOdd')
         // 先移除現有樣式
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('raiseOdd')
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').removeClass('lowerOdd')

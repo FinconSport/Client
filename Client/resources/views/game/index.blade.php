@@ -705,37 +705,48 @@
     // 賠率上升
     function raiseOdd(priority, market_bet_id) {
         let target = $(`div[key="marketBetRateKey"][priority="${priority}"][market_bet_id="${market_bet_id}"]`)
+        let leftTarget = $(`div[key="slideOrderCard"][market_bet_id="${market_bet_id}"]`)
         // 先移除現有樣式
         target.removeClass('raiseOdd')
         target.removeClass('lowerOdd')
+        leftTarget.removeClass('raiseOdd')
+        leftTarget.removeClass('lowerOdd')
         target.find('.fa-caret-up').hide()
         target.find('.fa-caret-down').hide()
 
         // 再加上賠率變化樣式
         target.addClass('raiseOdd')
+        leftTarget.addClass('raiseOdd')
         target.find('.fa-caret-up').show()
 
         // 三秒後移除
         setTimeout(() => {
             target.removeClass('raiseOdd')
+            leftTarget.removeClass('raiseOdd')
             target.find('.fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
     function lowerOdd(priority, market_bet_id) {
         let target = $(`div[key="marketBetRateKey"][priority="${priority}"][market_bet_id="${market_bet_id}"]`)
+        let leftTarget = $(`div[key="slideOrderCard"][market_bet_id="${market_bet_id}"]`)
+
         // 先移除現有樣式
         target.removeClass('raiseOdd')
         target.removeClass('lowerOdd')
+        leftTarget.removeClass('raiseOdd')
+        leftTarget.removeClass('lowerOdd')
         target.find('.fa-caret-up').hide()
         target.find('.fa-caret-down').hide()
 
         // 再加上賠率變化樣式
         target.addClass('lowerOdd')
+        leftTarget.addClass('lowerOdd')
         target.find('.fa-caret-down').show()
 
         // 三秒後移除
         setTimeout(() => {
+            leftTarget.removeClass('raiseOdd')
             target.removeClass('lowerOdd')
             target.find('.fa-caret-down').hide()
         }, 3000);
