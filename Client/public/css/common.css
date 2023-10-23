@@ -839,3 +839,14 @@ a.sportSelect:hover,
     color: white;
     padding: 10px;
 }
+
+button.dateCalendarBtn {
+    border: none;
+    border-radius: 5px;
+    background: #ffffff;
+    padding: 0.2rem 0rem;
+    /* margin: 0px 0px 0.5rem 0px; */
+    color: #415b5a;
+    font-size: small;
+    font-weight: 600;
+}

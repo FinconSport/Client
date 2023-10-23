@@ -203,3 +203,14 @@ span.market_price.odd {
 #bettingTypeContainer {
     height: calc(100% - 16.5rem);
 }
+
+.noDataContainer {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #415b5a;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+}
