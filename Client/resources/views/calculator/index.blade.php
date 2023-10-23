@@ -64,7 +64,7 @@
 
                 <div class="row m-0">
                     <div class="col-12">
-                        <div class="d-flex align-items-center justify-content-center">
+                        <div>
                             <button onclick="clearAll()">{{ trans('calculator.calculator.clear') }}</button>
                             <button onclick="claculate()">{{ trans('calculator.calculator.calculate') }}</button>
                         </div>
