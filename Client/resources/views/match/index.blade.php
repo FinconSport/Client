@@ -138,13 +138,6 @@
 			if( v.status > 3 && v.status < 9 ) str += v.status_name
 			str += '</p>'
 			str += '</td>'
-			const tds = document.querySelectorAll('#tableContent td[rowspan="2"]');
-			const lastTd = tds[tds.length - 1];
-
-			if (lastTd) {
-			const nextSiblingTd = lastTd.nextElementSibling;
-			if (nextSiblingTd) nextSiblingTd.style.color = 'red';
-			}
 			
 			
 			str += '<td rowspan=2>' + v.league_name + '</td>'
@@ -152,7 +145,7 @@
 			str += '<td>' + v.home_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td>' + v.scoreboard[k2][0] + '</td>'
+					str += '<td class="scoreResult">' + v.scoreboard[k2][0] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -167,14 +160,14 @@
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td>' + v.scoreboard[k2][1] + '</td>'
+					str += '<td class="scoreResult">' + v.scoreboard[k2][1] + '</td>'
 				} else {
 					str += '<td>-</td>'
 				}
 			});
 			str += '</tr>'
-			$('#tableContent').append(str)
 
+			$('#tableContent').append(str)
 
 		})
 
