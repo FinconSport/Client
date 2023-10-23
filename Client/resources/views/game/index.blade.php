@@ -189,11 +189,13 @@
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            if (!v) {
+            if (Object.keys(matchListD.data.list.market).length === 0) {
                 noData();
                 console.log('empty');
             }
+
             createMarketContainer(k, v);
+
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
@@ -212,7 +214,12 @@
         createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
+        
         // if refresh no data    
+        if (Object.keys(matchListD.data.list.market).length === 0) {
+            noData();
+            console.log('empty');
+        }
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
@@ -284,11 +291,6 @@
                         }
                     });
                 });
-            }
-
-            if (!v) {
-                noData();
-                console.log('empty');
             }
         });
 
