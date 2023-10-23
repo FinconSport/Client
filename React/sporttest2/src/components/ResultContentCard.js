@@ -118,6 +118,10 @@ class ResultContentCard extends React.Component {
             [langText.ResultTitle.gameSix,langText.ResultTitle.gameSeven,langText.ResultTitle.gameEight],
             [langText.ResultTitle.gameNine,langText.ResultTitle.overtime]]
         }
+        if( sport === 35232 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
+            [langText.ResultTitle.gameThree,langText.ResultTitle.overtime]]
+        }
 
         let scores = data.scoreboard
         let scoreData = scores.reduce((acc, currentValue, currentIndex) => {
