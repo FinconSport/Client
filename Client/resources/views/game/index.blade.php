@@ -210,8 +210,7 @@
         createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
-        // if refresh no data
-        noData();
+        // if refresh no data    
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
