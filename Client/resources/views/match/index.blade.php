@@ -71,7 +71,8 @@
 	
 @endsection
 @section('styles')
-<link href="{{ asset('css/match.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/match.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/match.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
@@ -128,15 +129,6 @@
 				$('#selectOption').append(`<option value=${e.league_id}>${e.name}</option>`)
 			})
 			
-		}
-
-		const scoreResults = document.querySelectorAll('.scoreResult');
-		if (scoreResults.length > 0) {
-			scoreResults.forEach((element, index) => {
-				if (index % 2 === 0) {
-				element.style.color = 'red';
-				}
-			});
 		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 
