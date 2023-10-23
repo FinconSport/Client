@@ -146,7 +146,7 @@
 			str += '<td>' + v.home_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td class="scoreResult">' + v.scoreboard[k2][0] + '</td>'
+					str += '<td><span class="scoreResult">' + v.scoreboard[k2][0] + '</span></td>'
 				} else {
 					str += '<td>-</td>'
 				}
@@ -161,7 +161,7 @@
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
-					str += '<td class="scoreResult">' + v.scoreboard[k2][1] + '</td>'
+					str += '<td><span class="scoreResult">' + v.scoreboard[k2][1] + '</span></td>'
 				} else {
 					str += '<td>-</td>'
 				}
