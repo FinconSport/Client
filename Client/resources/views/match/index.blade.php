@@ -194,7 +194,7 @@
 
 	$(document).ready(function() {
 
-		if( searchData.league_id ) callResultListData.league_id = searchData.league_id // get result params
+		if( searchData.league_id && searchData.league_id !== '0' ) callResultListData.league_id = searchData.league_id // get result params
 		if( searchData.start_time ) callResultListData.start_time = searchData.start_time // get start_time params
 		if( searchData.end_time ) callResultListData.end_time = searchData.end_time // get end_time params
 
