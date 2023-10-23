@@ -912,6 +912,18 @@
                                                 calBetNameStr = v4.market_bet_name + ' ' + v4.line
                                             } else {
                                                 calBetNameStr = v4.market_bet_name_en == 1 ? home + ' ' + v4.line : away + ' ' + v4.line
+                                                switch (v4.market_bet_name_en) {
+                                                    case 1:
+                                                        calBetNameStr = home 
+                                                        break;
+                                                    case 2:
+                                                        calBetNameStr = away
+                                                        break;
+                                                    default:
+                                                        calBetNameStr = v4.market_bet_name
+                                                        break;
+                                                }
+                                                calBetNameStr += ' ' + v4.line
                                             }
 
                                             $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
@@ -1204,7 +1216,18 @@
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
-            let str = bet_name_en == 1 ? home : away
+            let str = ''
+            switch (bet_name_en) {
+                case 1:
+                    str = home
+                    break;
+                case 2:
+                    str = away
+                    break;
+                default:
+                    str = bet_name
+                    break;
+            }
             str += ' ' + bet_name_line
             $('#leftSlideOrder span[key="bet_name"]').html(str)
         }
