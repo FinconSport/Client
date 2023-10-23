@@ -1003,18 +1003,22 @@ button.dateCalendarBtn {
 }
 
 /* search bar one line container */
+.search-main-container.one-line-searchbar {
+    justify-content: flex-start;
+}
+
 .search-main-container.one-line-searchbar .search-bar-container {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    justify-content: flex-start;
     margin-bottom: 1rem;
 }
 
 .search-main-container.one-line-searchbar .datecalendar-con {
-    width: 30%;
+    width: 350px;
 }
 
 .search-main-container.one-line-searchbar .select-con {
-    width: 15%;
+    width: 140px;
     margin-right: 0.5rem;
 }
 
