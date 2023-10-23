@@ -129,6 +129,12 @@
 			leagueArr.forEach( e =>{
 				$('#selectOption').append(`<option value=${e.league_id}>${e.name}</option>`)
 			})
+			// place holder of date
+			let tt = new Date();
+			let yy = new Date();
+			yy.setDate(yy.getDate() - 1);
+			setRange(searchDate(yy), searchDate(tt))
+
 
 			// search condition
 			$('#selectOption').val(searchData.league_id || 0 )
@@ -198,7 +204,6 @@
                 callResultListData.sport = sport // default sport
 				matchTitle = langTrans.matchTitle[sport]
 				matchTitleAll = matchCommonTitle.concat(langTrans.matchTitle[sport])
-				console.log(callResultListData)
 				caller(resultList_api, callResultListData, resultListD) // resultListD
                 clearInterval(isReadySportInt)
             }
