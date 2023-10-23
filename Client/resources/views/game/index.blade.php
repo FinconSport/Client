@@ -531,7 +531,7 @@
             if(bet_div.find('div[key="marketBetRateKey"]').length === 0) {
                 bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
             } else {
-                bet_div.find('div[key="marketBetRateKey"]:last').append(marketBetRateTemp);
+                bet_div.find('div[key="marketBetRateKey"]:last').after(marketBetRateTemp);
             }
             
         }
