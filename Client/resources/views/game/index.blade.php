@@ -607,7 +607,7 @@
     function noData() {
         var noDataElement = document.createElement('div');
         noDataElement.innerHTML = "{{ trans('match.main.nomoredata') }}";
-        noDataElement.remove();
+        $('#bettingTypeContainer').empty();
         $('#bettingTypeContainer').append(noDataElement);
     }
 
