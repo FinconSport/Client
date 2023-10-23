@@ -211,30 +211,23 @@
             return;
         }
 
+        // nodata
+        $('.bettingTypeContainer .noDataContainer').remove()
+
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
-            console.log(bet_div, v.priority)
             // if not exist -> create
             if( bet_div.length === 0 ) createMarketContainer(k, v);
             if (v.market_bet) {
-                Object.entries(v.market_bet).map((v2, k2) => {
-                    v2[1].map((v3, k3) => {
+                const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
+                // 遍历排序后的数组
+                sortedKeys.forEach((key) => {
+                    v.market_bet[key].forEach((v3) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
-                        console.log(bet_item, v3.market_bet_id)
-
-                        // test
-                        if(bet_item) {
-                            console.log('exit', bet_item)
-                        } else {
-                            console.log('non exit', bet_item)
-                        }
-
-                        // test
-
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
-                            createNewElement(v, v3, v2[1].length);
+                            createNewElement(v, v3, v.market_bet[key].length);
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
