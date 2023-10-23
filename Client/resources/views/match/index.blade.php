@@ -102,6 +102,7 @@
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
+		queryParams.sport_id = sport
 		if( league_id ) queryParams.league_id = league_id;
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
