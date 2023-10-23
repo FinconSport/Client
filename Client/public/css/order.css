@@ -211,165 +211,7 @@ div[key="matchSportMenu"]{
     margin-left: 0.2rem;
   }
 
-/* search bar and statistic css */
-.search-statistic-container{
-    /* margin-top: 60px; */
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.search-statistic-container .search-bar-container {
-    width: 52%;
-}
-
-.search-statistic-container .search-bar-container {
-    padding: 0.5rem;
-    background: #415b5a;
-    border-radius: 5px;
-}
-
-.search-statistic-container .search-bar-container,
-.search-statistic-container .datepicker-con {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.search-statistic-container .datecalendar-con {
-    width: 72%;
-}
-
-.search-statistic-container .select-con {
-    width: 26%;
-    position: relative;
-}
-
-.search-statistic-container .select-con::after {
-    position: absolute;
-    content: '\23F7';
-    height: auto;
-    top: 50%;
-    right: 0%;
-    transform: translate(-50%, -50%);
-}
-
-.search-statistic-container #selectOption {
-    background: white;
-    word-wrap: normal;
-    padding: 0;
-    border: 1px solid #415b5a;
-    border-radius: 5px;
-    -moz-appearance: none;
-    -webkit-appearance: none; 
-    position: relative;
-    width: 100%;
-    outline: none;
-    cursor: pointer;
-    color: #415b5a;
-    overflow: visible;
-    max-height: 2rem
-}
-
-.select-con .ui.selection.dropdown{
-    min-height: 2rem;
-}
-
-span.orderData_mOrder {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.search-statistic-container #selectOption option{
-    padding: 0.5rem;
-    background-color: #fff;
-    outline: none;
-    cursor: pointer;
-    color: #415b5a!important;
-    box-shadow: 0 0 10px 100px #ffffff inset!important;
-}
-
-.search-statistic-container #selectOption option:focus,
-.search-statistic-container #selectOption option:checked,
-.search-statistic-container #selectOption option:hover  {
-    box-shadow: 0 0 10px 100px #ffffff inset!important;
-}
-
-/* for IE10 */ 
-.search-statistic-container #selectOption::-ms-expand { 
-    display: none; 
-} 
-
-.datecalendar-con .date-divider {
-    margin: 0px 0.5rem;
-    color: #ffffff;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.custom-datepicker-class {
-    background: white;
-    padding: 0.5rem;
-    border: 1px solid #415b5a;
-    border-radius: 5px;
-    top: 133px!important;
-}
-
-.custom-datepicker-class td span, 
-.custom-datepicker-class td a {
-    color: rgb(65, 91, 90)!important;
-}
-
-.ui-datepicker-today a, .ui-datepicker-today span{
-    font-weight: 600!important;
-}
-
-#datepicker_from,#datepicker_to {
-    outline: none;
-    border-radius: 0px;
-    border: none;
-}
-
-.datepicker-con .input-group-text{
-    border-radius: 0px!important;
-    background: #ffffff;
-    border: none;
-    position: relative;
-}
-
-.datepicker-con .input-group.date {
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.datebutton-cons {
-    /* margin-top: 0.8rem; */
-    justify-content: space-around;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 0.5rem;
-}
-
-.datecalendar-con .ui.form .fields{
-    margin: 0 -0.5em 0.5em;
-}
-
-.datecalendar-con .calendar .input input {
-    height: 2rem!important;
-}
-
-/* button.dateCalendarBtn {
-    border: none;
-    border-radius: 5px;
-    background: #ffffff;
-    padding: 0.2rem 0rem;
-    color: #415b5a;
-    font-size: small;
-    font-weight: 600;
-} */
-
-.search-statistic-container .statistic-container {
+.search-main-container .statistic-container {
     width: 58%;
     display: grid;
     grid-template-columns: 18.5% 18.5% 18.5% 18.5% 18.5%;
@@ -378,7 +220,7 @@ span.orderData_mOrder {
     padding-left: 1%;
 }
 
-.search-statistic-container .stats-container {
+.search-main-container .stats-container {
     height: 100%;
     background: #ffffff;
     padding: 0.5rem;
@@ -389,13 +231,13 @@ span.orderData_mOrder {
     justify-content: space-between;
 }
 
-.search-statistic-container .stats-container p{
+.search-main-container .stats-container p{
     text-align: end;
     font-size: 1.5rem;
     word-wrap: break-word;
 }
 
-.search-statistic-container .stats-container span{
+.search-main-container .stats-container span{
    font-size: small;
    font-weight: 600;
 }

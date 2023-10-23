@@ -2,30 +2,32 @@
 
 @section('content')
 	<!-- search -->
-	<div class="search-bar-container">
-		<div class="select-con">
-			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">	
-				<option value=0 selected>{{ trans('match.filter.selectLeague') }}</option>
-			</select>
-		</div>
-		<div class="datecalendar-con">
-			<div class="ui form">
-				<div class="two fields">
-					<div class="field">
-					<div class="ui calendar" id="rangestart">
-						<div class="ui input left icon">
-						<i class="calendar icon"></i>
-						<input type="text" placeholder="{{ trans('common.search_area.start_time') }}" onchange="redirectToPage()">
+	<div class="search-main-container one-line-searchbar">
+		<div class="search-bar-container">
+			<div class="select-con">
+				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">	
+					<option value=0 selected>{{ trans('match.filter.selectLeague') }}</option>
+				</select>
+			</div>
+			<div class="datecalendar-con">
+				<div class="ui form">
+					<div class="two fields">
+						<div class="field">
+						<div class="ui calendar" id="rangestart">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="{{ trans('common.search_area.start_time') }}" onchange="redirectToPage()">
+							</div>
 						</div>
-					</div>
-					</div>
-					<div class="field">
-					<div class="ui calendar" id="rangeend">
-						<div class="ui input left icon">
-						<i class="calendar icon"></i>
-						<input type="text" placeholder="{{ trans('common.search_area.end_time') }}" onchange="redirectToPage()">
 						</div>
-					</div>
+						<div class="field">
+						<div class="ui calendar" id="rangeend">
+							<div class="ui input left icon">
+							<i class="calendar icon"></i>
+							<input type="text" placeholder="{{ trans('common.search_area.end_time') }}" onchange="redirectToPage()">
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-	<div class="search-statistic-container">
+	<div class="search-main-container">
 		<div class="search-bar-container">
 			<div class="select-con">
 				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">
