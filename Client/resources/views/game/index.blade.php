@@ -22,7 +22,7 @@
         </div>
         <div class="col-12">
             <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
-                <div class="col-12"><span key='bet_status'> - <span key='bet_type'></span></div>
+                <div class="col-12"><span key='bet_status'></span><span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
@@ -264,7 +264,7 @@
                                 let calBetNameStr = ''
                                 let home = bet_item.attr('home')
                                 let away = bet_item.attr('away')
-                                if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                if( convertTeamPriArr.indexOf(v.priority) === -1 ) {
                                     calBetNameStr = v3.market_bet_name + ' ' + v3.line
                                 } else {
                                     switch (parseInt(v3.market_bet_name_en)) {
@@ -282,7 +282,7 @@
                                 }
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early + ' - ' : commonLangTrans.sport_menu.living + ' - ')
 
                                 $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
 
@@ -786,7 +786,7 @@
         let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
 
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
+        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early + ' - ' : commonLangTrans.sport_menu.living + ' - ')
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
