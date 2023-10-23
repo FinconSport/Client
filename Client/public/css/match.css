@@ -56,6 +56,10 @@ tr:nth-child(odd):hover, /* 当任何一个 tr 被悬停时 */
     font-weight: 600;
 }
 
-tr.even td.scoreResult:first-child {
+tr.even td:first-child {
+    color: black;
+}
+
+tr.even td:first-child span.scoreResult{
     color: red;
 }
