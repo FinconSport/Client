@@ -216,15 +216,24 @@
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
             console.log(bet_div, v.priority)
             // if not exist -> create
-            if( !bet_div ) createMarketContainer(k, v);
+            if( bet_div.length === 0 ) createMarketContainer(k, v);
             if (v.market_bet) {
                 Object.entries(v.market_bet).map((v2, k2) => {
                     v2[1].map((v3, k3) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         console.log(bet_item, v3.market_bet_id)
 
+                        // test
+                        if(bet_item) {
+                            console.log('exit', bet_item)
+                        } else {
+                            console.log('non exit', bet_item)
+                        }
+
+                        // test
+
                         // if not exist -> create / if exists -> update
-                        if( !bet_item ) {
+                        if( bet_item.length === 0 ) {
                             createNewElement(v, v3, v2[1].length);
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
@@ -321,7 +330,6 @@
             }
         });
 
-
         // check exist bet type content is still exist in the data
         $('#bettingTypeContainer .bettingtype-container').each(function() {
             let priority = parseInt($(this).attr('priority'))
@@ -330,7 +338,6 @@
             if( !result ) {
                 $(this).remove()
                 console.log('remove bettingtype-container')
-                console.log(result)
             }
         });
 
@@ -351,7 +358,6 @@
             if (!result) {
                 $(this).remove();
                 console.log('remove marketBetRateKey')
-                console.log(result)
             }
         });
     }
