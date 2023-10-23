@@ -108,7 +108,8 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 1rem 0rem;
 }
 
-#scoreboardContainer td {
+#scoreboardContainer td,
+#scoreboardContainer tbody th div {
     color: #ffffff;
 }
 
