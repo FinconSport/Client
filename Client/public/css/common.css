@@ -1010,7 +1010,7 @@ button.dateCalendarBtn {
 .search-main-container.one-line-searchbar .search-bar-container {
     width: auto;
     justify-content: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .search-main-container.one-line-searchbar .datecalendar-con {
