@@ -171,15 +171,14 @@
 			});
 			str += '</tr>'
 
-			const tdsWithRowspan2 = document.querySelectorAll('#tableContent td[rowspan="2"]');
-			if (tdsWithRowspan2.length > 0) {
-			const lastRowspan2Td = tdsWithRowspan2[tdsWithRowspan2.length - 1];
-			const nextSiblingP = lastRowspan2Td.nextElementSibling;
-			nextSiblingP.style.color = 'red';
-			} else {
-			const secondChildTd = document.querySelector('tr td:nth-child(2)');
-			secondChildTd.style.color = 'red';
-			}
+			const tdsWithRowspan2 = document.querySelectorAll('td[rowspan="2"]');
+			const targetTd = tdsWithRowspan2.length > 0
+			? tdsWithRowspan2[tdsWithRowspan2.length - 1]
+			: document.querySelector('tr td:nth-child(2)') || document.querySelector('tr td:nth-child(3)');
+
+			const nextSibling = targetTd.nextElementSibling;
+			nextSibling.style.color = tdsWithRowspan2.length > 0 ? 'red' : 'red';
+
 
 			$('#tableContent').append(str)
 
