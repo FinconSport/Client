@@ -160,6 +160,7 @@
 				str += '<td>-</td>';
 			}
 			});
+
 			str += '</tr>'
 
 			if( k % 2 === 0) {
@@ -169,12 +170,17 @@
 			}
 			str += '<td>' + v.away_team_name + '</td>'
 			matchTitle.forEach((v2, k2) => {
-				if(v.scoreboard[k2]) {
-					str += '<td><span class="scoreResult">' + v.scoreboard[k2][1] + '</span></td>'
+			if (v.scoreboard[k2]) {
+				if (k2 === 0) {
+				str += '<td class="scoreResult">' + v.scoreboard[k2][1] + '</td>';
 				} else {
-					str += '<td>-</td>'
+				str += '<td>' + v.scoreboard[k2][1] + '</td>';
 				}
+			} else {
+				str += '<td>-</td>';
+			}
 			});
+
 			str += '</tr>'
 
 			$('#tableContent').append(str)
