@@ -584,9 +584,6 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
-	
-	
-
 	function redirectToPage() {
 		let result = $('#selectOption').val()
 		let start_time = $('#rangestart input').val()

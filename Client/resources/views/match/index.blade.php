@@ -1,6 +1,43 @@
 @extends('layout.app')
 
 @section('content')
+	<!-- search -->
+	<div class="search-bar-container">
+		<div class="select-con">
+			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">
+			</select>
+		</div>
+		<div class="datecalendar-con">
+			<div class="ui form">
+				<div class="two fields">
+					<div class="field">
+					<div class="ui calendar" id="rangestart">
+						<div class="ui input left icon">
+						<i class="calendar icon"></i>
+						<input type="text" placeholder="{{ trans('common.search_area.start_time') }}" onchange="redirectToPage()">
+						</div>
+					</div>
+					</div>
+					<div class="field">
+					<div class="ui calendar" id="rangeend">
+						<div class="ui input left icon">
+						<i class="calendar icon"></i>
+						<input type="text" placeholder="{{ trans('common.search_area.end_time') }}" onchange="redirectToPage()">
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="datebutton-cons">
+				<button class="dateCalendarBtn" data-range="lastMonth">{{ trans('common.search_area.last_month') }}</button>
+				<button class="dateCalendarBtn" data-range="lastWeek">{{ trans('common.search_area.last_week') }}</button>
+				<button class="dateCalendarBtn" data-range="yesterday">{{ trans('common.search_area.yesterday') }}</button>
+				<button class="dateCalendarBtn" data-range="today">{{ trans('common.search_area.today') }}</button>
+				<button class="dateCalendarBtn" data-range="thisWeek">{{ trans('common.search_area.this_week') }}</button>
+				<button class="dateCalendarBtn" data-range="thisMonth">{{ trans('common.search_area.this_month') }}</button>
+			</div>
+		</div>
+	</div>
 	<!-- Table -->
 	<div id="matchContainer" class="match">
         <div id="tableContainer" style="overflow: auto;">
@@ -58,13 +95,38 @@
     var callResultListData = { token: token, player: player, sport: sport, page: 1 }
     const resultList_api = '/api/v2/result_index'
 
+
+	function redirectToPage() {
+		let result = $('#selectOption').val()
+		let start_time = $('#rangestart input').val()
+		let end_time = $('#rangeend input').val()
+
+		const queryParams = {};
+		queryParams.result = result
+		if( start_time ) queryParams.start_time = start_time;
+		if( end_time ) queryParams.end_time = end_time;
+		
+		const queryString = new URLSearchParams(queryParams).toString();
+		const urlWithQuery = `?${queryString}`;
+		window.location.href = urlWithQuery
+	}
+
 	function renderView(isIni = 0) {
+		// initial
 		if( isIni === 1 ) {
+			// table title
 			matchTitleAll.forEach(ele => {
 				let str = ''
 				str += '<th>' + ele + '</th>'
 				$('#tableTitle').append(str)
 			});
+
+			// select option
+			let leagueArr = sportListD.data.find(item => item.sport_id === sport).league
+			leagueArr.forEach( e =>{
+				$('#selectOption').append(`<option value=${e.league_id}>${e.name}</option>`)
+			})
+			
 		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 
