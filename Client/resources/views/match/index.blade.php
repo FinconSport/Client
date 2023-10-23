@@ -131,16 +131,18 @@
 			leagueArr.forEach( e =>{
 				$('#selectOption').append(`<option value=${e.league_id}>${e.name}</option>`)
 			})
-			// place holder of date
-			let tt = new Date();
-			let yy = new Date();
-			yy.setDate(yy.getDate() - 1);
-			setRange(searchDate(yy), searchDate(tt))
-
 
 			// search condition
 			$('#selectOption').val(searchData.league_id || 0 )
-			setRange(searchData.start_time || '', searchData.end_time || '')
+			if( !searchData.start_time && !searchData.end_time ) {
+				// place holder of date
+				let tt = new Date();
+				let yy = new Date();
+				yy.setDate(yy.getDate() - 1);
+				setRange(searchDate(yy), searchDate(tt))
+			} else {
+				setRange(searchData.start_time || '', searchData.end_time || '')
+			}
 		}
 		
 		Object.entries(resultListD.data).map(([k, v]) => { 

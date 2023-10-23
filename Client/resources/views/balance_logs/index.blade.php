@@ -148,8 +148,16 @@
 			setRange(searchDate(yy), searchDate(tt))
 
 			// search condition
-			$('#selectOption').val(searchData.balance_type || '' )
-			setRange(searchData.start_time || '', searchData.end_time || '')
+			$('#selectOption').val(searchData.league_id || 0 )
+			if( !searchData.start_time && !searchData.end_time ) {
+				// place holder of date
+				let tt = new Date();
+				let yy = new Date();
+				yy.setDate(yy.getDate() - 1);
+				setRange(searchDate(yy), searchDate(tt))
+			} else {
+				setRange(searchData.start_time || '', searchData.end_time || '')
+			}
 		}
 
 
