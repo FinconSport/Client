@@ -189,11 +189,6 @@
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
-            if (Object.keys(matchListD.data.list.market).length === 0) {
-                noData();
-                console.log('empty');
-            }
-
             createMarketContainer(k, v);
 
             if (v.market_bet) {
@@ -206,6 +201,10 @@
                 });
             }
         });
+
+        if (Object.keys(matchListD.data.list.market).length === 0) {
+            noData();
+        }
     }
 
     // ajax update
@@ -214,11 +213,10 @@
         createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
-        
+
         // if refresh no data    
         if (Object.keys(matchListD.data.list.market).length === 0) {
             noData();
-            console.log('empty');
         }
 
         // update content
@@ -614,6 +612,7 @@
 
     function noData() {
         var noDataElement = document.createElement('div');
+        noDataElement.classList.add('noDataContainer');
         noDataElement.innerHTML = "{{ trans('match.main.nomoredata') }}";
         $('#bettingTypeContainer').empty();
         $('#bettingTypeContainer').append(noDataElement);
