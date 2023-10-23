@@ -100,6 +100,7 @@
 				if(v.scoreboard[k2]) {
 					str += '<td>' + v.scoreboard[k2][1] + '</td>'
 					$('#tableContent tr.even td:nth-child(2)').css('color', 'red');
+					$('#tableContent tr.odd td:nth-child(2)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
