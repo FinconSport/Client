@@ -284,6 +284,7 @@
 
             if (!v && !bet_div) {
                 noData();
+                console.log('empty');
             }
         });
 
