@@ -84,6 +84,8 @@
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
 					str += '<td>' + v.scoreboard[k2][0] + '</td>'
+					$('#tableContent tr.even td:nth-child(4)').css('color', 'red');
+					$('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
 				}
@@ -99,7 +101,7 @@
 			matchTitle.forEach((v2, k2) => {
 				if(v.scoreboard[k2]) {
 					str += '<td>' + v.scoreboard[k2][1] + '</td>'
-					$('#tableContent tr.even td:nth-child(2)').css('color', 'red');
+					$('#tableContent tr.even td:nth-child(4)').css('color', 'red');
 					$('#tableContent tr.odd td:nth-child(4)').css('color', 'red');
 				} else {
 					str += '<td>-</td>'
