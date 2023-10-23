@@ -282,7 +282,7 @@
                 });
             }
 
-            if (!v && !bet_div) {
+            if (!v) {
                 noData();
                 console.log('empty');
             }
