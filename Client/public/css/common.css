@@ -1008,23 +1008,24 @@ button.dateCalendarBtn {
 }
 
 .search-main-container.one-line-searchbar .search-bar-container {
-    width: auto;
+    width: 100%;
     justify-content: flex-start;
     margin-bottom: 0.5rem;
 }
 
-.search-main-container.one-line-searchbar .datecalendar-con {
-    width: 350px;
+.search-main-container.one-line-searchbar .select-con {
+    width: 15%;
+    margin-right: 0.5rem;
 }
 
-.search-main-container.one-line-searchbar .select-con {
-    width: 140px;
-    margin-right: 0.5rem;
+.search-main-container.one-line-searchbar .datecalendar-con {
+    width: 45%;
 }
 
 .search-main-container.one-line-searchbar .datebutton-cons {
     grid-column-gap: 0.5rem;
     margin-left: 0.5rem;
+    width: 40%;
 }
 
 .search-main-container.one-line-searchbar .datecalendar-con .ui.form .fields{
@@ -1043,14 +1044,4 @@ button.dateCalendarBtn {
     padding: 0.2rem 1rem;
     height: 28px;
     width: auto;
-}
-
-@media screen and (max-width: 1100px){
-    .search-main-container.one-line-searchbar .select-con {
-        width: 120px;
-    }
-
-    .search-main-container.one-line-searchbar .datecalendar-con {
-        width: 300px;
-    }
 }
