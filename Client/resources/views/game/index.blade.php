@@ -22,7 +22,7 @@
         </div>
         <div class="col-12">
             <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
-                <div class="col-12"><span key='bet_status'><span key='bet_type'></span></div>
+                <div class="col-12"><span key='bet_status'> - <span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
@@ -527,9 +527,9 @@
 
 
         // 足球 平局 -> 主平客
-        // if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
-        //     bet_div.find('.marketBetRateContainer').after(bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`));
-        // } else {
+        if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
+            bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`).after(marketBetRateTemp);
+        } else {
             bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
         // }
         

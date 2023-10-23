@@ -22,7 +22,7 @@
         </div>
         <div class="col-12">
             <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
-                <div class="col-12"><span key='bet_status'></span><span key='bet_type'></span></div>
+                <div class="col-12"><span key='bet_status'> - </span><span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
