@@ -189,6 +189,10 @@
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
+            if (!v) {
+                noData();
+                console.log('empty');
+            }
             createMarketContainer(k, v);
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
