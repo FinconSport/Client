@@ -178,9 +178,9 @@
 			nextSiblingP.style.color = 'red';
 			} else {
 			const secondChildTd = document.querySelector('tr td:nth-child(2)');
-			secondChildTd.style.color = 'your_other_color';
+			secondChildTd.style.color = 'red';
 			}
-			
+
 			$('#tableContent').append(str)
 
 		})
