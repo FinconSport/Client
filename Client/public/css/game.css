@@ -4,8 +4,10 @@
     width: 100%;
     border-radius: 5px;
     overflow: hidden;
-    color:#ffffff;
-    padding: 2rem 2rem;
+    color: #fff;
+    padding: 0rem 2rem;
+    height: 178px;
+    display: flex;
 }
 
 .scoreboardCon p {

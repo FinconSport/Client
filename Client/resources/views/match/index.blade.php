@@ -157,7 +157,7 @@
 			matchTitle.forEach((v2, k2) => {
 			if (v.scoreboard[k2]) {
 				if (k2 === 0) { // <- only add color red text the first child(total)
-					str += '<td style="color:red;">' + v.scoreboard[k2][0] + '</td>';
+					str += '<td style="color:#ff7000;">' + v.scoreboard[k2][0] + '</td>';
 				} else {
 					str += '<td>' + v.scoreboard[k2][0] + '</td>';
 				}
@@ -177,7 +177,7 @@
 			matchTitle.forEach((v2, k2) => {
 			if (v.scoreboard[k2]) {
 				if (k2 === 0) { // <- only add color red text the first child(total)
-					str += '<td style="color:red;">' + v.scoreboard[k2][1] + '</td>';
+					str += '<td style="color:#ff7000;">' + v.scoreboard[k2][1] + '</td>';
 				} else {
 					str += '<td>' + v.scoreboard[k2][1] + '</td>';
 				}
