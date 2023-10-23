@@ -108,6 +108,10 @@ div#bettingTypeContainer {
     padding: 0rem 0rem 1rem 0rem;
 }
 
+#scoreboardContainer td {
+    color: #ffffff;
+}
+
 #scoreboardContainer tbody tr:last-child th{
     padding: 0rem 0rem 0rem 0rem;
 }
