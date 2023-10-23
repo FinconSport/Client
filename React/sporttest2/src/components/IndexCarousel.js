@@ -8,7 +8,8 @@ import  "../css/IndexCarousel.css";
 
 
 const imgStyle = {
-    width: 'inherit',
+    width: '100%',
+    height: '10.5rem',
     margin : 'auto',
     borderRadius: '10px',
 }
@@ -45,7 +46,7 @@ class IndexCarousel extends React.Component {
             infinite: true,
             slidesToShow: 1,
             slidesToScroll: 1,
-            autoplay: true,
+            // autoplay: true,
             autoplaySpeed: 5000,
             cssEase: "linear",
         };
@@ -53,7 +54,7 @@ class IndexCarousel extends React.Component {
         const { data } = this.props.api_res
         if(data !== undefined){
             return (
-                <div style={{ marginTop: '0.5rem', padding: '0 0.5rem' }}>
+                <div style={{ padding: '0 0.5rem', height: '10.5rem', marginBottom: '0.5rem' }}>
                     <Slider {...settings}>
                         <div>
                             <img style={imgStyle} alt="carousel_bg" src={require('../image/carousel_bg.png')} />
@@ -61,12 +62,11 @@ class IndexCarousel extends React.Component {
                         <div>
                             <img style={imgStyle} alt="sport" src={require('../image/sport.jpg')} />
                         </div>
-                        {
+                        {/* {
                             data.map( ele => {
                                 return(
                                     <div className="IndexCarouselGame" key={ele} >
                                         <div className="CarouselGameDiv">
-                                            {/* <img alt='home' src={require('../image/icon/teamIcon/主隊1.png')} /> */}
                                             <div style={teamTitle}>{ ele.home }</div>
                                         </div>
                                         <div className="CarouselGameDiv CarouselGameScore">
@@ -74,14 +74,12 @@ class IndexCarousel extends React.Component {
                                             <div className="mt-1" style={{fontSize: '0.9rem'}}>{ this.formatDateTime(ele.match_time) }</div>
                                         </div>
                                         <div className="CarouselGameDiv">
-                                            {/* <img alt='away' src={require('../image/icon/teamIcon/客隊1.png')} /> */}
                                             <div style={teamTitle}>{ ele.away }</div>
                                         </div>
                                     </div>
                                 )
                             })
-                        }
-                       
+                        } */}
                     </Slider>
                 </div>
             );

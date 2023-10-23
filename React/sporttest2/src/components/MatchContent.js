@@ -214,6 +214,7 @@ class MatchContent extends React.Component {
 
 	// 投注資料
 	getBetData = (betData) => {
+		betData.cate = menuArr[window.menu]
 		this.props.callBack(betData)
 	}
 
