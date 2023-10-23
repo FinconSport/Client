@@ -2193,7 +2193,7 @@ class LsportApiController extends Controller {
                     if ($return === false) {
                         $this->ApiError("03");
                     }
-                    $tmp_bet_data['start_time'] = $return['start_time'];
+                    $tmp_bet_data['start_time'] = date("Y-m-d H:i:s",strtotime($return['start_time']));
                     
                     // 滾球/早盤字樣判定
                     $market_type = 0;
@@ -2223,7 +2223,7 @@ class LsportApiController extends Controller {
                 }
 
                 $tmp_bet_data = $v;
-                $tmp_bet_data['start_time'] = $return['start_time'];
+                $tmp_bet_data['start_time'] = date("Y-m-d H:i:s",strtotime($return['start_time']));
 
                 // 滾球/早盤字樣判定
                 $market_type = 0;
