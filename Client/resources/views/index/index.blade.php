@@ -22,7 +22,7 @@
         </div>
         <div class="col-12">
             <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
-                <div class="col-12"><span key='bet_type'></span></div>
+                <div class="col-12"><span key='bet_status'></span><span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
@@ -926,6 +926,8 @@
                                             }
 
                                             $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+                                            $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
+
 
                                             $(`div[key="slideOrderCard"][fixture_id="${k3}"][market_id="${betData.market_id}"][market_bet_id="${v4.market_bet_id}"] span[key="odd"]`).html(v4.price)
 
@@ -1212,6 +1214,7 @@
             better_rate: 0,
         }
 
+        $('#leftSlideOrder span[key="bet_status"]').html(cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {

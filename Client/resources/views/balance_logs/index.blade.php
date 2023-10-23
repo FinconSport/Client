@@ -107,6 +107,8 @@
 
 	$(document).ready(function() {
 
+		if(searchData.start_time) callLogsListData.start_time = searchData.start_time
+		if(searchData.end_time) callLogsListData.end_time = searchData.end_time
 		caller(logsList_api, callLogsListData, logsListD) // logsListD
 
 

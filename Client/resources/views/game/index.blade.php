@@ -22,7 +22,7 @@
         </div>
         <div class="col-12">
             <div class="leftSlideOrderCard row m-0" key='slideOrderCard'>
-                <div class="col-12"><span key='bet_type'></span></div>
+                <div class="col-12"><span key='bet_status'><span key='bet_type'></span></div>
                 <div class="col-8 mb-2 mt-2"><span key='bet_name'></span></div>
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
@@ -188,7 +188,6 @@
         createScoreBoard(matchListD.data);
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
             createMarketContainer(k, v);
-
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
@@ -254,6 +253,42 @@
                             bet_item.attr('bet_name', v3.market_bet_name + ' ' + v3.line);
                             bet_item.attr('bet_name_en', v3.market_bet_name_en);
                             bet_item.attr('line', v3.line);
+
+                            let isSelected = bet_item.hasClass('m_order_on')
+
+                            // 左邊投注區塊
+                            if( isSelected ) {
+                                $('div[key="slideOrderCard"]').attr('market_id', v.market_id)
+                                $('div[key="slideOrderCard"]').attr('market_bet_id', v3.market_bet_id)
+
+                                let calBetNameStr = ''
+                                let home = bet_item.attr('home')
+                                let away = bet_item.attr('away')
+                                if( convertTeamPriArr.indexOf(i) === -1 ) {
+                                    calBetNameStr = v3.market_bet_name + ' ' + v3.line
+                                } else {
+                                    switch (parseInt(v3.market_bet_name_en)) {
+                                        case 1:
+                                            calBetNameStr = home 
+                                            break;
+                                        case 2:
+                                            calBetNameStr = away
+                                            break;
+                                        default:
+                                            calBetNameStr = v3.market_bet_name
+                                            break;
+                                    }
+                                    calBetNameStr += ' ' + v3.line
+                                }
+
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
+
+                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
+
+                                $('#moneyInput').trigger('change') // 最高可贏金額
+                            }
+
 
                             // new rate
                             bet_item.find('.odd').text(v3.price)
@@ -490,8 +525,14 @@
             marketBetRateTemp.removeAttr('onclick');
         }
 
-        // Append the new element to the correct container
-        bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+
+        // 足球 平局 -> 主平客
+        if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
+            bet_div.find('.marketBetRateContainer').after(bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`));
+        } else {
+            bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+        }
+        
     }
 
     // ------- game page scoreboard function-----------
@@ -742,15 +783,13 @@
             bet_rate: bet_rate,
             better_rate: 0,
         }
+        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
 
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
-
+        $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? langTrans.sport_menu.early : langTrans.sport_menu.living)
         if( convertTeamPriArr.indexOf(priority) === -1 ) {
             $('#leftSlideOrder span[key="bet_name"]').html(bet_name)
         } else {
-            // let str = bet_name_en == 1 ? home : away
-            // str += ' ' + bet_name_line
-            
             let str;
             if (bet_name_en == 1) {
                 str = home+= ' ' + bet_name_line;
@@ -782,7 +821,6 @@
         $('div[fixture_id=' + fixture_id + '][market_id=' + market_id + '][market_bet_id=' + market_bet_id + ']').addClass('m_order_on')
 
         // 限額
-        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
         betLimitationD = accountD.data.limit[cate][sport]
         $('#submitOrder').attr('min', betLimitationD.min)
         $('#submitOrder').attr('max', betLimitationD.max)
