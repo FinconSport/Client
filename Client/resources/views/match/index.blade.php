@@ -30,14 +30,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="datebutton-cons">
-					<button class="dateCalendarBtn" data-range="lastMonth">{{ trans('common.search_area.last_month') }}</button>
-					<button class="dateCalendarBtn" data-range="lastWeek">{{ trans('common.search_area.last_week') }}</button>
-					<button class="dateCalendarBtn" data-range="yesterday">{{ trans('common.search_area.yesterday') }}</button>
-					<button class="dateCalendarBtn" data-range="today">{{ trans('common.search_area.today') }}</button>
-					<button class="dateCalendarBtn" data-range="thisWeek">{{ trans('common.search_area.this_week') }}</button>
-					<button class="dateCalendarBtn" data-range="thisMonth">{{ trans('common.search_area.this_month') }}</button>
-				</div>
+			</div>
+			<div class="datebutton-cons">
+				<button class="dateCalendarBtn" data-range="lastMonth">{{ trans('common.search_area.last_month') }}</button>
+				<button class="dateCalendarBtn" data-range="lastWeek">{{ trans('common.search_area.last_week') }}</button>
+				<button class="dateCalendarBtn" data-range="yesterday">{{ trans('common.search_area.yesterday') }}</button>
+				<button class="dateCalendarBtn" data-range="today">{{ trans('common.search_area.today') }}</button>
+				<button class="dateCalendarBtn" data-range="thisWeek">{{ trans('common.search_area.this_week') }}</button>
+				<button class="dateCalendarBtn" data-range="thisMonth">{{ trans('common.search_area.this_month') }}</button>
 			</div>
 		</div>
 	</div>
