@@ -147,7 +147,7 @@
 			setRange(searchDate(yy), searchDate(tt))
 
 			// search condition
-			$('#selectOption').val(searchData.league_id || 0 )
+			$('#selectOption').val(searchData.balance_type || '' )
 			if( !searchData.start_time && !searchData.end_time ) {
 				// place holder of date
 				let tt = new Date();
