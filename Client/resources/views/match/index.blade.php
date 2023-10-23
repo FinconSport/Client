@@ -5,7 +5,7 @@
 	<div class="search-bar-container">
 		<div class="select-con">
 			<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">	
-				<option value=-1 selected>請選擇聯賽</option>
+				<option value=0 selected>請選擇聯賽</option>
 			</select>
 		</div>
 		<div class="datecalendar-con">
@@ -131,7 +131,7 @@
 			})
 
 			// search condition
-			$('#selectOption').val(searchData.league_id || -1 )
+			$('#selectOption').val(searchData.league_id || 0 )
 			setRange(searchData.start_time || '', searchData.end_time || '')
 		}
 		
