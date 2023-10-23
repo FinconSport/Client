@@ -198,6 +198,8 @@
                         createNewElement(v, v3, v.market_bet[key].length);
                     });
                 });
+            } else {
+                noData();
             }
         });
     }
@@ -208,6 +210,8 @@
         createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
+        // if refresh no data
+        noData();
 
         // update content
         Object.entries(matchListD.data.list.market).map(([k, v]) => {
@@ -309,6 +313,7 @@
                 $(this).remove();
             }
         });
+        
     
 
     }
@@ -597,6 +602,13 @@
 
             $('.scoreboardCon').append(livingContainerTemp);
         }
+    }
+
+    function noData() {
+        var noDataElement = document.createElement('div');
+        noDataElement.innerHTML = "{{ trans('match.main.nomoredata') }}";
+        noDataElement.remove();
+        $('#bettingTypeContainer').append(noDataElement);
     }
 
     // detect if there's still package need to be processed
