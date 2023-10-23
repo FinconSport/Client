@@ -611,7 +611,7 @@
             $('#livingtableHead').append(scoreBoardHeadTemp);
 
             // Home team
-            const homeTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
+            const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
 
             for (let i = 0; i < gameTitle.length; i++) {
@@ -625,7 +625,7 @@
             $('#livingtableBody').append(scoreBoardBodyTemp_home);
 
             // Away team
-            const awayTeamName = $(`<th style="width:25%;text-align:left;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
+            const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
 
             for (let i = 0; i < gameTitle.length; i++) {
