@@ -211,7 +211,9 @@ class CommonCalculator extends React.Component {
             maxMoney: '0.00',
             isBetterRate: false,
             maxReturnMoney: 1000000,
-            isPending: false
+            isPending: false,
+            minLimit: this.props.accountD.data.limit['early'][window.sport].min,
+            maxLimit: this.props.accountD.data.limit['early'][window.sport].max
         }
     }
 
@@ -230,6 +232,7 @@ class CommonCalculator extends React.Component {
 	}
     
     componentDidMount() {
+        // ws
         if(window.ws) window.ws.close()
         window.WebSocketDemo()
 
@@ -264,26 +267,6 @@ class CommonCalculator extends React.Component {
         this.props.CloseCal()
     }
 
-    componentDidUpdate(prevProps) {
-		// if (prevProps.data !== this.props.data && this.props.data !== null ) {
-        //     // 取得限額
-        //     const start_time = new Date(this.props.data.start_time);
-        //     const currentDate = new Date();
-        //     if (start_time < currentDate) {
-        //         this.setState({
-        //             maxLimit: window.limit.living[window.sport].max,
-        //             minLimit: window.limit.living[window.sport].min
-
-        //         })
-        //     } else {
-        //         this.setState({
-        //             maxLimit: window.limit.early[window.sport].max,
-        //             minLimit: window.limit.early[window.sport].min
-        //         })
-        //     }
-		// }
-	}
-
     // 餘額更新
     reFreshBalance = () => {
         this.caller(this.state.accountApi, 'accountApi_res', 1)
@@ -301,7 +284,12 @@ class CommonCalculator extends React.Component {
             }
             money += num
         } else {
-            money = this.state.inputMoney.toString().concat(num)
+            if(this.state.inputMoney.toString() === '0' && num === 0) return
+            if(this.state.inputMoney.toString() === '0') {
+                money = num
+            } else {
+                money = this.state.inputMoney.toString().concat(num)
+            }
         }
 
         const mOrderOdd = this.props.data.bet_data.reduce(
@@ -357,17 +345,17 @@ class CommonCalculator extends React.Component {
             return;
         }
 
-        // if ( money < this.state.minLimit ) {
-        //     this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
-        //     this.ClearMoney()
-        //     return;
-        // }
+        if ( money < this.state.minLimit ) {
+            this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
+            this.ClearMoney()
+            return;
+        }
 
-        // if ( money > this.state.maxLimit ) {
-        //     this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
-        //     this.ClearMoney()
-        //     return;
-        // }
+        if ( money > this.state.maxLimit ) {
+            this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
+            this.ClearMoney()
+            return;
+        }
 
         // 金額通過檢查 送出投注
         var betData = this.props.data.bet_data
@@ -396,7 +384,6 @@ class CommonCalculator extends React.Component {
         this.caller(queryString , 'afterBet')
 
         setTimeout(() => {
-            console.log(this.state.isPending)
             if( this.state.isPending ) {
                 this.setState({
                     isPending: false,
@@ -424,7 +411,6 @@ class CommonCalculator extends React.Component {
     render() {
         const sendOrderData = this.props.data?.bet_data
         const res = this.props.accountD
-
         if(res && sendOrderData) {
             return (
                 <>
@@ -497,8 +483,7 @@ class CommonCalculator extends React.Component {
                             <CalHeight3 className='row' style={{ padding: '0 0.5rem', background: 'rgb(225, 235, 236)', borderTop: '2px solid rgba(65, 91, 90, 0.5)', boxShadow: 'rgba(65, 91, 90, 0.3) 0px 0px 5px 3px' }}>
                                 <div className='col-6'>{langText.CommonCalculator.maxwinning} <span>{this.state.maxMoney}</span></div>
                                 <div className='col-6'>
-                                    {/* <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} /> */}
-                                    <MoneyInput readOnly value={this.state.inputMoney} className='w-100' />
+                                    <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} />
                                 </div>
                             </CalHeight3>
                             <CalHeight12 className='row'>

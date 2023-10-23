@@ -71,6 +71,7 @@ const SliderBrickHeight2 = styled.div`
 	.SliderBrickTitle{
 		font-size: 0.7rem;
 		line-height: 2rem;
+        white-space: pre;
 	}
 	.SliderBrickOdd{
 		font-size: 0.9rem;
@@ -91,7 +92,7 @@ const SliderRightArrow = {
 	position: 'absolute',
 	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
 	top: '5rem',
-	right: '-2%',
+	right: '0',
 	fontSize: '1.5rem'
 }
 
@@ -246,7 +247,7 @@ class MatchContentCard extends React.Component {
                                                             sport === 154914 ? 
                                                             langText.GameTopSlider.stageStr[sport][v.periods.period] + langText.GameTopSlider.baseballPeriod[v.periods.Turn]
                                                             : 
-                                                            langText.GameTopSlider.stageStr[sport][v.periods.period]
+                                                            langText.GameTopSlider.stageStr[sport][v?.periods?.period] || this.formatDateTime(v.start_time)
                                                         )
                                                     }
                                                 </p>
@@ -368,10 +369,13 @@ class MatchContentCard extends React.Component {
                                     </div>
                                     <div className='col-55 text-center' style={{ paddingLeft: 0}}>
                                         {
-                                            this.state.swiperIndex === 0 ?
-                                            <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
-                                            :
-                                            <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
+                                            window.sport !== 35232 &&
+                                            (
+                                                this.state.swiperIndex === 0 ?
+                                                <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
+                                                :
+                                                <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
+                                            )
                                         }
                                         <Swiper
                                             slidesPerView={1}
@@ -422,10 +426,7 @@ class MatchContentCard extends React.Component {
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
-                                                                                                    {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
-                                                                                                        s.market_bet_name + s.line :
-                                                                                                        (s.line === '' ? '\u00A0' : s.line)
-                                                                                                    }
+                                                                                                    {s.market_bet_name}
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
@@ -459,17 +460,16 @@ class MatchContentCard extends React.Component {
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
                                                                                                     {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
-                                                                                                        s.market_bet_name + s.line :
-                                                                                                        (s.line === '' ? '\u00A0' : s.line)
+                                                                                                        s.market_bet_name + s.line : s.line
                                                                                                     }
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
-                                                                                                        <p className='SliderBrickOdd odd'>
+                                                                                                        <p className='SliderBrickOdd odd' style={window.sport !== 6046 && langText.MatchContent.allWinPriority.indexOf(k) !== -1 ? {lineHeight: '3.5rem'} : null}>
                                                                                                             { s.price }
                                                                                                         </p>
                                                                                                         :
-                                                                                                        <p className='SliderBrickOdd'>
+                                                                                                        <p className='SliderBrickOdd' style={window.sport !== 6046 && langText.MatchContent.allWinPriority.indexOf(k) !== -1 ? {lineHeight: '3.5rem'} : null}>
                                                                                                             <AiFillLock />
                                                                                                         </p>
                                                                                                     }

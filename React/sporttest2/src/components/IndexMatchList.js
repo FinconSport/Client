@@ -28,6 +28,7 @@ class IndexMatchList extends React.Component {
 
     // 早盤 滾球 
     handleTabClick = (menu_id) => {
+		document.getElementById('panelContiner').scrollTo({top: 0, behavior: 'smooth'});
         menu_id = parseInt(menu_id)
         window.menu = menu_id
         this.setState({
@@ -86,27 +87,21 @@ class IndexMatchList extends React.Component {
                                 })
                             }
                         </div>
-                        <div style={{width: '76%', marginLeft: '4%', overflowY: 'auto'}}>
-                            {
-                                Object.entries(res.data).map(([key, value]) => {
-                                    return(
-                                        <div style={{ overflowY: 'auto'}}>
-                                            {
-                                                value.total !== 0 &&
-                                                this.state.menu_id === mapping[key][1] &&
-                                                Object.entries(value.items).map(([key2, e]) => {
-                                                    return(
-                                                        e.count !== 0 &&
-                                                        <div key={key2} onClick={()=>this.handlePanelClick(key2)}>
-                                                            <IndexMatchMenuPanel name={e.name} sport={key2} count={e.count} />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    )
-                                })
-                            }
+                        <div style={{ width: '76%', marginLeft: '4%', overflowY: 'auto' }} id="panelContiner">
+                            {Object.entries(res.data)
+                                .filter(([key, value]) => value.total !== 0 && this.state.menu_id === mapping[key][1])
+                                .map(([key, value]) => (
+                                    <div style={{ paddingBottom: '2rem' }} key={key}>
+                                        {Object.entries(value.items)
+                                            .filter(([key2, e]) => e.count !== 0)
+                                            .map(([key2, e]) => (
+                                                <div key={key2} onClick={() => this.handlePanelClick(key2)}>
+                                                    <IndexMatchMenuPanel name={e.name} sport={key2} count={e.count}/>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </>

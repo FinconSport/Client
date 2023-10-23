@@ -11,7 +11,7 @@
 .IndexCarouselGame{
 	background-image: url('../image/banner_bg.png');
 	background-size: 100% 100%;
-	height: 10.5rem;
+	height: 10rem;
 	display: flex!important;
 	position: relative;
 }
