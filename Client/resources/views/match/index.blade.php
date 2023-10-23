@@ -97,12 +97,12 @@
 
 
 	function redirectToPage() {
-		let result = $('#selectOption').val()
+		let league_id = $('#selectOption').val()
 		let start_time = $('#rangestart input').val()
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
-		queryParams.result = result
+		queryParams.league_id = league_id
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
 		
@@ -184,6 +184,10 @@
 	}
 
 	$(document).ready(function() {
+
+		if( searchData.league_id ) callResultListData.league_id = parseInt(searchData.league_id) // get result params
+		if( searchData.start_time ) callResultListData.start_time = searchData.start_time // get start_time params
+		if( searchData.end_time ) callResultListData.end_time = searchData.end_time // get end_time params
 
 		// detest is sport List is ready
         isReadySportInt = setInterval(() => {
