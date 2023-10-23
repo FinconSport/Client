@@ -1262,7 +1262,7 @@ class LsportApiController extends Controller {
         $tmp['player_id'] = $player_id;
         $tmp['player'] = $player_account;
         $tmp['currency_type'] = $currency_type;
-        $tmp['type'] = "game_bet";
+        $tmp['balance_type'] = "game_bet";
         $tmp['change_balance'] = $change_amount;
         $tmp['before_balance'] = $before_amount;
         $tmp['after_balance'] = $after_amount;
@@ -1658,7 +1658,7 @@ class LsportApiController extends Controller {
         $tmp['player_id'] = $player_id;
         $tmp['player'] = $player_account;
         $tmp['currency_type'] = $player_currency_type;
-        $tmp['type'] = "game_bet";
+        $tmp['balance_type'] = "game_bet";
         $tmp['change_balance'] = $change_amount;
         $tmp['before_balance'] = $before_amount;
         $tmp['after_balance'] = $after_amount;
