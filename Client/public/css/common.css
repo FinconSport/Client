@@ -1044,3 +1044,13 @@ button.dateCalendarBtn {
     height: 28px;
     width: auto;
 }
+
+@media screen and (max-width: 1100px){
+    .search-main-container.one-line-searchbar .select-con {
+        width: 120px;
+    }
+
+    .search-main-container.one-line-searchbar .datecalendar-con {
+        width: 300px;
+    }
+}
