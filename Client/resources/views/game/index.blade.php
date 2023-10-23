@@ -198,8 +198,6 @@
                         createNewElement(v, v3, v.market_bet[key].length);
                     });
                 });
-            } else {
-                noData();
             }
         });
     }
@@ -282,6 +280,10 @@
                         }
                     });
                 });
+            }
+
+            if (!v && !bet_div) {
+                noData();
             }
         });
 
