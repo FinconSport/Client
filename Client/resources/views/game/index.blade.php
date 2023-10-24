@@ -330,7 +330,6 @@
             result = matchListD.data?.list?.market?.find(item => item.priority === priority);
             if( !result ) {
                 $(this).remove()
-                console.log('remove bettingtype-container')
             }
         });
 
@@ -350,7 +349,6 @@
             
             if (!result) {
                 $(this).remove();
-                console.log('remove marketBetRateKey')
             }
         });
     }
@@ -528,12 +526,7 @@
         if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
             bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`).after(marketBetRateTemp);
         } else {
-            if(bet_div.find('div[key="marketBetRateKey"]').length === 0) {
-                bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
-            } else {
-                bet_div.find('div[key="marketBetRateKey"]:last').after(marketBetRateTemp);
-            }
-            
+            bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
         }
         
     }
