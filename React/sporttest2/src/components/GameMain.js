@@ -165,10 +165,10 @@ class GameMain extends React.Component {
                                                                     <div key={k2}>
                                                                         <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
                                                                             <div className="col-5 row m-0 p-0">
-                                                                                <div className="col-4 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
+                                                                                <div className="col-3 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
                                                                                 {
                                                                                     data.status === 2 && sport === 6046 && langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
-                                                                                    <div className="col-8 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                                    <div className="col-9 p-0" style={{ textAlign: 'right' }}>{v2.line} (1-2)</div>
                                                                                     :
                                                                                     <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
                                                                                 }

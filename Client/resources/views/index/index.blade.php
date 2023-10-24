@@ -781,12 +781,6 @@
                             // stage
                             let timerStr = null
                             if( v3.periods ) {
-                                // test
-                                v3.periods.period = 80
-                                // test
-                                
-
-                                
                                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                                 // bet data
                                 renderBetArea(k, mainPriorityArr, v3, k3, card)

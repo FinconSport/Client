@@ -220,6 +220,7 @@ class MatchContentCard extends React.Component {
                 }
             }
 
+
             return (
                 <div style={{ ...MatchCard, ...(this.props.isOpen ? CardShow : CardHide) }} cardid={v.fixture_id}>
                     <SlideToggle duration={500} ref={this.slideToggleRef} collapsed={false} >
@@ -460,7 +461,7 @@ class MatchContentCard extends React.Component {
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
                                                                                                 <p className='SliderBrickTitle'>
                                                                                                     {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
-                                                                                                        s.market_bet_name + s.line : s.line
+                                                                                                        s.market_bet_name + s.line : s.line + ' (1-2)'
                                                                                                     }
                                                                                                 </p>
                                                                                                     {
