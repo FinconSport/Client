@@ -105,7 +105,8 @@ div#bettingTypeContainer {
 } */
 
 #scoreboardContainer thead th{
-    padding: 0rem 0rem 1rem 0rem;
+    padding: 0rem 0rem 0.5rem 0rem;
+    color: #ffffff;
 }
 
 #scoreboardContainer td,
@@ -159,6 +160,8 @@ div#bettingTypeContainer {
     height: 2.5rem;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .textOverFlowCon::-webkit-scrollbar{

@@ -199,7 +199,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        // createScoreBoard(matchListD.data);
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -582,7 +582,7 @@
             }
 
             const stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
-            const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;margin-bottom:0px;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
+            const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
             let baseballShowStage = []
@@ -604,10 +604,10 @@
                     }
 
                     if(baseballShowStage.indexOf(i) !== -1) {
-                        scoreBoardHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                        scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                     }
                 } else {
-                    scoreBoardHeadTemp.append($('<td style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                    scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
                 
             }
