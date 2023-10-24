@@ -580,6 +580,8 @@
             if( sport === 154914 ) {
                 data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
+
+            console.log(stageStr);
             const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${commonLangTrans.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
