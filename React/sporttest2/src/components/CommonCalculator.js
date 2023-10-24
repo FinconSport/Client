@@ -457,7 +457,10 @@ class CommonCalculator extends React.Component {
                                     </CalInfoCardWrapper>
                                 </CalHeight8>
                                 <CalHeight3 className='row' style={{ padding: '0 0.5rem', background: 'rgb(225, 235, 236)', borderTop: '2px solid rgba(65, 91, 90, 0.5)', boxShadow: 'rgba(65, 91, 90, 0.3) 0px 0px 5px 3px' }}>
-                                    <div className='col-6'>{langText.CommonCalculator.maxwinning} <span>{this.state.maxMoney}</span></div>
+                                    <div className='col-6 row m-0'>
+                                        <div className='col-5 p-0'>{langText.CommonCalculator.maxwinning}</div>
+                                        <div className='col-7 p-0' style={{ overflowX: 'hidden'}}>{this.state.maxMoney}</div>
+                                    </div>
                                     <div className='col-6'>
                                         <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} />
                                     </div>

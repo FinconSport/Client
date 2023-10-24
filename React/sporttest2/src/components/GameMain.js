@@ -168,7 +168,7 @@ class GameMain extends React.Component {
                                                                                 <div className="col-3 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
                                                                                 {
                                                                                     data.status === 2 && sport === 6046 && langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
-                                                                                    <div className="col-9 p-0" style={{ textAlign: 'right' }}>{v2.line} (1-2)</div>
+                                                                                    <div className="col-9 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
                                                                                     :
                                                                                     <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
                                                                                 }
