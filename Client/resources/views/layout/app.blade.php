@@ -164,7 +164,7 @@
 		// player and sport_id
 		const player = @json(session('player.id'));
 		const langText = @json(session('player.lang'));
-		const token = 12345
+		const token = @json(session('player.token'));
 		var sport = parseInt(searchData.sport)
 
 		// loading page control
