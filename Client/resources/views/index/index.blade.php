@@ -792,7 +792,9 @@
                                 renderBetArea(k, mainPriorityArr, v3, k3, card)
                                 // exception baseball
                                 if( sport === 154914 ) {
-                                    v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                                    if( parseInt(v3.periods.period) < 10 ) {
+                                        v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
+                                    }
 
                                     // base
                                     let baseCont = card.find('img[alt="base"]')
