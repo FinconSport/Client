@@ -33,7 +33,7 @@ const ResultSportItem = styled.div`
     color: white;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 1px;
-    width: 3rem;
+    width: 3.2rem;
     text-align: center;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
@@ -42,6 +42,15 @@ const ResultSportItem = styled.div`
     font-weight: 600;
     position: relative;
     padding-bottom: 0.2rem;
+    
+    p {
+        font-size: 0.7rem;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0.9);
+    }
 `
 
 const backIcon = {

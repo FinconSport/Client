@@ -209,7 +209,7 @@ class CommonCalculator extends React.Component {
             inputMoney: '',
             maxMoney: '0.00',
             isBetterRate: false,
-            isPending: false,
+            isPending: false
         }
     }
 

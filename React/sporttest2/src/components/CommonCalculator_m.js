@@ -211,9 +211,7 @@ class CommonCalculator extends React.Component {
             maxMoney: '0.00',
             isBetterRate: false,
             maxReturnMoney: 1000000,
-            isPending: false,
-            minLimit: this.props.accountD.data.limit['early'][window.sport].min,
-            maxLimit: this.props.accountD.data.limit['early'][window.sport].max
+            isPending: false
         }
     }
 
@@ -255,6 +253,15 @@ class CommonCalculator extends React.Component {
                 clearInterval(window.wsStatus)
             }
         }, 500);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.data !== this.props.data && this.props.data !== null ) {
+            this.setState({
+                minLimit: this.props.accountD.data.limit['early'][window.sport].min,
+                maxLimit: this.props.accountD.data.limit['early'][window.sport].max
+            })
+        }
     }
     
     // 關閉計算機
