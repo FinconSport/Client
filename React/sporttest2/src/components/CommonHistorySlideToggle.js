@@ -119,7 +119,7 @@ class CommonHistory extends React.Component {
                             </div>
                         </div>
                         <div className='col-3 p-0 text-right'>
-                            {val.m_order === 0 || this.state.isOpen === true ? `@${val.bet_data[0]?.bet_rate}` : null}
+                            { val.bet_data[0]?.bet_rate !== null && (val.m_order === 0 || this.state.isOpen === true) ? `@${val.bet_data[0]?.bet_rate}` : null}
                         </div>
                     </div>
                     
@@ -210,7 +210,7 @@ class CommonHistory extends React.Component {
                                     </div>
                                     <div className='col-3 p-0 text-right'>
                                         <span style={this.state.isOpen === false ? {display: 'none'}:null}>
-                                            {'@' + v.bet_rate}
+                                            { v.bet_rate !== null && '@' + v.bet_rate}
                                         </span>
                                     </div>
                                 </div>
