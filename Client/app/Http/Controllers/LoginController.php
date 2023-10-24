@@ -25,7 +25,7 @@ class LoginController extends Controller {
       $default_page = "/login";
 		
       $player_id = $input['player'];
-      $token = $input['token'];
+      $token = MD5($input['token']);
       $is_mobile = 0;
       if (isset($input['m'])) {
         $is_mobile = $input['m'];
