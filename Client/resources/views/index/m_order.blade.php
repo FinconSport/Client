@@ -41,7 +41,7 @@
                 </div>
                 <p class="fs-4 mb-0" id="m_order_rate"></p>
                 <div class="col-6 mb-2">{{ trans('index.bet_area.maxwin') }}</div>
-                <div class="col-6 mb-2 text-right" id="maxWinning">0.00</div>
+                <div class="col-6 mb-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
                 <div class="col-12 m-0" id="quickContainer">
                     <div class="col-3">
                         <div class="quick" value=100>+100</div>
@@ -1166,11 +1166,11 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        let min = parseInt($('#submitOrder').attr('min'))
-        let max = parseInt($('#submitOrder').attr('max'))
+        // let min = parseInt($('#submitOrder').attr('min'))
+        // let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        if (inputMoney < min) inputMoney = min
-        if (inputMoney > max) inputMoney = max
+        // if (inputMoney < min) inputMoney = min
+        // if (inputMoney > max) inputMoney = max
         let maxMoney = (inputMoney * mOrderRate).toFixed(2);
         if (maxMoney > maxRetunMoney) maxMoney = maxRetunMoney
         $('#maxWinning').html(maxMoney)
