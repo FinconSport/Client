@@ -199,7 +199,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        // createScoreBoard(matchListD.data);
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
