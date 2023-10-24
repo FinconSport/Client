@@ -199,7 +199,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        createScoreBoard(matchListD.data);
+        // createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -580,7 +580,9 @@
             if( sport === 154914 ) {
                 data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
-            const TeamNameHead = $(`<th style="width:25%;text-align:left;"><div class="setHeightDiv">${commonLangTrans.stageArr[sport][data.list.periods.period]}${stageStr}</div></th>`);
+
+            const stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
+            const TeamNameHead = $(`<th style="width: 25%; text-align: left;"><div class="setHeightDiv">${stageText}${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
             let baseballShowStage = []
