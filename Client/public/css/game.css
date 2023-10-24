@@ -159,6 +159,8 @@ div#bettingTypeContainer {
     height: 2.5rem;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .textOverFlowCon::-webkit-scrollbar{
