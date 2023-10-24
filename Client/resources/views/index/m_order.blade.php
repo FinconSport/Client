@@ -1203,10 +1203,14 @@
         }
         if (sendOrderData.bet_amount < min) {
             showErrorToast(langTrans.js.tooless_bet_amout + min);
+            $('#moneyInput').val(min)
+            $('#moneyInput').trigger('change')
             return;
         }
         if (sendOrderData.bet_amount > max) {
             showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            $('#moneyInput').val(max)
+            $('#moneyInput').trigger('change')
             return;
         }
 
