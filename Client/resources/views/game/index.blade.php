@@ -583,9 +583,7 @@
 
             const stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
             const TeamNameHead = $(`<th style="width: 25%; text-align: left;"><div class="setHeightDiv">${stageText}${stageStr}</div></th>`);
-            console.log("teamheadname" + stageText + stageStr);
-
-            scoreBoardHeadTemp.append(TeamNameHead);
+            scoreBoardHeadTemp.append(homeTeamName);
 
             let baseballShowStage = []
             for (let i = 0; i < gameTitle.length; i++) {
