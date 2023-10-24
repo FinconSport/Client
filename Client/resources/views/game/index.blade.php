@@ -582,7 +582,7 @@
             }
 
             const stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
-            const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText}${stageStr}</div></th>`);
+            const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
             let baseballShowStage = []
