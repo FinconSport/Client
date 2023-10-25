@@ -139,9 +139,8 @@ class CommonHistory extends React.Component {
                         k !== '0' && (
                             <ToggleDiv key={k}>
                                 <div>
-                                    <span>
-                                        {v.league_name}&ensp;({ this.formatDateTime(v.start_time) })
-                                    </span>
+                                    { v.league_name }&ensp;
+                                    <span style={{ color: 'rgb(180,180,180)'}}>({ this.formatDateTime(v.start_time) })</span>
                                 </div>
                                 <div className='row m-0'>
                                     <div className='col-9 p-0'>

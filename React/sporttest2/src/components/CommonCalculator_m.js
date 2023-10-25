@@ -492,7 +492,7 @@ class CommonCalculator extends React.Component {
                                                     <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
                                                     { data.away_team_name }
                                                 </div>
-                                                <div>{ data.market_name }</div>
+                                                <div>{langText.CommonCalculator.early} - { data.market_name }</div>
                                                 <div style={BetItemStyle} className='row m-0'>
                                                     <div className='col-10 p-0 text-left'>{ data.bet_item_name }</div>
                                                     <div className='col-2 p-0 odd text-right mcalCardInfo' market_bet_id={data.market_bet_id}>{ data.bet_rate }</div>

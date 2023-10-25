@@ -93,6 +93,8 @@ const twTranslation = {
     submit: "投注",
     limit: "限額",
     pending: "確認中",
+    early: '早盤',
+    living: '滾球',
   },
   GameTopSlider: {
     collect: "收藏",
