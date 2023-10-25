@@ -74,6 +74,14 @@ class LsportApiController extends Controller {
     /**
      * CommonAccount
      * 
+     * 先以玩家ID檢查玩家是否需要重新登入。
+     * 如果無須重新登入則回傳玩家的帳號名稱及帳戶餘額。
+     * Firstly checks if the player needs to re-login.
+     * If re-login is not required, then return an array that includes the player's account name and account balance.
+     *
+     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
+     * @return ::ApiSuccess($data = ARRAY{account, balance}) | ApiError
      */
     public function CommonAccount(Request $request) {
       
@@ -86,7 +94,7 @@ class LsportApiController extends Controller {
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->first();
+        $return = Player::where("id", $player_id)->fetch();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -99,7 +107,7 @@ class LsportApiController extends Controller {
 
         // 獲取agent的limit資料
         $agent_id = $return['agent_id'];
-        $return = Agent::where("id",$agent_id)->first();
+        $return = Agent::where("id",$agent_id)->fetch();
         if ($return === false) {
             $this->ApiError("03");
         }
@@ -118,6 +126,13 @@ class LsportApiController extends Controller {
 
     /**
      * IndexCarousel
+     * 
+     * 取出當前有效的'賽事結果'讓前端顯示。
+     * 
+     *
+     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
+     * @return ::ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
      */
     // 輪播
     public function IndexCarousel(Request $request) {
@@ -190,6 +205,13 @@ class LsportApiController extends Controller {
 
     /**
      * IndexMarquee
+     * 
+     * 取出當前有效的'Client端跑馬燈'(也就是Client端系統公告)讓前端顯示。
+     * 
+     * 
+     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
+     *                          # *player: 玩家的ID。 Required. Represents the player ID.
+     * @return ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
      */
     // 首頁跑馬燈
     public function IndexMarquee(Request $request) {
@@ -223,7 +245,7 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 自DB取出LsportNotice
-        $week_before = strtotime(date('Y-m-d 00:00:00', strtotime('-1 week')));
+        $week_before =  date('Y-m-d 00:00:00', strtotime('-1 week'));
         $return = LsportNotice::getList(["create_time" => $week_before]);
         if ($return === false) {
             $this->ApiError("02");
@@ -658,7 +680,8 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = strtotime(date("Y-m-d 00:00:00", strtotime("-1 day"))); // 預設昨天
         $after_tomorrow_es = $today + 3 * 24 * 60 * 60; 
-        $today_tomorrow_es = $today; // 這個「"」不能拿掉, es會報錯
+        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
+        $today_tomorrow_es = '"'.date('Y-m-d', $today).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
 
         //////////////////////////////////////////
         // ES取得賽事
@@ -681,7 +704,7 @@ class LsportApiController extends Controller {
         })
         ->orderBy("league_id", "ASC")
         ->orderBy("start_time","ASC")
-        ->get();
+        ->list(60);
         if ($return === false) {
             $this->ApiError('02');
         }
@@ -778,7 +801,7 @@ class LsportApiController extends Controller {
             $return = LsportMarket::where("fixture_id",$fixture_id)
             ->whereIn("market_id",$market_list_id[$sport_id])
             ->orderBy('market_id', 'ASC')
-            ->get();
+            ->list();
             if ($return === false) {
                 $this->ApiError('03');
             }
@@ -832,10 +855,9 @@ class LsportApiController extends Controller {
                 // 取得market_bet
                 $return = LsportMarketBet::where('fixture_id',$fixture_id)
                 ->where("market_id",$market_id)
-                //  ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
-                ->where("base_line",$market_main_line)  // main line 有時是空值, 要帶 "
+                ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
-                ->get();
+                ->list();
                 if ($return === false) {
                     $this->ApiError('04');
                 }
