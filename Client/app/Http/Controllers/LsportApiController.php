@@ -41,6 +41,7 @@ class LsportApiController extends Controller {
         'baseball' => 154914,
         'basketball' => 48242,
         'football' => 6046,
+        'icehockey' => 35232
     );
     
     //lsport_fixture.status 賽事狀態
