@@ -70,7 +70,6 @@ const SliderBrickHeight2 = styled.div`
 	.SliderBrickTitle{
 		font-size: 0.7rem;
 		line-height: 2rem;
-        white-space: pre;
 	}
 	.SliderBrickOdd{
 		font-size: 0.9rem;
@@ -91,7 +90,7 @@ const SliderRightArrow = {
 	position: 'absolute',
 	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
 	top: '5rem',
-	right: '-2%',
+	right: '0',
 	fontSize: '1.5rem'
 }
 
@@ -249,7 +248,7 @@ class MatchContentCard extends React.Component {
                                                 <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 1 ? 'red' : null}}>
                                                     {v.home_team_name}
                                                 </div>
-                                                <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
+                                                <div className='col-2 p-0 text-center' style={{ lineHeight: '2rem', color: '#ff7000'}}>
                                                     { v?.scoreboard && v.scoreboard[1][0] }
                                                 </div>
                                             </div>
@@ -257,7 +256,7 @@ class MatchContentCard extends React.Component {
                                                 <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 2 ? 'red' : null}}>
                                                     { v.away_team_name }
                                                 </div>
-                                                <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
+                                                <div className='col-2 p-0 text-center' style={{ lineHeight: '2rem', color: '#ff7000'}}>
                                                     { v?.scoreboard && v.scoreboard[2][0] }
                                                 </div>
                                             </div>
@@ -362,9 +361,10 @@ class MatchContentCard extends React.Component {
                                                                                                 style={ this.props?.selectedM?.market_bet_id === s.market_bet_id ? selectedOn : null}
                                                                                                 >
                                                                                                 <p className='SliderBrickTitle'>
-                                                                                                    {langText.MatchContent.sizePriority.indexOf(k) !== -1 ?
-                                                                                                        s.market_bet_name + s.line : s.line
+                                                                                                {langText.MatchContent.sizePriority.indexOf(k) !== -1 &&
+                                                                                                        s.market_bet_name
                                                                                                     }
+                                                                                                    <span style={{color: '#ff7000'}}>{s.line}</span>
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?

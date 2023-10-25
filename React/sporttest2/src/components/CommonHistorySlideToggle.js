@@ -88,7 +88,8 @@ class CommonHistory extends React.Component {
             <>
                 <div>
                     <div>
-                        { val.bet_data[0].league_name }&ensp;({ this.formatDateTime(val.bet_data[0].start_time) })
+                        { val.bet_data[0].league_name }&ensp;
+                        <span style={{ color: 'rgb(180,180,180)'}}>({ this.formatDateTime(val.bet_data[0].start_time) })</span>
                     </div>
                     <div className='row m-0'>
                         <div className='col-9 p-0'>

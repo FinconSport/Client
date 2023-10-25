@@ -143,7 +143,7 @@ class ResultContentCard extends React.Component {
             return (
                 <div style={ ResultCard_item } cardid={v.fixture_id}>
                     <div>
-                        <div className='row m-0 p-1'>
+                        <div className='row m-0' style={{ padding: '0.25rem 1rem'}}>
                             {/* left part */}
                             <div className='col-45' style={{ padding: '0 0.25rem 0 0'}}>
                                 <div style={rowHeight15}>
