@@ -36,9 +36,10 @@
         </div>
         <div class="col-12 row m-0">
             <div id="leftSlideOrderCardBetArea" class="row m-0">
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="{{ trans('index.bet_area.limit') }}0-10000">
                 </div>
+                <div class="col-12 m-0 text-red"><p class="mb-0" id="betPrompt"></p></div>
                 <p class="fs-4 mb-0" id="m_order_rate"></p>
                 <div class="col-6 mb-2">{{ trans('index.bet_area.maxwin') }}</div>
                 <div class="col-6 mb-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
@@ -1202,18 +1203,22 @@
             return;
         }
         if (sendOrderData.bet_amount < min) {
-            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            // showErrorToast(langTrans.js.tooless_bet_amout + min);
+            $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
             $('#moneyInput').val(min)
             $('#moneyInput').trigger('change')
             return;
         }
         if (sendOrderData.bet_amount > max) {
-            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            // showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            $('#betPrompt').html(langTrans.js.toohigh_bet_amout + min)
             $('#moneyInput').val(max)
             $('#moneyInput').trigger('change')
             return;
         }
 
+        
+        $('#betPrompt').html('')
         // Show loading spinner while submitting
         showLoading();
 

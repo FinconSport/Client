@@ -1304,8 +1304,8 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        let min = parseInt($('#submitOrder').attr('min'))
-        let max = parseInt($('#submitOrder').attr('max'))
+        // let min = parseInt($('#submitOrder').attr('min'))
+        // let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
         // if (inputMoney < min) $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
         // if (inputMoney > max) $('#betPrompt').html(langTrans.js.tooless_bet_amout + max)
@@ -1345,7 +1345,7 @@
         }
         if (sendOrderData.bet_amount > max) {
             // showErrorToast(langTrans.js.toohigh_bet_amout + max);
-            $('#betPrompt').html(langTrans.js.tooless_bet_amout + max)
+            $('#betPrompt').html(langTrans.js.toohigh_bet_amout + max)
             $('#moneyInput').val(max)
             $('#moneyInput').trigger('change')
             return;
