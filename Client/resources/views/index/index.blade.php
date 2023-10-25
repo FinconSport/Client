@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="" >
                 </div>
-                <div class="col-12 m-0 mt-2 text-red" id="betPrompt"></div>
+                <div class="col-12 m-0 text-red"><span class="mt-2" id="betPrompt"></span></div>
                 <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
                 <div class="col-6 mb-2 mt-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
                 <div class="col-12 m-0" id="quickContainer">
@@ -1307,7 +1307,7 @@
         let min = parseInt($('#submitOrder').attr('min'))
         let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        if (inputMoney < min) $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
+        if (inputMoney < min && inputMoney !== '') $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
         if (inputMoney > max) $('#betPrompt').html(langTrans.js.tooless_bet_amout + max)
         if (inputMoney <= max && inputMoney >= min ) $('#betPrompt').html('')
         let odd = parseFloat($('span[key="odd"]').html())
