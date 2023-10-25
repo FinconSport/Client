@@ -1134,11 +1134,11 @@ class LsportApiController extends Controller {
                 // 算出注單的延時到期時間(DB欄位:delay_time)
                 $delay_time = (time() + $delay_sec);
 
-                $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
+                $default_delay_datetime = $delay_time;
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
                 $default_order_status = $this->game_order_status['wait_for_result'];
-                $default_approval_time = date("Y-m-d H:i:s");
+                $default_approval_time = time();
                 $default_delay_datetime = null;
             }
         }
@@ -1223,7 +1223,7 @@ class LsportApiController extends Controller {
         // order data
         $order['bet_amount'] = $bet_amount;
         $order['status'] = $default_order_status;
-        $order['create_time'] = date("Y-m-d H:i:s");
+        $order['create_time'] = time();
 
         $order['approval_time'] = $default_approval_time;
         $order['delay_time'] = $default_delay_datetime;
@@ -1267,7 +1267,7 @@ class LsportApiController extends Controller {
         $tmp['change_balance'] = $change_amount;
         $tmp['before_balance'] = $before_amount;
         $tmp['after_balance'] = $after_amount;
-        $tmp['create_time'] = date("Y-m-d H:i:s");
+        $tmp['create_time'] = time();
         PlayerBalanceLogs::insert($tmp);
 
         ///////////////////////////////////
@@ -1406,11 +1406,11 @@ class LsportApiController extends Controller {
                 
                 // 算出注單的延時到期時間(DB欄位:delay_time)
                 $delay_time = (time() + $delay_sec);
-                $default_delay_datetime = date('Y-m-d H:i:s', $delay_time);
+                $default_delay_datetime = $delay_time;
             } else {  // 風控大單,延時投注均未啟動
                 // 通過
                 $default_order_status = $this->game_order_status['wait_for_result'];
-                $default_approval_time = date("Y-m-d H:i:s");
+                $default_approval_time = time();
                 $default_delay_datetime = null;
             }
         }
@@ -1476,7 +1476,7 @@ class LsportApiController extends Controller {
                 'better_rate' => $is_better_rate,
                 'bet_amount' => $bet_amount,
                 'status' => $default_order_status,
-                'create_time' => date("Y-m-d H:i:s"),
+                'create_time' => time(),
                 'approval_time' => $default_approval_time,
                 'delay_time' => $default_delay_datetime,
             );
@@ -1663,7 +1663,7 @@ class LsportApiController extends Controller {
         $tmp['change_balance'] = $change_amount;
         $tmp['before_balance'] = $before_amount;
         $tmp['after_balance'] = $after_amount;
-        $tmp['create_time'] = date("Y-m-d H:i:s");
+        $tmp['create_time'] = time();
         PlayerBalanceLogs::insert($tmp);
 
         ///////////////////////////////////
