@@ -642,7 +642,7 @@
             earlyContainerTemp.attr('id', data.list.league_id);
             earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
-            earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
             $('.scoreboardCon').append(earlyContainerTemp);
         }
@@ -957,18 +957,14 @@
         th: @json(trans('game.index.th')),
     };
     
-    const formatDateTimeV2 = (dateTimeString) => {
+    formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
-        const month = new Intl.DateTimeFormat(translations.dateTimezone, { month: 'long' }).format(dateTime);
-        const day = dateTime.getDate();
-        const suffix = getDaySuffix(day);
-        const hour = dateTime.getHours().toString().padStart(2, '0');
-        const minute = dateTime.getMinutes().toString().padStart(2, '0');
-        const formattedDate = `${month} ${day}${suffix}`;
-        const formattedTime = `${hour}:${minute}`;
-        
-        return `<span>${formattedDate}</span><span>${formattedTime}</span>`;
-    };
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
+    }
 
     const getDaySuffix = (day) => {
         if (day >= 11 && day <= 13) {
