@@ -10,6 +10,7 @@ return [
         154914 => ['Total', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th'],
         6046 => ['Total', 'First Half', 'Second Half'],
         48242 => ['Total', 'Q1', 'Q2', 'Q3', 'Q4'],
+        35232 => ['Total', '1st', '2nd', '3rd'],
       ],
       'upperStage'=> 'Top',
       'lowerStage'=> 'Bottom',
