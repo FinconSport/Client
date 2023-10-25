@@ -32,6 +32,7 @@
                 </div>
                 <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
                 <div class="col-6 mb-2 mt-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
+                <div class="col-12 m-0" id="betPrompt" class="text-red"></div>
                 <div class="col-12 m-0" id="quickContainer">
                     <div class="col-3">
                         <div class="quick" value=100>+100</div>
@@ -1303,11 +1304,12 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        // let min = parseInt($('#submitOrder').attr('min'))
-        // let max = parseInt($('#submitOrder').attr('max'))
+        let min = parseInt($('#submitOrder').attr('min'))
+        let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        // if (inputMoney < min) inputMoney = min
-        // if (inputMoney > max) inputMoney = max
+        if (inputMoney < min) $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
+        if (inputMoney > max) $('#betPrompt').html(langTrans.js.tooless_bet_amout + max)
+        if (inputMoney <= max && inputMoney >= min ) $('#betPrompt').html('')
         let odd = parseFloat($('span[key="odd"]').html())
         let maxMoney = (inputMoney * odd).toFixed(2);
         $('#maxWinning').html(maxMoney)
@@ -1335,13 +1337,13 @@
         let max = parseInt($('#submitOrder').attr('max'))
 
         if (sendOrderData.bet_amount < min) {
-            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            // showErrorToast(langTrans.js.tooless_bet_amout + min);
             $('#moneyInput').val(min)
             $('#moneyInput').trigger('change')
             return;
         }
         if (sendOrderData.bet_amount > max) {
-            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            // showErrorToast(langTrans.js.toohigh_bet_amout + max);
             $('#moneyInput').val(max)
             $('#moneyInput').trigger('change')
             return;
