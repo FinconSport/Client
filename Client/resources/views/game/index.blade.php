@@ -540,21 +540,9 @@
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
-        // Early fixture (status == 1)
-        if (data.list.status == 1) {
-            const leagueID = data.list.league_id;
-            $(`div[id="${leagueID}"]`).remove();
 
-            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.attr('id', data.list.league_id);
-            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.list.league_name);
-            earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
-            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.scoreboardCon').append(earlyContainerTemp);
-        }
         // Living fixture (status == 2)
-        if (data.list.status == 2) {
+        if (data.list.status == 2 || data.list.status == 9) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
@@ -644,6 +632,19 @@
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
             $('.scoreboardCon').append(livingContainerTemp);
+        } else {
+
+            // Early fixture (status == 1)
+            const leagueID = data.list.league_id;
+            $(`div[id="${leagueID}"]`).remove();
+
+            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+            earlyContainerTemp.attr('id', data.list.league_id);
+            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+            earlyContainerTemp.find('.league_name').text(data.list.league_name);
+            earlyContainerTemp.find('.start_time').html(formatDateTimeV2(data.list.start_time));
+            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            $('.scoreboardCon').append(earlyContainerTemp);
         }
     }
 
