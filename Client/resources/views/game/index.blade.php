@@ -569,7 +569,7 @@
                 data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
 
-            const stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
+            const stageText = data.list.status == 2 ? commonLangTrans.stageArr[sport][data.list.periods.period] : commonLangTrans.scoreBoard.ready
             const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 

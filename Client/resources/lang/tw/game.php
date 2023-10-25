@@ -32,6 +32,7 @@ return [
         "gameTwelve" => "12",
         "gamesOn" => "局上",
         "totalScore" => "總分",
+        'ready' => '即將開賽'
     ],
     "index" => [
         "th" => "日",

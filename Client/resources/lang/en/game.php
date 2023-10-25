@@ -32,6 +32,7 @@ return [
         "gameTwelve" => "12",
         "gamesOn" => "games on",
         "totalScore" => "Total Score",
+        'ready' => 'Ready To Start'
     ],
     "index" => [
         "th" => "th",
