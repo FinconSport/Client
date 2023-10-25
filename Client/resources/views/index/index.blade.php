@@ -27,12 +27,12 @@
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="" >
                 </div>
-                <div class="col-12 m-0 mt-2 text-red"><p class="mt-2 mb-0" id="betPrompt"></p></div>
-                <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
-                <div class="col-6 mb-2 mt-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
+                <div class="col-12 m-0 text-red"><p class="mb-0" id="betPrompt"></p></div>
+                <div class="col-6 mb-2">{{ trans('index.bet_area.maxwin') }}</div>
+                <div class="col-6 mb-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
                 <div class="col-12 m-0" id="quickContainer">
                     <div class="col-3">
                         <div class="quick" value=100>+100</div>
