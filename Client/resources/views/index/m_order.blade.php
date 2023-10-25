@@ -1134,7 +1134,7 @@
         $('#submitOrder').attr('min', betLimitationD.min)
         $('#submitOrder').attr('max', betLimitationD.max)
         $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
-        $('#moneyInput').val(betLimitationD.min)
+        // $('#moneyInput').val(betLimitationD.min)
         $('#moneyInput').trigger('change')
         $('#moneyInput').focus()
     }
