@@ -94,7 +94,7 @@ class LsportApiController extends Controller {
 
         // 獲取用戶資料
         $player_id = $input['player'];
-        $return = Player::where("id", $player_id)->fetch();
+        $return = Player::where("id", $player_id)->first();
         if ($return === false) {
             $this->ApiError("01");
         }
@@ -107,7 +107,7 @@ class LsportApiController extends Controller {
 
         // 獲取agent的limit資料
         $agent_id = $return['agent_id'];
-        $return = Agent::where("id",$agent_id)->fetch();
+        $return = Agent::where("id",$agent_id)->first();
         if ($return === false) {
             $this->ApiError("03");
         }
@@ -245,7 +245,7 @@ class LsportApiController extends Controller {
 
         //---------------------------------
         // 自DB取出LsportNotice
-        $week_before =  date('Y-m-d 00:00:00', strtotime('-1 week'));
+        $week_before = strtotime(date('Y-m-d 00:00:00', strtotime('-1 week')));
         $return = LsportNotice::getList(["create_time" => $week_before]);
         if ($return === false) {
             $this->ApiError("02");
