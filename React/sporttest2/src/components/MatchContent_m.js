@@ -67,7 +67,7 @@ class MatchContent extends React.Component {
 	findDifferences = (originalData, updateData, path = []) => {
 		for (const key in updateData) {
 			const currentPath = [...path, key];
-			if (originalData.hasOwnProperty(key)) {
+			if (originalData && originalData.hasOwnProperty(key)) {
 				u = updateData // 最後一筆物件資料
 				o = originalData // 最後一筆物件資料
 				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
@@ -190,15 +190,15 @@ class MatchContent extends React.Component {
 	}
 	
 	// 偵測menu改變
-	componentDidUpdate(prevProps) {
-		if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
-			this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
-			this.setState({
-				toggleStates: {},
-				sport_id: window.sport
-			});
-		}
-	}
+	// componentDidUpdate(prevProps) {
+	// 	if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
+	// 		this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
+	// 		this.setState({
+	// 			toggleStates: {},
+	// 			sport_id: window.sport
+	// 		});
+	// 	}
+	// }
 
 	// 滑到最上面
 	scrollToTop = () => {

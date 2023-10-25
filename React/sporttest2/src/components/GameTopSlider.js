@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination,} from 'swiper';
-import Marquee from "react-fast-marquee";
 import { RxTriangleUp } from 'react-icons/rx';
 import { MdAutorenew } from 'react-icons/md';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -90,7 +89,7 @@ const scoreBoardseriesLogoCon = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start', 
-    width: '66%',
+    width: '75%',
 }
 
 const maintablebpard = {
@@ -137,7 +136,7 @@ class GameTopSlider extends React.Component {
     }
 
     componentDidMount() {
-        this.textOverFlow()
+        // this.textOverFlow()
     } 
 
     refreshGame = () => {
@@ -176,11 +175,6 @@ class GameTopSlider extends React.Component {
                                 <div className='col-8 row m-0'>
                                     <div className="p-0">
                                         <p target='league'>{data.list.league_name}</p>
-                                        <p style={{ display: 'none' }}>
-                                            <Marquee speed={20} gradient={false}>
-                                                {data.list.league_name}&emsp;&emsp;&emsp;
-                                            </Marquee>
-                                        </p>
                                     </div>
                                 </div>
                                 <div className='col-2' onClick={this.refreshGame}>
@@ -190,11 +184,6 @@ class GameTopSlider extends React.Component {
                             <MainInfoSlider className='row' style={{ margin:'1rem 0.5rem 0 0.5rem'}}>
                                 <div className='col-4'>
                                     <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.home_team_name}</p>
-                                    <p className="fs-6 mt-2 mb-0" style={{ display: 'none' }}>
-                                        <Marquee speed={20} gradient={false}>
-                                            {fixture.home_team_name}&emsp;&emsp;&emsp;
-                                        </Marquee>
-                                    </p>
                                 </div>
                                 <div className='col-4'>
                                     {
@@ -224,15 +213,10 @@ class GameTopSlider extends React.Component {
                                 </div>
                                 <div className='col-4'>
                                     <p className="fs-6 mt-2 mb-0" target='teamName'>{fixture.away_team_name}</p>
-                                    <p className="fs-6 mt-2 mb-0" style={{ display: 'none' }}>
-                                        <Marquee speed={20} gradient={false}>
-                                            {fixture.away_team_name}&emsp;&emsp;&emsp;
-                                        </Marquee>
-                                    </p>
                                 </div>
                             </MainInfoSlider>
                         </SwiperSlide>
-                        {fixture.status === 2 && 
+                        {(fixture.status === 2 || fixture.status === 9) && 
                             <SwiperSlide id="scoreBoard" style={{ backgroundImage: `url(${ScoreBoardBg})`, backgroundSize: '100% 100%', paddingBottom: '52px'}}>
                                 <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
                                     <div className='col-2 gametopslider'>
@@ -243,11 +227,6 @@ class GameTopSlider extends React.Component {
                                     <div className='col-8 row m-0'>
                                         <div className="col-11 p-0">
                                             <p target='league'>{data.list.league_name}</p>
-                                            <p style={{ display: 'none' }}>
-                                                <Marquee speed={20} gradient={false}>
-                                                    {data.list.league_name}&emsp;&emsp;&emsp;
-                                                </Marquee>
-                                            </p>
                                         </div>
                                     </div>
                                     <div className='col-2' onClick={this.refreshGame}>
@@ -257,17 +236,17 @@ class GameTopSlider extends React.Component {
                                 <div style={maintablebpard}>
                                     <div style={scoreBoardSeries}>
                                         <div style={scoreBoardseriesLogoCon}>
-                                            <p>{data.list.league_name}</p>
+                                            {data.list.league_name}
                                         </div>
-                                        <p>
+                                        <div className="text-right" style={{ width: '25%'}}>
                                             {sport === 154914 ? 
                                                 langText.GameTopSlider.stageStr[sport][fixture.periods.period] + langText.GameTopSlider.baseballPeriod[fixture.periods.Turn]
                                                 : 
-                                                langText.GameTopSlider.stageStr[sport][fixture.periods.period]
-                                                
+                                                langText.GameTopSlider.stageStr[sport][fixture.periods.period]  
                                             }
-                                        </p>
+                                        </div>
                                     </div>
+
                                     <table className="table table-bordered">
                                         {(() => {
                                             const scbLen = fixture.scoreboard[1].length - 1;
@@ -299,13 +278,8 @@ class GameTopSlider extends React.Component {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <p className="mb-0" target='scbTeam'>{fixture.home_team_name}</p>
-                                                    <p style={{ display: 'none' }}>
-                                                        <Marquee speed={20} gradient={false}>
-                                                            {fixture.home_team_name}&emsp;&emsp;&emsp;
-                                                        </Marquee>
-                                                    </p>
+                                                <td style={{textOverflow: 'ellipsis',whiteSpace: 'nowrap',overflow: 'hidden',maxWidth: '5rem'}}>
+                                                    {fixture.home_team_name}
                                                 </td>
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
@@ -316,13 +290,8 @@ class GameTopSlider extends React.Component {
                                                 }
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <p className="mb-0" target='scbTeam'>{fixture.away_team_name}</p>
-                                                    <p style={{ display: 'none' }}>
-                                                        <Marquee speed={20} gradient={false}>
-                                                            {fixture.away_team_name}&emsp;&emsp;&emsp;
-                                                        </Marquee>
-                                                    </p>
+                                                <td style={{textOverflow: 'ellipsis',whiteSpace: 'nowrap',overflow: 'hidden',maxWidth: '5rem'}}>
+                                                    {fixture.away_team_name}
                                                 </td>
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {

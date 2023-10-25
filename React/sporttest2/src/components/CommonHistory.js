@@ -87,7 +87,7 @@ const HistoryCardMain = {
     backgroundColor: 'white',
     borderRadius: '10px',
     width: 'calc(100% + 1rem)',
-    padding: '0.25rem',
+    padding: '0.25rem 0.5rem',
     margin: '0.5rem 0 0 -0.5rem',
     position: 'relative'
 }
@@ -293,12 +293,31 @@ class CommonHistory extends React.Component {
                                         <div className='row m-0'>
                                             <div className='col-4 p-0'>{langText.CommonHistory.betamount}</div>
                                             <div className='col-8 p-0 text-right'>{ val.bet_amount }</div>
-                                            <div className='col-4 p-0'>{langText.CommonHistory.winamount}</div>
-                                            <div className='col-8 p-0 text-right'>{ val.result_amount }</div>
-                                            <div className='col-4 p-0'>{langText.CommonHistory.betstatus}</div>
-                                            <div className='col-8 p-0 text-right'>{ langText.CommonHistory.statusArr[val.status] }</div>
+                                            {
+                                                val.status === 4 &&
+                                                <>
+                                                    {/* 派彩金額 */}
+                                                    <div className='col-4 p-0'>{langText.CommonHistory.winamount}</div>
+                                                    <div className='col-8 p-0 text-right'>{ val.result_amount }</div>
+                                                    {/* 輸贏金額 */}
+                                                    <div className='col-4 p-0'>{langText.CommonHistory.winloss}</div>
+                                                    <div className='col-8 p-0 text-right' style={{ color: val.result_amount - val.bet_amount > 0 ? 'red' : 'green' }}>
+                                                        {(val.result_amount - val.bet_amount).toFixed(2)}
+                                                    </div>
+                                                </>
+                                            }
+                                            {/* 有效投注 */}
+                                            <div className='col-4 p-0'>{langText.CommonHistory.effectiveAmount}</div>
+                                            <div className='col-8 p-0 text-right'>{ val.active_bet }</div>
+                                            {/* 下注時間 */}
                                             <div className='col-4 p-0'>{langText.CommonHistory.bettime}</div>
                                             <div className='col-8 p-0 text-right'>{ this.formatDateTime(val.create_time) }</div>
+                                            {/* 注單狀態 */}
+                                            <div className='col-4 p-0'>{langText.CommonHistory.betstatus}</div>
+                                            <div className='col-8 p-0 text-right'>
+                                                { langText.CommonHistory.statusArr[val.status] }
+                                                { val.result_time && ' '+this.formatDateTime(val.result_time) }
+                                            </div>
                                         </div>
                                     </div>
                                 )

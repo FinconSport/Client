@@ -30,9 +30,11 @@ const SliderTitleDiv = {
     textAlign: 'center'
 }
 const rowHeight2 = {
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden'
 }
 
 const rowHeight15 = {
@@ -86,22 +88,7 @@ class ResultContentCard extends React.Component {
 		};
 	}
     
-    // 文字太長變成跑馬燈
-    textOverFlow = (id) => {
-        $('div[cardid="' + id + '"] .teamSpan').each(function(){
-            $(this).find('.teamSpanMarquee').hide()
-            $(this).find('.teamSpanSpan').show()
-            // 太長有換行
-            if(this.clientHeight > 40) {
-                $(this).find('.teamSpanMarquee').show()
-                $(this).find('.teamSpanSpan').hide()
-            }
-        })
-    }
-
-
     componentDidMount() {
-        this.textOverFlow(this.props.data.fixture_id)
         const data = this.props.data
         const sport = parseInt(window.sport)
         let gameTitle = []
@@ -158,7 +145,7 @@ class ResultContentCard extends React.Component {
                     <div>
                         <div className='row m-0 p-1'>
                             {/* left part */}
-                            <div className='col-45' style={{ padding: '0 0.5rem'}}>
+                            <div className='col-45' style={{ padding: '0 0.25rem 0 0'}}>
                                 <div style={rowHeight15}>
                                     <p className='mb-0 mt-1'>{this.formatDateTime(v.start_time)}</p>
                                 </div>
@@ -171,29 +158,15 @@ class ResultContentCard extends React.Component {
                                     </p>
                                 </div>
 
-                                <div className='teamSpan' style={rowHeight2}>
-                                    <div className="teamSpanMarquee w-100">
-                                        <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                            { v.home_team_name }&emsp;&emsp;&emsp;
-                                        </Marquee>
-                                    </div>
-                                    <span className="teamSpanSpan">
-                                        { v.home_team_name }
-                                    </span>
+                                <div style={rowHeight2}>
+                                    { v.home_team_name }
                                 </div>
-                                <div className='teamSpan' style={{...rowHeight2, marginTop: '1.5rem'}}>
-                                    <div className="teamSpanMarquee w-100">
-                                        <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                            { v.away_team_name }&emsp;&emsp;&emsp;
-                                        </Marquee>
-                                    </div>
-                                    <span className="teamSpanSpan">
-                                        { v.away_team_name }
-                                    </span>
+                                <div style={{...rowHeight2, marginTop: '1.5rem'}}>
+                                    { v.away_team_name }
                                 </div>
                             </div>
                             {/* right part */}
-                            <div className='col-55 text-center' style={{ paddingLeft: 0}}>
+                            <div className='col-55 text-center' style={{ padding: '0 0.25rem'}}>
                                 {
                                     gameTitle &&
                                     <Swiper

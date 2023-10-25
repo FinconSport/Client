@@ -209,7 +209,9 @@ class CommonCalculator extends React.Component {
             inputMoney: '',
             maxMoney: '0.00',
             isBetterRate: false,
-            isPending: false
+            isPending: false,
+            subBtnText: langText.CommonCalculator.submit,
+            subBtnRed: 0
         }
     }
 
@@ -219,12 +221,6 @@ class CommonCalculator extends React.Component {
 		this.setState({
 			[api_res]: json,
 		})
-
-        // 訊息
-        // if(api_res === 'afterBet') {
-        //     json.message === 'SUCCESS_API_GAME_BET_01' ? this.notifySuccess(json.message) : this.notifyError(json.message)
-        //     this.props.callBack() // 投注後餘額
-        // }
 	}
 
     componentDidMount() {
@@ -256,8 +252,8 @@ class CommonCalculator extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.data !== this.props.data && this.props.data !== null ) {
             this.setState({
-                minLimit: this.props.accountD.data.limit[this.props.cate][window.sport].min,
-                maxLimit: this.props.accountD.data.limit[this.props.cate][window.sport].max
+                minLimit: parseInt(this.props.accountD.data.limit[this.props.cate][window.sport].min),
+                maxLimit: parseInt(this.props.accountD.data.limit[this.props.cate][window.sport].max)
             })
         }
     }
@@ -300,6 +296,14 @@ class CommonCalculator extends React.Component {
             inputMoney: money,
             maxMoney: (this.props.data.bet_rate * money).toFixed(2)
         })
+
+        if ( parseInt(money) >= this.state.minLimit && parseInt(money) <= this.state.maxLimit ) {
+            this.setState({
+                subBtnText: langText.CommonCalculator.submit,
+                subBtnRed: 0
+            })
+        }
+        
     }
 
     // 清除金額
@@ -324,19 +328,31 @@ class CommonCalculator extends React.Component {
     submitBet = () => {
         const money = parseInt(this.state.inputMoney)
         if ( !money ) {
-            this.notifyError(langText.CommonCalculator.noinputmoney)
+            // this.notifyError(langText.CommonCalculator.noinputmoney)
+            this.setState({
+                subBtnText: langText.CommonCalculator.noinputmoney,
+                subBtnRed: 1
+            })
             this.ClearMoney()
             return;
         }
 
         if ( money < this.state.minLimit ) {
-            this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
+            // this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
+            this.setState({
+                subBtnText: langText.CommonCalculator.tooless + this.state.minLimit,
+                subBtnRed: 1
+            })
             this.ClearMoney()
             return;
         }
 
         if ( money > this.state.maxLimit ) {
-            this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
+            // this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
+            this.setState({
+                subBtnText: langText.CommonCalculator.toohigh + this.state.maxLimit,
+                subBtnRed: 1
+            })
             this.ClearMoney()
             return;
         }
@@ -494,7 +510,9 @@ class CommonCalculator extends React.Component {
                                                 <div id='pendingLoad'></div>
                                             </div>
                                             :
-                                            <div className='col-8 text-center' onClick={this.submitBet} style={{...FooterRightBtn, backgroundColor: 'rgb(196, 152, 53)'}}>{langText.CommonCalculator.submit}</div>
+                                            <div className='col-8 text-center' onClick={this.submitBet} style={{ ...FooterRightBtn, backgroundColor: this.state.subBtnRed === 1 ? 'red' : 'rgb(196, 152, 53)' }}>
+                                                {this.state.subBtnText}
+                                            </div>
                                         }
                                     </div>
                                 </div>   

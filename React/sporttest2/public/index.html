@@ -50,10 +50,11 @@
     -->
 	<script>
 		// var player = 8 ;
-		// var token = 12345 ;
+		// var token = '827ccb0eea8a706c4c34a16891f84e7b' ;
 		// var lang = 'tw'
-		var player = {{ $player }};
-		var token = {{ $token }};
+
+		var player = @json(session('player.id'));
+		var token = @json(session('player.token'));
 		var lang = @json(session('player.lang'));
 
 		// 菜單與體育彩種預設

@@ -30,9 +30,14 @@ const twTranslation = {
     betamount: "投注金額:",
     winamount: "派彩金額:",
     betstatus: "注單狀態:",
+    winloss: "輸贏金額:",
     bettime: "下注時間:",
     nomoredata: "沒有更多注單了",
     result: "結果",
+    effectiveAmount: '有效投注',
+    early: '早盤',
+    living: '滾球',
+    home: '[主]',
     statusArr: {
       0: '取消',
       1: '等待成立',
@@ -51,7 +56,6 @@ const twTranslation = {
   CommonHistorySlideToggle: {
     open: "展開",
     close: "收起",
-    effectiveAmount: '有效投注'
   },
   CommonLogs: {
     record: "帳變紀錄",

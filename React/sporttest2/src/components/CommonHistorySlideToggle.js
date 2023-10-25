@@ -44,7 +44,7 @@ class CommonHistory extends React.Component {
     }
 
     componentDidMount() {
-        this.textOverFlow(this.props.data.id)
+        // this.textOverFlow(this.props.data.id)
     }
 
 
@@ -54,23 +54,32 @@ class CommonHistory extends React.Component {
 		if (prevProps.data.id !== this.props.data.id) {
             this.setState({
                 isOpen: false
-            },() => {
-                this.textOverFlow(this.props.data.id)
             })
         }
 	}
 
     // 文字太長變成跑馬燈
-    textOverFlow = (id) => {
-        $('div[historyid="' + id + '"] .teamSpan').each(function(){
-            $(this).find('.teamSpanMarquee').hide()
-            $(this).find('.teamSpanSpan').show()
-            // 太長有換行
-            if(this.clientHeight > 22) {
-                $(this).find('.teamSpanMarquee').show()
-                $(this).find('.teamSpanSpan').hide()
-            }
-        })
+    // textOverFlow = (id) => {
+    //     $('div[historyid="' + id + '"] .teamSpan').each(function(){
+    //         $(this).find('.teamSpanMarquee').hide()
+    //         $(this).find('.teamSpanSpan').show()
+    //         // 太長有換行
+    //         if(this.clientHeight > 22) {
+    //             $(this).find('.teamSpanMarquee').show()
+    //             $(this).find('.teamSpanSpan').hide()
+    //         }
+    //     })
+    // }
+
+    
+    // 日期格式
+    formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString);
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based index), add 1, and pad with '0' if needed
+        const day = dateTime.getDate().toString().padStart(2, '0'); // Get day and pad with '0' if needed
+        const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
+        const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
+        return `${month}-${day} ${hour}:${minute}`;
     }
 
     render() {
@@ -78,48 +87,35 @@ class CommonHistory extends React.Component {
         return (
             <>
                 <div>
-                    <div className='teamSpan'>
-                        <div className="teamSpanMarquee">
-                            <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                            { val.bet_data[0].league_name }&emsp;&emsp;&emsp;
-                            </Marquee>
-                        </div>
-                        <span className="teamSpanSpan">
-                            { val.bet_data[0].league_name }
-                        </span>
+                    <div>
+                        { val.bet_data[0].league_name }&ensp;({ this.formatDateTime(val.bet_data[0].start_time) })
                     </div>
-
                     <div className='row m-0'>
                         <div className='col-9 p-0'>
-                            <div className='teamSpan'>
-                                <div className="teamSpanMarquee">
-                                    <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                        { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }&emsp;&emsp;&emsp;
-                                    </Marquee>
-                                </div>
-                                <span className="teamSpanSpan">
-                                    { val.bet_data[0].home_team_name }&ensp;VS&ensp;{ val.bet_data[0].away_team_name }
-                                </span>
-                            </div>
+                            { val.bet_data[0].home_team_name }<span style={{color: 'green'}}>{langText.CommonHistory.home}</span> VS { val.bet_data[0].away_team_name }
                         </div>
+                        {
+                            val.bet_data[0].home_team_score && val.bet_data[0].away_team_score &&
+                            <div className='col-12 p-0' style={{ color: 'red' }}>({val.bet_data[0].home_team_score}-{val.bet_data[0].away_team_score})</div>
+                        }
                     </div>
-
-
                     <div className='row m-0'>
-                        <div className='col-9 p-0'>
-                            <div className='teamSpan'>
-                                <div className="teamSpanMarquee">
-                                    <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                        { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })&emsp;&emsp;&emsp;
-                                    </Marquee>
-                                </div>
-                                <span className="teamSpanSpan">
-                                    { val.bet_data[0].market_name }&ensp;({ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line })
-                                </span>
+                        <div className='col-12 p-0'>
+                            <div>
+                                { val.bet_data[0].market_type === 0 ? langText.CommonHistory.early : langText.CommonHistory.living }-{ val.bet_data[0].market_name }&ensp;
+                                {
+                                    val.bet_data[0].market_bet_name_en == 1 &&
+                                    val.bet_data[0].home_team_name
+                                }
+                                {
+                                    val.bet_data[0].market_bet_name_en == 2 &&
+                                    val.bet_data[0].away_team_name
+                                }
+                                <span style={{color: 'green'}}>[{ val.bet_data[0].market_bet_name + val.bet_data[0].market_bet_line }]</span>
+                                { val.bet_data[0]?.bet_rate && 
+                                    <span>&ensp;@<span style={{color: '#c79e42'}}>{val.bet_data[0]?.bet_rate}</span></span> 
+                                }
                             </div>
-                        </div>
-                        <div className='col-3 p-0 text-right'>
-                            { val.bet_data[0]?.bet_rate !== null && (val.m_order === 0 || this.state.isOpen === true) ? `@${val.bet_data[0]?.bet_rate}` : null}
                         </div>
                     </div>
                     
@@ -136,82 +132,42 @@ class CommonHistory extends React.Component {
                             }>{langText.CommonHistory.detailStatusArr[val.bet_data[0].result_percent]}</div>
                         </div>
                     }
-                    {
-                        val.bet_data[0].home_team_score && val.bet_data[0].away_team_score &&
-                        <>
-                            <div className='row m-0'>
-                                <div className='col-9 p-0'>
-                                    {val.bet_data[0].home_team_name}
-                                </div>
-                                <div className='col-3 p-0 text-right'>
-                                    {val.bet_data[0].home_team_score}
-                                </div>
-                            </div>
-                            <div className='row m-0'>
-                                <div className='col-9 p-0'>
-                                    {val.bet_data[0].away_team_name}
-                                </div>
-                                <div className='col-3 p-0 text-right'>
-                                    {val.bet_data[0].away_team_score}
-                                </div>
-                            </div>
-                        </>
-                    }
-                    <div className='row m-0'>
-                        <div className='col-9 p-0'>
-                            <p className='mb-0'>{ langText.CommonHistorySlideToggle.effectiveAmount }</p>
-                        </div>
-                        <div className='col-3 p-0 text-right'>
-                            {val.bet_data[0].active_bet}
-                        </div>
-                    </div>
                 </div>
                 <ToggleContainer style={this.state.isOpen === true ? {maxHeight: val.bet_data.length * 6.5 + 'rem'} : null}>
                     {Object.entries(val.bet_data).map(([k, v]) =>
                         k !== '0' && (
                             <ToggleDiv key={k}>
-
-                                <div className='teamSpan'>
-                                    <div className="teamSpanMarquee">
-                                        <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                            {v.league_name}&emsp;&emsp;&emsp;
-                                        </Marquee>
-                                    </div>
-                                    <span className="teamSpanSpan">
-                                        {v.league_name}
+                                <div>
+                                    <span>
+                                        {v.league_name}&ensp;({ this.formatDateTime(v.start_time) })
                                     </span>
                                 </div>
                                 <div className='row m-0'>
                                     <div className='col-9 p-0'>
-                                        <div className='teamSpan'>
-                                            <div className="teamSpanMarquee">
-                                                <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                                    {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}&emsp;&emsp;&emsp;
-                                                </Marquee>
-                                            </div>
-                                            <span className="teamSpanSpan">
-                                                {v.home_team_name}&ensp;VS&ensp;{v.away_team_name}
-                                            </span>
-                                        </div>
+                                        { v.home_team_name }<span style={{color: 'green'}}>{langText.CommonHistory.home}</span> VS { v.away_team_name }
                                     </div>
+                                    {
+                                        v.home_team_score && v.away_team_score &&
+                                        <div className='col-12 p-0' style={{ color: 'red' }}>({v.home_team_score}-{v.away_team_score})</div>
+                                    }
                                 </div>
                                 <div className='row m-0'>
-                                    <div className='col-9 p-0'>
-                                        <div className='teamSpan'>
-                                            <div className="teamSpanMarquee">
-                                                <Marquee className='matchCardMarquee' speed={20} gradient={false}>
-                                                    { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})&emsp;&emsp;&emsp;
-                                                </Marquee>
-                                            </div>
-                                            <span className="teamSpanSpan">
-                                                { v.market_name } &ensp;({v.market_bet_name + v.market_bet_line})
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className='col-3 p-0 text-right'>
-                                        <span style={this.state.isOpen === false ? {display: 'none'}:null}>
-                                            { v.bet_rate !== null && '@' + v.bet_rate}
-                                        </span>
+                                    <div className='col-12 p-0'>
+                                        <div>
+                                            { v.market_type === 0 ? langText.CommonHistory.early : langText.CommonHistory.living }-{ v.market_name }&ensp;
+                                            {
+                                                v.market_bet_name_en == 1 &&
+                                                v.home_team_name
+                                            }
+                                            {
+                                                v.market_bet_name_en == 2 &&
+                                                v.away_team_name
+                                            }
+                                            <span style={{color: 'green'}}>[{ v.market_bet_name + v.market_bet_line }]</span>
+                                            { v?.bet_rate !== null &&
+                                                <span>&ensp;@<span style={{color: '#c79e42'}}>{v?.bet_rate}</span></span>
+                                            }
+                                        </div>  
                                     </div>
                                 </div>
                                 {
@@ -227,35 +183,6 @@ class CommonHistory extends React.Component {
                                         }>{langText.CommonHistory.detailStatusArr[v.result_percent]}</div>
                                     </div>
                                 }
-                                {
-                                    v.home_team_score && v.away_team_score &&
-                                    <>
-                                        <div className='row m-0'>
-                                            <div className='col-9 p-0'>
-                                                { v.home_team_name }
-                                            </div>
-                                            <div className='col-3 p-0 text-right'>
-                                                { v.home_team_score }
-                                            </div>
-                                        </div>
-                                        <div className='row m-0'>
-                                            <div className='col-9 p-0'>
-                                                { v.away_team_name }
-                                            </div>
-                                            <div className='col-3 p-0 text-right'>
-                                                { v.away_team_score }
-                                            </div>
-                                        </div>
-                                    </>
-                                }
-                                <div className='row m-0'>
-                                    <div className='col-9 p-0'>
-                                        <p className='mb-0'>{ langText.CommonHistorySlideToggle.effectiveAmount }</p>
-                                    </div>
-                                    <div className='col-3 p-0 text-right'>
-                                        {v.active_bet}
-                                    </div>
-                                </div>
                             </ToggleDiv>
                         )
                     )}

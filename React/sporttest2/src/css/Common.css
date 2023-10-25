@@ -7,8 +7,10 @@
     /* padding: 0 0.5rem 0 0.5rem; */
     color: rgb(65, 91, 90)
 }
+.SliderBrickTitle {
+    font-weight: normal;
+}
 .odd{
-    color: #c79e42;
     font-weight: 600;
 }
 .fw-600 {

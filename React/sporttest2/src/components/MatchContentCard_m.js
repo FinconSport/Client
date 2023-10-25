@@ -1,5 +1,4 @@
 import React from "react";
-import Marquee from "react-fast-marquee";
 import { langText } from "../pages/LanguageContext";
 import SlideToggle from "react-slide-toggle";
 import { Link } from "react-router-dom";
@@ -71,6 +70,7 @@ const SliderBrickHeight2 = styled.div`
 	.SliderBrickTitle{
 		font-size: 0.7rem;
 		line-height: 2rem;
+        white-space: pre;
 	}
 	.SliderBrickOdd{
 		font-size: 0.9rem;
@@ -97,7 +97,10 @@ const SliderRightArrow = {
 
 const TeamName = {
     lineHeight: '2rem',
-    paddingLeft: 0
+    paddingLeft: 0,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
 }
 
 const CardShow = {
@@ -156,22 +159,6 @@ class MatchContentCard extends React.Component {
         this.props.swiperTabCallBack(swiperIndex)
     }
 
-    // 文字太長變成跑馬燈
-    textOverFlow = (id) => {
-        $('div[cardid="' + id + '"] .teamSpan').each(function(){
-            $(this).find('.teamSpanMarquee').hide()
-            $(this).find('.teamSpanSpan').show()
-            // 太長有換行
-            if(this.clientHeight > 40) {
-                $(this).find('.teamSpanMarquee').show()
-                $(this).find('.teamSpanSpan').hide()
-            }
-        })
-    }
-
-    componentDidMount() {
-        this.textOverFlow(this.props.data.fixture_id)
-    } 
 
 
     getBetData = (sport, fixture_id, market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, status) => {
@@ -230,7 +217,7 @@ class MatchContentCard extends React.Component {
                         {({ toggle, setCollapsibleElement }) => (
                             <div>
                                 <div className='row m-0' ref={setCollapsibleElement}>
-                                    <div className='col-45' style={{ padding: '0 0.5rem'}}>
+                                    <div className='col-45' style={{ padding: '0 0.5rem 0 0'}}>
                                         <div className='row m-0' style={rowHeight2}>
                                             <div className='col-2 p-0'>
                                                 {
@@ -259,30 +246,16 @@ class MatchContentCard extends React.Component {
                                         </div>
                                         <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} >
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 teamSpan' style={TeamName}>
-                                                    <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee' speed={20} gradient={false} style={hcapTeam === 1 ? {color: 'red'} : null}>
-                                                            { v.home_team_name }&emsp;&emsp;&emsp;
-                                                        </Marquee>
-                                                    </div>
-                                                    <span className="teamSpanSpan" style={hcapTeam === 1 ? {color: 'red'} : null}>
+                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 1 ? 'red' : null}}>
                                                     {v.home_team_name}
-                                                    </span>
                                                 </div>
                                                 <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
                                                     { v?.scoreboard && v.scoreboard[1][0] }
                                                 </div>
                                             </div>
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 teamSpan' style={TeamName}>
-                                                    <div className="teamSpanMarquee">
-                                                        <Marquee className='matchCardMarquee' speed={20} gradient={false} style={hcapTeam === 2 ? {color: 'red'} : null}>
-                                                            { v.away_team_name }&emsp;&emsp;&emsp;
-                                                        </Marquee>
-                                                    </div>
-                                                    <span className="teamSpanSpan" style={hcapTeam === 2 ? {color: 'red'} : null}>
+                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 2 ? 'red' : null}}>
                                                     { v.away_team_name }
-                                                    </span>
                                                 </div>
                                                 <div className='col-2 p-0 text-center teamScore' index={1} style={{ lineHeight: '2rem'}}>
                                                     { v?.scoreboard && v.scoreboard[2][0] }
