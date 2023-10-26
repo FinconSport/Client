@@ -2154,8 +2154,8 @@ class LsportApiController extends Controller {
             // 轉時間格式
             $time_columns = ["start_time","create_time","approval_time","result_time"];
             foreach ($time_columns as $kkkk => $vvvv) {
-                if (isset($tmp[$vvvv])) { 
-                    $tmp[$vvvv] = date("Y-m-d H:i:s",$tmp[$vvvv]);
+                if (isset($tmp[$k][$vvvv])) { 
+                    $tmp[$k][$vvvv] = date("Y-m-d H:i:s",$tmp[$k][$vvvv]);
                 }
             }
 
