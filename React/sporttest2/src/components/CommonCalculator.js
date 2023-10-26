@@ -253,7 +253,9 @@ class CommonCalculator extends React.Component {
         if (prevProps.data !== this.props.data && this.props.data !== null ) {
             this.setState({
                 minLimit: parseInt(this.props.accountD.data.limit[this.props.cate][window.sport].min),
-                maxLimit: parseInt(this.props.accountD.data.limit[this.props.cate][window.sport].max)
+                maxLimit: parseInt(this.props.accountD.data.limit[this.props.cate][window.sport].max),
+                subBtnText: langText.CommonCalculator.submit,
+                subBtnRed: 0
             })
         }
     }
