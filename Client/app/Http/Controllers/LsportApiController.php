@@ -726,7 +726,7 @@ class LsportApiController extends Controller {
             $fixture_id = $v['fixture_id'];
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
-            $start_time = $v['start_time'];
+            $start_time = date("Y-m-d H:i:s",$v['start_time']);
 
             // 區分living, early
             $status = $v['status'];
