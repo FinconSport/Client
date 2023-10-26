@@ -1203,15 +1203,13 @@
             return;
         }
         if (sendOrderData.bet_amount < min) {
-            // showErrorToast(langTrans.js.tooless_bet_amout + min);
             $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
             $('#moneyInput').val(min)
             $('#moneyInput').trigger('change')
             return;
         }
         if (sendOrderData.bet_amount > max) {
-            // showErrorToast(langTrans.js.toohigh_bet_amout + max);
-            $('#betPrompt').html(langTrans.js.toohigh_bet_amout + min)
+            $('#betPrompt').html(langTrans.js.toohigh_bet_amout + max)
             $('#moneyInput').val(max)
             $('#moneyInput').trigger('change')
             return;
@@ -1239,23 +1237,25 @@
         });
         jsonData.bet_data = JSON.stringify(jsonData.bet_data)
 
-        console.log(jsonData)
-
         $.ajax({
             url: '/api/v2/m_game_bet',
             method: 'POST',
             data: jsonData,
             success: function(response) {
                 let res = JSON.parse(response)
-                calInter = setTimeout(function() {
+                if(res.status === 1) {
+                    calInter = setTimeout(function() {
+                        hideLoading();
+                        closeCal(1);
+                        closeOrderDetail()
+                    }, 10000);
+                } else {
+                    showErrorToast(res.message);
                     hideLoading();
-                    closeCal(1);
-                    closeOrderDetail()
-                }, 10000);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });
