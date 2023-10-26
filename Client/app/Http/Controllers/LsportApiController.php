@@ -492,8 +492,7 @@ class LsportApiController extends Controller {
 
         $today = time();
         $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        $after_tomorrow_es = '"'.date('Y-m-d', $after_tomorrow_es).'T00:00:00"'; // 這個「"」不能拿掉, es會報錯
-
+        
     	//---------------------------------
 
         $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
