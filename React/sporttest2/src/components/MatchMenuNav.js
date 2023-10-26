@@ -139,57 +139,38 @@ class MatchMenuNav extends React.Component {
 
     componentDidMount() {
         let res = this.state.api_res
-        
-        for (const category in res.data) {
-            if (res.data[category].items) {
-                for (const key in res.data[category].items) {
-                    if (res.data[category].items[key].count === 0) {
-                        delete res.data[category].items[key];
-                    }
-                }
-            }
-        }
-
 
         // default menu
         let rKey = null
-        for (const key in res.data) {
-            if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
-                rKey = key
-                if(window.menu === null || res.data[menuArr[window.menu]] === undefined || res.data[menuArr[window.menu]].total === 0) {
+        if( window.menu === null ) {
+            for (const key in res.data) {
+                if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
+                    rKey = key
                     this.setState({
                         menu_id: mapping[key][1],
                         objTage: rKey
                     })
                     window.menu = mapping[key][1]
+                    break;
                 }
-                break; 
             }
-        }
-
-
-        if( rKey === null ) {
-            this.setState({
-                isNoData: true
-            })
-
-            return;
+        } else {
+            rKey = menuArr[window.menu]
         }
 
         // default sport
-        if(window.sport === null || res.data[rKey].items[window.sport] === undefined) {
+        if( !window.sport || res.data[rKey].items[window.sport] === undefined) {
             let itemData = res.data[rKey].items
             let keys = Object.keys(itemData);
             window.sport = parseInt(keys.find(key => itemData[key].count > 0))
             this.setState({
                 sport_id: window.sport
             })
+            this.props.callBack(window.menu, window.sport)
+            this.setState({
+                api_res: res
+            })
         }
-        this.props.callBack(window.menu, window.sport)
-
-        this.setState({
-            api_res: res
-        })
 	}
 
     // 選擇分頁

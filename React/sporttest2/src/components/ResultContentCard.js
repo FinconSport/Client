@@ -188,7 +188,7 @@ class ResultContentCard extends React.Component {
                                                                         <div className='col' style={Padding01} key={k2}>
                                                                             <div style={SliderTitleDiv}>{ v2 }</div>
                                                                             <SliderBrickHeight2>
-                                                                                <div className="w-100 h-100" style={{ color: k2 === 0 ? '#ff7000' : null }}>
+                                                                                <div className="w-100 h-100" style={{ color: k1 === 0 && k2 === 0 ? '#ff7000' : null }}>
                                                                                     {
                                                                                         scoreData[k1] && scoreData[k1][k2] ?
                                                                                         scoreData[k1][k2][0]
@@ -198,7 +198,7 @@ class ResultContentCard extends React.Component {
                                                                                 </div>
                                                                             </SliderBrickHeight2>
                                                                             <SliderBrickHeight2>
-                                                                                <div className="w-100 h-100" style={{ color: k2 === 0 ? '#ff7000' : null }}>
+                                                                                <div className="w-100 h-100" style={{ color: k1 === 0 && k2 === 0 ? '#ff7000' : null }}>
                                                                                     {
                                                                                         scoreData[k1] && scoreData[k1][k2] ?
                                                                                         scoreData[k1][k2][1]
