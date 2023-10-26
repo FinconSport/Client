@@ -2202,12 +2202,13 @@ class LsportApiController extends Controller {
                     if ($return === false) {
                         $this->ApiError("03");
                     }
+                    $tmp_bet_data['start_time'] = $return['start_time'];
                     
                     // 轉時間格式
                     $time_columns = ["start_time","create_time","approval_time","result_time"];
                     foreach ($time_columns as $kkkk => $vvvv) {
-                        if (isset($return[$vvvv])) { 
-                            $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$return[$vvvv]);
+                        if (isset($tmp_bet_data[$vvvv])) { 
+                            $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$tmp_bet_data[$vvvv]);
                         }
                     }
 
@@ -2239,12 +2240,13 @@ class LsportApiController extends Controller {
                 }
 
                 $tmp_bet_data = $v;
+                $tmp_bet_data['start_time'] = $return['start_time'];
 
                 // 轉時間格式
                 $time_columns = ["start_time","create_time","approval_time","result_time"];
                 foreach ($time_columns as $kkkk => $vvvv) {
-                    if (isset($return[$vvvv])) { 
-                        $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$return[$vvvv]);
+                    if (isset($tmp_bet_data[$vvvv])) { 
+                        $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$tmp_bet_data[$vvvv]);
                     }
                 }
 
