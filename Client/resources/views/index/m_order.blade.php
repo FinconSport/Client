@@ -436,8 +436,8 @@
             if (betData && Object.keys(betData.list).length > 0) {
                 // 是否有讓方
                 let isHcapTeam = null
-                // 讓分的priority && line不同 && 有盤口
-                j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                // 讓分的priority && 有兩個選項
+                j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
 
                 Object.entries(betData.list).map(([k4, v4], s) => {
                     // 判定讓方 -> line值為負
@@ -693,7 +693,7 @@
                                     // 是否有讓方
                                     let isHcapTeam = null
                                     // 讓分的priority && line不同 && 有盤口
-                                    j === 1 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                                    j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => {
                                         // 先取消樣式
