@@ -27,11 +27,12 @@
                 <div class="col-4 mb-2 mt-2 text-right">
                     <span key='odd' class="odd"></span>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-2">
                     <input class="w-100 text-right" id="moneyInput" autocomplete="off" inputmode="numeric" oninput="this.value = this.value.replace(/\D+/g, '')" placeholder="" >
                 </div>
-                <div class="col-6 mb-2 mt-2">{{ trans('index.bet_area.maxwin') }}</div>
-                <div class="col-6 mb-2 mt-2 text-right" id="maxWinning">0.00</div>
+                <div class="col-12 m-0 text-red"><p class="mb-0" id="betPrompt"></p></div>
+                <div class="col-6 mb-2">{{ trans('index.bet_area.maxwin') }}</div>
+                <div class="col-6 mb-2 text-right" id="maxWinning" style="overflow: hidden;">0.00</div>
                 <div class="col-12 m-0" id="quickContainer">
                     <div class="col-3">
                         <div class="quick" value=100>+100</div>
@@ -762,6 +763,7 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
+        $('#betPrompt').html('')
         // 先移除樣式
         $('.leftSlideOrderCard').removeClass('raiseOdd')
         $('.leftSlideOrderCard .fa-caret-up').remove()
@@ -832,7 +834,7 @@
         $('#submitOrder').attr('min', betLimitationD.min)
         $('#submitOrder').attr('max', betLimitationD.max)
         $('#moneyInput').attr('placeholder', `${langTrans.js.limit} ${betLimitationD.min}-${betLimitationD.max}`)
-        $('#moneyInput').val(betLimitationD.min)
+        // $('#moneyInput').val(betLimitationD.min)
         $('#moneyInput').trigger('change')
         $('#moneyInput').focus()
     }
@@ -873,11 +875,11 @@
     // 最高可贏
     $('#moneyInput').on('keyup input change', function(event) {
         let inputMoney = parseInt($(this).val())
-        let min = parseInt($('#submitOrder').attr('min'))
-        let max = parseInt($('#submitOrder').attr('max'))
+        // let min = parseInt($('#submitOrder').attr('min'))
+        // let max = parseInt($('#submitOrder').attr('max'))
         if (isNaN(inputMoney)) inputMoney = ''
-        if (inputMoney < min) inputMoney = min
-        if (inputMoney > max) inputMoney = max
+        // if (inputMoney < min) inputMoney = min
+        // if (inputMoney > max) inputMoney = max
         let odd = parseFloat($('span[key="odd"]').html())
         let maxMoney = (inputMoney * odd).toFixed(2);
         $('#maxWinning').html(maxMoney)
@@ -905,14 +907,20 @@
         let max = parseInt($('#submitOrder').attr('max'))
 
         if (sendOrderData.bet_amount < min) {
-            showErrorToast(langTrans.js.tooless_bet_amout + min);
+            $('#betPrompt').html(langTrans.js.tooless_bet_amout + min)
+            $('#moneyInput').val(min)
+            $('#moneyInput').trigger('change')
             return;
         }
         if (sendOrderData.bet_amount > max) {
-            showErrorToast(langTrans.js.toohigh_bet_amout + max);
+            $('#betPrompt').html(langTrans.js.toohigh_bet_amout + max)
+            $('#moneyInput').val(max)
+            $('#moneyInput').trigger('change')
             return;
         }
 
+
+        $('#betPrompt').html('')
         // Show loading spinner while submitting
         showLoading();
 
@@ -922,14 +930,18 @@
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
-                calInter = setTimeout(function() {
+                if(res.status === 1) {
+                    calInter = setTimeout(function() {
+                        hideLoading();
+                        closeCal();
+                    }, 10000);
+                } else {
+                    showErrorToast(res.message);
                     hideLoading();
-                    closeCal();
-                }, 10000);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });

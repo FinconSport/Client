@@ -1186,6 +1186,7 @@
     // 打開投注計算機
     var sendOrderData = {}
     function openCal(e) {
+        $('#betPrompt').html('')
         // 先移除樣式
         $('.leftSlideOrderCard').removeClass('raiseOdd')
         $('.leftSlideOrderCard .fa-caret-up').remove()

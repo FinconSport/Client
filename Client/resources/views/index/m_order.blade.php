@@ -1080,6 +1080,7 @@
 
     // 打開左邊投注區塊
     function openOrderBet() {
+        $('#betPrompt').html('')
         closeOrderDetail(0)
         $('#leftSlideOrder').show("slide", {
             direction: "left"
