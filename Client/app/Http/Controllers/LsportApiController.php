@@ -842,6 +842,7 @@ class LsportApiController extends Controller {
                         $tmp_market['main_line'] = $market_main_line;
                     } else {
                         $tmp_market['main_line'] = "[".$return['base_line']."]";
+                        $market_main_line = $return['base_line'];
                     }
 
                 } else {
