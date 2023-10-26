@@ -75,6 +75,8 @@ return [
 		"recharge"=>"充值",
 		"withdraw"=>"提現",
 		"delay_bet_refund"=>"注單取消",
+		"agentapi_recharge"=>"充值",
+		"agentapi_withdraw"=>"提現",
 	], 
 
 
