@@ -2194,8 +2194,15 @@ class LsportApiController extends Controller {
                     if ($return === false) {
                         $this->ApiError("03");
                     }
-                    $tmp_bet_data['start_time'] = date("Y-m-d H:i:s",strtotime($return['start_time']));
                     
+                    // 轉時間格式
+                    $time_columns = ["start_time","create_time","approval_time","result_time"];
+                    foreach ($time_columns as $kkkk => $vvvv) {
+                        if (isset($return[$vvvv])) { 
+                            $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$return[$vvvv]);
+                        }
+                    }
+
                     // 滾球/早盤字樣判定
                     $market_type = 0;
                     if ($return['start_time'] < $vvv['create_time']) {
@@ -2229,10 +2236,10 @@ class LsportApiController extends Controller {
                 $time_columns = ["start_time","create_time","approval_time","result_time"];
                 foreach ($time_columns as $kkkk => $vvvv) {
                     if (isset($return[$vvvv])) { 
-                        $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",strtotime($return[$vvvv]));
+                        $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",$return[$vvvv]);
                     }
                 }
-                 
+
                 // 滾球/早盤字樣判定
                 $market_type = 0;
                 if ($return['start_time'] < $v['create_time']) {
