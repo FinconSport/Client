@@ -42,7 +42,7 @@ class GameOrder extends CacheModel
 			// end time 
 			if ($end_time != "") {
 				// 如果輸入是2020-10-10, 應當包含2020-10-10的資料, 所以條件為 < 2020-10-11
-				$end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime($end_time))));
+				$end_time = $end_time + 24*60*60;
 				$model = $model->where('create_time', "<", $end_time);
 			}
 
