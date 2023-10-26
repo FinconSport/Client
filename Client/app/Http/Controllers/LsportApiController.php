@@ -2225,7 +2225,6 @@ class LsportApiController extends Controller {
 
                 $tmp_bet_data = $v;
                 $tmp_bet_data['start_time'] = date("Y-m-d H:i:s",strtotime($return['start_time']));
-                $tmp_bet_data['approval_time'] = date("Y-m-d H:i:s",strtotime($return['approval_time']));
                 $tmp_bet_data['result_time'] = date("Y-m-d H:i:s",strtotime($return['result_time']));
                 $tmp_bet_data['create_time'] = date("Y-m-d H:i:s",strtotime($return['create_time']));
 
