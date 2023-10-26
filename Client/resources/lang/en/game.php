@@ -43,13 +43,6 @@ return [
         "tie" => "Tie",
         "correct_score" => "Correct Score",
     ],
-    'betTypePriority' => [
-      'sizePriority'=>  [5, 6, 105, 106, 111, 115, 119, 123, 205, 206, 303],
-      'allWinPriority'=>  [1, 2, 9, 101, 102, 109, 113, 117, 121, 201, 202, 301],
-      'hcapPriority'=>  [3, 4, 103, 104, 110, 114, 118, 122, 203, 204, 302],
-      'oddEvenPriority'=>  [7, 107, 108, 112, 116, 120, 124, 207, 208, 304],
-      'bdPriority'=>  [8],
-    ],
     "game_priority" => [
         "154914" => [// Baseball
           "1" => "Full Game Moneyline", 

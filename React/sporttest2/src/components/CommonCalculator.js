@@ -215,13 +215,28 @@ class CommonCalculator extends React.Component {
         }
     }
 
-    async caller(apiUrl, api_res) {
+    async caller(apiUrl) {
 		const json = await GetIni(apiUrl);
-
-		this.setState({
-			[api_res]: json,
-		})
-	}
+        console.log(json)
+        if( json.status === 1 ) {
+            setTimeout(() => {
+                if( this.state.isPending ) {
+                    this.setState({
+                        isPending: false,
+                    }, ()=>{
+                        // 關閉計算機
+                        this.CloseCal()
+                        this.props.callBack() // 投注後餘額
+                    })
+                }
+            }, 10000);
+        } else {
+            this.notifyError(json.message)
+            this.setState({
+                isPending: false,
+            })
+        }
+    }
 
     componentDidMount() {
         // ws
@@ -268,11 +283,6 @@ class CommonCalculator extends React.Component {
             maxMoney: '0.00'
         })
         this.props.CloseCal()
-    }
-
-    // 餘額更新
-    reFreshBalance = () => {
-        this.caller(this.state.accountApi, 'accountApi_res', 1)
     }
 
     // 鍵盤
@@ -380,17 +390,7 @@ class CommonCalculator extends React.Component {
         const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
         this.caller(queryString , 'afterBet')
 
-        setTimeout(() => {
-            if( this.state.isPending ) {
-                this.setState({
-                    isPending: false,
-                }, ()=>{
-                    // 關閉計算機
-                    this.CloseCal()
-                    this.props.callBack() // 投注後餘額
-                })
-            }
-        }, 10000);
+       
     }
 
     notifySuccess = (msg) => {
