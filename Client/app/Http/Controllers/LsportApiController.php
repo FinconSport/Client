@@ -679,7 +679,7 @@ class LsportApiController extends Controller {
         //取2天內賽事
         $today = strtotime(date("Y-m-d 00:00:00", strtotime("-1 day"))); // 預設昨天
         $today_tomorrow_es = $today; 
-        $after_tomorrow_es = $today + 3 * 24 * 60 * 60; 
+        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
 
         //////////////////////////////////////////
         // ES取得賽事
