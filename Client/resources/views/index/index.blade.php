@@ -1035,7 +1035,7 @@
         console.log(msg);
         
         // delay_order
-        if (msg.action === 'delay_order') {
+        if ( msg.action === 'delay_order') {
             clearTimeout(calInter)
             hideLoading();
             closeCal();
@@ -1325,7 +1325,6 @@
     })
 
     let calInter = null
-    let betReturnStatus = null
     // 投注
     function sendOrder() {
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
@@ -1363,16 +1362,17 @@
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
-                console.log(res)
-                
-                calInter = setTimeout(function() {
-                    hideLoading();
-                    closeCal();
-                }, 10000);
+                if(res.status === 1) {
+                    calInter = setTimeout(function() {
+                        hideLoading();
+                        closeCal();
+                    }, 10000);
+                } else {
+                    showErrorToast(res.message);
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                // hideLoading();
                 showErrorToast(jqXHR)
             }
         });
