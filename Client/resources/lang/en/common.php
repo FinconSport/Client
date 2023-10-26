@@ -46,6 +46,29 @@ return [
 		"this_week" => "This Week",  //  "本週",
 		"this_month" => "This Month",  //  "本月",
 	],
+	'js' => [
+		'loginFirst' => 'Please log in first!', // "請先登入!"
+		'sun' => 'Sun', // "日"
+		'mon' => 'Mon', // "一"
+		'tue' => 'Tue', // "二"
+		'wed' => 'Wed', // "三"
+		'thu' => 'Thu', // "四"
+		'fri' => 'Fri', // "五"
+		'sat' => 'Sat', // "六"
+		'jan' => 'January', // "一月"
+		'feb' => 'February', // "二月"
+		'mar' => 'March',  // "三月"
+		'apr' => 'April', // "四月"
+		'may' => 'May', // "五月"
+		'jun' => 'June', // "六月"
+		'jul' => 'July', // "七月"
+		'aug' => 'August', // "八月"
+		'sep' => 'September', // "九月"
+		'oct' => 'October', // "十月"
+		'nov' => 'November', // "十一月"
+		'dec' => 'December', // "十二月"
+		'today' => 'Today', // "今天"
+	],
 	'stageArr' => [
 		154914 => [
 			1 => '1st Inning',
@@ -100,32 +123,9 @@ return [
 	'priorityArr' => [
 		'allwin' => [1, 2, 9, 101, 102, 109, 113, 117, 121, 201, 202, 301],
 		'hcap' => [3, 4, 103, 104, 110, 114, 118, 122, 203 , 204, 302],
-		'oddeven' => [7, 107, 112, 116, 120, 124, 304],
-		'size' => [5, 205, 206, 105, 106, 111, 115, 119, 123, 303]
-	],
-	
-	'js' => [
-		'loginFirst' => 'Please log in first!', // "請先登入!"
-		'sun' => 'Sun', // "日"
-		'mon' => 'Mon', // "一"
-		'tue' => 'Tue', // "二"
-		'wed' => 'Wed', // "三"
-		'thu' => 'Thu', // "四"
-		'fri' => 'Fri', // "五"
-		'sat' => 'Sat', // "六"
-		'jan' => 'January', // "一月"
-		'feb' => 'February', // "二月"
-		'mar' => 'March',  // "三月"
-		'apr' => 'April', // "四月"
-		'may' => 'May', // "五月"
-		'jun' => 'June', // "六月"
-		'jul' => 'July', // "七月"
-		'aug' => 'August', // "八月"
-		'sep' => 'September', // "九月"
-		'oct' => 'October', // "十月"
-		'nov' => 'November', // "十一月"
-		'dec' => 'December', // "十二月"
-		'today' => 'Today', // "今天"
+		'oddeven' => [7, 107, 108, 112, 116, 120, 124, 207, 208, 304],
+		'size' => [5, 6, 205, 206, 105, 106, 111, 115, 119, 123, 303],
+		'bd' => [8]
 	],
 
 	// 後端

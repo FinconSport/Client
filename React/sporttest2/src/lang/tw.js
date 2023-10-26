@@ -184,10 +184,10 @@ const twTranslation = {
   },
   MatchContent: {
     nomorematch: "沒有更多賽事了",
-    sizePriority: [5, 6, 105, 106, 111, 115, 119, 123, 205, 206, 303],
-    allWinPriority: [1, 2, 101, 102, 109, 113, 117, 121, 201, 202, 301],
-    hcapPriority: [3, 4, 103, 104, 110, 114, 118, 122, 203, 204, 302],
-    oddEvenPriority: [7, 107, 108, 112, 116, 120, 124, 304],
+    sizePriority: [5, 6, 205, 206, 105, 106, 111, 115, 119, 123, 303],
+    allWinPriority: [1, 2, 9, 101, 102, 109, 113, 117, 121, 201, 202, 301],
+    hcapPriority: [3, 4, 103, 104, 110, 114, 118, 122, 203 , 204, 302],
+    oddEvenPriority: [7, 107, 108, 112, 116, 120, 124, 207, 208, 304],
     bdPriority: [8],
     game_priority: {
       154914: {

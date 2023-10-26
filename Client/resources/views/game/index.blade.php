@@ -293,17 +293,17 @@
                             bet_item.find('.odd').text(v3.price)
                             let pri = v.priority
                             switch (true) {
-                                case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
-                                case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
+                                case commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1:
+                                case commonLangTrans.priorityArr.size.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
                                     bet_item.find('.line').html(`${v3.line}`)
                                     break;
-                                case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
+                                case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
                                     bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
                                     bet_item.find('.line').html('')
                                     break;
-                                case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
-                                case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
+                                case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
+                                case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
                                         bet_item.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
                                         bet_item.find('.line').html(`${v3.line}`)
@@ -466,7 +466,7 @@
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
 
         // col setting
-        gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1 ? len = 6 : null
+        commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 6 : null
         marketBetRateTemp.addClass(`col-${12/len}`)
 
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
@@ -488,17 +488,17 @@
         marketBetRateTemp.find('.odd').text(v3.price)
         let pri = v.priority
         switch (true) {
-            case gameLangTrans.betTypePriority.bdPriority.indexOf(v.priority) !== -1:
-            case gameLangTrans.betTypePriority.sizePriority.indexOf(v.priority) !== -1:
+            case commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1:
+            case commonLangTrans.priorityArr.size.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
                 marketBetRateTemp.find('.line').html(`${v3.line}`)
                 break;
-            case gameLangTrans.betTypePriority.oddEvenPriority.indexOf(v.priority) !== -1:
+            case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
                 marketBetRateTemp.find('.line').html('')
                 break;
-            case gameLangTrans.betTypePriority.allWinPriority.indexOf(v.priority) !== -1:
-            case gameLangTrans.betTypePriority.hcapPriority.indexOf(v.priority) !== -1:
+            case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
+            case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
                     marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
                     marketBetRateTemp.find('.line').html(`${v3.line}`)
