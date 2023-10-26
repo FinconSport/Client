@@ -833,6 +833,8 @@ class LsportApiController extends Controller {
                         "fixture_id" => $fixture_id,
                         "market_id" => $market_id
                     ]);
+
+                    dd($return);
                     if ($return === false) {
                         $this->ApiError('04');
                     }
