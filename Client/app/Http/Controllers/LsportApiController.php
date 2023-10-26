@@ -2224,10 +2224,15 @@ class LsportApiController extends Controller {
                 }
 
                 $tmp_bet_data = $v;
-                $tmp_bet_data['start_time'] = date("Y-m-d H:i:s",strtotime($return['start_time']));
-                $tmp_bet_data['result_time'] = date("Y-m-d H:i:s",strtotime($return['result_time']));
-                $tmp_bet_data['create_time'] = date("Y-m-d H:i:s",strtotime($return['create_time']));
 
+                // 轉時間格式
+                $time_columns = ["start_time","create_time","approval_time","result_time"];
+                foreach ($time_columns as $kkkk => $vvvv) {
+                    if (isset($return[$vvvv])) { 
+                        $tmp_bet_data[$vvvv] = date("Y-m-d H:i:s",strtotime($return[$vvvv]));
+                    }
+                }
+                 
                 // 滾球/早盤字樣判定
                 $market_type = 0;
                 if ($return['start_time'] < $v['create_time']) {
