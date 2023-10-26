@@ -834,7 +834,6 @@ class LsportApiController extends Controller {
                         "market_id" => $market_id
                     ]);
 
-                    dd($return);
                     if ($return === false) {
                         $this->ApiError('04');
                     }
@@ -859,7 +858,7 @@ class LsportApiController extends Controller {
                 ->orderBy("name_en","ASC")
                 ->list();
                 if ($return === false) {
-                    $this->ApiError('04');
+                    $this->ApiError('05');
                 }
 
                 $market_bet_data = $return;
