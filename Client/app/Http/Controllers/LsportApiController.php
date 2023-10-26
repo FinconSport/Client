@@ -2150,6 +2150,14 @@ class LsportApiController extends Controller {
             foreach ($columns as $kk => $vv) {
                 $tmp[$k][$vv] = $v[$vv]; 
             }
+            
+            // 轉時間格式
+            $time_columns = ["start_time","create_time","approval_time","result_time"];
+            foreach ($time_columns as $kkkk => $vvvv) {
+                if (isset($tmp[$vvvv])) { 
+                    $tmp[$vvvv] = date("Y-m-d H:i:s",$tmp[$vvvv]);
+                }
+            }
 
             $tmp[$k]['status'] = $v['status'];
             $tmp[$k]['m_order'] = $v['m_order'];
