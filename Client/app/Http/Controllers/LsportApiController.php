@@ -2365,6 +2365,7 @@ class LsportApiController extends Controller {
         $list = array();
         foreach ($return as $k => $v) {
             $v['type'] = $typeList[$v['balance_type']];
+            $v['create_time'] = date("Y-m-d H:i:s",$v['create_time']);
             $list[] = $v;
         } 
 
