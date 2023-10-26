@@ -1325,6 +1325,7 @@
     })
 
     let calInter = null
+    let betReturnStatus = null
     // 投注
     function sendOrder() {
         if (sendOrderData.bet_amount === 0 || sendOrderData.bet_amount === undefined) {
@@ -1362,6 +1363,8 @@
             data: sendOrderData,
             success: function(response) {
                 let res = JSON.parse(response)
+                console.log(res)
+                
                 calInter = setTimeout(function() {
                     hideLoading();
                     closeCal();
