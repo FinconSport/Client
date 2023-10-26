@@ -857,6 +857,7 @@ class LsportApiController extends Controller {
                 ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
                 ->orderBy("name_en","ASC")
                 ->list();
+                dd($return);
                 if ($return === false) {
                     $this->ApiError('05');
                 }
