@@ -22,7 +22,8 @@ class LsportNotice extends CacheModel
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
 
         return Cache::remember($cacheKey, $cacheAliveTime, function () use ($data) {
-            $data = self::where("create_time" , ">=" , $data['create_time'])->orderBy('sport_id', 'ASC')->orderBy('create_time', 'DESC')->get();
+            $time = strtotime($data['create_time']);
+            $data = self::where("create_time" , ">=" , $time)->orderBy('sport_id', 'ASC')->orderBy('create_time', 'DESC')->get();
             return $data;
         });
     }
