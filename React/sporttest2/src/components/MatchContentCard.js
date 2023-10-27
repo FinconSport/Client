@@ -68,7 +68,7 @@ const SliderBrickHeight2 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.6rem;
+		font-size: 0.7rem;
 		line-height: 2rem;
 	}
 	.SliderBrickOdd{
@@ -90,7 +90,7 @@ const SliderRightArrow = {
 	position: 'absolute',
 	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
 	top: '5rem',
-	right: '0',
+	right: '-0.35rem',
 	fontSize: '1.5rem'
 }
 
@@ -338,7 +338,7 @@ class MatchContentCard extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='col-55 text-center' style={{ paddingLeft: 0}}>
+                                    <div className='col-55 text-center' style={{ padding: 0 }}>
                                         {
                                             window.sport !== 35232 &&
                                             (
