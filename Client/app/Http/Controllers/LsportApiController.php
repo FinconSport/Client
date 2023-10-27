@@ -729,7 +729,7 @@ class LsportApiController extends Controller {
             $fixture_id = $v['fixture_id'];
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
-            $start_time = date("Y-m-d H:i:s",$v['start_time']);
+            $start_time = date("Y-m-d H:i:s",$v['start_time']+$time_zone);
 
             // 區分living, early
             $status = $v['status'];
@@ -752,7 +752,7 @@ class LsportApiController extends Controller {
             $columns = ["fixture_id","start_time","status","last_update"];
             foreach ($columns as $kk => $vv) {
                 if ($vv == "start_time") {
-                    $v[$vv] = date("Y-m-d H:i:s",$v[$vv]);
+                    $v[$vv] = date("Y-m-d H:i:s",$v[$vv]+$time_zone);
                 }
                 $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
             }
