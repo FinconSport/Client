@@ -1034,19 +1034,30 @@ class LsportApiController extends Controller {
         $home_team_id = $fixture_data['home_id'];
         $away_team_id = $fixture_data['away_id'];
 
-        // 判斷賽事狀態是否可下注
+        // 判斷賽事狀態是否可下注 + 限額判斷
         $fixture_status = $fixture_data['status'];
         if ($fixture_status == 1) {
             // 早盤
             $limit = $agent_limit['early'][$sport_id];
-            dd($limit);
+
+            if ($bet_amount < $limit['min']) {
+                $this->ApiError("21");
+            }
+            if ($bet_amount > $limit['max']) {
+                $this->ApiError("22");
+            }
         } elseif (($fixture_status == 2) || ($fixture_status == 9)) {
             // 滾球
             $limit = $agent_limit['living'][$sport_id];
-            dd($limit);
+            if ($bet_amount < $limit['min']) {
+                $this->ApiError("21");
+            }
+            if ($bet_amount > $limit['max']) {
+                $this->ApiError("22");
+            }
         } else {
-            // 不能下注
-            $this->ApiError("09");
+            // 賽事狀態不允許下注
+            $this->ApiError("20");
         }
 
         //////////////////////////////////////////
