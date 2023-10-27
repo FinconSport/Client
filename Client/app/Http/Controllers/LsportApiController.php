@@ -1013,9 +1013,10 @@ class LsportApiController extends Controller {
         }
 
         $agent_account = $return['account'];
-        $agent_limit = json_decode($return['limit_data'],true);
 
-        dd($agent_limit);
+        // 限額資料
+        $agent_limit = json_decode($return['limit_data'],true);
+        $player_limit = $agent_limit[$sport_id]
 
         //////////////////////////////////////////
         // order data
@@ -1033,6 +1034,10 @@ class LsportApiController extends Controller {
         $league_id = $fixture_data['league_id'];
         $home_team_id = $fixture_data['home_id'];
         $away_team_id = $fixture_data['away_id'];
+
+        // 取得賽事開始時間
+        $fixture_start_time = $fixture_data['start_time'];
+        dd($fixture_start_time);
 
         //////////////////////////////////////////
         // order data
