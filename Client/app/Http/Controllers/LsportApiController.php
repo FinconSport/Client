@@ -666,9 +666,6 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
 
-
-        $time_zone = 8*60*60;
-
         //////////////////////////////////////////
 
         if (!isset($input['sport_id'])) {
@@ -676,6 +673,12 @@ class LsportApiController extends Controller {
         }
         $sport_id = $input['sport_id'];
 
+        $time_zone = 0;
+        // 根據sport_id , 切換時區
+        $sport_timezone = [6046, 154914];
+        if (in_array($sport_id, $sport_timezone)) {
+            $time_zone = 8*3600;
+        }
 
         //////////////////////////////////////////
 
@@ -729,8 +732,8 @@ class LsportApiController extends Controller {
             $fixture_id = $v['fixture_id'];
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
-            $start_time = date("Y-m-d H:i:s",$v['start_time']);
-
+            $start_time = date("Y-m-d H:i:s",$v['start_time']+$time_zone);
+            
             // 區分living, early
             $status = $v['status'];
             if ($status == 9) {
@@ -752,7 +755,7 @@ class LsportApiController extends Controller {
             $columns = ["fixture_id","start_time","status","last_update"];
             foreach ($columns as $kk => $vv) {
                 if ($vv == "start_time") {
-                    $v[$vv] = date("Y-m-d H:i:s",$v[$vv]);
+                    $v[$vv] = date("Y-m-d H:i:s",$v[$vv]+$time_zone);
                 }
                 $data[$status_type_name][$sport_id]['list'][$league_id]['list'][$fixture_id][$vv] = $v[$vv];
             }
