@@ -1034,13 +1034,20 @@ class LsportApiController extends Controller {
         $home_team_id = $fixture_data['home_id'];
         $away_team_id = $fixture_data['away_id'];
 
-        // 取得賽事開始時間
-        $fixture_start_time = $fixture_data['start_time'];
-        $current_time = time();
-
-        $a = date("Y-m-d H:i:s",$fixture_start_time);
-        $b = date("Y-m-d H:i:s",$current_time);
-        dd($a,$b);
+        // 判斷賽事狀態是否可下注
+        $fixture_status = $fixture_data['status'];
+        if ($fixture_status == 1) {
+            // 早盤
+            $limit = $agent_limit['early'][$sport_id];
+            dd($limit);
+        } elseif (($fixture_status == 2) || ($fixture_status == 9)) {
+            // 滾球
+            $limit = $agent_limit['living'][$sport_id];
+            dd($limit);
+        } else {
+            // 不能下注
+            $this->ApiError("09");
+        }
 
         //////////////////////////////////////////
         // order data
