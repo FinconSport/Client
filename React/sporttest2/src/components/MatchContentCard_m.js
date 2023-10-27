@@ -90,7 +90,7 @@ const SliderRightArrow = {
 	position: 'absolute',
 	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
 	top: '5rem',
-	right: '-0.25rem',
+	right: '-0.35rem',
 	fontSize: '1.5rem'
 }
 
@@ -265,7 +265,7 @@ class MatchContentCard extends React.Component {
                                             <div className="col p-0">+{v.market_bet_count}</div>
                                         </div>
                                     </div>
-                                    <div className='col-55 text-center' style={{ paddingLeft: 0, paddingRight: '0.2rem'}}>
+                                    <div className='col-55 text-center' style={{ padding: 0 }}>
                                      {
                                             window.sport !== 35232 &&
                                             (
