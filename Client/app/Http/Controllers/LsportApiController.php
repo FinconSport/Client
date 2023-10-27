@@ -1016,7 +1016,6 @@ class LsportApiController extends Controller {
 
         // 限額資料
         $agent_limit = json_decode($return['limit_data'],true);
-        $player_limit = $agent_limit[$sport_id]
 
         //////////////////////////////////////////
         // order data
