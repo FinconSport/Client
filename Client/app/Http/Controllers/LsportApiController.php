@@ -1037,7 +1037,10 @@ class LsportApiController extends Controller {
         // 取得賽事開始時間
         $fixture_start_time = $fixture_data['start_time'];
         $current_time = time();
-        dd($fixture_start_time,$current_time);
+
+        $a = date("Y-m-d H:i:s",$fixture_start_time);
+        $b = date("Y-m-d H:i:s",$current_time);
+        dd($a,$b);
 
         //////////////////////////////////////////
         // order data
