@@ -1013,6 +1013,9 @@ class LsportApiController extends Controller {
         }
 
         $agent_account = $return['account'];
+        $agent_limit = json_decode($return['limit_data'],true);
+
+        dd($agent_limit);
 
         //////////////////////////////////////////
         // order data
