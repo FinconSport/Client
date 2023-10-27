@@ -100,7 +100,7 @@ const CalHeight12 = styled.div`
     text-align: center;
     font-size: 1.2rem;
     .quick {
-        color: rgb(188, 213, 210);
+        color: rgb(117, 155, 150);
     }
     div {
         border: 1px solid rgb(224, 234, 235);
@@ -511,19 +511,19 @@ class CommonCalculator extends React.Component {
                                 </div>
                             </CalHeight3>
                             <CalHeight12 className='row'>
-                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(500,1)}>+500</div>
+                            <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(100,1)}>+100</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(1)}>1</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(2)}>2</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(3)}>3</div>
-                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(2000,1)}>+2000</div>
+                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(200,1)}>+200</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(4)}>4</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(5)}>5</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(6)}>6</div>
-                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(5000,1)}>+5000</div>
+                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(500,1)}>+500</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(7)}>7</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(8)}>8</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(9)}>9</div>
-                                <div className='col-3'>MAX</div>
+                                <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(1000,1)}>+1000</div>
                                 <div className='col-3'>.</div>
                                 <div className='col-3' onClick={()=>this.CalMoneyBrick(0)}>0</div>
                                 <div className='col-3' onClick={this.ClearMoney}>AC</div>

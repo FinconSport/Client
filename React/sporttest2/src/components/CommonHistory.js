@@ -275,8 +275,9 @@ class CommonHistory extends React.Component {
                                                     val.m_order === 0 ?
                                                     langText.CommonHistory.sport
                                                     :
-                                                    langText.CommonHistory.morder
+                                                    `${langText.CommonHistory.morder}(${(val.bet_data).length}${langText.CommonHistory.parlay}1)`
                                                 }
+                                                {langText.CommonHistory.orderid}
                                             </div>
                                             <div className='col-2 p-0 text-right'>
                                                 {

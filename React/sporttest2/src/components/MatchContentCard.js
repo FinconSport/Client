@@ -66,12 +66,12 @@ const SliderBrickHeight2 = styled.div`
 		margin-bottom: 0;
 	}
 	.SliderBrickTitle{
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		line-height: 2rem;
 	}
 	.SliderBrickOdd{
 		font-size: 0.9rem;
-		line-height: 1rem;
+		line-height: 1.5rem;
 	}
 `
 
@@ -370,6 +370,7 @@ class MatchContentCard extends React.Component {
                                                                                 {
                                                                                     tt && tt.list && Object.keys(tt.list).length > 0 ? 
                                                                                     Object.entries(tt.list).map(([r,s]) => {
+                                                                                        // s.line = '-0.25 (0-0)'
                                                                                         return(
                                                                                             k === 201 || k === 202 ?
                                                                                             <SliderBrickHeight3 key={r} onClick={()=>this.getBetData(
@@ -427,11 +428,22 @@ class MatchContentCard extends React.Component {
                                                                                                 s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id}>
-                                                                                                <p className='SliderBrickTitle'>
+                                                                                                <p className='SliderBrickTitle' style={{lineHeight: (s.line).indexOf('(') !== -1 ? '1rem' : null}}>
                                                                                                     {langText.MatchContent.sizePriority.indexOf(k) !== -1 &&
                                                                                                         s.market_bet_name
                                                                                                     }
-                                                                                                    <span style={{color: '#ff7000'}}>{s.line}</span>
+                                                                                                    {
+                                                                                                        (s.line).indexOf('(') !== -1 ?
+                                                                                                        <span style={{color: '#ff7000'}}>
+                                                                                                            {(s.line).split(' ')[0]}
+                                                                                                            <br/>
+                                                                                                            {(s.line).split(' ')[1]}
+                                                                                                        </span>
+                                                                                                        :
+                                                                                                        <span style={{color: '#ff7000'}}>
+                                                                                                            {s.line}
+                                                                                                        </span>
+                                                                                                    }
                                                                                                 </p>
                                                                                                     {
                                                                                                         s.status === 1 ?
