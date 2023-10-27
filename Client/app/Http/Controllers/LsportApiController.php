@@ -673,6 +673,12 @@ class LsportApiController extends Controller {
         }
         $sport_id = $input['sport_id'];
 
+        $time_zone = 0;
+        // 根據sport_id , 切換時區
+        $sport_timezone = [6046, 154914];
+        if (in_array($sport_id, $sport_timezone)) {
+            $time_zone = 8*3600;
+        }
 
         //////////////////////////////////////////
 
@@ -727,13 +733,6 @@ class LsportApiController extends Controller {
             $home_team_id = $v['home_id'];
             $away_team_id = $v['away_id'];
             $start_time = date("Y-m-d H:i:s",$v['start_time']+$time_zone);
-
-            // 根據sport_id , 切換時區
-            $time_zone = 0;
-            $sport_timezone = [6046, 154914];
-            if (in_array($sport_id, $sport_timezone)) {
-                $time_zone = 8*3600;
-            }
             
             // 區分living, early
             $status = $v['status'];
