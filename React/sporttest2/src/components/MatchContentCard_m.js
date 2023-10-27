@@ -43,7 +43,6 @@ const SliderBrickHeight3 = styled.div`
 	background: white;
 	margin-bottom: 0.2rem;
 	border-radius: 5px;
-    border: 1px solid transparent;
 	p {
 		margin-bottom: 0;
 	}
@@ -62,7 +61,6 @@ const SliderBrickHeight2 = styled.div`
 	background: white;
 	margin-bottom: 0.2rem;
 	border-radius: 5px;
-    border: 1px solid transparent;
 
 	p {
 		margin-bottom: 0;
@@ -90,7 +88,7 @@ const SliderRightArrow = {
 	position: 'absolute',
 	filter: 'drop-shadow(0px 2px 1px rgba(0,0,0,0.3))',
 	top: '5rem',
-	right: '-0.35rem',
+	right: '-0.25rem',
 	fontSize: '1.5rem'
 }
 

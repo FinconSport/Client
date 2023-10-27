@@ -27,14 +27,12 @@
 
 .raiseOdd{
     background-color: rgb(233 61 61 / 15%);
-    border: red 1px solid!important;
 }
 .raiseOdd .odd{
     color: red;
 }
 .lowerOdd {
     background-color: rgb(139 201 91 / 15%);
-    border: rgb(139, 201, 91) 1px solid!important;
 }
 .lowerOdd .odd{
     color: rgb(139, 201, 91);
