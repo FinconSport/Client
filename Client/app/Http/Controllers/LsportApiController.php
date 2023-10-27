@@ -1406,6 +1406,9 @@ class LsportApiController extends Controller {
 
         $agent_account = $return['account'];
 
+        // 限額資料
+        $agent_limit = json_decode($return['limit_data'],true);
+
         //////////////////////////////////////////
         // 風控大單
         $risk_order = $this->system_config['risk_order'];
@@ -1552,6 +1555,32 @@ class LsportApiController extends Controller {
             $league_id = $fixture_data['league_id'];
             $home_team_id = $fixture_data['home_id']; 
             $away_team_id = $fixture_data['away_id']; 
+                
+            // 判斷賽事狀態是否可下注 + 限額判斷
+            $fixture_status = $fixture_data['status'];
+            if ($fixture_status == 1) {
+                // 早盤
+                $limit = $agent_limit['early'][$sport_id];
+
+                if ($bet_amount < $limit['min']) {
+                    $this->ApiError("25");
+                }
+                if ($bet_amount > $limit['max']) {
+                    $this->ApiError("26");
+                }
+            } elseif (($fixture_status == 2) || ($fixture_status == 9)) {
+                // 滾球
+                $limit = $agent_limit['living'][$sport_id];
+                if ($bet_amount < $limit['min']) {
+                    $this->ApiError("25");
+                }
+                if ($bet_amount > $limit['max']) {
+                    $this->ApiError("26");
+                }
+            } else {
+                // 賽事狀態不允許下注
+                $this->ApiError("27");
+            }
     
             // 取得聯賽資料
             $league_name = LsportLeague::getName(['league_id'=>$league_id, 'api_lang'=>$agent_lang]);
