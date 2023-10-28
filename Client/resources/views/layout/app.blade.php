@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zn-tw">
   <head>
+  	<meta name="google" content="notranslate">
     <!--  Fonts and icons  -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200|Open+Sans+Condensed:700" rel="stylesheet">
     <!-- Jquery -->
