@@ -353,40 +353,40 @@
 
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
-				sports.forEach(function (x, index) {
-				var key = index + 1;
-				x.key = key;
+				order.map(v => {
+					let x = sports.find(item => item.sport_id === v)
+					if( x ) {
+						function createSportSelect(container, url) {
+							var sportSelect = document.createElement("a");
+							sportSelect.setAttribute("key", x.sport_id);
+							sportSelect.setAttribute("class", "sportSelect");
+							sportSelect.setAttribute("href", url + x.sport_id);
 
-				function createSportSelect(container, url) {
-					var sportSelect = document.createElement("a");
-					sportSelect.setAttribute("key", x.sport_id);
-					sportSelect.setAttribute("class", "sportSelect");
-					sportSelect.setAttribute("href", url + x.sport_id);
+							switch (x.sport_id) {
+								case 154914:
+									fontawesome = 'baseball';
+									break;
+								case 6046:
+									fontawesome = 'futbol';
+									break;
+								case 48242:
+									fontawesome = 'basketball';
+									break;
+								case 35232:
+									fontawesome = 'hockey-puck';
+									break;
+							}
 
-					switch (x.sport_id) {
-						case 154914:
-							fontawesome = 'baseball';
-							break;
-						case 6046:
-							fontawesome = 'futbol';
-							break;
-						case 48242:
-							fontawesome = 'basketball';
-							break;
-						case 35232:
-							fontawesome = 'hockey-puck';
-							break;
+							sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
+
+							container.appendChild(sportSelect);
+						}
+
+						createSportSelect(indexSportCon, "/?sport=");
+						createSportSelect(mOrderSportCon, "/m_order?sport=");
+						createSportSelect(matchSportCon, "/match?sport=");
 					}
-
-					sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
-
-					container.appendChild(sportSelect);
-				}
-
-				createSportSelect(indexSportCon, "/?sport=");
-				createSportSelect(mOrderSportCon, "/m_order?sport=");
-				createSportSelect(matchSportCon, "/match?sport=");
-				});
+				}) 
 
 				$(`#${currentPage}`).addClass('active currentpage');
 				$(`#${currentPage} .submenu-toggle-list`).animate({'max-height': '900px'}, 300);

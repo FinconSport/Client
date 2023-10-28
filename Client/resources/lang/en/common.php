@@ -6,6 +6,7 @@
  */
 return [
 	// 前端
+	'order'=> [6046, 48242, 154914, 35232],
 	"left_menu" => [
 		"sport_bet" => "Match Betting", // "體育投注"
 		"m_bet" => "Parlay Betting", // "串關投注"
