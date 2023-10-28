@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'tw',
+    'locale' => 'zh_tw',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'tw',
+    'fallback_locale' => 'zh_tw',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'tw',
+    'faker_locale' => 'zh_tw',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,7 +171,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\ElasticSearchDriverProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
