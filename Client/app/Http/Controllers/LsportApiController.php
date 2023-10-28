@@ -938,9 +938,14 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
         $key = $sport_id . "_" . $agent_lang;
-        $data = Redis::hget('lsport_match_list', $key);
 
-        dd($key,$data);
+        
+        ////////////////////////////////////////
+        
+        $key = "6046_tw";
+        $data = Redis::hget('lsport_match_list', $key);
+    
+        dd($data);
     } 
 
     /**
