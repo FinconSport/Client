@@ -353,7 +353,7 @@
 
 			if (sportListD && sportListD.data) {
 				var sports = sportListD.data;
-				order.map(v => {
+				commonLang.order.map(v => {
 					let x = sports.find(item => item.sport_id === v)
 					if( x ) {
 						function createSportSelect(container, url) {
