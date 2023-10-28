@@ -90,9 +90,9 @@ class Home extends React.Component {
 
 		this.loadData(); // 初始加载数据
 
-		this.renderInterval = setInterval(() => {
-			this.loadData();
-		}, 5000);
+		// this.renderInterval = setInterval(() => {
+		// 	this.loadData();
+		// }, 5000);
 	}
 
 	loadData() {

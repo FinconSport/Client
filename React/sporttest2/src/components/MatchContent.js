@@ -190,17 +190,15 @@ class MatchContent extends React.Component {
 	}
 				
 	// 偵測menu改變
-	// componentDidUpdate(prevProps) {
-	// 	if (prevProps.sport_id !== this.props.sport_id || prevProps.menu_id !== this.props.menu_id) {
-			
-	// 		this.setState({
-	// 			toggleStates: {},
-	// 			sport_id: window.sport
-	// 		},() => {
-	// 			this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
-	// 		});
-	// 	}
-	// }
+	componentDidUpdate(prevProps) {
+		if (prevProps.sport_id !== this.props.sport_id) {
+			this.caller(this.props.apiUrl + '&sport_id=' + window.sport, 2);
+			this.setState({
+				toggleStates: {},
+				sport_id: window.sport
+			});
+		}
+	}
 
 	// 滑到最上面
 	scrollToTop = () => {
