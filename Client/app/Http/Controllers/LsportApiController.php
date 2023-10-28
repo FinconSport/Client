@@ -2067,6 +2067,8 @@ class LsportApiController extends Controller {
                         }
                     }
                     
+                    // 處理 1/4分盤顯示
+                    $tmp_bet_data['line'] = $this->displayMainLine($tmp_bet_data['line']);
                     $tmp[$k]['bet_data'][] = $tmp_bet_data;
                 }
             } else {
@@ -2112,7 +2114,10 @@ class LsportApiController extends Controller {
                     $this->ApiError("04");
                 }
                 $tmp_bet_data['market_bet_name_en'] = $return['name_en'];
-
+                
+                // 處理 1/4分盤顯示
+                $tmp_bet_data['line'] = $this->displayMainLine($tmp_bet_data['line']);
+                    
                 $tmp[$k]['bet_data'][] = $tmp_bet_data;
             }
 
