@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redis;
 use DB;
 
 // LSport
@@ -910,6 +911,37 @@ class LsportApiController extends Controller {
             $this->ApiSuccess($data, "01", false);
         }
     }
+
+
+    // RedisMatch
+    public function RedisMatchIndex(Request $request) {
+        
+    	$input = $this->getRequest($request);
+
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
+        }
+
+        //---------------------------------
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+
+        //////////////////////////////////////////
+
+        if (!isset($input['sport_id'])) {
+            $this->ApiError("01");
+        }
+        $sport_id = $input['sport_id'];
+
+
+        ////////////////////////////////////////
+        $key = $sport_id . "_" . $agent_lang;
+        $data = Redis::hget('lsport_match_list', $key);
+
+        dd($data);
+    } 
 
     /**
      * GameBet
@@ -2550,16 +2582,7 @@ class LsportApiController extends Controller {
         return true;
     }
 
-    /**
-     * getMatchScoreboard
-     *
-     * 解析並回傳一場賽事的各局主客隊得分資料。應為走地中賽事。
-     * 
-     * @param 
-     * @return  # null
-     *          # false
-     *          # ARRAY
-     */
+
 
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
@@ -2635,15 +2658,7 @@ class LsportApiController extends Controller {
 
     }
 
-    /**
-     * getMatchScoreboard
-     *
-     * 解析並回傳一場賽事的比分板資料。應為走地中賽事。
-     * 
-     * @param 
-     * @return 
-     */
-     protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
+    protected function getMatchPeriods($sport_id, $fixture_status, $scoreboard, $livescore_extradata) {
 
         // 如果還未開賽就回傳null
         $fixture_status = intval($fixture_status);
