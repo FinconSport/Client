@@ -1853,7 +1853,7 @@ class LsportApiController extends Controller {
                 $tmp_data['market_bet_id'] = $market_bet_id;
                 $tmp_data['market_bet_name'] = $market_bet_name;
                 $tmp_data['market_bet_name_en'] = $vvv['name_en'];
-                $tmp_data['line'] = $vvv['line'];
+                $tmp_data['line'] = $this->displayMainLine($vvv['line']);
                 $tmp_data['price'] = $vvv['price'];
                 $tmp_data['status'] = $vvv['status'];
                 $tmp_data['last_update'] = $vvv['last_update'];
@@ -2462,5 +2462,42 @@ class LsportApiController extends Controller {
 
     }
 
+    // 切換1/4 分盤顯示
+    protected function displayMainLine($main_line) {
+        
+        $number = (float)$main_line;
+        $is_neg = false;
+        if ($number < 0) {
+            $is_neg = true;
+        }
+
+        $number = abs($number);
+
+        $integerPart = floor($number); // 取整數部分
+        $decimalPart = $number - $integerPart; // 取小數部分
+
+        switch ($decimalPart) {
+            case 0.25:
+                $a = $integerPart;
+                $b = $integerPart+0.5;
+                $main_line = $a . "/" . $b;
+                if ($is_neg) {  // 如果是負數
+                    $main_line = "-".$main_line;
+                }
+                break;
+            case 0.75:
+                $a = $integerPart+0.5;
+                $b = $integerPart+1;
+                $main_line = $a . "/" . $b;
+                if ($is_neg) {  // 如果是負數
+                    $main_line = "-".$main_line;
+                }
+                break;
+            default:
+        }
+        
+        return $main_line;
+
+    }
 }
 
