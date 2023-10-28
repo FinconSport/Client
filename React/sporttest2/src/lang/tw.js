@@ -1,5 +1,8 @@
 // tw.js (繁體中文翻譯文本)
 const twTranslation = {
+  Common: {
+    order: [6046, 48242, 154914, 35232]  // 菜單體育排序
+  },
   IndexNavbar: {
     home: "首頁",
     hot: "熱門",

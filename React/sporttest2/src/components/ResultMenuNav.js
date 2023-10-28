@@ -1,4 +1,5 @@
 import React from "react";
+import { langText } from "../pages/LanguageContext";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -114,7 +115,7 @@ class ResultMenuNav extends React.Component {
                         </Link>
                     </div>
                     <div style={ResultSportBar}>
-                        {
+                        {/* {
                             res.data.map( v => {
                                 return(
                                     <ResultSportItem key={v.sport_id} style={ parseInt(window.sport) === parseInt(v.sport_id) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v.sport_id))}>
@@ -122,6 +123,20 @@ class ResultMenuNav extends React.Component {
                                         <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ v.name }</p>
                                     </ResultSportItem>
                                 )
+                            })
+                        } */}
+                        {
+                            langText.Common.order.map((v, k) => {
+                                let e = res.data.find(item => item.sport_id === v)
+                                if( e ) {
+                                    return (
+                                        <ResultSportItem key={v} style={ parseInt(window.sport) === parseInt(v) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v))}>
+                                            <img style={ResultSportImg} alt={ e.name } src={ parseInt(window.sport) === parseInt(v) ? require('../image/ball/ball-' + v + '.png') : require('../image/ball/ball-' + v + '-white.png') } />
+                                            <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ e.name }</p>
+                                        </ResultSportItem>
+                                    );
+                                }
+                                
                             })
                         }
                     </div>

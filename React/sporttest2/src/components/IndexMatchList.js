@@ -66,6 +66,7 @@ class IndexMatchList extends React.Component {
 
     render() {
         const res = this.props.api_res
+        console.log(res)
         if( res !== undefined){
             return(
                 <>
@@ -88,20 +89,41 @@ class IndexMatchList extends React.Component {
                             }
                         </div>
                         <div style={{ width: '76%', marginLeft: '4%', overflowY: 'auto' }} id="panelContiner">
-                            {Object.entries(res.data)
-                                .filter(([key, value]) => value.total !== 0 && this.state.menu_id === mapping[key][1])
-                                .map(([key, value]) => (
-                                    <div style={{ paddingBottom: '2rem' }} key={key}>
-                                        {Object.entries(value.items)
-                                            .filter(([key2, e]) => e.count !== 0)
-                                            .map(([key2, e]) => (
-                                                <div key={key2} onClick={() => this.handlePanelClick(key2)}>
-                                                    <IndexMatchMenuPanel name={e.name} sport={key2} count={e.count}/>
+                            {
+                                langText.Common.order.map((v, k) => {
+                                    let key = this.state.menu_id === 0 ? 'early' : 'living'
+                                    if( res?.data?.[key]?.items?.[v]?.count > 0 ) {
+                                        let e = res.data[key].items[v]
+                                        return (
+                                            <div key={k}>
+                                                <div key={k} onClick={() => this.handlePanelClick(v)}>
+                                                    <IndexMatchMenuPanel name={e.name} sport={v} count={e.count} />
                                                 </div>
-                                            ))
-                                        }
-                                    </div>
-                                ))}
+                                            </div>
+                                        );
+                                    }
+
+                                })
+                            }
+                            {/* {Object.entries(res.data).map(([key, value]) => {
+                                if (value.total !== 0 && this.state.menu_id === mapping[key][1]) {
+                                    return (
+                                        <div style={{ paddingBottom: '2rem' }} key={key}>
+                                            {Object.entries(value.items).map(([key2, e]) => {
+                                                if (e.count !== 0) {
+                                                    return (
+                                                        <div key={key2} onClick={() => this.handlePanelClick(key2)}>
+                                                            <IndexMatchMenuPanel name={e.name} sport={key2} count={e.count} />
+                                                        </div>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })} */}
                         </div>
                     </div>
                 </>

@@ -228,15 +228,29 @@ class MatchMenuNav extends React.Component {
                     <div style={MatchSportBar}>
                         {
                             !this.state.isNoData && 
-                            Object.entries(res.data[this.state.objTage].items).map(([k, v],i) => {
-                                return(
-                                    <MatchSportItem key={k} style={ this.state.sport_id == k ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
-                                        <img style={MatchSportImg} alt={ v.name } src={ parseInt(this.state.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
-                                        <p className="mb-0">{ v.name }</p>
-                                        <div style={CountSpan}>{ v.count }</div>
-                                    </MatchSportItem>
-                                )
+                            langText.Common.order.map((v, k) => {
+                                let key = this.state.menu_id === 0 ? 'early' : 'living'
+                                if( res?.data?.[key]?.items?.[v]?.count > 0 ) {
+                                    let e = res.data[key].items[v]
+                                    return(
+                                        <MatchSportItem key={k} style={ this.state.sport_id == v ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v))}>
+                                            <img style={MatchSportImg} alt={ e.name } src={ parseInt(this.state.sport_id) === parseInt(v) ? require('../image/ball/ball-' + v + '.png') : require('../image/ball/ball-' + v + '-white.png') } />
+                                            <p className="mb-0">{ e.name }</p>
+                                            <div style={CountSpan}>{ e.count }</div>
+                                        </MatchSportItem>
+                                    )
+                                }
+
                             })
+                            // Object.entries(res.data[this.state.objTage].items).map(([k, v],i) => {
+                            //     return(
+                            //         <MatchSportItem key={k} style={ this.state.sport_id == k ? SportOn : null } onClick={() => this.handleSportChange(parseInt(k))}>
+                            //             <img style={MatchSportImg} alt={ v.name } src={ parseInt(this.state.sport_id) === parseInt(k) ? require('../image/ball/ball-' + k + '.png') : require('../image/ball/ball-' + k + '-white.png') } />
+                            //             <p className="mb-0">{ v.name }</p>
+                            //             <div style={CountSpan}>{ v.count }</div>
+                            //         </MatchSportItem>
+                            //     )
+                            // })
                         }
                     </div>
                 </>
