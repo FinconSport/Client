@@ -939,13 +939,17 @@ class LsportApiController extends Controller {
         ////////////////////////////////////////
         $key = $sport_id . "_" . $agent_lang;
 
-        
         ////////////////////////////////////////
 
-        $key = "6046_tw";
         $data = Redis::hget('lsport_match_list', $key);
     
-        dd($data);
+        // gzip
+        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+            $data = $this->gzip($data);
+            $this->ApiSuccess($data, "01", true);
+        } else {
+            $this->ApiSuccess($data, "01", false);
+        }
     } 
 
     /**
