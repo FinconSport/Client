@@ -32,9 +32,8 @@ class VerifyCsrfToken extends Middleware
             '/api/v2/balance_logs',
 
             //////////////////////////
-            '/api/v2/match_index2',
-            '/api/v2/game_index2',
-
+            '/api/v2/redis_match_index',
+            
             '/api/test'
     ];
 }
