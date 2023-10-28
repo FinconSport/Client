@@ -210,7 +210,7 @@ class CommonHistory extends React.Component {
 
     // 每次點進來都撈一次
 	componentDidUpdate(prevProps) {
-		if (prevProps.isShow !== this.props.isShow ) {
+		if (this.props.isShow && prevProps.isShow !== this.props.isShow ) {
             this.componentDidMount()
 		}
 	}

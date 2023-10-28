@@ -329,6 +329,7 @@ class CommonCalculator extends React.Component {
 
     // 清除金額
     ClearMoney = () => {
+        if(this.state.isPending) return;
         this.setState({
             inputMoney: '',
             maxMoney: '0.00'
