@@ -86,7 +86,3 @@ Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
 Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
 Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiController@CommonOrder');
-
-// test 
-Route::post('/api/v2/redis_match_index',      'App\Http\Controllers\LsportApiController@RedisMatchIndex');
-
