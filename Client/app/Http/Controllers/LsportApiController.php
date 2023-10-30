@@ -512,7 +512,10 @@ class LsportApiController extends Controller {
             $data = Redis::hget('lsport_match_list', $key);
             $data = json_decode($data,true);
 
-            dd($data);
+            $early_count = count($data['early'][$sport_id]['list']);
+            $living_count = count($data['living'][$sport_id]['list']);
+
+            dd($early_count,$living_count);
         }
 
         // gzip
