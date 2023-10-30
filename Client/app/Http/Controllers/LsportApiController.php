@@ -1879,19 +1879,18 @@ class LsportApiController extends Controller {
             // 順序排序
             ksort($tmp_market_data['market_bet']);
 
-            // 盤口數量限制
-            $keys = array_keys($tmp_market_data['market_bet']);
-            $position = array_search($market_main_line, $keys);
-            if ($position !== false) {
-                $result = [];
-                for ($i = max(0, $position - 2); $i <= min(count($keys) - 1, $position + 2); $i++) {
-                    $result[$keys[$i]] = $tmp_market_data['market_bet'][$keys[$i]];
+            // 盤口數量限制 ,
+            if ($market_main_line != "") {
+                $keys = array_keys($tmp_market_data['market_bet']);
+                $position = array_search($market_main_line, $keys);
+                if ($position !== false) {
+                    $result = [];
+                    for ($i = max(0, $position - 2); $i <= min(count($keys) - 1, $position + 2); $i++) {
+                        $result[$keys[$i]] = $tmp_market_data['market_bet'][$keys[$i]];
+                    }
+                    $tmp_market_data['market_bet'] = $result;
                 }
-            
-                // 打印结果
-                dd($result);
             }
-            dd($tmp_market_data['market_bet']);
 
             if ($active_market_bet > 0) {
                 if (count($tmp_market_data['market_bet']) > 0) {
