@@ -2061,7 +2061,7 @@ class LsportApiController extends Controller {
                     foreach ($round_columns as $kkkk => $vvvv) {
                         if (isset($tmp_bet_data[$vvvv])) {
                             if ($tmp_bet_data[$vvvv] != null) {
-                                $tmp_bet_data[$vvvv] = intval($tmp_bet_data[$vvvv]*100)/100;
+                            //    $tmp_bet_data[$vvvv] = intval($tmp_bet_data[$vvvv]*100)/100;
                                 $tmp_bet_data[$vvvv] = $tmp_bet_data[$vvvv]."";
                             }
                         }
@@ -2101,7 +2101,7 @@ class LsportApiController extends Controller {
                     foreach ($round_columns as $kkkk => $vvvv) {
                         if (isset($tmp_bet_data[$vvvv])) {
                             if ($tmp_bet_data[$vvvv] != null) {
-                                $tmp_bet_data[$vvvv] = intval($tmp_bet_data[$vvvv]*100)/100;
+                            //    $tmp_bet_data[$vvvv] = intval($tmp_bet_data[$vvvv]*100)/100;
                                 $tmp_bet_data[$vvvv] = $tmp_bet_data[$vvvv]."";
                             }
                         }
