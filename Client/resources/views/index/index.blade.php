@@ -757,6 +757,9 @@
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
 
+                        // bet data
+                        renderBetArea(k, mainPriorityArr, v3, k3, card)
+
                         // living
                         if( v3.status === 2 ) {
                             // score
@@ -783,8 +786,6 @@
                             let timerStr = null
                             if( v3.periods ) {
                                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
-                                // bet data
-                                renderBetArea(k, mainPriorityArr, v3, k3, card)
                                 // exception baseball
                                 if( sport === 154914 ) {
                                     if( parseInt(v3.periods.period) < 10 ) {
