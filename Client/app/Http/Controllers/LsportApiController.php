@@ -1982,7 +1982,7 @@ class LsportApiController extends Controller {
             "status"
         );
 
-        $round_columns = ['bet_amount','result_amount','active_bet','bet_rate','player_rate'];
+        $round_columns = ['bet_amount','result_amount','active_bet','bet_rate'];
 
         foreach ($order_data as $k => $v) {
             foreach ($columns as $kk => $vv) {
@@ -2008,7 +2008,7 @@ class LsportApiController extends Controller {
             foreach ($round_columns as $kkkk => $vvvv) {
                 if (isset($tmp[$k][$vvvv])) {
                     if ($tmp[$k][$vvvv] != null) {
-                        $tmp[$k][$vvvv] = intval($tmp[$k][$vvvv]*100)/100;
+                    //    $tmp[$k][$vvvv] = intval($tmp[$k][$vvvv]*100)/100;
                         $tmp[$k][$vvvv] = $tmp[$k][$vvvv]."";
                     }
                 }
