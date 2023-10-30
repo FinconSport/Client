@@ -447,10 +447,15 @@ class LsportApiController extends Controller {
                 dd($return['early']);
             }
 
-            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
-            $early_count = count($return['early'][$sport_id]['list']);
-            $living_count = count($return['living'][$sport_id]['list']);
+            $sport_name = $return[$sport_id]['sport_name'];
 
+            /////////////////////////
+
+            $early_count = 0;
+            foreach ($return['early'][$sport_id]['list'] as $k => $v) {
+                $early_count += count($v['list']);
+            }
+            
             if ($early_count > 0) { 
                 if (!isset($data['early']['total'])) {
                     $data['early']['total'] = 0;
@@ -458,6 +463,13 @@ class LsportApiController extends Controller {
                 $data['early']['items'][$sport_id]['count'] = $early_count;
                 $data['early']['items'][$sport_id]['name']  = $sport_name;
                 $data['early']['total'] += $early_count;
+            }
+
+            ////////////////////
+
+            $living_count = 0;
+            foreach ($return['living'][$sport_id]['list'] as $k => $v) {
+                $living_count += count($v['list']);
             }
 
             if ($living_count > 0) {
