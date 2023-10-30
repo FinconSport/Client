@@ -24,20 +24,12 @@ use App\Models\PlayerBalanceLogs;
 use App\Models\ClientMarquee;
 // use App\Models\SystemConfig;
 
-/**
- * LsportApiController
- * 
- * Client端的前端所需的資料接口。對應號源:LSports。
- * Providing data sources needed by the Client front-end. Corresponding dataset source: LSports.
- */
-
 class LsportApiController extends Controller {
     
     protected $page_limit = 20;
 
-    protected $agent_lang;  // 玩家的代理的語系. 選擇相對應的DB翻譯欄位時會用到.
-
-    protected $default_sport_id = 154914;  //預設的 sport_id (棒球)
+    protected $agent_lang;  
+    protected $default_sport_id = 154914;  
     protected $lsport_sport_id = array(
         'baseball' => 154914,
         'basketball' => 48242,
@@ -61,29 +53,12 @@ class LsportApiController extends Controller {
         'wait_for_audit' => 5,  // 等待審核的注單(風控大單)
     );
 
-    /**
-     * index
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return view('match.index') = 賽事頁面index。view('match.index') = MATCH page's index。
-     */
+    // index
     public function index(Request $request) {
         return view('match.index', $this->data);
     }
 
-    /**
-     * CommonAccount
-     * 
-     * 先以玩家ID檢查玩家是否需要重新登入。
-     * 如果無須重新登入則回傳玩家的帳號名稱及帳戶餘額。
-     * Firstly checks if the player needs to re-login.
-     * If re-login is not required, then return an array that includes the player's account name and account balance.
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ::ApiSuccess($data = ARRAY{account, balance}) | ApiError
-     */
+    // CommonAccount
     public function CommonAccount(Request $request) {
       
         $input = $this->getRequest($request);
@@ -125,16 +100,6 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($data, "01");
     }
 
-    /**
-     * IndexCarousel
-     * 
-     * 取出當前有效的'賽事結果'讓前端顯示。
-     * 
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ::ApiSuccess($data = ARRAY 篩選過的賽事結果) | ApiError
-     */
     // 輪播
     public function IndexCarousel(Request $request) {
       
@@ -204,16 +169,6 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($data, "01");
     }
 
-    /**
-     * IndexMarquee
-     * 
-     * 取出當前有效的'Client端跑馬燈'(也就是Client端系統公告)讓前端顯示。
-     * 
-     * 
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ApiSuccess($data = ARRAY Client跑馬燈資料) | ApiError
-     */
     // 首頁跑馬燈
     public function IndexMarquee(Request $request) {
 
@@ -329,15 +284,6 @@ class LsportApiController extends Controller {
         }
     }
 
-    /**
-     * IndexNotice
-     * 
-     * 取出各種公告(依系統、各球種...分類)讓前端顯示。
-     * 
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ApiSuccess($data = ARRAY Client各種公告列表) | ApiError
-     */
     // 系統公告接口
     public function IndexNotice(Request $request) {
 
@@ -465,15 +411,6 @@ class LsportApiController extends Controller {
         }
     }
 
-    /**
-     * IndexMatchList
-     *
-     * 取出賽事列表讓前端顯示。
-     * 
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ApiSuccess($data = ARRAY 賽事列表) | ApiError
-     */
     // 首頁賽事
     public function IndexMatchList(Request $request) {
         
@@ -546,21 +483,52 @@ class LsportApiController extends Controller {
         $this->ApiSuccess($data, "01"); 
     }
 
+    // 首頁賽事統計
+    public function IndexMatchListTotal(Request $request) {
+
+        $input = $this->getRequest($request);
+
+        $checkToken = $this->checkToken($input);
+        if ($checkToken === false) {
+            $this->ApiError("PLAYER_RELOGIN", true);
+        }
+
+        //////////////////////
+        // 取得代理的語系
+        $player_id = $input['player'];
+        $agent_lang = $this->getAgentLang($player_id);
+
+        ////////////////////////////////////////
+    
+        $sport_list = [154914,48242,6046,35232];
+        foreach ($sport_list as $k => $v) {
+            $sport_id = $v;
+
+            ////////////////////////////////////////
+            $key = $sport_id . "_" . $agent_lang;
+
+            ////////////////////////////////////////
+
+            $data = Redis::hget('lsport_match_list', $key);
+            $data = json_decode($data,true);
+
+            dd($data);
+        }
+
+        // gzip
+        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+            $data = $this->gzip($data);
+            $this->ApiSuccess($data, "01", true);
+        } else {
+            $this->ApiSuccess($data, "01", false);
+        }
+    }
 /****************************************
  *    
  *    賽事列表頁
  *    
 ****************************************/
 
-    /**
-     * MatchSport
-     *
-     * 取回當前體育的所有球種(體育類型)的列表。
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ApiSuccess($data = ARRAY 球種列表) | ApiError
-     */
     // 球種列表
     public function MatchSport(Request $request) {
       
@@ -673,6 +641,7 @@ class LsportApiController extends Controller {
 
         $data = Redis::hget('lsport_match_list', $key);
         $data = json_decode($data,true);
+
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
@@ -682,16 +651,7 @@ class LsportApiController extends Controller {
         }
     } 
 
-    /**
-     * GameBet
-     *
-     * 投注接口
-     * 
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     * @return ApiSuccess($data = ???) | ApiError
-     */
-
+    // GameBet
     public function GameBet(Request $request) {
       
     	$input = $this->getRequest($request);
@@ -1511,18 +1471,6 @@ class LsportApiController extends Controller {
 
     }
 
-    /**
-     * ResultIndex
-     * 
-     * 取得特定球種的賽事狀態(球隊,比賽結果等)，不含玩法及賠率。
-     * Get game conditions of a specified sport ID. Ex. teams, results, etc.
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in from the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     *                          # sport: 球種的ID，未指定時為1 (足球)。The specified sport ID. Value = 1 (soccer) when not specified.
-     *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
-     * @return ApiSuccess($data = ARRAY 指定球種的賽事狀態列表) | ApiError
-     */
     // 賽事結果 
     public function ResultIndex(Request $request) {
       
@@ -1697,19 +1645,7 @@ class LsportApiController extends Controller {
  *    
 ****************************************/
 
-    /**
-     * GameIndex
-     * 
-     * 取得單場賽事的資料。
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     *                          # fixture_id: 指定賽事的ID。The specified fixture ID.
-     *                          # sport_id: 指定賽事的球種ID。The sport ID of the specified fixture.
-     * @return ApiSuccess($data = ARRAY 指定的單場賽事資料) | ApiError
-     */
     // 遊戲頁
-
     public function GameIndex(Request $request) {
 
     	$input = $this->getRequest($request);
@@ -1909,17 +1845,6 @@ class LsportApiController extends Controller {
         }
     }
 
-    /**
-     * CommonOrder
-     *
-     * 抓取玩家的投注紀錄。
-     * 
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     *                          # page: 紀錄的頁次。預設1。
-     *                          # result: 記錄類型為已結算(1)或未結算(0)。預設0 (未結算)。
-     * @return ApiSuccess($data = ???) | ApiError
-     */
     // 下注紀錄
     public function CommonOrder(Request $request) {
       
@@ -2153,17 +2078,7 @@ class LsportApiController extends Controller {
         }
     }
 
-    /**
-     * BalanceLogs
-     * 
-     * 取得當前玩家的帳變紀錄 (balance logs)。
-     * The (balance logs)。
-     *
-     * @param Request $request: 前端傳入的使用者請求。User requests passed in by the front-end.
-     *                          # *player: 玩家的ID。 Required. Represents the player ID.
-     *                          # page: 頁次，未指定時為1。The specified page number. Value = 1 when not specified.
-     * @return ApiSuccess($data = ARRAY 列表) | ApiError
-     */
+    // BalanceLogs
     public function BalanceLogs(Request $request) {
       
     	$input = $this->getRequest($request);
@@ -2244,17 +2159,8 @@ class LsportApiController extends Controller {
 
     }
 
-    //====================================== PROTECTED methods ======================================
+    //////////////////////////
 
-    /**
-     * gzip
-     * 
-     * 壓縮過大過長的資料以利於傳遞
-     * Gzipping long and big data for better transmission efficiency
-     *
-     * @param data - 需要壓縮的陣列資料. Array data to be zipped.
-     * @return STR - 已經過gzcompress且base64_encode編碼的資串資料
-     */
     protected function gzip($data) {
 
         $data = json_encode($data, true);
@@ -2264,12 +2170,6 @@ class LsportApiController extends Controller {
         return $base64Data;
     }
 
-    /**
-     * ApiSuccess
-     * 
-     * 回傳予前端表示後端對前端請求的操作成功，以及所請求的結果。
-     *
-     */
     protected function ApiSuccess($data, $message, $is_gzip = false) {
 
         $success_code = strtoupper("SUCCESS_" . $this->controller . "_" . $this->function . "_" . $message);
@@ -2284,21 +2184,6 @@ class LsportApiController extends Controller {
         exit();
     }
 
-    /**
-     * ApiError
-     *
-     * 回傳予前端表示後端對前端請求的操作失敗，以及失敗訊息。
-     *
-     * @param $message = 經過拼裝可給前端翻譯顯示的包含控制器、方法、訊息的代碼字串。
-     * @param $is_common = 是否為通用錯誤,
-     * @param $gzip = BOOL: 參數data是否已經過gzip壓縮及base64編碼處理。實際上沒有作用
-     * @return JSON {
-     *      status = 狀態(恆為0),
-     *      data = 欲回傳給前端的資料(恆為null),
-     *      message = 經過拼裝可給前端翻譯顯示的包含控制器、方法、訊息的代碼字串,
-     *      gzip = BOOL: 參數data是否已經過gzip壓縮及base64編碼處理。
-     * }
-     */
     protected function ApiError($message , $is_common = false, $is_gzip = false) {
 
         if (! $is_common) {  // CLASS_FUNCTION ONLY
@@ -2317,15 +2202,6 @@ class LsportApiController extends Controller {
         exit();
     }
 
-    /**
-     * checkToken
-     *
-     * 檢查玩家是否存在於PlayerOnline DB資料表中。
-     * Checks if the player exists in the 'PlayerOnline' DB table.
-     * 
-     * @param $input ARRAY 包含玩家ID(key=player)及其token(key=token)的陣列
-     * @return BOOL {true | false}
-     */
     protected function checkToken($input) {
       
         $player_id = $input['player'];
@@ -2343,8 +2219,6 @@ class LsportApiController extends Controller {
 
         return true;
     }
-
-
 
     protected function getMatchScoreboard($sport_id, $fixture_status, $periods, $scoreboard) {
 
