@@ -444,7 +444,7 @@ class LsportApiController extends Controller {
             $return = json_decode($return,true);
 
             if ($sport_id  == 48242) {
-                dd($return['early']);
+            //    dd($return['early']);
             }
 
             $sport_name = $return[$sport_id]['sport_name'];
@@ -455,7 +455,7 @@ class LsportApiController extends Controller {
             foreach ($return['early'][$sport_id]['list'] as $k => $v) {
                 $early_count += count($v['list']);
             }
-            
+
             if ($early_count > 0) { 
                 if (!isset($data['early']['total'])) {
                     $data['early']['total'] = 0;
