@@ -447,7 +447,7 @@ class LsportApiController extends Controller {
             //    dd($return['early']);
             }
 
-            $sport_name = $return[$sport_id]['sport_name'];
+            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
 
             /////////////////////////
 
