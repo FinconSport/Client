@@ -443,6 +443,8 @@ class LsportApiController extends Controller {
             $return = Redis::hget('lsport_match_list', $key);
             $return = json_decode($return,true);
 
+
+            dd($return['early']);
             $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
             $early_count = count($return['early'][$sport_id]['list']);
             $living_count = count($return['living'][$sport_id]['list']);
