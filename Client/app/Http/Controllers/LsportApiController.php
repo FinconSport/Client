@@ -515,12 +515,22 @@ class LsportApiController extends Controller {
             $return = Redis::hget('lsport_match_list', $key);
             $return = json_decode($return,true);
 
+            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
             $early_count = count($return['early'][$sport_id]['list']);
             $living_count = count($return['living'][$sport_id]['list']);
-            $total_count = $early_count + $living_count;
-            $data[$sport_id] = $total_count;
-        }
 
+            if ($early_count > 0) {
+                $data['early']['items'][$sport_id]['count'] = $early_count;
+                $data['early']['items'][$sport_id]['name']  = $sport_name;
+                $data['early']['total'] += $early_count;
+            }
+
+            if ($living_count > 0) {
+                $data['living']['items'][$sport_id]['count'] = $living_count;
+                $data['living']['items'][$sport_id]['name']  = $sport_name;                
+                $data['living']['total'] += $living_count;
+            }
+        }
         dd($data);
 
         // gzip
