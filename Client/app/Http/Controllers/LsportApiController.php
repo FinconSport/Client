@@ -2008,7 +2008,7 @@ class LsportApiController extends Controller {
             foreach ($round_columns as $kkkk => $vvvv) {
                 if (isset($tmp[$k][$vvvv])) {
                     if ($tmp[$k][$vvvv] != null) {
-                        $tmp_bet_data[$vvvv] = $tmp_bet_data[$vvvv]+0;
+                        $tmp[$k][$vvvv] = $tmp[$k][$vvvv]+0;
                     //    $tmp[$k][$vvvv] = intval($tmp[$k][$vvvv]*100)/100;
                         $tmp[$k][$vvvv] = $tmp[$k][$vvvv]."";
                     }
