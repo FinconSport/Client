@@ -33,6 +33,7 @@ class VerifyCsrfToken extends Middleware
 
             //////////////////////////
             '/api/v2/redis_match_index',
+            '/api/v2/index_match_list_total',
             
             '/api/test'
     ];
