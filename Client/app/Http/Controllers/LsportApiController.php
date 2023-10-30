@@ -1876,6 +1876,8 @@ class LsportApiController extends Controller {
                 }
             }
 
+            // 順序排序
+            ksort($tmp_market_data['market_bet']);
             dd($tmp_market_data['market_bet']);
 
             if ($active_market_bet > 0) {
