@@ -411,80 +411,8 @@ class LsportApiController extends Controller {
         }
     }
 
-    // 首頁賽事
-    public function IndexMatchList(Request $request) {
-        
-        $input = $this->getRequest($request);
-
-        $checkToken = $this->checkToken($input);
-        if ($checkToken === false) {
-            $this->ApiError("PLAYER_RELOGIN", true);
-        }
-
-        //---------------------------------
-        // 取得代理的語系
-        $player_id = $input['player'];
-        $agent_lang = $this->getAgentLang($player_id);
-
-    	//---------------------------------
-
-        $today = time();
-        $after_tomorrow_es = $today + 2 * 24 * 60 * 60; 
-        
-    	//---------------------------------
-
-        $return = LsportFixture::select('sport_id', 'status', DB::raw('COUNT(*) as count'))
-        ->whereIn("status",[1,2,9])
-        ->where("start_time","<=", $after_tomorrow_es)   
-        ->groupBy('sport_id', 'status')
-        ->total();    
-
-        if ($return === false) {
-            $this->ApiError("01");
-        }
-
-        // 整理統計 , 回傳格式取決於SQL
-        $list = array();
-        $status_name = ["","early","living"];
-
-        foreach ($return as $k => $v) {
-            foreach ($v['buckets'] as $kk => $vv) {
-                $sport_id = $vv['key'];  
-                foreach ($vv as $kkk => $vvv) {
-                    if (!in_array($kkk,['key','doc_count'])) {
-                        foreach ($vvv['buckets'] as $kkkk => $vvvv) {
-                            $status = $vvvv['key'];
-                            if ($status == 9) { // 即將開始視為滾球
-                                $status = 2;
-                            }
-
-                            $current_status_name = $status_name[$status];
-
-                            $tmp_count = $vvvv['count']['value'];
-                            $list[$current_status_name]['items'][$sport_id]['count'] = $tmp_count;
-                            if (isset($list[$current_status_name]['total'])) {
-                                $list[$current_status_name]['total'] += $tmp_count;
-                            } else {
-                                $list[$current_status_name]['total'] = $tmp_count;
-                            }
-
-                            // 取得體育名稱
-                            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
-                            $list[$current_status_name]['items'][$sport_id]['name'] = $sport_name;
-                        }
-                    }
-                }
-            }
-        }
-
-        ///////////////////////////////////
-        $data = $list;
-
-        $this->ApiSuccess($data, "01"); 
-    }
-
     // 首頁賽事統計
-    public function IndexMatchListTotal(Request $request) {
+    public function IndexMatchList(Request $request) {
 
         $input = $this->getRequest($request);
 

@@ -86,5 +86,3 @@ Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
 Route::post('/api/v2/m_game_bet',       'App\Http\Controllers\LsportApiController@mGameBet');
 Route::post('/api/v2/common_order',     'App\Http\Controllers\LsportApiController@CommonOrder');
-
-Route::post('/api/v2/index_match_list_total', 'App\Http\Controllers\LsportApiController@IndexMatchListTotal');
