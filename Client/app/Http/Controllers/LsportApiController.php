@@ -501,6 +501,9 @@ class LsportApiController extends Controller {
         ////////////////////////////////////////
     
         $sport_list = [154914,48242,6046,35232];
+
+        ////////////////////////////////////////
+        $data = [];
         foreach ($sport_list as $k => $v) {
             $sport_id = $v;
 
@@ -509,14 +512,16 @@ class LsportApiController extends Controller {
 
             ////////////////////////////////////////
 
-            $data = Redis::hget('lsport_match_list', $key);
-            $data = json_decode($data,true);
+            $return = Redis::hget('lsport_match_list', $key);
+            $return = json_decode($return,true);
 
-            $early_count = count($data['early'][$sport_id]['list']);
-            $living_count = count($data['living'][$sport_id]['list']);
-
-            dd($early_count,$living_count);
+            $early_count = count($return['early'][$sport_id]['list']);
+            $living_count = count($return['living'][$sport_id]['list']);
+            $total_count = $early_count + $living_count;
+            $data[$sport_id] = $total_count;
         }
+
+        dd($data);
 
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
