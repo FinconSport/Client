@@ -1885,7 +1885,7 @@ class LsportApiController extends Controller {
             if ($position !== false) {
                 $result = [];
                 for ($i = max(0, $position - 2); $i <= min(count($keys) - 1, $position + 2); $i++) {
-                    $result[$keys[$i]] = $sortedArray[$keys[$i]];
+                    $result[$keys[$i]] = $tmp_market_data['market_bet'][$keys[$i]];
                 }
             
                 // 打印结果
