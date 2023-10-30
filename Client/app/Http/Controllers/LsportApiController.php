@@ -446,7 +446,8 @@ class LsportApiController extends Controller {
             if ($sport_id  == 48242) {
                 dd($return['early']);
             }
-            $sport_name = $return['sport_name'];
+
+            $sport_name = LsportSport::getName(['sport_id'=>$sport_id, 'api_lang'=>$agent_lang]);
             $early_count = count($return['early'][$sport_id]['list']);
             $living_count = count($return['living'][$sport_id]['list']);
 
