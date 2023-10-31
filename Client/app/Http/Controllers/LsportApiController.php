@@ -1644,6 +1644,35 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
+
+        if (isset($input['debug'])) {
+            $return = Redis::hget('lsport_match_list', $key);
+            $return = json_decode($return,true);
+
+            $redis_data = $return;
+            $pass = false;
+            $redis_fixture = null;
+            foreach ($redis_data as $k => $v) {
+                if ($pass) continue;
+                foreach ($v[$sport_id]['list'] as $kk => $vv) {
+                    if ($pass) continue;
+                    foreach ($vv as $kkk => $vvv) {
+                        if ($pass) continue;
+                        if (isset($vvv['list'][$fixture_id])) {
+                            $pass = true;
+                            $redis_fixture = $vvv['list'][$fixture_id];
+                        }
+                    }
+                }
+            }
+
+
+            dd($redis_fixture);
+        }
+
+
+        ////////////////////////////////////////
+
         $return = LsportFixture::where("sport_id",$sport_id)
         ->where("fixture_id",$fixture_id)
         ->whereIn('sport_id', function($query) use ($sport_id) {
@@ -1671,20 +1700,6 @@ class LsportApiController extends Controller {
         $home_team_id = $fixture_data['home_id'];
         $away_team_id = $fixture_data['away_id'];
         $status = $fixture_data['status'];
-        
-        if (isset($input['debug'])) {
-            $data = Redis::hget('lsport_match_list', $key);
-            $data = json_decode($data,true);
-
-            $status_type = "living";
-            if ($status == 1) {
-                $status_type = "early";
-            }
-
-            $cc = $data[$status_type][$sport_id]['list'][$league_id]['list'][$fixture_id];
-
-            dd($cc);
-        }
 
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
