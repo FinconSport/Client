@@ -1644,9 +1644,28 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
+
         if (isset($input['debug'])) {
             $return = Redis::hget('lsport_match_list', $key);
             $return = json_decode($return,true);
+
+            $redis_data = $return;
+            $pass = false;
+            $redis_fixture = null;
+            foreach ($redis_data as $k => $v) {
+                foreach ($v[$sport_id]['list'] as $kk => $vv) {
+                    foreach ($vv['list'] as $kkk => $vvv) {
+                        $fixture_id = $fixture_id+0;
+                        if ($kkk === $fixture_id) {
+                            $pass = true;
+                            $redis_fixture = $vvv;
+
+                        }
+                    }
+                }
+            }
+
+            dd($redis_fixture);
 
         }
 
@@ -1680,13 +1699,6 @@ class LsportApiController extends Controller {
         $away_team_id = $fixture_data['away_id'];
         $status = $fixture_data['status'];
 
-        if (isset($input['debug'])) {
-            $return = Redis::hget('lsport_match_list', $key);
-            $return = json_decode($return,true);
-
-            dd($return);
-
-        }
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
         $data['list']["league_id"] = $league_id;
