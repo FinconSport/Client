@@ -1644,36 +1644,6 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
-
-        if (isset($input['debug'])) {
-            $return = Redis::hget('lsport_match_list', $key);
-            $return = json_decode($return,true);
-
-            $redis_data = $return;
-            $pass = false;
-            $redis_fixture = null;
-            foreach ($redis_data as $k => $v) {
-                if ($pass) continue;
-                foreach ($v[$sport_id]['list'] as $kk => $vv) {
-                    if ($pass) continue;
-                    foreach ($vv['list'] as $kkk => $vvv) {
-                        if ($pass) continue;
-                        $fixture_id = $fixture_id+0;
-                        if ($kkk === $fixture_id) {
-                            $pass = true;
-                            $redis_fixture = $vvv;
-
-                        }
-                    }
-                }
-            }
-
-            dd($redis_fixture);
-
-        }
-
-        ////////////////////////////////////////
-
         $return = LsportFixture::where("sport_id",$sport_id)
         ->where("fixture_id",$fixture_id)
         ->whereIn('sport_id', function($query) use ($sport_id) {
