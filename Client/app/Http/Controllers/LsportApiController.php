@@ -1644,12 +1644,6 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
-
-        if (isset($input['debug'])) {
-            $data = Redis::hget('lsport_match_list', $key);
-            $data = json_decode($data,true);
-            dd($data);
-        }
         $return = LsportFixture::where("sport_id",$sport_id)
         ->where("fixture_id",$fixture_id)
         ->whereIn('sport_id', function($query) use ($sport_id) {
@@ -1678,6 +1672,20 @@ class LsportApiController extends Controller {
         $away_team_id = $fixture_data['away_id'];
         $status = $fixture_data['status'];
         
+        if (isset($input['debug'])) {
+            $data = Redis::hget('lsport_match_list', $key);
+            $data = json_decode($data,true);
+
+            $status_type = "living";
+            if ($status == 1) {
+                $status_type = "early";
+            }
+
+            $cc = $data[$status_type][$sport_id]['list'][$league_id]['list'][$fixture_id];
+
+            dd($cc);
+        }
+
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
         $data['list']["league_id"] = $league_id;
