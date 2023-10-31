@@ -1655,6 +1655,8 @@ class LsportApiController extends Controller {
             foreach ($redis_data as $k => $v) {
                 foreach ($v[$sport_id]['list'] as $kk => $vv) {
                     foreach ($vv as $kkk => $vvv) {
+
+                        dd($vvv);
                         if (isset($vvv['list'][$fixture_id])) {
                             $pass = true;
                             $redis_fixture = $vvv['list'][$fixture_id];
