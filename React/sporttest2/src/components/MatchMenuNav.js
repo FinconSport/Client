@@ -137,12 +137,21 @@ class MatchMenuNav extends React.Component {
         }
     }
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.api_res !== this.props.api_res) {
+			this.setState({
+				api_res: this.props.api_res
+			}, () => {
+                this.componentDidMount()
+            });
+		}
+	}
+
     componentDidMount() {
         let res = this.state.api_res
-
         // default menu
         let rKey = null
-        if( window.menu === null ) {
+        if( window.menu === null || !res.data?.[menuArr[window.menu]] ) {
             for (const key in res.data) {
                 if (res.data.hasOwnProperty(key) && res.data[key].total !== 0) {
                     rKey = key
@@ -159,7 +168,7 @@ class MatchMenuNav extends React.Component {
         }
 
         // default sport
-        if( !window.sport || res.data[rKey].items[window.sport] === undefined) {
+        if( !window.sport || res.data[rKey]?.items?.[window.sport] === undefined) {
             let itemData = res.data[rKey].items
             let keys = Object.keys(itemData);
             window.sport = parseInt(keys.find(key => itemData[key].count > 0))

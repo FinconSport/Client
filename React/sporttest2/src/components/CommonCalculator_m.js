@@ -199,6 +199,8 @@ const CalInfoCardIcon = {
     marginRight: '0.25rem'
 }
 
+var tenSecHolder = null
+
 
 class CommonCalculator extends React.Component {
     constructor(props){
@@ -220,7 +222,7 @@ class CommonCalculator extends React.Component {
 		const json = await GetIni(apiUrl);
 		console.log(json)
         if( json.status === 1 ) {
-            setTimeout(() => {
+            tenSecHolder = setTimeout(() => {
                 if( this.state.isPending ) {
                     this.setState({
                         isPending: false,
@@ -253,6 +255,7 @@ class CommonCalculator extends React.Component {
                         this.setState({
                             isPending: false
                         }, ()=>{
+                            clearTimeout(tenSecHolder)
                            // 關閉計算機以及串關明細並取消所有已選選項
                             this.ClearAll()
                             this.notifySuccess(message.order_id)

@@ -44,6 +44,12 @@ class IndexMatchList extends React.Component {
 		Cookies.set('sport', sport_id, { path: '/' })
     }
 
+    componentDidUpdate(prevProps) {
+		if (prevProps.api_res !== this.props.api_res) {
+			this.componentDidMount()
+		}
+	}
+
     componentDidMount() {
         let res = this.props.api_res
         let rKey = null
@@ -66,7 +72,6 @@ class IndexMatchList extends React.Component {
 
     render() {
         const res = this.props.api_res
-        console.log(res)
         if( res !== undefined){
             return(
                 <>

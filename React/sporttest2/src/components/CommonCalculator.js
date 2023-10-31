@@ -199,6 +199,8 @@ const CalInfoCardIcon = {
     marginRight: '0.25rem'
 }
 
+var tenSecHolder = null
+
 
 class CommonCalculator extends React.Component {
     constructor(props){
@@ -217,9 +219,8 @@ class CommonCalculator extends React.Component {
 
     async caller(apiUrl) {
 		const json = await GetIni(apiUrl);
-        console.log(json)
         if( json.status === 1 ) {
-            setTimeout(() => {
+            tenSecHolder = setTimeout(() => {
                 if( this.state.isPending ) {
                     this.setState({
                         isPending: false,
@@ -242,16 +243,15 @@ class CommonCalculator extends React.Component {
         // ws
         if(window.ws) window.ws.close()
         window.WebSocketDemo()
-
         window.wsStatus = setInterval(() => {
             if(window.socket_status) {
                 window.ws.onmessage = (event) => {
                     const message = JSON.parse(event.data)
-                    console.log(message)
                     if( message.action === 'delay_order' && this.state.isPending ) {
                         this.setState({
                             isPending: false
                         }, ()=>{
+                            clearTimeout(tenSecHolder)
                             // 關閉計算機
                             this.CloseCal()
                             this.notifySuccess(message.order_id)
