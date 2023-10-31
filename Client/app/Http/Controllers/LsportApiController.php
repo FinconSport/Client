@@ -1644,11 +1644,12 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
-        $data = Redis::hget('lsport_match_list', $key);
-        $data = json_decode($data,true);
 
-        dd($data);
-
+        if (isset($input['debug'])) {
+            $data = Redis::hget('lsport_match_list', $key);
+            $data = json_decode($data,true);
+            dd($data);
+        }
         $return = LsportFixture::where("sport_id",$sport_id)
         ->where("fixture_id",$fixture_id)
         ->whereIn('sport_id', function($query) use ($sport_id) {
