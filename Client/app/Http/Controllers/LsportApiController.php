@@ -1654,10 +1654,11 @@ class LsportApiController extends Controller {
             foreach ($redis_data as $k => $v) {
                 foreach ($v[$sport_id]['list'] as $kk => $vv) {
                     foreach ($vv['list'] as $kkk => $vvv) {
-
                         if ($kkk == $fixture_id) {
                             $pass = true;
                             $redis_fixture = $vvv;
+
+                            dd($vvv);
                         }
                     }
                 }
