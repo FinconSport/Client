@@ -2328,6 +2328,15 @@ class LsportApiController extends Controller {
 
     // 切換1/4 分盤顯示
     protected function displayMainLine($main_line) {
+
+        // 分數處理
+        $score = "";
+        $hasSpace = strpos($main_line, ' ') !== false;
+        if ($hasSpace) {
+            $fields = explode(' ', $main_line);
+            $main_line = $fields[0];
+            $score = " " . $fields[1];
+        }
         
         $number = (float)$main_line;
         $is_neg = false;
@@ -2360,8 +2369,7 @@ class LsportApiController extends Controller {
             default:
         }
         
-        return $main_line;
-
+        return $main_line.$score;
     }
 }
 
