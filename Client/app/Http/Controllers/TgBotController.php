@@ -35,8 +35,8 @@ class TgBotController extends Controller {
 
       //字串處理 \n
       $text = $input['text'];
-      $text = str_replace("(", "\n", $text);
-      $text = str_replace(")", " ❤️", $text);
+      $text = str_replace("(", "\n🐲", $text);
+      $text = str_replace(")", " 🐉", $text);
       $message = urlencode($text);
    
       $token = "6398366780:AAFf3M3LReIoAcDVuiN3L8zyqByHKWmbMhE";
