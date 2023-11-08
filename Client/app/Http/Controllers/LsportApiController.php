@@ -490,6 +490,7 @@ class LsportApiController extends Controller {
             $this->ApiSuccess($data, "01", false);
         }
     }
+
 /****************************************
  *    
  *    賽事列表頁
@@ -598,8 +599,8 @@ class LsportApiController extends Controller {
         if (!isset($input['sport_id'])) {
             $this->ApiError("01");
         }
+        
         $sport_id = $input['sport_id'];
-
 
         ////////////////////////////////////////
         $key = $sport_id . "_" . $agent_lang;

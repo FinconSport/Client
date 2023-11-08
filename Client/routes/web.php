@@ -57,6 +57,8 @@ Route::get('/error/maintain', 'App\Http\Controllers\TestController@maintain');
 // TG通知用
 Route::get('/tg', 'App\Http\Controllers\TgBotController@index');
 Route::post('/tg', 'App\Http\Controllers\TgBotController@index');
+Route::get('/tg/bill', 'App\Http\Controllers\TgBotController@bill');
+Route::post('/tg/bill', 'App\Http\Controllers\TgBotController@bill');
 
 // Mobile
 Route::get('/mobile', 'App\Http\Controllers\MobileController@index');
