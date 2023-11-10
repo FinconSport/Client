@@ -16,16 +16,19 @@ class TestController extends PcController {
     // 首頁
     public function index(Request $request) {
 
-      $return = LsportMarketBet::where('fixture_id',$fixture_id)
-      ->where("market_id",$market_id)
-      ->where("provder_bet_id", 8)
-      ->orderBy("name_en.keyword","ASC")
-      ->list();
+        $fixture_id = 11188426;
+        $market_id = 342;
+        
+        $return = LsportMarketBet::where('fixture_id',$fixture_id)
+        ->where("market_id",$market_id)
+        ->where("provder_bet_id", 8)
+        ->orderBy("name_en.keyword","ASC")
+        ->list();
 
-      ////////////////////////
+        ////////////////////////
 
-      dd($return);
-  
+        dd($return);
+    
       
     }
 
