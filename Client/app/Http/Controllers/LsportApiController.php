@@ -1742,6 +1742,9 @@ class LsportApiController extends Controller {
             if ($return === false) {
                 $this->ApiError('04');
             }
+            if ($return == null) {
+                continue;
+            }
 
             $check_market_bet_lines = [];
             $market_bet_data = $return;
