@@ -9,6 +9,7 @@ use DB;
 use App\Models\Player;
 use App\Models\LsportFixture;
 use App\Models\LsportSport;
+use App\Models\LsportMarketBet;
 
 class TestController extends PcController {
     
@@ -17,6 +18,7 @@ class TestController extends PcController {
 
       $return = LsportMarketBet::where('fixture_id',$fixture_id)
       ->where("market_id",$market_id)
+      ->where("provder_bet_id", 8)
       ->orderBy("name_en.keyword","ASC")
       ->list();
 
