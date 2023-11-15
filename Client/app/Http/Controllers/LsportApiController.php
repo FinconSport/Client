@@ -1736,7 +1736,7 @@ class LsportApiController extends Controller {
             // 取得market_bet
             $return = LsportMarketBet::where('fixture_id',$fixture_id)
             ->where("market_id",$market_id)
-            ->where("provder_bet_id", 8)
+            ->whereIn("provder_bet_id", [0,8])   // 號源提供商編號
             ->orderBy("name_en.keyword","ASC")
             ->list();
             if ($return === false) {
