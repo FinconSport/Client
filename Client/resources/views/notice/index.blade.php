@@ -50,31 +50,7 @@
 	var isReadyNotice = false
 
 	// notice list data
-	var noticeListDD = {
-		"data": [
-			[
-				{
-					"sport_id": 6046,
-					"title": "&#8203;``【oaicite:0】``&#8203;",
-					"context": "賽事已取消 1月1日 08:00 AT國民隊 vs. 圖利馬",
-					"create_time": "2023-11-20 14:54:17"
-				},
-				{
-					"sport_id": 0,
-					"title": "title 222",
-					"context": "活動公告 - 世界盃期間,我們將抽出幾位幸運兒",
-					"create_time": "2023-04-04 09:10:00"
-				},
-				{
-					"sport_id": 6046,
-					"title": "title 111",
-					"context": "系統公告 - Fourtune 365 首家菲律賓線上體育上線啦",
-					"create_time": "2023-04-04 09:09:53"
-				}
-			]
-		]
-	}
-
+	var noticeListD = {}
 	const noticeList_api = '/api/v2/index_notice'
 
 	$(document).ready(function() {
@@ -105,8 +81,8 @@
 			});
 		}
     	// noticelistD
-    	if (noticeListDD && noticeListDD.data) {
-        	noticeListDD.data.forEach((noticeItem, noticeIndex) => {
+    	if (noticeListD && noticeListD.data) {
+        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
