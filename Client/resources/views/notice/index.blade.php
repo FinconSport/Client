@@ -6,6 +6,7 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad notice-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
+						<h3>{{ trans('notice.main.notice') }}</h3>
 						<button class="nav-link active" id="tabAll" data-bs-toggle="tab" data-bs-target="#tab_All" type="button" role="tab" aria-controls="#tab_All" aria-selected="true">{{ trans('notice.main.all') }}</button>
 						<button class="nav-link" id="tabSyst" data-bs-toggle="tab" data-bs-target="#tab_Syst" type="button" role="tab" aria-controls="#tab_Syst" aria-selected="false">{{ trans('notice.main.system') }}</button>
                         <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" template="NavTabTemplate" hidden></button>          
