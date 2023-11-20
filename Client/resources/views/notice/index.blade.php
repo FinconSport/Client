@@ -42,6 +42,7 @@
 @endSection
 
 @push('main_js')
+<script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <script>
 	// detect ini ajax
 	var isReadyNoticeInt = null
