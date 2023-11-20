@@ -43,8 +43,8 @@ div[key="logs"]>div {
 
 .rule-con .nav .nav-link{
     background: #415b5a;
-    border-top-left-radius: 0.7rem;
-    border-bottom-left-radius: 0.7rem;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     color: #ffffff;
@@ -110,7 +110,7 @@ li {
 }
 
 .rule-tab-con {
-    height: calc(100vh - 11.5rem);
+    height: calc(100vh - 9rem);
     overflow: auto;
     width: 100%;
     padding: 0px 2rem 0px 0px;
@@ -120,7 +120,6 @@ li {
 /* width */
 .rule-tab-con::-webkit-scrollbar {
   width: 15px;
-  padding: 0.1rem;
 }
 
 /* Track */
@@ -133,6 +132,7 @@ li {
 .rule-tab-con::-webkit-scrollbar-thumb {
   background: #e2f0f0; 
   border-radius: 5px;
+  border: 2px solid #415b5a;
 }
 
 /* Handle on hover */
