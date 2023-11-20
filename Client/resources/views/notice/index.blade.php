@@ -80,13 +80,12 @@
 	
 	function createNavTabButton(sportItem, sportIndex) {
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
-
 		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
 		NavTabBtn.attr('aria-controls', '#tab_' + sportItem.sport_id);
 		NavTabBtn.html(sportItem.name);
 
-		$('#navSyst.nav-link').after(NavTabBtn);
+		$('#nav-tabs').children('.nav-link:visible:last').after(NavTabBtn);
 	}
 
 	function createTabPanel(sportItem, sportIndex) {
@@ -95,7 +94,7 @@
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
 		tabPanel.html(sportItem.name);
 
-		$('#navSyst.tab-pane').after(tabPanel);
+		$('#nav-tabContent').children('.tab-pane:visible:last').after(tabPanel);
 	}
 
 	$("button.nav-link").click(function() {
