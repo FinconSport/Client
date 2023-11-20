@@ -218,7 +218,7 @@
         $('#bettingTypeContainer .noDataContainer').remove()
 
         // update content
-        Object.entries(matchListD.data.list.market).map(([k, v]) => {
+        Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.priority - marketB.priority).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
             // if not exist -> create
             if( bet_div.length === 0 ) createMarketContainer(k, v);
@@ -1000,8 +1000,8 @@
     };
 
     // Function to handle filter button clicks
-    $('.filterBtn').click(function(){
-		document.getElementById('bettingTypeContainer').scrollTo({top: 0}); // totop first
+    $('.filterBtn').click(function(event){
+		if (event.originalEvent) document.getElementById('bettingTypeContainer').scrollTo({top: 0}); // totop first
         $('.filterBtn').removeClass('active')
         $(this).addClass('active')
         let tab = $(this).attr('key')
