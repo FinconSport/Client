@@ -204,14 +204,15 @@
 
         // 籃球 單節tab篩選
         if(sport === 48242) {
-            gameLangTrans.catePriority.single[sport].map(([k, v]) => {
-                console.log(k, v)
-                v.map(([k2, v2]) => {
-                    if($(`.bettingtype-container[priority=${v2}]`).length > 0) {
-                        $(`.filterBtn[key=${k}]`).show()
+            for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
+                console.log(key, value);
+                
+                for (const subValue of value) {
+                    if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
+                        $(`.filterBtn[key=${key}]`).show();
                     }
-                })
-            })
+                }
+            }
         }
     }
 
