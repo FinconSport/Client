@@ -83,11 +83,11 @@
     	// noticelistD
     	if (noticeListD && noticeListD.data) {
         	noticeListD.data.forEach((noticeItem, noticeIndex) => {
-            	createTabContent(noticeItem, noticeIndex);
-				matchAndAppendDataToTabs(noticeItem)
-				
+            	createTabContent(noticeItem, noticeIndex);			
 			});
 		}
+
+		checkEmptyTabPanes();
 	}
 
 	function createTabBtnAndContainer(sportItem, sportIndex) {
@@ -143,18 +143,19 @@
 		`;
 	}
 
-	function matchAndAppendDataToTabs(noticeItem) {
-		const sportId = noticeItem[0].sport_id;
-		const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
+	function checkEmptyTabPanes() {
+		// Check each tab pane for children with the class "tab-card"
+		$('.tab-pane').each(function () {
+			const tabPane = $(this);
+			const tabCardCount = tabPane.find('.tab-card').length;
 
-		if (!matchingSport) {
-			// Sport not found, create "no data" div and append to specific tab
-			const noDataHtml = $('<div class="tab-card-no-data"><p>No data available for this sport.</p></div>');
-			$('#tab_' + sportId + ' .tab-card-content').append(noDataHtml);
-			console.log('Sport not found for sportId:', sportId);
-		}
+			// If there are no children with the class "tab-card", add a message
+			if (tabCardCount === 0) {
+				const noTabCardMessage = $('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
+				tabPane.append(noTabCardMessage);
+			}
+		});
 	}
-
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
