@@ -63,7 +63,7 @@
 </div>
 <!-- early & living scoreboard-->
 <div id="scoreboardContainer">
-    <i class="fa-solid fa-reply" style="position: absolute; left: 0; top: 0"></i>
+    <i class="fa-solid fa-chevron-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <!-- early fixture -->
         <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
