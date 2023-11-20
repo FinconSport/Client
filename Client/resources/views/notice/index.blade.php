@@ -8,7 +8,7 @@
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
 						<h3>{{ trans('notice.main.notice') }}</h3>
 						<button class="nav-link active" id="tabAll" data-bs-toggle="tab" data-bs-target="#tab_All" type="button" role="tab" aria-controls="#tab_All" aria-selected="true">{{ trans('notice.main.all') }}</button>
-						<button class="nav-link" id="tabSyst" data-bs-toggle="tab" data-bs-target="#tab_Syst" type="button" role="tab" aria-controls="#tab_Syst" aria-selected="false">{{ trans('notice.main.system') }}</button>
+						<button class="nav-link" id="tabSystemNotice" data-bs-toggle="tab" data-bs-target="#tab_SystemNotice" type="button" role="tab" aria-controls="#tab_SystemNotice" aria-selected="false">{{ trans('notice.main.system') }}</button>
                         <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" template="NavTabTemplate" hidden></button>          
                     </div>
                 </nav>
@@ -20,7 +20,7 @@
 							<div class="tab-pane active" id="tab_All" role="tabpanel" aria-labelledby="tabAll">
 								<div class="tab-card-container"></div>
 							</div>
-							<div class="tab-pane" id="tab_Syst" role="tabpanel" aria-labelledby="tabSyst">
+							<div class="tab-pane" id="tab_SystemNotice" role="tabpanel" aria-labelledby="tabSystemNotice">
 								<div class="tab-card-container"></div>
 							</div>
                         </div>
@@ -79,15 +79,18 @@
 			});
 		}
 
+		//noticelistD
 		if (noticeListD && noticeListD.data) {
         	noticeListD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
 		}
+		
 	}
 
 	function createTabBtnAndContainer(sportItem, sportIndex) {
+		//tab btn
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
@@ -95,11 +98,11 @@
 		NavTabBtn.html(sportItem.name);
 		$('#nav-tab').append(NavTabBtn);
 
+		//tab container
 		const tabPanel = $('<div class="tab-pane" role="tabpanel"></div>');
 		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
-		tabPanel.append('<div class="tab-card-container"></div>'); // Added this line to create a container for tab cards
-
+		tabPanel.append('<div class="tab-card-container"></div>');
 		$('#nav-tabContent').append(tabPanel);
 	}
 
@@ -116,9 +119,9 @@
 				tabContent.append(noticeHtml);
 			}
 
-			// If sport_id is 0, append to #tab_Syst tab
+			// If sport_id is 0, append to #tab_SystemNotice tab
 			if (sportId === 0) {
-				const systTabContent = $('#tab_Syst .tab-card-container');
+				const systTabContent = $('#tab_SystemNotice .tab-card-container');
 				const noticeHtml = createNoticeHtml(item);
 				systTabContent.append(noticeHtml);
 			}
@@ -130,7 +133,7 @@
 		});
 	}
 
-
+	// notice content
 	function createNoticeHtml(noticeItem) {
 		return `
 			<div class="tab-card">
@@ -140,6 +143,7 @@
 		`;
 	}
 
+	// no more data function
 	function checkEmptyTabPanes() {
 		$('.tab-pane').each((_, tabPane) => {
 			if (!$(tabPane).find('.tab-card').length) {

@@ -34,9 +34,9 @@ div[key="logs"]>div {
 } */
 
 .notice-con .nav{
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-row-gap: 0.1rem;
+    display: flex;
+    /* grid-auto-columns: 1fr;
+    grid-row-gap: 0.1rem; */
     border: none;
 }
 
@@ -44,7 +44,7 @@ div[key="logs"]>div {
     text-align: center;
     margin: 0px!important;
     color: white;
-    padding: 0.75rem 1rem 0.75rem 2rem;
+    padding: 0.75rem 1rem;
 }
 
 .notice-con .nav .nav-link{
@@ -57,9 +57,10 @@ div[key="logs"]>div {
     text-align: center;
     text-decoration: none;
     border: none;
-    padding: .75rem 1rem .75rem 2rem;
+    padding: 0.75rem 1rem;
     margin: 0px;
     font-weight: 600;
+    width: 100%;
 }
 
 .notice-con .nav .nav-link.active{
@@ -101,7 +102,17 @@ li {
     border-radius: 5px;
     overflow: hidden;
     height: 100%;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
+}
+
+.notice-row .notice-col-left nav {
+    height: calc(100vh - 6rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.notice-row .notice-col-left nav::-webkit-scrollbar {
+    width: 0px;
 }
 
 .notice-col-left {
