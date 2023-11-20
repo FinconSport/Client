@@ -115,6 +115,17 @@
 			});
 		}
 
+		if (sportId === undefined) {
+			$('.nav-link[data-bs-toggle="tab"]').each(function () {
+				const tabId = $(this).attr('id');
+				const specificTabContent = $('#tab_' + tabId.substring(3) + ' .tab-card-content');
+				if (specificTabContent.children().length === 0) {
+					specificTabContent.append('<div class="notice-item no-data">No data available for this sport</div>');
+				}
+			});
+			return;
+		}
+
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
 			const systTabContent = $('#tab_Syst .tab-card-container');
@@ -143,7 +154,6 @@
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
-        console.log("top");   
     });
 
 </script>
