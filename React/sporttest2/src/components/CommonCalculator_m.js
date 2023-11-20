@@ -220,7 +220,6 @@ class CommonCalculator extends React.Component {
 
     async caller(apiUrl) {
 		const json = await GetIni(apiUrl);
-		console.log(json)
         if( json.status === 1 ) {
             tenSecHolder = setTimeout(() => {
                 if( this.state.isPending ) {
@@ -245,12 +244,10 @@ class CommonCalculator extends React.Component {
         // ws
         if(window.ws) window.ws.close()
         window.WebSocketDemo()
-
         window.wsStatus = setInterval(() => {
             if(window.socket_status) {
                 window.ws.onmessage = (event) => {
                     const message = JSON.parse(event.data)
-                    console.log(message)
                     if( message.action === 'delay_order' && this.state.isPending ) {
                         this.setState({
                             isPending: false
@@ -366,7 +363,6 @@ class CommonCalculator extends React.Component {
         }
         const money = parseInt(this.state.inputMoney)
         if ( !money ) {
-            // this.notifyError(langText.CommonCalculator.noinputmoney)
             this.setState({
                 subBtnText: langText.CommonCalculator.noinputmoney,
                 subBtnRed: 1
@@ -376,7 +372,6 @@ class CommonCalculator extends React.Component {
         }
 
         if ( money < this.state.minLimit ) {
-            // this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
             this.setState({
                 subBtnText: langText.CommonCalculator.tooless + this.state.minLimit,
                 subBtnRed: 1
@@ -386,7 +381,6 @@ class CommonCalculator extends React.Component {
         }
 
         if ( money > this.state.maxLimit ) {
-            // this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
             this.setState({
                 subBtnText: langText.CommonCalculator.toohigh + this.state.maxLimit,
                 subBtnRed: 1
@@ -420,8 +414,6 @@ class CommonCalculator extends React.Component {
         }
         const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
         this.caller(queryString , 'afterBet')
-
-        
     }
 
     notifySuccess = (msg) => {
