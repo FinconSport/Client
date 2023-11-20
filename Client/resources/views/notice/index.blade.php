@@ -52,7 +52,7 @@
 	// notice list data
 	var noticeListD = {}
 
-	var noticeListD1 = {
+	var noticeListDS = {
 		"status": 1,
 		"data": [
 			[
@@ -73,6 +73,7 @@
 		"message": "SUCCESS_API_INDEX_NOTICE_01",
 		"gzip": true
 	}
+
 	const noticeList_api = '/api/v2/index_notice'
 
 	$(document).ready(function() {
@@ -103,8 +104,8 @@
 			});
 		}
     	// noticelistD
-    	if (noticeListD1 && noticeListD1.data) {
-        	noticeListD1.data.forEach((noticeItem, noticeIndex) => {
+    	if (noticeListDS && noticeListDS.data) {
+        	noticeListDS.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
