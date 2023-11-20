@@ -119,42 +119,5 @@
 		// loop noticeListD here to generate the search select then append into the page
 	}
 
-	$('.nav-link').on('click', function(e) {
-		e.preventDefault();
-		$('.nav-link').removeClass('active');
-		$(this).addClass('active');
-
-		var target = $(this).data('bs-target');
-		$('.tab-pane').removeClass('show active');
-		$(target).addClass('show active');
-		$('.notice-tab-content').animate({
-			scrollTop: 0
-		}, 'fast');
-	});
-
-	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
-	$('.menuTypeBtn').click(function() {
-		let key = $(this).attr('key')
-		if ((key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on')) {
-			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('background-color', '#415b5a')
-			$('div[key="notice"] .slideMenuTag').css('color', 'white')
-
-			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius', '0')
-			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
-		} else {
-			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius', '25px')
-			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius', '25px')
-			$('div[key="notice"]').css('background-color', '#415b5a')
-			$('div[key="notice"] .slideMenuTag').css('background-color', 'rgb(196, 211, 211)')
-			$('div[key="notice"] .slideMenuTag').css('color', '#415b5a')
-
-			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius', '15px')
-			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius', '15px')
-			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
-		}
-	})
 </script>
 @endpush
