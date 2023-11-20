@@ -998,6 +998,7 @@
 
     // Function to handle filter button clicks
     $('.filterBtn').click(function(){
+		document.getElementById('bettingTypeContainer').scrollTo({top: 0}); // totop first
         $('.filterBtn').removeClass('active')
         $(this).addClass('active')
         let tab = $(this).attr('key')
@@ -1006,37 +1007,27 @@
                 $('.bettingtype-container').show()
                 break;
             case 'full':
-                $('.bettingtype-container').each(function(e){
+                $('.bettingtype-container').each(function(){
+                    console.log($(this))
                     let k = parseInt($(this).attr('priority'))
                     if(gameLangTrans.catePriority.full.indexOf(k) !== -1) {
-                        $(e).show()
+                        $(this).show()
                     } else {
-                        $(e).hide()
+                        $(this).hide()
                     }
                 })
                 break;
             case 'half':
-                $('.bettingtype-container').each(function(e){
+                $('.bettingtype-container').each(function(){
                     let k = parseInt($(this).attr('priority'))
                     if(gameLangTrans.catePriority.half.indexOf(k) !== -1) {
-                        $(e).show()
+                        $(this).show()
                     } else {
-                        $(e).hide()
+                        $(this).hide()
                     }
                 })
                 break;
         }
     })
-
-    // const filterButtonContainer = document.querySelector('.filterBtnContainer');
-    // function handleFilterButtonClick(event) {
-    //   if (event.target.classList.contains('filterBtn')) {
-    //     const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
-    //     buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
-    //     event.target.classList.add('active'); // Add the "active" class to the clicked button
-    //   }
-    // }
-    // filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
-    
 </script>
 @endpush
