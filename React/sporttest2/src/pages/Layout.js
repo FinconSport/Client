@@ -35,7 +35,7 @@ const Layout = () => {
 	return (
 		orientation === 'h' ? 
 		<div style={horizonPrompt}>
-			<p className="fw-600" style={{ paddingTop: '30%' }}>
+			<p className="fw-600" style={{ paddingTop: '27%' }}>
 				{langText.Layout.horizonPrompt}
 			</p>
 		</div>
