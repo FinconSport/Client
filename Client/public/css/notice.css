@@ -141,19 +141,41 @@ li {
   background: #e2f0f0; 
 }
 
-.tab-card {
+.notice-tab .tab-card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.5rem;
+}
+
+.notice-tab .tab-card {
     border: 1px solid #415b5a;
     color: #415b5a;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.tab-card-title {
-    padding: 0.5rem;
-    border-bottom: 1px solid #415b5a;
+.notice-tab .tab-card p {
+    margin: 0px!important;
 }
 
-.tab-card-content {
-    padding: 0.5rem;
+.notice-tab .tab-card-title {
+    padding: 1rem;
+    border-bottom: 1px solid #415b5a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.notice-tab .tab-card-title .noticetitle{
+    width: 60%;
+}
+.notice-tab .tab-card-title .noticetime{
+    width: 40%;
+    text-align: right;
+}
+
+.notice-tab .tab-card-content {
+    padding: 1rem;
     background: white;
 }
