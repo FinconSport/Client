@@ -208,9 +208,9 @@
 							json.data = uncompressed;
 						}
 						Object.assign(obj, json);
-						if (isUpdate === 0) {
-							showSuccessToast(json.message);
-						}
+						// if (isUpdate === 0) {
+						// 	showSuccessToast(json.message);
+						// }
 						resolve(); // 解决 Promise
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
