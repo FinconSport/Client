@@ -92,7 +92,7 @@
 				noticeListD.data.forEach((noticeItem) => {
 					const sportId = noticeItem[0].sport_id;
 					const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
-					if (matchingSport) {
+					if (!matchingSport) {
 						const noDataHtml = createNoDataHtml();
 						$('#tab_' + sportId + ' .tab-card-container').append(noDataHtml);
 					}
