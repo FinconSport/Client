@@ -50,9 +50,9 @@
 	var isReadyNotice = false
 
 	// notice list data
-	// var noticeListD = {}
+	var noticeListD = {}
 
-	var noticeListD = {
+	var noticeListD1 = {
 		"status": 1,
 		"data": [
 			[
