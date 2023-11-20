@@ -117,18 +117,28 @@
 	function createTabContent(noticeItem, noticeIndex) {
 		const sportId = noticeItem.sport_id;
 
-		// Find the corresponding tab based on sport_id
-		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
+		if (sportId === 0) {
+			// Insert into "tab_Syst" tab
+			const tabContentSyst = $('#tab_Syst .tab-card-content');
+			createTabCardContent(tabContentSyst, noticeItem);
+		} else {
+			// Find the corresponding tab based on sport_id
+			const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// Create content only if the tab exists
-		if (tabContent.length > 0) {
-			const tabCard = $('<div class="tab-card"></div>');
-			const tabCardTitle = $('<div class="tab-card-title"></div>').text(noticeItem.title);
-			const tabCardContent = $('<div class="tab-card-content"></div>').text(noticeItem.context);
-
-			tabCard.append(tabCardTitle, tabCardContent);
-			tabContent.append(tabCard);
+			// Create content only if the tab exists
+			if (tabContent.length > 0) {
+				createTabCardContent(tabContent, noticeItem);
+			}
 		}
+	}
+
+	function createTabCardContent(tabContent, noticeItem) {
+		const tabCard = $('<div class="tab-card"></div>');
+		const tabCardTitle = $('<div class="tab-card-title"></div>').text(noticeItem.title);
+		const tabCardContent = $('<div class="tab-card-content"></div>').text(noticeItem.context);
+
+		tabCard.append(tabCardTitle, tabCardContent);
+		tabContent.append(tabCard);
 	}
 		
 
