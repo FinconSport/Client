@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-<div id ="noticePage" class="h-100 notice-con">
+	<div id ="noticePage" class="h-100 notice-con">
         <div class="row notice-row">
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad notice-col-left">
                 <nav>
@@ -82,92 +82,75 @@
 
 
 	function renderView() {
-		// sportlistD
-		if (sportListD && sportListD.data) {
-			sportListD.data.forEach((sportItem, sportIndex) => {
-				createTabBtnAndContainer(sportItem, sportIndex);
+    // sportlistD
+    if (sportListD && sportListD.data) {
+        sportListD.data.forEach((sportItem, sportIndex) => {
+            createTabBtnAndContainer(sportItem, sportIndex);
+        });
+    }
+
+    // noticelistD
+    if (noticeListD && noticeListD.data) {
+        noticeListD.data.forEach((noticeItem, noticeIndex) => {
+            createTabContent(noticeItem, noticeIndex);
 			});
-
-			// noticelistD
-			if (noticeListD && noticeListD.data) {
-				// Track whether any notices are inserted
-				let noticesInserted = false;
-
-				noticeListD.data.forEach((noticeItem, noticeIndex) => {
-					if (createTabContent(noticeItem)) {
-						noticesInserted = true;
-					}
-				});
-
-				// If no notices were inserted, display "no data" text
-				if (!noticesInserted) {
-					displayNoDataText();
-				}
-			} else {
-				// If no notice data is available, display "no data" text
-				displayNoDataText();
-			}
 		}
 	}
-	
+
 	function createTabBtnAndContainer(sportItem, sportIndex) {
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
-		NavTabBtn.attr('aria-controls', '#tab_' + sportItem.sport_id);
+		NavTabBtn.attr('aria-controls', 'tab_' + sportItem.sport_id);
 		NavTabBtn.html(sportItem.name);
 		$('#nav-tab').append(NavTabBtn);
 
-		const tabPanel = $('div[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+		const tabPanel = $('<div class="tab-pane" role="tabpanel"></div>');
 		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
+
 		$('#nav-tabContent').append(tabPanel);
 	}
 
-	function createTabContent(noticeItem) {
-		const sportId = noticeItem.sport_id;
+	function createTabContent(noticeItem, noticeIndex) {
+		const sportId = noticeItem[0].sport_id;
+		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// Check if there is a corresponding sport_id in sportListD data
-		const isSportIdValid = sportListD.data.some(sportItem => sportItem.sport_id === sportId);
-
-		if (isSportIdValid) {
-			// Insert into "tab_Syst" tab if sport_id is 0
-			if (sportId === 0) {
-				const tabContentSyst = $('#tab_Syst .tab-card-content');
-				createTabCardContent(tabContentSyst, noticeItem);
-			}
-
-			// Insert into "tab_All" tab
-			const tabContentAll = $('#tab_All .tab-card-content');
-			createTabCardContent(tabContentAll, noticeItem);
-
-			// Find the corresponding tab based on sport_id
-			const tabContent = $('#tab_' + sportId + ' .tab-card-content');
-
-			// Create content only if the tab exists and sport_id is not 0
-			if (tabContent.length > 0 && sportId !== 0) {
-				createTabCardContent(tabContent, noticeItem);
-			}
-
-			return true; // Return true if notice is inserted
+		// Append to the specific sport_id tab
+		if (sportId !== undefined) {
+			noticeItem.forEach((item) => {
+				const noticeHtml = createNoticeHtml(item);
+				tabContent.append(noticeHtml);
+			});
 		}
 
-		return false; // Return false if no notice is inserted
+		// If sport_id is 0, append to #tab_Syst tab
+		if (sportId === 0) {
+			const systTabContent = $('#tab_Syst .tab-card-content');
+			noticeItem.forEach((item) => {
+				const noticeHtml = createNoticeHtml(item);
+				systTabContent.append(noticeHtml);
+			});
+		}
+
+		// Append to #tab_All tab
+		noticeItem.forEach((item) => {
+			const noticeHtml = createNoticeHtml(item);
+			$('#tab_All .tab-card-content').append(noticeHtml);
+		});
 	}
 
-	function displayNoDataText() {
-		// Display "no data" text in a specific element or console.log
-		console.log("No data available.");
+	function createNoticeHtml(noticeItem) {
+		// Adjust this based on your actual data structure
+		return `
+			<div class="notice-item">
+				<div class="notice-title">${noticeItem.title}</div>
+				<div class="notice-context">${noticeItem.context}</div>
+				<div class="notice-create-time">${noticeItem.create_time}</div>
+			</div>
+		`;
 	}
 
-	function createTabCardContent(tabContent, noticeItem) {
-		const tabCard = $('<div class="tab-card"></div>');
-		const tabCardTitle = $('<div class="tab-card-title"></div>').text(noticeItem.title);
-		const tabCardContent = $('<div class="tab-card-content"></div>').text(noticeItem.context);
-
-		tabCard.append(tabCardTitle, tabCardContent);
-		tabContent.append(tabCard);
-	}
 		
 
 	$("button.nav-link").click(function() {
