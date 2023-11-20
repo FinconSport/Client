@@ -70,33 +70,29 @@
 		//sportlistD
 		if (sportListD && sportListD.data) {
 			sportListD.data.forEach((sportItem, sportIndex) => {
-				console.log(sportItem, sportIndex);
-				createNavTabButton(sportItem, sportIndex);
-				createTabPanel(sportItem, sportIndex);
+				createTabContent(sportItem, sportIndex);
 			});
 		}
 
+		// noticelistD
+
 	}
 	
-	function createNavTabButton(sportItem, sportIndex) {
+	function createTabContent(sportItem, sportIndex) {
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
-
 		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
 		NavTabBtn.attr('aria-controls', '#tab_' + sportItem.sport_id);
 		NavTabBtn.html(sportItem.name);
-
 		$('#nav-tab').append(NavTabBtn);
-	}
 
-	function createTabPanel(sportItem, sportIndex) {
 		const tabPanel = $('div[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
 		tabPanel.html(sportItem.name);
-
 		$('#nav-tabContent').append(tabPanel);
 	}
+		
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
