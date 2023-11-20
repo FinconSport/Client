@@ -159,11 +159,20 @@ li {
 }
 
 .notice-tab .tab-card-title {
-    padding: 0.5rem;
+    padding: 1rem;
     border-bottom: 1px solid #415b5a;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.notice-tab .tab-card-title .noticetitle{
+    width: 60%;
+}
+.notice-tab .tab-card-title .noticetime{
+    width: 40%;
+    text-align: right;
 }
 
 .notice-tab .tab-card-content {
