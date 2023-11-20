@@ -418,29 +418,6 @@
     // 語系
     var langTrans = @json(trans('rule'));
 
-    // 左邊菜單  當點擊體育或串關時 移除目前選中樣式
-    $('.menuTypeBtn').click(function(){
-        let key = $(this).attr('key')
-        if( (key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on') ) {
-            $('div[key="rule"] .slideMenuTag').css('border-bottom-left-radius','0')
-            $('div[key="rule"] .slideMenuTag').css('border-top-left-radius','0')
-            $('div[key="rule"] .slideMenuTag').css('background-color','#415b5a')
-            $('div[key="rule"] .slideMenuTag').css('color','white')
-
-            $('div[key="match"] .slideMenuTag').css('border-bottom-right-radius','0')
-            $('div[key="logs"] .slideMenuTag').css('border-top-right-radius','0')
-        } else {
-            $('div[key="rule"] .slideMenuTag').css('border-bottom-left-radius','25px')
-            $('div[key="rule"] .slideMenuTag').css('border-top-left-radius','25px')
-            $('div[key="rule"]').css('background-color','#415b5a')
-            $('div[key="rule"] .slideMenuTag').css('background-color','rgb(196, 211, 211)')
-            $('div[key="rule"] .slideMenuTag').css('color','#415b5a')
-
-            $('div[key="match"] .slideMenuTag').css('border-bottom-right-radius','15px')
-            $('div[key="logs"] .slideMenuTag').css('border-top-right-radius','15px')
-        }
-    })
-
     $("button.nav-link").click(function() {
         $(".rule-tab-con").animate({ scrollTop: 0 }, "smooth");
         console.log("top");   
