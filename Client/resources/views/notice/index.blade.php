@@ -79,15 +79,13 @@
 				createTabBtnAndContainer(sportItem, sportIndex);
 			});
 		}
-
     	// noticelistD
     	if (noticeListD && noticeListD.data) {
         	noticeListD.data.forEach((noticeItem, noticeIndex) => {
-            	createTabContent(noticeItem, noticeIndex);			
+            	createTabContent(noticeItem, noticeIndex);
+				checkEmptyTabPanes();			
 			});
 		}
-
-		checkEmptyTabPanes();
 	}
 
 	function createTabBtnAndContainer(sportItem, sportIndex) {
@@ -134,7 +132,6 @@
 	}
 
 	function createNoticeHtml(noticeItem) {
-		// Adjust this based on your actual data structure
 		return `
 			<div class="tab-card">
 				<div class="tab-card-title"><p class="noticetitle">${noticeItem.title}</p><p class="noticetime">${noticeItem.create_time}</p></div>
@@ -144,15 +141,9 @@
 	}
 
 	function checkEmptyTabPanes() {
-		// Check each tab pane for children with the class "tab-card"
-		$('.tab-pane').each(function () {
-			const tabPane = $(this);
-			const tabCardCount = tabPane.find('.tab-card').length;
-
-			// If there are no children with the class "tab-card", add a message
-			if (tabCardCount === 0) {
-				const noTabCardMessage = $('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
-				tabPane.append(noTabCardMessage);
+		$('.tab-pane').each((_, tabPane) => {
+			if (!$(tabPane).find('.tab-card').length) {
+				$(tabPane).append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
 			}
 		});
 	}

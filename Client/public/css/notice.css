@@ -179,3 +179,13 @@ li {
     padding: 1rem;
     background: white;
 }
+
+.notice-tab .no-tab-card-text {
+    border: 1px solid #415b5a;
+    color: #415b5a;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0.5rem;
+    background: white;
+    text-align: center;
+}
