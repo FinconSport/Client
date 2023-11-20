@@ -93,6 +93,10 @@
     <button class="filterBtn active" key='all'>{{ trans('game.index.all') }}</button>
     <button class="filterBtn" key='full'>{{ trans('game.index.full') }}</button>
     <button class="filterBtn" key='half'>{{ trans('game.index.half') }}</button>
+    <button class="filterBtn" key='1' hidden>{{ trans('game.index.1qtr') }}</button>
+    <button class="filterBtn" key='2' hidden>{{ trans('game.index.2qtr') }}</button>
+    <button class="filterBtn" key='3' hidden>{{ trans('game.index.3qtr') }}</button>
+    <button class="filterBtn" key='4' hidden>{{ trans('game.index.4qtr') }}</button>
 </div>
 
 <div id="bettingTypeContainer"></div>
@@ -196,6 +200,18 @@
 
         if (Object.keys(matchListD.data.list.market).length === 0) {
             noData();
+        }
+
+        // 籃球 單節tab篩選
+        if(sport === 48242) {
+            gameLangTrans.catePriority.single[sport].map(([k, v]) => {
+                console.log(k, v)
+                v.map(([k2, v2]) => {
+                    if($(`.bettingtype-container[priority=${v2}]`).length > 0) {
+                        $(`.filterBtn[key=${k}]`).show()
+                    }
+                })
+            })
         }
     }
 
