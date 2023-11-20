@@ -7,8 +7,8 @@
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
 						<button class="nav-link active" id="navAll" data-bs-toggle="tab" data-bs-target="#navAll" type="button" role="tab" aria-controls="#navAll" aria-selected="true">{{ trans('notice.main.all') }}</button>
-						<button class="nav-link" id="0" data-bs-toggle="tab" data-bs-target="#nav0" type="button" role="tab" aria-controls="#nav0" aria-selected="true">{{ trans('notice.main.system') }}</button>
-                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" template="NavTabTemplate" hidden></button>          
+						<button class="nav-link" id="nav0" data-bs-toggle="tab" data-bs-target="#nav0" type="button" role="tab" aria-controls="#nav0" aria-selected="false">{{ trans('notice.main.system') }}</button>
+                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" template="NavTabTemplate" hidden></button>          
                     </div>
                 </nav>
             </div>
@@ -79,7 +79,7 @@
 	function createNavTabButton(sportItem, sportIndex) {
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 
-		NavTabBtn.attr('id', sportItem.sport_id);
+		NavTabBtn.attr('id', 'nav' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#nav' + sportItem.sport_id);
 		NavTabBtn.attr('aria-controls', '#nav' + sportItem.sport_id);
 		NavTabBtn.html(sportItem.name);
