@@ -98,45 +98,38 @@
 	function renderView() {
 		// sportlistD
 		if (sportListD && sportListD.data) {
-			sportListD.data.forEach((sportItem, sportIndex) => {
-				createTabBtnAndContainer(sportItem, sportIndex);
+			sportListD.data.forEach((sportItem) => {
+				createTabBtnAndContainer(sportItem);
 			});
 		}
-    	// noticelistD
-    	if (noticeListD1 && noticeListD1.data) {
-        	noticeListD1.data.forEach((noticeItem, noticeIndex) => {
-            	createTabContent(noticeItem, noticeIndex);
-				checkEmptyTabPanes();			
+		// noticelistD1
+		if (noticeListD1 && noticeListD1.data) {
+			noticeListD1.data.forEach((noticeItem) => {
+				createTabContent(noticeItem);
+				checkEmptyTabPanes();
 			});
 		}
 	}
 
-	function createTabBtnAndContainer(sportItem, sportIndex) {
-		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
-		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
-		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
-		NavTabBtn.attr('aria-controls', 'tab_' + sportItem.sport_id);
-		NavTabBtn.html(sportItem.name);
+	function createTabBtnAndContainer(sportItem) {
+		const { sport_id, name } = sportItem;
+
+		const NavTabBtn = $(`<button class="nav-link" data-bs-toggle="tab" role="tab" aria-selected="false">${name}</button>`);
+		NavTabBtn.attr('id', `tab${sport_id}`).attr('data-bs-target', `#tab_${sport_id}`).attr('aria-controls', `tab_${sport_id}`);
 		$('#nav-tab').append(NavTabBtn);
 
-		const tabPanel = $('<div class="tab-pane" role="tabpanel"></div>');
-		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
-		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
-
+		const tabPanel = $(`<div class="tab-pane" role="tabpanel" id="tab_${sport_id}" aria-labelledby="tab${sport_id}"></div>`);
 		$('#nav-tabContent').append(tabPanel);
 	}
 
-	function createTabContent(noticeItem, noticeIndex) {
+	function createTabContent(noticeItem) {
 		const sportId = noticeItem[0].sport_id;
-		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
+		const tabContent = $(`#tab_${sportId} .tab-card-content`);
 
-		// Append to the specific sport_id tab
-		if (sportId !== undefined) {
-			noticeItem.forEach((item) => {
-				const noticeHtml = createNoticeHtml(item);
-				tabContent.append(noticeHtml);
-			});
-		}
+		noticeItem.forEach((item) => {
+			const noticeHtml = createNoticeHtml(item);
+			tabContent.append(noticeHtml);
+		});
 
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
@@ -148,25 +141,29 @@
 		}
 
 		// Append to #tab_All tab
-		noticeItem.forEach((item) => {
-			const noticeHtml = createNoticeHtml(item);
-			$('#tab_All .tab-card-container').append(noticeHtml);
-		});
+		$('#tab_All .tab-card-container').append(tabContent.html());
 	}
 
 	function createNoticeHtml(noticeItem) {
+		const { title, create_time, context } = noticeItem;
 		return `
 			<div class="tab-card">
-				<div class="tab-card-title"><p class="noticetitle">${noticeItem.title}</p><p class="noticetime">${noticeItem.create_time}</p></div>
-				<div class="tab-card-content"><p>${noticeItem.context}</p></div>
+				<div class="tab-card-title">
+					<p class="noticetitle">${title}</p>
+					<p class="noticetime">${create_time}</p>
+				</div>
+				<div class="tab-card-content">
+					<p>${context}</p>
+				</div>
 			</div>
 		`;
 	}
 
 	function checkEmptyTabPanes() {
 		$('.tab-pane').each((_, tabPane) => {
-			if (!$(tabPane).find('.tab-card').length) {
-				$(tabPane).append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
+			const tabContainer = $(tabPane).find('.tab-card-container');
+			if (!tabContainer.find('.tab-card').length) {
+				tabContainer.append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
 			}
 		});
 	}
