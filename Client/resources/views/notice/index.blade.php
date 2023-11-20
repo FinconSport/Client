@@ -107,17 +107,6 @@
 		const sportId = noticeItem[0].sport_id;
 		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// If sport_id is not defined, create an empty div for all tabs
-		if (sportId === undefined) {
-			$('.nav-link[data-bs-toggle="tab"]').each(function () {
-				const tabId = $(this).attr('id');
-				const emptyDiv = $('<div class="notice-item no-data">No data available for this sport</div>');
-				const specificTabContent = $('#tab_' + tabId.substring(3) + ' .tab-card-content');
-				specificTabContent.append(emptyDiv);
-			});
-			return;
-		}
-
 		// Append to the specific sport_id tab
 		if (sportId !== undefined) {
 			noticeItem.forEach((item) => {
@@ -128,7 +117,7 @@
 
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
-			const systTabContent = $('#tab_Syst .tab-card-content');
+			const systTabContent = $('#tab_Syst .tab-card-container');
 			noticeItem.forEach((item) => {
 				const noticeHtml = createNoticeHtml(item);
 				systTabContent.append(noticeHtml);
@@ -138,10 +127,9 @@
 		// Append to #tab_All tab
 		noticeItem.forEach((item) => {
 			const noticeHtml = createNoticeHtml(item);
-			$('#tab_All .tab-card-content').append(noticeHtml);
+			$('#tab_All .tab-card-container').append(noticeHtml);
 		});
 	}
-
 
 	function createNoticeHtml(noticeItem) {
 		// Adjust this based on your actual data structure
