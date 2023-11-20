@@ -75,7 +75,7 @@
 	}
 	
 	function createNavTabButton(sportItem, sportIndex) {
-		const NavTabBtn = $('tr[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 
 		NavTabBtn.attr('id', sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#nav' + sportItem.sport_id);
