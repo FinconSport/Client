@@ -271,7 +271,7 @@ div.submenu-btn {
 }
 
 a.sportSelect{
-    color: white;
+    color: #c4d3d3;
     text-decoration: none;
 }
 
@@ -292,10 +292,9 @@ a.submenu-inner:hover {
     margin:0rem 0rem 1rem 2.1rem;
 } */
 
-a.sportSelect:hover,
 .sportSelect.openToggle {
-    background: #ffffff!important;
-    color: #415b5a!important;
+    background: #415b5a!important;
+    color: #c79e42!important;
 }
 
 .sportSelect .sportname-con {
