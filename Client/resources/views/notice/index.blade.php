@@ -72,6 +72,7 @@
 			sportListD.data.forEach((sportItem, sportIndex) => {
 				console.log(sportItem, sportIndex);
 				createNavTabButton(sportItem, sportIndex);
+				createTabPanel(sportItem, sportIndex);
 			});
 		}
 
@@ -86,7 +87,9 @@
 		NavTabBtn.html(sportItem.name);
 
 		$('#navSyst').after(NavTabBtn);
+	}
 
+	function createTabPanel(sportItem, sportIndex) {
 		const tabPanel = $('button[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		tabPanel.attr('id', 'nav' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'nav' + sportItem.sport_id);
