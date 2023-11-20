@@ -93,10 +93,10 @@
     <button class="filterBtn active" key='all'>{{ trans('game.index.all') }}</button>
     <button class="filterBtn" key='full'>{{ trans('game.index.full') }}</button>
     <button class="filterBtn" key='half'>{{ trans('game.index.half') }}</button>
-    <button class="filterBtn" key='1' hidden>{{ trans('game.index.1qtr') }}</button>
-    <button class="filterBtn" key='2' hidden>{{ trans('game.index.2qtr') }}</button>
-    <button class="filterBtn" key='3' hidden>{{ trans('game.index.3qtr') }}</button>
-    <button class="filterBtn" key='4' hidden>{{ trans('game.index.4qtr') }}</button>
+    <button class="filterBtn" key='1' mark='single' style="display: none;">{{ trans('game.index.1qtr') }}</button>
+    <button class="filterBtn" key='2' mark='single' style="display: none;">{{ trans('game.index.2qtr') }}</button>
+    <button class="filterBtn" key='3' mark='single' style="display: none;">{{ trans('game.index.3qtr') }}</button>
+    <button class="filterBtn" key='4' mark='single' style="display: none;">{{ trans('game.index.4qtr') }}</button>
 </div>
 
 <div id="bettingTypeContainer"></div>
@@ -205,8 +205,6 @@
         // 籃球 單節tab篩選
         if(sport === 48242) {
             for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
-                console.log(key, value);
-                
                 for (const subValue of value) {
                     if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
                         $(`.filterBtn[key=${key}]`).show();
@@ -371,6 +369,18 @@
                 $(this).remove();
             }
         });
+
+        // 籃球 單節tab篩選
+        if(sport === 48242) {
+            $('.filterBtn[mark="single"]').hide()
+            for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
+                for (const subValue of value) {
+                    if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
+                        $(`.filterBtn[key=${key}]`).show();
+                    }
+                }
+            }
+        }
 
         // tab (show corresponding bet)
         $('.filterBtn.active').click()
@@ -1044,6 +1054,12 @@
                     } else {
                         $(this).hide()
                     }
+                })
+                break;
+            default:
+                $('.bettingtype-container').hide()
+                gameLangTrans.catePriority.single[sport][1].map((v,k) => {
+                    $(`.bettingtype-container[priority=${v}]`).show()
                 })
                 break;
         }
