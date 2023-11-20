@@ -120,6 +120,7 @@ li {
 /* width */
 .rule-tab-con::-webkit-scrollbar {
   width: 15px;
+  padding: 0.1rem;
 }
 
 /* Track */

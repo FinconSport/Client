@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div id ="rulePage" class="container h-100 rule-con">
+    <div id ="rulePage" class="h-100 rule-con">
         <div class="row rule-row">
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad rule-col-left">
                 <nav>
