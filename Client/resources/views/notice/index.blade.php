@@ -49,40 +49,6 @@
 	// notice list data
 	var noticeListD = {}
 
-	var noticeListData = {
-		"status": 1,
-		"data": [
-			[
-				{
-					"sport_id": 0,
-					"title": "【賽事取消-足球/法國甲組聯賽】",
-					"context": "賽事已取消 1月1日 08:00 馬賽 vs. 里昂",
-					"create_time": "2023-11-20 14:54:17"
-				},
-				{
-					"sport_id": 0,
-					"title": "【選手次序錯誤-棒球/日本職業棒球】",
-					"context": "已賽事選手錯序故取消 1月1日 08:00 阪神虎 vs. 歐力士猛牛",
-					"create_time": "2023-11-20 14:54:17"
-				},
-				{
-					"sport_id": 154914,
-					"title": "title 222",
-					"context": "活動公告 - 世界盃期間,我們將抽出幾位幸運兒",
-					"create_time": "2023-04-04 09:10:00"
-				},
-				{
-					"sport_id": 0,
-					"title": "title 111",
-					"context": "系統公告 - Fourtune 365 首家菲律賓線上體育上線啦",
-					"create_time": "2023-04-04 09:09:53"
-				}
-			]
-		],
-		"message": "SUCCESS_API_INDEX_NOTICE_01",
-		"gzip": true
-	}
-
 	const noticeList_api = '/api/v2/index_notice'
 
 	$(document).ready(function() {
@@ -113,8 +79,8 @@
 			});
 		}
 
-		if (noticeListData && noticeListData.data) {
-        	noticeListData.data.forEach((noticeItem, noticeIndex) => {
+		if (noticeListD && noticeListD.data) {
+        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
@@ -137,34 +103,6 @@
 		$('#nav-tabContent').append(tabPanel);
 	}
 
-	// function createTabContent(noticeItem, noticeIndex) {
-	// 	const sportId = noticeItem[0].sport_id;
-	// 	console.log(sportId);
-	// 	const tabContent = $('#tab_' + sportId + ' .tab-card-content');
-
-	// 	// Append to the specific sport_id tab
-	// 	if (sportId !== undefined) {
-	// 		noticeItem.forEach((item) => {
-	// 			const noticeHtml = createNoticeHtml(item);
-	// 			tabContent.append(noticeHtml);
-	// 		});
-	// 	}
-
-	// 	// If sport_id is 0, append to #tab_Syst tab
-	// 	if (sportId === 0) {
-	// 		const systTabContent = $('#tab_Syst .tab-card-container');
-	// 		noticeItem.forEach((item) => {
-	// 			const noticeHtml = createNoticeHtml(item);
-	// 			systTabContent.append(noticeHtml);
-	// 		});
-	// 	}
-
-	// 	// Append to #tab_All tab
-	// 	noticeItem.forEach((item) => {
-	// 		const noticeHtml = createNoticeHtml(item);
-	// 		$('#tab_All .tab-card-container').append(noticeHtml);
-	// 	});
-	// }
 	function createTabContent(noticeItem, noticeIndex) {
 		noticeItem.forEach((item) => {
 			const sportId = item.sport_id;
