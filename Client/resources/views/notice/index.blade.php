@@ -205,8 +205,8 @@
 			});
 		}
     	// noticelistD
-    	if (noticeListD && noticeListD.data) {
-        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
+    	if (noticeListD1 && noticeListD1.data) {
+        	noticeListD1.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
