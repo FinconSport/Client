@@ -107,12 +107,6 @@
 		const sportId = noticeItem[0].sport_id;
 		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// if (sportId !== undefined) {
-		// 	noticeItem.forEach((item) => {
-		// 		const noticeHtml = createNoticeHtml(item);
-		// 		tabContent.append(noticeHtml);
-		// 	});
-		// }
 		// If sport_id is not defined, create an empty div
 		if (sportId === undefined) {
 			const emptyDiv = $('<div class="notice-item no-data">No data available for this sport</div>');
@@ -121,26 +115,30 @@
 		}
 
 		// Append to the specific sport_id tab
-		noticeItem.forEach((item) => {
-			const noticeHtml = createNoticeHtml(item);
-			tabContent.append(noticeHtml);
-		});
+		if (tabContent.length > 0) {
+			noticeItem.forEach((item) => {
+				const noticeHtml = createNoticeHtml(item);
+				tabContent.append(noticeHtml);
+			});
+		} else {
+			// If the sport_id is not found in sportlistd, append to #tab_All tab
+			const allTabContent = $('#tab_All .tab-card-content');
+			noticeItem.forEach((item) => {
+				const noticeHtml = createNoticeHtml(item);
+				allTabContent.append(noticeHtml);
+			});
+		}
 
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
-			const systTabContent = $('#tab_Syst .tab-card-container');
+			const systTabContent = $('#tab_Syst .tab-card-content');
 			noticeItem.forEach((item) => {
 				const noticeHtml = createNoticeHtml(item);
 				systTabContent.append(noticeHtml);
 			});
 		}
-
-		// Append to #tab_All tab
-		noticeItem.forEach((item) => {
-			const noticeHtml = createNoticeHtml(item);
-			$('#tab_All .tab-card-container').append(noticeHtml);
-		});
 	}
+
 
 	function createNoticeHtml(noticeItem) {
 		// Adjust this based on your actual data structure
