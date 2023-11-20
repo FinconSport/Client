@@ -135,8 +135,8 @@
 		// Adjust this based on your actual data structure
 		return `
 			<div class="tab-card">
-				<div class="tab-card-title">${noticeItem.title}${noticeItem.create_time}</div>
-				<div class="tab-card-content">${noticeItem.context}</div>
+				<div class="tab-card-title"><p>${noticeItem.title}</p><p>${noticeItem.create_time}</p></div>
+				<div class="tab-card-content"><p>${noticeItem.context}</p></div>
 			</div>
 		`;
 	}

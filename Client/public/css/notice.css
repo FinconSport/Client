@@ -141,19 +141,28 @@ li {
   background: #e2f0f0; 
 }
 
-.tab-card {
+.notice-tab .tab-card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.5rem;
+}
+
+.notice-tab .tab-card {
     border: 1px solid #415b5a;
     color: #415b5a;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.tab-card-title {
+.notice-tab .tab-card-title {
     padding: 0.5rem;
     border-bottom: 1px solid #415b5a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.tab-card-content {
+.notice-tab .tab-card-content {
     padding: 0.5rem;
     background: white;
 }
