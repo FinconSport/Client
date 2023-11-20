@@ -94,7 +94,7 @@
 					const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
 					if (!matchingSport) {
 						const noDataHtml = createNoDataHtml();
-						$('#tab_' + sportId + ' .tab-card-container').append(noDataHtml);
+						$('#tab_' + sport.sport_id + ' .tab-card-container').append(noDataHtml);
 					}
 				});
 			}
