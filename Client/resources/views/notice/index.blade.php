@@ -86,6 +86,19 @@
             	createTabContent(noticeItem, noticeIndex);
 			});
 		}
+
+		function matchAndAppendDataToTabs() {
+			if (sportListD && sportListD.data && noticeListD && noticeListD.data) {
+				noticeListD.data.forEach((noticeItem) => {
+					const sportId = noticeItem[0].sport_id;
+					const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
+					if (matchingSport) {
+						const noDataHtml = createNoDataHtml();
+						$('#tab_' + sportId + ' .tab-card-container').append(noDataHtml);
+					}
+				});
+			}
+		}
 	}
 
 	function createTabBtnAndContainer(sportItem, sportIndex) {
@@ -113,12 +126,6 @@
 				const noticeHtml = createNoticeHtml(item);
 				tabContent.append(noticeHtml);
 			});
-		} else {
-			// Insert empty data class to all tabs when sportId is undefined
-			const allTabs = document.querySelectorAll('.tab-pane');
-			allTabs.forEach((tab) => {
-				tab.classList.add('empty');
-			});
 		}
 
 		// If sport_id is 0, append to #tab_Syst tab
@@ -143,6 +150,14 @@
 			<div class="tab-card">
 				<div class="tab-card-title"><p class="noticetitle">${noticeItem.title}</p><p class="noticetime">${noticeItem.create_time}</p></div>
 				<div class="tab-card-content"><p>${noticeItem.context}</p></div>
+			</div>
+		`;
+	}
+
+	function createNoDataHtml() {
+		return `
+			<div class="tab-card-no-data">
+				<p>No data available for this sport.</p>
 			</div>
 		`;
 	}
