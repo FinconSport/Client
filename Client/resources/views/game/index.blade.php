@@ -90,8 +90,9 @@
 </div>
 
 <div class="filterBtnContainer">
-    <button class="filterBtn active">{{ trans('game.index.all') }}</button>
-    <button class="filterBtn">{{ trans('game.index.hot') }}</button>
+    <button class="filterBtn active" key='all'>{{ trans('game.index.all') }}</button>
+    <button class="filterBtn" key='full'>{{ trans('game.index.full') }}</button>
+    <button class="filterBtn" key='half'>{{ trans('game.index.half') }}</button>
 </div>
 
 <div id="bettingTypeContainer"></div>
@@ -996,15 +997,46 @@
     };
 
     // Function to handle filter button clicks
-    const filterButtonContainer = document.querySelector('.filterBtnContainer');
-    function handleFilterButtonClick(event) {
-      if (event.target.classList.contains('filterBtn')) {
-        const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
-        buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
-        event.target.classList.add('active'); // Add the "active" class to the clicked button
-      }
-    }
-    filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
+    $('.filterBtn').click(function(){
+        $('.filterBtn').removeClass('active')
+        $(this).addClass('active')
+        let tab = $(this).attr('key')
+        switch (tab) {
+            case 'all':
+                $('.bettingtype-container').show()
+                break;
+            case 'full':
+                $('.bettingtype-container').each(function(e){
+                    let k = parseInt($(this).attr('priority'))
+                    if(langTrans.catePriority.full.indexOf(k) !== -1) {
+                        $(e).show()
+                    } else {
+                        $(e).hide()
+                    }
+                })
+                break;
+            case 'half':
+                $('.bettingtype-container').each(function(e){
+                    let k = parseInt($(this).attr('priority'))
+                    if(langTrans.catePriority.half.indexOf(k) !== -1) {
+                        $(e).show()
+                    } else {
+                        $(e).hide()
+                    }
+                })
+                break;
+        }
+    })
+
+    // const filterButtonContainer = document.querySelector('.filterBtnContainer');
+    // function handleFilterButtonClick(event) {
+    //   if (event.target.classList.contains('filterBtn')) {
+    //     const buttons = filterButtonContainer.querySelectorAll('.filterBtn');
+    //     buttons.forEach(button => button.classList.remove('active')); // Remove the "active" class from all buttons
+    //     event.target.classList.add('active'); // Add the "active" class to the clicked button
+    //   }
+    // }
+    // filterButtonContainer.addEventListener('click', handleFilterButtonClick); // Add a click event listener to the container
     
 </script>
 @endpush
