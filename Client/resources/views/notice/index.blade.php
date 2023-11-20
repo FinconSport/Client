@@ -17,22 +17,13 @@
                 <div class="notice-tab-con">
                         <div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane active" id="tab_All" role="tabpanel" aria-labelledby="tabAll">
-								<div class="tab-card">
-									<div class="tab-card-title"></div>
-									<div class="tab-card-content"></div>
-								</div>
+								<div class="tab-card-container"></div>
 							</div>
 							<div class="tab-pane" id="tab_Syst" role="tabpanel" aria-labelledby="tabSyst">
-								<div class="tab-card">
-									<div class="tab-card-title"></div>
-									<div class="tab-card-content"></div>
-								</div>
+								<div class="tab-card-container"></div>
 							</div>
                             <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden>
-								<div class="tab-card">
-									<div class="tab-card-title"></div>
-									<div class="tab-card-content"></div>
-								</div>
+								<div class="tab-card-container"></div>
 							</div>
                         </div>
                     </div>
@@ -82,17 +73,17 @@
 
 
 	function renderView() {
-    // sportlistD
-    if (sportListD && sportListD.data) {
-        sportListD.data.forEach((sportItem, sportIndex) => {
-            createTabBtnAndContainer(sportItem, sportIndex);
-        });
-    }
+		// sportlistD
+		if (sportListD && sportListD.data) {
+			sportListD.data.forEach((sportItem, sportIndex) => {
+				createTabBtnAndContainer(sportItem, sportIndex);
+			});
+		}
 
-    // noticelistD
-    if (noticeListD && noticeListD.data) {
-        noticeListD.data.forEach((noticeItem, noticeIndex) => {
-            createTabContent(noticeItem, noticeIndex);
+    	// noticelistD
+    	if (noticeListD && noticeListD.data) {
+        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
+            	createTabContent(noticeItem, noticeIndex);
 			});
 		}
 	}
@@ -126,7 +117,7 @@
 
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
-			const systTabContent = $('#tab_Syst .tab-card-content');
+			const systTabContent = $('#tab_Syst .tab-card-container');
 			noticeItem.forEach((item) => {
 				const noticeHtml = createNoticeHtml(item);
 				systTabContent.append(noticeHtml);
@@ -136,22 +127,19 @@
 		// Append to #tab_All tab
 		noticeItem.forEach((item) => {
 			const noticeHtml = createNoticeHtml(item);
-			$('#tab_All .tab-card-content').append(noticeHtml);
+			$('#tab_All .tab-card-container').append(noticeHtml);
 		});
 	}
 
 	function createNoticeHtml(noticeItem) {
 		// Adjust this based on your actual data structure
 		return `
-			<div class="notice-item">
-				<div class="notice-title">${noticeItem.title}</div>
-				<div class="notice-context">${noticeItem.context}</div>
-				<div class="notice-create-time">${noticeItem.create_time}</div>
+			<div class="tab-card">
+				<div class="tab-card-title">${noticeItem.title}${noticeItem.create_time}</div>
+				<div class="tab-card-content">${noticeItem.context}</div>
 			</div>
 		`;
 	}
-
-		
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
