@@ -14,7 +14,7 @@
     display: none;
 }
 
-div[key="rule"] {
+/* div[key="rule"] {
     background-color: #415b5a;
 }
 
@@ -31,15 +31,20 @@ div[key="match"]>div {
 
 div[key="logs"]>div {
     border-top-right-radius:15px;
-}
-
-
+} */
 
 .notice-con .nav{
     display: grid;
     grid-auto-columns: 1fr;
     grid-row-gap: 0.1rem;
     border: none;
+}
+
+.notice-con .nav-tabs h3 {
+    text-align: center;
+    margin: 0px!important;
+    color: white;
+    padding: 0.75rem 1rem 0.75rem 2rem;
 }
 
 .notice-con .nav .nav-link{
