@@ -7,7 +7,7 @@
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
 						<button class="nav-link active" id="navAll" data-bs-toggle="tab" data-bs-target="#navAll" type="button" role="tab" aria-controls="#navAll" aria-selected="true">{{ trans('notice.main.all') }}</button>
-						<button class="nav-link" id="nav0" data-bs-toggle="tab" data-bs-target="#nav0" type="button" role="tab" aria-controls="#nav0" aria-selected="false">{{ trans('notice.main.system') }}</button>
+						<button class="nav-link" id="navSyst" data-bs-toggle="tab" data-bs-target="#navSyst" type="button" role="tab" aria-controls="#navSyst" aria-selected="false">{{ trans('notice.main.system') }}</button>
                         <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" template="NavTabTemplate" hidden></button>          
                     </div>
                 </nav>
@@ -16,8 +16,9 @@
             <div class="notice-tab">
                 <div class="notice-tab-con">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden>
-                            </div>
+							<div class="tab-pane active" id="navAll" role="tabpanel" aria-labelledby="navAll"></div>
+							<div class="tab-pane" id="navSyst" role="tabpanel" aria-labelledby="navSyst"></div>
+                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden></div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +85,14 @@
 		NavTabBtn.attr('aria-controls', '#nav' + sportItem.sport_id);
 		NavTabBtn.html(sportItem.name);
 
-		$('#nav-tab').append(NavTabBtn);
+		$('#navSyst').after(NavTabBtn);
+
+		const tabPanel = $('button[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+		tabPanel.attr('id', 'nav' + sportItem.sport_id);
+		tabPanel.attr('aria-labelledby', 'nav' + sportItem.sport_id);
+		tabPanel.html(sportItem.name);
+
+		$('.tab-content #navSyst').after(tabPanel);
 	}
 
 	$("button.nav-link").click(function() {
