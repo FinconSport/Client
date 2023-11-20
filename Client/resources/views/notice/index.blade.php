@@ -106,23 +106,16 @@
 
 
 	function renderView() {
-		// sportlistD
 		if (sportListD && sportListD.data) {
 			sportListD.data.forEach((sportItem, sportIndex) => {
 				createTabBtnAndContainer(sportItem, sportIndex);
 			});
 		}
-    	// noticelistD
-    	// if (noticeListD && noticeListD.data) {
-        // 	noticeListD.data.forEach((noticeItem, noticeIndex) => {
-        //     	createTabContent(noticeItem, noticeIndex);
-		// 		checkEmptyTabPanes();			
-		// 	});
-		// }
+
 		if (noticeListData && noticeListData.data) {
-        	noticeListData.data.forEach((noticeItem, noticeIndex) => {
-            	createTabContent(noticeItem, noticeIndex);
-				checkEmptyTabPanes();			
+			noticeListData.data.forEach((noticeItem, noticeIndex) => {
+				createTabContent(noticeItem, noticeIndex);
+				checkEmptyTabPanes();
 			});
 		}
 	}
@@ -138,14 +131,14 @@
 		const tabPanel = $('<div class="tab-pane" role="tabpanel"></div>');
 		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
+		tabPanel.append('<div class="tab-card-container"></div>'); // Added this line to create a container for tab cards
 
 		$('#nav-tabContent').append(tabPanel);
 	}
 
 	function createTabContent(noticeItem, noticeIndex) {
 		const sportId = noticeItem[0].sport_id;
-		console.log(sportId);
-		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
+		const tabContent = $('#tab_' + sportId + ' .tab-card-container'); // Changed to target the container inside the tab
 
 		// Append to the specific sport_id tab
 		if (sportId !== undefined) {
@@ -154,21 +147,6 @@
 				tabContent.append(noticeHtml);
 			});
 		}
-
-		// If sport_id is 0, append to #tab_Syst tab
-		if (sportId === 0) {
-			const systTabContent = $('#tab_Syst .tab-card-container');
-			noticeItem.forEach((item) => {
-				const noticeHtml = createNoticeHtml(item);
-				systTabContent.append(noticeHtml);
-			});
-		}
-
-		// Append to #tab_All tab
-		noticeItem.forEach((item) => {
-			const noticeHtml = createNoticeHtml(item);
-			$('#tab_All .tab-card-container').append(noticeHtml);
-		});
 	}
 
 	function createNoticeHtml(noticeItem) {
@@ -187,6 +165,7 @@
 			}
 		});
 	}
+
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
