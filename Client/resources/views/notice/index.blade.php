@@ -113,17 +113,12 @@
 				const noticeHtml = createNoticeHtml(item);
 				tabContent.append(noticeHtml);
 			});
-		}
-
-		if (sportId === undefined) {
-			$('.nav-link[data-bs-toggle="tab"]').each(function () {
-				const tabId = $(this).attr('id');
-				const specificTabContent = $('#tab_' + tabId.substring(3) + ' .tab-card-content');
-				if (specificTabContent.children().length === 0) {
-					specificTabContent.append('<div class="notice-item no-data">No data available for this sport</div>');
-				}
+		} else {
+			// Insert empty data class to all tabs when sportId is undefined
+			const allTabs = document.querySelectorAll('.tab-pane');
+			allTabs.forEach((tab) => {
+				tab.classList.add('empty');
 			});
-			return;
 		}
 
 		// If sport_id is 0, append to #tab_Syst tab
