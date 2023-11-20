@@ -1008,7 +1008,7 @@
             case 'full':
                 $('.bettingtype-container').each(function(e){
                     let k = parseInt($(this).attr('priority'))
-                    if(langTrans.catePriority.full.indexOf(k) !== -1) {
+                    if(gameLangTrans.catePriority.full.indexOf(k) !== -1) {
                         $(e).show()
                     } else {
                         $(e).hide()
@@ -1018,7 +1018,7 @@
             case 'half':
                 $('.bettingtype-container').each(function(e){
                     let k = parseInt($(this).attr('priority'))
-                    if(langTrans.catePriority.half.indexOf(k) !== -1) {
+                    if(gameLangTrans.catePriority.half.indexOf(k) !== -1) {
                         $(e).show()
                     } else {
                         $(e).hide()
