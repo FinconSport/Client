@@ -270,9 +270,10 @@ div.submenu-btn {
     transition: all 0.2s linear;
 }
 
-a.sportSelect{
-    color: #c4d3d3;
-    text-decoration: none;
+a.sportSelect,
+a.sportSelect:hover{
+    color: #c4d3d3!important;
+    text-decoration: none!important;
 }
 
 .submenu-inner, a.submenu-inner {
