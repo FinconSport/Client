@@ -6,9 +6,7 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad notice-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.baseball') }}</button>      
-                        <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.basketball') }}</button>
-                        <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.soccor') }}</button>          
+                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" template="buttonSportsNavTemplate" hidden></button>          
                     </div>
                 </nav>
             </div>
@@ -16,14 +14,7 @@
             <div class="notice-tab">
                 <div class="notice-tab-con">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
-								
-                            </div>
-							<div class="tab-pane" id="nav-basketball" role="tabpanel" aria-labelledby="nav-basketball">
-								
-                            </div>
-							<div class="tab-pane" id="nav-soccor" role="tabpanel" aria-labelledby="nav-soccor">
-								
+                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden>
                             </div>
                         </div>
                     </div>
@@ -73,8 +64,12 @@
 
 
 	function renderView() {
-		// loop noticeListD here to generate the search select then append into the page
-		// loop noticeListD here to generate the search select then append into the page
+		//sportlistD
+		if (sportListD && sportListD.data) {
+			sportListD.data.forEach((element, index) => {
+				console.log(element, index);
+			});
+		}
 	}
 
 	$("button.nav-link").click(function() {
