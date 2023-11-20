@@ -17,13 +17,13 @@
                 <div class="notice-tab-con">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
-								<p>{{ trans('rule.ruleTitles.baseball') }}</p>
+								
                             </div>
 							<div class="tab-pane" id="nav-basketball" role="tabpanel" aria-labelledby="nav-basketball">
-								<p>{{ trans('rule.ruleTitles.basketball') }}</p>
+								
                             </div>
 							<div class="tab-pane" id="nav-soccor" role="tabpanel" aria-labelledby="nav-soccor">
-								<p>{{ trans('rule.ruleTitles.soccor') }}</p>
+								
                             </div>
                         </div>
                     </div>
