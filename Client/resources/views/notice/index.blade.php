@@ -103,6 +103,7 @@
 
 	function createTabContent(noticeItem, noticeIndex) {
 		const sportId = noticeItem[0].sport_id;
+		console.log(sportId);
 		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
 		// Append to the specific sport_id tab
