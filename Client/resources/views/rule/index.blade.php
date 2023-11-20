@@ -394,7 +394,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/rule.css?v=' . $current_time) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/rule.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
 <style>	
 /* 寫入頁面限定CSS */
 </style>
