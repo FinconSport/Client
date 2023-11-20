@@ -107,25 +107,22 @@
 		const sportId = noticeItem[0].sport_id;
 		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// If sport_id is not defined, create an empty div
+		// If sport_id is not defined, create an empty div for all tabs
 		if (sportId === undefined) {
-			const emptyDiv = $('<div class="notice-item no-data">No data available for this sport</div>');
-			tabContent.append(emptyDiv);
+			$('.nav-link[data-bs-toggle="tab"]').each(function () {
+				const tabId = $(this).attr('id');
+				const emptyDiv = $('<div class="notice-item no-data">No data available for this sport</div>');
+				const specificTabContent = $('#tab_' + tabId.substring(3) + ' .tab-card-content');
+				specificTabContent.append(emptyDiv);
+			});
 			return;
 		}
 
 		// Append to the specific sport_id tab
-		if (tabContent.length > 0) {
+		if (sportId !== undefined) {
 			noticeItem.forEach((item) => {
 				const noticeHtml = createNoticeHtml(item);
 				tabContent.append(noticeHtml);
-			});
-		} else {
-			// If the sport_id is not found in sportlistd, append to #tab_All tab
-			const allTabContent = $('#tab_All .tab-card-content');
-			noticeItem.forEach((item) => {
-				const noticeHtml = createNoticeHtml(item);
-				allTabContent.append(noticeHtml);
 			});
 		}
 
@@ -137,6 +134,12 @@
 				systTabContent.append(noticeHtml);
 			});
 		}
+
+		// Append to #tab_All tab
+		noticeItem.forEach((item) => {
+			const noticeHtml = createNoticeHtml(item);
+			$('#tab_All .tab-card-content').append(noticeHtml);
+		});
 	}
 
 
