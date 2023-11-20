@@ -84,20 +84,9 @@
     	if (noticeListD && noticeListD.data) {
         	noticeListD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
+				matchAndAppendDataToTabs(noticeItem)
+				
 			});
-		}
-
-		function matchAndAppendDataToTabs() {
-			if (sportListD && sportListD.data && noticeListD && noticeListD.data) {
-				noticeListD.data.forEach((noticeItem) => {
-					const sportId = noticeItem[0].sport_id;
-					const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
-					if (!matchingSport) {
-						const noDataHtml = createNoDataHtml();
-						$('#tab_' + sport.sport_id + ' .tab-card-container').append(noDataHtml);
-					}
-				});
-			}
 		}
 	}
 
@@ -154,13 +143,17 @@
 		`;
 	}
 
-	function createNoDataHtml() {
-		return `
-			<div class="tab-card-no-data">
-				<p>No data available for this sport.</p>
-			</div>
-		`;
+	function matchAndAppendDataToTabs(noticeItem) {
+		const sportId = noticeItem[0].sport_id;
+		const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
+
+		if (!matchingSport) {
+			// Sport not found, create "no data" div and append to specific tab
+			const noDataHtml = $('<div class="tab-card-no-data"><p>No data available for this sport.</p></div>');
+			$('#tab_' + sportId + ' .tab-card-content').append(noDataHtml);
+		}
 	}
+
 
 	$("button.nav-link").click(function() {
         $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
