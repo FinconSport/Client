@@ -16,9 +16,24 @@
             <div class="notice-tab">
                 <div class="notice-tab-con">
                         <div class="tab-content" id="nav-tabContent">
-							<div class="tab-pane active" id="tab_All" role="tabpanel" aria-labelledby="tabAll"></div>
-							<div class="tab-pane" id="tab_Syst" role="tabpanel" aria-labelledby="tabSyst"></div>
-                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden></div>
+							<div class="tab-pane active" id="tab_All" role="tabpanel" aria-labelledby="tabAll">
+								<div class="tab-card">
+									<div class="tab-card-title"></div>
+									<div class="tab-card-content"></div>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab_Syst" role="tabpanel" aria-labelledby="tabSyst">
+								<div class="tab-card">
+									<div class="tab-card-title"></div>
+									<div class="tab-card-content"></div>
+								</div>
+							</div>
+                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden>
+								<div class="tab-card">
+									<div class="tab-card-title"></div>
+									<div class="tab-card-content"></div>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -70,15 +85,21 @@
 		//sportlistD
 		if (sportListD && sportListD.data) {
 			sportListD.data.forEach((sportItem, sportIndex) => {
-				createTabContent(sportItem, sportIndex);
+				createTabBtnAndContainer(sportItem, sportIndex);
 			});
 		}
 
 		// noticelistD
+		if (noticeListD && noticeListD.data) {
+			noticeListD.data.forEach((noticeItem, noticeIndex) => {
+				createTabContent(noticeItem, noticeIndex);
+				console.log(noticeItem, noticeIndex);
+			});
+		}
 
 	}
 	
-	function createTabContent(sportItem, sportIndex) {
+	function createTabBtnAndContainer(sportItem, sportIndex) {
 		const NavTabBtn = $('button[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		NavTabBtn.attr('id', 'tab' + sportItem.sport_id);
 		NavTabBtn.attr('data-bs-target', '#tab_' + sportItem.sport_id);
@@ -91,6 +112,23 @@
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
 		tabPanel.html(sportItem.name);
 		$('#nav-tabContent').append(tabPanel);
+	}
+
+	function createTabContent(noticeItem, noticeIndex) {
+		const sportId = noticeItem.sport_id;
+
+		// Find the corresponding tab based on sport_id
+		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
+
+		// Create content only if the tab exists
+		if (tabContent.length > 0) {
+			const tabCard = $('<div class="tab-card"></div>');
+			const tabCardTitle = $('<div class="tab-card-title"></div>').text(noticeItem.title);
+			const tabCardContent = $('<div class="tab-card-content"></div>').text(noticeItem.context);
+
+			tabCard.append(tabCardTitle, tabCardContent);
+			tabContent.append(tabCard);
+		}
 	}
 		
 

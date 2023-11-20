@@ -140,3 +140,20 @@ li {
 .notice-tab-con::-webkit-scrollbar-thumb:hover {
   background: #e2f0f0; 
 }
+
+.tab-card {
+    border: 1px solid #415b5a;
+    color: #415b5a;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab-card-title {
+    padding: 0.5rem;
+    border-bottom: 1px solid #415b5a;
+}
+
+.tab-card-content {
+    padding: 0.5rem;
+    background: white;
+}
