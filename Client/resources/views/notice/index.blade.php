@@ -50,7 +50,7 @@
 	var isReadyNotice = false
 
 	// notice list data
-	var noticeListD = {
+	var noticeListDD = {
 		"data": [
 			[
 				{
@@ -105,8 +105,8 @@
 			});
 		}
     	// noticelistD
-    	if (noticeListD && noticeListD.data) {
-        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
+    	if (noticeListDD && noticeListDD.data) {
+        	noticeListDD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
