@@ -82,21 +82,32 @@
 
 
 	function renderView() {
-		//sportlistD
+		// sportlistD
 		if (sportListD && sportListD.data) {
 			sportListD.data.forEach((sportItem, sportIndex) => {
 				createTabBtnAndContainer(sportItem, sportIndex);
 			});
-		}
 
-		// noticelistD
-		if (noticeListD && noticeListD.data) {
-			noticeListD.data.forEach((noticeItem, noticeIndex) => {
-				createTabContent(noticeItem, noticeIndex);
-				console.log(noticeItem, noticeIndex);
-			});
-		}
+			// noticelistD
+			if (noticeListD && noticeListD.data) {
+				// Track whether any notices are inserted
+				let noticesInserted = false;
 
+				noticeListD.data.forEach((noticeItem, noticeIndex) => {
+					if (createTabContent(noticeItem)) {
+						noticesInserted = true;
+					}
+				});
+
+				// If no notices were inserted, display "no data" text
+				if (!noticesInserted) {
+					displayNoDataText();
+				}
+			} else {
+				// If no notice data is available, display "no data" text
+				displayNoDataText();
+			}
+		}
 	}
 	
 	function createTabBtnAndContainer(sportItem, sportIndex) {
@@ -110,26 +121,43 @@
 		const tabPanel = $('div[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
 		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
 		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
-		tabPanel.html(sportItem.name);
 		$('#nav-tabContent').append(tabPanel);
 	}
 
-	function createTabContent(noticeItem, noticeIndex) {
+	function createTabContent(noticeItem) {
 		const sportId = noticeItem.sport_id;
 
-		if (sportId === 0) {
-			// Insert into "tab_Syst" tab
-			const tabContentSyst = $('#tab_Syst .tab-card-content');
-			createTabCardContent(tabContentSyst, noticeItem);
-		} else {
+		// Check if there is a corresponding sport_id in sportListD data
+		const isSportIdValid = sportListD.data.some(sportItem => sportItem.sport_id === sportId);
+
+		if (isSportIdValid) {
+			// Insert into "tab_Syst" tab if sport_id is 0
+			if (sportId === 0) {
+				const tabContentSyst = $('#tab_Syst .tab-card-content');
+				createTabCardContent(tabContentSyst, noticeItem);
+			}
+
+			// Insert into "tab_All" tab
+			const tabContentAll = $('#tab_All .tab-card-content');
+			createTabCardContent(tabContentAll, noticeItem);
+
 			// Find the corresponding tab based on sport_id
 			const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-			// Create content only if the tab exists
-			if (tabContent.length > 0) {
+			// Create content only if the tab exists and sport_id is not 0
+			if (tabContent.length > 0 && sportId !== 0) {
 				createTabCardContent(tabContent, noticeItem);
 			}
+
+			return true; // Return true if notice is inserted
 		}
+
+		return false; // Return false if no notice is inserted
+	}
+
+	function displayNoDataText() {
+		// Display "no data" text in a specific element or console.log
+		console.log("No data available.");
 	}
 
 	function createTabCardContent(tabContent, noticeItem) {
