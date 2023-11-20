@@ -97,10 +97,9 @@
 		NavTabBtn.html(sportItem.name);
 		$('#nav-tab').append(NavTabBtn);
 
-		const tabPanel = $('<div class="tab-pane" role="tabpanel"></div>');
-		tabPanel.attr('id', 'tab_' + sportItem.sport_id);
-		tabPanel.attr('aria-labelledby', 'tab' + sportItem.sport_id);
-
+		const tabPanel = $('button[template="tabPanelTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+		tabPanel.attr('id', 'tab' + sportItem.sport_id);
+		NavTabBtn.attr('aria-labelledby', 'tab_' + sportItem.sport_id);
 		$('#nav-tabContent').append(tabPanel);
 	}
 
