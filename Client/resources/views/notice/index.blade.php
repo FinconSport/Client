@@ -51,29 +51,6 @@
 
 	// notice list data
 	var noticeListD = {}
-
-	var noticeListDS = {
-		"status": 1,
-		"data": [
-			[
-				{
-					"sport_id": 6046,
-					"title": "【賽事取消-足球/哥倫比亞足球甲級聯賽】",
-					"context": "賽事已取消 1月1日 08:00 AT國民隊 vs. 圖利馬",
-					"create_time": "2023-11-20 14:54:17"
-				},
-				{
-					"sport_id": 0,
-					"title": "【賽事重複-籃球/美國職業籃球賽】",
-					"context": "賽事與#11760616重複故取消 1月1日 08:00 波特蘭拓荒者 vs. 洛杉磯湖人",
-					"create_time": "2023-11-20 14:54:17"
-				}
-			]
-		],
-		"message": "SUCCESS_API_INDEX_NOTICE_01",
-		"gzip": true
-	}
-
 	const noticeList_api = '/api/v2/index_notice'
 
 	$(document).ready(function() {
@@ -104,8 +81,8 @@
 			});
 		}
     	// noticelistD
-    	if (noticeListDS && noticeListDS.data) {
-        	noticeListDS.data.forEach((noticeItem, noticeIndex) => {
+    	if (noticeListD && noticeListD.data) {
+        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
