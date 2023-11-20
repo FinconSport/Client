@@ -96,6 +96,10 @@ return [
           "302" => "Full Game Point Spread",
           "303" => "Full Game Totals", 
           "304" => "Full Game Odd/Even", 
+          "305" => "First Half Moneyline",
+          "306" => "First Half Point Spread",
+          "307" => "First Half Totals",
+          "308" => "First Half Odd/Even",
         ],
     ],
 ];

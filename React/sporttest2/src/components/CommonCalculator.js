@@ -341,7 +341,6 @@ class CommonCalculator extends React.Component {
     submitBet = () => {
         const money = parseInt(this.state.inputMoney)
         if ( !money ) {
-            // this.notifyError(langText.CommonCalculator.noinputmoney)
             this.setState({
                 subBtnText: langText.CommonCalculator.noinputmoney,
                 subBtnRed: 1
@@ -351,7 +350,6 @@ class CommonCalculator extends React.Component {
         }
 
         if ( money < this.state.minLimit ) {
-            // this.notifyError(langText.CommonCalculator.tooless + this.state.minLimit)
             this.setState({
                 subBtnText: langText.CommonCalculator.tooless + this.state.minLimit,
                 subBtnRed: 1
@@ -361,7 +359,6 @@ class CommonCalculator extends React.Component {
         }
 
         if ( money > this.state.maxLimit ) {
-            // this.notifyError(langText.CommonCalculator.toohigh + this.state.maxLimit)
             this.setState({
                 subBtnText: langText.CommonCalculator.toohigh + this.state.maxLimit,
                 subBtnRed: 1
@@ -390,8 +387,6 @@ class CommonCalculator extends React.Component {
         }
         const queryString = `${this.state.game_bet}?${queryParams.join('&')}`;
         this.caller(queryString , 'afterBet')
-
-       
     }
 
     notifySuccess = (msg) => {

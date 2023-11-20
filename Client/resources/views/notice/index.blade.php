@@ -1,63 +1,39 @@
 @extends('layout.app')
 
 @section('content')
-<div class="container notice-container">
-	<div class="row notice-row">
-		<!--- Left Navigation -->
-		<div class="notice-nav nav flex-column nav-pills col-2 text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			<p>{{ trans('notice.main.notice') }}</p>
-			<!--- Button for All Notification-->
-			<button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">{{ trans('notice.main.all') }}</button>
-			<!--- Button for System Notification -->
-			<button class="nav-link" id="v-pills-0-tab" data-bs-toggle="pill" data-bs-target="#v-pills-0" type="button" role="tab" aria-controls="v-pills-0" aria-selected="false">{{ trans('notice.main.system') }}</button>
-			<!--- Sport Type Navigation Loop -->
-		</div>
-
-
-		<div template='card' class="card" hidden>
-			<div class="card-header d-flex">
-				<div class="p-2 bd-highlight notice-title">
-					<p key='title'></p>
-				</div>
-				<div class="ms-auto p-2 bd-highlight">
-					<p key='time'></p>
-				</div>
-			</div>
-			<div class="card-body">
-				<p key='content'></p>
-			</div>
-		</div>
-
-	
-
-
-		<div class="notice-container-pad col-10">
-			<!--- Tab Container -->
-			<div class="notice-tab-content tab-content" id="v-pills-tabContent">
-				<!---All Announcement Tab Container -->
-				<div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
-					<!--- all notice_list loop query -->
-				</div>
-				<!--- System Announcement Tab Container -->
-				<div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-0-tab">
-					<!--- system notice_list loop query -->
-				</div>
-				<!---Sport Announcement Tab Container Loop -->
-			</div>
-		</div>
-	</div>
-</div>
-
+<div id ="noticePage" class="h-100 notice-con">
+        <div class="row notice-row">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad notice-col-left">
+                <nav>
+                    <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
+                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" template="buttonSportsNavTemplate" hidden></button>          
+                    </div>
+                </nav>
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-10 col-10 notice-col-right">
+            <div class="notice-tab">
+                <div class="notice-tab-con">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane" role="tabpanel" template="tabPanelTemplate" hidden>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/notice.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<link href="{{ asset('css/notice.css?v=' . $current_time) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/notice.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
 <style>
 	/* 寫入頁面限定CSS */
 </style>
 @endSection
 
 @push('main_js')
+<script src="{{ asset('js/bootstrap.min.js?v=' . $system_config['version']) }}"></script>
 <script>
 	// detect ini ajax
 	var isReadyNoticeInt = null
@@ -88,73 +64,18 @@
 
 
 	function renderView() {
-		// loop noticeListD here to generate the search select then append into the page
-		sportListD.data.forEach(ele => {
-			let str = '<button class="nav-link" id="v-pills-' + ele.sport_id + '-tab" data-bs-toggle="pill" data-bs-target="#v-pills-' + ele.sport_id + '" type="button" role="tab" aria-controls="v-pills-' + ele.sport_id + '" aria-selected="false">' + ele.name + '</button>'
-
-			let str2 = '<div class="tab-pane fade" id="v-pills-' + ele.sport_id + '" role="tabpanel" aria-labelledby="v-pills-' + ele.sport_id + '-tab"></div>'
-
-			
-			
-
-			$('#v-pills-tab').append(str)
-			$('#v-pills-tabContent').append(str2)
-		});
-		
-		noticeListD.data[0].forEach( ele => {
-			let card = $('div[template="card"]').clone()
-			card.find('p[key="title"]').html( ele.title )
-			card.find('p[key="time"]').html( ele.create_time )
-			card.find('p[key="content"]').html( ele.context )
-			card.removeAttr('template')
-			card.removeAttr('hidden')
-			let card2 = card.clone()
-
-			$('#v-pills-all').append( card )
-			$('#v-pills-0').append( card2 )
-		})
-
-		
-
-		// loop noticeListD here to generate the search select then append into the page
+		//sportlistD
+		if (sportListD && sportListD.data) {
+			sportListD.data.forEach((element, index) => {
+				console.log(element, index);
+			});
+		}
 	}
 
-	$('.nav-link').on('click', function(e) {
-		e.preventDefault();
-		$('.nav-link').removeClass('active');
-		$(this).addClass('active');
+	$("button.nav-link").click(function() {
+        $(".notice-tab-con").animate({ scrollTop: 0 }, "smooth");
+        console.log("top");   
+    });
 
-		var target = $(this).data('bs-target');
-		$('.tab-pane').removeClass('show active');
-		$(target).addClass('show active');
-		$('.notice-tab-content').animate({
-			scrollTop: 0
-		}, 'fast');
-	});
-
-	// 左邊菜單  當點擊體育或串關時 移除目前選中樣式
-	$('.menuTypeBtn').click(function() {
-		let key = $(this).attr('key')
-		if ((key === 'index' || key === 'm_order' || key === 'match') && $(this).hasClass('on')) {
-			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('background-color', '#415b5a')
-			$('div[key="notice"] .slideMenuTag').css('color', 'white')
-
-			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius', '0')
-			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius', '0')
-			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
-		} else {
-			$('div[key="notice"] .slideMenuTag').css('border-bottom-left-radius', '25px')
-			$('div[key="notice"] .slideMenuTag').css('border-top-left-radius', '25px')
-			$('div[key="notice"]').css('background-color', '#415b5a')
-			$('div[key="notice"] .slideMenuTag').css('background-color', 'rgb(196, 211, 211)')
-			$('div[key="notice"] .slideMenuTag').css('color', '#415b5a')
-
-			$('div[key="calculator"] .slideMenuTag').css('border-bottom-right-radius', '15px')
-			$('div[key="menuBottomFill"] .slideMenuTag').css('border-top-right-radius', '15px')
-			$('div[key="notice"] .slideMenuTag').css('border-top-right-radius', '0')
-		}
-	})
 </script>
 @endpush

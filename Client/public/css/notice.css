@@ -1,122 +1,142 @@
-/* 左邊標籤 */
-div[key="notice"] {
-    border-bottom-left-radius: 25px;
-    border-top-left-radius: 25px;
+/* test */
+#mainArea {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
 }
 
-div[key="notice"] > div {
+#noticePage.notice-con {
+    padding: 0px 12px;
+    width: 100%;
+}
+
+.sportMenu {
+    display: none;
+}
+
+div[key="rule"] {
+    background-color: #415b5a;
+}
+
+div[key="rule"]>div {
     border-bottom-left-radius: 25px;
     border-top-left-radius: 25px;
     background-color: rgb(196, 211, 211);
     color: rgb(65, 91, 90);
 }
 
-div[key="calculator"] > div {
-    border-bottom-right-radius: 15px;
+div[key="match"]>div {
+    border-bottom-right-radius:15px;
 }
 
-div[key="menuBottomFill"] > div {
-    border-top-right-radius: 15px;
+div[key="logs"]>div {
+    border-top-right-radius:15px;
 }
 
-div[key="indexSportMenu"],
-div[key="mOrderSportMenu"],
-div[key="matchSportMenu"] {
-    display: none;
+
+
+.notice-con .nav{
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-row-gap: 0.1rem;
+    border: none;
 }
 
-.notice-container {
-    border-radius: 5px;
-    background-color: #e2f0f0;
-}
-
-.notice-tab-content .card .card-header {
-    background-color: #c4d3d3;
-}
-
-.notice-tab-content .card .card-body {
-    background-color: #e2f0f0;
-}
-
-.notice-nav {
-    padding: 20px;
-}
-
-.notice-nav p {
-    font-size: 20px;
-    font-weight: bold;
-}
-.notice-container-pad {
+.notice-con .nav .nav-link{
     background: #415b5a;
-    border-radius: 5px;
-    padding: 20px 10px 20px 20px;
-}
-
-.notice-tab-content {
-    border-radius: 5px;
-    padding: 0px 10px;
-    max-height: 70vh;
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.notice-tab-content .noData {
-    padding: 150px;
-    color: #fff;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    color: #ffffff;
     text-align: center;
-    font-size: 2em;
-    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    padding: .75rem 1rem .75rem 2rem;
+    margin: 0px;
+    font-weight: 600;
 }
 
-.notice-nav .nav-pills .nav-link.active,
-.notice-nav .nav-pills .nav-link:hover {
+.notice-con .nav .nav-link.active{
     background: #e2f0f0;
     color: #415b5a;
-    box-shadow: #415b5a 0px 0px 6px;
 }
 
-.notice-nav.nav-pills .nav-link.active {
-    background: #fff;
-    color: #415b5a;
-    box-shadow: #415b5a 0px 0px 6px;
+ul.number-bullets {list-style-type: number;}
+
+ul.no-bullets {
+    list-style-type: none;
+    padding: 0;
 }
 
-.notice-title {
-    font-weight: bold;
+ul.alpha-bullets {
+    list-style-type: lower-alpha;
 }
 
-.notice-nav.nav-pills .nav-link {
-    font-weight: bold;
+ul.upper-alpha-bullets {
+    list-style-type: upper-alpha;
+}
+
+ul.roman-bullets {
+    list-style-type: lower-roman;padding: 0;
+}
+
+li {
+    line-height: 2rem;
+}
+
+.nopad {
+    padding: 0px!important;
+}
+
+.notice-row {
+    /* background: #e2f0f0; */
     background: #415b5a;
-    margin-bottom: 5px;
+    border: 1px solid #415b5a;
     border-radius: 5px;
-    padding: 10px 15px;
-    color: #fff;
-    box-shadow: #000 0 0 3px;
+    overflow: hidden;
+    height: 100%;
+    padding: 1rem;
 }
 
-.notice-tab-content .card {
-    margin-bottom: 10px;
+.notice-col-left {
+    background: #415b5a;
+}
+
+.notice-col-right {
+    padding: 1.5rem 1rem 1.5rem 2rem;
+    background: #e2f0f0;
+    /* border-top-left-radius: 2rem 2rem;
+    border-bottom-left-radius: 2rem 2rem; */
+}
+
+.notice-tab-con {
+    height: calc(100vh - 9rem);
+    overflow: auto;
+    width: 100%;
+    padding: 0px 2rem 0px 0px;
+    color: #415b5a;
 }
 
 /* width */
-.notice-tab-content::-webkit-scrollbar {
-    width: 15px;
+.notice-tab-con::-webkit-scrollbar {
+  width: 15px;
 }
 
 /* Track */
-.notice-tab-content::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 0px 20px #728685;
-    border-radius: 5px;
+.notice-tab-con::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px 20px #415b5a; 
+  border-radius: 5px;
 }
-
+ 
 /* Handle */
-.notice-tab-content::-webkit-scrollbar-thumb {
-    background: #e3efee;
-    border-radius: 5px;
+.notice-tab-con::-webkit-scrollbar-thumb {
+  background: #e2f0f0; 
+  border-radius: 5px;
+  border: 2px solid #415b5a;
 }
 
 /* Handle on hover */
-.notice-tab-content::-webkit-scrollbar-thumb:hover {
-    background: #e3efee;
+.notice-tab-con::-webkit-scrollbar-thumb:hover {
+  background: #e2f0f0; 
 }

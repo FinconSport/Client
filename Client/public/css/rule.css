@@ -5,6 +5,10 @@
     flex-wrap: wrap;
 }
 
+#rulePage.rule-con {
+    padding: 0px 15px;
+}
+
 .sportMenu {
     display: none;
 }
@@ -31,34 +35,30 @@ div[key="logs"]>div {
 
 
 .rule-con .nav{
-    margin-left: 1.5rem;
-    margin-top: 5rem;
     display: grid;
     grid-auto-columns: 1fr;
     grid-row-gap: 0.1rem;
+    border: none;
 }
 
 .rule-con .nav .nav-link{
     background: #415b5a;
-    border-top-left-radius: 0.7rem;
-    border-bottom-left-radius: 0.7rem;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     color: #ffffff;
     text-align: center;
     text-decoration: none;
-    border: 1px solid transparent;
-    border-right: none;
+    border: none;
     padding: .75rem 1rem .75rem 2rem;
     margin: 0px;
     font-weight: 600;
 }
 
 .rule-con .nav .nav-link.active{
-    background: #ffffff;
+    background: #e2f0f0;
     color: #415b5a;
-    border: 1px solid #415b5a;
-    border-right: none;
 }
 
 ul.number-bullets {list-style-type: number;}
@@ -95,25 +95,26 @@ li {
     border-radius: 5px;
     overflow: hidden;
     height: 100%;
+    padding: 1rem;
 }
 
 .rule-col-left {
-    background: #e2f0f0;
+    background: #415b5a;
 }
 
 .rule-col-right {
     padding: 1.5rem 1rem 1.5rem 2rem;
-    background: #415b5a;
-    border-top-left-radius: 2rem 2rem;
-    border-bottom-left-radius: 2rem 2rem;
+    background: #e2f0f0;
+    /* border-top-left-radius: 2rem 2rem;
+    border-bottom-left-radius: 2rem 2rem; */
 }
 
 .rule-tab-con {
-    height: calc(100vh - 11.5rem);
+    height: calc(100vh - 9rem);
     overflow: auto;
     width: 100%;
     padding: 0px 2rem 0px 0px;
-    color: #ffffff;
+    color: #415b5a;
 }
 
 /* width */
@@ -123,17 +124,18 @@ li {
 
 /* Track */
 .rule-tab-con::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 0px 20px #728685; 
+  box-shadow: inset 0 0 0px 20px #415b5a; 
   border-radius: 5px;
 }
  
 /* Handle */
 .rule-tab-con::-webkit-scrollbar-thumb {
-  background: #e3efee; 
+  background: #e2f0f0; 
   border-radius: 5px;
+  border: 2px solid #415b5a;
 }
 
 /* Handle on hover */
 .rule-tab-con::-webkit-scrollbar-thumb:hover {
-  background: #e3efee; 
+  background: #e2f0f0; 
 }

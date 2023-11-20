@@ -253,9 +253,9 @@ class MatchContentCard extends React.Component {
                                                     { v?.scoreboard && v.scoreboard[2][0] }
                                                 </div>
                                             </div>
+                                            <div className="col p-0">+{v.market_bet_count}</div>
                                         </Link>
                                         <div className="row m-0" style={rowHeight2}>
-                                            <div className="col p-0">+{v.market_bet_count}</div>
                                             <div className="col" style={{ height: '2rem' }}>
                                             {
                                                 window.sport === 154914 && v.status === 2 ? (
@@ -338,13 +338,10 @@ class MatchContentCard extends React.Component {
                                     </div>
                                     <div className='col-55 text-center' style={{ padding: 0 }}>
                                         {
-                                            window.sport !== 35232 &&
-                                            (
-                                                this.state.swiperIndex === 0 ?
-                                                <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
-                                                :
-                                                <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
-                                            )
+                                            this.state.swiperIndex === 0 ?
+                                            <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
+                                            :
+                                            <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
                                         }
                                         <Swiper
                                             slidesPerView={1}
