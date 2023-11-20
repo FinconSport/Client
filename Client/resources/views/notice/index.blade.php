@@ -6,7 +6,7 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad notice-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" template="buttonSportsNavTemplate" hidden></button>          
+                        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" template="NavTabTemplate" hidden></button>          
                     </div>
                 </nav>
             </div>
@@ -66,10 +66,23 @@
 	function renderView() {
 		//sportlistD
 		if (sportListD && sportListD.data) {
-			sportListD.data.forEach((element, index) => {
-				console.log(element, index);
+			sportListD.data.forEach((sportItem, sportIndex) => {
+				console.log(sportItem, sportIndex);
+				createNavTabButton(sportItem, sportIndex);
 			});
 		}
+
+	}
+	
+	function createNavTabButton(sportItem, sportIndex) {
+		const NavTabBtn = $('tr[template="NavTabTemplate"]').clone().removeAttr('hidden').removeAttr('template');
+
+		NavTabBtn.attr('id', sportItem.sport_id);
+		NavTabBtn.attr('data-bs-target', '#nav' + sportItem.sport_id);
+		NavTabBtn.attr('aria-controls', '#nav' + sportItem.sport_id);
+		NavTabBtn.html(sportItem.name);
+
+		$('#nav-tab').append(NavTabBtn);
 	}
 
 	$("button.nav-link").click(function() {
