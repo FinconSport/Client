@@ -107,13 +107,24 @@
 		const sportId = noticeItem[0].sport_id;
 		const tabContent = $('#tab_' + sportId + ' .tab-card-content');
 
-		// Append to the specific sport_id tab
-		if (sportId !== undefined) {
-			noticeItem.forEach((item) => {
-				const noticeHtml = createNoticeHtml(item);
-				tabContent.append(noticeHtml);
-			});
+		// if (sportId !== undefined) {
+		// 	noticeItem.forEach((item) => {
+		// 		const noticeHtml = createNoticeHtml(item);
+		// 		tabContent.append(noticeHtml);
+		// 	});
+		// }
+		// If sport_id is not defined, create an empty div
+		if (sportId === undefined) {
+			const emptyDiv = $('<div class="notice-item no-data">No data available for this sport</div>');
+			tabContent.append(emptyDiv);
+			return;
 		}
+
+		// Append to the specific sport_id tab
+		noticeItem.forEach((item) => {
+			const noticeHtml = createNoticeHtml(item);
+			tabContent.append(noticeHtml);
+		});
 
 		// If sport_id is 0, append to #tab_Syst tab
 		if (sportId === 0) {
