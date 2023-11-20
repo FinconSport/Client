@@ -151,6 +151,7 @@
 			// Sport not found, create "no data" div and append to specific tab
 			const noDataHtml = $('<div class="tab-card-no-data"><p>No data available for this sport.</p></div>');
 			$('#tab_' + sportId + ' .tab-card-content').append(noDataHtml);
+			console.log('Sport not found for sportId:', sportId);
 		}
 	}
 
