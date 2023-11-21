@@ -48,8 +48,8 @@ div[key="logs"]>div {
 
 .notice-con .nav .nav-link{
     background: #415b5a;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     color: #ffffff;
@@ -64,7 +64,7 @@ div[key="logs"]>div {
 
 .notice-con .nav .nav-link.active{
     background: #e2f0f0;
-    color: #415b5a;
+    color: #c4d3d3;
 }
 
 ul.number-bullets {list-style-type: number;}
@@ -120,9 +120,8 @@ li {
 
 .notice-col-right {
     padding: 1.5rem 1rem 1.5rem 2rem;
-    background: #e2f0f0;
-    /* border-top-left-radius: 2rem 2rem;
-    border-bottom-left-radius: 2rem 2rem; */
+    background: #c4d3d3;
+    border-radius: 5px;
 }
 
 .notice-tab-con {
