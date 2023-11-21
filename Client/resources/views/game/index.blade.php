@@ -382,7 +382,6 @@
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
                 sortedKeys.forEach((key) => {
-                    console.log(v.market_bet[key])
                     if(v.priority === 8) {
                         const arr = v.market_bet[key]
                         // 计算中间索引
@@ -642,7 +641,24 @@
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
-                            createNewElement(v, v3, v.market_bet[key].length);
+                            if(v.priority === 8) {
+                                const arr = v.market_bet[key]
+                                // 计算中间索引
+                                const midIndex = Math.floor(arr.length / 2);
+                                // 使用Array.reduce和Array.concat合并两个部分
+                                const result = arr.reduce((acc, current, index) => {
+                                    const isFirstHalf = index < midIndex;
+                                    return acc.concat(isFirstHalf ? [current, arr[index + midIndex]] : []);
+                                }, []);
+
+                                result.forEach((v3) => {
+                                    createNewElement(v, v3, v.market_bet[key].length);
+                                });
+                            } else {
+                                v.market_bet[key].forEach((v3) => {
+                                    createNewElement(v, v3, v.market_bet[key].length);
+                                });
+                            }
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
@@ -893,7 +909,10 @@
 
     function createNewElement(v, v3, len) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-        marketBetRateTemp.addClass(`col`)
+        // col setting
+        commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 2 : null
+        marketBetRateTemp.addClass(`col-${12/len}`)
+
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
         
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
