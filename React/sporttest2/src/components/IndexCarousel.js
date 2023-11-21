@@ -46,7 +46,7 @@ class IndexCarousel extends React.Component {
             infinite: true,
             slidesToShow: 1,
             slidesToScroll: 1,
-            // autoplay: true,
+            autoplay: true,
             autoplaySpeed: 5000,
             cssEase: "linear",
         };
