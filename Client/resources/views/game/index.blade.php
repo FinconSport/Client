@@ -362,9 +362,26 @@
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
                 sortedKeys.forEach((key) => {
-                    v.market_bet[key].forEach((v3) => {
-                        createNewElement(v, v3, v.market_bet[key].length);
-                    });
+                    console.log(v.market_bet[key])
+                    if(v.priority === 8) {
+                        const arr = v.market_bet[key]
+                        // 计算中间索引
+                        const midIndex = Math.floor(arr.length / 2);
+                        // 使用Array.reduce和Array.concat合并两个部分
+                        const result = arr.reduce((acc, current, index) => {
+                            const isFirstHalf = index < midIndex;
+                            return acc.concat(isFirstHalf ? [current, arr[index + midIndex]] : []);
+                        }, []);
+
+                        result.forEach((v3) => {
+                            createNewElement(v, v3, v.market_bet[key].length);
+                        });
+                    } else {
+                        v.market_bet[key].forEach((v3) => {
+                            createNewElement(v, v3, v.market_bet[key].length);
+                        });
+                    }
+                    
                 });
             }
         });
@@ -521,6 +538,16 @@
                             },
                             {
                                 "market_bet_id": 18626907711761796,
+                                "market_bet_name": "0-4",
+                                "market_bet_name_en": "0-4",
+                                "line": "",
+                                "price": "4",
+                                "status": 1,
+                                "last_update": 1700421777,
+                                "provder_bet_id": "8"
+                            },
+                            {
+                                "market_bet_id": 18626907711761796,
                                 "market_bet_name": "1-0",
                                 "market_bet_name_en": "1-0",
                                 "line": "",
@@ -548,7 +575,17 @@
                                 "status": 1,
                                 "last_update": 1700421777,
                                 "provder_bet_id": "8"
-                            }
+                            },
+                            {
+                                "market_bet_id": 18626907711761796,
+                                "market_bet_name": "4-0",
+                                "market_bet_name_en": "4-0",
+                                "line": "",
+                                "price": "4",
+                                "status": 1,
+                                "last_update": 1700421777,
+                                "provder_bet_id": "8"
+                            },
                         ]
                     }
                 }
@@ -836,14 +873,10 @@
 
     function createNewElement(v, v3, len) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
-
-        // col setting
-        commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 6 : null
-        marketBetRateTemp.addClass(`col-${12/len}`)
-
+        marketBetRateTemp.addClass(`col`)
         marketBetRateTemp.removeAttr('hidden').removeAttr('template').removeAttr('style');
+        
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
-
         marketBetRateTemp.attr('priority', v.priority);
         marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
