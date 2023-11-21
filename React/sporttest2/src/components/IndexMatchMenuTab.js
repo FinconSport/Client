@@ -17,11 +17,11 @@ const MatchMenuTabStyle = {
 	paddingTop: '0.3rem',
     width: '100%',
 	background: '#445a5a',
-    color: 'rgb(197, 214, 213)'
+    color: '#c4d3d3'
 }
 
 const iconStyle = {
-	color: 'rgb(197, 214, 213)'
+	color: '#c4d3d3'
 }
 
 const TabSelected = {

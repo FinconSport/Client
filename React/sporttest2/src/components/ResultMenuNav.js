@@ -31,7 +31,7 @@ const ResultSportBar = {
 
 const ResultSportItem = styled.div`
 	background: #445a5a;
-    color: rgb(197, 214, 213);
+    color: #c4d3d3;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 1px;
     width: 3.2rem;

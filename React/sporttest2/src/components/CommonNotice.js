@@ -81,7 +81,7 @@ const TabMenuWrapperCon = {
 
 const TabMenuBtn = {
   background: "#445a5a",
-  color: "rgb(197, 214, 213)",
+  color: "#c4d3d3",
   height: "auto",
   lineHeight: "1rem",
   padding: "0.7rem",

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const MatchMenuPanelStyle = {
 	width: '100%',
-	color: 'rgb(197, 214, 213)',
+	color: '#c4d3d3',
 	fontWeight: '600',
 	backgroundColor: 'rgb(65, 91, 90)',
 	borderRadius: '15px',

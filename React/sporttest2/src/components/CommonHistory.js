@@ -95,7 +95,7 @@ const HistoryCardMain = {
 
 const BetRecordBtn = styled.button`
     background-color: #445a5a;
-    color: rgb(197, 214, 213);
+    color: #c4d3d3;
     box-shadow: rgb(150, 150, 150) 0px 2px 3px 0px;
     border: none;
     width: 10rem;
