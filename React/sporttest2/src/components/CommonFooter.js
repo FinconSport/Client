@@ -28,18 +28,18 @@ const bottomNavRow = {
 
 const FooterIconTab = {
     borderRadius: '50%',
-    background: 'white',
+    background: '#8cb5b1',
     width: '2.5rem',
     height: '2.5rem',
     marginTop: '0.5rem',
     fontSize: '1.5rem',
     lineHeight: '2rem',
-    color: 'rgb(65, 91, 90)',
+    color: '#c5d6d5',
     marginLeft: 'auto',
     marginRight: 'auto',
 }
 const FooterTab = styled.div`
-    color: white;
+    color: #8cb5b1;
     font-size: 1rem;
     width: 20%;
     font-weight: 600;
@@ -91,7 +91,7 @@ class CommonFooter extends React.Component {
                         <div>{langText.CommonFooter.record}</div>
                     </FooterTab>
                     <FooterTab onClick={()=>this.handleTabChange(3)} className={this.state.onIndex === 3 ? 'commonFooterOn' : ''}>
-                        <Link style={{color: 'white'}} to="/mobile">
+                        <Link style={{color: '#8cb5b1'}} to="/mobile">
                             <div style={FooterIconTab} >
                                 <IoHomeOutline />
                             </div>
@@ -99,7 +99,7 @@ class CommonFooter extends React.Component {
                         </Link>
                     </FooterTab>
                     <FooterTab onClick={()=>this.handleTabChange(4)} className={this.state.onIndex === 4 ? 'commonFooterOn' : ''}>
-                        <Link style={{color: 'white'}} to="/mobile/m_order">
+                        <Link style={{color: '#8cb5b1'}} to="/mobile/m_order">
                             <div style={FooterIconTab} >
                                 <SiTarget />
                             </div>
@@ -107,7 +107,7 @@ class CommonFooter extends React.Component {
                         </Link>
                     </FooterTab>
                     <FooterTab onClick={()=>this.handleTabChange(5)} className={this.state.onIndex === 5 ? 'commonFooterOn' : ''}>
-                        <Link style={{color: 'white'}} to="/mobile/match">
+                        <Link style={{color: '#8cb5b1'}} to="/mobile/match">
                             <div style={FooterIconTab} >
                                 <MdSportsBaseball />
                             </div>

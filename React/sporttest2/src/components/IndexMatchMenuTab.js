@@ -16,17 +16,21 @@ const MatchMenuTabStyle = {
 	marginBottom: '0.5rem',
 	paddingTop: '0.3rem',
     width: '100%',
-	background: 'rgb(65, 91, 90)',
-    color: '#fff'
+	background: '#445a5a',
+    color: 'rgb(197, 214, 213)'
 }
 
 const iconStyle = {
-	color: '#c79e42 '
+	color: 'rgb(197, 214, 213)'
 }
 
 const TabSelected = {
-	background: 'white',
-	color: 'rgb(65, 91, 90)',
+	background: '#445a5a',
+	color: '#c19e4f',
+}
+
+const iconStyleSelected = {
+	color: '#c19e4f',
 }
 
 class IndexMatchMenuTab extends React.Component {
@@ -40,13 +44,13 @@ class IndexMatchMenuTab extends React.Component {
 			}>
 				{
 					this.props.text === langText.IndexMatchList.today ? (
-						<MdToday style={iconStyle} />
+						<MdToday style={ this.props.selected === true ? {...iconStyle, ...iconStyleSelected} : iconStyle } />
 					) : this.props.text === langText.IndexMatchList.living ? (
-						<CgMediaLive style={iconStyle} />
+						<CgMediaLive style={ this.props.selected === true ? {...iconStyle, ...iconStyleSelected} : iconStyle } />
 					) : this.props.text === langText.IndexMatchList.early ? (
-						<FaEarlybirds style={iconStyle} />
+						<FaEarlybirds style={ this.props.selected === true ? {...iconStyle, ...iconStyleSelected} : iconStyle } />
 					) : (
-						<AiFillTrophy style={iconStyle} />
+						<AiFillTrophy style={ this.props.selected === true ? {...iconStyle, ...iconStyleSelected} : iconStyle } />
 					)
 				}
 				<div>{this.props.text}</div>

@@ -22,7 +22,7 @@ const ToTopStyle = {
 
 const RulesWrapper = {
     fontWeight: 600,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: 'rgb(228 240 239 / 90%)',
     position: 'fixed',
     width: '100%',
     height: '100%',
@@ -73,8 +73,8 @@ const TabMenuWrapperCon = {
 }
 
 const TabMenuBtn = {
-    background: '#3f5a5c',
-    color: '#ffffff',
+    background: '#445a5a',
+    color: 'rgb(197, 214, 213)',
     height: 'auto',
     lineHeight: '1rem',
     padding: '0.7rem',
@@ -87,8 +87,8 @@ const TabMenuBtn = {
 }
 
 const TabMenuBtnActive = {
-    background: '#ffffff',
-    color: '#3f5a5c',
+    background: '#445a5a',
+    color: '#c19e4f',
     height: 'auto',
     lineHeight: '1rem',
     padding: '0.7rem',

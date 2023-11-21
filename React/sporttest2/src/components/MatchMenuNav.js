@@ -48,7 +48,7 @@ const MatchMenuItem = styled.div`
 
 const MatchSportItem = styled.div`
 	background: rgb(65, 91, 90);
-    color: white;
+    color:rgb(197, 214, 213);
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 1px;
     width: 3.2rem;
@@ -88,12 +88,12 @@ const totalSpan = {
 }
 
 const MenuOn = {
-    background: 'white',
-    color: 'rgb(65, 91, 90)'
+    background: '#445a5a',
+    color: '#c19e4f'
 }
 const SportOn = {
-    color: 'rgb(65, 91, 90)',
-    background: 'white',
+    color: '#c19e4f',
+    background: '#445a5a',
 }
 
 const MatchSportImg = {
@@ -243,7 +243,7 @@ class MatchMenuNav extends React.Component {
                                     let e = res.data[key].items[v]
                                     return(
                                         <MatchSportItem key={k} style={ this.state.sport_id == v ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v))}>
-                                            <img style={MatchSportImg} alt={ e.name } src={ parseInt(this.state.sport_id) === parseInt(v) ? require('../image/ball/ball-' + v + '.png') : require('../image/ball/ball-' + v + '-white.png') } />
+                                            <img style={MatchSportImg} alt={ e.name } src={ parseInt(this.state.sport_id) === parseInt(v) ? require('../image/ball/ball-' + v + '-orange.png') : require('../image/ball/ball-' + v + '-lightgreen.png') } />
                                             <p className="mb-0">{ e.name }</p>
                                             <div style={CountSpan}>{ e.count }</div>
                                         </MatchSportItem>

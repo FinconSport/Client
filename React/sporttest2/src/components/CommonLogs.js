@@ -22,7 +22,7 @@ const ToTopStyle = {
 
 const LogsWrapper = {
     fontWeight: 600,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: 'rgb(228 240 239 / 90%)',
     position: 'fixed',
     width: '100%',
     height: '100%',

@@ -25,7 +25,7 @@ const ToTopStyle = {
 
 const HistoryWrapper = {
     fontWeight: 600,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: 'rgb(228 240 239 / 90%)',
     position: 'fixed',
     width: '100%',
     height: '100%',
@@ -94,8 +94,8 @@ const HistoryCardMain = {
 
 
 const BetRecordBtn = styled.button`
-    background-color: rgb(65,91,90);
-    color: rgb(196, 211, 211);
+    background-color: #445a5a;
+    color: rgb(197, 214, 213);
     box-shadow: rgb(150, 150, 150) 0px 2px 3px 0px;
     border: none;
     width: 10rem;
@@ -109,8 +109,8 @@ const BetRecordBtn = styled.button`
 `
 
 const BetRecordBtnOn = {
-    backgroundColor: 'white',
-    color: 'rgb(65,91,90)'
+    backgroundColor: '#445a5a',
+    color: '#c19e4f'
 }
 
 
