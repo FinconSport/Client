@@ -376,6 +376,9 @@
 								case 35232:
 									fontawesome = 'hockey-puck';
 									break;
+								case 131506:
+									fontawesome = 'football';
+									break;
 							}
 
 							sportSelect.innerHTML = "<div class='sportname-con'><i class='fa-solid fa-" + fontawesome + "'></i><span><p>" + x.name + "</p></span></div><span class='menuStatistics_1'>" + ' ' + "</span>";
