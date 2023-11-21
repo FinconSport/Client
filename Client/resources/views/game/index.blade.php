@@ -185,7 +185,7 @@
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
-        Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.market_name - marketB.market_name).map(([k, v]) => {
+        Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.priority - marketB.priority).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
