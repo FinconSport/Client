@@ -243,7 +243,7 @@ class MatchContentCard extends React.Component {
                                         </div>
                                         <Link to="/mobile/game" style={{color: 'inherit'}} onClick={()=>this.setGameMatchId(v.fixture_id)} >
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 1 ? 'red' : null}}>
+                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 1 ? 'darkred' : null}}>
                                                     {v.home_team_name}
                                                 </div>
                                                 <div className='col-2 p-0 text-center' style={{ lineHeight: '2rem', color: '#ff7000'}}>
@@ -251,7 +251,7 @@ class MatchContentCard extends React.Component {
                                                 </div>
                                             </div>
                                             <div className='row m-0' style={rowHeight2}>
-                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 2 ? 'red' : null}}>
+                                                <div className='col-10 p-0' style={{...TeamName, color:hcapTeam === 2 ? 'darkred' : null}}>
                                                     { v.away_team_name }
                                                 </div>
                                                 <div className='col-2 p-0 text-center' style={{ lineHeight: '2rem', color: '#ff7000'}}>
