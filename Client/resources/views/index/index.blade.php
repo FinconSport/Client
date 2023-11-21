@@ -284,6 +284,12 @@
         // put the view ini function here  
         // ex: matchListD html element appedning, textoverflow handle, open the first toggle....
 
+        if( !matchListD.data ) {
+            // is no data
+            $('#noData').show()
+            return;
+        }
+
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
@@ -714,6 +720,11 @@
     
     // render view layer here
     function renderView() {
+        if( !matchListD.data ) {
+            // is no data
+            $('#noData').show()
+            return;
+        }
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
