@@ -318,6 +318,16 @@
                             },
                             {
                                 "market_bet_id": 18626907711761796,
+                                "market_bet_name": "0-4",
+                                "market_bet_name_en": "0-4",
+                                "line": "",
+                                "price": "4",
+                                "status": 1,
+                                "last_update": 1700421777,
+                                "provder_bet_id": "8"
+                            },
+                            {
+                                "market_bet_id": 18626907711761796,
                                 "market_bet_name": "1-0",
                                 "market_bet_name_en": "1-0",
                                 "line": "",
@@ -342,6 +352,16 @@
                                 "market_bet_name_en": "3-0",
                                 "line": "",
                                 "price": "3",
+                                "status": 1,
+                                "last_update": 1700421777,
+                                "provder_bet_id": "8"
+                            },
+                            {
+                                "market_bet_id": 18626907711761796,
+                                "market_bet_name": "4-0",
+                                "market_bet_name_en": "4-0",
+                                "line": "",
+                                "price": "4",
                                 "status": 1,
                                 "last_update": 1700421777,
                                 "provder_bet_id": "8"
