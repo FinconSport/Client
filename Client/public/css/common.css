@@ -184,8 +184,8 @@ div.submenu-btn {
 .submenu-main{
     color:#ffffff;
     padding: 1rem;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     background-color: #415b5a;
     position:relative;
 }
@@ -230,7 +230,7 @@ div.submenu-btn {
 
 .submenu-main.active::before{
     top:-2rem;
-    border-top-left-radius: 2rem;
+    border-top-left-radius: 1rem;
 }
 
 .submenu-main.active .submenu-inner::after{
@@ -241,7 +241,7 @@ div.submenu-btn {
 .submenu-main.active::after,
 .submenu-main.clicked::after{
     bottom:-2rem;
-    border-bottom-left-radius: 2rem;
+    border-bottom-left-radius: 1rem;
 }
 
 .submenu-toggle-list {

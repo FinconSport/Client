@@ -5,9 +5,6 @@
     flex-wrap: wrap;
 }
 
-#rulePage.rule-con {
-    padding: 0px 15px;
-}
 
 .sportMenu {
     display: none;
@@ -90,13 +87,13 @@ li {
 }
 
 .rule-row {
-    /* background: #e2f0f0; */
     background: #415b5a;
     border: 1px solid #415b5a;
     border-radius: 5px;
     overflow: hidden;
     height: 100%;
     padding: 1rem 1rem 0rem 1rem;
+    margin: 0;
 }
 
 .rule-row .rule-col-left nav {
