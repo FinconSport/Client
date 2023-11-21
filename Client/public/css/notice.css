@@ -63,8 +63,8 @@ div[key="logs"]>div {
 }
 
 .notice-con .nav .nav-link.active{
-    background: #e2f0f0;
-    color: #c4d3d3;
+    background: #c4d3d3;
+    color: #415b5a;
 }
 
 ul.number-bullets {list-style-type: number;}
