@@ -59,6 +59,10 @@ return [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Half-time winner', 'Half-time handicap', 'Half-time over/under'],
 			'mainPriorityArr' => [201, 203, 205, 202, 204, 206],
 		],
+		131506 => [
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
+			'mainPriorityArr' => [401, 403, 405, 407],
+		],
 		48242 => [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
 			'mainPriorityArr' => [101, 103, 105, 107],

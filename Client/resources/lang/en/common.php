@@ -6,7 +6,7 @@
  */
 return [
 	// 前端
-	'order'=> [6046, 48242, 154914, 35232],
+	'order'=> [6046, 48242, 154914, 35232, 131506],
 	"left_menu" => [
 		"sport_bet" => "Match Betting", // "體育投注"
 		"m_bet" => "Parlay Betting", // "串關投注"
@@ -88,6 +88,16 @@ return [
 			101 => 'Full Time After Extra Time',
 		],
 		48242 => [
+			1 => '1st Quarter',
+			2 => '2nd Quarter',
+			3 => '3rd Quarter',
+			4 => '4th Quarter',
+			40 => 'Overtime',
+			80 => 'Break Time',
+			100 => 'Full Time',
+			101 => 'Full Time After Overtime',
+		],
+		131506 => [
 			1 => '1st Quarter',
 			2 => '2nd Quarter',
 			3 => '3rd Quarter',
