@@ -99,6 +99,10 @@ class ResultContentCard extends React.Component {
         if( sport === 6046 ) {
             gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstHalfScore,langText.ResultTitle.secondHalfScore,langText.ResultTitle.overtime]]
         }
+        if( sport === 131506 ) {
+            gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstQuarterScore,langText.ResultTitle.secondQuarterScore], 
+            [langText.ResultTitle.thirdQuarterScore,langText.ResultTitle.fourthQuarterScore,langText.ResultTitle.overtime]]
+        }
         if( sport === 154914 ) {
             gameTitle = [[langText.ResultTitle.fullTimeScore,langText.ResultTitle.firstRound,langText.ResultTitle.gameTwo], 
             [langText.ResultTitle.gameThree,langText.ResultTitle.gameFour,langText.ResultTitle.gameFive],
