@@ -1090,7 +1090,7 @@
                 break;
             default:
                 $('.bettingtype-container').hide()
-                Object.entries(gameLangTrans.catePriority.single[sport]).map(([k,v]) => {
+                Object.entries(gameLangTrans.catePriority.single[sport][tab]).map(([k,v]) => {
                     v.map(v1 => {
                         $(`.bettingtype-container[priority=${v1}]`).show()
                     })
