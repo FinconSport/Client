@@ -30,8 +30,8 @@ const ResultSportBar = {
 }
 
 const ResultSportItem = styled.div`
-	background: rgb(65, 91, 90);
-    color: white;
+	background: #445a5a;
+    color: #c4d3d3;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px 1px;
     width: 3.2rem;
@@ -66,8 +66,8 @@ const backIcon = {
 }
 
 const SportOn = {
-    color: 'rgb(65, 91, 90)',
-    background: 'white',
+    color: '#c19e4f',
+    background: '#445a5a',
 }
 
 const ResultSportImg = {
@@ -131,7 +131,7 @@ class ResultMenuNav extends React.Component {
                                 if( e ) {
                                     return (
                                         <ResultSportItem key={v} style={ parseInt(window.sport) === parseInt(v) ? SportOn : null } onClick={() => this.handleSportChange(parseInt(v))}>
-                                            <img style={ResultSportImg} alt={ e.name } src={ parseInt(window.sport) === parseInt(v) ? require('../image/ball/ball-' + v + '.png') : require('../image/ball/ball-' + v + '-white.png') } />
+                                            <img style={ResultSportImg} alt={ e.name } src={ parseInt(window.sport) === parseInt(v) ? require('../image/ball/ball-' + v + '-orange.png') : require('../image/ball/ball-' + v + '-lightgreen.png') } />
                                             <p className="mb-0" style={{ fontSize: '0.7rem' }}>{ e.name }</p>
                                         </ResultSportItem>
                                     );

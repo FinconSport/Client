@@ -5,15 +5,12 @@
     flex-wrap: wrap;
 }
 
-#rulePage.rule-con {
-    padding: 0px 15px;
-}
 
 .sportMenu {
     display: none;
 }
 
-div[key="rule"] {
+/* div[key="rule"] {
     background-color: #415b5a;
 }
 
@@ -30,34 +27,35 @@ div[key="match"]>div {
 
 div[key="logs"]>div {
     border-top-right-radius:15px;
-}
+} */
 
 
 
 .rule-con .nav{
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-row-gap: 0.1rem;
+    display: flex;
+    /* grid-auto-columns: 1fr;
+    grid-row-gap: 0.1rem; */
     border: none;
 }
 
 .rule-con .nav .nav-link{
     background: #415b5a;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     color: #ffffff;
     text-align: center;
     text-decoration: none;
     border: none;
-    padding: .75rem 1rem .75rem 2rem;
+    padding: 0.75rem 1rem;
     margin: 0px;
     font-weight: 600;
+    width: 100%;
 }
 
 .rule-con .nav .nav-link.active{
-    background: #e2f0f0;
+    background: #c4d3d3;
     color: #415b5a;
 }
 
@@ -89,13 +87,23 @@ li {
 }
 
 .rule-row {
-    /* background: #e2f0f0; */
     background: #415b5a;
     border: 1px solid #415b5a;
     border-radius: 5px;
     overflow: hidden;
     height: 100%;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
+    margin: 0;
+}
+
+.rule-row .rule-col-left nav {
+    height: calc(100vh - 6rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.rule-row .rule-col-left nav::-webkit-scrollbar {
+    width: 0px;
 }
 
 .rule-col-left {
@@ -104,9 +112,11 @@ li {
 
 .rule-col-right {
     padding: 1.5rem 1rem 1.5rem 2rem;
-    background: #e2f0f0;
-    /* border-top-left-radius: 2rem 2rem;
-    border-bottom-left-radius: 2rem 2rem; */
+    background: #c4d3d3;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .rule-tab-con {

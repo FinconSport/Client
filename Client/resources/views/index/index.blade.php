@@ -1383,7 +1383,6 @@
         $('#indexContainer .elToggleCount').each(function() {
             let id = $(this).attr('id').split('_')[1]
             let count = $('#toggleContent_' + id).find('.indexEachCard').length
-            console.log(id, count)
             $(this).html(count)
             if( count === 0 ) {
                 $(this).closest('.cateWrapper').hide()

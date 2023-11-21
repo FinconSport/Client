@@ -184,8 +184,8 @@ div.submenu-btn {
 .submenu-main{
     color:#ffffff;
     padding: 1rem;
-    border-top-left-radius: 2rem;
-    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     background-color: #415b5a;
     position:relative;
 }
@@ -230,7 +230,7 @@ div.submenu-btn {
 
 .submenu-main.active::before{
     top:-2rem;
-    border-top-left-radius: 2rem;
+    border-top-left-radius: 1rem;
 }
 
 .submenu-main.active .submenu-inner::after{
@@ -241,7 +241,7 @@ div.submenu-btn {
 .submenu-main.active::after,
 .submenu-main.clicked::after{
     bottom:-2rem;
-    border-bottom-left-radius: 2rem;
+    border-bottom-left-radius: 1rem;
 }
 
 .submenu-toggle-list {
@@ -270,8 +270,7 @@ div.submenu-btn {
     transition: all 0.2s linear;
 }
 
-a.sportSelect,
-a.sportSelect:hover{
+a.sportSelect{
     color: #c4d3d3;
     text-decoration: none!important;
 }
@@ -293,7 +292,8 @@ a.submenu-inner:hover {
     margin:0rem 0rem 1rem 2.1rem;
 } */
 .sportSelect.openToggle,
-.sportSelect.openToggle:hover {
+.sportSelect.openToggle:hover,
+a.sportSelect:hover {
     background: #415b5a!important;
     color: #c79e42!important;
 }

@@ -420,7 +420,13 @@
 
     $("button.nav-link").click(function() {
         $(".rule-tab-con").animate({ scrollTop: 0 }, "smooth");
-        console.log("top");   
+        console.log("top");  
+        var firstButton = document.querySelector('.nav-link');
+        if (firstButton.classList.contains('active')) {
+            $('.rule-col-right').css('border-top-left-radius', '0px');
+        } else {
+            $('.rule-col-right').css('border-top-left-radius', '5px');
+        } 
     });
     
 </script>
