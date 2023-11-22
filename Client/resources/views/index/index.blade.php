@@ -123,13 +123,13 @@
             </div>
         </div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;justify-content: space-between;">
-            <div class="textOverFlow teamSpan" style="width: 80%;">
+            <div key='homeTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
                 <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
                 </div>
             </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;justify-content: space-between;">
+            <div key='awayTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
                 <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
                 <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
@@ -147,16 +147,16 @@
     <div class="indexBetCard" key='basketBallQuaterBet'>
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
+            <div key='homeTeamInfo2' class="w-100 d-flex justify-content-between align-items-center">
+            <div class="teamSpan m-0 d-flex justify-content-between align-items-center">
+                    <div class="textOverFlow text-left p-0" style="width: 50%;"></div>
+                    <div class="text-right" style="width: 50%;"></div>
                 </div>
             </div>
-            <div key='awayTeamInfo2'>
-                <div class="teamSpan row m-0">
-                    <div class="col text-left p-0"></div>
-                    <div class="col text-right"></div>
+            <div key='awayTeamInfo2' class="w-100 d-flex justify-content-between align-items-center">
+                <div class="teamSpan m-0 d-flex justify-content-between align-items-center">
+                    <div class="textOverFlow text-left p-0" style="width: 50%;"></div>
+                    <div class="text-right" style="width: 50%;"></div>
                 </div>
             </div>
         </div>
