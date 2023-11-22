@@ -1445,5 +1445,14 @@
         return `${month}-${day} ${hour}:${minute}`;
     }
 
+    //responsive betItem when small layout
+    function detectLineBreak(content) {
+        const div = document.querySelector('.bet_name');
+        if (!div) return console.error("No elements found with class 'bet_name'.");
+        
+        const isLineBreak = div.clientHeight < (div.innerHTML = content, div.clientHeight);
+        console.log(isLineBreak ? 'Line break detected!' : 'No line break.');
+    }
+
 </script>
 @endpush
