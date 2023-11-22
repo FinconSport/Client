@@ -186,50 +186,19 @@
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
 
-         // ===== 玩法排序 (全場->半場->單節) =====
-
-        const market = matchListD.data.list.market
+        // ===== 玩法排序 (全場->半場->單節) =====
+        let markets = matchListD.data.list.market
         const catePriority = gameLangTrans.catePriority
-        const getCategory = (market) => {
-            const marketId = market.priority;
-
-            if (catePriority.full.includes(marketId)) {
-                return 'full';
-            } else if (catePriority.half.includes(marketId)) {
-                return 'half';
-            } else {
-                // Check in the 'single' category
-                const singleCategories = Object.values(catePriority.single);
-                for (const categories of singleCategories) {
-                    for (const category of Object.values(categories)) {
-                        if (category.includes(marketId)) {
-                            return 'single';
-                        }
-                    }
-                }
-            }
-            // Default to 'full' if not found
-            return 'full';
-        };
-
-        const sortedMarket = market.sort((marketA, marketB) => {
-            const categoryA = getCategory(marketA);
-            const categoryB = getCategory(marketB);
-
-            // Compare categories based on their priority
-            const priorityA = catePriority[categoryA].indexOf(marketA.priority);
-            const priorityB = catePriority[categoryB].indexOf(marketB.priority);
-
-            return priorityA - priorityB;
+        
+        markets.forEach(market => {
+            if( catePriority.full.indexOf(market.priority) !== -1 ) market.cateOrder = 1
+            if( catePriority.half.indexOf(market.priority) !== -1 ) market.cateOrder = 2
+            if( catePriority.half.indexOf(market.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
         });
-
-        console.log(sortedMarket);
-        console.log(matchListD.data.list.market)
+        
 
         // ===== 玩法排序 (全場->半場->單節) =====
-
-
-        Object.entries(sortedMarket).map(([k, v]) => {
+        Object.entries(markets).sort((a, b) => a.priority - b.priority).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
