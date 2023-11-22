@@ -26,7 +26,7 @@
     <div class="ui dimmer" id="dimmer">
 		<img src="{{ asset('image/loading.png?v=' . $system_config['version']) }}" alt="Logo">
     </div>
-	<div id='wrap' class="h-100 pb-2 w-100" style="opacity: 0">
+	<div id='wrap' class="pb-2" style="opacity: 0">
 		<div class="leftArea">
 			<div id='logoArea'>
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">
@@ -445,6 +445,8 @@
 
 
 		$(document).ready(function() {
+			$('#wrap').css('width', window.screen.width)
+			$('#wrap').css('height', window.screen.height)
 
 			// loading page
 			$('#dimmer').dimmer('show');
