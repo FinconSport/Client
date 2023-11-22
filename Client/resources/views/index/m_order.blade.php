@@ -145,16 +145,16 @@
             </div>
         </div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
+            <div key='homeTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
+                <div class="textOverFlow teamSpan" style="width: 85%;height: 2.5rem;">
                 </div>
-                <div class="scoreSpan" style="width: 15%;">
+                <div class="scoreSpan" style="width: 15%;padding-right: 1rem;padding-left: 2px;">
                 </div>
             </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
+            <div key='awayTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
+                <div class="textOverFlow teamSpan" style="width: 85%;height: 2.5rem;">
                 </div>
-                <div class="scoreSpan" style="width: 15%;">
+                <div class="scoreSpan" style="width: 15%;padding-right: 1rem;padding-left: 2px;">
                 </div>
             </div>
         </div>
@@ -184,7 +184,7 @@
 
 <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
     <div class="col text-right p-0" key='betItemDiv_name'>
-        <span class="bet_name"></span>
+        <span class="bet_name" style='white-space: nowrap;'></span>
     </div>
     <div class="col m-0 row text-right p-0" key='changeCol'>
         <div class="odd col p-0"></div>
