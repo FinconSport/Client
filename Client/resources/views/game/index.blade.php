@@ -446,7 +446,7 @@
                 clearInterval(isReadySportInt)
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
-                    caller(matchList_api, callMatchListData, matchListD, 1) // update 
+                    // caller(matchList_api, callMatchListData, matchListD, 1) // update 
                 }, 5000);
             }
         }, 100);
@@ -466,7 +466,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView();
+                    renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
