@@ -458,7 +458,11 @@
                         item = $(`div[template="betItem"]`).clone()
                         // 四格的時候調整寬度
                         if( priorityArr.length === 4 ) {
-                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                            if( window.innerWidth < 1300) {
+                                item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-5 col');
+                            } else {
+                                item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                            }
                         }
                         // 足球 調整col
                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
