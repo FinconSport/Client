@@ -147,16 +147,16 @@
     <div class="indexBetCard" key='basketBallQuaterBet'>
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2' class="w-100 d-flex justify-content-between align-items-center">
-            <div class="teamSpan m-0 d-flex justify-content-between align-items-center">
-                    <div class="textOverFlow text-left p-0" style="width: 50%;"></div>
-                    <div class="text-right" style="width: 50%;"></div>
+            <div key='homeTeamInfo2' class="w-100 d-flex align-items-center">
+            <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center">
+                    <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
+                    <div class="text-right" style="width: 40%;height: 2.5rem;"></div>
                 </div>
             </div>
-            <div key='awayTeamInfo2' class="w-100 d-flex justify-content-between align-items-center">
-                <div class="teamSpan m-0 d-flex justify-content-between align-items-center">
-                    <div class="textOverFlow text-left p-0" style="width: 50%;"></div>
-                    <div class="text-right" style="width: 50%;"></div>
+            <div key='awayTeamInfo2' class="w-100 d-flex align-items-center">
+                <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center">
+                    <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
+                    <div class="text-right" style="width: 40%;height: 2.5rem;"></div>
                 </div>
             </div>
         </div>
