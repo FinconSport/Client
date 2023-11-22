@@ -191,7 +191,7 @@
         const market = matchListD.data.list.market
         const catePriority = gameLangTrans.catePriority
         const getCategory = (market) => {
-            const marketId = market.market_id;
+            const marketId = market.priority;
 
             if (catePriority.full.includes(marketId)) {
                 return 'full';
@@ -217,8 +217,8 @@
             const categoryB = getCategory(marketB);
 
             // Compare categories based on their priority
-            const priorityA = catePriority[categoryA].indexOf(marketA.market_id);
-            const priorityB = catePriority[categoryB].indexOf(marketB.market_id);
+            const priorityA = catePriority[categoryA].indexOf(marketA.priority);
+            const priorityB = catePriority[categoryB].indexOf(marketB.priority);
 
             return priorityA - priorityB;
         });
