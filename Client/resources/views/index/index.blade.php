@@ -182,7 +182,7 @@
 
 <div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
     <div class="col text-right p-0" key='betItemDiv_name'>
-        <span class="bet_name"></span>
+        <span class="bet_name" style='white-space: nowrap;'></span>
     </div>
     <div class="col m-0 row text-right p-0" key='changeCol'>
         <div class="odd col p-0"></div>
@@ -1443,15 +1443,6 @@
         const hour = dateTime.getHours().toString().padStart(2, '0'); // Get hours and pad with '0' if needed
         const minute = dateTime.getMinutes().toString().padStart(2, '0'); // Get minutes and pad with '0' if needed
         return `${month}-${day} ${hour}:${minute}`;
-    }
-
-    //responsive betItem when small layout
-    function detectLineBreak(content) {
-        const div = document.querySelector('.bet_name');
-        if (!div) return console.error("No elements found with class 'bet_name'.");
-        
-        const isLineBreak = div.clientHeight < (div.innerHTML = content, div.clientHeight);
-        console.log(isLineBreak ? 'Line break detected!' : 'No line break.');
     }
 
 </script>
