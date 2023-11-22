@@ -123,16 +123,16 @@
             </div>
         </div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
+            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;justify-content: space-between;">
+            <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
-                <div class="scoreSpan" style="width: 15%;">
+                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
                 </div>
             </div>
-            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
-                <div class="textOverFlow teamSpan" style="width: 85%;">
+            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;justify-content: space-between;">
+                <div class="textOverFlow teamSpan" style="width: 80%;">
                 </div>
-                <div class="scoreSpan" style="width: 15%;">
+                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
                 </div>
             </div>
         </div>
