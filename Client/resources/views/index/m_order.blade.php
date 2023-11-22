@@ -173,7 +173,7 @@
 <div class="col p-0" template='betDiv' hidden>
 </div>
 <!-- betItem template -->
-<div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
+<div class="betItemDiv row m-0 flex-nowrap" key='betItemDiv-1' template='betItem-1' hidden>
     <div class="col-7 p-0 text-right">
         <span class="odd"></span>
         <i class="fa-solid fa-lock" style="display: none;"></i>
@@ -182,7 +182,7 @@
     </div>
 </div>
 
-<div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
+<div class="betItemDiv row m-0 flex-nowrap" key='betItemDiv' template='betItem' hidden>
     <div class="col text-right p-0" key='betItemDiv_name'>
         <span class="bet_name" style='white-space: nowrap;'></span>
     </div>
