@@ -253,88 +253,88 @@ class MatchContentCard extends React.Component {
                                                     { v?.scoreboard && v.scoreboard[2][0] }
                                                 </div>
                                             </div>
-                                            <div className="col p-0">+{v.market_bet_count}</div>
-                                        </Link>
-                                        <div className="row m-0" style={rowHeight2}>
-                                            <div className="col" style={{ height: '2rem' }}>
-                                            {
-                                                window.sport === 154914 && v.status === 2 ? (
-                                                    v?.periods?.Bases ?
-                                                    <img className="w-100" src={require(`../image/baseball/base/${v.periods.Bases.replaceAll('/', '')}.png`)} alt="base" />
-                                                    :
-                                                    <img className="w-100" src={require('../image/baseball/base/000.png')} alt="base"/>
-                                                ) : null
-                                            }
-                                            </div>
-                                            <div className="col p-0" style={{ height: '2rem' }}>
-                                            {
-                                                window.sport === 154914 && v.status === 2 ? (
-                                                    <>
-                                                    {v?.periods?.Strikes ? (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/s${v.periods.Strikes}.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    ) : (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/s0.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    )}
-                                                  
-                                                    {v?.periods?.Balls ? (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/b${v.periods.Balls}.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    ) : (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/b0.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    )}
-                                                  
-                                                    {v?.periods?.Outs ? (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/o${v.periods.Outs}.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    ) : (
-                                                      <div
-                                                        className="w-100"
-                                                        style={{
-                                                          backgroundImage: `url(${require(`../image/baseball/balls/o0.png`)}`,
-                                                          height: '33.33333%',
-                                                          backgroundSize: '100% 100%',
-                                                        }}
-                                                      ></div>
-                                                    )}
-                                                  </>
-                                                  
-                                                ) : null
+                                            <div className="row m-0" style={rowHeight2}>
+                                                <div className="col p-0">+{v.market_bet_count}</div>
+                                                <div className="col" style={{ height: '2rem' }}>
+                                                {
+                                                    window.sport === 154914 && v.status === 2 ? (
+                                                        v?.periods?.Bases ?
+                                                        <img className="w-100" src={require(`../image/baseball/base/${v.periods.Bases.replaceAll('/', '')}.png`)} alt="base" />
+                                                        :
+                                                        <img className="w-100" src={require('../image/baseball/base/000.png')} alt="base"/>
+                                                    ) : null
                                                 }
+                                                </div>
+                                                <div className="col p-0" style={{ height: '2rem' }}>
+                                                {
+                                                    window.sport === 154914 && v.status === 2 ? (
+                                                        <>
+                                                        {v?.periods?.Strikes ? (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/s${v.periods.Strikes}.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        ) : (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/s0.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        )}
+                                                    
+                                                        {v?.periods?.Balls ? (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/b${v.periods.Balls}.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        ) : (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/b0.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        )}
+                                                    
+                                                        {v?.periods?.Outs ? (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/o${v.periods.Outs}.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        ) : (
+                                                        <div
+                                                            className="w-100"
+                                                            style={{
+                                                            backgroundImage: `url(${require(`../image/baseball/balls/o0.png`)}`,
+                                                            height: '33.33333%',
+                                                            backgroundSize: '100% 100%',
+                                                            }}
+                                                        ></div>
+                                                        )}
+                                                    </>
+                                                    
+                                                    ) : null
+                                                    }
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>
                                     <div className='col-55 text-center' style={{ padding: 0 }}>
                                         {
