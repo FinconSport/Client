@@ -534,11 +534,7 @@
                         }
                         // 足球 調整col
                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
-                            if( window.innerWidth < 1300) {
-                                item.find('div[key="betItemDiv_name"]').toggleClass('col-5 col');
-                            } else {
-                                item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
-                            }
+                            item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
                         }
                     }
 
