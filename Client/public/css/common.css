@@ -705,19 +705,6 @@ a.sportSelect:hover {
     overflow: auto;
 }
 
-.indexEachCard .textOverFlow::-webkit-scrollbar {
-    width: 5px;
-    border-radius:0px;
-}
-
-.indexEachCard .textOverFlow::-webkit-scrollbar-track {
-    border-radius: 0px;
-}
-
-.indexEachCard .textOverFlow::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-}
-
 /* 選中 */
 .indexBetCardTable .m_order_on {
     background: rgba(65, 91, 90, 0.9);

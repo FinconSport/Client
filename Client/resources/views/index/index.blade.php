@@ -123,16 +123,16 @@
             </div>
         </div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
-                <div class="textOverFlow teamSpan" style="width: 80%;height: 2.5rem;">
+            <div key='homeTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;padding-left: 2px;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
-            <div key='awayTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
-                <div class="textOverFlow teamSpan" style="width: 80%;height: 2.5rem;">
+            <div key='awayTeamInfo' class="w-100" style="display: inline-flex;">
+                <div class="textOverFlow teamSpan" style="width: 85%;">
                 </div>
-                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;padding-left: 2px;">
+                <div class="scoreSpan" style="width: 15%;">
                 </div>
             </div>
         </div>
@@ -147,16 +147,16 @@
     <div class="indexBetCard" key='basketBallQuaterBet'>
         <div class="timeSpan"></div>
         <div class="indexBetCardInfo">
-            <div key='homeTeamInfo2' class="w-100 d-flex align-items-center">
-            <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center" style="height: 2.5rem;">
-                    <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
-                    <div class="textOverFlow text-right" style="width: 38.5%;height: 2.5rem;"></div>
+            <div key='homeTeamInfo2'>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
                 </div>
             </div>
-            <div key='awayTeamInfo2' class="w-100 d-flex align-items-center">
-                <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center" style="height: 2.5rem;">
-                    <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
-                    <div class="textOverFlow text-right" style="width: 38.5%;height: 2.5rem;"></div>
+            <div key='awayTeamInfo2'>
+                <div class="teamSpan row m-0">
+                    <div class="col text-left p-0"></div>
+                    <div class="col text-right"></div>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
 <div class="col p-0" template='betDiv' hidden>
 </div>
 <!-- betItem template -->
-<div class="betItemDiv row m-0 flex-nowrap" key='betItemDiv-1' template='betItem-1' hidden>
+<div class="betItemDiv row m-0" key='betItemDiv-1' template='betItem-1' hidden>
     <div class="col-7 p-0 text-right">
         <span class="odd"></span>
         <i class="fa-solid fa-lock" style="display: none;"></i>
@@ -180,9 +180,9 @@
     </div>
 </div>
 
-<div class="betItemDiv row m-0 flex-nowrap" key='betItemDiv' template='betItem' hidden>
+<div class="betItemDiv row m-0" key='betItemDiv' template='betItem' hidden>
     <div class="col text-right p-0" key='betItemDiv_name'>
-        <span class="bet_name" style='white-space: nowrap;'></span>
+        <span class="bet_name"></span>
     </div>
     <div class="col m-0 row text-right p-0" key='changeCol'>
         <div class="odd col p-0"></div>
