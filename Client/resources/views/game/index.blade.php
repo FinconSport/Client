@@ -187,10 +187,8 @@
         createScoreBoard(matchListD.data);
 
         // ===== 玩法排序 (全場->半場->單節) =====
-        let markets = matchListD.data.list.market
         const catePriority = gameLangTrans.catePriority
-        
-        markets.forEach(market => {
+        matchListD.data.list.market.forEach(market => {
             if( catePriority.full.indexOf(market.priority) !== -1 ) market.cateOrder = 1
             if( catePriority.half.indexOf(market.priority) !== -1 ) market.cateOrder = 2
             if( catePriority.half.indexOf(market.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
@@ -198,7 +196,7 @@
         
 
         // ===== 玩法排序 (全場->半場->單節) =====
-        Object.entries(markets).sort((a, b) => a.priority - b.priority).map(([k, v]) => {
+        Object.entries(matchListD.data.list.market).sort((a, b) => a.cateOrder - b.cateOrder).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
