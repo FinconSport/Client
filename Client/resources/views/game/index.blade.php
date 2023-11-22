@@ -185,6 +185,50 @@
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
+
+         // ===== 玩法排序 (全場->半場->單節) =====
+
+        const market = matchListD.data.list.market
+        const catePriority = gameLangTrans.catePriority
+        const getCategory = (market) => {
+            const marketId = market.market_id;
+
+            if (catePriority.full.includes(marketId)) {
+                return 'full';
+            } else if (catePriority.half.includes(marketId)) {
+                return 'half';
+            } else {
+                // Check in the 'single' category
+                const singleCategories = Object.values(catePriority.single);
+                for (const categories of singleCategories) {
+                    for (const category of Object.values(categories)) {
+                        if (category.includes(marketId)) {
+                            return 'single';
+                        }
+                    }
+                }
+            }
+            // Default to 'full' if not found
+            return 'full';
+        };
+
+        const sortedMarket = market.sort((marketA, marketB) => {
+            const categoryA = getCategory(marketA);
+            const categoryB = getCategory(marketB);
+
+            // Compare categories based on their priority
+            const priorityA = catePriority[categoryA].indexOf(marketA.market_id);
+            const priorityB = catePriority[categoryB].indexOf(marketB.market_id);
+
+            return priorityA - priorityB;
+        });
+
+        console.log(sortedMarket);
+        console.log(matchListD.data.list.market)
+
+        // ===== 玩法排序 (全場->半場->單節) =====
+
+
         Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.priority - marketB.priority).map(([k, v]) => {
             createMarketContainer(k, v);
             if (v.market_bet) {
@@ -249,46 +293,7 @@
         $('#bettingTypeContainer .noDataContainer').remove()
 
 
-        // ===== 玩法排序 (全場->半場->單節) =====
-
-        let market = matchListD.data.list.market
-        const getCategory = (market) => {
-            const marketId = market.market_id;
-
-            if (catePriority.full.includes(marketId)) {
-                return 'full';
-            } else if (catePriority.half.includes(marketId)) {
-                return 'half';
-            } else {
-                // Check in the 'single' category
-                const singleCategories = Object.values(catePriority.single);
-                for (const categories of singleCategories) {
-                    for (const category of Object.values(categories)) {
-                        if (category.includes(marketId)) {
-                            return 'single';
-                        }
-                    }
-                }
-            }
-            // Default to 'full' if not found
-            return 'full';
-        };
-
-        const sortedMarket = market.sort((marketA, marketB) => {
-            const categoryA = getCategory(marketA);
-            const categoryB = getCategory(marketB);
-
-            // Compare categories based on their priority
-            const priorityA = catePriority[categoryA].indexOf(marketA.market_id);
-            const priorityB = catePriority[categoryB].indexOf(marketB.market_id);
-
-            return priorityA - priorityB;
-        });
-
-        console.log(sortedMarket);
-        console.log(matchListD.data.list.market)
-
-        // ===== 玩法排序 (全場->半場->單節) =====
+       
 
         // update content
         Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.priority - marketB.priority).map(([k, v]) => {
