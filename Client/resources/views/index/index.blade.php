@@ -126,13 +126,13 @@
             <div key='homeTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
                 <div class="textOverFlow teamSpan" style="width: 80%;height: 2.5rem;">
                 </div>
-                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
+                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;padding-left: 2px;">
                 </div>
             </div>
             <div key='awayTeamInfo' class="w-100 d-flex justify-content-between align-items-center">
                 <div class="textOverFlow teamSpan" style="width: 80%;height: 2.5rem;">
                 </div>
-                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;">
+                <div class="scoreSpan" style="width: max-content;padding-right: 1rem;padding-left: 2px;">
                 </div>
             </div>
         </div>
@@ -150,13 +150,13 @@
             <div key='homeTeamInfo2' class="w-100 d-flex align-items-center">
             <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center" style="height: 2.5rem;">
                     <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
-                    <div class="text-right" style="width: 40%;height: 2.5rem;"></div>
+                    <div class="textOverFlow text-right" style="width: 38.5%;height: 2.5rem;"></div>
                 </div>
             </div>
             <div key='awayTeamInfo2' class="w-100 d-flex align-items-center">
                 <div class="teamSpan m-0 w-100 d-flex justify-content-between align-items-center" style="height: 2.5rem;">
                     <div class="textOverFlow text-left p-0" style="width: 60%;height: 2.5rem;"></div>
-                    <div class="text-right" style="width: 40%;height: 2.5rem;"></div>
+                    <div class="textOverFlow text-right" style="width: 38.5%;height: 2.5rem;"></div>
                 </div>
             </div>
         </div>
