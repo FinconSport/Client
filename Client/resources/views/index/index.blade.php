@@ -204,8 +204,7 @@
 
 
 @section('styles')
-<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-<link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
+<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
 @push('main_js')
