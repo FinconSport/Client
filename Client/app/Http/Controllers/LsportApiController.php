@@ -1727,7 +1727,6 @@ class LsportApiController extends Controller {
                 /////////////////////////
                 // 判定風控值
 
-                dd($market_bet_data);
                 $default_status = $vvv['status'];
                 if (isset($risk_data[$market_id][$kkk])) {
                     $risk_config = $risk_data[$market_id][$kkk];
