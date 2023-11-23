@@ -21,7 +21,7 @@ class IndexMarquee extends React.Component {
 			return(
 				<Marquee speed={50} style={marqueeStyle} gradient={false}>
 					{res.data.map((text, i) => {     
-						return (<p className="m-0" key={i}>{text}</p>) 
+						return (<p className="m-0 ms-4" key={i}>{text}</p>) 
 					})}
 				</Marquee>
 			)
