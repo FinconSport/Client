@@ -1777,19 +1777,9 @@ class LsportApiController extends Controller {
         $return = LsportRisk::where("fixture_id",$fixture_id)->first();
         $risk_data = json_decode($return['data'],true);
 
-        dd($data['list']['market']);
-        foreach ($data as $k => $v) {
-            foreach ($v['market'] as $kk => $vv) {
-                
-                $market_id = $vv['market_id'];
-                $market_list = $vv['market_bet'];
-                foreach ($market_list as $kkk => $vvv) {
-                    
-                    if (isset($risk_data[$market_id][$kkk])) {
-                        
-                    }
-                }
-
+        foreach ($data['list']['market'] as $k => $v) {
+            foreach ($v['market_bet'] as $kk => $vv) {
+                dd($vv);
             }
         }
         
