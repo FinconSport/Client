@@ -1734,7 +1734,7 @@ class LsportApiController extends Controller {
                     }
                 }
 
-                dd($risk_data[$market_id]);
+                dd($risk_data[$market_id],$kkk,$vvv);
                 /////////////////////////
 
                 $tmp_data = array();
