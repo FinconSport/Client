@@ -222,7 +222,7 @@ class MatchContentCard extends React.Component {
                                             <div className='col-10 p-0'>
                                                 <p className='mb-0 mt-1'>
                                                     {
-                                                        v.status === 1 ?
+                                                        v.status === 1 || v?.periods?.period === -1 ?
                                                         this.formatDateTime(v.start_time)
                                                         :
                                                         v.status === 9 ? langText.MatchContentCard.readyToStart :
