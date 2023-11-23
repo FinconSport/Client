@@ -1726,7 +1726,7 @@ class LsportApiController extends Controller {
                 $tmp_data['market_bet_name_en'] = $vvv['name_en'];
                 $tmp_data['line'] = $this->displayMainLine($vvv['line']);
                 $tmp_data['price'] = $vvv['price'];
-                $tmp_data['status'] = $default_status;
+                $tmp_data['status'] = $vvv['status'];
                 $tmp_data['last_update'] = $vvv['last_update'];
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
 
