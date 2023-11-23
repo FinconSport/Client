@@ -1729,7 +1729,7 @@ class LsportApiController extends Controller {
                 $default_status = $vvv['status'];
                 if (isset($risk_data[$market_id])) {
 
-                    if ($kkk > 1) {
+                    if ($kkk > 2) {
                         dd($kkk);
                     }
                     $risk_config = $risk_data[$market_id][$kkk];
