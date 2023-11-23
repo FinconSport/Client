@@ -1778,7 +1778,9 @@ class LsportApiController extends Controller {
         $risk_data = json_decode($return['data'],true);
 
         foreach ($data as $k => $v) {
-            dd($v);
+            foreach ($v['market'] as $kk => $vv) {
+                dd($vv);
+            }
         }
         
         /////////////////////////////////////////////////////////////////
