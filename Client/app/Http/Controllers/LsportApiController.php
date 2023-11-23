@@ -1734,7 +1734,6 @@ class LsportApiController extends Controller {
                     }
                 }
 
-                dd($risk_data[$market_id],$vvv['status'],$default_status);
                 /////////////////////////
 
                 $tmp_data = array();
@@ -1747,6 +1746,8 @@ class LsportApiController extends Controller {
                 $tmp_data['last_update'] = $vvv['last_update'];
                 $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
                     
+                dd($risk_data[$market_id],$vvv['status'],$default_status,$tmp_data);
+                
                 $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
                 
                 // 只要其中一個賠率status 為1 , 則顯示
