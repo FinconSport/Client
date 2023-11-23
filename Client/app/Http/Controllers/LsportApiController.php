@@ -881,7 +881,7 @@ class LsportApiController extends Controller {
         }
 
         if ($risk_config == 0) {
-            $this->ApiError("15");
+            $this->ApiError("151");
         }
 
         //////////////////////////////////////////
