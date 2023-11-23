@@ -224,6 +224,22 @@
 		// ===== DATA LAYER ======
 
 		// ===== VIEW LAYER ======
+
+		// 儲存先前的 screen.width
+		var previousScreenWidth = window.screen.width;
+
+		// 定義處理 screen.width 變化的函數
+		function handleScreenResize() {
+			// 取得當前的 screen.width
+			var currentScreenWidth = window.screen.width;
+			// 檢查 screen.width 是否改變
+			if (currentScreenWidth !== previousScreenWidth) {
+				// 更新 previousScreenWidth
+				previousScreenWidth = currentScreenWidth;
+				$('#wrap').css('width', previousScreenWidth)
+			}
+		}
+
 		function viewCommonIni() {
 			// 帳號 餘額
 			$('.player').html(accountD.data.account)
@@ -445,7 +461,10 @@
 
 
 		$(document).ready(function() {
-			$('#wrap').css('width', window.screen.width)
+			// 初始化寬度設定
+			handleScreenResize();
+			// 監聽 resize 事件
+			window.addEventListener('resize', handleScreenResize);
 
 			// loading page
 			$('#dimmer').dimmer('show');
