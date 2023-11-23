@@ -16,7 +16,7 @@
 
     @yield('styles')
   </head>
-  <body>
+  <body style="overflow-x: auto;">
 	@if($player['status'] !== 1)
 
 	@endif
