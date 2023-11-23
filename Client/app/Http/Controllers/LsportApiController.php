@@ -557,7 +557,7 @@ class LsportApiController extends Controller {
 
                     $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
-                    dd($fixture_id,$market_data,$risk_data);
+                    dd($fixture_id,$market_data,$risk_data[$market_id]);
                     $default_risk_data = [];
                     if (isset($risk_data[$market_id])) {
                       $default_risk_data = $risk_data[$market_id];
