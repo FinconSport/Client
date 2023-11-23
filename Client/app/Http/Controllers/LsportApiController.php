@@ -866,12 +866,18 @@ class LsportApiController extends Controller {
 
         $name_en = $market_bet_data['name_en'];
         $pos_name_en = [["1","Odd","Over"],["2","Even","Under"]];
+
+        $risk_config = null;
         if (in_array($name_en, $pos_name_en[0])) {
             // pos = 0
-            $risk_config = $risk_data[$market_id][0];
+            if (isset($risk_data[$market_id][0])) {
+                $risk_config = $risk_data[$market_id][0];
+            }
         } elseif (in_array($name_en, $pos_name_en[1])) {
             // pos = 1
-            $risk_config = $risk_data[$market_id][1];
+            if (isset($risk_data[$market_id][1])) {
+                $risk_config = $risk_data[$market_id][1];
+            }
         }
 
         dd($risk_config);
