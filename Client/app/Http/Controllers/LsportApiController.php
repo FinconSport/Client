@@ -1749,7 +1749,7 @@ class LsportApiController extends Controller {
                 $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
                 
                 // 只要其中一個賠率status 為1 , 則顯示
-                if ($vvv['status'] == 1) { 
+                if ($default_status == 1) { 
                     $check_market_bet_lines[$base_line] = true;
                 }
                 
