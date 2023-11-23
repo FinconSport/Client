@@ -1666,6 +1666,9 @@ class LsportApiController extends Controller {
         $data = array();
         $fixture_data = $return;
 
+        // 時間格式轉化
+        $fixture_data['start_time'] = date("Y-m-d H:i:s",$fixture_data['start_time']);
+
         $league_id = $fixture_data['league_id'];
         $fixture_id = $fixture_data['fixture_id'];
         $fixture_status = $fixture_data['status'];
