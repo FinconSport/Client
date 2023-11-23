@@ -880,7 +880,9 @@ class LsportApiController extends Controller {
             }
         }
 
-        dd($risk_config);
+        if ($risk_config == 0) {
+            $this->ApiError("15");
+        }
 
         //////////////////////////////////////////
         // 建立延時注單時或風控大單以下欄位應該留空: approval_time, bet_rate
