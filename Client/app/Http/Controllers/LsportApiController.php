@@ -1297,6 +1297,31 @@ class LsportApiController extends Controller {
             }
 
             //////////////////////////////////////////
+            // 取得風控設定
+            $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+            $risk_data = json_decode($return['data'],true);
+
+            $name_en = $market_bet_data['name_en'];
+            $pos_name_en = [["1","Odd","Over"],["2","Even","Under"]];
+
+            $risk_config = null;
+            if (in_array($name_en, $pos_name_en[0])) {
+                // pos = 0
+                if (isset($risk_data[$market_id][0])) {
+                    $risk_config = $risk_data[$market_id][0];
+                }
+            } elseif (in_array($name_en, $pos_name_en[1])) {
+                // pos = 1
+                if (isset($risk_data[$market_id][1])) {
+                    $risk_config = $risk_data[$market_id][1];
+                }
+            }
+
+            if ($risk_config === 0) {
+                $this->ApiError("151");
+            }
+
+            //////////////////////////////////////////
             // 建立延時注單時或風控大單以下欄位應該留空: approval_time, bet_rate
             // 風控大單啟動 --> '不'取賠率資料寫入注單, 賠率資料留到運營審核通過當下才會取
             // 延時投注啟動 --> '不'取賠率資料寫入注單, 賠率資料留到delay_time到期才會取
