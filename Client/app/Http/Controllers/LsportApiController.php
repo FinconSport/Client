@@ -537,6 +537,40 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_match_list', $key);
         $data = json_decode($data,true);
 
+        foreach ($data as $k => $v) {
+          foreach ($v as $sport_id => $sport) {
+            foreach ($sport['list'] as $league_id => $league) {
+              foreach ($league['list'] as $fixture_id => $fixture) {
+    
+                $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+                $risk_data = json_decode($return['data'],true);
+    
+                // 部份比賽, 沒有market
+                if (!isset($fixture['list'])) {
+                  continue;
+                }
+    
+                // 填入risk資料
+                foreach ($fixture['list'] as $market_id => $market) {
+                  if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+
+                    $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+
+                    dd($market_data);
+                    $default_risk_data = [];
+                    if (isset($risk_data[$market_id])) {
+                      $default_risk_data = $risk_data[$market_id];
+                    }
+                    $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['risk'] = $default_risk_data;
+                  }
+                }
+    
+              }
+            }
+          }
+        }
+    
+
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
