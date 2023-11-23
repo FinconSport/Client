@@ -428,7 +428,7 @@
             }
             
             let timerStr = null
-            if( v3.periods ) {
+            if( v3.periods && v3.periods.period !== -1 ) {
                 // stage
                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                 // exception baseball
@@ -800,7 +800,7 @@
 
                             // stage
                             let timerStr = null
-                            if( v3.periods ) {
+                            if( v3.periods && v3.periods.period !== -1 ) {
                                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                                 // exception baseball
                                 if( sport === 154914 ) {
@@ -824,7 +824,6 @@
                                     let outText = v3.periods.Outs ? v3.periods.Outs : '0'
                                     out.css('background-image', `url(/image/balls/o${outText}.png)`)
                                 }
-
                                 time.html(timerStr)
                             }
 
