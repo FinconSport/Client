@@ -1668,10 +1668,6 @@ class LsportApiController extends Controller {
         // 開始處理market
         $data['list']['market'] = array();
 
-        // 取得風控設定
-        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
-        $risk_data = json_decode($return['data'],true);
-
         $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
         if ($return === false) {
             $this->ApiError('03');
@@ -1724,19 +1720,6 @@ class LsportApiController extends Controller {
                 $base_line = $vvv['base_line'];
                 $check_market_bet_lines[$base_line] = false;
 
-                /////////////////////////
-                // 判定風控值
-
-                $default_status = $vvv['status'];
-                if (isset($risk_data[$market_id][$kkk])) {
-                    $risk_config = $risk_data[$market_id][$kkk];
-                    if ($risk_config !== null) {
-                        $default_status = $risk_config;
-                    }
-                }
-
-                /////////////////////////
-
                 $tmp_data = array();
                 $tmp_data['market_bet_id'] = $market_bet_id;
                 $tmp_data['market_bet_name'] = $market_bet_name;
@@ -1787,6 +1770,17 @@ class LsportApiController extends Controller {
             }
         }
 
+        /////////////////////////
+        // 判定風控值
+
+        // 取得風控設定
+        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+        $risk_data = json_decode($return['data'],true);
+
+        foreach ($data as $k => $v) {
+            dd($v);
+        }
+        
         /////////////////////////////////////////////////////////////////
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
