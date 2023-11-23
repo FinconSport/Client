@@ -46,6 +46,8 @@ class GameOrder extends CacheModel
 				$model = $model->where('create_time', "<", $end_time);
 			}
 
+
+			dd($start_time , $end_time);
 			// result
 			if ($result == -1) {		// 全部
 				// do nothing
