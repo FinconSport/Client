@@ -1733,6 +1733,8 @@ class LsportApiController extends Controller {
                         $default_status = $risk_config;
                     }
                 }
+
+                dd($risk_data[$market_id]);
                 /////////////////////////
 
                 $tmp_data = array();
