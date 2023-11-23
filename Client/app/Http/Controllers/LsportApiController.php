@@ -859,6 +859,12 @@ class LsportApiController extends Controller {
             $order['market_bet_name'] = $market_bet_data[$lang_col];
         }
         //////////////////////////////////////////
+        
+
+        dd($market_bet_data);
+        // 取得風控設定
+        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+        $risk_data = json_decode($return['data'],true);
 
 
         //////////////////////////////////////////
