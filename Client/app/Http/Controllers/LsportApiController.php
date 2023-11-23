@@ -1777,6 +1777,7 @@ class LsportApiController extends Controller {
         $return = LsportRisk::where("fixture_id",$fixture_id)->first();
         $risk_data = json_decode($return['data'],true);
 
+        dd($data);
         foreach ($data as $k => $v) {
             foreach ($v['market'] as $kk => $vv) {
                 
@@ -1785,7 +1786,6 @@ class LsportApiController extends Controller {
                 foreach ($market_list as $kkk => $vvv) {
                     
                     if (isset($risk_data[$market_id][$kkk])) {
-                        dd($data[$k]['market']['market_bet']);
                         
                     }
                 }
