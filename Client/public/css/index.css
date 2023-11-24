@@ -154,6 +154,9 @@
     line-height: 2rem;
     border-left: 2px solid rgb(220, 220, 220);
     padding: 0 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .timeSpan,
 .indexBetCardTable {
@@ -315,6 +318,7 @@
 .bet_name {
     font-weight: normal;
     color: #ff7000;
+    white-space: nowrap;
 }
 .bet_name .bet_name_item {
     color: black;
