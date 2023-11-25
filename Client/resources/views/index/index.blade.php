@@ -498,6 +498,8 @@
                 // 讓分的priority && 有兩個選項
                 j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
 
+                console.log(betData.list, isHcapTeam)
+
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && parseFloat(v4.line) < 0 ) {
@@ -1386,7 +1388,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                showErrorToast(jqXHR)
+                // showErrorToast(jqXHR)
             }
         });
     }
