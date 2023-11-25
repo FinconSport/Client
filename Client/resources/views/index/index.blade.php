@@ -496,13 +496,11 @@
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
-                j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
-
-                console.log(betData.list, isHcapTeam)
+                j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
 
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
-                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                    if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         if( stageBet === 0 ) {
                             // 先取消樣式
                             card.find('.teamSpan').eq(0).removeClass('hcapTeam');
@@ -868,11 +866,11 @@
                                     let isHcapTeam = null
 
                                     // 讓分的priority && line不同 && 有盤口
-                                    j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                                    j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
-                                        if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                        if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(0).removeClass('hcapTeam');
