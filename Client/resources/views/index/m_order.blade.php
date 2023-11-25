@@ -443,11 +443,11 @@
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
-                j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
 
                 Object.entries(betData.list).map(([k4, v4], s) => {
                     // 判定讓方 -> line值為負
-                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                    if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         let index = parseInt(v4.market_bet_name_en) - 1
                         card.find('.teamSpan').eq(index).addClass('hcapTeam') 
                     }
@@ -707,13 +707,13 @@
                                 // 是否有讓方
                                 let isHcapTeam = null
                                 // 讓分的priority && line不同 && 有盤口
-                                j === 1 && betData.list.length === 2 && (parseFloat(betData.list[0].line) !== parseFloat(betData.list[1].line)) ? isHcapTeam = true : isHcapTeam = false
+                                j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
                                 
                                 Object.entries(betData.list).map(([k4, v4], s) => {
                                     // 先取消樣式
                                     bet_div.find('div').removeClass('hcapTeam')
                                     // 判定讓方 -> line值為負
-                                    if( isHcapTeam && parseFloat(v4.line) < 0 ) {
+                                    if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                                         let index = parseInt(v4.market_bet_name_en) - 1
                                         bet_div.find('.teamSpan').eq(index).addClass('hcapTeam') 
                                     }
@@ -1268,7 +1268,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('error');
-                showErrorToast(jqXHR)
+                // showErrorToast(jqXHR)
             }
         });
     }

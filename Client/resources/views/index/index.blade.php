@@ -500,7 +500,7 @@
 
                 Object.entries(betData.list).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
-                    if( isHcapTeam && v4.line < 0 ) {
+                    if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         if( stageBet === 0 ) {
                             // 先取消樣式
                             card.find('.teamSpan').eq(0).removeClass('hcapTeam');
@@ -870,7 +870,7 @@
                                     
                                     Object.entries(betData.list).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
-                                        if( isHcapTeam && v4.line < 0 ) {
+                                        if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                                             if( stageBet === 0 ) {
                                                 // 先取消樣式
                                                 card.find('.teamSpan').eq(0).removeClass('hcapTeam');
