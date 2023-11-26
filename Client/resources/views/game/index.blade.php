@@ -694,10 +694,8 @@
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
 
-            console.log(scorehome)
-
             for (let i = 0; i < gameTitle.length; i++) {
-                const scoreValue = scorehome[i];
+                const scoreValue = Array.from(Object.values(scorehome))[i];
                 const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                 if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
                     scoreBoardBodyTemp_home.append(thHome);
@@ -711,7 +709,7 @@
             scoreBoardBodyTemp_away.append(awayTeamName);
 
             for (let i = 0; i < gameTitle.length; i++) {
-                const scoreValue = scoreaway[i];
+                const scoreValue = Array.from(Object.values(scoreaway))[i];
                 const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                 if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
                     scoreBoardBodyTemp_away.append(thAway);
