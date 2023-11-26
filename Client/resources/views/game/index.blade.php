@@ -630,7 +630,7 @@
 
 
         // Living fixture (status == 2)
-        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard && data.list?.periods?.period !== -1 ) {
+        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
@@ -657,7 +657,15 @@
                 data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
 
-            const stageText = data.list.status == 2 ? commonLangTrans.stageArr[sport][data.list.periods.period] : gameLangTrans.scoreBoard.ready
+            // const stageText = data.list.status == 2 ? commonLangTrans.stageArr[sport][data.list.periods.period] : gameLangTrans.scoreBoard.ready
+
+            var stageText = formatDateTime(data.list.start_time)
+            if( data.list.status == 2 ) {
+                if( data.list.periods.period !== -1 ) stageText = commonLangTrans.stageArr[sport][data.list.periods.period]
+            } else {
+                stageText = gameLangTrans.scoreBoard.ready
+            }
+
             const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
 
