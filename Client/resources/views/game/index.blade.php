@@ -694,7 +694,7 @@
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
 
-            console.log(`home-> ${scorehome}`)
+            console.log(scorehome)
 
             for (let i = 0; i < gameTitle.length; i++) {
                 const scoreValue = scorehome[i];
