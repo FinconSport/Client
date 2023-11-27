@@ -116,10 +116,10 @@
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="swiper-slide early-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
+            <div class="early-fixture-con" style="width:100%!important;"></div>
+            <div class="living-fixture-con" style="width:100%!important;"></div>
+            <div class="living-fixture-isBaseball-mts" style="width:100%!important;"></div>
+            <div class="living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
