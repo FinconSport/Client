@@ -762,7 +762,7 @@
 
         const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
         scoreBoardHeadTemp.append(TeamNameHead);
-
+        
         let baseballShowStage = [];
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
@@ -790,7 +790,9 @@
         }
 
         scoreBoardHeadContainer.append(scoreBoardHeadTemp);
-        scoreBoardTableContainer.append(scoreBoardHeadContainer);
+        
+        // scoreBoardHeadContainer.append(scoreBoardHeadTemp);
+        // scoreBoardTableContainer.append(scoreBoardHeadContainer);
         // $('#livingtableHead').append(scoreBoardHeadTemp);
 
         // Home team
@@ -819,9 +821,11 @@
             }
         }
 
-        scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+        // scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-        scoreBoardTableContainer.append(scoreBoardBodyContainer);
+        // scoreBoardTableContainer.append(scoreBoardBodyContainer);
+
+        scoreBoardTableContainer.append(scoreBoardHeadContainer);
 
         livingContainerTemp.append(scoreBoardTableContainer);
 
