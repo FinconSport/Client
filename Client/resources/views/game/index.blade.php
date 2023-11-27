@@ -700,18 +700,29 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
+
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
-            $(`tr[id="${headTr}"]`).remove();
-            $(`tr[id="${bodyTr}"]`).remove();
+
+            const headTrElement = $(`tr[id="${headTr}"]`);
+            const headTrParentThead = headTrElement.closest('thead');
+            const bodyTrElement = $(`tr[id="${headTr}"]`);
+            const bodyTrParentTBody = bodyTrElement.closest('tbody');
+
+            headTrElement.remove();
+            bodyTrElement.remove();
+
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
+
             scoreBoardHeadTemp.attr('id', headTr);
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
+
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
             // Thead data game title
             let stageStr = ''
@@ -753,9 +764,9 @@
                 }
                 
             }
-            const clonedLivingtableHead = $('#livingtableHead').clone();
-            clonedLivingtableHead.append(scoreBoardHeadTemp);
-            // $('#livingtableHead').append(scoreBoardHeadTemp);
+
+            bodyTrParentTHead.append(scoreBoardHeadTemp);
+
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -766,8 +777,8 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-            const clonedLivingtableBody = $('#livingtableBody').clone();
-            clonedLivingtableBody.append(scoreBoardBodyTemp_home);
+
+            bodyTrParentTBody.append(scoreBoardBodyTemp_home);
 
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -781,10 +792,6 @@
             }
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-            // Append away team after home team to table
-            livingContainerTemp.append(clonedLivingtableHead);
-            clonedLivingtableHead.after(clonedLivingtableBody);
-            
             $('.swiper-wrapper').append(livingContainerTemp);
         } else {
             // Early fixture (status == 1)
