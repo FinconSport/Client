@@ -76,7 +76,7 @@
                 <p class="away_team_name col-3"></p>
             </div>
             <!-- living fixture -->
-            <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
+            <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
                 <table>
                     <thead id="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -692,31 +692,27 @@
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const livingContainerTemp = $('div[key="livingContainerTemplate"]').clone();
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
-            const DynID = data.list.fixture_id;
-
-            $(`div[id="${DynID}"]`).remove();
-
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            // $('div[template="livingContainerTemplate"]').removeAttr('hidden');
+            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+            var scorehome = data.list?.scoreboard[1]
+            var scoreaway = data.list?.scoreboard[2]
+            const headTr = data.list.fixture_id + '_head';
+            const bodyTr = data.list.fixture_id + '_body';
+            $(`tr[id="${headTr}"]`).remove();
+            $(`tr[id="${bodyTr}"]`).remove();
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
-
-            var scorehome = data.list?.scoreboard[1]
-            var scoreaway = data.list?.scoreboard[2]
-            
-            livingContainerTemp.attr('id', DynID);
-            scoreBoardHeadTemp.attr('id', DynID);
-            scoreBoardBodyTemp_home.attr('id', DynID);
-            scoreBoardBodyTemp_away.attr('id', DynID);
+            scoreBoardHeadTemp.attr('id', headTr);
+            scoreBoardBodyTemp_home.attr('id', bodyTr);
+            scoreBoardBodyTemp_away.attr('id', bodyTr);
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
-
             // Thead data game title
             let stageStr = ''
             if( sport === 154914 && data.list?.periods?.period < 10 ) {
@@ -757,8 +753,7 @@
                 }
                 
             }
-
-            $(`div[id="${DynID}"] #livingtableHead`).append(scoreBoardHeadTemp);
+            $('#livingtableHead').append(scoreBoardHeadTemp);
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -769,9 +764,7 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-
-            $(`div[id="${DynID}"] #livingtableBody`).append(scoreBoardBodyTemp_home);
-
+            $('#livingtableBody').append(scoreBoardBodyTemp_home);
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
