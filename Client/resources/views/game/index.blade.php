@@ -804,11 +804,13 @@
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         if (existingMainCon.length !== 0) {
-            $(`div#${mainCon}`).empty();
+            livingContainerTemp.find('thead[key="livingtableHead"]').empty();
+            livingContainerTemp.find('thead[key="livingtableBody"]').empty();
         }
-        // $(`div[id="${mainCon}"]`).remove();
-        // $(`tr[id="${headTr}"]`).remove();
-        // $(`tr[id="${bodyTr}"]`).remove();
+
+        $(`div[id="${mainCon}"]`).remove();
+        $(`tr[id="${headTr}"]`).remove();
+        $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
