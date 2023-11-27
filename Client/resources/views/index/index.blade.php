@@ -431,7 +431,7 @@
                 // stage
                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                 // exception baseball
-                if( sport === 154914 ) {
+                if( sport === 154914 && !v3.periods?.Bases ) {
                     // stage
                     v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
