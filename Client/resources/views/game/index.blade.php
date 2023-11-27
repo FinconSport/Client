@@ -718,9 +718,9 @@
 
     function createScoreBoardTemplate(sport, data, iteration) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate"]:eq(${iteration})`).clone();
-        const dynamicID = `${data.list.fixture_id}_${iteration}`;
-
-        livingContainerTemp.attr('id', dynamicID);
+        const randomInt = Math.floor(Math.random() * 100) + 1;
+        const dynamicID = `${data.list.fixture_id}_${randomInt}`;
+        $(`.swiper-wrapper`).empty();
 
         const tableElement = $('<table></table>');
         const theadElement = $('<thead key="livingtableHead"></thead>');
