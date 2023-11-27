@@ -464,6 +464,10 @@
                                 item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
                             }
                         }
+                        // 三格的時候調整寬度
+                        if( priorityArr.length === 3 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-3 col');
+                        }
                         // 足球 調整col
                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {
                             item.find('div[key="betItemDiv_name"]').toggleClass('col-4 col');
@@ -517,6 +521,10 @@
                         // 四格的時候調整寬度
                         if( priorityArr.length === 4 ) {
                             item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-4 col');
+                        }
+                        // 三格的時候調整寬度
+                        if( priorityArr.length === 3 ) {
+                            item.find('div[key="changeCol"] .col').eq(0).toggleClass('col-3 col');
                         }
                         // 足球 調整col
                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) {

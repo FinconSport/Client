@@ -60,8 +60,8 @@ return [
 			'mainPriorityArr' => [201, 203, 205, 202, 204, 206],
 		],
 		131506 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
-			'mainPriorityArr' => [401, 403, 405, 407],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
+			'mainPriorityArr' => [401, 403, 405],
 		],
 		48242 => [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
@@ -84,8 +84,8 @@ return [
 			'mainPriorityArr' => [1, 3, 5, 7],
 		],
 		35232 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
-			'mainPriorityArr' => [301, 302, 303, 304],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
+			'mainPriorityArr' => [301, 302, 303],
 		],
 	],
 	'tableLivingData' => [
