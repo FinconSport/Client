@@ -77,15 +77,9 @@
             </div>
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
-                <table>
-                    <thead id="livingtableHead">
-                        <tr template="scoreBoardHeadTemplate" hidden></tr>
-                    </thead>
-                    <tbody id="livingtableBody">
-                        <tr template="scoreBoardBodyTemplate_home" hidden></tr>
-                        <tr template="scoreBoardBodyTemplate_away" hidden></tr>
-                    </tbody>
-                </table>
+                <tr template="scoreBoardHeadTemplate" hidden></tr>
+                <tr template="scoreBoardBodyTemplate_home" hidden></tr>
+                <tr template="scoreBoardBodyTemplate_away" hidden></tr>
             </div>
         </div>
         <!-- If we need pagination -->
@@ -712,9 +706,9 @@
             $(`thead[id="${headTr}"]`).remove();
             $(`tbody[id="${bodyTr}"]`).remove();
 
-            const table = $('<table>').addClass(`${tableID}`);
-            const tableHead = $('<thead>').attr('id', `${headTr}`);
-            const tableBody = $('<tbody>').attr('id', `${bodyTr}`);
+            
+            
+            
 
             table.append(tableHead);
             tableHead.after(tableBody);
@@ -771,6 +765,7 @@
                 
             }
 
+            const tableHead = $('<thead>').attr('id', `${headTr}`);
             tableHead.append(scoreBoardHeadTemp);
 
             // Home team
@@ -784,6 +779,7 @@
                 }
             }
 
+            const tableBody = $('<tbody>').attr('id', `${bodyTr}`);
             tableBody.append(scoreBoardBodyTemp_home);
 
             // Away team
@@ -799,7 +795,9 @@
 
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
+            const table = $('<table>').addClass(`${tableID}`);
             table.append(tableHead);
+            
             tableHead.after(tableBody);
             livingContainerTemp.append(table);
 
