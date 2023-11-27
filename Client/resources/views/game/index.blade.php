@@ -729,7 +729,7 @@
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], lts);
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
                 $('.template-con').append($('.early-fixture-con').detach().css({
                     'display': 'none',
                     'height': '0px',
@@ -737,7 +737,7 @@
                 }));
 
                 if (scbLen >= 6) {
-                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], mts);
+                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "mts");
                 } else {
                     $('.template-con').append($('.living-fixture-mts').detach().css({
                         'display': 'none',
@@ -747,7 +747,7 @@
                 }
 
                 if (scbLen > 9) {
-                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], mtn);
+                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "mtn");
                 } else {
                     $('.template-con').append($('.living-fixture-mtn').detach().css({
                         'display': 'none',
