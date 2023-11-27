@@ -776,8 +776,6 @@
         const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
         scoreBoardHeadTemp.append(TeamNameHead);
 
-        let baseballShowStageTemp = baseballShowStage;
-
         // for (let i = 0; i < gameTitle.length; i++) {
         //     if (sport === 154914) {
         //         const scbLen = data.list?.scoreboard[1].length - 1;
