@@ -45,6 +45,11 @@
     margin: auto;
 }
 
+.livingFixture-container.row,
+.scoreboardCon .earlyFixture-container {
+    height: auto;
+}
+
 @media screen and (max-width:1227px) {
     .livingFixture-container.row,
     .scoreboardCon .earlyFixture-container {
@@ -119,6 +124,7 @@ div#bettingTypeContainer {
     height: 3rem;
     text-align: center;
     line-height: 3rem;
+    z-index: 3;
 }
 
 #scoreboardContainer thead th{
