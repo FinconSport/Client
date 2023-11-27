@@ -846,7 +846,7 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
         if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
-            $('.swiper-wrapper .swiper-slide.living-fixture').append(livingContainerTemp);
+            $('.living-fixture').append(livingContainerTemp);
         }
     }
 
@@ -943,7 +943,7 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
         if (existingHeadTr_mts.length === 0 || existingBodyTr_mts.length === 0) {
-            $('.swiper-wrapper .swiper-slide.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
+            $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
         }
     }
 
@@ -1040,7 +1040,7 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
         if (existingHeadTr_mtn.length === 0 || existingBodyTr_mtn.length === 0) {
-            $('.swiper-wrapper .swiper-slide.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
+            $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
         }
     }
 
