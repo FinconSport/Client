@@ -792,8 +792,6 @@
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
             if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
                 $('.swiper-wrapper').append(livingContainerTemp);
-            } else {
-                $('.swiper-wrapper').append(livingContainerTemp);
             }
         } else {
             // Early fixture (status == 1)
