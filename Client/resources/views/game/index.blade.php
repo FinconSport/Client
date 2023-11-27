@@ -786,13 +786,13 @@
 
             // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-            
-            $(`div[id="${data.list.fixture_id}"]`).remove();
-            $(`tr[id="${headTr}"]`).remove();
-            $(`tr[id="${bodyTr}"]`).remove();
+            if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
+                $(`div[id="${data.list.fixture_id}"]`).remove();
+                $(`tr[id="${headTr}"]`).remove();
+                $(`tr[id="${bodyTr}"]`).remove();
+            }
 
             $('.swiper-wrapper').append(livingContainerTemp);
-
         } else {
             // Early fixture (status == 1)
             const leagueID = data.list.league_id;
