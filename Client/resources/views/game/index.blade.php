@@ -874,9 +874,6 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        if (existingMainCon.length !== 0) {
-            $('div.living-fixture-con').empty();
-        }
 
         $('.living-fixture-con').append(livingContainerTemp);
     }
