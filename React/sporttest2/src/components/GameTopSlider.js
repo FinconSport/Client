@@ -216,7 +216,7 @@ class GameTopSlider extends React.Component {
                                 </div>
                             </MainInfoSlider>
                         </SwiperSlide>
-                        {(fixture.status === 2 || fixture.status === 9) && 
+                        {(fixture.status === 2 || fixture.status === 9) && fixture.scoreboard && 
                             <SwiperSlide id="scoreBoard" style={{ backgroundImage: `url(${ScoreBoardBg})`, backgroundSize: '100% 100%', paddingBottom: '52px'}}>
                                 <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
                                     <div className='col-2 gametopslider'>
@@ -249,6 +249,7 @@ class GameTopSlider extends React.Component {
 
                                     <table className="table table-bordered">
                                         {(() => {
+                                            if( !fixture.scoreboard ) return
                                             const scbLen = fixture.scoreboard[1].length - 1;
                                             switch (true) {
                                                 case scbLen < 6:
@@ -281,10 +282,11 @@ class GameTopSlider extends React.Component {
                                                 <td style={{textOverflow: 'ellipsis',whiteSpace: 'nowrap',overflow: 'hidden',maxWidth: '5rem'}}>
                                                     {fixture.home_team_name}
                                                 </td>
+                                                
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                         return(
-                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{fixture.scoreboard[1][k] === undefined ? '-' : fixture.scoreboard[1][k]}</td>
+                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{Array.from(Object.values(fixture.scoreboard[1]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[1]))[k]}</td>
                                                         )
                                                     })
                                                 }
@@ -296,7 +298,7 @@ class GameTopSlider extends React.Component {
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                         return(
-                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{fixture.scoreboard[2][k] === undefined ? '-' : fixture.scoreboard[2][k]}</td>
+                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{Array.from(Object.values(fixture.scoreboard[2]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[2]))[k]}</td>
                                                         )
                                                     })
                                                 }
