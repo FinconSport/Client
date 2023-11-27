@@ -762,7 +762,7 @@
                 }
             }
             livingContainerTemp.find('thead[key="livingtableHead"]').append(scoreBoardHeadTemp);
-            livingtableHead
+
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
