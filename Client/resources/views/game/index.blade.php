@@ -1331,11 +1331,8 @@
         }
     })
 
-    // swiper slider toggle
-    const swiper = new Swiper('.swiper-container', {
-        loop: true,
-
-        // If we need pagination
+    var swiper = new Swiper('.swiper-container', {
+        // init: false,
         pagination: {
             el: '.swiper-pagination',
         },
@@ -1345,6 +1342,10 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+
+        slidesPerView : 'auto',
+        loop : true,
+        spaceBetween : 34
     });
 </script>
 @endpush
