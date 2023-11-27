@@ -712,7 +712,7 @@
             
             if (existingHeadTr.length === 2) {
                 console.log(`Two elements with ID ${headTr} found. Removing the first one.`);
-                existingHeadTr.first().remove();
+                existingHeadTr.first().closest('tr').remove();
             }
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
