@@ -728,57 +728,32 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
-
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                $('.template-con').append($('.early-fixture-con').detach().css({
-                    'display': 'none',
-                    'height': '0px',
-                    'important': 'true'
-                }));
 
-                if (scbLen >= 6) {
-                    isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    }));
-                }
+                $('.template-con').append($('.early-fixture-con').detach().css({ 'display': 'none', 'height': '0px', 'important': 'true' }));
 
-                if (scbLen > 9) {
-                    isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
-                } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    }));
-                }
+                scbLen >= 6 ? isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]) :
+                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css({ 'display': 'none', 'height': '0px', 'important': 'true' }));
+
+                scbLen > 9 ? isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]) :
+                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css({ 'display': 'none', 'height': '0px', 'important': 'true' }));
 
             } else {
                 createScoreBoardTemplate(sport, data);
             }
         } else {
             // Early fixture (status == 1)
-            $('.template-con').append(
-                $('.living-fixture-isBaseball-mtn, .living-fixture-isBaseball-mts, .living-fixture-con')
-                    .detach()
-                    .css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    })
-            );
+            $('.template-con').append($('.living-fixture-isBaseball-mtn, .living-fixture-isBaseball-mts, .living-fixture-con').detach().css({ 'display': 'none', 'height': '0px', 'important': 'true' }));
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
-            earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.attr('id', data.list.league_id);
-            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.list.league_name);
-            earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
-            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            const formattedDateTime = formatDateTime(data.list.start_time);
+            earlyContainerTemp.removeAttr('hidden').removeAttr('template').attr('id', data.list.league_id)
+                .find('.home_team_name').text(data.list.home_team_name).end()
+                .find('.league_name').text(data.list.league_name).end()
+                .find('.start_time').html(formattedDateTime).end()
+                .find('.away_team_name').text(data.list.away_team_name);
+
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
@@ -790,282 +765,126 @@
         const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]`).clone();
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
+        const scorehome = data.list?.scoreboard[1];
+        const scoreaway = data.list?.scoreboard[2];
 
-        var scorehome = data.list?.scoreboard[1];
-        var scoreaway = data.list?.scoreboard[2];
-
-        const mainCon = data.list.fixture_id + '_0_lts'; 
-        const existingMainCon = $(`div[id="${mainCon}"]`); 
-        const headTr = data.list.fixture_id + '_0_head'; 
-        const existingHeadTr = $(`tr[id="${headTr}"]`);
+        const mainCon = data.list.fixture_id + '_0_lts';
+        const headTr = data.list.fixture_id + '_0_head';
         const bodyTr = data.list.fixture_id + '_0_body';
-        const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $('div.living-fixture-con').empty();
-        livingContainerTemp.find('thead[key="livingtableHead"]').empty();
-        livingContainerTemp.find('tbody[key="livingtableBody"]').empty();
-
-        scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
-        scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
-
-        livingContainerTemp.attr('id', mainCon);
-        scoreBoardHeadTemp.attr('id', headTr);
-        scoreBoardBodyTemp_home.attr('id', bodyTr);
-        scoreBoardBodyTemp_away.attr('id', bodyTr);
+        clearAndSetContainer(livingContainerTemp, mainCon, headTr, bodyTr);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        // Thead data game title
-        let stageStr = '';
-        if (sport === 154914 && data.list?.periods?.period < 10) {
-            data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
-        }
-
-        var stageText = formatDateTime(data.list.start_time);
-        if (data.list.status == 2) {
-            if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
-        } else {
-            stageText = gameLangTrans.scoreBoard.ready;
-        }
-
-        const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
-        scoreBoardHeadTemp.append(TeamNameHead);
-
-        let baseballShowStageTemp = baseballShowStage;
-
-        for (let i = 0; i < gameTitle.length; i++) {
-            if (sport === 154914) {
-                const scbLen = data.list?.scoreboard[1].length - 1;
-                baseballShowStageTemp = baseballShowStage;
-                if (baseballShowStageTemp.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-                }
-            } else {
-                scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-            }
-        }
-
-        livingContainerTemp.find('thead[key="livingtableHead"]').append(scoreBoardHeadTemp);
-
-        // Home team
-        const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
-        scoreBoardBodyTemp_home.append(homeTeamName);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_home.append(thHome);
-            }
-        }
-
-        livingContainerTemp.find('tbody[key="livingtableBody"]').append(scoreBoardBodyTemp_home);
-
-        // Away team
-        const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
-        scoreBoardBodyTemp_away.append(awayTeamName);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_away.append(thAway);
-            }
-        }
-
-        // Append away team after home team to table
-        scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+        appendHeaderCells(scoreBoardHeadTemp, gameTitle, sport, data);
+        appendBodyCells(scoreBoardBodyTemp_home, scorehome, gameTitle, baseballShowStage, sport);
+        appendBodyCells(scoreBoardBodyTemp_away, scoreaway, gameTitle, baseballShowStage, sport);
 
         $('.living-fixture-con').append(livingContainerTemp);
     }
 
-    function isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, baseballShowStage_mts) {
+    function isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, baseballShowStage) {
         const livingContainerTemp_mts = $(`div[template="isBaseball_livingConTemplate_moreThanSix"]`).clone();
         const scoreBoardHeadTemp_mts = $(`tr[template="isBaseball_scoreBoardHeadTemplate_moreThanSix"]`).clone();
         const scoreBoardBodyTemp_home_mts = $(`tr[template="isBaseball_scoreBoardBodyTemplate_home_moreThanSix"]`).clone();
         const scoreBoardBodyTemp_away_mts = $(`tr[template="isBaseball_scoreBoardBodyTemplate_away_moreThanSix"]`).clone();
 
         livingContainerTemp_mts.removeAttr('hidden').removeAttr('template');
-
-        var scorehome = data.list?.scoreboard[1];
-        var scoreaway = data.list?.scoreboard[2];
+        const scorehome = data.list?.scoreboard[1];
+        const scoreaway = data.list?.scoreboard[2];
 
         const randomInt_mts = Math.floor(Math.random() * 100) + 1;
-
-        const mainCon_mts = data.list.fixture_id + '_1_mts'; 
-        const existingMainCon_mts = $(`div[id="${mainCon_mts}"]`); 
-        const headTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_head'; 
-        const existingHeadTr_mts = $(`tr[id="${headTr_mts}"]`);
+        const mainCon_mts = data.list.fixture_id + '_1_mts';
+        const headTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_head';
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
-        const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
-        $('div.living-fixture-isBaseball-mts').empty();
-        livingContainerTemp_mts.find('thead[key="isBaseball_livingtableHead_moreThanSix"]').empty();
-        livingContainerTemp_mts.find('tbody[key="isBaseball_livingtableBody_moreThanSix"]').empty();
-
-        scoreBoardHeadTemp_mts.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_home_mts.removeAttr('hidden').removeAttr('template');  
-        scoreBoardBodyTemp_away_mts.removeAttr('hidden').removeAttr('template'); 
-
-        livingContainerTemp_mts.attr('id', mainCon_mts);
-        scoreBoardHeadTemp_mts.attr('id', headTr_mts);
-        scoreBoardBodyTemp_home_mts.attr('id', bodyTr_mts);
-        scoreBoardBodyTemp_away_mts.attr('id', bodyTr_mts);
+        clearAndSetContainer(livingContainerTemp_mts, mainCon_mts, headTr_mts, bodyTr_mts);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        // Thead data game title
-        let stageStr = '';
-        if (sport === 154914 && data.list?.periods?.period < 10) {
-            data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
-        }
+        appendHeaderCells(scoreBoardHeadTemp_mts, gameTitle, sport, data);
+        appendBodyCells(scoreBoardBodyTemp_home_mts, scorehome, gameTitle, baseballShowStage, sport);
+        appendBodyCells(scoreBoardBodyTemp_away_mts, scoreaway, gameTitle, baseballShowStage, sport);
 
-        var stageText = formatDateTime(data.list.start_time);
-        if (data.list.status == 2) {
-            if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
-        } else {
-            stageText = gameLangTrans.scoreBoard.ready;
-        }
-
-        const TeamNameHead_mts = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
-        scoreBoardHeadTemp_mts.append(TeamNameHead_mts);
-
-        let baseballShowStageTemp_mts = baseballShowStage_mts;
-
-        for (let i = 0; i < gameTitle.length; i++) {
-            if (sport === 154914) {
-                const scbLen = data.list?.scoreboard[1].length - 1;
-                baseballShowStageTemp_mts = baseballShowStage_mts;
-                if (baseballShowStageTemp_mts.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp_mts.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-                }
-            } else {
-                scoreBoardHeadTemp_mts.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-            }
-        }
-
-        livingContainerTemp_mts.find('thead[key="isBaseball_livingtableHead_moreThanSix"]').append(scoreBoardHeadTemp_mts);
-
-        // Home team
-        const homeTeamName_mts = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
-        scoreBoardBodyTemp_home_mts.append(homeTeamName_mts);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome_mts = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage_mts.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_home_mts.append(thHome_mts);
-            }
-        }
-
-        livingContainerTemp_mts.find('tbody[key="isBaseball_livingtableBody_moreThanSix"]').append(scoreBoardBodyTemp_home_mts);
-
-        // Away team
-        const awayTeamName_mts = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
-        scoreBoardBodyTemp_away_mts.append(awayTeamName_mts);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway_mts = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage_mts.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_away_mts.append(thAway_mts);
-            }
-        }
-
-        // Append away team after home team to table
-        scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
         $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
     }
 
-    function isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, baseballShowStage_mtn) {
+    function isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, baseballShowStage) {
         const livingContainerTemp_mtn = $(`div[template="isBaseball_livingConTemplate_moreThanNine"]`).clone();
         const scoreBoardHeadTemp_mtn = $(`tr[template="isBaseball_scoreBoardHeadTemplate_moreThanNine"]`).clone();
         const scoreBoardBodyTemp_home_mtn = $(`tr[template="isBaseball_scoreBoardBodyTemplate_home_moreThanNine"]`).clone();
         const scoreBoardBodyTemp_away_mtn = $(`tr[template="isBaseball_scoreBoardBodyTemplate_away_moreThanNine"]`).clone();
 
         livingContainerTemp_mtn.removeAttr('hidden').removeAttr('template');
-
-        var scorehome = data.list?.scoreboard[1];
-        var scoreaway = data.list?.scoreboard[2];
+        const scorehome = data.list?.scoreboard[1];
+        const scoreaway = data.list?.scoreboard[2];
 
         const randomInt_mtn = Math.floor(Math.random() * 100) + 1;
-
-        const mainCon_mtn = data.list.fixture_id + '_2_mtn'; 
-        const existingMainCon_mtn = $(`div[id="${mainCon_mtn}"]`); 
-        const headTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_head'; 
-        const existingHeadTr_mtn = $(`tr[id="${headTr_mtn}"]`);
+        const mainCon_mtn = data.list.fixture_id + '_2_mtn';
+        const headTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_head';
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
-        const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
 
-        $('div.living-fixture-isBaseball-mtn').empty();
-        livingContainerTemp_mtn.find('thead[key="isBaseball_livingtableHead_moreThanNine"]').empty();
-        livingContainerTemp_mtn.find('tbody[key="isBaseball_livingtableBody_moreThanNine"]').empty();
-
-        scoreBoardHeadTemp_mtn.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_home_mtn.removeAttr('hidden').removeAttr('template');  
-        scoreBoardBodyTemp_away_mtn.removeAttr('hidden').removeAttr('template'); 
-
-        livingContainerTemp_mtn.attr('id', mainCon_mtn);
-        scoreBoardHeadTemp_mtn.attr('id', headTr_mtn);
-        scoreBoardBodyTemp_home_mtn.attr('id', bodyTr_mtn);
-        scoreBoardBodyTemp_away_mtn.attr('id', bodyTr_mtn);
+        clearAndSetContainer(livingContainerTemp_mtn, mainCon_mtn, headTr_mtn, bodyTr_mtn);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        // Thead data game title
+        appendHeaderCells(scoreBoardHeadTemp_mtn, gameTitle, sport, data);
+        appendBodyCells(scoreBoardBodyTemp_home_mtn, scorehome, gameTitle, baseballShowStage, sport);
+        appendBodyCells(scoreBoardBodyTemp_away_mtn, scoreaway, gameTitle, baseballShowStage, sport);
+
+        $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
+    }
+
+    function clearAndSetContainer(container, mainCon, headTr, bodyTr) {
+        const existingMainCon = $(`div[id="${mainCon}"]`);
+        const existingHeadTr = $(`tr[id="${headTr}"]`);
+        const existingBodyTr = $(`tr[id="${bodyTr}"]`);
+
+        $('div.living-fixture-con').empty();
+        container.attr('id', mainCon);
+        container.find('thead[key="livingtableHead"]').empty();
+        container.find('tbody[key="livingtableBody"]').empty();
+    }
+
+    function appendHeaderCells(header, gameTitle, sport, data) {
         let stageStr = '';
         if (sport === 154914 && data.list?.periods?.period < 10) {
             data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
         }
 
-        var stageText = formatDateTime(data.list.start_time);
+        let stageText = formatDateTime(data.list.start_time);
         if (data.list.status == 2) {
             if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
         } else {
             stageText = gameLangTrans.scoreBoard.ready;
         }
 
-        const TeamNameHead_mtn = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
-        scoreBoardHeadTemp_mtn.append(TeamNameHead_mtn);
-
-        let baseballShowStageTemp_mtn = baseballShowStage_mtn;
+        const teamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
+        header.append(teamNameHead);
 
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
-                baseballShowStageTemp_mtn = baseballShowStage_mtn;
-                if (baseballShowStageTemp_mtn.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp_mtn.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                const baseballShowStage = sport === 154914 ? baseballShowStage : null;
+                if (baseballShowStage && baseballShowStage.indexOf(i) !== -1) {
+                    header.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
             } else {
-                scoreBoardHeadTemp_mtn.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                header.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
             }
         }
-
-        livingContainerTemp_mtn.find('thead[key="isBaseball_livingtableHead_moreThanNine"]').append(scoreBoardHeadTemp_mtn);
-
-        // Home team
-        const homeTeamName_mtn = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
-        scoreBoardBodyTemp_home_mtn.append(homeTeamName_mtn);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome_mtn = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage_mtn.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_home_mtn.append(thHome_mtn);
-            }
-        }
-
-        livingContainerTemp_mtn.find('tbody[key="isBaseball_livingtableBody_moreThanNine"]').append(scoreBoardBodyTemp_home_mtn);
-
-        // Away team
-        const awayTeamName_mtn = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
-        scoreBoardBodyTemp_away_mtn.append(awayTeamName_mtn);
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway_mtn = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage_mtn.indexOf(i) === -1)) {
-                scoreBoardBodyTemp_away_mtn.append(thAway_mtn);
-            }
-        }
-
-        // Append away team after home team to table
-        scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
-        $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
     }
+
+    function appendBodyCells(body, scoreValues, gameTitle, baseballShowStage, sport) {
+        const teamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${scoreValues.team_name}</div></th>`);
+        body.append(teamName);
+
+        for (let i = 0; i < gameTitle.length; i++) {
+            const scoreValue = Array.from(Object.values(scoreValues))[i];
+            const tableCell = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
+            if (!(sport === 154914 && baseballShowStage && baseballShowStage.indexOf(i) === -1)) {
+                body.append(tableCell);
+            }
+        }
+    }
+
 
 
     function noData() {
