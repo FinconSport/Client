@@ -730,6 +730,7 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
+
                 $('.template-con').append($('.early-fixture-con').detach().css({
                     'display': 'none',
                     'height': '0px',
@@ -803,7 +804,7 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $('div.swiper-slide').empty();
+        $('div.living-fixture-con').empty();
 
         $(`div[id="${mainCon}"]`).remove();
         $(`tr[id="${headTr}"]`).remove();
@@ -880,7 +881,7 @@
         // if (existingMainCon.length === 0) {
         //     $('.living-fixture-con').append(livingContainerTemp);
         // }
-        
+
         $('.living-fixture-con').append(livingContainerTemp);
     }
 
@@ -904,7 +905,7 @@
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
-        $('div.swiper-slide').empty();
+        $('div.living-fixture-isBaseball-mts').empty();
 
         $(`div[id="${mainCon_mts}"]`).remove();
         $(`tr[id="${headTr_mts}"]`).remove();
@@ -1004,7 +1005,7 @@
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
         const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
 
-        $('div.swiper-slide').empty();
+        $('div.living-fixture-isBaseball-mtn').empty();
 
         $(`div[id="${mainCon_mtn}"]`).remove();
         $(`tr[id="${headTr_mtn}"]`).remove();
