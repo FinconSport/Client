@@ -727,18 +727,24 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                document.querySelectorAll(".living-fixture-con, .living-fixture-isBaseball-mts").forEach(el => {
-                    el.style.display = "block";
+                const scbLen = data.list?.scoreboard[1].length - 1;
+
+                document.querySelectorAll(".early-fixture").forEach(el => {
+                    el.style.display = "none";
                 });
+
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+                
+                if (scbLen >= 6) {
+                    isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+                }
             } else {
                 createScoreBoardTemplate(sport, data);
             }
         } else {
             // Early fixture (status == 1)
-            document.querySelectorAll(".early-fixture").forEach(el => {
-                el.style.display = "block";
+            document.querySelectorAll(".living-fixture-con, .living-fixture-isBaseball-mts").forEach(el => {
+                el.style.display = "none";
             });
 
             const leagueID = data.list.league_id;
