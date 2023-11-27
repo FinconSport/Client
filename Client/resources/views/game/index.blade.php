@@ -698,12 +698,18 @@
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
-            livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            $('div[template="livingContainerTemplate"]').removeAttr('hidden');
-            var scorehome = data.list?.scoreboard[1]
-            var scoreaway = data.list?.scoreboard[2]
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
+
+            $(`div[id="${headTr}"]`).remove();
+
+            livingContainerTemp.removeAttr('hidden').removeAttr('template');
+            // $('div[template="livingContainerTemplate"]').removeAttr('hidden');
+            livingContainerTemp.attr('id', headTr);
+            
+            var scorehome = data.list?.scoreboard[1]
+            var scoreaway = data.list?.scoreboard[2]
+            
             $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTr}"]`).remove();
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
