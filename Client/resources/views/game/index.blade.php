@@ -740,8 +740,31 @@
             scoreBoardHeadTemp.append(TeamNameHead);
 
             
+            let baseballShowStage = []
             for (let i = 0; i < gameTitle.length; i++) {
-                scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                if( sport === 154914 ) {
+                    const scbLen = data.list?.scoreboard[1].length - 1;
+                    switch (true) {
+                        case scbLen < 6:
+                            baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
+                        break;
+                        case scbLen >= 6 && scbLen <= 9:
+                            baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
+                        break;
+                        case scbLen > 9:
+                            baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
+                        break;
+                        default:
+                        break;
+                    }
+
+                    if(baseballShowStage.indexOf(i) !== -1) {
+                        scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                    }
+                } else {
+                    scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+                }
+                
             }
 
             $('#livingtableHead').append(scoreBoardHeadTemp);
