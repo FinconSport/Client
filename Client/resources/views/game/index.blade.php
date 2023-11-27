@@ -875,9 +875,11 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        if (existingMainCon.length === 0) {
-            $('.living-fixture-con').append(livingContainerTemp);
+        if (existingMainCon.length !== 0) {
+            $('div.living-fixture-con').empty();
         }
+
+        $('.living-fixture-con').append(livingContainerTemp);
     }
 
     function isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, baseballShowStage_mts) {
