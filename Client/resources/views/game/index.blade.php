@@ -725,11 +725,11 @@
         }
     }
 
-    function createScoreBoardTemplate(sport, data, iteration) {
-        const livingContainerTemp = $(`div[template="livingContainerTemplate"]:eq(${iteration})`).clone();
-        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]:eq(${iteration})`).clone();
-        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]:eq(${iteration})`).clone();
-        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]:eq(${iteration})`).clone();
+    function createScoreBoardTemplate(sport, data) {
+        const livingContainerTemp = $(`div[template="livingContainerTemplate"]`).clone();
+        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]`).clone();
+        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]`).clone();
+        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]`).clone();
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
 
