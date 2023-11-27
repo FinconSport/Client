@@ -803,9 +803,11 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        // $(`div[id="${mainCon}"]`).remove();
-        // $(`tr[id="${headTr}"]`).remove();
-        // $(`tr[id="${bodyTr}"]`).remove();
+        $('div.swiper-slide').empty();
+
+        $(`div[id="${mainCon}"]`).remove();
+        $(`tr[id="${headTr}"]`).remove();
+        $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -875,9 +877,10 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        if (existingMainCon.length === 0) {
-            $('.living-fixture-con').append(livingContainerTemp);
-        }
+        // if (existingMainCon.length === 0) {
+        //     $('.living-fixture-con').append(livingContainerTemp);
+        // }
+        $('.living-fixture-con').append(livingContainerTemp);
     }
 
     function isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, baseballShowStage_mts) {
@@ -899,6 +902,8 @@
         const existingHeadTr_mts = $(`tr[id="${headTr_mts}"]`);
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
+
+        $('div.swiper-slide').empty();
 
         $(`div[id="${mainCon_mts}"]`).remove();
         $(`tr[id="${headTr_mts}"]`).remove();
@@ -972,9 +977,10 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
-        if (existingMainCon_mts.length === 0) {
-            $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
-        }
+        // if (existingMainCon_mts.length === 0) {
+        //     $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
+        // }
+        $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
     }
 
     function isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, baseballShowStage_mtn) {
@@ -996,6 +1002,8 @@
         const existingHeadTr_mtn = $(`tr[id="${headTr_mtn}"]`);
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
         const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
+
+        $('div.swiper-slide').empty();
 
         $(`div[id="${mainCon_mtn}"]`).remove();
         $(`tr[id="${headTr_mtn}"]`).remove();
@@ -1069,9 +1077,10 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
-        if (existingMainCon_mtn.length === 0) {
-            $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
-        }
+        // if (existingMainCon_mtn.length === 0) {
+        //     $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
+        // }
+        $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
     }
 
 
