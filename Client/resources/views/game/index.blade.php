@@ -775,7 +775,7 @@
         clearAndSetContainer(livingContainerTemp, mainCon, headTr, bodyTr);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        appendHeaderCells(scoreBoardHeadTemp, gameTitle, sport, data);
+        appendHeaderCells(scoreBoardHeadTemp, gameTitle, sport, data, baseballShowStage);
         appendBodyCells(scoreBoardBodyTemp_home, scorehome, gameTitle, baseballShowStage, sport);
         appendBodyCells(scoreBoardBodyTemp_away, scoreaway, gameTitle, baseballShowStage, sport);
 
@@ -800,7 +800,7 @@
         clearAndSetContainer(livingContainerTemp_mts, mainCon_mts, headTr_mts, bodyTr_mts);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        appendHeaderCells(scoreBoardHeadTemp_mts, gameTitle, sport, data);
+        appendHeaderCells(scoreBoardHeadTemp_mts, gameTitle, sport, data, baseballShowStage);
         appendBodyCells(scoreBoardBodyTemp_home_mts, scorehome, gameTitle, baseballShowStage, sport);
         appendBodyCells(scoreBoardBodyTemp_away_mts, scoreaway, gameTitle, baseballShowStage, sport);
 
@@ -825,7 +825,7 @@
         clearAndSetContainer(livingContainerTemp_mtn, mainCon_mtn, headTr_mtn, bodyTr_mtn);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        appendHeaderCells(scoreBoardHeadTemp_mtn, gameTitle, sport, data);
+        appendHeaderCells(scoreBoardHeadTemp_mtn, gameTitle, sport, data, baseballShowStage);
         appendBodyCells(scoreBoardBodyTemp_home_mtn, scorehome, gameTitle, baseballShowStage, sport);
         appendBodyCells(scoreBoardBodyTemp_away_mtn, scoreaway, gameTitle, baseballShowStage, sport);
 
@@ -843,7 +843,7 @@
         container.find('tbody[key="livingtableBody"]').empty();
     }
 
-    function appendHeaderCells(header, gameTitle, sport, data) {
+    function appendHeaderCells(header, gameTitle, sport, data, baseballShowStage) {
         let stageStr = '';
         if (sport === 154914 && data.list?.periods?.period < 10) {
             data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
@@ -862,8 +862,8 @@
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
-                const baseballShowStage = sport === 154914 ? baseballShowStage : null;
-                if (baseballShowStage && baseballShowStage.indexOf(i) !== -1) {
+                const showStage = baseballShowStage || null;
+                if (!showStage || (showStage && showStage.indexOf(i) !== -1)) {
                     header.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
             } else {
