@@ -801,13 +801,12 @@
         const bodyTr = data.list.fixture_id + '_0_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        if (headTr.length !== 0) {
-            $('#' + headTr).first().remove();
-        }
-
         $('div.living-fixture-con').empty();
-        $(`tr#${headTr}`).empty();
-        $(`tr#${bodyTr}`).empty();
+        $('div.living-fixture-con #livingtableHead').empty();
+        $('div.living-fixture-con #livingtableBody').empty();
+
+        // $(`tr#${headTr}`).empty();
+        // $(`tr#${bodyTr}`).empty();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
