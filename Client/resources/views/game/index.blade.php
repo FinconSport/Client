@@ -733,10 +733,14 @@
 
                 if (scbLen >= 6) {
                     isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+                } else {
+                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css('display', 'none'));
                 }
 
                 if (scbLen > 9) {
                     isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
+                } else {
+                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css('display', 'none'));
                 }
 
             } else {
@@ -1446,6 +1450,8 @@
 
         slidesPerView : 'auto',
         loop : false,
+        observer: true,  
+        observeParents: true,
     });
 </script>
 @endpush
