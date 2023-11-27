@@ -300,7 +300,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        // createScoreBoard(matchListData.data);
+        createScoreBoard(matchListData.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -702,24 +702,22 @@
 
             var scorehome = data.list?.scoreboard[1];
             var scoreaway = data.list?.scoreboard[2];
-            const headTr = data.list.fixture_id + '_head';
-            const bodyTrHome = data.list.fixture_id + '_body_home';
-            const bodyTrAway = data.list.fixture_id + '_body_away';
 
+            const headTr = data.list.fixture_id + '_head';
+            const bodyTr = data.list.fixture_id + '_body';
             $(`div[id="${data.list.fixture_id}"]`).remove();
-            $(`tr[id="${data.list.fixture_id}_head"]`).remove();
-            $(`tr[id="${data.list.fixture_id}_body_home"]`).remove();
-            $(`tr[id="${data.list.fixture_id}_body_away"]`).remove();
+            $(`tr[id="${headTr}"]`).remove();
+            $(`tr[id="${bodyTr}"]`).remove();
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
-            scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
-            scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
+            scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
+            scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
 
             livingContainerTemp.attr('id', data.list.fixture_id);
             scoreBoardHeadTemp.attr('id', headTr);
-            scoreBoardBodyTemp_home.attr('id', bodyTrHome);
-            scoreBoardBodyTemp_away.attr('id', bodyTrAway);
-
+            scoreBoardBodyTemp_home.attr('id', bodyTr);
+            scoreBoardBodyTemp_away.attr('id', bodyTr);
+            
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
             // Thead data game title
             let stageStr = '';
