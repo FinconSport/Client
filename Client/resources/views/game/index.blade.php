@@ -722,7 +722,7 @@
         const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]:eq(${iteration})`).clone();
         const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]:eq(${iteration})`).clone();
 
-        const dynamicId = Math.floor(Math.random() * 100) + 1;
+        const dynamicId = `${data.list.fixture_id}_con_${iteration}`;
         livingContainerTemp.attr('id', `${dynamicId}`);
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
