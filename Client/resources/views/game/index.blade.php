@@ -805,9 +805,9 @@
         const existingBodyTrAway = $(`tr[id="${bodyTrAway}"]`);
 
         $('div.living-fixture-con').empty();
-        existingHeadTr.remove();
-        existingBodyTrHome.remove();
-        existingBodyTrAway.remove();
+        existingHeadTr.empty();
+        existingBodyTrHome.empty();
+        existingBodyTrAway.empty();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
