@@ -78,10 +78,10 @@
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
                 <table>
-                    <thead id="livingtableHead">
+                    <thead key="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
                     </thead>
-                    <tbody id="livingtableBody">
+                    <tbody key="livingtableBody">
                         <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                         <tr template="scoreBoardBodyTemplate_away" hidden></tr>
                     </tbody>
@@ -761,8 +761,8 @@
                     scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
             }
-            $(`#${data.list.fixture_id} thead`).append(scoreBoardHeadTemp);
-
+            livingContainerTemp.find('thead[key="livingtableHead"]').append(scoreBoardHeadTemp);
+            livingtableHead
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -774,7 +774,7 @@
                 }
             }
 
-            $(`#${data.list.fixture_id} tbody`).append(scoreBoardBodyTemp_home);
+            livingContainerTemp.find('tbody[key="livingtableBody"]').append(scoreBoardBodyTemp_home);
 
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
