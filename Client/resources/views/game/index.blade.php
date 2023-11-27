@@ -718,13 +718,13 @@
 
     function createScoreBoardTemplate(sport, data, iteration) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate"]:eq(${iteration})`).clone();
-        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]:eq(${iteration})`).clone();
-        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]:eq(${iteration})`).clone();
-        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]:eq(${iteration})`).clone();
 
         const tableElement = $('<table></table>');
         const theadElement = $('<thead key="livingtableHead"></thead>');
         const tbodyElement = $('<tbody key="livingtableBody"></tbody>');
+        const scoreBoardHeadTemp = $('<tr></tr>');
+        const scoreBoardBodyTemp_home = $('<tr></tr>');
+        const scoreBoardBodyTemp_away = $('<tr></tr>');
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
         $('div[key="livingContainerTemplate"]').removeAttr('hidden');
@@ -737,32 +737,30 @@
         $(`tr[id="${headTr}"]`).remove();
         $(`tr[id="${bodyTr}"]`).remove();
 
-        scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
-
         scoreBoardHeadTemp.attr('id', headTr);
-        scoreBoardBodyTemp_home.attr('id', bodyTr);
-        scoreBoardBodyTemp_away.attr('id', bodyTr);
+        scoreBoardBodyTemp_home.attr('id', `${bodyTr}_home`);
+        scoreBoardBodyTemp_away.attr('id', `${bodyTr}_away`);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
 
-        // Thead data game title
-        let stageStr = '';
-        if (sport === 154914 && data.list?.periods?.period < 10) {
-            data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
+         // Thead data game title
+        let stageStr = ''
+        if( sport === 154914 && data.list?.periods?.period < 10 ) {
+            data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
         }
 
-        let stageText = formatDateTime(data.list.start_time);
-        if (data.list.status == 2) {
-            if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
+        // const stageText = data.list.status == 2 ? commonLangTrans.stageArr[sport][data.list.periods.period] : gameLangTrans.scoreBoard.ready
+
+        var stageText = formatDateTime(data.list.start_time)
+        if( data.list.status == 2 ) {
+            if( data.list.periods.period !== -1 ) stageText = commonLangTrans.stageArr[sport][data.list.periods.period]
         } else {
-            stageText = gameLangTrans.scoreBoard.ready;
+            stageText = gameLangTrans.scoreBoard.ready
         }
 
         const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
         scoreBoardHeadTemp.append(TeamNameHead);
-        
+
         let baseballShowStage = [];
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
@@ -804,7 +802,7 @@
         }
 
         scoreBoardBodyTemp_home.appendTo(tbodyElement);
-        
+
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
         scoreBoardBodyTemp_away.append(awayTeamName);
@@ -824,11 +822,8 @@
         livingContainerTemp.append(tableElement);
 
         $('.swiper-wrapper').append(livingContainerTemp);
-
-        const livingTableHead = livingContainerTemp.find('tbody');
-        console.log('livingTableHead length:', livingTableHead.length);
-
     }
+
 
 
     function noData() {
