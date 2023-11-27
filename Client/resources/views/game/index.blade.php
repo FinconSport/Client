@@ -795,19 +795,15 @@
         var scoreaway = data.list?.scoreboard[2];
 
         const mainCon = data.list.fixture_id + '_0_lts'; 
-        const headTr = data.list.fixture_id + '_0_head'; 
-        const bodyTrHome = data.list.fixture_id + '_0_body_home';
-        const bodyTrAway = data.list.fixture_id + '_0_body_away';
-
         const existingMainCon = $(`div[id="${mainCon}"]`); 
+        const headTr = data.list.fixture_id + '_0_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
-        const existingBodyTrHome = $(`tr[id="${bodyTrHome}"]`);
-        const existingBodyTrAway = $(`tr[id="${bodyTrAway}"]`);
+        const bodyTr = data.list.fixture_id + '_0_body';
+        const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         $('div.living-fixture-con').empty();
-        existingHeadTr.empty();
-        existingBodyTrHome.empty();
-        existingBodyTrAway.empty();
+        existingHeadTr.remove();
+        existingBodyTr.remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -815,8 +811,8 @@
 
         livingContainerTemp.attr('id', mainCon);
         scoreBoardHeadTemp.attr('id', headTr);
-        scoreBoardBodyTemp_home.attr('id', bodyTrHome);
-        scoreBoardBodyTemp_away.attr('id', bodyTrAway);
+        scoreBoardBodyTemp_home.attr('id', bodyTr);
+        scoreBoardBodyTemp_away.attr('id', bodyTr);
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
         // Thead data game title
