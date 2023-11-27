@@ -693,7 +693,7 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
-        if ((data.list.status == 2 || data.list.status == 9 || data.list.status == 3) && data.list.scoreboard) {
+        if ((data.list.status == 2 || data.list.status == 9 ) && data.list.scoreboard) {
             if (sport === 154914) {
                 for (let i = 0; i < 3; i++) {
                     const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
@@ -701,9 +701,8 @@
                     const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
                     const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
-                    const livingContainerID = `livingContainer_${i + 1}`;
-                    livingContainerTemp.removeAttr('hidden').removeAttr('template').attr('id', livingContainerID);
-
+                    livingContainerTemp.removeAttr('hidden').removeAttr('template');
+                    $('div[key="livingContainerTemplate"]').removeAttr('hidden');
                     var scorehome = data.list?.scoreboard[1];
                     var scoreaway = data.list?.scoreboard[2];
 
@@ -755,14 +754,12 @@
                                 default:
                                     break;
                             }
-
                             if (baseballShowStage.indexOf(i) !== -1) {
                                 scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                             }
                         } else {
                             scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                         }
-                        
                     }
 
                     $('#livingtableHead').append(scoreBoardHeadTemp);
