@@ -729,20 +729,17 @@
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
-                $('.template-con').append($('.early-fixture-con').detach().css('display', 'none'));
-
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
+                document.querySelectorAll(".living-fixture-con").forEach(el => {el.classList.add("swiper-slide");});
 
                 if (scbLen >= 6) {
                     isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css('display', 'none'));
+                    document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => {el.classList.add("swiper-slide");});
                 }
 
                 if (scbLen > 9) {
                     isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
-                } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css('display', 'none'));
+                    document.querySelectorAll(".living-fixture-isBaseball-mtn").forEach(el => {el.classList.add("swiper-slide");});
                 }
 
             } else {
@@ -750,10 +747,6 @@
             }
         } else {
             // Early fixture (status == 1)
-            document.querySelectorAll(".living-fixture-con, .living-fixture-isBaseball-mts").forEach(el => {
-                el.style.display = "none";
-            });
-
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
