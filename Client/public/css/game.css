@@ -248,31 +248,31 @@ span.market_price.odd {
 
 
 /* slider css */
-#scoreboardContainer .swiper-wrapper .swiper-button-prev,
-#scoreboardContainer .swiper-wrapper .swiper-button-next{
+.swiper-wrapper .swiper-button-prev,
+.swiper-wrapper .swiper-button-next{
     color: #ffffff!important;
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-button-prev {
+.swiper-wrapper .swiper-button-prev {
     left: var(--swiper-navigation-sides-offset,10rem)!important;
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-button-next {
+.swiper-wrapper .swiper-button-next {
     right: var(--swiper-navigation-sides-offset,10rem)!important
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-button-prev {
+.swiper-wrapper .swiper-button-prev {
     left: var(--swiper-navigation-sides-offset,10rem)!important;
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-slide{
+.swiper-wrapper .swiper-slide{
     display: flex!important;
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-pagination {
+.swiper-wrapper .swiper-pagination {
     bottom: var(--swiper-pagination-bottom,24px)!important;
 }
 
-#scoreboardContainer .swiper-wrapper .swiper-pagination-bullet {
+.swiper-wrapper .swiper-pagination-bullet {
     background: white!important;
 }
