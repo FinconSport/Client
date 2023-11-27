@@ -746,9 +746,9 @@
 
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
 
-        let stageStr = '';
-        if (sport === 154914 && data.list?.periods?.period < 10) {
-            data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
+        let stageStr = ''
+        if( sport === 154914 && data.list?.periods?.period < 10 ) {
+            data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
         }
 
         const stageText = formatDateTime(data.list.start_time);
