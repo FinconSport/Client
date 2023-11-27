@@ -114,9 +114,9 @@
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="swiper-slide early-fixture-con" style="flex-shrink: 100 !important;width:auto!important"></div>
-            <div class="swiper-slide living-fixture-con" style="flex-shrink: 100 !important;width:auto!important"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mts" style="flex-shrink: 100 !important;width:auto%!important"></div>
+            <div class="swiper-slide early-fixture-con" style="width:100%!important"></div>
+            <div class="swiper-slide living-fixture-con" style="width:100%!important"></div>
+            <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important"></div>
             <!-- <div class="swiper-slide living-fixture-isBaseball-mtn"></div> -->
         </div>
         <!-- If we need pagination -->
@@ -1345,7 +1345,6 @@
 
         slidesPerView : 'auto',
         loop : true,
-        spaceBetween : 34
     });
 </script>
 @endpush
