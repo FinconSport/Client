@@ -239,10 +239,10 @@
                 },
                 "scoreboard": {
                     "1": [
-                        0,0,0,0,0,0,0
+                        0,0,0,0,0,0,0,0,0,0
                     ],
                     "2": [
-                        2,2,2,2,2,2,2
+                        2,2,2,2,2,2,2,0,0,0
                     ]
                 },
                 "market": []
@@ -897,9 +897,9 @@
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
-        $(`div[id="${mainCon_mts}"]`).remove();
-        $(`tr[id="${headTr_mts}"]`).remove();
-        $(`tr[id="${bodyTr_mts}"]`).remove();
+        $('div.living-fixture-isBaseball-mts').empty();
+        livingContainerTemp_mts.find('thead[key="isBaseball_livingtableHead_moreThanSix"]').empty();
+        livingContainerTemp_mts.find('tbody[key="isBaseball_livingtableBody_moreThanSix"]').empty();
 
         scoreBoardHeadTemp_mts.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mts.removeAttr('hidden').removeAttr('template');  
@@ -969,9 +969,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
-        if (existingMainCon_mts.length === 0) {
-            $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
-        }
+        $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
     }
 
     function isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, baseballShowStage_mtn) {
@@ -994,9 +992,9 @@
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
         const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
 
-        $(`div[id="${mainCon_mtn}"]`).remove();
-        $(`tr[id="${headTr_mtn}"]`).remove();
-        $(`tr[id="${bodyTr_mtn}"]`).remove();
+        $('div.living-fixture-isBaseball-mtn').empty();
+        livingContainerTemp_mtn.find('thead[key="isBaseball_livingtableHead_moreThanNine"]').empty();
+        livingContainerTemp_mtn.find('tbody[key="isBaseball_livingtableBody_moreThanNine"]').empty();
 
         scoreBoardHeadTemp_mtn.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mtn.removeAttr('hidden').removeAttr('template');  
@@ -1066,9 +1064,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
-        if (existingMainCon_mtn.length === 0) {
-            $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
-        }
+        $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
     }
 
 
