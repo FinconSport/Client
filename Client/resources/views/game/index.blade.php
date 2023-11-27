@@ -74,38 +74,38 @@
             <p class="away_team_name col-3"></p>
         </div>
         <!-- living fixture -->
-        <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
+        <div class="livingFixture-container row" template="livingContainerTemplate_lts" hidden>
             <table>
-                <thead key="livingtableHead">
-                    <tr template="scoreBoardHeadTemplate" hidden></tr>
+                <thead key="livingtableHead_lts">
+                    <tr template="scoreBoardHeadTemplate_lts" hidden></tr>
                 </thead>
-                <tbody key="livingtableBody">
-                    <tr template="scoreBoardBodyTemplate_home" hidden></tr>
-                    <tr template="scoreBoardBodyTemplate_away" hidden></tr>
+                <tbody key="livingtableBody_lts">
+                    <tr template="scoreBoardBodyTemplate_home_lts" hidden></tr>
+                    <tr template="scoreBoardBodyTemplate_away_lts" hidden></tr>
                 </tbody>
             </table>
         </div>
         <!-- // is baseball more than six -->
-        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_moreThanSix" hidden>
+        <div class="livingFixture-container row" template="livingContainerTemplate_mts" hidden>
             <table>
-                <thead key="isBaseball_livingtableHead_moreThanSix">
-                    <tr template="isBaseball_scoreBoardHeadTemplate_moreThanSix" hidden></tr>
+                <thead key="livingtableHead_mts">
+                    <tr template="scoreBoardHeadTemplate_mts" hidden></tr>
                 </thead>
-                <tbody key="isBaseball_livingtableBody_moreThanSix">
-                    <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanSix" hidden></tr>
-                    <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanSix" hidden></tr>
+                <tbody key="livingtableBody_mts">
+                    <tr template="scoreBoardBodyTemplate_home_mts" hidden></tr>
+                    <tr template="scoreBoardBodyTemplate_away_mts" hidden></tr>
                 </tbody>
             </table>
         </div>
         <!-- // is baseball more than 9 -->
-        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_moreThanNine" hidden>
+        <div class="livingFixture-container row" template="livingContainerTemplate_mtn" hidden>
             <table>
-                <thead key="isBaseball_livingtableHead_moreThanNine">
-                    <tr template="isBaseball_scoreBoardHeadTemplate_moreThanNine" hidden></tr>
+                <thead key="livingtableHead_mtn">
+                    <tr template="scoreBoardHeadTemplate_mtn" hidden></tr>
                 </thead>
-                <tbody key="isBaseball_livingtableBody_moreThanNine">
-                    <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanNine" hidden></tr>
-                    <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanNine" hidden></tr>
+                <tbody key="livingtableBody_mtn">
+                    <tr template="scoreBoardBodyTemplate_home_mtn" hidden></tr>
+                    <tr template="scoreBoardBodyTemplate_away_mtn" hidden></tr>
                 </tbody>
             </table>
         </div>
@@ -117,9 +117,9 @@
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
             <div class="swiper-slide early-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-lts" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-mts" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-mtn" style="width:100%!important;"></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -729,7 +729,7 @@
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], lts);
                 $('.template-con').append($('.early-fixture-con').detach().css({
                     'display': 'none',
                     'height': '0px',
@@ -737,15 +737,23 @@
                 }));
 
                 if (scbLen >= 6) {
-                    createScoreBoardTemplateMoreThanX(sport, data, [0, 4, 5, 6, 7, 8, 9], 6);
+                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], mts);
                 } else {
-                    hideScoreBoardTemplate('.living-fixture-isBaseball-mts');
+                    $('.template-con').append($('.living-fixture-mts').detach().css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    }));
                 }
 
                 if (scbLen > 9) {
-                    createScoreBoardTemplateMoreThanX(sport, data, [0, 7, 8, 9, 10, 11, 12], 9);
+                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], mtn);
                 } else {
-                    hideScoreBoardTemplate('.living-fixture-isBaseball-mtn');
+                    $('.template-con').append($('.living-fixture-mtn').detach().css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    }));
                 }
 
             } else {
@@ -753,7 +761,15 @@
             }
         } else {
             // Early fixture (status == 1)
-            hideScoreBoardTemplate('.living-fixture-isBaseball-mtn, .living-fixture-isBaseball-mts, .living-fixture-con');
+            $('.template-con').append(
+                $('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts')
+                    .detach()
+                    .css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    })
+            );
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
@@ -767,61 +783,47 @@
         }
     }
 
-    function hideScoreBoardTemplate(selector) {
-        $('.template-con').append(
-            $(selector).detach().css({
-                'display': 'none',
-                'height': '0px',
-                'important': 'true'
-            })
-        );
-    }
-
-    function createScoreBoardTemplateMoreThanX(sport, data, baseballShowStage, x) {
-        const containerSelector = sport === 154914 && x === 6 ? '.living-fixture-isBaseball-mts' : '.living-fixture-isBaseball-mtn';
-        const templateSelector = sport === 154914 && x === 6 ? 'isBaseball_livingConTemplate_moreThanSix' : 'isBaseball_livingConTemplate_moreThanNine';
-        const headTemplateSelector = sport === 154914 && x === 6 ? 'isBaseball_scoreBoardHeadTemplate_moreThanSix' : 'isBaseball_scoreBoardHeadTemplate_moreThanNine';
-        const bodyTemplateHomeSelector = sport === 154914 && x === 6 ? 'isBaseball_scoreBoardBodyTemplate_home_moreThanSix' : 'isBaseball_scoreBoardBodyTemplate_home_moreThanNine';
-        const bodyTemplateAwaySelector = sport === 154914 && x === 6 ? 'isBaseball_scoreBoardBodyTemplate_away_moreThanSix' : 'isBaseball_scoreBoardBodyTemplate_away_moreThanNine';
-
-        const livingContainerTemp = $(`div[template="${templateSelector}"]`).clone();
-        const scoreBoardHeadTemp = $(`tr[template="${headTemplateSelector}"]`).clone();
-        const scoreBoardBodyTemp_home = $(`tr[template="${bodyTemplateHomeSelector}"]`).clone();
-        const scoreBoardBodyTemp_away = $(`tr[template="${bodyTemplateAwaySelector}"]`).clone();
-
-        createScoreBoardTemplateCommon(sport, data, baseballShowStage, livingContainerTemp, scoreBoardHeadTemp, scoreBoardBodyTemp_home, scoreBoardBodyTemp_away);
-        $(containerSelector).empty().append(livingContainerTemp);
-    }
-
-    function createScoreBoardTemplateCommon(sport, data, baseballShowStage, livingContainerTemp, scoreBoardHeadTemp, scoreBoardBodyTemp_home, scoreBoardBodyTemp_away) {
-        const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
-        const scbLen = data.list?.scoreboard[1].length - 1;
+    function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix) {
+        const livingContainerTemp = $(`div[template="livingContainerTemplate_${tempConSuffix}"]`).clone();
+        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate_${tempConSuffix}"]`).clone();
+        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home_${tempConSuffix}"]`).clone();
+        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away_${tempConSuffix}"]`).clone();
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
+
+        var scorehome = data.list?.scoreboard[1];
+        var scoreaway = data.list?.scoreboard[2];
+
+        const randomInt = Math.floor(Math.random() * 100) + 1;
+
+        const mainCon = data.list.fixture_id + '_1'; 
+        const existingMainCon = $(`div[id="${mainCon}"]`); 
+        const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
+        const existingHeadTr = $(`tr[id="${headTr}"]`);
+        const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
+        const existingBodyTr = $(`tr[id="${bodyTr}"]`);
+
+        $(`div.living-fixture-isBaseball-mts`).empty();
+        livingContainerTemp.find(`thead[key="livingtableHead_${tempConSuffix}"]`).empty();
+        livingContainerTemp.find(`tbody[key="livingtableBody_${tempConSuffix}"]`).empty();
+
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
-        scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
-
-        const mainCon = data.list.fixture_id + '_0_lts';
-        const headTr = data.list.fixture_id + '_0_head';
-        const bodyTr = data.list.fixture_id + '_0_body';
-
-        $('div.living-fixture-con').empty();
-        livingContainerTemp.find('thead[key="livingtableHead"]').empty();
-        livingContainerTemp.find('tbody[key="livingtableBody"]').empty();
+        scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
+        scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
 
         livingContainerTemp.attr('id', mainCon);
         scoreBoardHeadTemp.attr('id', headTr);
         scoreBoardBodyTemp_home.attr('id', bodyTr);
         scoreBoardBodyTemp_away.attr('id', bodyTr);
 
+        const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
         // Thead data game title
         let stageStr = '';
         if (sport === 154914 && data.list?.periods?.period < 10) {
             data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
         }
 
-        let stageText = formatDateTime(data.list.start_time);
+        var stageText = formatDateTime(data.list.start_time);
         if (data.list.status == 2) {
             if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
         } else {
@@ -831,9 +833,13 @@
         const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
         scoreBoardHeadTemp.append(TeamNameHead);
 
+        let baseballShowStageTemp = baseballShowStage;
+
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
-                if (baseballShowStage.indexOf(i) !== -1) {
+                const scbLen = data.list?.scoreboard[1].length - 1;
+                baseballShowStageTemp = baseballShowStage;
+                if (baseballShowStageTemp.indexOf(i) !== -1) {
                     scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
             } else {
@@ -841,47 +847,36 @@
             }
         }
 
-        livingContainerTemp.find('thead[key="livingtableHead"]').append(scoreBoardHeadTemp);
+        livingContainerTemp.find(`thead[key="livingtableHead_${tempConSuffix}"]`).append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
         scoreBoardBodyTemp_home.append(homeTeamName);
-        createScoreBoardBody(sport, data.list.scoreboard[1], gameTitle, baseballShowStage, scoreBoardBodyTemp_home);
+        for (let i = 0; i < gameTitle.length; i++) {
+            const scoreValue = Array.from(Object.values(scorehome))[i];
+            const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
+            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
+                scoreBoardBodyTemp_home.append(thHome);
+            }
+        }
 
-        livingContainerTemp.find('tbody[key="livingtableBody"]').append(scoreBoardBodyTemp_home);
+        livingContainerTemp.find(`tbody[key="livingtableBody_${tempConSuffix}"]`).append(scoreBoardBodyTemp_home);
 
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
         scoreBoardBodyTemp_away.append(awayTeamName);
-        createScoreBoardBody(sport, data.list.scoreboard[2], gameTitle, baseballShowStage, scoreBoardBodyTemp_away);
+        for (let i = 0; i < gameTitle.length; i++) {
+            const scoreValue = Array.from(Object.values(scoreaway))[i];
+            const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
+            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
+                scoreBoardBodyTemp_away.append(thAway);
+            }
+        }
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-
-        $('.living-fixture-con').append(livingContainerTemp);
+        $(`.living-fixture-${tempConSuffix}`).append(livingContainerTemp);
     }
-
-    function createScoreBoardBody(sport, scores, gameTitle, baseballShowStage, scoreBoardBodyTemp) {
-        for (let i = 0; i < gameTitle.length; i++) {
-            const scoreValue = Array.from(Object.values(scores))[i];
-            const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
-                scoreBoardBodyTemp.append(thHome);
-            }
-        }
-    }
-
-
-    function createScoreBoardTemplate(sport, data) {
-        const livingContainerTemp = $(`div[template="livingContainerTemplate"]`).clone();
-        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]`).clone();
-        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]`).clone();
-        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]`).clone();
-
-        createScoreBoardTemplateCommon(sport, data, [], livingContainerTemp, scoreBoardHeadTemp, scoreBoardBodyTemp_home, scoreBoardBodyTemp_away);
-        $('.living-fixture-con').empty().append(livingContainerTemp);
-    }
-
 
     function noData() {
         var noDataElement = document.createElement('div');
