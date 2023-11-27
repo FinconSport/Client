@@ -88,6 +88,11 @@
                 </table>
             </div>
         </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 </div>
 
@@ -1132,14 +1137,18 @@
     })
 
     // swiper slider toggle
-    var Swipes = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.swiper-container', {
         loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
         },
     });
 </script>
