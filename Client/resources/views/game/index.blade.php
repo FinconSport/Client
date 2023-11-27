@@ -803,8 +803,7 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $(`tr[id="${headTr}"]`).remove();
-        $(`tr[id="${bodyTr}"]`).remove();
+        $('div.living-fixture-con').empty();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
