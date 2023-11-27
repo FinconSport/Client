@@ -239,10 +239,10 @@
                 },
                 "scoreboard": {
                     "1": [
-                        0,0
+                        0,0,0,0,0,0,0,0,0,0,0,0,0
                     ],
                     "2": [
-                        2,2
+                        2,2,2,2,2,2,2,0,0,0,0,0,0
                     ]
                 },
                 "market": []
@@ -1282,6 +1282,7 @@
             el: '.swiper-pagination',
         },
         initialSlide: 6,
+        allowTouchMove: false,
 
         // Navigation arrows
         navigation: {
