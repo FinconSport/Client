@@ -722,7 +722,8 @@
         const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]:eq(${iteration})`).clone();
         const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]:eq(${iteration})`).clone();
 
-        livingContainerTemp.attr('id', `${iteration}`);
+        const dynamicId = Math.floor(Math.random() * 100) + 1;
+        livingContainerTemp.attr('id', `${dynamicId}`);
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
         $('div[key="livingContainerTemplate"]').removeAttr('hidden');
@@ -793,7 +794,7 @@
 
         scoreBoardHeadContainer.append(scoreBoardHeadTemp);
 
-        $(`#${iteration} table`).append(scoreBoardHeadContainer);
+        $(`#${dynamicId} table`).append(scoreBoardHeadContainer);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -823,7 +824,7 @@
 
         scoreBoardBodyContainer.append(scoreBoardBodyTemp_away);
 
-        $(`#${iteration} table`).append(scoreBoardBodyContainer);
+        $(`#${dynamicId} table`).append(scoreBoardBodyContainer);
 
         // Append away team after home team to table
         livingContainerTemp.append(scoreBoardTableContainer);
