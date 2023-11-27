@@ -788,7 +788,7 @@
             }
         }
 
-        scoreBoardHeadTemp.appendTo(livingContainerTemp.find('thead[key="livingtableHead"]'));
+        livingContainerTemp.find('thead').append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -802,7 +802,7 @@
             }
         }
 
-        scoreBoardBodyTemp_home.appendTo(livingContainerTemp.find('tbody[key="livingtableBody"]'));
+        livingContainerTemp.find('tbody').append(scoreBoardBodyTemp_home);
         
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -820,7 +820,7 @@
 
         $('.swiper-wrapper').append(livingContainerTemp);
 
-        const livingTableHead = livingContainerTemp.find('thead[key="livingtableHead"]');
+        const livingTableHead = livingContainerTemp.find('tbody');
         console.log('livingTableHead length:', livingTableHead.length);
 
     }
