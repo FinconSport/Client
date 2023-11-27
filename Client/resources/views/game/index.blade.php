@@ -692,9 +692,6 @@
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
-        const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
-        const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
@@ -721,6 +718,10 @@
 
     function createScoreBoardTemplate(sport, data) {
         const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
+        const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
+        const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
+        
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
         $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
