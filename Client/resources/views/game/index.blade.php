@@ -227,7 +227,7 @@
 
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -301,7 +301,7 @@
     function renderView() {
         // update scoreboard home team and away team
 
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
