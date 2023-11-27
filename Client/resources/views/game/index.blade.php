@@ -271,6 +271,14 @@
             noData();
         }
 
+        // 沒有盤口的tab隱藏
+        gameLangTrans.catePriority.full.map( v => { 
+            $(`.bettingtype-container[priority=${v}]`).length === 0 ? $('.filterBtn[key="full"]').hide() : $('.filterBtn[key="full"]').show()
+        })
+        gameLangTrans.catePriority.half.map( v => { 
+            $(`.bettingtype-container[priority=${v}]`).length === 0 ? $('.filterBtn[key="half"]').hide() : $('.filterBtn[key="half"]').show()
+        })
+
         // 籃球 單節tab篩選
         if(sport === 48242) {
             for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
@@ -468,6 +476,14 @@
                 $(this).remove();
             }
         });
+
+        // 沒有盤口的tab隱藏
+        gameLangTrans.catePriority.full.map( v => { 
+            $(`.bettingtype-container[priority=${v}]`).length === 0 ? $('.filterBtn[key="full"]').hide() : $('.filterBtn[key="full"]').show()
+        })
+        gameLangTrans.catePriority.half.map( v => { 
+            $(`.bettingtype-container[priority=${v}]`).length === 0 ? $('.filterBtn[key="half"]').hide() : $('.filterBtn[key="half"]').show()
+        })
 
         // 籃球 單節tab篩選
         if(sport === 48242) {
