@@ -708,6 +708,7 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
+                createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9]);
             } else {
                 createScoreBoardTemplate(sport, data);
             }
