@@ -239,10 +239,10 @@
                 },
                 "scoreboard": {
                     "1": [
-                        0,0,0,0,0,0,0
+                        0,0,0,0,0,0,0,0,0,0,0
                     ],
                     "2": [
-                        2,2,2,2,2,2,2
+                        2,2,2,2,2,2,2,0,0,0,0
                     ]
                 },
                 "market": []
@@ -796,7 +796,7 @@
 
         const randomInt = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon = data.list.fixture_id + '_0_lts'; 
+        const mainCon = data.list.fixture_id + '_1_lts'; 
         const existingMainCon = $(`div[id="${mainCon}"]`); 
         const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
@@ -896,7 +896,7 @@
 
         const randomInt_mts = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon_mts = data.list.fixture_id + '_1_mts'; 
+        const mainCon_mts = data.list.fixture_id + '_2_mts'; 
         const existingMainCon_mts = $(`div[id="${mainCon_mts}"]`); 
         const headTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_head'; 
         const existingHeadTr_mts = $(`tr[id="${headTr_mts}"]`);
@@ -996,7 +996,7 @@
 
         const randomInt_mtn = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon_mtn = data.list.fixture_id + '_2_mtn'; 
+        const mainCon_mtn = data.list.fixture_id + '_3_mtn'; 
         const existingMainCon_mtn = $(`div[id="${mainCon_mtn}"]`); 
         const headTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_head'; 
         const existingHeadTr_mtn = $(`tr[id="${headTr_mtn}"]`);
