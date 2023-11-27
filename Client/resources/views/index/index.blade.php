@@ -431,7 +431,7 @@
                 // stage
                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                 // exception baseball
-                if( sport === 154914 && v3.periods?.Bases ) {
+                if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                     // stage
                     v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
 
@@ -802,7 +802,7 @@
                             if( v3.periods && v3.periods.period !== -1 ) {
                                 timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                                 // exception baseball
-                                if( sport === 154914 && v3.periods?.Bases ) {
+                                if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                                     if( parseInt(v3.periods.period) < 10 ) {
                                         v3.periods.Turn === '1' ? timerStr += langTrans.mainArea.lowerStage : timerStr += langTrans.mainArea.upperStage
                                     }
