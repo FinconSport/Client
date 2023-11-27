@@ -730,7 +730,7 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                $('.template-con').append($('.early-fixture').detach().css({
+                $('.template-con').append($('.early-fixture-con').detach().css({
                     'display': 'none',
                     'height': '0px',
                     'important': 'true'
@@ -749,7 +749,7 @@
                 if (scbLen > 9) {
                     isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
                 } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css({
+                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css({
                         'display': 'none',
                         'height': '0px',
                         'important': 'true'
