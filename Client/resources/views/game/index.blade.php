@@ -794,7 +794,7 @@
 
         scoreBoardHeadContainer.append(scoreBoardHeadTemp);
 
-        $(`#${dynamicId} table`).append(scoreBoardHeadContainer);
+        $(`#livingtableHead`).append(scoreBoardHeadContainer);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -824,7 +824,7 @@
 
         scoreBoardBodyContainer.append(scoreBoardBodyTemp_away);
 
-        $(`#${dynamicId} table`).append(scoreBoardBodyContainer);
+        $(`#livingtableBody`).append(scoreBoardBodyContainer);
 
         // Append away team after home team to table
         livingContainerTemp.append(scoreBoardTableContainer);
