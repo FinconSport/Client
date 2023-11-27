@@ -704,16 +704,21 @@
             const scorehome = data.list?.scoreboard[1];
             const scoreaway = data.list?.scoreboard[2];
 
+            const tableID = data.list.fixture_id + '_table';
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
 
-            $(`tr[id="${headTr}"]`).remove();
-            $(`tr[id="${bodyTr}"]`).remove();
+            $(`table[id="${tableID}"]`).remove();
             $(`thead[id="${headTr}"]`).remove();
             $(`tbody[id="${bodyTr}"]`).remove();
 
+            const table = $('<table>').addClass(`${tableID}`);
             const tableHead = $('<thead>').attr('id', `${headTr}`);
             const tableBody = $('<tbody>').attr('id', `${bodyTr}`);
+
+            table.append(tableHead);
+            tableHead.after(tableBody);
+            livingContainerTemp.append(table);
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
@@ -794,7 +799,6 @@
 
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-            const table = $('<table>').addClass('your-table-class');
             table.append(tableHead);
             tableHead.after(tableBody);
             livingContainerTemp.append(table);
