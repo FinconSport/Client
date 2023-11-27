@@ -706,14 +706,6 @@
             $(`thead[id="${headTr}"]`).remove();
             $(`tbody[id="${bodyTr}"]`).remove();
 
-            
-            
-            
-
-            table.append(tableHead);
-            tableHead.after(tableBody);
-            livingContainerTemp.append(table);
-
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
@@ -797,7 +789,7 @@
 
             const table = $('<table>').addClass(`${tableID}`);
             table.append(tableHead);
-            
+
             tableHead.after(tableBody);
             livingContainerTemp.append(table);
 
