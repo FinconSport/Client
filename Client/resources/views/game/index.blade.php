@@ -693,7 +693,7 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
-        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
+        if ((data.list.status == 2 || data.list.status == 9 || data.list.status == 3) && data.list.scoreboard) {
             if (sport === 154914) {
                 for (let i = 0; i < 3; i++) {
                     const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
