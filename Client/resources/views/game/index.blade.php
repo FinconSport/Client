@@ -62,69 +62,70 @@
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
 <!-- early & living scoreboard-->
+    <!-- template clone -->
+        <!-- early fixture -->
+        <div class="swiper-slide earlyFixture-container row" template="earlyContainerTemplate" hidden>
+            <p class="home_team_name col-3"></p>
+            <div class="col-4">
+                <p class="league_name"></p>
+                <p class="start_time"></p>
+            </div>
+            <p class="away_team_name col-3"></p>
+        </div>
+        <!-- living fixture -->
+        <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
+            <table>
+                <thead key="livingtableHead">
+                    <tr template="scoreBoardHeadTemplate" hidden></tr>
+                </thead>
+                <tbody key="livingtableBody">
+                    <tr template="scoreBoardBodyTemplate_home" hidden></tr>
+                    <tr template="scoreBoardBodyTemplate_away" hidden></tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- // is baseball less than six -->
+        <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_lessThanSix" hidden>
+            <table>
+                <thead key="isBaseball_livingtableHead_lessThanSix">
+                    <tr template="isBaseball_scoreBoardHeadTemplate_lessThanSix" hidden></tr>
+                </thead>
+                <tbody key="isBaseball_livingtableBody_lessThanSix">
+                    <tr template="isBaseball_scoreBoardBodyTemplate_home_lessThanSix" hidden></tr>
+                    <tr template="isBaseball_scoreBoardBodyTemplate_away_lessThanSix" hidden></tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- // is baseball more than six -->
+        <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_moreThanSix" hidden>
+            <table>
+                <thead key="isBaseball_livingtableHead_moreThanSix">
+                    <tr template="isBaseball_scoreBoardHeadTemplate_moreThanSix" hidden></tr>
+                </thead>
+                <tbody key="isBaseball_livingtableBody_moreThanSix">
+                    <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanSix" hidden></tr>
+                    <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanSix" hidden></tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- // is baseball more than 9 -->
+        <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_moreThanNine" hidden>
+            <table>
+                <thead key="isBaseball_livingtableHead_moreThanNine">
+                    <tr template="isBaseball_scoreBoardHeadTemplate_moreThanNine" hidden></tr>
+                </thead>
+                <tbody key="isBaseball_livingtableBody_moreThanNine">
+                    <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanNine" hidden></tr>
+                    <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanNine" hidden></tr>
+                </tbody>
+            </table>
+        </div>
+    <!-- template clone -->
+
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <!-- early fixture -->
-            <div class="swiper-slide earlyFixture-container row" template="earlyContainerTemplate" hidden>
-                <p class="home_team_name col-3"></p>
-                <div class="col-4">
-                    <p class="league_name"></p>
-                    <p class="start_time"></p>
-                </div>
-                <p class="away_team_name col-3"></p>
-            </div>
-            <!-- living fixture -->
-            <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
-                <table>
-                    <thead key="livingtableHead">
-                        <tr template="scoreBoardHeadTemplate" hidden></tr>
-                    </thead>
-                    <tbody key="livingtableBody">
-                        <tr template="scoreBoardBodyTemplate_home" hidden></tr>
-                        <tr template="scoreBoardBodyTemplate_away" hidden></tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- // is baseball less than six -->
-            <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_lessThanSix" hidden>
-                <table>
-                    <thead key="isBaseball_livingtableHead_lessThanSix">
-                        <tr template="isBaseball_scoreBoardHeadTemplate_lessThanSix" hidden></tr>
-                    </thead>
-                    <tbody key="isBaseball_livingtableBody_lessThanSix">
-                        <tr template="isBaseball_scoreBoardBodyTemplate_home_lessThanSix" hidden></tr>
-                        <tr template="isBaseball_scoreBoardBodyTemplate_away_lessThanSix" hidden></tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- // is baseball more than six -->
-            <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_moreThanSix" hidden>
-                <table>
-                    <thead key="isBaseball_livingtableHead_moreThanSix">
-                        <tr template="isBaseball_scoreBoardHeadTemplate_moreThanSix" hidden></tr>
-                    </thead>
-                    <tbody key="isBaseball_livingtableBody_moreThanSix">
-                        <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanSix" hidden></tr>
-                        <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanSix" hidden></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- // is baseball more than 9 -->
-            <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_moreThanNine" hidden>
-                <table>
-                    <thead key="isBaseball_livingtableHead_moreThanNine">
-                        <tr template="isBaseball_scoreBoardHeadTemplate_moreThanNine" hidden></tr>
-                    </thead>
-                    <tbody key="isBaseball_livingtableBody_moreThanNine">
-                        <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanNine" hidden></tr>
-                        <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanNine" hidden></tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
