@@ -707,7 +707,7 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                createScoreBoardTemplate(sport, data);
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             } else {
                 createScoreBoardTemplate(sport, data);
             }
@@ -725,7 +725,7 @@
         }
     }
 
-    function createScoreBoardTemplate(sport, data) {
+    function createScoreBoardTemplate(sport, data, baseballShowStage) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate"]`).clone();
         const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]`).clone();
         const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]`).clone();
@@ -776,41 +776,44 @@
         const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
         scoreBoardHeadTemp.append(TeamNameHead);
 
-        // for (let i = 0; i < gameTitle.length; i++) {
-        //     if (sport === 154914) {
-        //         const scbLen = data.list?.scoreboard[1].length - 1;
-        //         baseballShowStageTemp = baseballShowStage;
-        //         if (baseballShowStageTemp.indexOf(i) !== -1) {
-        //             scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-        //         }
-        //     } else {
-        //         scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
-        //     }
-        // }
-        let baseballShowStage = []
+        let baseballShowStageTemp = baseballShowStage;
+
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
-                switch (true) {
-                    case scbLen < 6:
-                        baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
-                        break;
-                    case scbLen >= 6 && scbLen <= 9:
-                        baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
-                        break;
-                    case scbLen > 9:
-                        baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
-                        break;
-                    default:
-                        break;
-                }
-                if (baseballShowStage.indexOf(i) !== -1) {
+                baseballShowStageTemp = baseballShowStage;
+                if (baseballShowStageTemp.indexOf(i) !== -1) {
                     scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
             } else {
                 scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
             }
         }
+
+        // let baseballShowStage = []
+        // for (let i = 0; i < gameTitle.length; i++) {
+        //     if (sport === 154914) {
+        //         const scbLen = data.list?.scoreboard[1].length - 1;
+        //         switch (true) {
+        //             case scbLen < 6:
+        //                 baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
+        //                 break;
+        //             case scbLen >= 6 && scbLen <= 9:
+        //                 baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
+        //                 break;
+        //             case scbLen > 9:
+        //                 baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //         if (baseballShowStage.indexOf(i) !== -1) {
+        //             scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+        //         }
+        //     } else {
+        //         scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
+        //     }
+        // }
         livingContainerTemp.find('thead[key="livingtableHead"]').append(scoreBoardHeadTemp);
 
         // Home team
