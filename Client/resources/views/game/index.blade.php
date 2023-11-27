@@ -692,6 +692,10 @@
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
+        const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
+        const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
