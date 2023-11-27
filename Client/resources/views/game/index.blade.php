@@ -820,6 +820,9 @@
 
         $('.swiper-wrapper').append(livingContainerTemp);
 
+        const livingTableHead = livingContainerTemp.find('thead[key="livingtableHead"]');
+        console.log('livingTableHead length:', livingTableHead.length);
+
     }
 
 
