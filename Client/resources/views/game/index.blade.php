@@ -726,24 +726,24 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
+
                 document.querySelectorAll(".living-fixture-con").forEach(el => {
                     el.style.display = "block";
                 });
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
 
-                if (scbLen >= 6) {
-                    document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => {
-                        el.style.display = "block";
-                    });
-                    isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                }
+                document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => {
+                    el.style.display = "block";
+                });
 
-                if (scbLen > 9) {
-                    document.querySelectorAll(".living-fixture-isBaseball-mtn").forEach(el => {
-                        el.style.display = "block";
-                    });
-                    isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 7, 8, 9, 10, 11, 12]);
-                }
+                isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+                
+                document.querySelectorAll(".living-fixture-isBaseball-mtn").forEach(el => {
+                    el.style.display = "block";
+                });
+
+                isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 7, 8, 9, 10, 11, 12]);
+
             } else {
                 createScoreBoardTemplate(sport, data);
             }
