@@ -697,21 +697,32 @@
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
-        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
+        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-            var scorehome = data.list?.scoreboard[1]
-            var scoreaway = data.list?.scoreboard[2]
+
+            const scorehome = data.list?.scoreboard[1];
+            const scoreaway = data.list?.scoreboard[2];
+
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
+
             $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTr}"]`).remove();
+            $(`thead[id="${headTr}"]`).remove();
+            $(`tbody[id="${bodyTr}"]`).remove();
+
+            const tableHead = $('<thead>').attr('id', `${headTr}`);
+            const tableBody = $('<tbody>').attr('id', `${bodyTr}`);
+
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
-            scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
-            scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
+            scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
+            scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
+
             scoreBoardHeadTemp.attr('id', headTr);
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
+
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
             // Thead data game title
             let stageStr = ''
@@ -725,6 +736,7 @@
             } else {
                 stageText = gameLangTrans.scoreBoard.ready
             }
+
             const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
             
@@ -753,7 +765,9 @@
                 }
                 
             }
-            $('#livingtableHead').append(scoreBoardHeadTemp);
+
+            tableHead.append(scoreBoardHeadTemp);
+
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -764,7 +778,9 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-            $('#livingtableBody').append(scoreBoardBodyTemp_home);
+
+            tableBody.append(scoreBoardBodyTemp_home);
+
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
@@ -775,11 +791,16 @@
                     scoreBoardBodyTemp_away.append(thAway);
                 }
             }
-            // Append away team after home team to table
+
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+
+            const table = $('<table>').addClass('your-table-class');
+            table.append(tableHead);
+            tableHead.after(tableBody);
+            livingContainerTemp.append(table);
+
             $('.swiper-wrapper').append(livingContainerTemp);
         } else {
-            // Early fixture (status == 1)
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
@@ -791,6 +812,7 @@
             $('.swiper-wrapper').append(earlyContainerTemp);
         }
     }
+
 
     function noData() {
         var noDataElement = document.createElement('div');
