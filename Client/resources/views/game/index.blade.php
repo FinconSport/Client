@@ -804,8 +804,8 @@
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         $('div.living-fixture-con').empty();
-        livingContainerTemp.find('thead[key="livingtableHead"]').empty();
-        livingContainerTemp.find('thead[key="livingtableBody"]').empty();
+        livingContainerTemp.find('thead[key="livingtableHead"]').remove();
+        livingContainerTemp.find('thead[key="livingtableBody"]').remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
