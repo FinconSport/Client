@@ -706,7 +706,7 @@
             const bodyTrHome = data.list.fixture_id + '_body_home'; // Unique ID for home team body row
             const bodyTrAway = data.list.fixture_id + '_body_away'; // Unique ID for away team body row
 
-            $(`div[id="${data.list.fixture_id}"]`).remove();
+            $(`div[id="${data.list.fixture_id}"]`).empty();
             $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTrHome}"]`).remove();
             $(`tr[id="${bodyTrAway}"]`).remove();
