@@ -803,7 +803,7 @@
 
         $('div.living-fixture-con').empty();
         livingContainerTemp.find('thead[key="livingtableHead"]').empty();
-        livingContainerTemp.find('thead[key="livingtableBody"]').empty();
+        livingContainerTemp.find('tbody[key="livingtableBody"]').empty();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
