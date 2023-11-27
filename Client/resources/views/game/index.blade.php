@@ -185,6 +185,39 @@
     var stagePriorityArr = null
     var gameTitle = null
 
+    // temp data
+    var matchListData = {
+        "status": matchListD.status,
+        "data": {
+            "list": {
+                "league_id": matchListD.data.list.league_id,
+                "league_name": matchListD.data.list.league_name,
+                "fixture_id": matchListD.data.list.fixture_id,
+                "start_time": matchListD.data.list.start_time,
+                "status": matchListD.data.list.status,
+                "last_update": matchListD.data.list.last_update,
+                "home_team_id": matchListD.data.list.home_team_id,
+                "home_team_name": matchListD.data.list.home_team_name,
+                "away_team_id": matchListD.data.list.away_team_id,
+                "away_team_name": matchListD.data.list.away_team_name,
+                "periods": {
+                    "period": 1,
+                    "Turn": "2"
+                },
+                "scoreboard": {
+                    "1": [
+                        0,0
+                    ],
+                    "2": [
+                        2,2
+                    ]
+                },
+                "market": []
+            }
+        },
+        "message": "SUCCESS_API_GAME_INDEX_01",
+        "gzip": true
+    }
 
     function setBettypeColor(status) {
         status === 2 ? $('.marketName').css('background', '#ffcb9c') : $('.marketName').css('background', '#b8d6d4')
@@ -192,7 +225,7 @@
 
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -251,7 +284,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
