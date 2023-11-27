@@ -707,9 +707,9 @@
             const bodyTrAway = data.list.fixture_id + '_body_away';
 
             $(`div[id="${data.list.fixture_id}"]`).remove();
-            $(`tr[id="${headTr}"]`).remove();
-            $(`tr[id="${bodyTrHome}"]`).remove();
-            $(`tr[id="${bodyTrAway}"]`).remove();
+            $(`tr[id="${data.list.fixture_id}_head"]`).remove();
+            $(`tr[id="${data.list.fixture_id}_body_home"]`).remove();
+            $(`tr[id="${data.list.fixture_id}_body_away"]`).remove();
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
