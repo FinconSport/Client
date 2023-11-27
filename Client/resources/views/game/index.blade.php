@@ -736,10 +736,6 @@
         $(`tr[id="${headTr}"]`).remove();
         $(`tr[id="${bodyTr}"]`).remove();
 
-        const scoreBoardTableContainer = $('<table>');
-        const scoreBoardHeadContainer = $('<thead>');
-        const scoreBoardBodyContainer = $('<tbody>');
-
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template');
@@ -792,9 +788,7 @@
             }
         }
 
-        scoreBoardHeadContainer.append(scoreBoardHeadTemp);
-
-        $(`#livingtableHead`).append(scoreBoardHeadContainer);
+        $(`#livingtableHead`).append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -808,7 +802,7 @@
             }
         }
 
-        scoreBoardBodyContainer.append(scoreBoardBodyTemp_home);
+        $(`#livingtableBody`).append(scoreBoardBodyTemp_home);
         
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -822,12 +816,8 @@
             }
         }
 
-        scoreBoardBodyContainer.append(scoreBoardBodyTemp_away);
-
-        $(`#livingtableBody`).append(scoreBoardBodyContainer);
-
-        // Append away team after home team to table
-        livingContainerTemp.append(scoreBoardTableContainer);
+        scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+        
         $('.swiper-wrapper').append(livingContainerTemp);
 
     }
