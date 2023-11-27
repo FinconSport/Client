@@ -115,8 +115,8 @@
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
             <div class="swiper-slide early-fixture-con" style="display:none;width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-con" style="display:none;width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-isBaseball-mts" style="display:none;width:100%!important;"></div>
             <!-- <div class="swiper-slide living-fixture-isBaseball-mtn"></div> -->
         </div>
         <!-- If we need pagination -->
@@ -722,23 +722,31 @@
     }
 
     // ------- game page scoreboard function-----------
-    function createScoreBoard(data) {
+    function createScoreBoard(data, sport) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                // is baseball less than six-->
-                document.querySelectorAll(".early-fixture").forEach(el => el.parentNode.removeChild(el));
+                const scbLen = data.list?.scoreboard[1].length - 1;
+                document.querySelectorAll(".living-fixture-con").forEach(el => {
+                    el.style.display = "block";
+                });
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+
+                if (scbLen >= 6) {
+                    document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => {
+                        el.style.display = "block";
+                    });
+                    isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
+                }
             } else {
                 createScoreBoardTemplate(sport, data);
             }
         } else {
             // Early fixture (status == 1)
-            document.querySelectorAll(".living-fixture").forEach(el => el.remove());
-            document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => el.remove());
-            // document.querySelectorAll(".living-fixture-isBaseball-mtn").forEach(el => el.remove());
+            document.querySelectorAll(".early-fixture").forEach(el => {
+                el.style.display = "block";
+            });
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
