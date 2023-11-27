@@ -878,9 +878,9 @@
 
         const mainCon_lts = data.list.fixture_id;
         const existingMainCon_lts = $(`div[id="${mainCon_lts}"]`); 
-        const headTr_lts = data.list.fixture_id + '_' + randomInt + '_head'; 
+        const headTr_lts = data.list.fixture_id + '_' + randomInt_lts + '_head'; 
         const existingHeadTr_lts = $(`tr[id="${headTr_lts}"]`);
-        const bodyTr_lts = data.list.fixture_id + '_' + randomInt + '_body';
+        const bodyTr_lts = data.list.fixture_id + '_' + randomInt_lts + '_body';
         const existingBodyTr_lts = $(`tr[id="${bodyTr_lts}"]`);
 
         $(`div[id="${mainCon_lts}"]`).remove();
@@ -976,9 +976,9 @@
 
         const mainCon_mts = data.list.fixture_id;
         const existingMainCon_mts = $(`div[id="${mainCon_mts}"]`); 
-        const headTr_mts = data.list.fixture_id + '_' + randomInt + '_head'; 
+        const headTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_head'; 
         const existingHeadTr_mts = $(`tr[id="${headTr_mts}"]`);
-        const bodyTr_mts = data.list.fixture_id + '_' + randomInt + '_body';
+        const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
         $(`div[id="${mainCon_mts}"]`).remove();
