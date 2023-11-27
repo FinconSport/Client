@@ -842,7 +842,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        if (existingMainCon.length === 0 ||existingHeadTr.length === 0 || existingBodyTr.length === 0) {
+        if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
             $('.swiper-wrapper').append(livingContainerTemp);
         }
     }
