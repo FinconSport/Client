@@ -76,7 +76,7 @@
                 <p class="away_team_name col-3"></p>
             </div>
             <!-- living fixture -->
-            <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
+            <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
                 <table>
                     <thead id="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -699,25 +699,33 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+            // $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
+
+            $(`div[id="${data.list.fixture_id}"]`).remove();
             $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTr}"]`).remove();
+
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
+
+            livingContainerTemp.attr('id', data.list.fixture_id);
             scoreBoardHeadTemp.attr('id', headTr);
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
+
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
             // Thead data game title
             let stageStr = ''
             if( sport === 154914 && data.list?.periods?.period < 10 ) {
                 data.list.periods.Turn === '1' ? stageStr = gameLangTrans.scoreBoard.lowerStage : stageStr = gameLangTrans.scoreBoard.upperStage
             }
+
             // const stageText = data.list.status == 2 ? commonLangTrans.stageArr[sport][data.list.periods.period] : gameLangTrans.scoreBoard.ready
             var stageText = formatDateTime(data.list.start_time)
             if( data.list.status == 2 ) {
@@ -725,6 +733,7 @@
             } else {
                 stageText = gameLangTrans.scoreBoard.ready
             }
+
             const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
             scoreBoardHeadTemp.append(TeamNameHead);
             
@@ -754,6 +763,7 @@
                 
             }
             $('#livingtableHead').append(scoreBoardHeadTemp);
+
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -765,6 +775,7 @@
                 }
             }
             $('#livingtableBody').append(scoreBoardBodyTemp_home);
+
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
@@ -775,8 +786,10 @@
                     scoreBoardBodyTemp_away.append(thAway);
                 }
             }
+
             // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+
             $('.swiper-wrapper').append(livingContainerTemp);
         } else {
             // Early fixture (status == 1)
