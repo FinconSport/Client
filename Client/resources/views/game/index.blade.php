@@ -804,8 +804,8 @@
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         $('div.living-fixture-con').empty();
-        $(`tr#${headTr}`).empty();
-        $(`tr#${bodyTr}`).empty();
+        $(`tr#${headTr} th`).remove();
+        $(`tr#${bodyTr} th`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
