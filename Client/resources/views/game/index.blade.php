@@ -739,7 +739,7 @@
 
         const randomInt = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon = data.list.fixture_id + '_' + randomInt;
+        const mainCon = data.list.fixture_id;
         const existingMainCon = $(`div[id="${mainCon}"]`); 
         const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
