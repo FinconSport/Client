@@ -771,7 +771,9 @@
                     for (let i = 0; i < gameTitle.length; i++) {
                         const scoreValue = Array.from(Object.values(scorehome))[i];
                         const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-                        scoreBoardBodyTemp_home.append(thHome);
+                        if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
+                            scoreBoardBodyTemp_home.append(thHome);
+                        }
                     }
 
                     $('#livingtableBody').append(scoreBoardBodyTemp_home);
@@ -783,7 +785,9 @@
                     for (let i = 0; i < gameTitle.length; i++) {
                         const scoreValue = Array.from(Object.values(scoreaway))[i];
                         const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
-                        scoreBoardBodyTemp_away.append(thAway);
+                        if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
+                            scoreBoardBodyTemp_home.append(thAway);
+                        }
                     }
 
                     // Append away team after home team to table
