@@ -805,11 +805,7 @@
             }
         }
 
-        //append home team to tbody
         scoreBoardBodyContainer.append(scoreBoardBodyTemp_home);
-        //append tbody to table
-        scoreBoardTableContainer.append(scoreBoardBodyContainer);
-        // $('#livingtableBody').append(scoreBoardBodyTemp_home);
         
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -823,10 +819,10 @@
             }
         }
 
-        //append tbody after home team
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-         //append table to main container
+        scoreBoardTableContainer.append(scoreBoardBodyContainer);
+
         livingContainerTemp.append(scoreBoardTableContainer);
 
         $('.swiper-wrapper').append(livingContainerTemp);
