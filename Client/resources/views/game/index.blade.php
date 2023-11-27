@@ -734,7 +734,6 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                // is baseball less than six-->
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
                 isBaseball_createScoreBoardTemplate_lessthansix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
             } else {
@@ -864,7 +863,7 @@
 
         const randomInt_lts = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon_lts = data.list.fixture_id;
+        const mainCon_lts = randomInt_lts;
         const headTr_lts = mainCon_lts + '_' + randomInt_lts + '_head'; 
         const bodyTr_lts = mainCon_lts + '_' + randomInt_lts + '_body';
 
