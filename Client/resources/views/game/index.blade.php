@@ -728,7 +728,7 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 // is baseball less than six-->
-                $('div[class="early-fixture"]').remove();
+                document.getElementsByClassName("early-fixture").remove();
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
                 isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
             } else {
@@ -736,9 +736,9 @@
             }
         } else {
             // Early fixture (status == 1)
-            $('div[class="living-fixture"]').remove();
-            $('div[class="living-fixture-isBaseball-mts"]').remove();
-            // $('div[class="living-fixture-isBaseball-mtn"]').remove();
+            document.getElementsByClassName("living-fixture").remove();
+            document.getElementsByClassName("living-fixture-isBaseball-mts").remove();
+            // document.getElementsByClassName("living-fixture-isBaseball-mtn").remove();
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
