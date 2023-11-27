@@ -693,8 +693,6 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
-        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
-
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
@@ -702,10 +700,12 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 for (let i = 0; i < 3; i++) {
-                    const clonedLivingContainer = $('div[template="livingContainerTemplate"]').clone();
+                    const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
                     const livingContainerID = `livingContainer_${i + 1}`;
-                    clonedLivingContainer.removeAttr('hidden').removeAttr('template').attr('id', livingContainerID);
 
+                    livingContainerTemp.removeAttr('hidden').removeAttr('template').attr('id', livingContainerID);
+
+                    $('div[key="livingContainerTemplate"]').removeAttr('hidden');
                     var scorehome = data.list?.scoreboard[1]
                     var scoreaway = data.list?.scoreboard[2]
 
@@ -742,7 +742,6 @@
                     const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
                     scoreBoardHeadTemp.append(TeamNameHead);
 
-                    
                     let baseballShowStage = []
                     for (let i = 0; i < gameTitle.length; i++) {
                         if( sport === 154914 ) {
@@ -801,9 +800,11 @@
                     // Append away team after home team to table
                     scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-                    $('.swiper-wrapper').append(clonedLivingContainer);
+                    $('.swiper-wrapper').append(livingContainerTemp);
                 }
             } else {
+                const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+
                 livingContainerTemp.removeAttr('hidden').removeAttr('template');
                 $('div[key="livingContainerTemplate"]').removeAttr('hidden');
                 var scorehome = data.list?.scoreboard[1]
