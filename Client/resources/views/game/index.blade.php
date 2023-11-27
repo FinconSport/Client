@@ -803,12 +803,6 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        if (existingMainCon.length !== 0) {
-            livingContainerTemp.find('thead[key="livingtableHead"]').empty();
-            livingContainerTemp.find('thead[key="livingtableBody"]').empty();
-        }
-
-        $(`div[id="${mainCon}"]`).remove();
         $(`tr[id="${headTr}"]`).remove();
         $(`tr[id="${bodyTr}"]`).remove();
 
