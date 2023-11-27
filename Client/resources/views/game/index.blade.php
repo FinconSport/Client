@@ -85,14 +85,14 @@
             </table>
         </div>
         <!-- // is baseball more than six -->
-        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_morethannine" hidden>
+        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_moreThanSix" hidden>
             <table>
-                <thead key="isBaseball_livingtableHead_morethannine">
-                    <tr template="isBaseball_scoreBoardHeadTemplate_morethannine" hidden></tr>
+                <thead key="isBaseball_livingtableHead_moreThanSix">
+                    <tr template="isBaseball_scoreBoardHeadTemplate_moreThanSix" hidden></tr>
                 </thead>
-                <tbody key="isBaseball_livingtableBody_morethannine">
-                    <tr template="isBaseball_scoreBoardBodyTemplate_home_morethannine" hidden></tr>
-                    <tr template="isBaseball_scoreBoardBodyTemplate_away_morethannine" hidden></tr>
+                <tbody key="isBaseball_livingtableBody_moreThanSix">
+                    <tr template="isBaseball_scoreBoardBodyTemplate_home_moreThanSix" hidden></tr>
+                    <tr template="isBaseball_scoreBoardBodyTemplate_away_moreThanSix" hidden></tr>
                 </tbody>
             </table>
         </div>
