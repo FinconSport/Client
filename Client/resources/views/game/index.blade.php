@@ -801,9 +801,11 @@
         const bodyTr = data.list.fixture_id + '_0_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
+        if (headTr.length !== 0) {
+            $('#' + headTr).first().remove();
+        }
+
         $('div.living-fixture-con').empty();
-        $(`tr#${headTr}`).remove();
-        $(`tr#${bodyTr}`).remove();
         $(`tr#${headTr}`).empty();
         $(`tr#${bodyTr}`).empty();
 
