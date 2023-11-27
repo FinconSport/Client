@@ -695,9 +695,6 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                // Declare baseballShowStage outside the loop
-                let baseballShowStage = [];
-
                 for (let i = 0; i < 3; i++) {
                     const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
                     const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
@@ -727,6 +724,8 @@
 
                     // Thead data game title
                     let stageStr = '';
+                    let baseballShowStage = [];
+
                     if (sport === 154914 && data.list?.periods?.period < 10) {
                         data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
                     }
@@ -741,7 +740,6 @@
                     const TeamNameHead = $(`<th style="width: 25%; text-align: left;color:#ffffff;"><div class="setHeightDiv">${stageText} ${stageStr}</div></th>`);
                     scoreBoardHeadTemp.append(TeamNameHead);
 
-                    let baseballShowStage = [];
                     for (let i = 0; i < gameTitle.length; i++) {
                         if (sport === 154914) {
                             const scbLen = data.list?.scoreboard[1].length - 1;
