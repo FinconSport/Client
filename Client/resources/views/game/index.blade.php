@@ -738,8 +738,8 @@
 
         const headTr = `${data.list.fixture_id}_head_${iteration}`;
         const bodyTr = `${data.list.fixture_id}_body_${iteration}`;
-        $(`tr[id="${headTr}"]`).remove();
-        $(`tr[id="${bodyTr}"]`).remove();
+        // $(`tr[id="${headTr}"]`).remove();
+        // $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.attr('id', headTr);
         scoreBoardBodyTemp_home.attr('id', `${bodyTr}_home`);
