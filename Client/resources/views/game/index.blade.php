@@ -765,7 +765,6 @@
                 }
             }
 
-            const tableHead = $('<thead>').attr('id', `${headTr}`);
             tableHead.append(scoreBoardHeadTemp);
 
             // Home team
@@ -779,7 +778,6 @@
                 }
             }
 
-            const tableBody = $('<tbody>').attr('id', `${bodyTr}`);
             tableBody.append(scoreBoardBodyTemp_home);
 
             // Away team
@@ -796,7 +794,6 @@
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
             // Append table to livingContainerTemp
-            const table = $('<table>').addClass(`${tableID}`);
             table.append(tableHead);
             tableHead.after(tableBody);
             livingContainerTemp.append(table);
