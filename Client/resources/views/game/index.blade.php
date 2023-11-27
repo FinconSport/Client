@@ -78,10 +78,10 @@
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
                 <table>
-                    <thead class="livingtableHead">
+                    <thead id="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
                     </thead>
-                    <tbody class="livingtableBody">
+                    <tbody id="livingtableBody">
                         <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                         <tr template="scoreBoardBodyTemplate_away" hidden></tr>
                     </tbody>
@@ -692,14 +692,15 @@
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
-        const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
-        const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
+        
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 for (let i = 0; i < 3; i++) {
                     const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+                    const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
+                    const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
+                    const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
                     
                     livingContainerTemp.removeAttr('hidden').removeAttr('template');
                     $('div[key="livingContainerTemplate"]').removeAttr('hidden');
@@ -762,7 +763,7 @@
                         }
                     }
 
-                    livingContainerTemp.find('.livingtableHead').append(scoreBoardHeadTemp);
+                    livingContainerTemp.find('#livingtableHead').append(scoreBoardHeadTemp);
 
                     // Home team
                     const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -776,7 +777,7 @@
                         }
                     }
 
-                    livingContainerTemp.find('.livingtableBody').append(scoreBoardBodyTemp_home);
+                    livingContainerTemp.find('#livingtableBody').append(scoreBoardBodyTemp_home);
 
                     // Away team
                     const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -799,6 +800,9 @@
             } else {
                 // The rest of the code for the case when sport is not 154914
                 const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+                const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
+                const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
+                const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
 
                 livingContainerTemp.removeAttr('hidden').removeAttr('template');
                 $('div[key="livingContainerTemplate"]').removeAttr('hidden');
@@ -835,7 +839,7 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
-                livingContainerTemp.find('.livingtableHead').append(scoreBoardHeadTemp);
+                $('#livingtableHead').append(scoreBoardHeadTemp);
                 // Home team
                 const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 scoreBoardBodyTemp_home.append(homeTeamName);
@@ -844,7 +848,7 @@
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                     scoreBoardBodyTemp_home.append(thHome);
                 }
-                livingContainerTemp.find('.livingtableBody').append(scoreBoardBodyTemp_home);
+                $('#livingtableBody').append(scoreBoardBodyTemp_home);
                 // Away team
                 const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
                 scoreBoardBodyTemp_away.append(awayTeamName);
