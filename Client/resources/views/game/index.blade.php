@@ -77,7 +77,7 @@
             </div>
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
-                <table>
+                <!-- <table>
                     <thead key="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
                     </thead>
@@ -85,7 +85,7 @@
                         <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                         <tr template="scoreBoardBodyTemplate_away" hidden></tr>
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>
         <!-- If we need pagination -->
