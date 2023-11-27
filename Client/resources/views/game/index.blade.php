@@ -729,7 +729,7 @@
             // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
 
-            $('.scoreboardCon').append(livingContainerTemp);
+            $('.swiper-wrapper').append(livingContainerTemp);
         } else {
 
             // Early fixture (status == 1)
@@ -742,7 +742,7 @@
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.scoreboardCon').append(earlyContainerTemp);
+            $('.swiper-wrapper').append(earlyContainerTemp);
         }
     }
 
