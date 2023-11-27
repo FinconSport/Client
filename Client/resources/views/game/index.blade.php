@@ -187,29 +187,31 @@
 
     // temp data
     var matchListData = {
-        "status": matchListD.status,
+        "status": 1,
         "data": {
             "list": {
-                "league_id": matchListD.data.list.league_id,
-                "league_name": matchListD.data.list.league_name,
-                "fixture_id": matchListD.data.list.fixture_id,
-                "start_time": matchListD.data.list.start_time,
-                "status": matchListD.data.list.status,
-                "last_update": matchListD.data.list.last_update,
-                "home_team_id": matchListD.data.list.home_team_id,
-                "home_team_name": matchListD.data.list.home_team_name,
-                "away_team_id": matchListD.data.list.away_team_id,
-                "away_team_name": matchListD.data.list.away_team_name,
+                "league_id": 15771,
+                "league_name": "LVBP",
+                "fixture_id": 11786403,
+                "start_time": "2023-11-27 08:00:00",
+                "status": 2,
+                "last_update": 1701044651,
+                "home_team_id": 328905,
+                "home_team_name": "Caribes de Anzoategui",
+                "away_team_id": 315931,
+                "away_team_name": "Navegantes del Magallanes",
                 "periods": {
                     "period": 1,
                     "Turn": "2"
                 },
                 "scoreboard": {
                     "1": [
-                        0,0
+                        0,
+                        0
                     ],
                     "2": [
-                        2,2
+                        2,
+                        2
                     ]
                 },
                 "market": []
