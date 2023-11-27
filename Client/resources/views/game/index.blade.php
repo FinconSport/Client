@@ -239,10 +239,10 @@
                 },
                 "scoreboard": {
                     "1": [
-                        0,0,0,0,0,0,0
+                        0,0,0,0,0,0,0,2,2,2
                     ],
                     "2": [
-                        2,2,2,2,2,2,2
+                        2,2,2,2,2,2,2,2,2,2
                     ]
                 },
                 "market": []
@@ -806,9 +806,9 @@
 
         $('div.swiper-slide').empty();
 
-        $(`div[id="${mainCon}"]`).remove();
-        $(`tr[id="${headTr}"]`).remove();
-        $(`tr[id="${bodyTr}"]`).remove();
+        // $(`div[id="${mainCon}"]`).remove();
+        // $(`tr[id="${headTr}"]`).remove();
+        // $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -905,9 +905,11 @@
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
-        $(`div[id="${mainCon_mts}"]`).remove();
-        $(`tr[id="${headTr_mts}"]`).remove();
-        $(`tr[id="${bodyTr_mts}"]`).remove();
+        $('div.swiper-slide').empty();
+
+        // $(`div[id="${mainCon_mts}"]`).remove();
+        // $(`tr[id="${headTr_mts}"]`).remove();
+        // $(`tr[id="${bodyTr_mts}"]`).remove();
 
         scoreBoardHeadTemp_mts.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mts.removeAttr('hidden').removeAttr('template');  
@@ -1003,9 +1005,11 @@
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
         const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
 
-        $(`div[id="${mainCon_mtn}"]`).remove();
-        $(`tr[id="${headTr_mtn}"]`).remove();
-        $(`tr[id="${bodyTr_mtn}"]`).remove();
+        $('div.swiper-slide').empty();
+
+        // $(`div[id="${mainCon_mtn}"]`).remove();
+        // $(`tr[id="${headTr_mtn}"]`).remove();
+        // $(`tr[id="${bodyTr_mtn}"]`).remove();
 
         scoreBoardHeadTemp_mtn.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mtn.removeAttr('hidden').removeAttr('template');  
