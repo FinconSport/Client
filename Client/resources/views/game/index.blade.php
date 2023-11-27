@@ -785,7 +785,7 @@
             }
         }
 
-        livingContainerTemp.find('#livingtableHead').append(scoreBoardHeadTemp);
+        $('#livingtableHead').append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -799,7 +799,7 @@
             }
         }
 
-        livingContainerTemp.find('#livingtableBody').append(scoreBoardBodyTemp_home);
+        $('#livingtableBody').append(scoreBoardBodyTemp_home);
         
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
