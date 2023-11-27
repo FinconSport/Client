@@ -796,7 +796,7 @@
 
         const randomInt = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon = data.list.fixture_id;
+        const mainCon = data.list.fixture_id + '_0'; 
         const existingMainCon = $(`div[id="${mainCon}"]`); 
         const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
@@ -875,7 +875,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
+        if (existingMainCon.length === 0) {
             $('.living-fixture-con').append(livingContainerTemp);
         }
     }
@@ -893,7 +893,7 @@
 
         const randomInt_mts = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon_mts = data.list.fixture_id + '_' + randomInt_mts + '_mts'; 
+        const mainCon_mts = data.list.fixture_id + '_1_mts'; 
         const existingMainCon_mts = $(`div[id="${mainCon_mts}"]`); 
         const headTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_head'; 
         const existingHeadTr_mts = $(`tr[id="${headTr_mts}"]`);
@@ -972,7 +972,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
-        if (existingHeadTr_mts.length === 0 || existingBodyTr_mts.length === 0) {
+        if (existingMainCon_mts.length === 0) {
             $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
         }
     }
@@ -990,7 +990,7 @@
 
         const randomInt_mtn = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_mtn'; 
+        const mainCon_mtn = data.list.fixture_id + '_2_mtn'; 
         const existingMainCon_mtn = $(`div[id="${mainCon_mtn}"]`); 
         const headTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_head'; 
         const existingHeadTr_mtn = $(`tr[id="${headTr_mtn}"]`);
@@ -1069,7 +1069,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
-        if (existingHeadTr_mtn.length === 0 || existingBodyTr_mtn.length === 0) {
+        if (existingMainCon_mtn.length === 0) {
             $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
         }
     }
