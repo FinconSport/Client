@@ -803,8 +803,6 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $('div.swiper-slide').empty();
-
         $(`div[id="${mainCon}"]`).remove();
         $(`tr[id="${headTr}"]`).remove();
         $(`tr[id="${bodyTr}"]`).remove();
@@ -903,8 +901,6 @@
         const bodyTr_mts = data.list.fixture_id + '_' + randomInt_mts + '_body';
         const existingBodyTr_mts = $(`tr[id="${bodyTr_mts}"]`);
 
-        $('div.swiper-slide').empty();
-
         $(`div[id="${mainCon_mts}"]`).remove();
         $(`tr[id="${headTr_mts}"]`).remove();
         $(`tr[id="${bodyTr_mts}"]`).remove();
@@ -1002,8 +998,6 @@
         const existingHeadTr_mtn = $(`tr[id="${headTr_mtn}"]`);
         const bodyTr_mtn = data.list.fixture_id + '_' + randomInt_mtn + '_body';
         const existingBodyTr_mtn = $(`tr[id="${bodyTr_mtn}"]`);
-
-        $('div.swiper-slide').empty();
 
         $(`div[id="${mainCon_mtn}"]`).remove();
         $(`tr[id="${headTr_mtn}"]`).remove();
