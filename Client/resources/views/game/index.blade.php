@@ -717,10 +717,11 @@
     }
 
     function createScoreBoardTemplate(sport, data, iteration) {
+        $(`.swiper-wrapper`).empty();
+
         const livingContainerTemp = $(`div[template="livingContainerTemplate"]:eq(${iteration})`).clone();
         const randomInt = Math.floor(Math.random() * 100) + 1;
         const dynamicID = `${data.list.fixture_id}_${randomInt}`;
-        $(`.swiper-wrapper`).empty();
 
         const tableElement = $('<table></table>');
         const theadElement = $('<thead key="livingtableHead"></thead>');
@@ -826,8 +827,6 @@
 
         $('.swiper-wrapper').append(livingContainerTemp);
     }
-
-
 
     function noData() {
         var noDataElement = document.createElement('div');
