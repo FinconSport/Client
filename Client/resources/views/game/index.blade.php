@@ -794,13 +794,11 @@
         var scorehome = data.list?.scoreboard[1];
         var scoreaway = data.list?.scoreboard[2];
 
-        const randomInt = Math.floor(Math.random() * 100) + 1;
-
         const mainCon = data.list.fixture_id + '_0_lts'; 
         const existingMainCon = $(`div[id="${mainCon}"]`); 
-        const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
+        const headTr = data.list.fixture_id + '_0_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
-        const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
+        const bodyTr = data.list.fixture_id + '_0_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         $('div.living-fixture-con').empty();
