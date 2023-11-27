@@ -761,7 +761,7 @@
                 }
                 
             }
-            // $('#livingtableHead').append(scoreBoardHeadTemp);
+            $(`#${data.list.fixture_id} #livingtableHead`).append(scoreBoardHeadTemp);
 
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -773,7 +773,8 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-            // $('#livingtableBody').append(scoreBoardBodyTemp_home);
+
+            $(`#${data.list.fixture_id} #livingtableBody`).append(scoreBoardBodyTemp_home);
 
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
