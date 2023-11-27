@@ -737,7 +737,7 @@
                 }));
 
                 if (scbLen >= 6) {
-                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "mts");
+                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
                 } else {
                     $('.template-con').append($('.living-fixture-mts').detach().css({
                         'display': 'none',
@@ -747,7 +747,7 @@
                 }
 
                 if (scbLen > 9) {
-                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "mtn");
+                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
                 } else {
                     $('.template-con').append($('.living-fixture-mtn').detach().css({
                         'display': 'none',
@@ -757,7 +757,7 @@
                 }
 
             } else {
-                createScoreBoardTemplate(sport, data);
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
             // Early fixture (status == 1)
@@ -803,7 +803,7 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $(`div.living-fixture-isBaseball-mts`).empty();
+        $(`div.living-fixture-${tempConSuffix}`).empty();
         livingContainerTemp.find(`thead[key="livingtableHead_${tempConSuffix}"]`).empty();
         livingContainerTemp.find(`tbody[key="livingtableBody_${tempConSuffix}"]`).empty();
 
