@@ -699,7 +699,6 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            // $('div[key="livingContainerTemplate"]').removeAttr('hidden');
 
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
@@ -762,7 +761,7 @@
                 }
                 
             }
-            $('#livingtableHead').append(scoreBoardHeadTemp);
+            // $('#livingtableHead').append(scoreBoardHeadTemp);
 
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -774,7 +773,7 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-            $('#livingtableBody').append(scoreBoardBodyTemp_home);
+            // $('#livingtableBody').append(scoreBoardBodyTemp_home);
 
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
