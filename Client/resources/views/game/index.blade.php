@@ -757,28 +757,33 @@
                 }
 
             } else {
-                $('.template-con').append( $('.living-fixture-mtn, .living-fixture-mts')
-                    .detach()
-                    .css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    })
-            );
+
+                $('.template-con').append( $('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({
+                    'display': 'none',
+                    'height': '0px',
+                    'important': 'true'
+                }));
+
+                $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
+                    'display': 'none',
+                    'important': 'true'
+                });
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
             // Early fixture (status == 1)
-            $('.template-con').append(
-                $('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts')
-                    .detach()
-                    .css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    })
+            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({
+                    'display': 'none',
+                    'height': '0px',
+                    'important': 'true'
+                })
             );
+
+            $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
+                'display': 'none',
+                'important': 'true'
+            });
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
