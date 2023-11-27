@@ -377,7 +377,7 @@
     function createFixtureCard(k, league_id, league_name, k3, v3) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
-        if( sport === 154914 && v3.status === 2 ) {
+        if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
             card.find('[key="not-show-baseCon"]').hide()
             card.find('[key="show-baseCon"]').show()
         } else {
@@ -731,7 +731,6 @@
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
-                    
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
@@ -758,7 +757,7 @@
                         card.find('.otherBetWay p').html('+' + v3.market_bet_count)
 
                         // 壘包 好壞球 只有 滾球 棒球有
-                        if( sport === 154914 && v3.status === 2 ) {
+                        if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
                             card.find('[key="not-show-baseCon"]').hide()
                             card.find('[key="show-baseCon"]').show()
                         } else {
