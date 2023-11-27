@@ -76,7 +76,7 @@
                 <p class="away_team_name col-3"></p>
             </div>
             <!-- living fixture -->
-            <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
+            <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
                 <table>
                     <thead id="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -699,30 +699,19 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard ) {
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
-            $('div[key="livingContainerTemplate"]').removeAttr('hidden');
-
+            $('div[template="livingContainerTemplate"]').removeAttr('hidden');
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
-
             const headTr = data.list.fixture_id + '_head';
             const bodyTr = data.list.fixture_id + '_body';
-
-            const headTrElement = $(`tr[id="${headTr}"]`);
-            const headTrParentThead = headTrElement.closest('thead');
-            const bodyTrElement = $(`tr[id="${headTr}"]`);
-            const bodyTrParentTBody = bodyTrElement.closest('tbody');
-
-            headTrElement.remove();
-            bodyTrElement.remove();
-
+            $(`tr[id="${headTr}"]`).remove();
+            $(`tr[id="${bodyTr}"]`).remove();
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
-
             scoreBoardHeadTemp.attr('id', headTr);
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
-
             const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport]
             // Thead data game title
             let stageStr = ''
@@ -764,9 +753,7 @@
                 }
                 
             }
-
-            bodyTrParentTHead.append(scoreBoardHeadTemp);
-
+            $('#livingtableHead').append(scoreBoardHeadTemp);
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -777,9 +764,7 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-
-            bodyTrParentTBody.append(scoreBoardBodyTemp_home);
-
+            $('#livingtableBody').append(scoreBoardBodyTemp_home);
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
@@ -790,8 +775,8 @@
                     scoreBoardBodyTemp_away.append(thAway);
                 }
             }
+            // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-
             $('.swiper-wrapper').append(livingContainerTemp);
         } else {
             // Early fixture (status == 1)
