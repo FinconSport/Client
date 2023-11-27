@@ -753,7 +753,9 @@
                 }
                 
             }
-            $('#livingtableHead').append(scoreBoardHeadTemp);
+            const clonedLivingtableHead = $('#livingtableHead').clone();
+            clonedLivingtableHead.append(scoreBoardHeadTemp);
+            // $('#livingtableHead').append(scoreBoardHeadTemp);
             // Home team
             const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
             scoreBoardBodyTemp_home.append(homeTeamName);
@@ -764,7 +766,9 @@
                     scoreBoardBodyTemp_home.append(thHome);
                 }
             }
-            $('#livingtableBody').append(scoreBoardBodyTemp_home);
+            const clonedLivingtableBody = $('#livingtableBody').clone();
+            clonedLivingtableBody.append(scoreBoardBodyTemp_home);
+
             // Away team
             const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
             scoreBoardBodyTemp_away.append(awayTeamName);
@@ -775,8 +779,12 @@
                     scoreBoardBodyTemp_away.append(thAway);
                 }
             }
-            // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+
+            // Append away team after home team to table
+            livingContainerTemp.append(clonedLivingtableHead);
+            clonedLivingtableHead.after(clonedLivingtableBody);
+            
             $('.swiper-wrapper').append(livingContainerTemp);
         } else {
             // Early fixture (status == 1)
