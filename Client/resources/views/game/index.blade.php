@@ -803,9 +803,12 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $(`div[id="${mainCon}"]`).remove();
-        $(`tr[id="${headTr}"]`).remove();
-        $(`tr[id="${bodyTr}"]`).remove();
+        if (existingMainCon.length !== 0) {
+            $(`div#${mainCon}`).empty();
+        }
+        // $(`div[id="${mainCon}"]`).remove();
+        // $(`tr[id="${headTr}"]`).remove();
+        // $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
