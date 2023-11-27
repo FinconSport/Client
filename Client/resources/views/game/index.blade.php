@@ -64,7 +64,7 @@
 <!-- early & living scoreboard-->
     <!-- template clone -->
         <!-- early fixture -->
-        <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
+        <div class="swiper-slide earlyFixture-container row" template="earlyContainerTemplate" hidden>
             <p class="home_team_name col-3"></p>
             <div class="col-4">
                 <p class="league_name"></p>
@@ -73,7 +73,7 @@
             <p class="away_team_name col-3"></p>
         </div>
         <!-- living fixture -->
-        <div class="livingFixture-container row" template="livingContainerTemplate" hidden>
+        <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
             <table>
                 <thead key="livingtableHead">
                     <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -85,7 +85,7 @@
             </table>
         </div>
         <!-- // is baseball more than six -->
-        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_morethannine" hidden>
+        <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_morethannine" hidden>
             <table>
                 <thead key="isBaseball_livingtableHead_morethannine">
                     <tr template="isBaseball_scoreBoardHeadTemplate_morethannine" hidden></tr>
@@ -97,7 +97,7 @@
             </table>
         </div>
         <!-- // is baseball more than 9 -->
-        <div class="livingFixture-container row" template="isBaseball_livingConTemplate_moreThanNine" hidden>
+        <div class="swiper-slide livingFixture-container row" template="isBaseball_livingConTemplate_moreThanNine" hidden>
             <table>
                 <thead key="isBaseball_livingtableHead_moreThanNine">
                     <tr template="isBaseball_scoreBoardHeadTemplate_moreThanNine" hidden></tr>
@@ -114,10 +114,10 @@
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="swiper-slide early-fixture"></div>
+            <!-- <div class="swiper-slide early-fixture"></div>
             <div class="swiper-slide living-fixture"></div>
             <div class="swiper-slide living-fixture-isBaseball-mts"></div>
-            <div class="swiper-slide living-fixture-isBaseball-mtn"></div>
+            <div class="swiper-slide living-fixture-isBaseball-mtn"></div> -->
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -728,18 +728,18 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 // is baseball less than six-->
-                $('div[class="early-fixture"]').remove();
+                // $('div[class="early-fixture"]').remove();
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
                 isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                isBaseball_createScoreBoardTemplate_morethannine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
+                isBaseball_createScoreBoardTemplate_morethanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
             } else {
                 createScoreBoardTemplate(sport, data);
             }
         } else {
             // Early fixture (status == 1)
-            $('div[class="living-fixture"]').remove();
-            $('div[class="living-fixture-isBaseball-mts"]').remove();
-            $('div[class="living-fixture-isBaseball-mtn"]').remove();
+            // $('div[class="living-fixture"]').remove();
+            // $('div[class="living-fixture-isBaseball-mts"]').remove();
+            // $('div[class="living-fixture-isBaseball-mtn"]').remove();
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
@@ -749,7 +749,7 @@
             earlyContainerTemp.find('.league_name').text(data.list.league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
-            $('.swiper-wrapper .swiper-slide.early-fixture').append(earlyContainerTemp);
+            $('.swiper-wrapper').append(earlyContainerTemp);
         }
     }
 
@@ -846,7 +846,7 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
         if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
-            $('.living-fixture').append(livingContainerTemp);
+            $('.swiper-wrapper').append(livingContainerTemp);
         }
     }
 
@@ -943,11 +943,11 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mts.after(scoreBoardBodyTemp_away_mts);
         if (existingHeadTr_mts.length === 0 || existingBodyTr_mts.length === 0) {
-            $('.living-fixture-isBaseball-mts').append(livingContainerTemp_mts);
+            $('.swiper-wrapper').append(livingContainerTemp_mts);
         }
     }
 
-    function isBaseball_createScoreBoardTemplate_morethannine(sport, data, baseballShowStage_mtn) {
+    function isBaseball_createScoreBoardTemplate_morethanNine(sport, data, baseballShowStage_mtn) {
         const livingContainerTemp_mtn = $(`div[template="isBaseball_livingConTemplate_morethannine"]`).clone();
         const scoreBoardHeadTemp_mtn = $(`tr[template="isBaseball_scoreBoardHeadTemplate_morethannine"]`).clone();
         const scoreBoardBodyTemp_home_mtn = $(`tr[template="isBaseball_scoreBoardBodyTemplate_home_morethannine"]`).clone();
@@ -1040,7 +1040,7 @@
         // Append away team after home team to table
         scoreBoardBodyTemp_home_mtn.after(scoreBoardBodyTemp_away_mtn);
         if (existingHeadTr_mtn.length === 0 || existingBodyTr_mtn.length === 0) {
-            $('.living-fixture-isBaseball-mtn').append(livingContainerTemp_mtn);
+            $('.swiper-wrapper').append(livingContainerTemp_mtn);
         }
     }
 
