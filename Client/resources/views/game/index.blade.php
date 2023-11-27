@@ -880,6 +880,7 @@
         // if (existingMainCon.length === 0) {
         //     $('.living-fixture-con').append(livingContainerTemp);
         // }
+        
         $('.living-fixture-con').append(livingContainerTemp);
     }
 
