@@ -78,10 +78,10 @@
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
                 <table>
-                    <thead key="livingtableHead">
+                    <thead id="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
                     </thead>
-                    <tbody key="livingtableBody">
+                    <tbody id="livingtableBody">
                         <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                         <tr template="scoreBoardBodyTemplate_away" hidden></tr>
                     </tbody>
