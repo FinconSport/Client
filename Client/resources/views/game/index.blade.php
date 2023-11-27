@@ -784,7 +784,7 @@
     }
 
     function createScoreBoardTemplate(sport, data, baseballShowStage) {
-        const livingContainerTemp = $(`div[template="livingContainerTemplate"]`).clone();
+        const livingContainerTemp = $(`div[template="livingConTemplate"]`).clone();
         const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate"]`).clone();
         const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home"]`).clone();
         const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away"]`).clone();
@@ -880,7 +880,6 @@
         // if (existingMainCon.length === 0) {
         //     $('.living-fixture-con').append(livingContainerTemp);
         // }
-
         $('.living-fixture-con').append(livingContainerTemp);
     }
 
