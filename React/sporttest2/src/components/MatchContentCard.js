@@ -227,7 +227,7 @@ class MatchContentCard extends React.Component {
                                                         :
                                                         v.status === 9 ? langText.MatchContentCard.readyToStart :
                                                         (
-                                                            sport === 154914 ? 
+                                                            sport === 154914 && v?.periods?.period ? 
                                                             langText.GameTopSlider.stageStr[sport][v.periods.period] + langText.GameTopSlider.baseballPeriod[v.periods.Turn]
                                                             : 
                                                             langText.GameTopSlider.stageStr[sport][v?.periods?.period] || this.formatDateTime(v.start_time)
