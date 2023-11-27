@@ -116,7 +116,7 @@
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="early-fixture-con" style="width:100%!important;"></div>
+            <div class="swiper-slide early-fixture-con" style="width:100%!important;"></div>
             <div class="swiper-slide living-fixture-con" style="width:100%!important;"></div>
             <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important;"></div>
             <div class="swiper-slide living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
@@ -730,17 +730,30 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
+                $('.template-con').append($('.early-fixture').detach().css({
+                    'display': 'none',
+                    'height': '0px',
+                    'important': 'true'
+                }));
 
                 if (scbLen >= 6) {
                     isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
                 } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css('display', 'none'));
+                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    }));
                 }
 
                 if (scbLen > 9) {
                     isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
                 } else {
-                    $('.template-con').append($('.living-fixture-isBaseball-mtn').detach().css('display', 'none'));
+                    $('.template-con').append($('.living-fixture-isBaseball-mts').detach().css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    }));
                 }
 
             } else {
@@ -748,6 +761,16 @@
             }
         } else {
             // Early fixture (status == 1)
+            $('.template-con').append(
+                $('.living-fixture-isBaseball-mtn, .living-fixture-isBaseball-mts, .living-fixture-con')
+                    .detach()
+                    .css({
+                        'display': 'none',
+                        'height': '0px',
+                        'important': 'true'
+                    })
+            );
+
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
