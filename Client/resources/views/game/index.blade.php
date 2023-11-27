@@ -686,7 +686,7 @@
     // ------- game page scoreboard function-----------
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        const livingContainerTemp = $('div[template="livingContainerTemplate"]').clone();
+        const livingContainerTemp = $('div[key="livingContainerTemplate"]').clone();
         const scoreBoardHeadTemp = $('tr[template="scoreBoardHeadTemplate"]').clone();
         const scoreBoardBodyTemp_home = $('tr[template="scoreBoardBodyTemplate_home"]').clone();
         const scoreBoardBodyTemp_away = $('tr[template="scoreBoardBodyTemplate_away"]').clone();
@@ -703,7 +703,7 @@
             const bodyTr = data.list.fixture_id + '_body';
 
             // Remove existing elements with the same IDs
-            $(`table[id="${tableID}"], thead[id="${headTr}"], tbody[id="${bodyTr}"]`).remove();
+            $(`div[id="${data.list.fixture_id}"], table[id="${tableID}"], thead[id="${headTr}"], tbody[id="${bodyTr}"]`).remove();
 
             // Create elements
             const table = $('<table>').addClass(`${tableID}`);
@@ -719,6 +719,7 @@
 
             livingContainerTemp.append(table);
 
+            livingContainerTemp.attr('id', data.list.fixture_id);
             scoreBoardHeadTemp.attr('id', headTr);
             scoreBoardBodyTemp_home.attr('id', bodyTr);
             scoreBoardBodyTemp_away.attr('id', bodyTr);
