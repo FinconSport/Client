@@ -239,10 +239,10 @@
                 },
                 "scoreboard": {
                     "1": [
-                        0,0,0,0,0,0,0,2,2,2
+                        0,0,0,0,0,0,0
                     ],
                     "2": [
-                        2,2,2,2,2,2,2,2,2,2
+                        2,2,2,2,2,2,2
                     ]
                 },
                 "market": []
@@ -730,7 +730,6 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-
                 $('.template-con').append($('.early-fixture-con').detach().css({
                     'display': 'none',
                     'height': '0px',
@@ -806,9 +805,9 @@
 
         $('div.swiper-slide').empty();
 
-        // $(`div[id="${mainCon}"]`).remove();
-        // $(`tr[id="${headTr}"]`).remove();
-        // $(`tr[id="${bodyTr}"]`).remove();
+        $(`div[id="${mainCon}"]`).remove();
+        $(`tr[id="${headTr}"]`).remove();
+        $(`tr[id="${bodyTr}"]`).remove();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -907,9 +906,9 @@
 
         $('div.swiper-slide').empty();
 
-        // $(`div[id="${mainCon_mts}"]`).remove();
-        // $(`tr[id="${headTr_mts}"]`).remove();
-        // $(`tr[id="${bodyTr_mts}"]`).remove();
+        $(`div[id="${mainCon_mts}"]`).remove();
+        $(`tr[id="${headTr_mts}"]`).remove();
+        $(`tr[id="${bodyTr_mts}"]`).remove();
 
         scoreBoardHeadTemp_mts.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mts.removeAttr('hidden').removeAttr('template');  
@@ -1007,9 +1006,9 @@
 
         $('div.swiper-slide').empty();
 
-        // $(`div[id="${mainCon_mtn}"]`).remove();
-        // $(`tr[id="${headTr_mtn}"]`).remove();
-        // $(`tr[id="${bodyTr_mtn}"]`).remove();
+        $(`div[id="${mainCon_mtn}"]`).remove();
+        $(`tr[id="${headTr_mtn}"]`).remove();
+        $(`tr[id="${bodyTr_mtn}"]`).remove();
 
         scoreBoardHeadTemp_mtn.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home_mtn.removeAttr('hidden').removeAttr('template');  
