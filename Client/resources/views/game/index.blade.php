@@ -1441,6 +1441,7 @@
         pagination: {
             el: '.swiper-pagination',
         },
+        initialSlide: 6,
 
         // Navigation arrows
         navigation: {
