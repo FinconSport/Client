@@ -819,7 +819,7 @@
             }
         }
 
-        $('#livingtableBody').append(scoreBoardBodyTemp_home);
+        $('#livingtableBody').append(scoreBoardBodyContainer);
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
