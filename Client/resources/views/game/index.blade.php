@@ -117,9 +117,9 @@
     <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
             <div class="early-fixture-con" style="width:100%!important;"></div>
-            <div class="living-fixture-con" style="width:100%!important;"></div>
-            <div class="living-fixture-isBaseball-mts" style="width:100%!important;"></div>
-            <div class="living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-con" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-isBaseball-mts" style="width:100%!important;"></div>
+            <div class="swiper-slide living-fixture-isBaseball-mtn" style="width:100%!important;"></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -730,16 +730,13 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                document.querySelectorAll(".living-fixture-con").forEach(el => {el.classList.add("swiper-slide");});
 
                 if (scbLen >= 6) {
                     isBaseball_createScoreBoardTemplate_moreThanSix(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                    document.querySelectorAll(".living-fixture-isBaseball-mts").forEach(el => {el.classList.add("swiper-slide");});
                 }
 
                 if (scbLen > 9) {
                     isBaseball_createScoreBoardTemplate_moreThanNine(sport, data, [0, 7, 8, 9, 10, 11, 12]);
-                    document.querySelectorAll(".living-fixture-isBaseball-mtn").forEach(el => {el.classList.add("swiper-slide");});
                 }
 
             } else {
