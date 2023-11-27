@@ -703,10 +703,10 @@
             var scorehome = data.list?.scoreboard[1];
             var scoreaway = data.list?.scoreboard[2];
             const headTr = data.list.fixture_id + '_head';
-            const bodyTrHome = data.list.fixture_id + '_body_home'; // Unique ID for home team body row
-            const bodyTrAway = data.list.fixture_id + '_body_away'; // Unique ID for away team body row
+            const bodyTrHome = data.list.fixture_id + '_body_home';
+            const bodyTrAway = data.list.fixture_id + '_body_away';
 
-            $(`div[id="${data.list.fixture_id}"]`).empty();
+            $(`div[id="${data.list.fixture_id}"]`).remove();
             $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTrHome}"]`).remove();
             $(`tr[id="${bodyTrAway}"]`).remove();
