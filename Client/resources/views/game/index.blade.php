@@ -786,7 +786,7 @@
                         const scoreValue = Array.from(Object.values(scoreaway))[i];
                         const thAway = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                         if( !(sport === 154914 && baseballShowStage.indexOf(i) === -1) ) {
-                            scoreBoardBodyTemp_home.append(thAway);
+                            scoreBoardBodyTemp_away.append(thAway);
                         }
                     }
 
