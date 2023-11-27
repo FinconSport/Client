@@ -76,7 +76,7 @@
                 <p class="away_team_name col-3"></p>
             </div>
             <!-- living fixture -->
-            <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
+            <div class="swiper-slide livingFixture-container row" template="livingContainerTemplate" hidden>
                 <!-- <table>
                     <thead key="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
@@ -727,7 +727,7 @@
         const scoreBoardBodyTemp_away = $('<tr></tr>');
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
-        $('div[key="livingContainerTemplate"]').removeAttr('hidden');
+        // $('div[template="livingContainerTemplate"]').removeAttr('hidden');
 
         const scorehome = data.list?.scoreboard[1];
         const scoreaway = data.list?.scoreboard[2];
