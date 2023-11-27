@@ -60,8 +60,8 @@ return [
 			'mainPriorityArr' => [201, 203, 205, 202, 204, 206],
 		],
 		131506 => [
-			'gameTitle' => ['全場獨贏', '全場讓分', '全場大小', '全場單雙'],
-			'mainPriorityArr' => [401, 403, 405, 407],
+			'gameTitle' => ['全場獨贏', '全場讓分', '全場大小'],
+			'mainPriorityArr' => [401, 403, 405],
 		],
 		48242 => [
 			'gameTitle' => ['全場獨贏', '全場讓分', '全場大小', '全場單雙'],
@@ -84,8 +84,8 @@ return [
 			'mainPriorityArr' => [1, 3, 5, 7],
 		],
 		35232 => [
-			'gameTitle' => ['全場獨贏', '全場讓球', '全場大小', '全場單雙'],
-			'mainPriorityArr' => [301, 302, 303, 304],
+			'gameTitle' => ['全場獨贏', '全場讓球', '全場大小'],
+			'mainPriorityArr' => [301, 302, 303],
 		],
 	],
 	'tableLivingData' => [
