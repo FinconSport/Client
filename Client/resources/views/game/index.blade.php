@@ -702,6 +702,8 @@
             const bodyTr = data.list.fixture_id + '_body';
 
             $(`div[id="${headTr}"]`).remove();
+            $(`tr[id="${headTr}"]`).remove();
+            $(`tr[id="${bodyTr}"]`).remove();
 
             livingContainerTemp.removeAttr('hidden').removeAttr('template');
             // $('div[template="livingContainerTemplate"]').removeAttr('hidden');
@@ -710,8 +712,6 @@
             var scorehome = data.list?.scoreboard[1]
             var scoreaway = data.list?.scoreboard[2]
             
-            $(`tr[id="${headTr}"]`).remove();
-            $(`tr[id="${bodyTr}"]`).remove();
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
