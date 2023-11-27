@@ -706,15 +706,13 @@
             const headTr = data.list.fixture_id + '_head';
             const existingHeadTr = $(`tr[id="${headTr}"]`);
             const bodyTr = data.list.fixture_id + '_body';
+            const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
             $(`div[id="${data.list.fixture_id}"]`).remove();
+            $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTr}"]`).remove();
             
-            if (existingHeadTr.length === 2) {
-                console.log(`Two elements with ID ${headTr} found. Removing the first one.`);
-                $(`tr[id="${headTr}"]`).remove();
-            }
-
+            
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
             scoreBoardBodyTemp_away.removeAttr('hidden').removeAttr('template'); 
@@ -793,8 +791,9 @@
 
             // Append away team after home team to table
             scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-
-            $('.swiper-wrapper').append(livingContainerTemp);
+            if (existingHeadTr.length === 0 || existingBodyTr.length === 0) {
+                $('.swiper-wrapper').append(livingContainerTemp);
+            }
         } else {
             // Early fixture (status == 1)
             const leagueID = data.list.league_id;
