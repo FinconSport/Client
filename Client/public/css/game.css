@@ -248,31 +248,31 @@ span.market_price.odd {
 
 
 /* slider css */
-.swiper-wrapper .swiper-button-prev,
-.swiper-wrapper .swiper-button-next{
+.swiper-button-prev,
+.swiper-button-next{
     color: #ffffff!important;
 }
 
-.swiper-wrapper .swiper-button-prev {
+.swiper-button-prev {
     left: var(--swiper-navigation-sides-offset,10rem)!important;
 }
 
-.swiper-wrapper .swiper-button-next {
+.swiper-button-next {
     right: var(--swiper-navigation-sides-offset,10rem)!important
 }
 
-.swiper-wrapper .swiper-button-prev {
+.swiper-button-prev {
     left: var(--swiper-navigation-sides-offset,10rem)!important;
 }
 
-.swiper-wrapper .swiper-slide{
+.swiper-slide{
     display: flex!important;
 }
 
-.swiper-wrapper .swiper-pagination {
+.swiper-pagination {
     bottom: var(--swiper-pagination-bottom,24px)!important;
 }
 
-.swiper-wrapper .swiper-pagination-bullet {
+.swiper-pagination-bullet {
     background: white!important;
 }
