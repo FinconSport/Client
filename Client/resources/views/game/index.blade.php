@@ -89,10 +89,10 @@
             </div>
         </div>
         <!-- If we need pagination -->
-        <div class="swiper-pagination" style="display:block!important;color: white!important;"></div>
+        <div class="swiper-pagination"></div>
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev" style="display:block!important;color: white!important;"></div>
-        <div class="swiper-button-next" style="display:block!important;color: white!important;"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 </div>
 
