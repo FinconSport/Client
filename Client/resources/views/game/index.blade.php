@@ -707,11 +707,9 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                for (let i = 0; i < 3; i++) {
-                    createScoreBoardTemplate(sport, data, i);
-                }
+                createScoreBoardTemplate(sport, data);
             } else {
-                createScoreBoardTemplate(sport, data, 0);
+                createScoreBoardTemplate(sport, data);
             }
         } else {
             // Early fixture (status == 1)
