@@ -704,10 +704,16 @@
             var scoreaway = data.list?.scoreboard[2];
 
             const headTr = data.list.fixture_id + '_head';
+            const existingHeadTr = $(`tr[id="${headTr}"]`);
             const bodyTr = data.list.fixture_id + '_body';
+
             $(`div[id="${data.list.fixture_id}"]`).remove();
-            $(`tr[id="${headTr}"]`).remove();
             $(`tr[id="${bodyTr}"]`).remove();
+            
+            if (existingHeadTr.length === 2) {
+                console.log(`Two elements with ID ${headTr} found. Removing the first one.`);
+                existingHeadTr.first().remove();
+            }
 
             scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
             scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
