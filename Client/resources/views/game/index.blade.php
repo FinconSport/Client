@@ -78,10 +78,10 @@
             <!-- living fixture -->
             <div class="swiper-slide livingFixture-container row" key="livingContainerTemplate" hidden>
                 <table>
-                    <thead id="livingtableHead">
+                    <thead class="livingtableHead">
                         <tr template="scoreBoardHeadTemplate" hidden></tr>
                     </thead>
-                    <tbody id="livingtableBody">
+                    <tbody class="livingtableBody">
                         <tr template="scoreBoardBodyTemplate_home" hidden></tr>
                         <tr template="scoreBoardBodyTemplate_away" hidden></tr>
                     </tbody>
@@ -762,7 +762,7 @@
                         }
                     }
 
-                    livingContainerTemp.find('#livingtableHead').append(scoreBoardHeadTemp);
+                    livingContainerTemp.find('.livingtableHead').append(scoreBoardHeadTemp);
 
                     // Home team
                     const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -776,7 +776,7 @@
                         }
                     }
 
-                    livingContainerTemp.find('#livingtableBody').append(scoreBoardBodyTemp_home);
+                    livingContainerTemp.find('.livingtableBody').append(scoreBoardBodyTemp_home);
 
                     // Away team
                     const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -835,7 +835,7 @@
                 for (let i = 0; i < gameTitle.length; i++) {
                     scoreBoardHeadTemp.append($('<th style="width:10%;text-align:center;"><div class="setHeightDiv">').text(gameTitle[i]));
                 }
-                $('#livingtableHead').append(scoreBoardHeadTemp);
+                livingContainerTemp.find('.livingtableHead').append(scoreBoardHeadTemp);
                 // Home team
                 const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
                 scoreBoardBodyTemp_home.append(homeTeamName);
@@ -844,7 +844,7 @@
                     const thHome = $('<td style="width:10%;text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
                     scoreBoardBodyTemp_home.append(thHome);
                 }
-                $('#livingtableBody').append(scoreBoardBodyTemp_home);
+                livingContainerTemp.find('.livingtableBody').append(scoreBoardBodyTemp_home);
                 // Away team
                 const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
                 scoreBoardBodyTemp_away.append(awayTeamName);
