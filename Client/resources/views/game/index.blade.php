@@ -790,10 +790,8 @@
         }
 
         scoreBoardHeadContainer.append(scoreBoardHeadTemp);
-        
-        // scoreBoardHeadContainer.append(scoreBoardHeadTemp);
-        // scoreBoardTableContainer.append(scoreBoardHeadContainer);
-        // $('#livingtableHead').append(scoreBoardHeadTemp);
+
+        $('#livingtableHead').append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -821,15 +819,13 @@
             }
         }
 
-        // scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
+        $('#livingtableBody').append(scoreBoardBodyTemp_home);
 
-        // scoreBoardTableContainer.append(scoreBoardBodyContainer);
-
-        scoreBoardTableContainer.append(scoreBoardHeadContainer);
-
+        // Append away team after home team to table
+        scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
         livingContainerTemp.append(scoreBoardTableContainer);
-
         $('.swiper-wrapper').append(livingContainerTemp);
+
     }
 
 
