@@ -736,10 +736,6 @@
             if (sport === 154914) {
                 // is baseball less than six-->
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                // is baseball more than six-->
-                createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9]);
-                // is baseball more than 9 -->
-                createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12]);
             } else {
                 createScoreBoardTemplate(sport, data);
             }
