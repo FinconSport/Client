@@ -781,17 +781,10 @@
             slide.classList.remove('active');
         });
 
-        const targetClass = `${slideIndex}slide`;
-        const targetSlides = document.querySelectorAll(`.${targetClass}`);
-
-        if (targetSlides.length > 0) {
-            targetSlides.forEach(slide => {
-                slide.style.display = 'table-cell';
-                slide.classList.add('active');
-            });
-        } else {
-            console.error(`No elements found with class ${targetClass}`);
-        }
+        $(`.${slideIndex}slide`).forEach(slide => {
+            slide.style.display = 'table-cell';
+            slide.classList.add('active');
+        });
     }
 
     function nextSlide() {
