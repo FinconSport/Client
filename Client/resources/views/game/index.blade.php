@@ -90,10 +90,10 @@
 
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
-    <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
+    <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="swiper-slide early-fixture-con" style="width:100%!important;"></div>
-            <div class="swiper-slide living-fixture-lts" style="width:100%!important;"></div>
+            <div class="early-fixture-con"></div>
+            <div class="living-fixture-lts"></div>
         </div>
     </div>
 
@@ -1287,25 +1287,5 @@
                 break;
         }
     })
-
-    var swiper = new Swiper('.swiper-container', {
-        // init: false,
-        pagination: {
-            el: '.swiper-pagination',
-        },
-        initialSlide: 6,
-        allowTouchMove: false,
-
-        // Navigation arrows
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-
-        slidesPerView : 'auto',
-        loop : false,
-        observer: true,  
-        observeParents: true,
-    });
 </script>
 @endpush
