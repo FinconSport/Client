@@ -825,6 +825,8 @@
                 if (scbLen > 9) {
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
                 }
+
+                showSlide(currentSlide);
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
