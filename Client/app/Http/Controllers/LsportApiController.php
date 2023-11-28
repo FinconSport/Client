@@ -850,6 +850,12 @@ class LsportApiController extends Controller {
         }
 
         //////////////////////////////////////////
+        // 水位調整
+
+        
+
+
+        //////////////////////////////////////////
         // order data
         $market_bet_line = $market_bet_data['line'];
         $order['market_bet_line'] = $market_bet_line;
@@ -893,25 +899,19 @@ class LsportApiController extends Controller {
                 // order data
                 $order['bet_rate'] = null;
                 //////////////////////////////////////////
-            }
-            // $is_risk_order: false AND $is_bet_delay=true
-            else {
+            } else {
                 //////////////////////////////////////////
                 // order data
                 $order['bet_rate'] = null;
                 //////////////////////////////////////////
             }
-        }
-        // $is_risk_order: false
-        else {
+        } else {
             if ($is_bet_delay == true) {
                 //////////////////////////////////////////
                 // order data
                 $order['bet_rate'] = null;
                 //////////////////////////////////////////
-            }
-            // $is_risk_order: false AND $is_bet_delay=false
-            else {
+            } else {
                 $current_market_bet_status = $market_bet_data['status'];
                 $current_market_bet_rate = $market_bet_data['price'];
 
