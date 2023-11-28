@@ -206,10 +206,10 @@
             },
             "scoreboard": {
                 "1": [
-                    0,0,0,0
+                    0,0,0,0,0,0,0,0,0,0,0,0
                 ],
                 "2": [
-                    2,2,2,2
+                    2,2,2,2,2,2,0,0,0,0,0,0
                 ]
             },
             "market": []
@@ -716,10 +716,6 @@
     } else {
         lastslide = 1;
         currentSlide = 1;
-    }
-
-    if (currentSlide === 3) {
-        $("#nextBTN").addClass("disabled-btn");
     }
 
     function showSlide(slideIndex) {
