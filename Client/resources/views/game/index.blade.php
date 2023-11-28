@@ -92,8 +92,8 @@
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
-            <div class="early-fixture-con"></div>
-            <div class="living-fixture-lts"></div>
+            <div class="early-fixture-con" style="width:100%!important;"></div>
+            <div class="living-fixture-lts" style="width:100%!important;"></div>
         </div>
     </div>
 
@@ -810,10 +810,10 @@
 
 
     function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix, percentTr) {
-        const livingContainerTemp = $(`div[template="livingContainerTemplate_${tempConSuffix}"]`).clone();
-        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate_${tempConSuffix}"]`).clone();
-        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home_${tempConSuffix}"]`).clone();
-        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away_${tempConSuffix}"]`).clone();
+        const livingContainerTemp = $(`div[template="livingContainerTemplate_lts"]`).clone();
+        const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate_lts"]`).clone();
+        const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home_lts"]`).clone();
+        const scoreBoardBodyTemp_away = $(`tr[template="scoreBoardBodyTemplate_away_lts"]`).clone();
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
 
@@ -829,9 +829,9 @@
         const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
-        $(`div.living-fixture-${tempConSuffix}`).empty();
-        livingContainerTemp.find(`thead[key="livingtableHead_${tempConSuffix}"]`).empty();
-        livingContainerTemp.find(`tbody[key="livingtableBody_${tempConSuffix}"]`).empty();
+        $(`div.living-fixture-lts`).empty();
+        livingContainerTemp.find(`thead[key="livingtableHead_lts"]`).empty();
+        livingContainerTemp.find(`tbody[key="livingtableBody_lts"]`).empty();
 
         scoreBoardHeadTemp.removeAttr('hidden').removeAttr('template');
         scoreBoardBodyTemp_home.removeAttr('hidden').removeAttr('template');  
@@ -873,7 +873,7 @@
             }
         }
 
-        livingContainerTemp.find(`thead[key="livingtableHead_${tempConSuffix}"]`).append(scoreBoardHeadTemp);
+        livingContainerTemp.find(`thead[key="livingtableHead_lts"]`).append(scoreBoardHeadTemp);
 
         // Home team
         const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
@@ -886,7 +886,7 @@
             }
         }
 
-        livingContainerTemp.find(`tbody[key="livingtableBody_${tempConSuffix}"]`).append(scoreBoardBodyTemp_home);
+        livingContainerTemp.find(`tbody[key="livingtableBody_lts"]`).append(scoreBoardBodyTemp_home);
 
         // Away team
         const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
@@ -901,7 +901,7 @@
 
         // Append away team after home team to table
         scoreBoardBodyTemp_home.after(scoreBoardBodyTemp_away);
-        $(`.living-fixture-${tempConSuffix}`).append(livingContainerTemp);
+        $(`.living-fixture-lts`).append(livingContainerTemp);
     }
 
     function noData() {
