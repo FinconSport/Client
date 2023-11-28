@@ -771,6 +771,30 @@
     //         $('.early-fixture-con').append(earlyContainerTemp);
     //     }
     // }
+
+    let currentSlide = 1;
+
+    function showSlide(slideIndex) {
+        const slides = document.querySelectorAll('.isBsbll');
+        slides.forEach(slide => slide.style.display = 'none');
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[slideIndex - 1].style.display = 'table-cell';
+    }
+
+    function nextSlide() {
+        if (currentSlide < 3) {
+            currentSlide++;
+        }
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+        }
+        showSlide(currentSlide);
+    }
+
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
@@ -795,28 +819,6 @@
                 if (scbLen > 9) {
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3rdslide");
                 }
-
-                function showSlide(slideIndex) {
-                    const slides = document.querySelectorAll('isBsbll');
-                    slides.forEach(slide => slide.style.display = 'none');
-                    slides.forEach(slide => slide.classList.remove('active'));
-                    slides[slideIndex - 1].style.display = 'table-cell';
-                }
-
-                function nextSlide() {
-                    if (currentSlide < 3) {
-                    currentSlide++;
-                    }
-                    showSlide(currentSlide);
-                }
-
-                function prevSlide() {
-                    if (currentSlide > 1) {
-                    currentSlide--;
-                    }
-                    showSlide(currentSlide);
-                }
-
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
@@ -837,6 +839,7 @@
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
+
 
 
     function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix, percentTr) {
