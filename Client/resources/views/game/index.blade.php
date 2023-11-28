@@ -201,40 +201,6 @@
     }
 
     function viewIni() { // view ini
-        matchListD = {
-            "status": 1,
-            "data": {
-                "list": {
-                    "league_id": 15771,
-                    "league_name": "LVBP",
-                    "fixture_id": 11786403,
-                    "start_time": "2023-11-27 08:00:00",
-                    "status": 2,
-                    "last_update": 1701044651,
-                    "home_team_id": 328905,
-                    "home_team_name": "Caribes de Anzoategui",
-                    "away_team_id": 315931,
-                    "away_team_name": "Navegantes del Magallanes",
-                    "periods": {
-                        "period": 6,
-                        "Turn": "2"
-                    },
-                    "scoreboard": {
-                        "1": [
-                            0,0,0, 0, 0, 0, 0, 0 , 0, 0, 0
-                        ],
-                        "2": [
-                            2,2,0, 0, 0, 0, 0, 0, 0, 0, 0
-                        ]
-                    },
-                    "market": []
-                }
-            },
-            "message": "SUCCESS_API_GAME_INDEX_01",
-            "gzip": true
-        }
-        
-        
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
 
