@@ -695,27 +695,31 @@
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
-                //lts(less than six) mts(more than six) mtn(more than nine)
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','important': 'true'}));
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts"); // <--lts(less than six)
+                // remove early slider container
+                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','important': 'true'})); 
 
                 if (scbLen >= 6) {
-                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
+                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts"); // <--mts(more than six)
                 } else {
+                    // remove slider more than six scoreboard
                     $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
                 }
 
                 if (scbLen > 9) {
-                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
+                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn"); // <--mtn(more than nine)
                 } else {
+                    // remove slider more than nine scoreboard
                     $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','important': 'true'}));
                 }
 
             } else {
+                // remove slider if not baseball
                 $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
+            // remove living slider container
             $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','important': 'true'}));
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
