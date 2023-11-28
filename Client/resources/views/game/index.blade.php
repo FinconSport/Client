@@ -781,7 +781,9 @@
             slide.classList.remove('active');
         });
 
-        $(`.${slideIndex}slide`).forEach(slide => {
+        const currentSlideClass = `${slideIndex}stslide`;
+        const currentSlideElements = document.querySelectorAll(`.${currentSlideClass}`);
+        currentSlideElements.forEach(slide => {
             slide.style.display = 'table-cell';
             slide.classList.add('active');
         });
