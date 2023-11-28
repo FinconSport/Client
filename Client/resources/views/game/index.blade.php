@@ -206,10 +206,10 @@
             },
             "scoreboard": {
                 "1": [
-                    0,0,0,0,0,0,0,0
+                    0,0,0,0,0,0,0,0,0,0,0,0
                 ],
                 "2": [
-                    2,2,2,2,2,2,0,0
+                    2,2,2,2,2,2,0,0,0,0,0,0
                 ]
             },
             "market": []
@@ -718,6 +718,10 @@
         currentSlide = 1;
     }
 
+    if (currentSlide === 3) {
+        $("#nextBTN").addClass("disabled-btn");
+    }
+
     function showSlide(slideIndex) {
         // Hide all slides
         document.querySelectorAll('.slider-bsbll').forEach(slide => {
@@ -760,6 +764,12 @@
         prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
+
+        if (isLastSlide) {
+            nextBTN.classList.add('disabled-btn');
+        } else {
+            nextBTN.classList.remove('disabled-btn');
+        }
     }
 
     function updatePaginationActiveClass() {
@@ -792,7 +802,7 @@
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
 
-                showSlide(currentSlide);
+                showSlide(currentSlide, lastslide, isLastSlide);
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
