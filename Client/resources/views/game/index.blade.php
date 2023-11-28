@@ -91,8 +91,8 @@
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        <div class="early-fixture-con" style="width:100%!important;"></div>
-        <div class="living-fixture-con" style="width:100%!important;"></div>
+        <div class="early-fixture-con"></div>
+        <div class="living-fixture-con"></div>
     </div>
 
     <button class="btn" onclick="prevSlide()">Prev</button>
