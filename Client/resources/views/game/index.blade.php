@@ -776,7 +776,7 @@
         };
 
         const hideInning = (inningSelector, display) => {
-            $($(selector).css({'display': 'none','important': 'true'}));
+            $($(inningSelector).css({'display': 'none','important': 'true'}));
         };
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
@@ -788,7 +788,15 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
                 
                 if (scbLen >= 6) {
-                    removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
+                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'table-cell');
+                } else {
+                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'none');
+                }
+
+                if (scbLen > 9) {
+                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'table-cell');
+                } else {
+                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'none');
                 }
 
             } else {
