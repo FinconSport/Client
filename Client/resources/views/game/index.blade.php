@@ -94,11 +94,18 @@
         <div class="swiper-wrapper">
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
+
+            <button class="btn" onclick="prevSlide()">Prev</button>
+            <button class="btn" onclick="nextSlide()">Next</button>
+
+            <ul class="pagination">
+                <li onclick="showSlide(1)">1</li>
+                <li onclick="showSlide(2)">2</li>
+                <li onclick="showSlide(3)">3</li>
+            </ul>
+            
         </div>
     </div>
-
-    <button class="btn" onclick="prevSlide()">Prev</button>
-    <button class="btn" onclick="nextSlide()">Next</button>
 </div>
 
 <div class="filterBtnContainer">
