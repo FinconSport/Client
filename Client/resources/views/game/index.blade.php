@@ -243,10 +243,10 @@
                     },
                     "scoreboard": {
                         "1": [
-                            0,0,0, 0, 0, 0, 0
+                            0,0,0, 0, 0, 0, 0, 0
                         ],
                         "2": [
-                            2,2,0, 0, 0, 0, 0
+                            2,2,0, 0, 0, 0, 0, 0
                         ]
                     },
                     "market": []
@@ -794,9 +794,9 @@
                 }
 
                 if (scbLen > 9) {
-                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'table-cell');
+                    hideInning('.isBsbll_10th, .isBsbll_11th, .isBsbll_12th', 'table-cell');
                 } else {
-                    hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'none');
+                    hideInning('.isBsbll_10th, .isBsbll_11th, .isBsbll_12th', 'none');
                 }
 
             } else {
