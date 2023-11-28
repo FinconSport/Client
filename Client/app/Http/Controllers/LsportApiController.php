@@ -868,12 +868,11 @@ class LsportApiController extends Controller {
         }
         $status_type_name = $status_type[$fixture_status];
         
-        $old_market_bet_data = $market_bet_data;
 
         // 根據水位調整賠率
-        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_bet_line);
+        $d_market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_bet_line);
 
-        dd($old_market_bet_data, $market_bet_data);
+        dd($market_bet_data, $d_market_bet_data);
 
         //////////////////////////////////////////
         
