@@ -781,9 +781,7 @@
                 // remove early slide
                 removeAndAppend('.early-fixture-con', 'none');
                 
-                if (scbLen < 6 || scbLen > 6) {
-                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                }
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
                 if (scbLen >= 6) {
                     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
                 } else {
