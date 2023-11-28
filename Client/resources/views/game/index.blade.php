@@ -780,16 +780,16 @@
                 
                 if (scbLen < 6 || scbLen > 6) {
                     createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                } else if (scbLen >= 6) {
+                }
+                if (scbLen >= 6) {
                     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
-
-                    if (scbLen > 9) {
-                        createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
-                    } else {
-                        removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than six remove mtn(more than nine) container
-                    }
                 } else {
                     removeAndAppend('.living-fixture-mts', 'none'); // <-- if is not more than six remove mts(more than six) container
+                }
+                if (scbLen > 9) {
+                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
+                } else {
+                    removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than nine remove mtn(more than nine) container
                 }
 
             } else {
