@@ -775,16 +775,13 @@
             $('.template-con').append($(selector).detach().css({'display': display,'important': 'true'}));
         };
 
-        const hideInning = (inningSelector, display) => {
-            $(inningSelector).css({'display': display, 'important': 'true'});
-        };
-
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 // remove early slide
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
-                hideInning('.isBsbll:not(.isBsbll_Total)', 'none');
+                
+                $('.isBsbll:not(.isBsbll_Total)').hide();
                 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
             
