@@ -852,7 +852,7 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 水位調整
 
-        
+        dd($fixture_status,$sport_id, $market_id);
 
 
         //////////////////////////////////////////
@@ -2402,5 +2402,36 @@ class LsportApiController extends Controller {
         
         return $main_line.$score;
     }
+
+    
+  // 計算 水位調整後的賠率
+  protected function getAdjustedRate($status, $sport_id, $market_id, $data) {
+
+    // 取得配置
+    $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
+    
+    // 沒有配置的
+    if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
+      return $data;
+    }
+
+    $market_bet_rate = $default_market_bet_llimit[$status][$sport_id][$market_id];
+
+    $tmp = array();
+    foreach ($data as $k => $v) {
+      $tmp[] = $v['price'];
+    }
+
+    if (count($tmp) >= 2) {
+      $dd = $this->adjustNumbers($tmp, $market_bet_rate);
+      foreach ($data as $k => $v) {
+        $data[$k]['price'] = $dd[$k];
+      }
+    }
+
+    return $data;
+  }
+
+
 }
 
