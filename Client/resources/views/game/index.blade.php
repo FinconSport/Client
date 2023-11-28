@@ -127,6 +127,9 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
+
+    <button class="btn" onclick="prevSlide()">Prev</button>
+    <button class="btn" onclick="nextSlide()">Next</button>
 </div>
 
 <div class="filterBtnContainer">
@@ -793,6 +796,27 @@
                 if (scbLen > 9) {
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3rdslide");
                     $('.isBsbll:not(.isBsbll_Total):not(.3rdslide)').css('display', 'none');
+                }
+
+                function showSlide(slideIndex) {
+                    const slides = document.querySelectorAll('isBsbll');
+                    slides.forEach(slide => slide.style.display = 'none');
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    slides[slideIndex - 1].style.display = 'table-cell';
+                }
+
+                function nextSlide() {
+                    if (currentSlide < 3) {
+                    currentSlide++;
+                    }
+                    showSlide(currentSlide);
+                }
+
+                function prevSlide() {
+                    if (currentSlide > 1) {
+                    currentSlide--;
+                    }
+                    showSlide(currentSlide);
                 }
 
             } else {
