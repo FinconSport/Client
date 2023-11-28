@@ -90,9 +90,11 @@
 
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
-    <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        <div class="early-fixture-con"></div>
-        <div class="living-fixture-con"></div>
+    <div class="swiper-container scoreboardCon" style="background-image: url('image/gameBg.jpg');">
+        <div class="swiper-wrapper">
+            <div class="early-fixture-con" style="width:100%!important;"></div>
+            <div class="living-fixture-con" style="width:100%!important;"></div>
+        </div>
     </div>
 
     <button class="btn" onclick="prevSlide()">Prev</button>
@@ -770,9 +772,15 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
+        const removeAndAppend = (selector, display) => {
+            $('.template-con').append($(selector).detach().css({'display': display,'important': 'true'}));
+        };
+
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
+                // remove early slide
+                removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
@@ -789,9 +797,14 @@
 
                 showSlide(currentSlide);
             } else {
+                // remove early slide and the living fixture mtn/mts if not baseball
+                removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             }
         } else {
+            // remove living slide
+            removeAndAppend('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts', 'none');
+
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
