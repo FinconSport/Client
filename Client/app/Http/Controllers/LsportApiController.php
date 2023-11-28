@@ -872,10 +872,8 @@ class LsportApiController extends Controller {
         // 根據水位調整賠率
         $d_market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_bet_line);
         if ($d_market_bet_data !== false) {
-           
+            $market_bet_data = $d_market_bet_data;
         }
-
-        dd($market_bet_data, $d_market_bet_data);
 
         //////////////////////////////////////////
         
@@ -2450,7 +2448,7 @@ class LsportApiController extends Controller {
     if (count($tmp) >= 2) {
       $dd = $this->adjustNumbers($tmp, $market_bet_rate);
       foreach ($data as $k => $v) {
-        $data[$k]['price'] = $dd[$k];
+        $data[$k]['price'] = $dd[$k] . "";
       }
     }
 
