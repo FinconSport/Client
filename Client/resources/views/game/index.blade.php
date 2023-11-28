@@ -127,6 +127,9 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
+
+    <button class="btn" onclick="prevSlide()">Prev</button>
+    <button class="btn" onclick="nextSlide()">Next</button>
 </div>
 
 <div class="filterBtnContainer">
@@ -768,6 +771,49 @@
     //         $('.early-fixture-con').append(earlyContainerTemp);
     //     }
     // }
+
+    let currentSlide = 1;
+
+    let currentSlide = 1;
+
+    function showSlide(slideIndex) {
+        const slides = document.querySelectorAll('.slider-bsbll');
+        slides.forEach(slide => slide.style.display = 'none');
+        slides.forEach(slide => slide.classList.remove('active'));
+        
+        // Find the slide with the appropriate class based on currentSlide
+        let targetClass = '';
+        if (currentSlide === 1) {
+            targetClass = '1stslide';
+        } else if (currentSlide === 2) {
+            targetClass = '2ndslide';
+        } else if (currentSlide === 3) {
+            targetClass = '3rdslide';
+        }
+
+        const targetSlide = document.querySelector(`.slider-bsbll.${targetClass}`);
+        
+        if (targetSlide) {
+            targetSlide.style.display = 'table-cell';
+            targetSlide.classList.add('active');
+        }
+    }
+
+    function nextSlide() {
+        if (currentSlide < 3) {
+            currentSlide++;
+        }
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+        }
+        showSlide(currentSlide);
+    }
+
+
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
@@ -782,18 +828,17 @@
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
+                $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1stslide");
 
                 if (scbLen >= 6) {
                     $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("2ndslide");
-                    $('.isBsbll:not(.isBsbll_Total)').css('display', 'none');
                 }
 
                 if (scbLen > 9) {
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3rdslide");
                 }
-
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
@@ -814,6 +859,7 @@
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
+
 
 
     function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix, percentTr) {
