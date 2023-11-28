@@ -776,7 +776,7 @@
         };
 
         const hideInning = (inningSelector, display) => {
-            $($(inningSelector).css({'display': display, 'important': 'true'}));
+            $(inningSelector).css({'display': display, 'important': 'true'});
         };
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
