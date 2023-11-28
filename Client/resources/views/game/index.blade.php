@@ -98,9 +98,9 @@
                 <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
                 <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
                 <ul class="pagination">
-                    <li onclick="showSlide(1)"><i class="fa-solid fa-circle"></i></li>
-                    <li onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
-                    <li onclick="showSlide(3)"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-1" onclick="showSlide(1)"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-2" onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-3" onclick="showSlide(3)"><i class="fa-solid fa-circle"></i></li>
                 </ul>
             </div>
         </div>
@@ -704,12 +704,16 @@
     // ------- game page scoreboard slider function-----------
     const scbLen = matchListData.data.list?.scoreboard[1].length - 1;
     let currentSlide = [];
+    let lastslide = [];
 
-    if (scbLen >= 6) {
-        currentSlide = 2;
-    } else if (scbLen > 9) {
+    if (scbLen > 9) {
+        lastslide = 3;
         currentSlide = 3;
+    } else if (scbLen >= 6) {
+        lastslide = 2; 
+        currentSlide = 2;
     } else {
+        lastslide = 1;
         currentSlide = 1;
     }
 
@@ -727,16 +731,25 @@
         currentSlide = slideIndex;
         updateButtonClasses();
         updatePaginationActiveClass();
+
+        // Check if it's the last slide
+        isLastSlide = currentSlide === lastslide;
     }
 
     function nextSlide() {
-        if (currentSlide < 3) { currentSlide++; }
-        showSlide(currentSlide);
+        if (currentSlide < lastslide) {
+            currentSlide++;
+            isLastSlide = currentSlide === lastslide;
+            showSlide(currentSlide);
+        }
     }
 
     function prevSlide() {
-        if (currentSlide > 1) { currentSlide--; }
-        showSlide(currentSlide);
+        if (currentSlide > 1) {
+            currentSlide--;
+            isLastSlide = false;
+            showSlide(currentSlide);
+        }
     }
 
     function updateButtonClasses() {
@@ -745,7 +758,7 @@
         // Update Previous button class
         prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
         // Update Next button class
-        nextBTN.classList.toggle('disabled-btn', currentSlide === 3);
+        nextBTN.classList.toggle('disabled-btn', isLastSlide);
     }
 
     function updatePaginationActiveClass() {
@@ -767,8 +780,16 @@
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
-                if (scbLen >= 6) $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
-                if (scbLen > 9) $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
+                if (scbLen >= 6) {
+                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
+                } else {
+                    $(".pgntn-bullet-2").addClass("d-none");
+                }
+                if (scbLen > 9) {
+                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
+                } else {
+                    $(".pgntn-bullet-3").addClass("d-none");
+                }
 
                 showSlide(currentSlide);
             } else {
