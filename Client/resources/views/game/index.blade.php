@@ -201,6 +201,40 @@
     }
 
     function viewIni() { // view ini
+        matchListD = {
+            "status": 1,
+            "data": {
+                "list": {
+                    "league_id": 15771,
+                    "league_name": "LVBP",
+                    "fixture_id": 11786403,
+                    "start_time": "2023-11-27 08:00:00",
+                    "status": 2,
+                    "last_update": 1701044651,
+                    "home_team_id": 328905,
+                    "home_team_name": "Caribes de Anzoategui",
+                    "away_team_id": 315931,
+                    "away_team_name": "Navegantes del Magallanes",
+                    "periods": {
+                        "period": 6,
+                        "Turn": "2"
+                    },
+                    "scoreboard": {
+                        "1": [
+                            0,0,0, 0, 0
+                        ],
+                        "2": [
+                            2,2,0, 0, 0
+                        ]
+                    },
+                    "market": []
+                }
+            },
+            "message": "SUCCESS_API_GAME_INDEX_01",
+            "gzip": true
+        }
+        
+        
         setBettypeColor(matchListD.data.list.status)
         createScoreBoard(matchListD.data);
 
@@ -667,15 +701,23 @@
         
     }
 
-    // ------- game page scoreboard function-----------
-    let currentSlide = 1;
+    // ------- game page scoreboard slider function-----------
+    const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
+    let currentSlide = [];
+
+    if (scbLen >= 6) {
+        currentSlide = 2;
+    } else if (scbLen > 9) {
+        currentSlide = 3;
+    } else {
+        currentSlide = 1;
+    }
 
     function showSlide(slideIndex) {
         // Hide all slides
         document.querySelectorAll('.slider-bsbll').forEach(slide => {
             slide.style.display = 'none';
         });
-
         // Show the slides with the corresponding class
         document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
@@ -683,33 +725,25 @@
 
         // Update the current slide index
         currentSlide = slideIndex;
-
         updateButtonClasses();
         updatePaginationActiveClass();
-
     }
 
     function nextSlide() {
-        if (currentSlide < 3) {
-            currentSlide++;
-        }
+        if (currentSlide < 3) { currentSlide++; }
         showSlide(currentSlide);
     }
 
     function prevSlide() {
-        if (currentSlide > 1) {
-            currentSlide--;
-        }
+        if (currentSlide > 1) { currentSlide--; }
         showSlide(currentSlide);
     }
 
     function updateButtonClasses() {
         const prevBTN = document.getElementById('prevBTN');
         const nextBTN = document.getElementById('nextBTN');
-
         // Update Previous button class
         prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
-
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', currentSlide === 3);
     }
