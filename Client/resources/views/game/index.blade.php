@@ -781,17 +781,17 @@
                 // remove early slide
                 removeAndAppend('.early-fixture-con', 'none');
                 
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                if (scbLen >= 6) {
-                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
-                } else {
-                    removeAndAppend('.living-fixture-mts', 'none'); // <-- if is not more than six remove mts(more than six) container
-                }
-                if (scbLen > 9) {
-                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
-                } else {
-                    removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than nine remove mtn(more than nine) container
-                }
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts");
+                // if (scbLen >= 6) {
+                //     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
+                // } else {
+                //     removeAndAppend('.living-fixture-mts', 'none'); // <-- if is not more than six remove mts(more than six) container
+                // }
+                // if (scbLen > 9) {
+                //     createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
+                // } else {
+                //     removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than nine remove mtn(more than nine) container
+                // }
 
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
