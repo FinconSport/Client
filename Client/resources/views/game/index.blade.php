@@ -790,7 +790,7 @@
             targetClass = '3rdslide';
         }
 
-        const targetSlide = document.querySelectorAll(`.slider-bsbll.${targetClass}`);
+        const targetSlide = document.querySelectorAll(`.${targetClass}`);
 
         if (targetSlide) {
             targetSlide.style.display = 'table-cell';
