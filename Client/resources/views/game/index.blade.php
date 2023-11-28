@@ -775,6 +775,10 @@
             $('.template-con').append($(selector).detach().css({'display': 'none','important': 'true'}));
         };
 
+        const hideInning = (inningSelector, display) => {
+            $($(selector).css({'display': 'none','important': 'true'}));
+        };
+
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
@@ -782,16 +786,10 @@
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
                 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
-                // if (scbLen >= 6) {
-                //     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
-                // } else {
-                //     removeAndAppend('.living-fixture-mts', 'none'); // <-- if is not more than six remove mts(more than six) container
-                // }
-                // if (scbLen > 9) {
-                //     createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
-                // } else {
-                //     removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than nine remove mtn(more than nine) container
-                // }
+                
+                if (scbLen >= 6) {
+                    removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
+                }
 
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
@@ -872,10 +870,10 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp.append($(`<th class="isBsbll_${gameTitle[i]}" style="width:${tempConSuffix};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
+                    scoreBoardHeadTemp.append($(`<th class="isBsbll_${gameTitle[i]}" style="width:${percentTr};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
                 }
             } else {
-                scoreBoardHeadTemp.append($(`<th style="width:${tempConSuffix};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
+                scoreBoardHeadTemp.append($(`<th style="width:${percentTr};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
             }
         }
 
@@ -886,7 +884,7 @@
         scoreBoardBodyTemp_home.append(homeTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome = $('<td style="width:${tempConSuffix};text-align:center;">').text(scoreValue !== undefined ? scoreValue : '-');
+            const thHome = $(`<td class="${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:${percentTr};text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_home.append(thHome);
             }
@@ -899,7 +897,7 @@
         scoreBoardBodyTemp_away.append(awayTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway = $(`<td style="width:${tempConSuffix};text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            const thAway = $(`<td class="${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:${percentTr};text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_away.append(thAway);
             }
