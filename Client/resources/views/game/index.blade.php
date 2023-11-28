@@ -243,10 +243,10 @@
                     },
                     "scoreboard": {
                         "1": [
-                            0,0,0, 0, 0, 0, 0, 0 , 0
+                            0,0,0, 0, 0, 0, 0, 0 , 0, 0
                         ],
                         "2": [
-                            2,2,0, 0, 0, 0, 0, 0, 0
+                            2,2,0, 0, 0, 0, 0, 0, 0, 0
                         ]
                     },
                     "market": []
@@ -781,14 +781,13 @@
                 // remove early slide
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
 
-                $('.isBsbll:not(.isBsbll_Total)').css('display', 'none');
-                
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
 
-                $(".isBsbll_1th, .isBsbll_2th, .isBsbll_3th, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1stslide");
+                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1stslide");
 
                 if (scbLen >= 6) {
                     $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("2ndslide");
+                    $('.isBsbll:not(.isBsbll_Total)').css('display', 'none');
                 }
 
                 if (scbLen > 9) {
