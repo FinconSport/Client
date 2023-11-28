@@ -778,6 +778,7 @@
         const slides = document.querySelectorAll('.slider-bsbll');
         slides.forEach(slide => slide.style.display = 'none');
         slides.forEach(slide => slide.classList.remove('active'));
+        slides[slideIndex - 1].style.display = 'table-cell';
 
         // Find the slide with the appropriate class based on currentSlide
         let targetClass = '';
@@ -789,7 +790,7 @@
             targetClass = '3rdslide';
         }
 
-        const targetSlide = document.querySelector(`.slider-bsbll.${targetClass}`);
+        const targetSlide = document.querySelectorAll(`.slider-bsbll.${targetClass}`);
 
         if (targetSlide) {
             targetSlide.style.display = 'table-cell';
@@ -812,8 +813,8 @@
         }
         showSlide(currentSlide);
     }
-
-
+    
+    
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
