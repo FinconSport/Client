@@ -772,11 +772,11 @@
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
         const removeAndAppend = (selector, display) => {
-            $('.template-con').append($(selector).detach().css({'display': 'none','important': 'true'}));
+            $('.template-con').append($(selector).detach().css({'display': display,'important': 'true'}));
         };
 
         const hideInning = (inningSelector, display) => {
-            $($(inningSelector).css({'display': 'none','important': 'true'}));
+            $($(inningSelector).css({'display': display, 'important': 'true'}));
         };
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
