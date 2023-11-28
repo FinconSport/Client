@@ -765,10 +765,9 @@
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
 
-        if (isLastSlide) {
+        if (currentSlide === lastslide) {
+            console.log('disabled-btn');
             nextBTN.classList.add('disabled-btn');
-        } else {
-            nextBTN.classList.remove('disabled-btn');
         }
     }
 
