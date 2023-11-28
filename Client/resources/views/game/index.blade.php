@@ -688,20 +688,6 @@
     }
 
     // ------- game page scoreboard function-----------
-    function HideSlidingContainerFunction() {
-        //lts(less than six) mts(more than six) mtn(more than nine)
-        $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({
-            'display': 'none',
-            'height': '0px',
-            'important': 'true'
-        }));
-
-        $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
-            'display': 'none',
-            'important': 'true'
-        });
-    }
-
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
@@ -709,6 +695,7 @@
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
+                //lts(less than six) mts(more than six) mtn(more than nine)
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
                 $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','height': '0px','important': 'true'}));
 
@@ -725,12 +712,11 @@
                 }
 
             } else {
-                HideSlidingContainerFunction();
+                $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
-            HideSlidingContainerFunction();
-
+            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','height': '0px','important': 'true'}));
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
