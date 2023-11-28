@@ -784,7 +784,7 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 // remove early slide
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
-                hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th, .isBsbll_10th, .isBsbll_11th, .isBsbll_12th', 'none');
+                hideInning('.isBsbll_7th, .isBsbll_8th, .isBsbll_9th', 'none');
                 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
             
