@@ -776,12 +776,13 @@
 
     function showSlide(slideIndex) {
         const slides = document.querySelectorAll('.slider-bsbll');
-        slides.forEach(slide => slide.style.display = 'none');
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[slideIndex - 1].style.display = 'table-cell';
+        slides.forEach(slide => {
+            slide.style.display = 'none';
+            slide.classList.remove('active');
+        });
 
         const targetClass = `${slideIndex}slide`;
-        const targetSlides = document.querySelectorAll(`.slider-bsbll.${targetClass}`);
+        const targetSlides = document.querySelectorAll(`.${targetClass}`);
 
         if (targetSlides.length > 0) {
             targetSlides.forEach(slide => {
@@ -789,7 +790,7 @@
                 slide.classList.add('active');
             });
         } else {
-            console.error(`No element found with class ${targetClass}`);
+            console.error(`No elements found with class ${targetClass}`);
         }
     }
 
@@ -806,8 +807,6 @@
         }
         showSlide(currentSlide);
     }
-
-
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
