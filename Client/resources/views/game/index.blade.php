@@ -94,16 +94,15 @@
         <div class="swiper-wrapper">
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
-
-            <button class="btn" onclick="prevSlide()">Prev</button>
-            <button class="btn" onclick="nextSlide()">Next</button>
-
-            <ul class="pagination">
-                <li onclick="showSlide(1)">1</li>
-                <li onclick="showSlide(2)">2</li>
-                <li onclick="showSlide(3)">3</li>
-            </ul>
-            
+            <div class="navigation-controls">
+                <button onclick="prevSlide()" id="prevBTN" class="disabled-btn">Previous</button>
+                <button onclick="nextSlide()" id="nextBTN">Next</button>
+                <ul class="pagination">
+                    <li onclick="showSlide(1)">1</li>
+                    <li onclick="showSlide(2)">2</li>
+                    <li onclick="showSlide(3)">3</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -715,6 +714,13 @@
         document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
         });
+
+        // Update the current slide index
+        currentSlide = slideIndex;
+
+        // Update button classes
+        updateButtonClasses();
+
     }
 
     function nextSlide() {
@@ -731,6 +737,17 @@
         showSlide(currentSlide);
     }
 
+    function updateButtonClasses() {
+        const prevBTN = document.getElementById('prevBTN');
+        const nextBTN = document.getElementById('nextBTN');
+
+        // Update Previous button class
+        prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
+
+        // Update Next button class
+        nextBTN.classList.toggle('disabled-btn', currentSlide === 3);
+    }
+
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
@@ -742,24 +759,19 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
-                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
-
-                if (scbLen >= 6) {
-                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
-                }
-
-                if (scbLen > 9) {
-                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
-                }
+                $$(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
+                if (scbLen >= 6) $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
+                if (scbLen > 9) $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
 
                 showSlide(currentSlide);
             } else {
                 $(".early-fixture-con").addClass("d-none");
+                $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             }
         } else {
             $(".living-fixture-con").addClass("d-none");
-
+            $(".navigation-controls").addClass("d-none");
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
@@ -771,8 +783,6 @@
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
-
-
 
     function createScoreBoardTemplate(sport, data, baseballShowStage) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate-con"]`).clone();
