@@ -775,17 +775,14 @@
     let currentSlide = 1;
 
     function showSlide(slideIndex) {
-        const slides = document.querySelectorAll('.slider-bsbll');
-        slides.forEach(slide => {
+        // Hide all slides
+        document.querySelectorAll('.slider-bsbll').forEach(slide => {
             slide.style.display = 'none';
-            slide.classList.remove('active');
         });
 
-        const currentSlideClass = `${slideIndex}slide`;
-        const currentSlideElements = document.querySelectorAll(`.${currentSlideClass}`);
-        currentSlideElements.forEach(slide => {
+        // Show the slides with the corresponding class
+        document.querySelectorAll(`.${slideIndex}slide`).forEach(slide => {
             slide.style.display = 'table-cell';
-            slide.classList.add('active');
         });
     }
 
