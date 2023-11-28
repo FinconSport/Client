@@ -850,6 +850,16 @@ class LsportApiController extends Controller {
         }
 
         //////////////////////////////////////////
+        // order data
+        $market_bet_line = $market_bet_data['line'];
+        $order['market_bet_line'] = $market_bet_line;
+        if (empty($market_bet_data[$lang_col])) {
+            $order['market_bet_name'] = $market_bet_data['name_en'];
+        } else {
+            $order['market_bet_name'] = $market_bet_data[$lang_col];
+        }
+
+        //////////////////////////////////////////
         // 水位調整
 
         $status_type = ["","early","living"];
@@ -861,19 +871,10 @@ class LsportApiController extends Controller {
         $old_market_bet_data = $market_bet_data;
 
         // 根據水位調整賠率
-        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $market_id, $market_bet_data);
+        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $market_id, $market_bet_line);
 
-        dd($old_market_bet_data, $market_bet_data);
+        dd($old_market_bet_data, $old_market_bet_data);
 
-        //////////////////////////////////////////
-        // order data
-        $market_bet_line = $market_bet_data['line'];
-        $order['market_bet_line'] = $market_bet_line;
-        if (empty($market_bet_data[$lang_col])) {
-            $order['market_bet_name'] = $market_bet_data['name_en'];
-        } else {
-            $order['market_bet_name'] = $market_bet_data[$lang_col];
-        }
         //////////////////////////////////////////
         
         // 取得風控設定
@@ -2414,8 +2415,20 @@ class LsportApiController extends Controller {
     }
 
     
-  // 計算 水位調整後的賠率
-  protected function getAdjustedRate($status, $sport_id, $market_id, $data) {
+  // 計算 水位調整後的賠率 , for game_bet, m_game_bet
+  protected function getAdjustedRate($status, $sport_id, $market_id, $market_main_line) {
+
+    // 取得market_bet
+    $return = LsportMarketBet::where('fixture_id',$fixture_id)
+        ->where("market_id",$market_id)
+        ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
+        ->orderBy("name_en.keyword","ASC")
+        ->list();
+    if ($return === false) {
+        return false;
+    }
+
+    $data = $return;
 
     // 取得配置
     $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
