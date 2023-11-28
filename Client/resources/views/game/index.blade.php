@@ -702,7 +702,7 @@
     }
 
     // ------- game page scoreboard slider function-----------
-    const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
+    const scbLen = matchListData.data.list?.scoreboard[1].length - 1;
     let currentSlide = [];
 
     if (scbLen >= 6) {
