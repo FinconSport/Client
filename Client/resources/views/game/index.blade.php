@@ -792,6 +792,7 @@
 
                 if (scbLen > 9) {
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3rdslide");
+                    $('.isBsbll:not(.isBsbll_Total):not(.3rdslide)').css('display', 'none');
                 }
 
             } else {
