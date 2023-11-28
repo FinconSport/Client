@@ -2422,6 +2422,8 @@ class LsportApiController extends Controller {
     
     // 沒有配置的
     if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
+
+        dd($status, $sport_id, $market_id);
       return 1;
     }
 
