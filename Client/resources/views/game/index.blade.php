@@ -95,8 +95,8 @@
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
             <div class="navigation-controls">
-                <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
-                <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
+                <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
+                <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
                 <ul class="pagination">
                     <li onclick="showSlide(1)"><i class="fa-solid fa-circle"></i></li>
                     <li onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
