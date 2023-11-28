@@ -269,6 +269,44 @@ span.market_price.odd {
     cursor: pointer;
 }
 
+.navigation-controls #prevBTN,
+.navigation-controls #nextBTN{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: larger;
+}
+
+.navigation-controls #prevBTN.disabled-btn,
+.navigation-controls #nextBTN.disabled-btn{
+    opacity: 0;
+    cursor: auto;
+}
+
+.navigation-controls ul.pagination {
+    position: absolute;
+    top: 10rem;
+    right: 32rem;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+}
+
+.navigation-controls ul.pagination li {
+    font-size: x-small;
+    margin: 0rem 0.3rem;
+}
+
+.navigation-controls #nextBTN{
+    right: 13rem;
+}
+
+.navigation-controls #prevBTN {
+    right: 48rem;
+}
+
 
 /* slider css */
 .swiper-button-prev,
