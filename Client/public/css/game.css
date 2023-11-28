@@ -246,6 +246,29 @@ span.market_price.odd {
     text-align: center;
 }
 
+.living-fixture-con,
+.early-fixture-con {
+    display: flex;
+}
+
+.living-fixture-con {
+    position: relative;
+}
+
+.navigation-controls {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.navigation-controls #prevBTN,
+.navigation-controls #nextBTN,
+.navigation-controls .pagination li{
+    pointer-events: auto;
+    cursor: pointer;
+}
+
 
 /* slider css */
 .swiper-button-prev,

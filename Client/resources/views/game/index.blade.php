@@ -95,12 +95,12 @@
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
             <div class="navigation-controls">
-                <button onclick="prevSlide()" id="prevBTN" class="disabled-btn">Previous</button>
-                <button onclick="nextSlide()" id="nextBTN">Next</button>
+                <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-less-than"></i></button>
+                <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-greater-than"></i></button>
                 <ul class="pagination">
-                    <li onclick="showSlide(1)">1</li>
-                    <li onclick="showSlide(2)">2</li>
-                    <li onclick="showSlide(3)">3</li>
+                    <li onclick="showSlide(1)"><i class="fa-solid fa-circle"></i></li>
+                    <li onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
+                    <li onclick="showSlide(3)"><i class="fa-solid fa-circle"></i></li>
                 </ul>
             </div>
         </div>
