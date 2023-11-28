@@ -871,7 +871,7 @@ class LsportApiController extends Controller {
         $old_market_bet_data = $market_bet_data;
 
         // 根據水位調整賠率
-        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $market_id, $market_bet_line);
+        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $fixture_id, $market_id, $market_bet_line);
 
         dd($old_market_bet_data, $old_market_bet_data);
 
@@ -2416,7 +2416,7 @@ class LsportApiController extends Controller {
 
     
   // 計算 水位調整後的賠率 , for game_bet, m_game_bet
-  protected function getAdjustedRate($status, $sport_id, $market_id, $market_main_line) {
+  protected function getAdjustedRate($status, $sport_id,$fixture_id, $market_id, $market_main_line) {
 
     // 取得market_bet
     $return = LsportMarketBet::where('fixture_id',$fixture_id)
