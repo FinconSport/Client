@@ -64,7 +64,7 @@
 <!-- early & living scoreboard-->
     <!-- template clone -->
         <!-- early fixture -->
-    <div class="template-con">
+    <div class="template-con" style="display:none;">
         <div class="earlyFixture-container row" template="earlyContainerTemplate" hidden>
             <p class="home_team_name col-3"></p>
             <div class="col-4">
@@ -697,26 +697,26 @@
 
                 //lts(less than six) mts(more than six) mtn(more than nine)
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','height': '0px','important': 'true'}));
+                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','important': 'true'}));
 
                 if (scbLen >= 6) {
                     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
                 } else {
-                    $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
+                    $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
                 }
 
                 if (scbLen > 9) {
                     createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
                 } else {
-                    $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','height': '0px','important': 'true'}));
+                    $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','important': 'true'}));
                 }
 
             } else {
-                $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
+                $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
-            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','height': '0px','important': 'true'}));
+            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','important': 'true'}));
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
