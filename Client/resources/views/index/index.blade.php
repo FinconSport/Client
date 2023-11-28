@@ -232,30 +232,6 @@
     const convertTeamPriArr = allWinArr.concat(hcapArr)
 
     /* ===== DATA LAYER ===== */
-    /*  
-        1. 現在大部份資料都api化，通過call ajax來loading
-        2. 在所有所需的api被call完之前，要添加頁面loading樣式，等全部都call好了才顯示頁面
-
-            有哪些api資料共用?
-            1. account
-            2. marquee
-            3. sport_list
-        
-            index有那些需要call api?
-            1. match_list
-            2. bet limitation?
-
-            有哪些需要沿用laravel映射?
-            1. $player 
-            2. $token (先寫死12345，之後正式再來換)
-            3. $system_config['version']
-            4. $current_time?
-    
-        3. 資料接收機制
-            1. ws -> push to queue -> update the globe data (先註解掉)
-            2. ajax -> update the globe data
-    */
-
     // detect ini ajax
     var isReadyIndexInt = null
     var isReadyIndex = false
