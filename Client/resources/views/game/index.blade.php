@@ -718,8 +718,8 @@
         // Update the current slide index
         currentSlide = slideIndex;
 
-        // Update button classes
         updateButtonClasses();
+        updatePaginationActiveClass();
 
     }
 
@@ -746,6 +746,13 @@
 
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', currentSlide === 3);
+    }
+
+    function updatePaginationActiveClass() {
+        const paginationItems = document.querySelectorAll('.pagination li');
+        paginationItems.forEach((item, index) => {
+            item.classList.toggle('active', index + 1 === currentSlide);
+        });
     }
 
     function createScoreBoard(data) {

@@ -295,8 +295,13 @@ span.market_price.odd {
 }
 
 .navigation-controls ul.pagination li {
-    font-size: x-small;
-    margin: 0rem 0.3rem;
+    font-size: 6px;
+    margin: 0rem 0.2rem;
+    opacity: 0.5;
+}
+
+.navigation-controls ul.pagination li.active {
+    opacity: 1;
 }
 
 .navigation-controls #nextBTN{
