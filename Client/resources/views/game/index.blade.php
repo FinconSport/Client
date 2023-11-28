@@ -775,8 +775,9 @@
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
+                $(".early-fixture-con").addClass("hidden");
 
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
@@ -791,9 +792,11 @@
 
                 showSlide(currentSlide);
             } else {
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts", "10%");
+                $(".early-fixture-con").addClass("hidden");
+                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             }
         } else {
+            $(".living-fixture-lts").addClass("hidden");
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
@@ -809,7 +812,7 @@
 
 
 
-    function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix, percentTr) {
+    function createScoreBoardTemplate(sport, data, baseballShowStage) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate_lts"]`).clone();
         const scoreBoardHeadTemp = $(`tr[template="scoreBoardHeadTemplate_lts"]`).clone();
         const scoreBoardBodyTemp_home = $(`tr[template="scoreBoardBodyTemplate_home_lts"]`).clone();
@@ -866,10 +869,10 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${gameTitle[i]}" style="width:${percentTr};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
+                    scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${gameTitle[i]}" style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
                 }
             } else {
-                scoreBoardHeadTemp.append($(`<th style="width:${percentTr};text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
+                scoreBoardHeadTemp.append($(`<th style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
             }
         }
 
@@ -880,7 +883,7 @@
         scoreBoardBodyTemp_home.append(homeTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:${percentTr};text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            const thHome = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_home.append(thHome);
             }
@@ -893,7 +896,7 @@
         scoreBoardBodyTemp_away.append(awayTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:${percentTr};text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            const thAway = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_away.append(thAway);
             }
