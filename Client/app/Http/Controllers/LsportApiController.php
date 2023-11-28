@@ -871,6 +871,9 @@ class LsportApiController extends Controller {
 
         // 根據水位調整賠率
         $d_market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_bet_line);
+        if ($d_market_bet_data !== false) {
+           
+        }
 
         dd($market_bet_data, $d_market_bet_data);
 
@@ -2422,9 +2425,7 @@ class LsportApiController extends Controller {
     
     // 沒有配置的
     if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
-
-        dd($status, $sport_id, $market_id);
-      return 1;
+      return false;
     }
 
     $market_bet_rate = $default_market_bet_llimit[$status][$sport_id][$market_id];
