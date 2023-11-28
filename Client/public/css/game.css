@@ -288,7 +288,7 @@ span.market_price.odd {
 
 .navigation-controls ul.pagination {
     position: absolute;
-    top: 10rem;
+    bottom: 10px;
     right: 32rem;
     transform: translate(-50%, -50%);
     margin: 0px;
