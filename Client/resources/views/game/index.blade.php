@@ -774,8 +774,6 @@
 
     let currentSlide = 1;
 
-    let currentSlide = 1;
-
     function showSlide(slideIndex) {
         const slides = document.querySelectorAll('.slider-bsbll');
         slides.forEach(slide => slide.style.display = 'none');
