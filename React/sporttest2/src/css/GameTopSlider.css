@@ -38,6 +38,7 @@
 #gameTopSlider table {
     color: #ffffff!important;
     border-color: #2c3032!important;
+    position: relative;
 }
 
 #gameTopSlider table thead tr{

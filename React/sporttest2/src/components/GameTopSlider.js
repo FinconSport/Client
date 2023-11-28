@@ -7,6 +7,7 @@ import { Navigation, Pagination,} from 'swiper';
 import { RxTriangleUp } from 'react-icons/rx';
 import { MdAutorenew } from 'react-icons/md';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { FaChevronLeft } from 'react-icons/fa';
 import GameBg from '../image/gameBg.jpg'
 import ScoreBoardBg from '../image/gameStatus.jpg'
@@ -101,6 +102,9 @@ class GameTopSlider extends React.Component {
 		super(props);
 		this.state = {
             isSetStar: Cookies.get(this.props.data.data.list.fixture_id, { path: '/' }) === 'true' || false,
+            scoreboardIndex: 0,
+            scoreboardSliderCount: 0,
+            scColumnCount: 1
         };
 	}
     // 加入星號 並設定cookie
@@ -135,8 +139,76 @@ class GameTopSlider extends React.Component {
         })
     }
 
+    prevSB = () => {
+        if( this.state.scoreboardIndex -1 > 0 ) {
+            this.setState({
+                scoreboardIndex: this.state.scoreboardIndex -1
+            })
+        }
+    }
+
+    nextSB = () => {
+        if( this.state.scoreboardIndex +1 <= this.state.scoreboardSliderCount ) {
+            this.setState({
+                scoreboardIndex: this.state.scoreboardIndex +1
+            })
+        }
+    }
+
     componentDidMount() {
-        // this.textOverFlow()
+        switch (parseInt(Cookies.get('sport', { path: '/' }))) {
+            case 154914:
+                this.setState({
+                    scColumnCount: 7
+                })
+                break;
+            case 48242:case 131506:
+                this.setState({
+                    scColumnCount: 5
+                })
+                break;
+            case 6046:
+                this.setState({
+                    scColumnCount: 3
+                })
+                break;
+            case 35232:
+                this.setState({
+                    scColumnCount: 4
+                })
+                break;
+            default:
+                break;
+        }
+        
+        if( !this.props.data?.data?.list?.scoreboard ) return
+        const data = this.props.data.data.list.scoreboard
+        const scbLen = data[1].length - 1;
+        switch (true) {
+            case scbLen < 6:
+                // this.baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
+                this.setState({
+                    scoreboardIndex: 1,
+                    scoreboardSliderCount: 1
+                })
+            break;
+            case scbLen >= 6 && scbLen <= 9:
+                // this.baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
+                this.setState({
+                    scoreboardIndex: 2,
+                    scoreboardSliderCount: 2
+                })
+            break;
+            case scbLen > 9:
+                // this.baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
+                this.setState({
+                    scoreboardIndex: 3,
+                    scoreboardSliderCount: 3
+                })
+            break;
+            default:
+            break;
+        }
     } 
 
     refreshGame = () => {
@@ -158,79 +230,12 @@ class GameTopSlider extends React.Component {
         const data = this.props.data.data
         const sport = parseInt(Cookies.get('sport', { path: '/' }))
         const fixture = data.list
-        let baseballShowStage = [];
-        const isBaseball = sport === 154914;
-        const scbLen = (fixture.scoreboard || fixture.scoreboard !== null) ? fixture.scoreboard[1].length - 1 : 0;
-        
-        const generateSwiperSlide = (scbLen, showStage) => (
-            <SwiperSlide id="scoreBoard" style={{ backgroundImage: `url(${ScoreBoardBg})`, backgroundSize: '100% 100%', paddingBottom: '52px'}}>
-                <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
-                    <div className='col-2 gametopslider'>
-                        <Link to="/mobile/match">
-                            <FaChevronLeft style={backIcon} />
-                        </Link>
-                    </div>
-                    <div className='col-8 row m-0'>
-                        <div className="col-11 p-0">
-                            <p target='league'>{data.list.league_name}</p>
-                        </div>
-                    </div>
-                    <div className='col-2' onClick={this.refreshGame}>
-                        <MdAutorenew className={this.props.isGameRefreshing === true ? 'rotateRefresh fs-1' : 'fs-1'}/>
-                    </div>
-                </MainInfoSlider>
-                <div style={maintablebpard}>
-                    <div style={scoreBoardSeries}>
-                        <div style={scoreBoardseriesLogoCon}>
-                            {data.list.league_name}
-                        </div>
-                        <div className="text-right" style={{ width: '25%'}}>
-                            {isBaseball ? 
-                                langText.GameTopSlider.stageStr[sport][fixture.periods.period] + langText.GameTopSlider.baseballPeriod[fixture.periods.Turn]
-                            : 
-                                langText.GameTopSlider.stageStr[sport][fixture.periods.period]  
-                        }
-                        </div>
-                    </div>
-                    <table className="table table-bordered">
-                        {(() => {
-                            this.baseballShowStage = showStage;
-                        })()}
-                        <thead>
-                            <tr>
-                                <th style={{ width: '20%'}}></th>
-                                {langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => (
-                                    <th key={k} style={ isBaseball && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null }>{v}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style={{textOverflow: 'ellipsis',whiteSpace: 'nowrap',overflow: 'hidden',maxWidth: '5rem'}}>
-                                    {fixture.home_team_name}
-                                </td>
-                                {langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => (
-                                    <td style={ isBaseball && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{fixture.scoreboard[1][k] === undefined ? '-' : fixture.scoreboard[1][k]}</td>
-                                ))}
-                            </tr>
-                            <tr>
-                                <td style={{textOverflow: 'ellipsis',whiteSpace: 'nowrap',overflow: 'hidden',maxWidth: '5rem'}}>
-                                    {fixture.away_team_name}
-                                </td>
-                                {langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => (
-                                    <td style={ isBaseball && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{fixture.scoreboard[2][k] === undefined ? '-' : fixture.scoreboard[2][k]}</td>
-                                ))}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </SwiperSlide>
-        );
-        
+
         if( data ) {
+            console.log(data)
             return (
                 <div style={{ height: '28%' }}>
-                    <Swiper initialSlide={ scbLen < 6 ? 2 : scbLen >= 6 && scbLen <= 9 ? 3 : scbLen > 9 ? 4 : 1} navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
+                    <Swiper navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
                         <SwiperSlide style={{ backgroundImage: `url(${GameBg})`, backgroundSize: '100% 100%'}}>
                             <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
                                 <div className='col-2 gametopslider'>
@@ -282,7 +287,7 @@ class GameTopSlider extends React.Component {
                                 </div>
                             </MainInfoSlider>
                         </SwiperSlide>
-                        {(fixture.status === 2 || fixture.status === 9) && !isBaseball &&
+                        {(fixture.status === 2 || fixture.status === 9) && fixture.scoreboard && 
                             <SwiperSlide id="scoreBoard" style={{ backgroundImage: `url(${ScoreBoardBg})`, backgroundSize: '100% 100%', paddingBottom: '52px'}}>
                                 <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
                                     <div className='col-2 gametopslider'>
@@ -305,22 +310,43 @@ class GameTopSlider extends React.Component {
                                             {data.list.league_name}
                                         </div>
                                         <div className="text-right" style={{ width: '25%'}}>
-                                            {isBaseball ? 
+                                            {sport === 154914 ? 
                                                 langText.GameTopSlider.stageStr[sport][fixture.periods.period] + langText.GameTopSlider.baseballPeriod[fixture.periods.Turn]
                                                 : 
                                                 langText.GameTopSlider.stageStr[sport][fixture.periods.period]  
                                             }
                                         </div>
                                     </div>
-
+                                    
                                     <table className="table table-bordered">
+                                        {(() => {
+                                            if( !fixture.scoreboard ) return
+                                            switch (this.state.scoreboardIndex) {
+                                                case 1:
+                                                    this.baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
+                                                break;
+                                                case 2:
+                                                    this.baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
+                                                break;
+                                                case 3:
+                                                    this.baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
+                                                break;
+                                                default:
+                                                    this.baseballShowStage = []
+                                                break;
+                                            }
+                                        })()}
                                         <thead>
                                             <tr>
                                                 <th style={{ width: '20%'}}></th>
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                         return(
-                                                            <th key={k}>{v}</th>
+                                                            <th key={k}style={{
+                                                                    width: `${80 / this.state.scColumnCount}%`,
+                                                                    ...(sport === 154914 && this.baseballShowStage.indexOf(k) === -1
+                                                                    ? { display: 'none' }: null),}}
+                                                                >{v}</th>
                                                         )
                                                     })
                                                 }
@@ -334,7 +360,27 @@ class GameTopSlider extends React.Component {
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                         return(
-                                                            <td key={k}>{fixture.scoreboard[1][k] === undefined ? '-' : fixture.scoreboard[1][k]}</td>
+                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>
+                                                                {Array.from(Object.values(fixture.scoreboard[1]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[1]))[k]}
+
+                                                                {/* arrow */}
+                                                                {
+                                                                    k === 0 && this.state.scoreboardIndex -1 > 0 ? <IoIosArrowBack onClick={this.prevSB} style={{ 
+                                                                        position: 'absolute', 
+                                                                        left: '20%', 
+                                                                        bottom: '1rem',
+                                                                        fontSize: '1.5rem'
+                                                                    }} /> : null
+                                                                }
+                                                                {
+                                                                    k === 0 && this.state.scoreboardIndex + 1 <= this.state.scoreboardSliderCount ? <IoIosArrowForward onClick={this.nextSB}  style={{ 
+                                                                        position: 'absolute', 
+                                                                        right: '-0.5rem', 
+                                                                        bottom: '1rem',
+                                                                        fontSize: '1.5rem'
+                                                                    }} /> : null
+                                                                }
+                                                            </td>
                                                         )
                                                     })
                                                 }
@@ -346,7 +392,7 @@ class GameTopSlider extends React.Component {
                                                 {
                                                     langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
                                                         return(
-                                                            <td key={k}>{fixture.scoreboard[2][k] === undefined ? '-' : fixture.scoreboard[2][k]}</td>
+                                                            <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{Array.from(Object.values(fixture.scoreboard[2]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[2]))[k]}</td>
                                                         )
                                                     })
                                                 }
@@ -355,18 +401,6 @@ class GameTopSlider extends React.Component {
                                     </table>
                                 </div>
                             </SwiperSlide>
-                        }
-
-                        {(fixture.status === 2 || fixture.status === 9) && (fixture.scoreboard || fixture.scoreboard !== null ) && isBaseball &&
-                            generateSwiperSlide(scbLen, [0, 1, 2, 3, 4, 5, 6])
-                        }
-
-                        {(fixture.status === 2 || fixture.status === 9) && (fixture.scoreboard || fixture.scoreboard !== null ) && isBaseball && scbLen >=6 &&
-                            generateSwiperSlide(scbLen, [0, 4, 5, 6, 7, 8, 9])
-                        }
-
-                        {(fixture.status === 2 || fixture.status === 9) && (fixture.scoreboard || fixture.scoreboard !== null ) && isBaseball && scbLen > 9 &&
-                            generateSwiperSlide(scbLen, [0, 7, 8, 9, 10, 11, 12])
                         }
                     </Swiper>
                 </div>
