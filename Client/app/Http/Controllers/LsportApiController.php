@@ -2454,7 +2454,16 @@ class LsportApiController extends Controller {
       }
     }
 
-    return $data;
+    // 找出bet_id 並return
+    
+    foreach ($data as $k => $v) {
+        $bet_id = $v['bet_id'];
+        if ($bet_id == $market_bet_id) {
+            return $v;
+        }
+    }
+    
+    return false;
   }
 
   protected function adjustNumbers($numbers, $targetValue) {
