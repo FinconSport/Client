@@ -2422,7 +2422,7 @@ class LsportApiController extends Controller {
     
     // 沒有配置的
     if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
-      return false;
+      return 1;
     }
 
     $market_bet_rate = $default_market_bet_llimit[$status][$sport_id][$market_id];
@@ -2434,7 +2434,7 @@ class LsportApiController extends Controller {
         ->orderBy("name_en.keyword","ASC")
         ->list();
     if ($return === false) {
-        return false;
+        return 2;
     }
 
     $data = $return;
