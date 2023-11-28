@@ -712,7 +712,7 @@
                 }
 
             } else {
-                $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
+                $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
