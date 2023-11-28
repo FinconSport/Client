@@ -207,6 +207,39 @@
 
     // match list data
     var matchListD = {}
+    // temp data
+    var matchListData = {
+        "status": 1,
+        "data": {
+            "list": {
+                "league_id": 15771,
+                "league_name": "LVBP",
+                "fixture_id": 11786403,
+                "start_time": "2023-11-27 08:00:00",
+                "status": 2,
+                "last_update": 1701044651,
+                "home_team_id": 328905,
+                "home_team_name": "Caribes de Anzoategui",
+                "away_team_id": 315931,
+                "away_team_name": "Navegantes del Magallanes",
+                "periods": {
+                    "period": 1,
+                    "Turn": "2"
+                },
+                "scoreboard": {
+                    "1": [
+                        0,0,0,0,0,0,0,0,0,0,0,0,0
+                    ],
+                    "2": [
+                        2,2,2,2,2,2,2,0,0,0,0,0,0
+                    ]
+                },
+                "market": []
+            }
+        },
+        "message": "SUCCESS_API_GAME_INDEX_01",
+        "gzip": true
+    }
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index'
 
@@ -224,7 +257,7 @@
 
     function viewIni() { // view ini
         setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -298,7 +331,7 @@
     function renderView() {
         // update scoreboard home team and away team
 
-        createScoreBoard(matchListD.data);
+        createScoreBoard(matchListData.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -688,39 +721,86 @@
     }
 
     // ------- game page scoreboard function-----------
+    // function createScoreBoard(data) {
+    //     const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+
+    //     if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
+    //         if (sport === 154914) {
+    //             const scbLen = data.list?.scoreboard[1].length - 1;
+
+    //             createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts"); // <--lts(less than six)
+    //             // remove early slider container
+    //             $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','important': 'true'})); 
+
+    //             if (scbLen >= 6) {
+    //                 createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts"); // <--mts(more than six)
+    //             } else {
+    //                 // remove slider more than six scoreboard
+    //                 $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
+    //             }
+
+    //             if (scbLen > 9) {
+    //                 createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn"); // <--mtn(more than nine)
+    //             } else {
+    //                 // remove slider more than nine scoreboard
+    //                 $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','important': 'true'}));
+    //             }
+
+    //         } else {
+    //             // remove slider if not baseball
+    //             $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
+    //             createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
+    //         }
+    //     } else {
+    //         // remove living slider container
+    //         $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','important': 'true'}));
+    //         const leagueID = data.list.league_id;
+    //         $(`div[id="${leagueID}"]`).remove();
+    //         earlyContainerTemp.removeAttr('hidden').removeAttr('template');
+    //         earlyContainerTemp.attr('id', data.list.league_id);
+    //         earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
+    //         earlyContainerTemp.find('.league_name').text(data.list.league_name);
+    //         earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
+    //         earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+    //         $('.early-fixture-con').append(earlyContainerTemp);
+    //     }
+    // }
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
+
+        const removeAndAppend = (selector, display) => {
+            $('.template-con').append($(selector).detach().css({'display': 'none','important': 'true'}));
+        };
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
+                // remove early slide
+                removeAndAppend('.early-fixture-con', 'none');
+                
+                if (scbLen < 6) {
+                    createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
+                } else if (scbLen >= 6) {
+                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
 
-                createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts"); // <--lts(less than six)
-                // remove early slider container
-                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','important': 'true'})); 
-
-                if (scbLen >= 6) {
-                    createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts"); // <--mts(more than six)
+                    if (scbLen > 9) {
+                        createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
+                    } else {
+                        removeAndAppend('.living-fixture-mtn', 'none'); // <-- if is not more than six remove mtn(more than nine) container
+                    }
                 } else {
-                    // remove slider more than six scoreboard
-                    $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
-                }
-
-                if (scbLen > 9) {
-                    createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn"); // <--mtn(more than nine)
-                } else {
-                    // remove slider more than nine scoreboard
-                    $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','important': 'true'}));
+                    removeAndAppend('.living-fixture-mts', 'none'); // <-- if is not more than six remove mts(more than six) container
                 }
 
             } else {
-                // remove slider if not baseball
-                $('.template-con').append($('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({'display': 'none','important': 'true'}));
+                // remove early slide and the living fixture mtn/mts if not baseball
+                removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
-            // remove living slider container
-            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({'display': 'none','important': 'true'}));
+            // remove living slide
+            removeAndAppend('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts', 'none');
+
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
@@ -732,6 +812,7 @@
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
+
 
     function createScoreBoardTemplate(sport, data, baseballShowStage, tempConSuffix) {
         const livingContainerTemp = $(`div[template="livingContainerTemplate_${tempConSuffix}"]`).clone();
