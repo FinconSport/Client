@@ -742,9 +742,7 @@
             currentSlide++;
             isLastSlide = currentSlide === lastslide;
             showSlide(currentSlide);
-            return true;
         }
-        return false;
     }
 
     function prevSlide() {
@@ -761,7 +759,7 @@
         // Update Previous button class
         prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
         // Update Next button class
-        nextBTN.classList.toggle('disabled-btn', !nextSlide());
+        nextBTN.classList.toggle('disabled-btn', isLastSlide);
     }
 
     function updatePaginationActiveClass() {
