@@ -852,8 +852,18 @@ class LsportApiController extends Controller {
         //////////////////////////////////////////
         // 水位調整
 
-        dd($fixture_status,$sport_id, $market_id);
+        $status_type = ["","early","living"];
+        if ($fixture_status == 9) {
+            $fixture_status = 2;
+        }
+        $status_type_name = $status_type[$fixture_status];
+        
+        $old_market_bet_data = $market_bet_data;
 
+        // 根據水位調整賠率
+        $market_bet_data = $this->getAdjustedRate($status_type_name, $sport_id, $market_id, $market_bet_data);
+
+        dd($old_market_bet_data, $market_bet_data);
 
         //////////////////////////////////////////
         // order data
@@ -2432,6 +2442,17 @@ class LsportApiController extends Controller {
     return $data;
   }
 
-
+  protected function adjustNumbers($numbers, $targetValue) {
+    while (max($numbers) < $targetValue) {
+        $maxValue = max($numbers);
+        $diff = $targetValue - $maxValue;
+        
+        for ($i = 0; $i < count($numbers); $i++) {
+            $numbers[$i] += $diff;
+        }
+    }
+    
+    return $numbers;
+  }
 }
 
