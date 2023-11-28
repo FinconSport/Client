@@ -775,7 +775,7 @@
     let currentSlide = 1;
 
     function showSlide(slideIndex) {
-        const slides = document.querySelectorAll('.isBsbll');
+        const slides = document.querySelectorAll('.slider-bsbll');
         slides.forEach(slide => slide.style.display = 'none');
         slides.forEach(slide => slide.classList.remove('active'));
         slides[slideIndex - 1].style.display = 'table-cell';
@@ -809,6 +809,7 @@
                 removeAndAppend('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts', 'none');
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
+                $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1stslide");
 
