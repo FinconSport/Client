@@ -781,7 +781,7 @@
         slides[slideIndex - 1].style.display = 'table-cell';
 
         const targetClass = `${slideIndex}slide`;
-        const targetSlides = document.querySelectorAll(`.${targetClass}`);
+        const targetSlides = document.querySelectorAll('.slider-bsbll.' + targetClass);
 
         if (targetSlides.length > 0) {
             targetSlides.forEach(slide => {
@@ -808,8 +808,6 @@
     }
 
 
-    
-    
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
