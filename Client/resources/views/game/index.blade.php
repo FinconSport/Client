@@ -780,21 +780,14 @@
         slides.forEach(slide => slide.classList.remove('active'));
         slides[slideIndex - 1].style.display = 'table-cell';
 
-        // Find the slide with the appropriate class based on currentSlide
-        let targetClass = '';
-        if (currentSlide === 1) {
-            targetClass = '1stslide';
-        } else if (currentSlide === 2) {
-            targetClass = '2ndslide';
-        } else if (currentSlide === 3) {
-            targetClass = '3rdslide';
-        }
+        const targetClass = `${slideIndex}slide`;
+        const targetSlides = document.querySelectorAll(`.${targetClass}`);
 
-        const targetSlide = document.querySelectorAll(`.${targetClass}`);
-
-        if (targetSlide) {
-            targetSlide.style.display = 'table-cell';
-            targetSlide.classList.add('active');
+        if (targetSlides.length > 0) {
+            targetSlides.forEach(slide => {
+                slide.style.display = 'table-cell';
+                slide.classList.add('active');
+            });
         } else {
             console.error(`No element found with class ${targetClass}`);
         }
@@ -813,6 +806,8 @@
         }
         showSlide(currentSlide);
     }
+
+
     
     
     function createScoreBoard(data) {
@@ -831,14 +826,14 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
-                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1stslide");
+                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1slide");
 
                 if (scbLen >= 6) {
-                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("2ndslide");
+                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("2slide");
                 }
 
                 if (scbLen > 9) {
-                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3rdslide");
+                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3slide");
                 }
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
