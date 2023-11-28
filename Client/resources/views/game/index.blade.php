@@ -781,7 +781,7 @@
         });
 
         // Show the slides with the corresponding class
-        document.querySelectorAll(`.${slideIndex}slide`).forEach(slide => {
+        document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
         });
     }
@@ -816,14 +816,14 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12], "lts", "7.5%");
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
-                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("1slide");
+                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
 
                 if (scbLen >= 6) {
-                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("2slide");
+                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
                 }
 
                 if (scbLen > 9) {
-                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("3slide");
+                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
                 }
             } else {
                 // remove early slide and the living fixture mtn/mts if not baseball
