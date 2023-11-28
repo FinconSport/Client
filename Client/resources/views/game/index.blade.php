@@ -705,6 +705,7 @@
     const scbLen = matchListData.data.list?.scoreboard[1].length - 1;
     let currentSlide = [];
     let lastslide = [];
+    let isLastSlide = false; 
 
     if (scbLen > 9) {
         lastslide = 3;
