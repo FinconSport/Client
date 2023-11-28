@@ -778,7 +778,7 @@
         const slides = document.querySelectorAll('.slider-bsbll');
         slides.forEach(slide => slide.style.display = 'none');
         slides.forEach(slide => slide.classList.remove('active'));
-        
+
         // Find the slide with the appropriate class based on currentSlide
         let targetClass = '';
         if (currentSlide === 1) {
@@ -790,10 +790,12 @@
         }
 
         const targetSlide = document.querySelector(`.slider-bsbll.${targetClass}`);
-        
+
         if (targetSlide) {
             targetSlide.style.display = 'table-cell';
             targetSlide.classList.add('active');
+        } else {
+            console.error(`No element found with class ${targetClass}`);
         }
     }
 
