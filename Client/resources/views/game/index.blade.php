@@ -238,15 +238,15 @@
                     "away_team_id": 315931,
                     "away_team_name": "Navegantes del Magallanes",
                     "periods": {
-                        "period": 2,
+                        "period": 6,
                         "Turn": "2"
                     },
                     "scoreboard": {
                         "1": [
-                            0,0,0
+                            0,0,0, 0, 0, 0
                         ],
                         "2": [
-                            2,2,0
+                            2,2,0, 0, 0, 0
                         ]
                     },
                     "market": []
