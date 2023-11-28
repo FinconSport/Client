@@ -688,6 +688,20 @@
     }
 
     // ------- game page scoreboard function-----------
+    function HideSlidingContainerFunction() {
+        //lts(less than six) mts(more than six) mtn(more than nine)
+        $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({
+            'display': 'none',
+            'height': '0px',
+            'important': 'true'
+        }));
+
+        $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
+            'display': 'none',
+            'important': 'true'
+        });
+    }
+
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
@@ -696,60 +710,26 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
-                $('.template-con').append($('.early-fixture-con').detach().css({
-                    'display': 'none',
-                    'height': '0px',
-                    'important': 'true'
-                }));
+                $('.template-con').append($('.early-fixture-con').detach().css({'display': 'none','height': '0px','important': 'true'}));
 
                 if (scbLen >= 6) {
                     createScoreBoardTemplate(sport, data, [0, 4, 5, 6, 7, 8, 9], "mts");
                 } else {
-                    $('.template-con').append($('.living-fixture-mts').detach().css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    }));
+                    $('.template-con').append($('.living-fixture-mts').detach().css({'display': 'none','height': '0px','important': 'true'}));
                 }
 
                 if (scbLen > 9) {
                     createScoreBoardTemplate(sport, data, [0, 7, 8, 9, 10, 11, 12], "mtn");
                 } else {
-                    $('.template-con').append($('.living-fixture-mtn').detach().css({
-                        'display': 'none',
-                        'height': '0px',
-                        'important': 'true'
-                    }));
+                    $('.template-con').append($('.living-fixture-mtn').detach().css({'display': 'none','height': '0px','important': 'true'}));
                 }
 
             } else {
-
-                $('.template-con').append( $('.early-fixture-con, .living-fixture-mtn, .living-fixture-mts').detach().css({
-                    'display': 'none',
-                    'height': '0px',
-                    'important': 'true'
-                }));
-
-                $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
-                    'display': 'none',
-                    'important': 'true'
-                });
-
+                HideSlidingContainerFunction();
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6], "lts");
             }
         } else {
-            // Early fixture (status == 1)
-            $('.template-con').append($('.living-fixture-mtn, .living-fixture-mts, .living-fixture-lts').detach().css({
-                    'display': 'none',
-                    'height': '0px',
-                    'important': 'true'
-                })
-            );
-
-            $('.swiper-pagination, .swiper-button-prev, .swiper-button-next').css({
-                'display': 'none',
-                'important': 'true'
-            });
+            HideSlidingContainerFunction();
 
             const leagueID = data.list.league_id;
             $(`div[id="${leagueID}"]`).remove();
