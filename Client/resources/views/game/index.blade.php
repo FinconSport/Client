@@ -313,7 +313,7 @@
     function renderView() {
         // update scoreboard home team and away team
 
-        createScoreBoard(matchListData.data);
+        //createScoreBoard(matchListData.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
