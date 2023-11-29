@@ -687,11 +687,16 @@
                 currentSlide = 3;
             }
 
-            function showSlide(slideIndex) {
-                // Hide all slides
+            // Function to hide all slides
+            function hideAllSlides() {
                 document.querySelectorAll('.slider-bsbll').forEach(slide => {
                     slide.style.display = 'none';
                 });
+            }
+
+            function showSlide(slideIndex) {
+                hideAllSlides();
+
                 // Show the slides with the corresponding class
                 document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
                     slide.style.display = 'table-cell';
@@ -743,6 +748,18 @@
                 });
             }
         }
+    }
+
+    // Call the hideAllSlides function before showing the initial slide
+    hideAllSlides();
+
+    // Show the initial slide based on the conditions
+    if (scbLen < 6) {
+        showSlide(1);
+    } else if (scbLen >= 6 && scbLen <= 9) {
+        showSlide(2);
+    } else {
+        showSlide(3);
     }
 
     function createScoreBoard(data) {
