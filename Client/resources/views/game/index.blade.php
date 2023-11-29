@@ -93,7 +93,7 @@
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
         <div class="swiper-wrapper">
             <div class="early-fixture-con" style="width:100%!important;"></div>
-            <div class="living-fixture-con" style="width:100%!important;">
+            <div class="living-fixture-con" style="width:100%!important;"></div>
             <div class="navigation-controls">
                 <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
                 <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
@@ -102,7 +102,6 @@
                     <li class="pgntn-bullet-2" onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
                     <li class="pgntn-bullet-3" onclick="showSlide(3)"><i class="fa-solid fa-circle"></i></li>
                 </ul>
-            </div>
             </div>
         </div>
     </div>
@@ -186,39 +185,6 @@
 
     // match list data
     var matchListD = {}
-    // temp data
-    var matchListData = {
-    "status": 1,
-    "data": {
-        "list": {
-            "league_id": 15771,
-            "league_name": "LVBP",
-            "fixture_id": 11786403,
-            "start_time": "2023-11-27 08:00:00",
-            "status": 2,
-            "last_update": 1701044651,
-            "home_team_id": 328905,
-            "home_team_name": "Caribes de Anzoategui",
-            "away_team_id": 315931,
-            "away_team_name": "Navegantes del Magallanes",
-            "periods": {
-                "period": 1,
-                "Turn": "2"
-            },
-            "scoreboard": {
-                "1": [
-                    0,0,0,0,0,0,0,0,0,0,0,0,0
-                ],
-                "2": [
-                    2,2,2,2,2,2,2,0,0,0,0,0,0
-                ]
-            },
-            "market": []
-        }
-    },
-    "message": "SUCCESS_API_GAME_INDEX_01",
-    "gzip": true
-}
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index'
 
@@ -237,7 +203,7 @@
     function viewIni() { // view ini
         
         setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListData.data);
+        createScoreBoard(matchListD.data);
 
 
 
@@ -313,7 +279,7 @@
     function renderView() {
         // update scoreboard home team and away team
 
-        createScoreBoard(matchListData.data);
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
