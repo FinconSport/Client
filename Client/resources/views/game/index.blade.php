@@ -739,16 +739,16 @@
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-                $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
+                $('.isBsbll:not(.isBsbll_0)').addClass("slider-bsbll");
 
-                $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
+                $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
                 if (scbLen >= 6 && scbLen <= 9) {
-                    $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
+                    $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
                 }
                 if (scbLen > 9) {
-                    $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
+                    $(".isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-3");
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
@@ -861,7 +861,7 @@
         scoreBoardBodyTemp_home.append(homeTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            const thHome = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_home.append(thHome);
             }
@@ -874,7 +874,7 @@
         scoreBoardBodyTemp_away.append(awayTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + gameTitle[i] : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            const thAway = $(`<td class="isBsbll ${sport === 154914 ? 'isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
             if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_away.append(thAway);
             }
