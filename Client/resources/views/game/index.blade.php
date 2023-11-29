@@ -731,10 +731,10 @@
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
 
-        if (currentSlide === lastslide) {
-            console.log('disabled-btn');
-            nextBTN.classList.add('disabled-btn');
-        }
+        // if (currentSlide === lastslide) {
+        //     console.log('disabled-btn');
+        //     nextBTN.classList.add('disabled-btn');
+        // }
     }
 
     function updatePaginationActiveClass() {
