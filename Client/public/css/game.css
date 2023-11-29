@@ -52,7 +52,8 @@
 
 @media screen and (max-width:1227px) {
     .livingFixture-container.row,
-    .scoreboardCon .earlyFixture-container {
+    .scoreboardCon .earlyFixture-container,
+    .navigation-controls {
         width: 87%;
     }
   }
@@ -256,10 +257,13 @@ span.market_price.odd {
 }
 
 .navigation-controls {
-    position: absolute;
     height: 100%;
-    width: 100%;
+    width: 65%;
     pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .navigation-controls #prevBTN,
@@ -289,7 +293,7 @@ span.market_price.odd {
 .navigation-controls ul.pagination {
     position: absolute;
     bottom: 10px;
-    right: 32rem;
+    right: 29%;
     transform: translate(-50%, -50%);
     margin: 0px;
 }
@@ -305,40 +309,9 @@ span.market_price.odd {
 }
 
 .navigation-controls #nextBTN{
-    right: 13rem;
+    right: -1rem;
 }
 
 .navigation-controls #prevBTN {
-    right: 48rem;
-}
-
-
-/* slider css */
-.swiper-button-prev,
-.swiper-button-next{
-    color: #ffffff!important;
-}
-
-.swiper-button-prev {
-    left: var(--swiper-navigation-sides-offset,10rem)!important;
-}
-
-.swiper-button-next {
-    right: var(--swiper-navigation-sides-offset,10rem)!important
-}
-
-.swiper-button-prev {
-    left: var(--swiper-navigation-sides-offset,10rem)!important;
-}
-
-.swiper-slide{
-    display: flex!important;
-}
-
-.swiper-pagination {
-    bottom: var(--swiper-pagination-bottom,24px)!important;
-}
-
-.swiper-pagination-bullet {
-    background: white!important;
+    right: 53%;
 }
