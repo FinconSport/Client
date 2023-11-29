@@ -672,6 +672,8 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
+    let scbLen;
+
     if (scbLen > 9) {
         lastslide = 3;
         currentSlide = 3;
@@ -747,7 +749,7 @@
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                let scbLen = data.list?.scoreboard[1].length - 1;
+                scbLen = data.list?.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
