@@ -847,7 +847,7 @@
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
-                    scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${gameTitle[i]}" style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
+                    scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${i}" style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
                 }
             } else {
                 scoreBoardHeadTemp.append($(`<th style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
