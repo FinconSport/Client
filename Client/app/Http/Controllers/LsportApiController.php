@@ -550,7 +550,7 @@ class LsportApiController extends Controller {
                 if (isset($input['debug'])) {
                     if ($fixture_id == 11188644) {
 
-                        dd($data);
+                        dd($fixture);
                     }
                 }
 
