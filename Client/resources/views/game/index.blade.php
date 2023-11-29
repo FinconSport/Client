@@ -676,15 +676,15 @@
             let lastslide = [];
             let isLastSlide = false; 
 
-            if (scbLen > 9) {
-                lastslide = 3;
-                currentSlide = 3;
-            } else if (scbLen >= 6 && scbLen <= 9) {
-                lastslide = 2; 
-                currentSlide = 2;
-            } else {
+            if (scbLen < 6) {
                 lastslide = 1;
                 currentSlide = 1;
+            } else if (scbLen >= 6 && scbLen <= 9) {
+                lastslide = 2;
+                currentSlide = 2;
+            } else {
+                lastslide = 3;
+                currentSlide = 3;
             }
 
             function showSlide(slideIndex) {
