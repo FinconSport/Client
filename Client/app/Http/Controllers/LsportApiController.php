@@ -538,6 +538,10 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_match_list', $key);
         $data = json_decode($data,true);
 
+        if (isset($input['debug'])) {
+            dd($data);
+        }
+
         foreach ($data as $k => $v) {
           foreach ($v as $sport_id => $sport) {
             foreach ($sport['list'] as $league_id => $league) {
