@@ -672,23 +672,6 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
-    let scbLen;
-    console.log(scbLen);
-
-    if (scbLen < 6) {
-        lastslide = 1;
-        currentSlide = 1;
-        console.log(lastslide, currentSlide);
-    } else if (scbLen >= 6 && scbLen <= 9) {
-        lastslide = 2;
-        currentSlide = 2;
-        console.log(lastslide, currentSlide);
-    } else {
-        lastslide = 3;
-        currentSlide = 3;
-        console.log(lastslide, currentSlide);
-    }
-    
 
     function showSlide(slideIndex) {
         // Hide all slides
@@ -748,11 +731,11 @@
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        let scbLen;
+        
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
-                scbLen = data.list?.scoreboard[1].length - 1;
+                const scbLen = data.list?.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -768,6 +751,22 @@
                     $(".isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-3");
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
+                }
+
+                console.log(scbLen);
+
+                if (scbLen < 6) {
+                    lastslide = 1;
+                    currentSlide = 1;
+                    console.log(lastslide, currentSlide);
+                } else if (scbLen >= 6 && scbLen <= 9) {
+                    lastslide = 2;
+                    currentSlide = 2;
+                    console.log(lastslide, currentSlide);
+                } else {
+                    lastslide = 3;
+                    currentSlide = 3;
+                    console.log(lastslide, currentSlide);
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
