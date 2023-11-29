@@ -723,6 +723,19 @@
         updatePaginationActiveClass();
         // Check if it's the last slide
         isLastSlide = currentSlide === lastslide;
+
+        // Call setSlide3Width and log the count
+        var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
+        var slide3Count = slide3Elements.length;
+        setSlide3Width('width', (60 / slide3Count) + '%');
+        console.log('slide-3 with display: table-cell count: ' + slide3Count);
+    }
+
+    function setSlide3Width(property, value) {
+        var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
+        slide3Elements.forEach(function(element) {
+            element.style.setProperty(property, value, 'important');
+        });
     }
 
     function nextSlide() {
@@ -775,19 +788,6 @@
                     $(".isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-3");
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
-                }
-
-                // update th layout slide-3 
-                var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
-                var slide3Count = slide3Elements.length;
-
-                setSlide3Width('width', (60 / slide3Count) + '%');
-                console.log('slide-3 with display: table-cell count: ' + slide3Count);
-
-                function setSlide3Width(property, value) {
-                    slide3Elements.forEach(function(element) {
-                        element.style.setProperty(property, value, 'important');
-                    });
                 }
 
                 if (scbLen < 6) {
