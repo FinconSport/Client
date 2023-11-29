@@ -538,9 +538,6 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_match_list', $key);
         $data = json_decode($data,true);
 
-        if (isset($input['debug'])) {
-            dd($data);
-        }
 
         foreach ($data as $k => $v) {
           foreach ($v as $sport_id => $sport) {
@@ -550,6 +547,13 @@ class LsportApiController extends Controller {
                 $return = LsportRisk::where("fixture_id",$fixture_id)->first();
                 $risk_data = json_decode($return['data'],true);
     
+                if (isset($input['debug'])) {
+                    if ($fixture_id == 11188644) {
+
+                        dd($data);
+                    }
+                }
+
                 // 部份比賽, 沒有market
                 if (!isset($fixture['list'])) {
                   continue;
