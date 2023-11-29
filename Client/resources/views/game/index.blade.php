@@ -694,16 +694,15 @@
                 });
             }
 
-            function showSlide(slideIndex) {
+            function showSlide(currentSlide, lastslide, isLastSlide) {
                 hideAllSlides();
 
                 // Show the slides with the corresponding class
-                document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
+                document.querySelectorAll(`.slide-${currentSlide}`).forEach(slide => {
                     slide.style.display = 'table-cell';
                 });
 
                 // Update the current slide index
-                currentSlide = slideIndex;
                 updateButtonClasses();
                 updatePaginationActiveClass();
 
