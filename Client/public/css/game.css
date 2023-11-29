@@ -54,7 +54,7 @@
     .livingFixture-container.row,
     .scoreboardCon .earlyFixture-container,
     .navigation-controls {
-        width: 87%;
+        width: 87%!important;
     }
   }
 
@@ -296,7 +296,7 @@ span.market_price.odd {
     right: 30%;
     transform: translate(-50%, -50%);
     margin: 0px;
-}
+}.navigation-controls #prevBTN
 
 .navigation-controls ul.pagination li {
     font-size: 6px;
