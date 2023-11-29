@@ -672,23 +672,19 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
-    if (matchListD.data) {
-        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
-            const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
-            if (scbLen > 9) {
-                lastslide = 3;
-                currentSlide = 3;
-                console.log(lastslide, currentSlide);
-            } else if (scbLen >= 6) {
-                lastslide = 2; 
-                currentSlide = 2;
-                console.log(lastslide, currentSlide);
-            } else {
-                lastslide = 1;
-                currentSlide = 1;
-                console.log(lastslide, currentSlide);
-            }
-        }
+    const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
+    if (scbLen > 9) {
+        lastslide = 3;
+        currentSlide = 3;
+        console.log(lastslide, currentSlide);
+    } else if (scbLen >= 6) {
+        lastslide = 2; 
+        currentSlide = 2;
+        console.log(lastslide, currentSlide);
+    } else {
+        lastslide = 1;
+        currentSlide = 1;
+        console.log(lastslide, currentSlide);
     }
 
     function showSlide(slideIndex) {
