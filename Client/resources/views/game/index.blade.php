@@ -682,7 +682,7 @@
         lastslide = 2;
         currentSlide = 2;
         console.log(lastslide, currentSlide);
-    } else {
+    } else if ( scbLen < 9)  {
         lastslide = 3;
         currentSlide = 3;
         console.log(lastslide, currentSlide);
