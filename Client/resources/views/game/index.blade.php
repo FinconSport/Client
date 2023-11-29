@@ -672,42 +672,34 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
-
     if (matchListD.data) {
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
-            
-            if (scbLen < 6) {
-                lastslide = 1;
-                currentSlide = 1;
-            } else if (scbLen >= 6 && scbLen <= 9) {
-                lastslide = 2;
-                currentSlide = 2;
-            } else {
+            if (scbLen > 9) {
                 lastslide = 3;
                 currentSlide = 3;
+            } else if (scbLen >= 6 && scbLen <= 9) {
+                lastslide = 2; 
+                currentSlide = 2;
+            } else {
+                lastslide = 1;
+                currentSlide = 1;
             }
         }
     }
 
-    // Function to hide all slides
-    function hideAllSlides() {
+    function showSlide(slideIndex) {
+        // Hide all slides
         document.querySelectorAll('.slider-bsbll').forEach(slide => {
             slide.style.display = 'none';
         });
-    }
-
-    function showSlide(currentSlide) {
-        hideAllSlides();
-
         // Show the slides with the corresponding class
-        document.querySelectorAll(`.slide-${currentSlide}`).forEach(slide => {
+        document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
         });
 
         // Update the current slide index
-        // currentSlide = slideIndex;
-        console.log(currentSlide);
+        currentSlide = slideIndex;
         updateButtonClasses();
         updatePaginationActiveClass();
 
@@ -764,7 +756,6 @@
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
-
                 if (scbLen >= 6 && scbLen <= 9) {
                     $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
                 } else {
