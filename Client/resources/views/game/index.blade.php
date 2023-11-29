@@ -778,7 +778,7 @@
                 }
 
                 // update th layout slide-3 
-                var slide3Elements = document.querySelectorAll('.slide-3');
+                var slide3Elements = document.querySelectorAll('.slide-3:not([style*="display: none"])');
                 setSlide3Width('width', (60 / slide3Elements.length) + '%');
                 console.log('slide-3:' + slide3Elements.length);
 
