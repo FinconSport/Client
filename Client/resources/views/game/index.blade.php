@@ -678,11 +678,15 @@
         lastslide = 1;
         currentSlide = 1;
         console.log(lastslide, currentSlide);
-    } else if (scbLen >= 6 && scbLen <= 9) {
+    }
+
+    if (scbLen >= 6 && scbLen <= 9) {
         lastslide = 2;
         currentSlide = 2;
         console.log(lastslide, currentSlide);
-    } else if ( scbLen < 9)  {
+    }
+
+    if (scbLen < 9) {
         lastslide = 3;
         currentSlide = 3;
         console.log(lastslide, currentSlide);
