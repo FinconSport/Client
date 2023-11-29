@@ -678,7 +678,7 @@
             if (scbLen > 9) {
                 lastslide = 3;
                 currentSlide = 3;
-            } else if (scbLen >= 6 && scbLen <= 9) {
+            } else if (scbLen >= 6) {
                 lastslide = 2; 
                 currentSlide = 2;
             } else {
