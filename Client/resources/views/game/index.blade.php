@@ -669,86 +669,16 @@
     }
 
     // ------- game page scoreboard slider function-----------
-    let currentSlide = [];
-    let lastslide = [];
-    let isLastSlide = false; 
-    const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
-    if (scbLen > 9) {
-        lastslide = 3;
-        currentSlide = 3;
-        console.log(lastslide, currentSlide);
-    } else if (scbLen >= 6) {
-        lastslide = 2; 
-        currentSlide = 2;
-        console.log(lastslide, currentSlide);
-    } else {
-        lastslide = 1;
-        currentSlide = 1;
-        console.log(lastslide, currentSlide);
-    }
-
-    function showSlide(slideIndex) {
-        // Hide all slides
-        document.querySelectorAll('.slider-bsbll').forEach(slide => {
-            slide.style.display = 'none';
-        });
-        // Show the slides with the corresponding class
-        document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
-            slide.style.display = 'table-cell';
-        });
-
-        // Update the current slide index
-        currentSlide = slideIndex;
-        updateButtonClasses();
-        updatePaginationActiveClass();
-
-        // Check if it's the last slide
-        isLastSlide = currentSlide === lastslide;
-    }
-
-    function nextSlide() {
-        if (currentSlide < lastslide) {
-            currentSlide++;
-            isLastSlide = currentSlide === lastslide;
-            showSlide(currentSlide);
-        }
-    }
-
-    function prevSlide() {
-        if (currentSlide > 1) {
-            currentSlide--;
-            isLastSlide = false;
-            showSlide(currentSlide);
-        }
-    }
-
-    function updateButtonClasses() {
-        const prevBTN = document.getElementById('prevBTN');
-        const nextBTN = document.getElementById('nextBTN');
-        // Update Previous button class
-        prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
-        // Update Next button class
-        nextBTN.classList.toggle('disabled-btn', isLastSlide);
-
-        if (currentSlide === lastslide) {
-            console.log('disabled-btn');
-            nextBTN.classList.add('disabled-btn');
-        }
-    }
-
-    function updatePaginationActiveClass() {
-        const paginationItems = document.querySelectorAll('.pagination li');
-        paginationItems.forEach((item, index) => {
-            item.classList.toggle('active', index + 1 === currentSlide);
-        });
-    }
-
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
+                let currentSlide = [];
+                let lastslide = [];
+                let isLastSlide = false; 
+
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -767,6 +697,77 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
+
+                if (scbLen > 9) {
+                    lastslide = 3;
+                    currentSlide = 3;
+                    console.log(lastslide, currentSlide);
+                } else if (scbLen >= 6) {
+                    lastslide = 2; 
+                    currentSlide = 2;
+                    console.log(lastslide, currentSlide);
+                } else {
+                    lastslide = 1;
+                    currentSlide = 1;
+                    console.log(lastslide, currentSlide);
+                }
+
+                function showSlide(slideIndex) {
+                    // Hide all slides
+                    document.querySelectorAll('.slider-bsbll').forEach(slide => {
+                        slide.style.display = 'none';
+                    });
+                    // Show the slides with the corresponding class
+                    document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
+                        slide.style.display = 'table-cell';
+                    });
+
+                    // Update the current slide index
+                    currentSlide = slideIndex;
+                    updateButtonClasses();
+                    updatePaginationActiveClass();
+
+                    // Check if it's the last slide
+                    isLastSlide = currentSlide === lastslide;
+                }
+
+                function nextSlide() {
+                    if (currentSlide < lastslide) {
+                        currentSlide++;
+                        isLastSlide = currentSlide === lastslide;
+                        showSlide(currentSlide);
+                    }
+                }
+
+                function prevSlide() {
+                    if (currentSlide > 1) {
+                        currentSlide--;
+                        isLastSlide = false;
+                        showSlide(currentSlide);
+                    }
+                }
+
+                function updateButtonClasses() {
+                    const prevBTN = document.getElementById('prevBTN');
+                    const nextBTN = document.getElementById('nextBTN');
+                    // Update Previous button class
+                    prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
+                    // Update Next button class
+                    nextBTN.classList.toggle('disabled-btn', isLastSlide);
+
+                    if (currentSlide === lastslide) {
+                        console.log('disabled-btn');
+                        nextBTN.classList.add('disabled-btn');
+                    }
+                }
+
+                function updatePaginationActiveClass() {
+                    const paginationItems = document.querySelectorAll('.pagination li');
+                    paginationItems.forEach((item, index) => {
+                        item.classList.toggle('active', index + 1 === currentSlide);
+                    });
+                }
+
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
