@@ -778,7 +778,7 @@
                 }
 
                 // update th layout slide-3 
-                var slide3Elements = document.querySelectorAll('.slide-3[style*="display: table-cell"]');
+                var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
                 var slide3Count = slide3Elements.length;
 
                 setSlide3Width('width', (60 / slide3Count) + '%');
