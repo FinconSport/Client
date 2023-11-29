@@ -725,17 +725,19 @@
         isLastSlide = currentSlide === lastslide;
 
         // Call setSlide3Width and log the count
-        var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
-        var slide3Count = slide3Elements.length;
-        setSlide3Width('width', (60 / slide3Count) + '%');
+        var slide3Count = setSlide3Width('width', (60 / getSlide3Count()) + '%');
         console.log('slide-3 with display: table-cell count: ' + slide3Count);
     }
 
     function setSlide3Width(property, value) {
         var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
+        var slide3Count = slide3Elements.length;
+
         slide3Elements.forEach(function(element) {
             element.style.setProperty(property, value, 'important');
         });
+
+        return slide3Count;
     }
 
     function nextSlide() {
