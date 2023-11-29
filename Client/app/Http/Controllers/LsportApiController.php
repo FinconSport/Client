@@ -1851,7 +1851,7 @@ class LsportApiController extends Controller {
             $market_id = $v['market_id'];
             foreach ($v['market_bet'] as $kk => $vv) {
                 foreach ($vv as $kkk => $vvv) {
-                    dd($vvv);
+                //    dd($vvv);
                 }
             }
         }
