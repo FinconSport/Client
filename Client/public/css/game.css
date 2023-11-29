@@ -293,7 +293,7 @@ span.market_price.odd {
 .navigation-controls ul.pagination {
     position: absolute;
     bottom: 10px;
-    right: 29%;
+    right: 30%;
     transform: translate(-50%, -50%);
     margin: 0px;
 }
@@ -309,9 +309,9 @@ span.market_price.odd {
 }
 
 .navigation-controls #nextBTN{
-    right: -1rem;
+    right: -2rem;
 }
 
 .navigation-controls #prevBTN {
-    right: 53%;
+    right: 59%;
 }
