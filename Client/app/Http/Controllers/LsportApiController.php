@@ -1847,6 +1847,15 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 判斷水位設定
         
+        foreach ($data['list']['market'] as $k => $v) {
+            $market_id = $v['market_id'];
+            foreach ($v['market_bet'] as $kk => $vv) {
+                foreach ($vv as $kkk => $vvv) {
+                //    dd($vvv);
+                }
+            }
+        }
+
         
         /////////////////////////////////////////////////////////////////
         // gzip
