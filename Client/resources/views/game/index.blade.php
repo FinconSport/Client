@@ -673,6 +673,7 @@
     let lastslide = [];
     let isLastSlide = false; 
     let scbLen;
+    console.log(scbLen);
 
     if (scbLen < 6) {
         lastslide = 1;
