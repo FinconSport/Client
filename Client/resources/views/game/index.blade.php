@@ -778,9 +778,11 @@
                 }
 
                 // update th layout slide-3 
-                var slide3Elements = document.querySelectorAll('.slide-3:not([style*="display: none"])');
-                setSlide3Width('width', (60 / slide3Elements.length) + '%');
-                console.log('slide-3:' + slide3Elements.length);
+                var slide3Elements = document.querySelectorAll('.slide-3[style*="display: table-cell"]');
+                var slide3Count = slide3Elements.length;
+
+                setSlide3Width('width', (60 / slide3Count) + '%');
+                console.log('slide-3 with display: table-cell count: ' + slide3Count);
 
                 function setSlide3Width(property, value) {
                     slide3Elements.forEach(function(element) {
