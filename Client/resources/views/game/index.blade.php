@@ -764,26 +764,19 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_0)').addClass("slider-bsbll");
 
-                function addSlideClass(startIndex, endIndex, slideNumber) {
-                    for (let i = startIndex; i <= endIndex; i++) {
-                        $(`.isBsbll_${i}`).addClass(`slide-${slideNumber}`);
-                    }
-                }
-
-                addSlideClass(1, 6, 1); //<- default 1,2,3,4,5,6 add slide-1
+                $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
 
                 if (scbLen >= 6 && scbLen <= 9) {
-                    addSlideClass(4, 9, 2); // <--4,5,6,7,8,9 add slide-2
+                    $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
                 }
-
                 if (scbLen > 9) {
-                    addSlideClass(7, 12, 3); // <--7,8,9,10,11,12 add slide-3
+                    $(".isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-3");
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
-
+                
                 // update th layout slide-3 
                 var slide3Elements = document.querySelectorAll('.slide-3');
                 setSlide3Width('width', (60 / slide3Elements.length) + '%');
