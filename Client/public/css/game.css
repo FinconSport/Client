@@ -315,3 +315,7 @@ span.market_price.odd {
 .navigation-controls #prevBTN {
     right: 59%;
 }
+
+.slider-bsbll.slide-3{
+    width: 20%!important;
+}

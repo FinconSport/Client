@@ -683,10 +683,6 @@
             slide.style.display = 'table-cell';
         });
 
-        if (currentSlide === 3) {
-            document.querySelector('#prevBTN').style.right = '50%';
-        }
-
         // Update the current slide index
         currentSlide = slideIndex;
         updateButtonClasses();
@@ -702,10 +698,6 @@
             isLastSlide = currentSlide === lastslide;
             showSlide(currentSlide);
         }
-
-        if (currentSlide === 3) {
-            document.querySelector('#prevBTN').style.right = '50%';
-        }
     }
 
     function prevSlide() {
@@ -713,10 +705,6 @@
             currentSlide--;
             isLastSlide = false;
             showSlide(currentSlide);
-        }
-
-        if (currentSlide === 3) {
-            document.querySelector('#prevBTN').style.right = '50%';
         }
     }
 
