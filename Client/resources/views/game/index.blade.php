@@ -727,7 +727,7 @@
         isLastSlide = currentSlide === lastslide;
 
         // Call setSlide3Width and log the count
-        getSlide3Count = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]').length;
+        getSlide3Count = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]').length - 6;
         setSlide3Width('width', (60 / getSlide3Count) + '%');
         console.log('slide-3 with display: table-cell count: ' + getSlide3Count);
     }
