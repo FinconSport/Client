@@ -735,7 +735,9 @@
     function setSlide3Width(property, value) {
         var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
         slide3Elements.forEach(function(element) {
-            element.style.setProperty(property, value, 'important');
+            if (!element.classList.contains('slide-2')) {
+                element.style.setProperty(property, value, 'important');
+            }
         });
     }
 
