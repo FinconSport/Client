@@ -750,9 +750,6 @@
         }
     }
 
-    // Call the hideAllSlides function before showing the initial slide
-    hideAllSlides();
-
     // Show the initial slide based on the conditions
     if (scbLen < 6) {
         showSlide(1);
