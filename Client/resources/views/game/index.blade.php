@@ -757,7 +757,8 @@
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
-                if (scbLen >= 6) {
+                
+                if (scbLen >= 6 && scbLen <= 9) {
                     $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
