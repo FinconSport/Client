@@ -687,68 +687,68 @@
                 lastslide = 3;
                 currentSlide = 3;
             }
-
-            // Function to hide all slides
-            function hideAllSlides() {
-                document.querySelectorAll('.slider-bsbll').forEach(slide => {
-                    slide.style.display = 'none';
-                });
-            }
-
-            function showSlide(slideIndex) {
-                hideAllSlides();
-
-                // Show the slides with the corresponding class
-                document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
-                    slide.style.display = 'table-cell';
-                });
-
-                // Update the current slide index
-                currentSlide = slideIndex;
-                updateButtonClasses();
-                updatePaginationActiveClass();
-
-                // Check if it's the last slide
-                isLastSlide = currentSlide === lastslide;
-            }
-
-            function nextSlide() {
-                if (currentSlide < lastslide) {
-                    currentSlide++;
-                    isLastSlide = currentSlide === lastslide;
-                    showSlide(currentSlide);
-                }
-            }
-
-            function prevSlide() {
-                if (currentSlide > 1) {
-                    currentSlide--;
-                    isLastSlide = false;
-                    showSlide(currentSlide);
-                }
-            }
-
-            function updateButtonClasses() {
-                const prevBTN = document.getElementById('prevBTN');
-                const nextBTN = document.getElementById('nextBTN');
-                // Update Previous button class
-                prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
-                // Update Next button class
-                nextBTN.classList.toggle('disabled-btn', isLastSlide);
-
-                if (currentSlide === lastslide) {
-                    console.log('disabled-btn');
-                    nextBTN.classList.add('disabled-btn');
-                }
-            }
-
-            function updatePaginationActiveClass() {
-                const paginationItems = document.querySelectorAll('.pagination li');
-                paginationItems.forEach((item, index) => {
-                    item.classList.toggle('active', index + 1 === currentSlide);
-                });
-            }
         }
+    }
+
+    // Function to hide all slides
+    function hideAllSlides() {
+        document.querySelectorAll('.slider-bsbll').forEach(slide => {
+            slide.style.display = 'none';
+        });
+    }
+
+    function showSlide(slideIndex) {
+        hideAllSlides();
+
+        // Show the slides with the corresponding class
+        document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
+            slide.style.display = 'table-cell';
+        });
+
+        // Update the current slide index
+        currentSlide = slideIndex;
+        updateButtonClasses();
+        updatePaginationActiveClass();
+
+        // Check if it's the last slide
+        isLastSlide = currentSlide === lastslide;
+    }
+
+    function nextSlide() {
+        if (currentSlide < lastslide) {
+            currentSlide++;
+            isLastSlide = currentSlide === lastslide;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+            isLastSlide = false;
+            showSlide(currentSlide);
+        }
+    }
+
+    function updateButtonClasses() {
+        const prevBTN = document.getElementById('prevBTN');
+        const nextBTN = document.getElementById('nextBTN');
+        // Update Previous button class
+        prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
+        // Update Next button class
+        nextBTN.classList.toggle('disabled-btn', isLastSlide);
+
+        if (currentSlide === lastslide) {
+            console.log('disabled-btn');
+            nextBTN.classList.add('disabled-btn');
+        }
+    }
+
+    function updatePaginationActiveClass() {
+        const paginationItems = document.querySelectorAll('.pagination li');
+        paginationItems.forEach((item, index) => {
+            item.classList.toggle('active', index + 1 === currentSlide);
+        });
     }
 
     function createScoreBoard(data) {
