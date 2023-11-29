@@ -1835,7 +1835,11 @@ class LsportApiController extends Controller {
             $market_id = $v['market_id'];
             foreach ($v['market_bet'] as $kk => $vv) {
                 foreach ($vv as $kkk => $vvv) {
-                    dd($vvv);
+                    if (isset($risk_data[$market_id][$kkk])) {
+                        if ($risk_data[$market_id][$kkk] !== null) {
+                            $data['list']['market'][$k]['market_bet'][$kk][$kkk]['status'] = $risk_data[$market_id][$kkk];
+                        }
+                    }
                 }
             }
         }
@@ -1843,15 +1847,6 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 判斷水位設定
         
-        foreach ($data['list']['market'] as $k => $v) {
-            $market_id = $v['market_id'];
-            foreach ($v['market_bet'] as $kk => $vv) {
-                foreach ($vv as $kkk => $vvv) {
-                    dd($vvv);
-                }
-            }
-        }
-
         
         /////////////////////////////////////////////////////////////////
         // gzip
