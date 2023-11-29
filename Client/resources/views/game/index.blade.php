@@ -687,39 +687,28 @@
         currentSlide = slideIndex;
         updateButtonClasses();
         updatePaginationActiveClass();
-
         // Check if it's the last slide
         isLastSlide = currentSlide === lastslide;
     }
 
     function nextSlide() {
-        if (currentSlide < lastslide) {
-            currentSlide++;
-            isLastSlide = currentSlide === lastslide;
-            showSlide(currentSlide);
-        }
+        if (currentSlide < lastslide) currentSlide++, isLastSlide = currentSlide === lastslide, showSlide(currentSlide);
     }
 
     function prevSlide() {
-        if (currentSlide > 1) {
-            currentSlide--;
-            isLastSlide = false;
-            showSlide(currentSlide);
-        }
+        if (currentSlide > 1) currentSlide--, isLastSlide = false, showSlide(currentSlide);
     }
 
     function updateButtonClasses() {
         const prevBTN = document.getElementById('prevBTN');
         const nextBTN = document.getElementById('nextBTN');
-        // Update Previous button class
-        prevBTN.classList.toggle('disabled-btn', currentSlide === 1);
-        // Update Next button class
+        
+        // Update Previous/Next button class
+        prevBTN.classList.toggle('disabled-btn', currentSlide === 1); 
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
 
-        if (currentSlide === lastslide) {
-            console.log('disabled-btn');
-            nextBTN.classList.add('disabled-btn');
-        }
+        // disbale next button if lastslide is same of currentslide
+        if (currentSlide === lastslide) console.log('disabled-btn'), nextBTN.classList.add('disabled-btn');
     }
 
     function updatePaginationActiveClass() {
@@ -747,21 +736,30 @@
                     }
                 }
 
-                addSlideClass(1, 6, 1);
+                addSlideClass(1, 6, 1); //<- default 1,2,3,4,5,6 add slide-1
 
                 if (scbLen >= 6 && scbLen <= 9) {
-                    addSlideClass(4, 9, 2); // <--4,5,6,7,8,9
+                    addSlideClass(4, 9, 2); // <--4,5,6,7,8,9 add slide-2
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
                 }
 
                 if (scbLen > 9) {
-                    addSlideClass(7, 12, 3); // <--7,8,9,10,11,12
+                    addSlideClass(7, 12, 3); // <--7,8,9,10,11,12 add slide-3
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
 
-                console.log(scbLen);
+                // update th layout slide-3 
+                var slide3Elements = document.querySelectorAll('.slide-3');
+                setSlide3Width('width', (60 / slide3Elements.length) + '%');
+                console.log(slide3Elements.length);
+
+                function setSlide3Width(property, value) {
+                    slide3Elements.forEach(function(element) {
+                        element.style.setProperty(property, value, 'important');
+                    });
+                }
 
                 if (scbLen < 6) {
                     lastslide = 1;
