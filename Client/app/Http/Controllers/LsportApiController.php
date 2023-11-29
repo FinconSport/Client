@@ -1687,6 +1687,12 @@ class LsportApiController extends Controller {
         $away_team_id = $fixture_data['away_id'];
         $status = $fixture_data['status'];
 
+        $status_type = ["","early","living"];
+        if ($fixture_status == 9) {
+            $fixture_status = 2;
+        }
+        $status_type_name = $status_type[$fixture_status];
+        
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
         $data['list']["league_id"] = $league_id;
