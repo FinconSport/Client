@@ -756,7 +756,7 @@
                 }
 
                 if (scbLen > 9) {
-                    addSlideClass(7, 9, 3); // <--7,8,9
+                    addSlideClass(7, 12, 3); // <--7,8,9
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
