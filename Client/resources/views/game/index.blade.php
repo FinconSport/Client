@@ -717,6 +717,16 @@
         // Show the slides with the corresponding class
         document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
+
+            if (slideIndex === 3) {
+                // Get the length of elements with class .slide-3
+                const slideLength = document.querySelectorAll('.slide-3').length - 6;
+                const calculatedWidth =  60 / slideLength;
+                slide.style.width = `${calculatedWidth}%`;
+                console.log('slide-3 count:' + slideLength + 'width' + calculatedWidth);
+            } else {
+                slide.style.width = `10%`;
+            }
         });
 
         // Update the current slide index
@@ -725,20 +735,7 @@
         updatePaginationActiveClass();
         // Check if it's the last slide
         isLastSlide = currentSlide === lastslide;
-
-        // Call setSlide3Width and log the count
-        getSlide3Count = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]').length - 6;
-        setSlide3Width('width', (60 / getSlide3Count) + '%');
-        console.log('slide-3 with display: table-cell count: ' + getSlide3Count);
-    }
-
-    function setSlide3Width(property, value) {
-        var slide3Elements = document.querySelectorAll('.isBsbll.slide-3[style*="display: table-cell"]');
-        slide3Elements.forEach(function(element) {
-            if (!element.classList.contains('slide-2')) {
-                element.style.setProperty(property, value, 'important');
-            }
-        });
+        
     }
 
     function nextSlide() {
