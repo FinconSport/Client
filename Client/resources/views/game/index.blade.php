@@ -669,13 +669,14 @@
     }
 
     // ------- game page scoreboard slider function-----------
+    let currentSlide = [];
+    let lastslide = [];
+    let isLastSlide = false; 
+
     if (matchListD.data) {
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             const scbLen = matchListD.data.list?.scoreboard[1].length - 1;
-            let currentSlide = [];
-            let lastslide = [];
-            let isLastSlide = false; 
-
+            
             if (scbLen < 6) {
                 lastslide = 1;
                 currentSlide = 1;
@@ -694,15 +695,16 @@
                 });
             }
 
-            function showSlide(currentSlide, lastslide, isLastSlide) {
+            function showSlide(slideIndex) {
                 hideAllSlides();
 
                 // Show the slides with the corresponding class
-                document.querySelectorAll(`.slide-${currentSlide}`).forEach(slide => {
+                document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
                     slide.style.display = 'table-cell';
                 });
 
                 // Update the current slide index
+                currentSlide = slideIndex;
                 updateButtonClasses();
                 updatePaginationActiveClass();
 
