@@ -1692,7 +1692,7 @@ class LsportApiController extends Controller {
             $fixture_status = 2;
         }
         $status_type_name = $status_type[$fixture_status];
-        
+
         // 取得聯賽
         $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
         $data['list']["league_id"] = $league_id;
@@ -1853,8 +1853,6 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 判斷水位設定
         
-        if ($fixture_id == 11188644) {
-        
         // 取得配置
         $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
 
@@ -1888,9 +1886,6 @@ class LsportApiController extends Controller {
                     } 
                 }
             }
-        }
-
-        dd($data);
         }
         
         /////////////////////////////////////////////////////////////////
