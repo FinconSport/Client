@@ -766,7 +766,7 @@
 
                 $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
 
-                if (scbLen >= 6 && scbLen <= 9) {
+                if (scbLen >= 6) {
                     $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
@@ -776,11 +776,11 @@
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
-                
+
                 // update th layout slide-3 
                 var slide3Elements = document.querySelectorAll('.slide-3');
                 setSlide3Width('width', (60 / slide3Elements.length) + '%');
-                console.log(slide3Elements.length);
+                console.log('slide-3:' + slide3Elements.length);
 
                 function setSlide3Width(property, value) {
                     slide3Elements.forEach(function(element) {
