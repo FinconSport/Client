@@ -678,19 +678,16 @@
         lastslide = 1;
         currentSlide = 1;
         console.log(lastslide, currentSlide);
-    }
-
-    if (scbLen >= 6 && scbLen <= 9) {
+    } else if (scbLen >= 6 && scbLen <= 9) {
         lastslide = 2;
         currentSlide = 2;
         console.log(lastslide, currentSlide);
-    }
-
-    if (scbLen < 9) {
+    } else {
         lastslide = 3;
         currentSlide = 3;
         console.log(lastslide, currentSlide);
     }
+    
 
     function showSlide(slideIndex) {
         // Hide all slides
