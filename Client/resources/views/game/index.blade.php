@@ -750,14 +750,7 @@
         }
     }
 
-    // Show the initial slide based on the conditions
-    if (scbLen < 6) {
-        showSlide(1);
-    } else if (scbLen >= 6 && scbLen <= 9) {
-        showSlide(2);
-    } else {
-        showSlide(3);
-    }
+    
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
@@ -783,7 +776,15 @@
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
 
-                showSlide(currentSlide, lastslide, isLastSlide);
+                // Show the initial slide based on the conditions
+                if (scbLen < 6) {
+                    showSlide(1);
+                } else if (scbLen >= 6 && scbLen <= 9) {
+                    showSlide(2);
+                } else {
+                    showSlide(3);
+                }
+                
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
