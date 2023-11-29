@@ -547,13 +547,6 @@ class LsportApiController extends Controller {
                 $return = LsportRisk::where("fixture_id",$fixture_id)->first();
                 $risk_data = json_decode($return['data'],true);
     
-                if (isset($input['debug'])) {
-                    if ($fixture_id == 11188644) {
-
-                        dd($fixture);
-                    }
-                }
-
                 // 部份比賽, 沒有market
                 if (!isset($fixture['list'])) {
                   continue;
@@ -572,6 +565,15 @@ class LsportApiController extends Controller {
                     }
                   }
                 }
+
+                
+                if (isset($input['debug'])) {
+                    if ($fixture_id == 11188644) {
+
+                        dd($fixture);
+                    }
+                }
+
     
               }
             }
