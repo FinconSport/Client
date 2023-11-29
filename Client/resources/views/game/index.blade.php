@@ -678,7 +678,7 @@
         lastslide = 3;
         currentSlide = 3;
         console.log(lastslide, currentSlide);
-    } else if (scbLen >= 6) {
+    } else if (scbLen >= 6 && scbLen <= 9) {
         lastslide = 2; 
         currentSlide = 2;
         console.log(lastslide, currentSlide);
@@ -731,10 +731,10 @@
         // Update Next button class
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
 
-        // if (currentSlide === lastslide) {
-        //     console.log('disabled-btn');
-        //     nextBTN.classList.add('disabled-btn');
-        // }
+        if (currentSlide === lastslide) {
+            console.log('disabled-btn');
+            nextBTN.classList.add('disabled-btn');
+        }
     }
 
     function updatePaginationActiveClass() {
