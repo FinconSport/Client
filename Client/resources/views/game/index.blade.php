@@ -679,7 +679,7 @@
             if (scbLen > 9) {
                 lastslide = 3;
                 currentSlide = 3;
-            } else if (scbLen >= 6) {
+            } else if (scbLen >= 6 && scbLen <= 9) {
                 lastslide = 2; 
                 currentSlide = 2;
             } else {
@@ -757,7 +757,7 @@
                 $('.isBsbll:not(.isBsbll_Total)').addClass("slider-bsbll");
 
                 $(".isBsbll_1st, .isBsbll_2nd, .isBsbll_3rd, .isBsbll_4th, .isBsbll_5th, .isBsbll_6th").addClass("slide-1");
-                
+
                 if (scbLen >= 6 && scbLen <= 9) {
                     $(".isBsbll_4th, .isBsbll_5th, .isBsbll_6th, .isBsbll_7th, .isBsbll_8th, .isBsbll_9th").addClass("slide-2");
                 } else {
