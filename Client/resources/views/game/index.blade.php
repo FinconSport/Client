@@ -98,9 +98,9 @@
                 <button onclick="prevSlide()" id="prevBTN" class="disabled-btn"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
                 <button onclick="nextSlide()" id="nextBTN"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
                 <ul class="pagination">
-                    <li class="pgntn-bullet-1" onclick="showSlide(1)"><i class="fa-solid fa-circle"></i></li>
-                    <li class="pgntn-bullet-2" onclick="showSlide(2)"><i class="fa-solid fa-circle"></i></li>
-                    <li class="pgntn-bullet-3" onclick="showSlide(3)"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-1"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-2"><i class="fa-solid fa-circle"></i></li>
+                    <li class="pgntn-bullet-3"><i class="fa-solid fa-circle"></i></li>
                 </ul>
             </div>
         </div>
