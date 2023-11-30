@@ -185,39 +185,6 @@
 
     // match list data
     var matchListD = {}
-    // temp data
-    var matchListData = {
-        "status": 1,
-        "data": {
-            "list": {
-                "league_id": 15771,
-                "league_name": "LVBP",
-                "fixture_id": 11786403,
-                "start_time": "2023-11-27 08:00:00",
-                "status": 2,
-                "last_update": 1701044651,
-                "home_team_id": 328905,
-                "home_team_name": "Caribes de Anzoategui",
-                "away_team_id": 315931,
-                "away_team_name": "Navegantes del Magallanes",
-                "periods": {
-                    "period": 1,
-                    "Turn": "2"
-                },
-                "scoreboard": {
-                    "1": [
-                        0,0,0,0,0,0,0,0,0,0,0,0
-                    ],
-                    "2": [
-                        2,2,2,2,2,2,2,0,0,0,0,0
-                    ]
-                },
-                "market": []
-            }
-        },
-        "message": "SUCCESS_API_GAME_INDEX_01",
-        "gzip": true
-    }
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index'
 
@@ -235,7 +202,7 @@
 
     function viewIni() { // view ini        
         setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListData.data);
+        createScoreBoard(matchListD.data);
 
 
 
@@ -310,7 +277,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        createScoreBoard(matchListData.data);
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -767,7 +734,7 @@
         
 
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
-            if (sport === 35232) {
+            if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
@@ -863,7 +830,7 @@
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
         // Thead data game title
         let stageStr = '';
-        if (sport === 35232 && data.list?.periods?.period < 10) {
+        if (sport === 154914 && data.list?.periods?.period < 10) {
             data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
         }
 
@@ -880,7 +847,7 @@
         let baseballShowStageTemp = baseballShowStage;
 
         for (let i = 0; i < gameTitle.length; i++) {
-            if (sport === 35232) {
+            if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
@@ -898,8 +865,8 @@
         scoreBoardBodyTemp_home.append(homeTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scorehome))[i];
-            const thHome = $(`<td class="${sport === 35232 ? 'isBsbll isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 35232 && baseballShowStage.indexOf(i) === -1)) {
+            const thHome = $(`<td class="${sport === 154914 ? 'isBsbll isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_home.append(thHome);
             }
         }
@@ -911,8 +878,8 @@
         scoreBoardBodyTemp_away.append(awayTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scoreaway))[i];
-            const thAway = $(`<td class="${sport === 35232 ? 'isBsbll isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
-            if (!(sport === 35232 && baseballShowStage.indexOf(i) === -1)) {
+            const thAway = $(`<td class="${sport === 154914 ? 'isBsbll isBsbll_' + i : ''}" style="width:10%;text-align:center;">`).text(scoreValue !== undefined ? scoreValue : '-');
+            if (!(sport === 154914 && baseballShowStage.indexOf(i) === -1)) {
                 scoreBoardBodyTemp_away.append(thAway);
             }
         }
