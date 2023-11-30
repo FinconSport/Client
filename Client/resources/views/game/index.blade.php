@@ -277,8 +277,9 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-
-        createScoreBoard(matchListD.data);
+        if (!initialLoad) {
+            createScoreBoard(matchListD.data);
+        }
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -671,8 +672,18 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
+    let initialLoad = true;
 
     var getSlide3Count;
+
+    // Check if it's the first visit or a refresh
+    if (localStorage.getItem('hasVisited') === null) {
+        showSlide(1);
+        localStorage.setItem('hasVisited', 'true');
+    } else {
+        // If it's a refresh, don't execute the currentSlide logic
+        initialLoad = false;
+    }
 
     function showSlide(slideIndex) {
         // Hide all slides
