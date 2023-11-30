@@ -677,10 +677,10 @@
         document.querySelectorAll('.slider-bsbll').forEach(slide => {
             slide.style.display = 'none';
         });
+
         // Show the slides with the corresponding class
         document.querySelectorAll(`.slide-${slideIndex}`).forEach(slide => {
             slide.style.display = 'table-cell';
-
             if (slideIndex === 3) {
                 // Get the length of elements with class .slide-3
                 const slideLength = document.querySelectorAll('.slide-3').length - 6;
@@ -692,12 +692,14 @@
             }
         });
 
+        //set the currentslide to local when every refresh will get the current display slide
         localStorage.setItem('currentSlide', slideIndex);
 
         // Update the current slide index
         currentSlide = slideIndex;
         updateButtonClasses();
         updatePaginationActiveClass();
+
         // Check if it's the last slide
         isLastSlide = currentSlide === lastslide;
     }
@@ -731,8 +733,6 @@
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        
-
         if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
             if (sport === 154914) {
                 const scbLen = data.list?.scoreboard[1].length - 1;
@@ -754,7 +754,7 @@
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
 
-                // Load the current slide information even after refresh
+                // Load the current slide even after refresh
                 const storedSlide = localStorage.getItem('currentSlide');
                 if (storedSlide) {
                     currentSlide = parseInt(storedSlide);
@@ -888,6 +888,7 @@
         $(`.living-fixture-con`).append(livingContainerTemp);
     }
 
+    // Clear localStorage('currentSlide') when the page is unloaded (hard refresh or leaving the page)
     window.addEventListener('beforeunload', function () {
         localStorage.removeItem('currentSlide');
     });
