@@ -670,13 +670,6 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
-
-    // Load the current slide information from localStorage if available
-    if (localStorage.getItem('currentSlide')) {
-        currentSlide = parseInt(localStorage.getItem('currentSlide'));
-        console.log('refresh slide');
-    }
-
     var getSlide3Count;
 
     function showSlide(slideIndex) {
@@ -710,11 +703,29 @@
     }
 
     function nextSlide() {
-        if (currentSlide < lastslide) currentSlide++, isLastSlide = currentSlide === lastslide, showSlide(currentSlide), console.log('Current Slide:', currentSlide);
+        if (currentSlide < lastslide) {
+            currentSlide++;
+            isLastSlide = currentSlide === lastslide;
+            showSlide(currentSlide);
+            console.log('Current Slide:', currentSlide);
+
+            // Save the current and last slide information in localStorage
+            localStorage.setItem('currentSlide', currentSlide);
+            localStorage.setItem('lastslide', lastslide);
+        }
     }
 
     function prevSlide() {
-        if (currentSlide > 1) currentSlide--, isLastSlide = false, showSlide(currentSlide), console.log('Current Slide:', currentSlide);
+        if (currentSlide > 1) {
+            currentSlide--;
+            isLastSlide = false;
+            showSlide(currentSlide);
+            console.log('Current Slide:', currentSlide);
+
+            // Save the current and last slide information in localStorage
+            localStorage.setItem('currentSlide', currentSlide);
+            localStorage.setItem('lastslide', lastslide);
+        }
     }
 
     function updateButtonClasses() {
@@ -776,9 +787,12 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
-                // Save the current and last slide information in localStorage
-                localStorage.setItem('currentSlide', currentSlide);
-                localStorage.setItem('lastslide', lastslide);
+                // Load the current slide information from localStorage if available
+                if (localStorage.getItem('currentSlide')) {
+                    currentSlide = parseInt(localStorage.getItem('currentSlide'));
+                    console.log('refresh slide');
+                }
+
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
