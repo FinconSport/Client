@@ -671,6 +671,12 @@
     let lastslide = [];
     let isLastSlide = false; 
 
+    // Load the current slide information from localStorage if available
+    if (localStorage.getItem('currentSlide')) {
+        currentSlide = parseInt(localStorage.getItem('currentSlide'));
+        console.log('refresh slide');
+    }
+
     var getSlide3Count;
 
     function showSlide(slideIndex) {
@@ -692,6 +698,8 @@
                 slide.style.width = `10%`;
             }
         });
+
+        localStorage.setItem('currentSlide', currentSlide);
 
         // Update the current slide index
         currentSlide = slideIndex;
@@ -768,6 +776,9 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
+                // Save the current and last slide information in localStorage
+                localStorage.setItem('currentSlide', currentSlide);
+                localStorage.setItem('lastslide', lastslide);
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
