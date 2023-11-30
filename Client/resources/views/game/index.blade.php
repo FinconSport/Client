@@ -703,21 +703,11 @@
     }
 
     function nextSlide() {
-        if (currentSlide < lastslide) {
-            currentSlide++;
-            isLastSlide = currentSlide === lastslide;
-            showSlide(currentSlide);
-            console.log('Current Slide:', currentSlide);
-        }
+        if (currentSlide < lastslide) currentSlide++, isLastSlide = currentSlide === lastslide, showSlide(currentSlide);
     }
 
     function prevSlide() {
-        if (currentSlide > 1) {
-            currentSlide--;
-            isLastSlide = false;
-            showSlide(currentSlide);
-            console.log('Current Slide:', currentSlide);
-        }
+        if (currentSlide > 1) currentSlide--, isLastSlide = false, showSlide(currentSlide);
     }
 
     function updateButtonClasses() {
@@ -768,21 +758,17 @@
                 const storedSlide = localStorage.getItem('currentSlide');
                 if (storedSlide) {
                     currentSlide = parseInt(storedSlide);
-                    console.log('Refreshed to Slide:', currentSlide);
                 } else {
                     // Set initial values based on your conditions
                     if (scbLen < 6) {
                         lastslide = 1;
                         currentSlide = 1;
-                        console.log('Initial values:', lastslide, currentSlide);
                     } else if (scbLen >= 6 && scbLen <= 9) {
                         lastslide = 2;
                         currentSlide = 2;
-                        console.log('Initial values:', lastslide, currentSlide);
                     } else {
                         lastslide = 3;
                         currentSlide = 3;
-                        console.log('Initial values:', lastslide, currentSlide);
                     }
                 }
 
