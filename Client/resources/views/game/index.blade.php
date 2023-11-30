@@ -692,7 +692,7 @@
             }
         });
 
-        localStorage.setItem('currentSlide', currentSlide);
+        localStorage.setItem('currentSlide', slideIndex);
 
         // Update the current slide index
         currentSlide = slideIndex;
@@ -708,10 +708,6 @@
             isLastSlide = currentSlide === lastslide;
             showSlide(currentSlide);
             console.log('Current Slide:', currentSlide);
-
-            // Save the current and last slide information in localStorage
-            localStorage.setItem('currentSlide', currentSlide);
-            localStorage.setItem('lastslide', lastslide);
         }
     }
 
@@ -721,10 +717,6 @@
             isLastSlide = false;
             showSlide(currentSlide);
             console.log('Current Slide:', currentSlide);
-
-            // Save the current and last slide information in localStorage
-            localStorage.setItem('currentSlide', currentSlide);
-            localStorage.setItem('lastslide', lastslide);
         }
     }
 
@@ -786,11 +778,11 @@
                     console.log(lastslide, currentSlide);
                 }
 
-                showSlide(currentSlide, lastslide, isLastSlide);
-                // Load the current slide information from localStorage if available
-                if (localStorage.getItem('currentSlide')) {
-                    currentSlide = parseInt(localStorage.getItem('currentSlide'));
-                    console.log('refresh slide');
+                const storedSlide = localStorage.getItem('currentSlide');
+                if (storedSlide) {
+                    currentSlide = parseInt(storedSlide);
+                    showSlide(currentSlide);
+                    console.log('Refreshed to Slide:', currentSlide);
                 }
 
             } else {
