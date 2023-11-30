@@ -764,26 +764,29 @@
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
 
-                if (scbLen < 6) {
-                    lastslide = 1;
-                    currentSlide = 1;
-                    console.log(lastslide, currentSlide);
-                } else if (scbLen >= 6 && scbLen <= 9) {
-                    lastslide = 2;
-                    currentSlide = 2;
-                    console.log(lastslide, currentSlide);
-                } else {
-                    lastslide = 3;
-                    currentSlide = 3;
-                    console.log(lastslide, currentSlide);
-                }
-
+                // Load the current slide information from localStorage if available
                 const storedSlide = localStorage.getItem('currentSlide');
                 if (storedSlide) {
                     currentSlide = parseInt(storedSlide);
-                    showSlide(currentSlide);
                     console.log('Refreshed to Slide:', currentSlide);
+                } else {
+                    // Set initial values based on your conditions
+                    if (scbLen < 6) {
+                        lastslide = 1;
+                        currentSlide = 1;
+                        console.log('Initial values:', lastslide, currentSlide);
+                    } else if (scbLen >= 6 && scbLen <= 9) {
+                        lastslide = 2;
+                        currentSlide = 2;
+                        console.log('Initial values:', lastslide, currentSlide);
+                    } else {
+                        lastslide = 3;
+                        currentSlide = 3;
+                        console.log('Initial values:', lastslide, currentSlide);
+                    }
                 }
+
+                showSlide(currentSlide, lastslide, isLastSlide);
 
             } else {
                 $(".early-fixture-con").addClass("d-none");
