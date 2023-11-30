@@ -277,9 +277,7 @@
     // ajax update
     function renderView() {
         // update scoreboard home team and away team
-        if (!initialLoad) {
-            createScoreBoard(matchListD.data);
-        }
+        createScoreBoard(matchListD.data);
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
@@ -672,18 +670,14 @@
     let currentSlide = [];
     let lastslide = [];
     let isLastSlide = false; 
-    let initialLoad = true;
+
+    const storedSlide = localStorage.getItem('currentSlide');
+    if (storedSlide) {
+        currentSlide = parseInt(storedSlide, 10);
+        lastslide = currentSlide;
+    }
 
     var getSlide3Count;
-
-    // Check if it's the first visit or a refresh
-    if (localStorage.getItem('hasVisited') === null) {
-        showSlide(1);
-        localStorage.setItem('hasVisited', 'true');
-    } else {
-        // If it's a refresh, don't execute the currentSlide logic
-        initialLoad = false;
-    }
 
     function showSlide(slideIndex) {
         // Hide all slides
@@ -707,6 +701,9 @@
 
         // Update the current slide index
         currentSlide = slideIndex;
+        // Store the currentSlide value in localStorage
+        localStorage.setItem('currentSlide', currentSlide);
+
         updateButtonClasses();
         updatePaginationActiveClass();
         // Check if it's the last slide
@@ -779,7 +776,7 @@
                     console.log(lastslide, currentSlide);
                 }
 
-                showSlide(currentSlide, lastslide, isLastSlide);
+                showSlide(currentSlide);
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
