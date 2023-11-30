@@ -900,6 +900,10 @@
         $(`.living-fixture-con`).append(livingContainerTemp);
     }
 
+    window.addEventListener('beforeunload', function () {
+        localStorage.removeItem('currentSlide');
+    });
+
     function noData() {
         var noDataElement = document.createElement('div');
         noDataElement.classList.add('noDataContainer');
