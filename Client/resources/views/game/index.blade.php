@@ -671,12 +671,6 @@
     let lastslide = [];
     let isLastSlide = false; 
 
-    const storedSlide = localStorage.getItem('currentSlide');
-    if (storedSlide) {
-        currentSlide = parseInt(storedSlide, 10);
-        lastslide = currentSlide;
-    }
-
     var getSlide3Count;
 
     function showSlide(slideIndex) {
@@ -701,9 +695,6 @@
 
         // Update the current slide index
         currentSlide = slideIndex;
-        // Store the currentSlide value in localStorage
-        localStorage.setItem('currentSlide', currentSlide);
-
         updateButtonClasses();
         updatePaginationActiveClass();
         // Check if it's the last slide
@@ -711,11 +702,11 @@
     }
 
     function nextSlide() {
-        if (currentSlide < lastslide) currentSlide++, isLastSlide = currentSlide === lastslide, showSlide(currentSlide);
+        if (currentSlide < lastslide) currentSlide++, isLastSlide = currentSlide === lastslide, showSlide(currentSlide), console.log('Current Slide:', currentSlide);
     }
 
     function prevSlide() {
-        if (currentSlide > 1) currentSlide--, isLastSlide = false, showSlide(currentSlide);
+        if (currentSlide > 1) currentSlide--, isLastSlide = false, showSlide(currentSlide), console.log('Current Slide:', currentSlide);
     }
 
     function updateButtonClasses() {
@@ -776,7 +767,7 @@
                     console.log(lastslide, currentSlide);
                 }
 
-                showSlide(currentSlide);
+                showSlide(currentSlide, lastslide, isLastSlide);
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
