@@ -776,7 +776,7 @@
 
                 $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
 
-                if (scbLen >= 6 && scbLen <= 9) {
+                if (scbLen >= 6) {
                     $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
