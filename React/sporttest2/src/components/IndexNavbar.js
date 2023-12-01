@@ -2,6 +2,10 @@ import React from "react";
 import { langText } from "../pages/LanguageContext";
 import  "../css/IndexNavbar.css";
 
+const hideElement = {
+	display: 'none',
+}
+
 class indexNavbar extends React.Component {
 	constructor() {
 		super();
@@ -20,13 +24,13 @@ class indexNavbar extends React.Component {
     	return (
 			<div id="navBarContainer">
 				<img id="logo" alt="logo" src={require('../image/logo.png')} />
-				<div onClick={() => this.handleClick(0)} className={activeTab === 0 ? 'on' : ''}>
+				<div style={ hideElement } onClick={() => this.handleClick(0)} className={activeTab === 0 ? 'on' : ''}>
 					{langText.IndexNavbar.home}
 				</div>
-				<div onClick={() => this.handleClick(1)} className={activeTab === 1 ? 'on' : ''}>
+				<div style={ hideElement } onClick={() => this.handleClick(1)} className={activeTab === 1 ? 'on' : ''}>
 					{langText.IndexNavbar.hot}
 				</div>
-				<div onClick={() => this.handleClick(2)} className={activeTab === 2 ? 'on' : ''}>
+				<div style={ hideElement } onClick={() => this.handleClick(2)} className={activeTab === 2 ? 'on' : ''}>
 					{langText.IndexNavbar.streamimg}
 				</div>
 			</div>

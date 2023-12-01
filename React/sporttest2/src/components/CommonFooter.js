@@ -25,6 +25,9 @@ const bottomNavRow = {
     padding: '0 0.5rem'
 }
 
+const hideElement = {
+	display: 'none',
+}
 
 const FooterIconTab = {
     borderRadius: '50%',
@@ -78,7 +81,7 @@ class CommonFooter extends React.Component {
         return(
             <>
                 <Col style={bottomNavRow} id='footer'>
-                    <FooterTab onClick={()=>this.handleTabChange(1)} className={this.state.onIndex === 1 ? 'commonFooterOn' : ''}>
+                    <FooterTab style={ hideElement } onClick={()=>this.handleTabChange(1)} className={this.state.onIndex === 1 ? 'commonFooterOn' : ''}>
                         <div style={FooterIconTab} >
                             <AiFillStar />
                         </div>
