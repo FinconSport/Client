@@ -235,8 +235,8 @@
 			if (currentScreenWidth !== previousScreenWidth) {
 				// 更新 previousScreenWidth
 				previousScreenWidth = currentScreenWidth;
-				$('#wrap').css('width', previousScreenWidth)
 			}
+			$('#wrap').css('width', previousScreenWidth)
 		}
 
 		function viewCommonIni() {
