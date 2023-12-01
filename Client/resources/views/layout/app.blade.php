@@ -535,7 +535,7 @@
 					case 'lastWeek':
 						startDate.setDate(currentDate.getDate() - currentDate.getDay() - 6 );
 						endDate = new Date(startDate);
-						endDate.setDate(currentDate.getDate() - currentDate.getDay());
+						endDate.setDate(startDate.getDate() + 6);
 						break;
 					case 'yesterday':
 						startDate.setDate(currentDate.getDate() - 1);
