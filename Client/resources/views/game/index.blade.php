@@ -91,7 +91,7 @@
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        <div class="swiper-wrapper d-flex w-100">
+        <div class="swiper-wrapper">
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
             <div class="navigation-controls">
@@ -147,8 +147,8 @@
 @endsection
 
 @section('styles')
+<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
 <link href="{{ asset('css/game.css?v=' . $system_config['version']) }}" rel="stylesheet">
-<link href="{{ asset('css/game.css?v=' . $current_time) }}" rel="stylesheet">
 
 @push('main_js')
 
