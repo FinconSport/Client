@@ -77,7 +77,44 @@ class Game extends React.Component {
 		})
 	}
 
-	findDifferences = (originalData, updateData, path = []) => {
+	findDifferences = (originalData, updateData) => {
+		originalData.market.forEach( element => {
+			let priority = element.priority
+			Object.entries(element.market_bet).map( ([k, v]) => {
+				for (let i = 0; i < v.length; i++) {
+					let o = v[i];
+					let market_bet_id = o.market_bet_id
+					
+					let marketBet = updateData.market.find( item => item.priority === priority ).market_bet
+					Object.entries(marketBet).map( ([k2, v2]) => {
+						v2.forEach (e => {
+							if( e.market_bet_id !== market_bet_id) return;
+							let u = e
+							let status = u.status
+							let uRate = u.price
+							let oRate = o.price
+
+							if( status === 1 ) {
+								if(uRate > oRate) {
+									// 賠率上升
+									$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
+								}
+								if(uRate < oRate) {
+									// 賠率下降
+									$('div[market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
+								}
+								setTimeout(() => {
+									this.removeRateStyle(market_bet_id)
+								}, 3000);
+							}	
+						})
+					})
+				}
+			})
+		});
+	}
+
+	findDifferences2 = (originalData, updateData, path = []) => {
 		for (const key in updateData) {
 			const currentPath = [...path, key];
 			if (originalData.hasOwnProperty(key)) {
