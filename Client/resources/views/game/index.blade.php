@@ -91,7 +91,7 @@
 <div id="scoreboardContainer">
     <i class="fa-solid fa-arrow-left" id="backIcon" onclick="window.history.back();"></i>
     <div class="scoreboardCon" style="background-image: url('image/gameBg.jpg');">
-        <div class="swiper-wrapper" style="width:100%;">
+        <div class="swiper-wrapper d-flex w-100">
             <div class="early-fixture-con" style="width:100%!important;"></div>
             <div class="living-fixture-con" style="width:100%!important;"></div>
             <div class="navigation-controls">
