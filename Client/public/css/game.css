@@ -125,7 +125,7 @@ div#bettingTypeContainer {
     height: 3rem;
     text-align: center;
     line-height: 3rem;
-    z-index: 3;
+    z-index: 2;
 }
 
 #scoreboardContainer thead th{
