@@ -12,8 +12,6 @@
     <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/icon/all.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css?v=' . $system_config['version']) }}" rel="stylesheet">
-	<!-- <link href="{{ asset('css/swiper-bundle.min.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
-	<link href="{{ asset('css/swiper-bundle.min.css?v=' . $current_time) }}" rel="stylesheet">
 
     @yield('styles')
   </head>
@@ -138,8 +136,6 @@
     <script src="{{ asset('js/jquery-ui.min.js?v=' . $system_config['version']) }}"></script>
     <script src="{{ asset('js/semantic.min.js?v=' . $system_config['version']) }}"></script>
 	<script src="{{ asset('js/pako.min.js?v=' . $system_config['version']) }}"></script><!-- 解壓縮 -->
-	<!-- <script src="{{ asset('js/swiper-bundle.min.js?v=' . $system_config['version']) }}"></script> -->
-	<script src="{{ asset('js/swiper-bundle.min.js?v=' . $current_time) }}"></script>
 	<script>
 		const current_time = '{{ $current_time }}';
 		const version = '{{ $system_config["version"] }}';
