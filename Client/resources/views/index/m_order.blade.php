@@ -83,7 +83,7 @@
     </div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<div id='searchCondition'>
+<div id='searchCondition' class="d-none">
     {{ trans('common.search_area.search') }}
 </div>
 <div id="indexContainer">
@@ -206,7 +206,8 @@
 
 
 @section('styles')
-<link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/index.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/index.css?v=' . $current_time) }}" rel="stylesheet">
 <link href="{{ asset('css/m_order.css?v=' . $system_config['version']) }}" rel="stylesheet">
 @endSection
 
