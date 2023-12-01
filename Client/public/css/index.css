@@ -59,7 +59,7 @@
     display: inline-flex;
     width: 100%;
     height: calc(100% - 3.5rem);
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 }
 /* 中間投注 */
 #indexContainerLeft {
