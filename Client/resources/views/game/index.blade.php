@@ -213,7 +213,10 @@
         // ===== 玩法排序 (全場->半場->單節) =====
 
         Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
-            console.log(k, v)
+            // 冰球 美足 略過 單雙
+            if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
+            if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
+
             createMarketContainer(k, v);
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
