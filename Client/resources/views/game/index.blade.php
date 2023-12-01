@@ -472,11 +472,18 @@
         gameLangTrans.catePriority.half.map( v => { 
             halfCounting += $(`.bettingtype-container[priority=${v}]`).length
         })
-        halfCounting === 0 ? $('.filterBtn[key="half"]').hide() : $('.filterBtn[key="half"]').show()
+
+        if( halfCounting === 0 ) {
+            $('.filterBtn[key="half"]').hide();
+            $('.filterBtn[key="half"]').removeClass('active')
+        } else {
+            $('.filterBtn[key="half"]').show()
+        }
 
         // 籃球 單節tab篩選
         if(sport === 48242) {
             $('.filterBtn[mark="single"]').hide()
+            $('.filterBtn[mark="single"]').removeClass('active')
             for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
                 for (const subValue of value) {
                     if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
@@ -485,6 +492,10 @@
                 }
             }
         }
+
+        if( $('.filterBtn.active').length === 0 ) {
+            $('.filterBtn[key="all"]').addClass('active')
+        } 
 
         // tab (show corresponding bet)
         $('.filterBtn.active').click()
