@@ -61,7 +61,7 @@
     <div id="leftSlideOrderLoadingSpinner"><div class="inner-spinner"></div></div>
     <span>{{ trans('index.bet_area.loading') }}</span>
 </div>
-<div id='searchCondition'>
+<div id='searchCondition' class="d-none">
     {{ trans('common.search_area.search') }}
 </div>
 <div id="indexContainer">
