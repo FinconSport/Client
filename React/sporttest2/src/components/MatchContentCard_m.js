@@ -201,7 +201,6 @@ class MatchContentCard extends React.Component {
                 if( h && a) {
                     h = h[0]?.line
                     a = a[1]?.line
-
                     if( h !== a ) {
                         hcapTeam = h < 0 ? 1 : 2
                     }
@@ -265,10 +264,14 @@ class MatchContentCard extends React.Component {
                                     </div>
                                     <div className='col-55 text-center' style={{ padding: 0 }}>
                                         {
-                                            this.state.swiperIndex === 0 ?
-                                            <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
-                                            :
-                                            <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
+                                            // 冰球沒有半場 只有一頁slider 不需要箭頭提示
+                                            window.sport !== 35232 &&
+                                            (
+                                                this.state.swiperIndex === 0 ?
+                                                <IoIosArrowForward onClick={()=>{this.matchCardSwiper.slideNext()}} style={SliderRightArrow}/>
+                                                :
+                                                <IoIosArrowBack onClick={()=>{this.matchCardSwiper.slidePrev()}} style={SliderLeftArrow}/>
+                                            )
                                         }
                                         <Swiper
                                             slidesPerView={1}
