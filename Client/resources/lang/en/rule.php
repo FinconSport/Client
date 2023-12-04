@@ -18,7 +18,7 @@ return [
 		"betting_type" => "Betting Types", // "投注類型",
 		"moneyline" => "Moneyline", // "獨贏盤",
 		"get_the_ball" => "Handicap", // "讓球",
-		"In-play_handicap" => "In-play Handicap", // "滾球讓球",
+		"inplay_handicap" => "In-play Handicap", // "滾球讓球",
 		"total_score" => "Total Points: Over / Under", // "總得分: 大 / 小",
 		"rolling_total_score" => "In-play Total Points: Over / Under", // "滾球總得分: 大 / 小",
 		"rolling_ball_total" => "In-play Total Score: Over / Under", //"滾球總分： 大 / 小",
