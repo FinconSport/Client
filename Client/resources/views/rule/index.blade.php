@@ -403,6 +403,16 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_1') }}</li>
                                 </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.get_the_ball') }}</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.lets_roll') }}</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
