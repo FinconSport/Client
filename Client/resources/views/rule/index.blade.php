@@ -397,6 +397,12 @@
                                     <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_5') }}</li>
                                     <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_6') }}</li>
                                 </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_1') }}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
