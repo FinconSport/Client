@@ -433,7 +433,7 @@ return [
 		"rc_soccor_67" => "If the match is canceled during the second half, all half-time correct score bets will be considered valid.",
 		// "rc_soccor_67" => "如果賽事在下半場取消，所有半場波膽的投注被視為有效。",
 	],
-	"rulesGeneralIceHockey" => [
+	"generalRuleIceHockey" => [
 		"gr_IceHockey_1" => "If the originally scheduled venue is changed, all bets will be considered void.",
 			// "如果原定比賽場地更改，所有的投注將被視為無效。",
 		"gr_IceHockey_2" => "In a penalty shootout, the winning team will be awarded one additional point on the final score after the conclusion of the match.",
