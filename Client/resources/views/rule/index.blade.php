@@ -386,50 +386,6 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="tab-pane" id="navIceHockey" role="tabpanel" aria-labelledby="nav-iceHockey">
-                                <h2>{{ trans('rule.ruleTitles.sportName.4') }}</h2>
-                                <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
-                                <ul class="number-bullets">
-                                    @foreach(trans('rule.generalRulesIceHockey') as $key => $grRule)
-                                        <li>{{ trans('rule.generalRulesIceHockey.gr_IceHockey_' . $key) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_1) }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_2) }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.handicap_1stHalf') }}</h3>
-                                <ul class="number-bullets">
-                                    @foreach([14, 15, 16] as $i)
-                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_2) }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.overUnder) }} ({{ trans('rule.ruleTitles.ball) }})</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_3) }}</li>
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_4) }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder) }} ({{ trans('rule.ruleTitles.ball) }})</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_3) }}</li>
-                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_4) }}</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
