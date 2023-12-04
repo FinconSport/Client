@@ -6,11 +6,26 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad rule-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.sportName.1') }}</button>      
+                        @foreach(range(1, 5) as $i)
+                            <button
+                                key="{{ $i }}"
+                                class="nav-link {{ $i === 1 ? 'active' : '' }}"
+                                id="nav-{{ $i }}"
+                                data-bs-toggle="tab"
+                                data-bs-target="#nav{{ $i }}"
+                                type="button"
+                                role="tab" 
+                                aria-controls="#nav{{ $i }}" 
+                                aria-selected="{{ $i === 1 ? 'true' : 'false' }}"
+                            >
+                                {{ trans('rule.ruleTitles.sportName.{{ $i }}') }}
+                            </button>
+                        @endforeach
+                        <!-- <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.sportName.1') }}</button>      
                         <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.2') }}</button>
                         <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.sportName.3') }}</button>  
                         <button class="nav-link" id="nav-iceHockey" data-bs-toggle="tab" data-bs-target="#navIceHockey" type="button" role="tab" aria-controls="#navIceHockey" aria-selected="false">{{ trans('rule.ruleTitles.sportName.4') }}</button>    
-                        <button class="nav-link" id="nav-americanFootball" data-bs-toggle="tab" data-bs-target="#navAmericanFootball" type="button" role="tab" aria-controls="#navAmericanFootball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.5') }}</button>         
+                        <button class="nav-link" id="nav-americanFootball" data-bs-toggle="tab" data-bs-target="#navAmericanFootball" type="button" role="tab" aria-controls="#navAmericanFootball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.5') }}</button>          -->
                     </div>
                 </nav>
             </div>
@@ -18,7 +33,7 @@
             <div class="rule-tab">
                 <div class="rule-tab-con">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
+                            <div class="tab-pane active" id="nav1" role="tabpanel" aria-labelledby="nav-1">
                                 <h2>{{ trans('rule.ruleTitles.sportName.1') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
@@ -107,7 +122,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="tab-pane" id="navBasketball" role="tabpanel" aria-labelledby="nav-basketball">
+                            <div class="tab-pane" id="nav2" role="tabpanel" aria-labelledby="nav-2">
                                 <h2>{{ trans('rule.ruleTitles.sportName.2') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
@@ -179,7 +194,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="tab-pane" id="navSoccor" role="tabpanel" aria-labelledby="nav-soccor">
+                            <div class="tab-pane" id="nav3" role="tabpanel" aria-labelledby="nav-3">
                                 <h2>{{ trans('rule.ruleTitles.sportName.3') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
@@ -387,7 +402,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="tab-pane" id="navIceHockey" role="tabpanel" aria-labelledby="nav-iceHockey">
+                            <div class="tab-pane" id="nav4" role="tabpanel" aria-labelledby="nav-4">
                                 <h2>{{ trans('rule.ruleTitles.sportName.4') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
@@ -424,7 +439,7 @@
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_4') }}</li>
                                 </ul>
                             </div>
-                            <div class="tab-pane" id="navAmericanFootball" role="tabpanel" aria-labelledby="nav-americanFootball">
+                            <div class="tab-pane" id="nav5" role="tabpanel" aria-labelledby="nav-5">
                                 <h2>{{ trans('rule.ruleTitles.sportName.5') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
