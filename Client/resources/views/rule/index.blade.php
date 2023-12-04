@@ -437,7 +437,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
                                 @foreach([
                                     'moneyline' => [1, 2],
                                     'get_the_ball' => [3, 4, 5, 2],
