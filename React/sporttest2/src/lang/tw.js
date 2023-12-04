@@ -312,11 +312,15 @@ const twTranslation = {
     iplocationnotallowed: "IP位置不允許訪問頁",
   },
   CommonRulesTitles: {
+    sportName:{
+      1: '足球', // <- soccor
+      2: '籃球', // <- basketball
+      3: '棒球', // <- baseball
+      4: '冰球', // <- ice hockey
+      5: '美式足球', // <- american football
+    },
     gameRules: "競猜規則",
     generalrule: "一般規則",
-    baseball: "棒球",
-    basketball: "籃球",
-    soccor: "足球",
     bettingtype: "投注類型",
     solowinners: "獨贏盤",
     gettheball: "讓球",
@@ -352,6 +356,10 @@ const twTranslation = {
     otwinAlonefirstHalf: "加時賽 - 獨贏 - 上半場",
     crts: "波膽",
     crtsfirstHalf: "波膽 - 上半場",
+    overUnder: "大/小",
+    inPlayOverUnder : "滾球大/小",
+    totalPoints: '總比分',
+    ball: '球',
   },
   CommonRulesGeneralBaseball: {
     grBaseball_1: "如果主客場變更，所有注單將被取消。",
@@ -621,6 +629,64 @@ const twTranslation = {
     rcSoccor_66:
       "如果賽事在上半場取消，已有明確賽果或所有半場波膽投注在“其它比分”為僅有可能獲勝的選項，投注將被視為有效；其餘的投注則被視為無效，此是由於賽事無條件決定後面的進球不會影響賽事的結果。",
     rcSoccor_67: "如果賽事在下半場取消，所有半場波膽的投注被視為有效。",
+  },
+  CommonRulesGeneralIceHockey: {
+    grIceHockey_1:
+      "如果原定比賽場地更改，所有的投注將被視為無效。",
+    grIceHockey_2:
+      "在罰球中，獲勝方會在賽事結束後的最終比分上加一分。",
+    grIceHockey_3:
+      "在賽節投注中，特殊的賽節必須全部完成則注單才被視為有效，除非有明確說明或者個別投注規則。其他情況下，注單將一律取消。",
+    grIceHockey_4:
+      "第三節賽節投注不包括加時賽和罰球賽。",
+    grIceHockey_5:
+      "如果比賽提前開賽，只有在開賽之前投注的注單被視為有效投注。在開賽後投注的注單將被視為無效投注，滾球投注類型不包括在內。",
+    grIceHockey_6:
+      "加時賽與點球大戰將包括在內。",
+  },
+  CommonRulesContentsIceHockey: {
+    rcIceHockey_1:
+      "預測哪支球隊將贏得比賽。",
+    rcIceHockey_2:
+      "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+    rcIceHockey_3:
+      "預測賽事/賽節總進球數將大於或小於盤口分數。",
+    rcIceHockey_4:
+      "如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
+  },
+  CommonRulesGeneralAmericanFootball: {
+    grAmericanFootball_1:
+      "最終賽果是以全場四個時節後的比分為準（包括加時賽）。",
+    grAmericanFootball_2:
+      "單節/半場的投注，必須在比賽賽節完成後注單才被視為有效。",
+    grAmericanFootball_3:
+      "第四節投注不包括加時賽。",
+    grAmericanFootball_4:
+      "美國大學美式足球聯賽場地規則：盤口指示的“主場“和“客場“信息僅供參考。無論原定場地是否更改為“主場“，“客場“或“中立場“，所有注單將保持有效。",
+    grAmericanFootball_5:
+      "除非個別玩法規則另有注明，賽事完場時間將包括加時賽。",
+    grAmericanFootball_6:
+      "如比賽在法定時間提前進行，在比賽開始前的投注依然有效，在比賽開始後的所有投注均視為無效(滾球投注另作別論)。",
+  },
+  CommonRulesContentsAmericanFootball: {
+    rcAmericanFootball_1:
+      "預測哪一支球隊將在比賽勝出。盤口提供兩支球隊為投注選項。",
+    rcAmericanFootball_2:
+      "賽事盤口包括全場、半場投注。",
+    rcAmericanFootball_3:
+      "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+    rcAmericanFootball_4:
+      "如果賽事在下半場取消或中斷，所有上半場注單保持有效。",
+    rcAmericanFootball_5:
+      "如果賽事在下半場取消或中斷，所有下半場注單將被視為無效。",
+    rcAmericanFootball_6:
+      "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。投注當時的比分對結算沒有影響。",
+    rcAmericanFootball_7:
+      "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
+    rcAmericanFootball_8: 
+      "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
+    rcAmericanFootball_9:
+      "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。",
   },
   ResultTitle: {
     baseball: "棒球",

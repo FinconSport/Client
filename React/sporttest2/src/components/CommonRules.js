@@ -67,9 +67,10 @@ const RulesPageClose = {
 
 const TabMenuWrapperCon = {
     padding: '0.5rem',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap:' 0.5rem',
+    columnGap: '0.5rem',
+    flexWrap: 'nowrap',
+    display: 'flex',
+    overflowX: 'scroll',
 }
 
 const TabMenuBtn = {
@@ -84,6 +85,7 @@ const TabMenuBtn = {
     borderRadius: '15px',
     boxShadow: '#00000080 0 0 9px 0px',
     border:'none',
+    minWidth: '100px',
 }
 
 const TabMenuBtnActive = {
@@ -98,6 +100,7 @@ const TabMenuBtnActive = {
     borderRadius: '15px',
     boxShadow: '#00000080 0 0 9px 0px',
     border:'none',
+    minWidth: '100px',
 }
 
 const HideTabContent = {
@@ -222,9 +225,15 @@ class CommonRules extends React.Component {
                 <AiFillCloseCircle style={RulesPageClose} onClick={this.closeGameRule} />
                 <div style={RulesBetWrapper}>
                     <div style={TabMenuWrapperCon}>
-                        <button onClick={()=> this.handleTabChange(1) } style={ this.state.activeTab === 1 ? TabMenuBtnActive : TabMenuBtn }>{langText.CommonRulesTitles.soccor}</button>
-                        <button onClick={()=> this.handleTabChange(2) } style={ this.state.activeTab === 2 ? TabMenuBtnActive : TabMenuBtn }>{langText.CommonRulesTitles.basketball}</button>
-                        <button onClick={()=> this.handleTabChange(3) } style={ this.state.activeTab === 3 ? TabMenuBtnActive : TabMenuBtn }>{langText.CommonRulesTitles.baseball}</button>
+                        {Array.from({ length: 5 }, (_, index) => (
+                                <button
+                                    key={index + 1}
+                                    onClick={() => this.handleTabChange(index + 1)}
+                                    style={this.state.activeTab === index + 1 ? TabMenuBtnActive : TabMenuBtn}
+                                >
+                                    {langText.CommonRulesTitles.sportName[index + 1]}
+                                </button>
+                        ))}
                     </div>
                     <div id='GameRulesMain' style={PageContainer}>
                         <div id='TabMainWrapperCon' style={TabMainWrapperCon}>
@@ -232,7 +241,7 @@ class CommonRules extends React.Component {
                             {/* ---soccor */}
                             <div style={ this.state.activeTab === 1 ? ShowTabContent : HideTabContent }>
                                 <div style={TabWrapperTitle}>
-                                    <h1 style={h1}>{langText.CommonRulesTitles.soccor}</h1>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[2]}</h1>
                                 </div>
                                 <div style={TabWrapperContent}>
                                     <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>
@@ -458,7 +467,7 @@ class CommonRules extends React.Component {
                             {/* ---basketball */}
                             <div style={ this.state.activeTab === 2 ? ShowTabContent : HideTabContent }>
                                 <div style={TabWrapperTitle}>
-                                    <h1 style={h1}>{langText.CommonRulesTitles.basketball}</h1>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[2]}</h1>
                                 </div>
                                 <div style={TabWrapperContent}>
                                     <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>
@@ -539,7 +548,7 @@ class CommonRules extends React.Component {
                             {/* ---baseball */}
                             <div style={ this.state.activeTab === 3 ? ShowTabContent : HideTabContent }>
                                 <div style={TabWrapperTitle}>
-                                    <h1 style={h1}>{langText.CommonRulesTitles.baseball}</h1>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[3]}</h1>
                                 </div>
                                 <div style={TabWrapperContent}>
                                     <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>
@@ -626,7 +635,105 @@ class CommonRules extends React.Component {
                                     </ul>
                                 </div>
                             </div>
+                            
+                            {/* ---Ice Hockey  */}
+                            <div style={ this.state.activeTab === 4 ? ShowTabContent : HideTabContent }>
+                                <div style={TabWrapperTitle}>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[4]}</h1>
+                                </div>
+                                <div style={TabWrapperContent}>
+                                    <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_1}</li>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_2}</li>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_3}</li>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_4}</li>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_5}</li>
+                                        <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_6}</li>
+                                    </ul>
 
+                                    <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_1}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.overUnder} ({langText.CommonRulesTitles.ball})</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_3}</li>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_4}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.inPlayOverUnder} ({langText.CommonRulesTitles.ball})</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_3}</li>
+                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_4}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* ---American Football  */}
+                            <div style={ this.state.activeTab === 5 ? ShowTabContent : HideTabContent }>
+                                <div style={TabWrapperTitle}>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[5]}</h1>
+                                </div>
+                                <div style={TabWrapperContent}>
+                                    <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_1}</li>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_3}</li>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_4}</li>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_5}</li>
+                                        <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_6}</li>
+                                    </ul>
+
+                                    <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_3}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_4}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_5}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_3}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_6}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.overUnder} ({langText.CommonRulesTitles.totalPoints})</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_7}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                    </ul>
+                                    
+                                    <h3 style={h3}>{langText.CommonRulesTitles.inPlayOverUnder} ({langText.CommonRulesTitles.totalPoints})</h3>
+                                    <ul style={numBullets}>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_8}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_9}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                    </ul>
+                                </div>
+                            </div>
                             
 
                             
