@@ -28,6 +28,7 @@
             <div class="rule-tab">
                 <div class="rule-tab-con">
                         <div class="tab-content" id="nav-tabContent">
+                            <!-- baseball -->
                             <div class="tab-pane active" id="nav1" role="tabpanel" aria-labelledby="nav-1">
                                 <h3>{{ trans('rule.ruleTitles.sportName.1') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
@@ -54,7 +55,7 @@
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(range(1, 2) as $i)
                                         <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_' . $i) }}</li>
@@ -68,7 +69,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([3, 2] as $i)
                                         <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_' . $i) }}</li>
@@ -117,6 +118,7 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            <!-- basketball -->
                             <div class="tab-pane" id="nav2" role="tabpanel" aria-labelledby="nav-2">
                                 <h3>{{ trans('rule.ruleTitles.sportName.2') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
@@ -135,7 +137,7 @@
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([1, 2] as $i)
                                         <li>{{ trans('rule.ruleContentsBasketball.rc_basketball_' . $i) }}</li>
@@ -149,7 +151,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([6, 2] as $i)
                                         <li>{{ trans('rule.ruleContentsBasketball.rc_basketball_' . $i) }}</li>
@@ -189,6 +191,7 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            <!-- Soccor -->
                             <div class="tab-pane" id="nav3" role="tabpanel" aria-labelledby="nav-3">
                                 <h3>{{ trans('rule.ruleTitles.sportName.3') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
@@ -234,7 +237,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([17, 18] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
@@ -327,7 +330,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
                                 <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                 <ul class="number-bullets">
                                     @foreach([45, 46] as $i)
@@ -397,6 +400,7 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            <!-- ice hockey -->
                             <div class="tab-pane" id="nav4" role="tabpanel" aria-labelledby="nav-4">
                                 <h3>{{ trans('rule.ruleTitles.sportName.4') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
@@ -407,35 +411,23 @@
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_1') }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
-                                <ul class="number-bullets">
-                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
-                                <ul class="number-bullets">
-                                    @foreach([3, 4] as $i)
-                                        <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
-                                <ul class="number-bullets">
-                                    @foreach([3, 4] as $i)
-                                        <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
+                                @foreach([
+                                    'moneyline' => [1],
+                                    'get_the_ball' => [2],
+                                    'inplay_handicap' => [2],
+                                    'overUnder' => [3, 4],
+                                    'inPlay_overUnder' => [3, 4],
+                                ] as $title => $items)
+                                    <h3>{{ trans('rule.ruleTitles.' . $title) }} @if(in_array($title, ['overUnder', 'inPlay_overUnder'])) ({{ trans('rule.ruleTitles.ball') }}) @endif</h3>
+                                    <ul class="number-bullets">
+                                        @foreach($items as $i)
+                                            <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <hr class="solid">
+                                @endforeach
                             </div>
+                            <!-- american football -->
                             <div class="tab-pane" id="nav5" role="tabpanel" aria-labelledby="nav-5">
                                 <h3>{{ trans('rule.ruleTitles.sportName.5') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
@@ -445,10 +437,11 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
                                 @foreach([
-                                    'solo_winners' => [1, 2],
+                                    'moneyline' => [1, 2],
                                     'get_the_ball' => [3, 4, 5, 2],
-                                    'lets_roll' => [3, 6, 2],
+                                    'inplay_handicap' => [3, 6, 2],
                                     'overUnder' => [7, 2],
                                     'inPlay_overUnder' => [8, 9, 2],
                                 ] as $title => $items)

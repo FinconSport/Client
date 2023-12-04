@@ -154,7 +154,7 @@ const h2 = {
 }
 
 const h3 = {
-    fontSize: '1.2rem',
+    fontSize: '1.1rem',
     fontWeight: '600',
 }
 
@@ -176,7 +176,7 @@ const noBullets = {
 
 const alphaBullets = {
     listStyleType: 'lower-alpha',
-    padding: '0px',
+    paddingLeft: '15px',
 }
 
 const upperAlphaBullets = {
