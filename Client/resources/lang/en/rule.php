@@ -51,7 +51,7 @@ return [
 		"overUnder" => "Over / Under", // "大/小",
 		"inPlay_overUnder" => "In-play Over/Under", // 滾球大/小
 		"totalPoints" => "Total Points", // '總比分',
-		"ball" => "", // 球
+		"ball" => "Ball", // 球
 	],
 	"generalRulesBaseball" => [
 		"gr_baseball_1" => "If the home or away team changes, all bets will be voided.",
