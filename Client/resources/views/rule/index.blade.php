@@ -6,9 +6,10 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad rule-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.baseball') }}</button>      
-                        <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.basketball') }}</button>
-                        <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.soccor') }}</button>          
+                        <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.sportName[1]') }}</button>      
+                        <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.sportName[2]') }}</button>
+                        <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.sportName[3]') }}</button>  
+                        <button class="nav-link" id="nav-iceHockey" data-bs-toggle="tab" data-bs-target="#navIceHockey" type="button" role="tab" aria-controls="#navIceHockey" aria-selected="false">{{ trans('rule.ruleTitles.sportName[4]') }}</button>           
                     </div>
                 </nav>
             </div>
@@ -17,7 +18,7 @@
                 <div class="rule-tab-con">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane active" id="navBaseball" role="tabpanel" aria-labelledby="nav-baseball">
-                                <h2>{{ trans('rule.ruleTitles.baseball') }}</h2>
+                                <h2>{{ trans('rule.ruleTitles.sportName[1]') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
@@ -106,7 +107,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="navBasketball" role="tabpanel" aria-labelledby="nav-basketball">
-                                <h2>{{ trans('rule.ruleTitles.basketball') }}</h2>
+                                <h2>{{ trans('rule.ruleTitles.sportName[2]') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesBasketball') as $key => $grRule)
@@ -178,7 +179,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="navSoccor" role="tabpanel" aria-labelledby="nav-soccor">
-                                <h2>{{ trans('rule.ruleTitles.soccor') }}</h2>
+                                <h2>{{ trans('rule.ruleTitles.sportName[3]') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesSoccor') as $key => $grRule)
@@ -383,6 +384,50 @@
                                     @foreach([63, 64, 65, 66] as $i)
                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                     @endforeach
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="navIceHockey" role="tabpanel" aria-labelledby="nav-iceHockey">
+                                <h2>{{ trans('rule.ruleTitles.sportName[4]') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
+                                <ul class="number-bullets">
+                                    @foreach(trans('rule.generalRulesIceHockey') as $key => $grRule)
+                                        <li>{{ trans('rule.generalRulesIceHockey.' . $key) }}</li>
+                                    @endforeach
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_1) }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_2) }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.handicap_1stHalf') }}</h3>
+                                <ul class="number-bullets">
+                                    @foreach([14, 15, 16] as $i)
+                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
+                                    @endforeach
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_2) }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.overUnder) }} ({{ trans('rule.ruleTitles.ball) }})</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_3) }}</li>
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_4) }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder) }} ({{ trans('rule.ruleTitles.ball) }})</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_3) }}</li>
+                                    <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_4) }}</li>
                                 </ul>
                             </div>
                         </div>

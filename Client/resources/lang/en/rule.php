@@ -7,10 +7,14 @@
 return [
 	// 前端
 	"ruleTitles" => [
+		"sportName" => [
+			"1" => "Baseball", // <- 棒球
+			"2" => "Basketball", // <- 籃球
+			"3" => "Soccer", // <- 足球
+			"4" => "Ice Hockey", // <- 冰球
+			"5" => "American Football", // <- 美式足球
+		],
 		"general_rule" => "General Rules", // "一般規則",
-		"baseball" => "Baseball", // "棒球",
-		"basketball" => "Basketball", // "籃球",
-		"soccor" => "Soccer", // "足球",
 		"betting_type" => "Betting Types", // "投注類型",
 		"solo_winners" => "Winner", // "獨贏盤",
 		"get_the_ball" => "Handicap", // "讓球",
@@ -44,6 +48,10 @@ return [
 		"ot_winAlone_1stHalf" => "Overtime Moneyline - First Half", // "加時賽 - 獨贏 - 上半場",
 		"crts" => "Correct Score", // "波膽",
 		"crts_1stHalf" => "Correct Score - First Half", // "波膽 - 上半場",
+		"overUnder" => "Over / Under", // "大/小",
+		"inPlay_overUnder" => "In-play Over/Under", // 滾球大/小
+		"total_points" => "Total Points", // '總比分',
+		"ball" => "Ball", // 球
 	],
 	"generalRulesBaseball" => [
 		"gr_baseball_1" => "If the home or away team changes, all bets will be voided.",
@@ -424,6 +432,30 @@ return [
 		// "rc_soccor_66" => "如果賽事在上半場取消，已有明確賽果或所有半場波膽投注在“其它比分”為僅有可能獲勝的選項，投注將被視為有效；其餘的投注則被視為無效，此是由於賽事無條件決定後面的進球不會影響賽事的結果。",
 		"rc_soccor_67" => "If the match is canceled during the second half, all half-time correct score bets will be considered valid.",
 		// "rc_soccor_67" => "如果賽事在下半場取消，所有半場波膽的投注被視為有效。",
+	],
+	"rulesGeneralIceHockey" => [
+		"gr_IceHockey_1" => "If the originally scheduled venue is changed, all bets will be considered void.",
+			// "如果原定比賽場地更改，所有的投注將被視為無效。",
+		"gr_IceHockey_2" => "In a penalty shootout, the winning team will be awarded one additional point on the final score after the conclusion of the match.",
+			// "在罰球中，獲勝方會在賽事結束後的最終比分上加一分。",
+		"gr_IceHockey_3" => "In period betting, all specific periods must be completed for the bet to be considered valid, unless there is explicit clarification or specific betting rules. In all other cases, bets will be voided.",
+			// "在賽節投注中，特殊的賽節必須全部完成則注單才被視為有效，除非有明確說明或者個別投注規則。其他情況下，注單將一律取消。",
+		"gr_IceHockey_4" => "Bets on the third period do not include overtime and penalty shootout.",
+			// "第三節賽節投注不包括加時賽和罰球賽。",
+		"gr_IceHockey_5" => "If the match starts earlier than scheduled, only bets placed before the start of the match are considered valid. Bets placed after the start of the match will be deemed void, excluding in-play bets.",
+			// "如果比賽提前開賽，只有在開賽之前投注的注單被視為有效投注。在開賽後投注的注單將被視為無效投注，滾球投注類型不包括在內。",
+		"gr_IceHockey_6" => "Overtime and penalty shootouts will be included.",
+			// "加時賽與點球大戰將包括在內。",
+	],
+	"rulesContentsIceHockey" => [
+		"rc_IceHockey_1" => "Predict which team will win the game.",
+			// "預測哪支球隊將贏得比賽。",
+		"rc_IceHockey_2" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
+			// "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+		"rc_IceHockey_3" => "Predict whether the total goals in the match/period will be over or under the specified handicap score",
+			// "預測賽事/賽節總進球數將大於或小於盤口分數。",
+		"rc_IceHockey_4" => "Bets on over/under will be settled if there is a clear result in the match before the interruption, and there is no subsequent significant event that would affect the outcome. In any other circumstances, the bets will be voided.",
+			// "如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
 	],
 	// 後端
 ];
