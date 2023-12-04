@@ -787,13 +787,12 @@ a.sportSelect:hover {
 
 .marquee-modal-content {
     background-color: #fff;
-    /* padding: 20px 30px; */
     position: absolute;
-    top: 34%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 5px;
-    height: 40vh;
+    height: 25vh;
     width: 50vw;
     display: flex;
     flex-direction: column;
@@ -804,6 +803,7 @@ a.sportSelect:hover {
 .marquee-modal-content .modal-header {
     justify-content: flex-end;
     position: relative;
+    z-index: 1;
 }
 
 .marquee-modal-content span.close-modal {
@@ -820,6 +820,7 @@ a.sportSelect:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 0px 20px;
 }
 
 .marquee-modal-content .modal-body h5{
