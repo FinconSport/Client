@@ -391,12 +391,9 @@
                                 <h2>{{ trans('rule.ruleTitles.sportName.4') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_1') }}</li>
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_2') }}</li>
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_3') }}</li>
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_4') }}</li>
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_5') }}</li>
-                                    <li>{{ trans('rule.generalRuleIceHockey.gr_IceHockey_6') }}</li>
+                                    @foreach(trans('rule.generalRuleIceHockey') as $key => $grRule)
+                                        <li>{{ trans('rule.generalRuleIceHockey.' . $key) }}</li>
+                                    @endforeach
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
@@ -431,12 +428,9 @@
                                 <h2>{{ trans('rule.ruleTitles.sportName.5') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_1') }}</li>
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_2') }}</li>
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_3') }}</li>
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_4') }}</li>
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_5') }}</li>
-                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_6') }}</li>
+                                    @foreach(trans('rule.rulesGeneralAmericanFootball') as $key => $grRule)
+                                        <li>{{ trans('rule.rulesGeneralAmericanFootball.' . $key) }}</li>
+                                    @endforeach
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
