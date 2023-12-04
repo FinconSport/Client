@@ -793,7 +793,7 @@ a.sportSelect:hover {
     transform: translate(-50%,-50%);
     border-radius: 5px;
     height: 25vh;
-    width: 50vw;
+    width:45vw;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
