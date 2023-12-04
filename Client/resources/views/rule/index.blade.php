@@ -442,8 +442,8 @@
                                 <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
-                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_IceHockey_1') }}</li>
-                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_IceHockey_2') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_1') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h2>{{ trans('rule.ruleTitles.get_the_ball') }}</h2>
