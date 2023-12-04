@@ -276,6 +276,25 @@ return [
 		"rc_IceHockey_3" => "預測賽事/賽節總進球數將大於或小於盤口分數。",
 		"rc_IceHockey_4" => "如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
 	],
+	"rulesGeneralAmericanFootball" => [
+		"gr_AmericanFootball_1" => "最終賽果是以全場四個時節後的比分為準（包括加時賽）。",
+		"gr_AmericanFootball_2" => "單節/半場的投注，必須在比賽賽節完成後注單才被視為有效。",
+		"gr_AmericanFootball_3" => "第四節投注不包括加時賽。",
+		"gr_AmericanFootball_4" => "美國大學美式足球聯賽場地規則：盤口指示的“主場“和“客場“信息僅供參考。無論原定場地是否更改為“主場“，“客場“或“中立場“，所有注單將保持有效。",
+		"gr_AmericanFootball_5" => "除非個別玩法規則另有注明，賽事完場時間將包括加時賽。",
+		"gr_AmericanFootball_6" => "如比賽在法定時間提前進行，在比賽開始前的投注依然有效，在比賽開始後的所有投注均視為無效(滾球投注另作別論)。",
+	],
+	"rulesContentsAmericanFootball" => [
+		"rc_AmericanFootball_1" => "預測哪一支球隊將在比賽勝出。盤口提供兩支球隊為投注選項。",
+		"rc_AmericanFootball_2" => "賽事盤口包括全場、半場投注。",
+		"rc_AmericanFootball_3" => "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+		"rc_AmericanFootball_4" => "如果賽事在下半場取消或中斷，所有上半場注單保持有效。",
+		"rc_AmericanFootball_5" => "如果賽事在下半場取消或中斷，所有下半場注單將被視為無效。",
+		"rc_AmericanFootball_6" => "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。投注當時的比分對結算沒有影響。",
+		"rc_AmericanFootball_7" => "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
+		"rc_AmericanFootball_8" => "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
+		"rc_AmericanFootball_9" => "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。",
+	],
 	// 後端
 ];
 
