@@ -401,7 +401,7 @@
                                     <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_1) }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsIceHockey.rc_IceHockey_2) }}</li>
                                 </ul>
