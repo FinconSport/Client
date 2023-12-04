@@ -206,13 +206,13 @@ class CommonSliderUser extends React.Component {
             isLogsOpen={this.state.isLogsOpen}
             callBack={this.closeLogs}
           />
-          <CommonRules
-            isGameRuleOpen={this.state.isGameRuleOpen}
-            callBack={this.closeGameRule}
-          />
           <CommonNotice
             isNoticeOpen={this.state.isNoticeOpen}
             callBack={this.closeNotice}
+          />
+          <CommonRules
+            isGameRuleOpen={this.state.isGameRuleOpen}
+            callBack={this.closeGameRule}
           />
         </div>
       );

@@ -33,7 +33,7 @@ const TabOnStyle = {
 const GameMainBodyStyle = {
     background: 'rgb(65, 91, 90)',
     padding: '0.5rem',
-    height: 'calc(100% - 2rem)',
+    height: 'calc(100% - 0rem)',
     color: 'white',
 }
 
@@ -133,8 +133,8 @@ class GameMain extends React.Component {
         const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
 
         return (
-            <div style={{ height: '72%' }}>
-                <div className="row m-0">
+            <div style={{ height: '75%' }}>
+                <div className="row m-0 d-none">
                     <TabLeft className="col-6" onClick={() => this.changeTab(0)} style={this.state.activeTab === 0 ? TabOnStyle : {}}>{langText.GameMain.bet}</TabLeft>
                     <TabRight className="col-6" onClick={() => this.changeTab(1)} style={this.state.activeTab === 1 ? TabOnStyle : {}}>{langText.GameMain.analyze}</TabRight>
                 </div>

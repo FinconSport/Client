@@ -234,7 +234,7 @@ class GameTopSlider extends React.Component {
         if( data ) {
             console.log(data)
             return (
-                <div style={{ height: '28%' }}>
+                <div style={{ height: '25%' }}>
                     <Swiper navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
                         <SwiperSlide style={{ backgroundImage: `url(${GameBg})`, backgroundSize: '100% 100%'}}>
                             <MainInfoSlider className='row m-0' style={{ height: '2.5rem', lineHeight: '2.5rem' }}>
