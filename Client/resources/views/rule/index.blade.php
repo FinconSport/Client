@@ -6,21 +6,21 @@
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad rule-col-left">
                 <nav>
                     <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                        @foreach(range(1, 5) as $i)
-                            <button
-                                key="{{ $i }}"
-                                class="nav-link {{ $i === 1 ? 'active' : '' }}"
-                                id="nav-{{ $i }}"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav{{ $i }}"
-                                type="button"
-                                role="tab" 
-                                aria-controls="#nav{{ $i }}" 
-                                aria-selected="{{ $i === 1 ? 'true' : 'false' }}"
-                            >
-                                {{ trans('rule.ruleTitles.sportName.{{ $i }}') }}
-                            </button>
-                        @endforeach
+                    @foreach(range(1, 5) as $i)
+                        <button
+                            key="{{ $i }}"
+                            class="nav-link {{ $i === 1 ? 'active' : '' }}"
+                            id="nav-{{ $i }}"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav{{ $i }}"
+                            type="button"
+                            role="tab" 
+                            aria-controls="#nav{{ $i }}" 
+                            aria-selected="{{ $i === 1 ? 'true' : 'false' }}"
+                        >
+                            {{ trans('rule.ruleTitles.sportName.' . $i) }}
+                        </button>
+                    @endforeach
                         <!-- <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.sportName.1') }}</button>      
                         <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.2') }}</button>
                         <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.sportName.3') }}</button>  
