@@ -28,6 +28,77 @@ class TgBotController extends Controller {
 
     }
 
+    // step 1
+    public function RMQStep1(Request $request) {
+    	
+      $input = $this->getRequest($request);
+
+      //字串處理 \n
+      $text = "「斷線魔法 ❤️」";
+      $message = urlencode($text);
+
+   
+      $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
+      $chat_id = "-873155069";
+
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
+
+    }
+    // step 2
+    public function RMQStep2(Request $request) {
+    	
+      $input = $this->getRequest($request);
+
+      //字串處理 \n
+      $text = "LSport :「我可是活了500年的RMQ」";
+      $message = urlencode($text);
+
+   
+      $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
+      $chat_id = "-873155069";
+
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
+
+    }
+    // step 3
+    public function RMQStep3(Request $request) {
+    	
+      $input = $this->getRequest($request);
+
+      //字串處理 \n
+      $text = "「RMQ ... 站你面前的是1000年的Golang」";
+      $message = urlencode($text);
+
+   
+      $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
+      $chat_id = "-873155069";
+
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
+
+    }
+
+    
+    // step 4
+    public function RMQStep4(Request $request) {
+    	
+      $input = $this->getRequest($request);
+
+      //字串處理 \n
+      $text = "「讓RMQ變正常的魔法 ❤️」";
+      $message = urlencode($text);
+
+   
+      $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
+      $chat_id = "-873155069";
+
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
+
+    }
+
     // bill
     public function bill(Request $request) {
     	
