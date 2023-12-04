@@ -9,7 +9,8 @@
     <link href="{{ asset('css/jquery-ui.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <!-- COMM CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
-    <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet">
+	<link href="{{ asset('css/common.css?v=' . $current_time) }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/common.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
     <link href="{{ asset('css/icon/all.min.css?v=' . $system_config['version']) }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css?v=' . $system_config['version']) }}" rel="stylesheet">
 
@@ -55,7 +56,7 @@
 
 						<div class="submenu-main" id="lf_order">
 							<div class="submenu-inner">
-								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-regular fa-circle-dot"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
+								<div onclick="navTo('order')" class="submenu-btn"><i class="fa-solid fa-list"></i> <p>{{ trans('common.left_menu.record') }}</p></div>
 							</div>
 						</div>
 
