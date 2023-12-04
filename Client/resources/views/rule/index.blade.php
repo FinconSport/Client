@@ -452,7 +452,7 @@
                                     'overUnder' => [7, 2],
                                     'inPlay_overUnder' => [8, 9, 2],
                                 ] as $title => $items)
-                                    <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
+                                    <h3>{{ trans('rule.ruleTitles.' . $title) }} @if(in_array($title, ['overUnder', 'inPlay_overUnder'])) ({{ trans('rule.ruleTitles.total_points') }}) @endif</h3>
                                     <ul class="number-bullets">
                                         @foreach($items as $i)
                                             <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
