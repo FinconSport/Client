@@ -184,13 +184,13 @@ class CommonSliderUser extends React.Component {
                 <MenuBtn onClick={this.openGameRule}>
                   {langText.CommonRulesTitles.gameRules}
                 </MenuBtn>
-                <MenuBtn onClick={this.openNotice}>
-                  {langText.CommonNotice.notice}
-                </MenuBtn>
                 <MenuBtn>
                   <Link style={{color: '#415b5a'}} to="/mobile/result">
                       {langText.ResultTitle.result}
                     </Link>
+                </MenuBtn>
+                <MenuBtn onClick={this.openNotice}>
+                  {langText.CommonNotice.notice}
                 </MenuBtn>
               </div>
             </div>
@@ -206,13 +206,13 @@ class CommonSliderUser extends React.Component {
             isLogsOpen={this.state.isLogsOpen}
             callBack={this.closeLogs}
           />
-          <CommonNotice
-            isNoticeOpen={this.state.isNoticeOpen}
-            callBack={this.closeNotice}
-          />
           <CommonRules
             isGameRuleOpen={this.state.isGameRuleOpen}
             callBack={this.closeGameRule}
+          />
+          <CommonNotice
+            isNoticeOpen={this.state.isNoticeOpen}
+            callBack={this.closeNotice}
           />
         </div>
       );
