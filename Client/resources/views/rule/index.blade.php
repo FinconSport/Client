@@ -29,7 +29,7 @@
                 <div class="rule-tab-con">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane active" id="nav1" role="tabpanel" aria-labelledby="nav-1">
-                                <h2>{{ trans('rule.ruleTitles.sportName.1') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.sportName.1') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
@@ -53,7 +53,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(range(1, 2) as $i)
@@ -118,7 +118,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="nav2" role="tabpanel" aria-labelledby="nav-2">
-                                <h2>{{ trans('rule.ruleTitles.sportName.2') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.sportName.2') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesBasketball') as $key => $grRule)
@@ -134,7 +134,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([1, 2] as $i)
@@ -190,7 +190,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="nav3" role="tabpanel" aria-labelledby="nav-3">
-                                <h2>{{ trans('rule.ruleTitles.sportName.3') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.sportName.3') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRulesSoccor') as $key => $grRule)
@@ -198,7 +198,7 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.handicap') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.handicap') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach([1, 2, 3, 4, 5] as $i)
@@ -398,7 +398,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="nav4" role="tabpanel" aria-labelledby="nav-4">
-                                <h2>{{ trans('rule.ruleTitles.sportName.4') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.sportName.4') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.generalRuleIceHockey') as $key => $grRule)
@@ -406,30 +406,30 @@
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_1') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.get_the_ball') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.lets_roll') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.lets_roll') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h2>
+                                <h3>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
                                 <ul class="number-bullets">
                                     @foreach([3, 4] as $i)
                                         <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h2>
+                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
                                 <ul class="number-bullets">
                                     @foreach([3, 4] as $i)
                                         <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
@@ -437,7 +437,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" id="nav5" role="tabpanel" aria-labelledby="nav-5">
-                                <h2>{{ trans('rule.ruleTitles.sportName.5') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.sportName.5') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
                                     @foreach(trans('rule.rulesGeneralAmericanFootball') as $grRule)
@@ -452,7 +452,7 @@
                                     'overUnder' => [7, 2],
                                     'inPlay_overUnder' => [8, 9, 2],
                                 ] as $title => $items)
-                                    <h2>{{ trans('rule.ruleTitles.' . $title) }}</h2>
+                                    <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
                                     <ul class="number-bullets">
                                         @foreach($items as $i)
                                             <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
