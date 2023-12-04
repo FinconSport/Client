@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div id ="rulePage" class="h-100 rule-con">
+    <div id ="rulePage" class="h-100 w-100 rule-con">
         <div class="row rule-row">
             <div class="col-xl-2 col-lg-2 col-md-2 col-2 nopad rule-col-left">
                 <nav>
@@ -9,7 +9,8 @@
                         <button class="nav-link active" id="nav-baseball" data-bs-toggle="tab" data-bs-target="#navBaseball" type="button" role="tab" aria-controls="#navBaseball" aria-selected="true">{{ trans('rule.ruleTitles.sportName.1') }}</button>      
                         <button class="nav-link" id="nav-basketball" data-bs-toggle="tab" data-bs-target="#navBasketball" type="button" role="tab" aria-controls="#navBasketball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.2') }}</button>
                         <button class="nav-link" id="nav-soccor" data-bs-toggle="tab" data-bs-target="#navSoccor" type="button" role="tab" aria-controls="#navSoccor" aria-selected="false">{{ trans('rule.ruleTitles.sportName.3') }}</button>  
-                        <button class="nav-link" id="nav-iceHockey" data-bs-toggle="tab" data-bs-target="#navIceHockey" type="button" role="tab" aria-controls="#navIceHockey" aria-selected="false">{{ trans('rule.ruleTitles.sportName.4') }}</button>           
+                        <button class="nav-link" id="nav-iceHockey" data-bs-toggle="tab" data-bs-target="#navIceHockey" type="button" role="tab" aria-controls="#navIceHockey" aria-selected="false">{{ trans('rule.ruleTitles.sportName.4') }}</button>    
+                        <button class="nav-link" id="nav-americanFootball" data-bs-toggle="tab" data-bs-target="#navAmericanFootball" type="button" role="tab" aria-controls="#navAmericanFootball" aria-selected="false">{{ trans('rule.ruleTitles.sportName.5') }}</button>         
                     </div>
                 </nav>
             </div>
@@ -424,6 +425,53 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_3') }}</li>
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_4') }}</li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="navAmericanFootball" role="tabpanel" aria-labelledby="nav-americanFootball">
+                                <h2>{{ trans('rule.ruleTitles.sportName.5') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_1') }}</li>
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_2') }}</li>
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_3') }}</li>
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_4') }}</li>
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_5') }}</li>
+                                    <li>{{ trans('rule.rulesGeneralAmericanFootball.gr_AmericanFootball_6') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
+                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_IceHockey_1') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_IceHockey_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.get_the_ball') }}</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_3') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_4') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_5') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.lets_roll') }}</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_3') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_6') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.total_points') }})</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_7') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.total_points') }})</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_8') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_9') }}</li>
+                                    <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_2') }}</li>
                                 </ul>
                             </div>
                         </div>
