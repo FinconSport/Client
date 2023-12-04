@@ -413,6 +413,18 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_2') }}</li>
                                 </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_3') }}</li>
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_4') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h2>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h2>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_3') }}</li>
+                                    <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_4') }}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
