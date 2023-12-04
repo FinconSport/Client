@@ -50,7 +50,7 @@ return [
 		"crts_1stHalf" => "波膽 - 上半場",
 		"overUnder" => "大/小",
 		"inPlay_overUnder" => " 滾球大/小",
-		"total_points" => "總比分",
+		"totalPoints" => "總比分",
 		"ball" => "球",
 	],
 	"generalRulesBaseball" => [

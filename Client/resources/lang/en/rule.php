@@ -50,7 +50,7 @@ return [
 		"crts_1stHalf" => "Correct Score - First Half", // "波膽 - 上半場",
 		"overUnder" => "Over / Under", // "大/小",
 		"inPlay_overUnder" => "In-play Over/Under", // 滾球大/小
-		"total_points" => "Total Points", // '總比分',
+		"totalPoints" => "Total Points", // '總比分',
 		"ball" => "", // 球
 	],
 	"generalRulesBaseball" => [
