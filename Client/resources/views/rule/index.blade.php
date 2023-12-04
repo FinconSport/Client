@@ -440,46 +440,26 @@
                                 <h2>{{ trans('rule.ruleTitles.sportName.5') }}</h2>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @foreach(trans('rule.rulesGeneralAmericanFootball') as $key => $grRule)
-                                        <li>{{ trans('rule.rulesGeneralAmericanFootball.' . $key) }}</li>
+                                    @foreach(trans('rule.rulesGeneralAmericanFootball') as $grRule)
+                                        <li>{{ $grRule }}</li>
                                     @endforeach
                                 </ul>
                                 <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.betting_type') }}</h2>
-                                <h3>{{ trans('rule.ruleTitles.solo_winners') }}</h3>
-                                <ul class="number-bullets">
-                                    @foreach([1, 2] as $i)
-                                        <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.get_the_ball') }}</h2>
-                                <ul class="number-bullets">
-                                    @foreach([3, 4, 5, 2] as $i)
-                                        <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.lets_roll') }}</h2>
-                                <ul class="number-bullets">
-                                    @foreach([3, 6, 2] as $i)
-                                        <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.total_points') }})</h2>
-                                <ul class="number-bullets">
-                                    @foreach([7, 2] as $i)
-                                        <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
-                                <hr class="solid">
-                                <h2>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.total_points') }})</h2>
-                                <ul class="number-bullets">
-                                    @foreach([8, 9, 2] as $i)
-                                        <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
-                                    @endforeach
-                                </ul>
+                                @foreach([
+                                    'solo_winners' => [1, 2],
+                                    'get_the_ball' => [3, 4, 5, 2],
+                                    'lets_roll' => [3, 6, 2],
+                                    'overUnder' => [7, 2],
+                                    'inPlay_overUnder' => [8, 9, 2],
+                                ] as $title => $items)
+                                    <h2>{{ trans('rule.ruleTitles.' . $title) }}</h2>
+                                    <ul class="number-bullets">
+                                        @foreach($items as $i)
+                                            <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <hr class="solid">
+                                @endforeach
                             </div>
                         </div>
                     </div>
