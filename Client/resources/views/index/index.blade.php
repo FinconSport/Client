@@ -268,8 +268,7 @@
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
-            Object.entries(v[sport].list).map(([k2, v2], league_ind) => { // league toggle
-                console.log(k2, v2, league_ind)
+            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
                 createLeague(k, k2, v2)
                 // 获取 list 对象的所有属性，并将它们存储在一个数组中
                 const listKeys = Object.keys(v2.list);
@@ -318,7 +317,7 @@
         $('#indexContainerLeft').append(el_toggle)
     }
 
-    function createLeague(k, k2, v2) {
+    function createLeague(k, k2, v2, prevId=null) {
         // title
         let league_wrapper = $('div[template="leagueWrapper"]').clone()
         let league_toggle = league_wrapper.find('.seriesWrapperTitle')
@@ -343,12 +342,16 @@
         let league_toggle_content = league_wrapper.find('.seriesWrapperContent')
         league_toggle_content.attr('id', `seriesWrapperContent_${k}_${v2.league_id}`)
 
+        league_wrapper.attr('key', v2.league_id)
         league_wrapper.removeAttr('hidden')
         league_wrapper.removeAttr('template')
 
         let el_toggle_content = $(`#toggleContent_${k}`)
-        el_toggle_content.append(league_wrapper)
-
+        if( prevId === null ) {
+            el_toggle_content.append(league_wrapper)
+        } else {
+            el_toggle_content.find(`.leagueWrapper[key=${prevId}]`).after(league_wrapper)
+        }
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3) {
@@ -710,7 +713,7 @@
             return;
         }
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+            Object.entries(v[sport].list).map(([k2, v2], league_ind) => { // league toggle
                 Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
@@ -726,7 +729,10 @@
 
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
-                            if( !isLeagueExist ) createLeague(k, k2, v2)
+                            if( !isLeagueExist ) {
+                                let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
+                                createLeague(k, k2, v2, prevId)
+                            } 
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
                             let livingNode = $(`#${k3}`)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
