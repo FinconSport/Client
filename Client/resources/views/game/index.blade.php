@@ -312,17 +312,19 @@
             if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
+
             // if not exist -> create
             if( bet_div.length === 0 ) createMarketContainer(k, v);
+            
             if (v.market_bet) {
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
-                sortedKeys.forEach((key) => {
+                sortedKeys.forEach((key, p) => {
                     v.market_bet[key].forEach((v3) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
-                            if(v.priority === 8) {
+                            if(v.priority === 8) { // 波膽
                                 const arr = v.market_bet[key]
                                 // 计算中间索引
                                 const midIndex = Math.floor(arr.length / 2);
@@ -336,8 +338,19 @@
                                     createNewElement(v, v3, v.market_bet[key].length);
                                 });
                             } else {
-                                v.market_bet[key].forEach((v3) => {
-                                    createNewElement(v, v3, v.market_bet[key].length);
+                                v.market_bet[key].forEach((v3, s) => {
+                                    let line = null
+                                    if( s === 0) {
+                                        if( p-1 > 0) {
+                                            line = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b))[p-1]
+                                        } else {
+                                            line = 'first'
+                                        }
+                                    }
+                                    if( s > 0 ) {
+                                        line = v3.line
+                                    }
+                                    createNewElement(v, v3, v.market_bet[key].length, line);
                                 });
                             }
                         } else {
@@ -618,7 +631,7 @@
     }
     
 
-    function createNewElement(v, v3, len) {
+    function createNewElement(v, v3, len, line=null) {
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         // col setting
         commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 2 : null
@@ -682,9 +695,17 @@
         if( sport === 6046 && allWinArr.indexOf(v.priority) !== -1 && v3.market_bet_name_en === 'X' ) {
             bet_div.find(`div[priority=${v.priority}][bet_name_en="1"]`).after(marketBetRateTemp);
         } else {
-            bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+            if( line !== null) {
+                if( line === 'first' ) {
+                    bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
+                } else {
+                    bet_div.find(`[key="marketBetRateKey"][line="${line}"]`).after(marketBetRateTemp)
+                }
+            } else {
+                bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
+            }
+           
         }
-        
     }
 
     // ------- game page scoreboard slider function-----------
