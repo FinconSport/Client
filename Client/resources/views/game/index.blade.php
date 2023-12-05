@@ -347,7 +347,7 @@
                                     }
                                 }
                                 if( s > 0 ) {
-                                    line = v3.line
+                                    line = v.main_line
                                 }
                                 console.log(p, sortedKeys)
                                 createNewElement(v, v3, v.market_bet[key].length, line);
