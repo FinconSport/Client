@@ -177,14 +177,14 @@
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_0.' . $k) }}</li>
                                                         @endforeach
                                                     @endif
-                                                    @if($title === 'betting_sizes' && array_key_exists(27, $value))
+                                                    @if($title === 'betting_sizes' && $key === 27)
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_27_0') as $k => $grRule)
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_0.' . $k) }}</li>
                                                         @endforeach
                                                     @endif
                                                 </ul>
                                                 <ul class="{{ in_array($title, ['betting_sizes']) ? 'alpha-bullets' : '' }}">
-                                                    @if($title === 'betting_sizes' && array_key_exists(28, $value))
+                                                    @if($title === 'betting_sizes' && $key === 28)
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $k => $g)
                                                             @if (is_array($g))
                                                                 <ul class="roman-bullets">
