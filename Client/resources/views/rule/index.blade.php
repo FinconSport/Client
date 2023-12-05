@@ -142,7 +142,6 @@
                                     'rolling_ball_overUnder' => [34],
                                     'ot_goal_overUnder' => [35, 36, 37],
                                     'ot_goals_overUnder_1stHalf' => [38, 39, 40],
-                                    'handicap_1stHalf' => [14, 15, 16],
                                     'team_goals_overUnder' => [41, 42, 43, 44],
                                     'moneyline' => [45, 46],
                                     'win_alone' => [47],
@@ -153,13 +152,13 @@
                                     'crts' => [60, 61, 62],
                                     'crts_1stHalf' => [63, 64, 65, 66],
                                 ] as $title => $items)
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes',  'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'ot_win_alone', 'ot_winAlone_1stHalf', 'ot_goal_overUnder', 'crts']))
+                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'team_goals_overUnder', 'moneyline', 'ot_win_alone', 'ot_winAlone_1stHalf', 'crts']))
                                         <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
                                     @endif
-                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'score_goal', 'win_alone_1stHalf']))
+                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'win_alone_1stHalf', 'score_goal', 'crts_1stHalf']))
                                         <h4>{{ trans('rule.ruleTitles.' . $title) }}</h4>
                                     @endif
-                                    @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts_1stHalf']))
+                                    @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts']))
                                         <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                     @endif
                                     <ul class="number-bullets">
@@ -206,7 +205,7 @@
                                                         @endforeach
                                                     @endif
                                                 </ul>
-                                                <ul class="{{ in_array($title, ['score_goal']) ? 'number-bullets' : '' }}">
+                                                <ul class="{{ in_array($title, [$key === 28]) ? 'number-bullets' : '' }}">
                                                     @if(in_array($title, ['score_goal']))
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_52') as $k => $g)
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52.' . $k) }}</li>
@@ -233,8 +232,8 @@
                                             @endif
                                         @endforeach
                                     </ul>
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf', 'rolling_ball_overUnder']))
-                                        <hr class="solid">
+                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'rolling_ball_overUnder', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'team_goals_overUnder', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
+                                        <hr class="solid {{ in_array($title === 'betting_sizes' && $key === 28) ? 'd-none' : '' }}">
                                     @endif
                                 @endforeach
                             </div>
