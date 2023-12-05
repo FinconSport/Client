@@ -62,7 +62,8 @@ class TgBotController extends Controller {
       $input = $this->getRequest($request);
 
       //字串處理 \n
-      $text = "Prematch 重啟中";
+      $date = date("Y-m-d H:i:s");
+      $text = "[" . $date . "] Prematch 重啟中";
       $message = urlencode($text);
 
    
@@ -79,7 +80,8 @@ class TgBotController extends Controller {
       $input = $this->getRequest($request);
 
       //字串處理 \n
-      $text = "Inplay 重啟中";
+      $date = date("Y-m-d H:i:s");
+      $text = "[" . $date . "] Inplay 重啟中";
       $message = urlencode($text);
 
    
