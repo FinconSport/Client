@@ -84,8 +84,8 @@ class Game extends React.Component {
 				for (let i = 0; i < v.length; i++) {
 					let o = v[i];
 					let market_bet_id = o.market_bet_id
-					
-					let marketBet = updateData.market.find( item => item.priority === priority ).market_bet
+					let marketBet = updateData.market.find( item => item.priority === priority )?.market_bet
+					if( !marketBet ) return;
 					Object.entries(marketBet).map( ([k2, v2]) => {
 						v2.forEach (e => {
 							if( e.market_bet_id !== market_bet_id) return;
