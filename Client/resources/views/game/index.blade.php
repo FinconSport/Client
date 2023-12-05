@@ -297,6 +297,33 @@
        
 
         // update content
+        // check exist bet type content is still exist in the data
+        $('#bettingTypeContainer .bettingtype-container').each(function() {
+            let priority = parseInt($(this).attr('priority'))
+            let result = null
+            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
+            if( !result ) {
+                $(this).remove()
+            }
+        });
+
+        // check exist bet item is still exist in the data
+        $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
+            const priority = parseInt($(this).attr('priority'));
+            const line = $(this).attr('line')
+            const market_bet_id = parseInt($(this).attr('market_bet_id'))
+            const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
+
+            // 遍历 market_bet 属性
+            var result = Object.values(resultArr.market_bet).find(marketBets => {
+                // 在每个 market_bet 数组中查找匹配的 market_bet_id
+                return marketBets.find(item => item.market_bet_id === market_bet_id);
+            });
+            
+            if (!result) {
+                $(this).remove();
+            }
+        });
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -448,34 +475,7 @@
             }
         });
 
-        // check exist bet type content is still exist in the data
-        $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            if( !result ) {
-                $(this).remove()
-            }
-        });
-
-        // check exist bet item is still exist in the data
-        $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
-            const priority = parseInt($(this).attr('priority'));
-            const line = $(this).attr('line')
-            const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
-
-            // 遍历 market_bet 属性
-            var result = Object.values(resultArr.market_bet).find(marketBets => {
-                // 在每个 market_bet 数组中查找匹配的 market_bet_id
-                return marketBets.find(item => item.market_bet_id === market_bet_id);
-            });
-
-            
-            if (!result) {
-                $(this).remove();
-            }
-        });
+       
 
         // 沒有盤口的tab隱藏
         let fullCounting = 0
