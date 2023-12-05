@@ -169,8 +169,17 @@
                                             @else
                                                 <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key) }}</li>
                                                 <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                    @foreach($value as $subValue)
-                                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subValue) }}</li>
+                                                    @foreach($value as $subKey => $subValue)
+                                                        @if(is_array($subValue))
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey) }}</li>
+                                                            <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
+                                                                @foreach($subValue as $nestedSubValue)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey . '_' . $nestedSubValue) }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subValue) }}</li>
+                                                        @endif
                                                     @endforeach
                                                 </ul>
                                             @endif
