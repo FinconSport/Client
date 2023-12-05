@@ -153,10 +153,10 @@
                                     'crts' => [60, 61, 62],
                                     'crts_1stHalf' => [63, 64, 65, 66],
                                 ] as $title => $items)
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
+                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes',  'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
                                         <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
                                     @endif
-                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'win_alone_1stHalf', 'crts', 'crts_1stHalf']))
+                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'ot_goal_overUnder', 'win_alone_1stHalf', 'crts', 'crts_1stHalf']))
                                         <h4>{{ trans('rule.ruleTitles.' . $title) }}</h4>
                                     @endif
                                     @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts']))
