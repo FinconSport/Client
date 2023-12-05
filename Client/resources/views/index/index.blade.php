@@ -1013,6 +1013,7 @@
                         } 
 
                         let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : null
+                        console.log(prevFixtureId)
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3, prevFixtureId)
                     }
                 })
