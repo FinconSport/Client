@@ -731,6 +731,7 @@
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) {
                                 let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
+                                console.log(prevId)
                                 createLeague(k, k2, v2, prevId)
                             } 
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
