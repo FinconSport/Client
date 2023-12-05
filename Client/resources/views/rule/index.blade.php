@@ -173,8 +173,10 @@
                                                         @if(is_array($subValue))
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey) }}</li>
                                                             <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0') as $subKey => $subValue)
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0.' . $subKey) }}</li>
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0') as $k => $x)
+                                                                    @if(is_array($x))
+                                                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0.' . $k) }}</li>
+                                                                    @endif
                                                                 @endforeach
                                                             </ul>
                                                         @else
