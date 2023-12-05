@@ -1001,6 +1001,12 @@
                 closeFixture(fixture_id)
             } 
         });
+
+
+        // 滾球移到最上面
+        let parentNode = $('#indexContainerLeft')
+        let livingNode = $('#toggleContent_living')
+        livingNode.prependTo(parentNode);
         statistics()
     }
 
