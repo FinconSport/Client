@@ -281,7 +281,6 @@
                     return orderByA - orderByB;
                 });
 
-                console.log(listKeys)
                 listKeys.forEach( ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
@@ -352,7 +351,11 @@
         if( prevId === null ) {
             el_toggle_content.append(league_wrapper)
         } else {
-            el_toggle_content.find(`.leagueWrapper[key=${prevId}]`).after(league_wrapper)
+            if( prevId === 'first' ) {
+                el_toggle_content.prepend(league_wrapper)
+            } else {
+                el_toggle_content.find(`.leagueWrapper[key=${prevId}]`).after(league_wrapper)
+            }
         }
     }
 
@@ -468,7 +471,11 @@
         if( prevFixtureId === null ) {
             league_toggle_content.append(card)
         } else {
-            league_toggle_content.find(`#${prevFixtureId}`).after(card)
+            if( prevFixtureId === 'first' ) {
+                league_toggle_content.prepend(card)
+            } else {
+                league_toggle_content.find(`#${prevFixtureId}`).after(card)
+            }
         }
     }
 
@@ -732,8 +739,6 @@
                     return orderByA - orderByB;
                 });
 
-                console.log(listKeys)
-
                 listKeys.forEach((ele, fixture_ind) => {
                     let k3 = ele
                     let v3 = v2.list[ele]
@@ -741,10 +746,6 @@
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                  let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
-
-
-                    console.log(ele, fixture_ind, isExist)
-
 
                     if( isExist ) {
                         let card = $(`#${k3}`) 
@@ -758,7 +759,7 @@
                         if( isSwitchCate ) {
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) {
-                                let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
+                                let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : 'first'
                                 // console.log(prevId)
                                 createLeague(k, k2, v2, prevId)
                             } 
@@ -1017,12 +1018,12 @@
                         // 新的賽事
                         if( !isCateExist ) createCate(k, v)
                         if( !isLeagueExist ) {
-                            let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
+                            let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : 'first'
                             // console.log(prevId)
                             createLeague(k, k2, v2, prevId)
                         } 
 
-                        let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : null
+                        let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : 'first'
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3, prevFixtureId)
                     }
                 })
