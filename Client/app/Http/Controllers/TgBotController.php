@@ -33,18 +33,29 @@ class TgBotController extends Controller {
     	
       $input = $this->getRequest($request);
 
-      //字串處理 \n
-      $text = "「斷線魔法 ❤️」";
-      $message = urlencode($text);
-
-   
       $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
       $chat_id = "-873155069";
+      $photoUrl = "https://sportc.asgame.net/image/tg_bot/001.jpg";  // 替换为远程图片的URL
 
-      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
-      file_get_contents($url);
-
+      $apiUrl = "https://api.telegram.org/bot$token/sendPhoto";
+      
+      // 构建POST请求的参数
+      $postFields = array(
+          'chat_id' => $chat_id,
+          'photo'   => $photoUrl,
+      );
+      
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $apiUrl);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      
+      $response = curl_exec($ch);
+      curl_close($ch);
+      
     }
+
     // step 2
     public function RMQStep2(Request $request) {
     	
