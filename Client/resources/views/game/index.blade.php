@@ -233,11 +233,11 @@
                         }, []);
 
                         result.forEach((v3) => {
-                            createNewElement(v, v3, v.market_bet[key].length);
+                            createNewElement(v, v3, v.market_bet[key].length, key);
                         });
                     } else {
                         v.market_bet[key].forEach((v3) => {
-                            createNewElement(v, v3, v.market_bet[key].length);
+                            createNewElement(v, v3, v.market_bet[key].length, key);
                         });
                     }
                     
@@ -335,7 +335,7 @@
                                 }, []);
 
                                 result.forEach((v3) => {
-                                    createNewElement(v, v3, v.market_bet[key].length);
+                                    createNewElement(v, v3, v.market_bet[key].length, key);
                                 });
                             } else {
                                 let line = null
@@ -347,10 +347,10 @@
                                     }
                                 }
                                 if( s > 0 ) {
-                                    line = v.main_line
+                                    line = key
                                 }
                                 console.log(p, sortedKeys)
-                                createNewElement(v, v3, v.market_bet[key].length, line);
+                                createNewElement(v, v3, v.market_bet[key].length, key, line);
                             }
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
@@ -630,7 +630,7 @@
     }
     
 
-    function createNewElement(v, v3, len, line=null) {
+    function createNewElement(v, v3, len, key, line=null) {
         console.log(v3, line)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         // col setting
@@ -649,7 +649,7 @@
         marketBetRateTemp.attr('bet_name', v3.market_bet_name + ' ' + v3.line);
         marketBetRateTemp.attr('bet_name_en', v3.market_bet_name_en);
         marketBetRateTemp.attr('line', v3.line);
-        marketBetRateTemp.attr('mainline', v.main_line)
+        marketBetRateTemp.attr('linekey', key)
         marketBetRateTemp.attr('league', matchListD.data.list.league_name);
         marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
@@ -700,7 +700,7 @@
                 if( line === 'first' ) {
                     bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
                 } else {
-                    bet_div.find(`[key="marketBetRateKey"][mainline="${line}"]`).after(marketBetRateTemp)
+                    bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).after(marketBetRateTemp)
                 }
             } else {
                 bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
