@@ -320,8 +320,8 @@
                 return marketBets.find(item => item.market_bet_id === market_bet_id);
             });
             
-            console.log(market_bet_id)
             if (!result) {
+                console.log(market_bet_id)
                 $(this).remove();
             }
         });
