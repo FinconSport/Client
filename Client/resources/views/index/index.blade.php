@@ -714,7 +714,22 @@
         }
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2], league_ind) => { // league toggle
-                Object.entries(v2.list).map(([k3, v3]) => {  // fixture card
+
+                // 获取 list 对象的所有属性，并将它们存储在一个数组中
+                const listKeys = Object.keys(v2.list);
+                // 使用 sort 方法对 listKeys 数组进行排序
+                listKeys.sort((a, b) => {
+                    // 获取 a 和 b 对应的 fixture 对象的 orderBy 属性值
+                    const orderByA = v2.list[a].order_by;
+                    const orderByB = v2.list[b].order_by;
+                    // 比较 orderByA 和 orderByB，以确定排序顺序
+                    return orderByA - orderByB;
+                });
+                listKeys.forEach((ele, ind) => {
+                    console.log(ele, ind)
+                    let k3 = ele
+                    let v3 = v2.list[ele]
+
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
@@ -731,7 +746,7 @@
                             if( !isCateExist ) createCate(k, v)
                             if( !isLeagueExist ) {
                                 let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
-                                console.log(prevId)
+                                // console.log(prevId)
                                 createLeague(k, k2, v2, prevId)
                             } 
                             let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
@@ -990,7 +1005,7 @@
                         if( !isCateExist ) createCate(k, v)
                         if( !isLeagueExist ) {
                             let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
-                            console.log(prevId)
+                            // console.log(prevId)
                             createLeague(k, k2, v2, prevId)
                         } 
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
