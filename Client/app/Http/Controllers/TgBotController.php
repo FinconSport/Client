@@ -35,7 +35,7 @@ class TgBotController extends Controller {
 
       $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
       $chat_id = "-873155069";
-      $photoUrl = "https://sportc.asgame.net/image/tg_bot/002.jpg";  // 替换为远程图片的URL
+      $photoUrl = "https://sportc.asgame.net/image/tg_bot/001.jpg";  // 替换为远程图片的URL
 
       $apiUrl = "https://api.telegram.org/bot$token/sendPhoto";
       
@@ -61,26 +61,16 @@ class TgBotController extends Controller {
     	
       $input = $this->getRequest($request);
 
+      //字串處理 \n
+      $text = "Prematch 重啟中";
+      $message = urlencode($text);
+
+   
       $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
       $chat_id = "-873155069";
-      $photoUrl = "https://sportc.asgame.net/image/tg_bot/001.jpg";  // 替换为远程图片的URL
 
-      $apiUrl = "https://api.telegram.org/bot$token/sendPhoto";
-      
-      // 构建POST请求的参数
-      $postFields = array(
-          'chat_id' => $chat_id,
-          'photo'   => $photoUrl,
-      );
-      
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $apiUrl);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      
-      $response = curl_exec($ch);
-      curl_close($ch);
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
       
     }
     // step 3
@@ -88,26 +78,16 @@ class TgBotController extends Controller {
     	
       $input = $this->getRequest($request);
 
+      //字串處理 \n
+      $text = "Inplay 重啟中";
+      $message = urlencode($text);
+
+   
       $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
       $chat_id = "-873155069";
-      $photoUrl = "https://sportc.asgame.net/image/tg_bot/003.jpg";  // 替换为远程图片的URL
 
-      $apiUrl = "https://api.telegram.org/bot$token/sendPhoto";
-      
-      // 构建POST请求的参数
-      $postFields = array(
-          'chat_id' => $chat_id,
-          'photo'   => $photoUrl,
-      );
-      
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $apiUrl);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      
-      $response = curl_exec($ch);
-      curl_close($ch);
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
     }
 
     
@@ -116,26 +96,17 @@ class TgBotController extends Controller {
     	
       $input = $this->getRequest($request);
 
+      //字串處理 \n
+      $date = date("Y-m-d H:i:s");
+      $text = "[" . $date . "] 重啟完成";
+      $message = urlencode($text);
+
+   
       $token = "6205808787:AAG6ZcMhFbXTWlvXvm4DGfVGZxTkY3ZqCvQ";
       $chat_id = "-873155069";
-      $photoUrl = "https://sportc.asgame.net/image/tg_bot/004.jpg";  // 替换为远程图片的URL
 
-      $apiUrl = "https://api.telegram.org/bot$token/sendPhoto";
-      
-      // 构建POST请求的参数
-      $postFields = array(
-          'chat_id' => $chat_id,
-          'photo'   => $photoUrl,
-      );
-      
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $apiUrl);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      
-      $response = curl_exec($ch);
-      curl_close($ch);
+      $url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=". $message;
+      file_get_contents($url);
 
     }
 
