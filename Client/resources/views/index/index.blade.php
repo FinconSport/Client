@@ -988,7 +988,11 @@
                     } else {
                         // 新的賽事
                         if( !isCateExist ) createCate(k, v)
-                        if( !isLeagueExist ) createLeague(k, k2, v2)
+                        if( !isLeagueExist ) {
+                            let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
+                            console.log(prevId)
+                            createLeague(k, k2, v2, prevId)
+                        } 
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
                     }
                 })
