@@ -704,7 +704,7 @@
                     bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
                 } else {
                     console.log(bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).eq(-1))
-                    // bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).eq(-1).after(marketBetRateTemp)
+                    bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).eq(-1).after(marketBetRateTemp)
                 }
             } else {
                 bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
