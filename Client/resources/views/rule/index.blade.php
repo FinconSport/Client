@@ -163,18 +163,27 @@
                                         <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                     @endif
                                     <ul class="number-bullets">
-                                    @foreach($items as $key => $value)
-                                        @if(!is_array($value))
-                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $value) }}</li>
-                                        @else
-                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0') }}</li>
-                                            <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0') as $subKey => $subValue)
-                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0.' . $subKey) }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    @endforeach
+                                        @foreach($items as $key => $value)
+                                            @if(!is_array($value))
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $value) }}</li>
+                                            @else
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key) }}</li>
+                                                <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
+                                                    @foreach($value as $subKey => $subValue)
+                                                        @if(is_array($subValue))
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey) }}</li>
+                                                            <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0') as $subKey => $subValue)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_0.' . $subKey) }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subValue) }}</li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                     @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'win_alone', 'win_alone_1stHalf', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
                                         <hr class="solid">
