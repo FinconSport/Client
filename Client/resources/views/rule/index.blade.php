@@ -153,10 +153,10 @@
                                     'crts' => [60, 61, 62],
                                     'crts_1stHalf' => [63, 64, 65, 66],
                                 ] as $title => $items)
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'win_alone_1stHalf', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
+                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
                                         <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
                                     @endif
-                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'crts', 'crts_1stHalf']))
+                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'win_alone_1stHalf', 'crts', 'crts_1stHalf']))
                                         <h4>{{ trans('rule.ruleTitles.' . $title) }}</h4>
                                     @endif
                                     @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts']))
@@ -177,14 +177,14 @@
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_0.' . $k) }}</li>
                                                         @endforeach
                                                     @endif
-                                                    @if(in_array($title, ['betting_sizes']))
+                                                    @if($title === 'betting_sizes' && $key === 27)
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_27_0') as $k => $grRule)
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_0.' . $k) }}</li>
                                                         @endforeach
                                                     @endif
                                                 </ul>
                                                 <ul class="{{ in_array($title, ['betting_sizes']) ? 'alpha-bullets' : '' }}">
-                                                    @if(in_array($title, ['betting_sizes']))
+                                                    @if($title === 'betting_sizes' && $key === 28)
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $k => $g)
                                                             @if (is_array($g))
                                                                 <ul class="roman-bullets">
@@ -233,7 +233,7 @@
                                             @endif
                                         @endforeach
                                     </ul>
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'win_alone_1stHalf', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
+                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'handicap_1stHalf', 'team_goals_overUnder', 'moneyline', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
                                         <hr class="solid">
                                     @endif
                                 @endforeach
