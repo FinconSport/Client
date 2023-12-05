@@ -729,7 +729,13 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
+
+                console.log(listKeys)
+
                 listKeys.forEach((ele, fixture_ind) => {
+
+                    console.log(ele, fixture_ind)
+
                     let k3 = ele
                     let v3 = v2.list[ele]
 
