@@ -743,6 +743,7 @@
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
                     if( isExist ) {
+                        console.log('isExist')
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -1010,14 +1011,17 @@
                             });
                         }
                     } else {
+                        console.log('!isExist')
                         // 新的賽事
-                        if( !isCateExist ) createCate(k, v)
+                        if( !isCateExist ) console.log('!isCateExist'), createCate(k, v)
                         if( !isLeagueExist ) {
+                            console.log('!isLeagueExist')
                             let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : null
                             // console.log(prevId)
                             createLeague(k, k2, v2, prevId)
                         } 
 
+                        console.log('createFixtureCard')
                         let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : null
                         console.log(prevFixtureId)
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3, prevFixtureId)
