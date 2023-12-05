@@ -700,9 +700,11 @@
         } else {
             if( line !== null) {
                 if( line === 'first' ) {
+                    console.log(bet_div.find('.marketBetRateContainer'))
                     bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
                 } else {
-                    bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).after(marketBetRateTemp)
+                    console.log(bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`))
+                    // bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).after(marketBetRateTemp)
                 }
             } else {
                 bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
