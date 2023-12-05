@@ -131,12 +131,12 @@
                                 <hr class="solid">
                                 @foreach([
                                     'handicap' => [1, 2, 3, 4, 5 => [1, 2, 3], 6, 7, 8],
-                                    'fulltime_handicap_result' => [9, 10, 11, 12 => [1, 2, 3, 4, 5], 13],
+                                    'fulltime_handicap_result' => [9, 10, 11, 12, 13],
                                     'handicap_1stHalf' => [14, 15, 16],
                                     'inplay_handicap' => [17, 18],
                                     'ot_handicap' => [19, 20],
                                     'ot_let_1stHalf' => [21, 22, 23],
-                                    'betting_sizes' => [24, 25, 26, 27 => [1, 2, 3], 28],
+                                    'betting_sizes' => [24, 25, 26, 27, 28],
                                     'goal_largeSmall' => [29, 30],
                                     'goal_overUnder_1stHalf' => [31, 32, 33],
                                     'rolling_ball_overUnder' => [34],
@@ -147,7 +147,7 @@
                                     'moneyline' => [45, 46],
                                     'win_alone' => [47],
                                     'win_alone_1stHalf' => [48],
-                                    'score_goal' => [49, 50, 51 => [1, 2, 3]],
+                                    'score_goal' => [49, 50, 51],
                                     'ot_win_alone' => [55, 56],
                                     'ot_winAlone_1stHalf' => [57, 58, 59],
                                     'crts' => [60, 61, 62],
