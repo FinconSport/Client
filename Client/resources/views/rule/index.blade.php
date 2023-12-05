@@ -136,7 +136,7 @@
                                     'inplay_handicap' => [17, 18],
                                     'ot_handicap' => [19, 20],
                                     'ot_let_1stHalf' => [21, 22, 23],
-                                    'betting_sizes' => [24, 25, 26, 27 => [1, 2, 3]],
+                                    'betting_sizes' => [24, 25, 26, 27 => [1, 2, 3], 28],
                                     'goal_largeSmall' => [29, 30],
                                     'goal_overUnder_1stHalf' => [31, 32, 33],
                                     'rolling_ball_overUnder' => [34],
@@ -147,7 +147,7 @@
                                     'moneyline' => [45, 46],
                                     'win_alone' => [47],
                                     'win_alone_1stHalf' => [48],
-                                    'betting_sizes' => [24, 25, 26, 27 => [1, 2, 3]],
+                                    'score_goal' => [49, 50, 51 => [1, 2, 3]],
                                     'ot_win_alone' => [55, 56],
                                     'ot_winAlone_1stHalf' => [57, 58, 59],
                                     'crts' => [60, 61, 62],
@@ -173,11 +173,66 @@
                                                     @if(is_array($subValue))
                                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey) }}</li>
                                                         <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                            @foreach(trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey) as $k => $x)
-                                                                @if(is_array($x))
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subKey . '.' . $k) }}</li>
-                                                                @endif
-                                                            @endforeach
+                                                            @if(in_array($title, ['handicap']))
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_5_0') as $k => $grRule)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_0.' . $k) }}</li>
+                                                                @endforeach
+                                                            @endif
+                                                            @if(in_array($title, ['fulltime_handicap_result']))
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_12_0') as $k => $grRule)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_0.' . $k) }}</li>
+                                                                @endforeach
+                                                            @endif
+                                                            @if(in_array($title, ['betting_sizes']))
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_27_0') as $k => $grRule)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_0.' . $k) }}</li>
+                                                                @endforeach
+                                                            @endif
+                                                        </ul>
+                                                        <ul class="{{ in_array($title, ['betting_sizes']) ? 'alpha-bullets' : '' }}">
+                                                            @if(in_array($title, ['betting_sizes']))
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $k => $g)
+                                                                    @if (is_array($g))
+                                                                        <ul class="roman-bullets">
+                                                                            @foreach($g as $sk => $sr)
+                                                                                @if (is_array($sr))
+                                                                                    <ul class="roman-bullets">
+                                                                                        @foreach($sr as $sSk => $sSr)
+                                                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k . '.' . $sk . '.' . $sSk) }}</li>
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                @else
+                                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k . '.' . $sk) }}</li>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @else
+                                                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k) }}</li>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        </ul>
+                                                        <ul class="{{ in_array($title, ['score_goal']) ? 'number-bullets' : '' }}">
+                                                            @if(in_array($title, ['score_goal']))
+                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_52') as $k => $g)
+                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52.' . $k) }}</li>
+                                                                @endforeach
+                                                                <ul class="upper-alpha-bullets">
+                                                                    <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li>  
+                                                                    <ul class="roman-bullets">
+                                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_53') as $k => $g)
+                                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53.' . $k) }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                    <li><h4>{{ trans('rule.ruleTitles.example_2') }}</h4></li>  
+                                                                    <ul class="roman-bullets">
+                                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_54') as $k => $g)
+                                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54.' . $k) }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </ul>
+                                                                <li>{{ trans('rule.ruleTitles.example_2') }}</li>
+                                                            @endif
                                                         </ul>
                                                     @else
                                                         <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subValue) }}</li>

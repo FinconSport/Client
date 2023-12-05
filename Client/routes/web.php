@@ -58,8 +58,13 @@ Route::get('/error/maintain', 'App\Http\Controllers\TestController@maintain');
 Route::get('/tg', 'App\Http\Controllers\TgBotController@index');
 Route::post('/tg', 'App\Http\Controllers\TgBotController@index');
 Route::get('/tg/RMQStep1', 'App\Http\Controllers\TgBotController@RMQStep1');
+
 Route::get('/tg/RMQStep2', 'App\Http\Controllers\TgBotController@RMQStep2');
+Route::get('/tg/RMQStep2Error', 'App\Http\Controllers\TgBotController@RMQStep2Error');
+
 Route::get('/tg/RMQStep3', 'App\Http\Controllers\TgBotController@RMQStep3');
+Route::get('/tg/RMQStep3Error', 'App\Http\Controllers\TgBotController@RMQStep3Error');
+
 Route::get('/tg/RMQStep4', 'App\Http\Controllers\TgBotController@RMQStep4');
 
 Route::get('/tg/bill', 'App\Http\Controllers\TgBotController@bill');
