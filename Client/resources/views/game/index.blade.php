@@ -322,6 +322,7 @@
                 sortedKeys.forEach((key, p) => {
                     v.market_bet[key].forEach((v3, s) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
+                        console.log(bet_item)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
                             if(v.priority === 8) { // 波膽
@@ -340,7 +341,7 @@
                             } else {
                                 let line = null
                                 if( s === 0) {
-                                    if( p-1 > 0) {
+                                    if( p-1 >= 0) {
                                         line = sortedKeys[p-1]
                                     } else {
                                         line = 'first'
