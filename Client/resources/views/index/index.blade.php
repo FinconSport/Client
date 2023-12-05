@@ -268,7 +268,8 @@
         // loop matchListD to generate html element here
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             createCate(k, v)
-            Object.entries(v[sport].list).map(([k2, v2]) => { // league toggle
+            Object.entries(v[sport].list).map(([k2, v2], league_ind) => { // league toggle
+                console.log(k2, v2, league_ind)
                 createLeague(k, k2, v2)
                 // 获取 list 对象的所有属性，并将它们存储在一个数组中
                 const listKeys = Object.keys(v2.list);
