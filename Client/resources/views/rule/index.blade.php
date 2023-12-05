@@ -160,20 +160,19 @@
                                         <h4>{{ trans('rule.ruleTitles.' . $title) }}</h4>
                                     @endif
                                     @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts']))
-                                        <h4>({{ trans('rule.ruleTitles.general_rule') }})</h4>
+                                        <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                     @endif
                                     <ul class="number-bullets">
-                                        @foreach($items as $i => $v)
-                                            @if(!is_array($v))
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $v) }}</li>
+                                        @foreach($items as $key => $value)
+                                            @if(!is_array($value))
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $value) }}</li>
                                             @else
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
-                                                <ul class="{{ in_array($title, ['handicap']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                    @foreach($v as $x)
-                                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i . '_' . $x) }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key) }}</li>
+                                                <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
+                                                    @foreach($value as $subValue)
+                                                        <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key . '_' . $subValue) }}</li>
                                                     @endforeach
                                                 </ul>
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $i) }}</li>
                                             @endif
                                         @endforeach
                                     </ul>
