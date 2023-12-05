@@ -320,7 +320,7 @@
                 const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
                 // 遍历排序后的数组
                 sortedKeys.forEach((key, p) => {
-                    v.market_bet[key].forEach((v3) => {
+                    v.market_bet[key].forEach((v3, s) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
@@ -338,20 +338,18 @@
                                     createNewElement(v, v3, v.market_bet[key].length);
                                 });
                             } else {
-                                v.market_bet[key].forEach((v3, s) => {
-                                    let line = null
-                                    if( s === 0) {
-                                        if( p-1 > 0) {
-                                            line = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b))[p-1]
-                                        } else {
-                                            line = 'first'
-                                        }
+                                let line = null
+                                if( s === 0) {
+                                    if( p-1 > 0) {
+                                        line = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b))[p-1]
+                                    } else {
+                                        line = 'first'
                                     }
-                                    if( s > 0 ) {
-                                        line = v3.line
-                                    }
-                                    createNewElement(v, v3, v.market_bet[key].length, line);
-                                });
+                                }
+                                if( s > 0 ) {
+                                    line = v3.line
+                                }
+                                createNewElement(v, v3, v.market_bet[key].length, line);
                             }
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
