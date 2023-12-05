@@ -352,7 +352,7 @@
             el_toggle_content.append(league_wrapper)
         } else {
             if( prevId === 'first' ) {
-                el_toggle_content.after($(`#catWrapperTitle_${k}`))
+                $(`#catWrapperTitle_${k}`).after(league_wrapper)
             } else {
                 el_toggle_content.find(`.leagueWrapper[key=${prevId}]`).after(league_wrapper)
             }
