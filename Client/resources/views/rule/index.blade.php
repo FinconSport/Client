@@ -233,7 +233,7 @@
                                         @endforeach
                                     </ul>
                                     @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'rolling_ball_overUnder', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'team_goals_overUnder', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
-                                        <hr class="solid {{ in_array($title === 'betting_sizes' && $key === 28) ? 'd-none' : '' }}">
+                                        <hr class="solid {{ ($title === 'betting_sizes' && $key === 28) ? 'd-none' : '' }}">
                                     @endif
                                 @endforeach
                             </div>
