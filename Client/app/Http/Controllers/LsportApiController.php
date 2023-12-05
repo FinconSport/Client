@@ -1850,44 +1850,6 @@ class LsportApiController extends Controller {
                 }
             }
         }
-
-        /////////////////////////
-        // 判斷水位設定
-        
-        // 取得配置
-        $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
-
-        // 沒有配置的
-        if (!isset($default_market_bet_llimit[$status_type_name][$sport_id][$market_id])) {
-            $market_rate_limit = 0;
-        } else {
-            $market_rate_limit = $default_market_bet_llimit[$status_type_name][$sport_id][$market_id];
-        }
-
-        foreach ($data['list']['market'] as $k => $v) {
-            $market_id = $v['market_id'];
-            foreach ($v['market_bet'] as $kk => $vv) {
-                $is_adjusted = true;
-                $different_price = 0;
-                foreach ($vv as $kkk => $vvv) {
-                    if ($vvv['price'] > $market_rate_limit) {
-                        $is_adjusted = false;
-                    } else {
-                        $tmp_different_price = $market_rate_limit - $vvv['price'];
-                        if ($tmp_different_price > $different_price) {
-                            $different_price = $tmp_different_price;
-                        }
-                    }
-                }
-
-                if ($is_adjusted) {
-                    foreach ($vv as $kkk => $vvv) {
-                        $vvv['price'] = $vvv['price'] + $different_price;
-                        $data['list']['market'][$k]['market_bet'][$kk][$kkk]['price'] = $vvv['price'] . "";
-                    } 
-                }
-            }
-        }
         
         /////////////////////////////////////////////////////////////////
         // gzip
