@@ -297,6 +297,34 @@
        
 
         // update content
+        // check exist bet type content is still exist in the data
+        $('#bettingTypeContainer .bettingtype-container').each(function() {
+            let priority = parseInt($(this).attr('priority'))
+            let result = null
+            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
+            if( !result ) {
+                $(this).remove()
+            }
+        });
+
+        // check exist bet item is still exist in the data
+        $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
+            const priority = parseInt($(this).attr('priority'));
+            const line = $(this).attr('line')
+            const market_bet_id = parseInt($(this).attr('market_bet_id'))
+            const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
+
+            // 遍历 market_bet 属性
+            var result = Object.values(resultArr.market_bet).find(marketBets => {
+                // 在每个 market_bet 数组中查找匹配的 market_bet_id
+                return marketBets.find(item => item.market_bet_id === market_bet_id);
+            });
+            
+            console.log(market_bet_id)
+            if (!result) {
+                $(this).remove();
+            }
+        });
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -322,9 +350,9 @@
                 sortedKeys.forEach((key, p) => {
                     v.market_bet[key].forEach((v3, s) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
-                        console.log(bet_item)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
+                            console.log(v3.market_bet_id)
                             if(v.priority === 8) { // 波膽
                                 const arr = v.market_bet[key]
                                 // 计算中间索引
@@ -448,34 +476,7 @@
             }
         });
 
-        // check exist bet type content is still exist in the data
-        $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
-            if( !result ) {
-                $(this).remove()
-            }
-        });
-
-        // check exist bet item is still exist in the data
-        $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
-            const priority = parseInt($(this).attr('priority'));
-            const line = $(this).attr('line')
-            const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
-
-            // 遍历 market_bet 属性
-            var result = Object.values(resultArr.market_bet).find(marketBets => {
-                // 在每个 market_bet 数组中查找匹配的 market_bet_id
-                return marketBets.find(item => item.market_bet_id === market_bet_id);
-            });
-
-            
-            if (!result) {
-                $(this).remove();
-            }
-        });
+       
 
         // 沒有盤口的tab隱藏
         let fullCounting = 0
@@ -556,7 +557,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView();
+                    // renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
