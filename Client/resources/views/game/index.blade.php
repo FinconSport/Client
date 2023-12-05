@@ -308,11 +308,9 @@
         // ===== 玩法排序 (全場->半場->單節) =====
 
         Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
-
             // 冰球 美足 略過 單雙
             if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
-
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
             // if not exist -> create
             if( bet_div.length === 0 ) createMarketContainer(k, v);
@@ -471,13 +469,17 @@
         gameLangTrans.catePriority.full.map( v => { 
             fullCounting += $(`.bettingtype-container[priority=${v}]`).length
         })
-        fullCounting === 0 ? $('.filterBtn[key="full"]').hide() : $('.filterBtn[key="full"]').show()
+        if( fullCounting === 0 ) {
+            $('.filterBtn[key="full"]').hide();
+            $('.filterBtn[key="full"]').removeClass('active')
+        } else {
+            $('.filterBtn[key="full"]').show()
+        }
 
         let halfCounting = 0
         gameLangTrans.catePriority.half.map( v => { 
             halfCounting += $(`.bettingtype-container[priority=${v}]`).length
         })
-
         if( halfCounting === 0 ) {
             $('.filterBtn[key="half"]').hide();
             $('.filterBtn[key="half"]').removeClass('active')
@@ -493,6 +495,7 @@
                 for (const subValue of value) {
                     if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
                         $(`.filterBtn[key=${key}]`).show();
+                        $(`.filterBtn[key=${key}]`).addClass('active')
                     }
                 }
             }
@@ -501,7 +504,6 @@
         if( $('.filterBtn.active').length === 0 ) {
             $('.filterBtn[key="all"]').addClass('active')
         } 
-
         // tab (show corresponding bet)
         $('.filterBtn.active').click()
     }
