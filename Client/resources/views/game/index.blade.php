@@ -341,14 +341,15 @@
                                 let line = null
                                 if( s === 0) {
                                     if( p-1 > 0) {
-                                        line = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b))[p-1]
+                                        line = sortedKeys[p-1]
                                     } else {
                                         line = 'first'
                                     }
                                 }
                                 if( s > 0 ) {
-                                    line = v3.line
+                                    line = v.main_line
                                 }
+                                console.log(p, sortedKeys)
                                 createNewElement(v, v3, v.market_bet[key].length, line);
                             }
                         } else {
@@ -630,6 +631,7 @@
     
 
     function createNewElement(v, v3, len, line=null) {
+        console.log(v3, line)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         // col setting
         commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 2 : null
@@ -647,6 +649,7 @@
         marketBetRateTemp.attr('bet_name', v3.market_bet_name + ' ' + v3.line);
         marketBetRateTemp.attr('bet_name_en', v3.market_bet_name_en);
         marketBetRateTemp.attr('line', v3.line);
+        marketBetRateTemp.attr('mainline', v.main_line)
         marketBetRateTemp.attr('league', matchListD.data.list.league_name);
         marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
         marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
@@ -697,7 +700,7 @@
                 if( line === 'first' ) {
                     bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
                 } else {
-                    bet_div.find(`[key="marketBetRateKey"][line="${line}"]`).after(marketBetRateTemp)
+                    bet_div.find(`[key="marketBetRateKey"][mainline="${line}"]`).after(marketBetRateTemp)
                 }
             } else {
                 bet_div.find('.marketBetRateContainer').append(marketBetRateTemp);
