@@ -354,7 +354,7 @@
         }
     }
 
-    function createFixtureCard(k, league_id, league_name, k3, v3) {
+    function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
@@ -463,7 +463,11 @@
         card.removeAttr('hidden')
         card.removeAttr('template')
         let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
-        league_toggle_content.append(card)
+        if( prevFixtureId === null ) {
+            league_toggle_content.append(card)
+        } else {
+            league_toggle_content.find(`#${prevFixtureId}`).after(card)
+        }
     }
 
     function createBetArea(k, priorityArr, v3, k3, league_name, s, card, stageBet = 0) {
@@ -725,8 +729,7 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
-                listKeys.forEach((ele, ind) => {
-                    console.log(ele, ind)
+                listKeys.forEach((ele, fixture_ind) => {
                     let k3 = ele
                     let v3 = v2.list[ele]
 
@@ -1008,7 +1011,9 @@
                             // console.log(prevId)
                             createLeague(k, k2, v2, prevId)
                         } 
-                        createFixtureCard(k, v2.league_id, v2.league_name, k3, v3)
+
+                        let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : null
+                        createFixtureCard(k, v2.league_id, v2.league_name, k3, v3, prevFixtureId)
                     }
                 })
             })
