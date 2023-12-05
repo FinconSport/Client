@@ -320,6 +320,7 @@
                 return marketBets.find(item => item.market_bet_id === market_bet_id);
             });
             
+            console.log(market_bet_id)
             if (!result) {
                 $(this).remove();
             }
@@ -349,9 +350,9 @@
                 sortedKeys.forEach((key, p) => {
                     v.market_bet[key].forEach((v3, s) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
-                        console.log(bet_item)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
+                            console.log(v3.market_bet_id)
                             if(v.priority === 8) { // 波膽
                                 const arr = v.market_bet[key]
                                 // 计算中间索引
@@ -556,7 +557,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView();
+                    // renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
