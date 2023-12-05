@@ -341,7 +341,7 @@
                                 let line = null
                                 if( s === 0) {
                                     if( p-1 > 0) {
-                                        line = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b))[p-1]
+                                        line = sortedKeys[p-1]
                                     } else {
                                         line = 'first'
                                     }
@@ -349,6 +349,7 @@
                                 if( s > 0 ) {
                                     line = v3.line
                                 }
+                                console.log(p, sortedKeys)
                                 createNewElement(v, v3, v.market_bet[key].length, line);
                             }
                         } else {
