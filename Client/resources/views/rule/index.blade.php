@@ -72,7 +72,7 @@
                                             <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_' . $i) }}</li>
                                         @endforeach
                                     </ul>
-                                    <hr class="solid">
+                                    <hr class="solid {{ ($title === 'overtime') ? 'd-none' : '' }}">
                                 @endforeach
                             </div>
                             <!-- basketball -->
@@ -116,7 +116,7 @@
                                             </ul>
                                         @endif
                                     </ul>
-                                    <hr class="solid">
+                                    <hr class="solid {{ ($title === 'total_points') ? 'd-none' : '' }}">
                                 @endforeach
                             </div>
                             <!-- Soccor -->
@@ -182,8 +182,8 @@
                                                         @endforeach
                                                     @endif
                                                 </ul>
-                                                <ul class="{{ in_array($title, ['betting_sizes']) ? 'alpha-bullets' : '' }}">
-                                                    @if($title === 'betting_sizes' && $key === 28)
+                                                @if($title === 'betting_sizes' && $key === 28)
+                                                    <ul class="alpha-bullets">
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $k => $g)
                                                             @if (is_array($g))
                                                                 <ul class="roman-bullets">
@@ -203,10 +203,10 @@
                                                                 <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k) }}</li>
                                                             @endif
                                                         @endforeach
-                                                    @endif
-                                                </ul>
-                                                <ul class="{{ in_array($title, [$key === 28]) ? 'number-bullets' : '' }}">
-                                                    @if(in_array($title, ['score_goal']))
+                                                    </ul>
+                                                @endif
+                                                @if(in_array($title, ['score_goal']))
+                                                    <ul class="number-bullets">
                                                         @foreach(trans('rule.ruleContentsSoccor.rc_soccor_52') as $k => $g)
                                                             <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52.' . $k) }}</li>
                                                         @endforeach
@@ -225,8 +225,8 @@
                                                             </ul>
                                                         </ul>
                                                         <li>{{ trans('rule.ruleTitles.example_2') }}</li>
-                                                    @endif
-                                                </ul>
+                                                    </ul>
+                                                @endif
                                             @else
                                                 <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $value) }}</li>
                                             @endif
@@ -261,7 +261,7 @@
                                             <li>{{ trans('rule.rulesContentsIceHockey.rc_IceHockey_' . $i) }}</li>
                                         @endforeach
                                     </ul>
-                                    <hr class="solid">
+                                    <hr class="solid {{ ($title === 'inPlay_overUnder') ? 'd-none' : '' }}">
                                 @endforeach
                             </div>
                             <!-- american football -->
@@ -288,7 +288,7 @@
                                             <li>{{ trans('rule.rulesContentsAmericanFootball.rc_AmericanFootball_' . $i) }}</li>
                                         @endforeach
                                     </ul>
-                                    <hr class="solid">
+                                    <hr class="solid {{ ($title === 'inPlay_overUnder') ? 'd-none' : '' }}">
                                 @endforeach
                             </div>
                         </div>
