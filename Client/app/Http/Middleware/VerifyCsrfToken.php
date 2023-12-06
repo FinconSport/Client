@@ -32,7 +32,7 @@ class VerifyCsrfToken extends Middleware
             '/api/v2/m_game_bet',
             '/api/v2/balance_logs',
 
-            '/api/v2/match_list_b',
+            '/api/v2/match_index_b',
             //////////////////////////
             
             '/api/test'
