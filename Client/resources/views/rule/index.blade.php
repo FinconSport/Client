@@ -273,8 +273,8 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
-                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_4') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
