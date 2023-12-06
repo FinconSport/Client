@@ -54,6 +54,11 @@ class LsportFixture extends CacheModel
                 ->where("league_id",$league_id)
                 ->where("start_time", ">=", $start_time)
                 ->where("start_time", "<", $end_time)
+                ->whereIn('fixture_id', function($query) {
+                    $query->select('fixture_id')
+                          ->from('lsport_risk')
+                          ->where('status', 1);
+                })
                 ->whereIn("status", [3,4,5,6,7])
                 ->orderBy("start_time","DESC")
                 ->get();
@@ -61,6 +66,11 @@ class LsportFixture extends CacheModel
                 $return = LsportFixture::where("sport_id", $sport_id)
                 ->where("start_time", ">=", $start_time)
                 ->where("start_time", "<", $end_time)
+                ->whereIn('fixture_id', function($query) {
+                    $query->select('fixture_id')
+                          ->from('lsport_risk')
+                          ->where('status', 1);
+                })
                 ->whereIn("status", [3,4,5,6,7])
                 ->orderBy("start_time","DESC")
                 ->get();
