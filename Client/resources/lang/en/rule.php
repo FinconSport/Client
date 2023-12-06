@@ -482,16 +482,27 @@ return [
 			// "加時賽與點球大戰將包括在內。",
 	],
 	"rulesContentsIceHockey" => [
-		"rc_IceHockey_1" => "Predict which team will win the game.",
-			// "預測哪支球隊將贏得比賽。",
-		"rc_IceHockey_2" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
-			// "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
-		"rc_IceHockey_3" => "Predict whether the total goals in the match/period will be over or under the specified handicap score",
-			// "預測賽事/賽節總進球數將大於或小於盤口分數。",
-		"rc_IceHockey_4" => "Bets on over/under will be settled if there is a clear result in the match before the interruption, and there is no subsequent significant event that would affect the outcome. In any other circumstances, the bets will be voided.",
-			// "如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
+		"moneyline_1" => "Predict which team will win the game.",
+		// "預測哪支球隊將贏得比賽。",
+
+		"getTheBall_1" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
+		//"預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+		
+		"inplayHandicap_1" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
+		//"預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+
+		"overUnder_1" => "Predict whether the total goals in the match/period will be over or under the specified handicap score",
+		//"預測賽事/賽節總進球數將大於或小於盤口分數。",
+		"overUnder_2" => "Bets on over/under will be settled if there is a clear result in the match before the interruption, and there is no subsequent significant event that would affect the outcome. In any other circumstances, the bets will be voided.",
+		//"如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
+		
+		"inPlayOverUnder_1" => "Predict whether the total goals in the match/period will be over or under the specified handicap score",
+		//"預測賽事/賽節總進球數將大於或小於盤口分數。",
+		"inPlayOverUnder_2" => "Bets on over/under will be settled if there is a clear result in the match before the interruption, and there is no subsequent significant event that would affect the outcome. In any other circumstances, the bets will be voided.",
+		//"如果賽事中斷前已有明確結果並且之後沒有任何顯著會影響賽事結果的情況，大小球投注的注單才會被結算。若遇到任何其他情況，注單將一律被取消。",
 	],
-	"rulesGeneralAmericanFootball" => [
+
+	"generalRulesAmericanFootball" => [
 		"gr_AmericanFootball_1" => "The final result is determined based on the score after four quarters, including overtime if applicable.",
 			// "最終賽果是以全場四個時節後的比分為準（包括加時賽）。",
 		"gr_AmericanFootball_2" => "Bets on individual quarters or halves will only be considered valid after the completion of the corresponding game segment.",
@@ -506,24 +517,38 @@ return [
 			// "如比賽在法定時間提前進行，在比賽開始前的投注依然有效，在比賽開始後的所有投注均視為無效(滾球投注另作別論)。",
 	],
 	"rulesContentsAmericanFootball" => [
-		"rc_AmericanFootball_1" => "Predict which team will win the game. The bookmaker provides two teams as betting options.",
+		"moneyline_1" => "Predict which team will win the game. The bookmaker provides two teams as betting options.",
 			// "預測哪一支球隊將在比賽勝出。盤口提供兩支球隊為投注選項。",
-		"rc_AmericanFootball_2" => "The match handicap includes bets for the full game as well as halftime.",
+		"moneyline_2" => "The match handicap includes bets for the full game as well as halftime.",
 			// "賽事盤口包括全場、半場投注。",
-		"rc_AmericanFootball_3" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
+
+		"getTheBall_1" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
 			// "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
-		"rc_AmericanFootball_4" => "If the match is canceled or interrupted during the second half, all first-half bets will remain valid.",
+		"getTheBall_2" => "If the match is canceled or interrupted during the second half, all first-half bets will remain valid.",
 			// "如果賽事在下半場取消或中斷，所有上半場注單保持有效。",
-		"rc_AmericanFootball_5" => ".If the match is canceled or interrupted during the second half, all second-half bets will be considered void.",
+		"getTheBall_3" => ".If the match is canceled or interrupted during the second half, all second-half bets will be considered void.",
 			// "如果賽事在下半場取消或中斷，所有下半場注單將被視為無效。",
-		"rc_AmericanFootball_6" => "Settlement is determined based on a 0-0 score at the end of the match, according to the point spread specified in the handicap at the time of betting. The score at the time of placing the bet does not affect the settlement.",
+		"getTheBall_4" => "The match handicap includes bets for the full game as well as halftime.",
+			// "賽事盤口包括全場、半場投注。",
+
+		"inplayHandicap_1" => "Predict which team will win a specific quarter or the entire game based on the designated point spread in the handicap.",
+			// "預測哪一支球隊在盤口指定的讓分數贏得某個時節或全場比賽。",
+		"inplayHandicap_2" => "Settlement is determined based on a 0-0 score at the end of the match, according to the point spread specified in the handicap at the time of betting. The score at the time of placing the bet does not affect the settlement.",
 			// "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。投注當時的比分對結算沒有影響。",
-		"rc_AmericanFootball_7" => "Predict whether the total score of the match will be over or under the specified over/under points in the handicap.",
+		"inplayHandicap_3" => "The match handicap includes bets for the full game as well as halftime.",
+			// "賽事盤口包括全場、半場投注。",
+
+		"overUnder_1" => "Predict whether the total score of the match will be over or under the specified over/under points in the handicap.",
 			// "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
-		"rc_AmericanFootball_8" => "Predict whether the total score of the match will be over or under the specified over/under points in the handicap.",
+		"overUnder_2" => "The match handicap includes bets for the full game as well as halftime.",
+			// "賽事盤口包括全場、半場投注。",
+		
+		"inPlayOverUnder_1" => "Predict whether the total score of the match will be over or under the specified over/under points in the handicap.",
 			// "預測賽事總比分將大於或小於在盤口指定的大/小盤分數。",
-		"rc_AmericanFootball_9" => "Settlement is determined based on a 0-0 score at the end of the match, according to the point spread specified in the handicap at the time of betting. The score at the time of placing the bet does not affect the settlement.",
+		"inPlayOverUnder_2" => "Settlement is determined based on a 0-0 score at the end of the match, according to the point spread specified in the handicap at the time of betting. The score at the time of placing the bet does not affect the settlement.",
 			// "結算是以0-0的比分在比賽結束後按盤口開出的讓分數做裁決。",
+		"inPlayOverUnder_3" => "The match handicap includes bets for the full game as well as halftime.",
+			// "賽事盤口包括全場、半場投注。",
 	],
 	// 後端
 ];
