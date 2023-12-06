@@ -630,12 +630,12 @@ class LsportApiController extends Controller {
                         if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
                             $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
-
-                            if (isset($risk_data[$market_id])) {
-                                foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
-                                    if ($risk_config !== null) {
-
-                                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$risk_key]['status'] = $risk_config;
+                            foreach ($market_data['list'] as $line => $bet_data) {
+                                if (isset($risk_data[$market_id])) {
+                                    foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
+                                        if ($risk_config !== null) {
+                                            $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                        }
                                     }
                                 }
                             }
