@@ -226,13 +226,13 @@ class CommonRules extends React.Component {
                 <div style={RulesBetWrapper}>
                     <div style={TabMenuWrapperCon}>
                         {Array.from({ length: 5 }, (_, index) => (
-                                <button
-                                    key={index + 1}
-                                    onClick={() => this.handleTabChange(index + 1)}
-                                    style={this.state.activeTab === index + 1 ? TabMenuBtnActive : TabMenuBtn}
-                                >
-                                    {langText.CommonRulesTitles.sportName[index + 1]}
-                                </button>
+                            <button
+                                key={index + 1}
+                                onClick={() => this.handleTabChange(index + 1)}
+                                style={this.state.activeTab === index + 1 ? TabMenuBtnActive : TabMenuBtn}
+                            >
+                                {langText.CommonRulesTitles.sportName[index + 1]}
+                            </button>
                         ))}
                     </div>
                     <div id='GameRulesMain' style={PageContainer}>
@@ -241,7 +241,7 @@ class CommonRules extends React.Component {
                             {/* ---soccor */}
                             <div style={ this.state.activeTab === 1 ? ShowTabContent : HideTabContent }>
                                 <div style={TabWrapperTitle}>
-                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[2]}</h1>
+                                    <h1 style={h1}>{langText.CommonRulesTitles.sportName[1]}</h1>
                                 </div>
                                 <div style={TabWrapperContent}>
                                     <h2 style={h2}>{langText.CommonRulesTitles.generalrule}</h2>

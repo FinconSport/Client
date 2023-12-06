@@ -124,118 +124,230 @@
                                 <h3>{{ trans('rule.ruleTitles.sportName.3') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @foreach(trans('rule.generalRulesSoccor') as $key => $grRule)
-                                        <li>{{ trans('rule.generalRulesSoccor.' . $key) }}</li>
-                                    @endforeach
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_2') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_3') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_4') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_5') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_6') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_7') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_8') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_9') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_10') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_11') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_12') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_13') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_14') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_15') }}</li>
+                                    <li>{{ trans('rule.generalRulesSoccor.gr_soccor_16') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                @foreach([
-                                    'handicap' => [1, 2, 3, 4, 5 => true, 6, 7, 8],
-                                    'fulltime_handicap_result' => [9, 10, 11, 12 => true, 13],
-                                    'handicap_1stHalf' => [14, 15, 16],
-                                    'inplay_handicap' => [17, 18],
-                                    'ot_handicap' => [19, 20],
-                                    'ot_let_1stHalf' => [21, 22, 23],
-                                    'betting_sizes' => [24, 25, 26, 27 => true, 28 => true],
-                                    'goal_largeSmall' => [29, 30],
-                                    'goal_overUnder_1stHalf' => [31, 32, 33],
-                                    'rolling_ball_overUnder' => [34],
-                                    'ot_goal_overUnder' => [35, 36, 37],
-                                    'ot_goals_overUnder_1stHalf' => [38, 39, 40],
-                                    'team_goals_overUnder' => [41, 42, 43, 44],
-                                    'moneyline' => [45, 46],
-                                    'win_alone' => [47],
-                                    'win_alone_1stHalf' => [48],
-                                    'score_goal' => [49, 50, 51 => true],
-                                    'ot_win_alone' => [55, 56],
-                                    'ot_winAlone_1stHalf' => [57, 58, 59],
-                                    'crts' => [60, 61, 62],
-                                    'crts_1stHalf' => [63, 64, 65, 66],
-                                ] as $title => $items)
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'betting_sizes', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'team_goals_overUnder', 'moneyline', 'ot_win_alone', 'ot_winAlone_1stHalf', 'crts']))
-                                        <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
-                                    @endif
-                                    @if(in_array($title, ['goal_largeSmall', 'goal_overUnder_1stHalf', 'goal_overUnder_1stHalf', 'rolling_ball_overUnder', 'win_alone', 'win_alone_1stHalf', 'score_goal', 'crts_1stHalf']))
-                                        <h4>{{ trans('rule.ruleTitles.' . $title) }}</h4>
-                                    @endif
-                                    @if(in_array($title, ['handicap', 'betting_sizes', 'moneyline', 'crts']))
-                                        <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
-                                    @endif
-                                    <ul class="number-bullets">
-                                        @foreach($items as $key => $value)
-                                            @if($value === true)
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $key) }}</li>
-                                                <ul class="{{ in_array($title, ['handicap', 'betting_sizes']) ? 'alpha-bullets' : '' }} {{ in_array($title, ['fulltime_handicap_result']) ? 'number-bullets' : '' }}">
-                                                    @if(in_array($title, ['handicap']))
-                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_5_0') as $k => $grRule)
-                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_5_0.' . $k) }}</li>
-                                                        @endforeach
-                                                    @endif
-                                                    @if(in_array($title, ['fulltime_handicap_result']))
-                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_12_0') as $k => $grRule)
-                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_12_0.' . $k) }}</li>
-                                                        @endforeach
-                                                    @endif
-                                                    @if($title === 'betting_sizes' && $key === 27)
-                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_27_0') as $k => $grRule)
-                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_27_0.' . $k) }}</li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                                @if($title === 'betting_sizes' && $key === 28)
-                                                    <ul class="alpha-bullets">
-                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_28_0') as $k => $g)
-                                                            @if (is_array($g))
-                                                                <ul class="roman-bullets">
-                                                                    @foreach($g as $sk => $sr)
-                                                                        @if (is_array($sr))
-                                                                            <ul class="roman-bullets">
-                                                                                @foreach($sr as $sSk => $sSr)
-                                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k . '.' . $sk . '.' . $sSk) }}</li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                        @else
-                                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k . '.' . $sk) }}</li>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </ul>
-                                                            @else
-                                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_28_0.' . $k) }}</li>
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                                @if(in_array($title, ['score_goal']))
-                                                    <ul class="number-bullets">
-                                                        @foreach(trans('rule.ruleContentsSoccor.rc_soccor_52') as $k => $g)
-                                                            <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_52.' . $k) }}</li>
-                                                        @endforeach
-                                                        <ul class="upper-alpha-bullets">
-                                                            <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li>  
-                                                            <ul class="roman-bullets">
-                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_53') as $k => $g)
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_53.' . $k) }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                            <li><h4>{{ trans('rule.ruleTitles.example_2') }}</h4></li>  
-                                                            <ul class="roman-bullets">
-                                                                @foreach(trans('rule.ruleContentsSoccor.rc_soccor_54') as $k => $g)
-                                                                    <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_54.' . $k) }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </ul>
-                                                        <li>{{ trans('rule.ruleTitles.example_2') }}</li>
-                                                    </ul>
-                                                @endif
-                                            @else
-                                                <li>{{ trans('rule.ruleContentsSoccor.rc_soccor_' . $value) }}</li>
-                                            @endif
-                                        @endforeach
+                                <h3>{{ trans('rule.ruleTitles.handicap') }}</h3>
+                                <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_4') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_5') }}</li>
+                                    <ul class="alpha-bullets">
+                                        <li>{{ trans('rule.ruleContentsSoccor.handicap_5_1') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.handicap_5_2') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.handicap_5_3') }}</li>
                                     </ul>
-                                    @if(in_array($title, ['handicap', 'fulltime_handicap_result', 'handicap_1stHalf', 'inplay_handicap', 'ot_handicap', 'ot_let_1stHalf', 'rolling_ball_overUnder', 'ot_goal_overUnder', 'ot_goals_overUnder_1stHalf', 'team_goals_overUnder', 'score_goal', 'ot_win_alone', 'ot_winAlone_1stHalf']))
-                                        <hr class="solid {{ ($title === 'betting_sizes' && $key === 28) ? 'd-none' : '' }}">
-                                    @endif
-                                @endforeach
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_6') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_7') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap_8') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.fulltime_handicap_result') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4') }}</li>
+                                    <ul class="number-bullets">
+                                        <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_1') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_2') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_3') }}</li>
+                                    </ul>
+                                    <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_5') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.handicap_1stHalf') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.handicap1stHalf_3') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.inplayHandicap_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.inplayHandicap_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.ot_handicap') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otHandicap_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otHandicap_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.ot_let_1stHalf') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otLet1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otLet1stHalf_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.betting_sizes') }}</h3>
+                                <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_4') }}</li>
+                                    <ul class="alpha-bullets">
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_4_1') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_4_2') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_4_3') }}</li>
+                                    </ul>
+                                    <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5') }}</li>
+                                    <ul class="alpha-bullets">
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_1') }}</li>
+                                        <ul class="roman-bullets">
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_1_1') }}</li>
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_1_2') }}</li>
+                                        </ul>
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_2') }}</li>
+                                        <ul class="roman-bullets">
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_2_1') }}</li>
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_2_2') }}</li>
+                                        </ul>
+                                        <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_3') }}</li>
+                                        <ul class="roman-bullets">
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_3_1') }}</li>
+                                            <li>{{ trans('rule.ruleContentsSoccor.bettingSizes_5_3_2') }}</li>
+                                        </ul>
+                                    </ul>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.goal_largeSmall') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.goalLargeSmall_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.goalLargeSmall_2') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.goalOverUnder1stHalf') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.goalOverUnder1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.goalOverUnder1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.goalOverUnder1stHalf_3') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.rolling_ball_overUnder') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.rollingBallOverUnder_1') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.ot_goal_overUnder') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalOverUnder_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalOverUnder_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalOverUnder_3') }}</li>
+                                </ul>
+
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.ot_goals_overUnder_1stHalf') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalsOverUnder1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalsOverUnder1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otGoalsOverUnder1stHalf_3') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.team_goals_overUnder') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                584
+                                <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
+                                <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.moneyline_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.moneyline_2') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.win_alone') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.winAlone_1') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.win_alone_1stHalf') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.winAlone1stHalf_1') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.score_goal') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3') }}</li>
+                                    <ul class="number-bullets">
+                                        <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_3') }}</li>
+                                        <ul class="upper-alpha-bullets">
+                                            <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li> 
+                                            <ul class="roman-bullets">
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1_1') }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1_2') }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1_3') }}</li>
+                                            </ul> 
+                                            <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li> 
+                                            <ul class="roman-bullets">
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2_1') }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2_2') }}</li>
+                                                <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2_3') }}</li>
+                                            </ul> 
+                                        </ul>
+                                    </ul>
+                                    <li>{{ trans('rule.ruleTitles.example_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+
+                                <h3>{{ trans('rule.ruleTitles.ot_win_alone') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otWinAlone_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otWinAlone_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.ot_winAlone_1stHalf') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.otWinAlone1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otWinAlone1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otWinAlone1stHalf_3') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                
+                                <h3>{{ trans('rule.ruleTitles.crts') }}</h3>
+                                <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts_3') }}</li>
+                                </ul>
+                                <h4>{{ trans('rule.ruleTitles.crts_1stHalf') }}</h4>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts1stHalf_1') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts1stHalf_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.crts1stHalf_4') }}</li>
+                                </ul>
                             </div>
                             <!-- ice hockey -->
                             <div class="tab-pane" id="nav4" role="tabpanel" aria-labelledby="nav-4">
