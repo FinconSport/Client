@@ -1977,7 +1977,6 @@ class LsportApiController extends Controller {
 
         $data = Redis::hget('lsport_risk_match_list', $key);
         $data = json_decode($data,true);
-
         
         //////////////////////////////////
         // 取得賽事資料
@@ -1986,14 +1985,20 @@ class LsportApiController extends Controller {
             $this->ApiError("02");
         }
 
-        dd($return);
-        $current_league_id = 1;
+        $current_league_id = $return['league_id'];
 
-
+        //////////////////////////////////
 
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $sport) {
               foreach ($sport['list'] as $league_id => $league) {
+                
+                // game_index 限定
+                if ($current_league_id != $league_id) {
+                    unset($data[$k][$sport_id]['list'][$league_id]);
+                    continue;
+                }
+
                 foreach ($league['list'] as $fixture_id => $fixture) {
       
                     // game_index 限定邏輯
