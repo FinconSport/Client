@@ -248,7 +248,7 @@ return [
 		// "handicap_8" => "如果賽事在90分鐘結束前取消或中斷，所有注單將會被視為無效。",
 
 		"fulltimeHandicapResult_1" => "Bet on the full-time match result, taking into account the handicap adjustments, which can be a home win, away win, or a draw.",
-		// "fulltimeHandicapResult_2" => "投注一場球賽經讓球調整後的全場賽果是主勝、客勝或和局。",
+		// "fulltimeHandicapResult_1" => "投注一場球賽經讓球調整後的全場賽果是主勝、客勝或和局。",
 		"fulltimeHandicapResult_2" => "Full-time handicap results are based on the full-time result within the statutory match duration and do not include extra time or penalty shootout results.",
 		// "fulltimeHandicapResult_3" => "全場讓球賽果是根據法定比賽時間的全場賽果為準，不包括加時賽或點球大戰賽果。",
 		"fulltimeHandicapResult_3" => "The stronger team will give a handicap to the weaker team, and the outcome will be determined by the official result adjusted for the handicap. The handicap number is a whole number, such as one goal, two goals, three goals, etc. You can predict the home team win, draw, or away team win based on the adjusted result.",
@@ -333,11 +333,11 @@ return [
 		// "goalLargeSmall_2" => "如果比賽停止，取消或中斷，所有投注將被視為無效，除非在賽事取消或中斷前，結果已經明確。",
 
 		"goalOverUnder1stHalf_1" => "All first-half bets will be settled based on the result of the first 45 minutes of the match.",
-		// "goalOverUnder1stHalf_1" => "所有上半場的投注將以上半場45分鐘的賽果結算。",
-		"goalOverUnder1stHalf_1" => "If the match is canceled or interrupted during the first half for any reason, all first-half bets will be canceled unless there was a clear result before the match was canceled or interrupted.",
-		// "goalOverUnder1stHalf_1" => "如果賽事在上半場時節因任何理由取消或中斷，所有上半場注單將被取消。除非在賽事取消或中斷前，結果已經明確。",
-		"goalOverUnder1stHalf_1" => "If the match is canceled or interrupted during the second half or extra time for any reason, all first-half bets will remain valid.",
-		// "goalOverUnder1stHalf_1" => "如果賽事在下半場或加時時段因任何理由取消或中斷，所有上半場注單保持有效。",
+		// "goalOverUnder1stHalf_2" => "所有上半場的投注將以上半場45分鐘的賽果結算。",
+		"goalOverUnder1stHalf_2" => "If the match is canceled or interrupted during the first half for any reason, all first-half bets will be canceled unless there was a clear result before the match was canceled or interrupted.",
+		// "goalOverUnder1stHalf_2" => "如果賽事在上半場時節因任何理由取消或中斷，所有上半場注單將被取消。除非在賽事取消或中斷前，結果已經明確。",
+		"goalOverUnder1stHalf_3" => "If the match is canceled or interrupted during the second half or extra time for any reason, all first-half bets will remain valid.",
+		// "goalOverUnder1stHalf_3" => "如果賽事在下半場或加時時段因任何理由取消或中斷，所有上半場注單保持有效。",
 		
 		"rollingBallOverUnder_1" => "Settlement is based on the total number of goals scored by both teams within the 90 minutes.",
 		// "rollingBallOverUnder_1" => "結算是以雙方球隊在90分鐘內的總進球數為依據。",
@@ -421,7 +421,7 @@ return [
 		// "crts_3" => "全場波膽投注的結算根據90分鐘完場比分做出裁決。",
 		
 		"crts1stHalf_1" => "If the match is canceled, has a clear result, or all full-time correct score bets have 'other score' as the only possible winning option, the bets will be considered valid. All other bets will be considered void, as further goals after the match's outcome is determined do not affect the result.",
-		// "crts1stHalf_3" => "如果賽事取消，已有明確賽果或全場波膽投注在“其它比分”為僅有可能獲勝的選項，投注將被視為有效；其餘的投注則被視為無效，此是由於賽事無條件決定後面的進球不會影響賽事的結果。",
+		// "crts1stHalf_1" => "如果賽事取消，已有明確賽果或全場波膽投注在“其它比分”為僅有可能獲勝的選項，投注將被視為有效；其餘的投注則被視為無效，此是由於賽事無條件決定後面的進球不會影響賽事的結果。",
 		"crts1stHalf_2" => "Predict the exact half-time score of a specific match.",
 		// "crts1stHalf_2" => "預測一場特定賽事半場的準確比分。",
 		"crts1stHalf_3" => "Half-time correct score bets refer to bets placed on the first half of the match, and settlement is based on the score at the end of the first '45 minutes'.",

@@ -241,7 +241,7 @@
                                     <li>{{ trans('rule.ruleContentsSoccor.goalLargeSmall_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsSoccor.goalLargeSmall_2') }}</li>
                                 </ul>
-                                <h4>{{ trans('rule.ruleTitles.goalOverUnder1stHalf') }}</h4>
+                                <h4>{{ trans('rule.ruleTitles.goal_overUnder_1stHalf') }}</h4>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsSoccor.goalOverUnder1stHalf_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsSoccor.goalOverUnder1stHalf_2') }}</li>
@@ -277,7 +277,6 @@
                                     <li>{{ trans('rule.ruleContentsSoccor.teamGoalsOverUnder_2') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                584
                                 <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
                                 <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                 <ul class="number-bullets">
@@ -333,7 +332,7 @@
                                     <li>{{ trans('rule.ruleContentsSoccor.otWinAlone1stHalf_3') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                
+
                                 <h3>{{ trans('rule.ruleTitles.crts') }}</h3>
                                 <h4>{{ trans('rule.ruleTitles.general_rule') }}</h4>
                                 <ul class="number-bullets">
