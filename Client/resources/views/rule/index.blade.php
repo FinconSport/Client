@@ -33,47 +33,86 @@
                                 <h3>{{ trans('rule.ruleTitles.sportName.1') }}</h3>
                                 <h3>{{ trans('rule.ruleTitles.general_rule') }}</h3>
                                 <ul class="number-bullets">
-                                    @foreach(trans('rule.generalRulesBaseball') as $key => $grRule)
-                                        @if (is_array($grRule))
-                                            <ul>
-                                                @foreach($grRule as $subKey => $subRule)
-                                                    @if (is_array($subRule))
-                                                        <ul>
-                                                            @foreach($subRule as $subSubKey => $subSubRule)
-                                                                <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey . '.' . $subSubKey) }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        <li>{{ trans('rule.generalRulesBaseball.' . $key . '.' . $subKey) }}</li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            <li>{{ trans('rule.generalRulesBaseball.' . $key) }}</li>
-                                        @endif
-                                    @endforeach
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_2') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_3') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_4') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_5') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_6') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_7') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_8') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_9') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_10') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11') }}</li>
+                                    <ul>
+                                        <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_1') }}</li>
+                                        <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2') }}</li>
+                                        <ul>
+                                            <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_1') }}</li>
+                                            <li>{{ trans('rule.generalRulesBaseball.gr_baseball_11_2_2') }}</li>
+                                        </ul>
+                                    </ul>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.betting_type') }}</h3>
-                                @foreach([
-                                    'moneyline' => [1, 2],
-                                    'get_the_ball' => [3, 2],
-                                    'inplay_handicap' => [3, 2],
-                                    'total_score' => [4, 2, 5, 6, 7, 8],
-                                    'rolling_total_score' => [4, 9, 2],
-                                    'total_score_sd' => [10, 2],
-                                    'solo_win' => [11, 12],
-                                    'team_scores' => [13, 14],
-                                    'overtime' => [14, 15, 16],
-                                ] as $title => $items)
-                                    <h3>{{ trans('rule.ruleTitles.' . $title) }}</h3>
-                                    <ul class="number-bullets">
-                                        @foreach($items as $i)
-                                            <li>{{ trans('rule.ruleContentsBaseBall.rc_baseball_' . $i) }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <hr class="solid {{ ($title === 'overtime') ? 'd-none' : '' }}">
-                                @endforeach
+                                <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.moneyline_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.moneyline_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.getTheBall_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.getTheBall_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.inplayHandicap_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.inplayHandicap_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.total_score') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_2') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_3') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_4') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_5') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_6') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.rolling_total_score') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.rollingTotalScore_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.rollingTotalScore_2') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.rollingTotalScore_3') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.total_score_sd') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScoreSd_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.totalScoreSd_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.solo_win') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.soloWin_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.soloWin_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.team_scores') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.teamScores_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.teamScores_2') }}</li>
+                                </ul>
+                                <hr class="solid">
+                                <h3>{{ trans('rule.ruleTitles.overtime') }}</h3>
+                                <ul class="number-bullets">
+                                    <li>{{ trans('rule.ruleContentsBaseBall.overtime_1') }}</li>
+                                    <li>{{ trans('rule.generalRulesBaseball.overtime_2') }}</li>
+                                </ul>
                             </div>
                             <!-- basketball -->
                             <div class="tab-pane" id="nav2" role="tabpanel" aria-labelledby="nav-2">
