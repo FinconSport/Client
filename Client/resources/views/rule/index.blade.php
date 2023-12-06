@@ -382,7 +382,7 @@
                                                 <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1_2') }}</li>
                                                 <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_1_3') }}</li>
                                             </ul> 
-                                            <li><h4>{{ trans('rule.ruleTitles.example_1') }}</h4></li> 
+                                            <li><h4>{{ trans('rule.ruleTitles.example_2') }}</h4></li> 
                                             <ul class="roman-bullets">
                                                 <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2_1') }}</li>
                                                 <li>{{ trans('rule.ruleContentsSoccor.scoreGoal_3_2_2') }}</li>
@@ -390,7 +390,6 @@
                                             </ul> 
                                         </ul>
                                     </ul>
-                                    <li>{{ trans('rule.ruleTitles.example_2') }}</li>
                                 </ul>
                                 <hr class="solid">
 
