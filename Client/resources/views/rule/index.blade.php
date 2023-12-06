@@ -448,13 +448,13 @@
                                     <li>{{ trans('rule.rulesContentsIceHockey.inplayHandicap_1') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.overUnder') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.overUnder_1') }}</li>
                                     <li>{{ trans('rule.rulesContentsIceHockey.overUnder_2') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.ball') }})</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsIceHockey.inPlayOverUnder_1') }}</li>
                                     <li>{{ trans('rule.rulesContentsIceHockey.inPlayOverUnder_2') }}</li>
@@ -495,13 +495,13 @@
                                     <li>{{ trans('rule.rulesContentsAmericanFootball.inplayHandicap_3') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.overUnder') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.overUnder') }} ({{ trans('rule.ruleTitles.totalPoints') }})</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsAmericanFootball.overUnder_1') }}</li>
                                     <li>{{ trans('rule.rulesContentsAmericanFootball.overUnder_2') }}</li>
                                 </ul>
                                 <hr class="solid">
-                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }}</h3>
+                                <h3>{{ trans('rule.ruleTitles.inPlay_overUnder') }} ({{ trans('rule.ruleTitles.totalPoints') }})</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.rulesContentsAmericanFootball.inPlayOverUnder_1') }}</li>
                                     <li>{{ trans('rule.rulesContentsAmericanFootball.inPlayOverUnder_2') }}</li>
