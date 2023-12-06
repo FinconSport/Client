@@ -112,6 +112,7 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.overtime_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsBaseBall.overtime_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.overtime_3') }}</li>
                                 </ul>
                             </div>
                             <!-- basketball -->
@@ -242,6 +243,8 @@
                                         <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_1') }}</li>
                                         <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_2') }}</li>
                                         <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_3') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_4') }}</li>
+                                        <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_4_5') }}</li>
                                     </ul>
                                     <li>{{ trans('rule.ruleContentsSoccor.fulltimeHandicapResult_5') }}</li>
                                 </ul>
@@ -273,6 +276,7 @@
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsSoccor.otLet1stHalf_1') }}</li>
                                     <li>{{ trans('rule.ruleContentsSoccor.otLet1stHalf_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsSoccor.otLet1stHalf_3') }}</li>
                                 </ul>
                                 <hr class="solid">
 
