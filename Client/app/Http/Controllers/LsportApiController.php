@@ -554,12 +554,12 @@ class LsportApiController extends Controller {
     
                 // 填入risk資料
                 foreach ($fixture['list'] as $market_id => $market) {
-                  if (isset($data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                    $market_data = $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+                  if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+                    $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
                     if (isset($risk_data[$market_id])) {
                         foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
                             if ($risk_config !== null) {
-                                $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$risk_key]['status'] = $risk_config;
+                                $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$risk_key]['status'] = $risk_config;
                             }
                         }
                     }
@@ -627,8 +627,8 @@ class LsportApiController extends Controller {
       
                     // 填入risk資料
                     foreach ($fixture['list'] as $market_id => $market) {
-                        if (isset($data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                            $market_data = $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+                        if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+                            $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
                             $market_main_line = $market_data['main_line'];
 
@@ -636,14 +636,14 @@ class LsportApiController extends Controller {
 
                                 // match_index 限定邏輯
                                 if ($line != $market_main_line) {
-                                    unset($data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                    unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
                                     continue;
                                 }
 
                                 if (isset($risk_data[$market_id])) {
                                     foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
                                         if ($risk_config !== null) {
-                                            $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                            $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
                                         }
                                     }
                                 }
@@ -1995,15 +1995,15 @@ class LsportApiController extends Controller {
                 
                 // game_index 限定
                 if ($current_league_id != $league_id) {
-                    unset($data[$sport_id]['list'][$league_id]);
+                    unset($data[$k][$sport_id]['list'][$league_id]);
                     continue;
                 }
-
+                
                 foreach ($league['list'] as $fixture_id => $fixture) {
       
                     // game_index 限定邏輯
                     if ($fixture_id != $input['fixture_id']) {
-                        unset($data[$sport_id]['list'][$league_id]['list'][$fixture_id]);
+                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]);
                         continue;
                     }
 
@@ -2017,8 +2017,8 @@ class LsportApiController extends Controller {
       
                     // 填入risk資料
                     foreach ($fixture['list'] as $market_id => $market) {
-                        if (isset($data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                            $market_data = $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+                        if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+                            $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
                             $market_main_line = $market_data['main_line'];
 
@@ -2027,7 +2027,7 @@ class LsportApiController extends Controller {
                                 if (isset($risk_data[$market_id])) {
                                     foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
                                         if ($risk_config !== null) {
-                                            $data[$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                            $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
                                         }
                                     }
                                 }
@@ -2040,6 +2040,10 @@ class LsportApiController extends Controller {
               }
             }
           }
+
+        // game_index 限定 , 合併 early , living
+        $mergedData = array_merge($data['data']['early'], $data['data']['living']);
+        $data['data'] = $mergedData;
 
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
@@ -2645,7 +2649,7 @@ class LsportApiController extends Controller {
     if (count($tmp) >= 2) {
       $dd = $this->adjustNumbers($tmp, $market_bet_rate);
       foreach ($data as $k => $v) {
-        $data['price'] = $dd[$k] . "";
+        $data[$k]['price'] = $dd[$k] . "";
       }
     }
 
