@@ -640,7 +640,6 @@ class LsportApiController extends Controller {
                             }
 
                             if ($market_id == 226) {
-                                
                                 $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
                                 dd( $market_data , $risk_data[$market_id]);
                             }
