@@ -612,8 +612,15 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_risk_match_list', $key);
         $data = json_decode($data,true);
 
-        dd($data);
-        
+        // gzip
+        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
+            $data = $this->gzip($data);
+            $this->ApiSuccess($data, "01", true);
+        } else {
+            $this->ApiSuccess($data, "01", false);
+        }
+
+        ///////////////////////
         foreach ($data as $k => $v) {
           foreach ($v as $sport_id => $sport) {
             foreach ($sport['list'] as $league_id => $league) {
