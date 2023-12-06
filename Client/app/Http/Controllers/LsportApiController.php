@@ -630,16 +630,17 @@ class LsportApiController extends Controller {
                         if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
                             $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
-                            if ($market_id == 226) {
-                                dd( $market_data , $risk_data[$market_id]);
-                            }
-                            
+
                             if (isset($risk_data[$market_id])) {
                                 foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
                                     if ($risk_config !== null) {
                                         $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$risk_key]['status'] = $risk_config;
                                     }
                                 }
+                            }
+                            
+                            if ($market_id == 226) {
+                                dd( $market_data , $risk_data[$market_id]);
                             }
                         }
                     }
