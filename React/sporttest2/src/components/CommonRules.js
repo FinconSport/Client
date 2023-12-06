@@ -430,7 +430,6 @@ class CommonRules extends React.Component {
                                                     <li>{langText.CommonRulesSoccor.scoregoal_3_2_3}</li>
                                                 </ul>
                                             </ul>
-                                            <li>{langText.CommonRulesTitles.example2}</li>
                                         </ul>
                                     </ul>
                                     
