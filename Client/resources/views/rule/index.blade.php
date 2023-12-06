@@ -58,60 +58,60 @@
                                 <h3>{{ trans('rule.ruleTitles.moneyline') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.moneyline_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.moneyline_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.moneyline_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.get_the_ball') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.getTheBall_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.getTheBall_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.getTheBall_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.inplay_handicap') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.inplayHandicap_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.inplayHandicap_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.inplayHandicap_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.total_score') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.totalScore_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_2') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_3') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_4') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_5') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScore_6') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_4') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_5') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScore_6') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.rolling_total_score') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.rollingTotalScore_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.rollingTotalScore_2') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.rollingTotalScore_3') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.rollingTotalScore_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.rollingTotalScore_3') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.total_score_sd') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.totalScoreSd_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.totalScoreSd_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.totalScoreSd_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.solo_win') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.soloWin_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.soloWin_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.soloWin_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.team_scores') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.teamScores_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.teamScores_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.teamScores_2') }}</li>
                                 </ul>
                                 <hr class="solid">
                                 <h3>{{ trans('rule.ruleTitles.overtime') }}</h3>
                                 <ul class="number-bullets">
                                     <li>{{ trans('rule.ruleContentsBaseBall.overtime_1') }}</li>
-                                    <li>{{ trans('rule.generalRulesBaseball.overtime_2') }}</li>
+                                    <li>{{ trans('rule.ruleContentsBaseBall.overtime_2') }}</li>
                                 </ul>
                             </div>
                             <!-- basketball -->
