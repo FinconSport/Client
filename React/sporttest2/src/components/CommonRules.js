@@ -159,7 +159,7 @@ const h3 = {
 }
 
 const h4 = {
-    fontSize: '1.2rem',
+    fontSize: '1.01rem',
     fontWeight: '600',
 }
 
@@ -181,7 +181,7 @@ const alphaBullets = {
 
 const upperAlphaBullets = {
     listStyleType: 'upper-alpha',
-    padding: '0px',
+    paddingLeft: '15px',
 }
 
 const romanBullets = {
@@ -264,170 +264,170 @@ class CommonRules extends React.Component {
                                         <li>{langText.CommonRulesGeneralSoccor.grSoccor_16}</li>
                                     </ul>
                                     
-                                    <h2 style={h2}>{langText.CommonRulesTitles.handicap}</h2>
-                                    <h3 style={h3}>{langText.CommonRulesTitles.generalrule}</h3>
+                                    <h3 style={h2}>{langText.CommonRulesTitles.handicap}</h3>
+                                    <h4 style={h3}>{langText.CommonRulesTitles.generalrule}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_1}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_2}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_3}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_4}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_5}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_1}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_2}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_3}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_4}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_5}</li>
                                         <ul style={alphaBullets}>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_5_1}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_5_2}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_5_3}</li>
+                                            <li>{langText.CommonRulesSoccor.handicap_5_1}</li>
+                                            <li>{langText.CommonRulesSoccor.handicap_5_2}</li>
+                                            <li>{langText.CommonRulesSoccor.handicap_5_3}</li>
                                         </ul>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_6}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_7}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_8}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_6}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_7}</li>
+                                        <li>{langText.CommonRulesSoccor.handicap_8}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.fulltimehandicapresult}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_9}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_10}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_11}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_12}</li>
+                                        <li>{langText.CommonRulesSoccor.fulltimehandicapresult_1}</li>
+                                        <li>{langText.CommonRulesSoccor.fulltimehandicapresult_2}</li>
+                                        <li>{langText.CommonRulesSoccor.fulltimehandicapresult_2}</li>
+                                        <li>{langText.CommonRulesSoccor.fulltimehandicapresult_3}</li>
                                         <ul style={numBullets}>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_12_1}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_12_2}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_12_3}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_12_4}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_12_5}</li>
+                                            <li>{langText.CommonRulesSoccor.fulltimehandicapresult_4_1}</li>
+                                            <li>{langText.CommonRulesSoccor.fulltimehandicapresult_4_2}</li>
+                                            <li>{langText.CommonRulesSoccor.fulltimehandicapresult_4_3}</li>
+                                            <li>{langText.CommonRulesSoccor.fulltimehandicapresult_4_4}</li>
+                                            <li>{langText.CommonRulesSoccor.fulltimehandicapresult_4_5}</li>
                                         </ul>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_13}</li>
+                                        <li>{langText.CommonRulesSoccor.fulltimehandicapresult_5}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.handicapfirstHalf}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_14}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_15}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_16}</li>
+                                        <li>{langText.CommonRulesSoccor.handicapfirstHalf_1}</li>
+                                        <li>{langText.CommonRulesSoccor.handicapfirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.handicapfirstHalf_3}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_17}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_18}</li>
+                                        <li>{langText.CommonRulesSoccor.letsroll_1}</li>
+                                        <li>{langText.CommonRulesSoccor.letsroll_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.othandicap}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_19}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_20}</li>
+                                        <li>{langText.CommonRulesSoccor.othandicap_1}</li>
+                                        <li>{langText.CommonRulesSoccor.othandicap_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.otletfirstHalf}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_21}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_22}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_23}</li>
+                                        <li>{langText.CommonRulesSoccor.otletfirstHalf_1}</li>
+                                        <li>{langText.CommonRulesSoccor.otletfirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.otletfirstHalf_3}</li>
                                     </ul>
                                     
-                                    <h3 style={h3}>{langText.CommonRulesTitles.betting_sizes}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.bettingsizes}</h3>
                                     <h4 style={h4}>{langText.CommonRulesTitles.generalrule}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_24}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_25}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_26}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_27}</li>
+                                        <li>{langText.CommonRulesSoccor.bettingSizes_1}</li>
+                                        <li>{langText.CommonRulesSoccor.bettingSizes_2}</li>
+                                        <li>{langText.CommonRulesSoccor.bettingSizes_3}</li>
+                                        <li>{langText.CommonRulesSoccor.bettingSizes_4}</li>
                                         <ul style={alphaBullets}>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_27_1}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_27_2}</li>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_27_3}</li>
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_4_1}</li>
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_4_2}</li>
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_4_3}</li>
                                         </ul>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_28}</li>
+                                        <li>{langText.CommonRulesSoccor.bettingSizes_5}</li>
                                         <ul style={alphaBullets}>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_1}</li>
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_5_1}</li>
                                             <ul style={romanBullets}>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_1_1}</li>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_1_2}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_1_1}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_1_2}</li>
                                             </ul>   
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_2}</li> 
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_5_2}</li> 
                                             <ul style={romanBullets}>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_2_1}</li>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_2_2}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_2_1}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_2_2}</li>
                                             </ul> 
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_3}</li>
+                                            <li>{langText.CommonRulesSoccor.bettingSizes_5_3}</li>
                                             <ul style={romanBullets}>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_3_1}</li>
-                                                <li>{langText.CommonRulesContentsSoccor.rcSoccor_28_3_2}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_3_1}</li>
+                                                <li>{langText.CommonRulesSoccor.bettingSizes_5_3_2}</li>
                                             </ul>  
                                         </ul>
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.goallargeSmall}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_29}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_30}</li> 
+                                        <li>{langText.CommonRulesSoccor.goallargeSmall_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.goallargeSmall_2}</li> 
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.goaloverUnderfirstHalf}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_31}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_32}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_33}</li> 
+                                        <li>{langText.CommonRulesSoccor.goaloverUnderfirstHalf_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.goaloverUnderfirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.goaloverUnderfirstHalf_3}</li> 
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.rollingballoverUnder}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_34}</li>   
+                                        <li>{langText.CommonRulesSoccor. rollingballoverUnder_1}</li>   
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.otgoaloverUnder}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_35}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_36}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_37}</li> 
+                                        <li>{langText.CommonRulesSoccor.otgoaloverUnder_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.otgoaloverUnder_2}</li>
+                                        <li>{langText.CommonRulesSoccor.otgoaloverUnder_3}</li> 
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.otgoalsoverUnderfirstHalf}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_38}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_39}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_40}</li> 
+                                        <li>{langText.CommonRulesSoccor.otgoalsoverUnderfirstHalf_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.otgoalsoverUnderfirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.otgoalsoverUnderfirstHalf_3}</li> 
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.teamgoalsoverUnder}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_41}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_42}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_43}</li> 
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_44}</li> 
+                                        <li>{langText.CommonRulesSoccor.teamgoalsoverUnder_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.teamgoalsoverUnder_2}</li>
+                                        <li>{langText.CommonRulesSoccor.teamgoalsoverUnder_3}</li> 
+                                        <li>{langText.CommonRulesSoccor.teamgoalsoverUnder_4}</li> 
                                     </ul>
                                     
-                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.moneyline}</h3>
                                     <h4 style={h4}>{langText.CommonRulesTitles.generalrule}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_45}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_46}</li>
+                                        <li>{langText.CommonRulesSoccor.moneyline_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.moneyline_2}</li>
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.winalone}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_47}</li>   
+                                        <li>{langText.CommonRulesSoccor.winalone_1}</li>   
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.winalonefirstHalf}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_48}</li>   
+                                        <li>{langText.CommonRulesSoccor.winalonefirstHalf_1}</li>   
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.scoregoal}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_49}</li>   
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_50}</li>  
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_51}</li>  
+                                        <li>{langText.CommonRulesSoccor.scoregoal_1}</li>   
+                                        <li>{langText.CommonRulesSoccor.scoregoal_2}</li>  
+                                        <li>{langText.CommonRulesSoccor.scoregoal_3}</li>  
                                         <ul style={numBullets}>
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_52_1}</li>  
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_52_2}</li>  
-                                            <li>{langText.CommonRulesContentsSoccor.rcSoccor_52_3}</li>   
+                                            <li>{langText.CommonRulesSoccor.scoregoal_3_1}</li>  
+                                            <li>{langText.CommonRulesSoccor.scoregoal_3_2}</li>  
+                                            <li>{langText.CommonRulesSoccor.scoregoal_3_3}</li>   
                                             <ul style={upperAlphaBullets}>
                                                 <li><h4 style={h4}>{langText.CommonRulesTitles.example1}</h4></li>  
                                                 <ul style={romanBullets}>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_53_1}</li>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_53_2}</li>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_53_3}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_1_1}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_1_2}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_1_3}</li>
                                                 </ul>
                                                 <li><h4 style={h4}>{langText.CommonRulesTitles.example2}</h4></li>  
                                                 <ul style={romanBullets}>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_54_1}</li>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_54_2}</li>
-                                                    <li>{langText.CommonRulesContentsSoccor.rcSoccor_54_3}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_2_1}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_2_2}</li>
+                                                    <li>{langText.CommonRulesSoccor.scoregoal_3_2_3}</li>
                                                 </ul>
                                             </ul>
                                             <li>{langText.CommonRulesTitles.example2}</li>
@@ -436,30 +436,30 @@ class CommonRules extends React.Component {
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.otwinalone}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_55}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_56}</li>
+                                        <li>{langText.CommonRulesSoccor.otwinalone_1}</li>
+                                        <li>{langText.CommonRulesSoccor.otwinalone_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.otwinAlonefirstHalf}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_57}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_58}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_59}</li>
+                                        <li>{langText.CommonRulesSoccor.otwinAlonefirstHalf_1}</li>
+                                        <li>{langText.CommonRulesSoccor.otwinAlonefirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.otwinAlonefirstHalf_3}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.crts}</h3>
                                     <h4 style={h4}>{langText.CommonRulesTitles.generalrule}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_60}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_61}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_62}</li>
+                                        <li>{langText.CommonRulesSoccor.crts_1}</li>
+                                        <li>{langText.CommonRulesSoccor.crts_2}</li>
+                                        <li>{langText.CommonRulesSoccor.crts_3}</li>
                                     </ul>
                                     <h4 style={h4}>{langText.CommonRulesTitles.crtsfirstHalf}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_63}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_64}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_65}</li>
-                                        <li>{langText.CommonRulesContentsSoccor.rcSoccor_66}</li>
+                                        <li>{langText.CommonRulesSoccor.crtsfirstHalf_1}</li>
+                                        <li>{langText.CommonRulesSoccor.crtsfirstHalf_2}</li>
+                                        <li>{langText.CommonRulesSoccor.crtsfirstHalf_3}</li>
+                                        <li>{langText.CommonRulesSoccor.crtsfirstHalf_4}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -487,60 +487,60 @@ class CommonRules extends React.Component {
                                         </ul>
                                     </ul>
                                     
-                                    <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
-                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <h3 style={h2}>{langText.CommonRulesTitles.bettingtype}</h3>
+                                    <h4 style={h3}>{langText.CommonRulesTitles.moneyline}</h4>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_1}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_2}</li>
+                                        <li>{langText.CommonRulesBasketball.moneyline_1}</li>
+                                        <li>{langText.CommonRulesBasketball.moneyline_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_3}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_4}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_5}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_2}</li>
+                                        <li>{langText.CommonRulesBasketball.gettheball_1}</li>
+                                        <li>{langText.CommonRulesBasketball.gettheball_2}</li>
+                                        <li>{langText.CommonRulesBasketball.gettheball_3}</li>
+                                        <li>{langText.CommonRulesBasketball.gettheball_4}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_6}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_2}</li>
+                                        <li>{langText.CommonRulesBasketball.letsroll_1}</li>
+                                        <li>{langText.CommonRulesBasketball.letsroll_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.totalscore}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_7}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_2}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_8}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_9}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_4}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_10}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_11}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_1}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_2}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_3}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_4}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_5}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_6}</li>
+                                        <li>{langText.CommonRulesBasketball.totalscore_7}</li>
                                         <ul style={alphaBullets}>
-                                            <li>{langText.CommonRulesContentsBasketball.rcBasketball_11_1}</li>
-                                            <li>{langText.CommonRulesContentsBasketball.rcBasketball_11_2}</li>
+                                            <li>{langText.CommonRulesBasketball.totalscore_7_1}</li>
+                                            <li>{langText.CommonRulesBasketball.totalscore_7_2}</li>
                                         </ul>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.rollingtotalscore}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_7}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_12}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_8}</li>
+                                        <li>{langText.CommonRulesBasketball.rollingtotalscore_1}</li>
+                                        <li>{langText.CommonRulesBasketball.rollingtotalscore_2}</li>
+                                        <li>{langText.CommonRulesBasketball.rollingtotalscore_3}</li>
                                     </ul>
                                     
-                                    <h3 style={h3}>{langText.CommonRulesTitles.team_scores}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.teamscores}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_13}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_14}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_15}</li>
+                                        <li>{langText.CommonRulesBasketball.teamscores_1}</li>
+                                        <li>{langText.CommonRulesBasketball.teamscores_2}</li>
+                                        <li>{langText.CommonRulesBasketball.teamscores_3}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.totalpoints}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_16}</li>
-                                        <li>{langText.CommonRulesContentsBasketball.rcBasketball_2}</li>
+                                        <li>{langText.CommonRulesBasketball.totalpoints_1}</li>
+                                        <li>{langText.CommonRulesBasketball.totalpoints_2}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -573,65 +573,66 @@ class CommonRules extends React.Component {
                                             </ul>
                                         </ul>
                                     </ul>
-
+                                    
                                     <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
-                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.moneyline}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_1}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.moneyline_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.moneyline_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_3}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.gettheball_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.gettheball_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_3}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.letsroll_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.letsroll_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.totalscore}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_4}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_5}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_6}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_7}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_8}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_3}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_4}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_5}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscore_6}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.rollingtotalscore}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_4}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_9}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.rollingtotalscore_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.rollingtotalscore_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.rollingtotalscore_3}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.totalscoresd}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_10}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscoresd_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.totalscoresd_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.solowin}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_11}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_12}</li>
+                                        <li>{langText.CommonRulesBaseBall.solowin_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.solowin_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.teamscores}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_13}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_14}</li>
+                                        <li>{langText.CommonRulesBaseBall.teamscores_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.teamscores_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.overtime}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_14}</li>
-                                        <li>{langText.CommonRulesContentsBaseBall.rcBaseball_15}</li>
+                                        <li>{langText.CommonRulesBaseBall.overtime_1}</li>
+                                        <li>{langText.CommonRulesBaseBall.overtime_2}</li>
+                                        <li>{langText.CommonRulesBaseBall.overtime_3}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -651,33 +652,33 @@ class CommonRules extends React.Component {
                                         <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_5}</li>
                                         <li>{langText.CommonRulesGeneralIceHockey.grIceHockey_6}</li>
                                     </ul>
-
+                                    
                                     <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
-                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.moneyline}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_1}</li>
+                                        <li>{langText.CommonRulesIceHockey.moneyline_1}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_2}</li>
+                                        <li>{langText.CommonRulesIceHockey.gettheball_1}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_2}</li>
+                                        <li>{langText.CommonRulesIceHockey.letsroll_1}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.overUnder} ({langText.CommonRulesTitles.ball})</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_3}</li>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_4}</li>
+                                        <li>{langText.CommonRulesIceHockey.overUnder_1}</li>
+                                        <li>{langText.CommonRulesIceHockey.overUnder_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.inPlayOverUnder} ({langText.CommonRulesTitles.ball})</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_3}</li>
-                                        <li>{langText.CommonRulesContentsIceHockey. rcIceHockey_4}</li>
+                                        <li>{langText.CommonRulesIceHockey.inPlayOverUnder_1}</li>
+                                        <li>{langText.CommonRulesIceHockey.inPlayOverUnder_2}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -697,46 +698,43 @@ class CommonRules extends React.Component {
                                         <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_5}</li>
                                         <li>{langText.CommonRulesGeneralAmericanFootball.grAmericanFootball_6}</li>
                                     </ul>
-
+                                    
                                     <h2 style={h2}>{langText.CommonRulesTitles.bettingtype}</h2>
-                                    <h3 style={h3}>{langText.CommonRulesTitles.solowinners}</h3>
+                                    <h3 style={h3}>{langText.CommonRulesTitles.moneyline}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_1}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.moneyline_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.moneyline_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.gettheball}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_3}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_4}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_5}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.gettheball_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.gettheball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.gettheball_3}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.gettheball_4}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.letsroll}</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_3}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_6}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.letsroll_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.letsroll_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.letsroll_3}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.overUnder} ({langText.CommonRulesTitles.totalPoints})</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_7}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.overUnder_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.overUnder_2}</li>
                                     </ul>
                                     
                                     <h3 style={h3}>{langText.CommonRulesTitles.inPlayOverUnder} ({langText.CommonRulesTitles.totalPoints})</h3>
                                     <ul style={numBullets}>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_8}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_9}</li>
-                                        <li>{langText.CommonRulesContentsAmericanFootball.rcAmericanFootball_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.inPlayOverUnder_1}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.inPlayOverUnder_2}</li>
+                                        <li>{langText.CommonRulesContentsAmericanFootball.inPlayOverUnder_3}</li>
                                     </ul>
                                 </div>
                             </div>
-                            
-
-                            
                         </div>
                     </div>
                     <TbArrowBigUpFilled onClick={this.scrollToTop} style={ ToTopStyle }/>
