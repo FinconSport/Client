@@ -2042,8 +2042,8 @@ class LsportApiController extends Controller {
           }
 
         // game_index 限定 , 合併 early , living
-        $mergedData = array_merge($data['data']['early'], $data['data']['living']);
-        $data['data'] = $mergedData;
+        $mergedData = array_merge($data['early'], $data['living']);
+        $data = $mergedData;
 
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
