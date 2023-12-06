@@ -94,6 +94,7 @@ Route::post('/api/v2/result_index',     'App\Http\Controllers\LsportApiControlle
 Route::post('/api/v2/match_index',      'App\Http\Controllers\LsportApiController@MatchIndex');
 Route::post('/api/v2/match_index_b',      'App\Http\Controllers\LsportApiController@MatchIndexB');
 Route::post('/api/v2/game_index',       'App\Http\Controllers\LsportApiController@GameIndex');
+Route::post('/api/v2/game_index_b',      'App\Http\Controllers\LsportApiController@GameIndexB');
 Route::post('/api/v2/match_sport',       'App\Http\Controllers\LsportApiController@MatchSport');
 Route::post('/api/v2/balance_logs',     'App\Http\Controllers\LsportApiController@BalanceLogs');
 Route::post('/api/v2/game_bet',         'App\Http\Controllers\LsportApiController@GameBet');
