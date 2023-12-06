@@ -637,8 +637,9 @@ class LsportApiController extends Controller {
                                 // match_index 限定邏輯
                                 if ($line != $market_main_line) {
                                     unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                    continue;
                                 }
-                                
+
                                 if (isset($risk_data[$market_id])) {
                                     foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
                                         if ($risk_config !== null) {
