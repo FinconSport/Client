@@ -288,7 +288,7 @@
         $('#bettingTypeContainer .bettingtype-container').each(function() {
             let priority = parseInt($(this).attr('priority'))
             let result = null
-            result = fixtureData?.list?.find(item => item.priority === priority);
+            result = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
             if( !result ) {
                 $(this).remove()
             }
@@ -299,7 +299,7 @@
             const priority = parseInt($(this).attr('priority'));
             const line = $(this).attr('line')
             const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = fixtureData?.list?.find(item => item.priority === priority);
+            const resultArr = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
 
             // 遍历 market_bet 属性
             var result = Object.values(resultArr.list).find(marketBets => {
