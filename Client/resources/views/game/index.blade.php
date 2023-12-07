@@ -185,7 +185,7 @@
     // match list data
     var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
-    const matchList_api = '/api/v2/game_index'
+    const matchList_api = '/api/v2/game_index_b'
 
     // bet limitation data
     var betLimitationD = {}
@@ -633,7 +633,6 @@
     
 
     function createNewElement(v, v3, len, key, line=null) {
-        console.log(v3, line)
         const marketBetRateTemp = $('div[template="marketBetRateTemplate"]').clone();
         // col setting
         commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1 ? len = 2 : null
