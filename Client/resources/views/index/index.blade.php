@@ -623,7 +623,7 @@
                 caller(matchList_api, callMatchListData, matchListD) // match_list
                 setInterval(() => {
                     caller(matchList_api, callMatchListData, matchListD, 1) // update 
-                }, 3000);
+                }, 5000);
             }
         }, 100);
 
@@ -641,7 +641,7 @@
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     renderView()
-                }, 3000);
+                }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
 
@@ -744,7 +744,7 @@
                     let v3 = v2.list[ele]
 
                     let isExist = $(`#${k3}`).length > 0 ? true : false // isExist already
-                 let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
+                    let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
 
                     if( isExist ) {
@@ -803,6 +803,9 @@
                                 let updateAway = parseInt(v3.scoreboard[2][0])
                                 if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
                                 if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
+
+                                console.log(nowHomeScore, updateHome)
+
 
                                 setTimeout(() => {
                                     homeScore.removeClass('raiseScore')
