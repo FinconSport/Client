@@ -199,20 +199,23 @@
         status === 2 ? $('.marketName').css('background', '#ffcb9c') : $('.marketName').css('background', '#b8d6d4')
     }
 
-    function viewIni() { // view ini        
-        setBettypeColor(matchListD.data.list.status)
-        createScoreBoard(matchListD.data);
+    function viewIni() { // view ini 
+        let fixtureData = matchListD.data[0].list[searchData.fixture_id]
+        console.log(fixtureData)
+        setBettypeColor(fixtureData.status)
+        createScoreBoard(fixtureData);
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
-        matchListD.data.list.market.forEach(market => {
-            if( catePriority.full.indexOf(market.priority) !== -1 ) market.cateOrder = 1
-            if( catePriority.half.indexOf(market.priority) !== -1 ) market.cateOrder = 2
-            if( catePriority.full.indexOf(market.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
-        });
+        fixtureData.list.map(([marketk, marketv]) => {
+            if( catePriority.full.indexOf(marketv.priority) !== -1 ) market.cateOrder = 1
+            if( catePriority.half.indexOf(marketv.priority) !== -1 ) market.cateOrder = 2
+            if( catePriority.full.indexOf(marketv.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
+        })
+        
         // ===== 玩法排序 (全場->半場->單節) =====
 
-        Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
+        Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
             // 冰球 美足 略過 單雙
             if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
@@ -557,7 +560,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    renderView();
+                    // renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
@@ -779,9 +782,9 @@
 
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
-        if ((data.list.status == 2 || data.list.status == 9) && data.list.scoreboard) {
+        if ((data.status == 2 || data.status == 9) && data.scoreboard) {
             if (sport === 154914) {
-                const scbLen = data.list?.scoreboard[1].length - 1;
+                const scbLen = data?.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -847,16 +850,16 @@
 
         livingContainerTemp.removeAttr('hidden').removeAttr('template');
 
-        var scorehome = data.list?.scoreboard[1];
-        var scoreaway = data.list?.scoreboard[2];
+        var scorehome = data?.scoreboard[1];
+        var scoreaway = data?.scoreboard[2];
 
         const randomInt = Math.floor(Math.random() * 100) + 1;
 
-        const mainCon = data.list.fixture_id + '_1'; 
+        const mainCon = fixture_id + '_1'; 
         const existingMainCon = $(`div[id="${mainCon}"]`); 
-        const headTr = data.list.fixture_id + '_' + randomInt + '_head'; 
+        const headTr = fixture_id + '_' + randomInt + '_head'; 
         const existingHeadTr = $(`tr[id="${headTr}"]`);
-        const bodyTr = data.list.fixture_id + '_' + randomInt + '_body';
+        const bodyTr = fixture_id + '_' + randomInt + '_body';
         const existingBodyTr = $(`tr[id="${bodyTr}"]`);
 
         $(`div.living-fixture-con`).empty();
@@ -875,13 +878,13 @@
         const gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
         // Thead data game title
         let stageStr = '';
-        if (sport === 154914 && data.list?.periods?.period < 10) {
-            data.list.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
+        if (sport === 154914 && data?.periods?.period < 10) {
+            data.periods.Turn === '1' ? (stageStr = gameLangTrans.scoreBoard.lowerStage) : (stageStr = gameLangTrans.scoreBoard.upperStage);
         }
 
-        var stageText = formatDateTime(data.list.start_time);
-        if (data.list.status == 2) {
-            if (data.list.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.list.periods.period];
+        var stageText = formatDateTime(data.start_time);
+        if (data.status == 2) {
+            if (data.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.periods.period];
         } else {
             stageText = gameLangTrans.scoreBoard.ready;
         }
@@ -893,7 +896,7 @@
 
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
-                const scbLen = data.list?.scoreboard[1].length - 1;
+                const scbLen = data?.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
                     scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${i}" style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
@@ -906,7 +909,7 @@
         livingContainerTemp.find(`thead[key="livingtableHead-con"]`).append(scoreBoardHeadTemp);
 
         // Home team
-        const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.home_team_name}</div></th>`);
+        const homeTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.home_team_name}</div></th>`);
         scoreBoardBodyTemp_home.append(homeTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scorehome))[i];
@@ -919,7 +922,7 @@
         livingContainerTemp.find(`tbody[key="livingtableBody-con"]`).append(scoreBoardBodyTemp_home);
 
         // Away team
-        const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.list.away_team_name}</div></th>`);
+        const awayTeamName = $(`<th style="width:25%;text-align:left;color:#ffffff;"><div class="textOverflowCon">${data.away_team_name}</div></th>`);
         scoreBoardBodyTemp_away.append(awayTeamName);
         for (let i = 0; i < gameTitle.length; i++) {
             const scoreValue = Array.from(Object.values(scoreaway))[i];
