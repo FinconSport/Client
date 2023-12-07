@@ -176,7 +176,6 @@
     // detect ini ajax
     var isReadyIndexInt = null
     var isReadyIndex = false
-
     var isReadySportInt = null
 
 
@@ -289,7 +288,7 @@
         // set color of bet title update
         setBettypeColor(matchListD.data.list.status);
 
-        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
+        let cate = fixtureData.status === 1 ? 'early' : 'living'
 
         // if refresh no data    
         if (Object.keys(matchListD.data.list.market).length === 0) {
@@ -1092,7 +1091,7 @@
             bet_rate: bet_rate,
             better_rate: 0,
         }
-        let cate = matchListD.data.list.status === 1 ? 'early' : 'living'
+        let cate = fixtureData.status === 1 ? 'early' : 'living'
 
         $('#leftSlideOrder span[key="bet_type"]').html(bet_type)
         $('#leftSlideOrder span[key="bet_status"]').html( cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
