@@ -241,7 +241,7 @@
     // match list data
     var matchListD = {}
     var callMatchListData = { token: token, player: player, sport_id: sport }
-    const matchList_api = '/api/v2/match_index'
+    const matchList_api = '/api/v2/match_index_b'
 
     // bet limitation data
     var betLimitationD = {}
