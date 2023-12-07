@@ -491,7 +491,7 @@
                 // 讓分的priority && 有兩個選項
                 j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
 
-                Object.entries(betData.list).map(([k4, v4], s) => { 
+                Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         if( stageBet === 0 ) {
