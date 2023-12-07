@@ -202,13 +202,12 @@
 
     function viewIni() { // view ini 
         fixtureData = matchListD.data[0].list[searchData.fixture_id]
-        console.log(fixtureData)
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
-        fixtureData.list.map(([marketk, marketv]) => {
+        Object.entries(fixtureData.list).map(([marketk, marketv]) => {
             if( catePriority.full.indexOf(marketv.priority) !== -1 ) market.cateOrder = 1
             if( catePriority.half.indexOf(marketv.priority) !== -1 ) market.cateOrder = 2
             if( catePriority.full.indexOf(marketv.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
