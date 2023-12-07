@@ -223,12 +223,12 @@
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
 
             createMarketContainer(k, v);
-            if (v.market_bet) {
-                const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
+            if (v.list) {
+                const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
                 sortedKeys.forEach((key) => {
                     if(v.priority === 8) {
-                        const arr = v.market_bet[key]
+                        const arr = v.list[key]
                         // 计算中间索引
                         const midIndex = Math.floor(arr.length / 2);
                         // 使用Array.reduce和Array.concat合并两个部分
@@ -238,11 +238,11 @@
                         }, []);
 
                         result.forEach((v3) => {
-                            createNewElement(v, v3, v.market_bet[key].length, key);
+                            createNewElement(v, v3, v.list[key].length, key);
                         });
                     } else {
-                        v.market_bet[key].forEach((v3) => {
-                            createNewElement(v, v3, v.market_bet[key].length, key);
+                        v.list[key].forEach((v3) => {
+                            createNewElement(v, v3, v.list[key].length, key);
                         });
                     }
                     
