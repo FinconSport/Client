@@ -207,10 +207,10 @@
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
-        Object.entries(fixtureData.list).map(([marketk, marketv]) => {
-            if( catePriority.full.indexOf(marketv.priority) !== -1 ) market.cateOrder = 1
-            if( catePriority.half.indexOf(marketv.priority) !== -1 ) market.cateOrder = 2
-            if( catePriority.full.indexOf(marketv.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
+        Object.entries(fixtureData.list).map(([marketk, market]) => {
+            if( catePriority.full.indexOf(market.priority) !== -1 ) market.cateOrder = 1
+            if( catePriority.half.indexOf(market.priority) !== -1 ) market.cateOrder = 2
+            if( catePriority.full.indexOf(market.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
         })
         
         // ===== 玩法排序 (全場->半場->單節) =====
