@@ -179,15 +179,14 @@
 
     var isReadySportInt = null
 
-	// fixture
-	var fixture = null
 
     // match list data
     var matchListD = {}
     var fixtureData = {}
+    var fixture_id = null
     var league_id = null
     var league_name = null
-    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
+    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id}
     const matchList_api = '/api/v2/game_index_b'
 
     // bet limitation data
@@ -203,6 +202,7 @@
     }
 
     function viewIni() { // view ini 
+        fixture_id = parseInt(searchData.fixture_id)
         fixtureData = matchListD.data[0].list[searchData.fixture_id]
         league_id = matchListD.data[0]['league_id']
         league_name = matchListD.data[0]['league_name']
@@ -439,10 +439,10 @@
                                     calBetNameStr += ' ' + v3.line
                                 }
 
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
+                                $(`div[key="slideOrderCard"][fixture_id="${fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_name"]`).html(calBetNameStr)
+                                $(`div[key="slideOrderCard"][fixture_id="${fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="bet_status"]`).html(cate === 'early' ? commonLangTrans.sport_menu.early : commonLangTrans.sport_menu.living)
 
-                                $(`div[key="slideOrderCard"][fixture_id="${searchData.fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
+                                $(`div[key="slideOrderCard"][fixture_id="${fixture_id}"][market_id="${v.market_id}"][market_bet_id="${v3.market_bet_id}"] span[key="odd"]`).html(v3.price)
 
                                 $('#moneyInput').trigger('change') // 最高可贏金額
                             }
