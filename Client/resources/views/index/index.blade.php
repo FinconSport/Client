@@ -728,7 +728,6 @@
         }
         Object.entries(matchListD.data).map(([k, v]) => {  // living early toggle
             Object.entries(v[sport].list).map(([k2, v2], league_ind) => { // league toggle
-
                 // 获取 list 对象的所有属性，并将它们存储在一个数组中
                 const listKeys = Object.keys(v2.list);
                 // 使用 sort 方法对 listKeys 数组进行排序
@@ -748,6 +747,7 @@
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
 
+                    console.log(k3, isExist)
                     if( isExist ) {
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
