@@ -360,8 +360,6 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
-        if( v3.risk_status !== 1 ) return
-        console.log('createFixtureCard', k3, v3.risk_status, prevFixtureId)
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
@@ -469,6 +467,9 @@
 
         card.removeAttr('hidden')
         card.removeAttr('template')
+
+        if( v3.risk_status !== 1 ) card.css('display', 'none')
+
         let league_toggle_content = $(`#seriesWrapperContent_${k}_${league_id}`)
         if( prevFixtureId === null ) {
             league_toggle_content.append(card)
@@ -750,10 +751,7 @@
                     console.log(k3, isExist)
 
                     if( isExist ) {
-                        if( v3.risk_status !== 1 ) {
-                            $(`#${k3}`).remove()
-                            return;
-                        }
+                        if( v3.risk_status !== 1 ) $(`#${k3}`).hide()
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
@@ -1433,7 +1431,7 @@
     function statistics() {
         $('#indexContainer .elToggleCount').each(function() {
             let id = $(this).attr('id').split('_')[1]
-            let count = $('#toggleContent_' + id).find('.indexEachCard').length
+            let count = $('#toggleContent_' + id).find('.indexEachCard:visible').length
             $(this).html(count)
             if( count === 0 ) {
                 $(this).closest('.cateWrapper').hide()
@@ -1445,13 +1443,13 @@
         $('#indexContainer .legToggleCount').each(function() {
             let idArr = $(this).attr('id').split('_')
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
-            let count = $('#' + id).find('.indexEachCard').length
+            let count = $('#' + id).find('.indexEachCard:visible').length
             $(this).html(count)
             if( count === 0 ) $(this).closest('.leagueWrapper').remove()
         })
 
         // is no data
-        if( $('#indexContainer .indexEachCard').length === 0 ) {
+        if( $('#indexContainer .indexEachCard:visible').length === 0 ) {
             $('#noData').show()
         } else {
             $('#noData').hide()
