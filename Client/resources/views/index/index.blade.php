@@ -1443,7 +1443,11 @@
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
             let count = $('#' + id).find('.indexEachCard:visible').length
             $(this).html(count)
-            if( count === 0 ) $(this).closest('.leagueWrapper').remove()
+            if( count === 0 ) {
+                $(this).closest('.leagueWrapper').hide()
+            } else {
+                $(this).closest('.leagueWrapper').show()
+            }
         })
 
         // is no data
