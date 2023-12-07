@@ -184,6 +184,7 @@
 
     // match list data
     var matchListD = {}
+    var fixtureData = {}
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index_b'
 
@@ -200,7 +201,7 @@
     }
 
     function viewIni() { // view ini 
-        let fixtureData = matchListD.data[0].list[searchData.fixture_id]
+        fixtureData = matchListD.data[0].list[searchData.fixture_id]
         console.log(fixtureData)
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
