@@ -248,7 +248,7 @@
             }
         });
 
-        if (Object.keys(matchListD.data.list.market).length === 0) {
+        if (Object.keys(fixtureData.list).length === 0) {
             noData();
         }
 
