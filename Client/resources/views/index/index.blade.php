@@ -748,10 +748,8 @@
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
 
-                    console.log(k3, isExist)
-
                     if( isExist ) {
-                        if( v3.risk_status !== 1 ) $(`#${k3}`).hide()
+                        v3.risk_status !== 1 ? $(`#${k3}`).hide() : $(`#${k3}`).show()
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
