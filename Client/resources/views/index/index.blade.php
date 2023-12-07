@@ -360,8 +360,8 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
-        console.log('createFixtureCard', k3, v3.risk_status)
         if( v3.risk_status !== 1 ) return
+        console.log('createFixtureCard', k3, v3.risk_status, prevFixtureId)
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
@@ -1027,12 +1027,12 @@
                         // 新的賽事
                         if( !isCateExist ) createCate(k, v)
                         if( !isLeagueExist ) {
-                            let prevId = league_ind -1 >= 0 ? Object.keys(v[sport].list)[league_ind - 1] : 'first'
+                            let prevId = league_ind > 0 ? Object.keys(v[sport].list)[league_ind - 1] : 'first'
                             // console.log(prevId)
                             createLeague(k, k2, v2, prevId)
                         } 
 
-                        let prevFixtureId = fixture_ind -1 >= 0 ? listKeys[fixture_ind - 1] : 'first'
+                        let prevFixtureId = fixture_ind > 0 ? listKeys[fixture_ind - 1] : 'first'
                         createFixtureCard(k, v2.league_id, v2.league_name, k3, v3, prevFixtureId)
                     }
                 })
