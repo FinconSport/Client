@@ -185,6 +185,7 @@
     // match list data
     var matchListD = {}
     var fixtureData = {}
+    var league_id = null
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index_b'
 
@@ -202,6 +203,7 @@
 
     function viewIni() { // view ini 
         fixtureData = matchListD.data[0].list[searchData.fixture_id]
+        league_id = matchListD.data[0].league_id
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
 
@@ -830,14 +832,14 @@
         } else {
             $(".living-fixture-con").addClass("d-none");
             $(".navigation-controls").addClass("d-none");
-            const leagueID = data.list.league_id;
+            const leagueID = league_id;
             $(`div[id="${leagueID}"]`).remove();
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
-            earlyContainerTemp.attr('id', data.list.league_id);
-            earlyContainerTemp.find('.home_team_name').text(data.list.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.list.league_name);
-            earlyContainerTemp.find('.start_time').html(formatDateTime(data.list.start_time));
-            earlyContainerTemp.find('.away_team_name').text(data.list.away_team_name);
+            earlyContainerTemp.attr('id', league_id);
+            earlyContainerTemp.find('.home_team_name').text(data.home_team_name);
+            earlyContainerTemp.find('.league_name').text(data.league_name);
+            earlyContainerTemp.find('.start_time').html(formatDateTime(data.start_time));
+            earlyContainerTemp.find('.away_team_name').text(data.away_team_name);
             $('.early-fixture-con').append(earlyContainerTemp);
         }
     }
