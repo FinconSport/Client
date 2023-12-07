@@ -228,25 +228,9 @@
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
                 sortedKeys.forEach((key) => {
-                    if(v.priority === 8) {
-                        const arr = v.list[key]
-                        // 计算中间索引
-                        const midIndex = Math.floor(arr.length / 2);
-                        // 使用Array.reduce和Array.concat合并两个部分
-                        const result = arr.reduce((acc, current, index) => {
-                            const isFirstHalf = index < midIndex;
-                            return acc.concat(isFirstHalf ? [current, arr[index + midIndex]] : []);
-                        }, []);
-
-                        result.forEach((v3) => {
-                            createNewElement(v, v3, v.list[key].length, key);
-                        });
-                    } else {
-                        v.list[key].forEach((v3) => {
-                            createNewElement(v, v3, v.list[key].length, key);
-                        });
-                    }
-                    
+                    v.list[key].forEach((v3) => {
+                        createNewElement(v, v3, v.list[key].length, key);
+                    });
                 });
             }
         });
@@ -283,15 +267,15 @@
 
     // ajax update
     function renderView() {
-        // update scoreboard home team and away team
-        createScoreBoard(matchListD.data);
-        // set color of bet title update
-        setBettypeColor(matchListD.data.list.status);
+
+        fixtureData = matchListD.data[0].list[searchData.fixture_id]
+        setBettypeColor(fixtureData.status)
+        createScoreBoard(fixtureData);
 
         let cate = fixtureData.status === 1 ? 'early' : 'living'
 
         // if refresh no data    
-        if (Object.keys(matchListD.data.list.market).length === 0) {
+        if (Object.keys(fixtureData.list).length === 0) {
             noData();
             return;
         }
@@ -299,15 +283,12 @@
         // nodata
         $('#bettingTypeContainer .noDataContainer').remove()
 
-
-       
-
         // update content
         // check exist bet type content is still exist in the data
         $('#bettingTypeContainer .bettingtype-container').each(function() {
             let priority = parseInt($(this).attr('priority'))
             let result = null
-            result = matchListD.data?.list?.market?.find(item => item.priority === priority);
+            result = fixtureData?.list?.find(item => item.priority === priority);
             if( !result ) {
                 $(this).remove()
             }
@@ -318,10 +299,10 @@
             const priority = parseInt($(this).attr('priority'));
             const line = $(this).attr('line')
             const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = matchListD.data?.list?.market?.find(item => item.priority === priority);
+            const resultArr = fixtureData?.list?.find(item => item.priority === priority);
 
             // 遍历 market_bet 属性
-            var result = Object.values(resultArr.market_bet).find(marketBets => {
+            var result = Object.values(resultArr.list).find(marketBets => {
                 // 在每个 market_bet 数组中查找匹配的 market_bet_id
                 return marketBets.find(item => item.market_bet_id === market_bet_id);
             });
@@ -334,59 +315,44 @@
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
-        matchListD.data.list.market.forEach(market => {
+        Object.entries(fixtureData.list).map(([marketk, market]) => {
             if( catePriority.full.indexOf(market.priority) !== -1 ) market.cateOrder = 1
             if( catePriority.half.indexOf(market.priority) !== -1 ) market.cateOrder = 2
             if( catePriority.full.indexOf(market.priority) === -1 && catePriority.half.indexOf(market.priority) === -1 ) market.cateOrder = 3
-        });
+        })
         // ===== 玩法排序 (全場->半場->單節) =====
-
-        Object.entries(matchListD.data.list.market).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
+        Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
             // 冰球 美足 略過 單雙
             if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
+
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
 
             // if not exist -> create
             if( bet_div.length === 0 ) createMarketContainer(k, v);
             
-            if (v.market_bet) {
-                const sortedKeys = Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b));
+            if (v.list) {
+                const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
                 sortedKeys.forEach((key, p) => {
-                    v.market_bet[key].forEach((v3, s) => {
+                    v.list[key].forEach((v3, s) => {
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
                             console.log(v3.market_bet_id)
-                            if(v.priority === 8) { // 波膽
-                                const arr = v.market_bet[key]
-                                // 计算中间索引
-                                const midIndex = Math.floor(arr.length / 2);
-                                // 使用Array.reduce和Array.concat合并两个部分
-                                const result = arr.reduce((acc, current, index) => {
-                                    const isFirstHalf = index < midIndex;
-                                    return acc.concat(isFirstHalf ? [current, arr[index + midIndex]] : []);
-                                }, []);
-
-                                result.forEach((v3) => {
-                                    createNewElement(v, v3, v.market_bet[key].length, key);
-                                });
-                            } else {
-                                let line = null
-                                if( s === 0) {
-                                    if( p-1 >= 0) {
-                                        line = sortedKeys[p-1]
-                                    } else {
-                                        line = 'first'
-                                    }
+                            let line = null
+                            if( s === 0) {
+                                if( p-1 >= 0) {
+                                    line = sortedKeys[p-1]
+                                } else {
+                                    line = 'first'
                                 }
-                                if( s > 0 ) {
-                                    line = key
-                                }
-                                console.log(p, sortedKeys)
-                                createNewElement(v, v3, v.market_bet[key].length, key, line);
                             }
+                            if( s > 0 ) {
+                                line = key
+                            }
+                            console.log(p, sortedKeys)
+                            createNewElement(v, v3, v.list[key].length, key, line);
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
@@ -563,7 +529,7 @@
                 $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
-                    // renderView();
+                    renderView();
                 }, 5000);
                 clearInterval(isReadyIndexInt); // stop checking
 
