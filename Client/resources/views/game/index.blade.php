@@ -1189,6 +1189,7 @@
                     calInter = setTimeout(function() {
                         hideLoading();
                         closeCal();
+                        refreshBalence();
                     }, 10000);
                 } else {
                     showErrorToast(res.message);

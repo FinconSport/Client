@@ -360,6 +360,7 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
+        console.log('createFixtureCard')
         if( v3.risk_status !== 1 ) return
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
@@ -746,6 +747,7 @@
                     let isCateExist = $(`#toggleContent_${k}`).length > 0 ? true : false // is cate exist
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
 
+                    console.log(k3, isExist)
                     if( isExist ) {
                         if( v3.risk_status !== 1 ) $(`#${k3}`).remove()
                         let card = $(`#${k3}`) 
@@ -1409,6 +1411,7 @@
                     calInter = setTimeout(function() {
                         hideLoading();
                         closeCal();
+                        refreshBalence();
                     }, 10000);
                 } else {
                     showErrorToast(res.message);
