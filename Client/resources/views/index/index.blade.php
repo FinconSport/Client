@@ -752,6 +752,7 @@
                     if( isExist ) {
                         v3.risk_status !== 1 ? $(`#${k3}`).hide() : $(`#${k3}`).show()
                         let card = $(`#${k3}`) 
+                        card.attr('risk_status', v3.risk_status)
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
                         let away_team_info = card.find('[key="awayTeamInfo"]')
@@ -770,7 +771,6 @@
                             let livingNode = $(`#${k3}`)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
                             card.attr('cate', k)
-                            card.attr('risk_status', v3.risk_status)
                             card.attr('status', v3.status)
                         }   
 
