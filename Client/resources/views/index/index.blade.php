@@ -383,6 +383,7 @@
         card.find('.otherBetWay').attr('fixture_id', k3)
 
         card.attr('id', k3)
+        card.attr('risk_status', v3.risk_status)
         card.attr('cate', k)
         card.attr('status', v3.status)
         card.attr('league_id', league_id)
@@ -769,6 +770,7 @@
                             let livingNode = $(`#${k3}`)
                             livingNode.prependTo(parentNode); // move to corrsponding cate and league
                             card.attr('cate', k)
+                            card.attr('risk_status', v3.risk_status)
                             card.attr('status', v3.status)
                         }   
 
@@ -1429,7 +1431,7 @@
     function statistics() {
         $('#indexContainer .elToggleCount').each(function() {
             let id = $(this).attr('id').split('_')[1]
-            let count = $('#toggleContent_' + id).find('.indexEachCard:visible').length
+            let count = $('#toggleContent_' + id).find('.indexEachCard[risk_status=1]').length
             $(this).html(count)
             if( count === 0 ) {
                 $(this).closest('.cateWrapper').hide()
@@ -1441,7 +1443,7 @@
         $('#indexContainer .legToggleCount').each(function() {
             let idArr = $(this).attr('id').split('_')
             let id = `seriesWrapperContent_${idArr[1]}_${idArr[2]}` 
-            let count = $('#' + id).find('.indexEachCard:visible').length
+            let count = $('#' + id).find('.indexEachCard[risk_status=1]').length
             $(this).html(count)
             if( count === 0 ) {
                 $(this).closest('.leagueWrapper').hide()
@@ -1451,7 +1453,7 @@
         })
 
         // is no data
-        if( $('#indexContainer .indexEachCard:visible').length === 0 ) {
+        if( $('#indexContainer .indexEachCard[risk_status=1]').length === 0 ) {
             $('#noData').show()
         } else {
             $('#noData').hide()
