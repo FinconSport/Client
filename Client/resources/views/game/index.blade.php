@@ -267,6 +267,658 @@
 
     // ajax update
     function renderView() {
+        // ================= TEST DATA =================
+        matchListD = {
+            "status": 1,
+            "data": [
+                {
+                    "league_id": 61,
+                    "league_name": "法國甲組聯賽",
+                    "list": {
+                        "11841113": {
+                            "fixture_id": 11841113,
+                            "start_time": "2023-12-08 03:30:00",
+                            "status": 1,
+                            "last_update": 1701630849,
+                            "home_team_id": 86489,
+                            "home_team_name": "比斯特",
+                            "away_team_id": 1769,
+                            "away_team_name": "史特拉斯堡",
+                            "risk_status": 1,
+                            "periods": null,
+                            "scoreboard": null,
+                            "market_bet_count": 46,
+                            "order_by": 1701977400,
+                            "list": {
+                                "1": {
+                                    "market_id": 1,
+                                    "priority": 201,
+                                    "main_line": "",
+                                    "market_name": "全場獨贏",
+                                    "list": {
+                                        "": [
+                                            {
+                                                "market_bet_id": 2678633911841113,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "99",
+                                                "status": 1,
+                                                "last_update": 1701786590
+                                            },
+                                            {
+                                                "market_bet_id": 159287028011841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "4.5",
+                                                "status": 2,
+                                                "last_update": 1701880544
+                                            },
+                                            {
+                                                "market_bet_id": 116286426611841120,
+                                                "market_bet_name": "平",
+                                                "market_bet_name_en": "X",
+                                                "line": "",
+                                                "price": "3.6",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "1": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "2": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "X": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 1
+                                },
+                                "2": {
+                                    "market_id": 2,
+                                    "priority": 205,
+                                    "main_line": "3.5",
+                                    "market_name": "全場大小",
+                                    "list": {
+                                        "1.5": [
+                                            {
+                                                "market_bet_id": 117590783711841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "1.5",
+                                                "price": "1.36",
+                                                "status": 1,
+                                                "last_update": 1701920760
+                                            },
+                                            {
+                                                "market_bet_id": 65665707911841110,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "1.5",
+                                                "price": "3.2",
+                                                "status": 1,
+                                                "last_update": 1701920760
+                                            }
+                                        ],
+                                        "2.5": [
+                                            {
+                                                "market_bet_id": 117590773811841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "2.5",
+                                                "price": "2.08",
+                                                "status": 1,
+                                                "last_update": 1701920880
+                                            },
+                                            {
+                                                "market_bet_id": 181010425011841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "2.5",
+                                                "price": "1.73",
+                                                "status": 1,
+                                                "last_update": 1701920880
+                                            }
+                                        ],
+                                        "3.5": [
+                                            {
+                                                "market_bet_id": 117590777111841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "3.5",
+                                                "price": "3.75",
+                                                "status": 1,
+                                                "last_update": 1701928833
+                                            },
+                                            {
+                                                "market_bet_id": 93898208111841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "3.5",
+                                                "price": "1.29",
+                                                "status": 1,
+                                                "last_update": 1701928833
+                                            }
+                                        ],
+                                        "4.0": [
+                                            {
+                                                "market_bet_id": 9999999999999999,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.0",
+                                                "price": "400",
+                                                "status": 1,
+                                                "last_update": 1701920760
+                                            },
+                                            {
+                                                "market_bet_id": 9999999999999998,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.0",
+                                                "price": "40",
+                                                "status": 2,
+                                                "last_update": 1701920760
+                                            }
+                                        ],
+                                        "4.5": [
+                                            {
+                                                "market_bet_id": 117590768011841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "4.5",
+                                                "price": "8",
+                                                "status": 1,
+                                                "last_update": 1701933245
+                                            },
+                                            {
+                                                "market_bet_id": 128165768011841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "4.5",
+                                                "price": "1.08",
+                                                "status": 1,
+                                                "last_update": 1701933245
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "Under": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "Over": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 1
+                                },
+                                "3": {
+                                    "market_id": 3,
+                                    "priority": 203,
+                                    "main_line": "-0.5/1",
+                                    "market_name": "全場讓分",
+                                    "list": {
+                                        "-1.5": [
+                                            {
+                                                "market_bet_id": 33511624611841110,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1.5",
+                                                "price": "3.1",
+                                                "status": 1,
+                                                "last_update": 1701903594
+                                            },
+                                            {
+                                                "market_bet_id": 175013336411841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1.5",
+                                                "price": "1.35",
+                                                "status": 1,
+                                                "last_update": 1701903594
+                                            }
+                                        ],
+                                        "-1.25": [
+                                            {
+                                                "market_bet_id": 178169259411841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-1/1.5",
+                                                "price": "2.75",
+                                                "status": 1,
+                                                "last_update": 1701933245
+                                            },
+                                            {
+                                                "market_bet_id": 176356006811841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "1/1.5",
+                                                "price": "1.43",
+                                                "status": 1,
+                                                "last_update": 1701933245
+                                            }
+                                        ],
+                                        "-0.75": [
+                                            {
+                                                "market_bet_id": 178521864611841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5/1",
+                                                "price": "2.05",
+                                                "status": 1,
+                                                "last_update": 1701927393
+                                            },
+                                            {
+                                                "market_bet_id": 11115104811841112,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5/1",
+                                                "price": "1.88",
+                                                "status": 1,
+                                                "last_update": 1701927393
+                                            }
+                                        ],
+                                        "-0.5": [
+                                            {
+                                                "market_bet_id": 33170005511841110,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5",
+                                                "price": "1.73",
+                                                "status": 1,
+                                                "last_update": 1701927753
+                                            },
+                                            {
+                                                "market_bet_id": 42249051111841110,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5",
+                                                "price": "2.08",
+                                                "status": 1,
+                                                "last_update": 1701927753
+                                            }
+                                        ],
+                                        "-0.25": [
+                                            {
+                                                "market_bet_id": 178518059511841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0/0.5",
+                                                "price": "1.53",
+                                                "status": 1,
+                                                "last_update": 1701923340
+                                            },
+                                            {
+                                                "market_bet_id": 150004196111841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0/0.5",
+                                                "price": "2.42",
+                                                "status": 1,
+                                                "last_update": 1701923340
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "1": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "2": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 1
+                                },
+                                "5": {
+                                    "market_id": 5,
+                                    "priority": 208,
+                                    "main_line": "",
+                                    "market_name": "全場單雙",
+                                    "list": {
+                                        "": [
+                                            {
+                                                "market_bet_id": 134111638811841120,
+                                                "market_bet_name": "雙",
+                                                "market_bet_name_en": "Even",
+                                                "line": "",
+                                                "price": "1.85",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            },
+                                            {
+                                                "market_bet_id": 13846137911841112,
+                                                "market_bet_name": "單",
+                                                "market_bet_name_en": "Odd",
+                                                "line": "",
+                                                "price": "2",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "Odd": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "Even": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 1
+                                },
+                                "21": {
+                                    "market_id": 21,
+                                    "priority": 206,
+                                    "main_line": "0.5",
+                                    "market_name": "上半場大小",
+                                    "list": {
+                                        "0.5": [
+                                            {
+                                                "market_bet_id": 67561260911841110,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "0.5",
+                                                "price": "1.44",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            },
+                                            {
+                                                "market_bet_id": 114152958111841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "0.5",
+                                                "price": "2.63",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ],
+                                        "1.5": [
+                                            {
+                                                "market_bet_id": 87026835611841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "1.5",
+                                                "price": "3.25",
+                                                "status": 1,
+                                                "last_update": 1701881055
+                                            },
+                                            {
+                                                "market_bet_id": 114152961411841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "1.5",
+                                                "price": "1.33",
+                                                "status": 1,
+                                                "last_update": 1701881055
+                                            }
+                                        ],
+                                        "2.5": [
+                                            {
+                                                "market_bet_id": 95793761111841120,
+                                                "market_bet_name": "大",
+                                                "market_bet_name_en": "Over",
+                                                "line": "2.5",
+                                                "price": "9",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            },
+                                            {
+                                                "market_bet_id": 114152964711841120,
+                                                "market_bet_name": "小",
+                                                "market_bet_name_en": "Under",
+                                                "line": "2.5",
+                                                "price": "1.07",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "Under": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "Over": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 2
+                                },
+                                "41": {
+                                    "market_id": 41,
+                                    "priority": 202,
+                                    "main_line": "",
+                                    "market_name": "上半場獨贏",
+                                    "list": {
+                                        "": [
+                                            {
+                                                "market_bet_id": 187417654311841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "",
+                                                "price": "2.4",
+                                                "status": 1,
+                                                "last_update": 1701787100
+                                            },
+                                            {
+                                                "market_bet_id": 187417654611841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "",
+                                                "price": "5",
+                                                "status": 1,
+                                                "last_update": 1701786590
+                                            },
+                                            {
+                                                "market_bet_id": 187417663211841120,
+                                                "market_bet_name": "平",
+                                                "market_bet_name_en": "X",
+                                                "line": "",
+                                                "price": "2.1",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "1": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "2": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "X": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 2
+                                },
+                                "64": {
+                                    "market_id": 64,
+                                    "priority": 204,
+                                    "main_line": "-0/0.5",
+                                    "market_name": "上半場讓分",
+                                    "list": {
+                                        "-0.75": [
+                                            {
+                                                "market_bet_id": 129354321111841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5/1",
+                                                "price": "3.1",
+                                                "status": 1,
+                                                "last_update": 1701910376
+                                            },
+                                            {
+                                                "market_bet_id": 97877830311841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5/1",
+                                                "price": "1.35",
+                                                "status": 1,
+                                                "last_update": 1701910376
+                                            }
+                                        ],
+                                        "-0.5": [
+                                            {
+                                                "market_bet_id": 143778476211841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0.5",
+                                                "price": "2.38",
+                                                "status": 1,
+                                                "last_update": 1701918600
+                                            },
+                                            {
+                                                "market_bet_id": 177601456211841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0.5",
+                                                "price": "1.55",
+                                                "status": 1,
+                                                "last_update": 1701918600
+                                            }
+                                        ],
+                                        "-0.25": [
+                                            {
+                                                "market_bet_id": 184254911411841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "-0/0.5",
+                                                "price": "1.95",
+                                                "status": 1,
+                                                "last_update": 1701927303
+                                            },
+                                            {
+                                                "market_bet_id": 97866837811841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "0/0.5",
+                                                "price": "1.9",
+                                                "status": 1,
+                                                "last_update": 1701927303
+                                            }
+                                        ],
+                                        "0.25": [
+                                            {
+                                                "market_bet_id": 86370802911841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0/0.5",
+                                                "price": "1.24",
+                                                "status": 1,
+                                                "last_update": 1701925051
+                                            },
+                                            {
+                                                "market_bet_id": 202934137911841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-0/0.5",
+                                                "price": "3.9",
+                                                "status": 1,
+                                                "last_update": 1701925051
+                                            }
+                                        ],
+                                        "0.5": [
+                                            {
+                                                "market_bet_id": 166097804711841120,
+                                                "market_bet_name": "主",
+                                                "market_bet_name_en": "1",
+                                                "line": "0.5",
+                                                "price": "1.17",
+                                                "status": 1,
+                                                "last_update": 1701927693
+                                            },
+                                            {
+                                                "market_bet_id": 155511695311841120,
+                                                "market_bet_name": "客",
+                                                "market_bet_name_en": "2",
+                                                "line": "-0.5",
+                                                "price": "5",
+                                                "status": 1,
+                                                "last_update": 1701927693
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "1": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "2": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 2
+                                },
+                                "72": {
+                                    "market_id": 72,
+                                    "priority": 207,
+                                    "main_line": "",
+                                    "market_name": "上半場單雙",
+                                    "list": {
+                                        "": [
+                                            {
+                                                "market_bet_id": 44061621611841110,
+                                                "market_bet_name": "雙",
+                                                "market_bet_name_en": "Even",
+                                                "line": "",
+                                                "price": "1.73",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            },
+                                            {
+                                                "market_bet_id": 70154479911841110,
+                                                "market_bet_name": "單",
+                                                "market_bet_name_en": "Odd",
+                                                "line": "",
+                                                "price": "2.1",
+                                                "status": 1,
+                                                "last_update": 1701693867
+                                            }
+                                        ]
+                                    },
+                                    "bet_total": {
+                                        "Even": {
+                                            "count": 0,
+                                            "total": 0
+                                        },
+                                        "Odd": {
+                                            "count": 0,
+                                            "total": 0
+                                        }
+                                    },
+                                    "cateOrder": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "message": "SUCCESS_API_GAME_INDEX_B_01",
+            "gzip": true
+        }
+
+        // ================= TEST DATA =================
+
 
         fixtureData = matchListD.data[0].list[searchData.fixture_id]
         setBettypeColor(fixtureData.status)
