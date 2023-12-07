@@ -360,7 +360,7 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
-        console.log('createFixtureCard')
+        console.log('createFixtureCard', k3, v3.risk_status)
         if( v3.risk_status !== 1 ) return
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
@@ -748,8 +748,12 @@
                     let isLeagueExist = $(`#seriesWrapperContent_${k}_${v2.league_id}`).length > 0 ? true : false // is league exist 
 
                     console.log(k3, isExist)
+
                     if( isExist ) {
-                        if( v3.risk_status !== 1 ) $(`#${k3}`).remove()
+                        if( v3.risk_status !== 1 ) {
+                            $(`#${k3}`).remove()
+                            return;
+                        }
                         let card = $(`#${k3}`) 
                         let time = card.find('.timer');
                         let home_team_info = card.find('[key="homeTeamInfo"]')
