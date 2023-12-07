@@ -307,7 +307,6 @@
             });
             
             if (!result) {
-                console.log(market_bet_id)
                 $(this).remove();
             }
         });
@@ -338,7 +337,6 @@
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
-                            console.log(v3.market_bet_id)
                             let line = null
                             if( s === 0) {
                                 if( p-1 >= 0) {
@@ -350,7 +348,6 @@
                             if( s > 0 ) {
                                 line = key
                             }
-                            console.log(p, sortedKeys)
                             createNewElement(v, v3, v.list[key].length, key, line);
                         } else {
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
@@ -670,10 +667,8 @@
         } else {
             if( line !== null) {
                 if( line === 'first' ) {
-                    console.log(bet_div.find('.marketBetRateContainer'))
                     bet_div.find('.marketBetRateContainer').prepend(marketBetRateTemp)
                 } else {
-                    console.log(bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).eq(-1))
                     bet_div.find(`[key="marketBetRateKey"][linekey="${line}"]`).eq(-1).after(marketBetRateTemp)
                 }
             } else {
@@ -703,7 +698,6 @@
                 const slideLength = document.querySelectorAll('.slide-3').length - 6;
                 const calculatedWidth =  60 / slideLength;
                 slide.style.width = `${calculatedWidth}%`;
-                console.log('slide-3 count:' + slideLength + 'width' + calculatedWidth);
             } else {
                 slide.style.width = `10%`;
             }
@@ -738,7 +732,7 @@
         nextBTN.classList.toggle('disabled-btn', isLastSlide);
 
         // disbale next button if lastslide is same of currentslide
-        if (currentSlide === lastslide) console.log('disabled-btn'), nextBTN.classList.add('disabled-btn');
+        if (currentSlide === lastslide) nextBTN.classList.add('disabled-btn');
     }
 
     function updatePaginationActiveClass() {
