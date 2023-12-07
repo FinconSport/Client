@@ -360,6 +360,7 @@
     }
 
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
+        if( v3.risk_status !== 1 ) return
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
         if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
