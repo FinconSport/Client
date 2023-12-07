@@ -186,6 +186,7 @@
     var matchListD = {}
     var fixtureData = {}
     var league_id = null
+    var league_name = null
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture}
     const matchList_api = '/api/v2/game_index_b'
 
@@ -203,7 +204,8 @@
 
     function viewIni() { // view ini 
         fixtureData = matchListD.data[0].list[searchData.fixture_id]
-        league_id = matchListD.data[0].league_id
+        league_id = matchListD.data[0]['league_id']
+        league_name = matchListD.data[0]['league_name']
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
 
@@ -647,7 +649,7 @@
         
         let bet_div = $(`.bettingtype-container[market_id=${v.market_id}][priority=${v.priority}]`)
         marketBetRateTemp.attr('priority', v.priority);
-        marketBetRateTemp.attr('fixture_id', matchListD.data.list.fixture_id);
+        marketBetRateTemp.attr('fixture_id', fixture_id);
         marketBetRateTemp.attr('market_id', v.market_id);
         marketBetRateTemp.attr('market_bet_id', v3.market_bet_id);
         marketBetRateTemp.attr('bet_rate', v3.price);
@@ -656,9 +658,9 @@
         marketBetRateTemp.attr('bet_name_en', v3.market_bet_name_en);
         marketBetRateTemp.attr('line', v3.line);
         marketBetRateTemp.attr('linekey', key)
-        marketBetRateTemp.attr('league', matchListD.data.list.league_name);
-        marketBetRateTemp.attr('home', matchListD.data.list.home_team_name);
-        marketBetRateTemp.attr('away', matchListD.data.list.away_team_name);
+        marketBetRateTemp.attr('league', league_name);
+        marketBetRateTemp.attr('home', fixtureData.home_team_name);
+        marketBetRateTemp.attr('away', fixtureData.away_team_name);
 
         marketBetRateTemp.find('.odd').text(v3.price)
         let pri = v.priority
@@ -675,10 +677,10 @@
             case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
             case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
-                    marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
+                    marketBetRateTemp.find('.market_bet_name').html(`${fixtureData.home_team_name}`)
                     marketBetRateTemp.find('.line').html(`${v3.line}`)
                 } else if (v3.market_bet_name_en == 2) {
-                    marketBetRateTemp.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
+                    marketBetRateTemp.find('.market_bet_name').html(`${fixtureData.away_team_name}`)
                     marketBetRateTemp.find('.line').html(`${v3.line}`)
                 } else if (v3.market_bet_name_en == 'X') {
                     marketBetRateTemp.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
