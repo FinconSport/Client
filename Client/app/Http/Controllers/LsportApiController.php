@@ -2041,12 +2041,13 @@ class LsportApiController extends Controller {
             }
           }
 
-        // game_index 限定 , 合併 early , living
-        $mergedData = array_merge($data['early'][$sport_id]['list'], $data['living'][$sport_id]['list']);
-
-        dd($mergedData);
-        $data = $mergedData;
-
+        // game_index 限定 
+        if (count($data['early'][$sport_id]['list']) > 0) {
+            $data = $data['early'][$sport_id]['list'];
+        } else {
+            $data = $data['living'][$sport_id]['list'];
+        }
+        
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
