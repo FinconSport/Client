@@ -324,9 +324,6 @@
                 // 遍历排序后的数组
                 sortedKeys.forEach((key, p) => {
                     v.list[key].forEach((v3, s) => {
-
-                        console.log(key)
-
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
@@ -342,17 +339,9 @@
                                 line = key
                             }
                             createNewElement(v, v3, v.list[key].length, key, line);
-                            console.log('new create')
                         } else {
-                            console.log('exist')
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
-
-                            console.log(v3)
-
-
-
-                            console.log(oldRate, newRate, v3.market_bet_name, v3.line)
                             // status
                             if( v3.status === 1 ) {
                                 bet_item.find('.fa-lock').hide()
