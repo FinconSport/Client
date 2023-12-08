@@ -490,6 +490,8 @@
             bet_div.attr('priority', i)
             if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
             if( betData && Object.keys(betData.list).length > 0 ) {
+
+                console.log(betData)
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
