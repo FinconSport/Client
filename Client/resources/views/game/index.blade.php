@@ -340,6 +340,7 @@
                             }
                             createNewElement(v, v3, v.list[key].length, key, line);
                         } else {
+                            let isSelected = bet_item.hasClass('m_order_on')
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
                             // status
@@ -350,9 +351,23 @@
                                 // rate compare
                                 if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id)
                                 if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id)
+
+                                // 左邊選中的剛好鎖起來了 -> 復原
+                                if( isSelected ) {
+                                    $('#submitOrder').html(langTrans.bet_area.bet)
+                                    $('#submitOrder').removeClass('disabled')
+                                    $('#submitOrder').removeAttr('disabled')
+                                }
                             } else {
                                 bet_item.find('.fa-lock').show()
                                 bet_item.removeAttr('onclick')
+
+                                // 左邊選中的剛好鎖起來了
+                                if( isSelected ) {
+                                    $('#submitOrder').html(langTrans.bet_area.disabled)
+                                    $('#submitOrder').addClass('disabled')
+                                    $('#submitOrder').attr('disabled', true)
+                                }
                             }
 
                             // set new attribute
@@ -362,7 +377,7 @@
                             bet_item.attr('bet_name_en', v3.market_bet_name_en);
                             bet_item.attr('line', v3.line);
 
-                            let isSelected = bet_item.hasClass('m_order_on')
+                            
 
                             // 左邊投注區塊
                             if( isSelected ) {
@@ -963,9 +978,8 @@
 
         // 三秒後移除
         setTimeout(() => {
-            target.removeClass('raiseOdd')
-            leftTarget.removeClass('raiseOdd')
-            target.find('.fa-caret-up').hide()
+            $('div').removeClass('raiseOdd')
+            $('div').find('.fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
@@ -988,9 +1002,8 @@
 
         // 三秒後移除
         setTimeout(() => {
-            leftTarget.removeClass('raiseOdd')
-            target.removeClass('lowerOdd')
-            target.find('.fa-caret-down').hide()
+            $('div').removeClass('raiseOdd')
+            $('div').find('.fa-caret-down').hide()
         }, 3000);
     }
 
