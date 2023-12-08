@@ -1275,8 +1275,8 @@
     })
 
     // Get the last entry in the browser's history
-    const lastHistoryEntry = history.state;
-    console.log(lastHistoryEntry);
+    const lastVisitedUrl = document.referrer;
+    console.log(lastVisitedUrl);
     
 </script>
 @endpush
