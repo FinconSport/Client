@@ -2048,8 +2048,9 @@ class LsportApiController extends Controller {
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $vv) {
                 foreach ($vv['list'] as $league_id => $vvv) {
-                    dd($vvv);
-                    $tmp_data['list'] = $vvvv;
+                   
+                    $tmp_data['league_id'] = $vvv['league_id'];
+                    $tmp_data['league_name'] = $vvv['league_name'];
                     foreach ($vvv['list'] as $fixture_id => $vvvv) {
                         $tmp_data['list'] = $vvvv;
                     }
