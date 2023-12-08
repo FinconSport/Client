@@ -1278,11 +1278,11 @@
         const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
         var currentPage = null;
 
-        if (lastVisitedUrl.includes('?sport=')) {
+        if (BettingPage.includes('?sport=')) {
             currentPage = 'lf_sport';
-        } else if (lastVisitedUrl.includes('m_order')) {
+        } else if (BettingPage.includes('m_order')) {
             currentPage = 'lf_mOrder';
-        } else if (lastVisitedUrl.includes('index')) {
+        } else if (BettingPage.includes('index')) {
             currentPage = 'lf_sport';
         }
 
@@ -1302,7 +1302,7 @@
         } else if (sportParam.includes('index')) {
             betpage = '{{ trans('common.left_menu.sport_bet') }}';
         }
-        
+
         console.log('Betting page: ' + betpage + ' Current Sport: ' + sport);
     }
 </script>
