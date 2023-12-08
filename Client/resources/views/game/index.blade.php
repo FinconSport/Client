@@ -201,9 +201,6 @@
     }
 
     function viewIni() { // view ini 
-        //open left menu function for game page
-        leftMenuforGamepage();
-
         fixture_id = parseInt(searchData.fixture_id)
         fixtureData = matchListD.data.list[searchData.fixture_id]
         league_id = matchListD.data['league_id']
@@ -272,6 +269,9 @@
                 }
             }
         }
+
+        //open left menu function for game page
+        leftMenuforGamepage();
     }
 
     // ajax update
@@ -1302,40 +1302,38 @@
     })
 
     function leftMenuforGamepage() {
-        //open left menu function
-        const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
-        var currentPage = null;
+        if (sportListD && sportListD.data) {
+            // Open left menu function
+            const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
+            var currentPage = null;
 
-        if (BettingPage.includes('/?sport=')) {
-            currentPage = 'lf_sport';
-        } else if (BettingPage.includes('m_order')) {
-            currentPage = 'lf_mOrder';
-        } else if (BettingPage.includes('index')) {
-            currentPage = 'lf_sport';
+            if (BettingPage.includes('/?sport=')) {
+                currentPage = 'lf_sport';
+            } else if (BettingPage.includes('m_order')) {
+                currentPage = 'lf_mOrder';
+            } else if (BettingPage.includes('index')) {
+                currentPage = 'lf_sport';
+            }
+
+            $(`#${currentPage}`).addClass('active currentpage');
+            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
+            $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
+
+            //for debugging only to get if match betting or multiple order
+            console.log(BettingPage);
+            var betpage = null;
+
+            if (BettingPage.includes('/?sport=')) {
+                betpage = "{{ trans('common.left_menu.sport_bet') }}";
+            } else if (BettingPage.includes('m_order')) {
+                betpage = "{{ trans('common.left_menu.m_bet') }}";
+            } else if (BettingPage.includes('index')) {
+                betpage = "{{ trans('common.left_menu.sport_bet') }}";
+            }
+
+            console.log(betpage + ': ' + sport);
         }
-
-        $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
-        $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-
-        //for debugging only to get if match betting or multiple order
-        console.log(BettingPage);
-        var betpage = null;
-
-        if (BettingPage.includes('/?sport=')) {
-            betpage = "{{ trans('common.left_menu.sport_bet') }}";
-        } else if (BettingPage.includes('m_order')) {
-            betpage = "{{ trans('common.left_menu.m_bet') }}";
-        } else if (BettingPage.includes('index')) {
-            betpage = "{{ trans('common.left_menu.sport_bet') }}";
-        }
-
-        console.log(betpage + ': ' + sport);
-        // Remove classes if not a[key="${sport}"] is clicked
-        $(`#subMenuContainer a`).not(`[key="${sport}"]`).on('click', function() {
-            $(`#${currentPage}`).removeClass('active');
-            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '0px' }, 300);
-        });
     }
+
 </script>
 @endpush
