@@ -1296,11 +1296,11 @@
         var betpage = null;
 
         if (sportParam.includes('?sport=')) {
-            betpage = '{{ trans('common.left_menu.sport_bet') }}';
+            betpage = "{{ trans('common.left_menu.sport_bet') }}";
         } else if (sportParam.includes('m_order')) {
-            betpage = '{{ trans('common.left_menu.m_bet') }}';
+            betpage = "{{ trans('common.left_menu.m_bet') }}";
         } else if (sportParam.includes('index')) {
-            betpage = '{{ trans('common.left_menu.sport_bet') }}';
+            betpage = "{{ trans('common.left_menu.sport_bet') }}";
         }
 
         console.log('Betting page: ' + betpage + ' Current Sport: ' + sport);
