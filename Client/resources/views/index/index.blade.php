@@ -808,9 +808,6 @@
                                 if( updateHome > nowHomeScore ) homeScore.addClass('raiseScore')
                                 if( updateAway > nowAwayScore ) awayScore.addClass('raiseScore')
 
-                                console.log(nowHomeScore, updateHome)
-
-
                                 setTimeout(() => {
                                     homeScore.removeClass('raiseScore')
                                     awayScore.removeClass('raiseScore')
