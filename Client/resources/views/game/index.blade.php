@@ -201,6 +201,9 @@
     }
 
     function viewIni() { // view ini 
+        //open left menu function for game page
+        leftMenuforGamepage();
+
         fixture_id = parseInt(searchData.fixture_id)
         fixtureData = matchListD.data.list[searchData.fixture_id]
         league_id = matchListD.data['league_id']
@@ -259,8 +262,6 @@
                 }
             }
         }
-
-        leftMenuforGamepage();
     }
 
     // ajax update
@@ -1286,12 +1287,10 @@
             currentPage = 'lf_sport';
         }
 
-        var currentSport = sport;
-        console.log(sportListD.data);
-
         $(`#${currentPage}`).addClass('active currentpage');
         $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
-        $(`#subMenuContainer .currentpage a[key="${currentSport}"]`).addClass('openToggle');
+        $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
+        console.log('Current Sport: ' + currentcurrentSport);
     }
 </script>
 @endpush
