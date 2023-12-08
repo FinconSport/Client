@@ -631,15 +631,12 @@ class LsportApiController extends Controller {
                             $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
                             $market_main_line = $market_data['main_line'];
-
-                            if ($market_id == 3) {
-                                dd($market_data);
-                            }
-                            
+                            $base_main_line = $market_data['base_main_line'];
+   
                             foreach ($market_data['list'] as $line => $bet_data) {
 
                                 // match_index 限定邏輯
-                                if ($line != $market_main_line) {
+                                if ($line != $base_main_line) {
                                     unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
                                     continue;
                                 }
