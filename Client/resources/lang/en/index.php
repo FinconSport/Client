@@ -64,24 +64,24 @@ return [
 			'mainPriorityArr' => [401, 403, 405],
 		],
 		48242 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
-			'mainPriorityArr' => [101, 103, 105, 107],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
+			'mainPriorityArr' => [101, 103, 105],
 			'stageTitle' => [
-				1 => ['1st quarter winner', '1st quarter hcap', '1st quarter o/u', '1st quarter odd/even'],
-				2 => ['2nd quarter winner', '2nd quarter hcap', '2nd quarter o/u', '2nd quarter odd/even'],
-				3 => ['3rd quarter winner', '3rd quarter hcap', '3rd quarter o/u', '3rd quarter odd/even'],
-				4 => ['4th quarter winner', '4th quarter hcap', '4th quarter o/u', '4th quarter odd/even'],
+				1 => ['1st quarter winner', '1st quarter hcap', '1st quarter o/u'],
+				2 => ['2nd quarter winner', '2nd quarter hcap', '2nd quarter o/u'],
+				3 => ['3rd quarter winner', '3rd quarter hcap', '3rd quarter o/u'],
+				4 => ['4th quarter winner', '4th quarter hcap', '4th quarter o/u'],
 			],
 			'stagePriorityArr' => [
-				1 => [109, 110, 111, 112],
-				2 => [113, 114, 115, 116],
-				3 => [117, 118, 119, 120],
-				4 => [121, 122, 123, 124]
+				1 => [109, 110, 111],
+				2 => [113, 114, 115],
+				3 => [117, 118, 119],
+				4 => [121, 122, 123]
 			],
 		],
 		154914 => [
-			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under', 'Full-time Odd/Even'],
-			'mainPriorityArr' => [1, 3, 5, 7],
+			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
+			'mainPriorityArr' => [1, 3, 5],
 		],
 		35232 => [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
