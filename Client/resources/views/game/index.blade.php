@@ -1287,10 +1287,11 @@
         }
 
         $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300, 'linear');
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300, 'swing');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
 
         //for debugging only to get if match betting or multiple order
+        console.log(BettingPage);
         var betpage = null;
 
         if (BettingPage.includes('?sport=')) {
@@ -1301,8 +1302,7 @@
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
         }
 
-        console.log('Current Sport: ' + sport);
-        console.log('Betting page: ' + betpage);
+        console.log(betpage + ': ' + sport);
     }
 </script>
 @endpush
