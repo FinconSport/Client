@@ -1286,7 +1286,7 @@
     $(`#${currentPage}`).addClass('active currentpage');
     $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
     $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-    console.log('sport: ' + sport);
+    console.log('sport: ' + callMatchListData.sport_id);
     
 </script>
 @endpush
