@@ -1290,20 +1290,19 @@
         $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300, 'linear');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
 
-        //for debugging only to get if from match betting or multiple order
-        const bettingPageSearchParams = new URLSearchParams(BettingPage);
-        const sportParam = bettingPageSearchParams.get('sport');
+        //for debugging only to get if match betting or multiple order
         var betpage = null;
 
-        if (sportParam.includes('?sport=')) {
+        if (BettingPage.includes('?sport=')) {
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
-        } else if (sportParam.includes('m_order')) {
+        } else if (BettingPage.includes('m_order')) {
             betpage = "{{ trans('common.left_menu.m_bet') }}";
-        } else if (sportParam.includes('index')) {
+        } else if (BettingPage.includes('index')) {
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
         }
 
-        console.log('Betting page: ' + betpage + ' Current Sport: ' + sport);
+        console.log('Current Sport: ' + sport);
+        console.log('Betting page: ' + betpage);
     }
 </script>
 @endpush
