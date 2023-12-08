@@ -185,7 +185,7 @@
     var fixture_id = null
     var league_id = null
     var league_name = null
-    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id}
+    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id };
     const matchList_api = '/api/v2/game_index_b'
 
     // bet limitation data
@@ -201,6 +201,9 @@
     }
 
     function viewIni() { // view ini 
+        //open left menu function for game page
+        leftMenuforGamepage();
+
         fixture_id = parseInt(searchData.fixture_id)
         fixtureData = matchListD.data.list[searchData.fixture_id]
         league_id = matchListD.data['league_id']
@@ -219,11 +222,17 @@
         // ===== 玩法排序 (全場->半場->單節) =====
 
         Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
-            // 冰球 美足 略過 單雙
-            if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
-            if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
 
-            createMarketContainer(k, v);
+            let mainLine = v?.main_line
+            if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
+                let isMinus = mainLine.indexOf('-') === -1 ? false : true
+                if( isMinus ) mainLine = mainLine.replace('-', '') 
+                let num1 = parseFloat(mainLine.split('/')[0])
+                let num2 = parseFloat(mainLine.split('/')[1])
+                mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
+            }
+
+            if( v?.list?.[mainLine]?.length > 0 )  createMarketContainer(k, v);
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
@@ -282,34 +291,31 @@
         // nodata
         $('#bettingTypeContainer .noDataContainer').remove()
 
-        // update content
-        // check exist bet type content is still exist in the data
-        $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
-            if( !result ) {
-                $(this).remove()
-            }
-        });
-
         // check exist bet item is still exist in the data
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
-            const line = $(this).attr('line')
+            const linekey = $(this).attr('linekey')
             const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
+            const resultArr = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
 
             // 遍历 market_bet 属性
-            var result = Object.values(resultArr.list).find(marketBets => {
-                // 在每个 market_bet 数组中查找匹配的 market_bet_id
-                return marketBets.find(item => item.market_bet_id === market_bet_id);
-            });
-            
-            if (!result) {
-                $(this).remove();
-            }
+            let result = resultArr?.list?.[linekey]?.find( item => item.market_bet_id === market_bet_id)
+            if( !result ) $(this).remove();
         });
+
+        // update content
+        // check exist bet type content is still exist in the data
+        $('#bettingTypeContainer .bettingtype-container').each(function() {
+            if( $(this).find('div[key="marketBetRateKey"]').length === 0 ) $(this).remove()
+            // let priority = parseInt($(this).attr('priority'))
+            // let result = null
+            // result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
+            // if( !result ) {
+            //     $(this).remove()
+            // }
+        });
+
+        
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
@@ -320,15 +326,17 @@
         })
         // ===== 玩法排序 (全場->半場->單節) =====
         Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
-            // 冰球 美足 略過 單雙
-            if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
-            if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
-
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
-
             // if not exist -> create
-            if( bet_div.length === 0 ) createMarketContainer(k, v);
-            
+            let mainLine = v?.main_line
+            if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
+                let isMinus = mainLine.indexOf('-') === -1 ? false : true
+                if( isMinus ) mainLine = mainLine.replace('-', '') 
+                let num1 = parseFloat(mainLine.split('/')[0])
+                let num2 = parseFloat(mainLine.split('/')[1])
+                mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
+            }
+            if( bet_div.length === 0 && v?.list?.[mainLine]?.length > 0 ) createMarketContainer(k, v);
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
@@ -350,20 +358,34 @@
                             }
                             createNewElement(v, v3, v.list[key].length, key, line);
                         } else {
+                            let isSelected = bet_item.hasClass('m_order_on')
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
-
-                            // rate compare
-                            if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id)
-                            if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id)
-
                             // status
                             if( v3.status === 1 ) {
                                 bet_item.find('.fa-lock').hide()
                                 bet_item.attr('onclick', 'openCal($(this))')
+                                
+                                // rate compare
+                                if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id)
+                                if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id)
+
+                                // 左邊選中的剛好鎖起來了 -> 復原
+                                if( isSelected ) {
+                                    $('#submitOrder').html(langTrans.bet_area.bet)
+                                    $('#submitOrder').removeClass('disabled')
+                                    $('#submitOrder').removeAttr('disabled')
+                                }
                             } else {
                                 bet_item.find('.fa-lock').show()
                                 bet_item.removeAttr('onclick')
+
+                                // 左邊選中的剛好鎖起來了
+                                if( isSelected ) {
+                                    $('#submitOrder').html(langTrans.bet_area.disabled)
+                                    $('#submitOrder').addClass('disabled')
+                                    $('#submitOrder').attr('disabled', true)
+                                }
                             }
 
                             // set new attribute
@@ -373,7 +395,7 @@
                             bet_item.attr('bet_name_en', v3.market_bet_name_en);
                             bet_item.attr('line', v3.line);
 
-                            let isSelected = bet_item.hasClass('m_order_on')
+                            
 
                             // 左邊投注區塊
                             if( isSelected ) {
@@ -418,17 +440,13 @@
                                     bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
                                     bet_item.find('.line').html(`${v3.line}`)
                                     break;
-                                case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
-                                    bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
-                                    bet_item.find('.line').html('')
-                                    break;
                                 case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
                                 case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
-                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
+                                        bet_item.find('.market_bet_name').html(`${fixtureData.home_team_name}`)
                                         bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 2) {
-                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
+                                        bet_item.find('.market_bet_name').html(`${fixtureData.away_team_name}`)
                                         bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 'X') {
                                         bet_item.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
@@ -630,10 +648,6 @@
             case commonLangTrans.priorityArr.size.indexOf(v.priority) !== -1:
                 marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
                 marketBetRateTemp.find('.line').html(`${v3.line}`)
-                break;
-            case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
-                marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
-                marketBetRateTemp.find('.line').html('')
                 break;
             case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
             case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
@@ -982,9 +996,8 @@
 
         // 三秒後移除
         setTimeout(() => {
-            target.removeClass('raiseOdd')
-            leftTarget.removeClass('raiseOdd')
-            target.find('.fa-caret-up').hide()
+            $('div').removeClass('raiseOdd')
+            $('div').find('.fa-caret-up').hide()
         }, 3000);
     }
     // 賠率下降
@@ -1007,9 +1020,8 @@
 
         // 三秒後移除
         setTimeout(() => {
-            leftTarget.removeClass('raiseOdd')
-            target.removeClass('lowerOdd')
-            target.find('.fa-caret-down').hide()
+            $('div').removeClass('raiseOdd')
+            $('div').find('.fa-caret-down').hide()
         }, 3000);
     }
 
@@ -1288,5 +1300,42 @@
                 break;
         }
     })
+
+    function leftMenuforGamepage() {
+        //open left menu function
+        const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
+        var currentPage = null;
+
+        if (BettingPage.includes('/?sport=')) {
+            currentPage = 'lf_sport';
+        } else if (BettingPage.includes('m_order')) {
+            currentPage = 'lf_mOrder';
+        } else if (BettingPage.includes('index')) {
+            currentPage = 'lf_sport';
+        }
+
+        $(`#${currentPage}`).addClass('active currentpage');
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
+        $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
+
+        //for debugging only to get if match betting or multiple order
+        console.log(BettingPage);
+        var betpage = null;
+
+        if (BettingPage.includes('/?sport=')) {
+            betpage = "{{ trans('common.left_menu.sport_bet') }}";
+        } else if (BettingPage.includes('m_order')) {
+            betpage = "{{ trans('common.left_menu.m_bet') }}";
+        } else if (BettingPage.includes('index')) {
+            betpage = "{{ trans('common.left_menu.sport_bet') }}";
+        }
+
+        console.log(betpage + ': ' + sport);
+        // Remove classes if not a[key="${sport}"] is clicked
+        $(`#subMenuContainer a`).not(`[key="${sport}"]`).on('click', function() {
+            $(`#${currentPage}`).removeClass('active');
+            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '0px' }, 300);
+        });
+    }
 </script>
 @endpush

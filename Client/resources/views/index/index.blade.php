@@ -225,7 +225,6 @@
     const allWinArr = commonLangTrans.priorityArr.allwin // 獨贏系列
     const hcapArr = commonLangTrans.priorityArr.hcap // 讓球系列
     const sizeArr = commonLangTrans.priorityArr.size // 大小系列
-    const oddEvenArr = commonLangTrans.priorityArr.oddeven // 單雙系列
 
 
     // 需要把bet_name替換成主客隊名的priority (獨贏讓球)
@@ -562,7 +561,6 @@
                     // 按照不同體育種類、玩法 顯示相對應內容
                     if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
                     if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html('<span class="bet_name_item">'+v4.market_bet_name+'</span>' + v4.line)
-                    if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( '<span class="bet_name_item">'+v4.market_bet_name+'</span>' )
                     if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( '<span class="bet_name_item">'+v4.market_bet_name+'</span>' )
                     
 
@@ -940,7 +938,6 @@
                                         // 賦值
                                         if( hcapArr.indexOf(i) !== -1 ) item.find('.bet_name').html( v4.line )
                                         if( sizeArr.indexOf(i) !== -1 ) item.find('.bet_name').html('<span class="bet_name_item">'+v4.market_bet_name+'</span>' + v4.line)
-                                        if( oddEvenArr.indexOf(i) !== -1 ) item.find('.bet_name').html( '<span class="bet_name_item">'+v4.market_bet_name+'</span>' )
                                         if( allWinArr.indexOf(i) !== -1 && sport === 6046 ) item.find('.bet_name').html( '<span class="bet_name_item">'+v4.market_bet_name+'</span>' )
 
                                         // 左邊投注區塊
