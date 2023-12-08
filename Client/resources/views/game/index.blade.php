@@ -1290,7 +1290,7 @@
         $(`#${currentPage}`).addClass('active currentpage');
         $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-        console.log('Current Sport: ' + currentcurrentSport);
+        console.log('Current Sport: ' + sport);
     }
 </script>
 @endpush
