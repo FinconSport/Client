@@ -2043,9 +2043,9 @@ class LsportApiController extends Controller {
 
         // game_index 限定 
         if (count($data['early'][$sport_id]['list'][$league_id]['list']) > 0) {
-            $data = $data['early'][$sport_id]['list'];
+            $data = $data['early'][$sport_id]['list'][$league_id];
         } else {
-            $data = $data['living'][$sport_id]['list'];
+            $data = $data['living'][$sport_id]['list'][$league_id];
         }
 
         // gzip
