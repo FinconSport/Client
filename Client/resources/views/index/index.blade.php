@@ -490,12 +490,12 @@
             bet_div.attr('priority', i)
             if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
             if( betData && Object.keys(betData.list).length > 0 ) {
-
-                console.log(betData)
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
                 j === 1 && betData.list.length === 2 && betData.list[0].line !== betData.list[1].line ? isHcapTeam = true : isHcapTeam = false
+
+                if( j === 1 ) console.log(betData)
 
                 Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
