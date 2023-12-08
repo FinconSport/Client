@@ -1313,29 +1313,6 @@
         }
         console.log(betpage + ': ' + sport);
     }
-
-    // left side menu click function
-    var submenuClicked = false;
-    var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
-    $(".submenu-btn").click(function () {
-        $(this).closest('.submenu-main').toggleClass('active');
-
-        var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
-        if (currentSubmenuToggleList.length) {
-            if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
-                currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300, 'easeOutQuart');
-                console.log("Click");
-                submenuClicked = true;
-            } else {
-                currentSubmenuToggleList.animate({ maxHeight: '0' }, 300, 'easeOutQuart');
-                console.log("unclick");
-                submenuClicked = false;
-            }
-        }
-
-        $('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-        $('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300, 'easeOutQuart');
-    });
-    // ----------------------------
+    
 </script>
 @endpush
