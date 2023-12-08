@@ -1323,18 +1323,18 @@
         var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
         if (currentSubmenuToggleList.length) {
             if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
-                currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 2000, 'easeOutQuart');
+                currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 300, 'easeOutQuart');
                 console.log("Click");
                 submenuClicked = true;
             } else {
-                currentSubmenuToggleList.animate({ maxHeight: '0' }, 2000, 'easeOutQuart');
+                currentSubmenuToggleList.animate({ maxHeight: '0' }, 300, 'easeOutQuart');
                 console.log("unclick");
                 submenuClicked = false;
             }
         }
 
         $('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
-        $('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 2000, 'easeOutQuart');
+        $('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 300, 'easeOutQuart');
     });
     // ----------------------------
 </script>
