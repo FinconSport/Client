@@ -1270,9 +1270,22 @@
         }
     })
 
-    // Get the last entry in the browser's history
-    const lastVisitedUrl = document.referrer;
+    //open left menu function
+    const lastVisitedUrl = document.referrer; // <-- Get the last entry in the browser's history
     console.log(lastVisitedUrl);
+    var currentPage = null;
+
+    if (lastVisitedUrl.includes('?sport=')) {
+        currentPage = 'lf_sport';
+    } else if (lastVisitedUrl.includes('m_order')) {
+        currentPage = 'lf_mOrder';
+    } else if (lastVisitedUrl.includes('index')) {
+        currentPage = 'lf_sport';
+    }
+
+    $(`#${currentPage}`).addClass('active currentpage');
+    $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
+    $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
     
 </script>
 @endpush
