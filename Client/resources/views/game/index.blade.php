@@ -1272,7 +1272,7 @@
         const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
         var currentPage = null;
 
-        if (BettingPage.includes('?sport=')) {
+        if (BettingPage.includes('/?sport=')) {
             currentPage = 'lf_sport';
         } else if (BettingPage.includes('m_order')) {
             currentPage = 'lf_mOrder';
@@ -1288,7 +1288,7 @@
         console.log(BettingPage);
         var betpage = null;
 
-        if (BettingPage.includes('?sport=')) {
+        if (BettingPage.includes('/?sport=')) {
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
         } else if (BettingPage.includes('m_order')) {
             betpage = "{{ trans('common.left_menu.m_bet') }}";
