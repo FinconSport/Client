@@ -345,14 +345,14 @@
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
 
-                            // rate compare
-                            if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id)
-                            if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id)
-
                             // status
                             if( v3.status === 1 ) {
                                 bet_item.find('.fa-lock').hide()
                                 bet_item.attr('onclick', 'openCal($(this))')
+                                
+                                // rate compare
+                                if( oldRate > newRate ) lowerOdd(v.priority, v3.market_bet_id), console.log(oldRate, newRate, v3.market_bet_name, v3.line)
+                                if( oldRate < newRate ) raiseOdd(v.priority, v3.market_bet_id), console.log(oldRate, newRate, v3.market_bet_name, v3.line)
                             } else {
                                 bet_item.find('.fa-lock').show()
                                 bet_item.removeAttr('onclick')
