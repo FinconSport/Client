@@ -2046,8 +2046,13 @@ class LsportApiController extends Controller {
         
         $tmp_data = array();
         foreach ($data as $k => $v) {
-            foreach ($v[$k][$sport_id]['list'] as $kk => $vv) {
-                dd($vv);
+            foreach ($v[$k] as $kk => $vv) {
+                foreach ($vv[$kk] as $kkk => $vvv) {
+
+                    dd($vvv);
+                    
+                }
+                
             }
         }
         $data = $mergedData;
