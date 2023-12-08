@@ -279,7 +279,6 @@
                     // 比较 orderByA 和 orderByB，以确定排序顺序
                     return orderByA - orderByB;
                 });
-
                 listKeys.forEach( ele => {
                     createFixtureCard(k, v2.league_id, v2.league_name, ele, v2.list[ele])
                 })
@@ -1164,16 +1163,6 @@
     }
 
 
-    // 內容太長 跑馬燈
-    function fixTextOverflow() {
-        $('.textOverFlow').each(function(){
-            if ($(this).prop('scrollHeight') > $(this).height()) {
-                $(this).removeClass('textOverFlow')
-                $(this).wrap('<marquee behavior="scroll"><p></p></marquee>');
-            }
-        })
-    }
-
     // 賠率上升
     function raiseOdd(fixture_id, market_id, market_bet_id) {
         // 先移除現有樣式
@@ -1214,22 +1203,7 @@
         }, 3000);
     }
 
-    // 文字太常處理 參考
-    function marqueeLongText(){
-        $("td.home-name, td.away-name").each(function() {
-            const $td = $(this);
-            const $text = $td.find(".text");
-            const $img = $td.find("img");
-            if ($td.width() < ($text.width()+ parseInt($(this).css("padding-left")) + $img.width())) {
-                $text.find("div").addClass("marquee");
-                $text.css("overflow", "hidden");
-            }
-            else{
-                $text.find("div").removeClass("marquee");
-                $text.css("overflow", "auto");
-            }
-        });
-    }
+
 
 
     // 打開投注計算機
