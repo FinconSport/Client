@@ -296,12 +296,13 @@
         // update content
         // check exist bet type content is still exist in the data
         $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
-            if( !result ) {
-                $(this).remove()
-            }
+            if( $(this).find('div[key="marketBetRateKey"]').length === 0 ) $(this).remove()
+            // let priority = parseInt($(this).attr('priority'))
+            // let result = null
+            // result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
+            // if( !result ) {
+            //     $(this).remove()
+            // }
         });
 
         
