@@ -634,8 +634,8 @@ class LsportApiController extends Controller {
 
                             if ($market_id == 3) {
                                 dd($market_data);
-                                
                             }
+                            
                             foreach ($market_data['list'] as $line => $bet_data) {
 
                                 // match_index 限定邏輯
