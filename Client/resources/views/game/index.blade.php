@@ -317,15 +317,20 @@
         // ===== 玩法排序 (全場->半場->單節) =====
         Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
-
             // if not exist -> create
             if( bet_div.length === 0 && v?.list?.[v?.main_line]?.length > 0 ) createMarketContainer(k, v);
             
+            console.log(v, bet_div)
+
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
                 sortedKeys.forEach((key, p) => {
+                    console.log(key)
                     v.list[key].forEach((v3, s) => {
+
+                        console.log(v3)
+
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
                         if( bet_item.length === 0 ) {
@@ -345,6 +350,7 @@
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
 
+                            console.log(oldRate, newRate, v3.market_bet_name, v3.line)
                             // status
                             if( v3.status === 1 ) {
                                 bet_item.find('.fa-lock').hide()
@@ -402,10 +408,7 @@
 
 
                             // new rate
-                            // bet_item.find('.odd').text(v3.price)
-                            bet_item.find('.odd').text(666)
-                            console.log(oldRate, newRate, v3.market_bet_name, v3.line)
-                            
+                            bet_item.find('.odd').text(v3.price)
                             let pri = v.priority
                             switch (true) {
                                 case commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1:
