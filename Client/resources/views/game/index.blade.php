@@ -185,7 +185,8 @@
     var fixture_id = null
     var league_id = null
     var league_name = null
-    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id}
+    var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id };
+    console.log(callMatchListData.sport_id);
     const matchList_api = '/api/v2/game_index_b'
 
     // bet limitation data
@@ -1286,7 +1287,5 @@
     $(`#${currentPage}`).addClass('active currentpage');
     $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
     $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-    console.log(callMatchListData.sport_id);
-    
 </script>
 @endpush
