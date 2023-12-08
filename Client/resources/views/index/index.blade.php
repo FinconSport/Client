@@ -489,15 +489,27 @@
             bet_div.attr('priority', i)
             if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
             if( betData && Object.keys(betData.list).length > 0 ) {
+
+                // 足球 讓分mainline處理
+                let mainLine = v3?.main_line
+                if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
+                    let isMinus = mainLine.indexOf('-') === -1 ? false : true
+                    if( isMinus ) mainLine = mainLine.replace('-', '') 
+                    let num1 = parseFloat(mainLine.split('/')[0])
+                    let num2 = parseFloat(mainLine.split('/')[1])
+                    mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
+                }
+
+
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
                 if( j === 1 ) {
-                    let bet = betData.list[betData.main_line]
+                    let bet = betData.list[betData.mainLine]
                     bet.length === 2 && (bet[0].line !== bet[1].line) ? isHcapTeam = true : isHcapTeam = false
                 }
 
-                Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
+                Object.entries(betData.list[betData.mainLine]).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         if( stageBet === 0 ) {
@@ -883,17 +895,27 @@
                                 let item = null
                                 if( v3.list ) betData = Object.values(v3.list).find(m => m.priority === i)
                                 if( betData && Object.keys(betData.list).length > 0 ) {
+                                    // 足球 讓分mainline處理
+                                    let mainLine = v3?.main_line
+                                    if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
+                                        let isMinus = mainLine.indexOf('-') === -1 ? false : true
+                                        if( isMinus ) mainLine = mainLine.replace('-', '') 
+                                        let num1 = parseFloat(mainLine.split('/')[0])
+                                        let num2 = parseFloat(mainLine.split('/')[1])
+                                        mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
+                                    }
+
                                     // 是否有讓方
                                     let isHcapTeam = null
 
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1 ) {
-                                        let bet = betData.list[betData.main_line]
+                                        let bet = betData.list[betData.mainLine]
                                         bet.length === 2 && (bet[0].line !== bet[1].line) ? isHcapTeam = true : isHcapTeam = false
                                     }
 
                                     
-                                    Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
+                                    Object.entries(betData.list[betData.mainLine]).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                                             if( stageBet === 0 ) {
