@@ -1284,7 +1284,7 @@
     }
 
     var currentSport = sport;
-    console.log(`a[key="${currentSport}"]`);
+    console.log(sportListD.data);
 
     $(`#${currentPage}`).addClass('active currentpage');
     $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
