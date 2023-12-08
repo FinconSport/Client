@@ -1319,7 +1319,7 @@
             }
 
             $(`#${currentPage}`).addClass('active currentpage');
-            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
+            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 2000, 'easeOutQuart');
             $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
         }
     }
