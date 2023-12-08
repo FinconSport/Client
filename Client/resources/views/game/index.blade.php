@@ -1331,6 +1331,11 @@
         }
 
         console.log(betpage + ': ' + sport);
+        // Remove classes if not a[key="${sport}"] is clicked
+        $(`#subMenuContainer a`).not(`[key="${sport}"]`).on('click', function() {
+            $(`#${currentPage}`).removeClass('active');
+            $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '0px' }, 300);
+        });
     }
 </script>
 @endpush
