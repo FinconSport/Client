@@ -319,17 +319,13 @@
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
             // if not exist -> create
             if( bet_div.length === 0 && v?.list?.[v?.main_line]?.length > 0 ) createMarketContainer(k, v);
-            
-            console.log(v, bet_div)
-
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
                 sortedKeys.forEach((key, p) => {
-                    console.log(key)
                     v.list[key].forEach((v3, s) => {
 
-                        console.log(v3)
+                        console.log(key)
 
                         let bet_item = $(`div[key="marketBetRateKey"][priority="${v.priority}"][market_bet_id="${v3.market_bet_id}"]`)
                         // if not exist -> create / if exists -> update
@@ -346,9 +342,15 @@
                                 line = key
                             }
                             createNewElement(v, v3, v.list[key].length, key, line);
+                            console.log('new create')
                         } else {
+                            console.log('exist')
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
+
+                            console.log(v3)
+
+
 
                             console.log(oldRate, newRate, v3.market_bet_name, v3.line)
                             // status
@@ -483,7 +485,7 @@
         } 
 
         // tab (show corresponding bet)
-        // $('.filterBtn.active').click()
+        $('.filterBtn.active').click()
     }
    
    
