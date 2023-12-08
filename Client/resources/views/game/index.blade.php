@@ -222,17 +222,7 @@
         // ===== 玩法排序 (全場->半場->單節) =====
 
         Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
-
-            let mainLine = v?.main_line
-            if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
-                let isMinus = mainLine.indexOf('-') === -1 ? false : true
-                if( isMinus ) mainLine = mainLine.replace('-', '') 
-                let num1 = parseFloat(mainLine.split('/')[0])
-                let num2 = parseFloat(mainLine.split('/')[1])
-                mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
-            }
-
-            if( v?.list?.[v?.mainLine]?.length > 0 )  createMarketContainer(k, v);
+            if( v?.list?.[v?.main_line]?.length > 0 )  createMarketContainer(k, v);
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
@@ -328,15 +318,7 @@
         Object.entries(fixtureData.list).sort(([, marketA], [, marketB]) => marketA.cateOrder - marketB.cateOrder).map(([k, v]) => {
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
             // if not exist -> create
-            let mainLine = v?.main_line
-            if( sport === 6046 && mainLine && mainLine.indexOf('/') !== -1 ) {
-                let isMinus = mainLine.indexOf('-') === -1 ? false : true
-                if( isMinus ) mainLine = mainLine.replace('-', '') 
-                let num1 = parseFloat(mainLine.split('/')[0])
-                let num2 = parseFloat(mainLine.split('/')[1])
-                mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
-            }
-            if( bet_div.length === 0 && v?.list?.[v?.mainLine]?.length > 0 ) createMarketContainer(k, v);
+            if( bet_div.length === 0 && v?.list?.[v?.main_line]?.length > 0 ) createMarketContainer(k, v);
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
@@ -1315,7 +1297,7 @@
         }
 
         $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 2000, 'easeOutQuart');
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
 
         //for debugging only to get if match betting or multiple order
@@ -1329,8 +1311,8 @@
         } else if (BettingPage.includes('index')) {
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
         }
+
         console.log(betpage + ': ' + sport);
     }
-    
 </script>
 @endpush
