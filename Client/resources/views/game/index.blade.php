@@ -794,7 +794,7 @@
             earlyContainerTemp.removeAttr('hidden').removeAttr('template');
             earlyContainerTemp.attr('id', league_id);
             earlyContainerTemp.find('.home_team_name').text(data.home_team_name);
-            earlyContainerTemp.find('.league_name').text(data.league_name);
+            earlyContainerTemp.find('.league_name').text(league_name);
             earlyContainerTemp.find('.start_time').html(formatDateTime(data.start_time));
             earlyContainerTemp.find('.away_team_name').text(data.away_team_name);
             $('.early-fixture-con').append(earlyContainerTemp);
