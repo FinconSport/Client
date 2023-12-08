@@ -286,7 +286,7 @@
         $('#bettingTypeContainer .bettingtype-container').each(function() {
             let priority = parseInt($(this).attr('priority'))
             let result = null
-            result = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
+            result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
             if( !result ) {
                 $(this).remove()
             }
@@ -295,19 +295,13 @@
         // check exist bet item is still exist in the data
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
-            const line = $(this).attr('line')
+            const linekey = $(this).attr('linekey')
             const market_bet_id = parseInt($(this).attr('market_bet_id'))
-            const resultArr = Object.entries(fixtureData?.list)?.find(item => item.priority === priority);
+            const resultArr = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
 
             // 遍历 market_bet 属性
-            var result = Object.values(resultArr.list).find(marketBets => {
-                // 在每个 market_bet 数组中查找匹配的 market_bet_id
-                return marketBets.find(item => item.market_bet_id === market_bet_id);
-            });
-            
-            if (!result) {
-                $(this).remove();
-            }
+            let result = resultArr?.list?.[linekey]?.find( item => item.market_bet_id === market_bet_id)
+            if( !result ) $(this).remove();
         });
 
         // ===== 玩法排序 (全場->半場->單節) =====
