@@ -1283,7 +1283,7 @@
         currentPage = 'lf_sport';
     }
 
-    currentSport = sport;
+    var currentSport = sport;
     console.log(`a[key="${currentSport}"]`);
 
     $(`#${currentPage}`).addClass('active currentpage');
