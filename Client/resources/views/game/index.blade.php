@@ -1284,7 +1284,7 @@
         }
 
         $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300, 'swing');
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
 
         //for debugging only to get if match betting or multiple order
