@@ -1297,7 +1297,7 @@
         }
 
         $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 1000, 'easeOutQuart');
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 2000, 'easeOutQuart');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
 
         //for debugging only to get if match betting or multiple order
@@ -1311,8 +1311,31 @@
         } else if (BettingPage.includes('index')) {
             betpage = "{{ trans('common.left_menu.sport_bet') }}";
         }
-
         console.log(betpage + ': ' + sport);
     }
+
+    // left side menu click function
+    var submenuClicked = false;
+    var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
+    $(".submenu-btn").click(function () {
+        $(this).closest('.submenu-main').toggleClass('active');
+
+        var currentSubmenuToggleList = $(this).next(".submenu-toggle-list");
+        if (currentSubmenuToggleList.length) {
+            if (currentSubmenuToggleList[0].style.maxHeight === '0px' || currentSubmenuToggleList[0].style.maxHeight === '') {
+                currentSubmenuToggleList.animate({ maxHeight: submenuToggleList[0].scrollHeight + 'px' }, 2000, 'easeOutQuart');
+                console.log("Click");
+                submenuClicked = true;
+            } else {
+                currentSubmenuToggleList.animate({ maxHeight: '0' }, 2000, 'easeOutQuart');
+                console.log("unclick");
+                submenuClicked = false;
+            }
+        }
+
+        $('.submenu-main').not($(this).closest('.submenu-main')).removeClass("active");
+        $('.submenu-toggle-list').not(currentSubmenuToggleList[0]).animate({ maxHeight: '0' }, 2000, 'easeOutQuart');
+    });
+    // ----------------------------
 </script>
 @endpush
