@@ -2043,6 +2043,8 @@ class LsportApiController extends Controller {
 
         // game_index 限定 , 合併 early , living
         $mergedData = array_merge($data['early'][$sport_id]['list'], $data['living'][$sport_id]['list']);
+
+        dd($mergedData);
         $data = $mergedData;
 
         // gzip
