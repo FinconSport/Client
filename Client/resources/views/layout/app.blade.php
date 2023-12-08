@@ -570,10 +570,6 @@
 		var submenuClicked = false;
 		var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
 
-		//for debugging only
-		var submenuToggleListHeight = $("#indexSportCon").outerHeight(true);
-		console.log(submenuToggleListHeight);
-
 		$(".submenu-btn").click(function () {
 			$(this).closest('.submenu-main').toggleClass('active');
 
