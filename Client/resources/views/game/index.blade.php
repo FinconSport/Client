@@ -223,7 +223,8 @@
             if( sport === 35232 && v.priority === 304 || sport === 35232 && v.priority === 308 ) return;
             if( sport === 131506 && v.priority === 407 || sport === 131506 && v.priority === 408 ) return;
 
-            createMarketContainer(k, v);
+            if( v.list[v.main_line].length > 0 )  createMarketContainer(k, v);
+            
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
                 // 遍历排序后的数组
@@ -327,7 +328,7 @@
             let bet_div = $(`.bettingtype-container[priority=${v.priority}]`)
 
             // if not exist -> create
-            if( bet_div.length === 0 ) createMarketContainer(k, v);
+            if( bet_div.length === 0 && v.list[v.main_line].length > 0 ) createMarketContainer(k, v);
             
             if (v.list) {
                 const sortedKeys = Object.keys(v.list)
