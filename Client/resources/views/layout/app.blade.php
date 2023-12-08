@@ -571,7 +571,7 @@
 		var submenuToggleList = $(".submenu-toggle-list"); // Precalculate the scrollHeight once
 
 		//for debugging only
-		var submenuToggleListHeight = $(".submenu-toggle-list")[0].scrollHeight;
+		var submenuToggleListHeight = $(".submenu-main.active .submenu-toggle-list").prop("scrollHeight");
 		console.log(submenuToggleListHeight);
 
 		$(".submenu-btn").click(function () {
