@@ -202,9 +202,9 @@
 
     function viewIni() { // view ini 
         fixture_id = parseInt(searchData.fixture_id)
-        fixtureData = matchListD.data[0].list[searchData.fixture_id]
-        league_id = matchListD.data[0]['league_id']
-        league_name = matchListD.data[0]['league_name']
+        fixtureData = matchListD.data.list[searchData.fixture_id]
+        league_id = matchListD.data['league_id']
+        league_name = matchListD.data['league_name']
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
 
@@ -267,7 +267,7 @@
 
     // ajax update
     function renderView() {
-        fixtureData = matchListD.data[0].list[searchData.fixture_id]
+        fixtureData = matchListD.data.list[searchData.fixture_id]
         setBettypeColor(fixtureData.status)
         createScoreBoard(fixtureData);
 
