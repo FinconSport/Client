@@ -1283,10 +1283,11 @@
         currentPage = 'lf_sport';
     }
 
+    currentSport = sport;
+    console.log(`a[key="${currentSport}"]`);
+
     $(`#${currentPage}`).addClass('active currentpage');
     $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
-    $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-    console.log(`a[key="${sport}"]`);
-    
+    $(`#subMenuContainer .currentpage a[key="${currentSport}"]`).addClass('openToggle');
 </script>
 @endpush
