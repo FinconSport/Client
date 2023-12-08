@@ -130,7 +130,7 @@
 		let end_time = $('#rangeend input').val()
 
 		const queryParams = {};
-		if( balance_type ) queryParams.balance_type = balance_type;
+		if( balance_type ) queryParams.type = balance_type;
 		if( start_time ) queryParams.start_time = start_time;
 		if( end_time ) queryParams.end_time = end_time;
 		
@@ -149,7 +149,7 @@
 			setRange(searchDate(yy), searchDate(tt))
 
 			// search condition
-			$('#selectOption').val(searchData.balance_type || '' )
+			$('#selectOption').val(searchData.type || '' )
 			if( !searchData.start_time && !searchData.end_time ) {
 				// place holder of date
 				let tt = new Date();
