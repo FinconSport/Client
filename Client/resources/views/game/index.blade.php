@@ -1275,8 +1275,7 @@
 
     function leftMenuforGamepage() {
         //open left menu function
-        const lastVisitedUrl = document.referrer; // <-- Get the last entry in the browser's history
-        console.log(lastVisitedUrl);
+        const BettingPage = document.referrer; // <-- Get the last entry (Match or M_Order)
         var currentPage = null;
 
         if (lastVisitedUrl.includes('?sport=')) {
@@ -1288,9 +1287,23 @@
         }
 
         $(`#${currentPage}`).addClass('active currentpage');
-        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300);
+        $(`#${currentPage} .submenu-toggle-list`).animate({ 'max-height': '900px' }, 300, 'linear');
         $(`#subMenuContainer .currentpage a[key="${sport}"]`).addClass('openToggle');
-        console.log('Current Sport: ' + sport);
+
+        //for debugging only to get if from match betting or multiple order
+        const bettingPageSearchParams = new URLSearchParams(BettingPage);
+        const sportParam = bettingPageSearchParams.get('sport');
+        var betpage = null;
+
+        if (sportParam.includes('?sport=')) {
+            betpage = '{{ trans('common.left_menu.sport_bet') }}';
+        } else if (sportParam.includes('m_order')) {
+            betpage = '{{ trans('common.left_menu.m_bet') }}';
+        } else if (sportParam.includes('index')) {
+            betpage = '{{ trans('common.left_menu.sport_bet') }}';
+        }
+        
+        console.log('Betting page: ' + betpage + ' Current Sport: ' + sport);
     }
 </script>
 @endpush
