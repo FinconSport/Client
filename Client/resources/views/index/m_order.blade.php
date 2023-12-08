@@ -494,7 +494,6 @@
                     item.attr('league', league_name)
                     item.attr('home', v3.home_team_name)
                     item.attr('away', v3.away_team_name)
-                    item.attr('cate', k)
 
                     // rate
                     item.find('.odd').html(v4.price)
@@ -779,7 +778,6 @@
                                         item.attr('league', v2.league_name)
                                         item.attr('home', v3.home_team_name)
                                         item.attr('away', v3.away_team_name)
-                                        item.attr('cate', k)
                                         // rate
                                         item.find('.odd').html(v4.price)
 
