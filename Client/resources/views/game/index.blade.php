@@ -345,7 +345,6 @@
                             let oldRate = parseFloat(bet_item.attr('bet_rate'))
                             let newRate = parseFloat(v3.price)
 
-                            console.log(oldRate, newRate, v3.market_bet_name, v3.line)
                             // status
                             if( v3.status === 1 ) {
                                 bet_item.find('.fa-lock').hide()
@@ -403,7 +402,10 @@
 
 
                             // new rate
-                            bet_item.find('.odd').text(v3.price)
+                            // bet_item.find('.odd').text(v3.price)
+                            bet_item.find('.odd').text(666)
+                            console.log(oldRate, newRate, v3.market_bet_name, v3.line)
+                            
                             let pri = v.priority
                             switch (true) {
                                 case commonLangTrans.priorityArr.bd.indexOf(v.priority) !== -1:
