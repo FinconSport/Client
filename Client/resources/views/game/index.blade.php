@@ -281,17 +281,6 @@
         // nodata
         $('#bettingTypeContainer .noDataContainer').remove()
 
-        // update content
-        // check exist bet type content is still exist in the data
-        $('#bettingTypeContainer .bettingtype-container').each(function() {
-            let priority = parseInt($(this).attr('priority'))
-            let result = null
-            result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
-            if( !result ) {
-                $(this).remove()
-            }
-        });
-
         // check exist bet item is still exist in the data
         $('#bettingTypeContainer div[key="marketBetRateKey"]').each(function() {
             const priority = parseInt($(this).attr('priority'));
@@ -303,6 +292,19 @@
             let result = resultArr?.list?.[linekey]?.find( item => item.market_bet_id === market_bet_id)
             if( !result ) $(this).remove();
         });
+
+        // update content
+        // check exist bet type content is still exist in the data
+        $('#bettingTypeContainer .bettingtype-container').each(function() {
+            let priority = parseInt($(this).attr('priority'))
+            let result = null
+            result = Object.values(fixtureData?.list)?.find(item => item.priority === priority);
+            if( !result ) {
+                $(this).remove()
+            }
+        });
+
+        
 
         // ===== 玩法排序 (全場->半場->單節) =====
         const catePriority = gameLangTrans.catePriority
