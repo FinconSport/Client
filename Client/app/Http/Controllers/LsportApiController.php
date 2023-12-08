@@ -639,6 +639,12 @@ class LsportApiController extends Controller {
                                 if ($line != $base_main_line) {
                                     unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
                                     continue;
+                                } else {
+                                    
+                                    $dd_line = $this->displayMainLine($line);
+                                   // unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+
+                                   dd($dd_line ,$bet_data );
                                 }
 
                                 if (isset($risk_data[$market_id])) {
