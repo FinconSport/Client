@@ -407,10 +407,10 @@
                                 case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
                                 case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
-                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.home_team_name}`)
+                                        bet_item.find('.market_bet_name').html(`${fixtureData.home_team_name}`)
                                         bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 2) {
-                                        bet_item.find('.market_bet_name').html(`${matchListD.data.list.away_team_name}`)
+                                        bet_item.find('.market_bet_name').html(`${fixtureData.away_team_name}`)
                                         bet_item.find('.line').html(`${v3.line}`)
                                     } else if (v3.market_bet_name_en == 'X') {
                                         bet_item.find('.market_bet_name').html('{{ trans("game.index.tie") }}')
