@@ -500,13 +500,16 @@
                     mainLine = isMinus ? 0 - (num1 + num2)/2 : (num1 + num2)/2
                 }
 
-
                 // 是否有讓方
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
                 if( j === 1 ) {
                     let bet = betData.list[betData.mainLine]
                     bet.length === 2 && (bet[0].line !== bet[1].line) ? isHcapTeam = true : isHcapTeam = false
+                }
+
+                if( sport === 6046 ) {
+                    console.log( v3.main_line, mainLine, betData )
                 }
 
                 Object.entries(betData.list[betData.mainLine]).map(([k4, v4], s) => { 
