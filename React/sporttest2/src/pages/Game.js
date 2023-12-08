@@ -16,7 +16,7 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            game_api: 'https://sportc.asgame.net/api/v2/game_index?token=' + window.token+ '&player=' + window.player+ '&sport_id=' + Cookies.get('sport', { path: '/' }) + '&fixture_id='+Cookies.get('GameMatchId', { path: '/' }),
+            game_api: 'https://sportc.asgame.net/api/v2/game_index_b?token=' + window.token+ '&player=' + window.player+ '&sport_id=' + Cookies.get('sport', { path: '/' }) + '&fixture_id='+Cookies.get('GameMatchId', { path: '/' }),
 			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
 			betData: null,
 			isOpenCal: false,
@@ -71,7 +71,7 @@ class Game extends React.Component {
 			if( isUpdate === 0) {
 				clearInterval(window.ajaxInt)
 				window.ajaxInt = setInterval(() => {
-					this.caller(this.state.game_api, 'game_res', 0, 1)
+					// this.caller(this.state.game_api, 'game_res', 0, 1)
 				}, 5000);
 			}
 		})
@@ -192,7 +192,9 @@ class Game extends React.Component {
 
 	// 取得投注所需資料
 	getBetData = (betData) => {
-		window.menu = this.state.game_res.data.list.status === 1 ? 0 : 1
+		let temp = this.state.game_res.data.list
+		let id = Object.keys(temp)
+		window.menu = temp[id].status === 1 ? 0 : 1
 		betData.cate = menuArr[window.menu]
 		this.setState({
 			betData: betData,
@@ -229,15 +231,17 @@ class Game extends React.Component {
 	}
 
 	render() {
-		const data = this.state?.game_res
+		const data = this.state?.game_res?.data
 		const betData = this.state.betData
+		const fixtureId = data ? Object.keys(data.list) : null
+		const leagueName = data ? data.league_name : null
 
 		return (
 			data !== undefined ?
 				<>
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} className="h-100" >
-						<GameTopSlider data={data} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
-						<GameMain data={data.data} getBetDataCallBack={this.getBetData} />
+						<GameTopSlider data={data} fixtureId={fixtureId} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
+						<GameMain data={data} fixtureId={fixtureId} leagueName={leagueName} getBetDataCallBack={this.getBetData} />
 					</PullToRefresh>
 					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 				</>

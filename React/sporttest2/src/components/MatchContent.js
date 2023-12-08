@@ -135,13 +135,6 @@ class MatchContent extends React.Component {
 			if( updateData ) this.findDifferences(oldData, updateData)
 		}
 
-		// var registerId = []
-		// Object.values(json.data).forEach((item) => {
-		// 	item.forEach(ele => {
-		// 		registerId.push(ele.series.id)
-		// 	});
-		// });
-
 		this.setState({
 			data: json.data,
 		}, () => {
@@ -234,35 +227,37 @@ class MatchContent extends React.Component {
 				{
 					data && data[menuArr[window.menu]][window.sport]?.list ?
 					Object.entries(data[menuArr[window.menu]][window.sport].list).length > 0 ?
-					Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
-						<SlideToggle key={k} duration={500}>
-						  {({ toggle, setCollapsibleElement }) => (
-							<>
-								<div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
-									{ v.league_name }({ Object.keys(v.list).length })
-									{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
-								</div>
-								<div className='row m-0' ref={setCollapsibleElement}>
-									{Object.entries(v.list)
-										.sort(([, a], [, b]) => a.order_by - b.order_by) // 根据 order_by 属性排序
-										.map(([k2, v2]) => (
-											<MatchContentCard
-											series_name={v.league_name}
-											key={v2.fixture_id}
-											swiperIndex={this.state.swiperIndex}
-											swiperTabCallBack={this.swiperTabHandler}
-											getBetDataCallBack={this.getBetData}
-											data={v2}
-											isOpen={this.state.toggleStates[k] ? false : true}
-											/>
-										))
-									}
-								</div>
-							</>
-						  )}
-						</SlideToggle>
-					)) :
-					<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
+						Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
+							Object.values(v.list).filter(item => item.risk_status === 1).length > 0 &&
+							<SlideToggle key={k} duration={500}>
+							{({ toggle, setCollapsibleElement }) => (
+								<>
+									<div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
+										{ v.league_name }({ Object.keys(v.list).length })
+										{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
+									</div>
+									<div className='row m-0' ref={setCollapsibleElement}>
+										{Object.entries(v.list)
+											.sort(([, a], [, b]) => a.order_by - b.order_by) // 根据 order_by 属性排序
+											.map(([k2, v2]) => (
+												<MatchContentCard
+													series_name={v.league_name}
+													key={v2.fixture_id}
+													swiperIndex={this.state.swiperIndex}
+													swiperTabCallBack={this.swiperTabHandler}
+													getBetDataCallBack={this.getBetData}
+													data={v2}
+													isOpen={this.state.toggleStates[k] ? false : true}
+												/>
+											))
+										}
+									</div>
+								</>
+							)}
+							</SlideToggle>
+						)) 
+						:
+						<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
 					:
 					<div className="loading loading04 text-white mt-5">
 						<span>L</span>

@@ -193,11 +193,13 @@ class MatchContentCard extends React.Component {
 		const v = this.props.data
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
-        if ( v !== undefined && gameTitle ){
+        if ( v !== undefined && gameTitle && v.risk_status === 1 ){
             let hcapTeam = null
             if( v?.list && Object.keys(v.list).length > 0 ) {
-                let h = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list
-                let a = Object.values(v.list).find(e => e.priority === gameTitle[0][1])?.list
+                let listVals = Object.values(v.list).find(e => e.priority === gameTitle[0][1])
+                let mainline = listVals?.main_line
+                let h = listVals?.list?.[mainline]
+                let a = listVals?.list?.[mainline]
                 if( h && a) {
                     h = h[0]?.line
                     a = a[1]?.line
@@ -295,8 +297,8 @@ class MatchContentCard extends React.Component {
                                                                             <div className='col-4' style={Padding01} key={k}>
                                                                                 <div style={SliderTitleDiv}>{ langText.MatchContent.game_priority[window.sport][k] }</div>
                                                                                 {
-                                                                                    tt && tt.list && Object.keys(tt.list).length > 0 ? 
-                                                                                    Object.entries(tt.list).map(([r,s]) => {
+                                                                                    tt && tt.list && tt.list?.[tt.main_line]?.length > 0 ? 
+                                                                                    Object.entries(tt.list[tt.main_line]).map(([r,s]) => {
                                                                                         // s.line = '-0.25 (0-0)'
                                                                                         return(
                                                                                             k === 201 || k === 202 ?

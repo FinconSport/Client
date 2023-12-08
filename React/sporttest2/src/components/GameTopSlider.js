@@ -101,7 +101,7 @@ class GameTopSlider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            isSetStar: Cookies.get(this.props.data.data.list.fixture_id, { path: '/' }) === 'true' || false,
+            isSetStar: Cookies.get(this.props.fixtureId, { path: '/' }) === 'true' || false,
             scoreboardIndex: 0,
             scoreboardSliderCount: 0,
             scColumnCount: 1
@@ -227,12 +227,11 @@ class GameTopSlider extends React.Component {
 
 
 	render() {
-        const data = this.props.data.data
+        const data = this.props.data
         const sport = parseInt(Cookies.get('sport', { path: '/' }))
-        const fixture = data.list
+        const fixture = data.list[this.props.fixtureId]
 
         if( data ) {
-            console.log(data)
             return (
                 <div style={{ height: '25%' }}>
                     <Swiper navigation={true}  pagination={true} modules={[Navigation, Pagination]} style={{ color: 'white', fontSize: '0.8rem' }} slidesPerView={1} id='gameTopSlider' className="h-100">
@@ -245,7 +244,7 @@ class GameTopSlider extends React.Component {
                                 </div>
                                 <div className='col-8 row m-0'>
                                     <div className="p-0">
-                                        <p target='league'>{data.list.league_name}</p>
+                                        <p target='league'>{data.league_name}</p>
                                     </div>
                                 </div>
                                 <div className='col-2' onClick={this.refreshGame}>
@@ -297,7 +296,7 @@ class GameTopSlider extends React.Component {
                                     </div>
                                     <div className='col-8 row m-0'>
                                         <div className="col-11 p-0">
-                                            <p target='league'>{data.list.league_name}</p>
+                                            <p target='league'>{data.league_name}</p>
                                         </div>
                                     </div>
                                     <div className='col-2' onClick={this.refreshGame}>
@@ -307,7 +306,7 @@ class GameTopSlider extends React.Component {
                                 <div style={maintablebpard}>
                                     <div style={scoreBoardSeries}>
                                         <div style={scoreBoardseriesLogoCon}>
-                                            {data.list.league_name}
+                                            {data.league_name}
                                         </div>
                                         <div className="text-right" style={{ width: '25%'}}>
                                             {sport === 154914 ? 

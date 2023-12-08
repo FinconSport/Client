@@ -135,13 +135,6 @@ class MatchContent extends React.Component {
 			if( updateData ) this.findDifferences(oldData, updateData)
 		}
 
-		// var registerId = []
-		// Object.values(json.data).forEach((item) => {
-		// 	item.forEach(ele => {
-		// 		registerId.push(ele.series.id)
-		// 	});
-		// });
-
 		this.setState({
 			data: json.data,
 		}, () => {
@@ -235,6 +228,7 @@ class MatchContent extends React.Component {
 					data && data[menuArr[window.menu]][window.sport]?.list ?
 					Object.entries(data[menuArr[window.menu]][window.sport].list).length > 0 ?
 					Object.entries(data[menuArr[window.menu]][window.sport].list).map(([k, v]) => (
+						Object.values(v.list).filter(item => item.risk_status === 1).length > 0 &&
 						<SlideToggle key={k} duration={500}>
 						  {({ toggle, setCollapsibleElement }) => (
 							<>
@@ -259,11 +253,10 @@ class MatchContent extends React.Component {
 										);
 									})}
 								</div>
-
 							</>
 						  )}
 						</SlideToggle>
-					)) :
+					)):
 					<h5 className='mt-2 text-center fw-600' style={{ color: 'rgb(196, 211, 211)' }}>{langText.MatchContent.nomorematch}</h5>
 					:
 					<div className="loading loading04 text-white mt-5">

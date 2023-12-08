@@ -114,12 +114,12 @@ class GameMain extends React.Component {
         this.props.getBetDataCallBack(
             {
                 sport_id: window.sport, 
-                fixture_id: this.props.data.list.fixture_id, 
+                fixture_id: this.props.fixtureId, 
                 market_id: market_id, 
                 market_bet_id: market_bet_id, 
                 bet_rate: price, 
                 market_name: market_name, 
-                series_name: this.props.data.list.league_name, 
+                series_name: this.props.leagueName, 
                 home_team_name: home_team_name, 
                 away_team_name: away_team_name, 
                 bet_item_name: bet_item_name, 
@@ -129,8 +129,8 @@ class GameMain extends React.Component {
 
     render() {
         const sport = parseInt(Cookies.get('sport', { path: '/' }))
-        const data = this.props.data.list
-        const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority], [langText.MatchContent.oddEvenPriority]]
+        const data = this.props.data.list[this.props.fixtureId]
+        const GamePriorityArr = [[langText.MatchContent.allWinPriority], [langText.MatchContent.hcapPriority], [langText.MatchContent.sizePriority]]
 
         return (
             <div style={{ height: '75%' }}>
@@ -150,94 +150,16 @@ class GameMain extends React.Component {
                                     }
                                 </GameCat>
                                 <GameBetBody>
-                                    {data.market.sort((a, b) => a.priority - b.priority).map((v, k) => {
+                                    {Object.entries(data.list).sort((a, b) => a.priority - b.priority).map(([k, v]) => {
                                         let t = v.priority
-                                        if ( Object.keys(v.market_bet).length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1) && !( sport === 35232 && (t === 304 || t === 308)) && !( sport === 131506 && (t === 407 || t === 408)) ) {
+                                        if ( Object.keys(v.list).length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1) && !( sport === 35232 && (t === 304 || t === 308)) && !( sport === 131506 && (t === 407 || t === 408)) ) {
                                             return (
                                                 <GameBetCard key={k}>
                                                     <GameBetCardBetName>{v.market_name}</GameBetCardBetName>
                                                     {
-                                                        t === 8 ?
-                                                        <div className="row m-0">
-                                                            <div className="col p-0">
-                                                                {
-                                                                    Object.keys(v.market_bet).map((key, v1) => (
-                                                                        <div key={key}>
-                                                                            {v.market_bet[key].sort((a, b) => a.market_bet_name - b.market_bet_name).slice(0, v.market_bet[''].length/2).map((v2, k2) => (
-                                                                                <div key={k2}>
-                                                                                    <div className="row m-0" style={{ ...BetBrick, ...(k2 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
-                                                                                        <div className="col-5 row m-0 p-0">
-                                                                                            <div style={{ textAlign: 'left' }}>{v2.market_bet_name}</div>
-                                                                                        </div>
-                                                                                        <div className="col-5 row m-0 p-0">
-                                                                                            <div style={{ textAlign: 'right' }}>
-                                                                                                <div market_bet_id={v2.market_bet_id}
-                                                                                                    onClick={() => this.getBetData(
-                                                                                                        v.market_id,
-                                                                                                        v2.market_bet_id,
-                                                                                                        v2.price,
-                                                                                                        v.market_name,
-                                                                                                        data.home_team_name,
-                                                                                                        data.away_team_name,
-                                                                                                        v2.market_bet_name + ' ' + v2.line,
-                                                                                                        v2.status
-                                                                                                    )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
-                                                                                                    {v2.price}
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div className="col-1 p-0" style={{ textAlign: 'left' }}>
-                                                                                                <AiFillLock style={v2.status === 1 ? { display: 'none' } : { display: 'initial' }} />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))}
-                                                                        </div>
-                                                                    ))
-                                                                }
-                                                            </div>
-                                                            <div className="col p-0">
-                                                                {
-                                                                    Object.keys(v.market_bet).map((key, v1) => (
-                                                                        <div key={key}>
-                                                                            {v.market_bet[key].sort((a, b) => a.market_bet_name - b.market_bet_name).slice(v.market_bet[''].length/2).map((v2, k2) => (
-                                                                                <div key={k2}>
-                                                                                    <div className="row m-0" style={{ ...BetBrick, ...(k2 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
-                                                                                        <div className="col-5 row m-0 p-0">
-                                                                                            <div style={{ textAlign: 'left' }}>{v2.market_bet_name}</div>
-                                                                                        </div>
-                                                                                        <div className="col-5 row m-0 p-0">
-                                                                                            <div style={{ textAlign: 'right' }}>
-                                                                                                <div market_bet_id={v2.market_bet_id}
-                                                                                                    onClick={() => this.getBetData(
-                                                                                                        v.market_id,
-                                                                                                        v2.market_bet_id,
-                                                                                                        v2.price,
-                                                                                                        v.market_name,
-                                                                                                        data.home_team_name,
-                                                                                                        data.away_team_name,
-                                                                                                        v2.market_bet_name + ' ' + v2.line,
-                                                                                                        v2.status
-                                                                                                    )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
-                                                                                                    {v2.price}
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div className="col-1 p-0" style={{ textAlign: 'left' }}>
-                                                                                                <AiFillLock style={v2.status === 1 ? { display: 'none' } : { display: 'initial' }} />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))}
-                                                                        </div>
-                                                                    ))
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        :
-                                                        Object.keys(v.market_bet).sort((a, b) => parseFloat(a) - parseFloat(b)).map((key, v1) => (
+                                                        Object.keys(v.list).sort((a, b) => parseFloat(a) - parseFloat(b)).map((key, v1) => (
                                                             <div key={key}>
-                                                                {v.market_bet[key].map((v2, k2) => (
+                                                                {v.list[key].map((v2, k2) => (
                                                                     <div key={k2}>
                                                                         <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
                                                                             <div className="col-5 row m-0 p-0">
