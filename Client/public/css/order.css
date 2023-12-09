@@ -163,12 +163,12 @@
   }
 
 .search-main-container .statistic-container {
-    width: 58%;
+    width: 51%;
     display: grid;
-    grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
-    justify-content: space-between;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     align-items: start;
-    grid-column-gap: 1%;
+    /* grid-column-gap: 1%; */
+    justify-content: space-evenly;
 }
 
 .search-main-container .stats-container {
