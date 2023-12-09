@@ -318,7 +318,7 @@ class LsportApiController extends Controller {
             $context = $v['marquee'];
             $create_time = $v['create_time'];
 
-            $notice_list[$sport_id][] = [
+            $notice_list[] = [
                 "sport_id" => $sport_id,
                 "title" => $title,
                 "context" => $context,
