@@ -324,6 +324,17 @@ class LsportApiController extends Controller {
                 "context" => $context,
                 "create_time" => $create_time,
             ];
+
+            if ($sport_id != 0) {
+                $notice_list[0][] = [
+                    "sport_id" => $sport_id,
+                    "title" => $title,
+                    "context" => $context,
+                    "create_time" => $create_time,
+                ];
+    
+
+            }
         }
 
         ///////////////////////////////////
