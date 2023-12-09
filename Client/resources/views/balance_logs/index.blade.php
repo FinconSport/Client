@@ -167,10 +167,10 @@
 			if( k % 2 === 0) str = '<tr class="even">'
 
 			str += '<td>' + v.id + '</td>'
-			str += '<td>' + v.type + '</td>'
-			str += '<td>' + v.change_balance + '</td>'
-			str += '<td>' + v.before_balance + '</td>'
-			str += '<td>' + v.after_balance + '</td>'
+			str += '<td style="text-align:left;">' + v.type + '</td>'
+			str += '<td style="text-align:right;">' + v.change_balance + '</td>'
+			str += '<td style="text-align:right;">' + v.before_balance + '</td>'
+			str += '<td style="text-align:right;">' + v.after_balance + '</td>'
 			str += '<td>' + v.create_time + '</td>'
 			str += '</tr>'
 			$('#tableContent').append(str)
