@@ -106,29 +106,29 @@
 	}
 
 	function createTabContent(noticeItem, noticeIndex) {
-		noticeItem.forEach((item) => {
-			const sportId = item.sport_id;
-
-			// If sport_id is 0, append to #tab_SystemNotice tab
-			if (sportId === 0) {
-				const systTabContent = $('#tab_SystemNotice .tab-card-container');
-				const noticeHtml = createNoticeHtml(item);
-				systTabContent.append(noticeHtml);
-			} else {
-				// Filter the sportListD data for the current sport_id
-				const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
-
-				if (matchingSport) {
-					const tabContent = $(`#tab_${sportId} .tab-card-container`);
+		Object.keys(noticeItem).forEach((sportId) => {
+			noticeItem[sportId].forEach((item) => {
+				// If sport_id is 0, append to #tab_SystemNotice tab
+				if (sportId === "0") {
+					const systTabContent = $('#tab_SystemNotice .tab-card-container');
 					const noticeHtml = createNoticeHtml(item);
-					tabContent.append(noticeHtml);
-				}
-			}
+					systTabContent.append(noticeHtml);
+				} else {
+					// Filter the sportListD data for the current sport_id
+					const matchingSport = sportListD.data.find((sport) => sport.sport_id === parseInt(sportId));
 
-			// Append to #tab_All tab
-			const allTabContent = $('#tab_All .tab-card-container');
-			const noticeHtml = createNoticeHtml(item);
-			allTabContent.append(noticeHtml);
+					if (matchingSport) {
+						const tabContent = $(`#tab_${sportId} .tab-card-container`);
+						const noticeHtml = createNoticeHtml(item);
+						tabContent.append(noticeHtml);
+					}
+				}
+
+				// Append to #tab_All tab
+				const allTabContent = $('#tab_All .tab-card-container');
+				const noticeHtml = createNoticeHtml(item);
+				allTabContent.append(noticeHtml);
+			});
 		});
 	}
 
