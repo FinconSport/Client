@@ -2,15 +2,16 @@
 
 @section('content')
 	<div class="search-main-container">
-		<div class="search-bar-container">
-			<div class="select-con">
+		<!-- if d-none remove from select-con div, remove align-items-center from search-bar-container div and w-100 from datecalendar-con div -->
+		<div class="search-bar-container align-items-center">
+			<div class="select-con d-none">
 				<select class="ui selection dropdown" id="selectOption" name="selectOption" onchange="redirectToPage()">
 					<option value=-1>{{ trans('common.left_menu.all') }}</option>
 					<option value=0>{{ trans('common.left_menu.unsettled') }}</option>
 					<option value=1>{{ trans('common.left_menu.settled') }}</option>
 				</select>
 			</div>
-			<div class="datecalendar-con">
+			<div class="datecalendar-con w-100">
 				<div class="ui form">
 					<div class="two fields">
 						<div class="field">
@@ -116,7 +117,8 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/order.css?v=' . $system_config['version']) }}" rel="stylesheet"> -->
+<link href="{{ asset('css/order.css?v=' . $current_time) }}" rel="stylesheet">
 <style>	
 /* 寫入頁面限定CSS */
 </style>
