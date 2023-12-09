@@ -313,7 +313,7 @@ class LsportApiController extends Controller {
         }
 
         foreach ($return as $k => $v) {
-            $sport_id = 0;
+            $sport_id = $v['sport_id'];
             $title = $v['title'];
             $context = $v['marquee'];
             $create_time = $v['create_time'];
@@ -324,6 +324,7 @@ class LsportApiController extends Controller {
                 "context" => $context,
                 "create_time" => $create_time,
             ];
+
         }
 
         ///////////////////////////////////
