@@ -850,12 +850,12 @@ a.sportSelect:hover {
 .search-main-container{
     /* margin-top: 60px; */
     display: flex;
-    justify-content: center;
     align-items: stretch;
+    justify-content: space-between;
 }
 
 .search-main-container .search-bar-container {
-    width: 48%;
+    width: 48.5%;
 }
 
 

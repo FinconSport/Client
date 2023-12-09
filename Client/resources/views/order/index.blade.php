@@ -43,25 +43,35 @@
 			</div>
 		</div>
 		<div class="statistic-container" id="countTr" template="orderTotalTemplate" hidden>
-			<div class="stats-container">
-				<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
-				<p class="orderData_totalBetCount"></p>
+			<div class="stats-card">
+				<div class="stats-container">
+					<span><i class="fa-sharp fa-regular fa-rectangle-list" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_count') }}</span>
+					<p class="orderData_totalBetCount"></p>
+				</div>
 			</div>
-			<div class="stats-container">
-				<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
-				<p class="orderData_totalBetAmount"></p>
+			<div class="stats-card">
+				<div class="stats-container">
+					<span><i class="fa-solid fa-circle-dollar-to-slot" style="color: #415b5a;margin-right: 0.5rem;"></i>{{ trans('order.main.total_bet_amount') }}</span>
+					<p class="orderData_totalBetAmount"></p>
+				</div>
 			</div>
-			<div class="stats-container">
-				<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
-				<p class="orderData_totalEffectiveAmount"></p>
+			<div class="stats-card">
+				<div class="stats-container">
+					<span><i class="fa-sharp fa-solid fa-star" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_effective_amount') }}</span>
+					<p class="orderData_totalEffectiveAmount"></p>
+				</div>
 			</div>
-			<div class="stats-container">
-				<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
-				<p class="orderData_totalResultAmount"></p>
+			<div class="stats-card">
+				<div class="stats-container">
+					<span><i class="fa-sharp fa-solid fa-trophy" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_result_amount') }}</span>
+					<p class="orderData_totalResultAmount"></p>
+				</div>
 			</div>
-			<div class="stats-container total-win-amount">
-				<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
-				<p class="orderData_totalWinAmount"></p>
+			<div class="stats-card">
+				<div class="stats-container total-win-amount">
+					<span><i class="fa-solid fa-dollar-sign" style="color: #415a5b;margin-right: 0.5rem;"></i>{{ trans('order.main.total_win_amount') }}</span>
+					<p class="orderData_totalWinAmount"></p>
+				</div>
 			</div>
 		</div>
 	</div>
