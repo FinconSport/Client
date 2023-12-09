@@ -72,11 +72,11 @@
 
 	function renderView() {
 		// sportlistD
-		// if (sportListD && sportListD.data) {
-		// 	sportListD.data.forEach((sportItem, sportIndex) => {
-		// 		createTabBtnAndContainer(sportItem, sportIndex);
-		// 	});
-		// }
+		if (sportListD && sportListD.data) {
+			sportListD.data.forEach((sportItem, sportIndex) => {
+				createTabBtnAndContainer(sportItem, sportIndex);
+			});
+		}
 
 		//noticelistD
 		// if (noticeListD && noticeListD.data) {
