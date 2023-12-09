@@ -635,9 +635,11 @@
 	if (tableContainer.scrollHeight > tableContainer.offsetHeight) {
 		console.log('Scroll bar is currently showing.');
 		$('#noMoreData').css('position', 'relative');
+		$('.statistic-container').css('padding-right', '5px'); //<-- add 5px padding to align the stats if has scroll bar
 	} else {
 		console.log('Scroll bar is not showing.');
 		$('#noMoreData').css({ position: 'absolute', bottom: '0' });
+		$('.statistic-container').css('padding-right', '0px'); //<-- remove 5px padding to align the stats if no scroll bar
 	}
 	}
 

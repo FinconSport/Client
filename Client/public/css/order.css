@@ -8,7 +8,7 @@
 }
 
 #orderContainer::-webkit-scrollbar {
-    width: 5px;
+    width: 0px;
 }
 
 #tableContainer {
@@ -20,7 +20,7 @@
 }
 
 #tableContainer::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
 }
 
 #orderContainer #noMoreData {
