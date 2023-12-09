@@ -19,6 +19,10 @@
     position: relative;
 }
 
+#tableContainer::-webkit-scrollbar {
+    width: 0px;
+}
+
 #orderContainer #noMoreData {
     height: 3rem;
     padding-top: 0.5rem;
