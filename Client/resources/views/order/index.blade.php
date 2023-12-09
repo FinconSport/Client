@@ -80,8 +80,8 @@
             <table id="orderTable" class="cell-border w-100 text-center">
                 <thead>
                     <tr class="no-border-top">
-                        <th style="width: 8%;" class="no-border-left">{{ trans('order.main.index') }}</th>
-                        <th style="width: 9%;">{{ trans('order.main.bet_type') }}</th>
+                        <th style="width: 7%;" class="no-border-left">{{ trans('order.main.index') }}</th>
+                        <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
                         <th style="width: 21%;">{{ trans('order.main.event') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.result') }}</th>
@@ -93,8 +93,8 @@
                 </thead>
                 <tbody id="orderDataTemp">
                     <tr class="orderData_main" template="orderTemplate" hidden>
-                        <td style="width: 8%;" class="orderData_id"></td>
-                        <td style="width: 9%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
+                        <td style="width: 7%;" class="orderData_id"></td>
+                        <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
                         <td style="width: 21%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
@@ -385,7 +385,8 @@
 			const dynamicId = `${betItem.id}`;
 			const dynamicClass = `additionalTr_${orderItem.m_id}`;
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
-				'<td style="width: 8%;"></td>'.repeat(2) +
+				'<td style="width: 7%;"></td>' +
+				'<td style="width: 10%;"></td>' +
 				'<td style="width: 21%; text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%; text-align:left;" class="orderData_betData_BetWay"></td>' +
 				'<td style="width: 10%; text-align:right;" class="orderData_betData_Result"></td>' +
