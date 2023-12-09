@@ -146,9 +146,11 @@
 	// no more data function
 	function checkEmptyTabPanes() {
 		$('.tab-pane').each((_, tabPane) => {
-			if (!$(tabPane).find('.tab-card').length) {
-				$(tabPane).append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
-			}
+			const $tabPane = $(tabPane);
+			const $tabCards = $tabPane.find('.tab-card');
+			const $noTabCardText = $tabPane.find('.no-tab-card-text');
+			
+			$tabCards.length ? $noTabCardText.remove() : $noTabCardText.length || $tabPane.append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
 		});
 	}
 
