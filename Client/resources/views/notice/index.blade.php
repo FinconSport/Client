@@ -80,7 +80,7 @@
 
 		//noticelistD
 		if (noticeListD && noticeListD.data) {
-        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
+        	Object.values(noticeListD.data).forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
@@ -106,29 +106,29 @@
 	}
 
 	function createTabContent(noticeItem, noticeIndex) {
-		Object.keys(noticeItem).forEach((sportId) => {
-			noticeItem[sportId].forEach((item) => {
-				// If sport_id is 0, append to #tab_SystemNotice tab
-				if (sportId === "0") {
-					const systTabContent = $('#tab_SystemNotice .tab-card-container');
-					const noticeHtml = createNoticeHtml(item);
-					systTabContent.append(noticeHtml);
-				} else {
-					// Filter the sportListD data for the current sport_id
-					const matchingSport = sportListD.data.find((sport) => sport.sport_id === parseInt(sportId));
+		noticeItem.forEach((item) => {
+			const sportId = item.sport_id;
 
-					if (matchingSport) {
-						const tabContent = $(`#tab_${sportId} .tab-card-container`);
-						const noticeHtml = createNoticeHtml(item);
-						tabContent.append(noticeHtml);
-					}
-				}
+			// Filter the sportListD data for the current sport_id
+			const matchingSport = sportListD.data.find((sport) => sport.sport_id === sportId);
 
-				// Append to #tab_All tab
-				const allTabContent = $('#tab_All .tab-card-container');
+			if (matchingSport) {
+				const tabContent = $(`#tab_${sportId} .tab-card-container`);
 				const noticeHtml = createNoticeHtml(item);
-				allTabContent.append(noticeHtml);
-			});
+				tabContent.append(noticeHtml);
+			}
+
+			// If sport_id is 0, append to #tab_SystemNotice tab
+			if (sportId === 0) {
+				const systTabContent = $('#tab_SystemNotice .tab-card-container');
+				const noticeHtml = createNoticeHtml(item);
+				systTabContent.append(noticeHtml);
+			}
+
+			// Append to #tab_All tab
+			const allTabContent = $('#tab_All .tab-card-container');
+			const noticeHtmlAll = createNoticeHtml(item);
+			allTabContent.append(noticeHtmlAll);
 		});
 	}
 
