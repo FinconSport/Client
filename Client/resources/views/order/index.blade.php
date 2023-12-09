@@ -82,7 +82,7 @@
                     <tr class="no-border-top">
                         <th style="width: 7%;" class="no-border-left">{{ trans('order.main.index') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_type') }}</th>
-                        <th style="width: 21%;">{{ trans('order.main.event') }}</th>
+                        <th style="width: 22%;">{{ trans('order.main.event') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_way') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.result') }}</th>
                         <th style="width: 10%;">{{ trans('order.main.bet_amount') }}</th>
@@ -95,7 +95,7 @@
                     <tr class="orderData_main" template="orderTemplate" hidden>
                         <td style="width: 7%;" class="orderData_id"></td>
                         <td style="width: 10%;text-align:left;"><span class="orderData_sportType"></span><br><span class="orderData_mOrder"></span></td>
-                        <td style="width: 21%;" class="orderData_betData_Event"></td>
+                        <td style="width: 22%;" class="orderData_betData_Event"></td>
                         <td style="width: 10%;" class="orderData_betData_BetWay"></td>
                         <td style="width: 10%;" class="orderData_betData_Result"></td>
                         <td style="width: 10%;" class="text-right"><span class="orderData_betAmount"></span><br><span style="color:#b2b2b2;" class="orderData_createTime"></span></td>
@@ -387,7 +387,7 @@
 			const additionalTr = $('<tr></tr>').attr('id', dynamicId).addClass(dynamicClass).addClass('orderData_expand').append(
 				'<td style="width: 7%;"></td>' +
 				'<td style="width: 10%;"></td>' +
-				'<td style="width: 21%; text-align:left;" class="orderData_betData_Event"></td>' +
+				'<td style="width: 22%; text-align:left;" class="orderData_betData_Event"></td>' +
 				'<td style="width: 10%; text-align:left;" class="orderData_betData_BetWay"></td>' +
 				'<td style="width: 10%; text-align:right;" class="orderData_betData_Result"></td>' +
 				'<td style="width: 10%;"></td>'.repeat(4)
