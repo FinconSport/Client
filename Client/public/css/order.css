@@ -162,13 +162,20 @@
     margin-left: 0.2rem;
   }
 
-.search-main-container .statistic-container {
-    width: 51%;
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    align-items: start;
-    /* grid-column-gap: 1%; */
-    justify-content: space-evenly;
+.search-main-container .stats-card {
+    height: 100%;
+    padding: 0% 2.5%;
+}
+
+.search-main-container .stats-container {
+    height: 100%;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 2px solid #415b5a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .search-main-container .stats-container {
