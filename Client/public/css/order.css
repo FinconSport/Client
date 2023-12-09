@@ -47,7 +47,7 @@
 #orderTable th {
     border-left: 1px solid rgb(65, 91, 90);
     border-right: 1px solid rgb(65, 91, 90);
-    padding: 1rem;
+    padding: 0.5rem 0.7rem;
     font-weight: 600;
     overflow: hidden;
 }
