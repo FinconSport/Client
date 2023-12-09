@@ -49,6 +49,7 @@
     border-right: 1px solid rgb(65, 91, 90);
     padding: 1rem;
     font-weight: 600;
+    overflow: hidden;
 }
 
 #orderTable th:first-child,
@@ -118,6 +119,10 @@
     float: right;
 }
 
+table#orderTable {
+    table-layout: fixed;
+    overflow: hidden;
+}
 
 #orderContainer {
     margin-top: 1rem;
