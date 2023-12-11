@@ -794,10 +794,8 @@
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                const scbLen = data?.scoreboard[1].length - 1;
-                if (scbLen >= 2) {
-                    console.log(scbLen);
-                }
+                const scbLen = data.scoreboard[1].length - 1;
+                console.log('scoreboard length: ' + scbLen)
             }
         } else {
             $(".living-fixture-con").addClass("d-none");
