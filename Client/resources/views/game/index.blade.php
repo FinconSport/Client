@@ -743,7 +743,7 @@
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         if ((data.status == 2 || data.status == 9) && data.scoreboard) {
             if (sport === 154914) {
-                const scbLen = data?.scoreboard[1].length - 1;
+                const scbLen = data.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -857,7 +857,7 @@
 
         for (let i = 0; i < gameTitle.length; i++) {
             if (sport === 154914) {
-                const scbLen = data?.scoreboard[1].length - 1;
+                const scbLen = data.scoreboard[1].length - 1;
                 baseballShowStageTemp = baseballShowStage;
                 if (baseballShowStageTemp.indexOf(i) !== -1) {
                     scoreBoardHeadTemp.append($(`<th class="isBsbll isBsbll_${i}" style="width:10%;text-align:center;"><div class="setHeightDiv">`).text(gameTitle[i]));
