@@ -12,6 +12,7 @@
 					<option value='recharge'>{{ trans('logs.main.recharge') }}</option>
 					<option value='withdraw'>{{ trans('logs.main.withdraw') }}</option>
 					<option value='delay_bet_refund'>{{ trans('logs.main.delay_bet_refund') }}</option>
+				
 				</select>
 			</div>
 			<div class="datecalendar-con">
