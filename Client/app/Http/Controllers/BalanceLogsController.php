@@ -57,9 +57,6 @@ class BalanceLogsController extends PcController {
       $typeList = trans("pc.BalanceLogs_TypeList");
       $this->assign("type_list",$typeList);
 
-
-      dd($typeList);
-
       $page_limit = $this->page_limit;
       $page = $input['page'];
       $skip = ($page-1)*$page_limit;
