@@ -158,7 +158,7 @@ class MatchContentCard extends React.Component {
 
 
 
-    getBetData = (sport, fixture_id, market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, status) => {
+    getBetData = (sport, fixture_id, market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, bet_item_line, status) => {
 
         if( status !== 1 ) return;
         this.props.getBetDataCallBack(
@@ -173,6 +173,7 @@ class MatchContentCard extends React.Component {
                 home_team_name: home_team_name, 
                 away_team_name: away_team_name, 
                 bet_item_name: bet_item_name, 
+                bet_item_line: bet_item_line
             }
         )
     }
@@ -319,8 +320,8 @@ class MatchContentCard extends React.Component {
                                                                                                     langText.MatchContentCard.tie
                                                                                                 )
                                                                                                 :
-                                                                                                s.market_bet_name + ' ' + s.line
-                                                                                                ,
+                                                                                                s.market_bet_name + ' ',
+                                                                                                s.line,
                                                                                                 s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id} 
@@ -352,10 +353,10 @@ class MatchContentCard extends React.Component {
                                                                                                 v.home_team_name,
                                                                                                 v.away_team_name,
                                                                                                 langText.MatchContent.allWinPriority.indexOf(k) !== -1 || langText.MatchContent.hcapPriority.indexOf(k) !== -1  ?
-                                                                                                (s.market_bet_name_en === "1" ? v.home_team_name : v.away_team_name) + ' ' + s.line
+                                                                                                (s.market_bet_name_en === "1" ? v.home_team_name : v.away_team_name) + ' '
                                                                                                 :
-                                                                                                (s.market_bet_name + ' ' + s.line)
-                                                                                                ,
+                                                                                                (s.market_bet_name + ' '),
+                                                                                                s.line,
                                                                                                 s.status
                                                                                             )}>
                                                                                                 <div className="w-100 h-100" market_bet_id={s.market_bet_id} 

@@ -462,9 +462,11 @@ class CommonCalculator extends React.Component {
                                             </div>
                                             <div className='col-12'>{langText.CommonCalculator[this.props.cate]} - { sendOrderData.market_name }</div>
                                             <div style={BetItemStyle} className='row m-0'>
-                                                <div className='col-10 p-0'>{ sendOrderData.bet_item_name }</div>
+                                                <div className='col-10 p-0'>{ sendOrderData.bet_item_name }
+                                                    <span style={{ color: 'rgb(255, 112, 0)' }}>{ sendOrderData.bet_item_line }</span>
+                                                </div>
                                                 <div className='col-2 p-0 text-center calCardInfo' market_bet_id={sendOrderData.market_bet_id}>
-                                                    <span className='odd' style={{ color: 'rgb(255, 112, 0)'}}>{ sendOrderData.bet_rate }</span>
+                                                    <span className='odd'>{ sendOrderData.bet_rate }</span>
                                                 </div>
                                             </div>
                                         </div>
