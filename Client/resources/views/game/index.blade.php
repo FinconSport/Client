@@ -788,14 +788,14 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
-                console.log('scoreboard length: ' + scbLen)
+                console.log(scbLen + 'Inning')
 
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
                 const scbLen = data.scoreboard[1].length - 1;
-                console.log('scoreboard length: ' + scbLen)
+                console.log(scbLen + 'Inning')
             }
         } else {
             $(".living-fixture-con").addClass("d-none");
