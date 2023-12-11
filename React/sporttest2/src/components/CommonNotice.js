@@ -116,7 +116,7 @@ class CommonNotice extends React.Component {
       page: 1,
       searchStatus: 0,
       fetchMoreLock: 0,
-      activeTab: 99,
+      activeTab: -1,
     };
   }
 
@@ -169,17 +169,17 @@ class CommonNotice extends React.Component {
     const { activeTab, notice_list } = this.state;
     const notice_cat = {
       0: langText.CommonNotice.system,
-      1: langText.CommonNotice.soccer,
-      2: langText.CommonNotice.basketball,
-      3: langText.CommonNotice.baseball,
-      4: langText.CommonNotice.iceball,
-      5: langText.CommonNotice.tennis,
-      6: langText.CommonNotice.football,
-      7: langText.CommonNotice.snooker,
-      8: langText.CommonNotice.tabletennis,
-      9: langText.CommonNotice.volleyball,
+      154914: langText.CommonNotice.baseball,
+      6046: langText.CommonNotice.football,
+      48242: langText.CommonNotice.basketball,
+      35232: langText.CommonNotice.icehockey,
+      131506: langText.CommonNotice.americanfootball,
+      // 1: langText.CommonNotice.tennis,
+      // 2: langText.CommonNotice.snooker,
+      // 3: langText.CommonNotice.tabletennis,
+      // 4: langText.CommonNotice.volleyball,
     };
-
+    
     if (notice_list) {
       const noticeArray = Object.values(notice_list);
       const allNotice = noticeArray.flat();
@@ -202,10 +202,10 @@ class CommonNotice extends React.Component {
             <div style={TabMenuWrapperCon}>
               {/* all btn */}
               <button
-                onClick={() => this.handleTabChange(99)}
-                style={activeTab == 99 ? TabMenuBtnActive : TabMenuBtn}
+                onClick={() => this.handleTabChange(-1)}
+                style={activeTab == -1 ? TabMenuBtnActive : TabMenuBtn}
               >
-                {langText.CommonNotice.notice}
+                {langText.CommonNotice.all}
               </button>
               {/* each btn */}
               {Object.entries(notice_cat).map(([key, val]) => (
@@ -224,7 +224,7 @@ class CommonNotice extends React.Component {
                 <div id="TabMainWrapperCon">
                   <div
                     className="content"
-                    style={{ display: activeTab === 99 ? "block" : "none" }}
+                    style={{ display: activeTab === -1 ? "block" : "none" }}
                   >
                     {allNotice
                       .sort((a, b) => {

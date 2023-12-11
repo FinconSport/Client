@@ -80,7 +80,7 @@
 
 		//noticelistD
 		if (noticeListD && noticeListD.data) {
-        	noticeListD.data.forEach((noticeItem, noticeIndex) => {
+        	Object.values(noticeListD.data).forEach((noticeItem, noticeIndex) => {
             	createTabContent(noticeItem, noticeIndex);
 				checkEmptyTabPanes();			
 			});
@@ -127,10 +127,11 @@
 
 			// Append to #tab_All tab
 			const allTabContent = $('#tab_All .tab-card-container');
-			const noticeHtml = createNoticeHtml(item);
-			allTabContent.append(noticeHtml);
+			const noticeHtmlAll = createNoticeHtml(item);
+			allTabContent.append(noticeHtmlAll);
 		});
 	}
+
 
 	// notice content
 	function createNoticeHtml(noticeItem) {
@@ -145,9 +146,11 @@
 	// no more data function
 	function checkEmptyTabPanes() {
 		$('.tab-pane').each((_, tabPane) => {
-			if (!$(tabPane).find('.tab-card').length) {
-				$(tabPane).append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
-			}
+			const $tabPane = $(tabPane);
+			const $tabCards = $tabPane.find('.tab-card');
+			const $noTabCardText = $tabPane.find('.no-tab-card-text');
+			
+			$tabCards.length ? $noTabCardText.remove() : $noTabCardText.length || $tabPane.append('<div class="no-tab-card-text">{{ trans("match.main.nomoredata") }}</div>');
 		});
 	}
 

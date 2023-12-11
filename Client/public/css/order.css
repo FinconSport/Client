@@ -19,6 +19,10 @@
     position: relative;
 }
 
+#tableContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
 #orderContainer #noMoreData {
     height: 3rem;
     padding-top: 0.5rem;
@@ -43,8 +47,9 @@
 #orderTable th {
     border-left: 1px solid rgb(65, 91, 90);
     border-right: 1px solid rgb(65, 91, 90);
-    padding: 1rem;
+    padding: 0.5rem 0.7rem;
     font-weight: 600;
+    overflow: hidden;
 }
 
 #orderTable th:first-child,
@@ -114,6 +119,10 @@
     float: right;
 }
 
+table#orderTable {
+    table-layout: fixed;
+    overflow: hidden;
+}
 
 #orderContainer {
     margin-top: 1rem;
@@ -168,7 +177,7 @@
 }
 
 .search-main-container .statistic-container {
-    width: 51%;
+    width: 50%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     align-items: start;
