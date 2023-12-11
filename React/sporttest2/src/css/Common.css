@@ -29,13 +29,13 @@
     background-color: rgb(233 61 61 / 15%);
 }
 .raiseOdd .odd{
-    color: red;
+    color: red!important;
 }
 .lowerOdd {
     background-color: rgb(139 201 91 / 15%);
 }
 .lowerOdd .odd{
-    color: rgb(139, 201, 91);
+    color: rgb(139, 201, 91)!important;
 }
 
 .calCardInfo.raiseOdd::after {

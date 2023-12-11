@@ -161,20 +161,7 @@ class GameMain extends React.Component {
                                                             <div key={key}>
                                                                 {v.list[key].map((v2, k2) => (
                                                                     <div key={k2}>
-                                                                        <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2}>
-                                                                            <div className="col-5 row m-0 p-0">
-                                                                                <div className="col-3 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
-                                                                                {
-                                                                                    data.status === 2 && sport === 6046 && langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
-                                                                                    <div className="col-9 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
-                                                                                    :
-                                                                                    <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
-                                                                                }
-                                                                            </div>
-                                                                            <div className="col-7 row m-0 p-0">
-                                                                                <div className="col-11" style={{ textAlign: 'right' }}>
-                                                                                    <div market_bet_id={v2.market_bet_id}
-                                                                                        onClick={() => this.getBetData(
+                                                                        <div className="row m-0" style={{ ...BetBrick, ...(k2 === 0 && v1 !== 0 ? { borderTop: '2px solid rgb(65, 91, 90)' } : null) }} key={k2} onClick={() => this.getBetData(
                                                                                             v.market_id,
                                                                                             v2.market_bet_id,
                                                                                             v2.price,
@@ -186,8 +173,20 @@ class GameMain extends React.Component {
                                                                                                 :
                                                                                                 (v2.market_bet_name + ' ' + v2.line),
                                                                                             v2.status
-                                                                                        )} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
-                                                                                        {v2.price}
+                                                                                        )} >
+                                                                            <div className="col-5 row m-0 p-0">
+                                                                                <div className="col-3 p-0" style={{ textAlign: 'right' }}>{v2.market_bet_name}</div>
+                                                                                {
+                                                                                    data.status === 2 && sport === 6046 && langText.MatchContent.hcapPriority.indexOf(t) !== -1 ?
+                                                                                    <div className="col-9 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                                    :
+                                                                                    <div className="col-5 p-0" style={{ textAlign: 'right' }}>{v2.line}</div>
+                                                                                }
+                                                                            </div>
+                                                                            <div className="col-7 row m-0 p-0">
+                                                                                <div className="col-11" style={{ textAlign: 'right' }}>
+                                                                                    <div market_bet_id={v2.market_bet_id} style={{ width: '3rem', float: 'right', padding: '0 0.25rem' }} >
+                                                                                            <span className="odd" style={{ color: 'rgb(255, 112, 0)' }}> {v2.price}</span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-1 p-0" style={{ textAlign: 'left' }}>
