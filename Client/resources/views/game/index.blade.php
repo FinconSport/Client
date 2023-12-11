@@ -758,15 +758,27 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_0)').addClass("slider-bsbll");
 
-                $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
-
-                if (scbLen >= 6) {
-                    $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
+                // $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
+                // if (scbLen >= 6) {
+                //     $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
+                // } else {
+                //     $(".pgntn-bullet-2").addClass("d-none");
+                // }
+                // if (scbLen > 9) {
+                //     $(".isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-3");
+                // } else {
+                //     $(".pgntn-bullet-3").addClass("d-none");
+                // }
+                
+                //for debug only
+                $(".isBsbll_1, .isBsbll_2").addClass("slide-1");
+                if (scbLen >= 2) {
+                    $(".isBsbll_2, .isBsbll_3").addClass("slide-2");
                 } else {
                     $(".pgntn-bullet-2").addClass("d-none");
                 }
-                if (scbLen > 9) {
-                    $(".isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-3");
+                if (scbLen > 4) {
+                    $(".isBsbll_3, .isBsbll_4").addClass("slide-3");
                 } else {
                     $(".pgntn-bullet-3").addClass("d-none");
                 }
@@ -776,10 +788,22 @@
                 if (storedSlide) {
                     currentSlide = parseInt(storedSlide);
                 } else {
-                    if (scbLen < 6) {
+                    // if (scbLen < 6) {
+                    //     lastslide = 1;
+                    //     currentSlide = 1;
+                    // } else if (scbLen >= 6 && scbLen <= 9) {
+                    //     lastslide = 2;
+                    //     currentSlide = 2;
+                    // } else {
+                    //     lastslide = 3;
+                    //     currentSlide = 3;
+                    // }
+
+                    //for debug only
+                    if (scbLen < 2) {
                         lastslide = 1;
                         currentSlide = 1;
-                    } else if (scbLen >= 6 && scbLen <= 9) {
+                    } else if (scbLen >= 2 && scbLen <= 4) {
                         lastslide = 2;
                         currentSlide = 2;
                     } else {
