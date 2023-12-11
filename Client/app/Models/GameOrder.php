@@ -50,7 +50,7 @@ class GameOrder extends CacheModel
 			if ($result == -1) {		// 全部
 				// do nothing
 			} elseif ($result == 0) {	// 未結
-				$model = $model->whereIn('status', [0,1,2,3]);
+				$model = $model->whereIn('status', [0,1,2,3,5]);
 			} else {					// 已結
 				$model = $model->where('status', 4);
 			}
