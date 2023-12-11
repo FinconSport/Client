@@ -290,7 +290,16 @@
 
             // 遍历 market_bet 属性
             let result = resultArr?.list?.[linekey]?.find( item => item.market_bet_id === market_bet_id)
-            if( !result ) $(this).remove();
+            if( !result ) {
+                // 移除item
+                $(this).remove();
+                // 計算機選中的盤口剛好消失
+                if( $('div[key="slideOrderCard"]').attr('market_bet_id') == market_bet_id ) {
+                    $('#submitOrder').html(langTrans.bet_area.disabled)
+                    $('#submitOrder').addClass('disabled')
+                    $('#submitOrder').attr('disabled', true)
+                }
+            } 
         });
 
         // update content
@@ -1007,7 +1016,7 @@
 
         // 三秒後移除
         setTimeout(() => {
-            $('div').removeClass('raiseOdd')
+            $('div').removeClass('lowerOdd')
             $('div').find('.fa-caret-down').hide()
         }, 3000);
     }
