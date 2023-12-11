@@ -70,11 +70,14 @@ return [
 	 * 
 	 ****************/
 	'BalanceLogs_TypeList' => [
-		"game_bet"=>"Betting",  //  "投注",
-		"game_result"=>"Winning",  //  "派獎",
-		"recharge"=>"Deposit",  //  "入金",
-		"withdraw"=>"Withdraw", //  "提出",
-        "delay_bet_refund"=>"Delay-bet refund",
+		"game_bet"=>"bet",  //  "投注",
+		"game_result"=>"result",  //  "派獎",
+		"recharge"=>"recharge",  //  "入金",
+		"withdraw"=>"withdraw", //  "提出",
+        "delay_bet_refund"=>"delaybet refund",
+		"bet_refund"=>"refund",
+		"agentapi_recharge"=>"recharge",
+		"agentapi_withdraw"=>"withdraw",
 	],  //   
 
 
