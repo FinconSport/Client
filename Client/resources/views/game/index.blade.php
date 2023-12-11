@@ -813,6 +813,7 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
+                console.log('scoreboard length: ' + scbLen)
 
             } else {
                 $(".early-fixture-con").addClass("d-none");
