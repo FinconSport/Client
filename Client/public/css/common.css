@@ -1046,7 +1046,7 @@ button.dateCalendarBtn {
 }
 
 .search-main-container.one-line-searchbar button.dateCalendarBtn {
-    padding: 0.2rem 1rem;
+    padding: 0px;
     height: 28px;
     width: auto;
 }

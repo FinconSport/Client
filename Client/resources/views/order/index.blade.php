@@ -14,7 +14,7 @@
 			<div class="datecalendar-con w-100">
 				<div class="ui form">
 					<div class="two fields">
-						<div class="field">
+						<div class="field pr-1">
 						<div class="ui calendar" id="rangestart">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
@@ -22,7 +22,7 @@
 							</div>
 						</div>
 						</div>
-						<div class="field">
+						<div class="field pl-1">
 						<div class="ui calendar" id="rangeend">
 							<div class="ui input left icon">
 							<i class="calendar icon"></i>
