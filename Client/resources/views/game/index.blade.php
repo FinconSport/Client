@@ -751,8 +751,9 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         if ((data.status == 2 || data.status == 9) && data.scoreboard) {
+            const scbLen = data.scoreboard[1].length - 1;
+            
             if (sport === 154914) {
-                const scbLen = data.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
@@ -788,18 +789,19 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
-                console.log(scbLen + ' Inning')
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                const scbLen = data.scoreboard[1].length - 1;
-                console.log(scbLen +
-                    (sport === 154914 || sport === 154914 ? ' Inning' : '') +
-                    (sport === 6046 ? ' Half' : '') +
-                    (sport === 48242 || sport === 131506 ? ' Quarter' : '')
-                );
             }
+
+            //for debug only
+            console.log(scbLen +
+                (sport === 154914 || sport === 35232 ? ' Inning' : '') +
+                (sport === 6046 ? ' Half' : '') +
+                (sport === 48242 || sport === 131506 ? ' Quarter' : '')
+            );
+
         } else {
             $(".living-fixture-con").addClass("d-none");
             $(".navigation-controls").addClass("d-none");
