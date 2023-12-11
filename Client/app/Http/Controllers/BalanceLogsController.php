@@ -72,8 +72,8 @@ class BalanceLogsController extends PcController {
         $mBalanceLogs = $mBalanceLogs->where("create_time","<=",$input['end_time']);
       }
 
-      if (isset($input['type']) && ($input['type'] != "")) {
-        $mBalanceLogs = $mBalanceLogs->where("type",$input['type']);
+      if (isset($input['balance_type']) && ($input['balance_type'] != "")) {
+        $mBalanceLogs = $mBalanceLogs->where("balance_type",$input['balance_type']);
       }
 
       $groupedData = $mBalanceLogs->orderBy('id', 'DESC')->get();

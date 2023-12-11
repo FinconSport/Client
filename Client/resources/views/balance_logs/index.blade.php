@@ -6,12 +6,10 @@
 		<div class="search-bar-container">
 			<div class="select-con">
 				<select class="ui selection dropdown" id="selectOption" name="balance_type" onchange="redirectToPage()">	
-					<option value='' selected>{{ trans('logs.main.all') }}</option>
-					<option value='game_bet' >{{ trans('logs.main.game_bet') }}</option>
-					<option value='game_result'>{{ trans('logs.main.game_result') }}</option>
-					<option value='recharge'>{{ trans('logs.main.recharge') }}</option>
-					<option value='withdraw'>{{ trans('logs.main.withdraw') }}</option>
-					<option value='delay_bet_refund'>{{ trans('logs.main.delay_bet_refund') }}</option>
+					<option value=''>{{ trans('logs.main.all') }}</option>
+					@foreach ($type_list as $key => $value)
+					<option value='{{ $key }}'>{{ $value }}</option>
+					@endforeach
 				</select>
 			</div>
 			<div class="datecalendar-con">
