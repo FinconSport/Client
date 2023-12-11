@@ -363,7 +363,7 @@
 					betItem.result_percent === 5 ? `<span style="color: #ff00ff;">{{ trans("order.result_precent.5") }}</span>` : // Add more conditions as needed
 					`${betItem.result_percent}`;
 					break;
-				case 4:
+				case 5:
 					resultText = `<span style="color: #000000;">{{ trans("order.main.waitToCheck") }}</span>`;
 					break;
 			}
