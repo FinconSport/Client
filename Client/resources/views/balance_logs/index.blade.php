@@ -105,8 +105,29 @@
 
 	$(document).ready(function() {
 
-		if(searchData.start_time) callLogsListData.start_time = searchData.start_time
-		if(searchData.end_time) callLogsListData.end_time = searchData.end_time
+		// place holder of date
+		let tt = new Date();
+		let yy = new Date();
+		yy.setDate(yy.getDate() - 1);
+		setRange(searchDate(yy), searchDate(tt))
+
+		// search condition
+		$('#selectOption').val(searchData.balance_type || '' )
+		if( !searchData.start_time && !searchData.end_time ) {
+			// default date
+			let tt = new Date();
+			let yy = new Date();
+			yy.setDate(yy.getDate() - 1);
+			setRange(searchDate(yy), searchDate(tt))
+		} else {
+			setRange(searchData.start_time || '', searchData.end_time || '')
+		}
+
+		// search condition
+		callLogsListData.balance_type = searchData.balance_type || ''
+		callLogsListData.start_time = searchData.start_time || ''
+		callLogsListData.end_time = searchData.end_time || ''
+
 		caller(logsList_api, callLogsListData, logsListD) // logsListD
 
 
@@ -138,31 +159,9 @@
 	}
 
 	function renderView( isIni = 0 ) {
-		// search
-		if( isIni ) {
-			// place holder of date
-			let tt = new Date();
-			let yy = new Date();
-			yy.setDate(yy.getDate() - 1);
-			setRange(searchDate(yy), searchDate(tt))
-
-			// search condition
-			$('#selectOption').val(searchData.balance_type || '' )
-			if( !searchData.start_time && !searchData.end_time ) {
-				// place holder of date
-				let tt = new Date();
-				let yy = new Date();
-				yy.setDate(yy.getDate() - 1);
-				setRange(searchDate(yy), searchDate(tt))
-			} else {
-				setRange(searchData.start_time || '', searchData.end_time || '')
-			}
-		}
-
-
 		Object.entries(logsListD.data.list).map(([k, v]) => { 
-			let str = '<tr class="odd">'
-			if( k % 2 === 0) str = '<tr class="even">'
+			let str = '<tr class="odd" style="height: 3rem;">'
+			if( k % 2 === 0) str = '<tr class="even" style="height: 3rem;">'
 
 			str += '<td style="text-align:right;">' + v.id + '</td>'
 			str += '<td style="text-align:left;">' + v.type + '</td>'
@@ -177,8 +176,6 @@
 		// detect if it's last page
 		if( logsListD.data.list.length !== 20 || logsListD.data.list.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
-
-		if( isIni === 1 && window.innerHeight > 750 ) fetchMore()
 	}
 
 	// 下拉更多資料

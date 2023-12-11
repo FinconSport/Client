@@ -751,15 +751,15 @@
     function createScoreBoard(data) {
         const earlyContainerTemp = $('div[template="earlyContainerTemplate"]').clone();
         if ((data.status == 2 || data.status == 9) && data.scoreboard) {
+            const scbLen = data.scoreboard[1].length - 1;
+            
             if (sport === 154914) {
-                const scbLen = data.scoreboard[1].length - 1;
                 $(".early-fixture-con").addClass("d-none");
 
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
                 $('.isBsbll:not(.isBsbll_0)').addClass("slider-bsbll");
 
                 $(".isBsbll_1, .isBsbll_2, .isBsbll_3, .isBsbll_4, .isBsbll_5, .isBsbll_6").addClass("slide-1");
-
                 if (scbLen >= 6) {
                     $(".isBsbll_4, .isBsbll_5, .isBsbll_6, .isBsbll_7, .isBsbll_8, .isBsbll_9").addClass("slide-2");
                 } else {
@@ -789,14 +789,18 @@
                 }
 
                 showSlide(currentSlide, lastslide, isLastSlide);
-
             } else {
                 $(".early-fixture-con").addClass("d-none");
                 $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
-                const scbLen = data?.scoreboard[1].length - 1;
-                console.log('scoreboard Length: ' + scbLen);
             }
+
+            console.log(
+                scbLen +
+                (scbLen === 1 ? 'st' : scbLen === 2 ? 'nd' : scbLen === 3 ? 'rd' : 'th') +
+                ((sport === 6046 ? ' Half' : sport === 48242 || sport === 131506) ? ' Quarter' : (sport === 154914 || sport === 35232) ? ' Inning' : '')
+            );
+
         } else {
             $(".living-fixture-con").addClass("d-none");
             $(".navigation-controls").addClass("d-none");
@@ -1303,13 +1307,10 @@
 
             if (BettingPage.includes('/?sport=')) {
                 currentPage = 'lf_sport';
-                console.log("{{ trans('common.left_menu.sport_bet') }}: " + sport);
             } else if (BettingPage.includes('m_order')) {
                 currentPage = 'lf_mOrder';
-                console.log("{{ trans('common.left_menu.m_bet') }}: " + sport);
             } else if (BettingPage.includes('index')) {
                 currentPage = 'lf_sport';
-                console.log("{{ trans('common.left_menu.sport_bet') }}: " + sport);
             }
 
             $(`#${currentPage}`).addClass('active currentpage');
