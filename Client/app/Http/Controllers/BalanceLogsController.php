@@ -63,6 +63,7 @@ class BalanceLogsController extends PcController {
 
       //////////////////////////
 
+      dd($input);
       $mBalanceLogs = PlayerBalanceLogs::where("player_id",$player_id);
       if (isset($input['start_time']) && ($input['start_time'] != "")) {
         $mBalanceLogs = $mBalanceLogs->where("create_time",">=",$input['start_time']);
