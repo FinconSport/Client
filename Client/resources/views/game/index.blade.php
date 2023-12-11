@@ -795,13 +795,10 @@
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             }
 
-            //for debug only
             console.log(
                 scbLen +
                 (scbLen === 1 ? 'st' : scbLen === 2 ? 'nd' : scbLen === 3 ? 'rd' : 'th') +
-                (sport === 6046 ? ' Half' : '') +
-                (sport === 48242 || sport === 131506 ? ' Quarter' : '') +
-                (sport === 154914 || sport === 35232 ? ' Inning' : '')
+                ((sport === 6046 ? ' Half' : sport === 48242 || sport === 131506) ? ' Quarter' : (sport === 154914 || sport === 35232) ? ' Inning' : '')
             );
 
         } else {
@@ -1310,13 +1307,10 @@
 
             if (BettingPage.includes('/?sport=')) {
                 currentPage = 'lf_sport';
-                console.log("{{ trans('common.left_menu.sport_bet') }}: " + sport);
             } else if (BettingPage.includes('m_order')) {
                 currentPage = 'lf_mOrder';
-                console.log("{{ trans('common.left_menu.m_bet') }}: " + sport);
             } else if (BettingPage.includes('index')) {
                 currentPage = 'lf_sport';
-                console.log("{{ trans('common.left_menu.sport_bet') }}: " + sport);
             }
 
             $(`#${currentPage}`).addClass('active currentpage');
