@@ -74,7 +74,7 @@ class BalanceLogsController extends PcController {
 
       if (isset($input['balance_type']) && ($input['balance_type'] != "")) {
         $mBalanceLogs = $mBalanceLogs->where("balance_type",$input['balance_type']);
-        dd($input);
+        dd("1111",$input);
       }
 
       $groupedData = $mBalanceLogs->orderBy('id', 'DESC')->get();
