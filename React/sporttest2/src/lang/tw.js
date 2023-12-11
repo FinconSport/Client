@@ -52,6 +52,7 @@ const twTranslation = {
       2: '等待開獎',
       3: '等待派獎',
       4: '已派獎',
+      5: '等待審核'
     },
     detailStatusArr: {
       0: '輸',

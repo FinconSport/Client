@@ -22,7 +22,8 @@ class Game extends React.Component {
 			isOpenCal: false,
 			isGameRefreshing: false,
 			isRefrehingBalance: false,
-			sport: parseInt(Cookies.get('sport', { path: '/' }))
+			sport: parseInt(Cookies.get('sport', { path: '/' })),
+			fixtureId: Cookies.get('GameMatchId', { path: '/' })
         };
 	}
 
@@ -42,8 +43,8 @@ class Game extends React.Component {
 
 		// 是否是更新
 		if( isUpdate === 1 ) {
-			var oldData = this.state.game_res?.data?.list
-			var updateData = json.data?.list
+			var oldData = this.state.game_res?.data?.list?.[this.state.fixtureId]?.list
+			var updateData = json.data?.list?.[this.state.fixtureId]?.list
 			if( updateData ) {
 				this.removeRateStyle(0)
 				this.findDifferences(oldData, updateData)
@@ -71,20 +72,20 @@ class Game extends React.Component {
 			if( isUpdate === 0) {
 				clearInterval(window.ajaxInt)
 				window.ajaxInt = setInterval(() => {
-					// this.caller(this.state.game_api, 'game_res', 0, 1)
+					this.caller(this.state.game_api, 'game_res', 0, 1)
 				}, 5000);
 			}
 		})
 	}
 
 	findDifferences = (originalData, updateData) => {
-		originalData.market.forEach( element => {
+		Object.entries(originalData).map( ([key, element]) => {
 			let priority = element.priority
-			Object.entries(element.market_bet).map( ([k, v]) => {
+			Object.entries(element.list).map( ([k, v]) => {
 				for (let i = 0; i < v.length; i++) {
 					let o = v[i];
 					let market_bet_id = o.market_bet_id
-					let marketBet = updateData.market.find( item => item.priority === priority )?.market_bet
+					let marketBet = updateData[key]?.list
 					if( !marketBet ) return;
 					Object.entries(marketBet).map( ([k2, v2]) => {
 						v2.forEach (e => {
@@ -112,42 +113,6 @@ class Game extends React.Component {
 				}
 			})
 		});
-	}
-
-	findDifferences2 = (originalData, updateData, path = []) => {
-		for (const key in updateData) {
-			const currentPath = [...path, key];
-			if (originalData.hasOwnProperty(key)) {
-				u = updateData // 最後一筆物件資料
-				o = originalData // 最後一筆物件資料
-				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
-					this.findDifferences(originalData[key], updateData[key], currentPath);
-				} else if (key === 'price' && originalData[key] !== updateData[key]) {
-					// console.log(`============== ${u.market_bet_id} ==============`);
-					// console.log(`原始值: ${originalData[key]}`);
-					// console.log(`更新值: ${updateData[key]}`);
-					let market_bet_id = u.market_bet_id
-					let status = u.status
-					let uRate = u.price
-					let oRate = o.price
-
-
-					if( status === 1 ) {
-						if(uRate > oRate) {
-							// 賠率上升
-							$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
-						}
-						if(uRate < oRate) {
-							// 賠率下降
-							$('div[market_bet_id=' + market_bet_id + ']').addClass('lowerOdd')
-						}
-						setTimeout(() => {
-							this.removeRateStyle(market_bet_id)
-						}, 3000);
-					}					
-				}
-			}
-		}
 	}
 
 	removeRateStyle = (market_bet_id) => {
@@ -233,7 +198,7 @@ class Game extends React.Component {
 	render() {
 		const data = this.state?.game_res?.data
 		const betData = this.state.betData
-		const fixtureId = data ? Object.keys(data.list) : null
+		const fixtureId = this.state.fixtureId
 		const leagueName = data ? data.league_name : null
 
 		return (

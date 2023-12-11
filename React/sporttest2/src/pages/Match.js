@@ -99,9 +99,7 @@ class Match extends React.Component {
 
 		// 呼叫所需api
 		this.caller(this.state.accout_api, 'account_res')
-		this.caller(this.state.betRecord_api, 'betRecord_res')
 		this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
-
 
 		this.renderInterval = setInterval(() => {
 			this.caller(this.state.indexMatchList_api, 'indexMatchList_res')
