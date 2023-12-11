@@ -160,8 +160,8 @@
 
 	function renderView( isIni = 0 ) {
 		Object.entries(logsListD.data.list).map(([k, v]) => { 
-			let str = '<tr class="odd">'
-			if( k % 2 === 0) str = '<tr class="even">'
+			let str = '<tr class="odd" style="height: 3rem;">'
+			if( k % 2 === 0) str = '<tr class="even" style="height: 3rem;">'
 
 			str += '<td style="text-align:right;">' + v.id + '</td>'
 			str += '<td style="text-align:left;">' + v.type + '</td>'
@@ -176,8 +176,6 @@
 		// detect if it's last page
 		if( logsListD.data.list.length !== 20 || logsListD.data.list.length === 0 ) isLastPage = true
 		isLastPage && $('#noMoreData').show()
-
-		// if( isIni === 1 && window.innerHeight > 750 ) fetchMore()
 	}
 
 	// 下拉更多資料
