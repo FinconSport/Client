@@ -30,10 +30,6 @@ class BalanceLogsController extends PcController {
         $this->error(__CLASS__, __FUNCTION__, "01");
       }
 
-      if ((!isset($input['page'])) || ($input['page'] == "")) {
-        $input['page'] = 1; // 預設1 
-      }
-      
       $this->assign("search",$input);
 
       $this->getCurrentTime();
@@ -56,57 +52,6 @@ class BalanceLogsController extends PcController {
       // 帳變類型
       $typeList = trans("pc.BalanceLogs_TypeList");
       $this->assign("type_list",$typeList);
-
-      $page_limit = $this->page_limit;
-      $page = $input['page'];
-      $skip = ($page-1)*$page_limit;
-
-      //////////////////////////
-
-      $mBalanceLogs = PlayerBalanceLogs::where("player_id",$player_id);
-      if (isset($input['start_time']) && ($input['start_time'] != "")) {
-        $mBalanceLogs = $mBalanceLogs->where("create_time",">=",$input['start_time']);
-      }
-
-      if (isset($input['end_time']) && ($input['end_time'] != "")) {
-        $mBalanceLogs = $mBalanceLogs->where("create_time","<=",$input['end_time']);
-      }
-
-      if (isset($input['balance_type']) && ($input['balance_type'] != "")) {
-        $mBalanceLogs = $mBalanceLogs->where("balance_type",$input['balance_type']);
-      }
-
-      $groupedData = $mBalanceLogs->orderBy('id', 'DESC')->get();
-      $pagination = count($groupedData);
-
-      $return = $mBalanceLogs->skip($skip)->take($page_limit)->orderBy('id', 'DESC')->get();
-      if ($return === false) {
-        $this->error(__CLASS__, __FUNCTION__, "04");
-      }
-
-      $list = array();
-      foreach ($return as $k => $v) {
-
-        if (isset($typeList[$v['type']])) {
-          $v['type'] = $typeList[$v['type']];
-        }
-
-        $list[] = $v;
-
-      } 
-
-      $this->assign("list",$list);
-      
-      // pagination
-
-      $tmp = array();
-      $tmp['max_count'] = $pagination;
-      $tmp['max_page'] = ceil($pagination/$page_limit)+0;
-      $tmp['current_page'] = $page+0;
-
-      $this->assign("pagination",$tmp);
-
-
 
       return view('balance_logs.index',$this->data);
       
