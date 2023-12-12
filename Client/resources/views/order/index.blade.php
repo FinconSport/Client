@@ -207,7 +207,7 @@
 
 				// Validate and accumulate total
 				totalBetItemCount += betItemCounter;
-				totalBetAmount += betAmount;
+				if( orderItem.status != 1 ) totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
 				totalEffectivetAmount += activeBet;
 				totalWinLoss += winLoss || 0;
