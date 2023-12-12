@@ -601,7 +601,6 @@ class LsportApiController extends Controller {
             }
         }
         
-        dd($data);
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
