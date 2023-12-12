@@ -595,8 +595,6 @@ class LsportApiController extends Controller {
                 }
             }
         }
-
-        dd($market_bet_count);
         
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
