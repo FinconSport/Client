@@ -585,13 +585,12 @@ class LsportApiController extends Controller {
                                             }
                                         }
                                     }
-                                    $market_bet_count++;
                                 }
 
                             }
                         }
         
-                        dd($fixture_id, $market_bet_count);
+                        dd($fixture_id, $fixture['list']);
                     }
                 }
             }
