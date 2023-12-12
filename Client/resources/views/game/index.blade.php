@@ -499,7 +499,7 @@
         } 
 
         // tab (show corresponding bet)
-        $('.filterBtn.active').click()
+        // $('.filterBtn.active').click()
     }
    
    
