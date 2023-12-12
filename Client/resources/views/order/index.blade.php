@@ -206,6 +206,7 @@
 				});
 
 				// Validate and accumulate total
+				console.log(orderItem)
 				totalBetItemCount += betItemCounter;
 				if( orderItem.status != 1 ) totalBetAmount += betAmount;
 				totalResultAmount += resultAmount;
