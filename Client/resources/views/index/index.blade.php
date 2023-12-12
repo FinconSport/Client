@@ -767,11 +767,20 @@
                                 // console.log(prevId)
                                 createLeague(k, k2, v2, prevId)
                             } 
-                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
-                            let livingNode = $(`#${k3}`)
-                            livingNode.prependTo(parentNode); // move to corrsponding cate and league
+
+                            // setting attribute
                             card.attr('cate', k)
                             card.attr('status', v3.status)
+
+                            let prevFixtureId = fixture_ind > 0 ? listKeys[fixture_ind - 1] : 'first'
+                            let parentNode =$(`#seriesWrapperContent_${k}_${v2.league_id}`)
+                            let fixtureNode = $(`#${k3}`)
+                            // move to corrsponding cate and league
+                            if( prevFixtureId === 'first' ) {
+                                fixtureNode.prependTo(parentNode); 
+                            } else {
+                                $(`#${prevFixtureId}`).after(fixtureNode)
+                            }
                         }   
 
                         // 玩法統計
