@@ -273,6 +273,20 @@ class CommonCalculator extends React.Component {
                 subBtnRed: 0
             })
         }
+
+        if ( prevProps.isDisableCal !== this.props.isDisableCal ) {
+            if( this.props.isDisableCal ) {
+                this.setState({
+                    subBtnText: langText.CommonCalculator.disabled,
+                    subBtnRed: 1
+                })
+            } else {
+                this.setState({
+                    subBtnText: langText.CommonCalculator.submit,
+                    subBtnRed: 0
+                })
+            }
+        }
     }
     
     // 關閉計算機
@@ -309,13 +323,12 @@ class CommonCalculator extends React.Component {
             maxMoney: (this.props.data.bet_rate * money).toFixed(2)
         })
 
-        if ( parseInt(money) >= this.state.minLimit && parseInt(money) <= this.state.maxLimit ) {
+        if ( parseInt(money) >= this.state.minLimit && parseInt(money) <= this.state.maxLimit && !this.props.isDisableCal ) {
             this.setState({
                 subBtnText: langText.CommonCalculator.submit,
                 subBtnRed: 0
             })
         }
-        
     }
 
     // 清除金額
@@ -339,6 +352,9 @@ class CommonCalculator extends React.Component {
 
     // 送出投注
     submitBet = () => {
+
+        if( this.props.isDisableCal ) return;
+
         const money = parseInt(this.state.inputMoney)
         if ( !money ) {
             this.setState({

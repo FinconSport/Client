@@ -110,9 +110,6 @@ class GameMain extends React.Component {
 
     getBetData = (market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, bet_item_line, status) => {
         if( status !== 1 ) return;
-
-        console.log(bet_item_line)
-
         this.props.getBetDataCallBack(
             {
                 sport_id: window.sport, 
@@ -121,7 +118,8 @@ class GameMain extends React.Component {
                 market_bet_id: market_bet_id, 
                 bet_rate: price, 
                 market_name: market_name, 
-                series_name: this.props.leagueName, 
+                league_name: this.props.league_name, 
+                league_id: this.props.league_id, 
                 home_team_name: home_team_name, 
                 away_team_name: away_team_name, 
                 bet_item_name: bet_item_name, 
@@ -153,7 +151,7 @@ class GameMain extends React.Component {
                                     }
                                 </GameCat>
                                 <GameBetBody>
-                                    {Object.entries(data.list).sort((a, b) => a.priority - b.priority).map(([k, v]) => {
+                                    {Object.entries(data.list).sort((a, b) => a[1].priority - b[1].priority).map(([k, v]) => {
                                         let t = v.priority
                                         if ( Object.keys(v.list).length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1) && !( sport === 35232 && (t === 304 || t === 308)) && !( sport === 131506 && (t === 407 || t === 408)) ) {
                                             return (

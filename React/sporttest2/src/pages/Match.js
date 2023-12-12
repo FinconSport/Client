@@ -37,7 +37,8 @@ class Match extends React.Component {
 			sport_id: window.sport,
 			isRefrehingBalance: false,
 			betData: null,
-			isOpenCal: false
+			isOpenCal: false,
+			isDisableCal: false
 		};
 	}
 
@@ -164,6 +165,13 @@ class Match extends React.Component {
 		})
 	}
 
+	// 計算機失效
+	disableBet = ( bool ) => {
+		this.setState({
+			isDisableCal: bool
+		})
+	}
+
 	// 關閉計算機
 	CloseCal = () => {
 		this.setState({
@@ -178,10 +186,10 @@ class Match extends React.Component {
 					<CommonSliderUser ref={(ref) => (this.sliderRef = ref)} api_res={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} style={{ width: '74%' }}>
 						<MatchMenuNav api_res={this.state.indexMatchList_res} callBack={this.changeTab} />
-						<MatchContent apiUrl={this.state.baseApiUrl} menu_id={this.state.menu_id}  sport_id={this.state.sport_id} callBack={this.getBetData}/>
+						<MatchContent apiUrl={this.state.baseApiUrl} menu_id={this.state.menu_id}  sport_id={this.state.sport_id} callBack={this.getBetData} lockBet={this.disableBet}/>
 						<div onClick={this.handleCallBMethod} style={slideIconStyle}><GrMenu /></div>
 					</PullToRefresh>
-					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
+					<CommonCalculator isOpenCal={this.state.isOpenCal} data={this.state.betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} isDisableCal={this.state.isDisableCal} />
 					<CommonFooter index={5} />
 				</div>
 			:

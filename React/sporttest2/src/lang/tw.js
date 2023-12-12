@@ -105,6 +105,7 @@ const twTranslation = {
     pending: "確認中",
     early: '早盤',
     living: '滾球',
+    disabled: '已失效',
   },
   GameTopSlider: {
     collect: "收藏",

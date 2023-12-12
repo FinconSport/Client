@@ -73,13 +73,12 @@ class MatchContent extends React.Component {
 				if (typeof originalData[key] === 'object' && typeof updateData[key] === 'object') {
 					this.findDifferences(originalData[key], updateData[key], currentPath);
 				} else if (key === 'price' && originalData[key] !== updateData[key]) {
-					// console.log(`============== ${u.market_bet_id} ==============`);
-					// console.log(`原始值: ${originalData[key]}`);
-					// console.log(`更新值: ${updateData[key]}`);
+
 					let market_bet_id = u.market_bet_id
 					let status = u.status
 					let uRate = u.price
 					let oRate = o.price
+
 					if( status === 1 ) {
 						// 計算機
 						$('.calCardInfo[market_bet_id=' + market_bet_id + '] .odd').html(uRate)
@@ -100,7 +99,7 @@ class MatchContent extends React.Component {
 						setTimeout(() => {
 							this.removeRateStyle(market_bet_id)
 						}, 3000);
-					}					
+					}
 				}
 			}
 		}
@@ -132,7 +131,26 @@ class MatchContent extends React.Component {
 		if( callerType === 1 ) {
 			var oldData = this.state.data[menuArr[window.menu]][window.sport]?.list
 			var updateData = json.data[menuArr[window.menu]][window.sport]?.list
-			if( updateData ) this.findDifferences(oldData, updateData)
+			var stateBetData = this.state.betData
+			if( updateData ) {
+				if( stateBetData ) {
+					let market_bet = updateData?.[stateBetData.league_id]?.list?.[stateBetData.fixture_id]?.list?.[stateBetData.market_id]?.list
+					let item = null
+					if( market_bet ) {
+						for (const key in market_bet) {
+							const ele = market_bet[key];
+							item = ele.find( item => item.market_bet_id === stateBetData.market_bet_id )
+							if( item ) break;
+						}
+					}
+					if( !item || item.status !== 1 ) {
+						this.props.lockBet( true )
+					} else {
+						this.props.lockBet( false )
+					}
+				}
+				this.findDifferences(oldData, updateData)
+			} 
 		}
 
 		this.setState({
@@ -207,6 +225,9 @@ class MatchContent extends React.Component {
 
 	// 投注資料
 	getBetData = (betData) => {
+		this.setState({
+			betData
+		})
 		betData.cate = menuArr[window.menu]
 		this.props.callBack(betData)
 	}
@@ -241,7 +262,8 @@ class MatchContent extends React.Component {
 											.sort(([, a], [, b]) => a.order_by - b.order_by) // 根据 order_by 属性排序
 											.map(([k2, v2]) => (
 												<MatchContentCard
-													series_name={v.league_name}
+													league_name={v.league_name}
+													league_id={v.league_id}
 													key={v2.fixture_id}
 													swiperIndex={this.state.swiperIndex}
 													swiperTabCallBack={this.swiperTabHandler}

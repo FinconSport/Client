@@ -20,6 +20,7 @@ class Game extends React.Component {
 			accout_api: 'https://sportc.asgame.net/api/v2/common_account?token=' + window.token+ '&player=' + window.player+ '',
 			betData: null,
 			isOpenCal: false,
+			isDisableCal: false,
 			isGameRefreshing: false,
 			isRefrehingBalance: false,
 			sport: parseInt(Cookies.get('sport', { path: '/' })),
@@ -41,11 +42,30 @@ class Game extends React.Component {
 			json.data = uncompressed
 		}
 
+		if( !json.data.list && isAcc === 0 ) window.location.href = '/mobile/match';
+
 		// 是否是更新
 		if( isUpdate === 1 ) {
 			var oldData = this.state.game_res?.data?.list?.[this.state.fixtureId]?.list
 			var updateData = json.data?.list?.[this.state.fixtureId]?.list
+			var stateBetData = this.state.betData
+
 			if( updateData ) {
+				if( stateBetData ) {
+					let market_bet = updateData?.[stateBetData.market_id]?.list?.[stateBetData.bet_item_line
+					]
+					let item = market_bet?.find( item => item.market_bet_id === stateBetData.market_bet_id )
+
+					if( !item || item.status !== 1 ) {
+						this.setState({
+							isDisableCal: true
+						})
+					} else {
+						this.setState({
+							isDisableCal: false
+						})
+					}
+				}
 				this.removeRateStyle(0)
 				this.findDifferences(oldData, updateData)
 			} 
@@ -80,7 +100,6 @@ class Game extends React.Component {
 
 	findDifferences = (originalData, updateData) => {
 		Object.entries(originalData).map( ([key, element]) => {
-			let priority = element.priority
 			Object.entries(element.list).map( ([k, v]) => {
 				for (let i = 0; i < v.length; i++) {
 					let o = v[i];
@@ -96,6 +115,8 @@ class Game extends React.Component {
 							let oRate = o.price
 
 							if( status === 1 ) {
+								// 計算機
+								$('.calCardInfo[market_bet_id=' + market_bet_id + '] .odd').html(uRate)
 								if(uRate > oRate) {
 									// 賠率上升
 									$('div[market_bet_id=' + market_bet_id + ']').addClass('raiseOdd')
@@ -200,15 +221,16 @@ class Game extends React.Component {
 		const betData = this.state.betData
 		const fixtureId = this.state.fixtureId
 		const leagueName = data ? data.league_name : null
+		const leagueId = data ? data.league_id : null
 
 		return (
 			data !== undefined ?
 				<>
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} className="h-100" >
 						<GameTopSlider data={data} fixtureId={fixtureId} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
-						<GameMain data={data} fixtureId={fixtureId} leagueName={leagueName} getBetDataCallBack={this.getBetData} />
+						<GameMain data={data} fixtureId={fixtureId} league_name={leagueName} league_id={leagueId} getBetDataCallBack={this.getBetData}/>
 					</PullToRefresh>
-					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} />
+					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} isDisableCal={this.state.isDisableCal} />
 				</>
 			:
 			<CommonLoader/>
