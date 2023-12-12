@@ -643,10 +643,14 @@ a.sportSelect:hover {
     color: rgb(65, 91, 90);
 }
 
-.loading span,
-.loading img {
+.loading span {
     display: inline-block;
     margin: 0 -0.05em;
+}
+
+.loading img {
+    display: inline-block;
+    margin: 0 -0.55em;
 }
 
 .loading04 span,

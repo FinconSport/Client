@@ -23,7 +23,7 @@
 	<div id="toast"></div>
 	<!-- loader -->
     <div class="ui dimmer" id="dimmer">
-		<div id="loadingDiv">
+		<div id="loadingDiv" class="loading loading04">
 			<img src="{{ asset('image/loading/f.png?v=' . $system_config['version']) }}" alt="Logo">
 			<img src="{{ asset('image/loading/t.png?v=' . $system_config['version']) }}" alt="Logo">
 			<img src="{{ asset('image/loading/3.png?v=' . $system_config['version']) }}" alt="Logo">

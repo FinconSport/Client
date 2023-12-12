@@ -1,11 +1,6 @@
 import React from "react";
 
-const logoImg = {
-	position: 'absolute',
-	width: '80%',
-	left: '10%',
-	top: '35%'
-}
+
 const spinImg = {
 	position: 'absolute',
 	width: '8rem',
@@ -28,11 +23,23 @@ const loadingStyle = {
 	backgroundColor: 'rgba(0, 0, 0, 0.8)',
 }
 
+const logoImg = {
+	position: 'relative',
+	width: '20%',
+	margin: '0 -0.45rem'
+}
+
 class CommonLoader extends React.Component {
 	render() {
 		return(
 			<div style={loadingStyle}>
-				<img alt="logo" style={logoImg} src={require('../image/loading.png')} />
+				<div className="loading loading04" style={{ width: '60%', margin: '90% auto', position: 'relative', textAlign: 'center' }}>
+					<img alt="logo" style={logoImg} src={require('../image/loading/f.png')} />
+					<img alt="logo" style={logoImg} src={require('../image/loading/t.png')} />
+					<img alt="logo" style={logoImg} src={require('../image/loading/3.png')} />
+					<img alt="logo" style={logoImg} src={require('../image/loading/6.png')} />
+					<img alt="logo" style={logoImg} src={require('../image/loading/5.png')} />
+				</div>
 			</div>
 		)
 	}
