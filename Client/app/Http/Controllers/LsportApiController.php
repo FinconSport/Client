@@ -536,137 +536,71 @@ class LsportApiController extends Controller {
 
         ////////////////////////////////////////
 
-        $data = Redis::hget('lsport_match_list', $key);
-        $data = json_decode($data,true);
-
-
-        foreach ($data as $k => $v) {
-          foreach ($v as $sport_id => $sport) {
-            foreach ($sport['list'] as $league_id => $league) {
-              foreach ($league['list'] as $fixture_id => $fixture) {
-    
-                $return = LsportRisk::where("fixture_id",$fixture_id)->first();
-                $risk_data = json_decode($return['data'],true);
-    
-                // 部份比賽, 沒有market
-                if (!isset($fixture['list'])) {
-                  continue;
-                }
-    
-                // 填入risk資料
-                foreach ($fixture['list'] as $market_id => $market) {
-                  if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                    $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
-                    if (isset($risk_data[$market_id])) {
-                        foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
-                            if ($risk_config !== null) {
-                                $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$risk_key]['status'] = $risk_config;
-                            }
-                        }
-                    }
-                  }
-                }
-
-              }
-            }
-          }
-        }
-    
-
-        // gzip
-        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
-            $data = $this->gzip($data);
-            $this->ApiSuccess($data, "01", true);
-        } else {
-            $this->ApiSuccess($data, "01", false);
-        }
-    } 
-
-    // Match
-    public function MatchIndexB(Request $request) {
-        
-    	$input = $this->getRequest($request);
-
-        $checkToken = $this->checkToken($input);
-        if ($checkToken === false) {
-            $this->ApiError("PLAYER_RELOGIN", true);
-        }
-
-        //---------------------------------
-        // 取得代理的語系
-        $player_id = $input['player'];
-        $agent_lang = $this->getAgentLang($player_id);
-
-        //////////////////////////////////////////
-
-        if (!isset($input['sport_id'])) {
-            $this->ApiError("01");
-        }
-        
-        $sport_id = $input['sport_id'];
-
-        ////////////////////////////////////////
-        $key = $sport_id . "_" . $agent_lang;
-
-        ////////////////////////////////////////
-
         $data = Redis::hget('lsport_risk_match_list', $key);
         $data = json_decode($data,true);
 
+
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $sport) {
-              foreach ($sport['list'] as $league_id => $league) {
-                foreach ($league['list'] as $fixture_id => $fixture) {
-      
-                    $return = LsportRisk::where("fixture_id",$fixture_id)->first();
-                    $risk_data = json_decode($return['data'],true);
-      
-                    // 部份比賽, 沒有market
-                    if (!isset($fixture['list'])) {
-                        continue;
-                    }
-      
-                    // 填入risk資料
-                    foreach ($fixture['list'] as $market_id => $market) {
-                        if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                            $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+                foreach ($sport['list'] as $league_id => $league) {
+                    foreach ($league['list'] as $fixture_id => $fixture) {
+        
+                        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+                        $risk_data = json_decode($return['data'],true);
+        
+                        $market_bet_count = 0;
+                        // 部份比賽, 沒有market
+                        if (!isset($fixture['list'])) {
+                            continue;
+                        }
+        
+                        // 填入risk資料
+                        foreach ($fixture['list'] as $market_id => $market) {
+                            if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+                                $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
-                            $market_main_line = $market_data['main_line'];
-                            $base_main_line = $market_data['base_main_line'];
-   
-                            foreach ($market_data['list'] as $line => $bet_data) {
+                                $market_main_line = $market_data['main_line'];
+                                $base_main_line = $market_data['base_main_line'];
+    
+                                foreach ($market_data['list'] as $line => $bet_data) {
 
-                                // match_index 限定邏輯
-                                if ($line != $base_main_line) {
-                                    unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
-                                    continue;
-                                } 
-                                
-                                // 處理1/4盤
-                                $dd_line = $this->displayMainLine($line);
-                                if ($dd_line != $line) {
-                                    $cc = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line];
-                                    $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$dd_line] = $cc;
-                                    unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
-                                }
+                                    // match_index 限定邏輯
+                                    if ($line != $base_main_line) {
+                                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                        continue;
+                                    } 
+                                    
+                                    // 處理1/4盤
+                                    $dd_line = $this->displayMainLine($line);
+                                    if ($dd_line != $line) {
+                                        $cc = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line];
+                                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$dd_line] = $cc;
+                                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                    }
 
-                                if (isset($risk_data[$market_id])) {
-                                    foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
-                                        if ($risk_config !== null) {
-                                            $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                    if (isset($risk_data[$market_id])) {
+                                        foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
+                                            if ($risk_config !== null) {
+                                                $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                            }
                                         }
                                     }
                                 }
+
                             }
 
+                            // 計算多少玩法
+                            $cc = count($market_data['list']);
+                            $market_bet_count += $cc; 
+                            
                         }
+        
+                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = $market_bet_count;
                     }
-      
                 }
-              }
             }
-          }
-
+        }
+        
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
@@ -1721,244 +1655,8 @@ class LsportApiController extends Controller {
  *    
 ****************************************/
 
-    // 遊戲頁
-    public function GameIndex(Request $request) {
-
-    	$input = $this->getRequest($request);
-
-        $checkToken = $this->checkToken($input);
-        if ($checkToken === false) {
-            $this->ApiError("PLAYER_RELOGIN", true);
-        }
-
-        //---------------------------------
-        // 處理輸入
-        $necessary_inputs = array('player', 'sport_id', 'fixture_id');  // 必要輸入欄位名稱
-        foreach ($necessary_inputs as $nk => $input_name) {
-            if (empty($input[$input_name])) {
-                $this->ApiError('01');
-            }
-        }
-        $player_id = $input['player'];
-        $fixture_id = $input['fixture_id'];
-        $sport_id = $input['sport_id'];
-
-        //---------------------------------
-        // 取得代理的語系
-        $agent_lang = $this->getAgentLang($player_id);
-
-        /////////////////////////////////////////////////////////////////
-
-        $key = $sport_id . "_" . $agent_lang;
-
-        ////////////////////////////////////////
-
-        $return = LsportFixture::where("sport_id",$sport_id)
-        ->where("fixture_id",$fixture_id)
-        ->whereIn('sport_id', function($query) use ($sport_id) {
-            $query->select('sport_id')
-                  ->from('es_lsport_sport')
-                  ->where('sport_id', $sport_id)
-                  ->where('status', 1);
-        })
-        ->whereIn('league_id', function($query) {
-            $query->select('league_id')
-                  ->from('es_lsport_league')
-                  ->where('status', 1);
-        })
-        ->fetch();
-        if ($return === false) {
-            $this->ApiError("02");
-        }
-
-        $data = array();
-        $fixture_data = $return;
-
-        // 時間格式轉化
-        $fixture_data['start_time'] = date("Y-m-d H:i:s",$fixture_data['start_time']);
-
-        $league_id = $fixture_data['league_id'];
-        $fixture_id = $fixture_data['fixture_id'];
-        $fixture_status = $fixture_data['status'];
-        $home_team_id = $fixture_data['home_id'];
-        $away_team_id = $fixture_data['away_id'];
-        $status = $fixture_data['status'];
-
-        $status_type = ["","early","living"];
-        if ($fixture_status == 9) {
-            $fixture_status = 2;
-        }
-        $status_type_name = $status_type[$fixture_status];
-
-        // 取得聯賽
-        $league_name = LsportLeague::getName(['league_id' => $league_id, "api_lang" => $agent_lang]);
-        $data['list']["league_id"] = $league_id;
-        $data['list']["league_name"] = $league_name;
-
-        // fixture columns
-        $columns = ["fixture_id","start_time","status","last_update"];
-        foreach ($columns as $kk => $vv) {
-            $data['list'][$vv] = $fixture_data[$vv];
-        }
-
-        // home_team_name
-        $team_name = LsportTeam::getName(['team_id' => $home_team_id, "api_lang" => $agent_lang]);
-        $data['list']['home_team_id'] = $home_team_id;
-        $data['list']['home_team_name'] = $team_name;
-
-        // away_team_name
-        $team_name = LsportTeam::getName(['team_id' => $away_team_id, "api_lang" => $agent_lang]);
-        $data['list']['away_team_id'] = $away_team_id;
-        $data['list']['away_team_name'] = $team_name;
-
-        // 比分版資料
-        $livescore_extradata = $fixture_data['livescore_extradata'];
-        $periods = $fixture_data['periods'];
-        $scoreboard = $fixture_data['scoreboard'];
-
-        $parsed_periods = $this->getMatchPeriods($sport_id, $status, $scoreboard, $livescore_extradata);
-        $parsed_scoreboard = $this->getMatchScoreboard($sport_id, $status, $periods, $scoreboard);
-        
-        $data['list']['periods'] = $parsed_periods; 
-        $data['list']['scoreboard'] = $parsed_scoreboard;
-
-        // 開始處理market
-        $data['list']['market'] = array();
-
-        $return = LsportMarket::where("fixture_id",$fixture_id)->orderBy('market_id', 'ASC')->list();
-        if ($return === false) {
-            $this->ApiError('03');
-        }
-
-        $market_data = $return;
-        foreach ($market_data as $kk => $vv) {
-            $active_market_bet = 0;
-
-            $market_id = $vv['market_id'];
-            $market_main_line = $vv['main_line'];
-            $market_priority = $vv['priority'];
-
-            $tmp_market_data = array();
-            // set data
-            $tmp_market_data['market_id'] = $market_id;
-            $tmp_market_data['priority'] = $market_priority;
-            $tmp_market_data['main_line'] = $market_main_line;
-
-            // 設定market name
-            $market_name = $vv['name_en'];
-            if (isset($vv['name_'.$agent_lang]) && ($vv['name_'.$agent_lang] != null) && ($vv['name_'.$agent_lang] != "")) { 
-                $market_name = $vv['name_'.$agent_lang];
-            } 
-            $tmp_market_data['market_name'] = $market_name;
-
-            // 取得market_bet
-            $return = LsportMarketBet::where('fixture_id',$fixture_id)
-            ->where("market_id",$market_id)
-            ->orderBy("name_en.keyword","ASC")
-            ->list();
-            if ($return === false) {
-                $this->ApiError('04');
-            }
-            if ($return == null) {
-                continue;
-            }
-
-            $check_market_bet_lines = [];
-            $market_bet_data = $return;
-            foreach ($market_bet_data as $kkk => $vvv) {
-                $market_bet_id = $vvv['bet_id'];
-
-                // 設定market_bet_name
-                $market_bet_name = $vvv['name_en'];
-                if (isset($vvv['name_'.$agent_lang]) && ($vvv['name_'.$agent_lang] != null) && ($vvv['name_'.$agent_lang] != "")) { 
-                    $market_bet_name = $vvv['name_'.$agent_lang];
-                } 
-
-                $base_line = $vvv['base_line'];
-                $check_market_bet_lines[$base_line] = false;
-
-                $tmp_data = array();
-                $tmp_data['market_bet_id'] = $market_bet_id;
-                $tmp_data['market_bet_name'] = $market_bet_name;
-                $tmp_data['market_bet_name_en'] = $vvv['name_en'];
-                $tmp_data['line'] = $this->displayMainLine($vvv['line']);
-                $tmp_data['price'] = $vvv['price'];
-                $tmp_data['status'] = $vvv['status'];
-                $tmp_data['last_update'] = $vvv['last_update'];
-                $tmp_data['provder_bet_id'] = $vvv['provder_bet_id'];
-
-                $tmp_market_data['market_bet'][$base_line][] = $tmp_data;
-                
-                // 只要其中一個賠率status 為1 , 則顯示
-                if ($vvv['status'] == 1) { 
-                    $check_market_bet_lines[$base_line] = true;
-                }
-                
-                $active_market_bet++;
-            }
-
-            // 移除已鎖的盤口
-            foreach ($tmp_market_data['market_bet'] as $k => $v) {
-                if ($check_market_bet_lines[$k] === false) {
-                    unset($tmp_market_data['market_bet'][$k]);
-                }
-            }
-
-            // 順序排序
-            ksort($tmp_market_data['market_bet']);
-
-            // 盤口數量限制 ,
-            if ($market_main_line != "") {
-                $keys = array_keys($tmp_market_data['market_bet']);
-                $position = array_search($market_main_line, $keys);
-                if ($position !== false) {
-                    $result = [];
-                    for ($i = max(0, $position - 2); $i <= min(count($keys) - 1, $position + 2); $i++) {
-                        $result[$keys[$i]] = $tmp_market_data['market_bet'][$keys[$i]];
-                    }
-                    $tmp_market_data['market_bet'] = $result;
-                }
-            }
-
-            if ($active_market_bet > 0) {
-                if (count($tmp_market_data['market_bet']) > 0) {
-                    $data['list']['market'][] = $tmp_market_data;
-                }
-            }
-        }
-
-        /////////////////////////
-        // 判定風控值
-
-        // 取得風控設定
-        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
-        $risk_data = json_decode($return['data'],true);
-
-        foreach ($data['list']['market'] as $k => $v) {
-            $market_id = $v['market_id'];
-            foreach ($v['market_bet'] as $kk => $vv) {
-                foreach ($vv as $kkk => $vvv) {
-                    if (isset($risk_data[$market_id][$kkk])) {
-                        if ($risk_data[$market_id][$kkk] !== null) {
-                            $data['list']['market'][$k]['market_bet'][$kk][$kkk]['status'] = $risk_data[$market_id][$kkk];
-                        }
-                    }
-                }
-            }
-        }
-        
-        /////////////////////////////////////////////////////////////////
-        // gzip
-        if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
-            $data = $this->gzip($data);
-            $this->ApiSuccess($data, "01", true);
-        } else {
-            $this->ApiSuccess($data, "01", false);
-        }
-    }
-
     // 遊戲頁 . 改
-    public function GameIndexB(Request $request) {
+    public function GameIndex(Request $request) {
         
     	$input = $this->getRequest($request);
 
