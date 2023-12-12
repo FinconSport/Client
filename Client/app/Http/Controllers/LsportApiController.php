@@ -543,58 +543,58 @@ class LsportApiController extends Controller {
 
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $sport) {
-              foreach ($sport['list'] as $league_id => $league) {
-                foreach ($league['list'] as $fixture_id => $fixture) {
-      
-                    $return = LsportRisk::where("fixture_id",$fixture_id)->first();
-                    $risk_data = json_decode($return['data'],true);
-      
-                    // 部份比賽, 沒有market
-                    if (!isset($fixture['list'])) {
-                        continue;
-                    }
-      
-                    // 填入risk資料
-                    foreach ($fixture['list'] as $market_id => $market) {
-                        if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
-                            $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
+                foreach ($sport['list'] as $league_id => $league) {
+                    foreach ($league['list'] as $fixture_id => $fixture) {
+        
+                        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+                        $risk_data = json_decode($return['data'],true);
+        
+                        // 部份比賽, 沒有market
+                        if (!isset($fixture['list'])) {
+                            continue;
+                        }
+        
+                        // 填入risk資料
+                        foreach ($fixture['list'] as $market_id => $market) {
+                            if (isset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id])) {
+                                $market_data = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id];
 
-                            $market_main_line = $market_data['main_line'];
-                            $base_main_line = $market_data['base_main_line'];
-   
-                            foreach ($market_data['list'] as $line => $bet_data) {
+                                $market_main_line = $market_data['main_line'];
+                                $base_main_line = $market_data['base_main_line'];
+    
+                                foreach ($market_data['list'] as $line => $bet_data) {
 
-                                // match_index 限定邏輯
-                                if ($line != $base_main_line) {
-                                    unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
-                                    continue;
-                                } 
-                                
-                                // 處理1/4盤
-                                $dd_line = $this->displayMainLine($line);
-                                if ($dd_line != $line) {
-                                    $cc = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line];
-                                    $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$dd_line] = $cc;
-                                    unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
-                                }
+                                    // match_index 限定邏輯
+                                    if ($line != $base_main_line) {
+                                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                        continue;
+                                    } 
+                                    
+                                    // 處理1/4盤
+                                    $dd_line = $this->displayMainLine($line);
+                                    if ($dd_line != $line) {
+                                        $cc = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line];
+                                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$dd_line] = $cc;
+                                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
+                                    }
 
-                                if (isset($risk_data[$market_id])) {
-                                    foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
-                                        if ($risk_config !== null) {
-                                            $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                    if (isset($risk_data[$market_id])) {
+                                        foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
+                                            if ($risk_config !== null) {
+                                                $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line][$risk_key]['status'] = $risk_config;
+                                            }
                                         }
                                     }
+                                    $market_bet_count++;
                                 }
-                                $market_bet_count++;
-                            }
 
+                            }
                         }
+        
                     }
-      
                 }
-              }
             }
-          }
+        }
 
         dd($market_bet_count);
         
