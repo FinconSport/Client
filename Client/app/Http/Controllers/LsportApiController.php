@@ -594,13 +594,13 @@ class LsportApiController extends Controller {
                             $market_bet_count += $cc; 
                             
                         }
-        
-                        dd($fixture_id, $market_bet_count);
+        ////
                     }
                 }
             }
         }
         
+        dd($data);
         // gzip
         if (!isset($input['is_gzip']) || ($input['is_gzip']==1)) {  // 方便測試觀察輸出可以開關gzip
             $data = $this->gzip($data);
