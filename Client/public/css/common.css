@@ -8,8 +8,8 @@ body {
 
 /* 在某个地方定义图像 URL 变量 */
 :root {
-    --soccer-ball-url: url(../bg_balls/image/ball-soccer.png);
-    --baseball-ball-url: url(../bg_balls/image/ball-baseball.png);
+    --soccer-ball-url: url(../image/bg_balls/ball-soccer.png);
+    --baseball-ball-url: url(../image/bg_balls/ball-baseball.png);
 }
 
 /* 使用这些变量作为背景图像 */
@@ -643,32 +643,39 @@ a.sportSelect:hover {
     color: rgb(65, 91, 90);
 }
 
-.loading span {
+.loading span,
+.loading img {
     display: inline-block;
     margin: 0 -0.05em;
 }
 
-.loading04 span {
+.loading04 span,
+.loading04 img {
     animation: loading04 1s infinite;
 }
 
-.loading04 span:nth-child(2) {
+.loading04 span:nth-child(2),
+.loading04 img:nth-child(2) {
     animation-delay: 0.1s;
 }
 
-.loading04 span:nth-child(3) {
+.loading04 span:nth-child(3),
+.loading04 img:nth-child(3)  {
     animation-delay: 0.2s;
 }
 
-.loading04 span:nth-child(4) {
+.loading04 span:nth-child(4),
+.loading04 img:nth-child(4)  {
     animation-delay: 0.3s;
 }
 
-.loading04 span:nth-child(5) {
+.loading04 span:nth-child(5),
+.loading04 img:nth-child(5)  {
     animation-delay: 0.4s;
 }
 
-.loading04 span:nth-child(6) {
+.loading04 span:nth-child(6),
+.loading04 img:nth-child(6)  {
     animation-delay: 0.5s;
 }
 
