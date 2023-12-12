@@ -482,13 +482,16 @@
         // 籃球 單節tab篩選
         if(sport === 48242) {
             let r = $('.filterBtn.active[mark="single"]').attr('key')
-            $('.filterBtn[mark="single"]').hide()
-            $('.filterBtn[mark="single"]').removeClass('active')
+            // $('.filterBtn[mark="single"]').hide()
+            // $('.filterBtn[mark="single"]').removeClass('active')
             for (const [key, value] of Object.entries(gameLangTrans.catePriority.single[sport])) {
                 for (const subValue of value) {
                     if ($(`.bettingtype-container[priority=${subValue}]`).length > 0) {
                         $(`.filterBtn[key=${key}]`).show();
                         if( key == r ) $(`.filterBtn[key=${key}]`).addClass('active')
+                    } else {
+                        $(`.filterBtn[key=${key}]`).hide();
+                        $(`.filterBtn[key=${key}]`).removeClass('active')
                     }
                 }
             }
@@ -499,7 +502,7 @@
         } 
 
         // tab (show corresponding bet)
-        // $('.filterBtn.active').click()
+        $('.filterBtn.active').click()
     }
    
    
