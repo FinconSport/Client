@@ -186,7 +186,7 @@
     var league_id = null
     var league_name = null
     var callMatchListData = { token: token, player: player, sport_id: sport, fixture_id: fixture_id };
-    const matchList_api = '/api/v2/game_index_b'
+    const matchList_api = '/api/v2/game_index'
 
     // bet limitation data
     var betLimitationD = {}
