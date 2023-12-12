@@ -594,7 +594,8 @@ class LsportApiController extends Controller {
                             $market_bet_count += $cc; 
                             
                         }
-        ////
+        
+                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['market_bet_count'] = $market_bet_count;
                     }
                 }
             }
