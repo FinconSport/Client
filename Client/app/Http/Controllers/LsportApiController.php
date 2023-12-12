@@ -589,6 +589,7 @@ class LsportApiController extends Controller {
 
                             }
 
+                            dd($market);
                             // 計算多少玩法
                             foreach ($market['list'] as $market_data) {
                                 $cc = count($market_data['list']);
