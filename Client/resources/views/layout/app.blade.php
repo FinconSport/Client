@@ -23,7 +23,13 @@
 	<div id="toast"></div>
 	<!-- loader -->
     <div class="ui dimmer" id="dimmer">
-		<img src="{{ asset('image/loading.png?v=' . $system_config['version']) }}" alt="Logo">
+		<div id="loadingDiv">
+			<img src="{{ asset('image/loading/f.png?v=' . $system_config['version']) }}" alt="Logo">
+			<img src="{{ asset('image/loading/t.png?v=' . $system_config['version']) }}" alt="Logo">
+			<img src="{{ asset('image/loading/3.png?v=' . $system_config['version']) }}" alt="Logo">
+			<img src="{{ asset('image/loading/6.png?v=' . $system_config['version']) }}" alt="Logo">
+			<img src="{{ asset('image/loading/5.png?v=' . $system_config['version']) }}" alt="Logo">
+		</div>
     </div>
 	<div id='wrap' class="pb-2 h-100" style="opacity: 0">
 		<div class="leftArea">
