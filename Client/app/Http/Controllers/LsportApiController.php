@@ -539,7 +539,6 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_risk_match_list', $key);
         $data = json_decode($data,true);
 
-        $market_bet_count = 0;
 
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $sport) {
@@ -549,6 +548,7 @@ class LsportApiController extends Controller {
                         $return = LsportRisk::where("fixture_id",$fixture_id)->first();
                         $risk_data = json_decode($return['data'],true);
         
+                        $market_bet_count = 0;
                         // 部份比賽, 沒有market
                         if (!isset($fixture['list'])) {
                             continue;
@@ -591,6 +591,7 @@ class LsportApiController extends Controller {
                             }
                         }
         
+                        dd($fixture_id, $market_bet_count);
                     }
                 }
             }
