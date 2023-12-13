@@ -30,7 +30,6 @@ class LsportApiController extends Controller {
     protected $page_limit = 20;
 
     protected $agent_lang;  
-    protected $default_sport_id = 154914;  
     protected $lsport_sport_id = array(
         'baseball' => 154914,
         'basketball' => 48242,
@@ -641,7 +640,6 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
-        $sport_id = $this->default_sport_id ;  //球種ID
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1056,7 +1054,6 @@ class LsportApiController extends Controller {
         $bet_amount = $input['bet_amount'];  //投注金額
         $is_better_rate = $input['better_rate'];  //是否自動接受更好的賠率(若不接受則在伺服器端賠率較佳時會退回投注)
 
-        $sport_id = $this->default_sport_id;
         if (isset($input['sport_id'])) {
             $sport_id = $input['sport_id'];
         }
@@ -1492,7 +1489,7 @@ class LsportApiController extends Controller {
         /////////////////////////
         // 輸入判定
         if (!isset($input['sport']) || ($input['sport'] == "")) {
-            $input['sport'] = $this->default_sport_id;  // 預設1 , 足球
+            $input['sport'] = $this->system_config['default_sport'];  // 預設1 , 足球
         }
 
         if (!isset($input['page']) || ($input['page'] == "")) {
@@ -2151,7 +2148,6 @@ class LsportApiController extends Controller {
         }
 
         // 目前只處理特定類型
-        //if ($sport_id != default_sport_id) {
         if (!in_array($sport_id, $this->lsport_sport_id)) {
             return null;
         }
@@ -2226,7 +2222,6 @@ class LsportApiController extends Controller {
         }
 
         // 目前只處理特定類型
-        //if ($sport_id != default_sport_id) {
         if (!in_array($sport_id, $this->lsport_sport_id)) {
             return null;
         }
