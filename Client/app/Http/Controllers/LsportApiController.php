@@ -568,14 +568,6 @@ class LsportApiController extends Controller {
                                         unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
                                         continue;
                                     } 
-                                    
-                                    // 處理1/4盤
-                                    $dd_line = $this->displayMainLine($line);
-                                    if ($dd_line != $line) {
-                                        $cc = $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line];
-                                        $data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$dd_line] = $cc;
-                                        unset($data[$k][$sport_id]['list'][$league_id]['list'][$fixture_id]['list'][$market_id]['list'][$line]);
-                                    }
 
                                     if (isset($risk_data[$market_id])) {
                                         foreach ($risk_data[$market_id] as $risk_key => $risk_config) {
