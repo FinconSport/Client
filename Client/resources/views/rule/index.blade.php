@@ -535,7 +535,7 @@
         isReadyRuleInt = setInterval(() => {
             if( isReadyCommon ) {
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
+                // $('#wrap').css('opacity', 1); // show the main content
                 clearInterval(isReadyRuleInt); // stop checking
             }
         }, 500);

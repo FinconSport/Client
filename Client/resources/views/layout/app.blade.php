@@ -31,7 +31,7 @@
 			<img src="{{ asset('image/loading/5.png?v=' . $system_config['version']) }}" alt="Logo">
 		</div>
     </div>
-	<div id='wrap' class="pb-2 h-100">
+	<div id='wrap' class="pb-2 h-100" style="opacity: 0;">
 		<div class="leftArea">
 			<div id='logoArea'>
 				<img src="{{ asset('image/logo.png?v=' . $system_config['version']) }}" alt="Logo">
@@ -473,6 +473,9 @@
 
 			// loading page
 			$('#dimmer').dimmer('show');
+
+			$('#wrap').css('opacity', 1); // show the main content
+
 
 			// data layer
 			caller(account_api, commonCallData, accountD) // account

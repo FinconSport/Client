@@ -175,7 +175,9 @@ class Match extends React.Component {
 	// 關閉計算機
 	CloseCal = () => {
 		this.setState({
-			isOpenCal: false
+			isOpenCal: false,
+			isDisableCal: false,
+			betData: null,
 		})
 	}
 

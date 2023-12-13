@@ -563,7 +563,7 @@
             if (orderListD.status === 1) { isReadyOrder = true; }
             if( isReadyOrder && isReadyCommon) {
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
+                // $('#wrap').css('opacity', 1); // show the main content
 				renderView();
 				createTotal(totalResultAmount, totalBetAmount);
 				updateRowColors();
