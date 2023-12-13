@@ -16,7 +16,7 @@ class LsportLeague extends CacheModel
     public static function getName($data) {
 
         // 緩存時間
-        $cacheAliveTime = 3600;
+        $cacheAliveTime = 60;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
@@ -39,7 +39,7 @@ class LsportLeague extends CacheModel
     public static function getStatus($data) {
 
         // 緩存時間
-        $cacheAliveTime = 3600;
+        $cacheAliveTime = 60;
 
         // 緩存Key
         $cacheKey = (new static)->getCacheKey($data , __FUNCTION__);
