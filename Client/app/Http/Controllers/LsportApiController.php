@@ -539,7 +539,6 @@ class LsportApiController extends Controller {
         $data = Redis::hget('lsport_risk_match_list', $key);
         $data = json_decode($data,true);
 
-
         foreach ($data as $k => $v) {
             foreach ($v as $sport_id => $sport) {
                 foreach ($sport['list'] as $league_id => $league) {
