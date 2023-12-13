@@ -1,10 +1,10 @@
 /* logo */
 #logo {
 	padding-top: 0.5rem;
-	width: 6rem;
-	height: 3rem;
-	margin-right: 0.3rem;
-	float: left;
+    width: 10rem;
+    height: 2.75rem;
+    margin-bottom: 0.25rem;
+    float: left;
 }
 
 #navBarContainer {
