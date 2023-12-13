@@ -582,7 +582,7 @@
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
+                // $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     renderView()

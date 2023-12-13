@@ -136,7 +136,7 @@
             if (logsListD.status === 1) { isReadyLogs = true; }
 			if( isReadyCommon && isReadyLogs ) {
 				$('#dimmer').dimmer('hide'); // hide loading
-				$('#wrap').css('opacity', 1); // show the main content
+				// $('#wrap').css('opacity', 1); // show the main content
 				renderView(1)
 				clearInterval(isReadyLogsInt); // stop checking
 			}

@@ -62,7 +62,7 @@
 			}
 			if (isReadyNotice && isReadyCommon) {
 				$('#dimmer').dimmer('hide'); // hide loading
-				$('#wrap').css('opacity', 1); // show the main content
+				// $('#wrap').css('opacity', 1); // show the main content
 				renderView()
 				clearInterval(isReadyNoticeInt); // stop checking
 			}

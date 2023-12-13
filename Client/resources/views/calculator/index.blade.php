@@ -98,7 +98,7 @@
         isReadyCalInt = setInterval(() => {
             if( isReadyCommon ) {
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
+                // $('#wrap').css('opacity', 1); // show the main content
                 clearInterval(isReadyCalInt); // stop checking
             }
         }, 500);

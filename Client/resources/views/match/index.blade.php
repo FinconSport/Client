@@ -224,7 +224,7 @@
             // if( isReadyResult && isReadyCommon ) {
             if( isReadyCommon && isReadyResult ) {
                 $('#dimmer').dimmer('hide'); // hide loading
-                $('#wrap').css('opacity', 1); // show the main content
+                // $('#wrap').css('opacity', 1); // show the main content
 				renderView(1)
                 clearInterval(isReadyResultInt); // stop checking
             }
