@@ -352,9 +352,7 @@ class CommonCalculator extends React.Component {
 
     // 送出投注
     submitBet = () => {
-
         if( this.props.isDisableCal ) return;
-
         const money = parseInt(this.state.inputMoney)
         if ( !money ) {
             this.setState({

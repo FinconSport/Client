@@ -108,7 +108,7 @@ class GameMain extends React.Component {
         })
     }
 
-    getBetData = (market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, bet_item_line, status) => {
+    getBetData = (market_id, market_bet_id, price, market_name, home_team_name, away_team_name, bet_item_name, bet_item_line, key_line, status) => {
         if( status !== 1 ) return;
         this.props.getBetDataCallBack(
             {
@@ -124,6 +124,7 @@ class GameMain extends React.Component {
                 away_team_name: away_team_name, 
                 bet_item_name: bet_item_name, 
                 bet_item_line: bet_item_line, 
+                key_line: key_line
             }
         )
     }
@@ -174,6 +175,7 @@ class GameMain extends React.Component {
                                                                                     :
                                                                                     (v2.market_bet_name + ' '),
                                                                                 v2.line,
+                                                                                key,
                                                                                 v2.status
                                                                             )} >
                                                                             <div className="col-5 row m-0 p-0">

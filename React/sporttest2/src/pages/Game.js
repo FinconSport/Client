@@ -52,11 +52,10 @@ class Game extends React.Component {
 
 			if( updateData ) {
 				if( stateBetData ) {
-					let market_bet = updateData?.[stateBetData.market_id]?.list?.[stateBetData.bet_item_line
+					let market_bet = updateData?.[stateBetData.market_id]?.list?.[stateBetData.key_line
 					]
 					let item = market_bet?.find( item => item.market_bet_id === stateBetData.market_bet_id )
-
-					if( !item || item.status !== 1 ) {
+					if( !item || item?.status !== 1 ) {
 						this.setState({
 							isDisableCal: true
 						})
@@ -191,7 +190,9 @@ class Game extends React.Component {
 	// 關閉計算機
 	CloseCal = () => {
 		this.setState({
-			isOpenCal: false
+			betData: null,
+			isOpenCal: false,
+			isDisableCal: false
 		})
 	}
 
@@ -200,6 +201,7 @@ class Game extends React.Component {
 		this.setState({
 			betData: null,
 			isOpenCal: false,
+			isDisableCal: false,
 			isGameRefreshing: false,
 			isRefrehingBalance: false,
 		},() => {
