@@ -862,7 +862,7 @@
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
                                 // 換節了 重新渲染單節投注區塊
-                                if( (v3?.periods?.period).toString() !== period ) {
+                                if( (v3?.periods?.period)?.toString() !== period ) {
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
                                         card.find('.indexBetCardTable').eq(1).html('')
