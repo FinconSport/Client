@@ -492,11 +492,11 @@
                 let isHcapTeam = null
                 // 讓分的priority && 有兩個選項
                 if( j === 1 ) {
-                    let bet = betData.list[betData.main_line]
+                    let bet = betData.list[betData.base_main_line]
                     bet.length === 2 && (bet[0].line !== bet[1].line) ? isHcapTeam = true : isHcapTeam = false
                 }
        
-                Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
+                Object.entries(betData.list[betData.base_main_line]).map(([k4, v4], s) => { 
                     // 判定讓方 -> line值為負
                     if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                         if( stageBet === 0 ) {
@@ -896,12 +896,12 @@
 
                                     // 讓分的priority && line不同 && 有盤口
                                     if( j === 1 ) {
-                                        let bet = betData.list[betData.main_line]
+                                        let bet = betData.list[betData.base_main_line]
                                         bet.length === 2 && (bet[0].line !== bet[1].line) ? isHcapTeam = true : isHcapTeam = false
                                     }
 
                                     
-                                    Object.entries(betData.list[betData.main_line]).map(([k4, v4], s) => { 
+                                    Object.entries(betData.list[betData.base_main_line]).map(([k4, v4], s) => { 
                                         // 判定讓方 -> line值為負
                                         if( isHcapTeam && v4.line.indexOf('-') !== -1 ) {
                                             if( stageBet === 0 ) {
