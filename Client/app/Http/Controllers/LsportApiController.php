@@ -523,7 +523,6 @@ class LsportApiController extends Controller {
         $player_id = $input['player'];
         $agent_lang = $this->getAgentLang($player_id);
 
-        dd($agent_lang);
         //////////////////////////////////////////
 
         if (!isset($input['sport_id'])) {
