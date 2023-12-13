@@ -641,7 +641,7 @@
                 gameTitle = langTrans['sportBetData'][sport]['gameTitle']
 
                 $('#dimmer').dimmer('hide'); // hide loading
-                // $('#wrap').css('opacity', 1); // show the main content
+                $('#wrap').css('opacity', 1); // show the main content
                 viewIni(); // ini data
                 renderInter = setInterval(() => { // then refresh every 5 sec
                     renderView()
@@ -858,7 +858,7 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                let period = card.attr('period').toString()
+                                let period = card.attr('period')?.toString()
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
                                 // 換節了 重新渲染單節投注區塊

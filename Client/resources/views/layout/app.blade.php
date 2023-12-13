@@ -22,7 +22,7 @@
 	<!-- toast -->
 	<div id="toast"></div>
 	<!-- loader -->
-    <div class="ui dimmer" id="dimmer">
+    <div class="ui dimmer visible active" id="dimmer">
 		<div id="loadingDiv" class="loading loading04">
 			<img src="{{ asset('image/loading/f.png?v=' . $system_config['version']) }}" alt="Logo">
 			<img src="{{ asset('image/loading/t.png?v=' . $system_config['version']) }}" alt="Logo">
@@ -472,7 +472,7 @@
 			window.addEventListener('resize', handleScreenResize);
 
 			// loading page
-			$('#dimmer').dimmer('show');
+			// $('#dimmer').dimmer('show');
 
 			// data layer
 			caller(account_api, commonCallData, accountD) // account
