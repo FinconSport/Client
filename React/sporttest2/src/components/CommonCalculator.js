@@ -418,28 +418,31 @@ class CommonCalculator extends React.Component {
     render() {
         const sendOrderData = this.props.data
         const res = this.props.accountD
-        if(res && sendOrderData) {
-                return (
-                    <>
-                        <ToastContainer
-                            position="top-center"
-                            autoClose={1500}
-                            hideProgressBar
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            draggable
-                            pauseOnHover={false}
-                            transition={Slide}
-                            theme='colored'
-                            style={ToastStyle}
-                            limit={3}
-                        />
-                        <div style={{ ...CalOuterWrapper, ...(this.props.isOpenCal === true && CalWrapperOn) }}>
-                            <div id='calwrapper' style={{ ...CalWrapper, ...(this.props.isOpenCal === true && CalWrapperOn) }} onClick={this.CloseCal}>
-                            </div>
-                            <div style={{...CalContainer, ...(this.props.isOpenCal === true && CalContainerOn)}}>
-                                <CalHeight3 className='w-100 text-center' style={{padding: '0 1rem', display: 'flex', background: 'rgb(225, 235, 236)'}}>
+
+        return (
+            <>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={1500}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    draggable
+                    pauseOnHover={false}
+                    transition={Slide}
+                    theme='colored'
+                    style={ToastStyle}
+                    limit={3}
+                />
+                <div style={{ ...CalOuterWrapper, ...(this.props.isOpenCal === true && CalWrapperOn) }}>
+                    <div id='calwrapper' style={{ ...CalWrapper, ...(this.props.isOpenCal === true && CalWrapperOn) }} onClick={this.CloseCal}>
+                    </div>
+                    <div style={{...CalContainer, ...(this.props.isOpenCal === true && CalContainerOn)}}>
+                        <CalHeight3 className='w-100 text-center' style={{padding: '0 1rem', display: 'flex', background: 'rgb(225, 235, 236)'}}>
+                            {
+                                res &&
+                                <>
                                     <div style={{ display: 'flex', width: '58%', marginLeft: '2%' }}>
                                         <span>Hi! { res.data.account }</span>
                                     </div>
@@ -452,90 +455,96 @@ class CommonCalculator extends React.Component {
                                     <div style={{fontSize: '1.5rem', width: '10%'}}>
                                         <FaAngleDoubleDown onClick={this.CloseCal} />
                                     </div>
-                                </CalHeight3> 
-                                <CalHeight3 className='row m-0' style={{borderBottom: '1px solid rgba(65, 91, 90, 0.5)'}}>
-                                    <div className='col-8'>
-                                        <input id='userInputMoney' type='checkbox' checked={this.state.isBetterRate} style={BetterRateStyle} onChange={this.handleBetterRate}/>
-                                        <label htmlFor='userInputMoney'>{langText.CommonCalculator.betterrate}</label>
-                                    </div>
-                                    <div className='col-4 text-center'>
-                                        <div style={ClearAll} onClick={this.CloseCal} >
-                                            <RiForbid2Line style={ClearAllStyle}/>
-                                            {langText.CommonCalculator.clearall}
-                                        </div>
-                                    </div>
-                                </CalHeight3>
-                                <CalHeight8>
-                                    <CalInfoCardWrapper id='calInfoCardWrapper'>
-                                        <div className='row' style={CalInfoCard}>
-                                            <div>{ sendOrderData.series_name }</div>
-                                            <div className='col-12'>
-                                                { sendOrderData.home_team_name }
-                                                <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
-                                                { sendOrderData.away_team_name }
-                                            </div>
-                                            <div className='col-12'>{langText.CommonCalculator[this.props.cate]} - { sendOrderData.market_name }</div>
-                                            <div style={BetItemStyle} className='row m-0'>
-                                                <div className='col-10 p-0'>{ sendOrderData.bet_item_name }
-                                                    <span style={{ color: 'rgb(255, 112, 0)' }}>{ sendOrderData.bet_item_line }</span>
-                                                </div>
-                                                <div className='col-2 p-0 text-center calCardInfo' market_bet_id={sendOrderData.market_bet_id}>
-                                                    <span className='odd'>{ sendOrderData.bet_rate }</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </CalInfoCardWrapper>
-                                </CalHeight8>
-                                <CalHeight3 className='row' style={{ padding: '0 0.5rem', background: 'rgb(225, 235, 236)', borderTop: '2px solid rgba(65, 91, 90, 0.5)', boxShadow: 'rgba(65, 91, 90, 0.3) 0px 0px 5px 3px' }}>
-                                    <div className='col-6 row m-0'>
-                                        <div className='col-5 p-0'>{langText.CommonCalculator.maxwinning}</div>
-                                        <div className='col-7 p-0' style={{ overflowX: 'hidden'}}>{this.state.maxMoney}</div>
-                                    </div>
-                                    <div className='col-6'>
-                                        <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} />
-                                    </div>
-                                </CalHeight3>
-                                <CalHeight12 className='row'>
-                                    <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(100,1)}>+100</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(1)}>1</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(2)}>2</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(3)}>3</div>
-                                    <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(200,1)}>+200</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(4)}>4</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(5)}>5</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(6)}>6</div>
-                                    <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(500,1)}>+500</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(7)}>7</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(8)}>8</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(9)}>9</div>
-                                    <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(1000,1)}>+1000</div>
-                                    <div className='col-3'>.</div>
-                                    <div className='col-3' onClick={()=>this.CalMoneyBrick(0)}>0</div>
-                                    <div className='col-3' onClick={this.ClearMoney}>AC</div>
-                                </CalHeight12>
-                                <div style={{ padding: '0.5rem 2rem', background: 'rgb(65, 91, 90)' }}>
-                                    <div className='row' style={{ height: '3rem'}}>
-                                        <div className='col-3 text-center' onClick={this.CloseCal} style={FooterLeftBtn}>{langText.CommonCalculator.cancel}</div>
-                                        <div className='col-1'></div>
-                                        {
-                                            this.state.isPending ?
-                                            <div className='col-8 text-center' style={{...FooterRightBtn, backgroundColor: '#978b8b'}}>
-                                                {langText.CommonCalculator.pending}
-                                                <div id='pendingLoad'></div>
-                                            </div>
-                                            :
-                                            <div className='col-8 text-center' onClick={this.submitBet} style={{ ...FooterRightBtn, backgroundColor: this.state.subBtnRed === 1 ? 'red' : 'rgb(196, 152, 53)' }}>
-                                                {this.state.subBtnText}
-                                            </div>
-                                        }
-                                    </div>
-                                </div>   
+                                </>
+                            }
+                            
+                        </CalHeight3> 
+                        <CalHeight3 className='row m-0' style={{borderBottom: '1px solid rgba(65, 91, 90, 0.5)'}}>
+                            <div className='col-8'>
+                                <input id='userInputMoney' type='checkbox' checked={this.state.isBetterRate} style={BetterRateStyle} onChange={this.handleBetterRate}/>
+                                <label htmlFor='userInputMoney'>{langText.CommonCalculator.betterrate}</label>
                             </div>
-                        </div>
-                    </>
-                )
-            }
-        }
+                            <div className='col-4 text-center'>
+                                <div style={ClearAll} onClick={this.CloseCal} >
+                                    <RiForbid2Line style={ClearAllStyle}/>
+                                    {langText.CommonCalculator.clearall}
+                                </div>
+                            </div>
+                        </CalHeight3>
+                        <CalHeight8>
+                            {
+                                sendOrderData &&
+                                <CalInfoCardWrapper id='calInfoCardWrapper'>
+                                    <div className='row' style={CalInfoCard}>
+                                        <div>{ sendOrderData.series_name }</div>
+                                        <div className='col-12'>
+                                            { sendOrderData.home_team_name }
+                                            <span style={{fontStyle: 'italic'}}>&ensp;VS&ensp;</span>
+                                            { sendOrderData.away_team_name }
+                                        </div>
+                                        <div className='col-12'>{langText.CommonCalculator[this.props.cate]} - { sendOrderData.market_name }</div>
+                                        <div style={BetItemStyle} className='row m-0'>
+                                            <div className='col-10 p-0'>{ sendOrderData.bet_item_name }
+                                                <span style={{ color: 'rgb(255, 112, 0)' }}>{ sendOrderData.bet_item_line }</span>
+                                            </div>
+                                            <div className='col-2 p-0 text-center calCardInfo' market_bet_id={sendOrderData.market_bet_id}>
+                                                <span className='odd'>{ sendOrderData.bet_rate }</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CalInfoCardWrapper>
+                            }
+                        </CalHeight8>
+                        <CalHeight3 className='row' style={{ padding: '0 0.5rem', background: 'rgb(225, 235, 236)', borderTop: '2px solid rgba(65, 91, 90, 0.5)', boxShadow: 'rgba(65, 91, 90, 0.3) 0px 0px 5px 3px' }}>
+                            <div className='col-6 row m-0'>
+                                <div className='col-5 p-0'>{langText.CommonCalculator.maxwinning}</div>
+                                <div className='col-7 p-0' style={{ overflowX: 'hidden'}}>{this.state.maxMoney}</div>
+                            </div>
+                            <div className='col-6'>
+                                <MoneyInput readOnly value={this.state.inputMoney} className='w-100' placeholder={`${langText.CommonCalculator.limit} ${this.state.minLimit}-${this.state.maxLimit}`} />
+                            </div>
+                        </CalHeight3>
+                        <CalHeight12 className='row'>
+                            <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(100,1)}>+100</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(1)}>1</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(2)}>2</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(3)}>3</div>
+                            <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(200,1)}>+200</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(4)}>4</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(5)}>5</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(6)}>6</div>
+                            <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(500,1)}>+500</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(7)}>7</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(8)}>8</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(9)}>9</div>
+                            <div className='col-3 quick' onClick={()=>this.CalMoneyBrick(1000,1)}>+1000</div>
+                            <div className='col-3'>.</div>
+                            <div className='col-3' onClick={()=>this.CalMoneyBrick(0)}>0</div>
+                            <div className='col-3' onClick={this.ClearMoney}>AC</div>
+                        </CalHeight12>
+                        <div style={{ padding: '0.5rem 2rem', background: 'rgb(65, 91, 90)' }}>
+                            <div className='row' style={{ height: '3rem'}}>
+                                <div className='col-3 text-center' onClick={this.CloseCal} style={FooterLeftBtn}>{langText.CommonCalculator.cancel}</div>
+                                <div className='col-1'></div>
+                                {
+                                    this.state.isPending ?
+                                    <div className='col-8 text-center' style={{...FooterRightBtn, backgroundColor: '#978b8b'}}>
+                                        {langText.CommonCalculator.pending}
+                                        <div id='pendingLoad'></div>
+                                    </div>
+                                    :
+                                    <div className='col-8 text-center' onClick={this.submitBet} style={{ ...FooterRightBtn, backgroundColor: this.state.subBtnRed === 1 ? 'red' : 'rgb(196, 152, 53)' }}>
+                                        {this.state.subBtnText}
+                                    </div>
+                                }
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </>
+        )
+        
     }
+}
 
 export default CommonCalculator;

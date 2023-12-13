@@ -176,7 +176,8 @@ class Match extends React.Component {
 	CloseCal = () => {
 		this.setState({
 			isOpenCal: false,
-			isDisableCal: false
+			isDisableCal: false,
+			betData: null,
 		})
 	}
 
