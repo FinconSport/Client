@@ -2403,8 +2403,14 @@ class LsportApiController extends Controller {
             $json[$market_id] = [0,0,0];
         }
         
-        dd($json);
+        $return = LsportRisk::where("fixture_id",$fixture_id)->update([
+            "data" => $json
+        ]);
+        if ($return === false) {
+            return false;
+        }
 
+        return true;
     }
 }
 
