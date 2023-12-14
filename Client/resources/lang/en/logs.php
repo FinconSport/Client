@@ -17,7 +17,13 @@ return [
 		"pre_page" => "Previous Page", // "上一頁",
 		"next_page" => "Next Page", // "下一頁",
 		"last_page" => "Last Page", // "最後一頁",
-		"nodata" => " No Data Currently", // "暫無資料",
+		"nomoredata" => " No Data Currently", // "暫無資料",
+		"all" => "All",
+		"game_bet" => "Betting",
+		"game_result" => "Prizing",
+		"recharge" => "Recharge",
+		"withdraw" => "Withdraw",
+		"delay_bet_refund" => "Bet Failed Refund",
 	],
 
 	// 後端

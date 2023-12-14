@@ -230,6 +230,12 @@ class GameTopSlider extends React.Component {
         const data = this.props.data
         const sport = parseInt(Cookies.get('sport', { path: '/' }))
         const fixture = data.list[this.props.fixtureId]
+        let scTitle = null
+        if( sport === 48242 ) {
+            scTitle = this.props.league_id === 4045 ? langText.GameTopSlider.scoreBoardTitle[sport][4045] : langText.GameTopSlider.scoreBoardTitle[sport].common
+        } else {
+            scTitle = langText.GameTopSlider.scoreBoardTitle[sport]
+        }
 
         if( data ) {
             return (
@@ -312,6 +318,12 @@ class GameTopSlider extends React.Component {
                                             {sport === 154914 ? 
                                                 langText.GameTopSlider.stageStr[sport][fixture.periods.period] + langText.GameTopSlider.baseballPeriod[fixture.periods.Turn]
                                                 : 
+                                                sport === 48242 ?
+                                                this.props.league_id === 4045 ?
+                                                langText.GameTopSlider.stageStr[sport][4045][fixture.periods.period]  
+                                                :
+                                                langText.GameTopSlider.stageStr[sport].common[fixture.periods.period]  
+                                                :
                                                 langText.GameTopSlider.stageStr[sport][fixture.periods.period]  
                                             }
                                         </div>
@@ -339,7 +351,7 @@ class GameTopSlider extends React.Component {
                                             <tr>
                                                 <th style={{ width: '20%'}}></th>
                                                 {
-                                                    langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
+                                                    scTitle.map((v, k) => {
                                                         return(
                                                             <th key={k}style={{
                                                                     width: `${80 / this.state.scColumnCount}%`,
@@ -357,7 +369,7 @@ class GameTopSlider extends React.Component {
                                                     {fixture.home_team_name}
                                                 </td>
                                                 {
-                                                    langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
+                                                    scTitle.map((v, k) => {
                                                         return(
                                                             <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>
                                                                 {Array.from(Object.values(fixture.scoreboard[1]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[1]))[k]}
@@ -389,7 +401,7 @@ class GameTopSlider extends React.Component {
                                                     {fixture.away_team_name}
                                                 </td>
                                                 {
-                                                    langText.GameTopSlider.scoreBoardTitle[sport].map((v, k) => {
+                                                    scTitle.map((v, k) => {
                                                         return(
                                                             <td style={ sport === 154914 && this.baseballShowStage.indexOf(k) === -1 ? {display: 'none'} : null } key={k}>{Array.from(Object.values(fixture.scoreboard[2]))[k] === undefined ? '-' : Array.from(Object.values(fixture.scoreboard[2]))[k]}</td>
                                                         )

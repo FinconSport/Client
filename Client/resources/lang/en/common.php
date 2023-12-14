@@ -88,14 +88,24 @@ return [
 			101 => 'Full Time After Extra Time',
 		],
 		48242 => [
-			1 => '1st Quarter',
-			2 => '2nd Quarter',
-			3 => '3rd Quarter',
-			4 => '4th Quarter',
-			40 => 'Overtime',
-			80 => 'Break Time',
-			100 => 'Full Time',
-			101 => 'Full Time After Overtime',
+			'common' => [
+				1 => '1st Quarter',
+				2 => '2nd Quarter',
+				3 => '3rd Quarter',
+				4 => '4th Quarter',
+				40 => 'Overtime',
+				80 => 'Break Time',
+				100 => 'Full Time',
+				101 => 'Full Time After Overtime',
+			],
+			4045 => [
+				10 => '1st Half',
+				20 => '2nd Half',
+				40 => 'Overtime',
+				80 => 'Break Time',
+				100 => 'Full Time',
+				101 => 'Full Time After Overtime',
+			]
 		],
 		131506 => [
 			1 => '1st Quarter',

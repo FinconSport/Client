@@ -43,6 +43,7 @@ return [
 		"waitToCreate" => "Pending",
 		"waitToOpen" => "Awaiting Draw",
 		"waitToPrize" => "Awaiting Payout",
+		"waitToCheck" => "Awaiting Approval",
 		'living' => 'living',
 		'early' => 'early',
 		'parlay' => 'X'

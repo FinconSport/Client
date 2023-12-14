@@ -66,17 +66,12 @@ return [
 		48242 => [
 			'gameTitle' => ['Full-time winner', 'Full-time handicap', 'Full-time over/under'],
 			'mainPriorityArr' => [101, 103, 105],
-			'stageTitle' => [
-				1 => ['1st quarter winner', '1st quarter hcap', '1st quarter o/u'],
-				2 => ['2nd quarter winner', '2nd quarter hcap', '2nd quarter o/u'],
-				3 => ['3rd quarter winner', '3rd quarter hcap', '3rd quarter o/u'],
-				4 => ['4th quarter winner', '4th quarter hcap', '4th quarter o/u'],
-			],
 			'stagePriorityArr' => [
 				1 => [109, 110, 111],
 				2 => [113, 114, 115],
 				3 => [117, 118, 119],
-				4 => [121, 122, 123]
+				4 => [121, 122, 123],
+				10 => [102, 104, 106]
 			],
 		],
 		154914 => [

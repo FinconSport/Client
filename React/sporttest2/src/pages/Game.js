@@ -229,7 +229,7 @@ class Game extends React.Component {
 			data !== undefined ?
 				<>
 					<PullToRefresh onRefresh={this.handleRefresh} pullingContent={''} className="h-100" >
-						<GameTopSlider data={data} fixtureId={fixtureId} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
+						<GameTopSlider data={data} fixtureId={fixtureId} league_id={leagueId} refreshGame={this.refreshGame} isGameRefreshing={this.state.isGameRefreshing} />
 						<GameMain data={data} fixtureId={fixtureId} league_name={leagueName} league_id={leagueId} getBetDataCallBack={this.getBetData}/>
 					</PullToRefresh>
 					<CommonCalculator isOpenCal={this.state.isOpenCal} data={betData} cate={this.state.betData?.cate} CloseCal={this.CloseCal} accountD={this.state.account_res} isRefrehingBalance={this.state.isRefrehingBalance} callBack={this.refreshWallet} isDisableCal={this.state.isDisableCal} />
