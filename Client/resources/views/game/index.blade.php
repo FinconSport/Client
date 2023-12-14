@@ -862,7 +862,14 @@
 
         var stageText = formatDateTime(data.start_time);
         if (data.status == 2) {
-            if (data.periods.period !== -1) stageText = commonLangTrans.stageArr[sport][data.periods.period];
+            if (data.periods.period !== -1) {
+                // basket ball (league ncaa)
+                if( sport === 48242 ) {
+                    stageText = league_id == 4045 ? commonLangTrans.stageArr[sport][4045][data.periods.period] : commonLangTrans.stageArr[sport]['common'][data.periods.period]
+                } else {
+                    stageText = commonLangTrans.stageArr[sport][data.periods.period];
+                }
+            }
         } else {
             stageText = gameLangTrans.scoreBoard.ready;
         }
