@@ -801,7 +801,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
@@ -869,23 +869,19 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                let period = card.attr('period')?.toString()
+                                let period = card.attr('period')
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
 
-                                console.log(period, v3?.periods?.period, stagePriorityArr)
 
                                 // 換節了 重新渲染單節投注區塊
                                 if( v3?.periods?.period != period ) {
-                                    console.log('rerender')
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
-                                        console.log('createBetArea')
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
                                     } else {
-                                        console.log('hide single')
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
                                 }
