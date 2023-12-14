@@ -2396,7 +2396,9 @@ class LsportApiController extends Controller {
             return false;
         }
 
-        dd($return);
+        $json = json_decode($return['data'],true);
+
+        dd($json);
 
     }
 }
