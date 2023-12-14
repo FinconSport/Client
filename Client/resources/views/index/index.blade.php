@@ -872,6 +872,9 @@
                                 let period = card.attr('period')?.toString()
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
+
+                                console.log(period, v3?.periods?.period, stagePriorityArr)
+
                                 // 換節了 重新渲染單節投注區塊
                                 if( (v3?.periods?.period)?.toString() !== period ) {
                                     card.attr('period', v3.periods.period)
