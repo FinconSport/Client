@@ -877,6 +877,7 @@
 
                                 // 換節了 重新渲染單節投注區塊
                                 if( v3?.periods?.period != period ) {
+                                    console.log('rerender')
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
                                         console.log('createBetArea')
@@ -884,6 +885,7 @@
                                         createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
                                     } else {
+                                        console.log('hide single')
                                         card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
                                 }
