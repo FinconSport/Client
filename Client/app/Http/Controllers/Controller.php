@@ -283,7 +283,10 @@ class Controller extends BaseController
 	protected function setPlayerInfo($session) {
 
 		if (!isset($session['player']['id'])) {
-
+			Session::flush();
+			header("Location: /error/500");
+			exit();
+			
 		}
 		$player_id = $session['player']['id'];
 		$return = Player::where("id",$player_id)->first();
