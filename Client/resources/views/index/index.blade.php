@@ -413,7 +413,12 @@
             let timerStr = null
             if( v3.periods && v3.periods.period !== -1 ) {
                 // stage
-                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                if( sport === 48242 ) { // 籃球 大學聯賽 賽制不同
+                    timerStr = league_id == 4045 ? commonLangTrans.stageArr[sport][league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
+                } else {
+                    timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                }
+                
                 // exception baseball
                 if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                     // stage
@@ -829,7 +834,13 @@
                             // stage
                             let timerStr = null
                             if( v3.periods && v3.periods.period !== -1 ) {
-                                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                                if( sport === 48242 ) { // 籃球 大學聯賽 賽制不同
+                                    timerStr = league_id == 4045 ? commonLangTrans.stageArr[sport][league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
+                                } else {
+                                    timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                                }
+
+
                                 // exception baseball
                                 if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                                     if( parseInt(v3.periods.period) < 10 ) {
