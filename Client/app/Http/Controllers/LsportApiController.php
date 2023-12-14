@@ -1377,6 +1377,9 @@ class LsportApiController extends Controller {
                     $order['bet_rate'] = null;
                     //////////////////////////////////////////
                 }
+                
+                // 設定risk 
+                $this->riskOrderLock($fixture_id, $market_id);
             }
             // $is_risk_order: false
             else {
