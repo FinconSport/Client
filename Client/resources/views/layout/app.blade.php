@@ -136,7 +136,7 @@
 		</div>
 	</div>
 
-	{{ dd($system_config) }}
+	
 
 
 

@@ -168,17 +168,23 @@ class MatchMenuNav extends React.Component {
         }
 
         // default sport
-        if( !window.sport || res.data[rKey]?.items?.[window.sport] === undefined) {
+        if( res.data[rKey]?.items?.[window.sport] === undefined) {
             let itemData = res.data[rKey].items
-            let keys = Object.keys(itemData);
-            window.sport = parseInt(keys.find(key => itemData[key].count > 0))
-            this.setState({
-                sport_id: window.sport
-            })
-            this.props.callBack(window.menu, window.sport)
-            this.setState({
-                api_res: res
-            })
+            for (let i = 0; i < langText.Common.order.length; i++) {
+                const e = langText.Common.order[i];
+                if( itemData[e] && itemData[e].count > 0 ) {
+                    window.sport = e
+                    this.setState({
+                        sport_id: window.sport
+                    })
+                    this.props.callBack(window.menu, window.sport)
+                    this.setState({
+                        api_res: res
+                    })
+
+                    break;
+                }
+            }
         }
 	}
 
@@ -186,13 +192,22 @@ class MatchMenuNav extends React.Component {
     handleMenuChange = (menu_id, objTage) => {
         window.menu = menu_id
         // 如果分頁沒有球種 則預設第一筆數據
-        // 例如 今日沒有棒球 但早盤有棒球  當tab從早盤跳到今日時，預設球類為資料第一筆
-        let isSelectedSportIdExi = this.props.api_res.data[menuArr[menu_id]].items[this.state.sport_id]
+        // 例如 早盤沒有足球 但滾球有足球  當tab從滾球跳到早盤時，預設球類為資料第一筆
+        let res = this.state.api_res
+
+        let isSelectedSportIdExi = res.data[menuArr[menu_id]].items[this.state.sport_id]
 		if(isSelectedSportIdExi === undefined) {
-            window.sport = parseInt(Object.keys(this.props.api_res.data[menuArr[menu_id]].items)[0])
-            this.setState({
-                sport_id: parseInt(Object.keys(this.props.api_res.data[menuArr[menu_id]].items)[0])
-            })
+            let itemData = res.data[menuArr[menu_id]].items
+            for (let i = 0; i < langText.Common.order.length; i++) {
+                const e = langText.Common.order[i];
+                if( itemData[e] && itemData[e].count > 0 ) {
+                    window.sport = e
+                    this.setState({
+                        sport_id: window.sport
+                    })
+                    break;
+                }
+            }
         }
 
         this.setState({
