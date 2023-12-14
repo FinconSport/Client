@@ -488,7 +488,7 @@
 			// check if api are all loaded every 500 ms 
 			isReadyCommonInt = setInterval(() => {
 				if(accountD.status === 1 && marqueeD.status === 1 && sportListD.status === 1) {
-					if( !sport ) sport = parseInt( "system_config['default_sport']" ) // default sport
+					if( !sport ) sport = parseInt( '{{ $system_config["default_sport"] }}' ) // default sport
 					isReadyCommon = true
 					viewCommonIni() // excute all common view layer ini function
 					clearInterval(isReadyCommonInt); // stop checking
