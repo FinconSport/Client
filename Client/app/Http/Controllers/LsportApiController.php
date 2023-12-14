@@ -938,8 +938,7 @@ class LsportApiController extends Controller {
             }
 
             // 設定risk 
-
-            dd($risk_config, $market_id,$fixture_id);
+            $this->riskOrderLock($fixture_id, $market_id);
 
         } else {
             if ($is_bet_delay == true) {
@@ -2326,68 +2325,79 @@ class LsportApiController extends Controller {
         
         return $main_line.$score;
     }
-
     
-  // 計算 水位調整後的賠率 , for game_bet, m_game_bet
-  protected function getAdjustedRate($status, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_main_line) {
+    // 計算 水位調整後的賠率 , for game_bet, m_game_bet
+    protected function getAdjustedRate($status, $sport_id, $fixture_id, $market_id, $market_bet_id, $market_main_line) {
 
-    // 取得配置
-    $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
-    
-    // 沒有配置的
-    if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
-      return false;
-    }
-
-    $market_bet_rate = $default_market_bet_llimit[$status][$sport_id][$market_id];
-
-    // 取得market_bet
-    $return = LsportMarketBet::where('fixture_id',$fixture_id)
-        ->where("market_id",$market_id)
-        ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
-        ->orderBy("name_en.keyword","ASC")
-        ->list();
-    if ($return === false) {
-        return 2;
-    }
-
-    $data = $return;
-
-    $tmp = array();
-    foreach ($data as $k => $v) {
-      $tmp[] = $v['price'];
-    }
-
-    if (count($tmp) >= 2) {
-      $dd = $this->adjustNumbers($tmp, $market_bet_rate);
-      foreach ($data as $k => $v) {
-        $data[$k]['price'] = $dd[$k] . "";
-      }
-    }
-
-    // 找出bet_id 並return
-    
-    foreach ($data as $k => $v) {
-        $bet_id = $v['bet_id'];
-        if ($bet_id == $market_bet_id) {
-            return $v;
-        }
-    }
-    
-    return false;
-  }
-
-  protected function adjustNumbers($numbers, $targetValue) {
-    while (max($numbers) < $targetValue) {
-        $maxValue = max($numbers);
-        $diff = $targetValue - $maxValue;
+        // 取得配置
+        $default_market_bet_llimit = json_decode($this->system_config['default_market_bet_llimit'], true);
         
-        for ($i = 0; $i < count($numbers); $i++) {
-            $numbers[$i] += $diff;
+        // 沒有配置的
+        if (!isset($default_market_bet_llimit[$status][$sport_id][$market_id])) {
+        return false;
         }
+
+        $market_bet_rate = $default_market_bet_llimit[$status][$sport_id][$market_id];
+
+        // 取得market_bet
+        $return = LsportMarketBet::where('fixture_id',$fixture_id)
+            ->where("market_id",$market_id)
+            ->where("base_line.keyword",'"'.$market_main_line.'"')  // main line 有時是空值, 要帶 "
+            ->orderBy("name_en.keyword","ASC")
+            ->list();
+        if ($return === false) {
+            return 2;
+        }
+
+        $data = $return;
+
+        $tmp = array();
+        foreach ($data as $k => $v) {
+        $tmp[] = $v['price'];
+        }
+
+        if (count($tmp) >= 2) {
+        $dd = $this->adjustNumbers($tmp, $market_bet_rate);
+        foreach ($data as $k => $v) {
+            $data[$k]['price'] = $dd[$k] . "";
+        }
+        }
+
+        // 找出bet_id 並return
+        
+        foreach ($data as $k => $v) {
+            $bet_id = $v['bet_id'];
+            if ($bet_id == $market_bet_id) {
+                return $v;
+            }
+        }
+        
+        return false;
     }
-    
-    return $numbers;
-  }
+
+    protected function adjustNumbers($numbers, $targetValue) {
+        while (max($numbers) < $targetValue) {
+            $maxValue = max($numbers);
+            $diff = $targetValue - $maxValue;
+            
+            for ($i = 0; $i < count($numbers); $i++) {
+                $numbers[$i] += $diff;
+            }
+        }
+        
+        return $numbers;
+    }
+
+    // 大單自動鎖盤
+    protected function riskOrderLock($fixture_id, $market_id) {
+
+        $return = LsportRisk::where("fixture_id",$fixture_id)->first();
+        if ($return === false) {
+            return false;
+        }
+
+        dd($return);
+
+    }
 }
 
