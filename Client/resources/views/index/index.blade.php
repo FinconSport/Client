@@ -835,7 +835,7 @@
                             let timerStr = null
                             if( v3.periods && v3.periods.period !== -1 ) {
                                 if( sport === 48242 ) { // 籃球 大學聯賽 賽制不同
-                                    timerStr = league_id == 4045 ? commonLangTrans.stageArr[sport][league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
+                                    timerStr = v2.league_id == 4045 ? commonLangTrans.stageArr[sport][v2.league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
                                 } else {
                                     timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
                                 }
