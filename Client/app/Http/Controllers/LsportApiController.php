@@ -2398,6 +2398,11 @@ class LsportApiController extends Controller {
 
         $json = json_decode($return['data'],true);
 
+        $json[$market_id] = [0,0];
+        if ($market_id == 1) {  // 足球全場獨贏 , 1x2限定
+            $json[$market_id] = [0,0,0];
+        }
+        
         dd($json);
 
     }
