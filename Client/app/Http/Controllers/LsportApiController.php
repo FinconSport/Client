@@ -836,6 +836,8 @@ class LsportApiController extends Controller {
             $default_order_status = $this->game_order_status['wait_for_audit'];
             $default_approval_time = null;
             $default_delay_datetime = null;
+
+
         } else { // 風控大單功能未啟動
 
             // 延時投注功能(風控大單優先於延時投注)
@@ -929,19 +931,21 @@ class LsportApiController extends Controller {
                 //////////////////////////////////////////
                 // order data
                 $order['bet_rate'] = null;
-                //////////////////////////////////////////
             } else {
                 //////////////////////////////////////////
                 // order data
                 $order['bet_rate'] = null;
-                //////////////////////////////////////////
             }
+
+            // 設定risk 
+
+            dd($risk_config, $market_id,$fixture_id);
+
         } else {
             if ($is_bet_delay == true) {
                 //////////////////////////////////////////
                 // order data
                 $order['bet_rate'] = null;
-                //////////////////////////////////////////
             } else {
                 $current_market_bet_status = $market_bet_data['status'];
                 $current_market_bet_rate = $market_bet_data['price'];
