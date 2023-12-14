@@ -847,7 +847,7 @@
 
         var gameTitle = null
         if( sport === 48242 ) {
-            league_id == 4045 ? gameLangTrans.scoreBoard.gameTitle[sport][4045] : gameLangTrans.scoreBoard.gameTitle[sport]['common'];
+            gameTitle = league_id == 4045 ? gameLangTrans.scoreBoard.gameTitle[sport][4045] : gameLangTrans.scoreBoard.gameTitle[sport]['common'];
         } else {
             gameLangTrans.scoreBoard.gameTitle[sport];
         }
