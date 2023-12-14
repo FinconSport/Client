@@ -133,7 +133,7 @@ class TestController extends PcController {
     public function error_ip(Request $request) {
 
 
-        return view('errors.500',$this->data);
+        return view('errors.ip',$this->data);
 
     }
     public function maintain(Request $request) {
