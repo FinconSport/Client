@@ -281,6 +281,10 @@ class Controller extends BaseController
 
 	// 取得用戶資料並輸出至頁面
 	protected function setPlayerInfo($session) {
+
+		if (!isset($session['player']['id'])) {
+
+		}
 		$player_id = $session['player']['id'];
 		$return = Player::where("id",$player_id)->first();
 		$player = array();

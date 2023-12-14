@@ -42,38 +42,38 @@ class TestController extends PcController {
           // 构建 Elasticsearch 查询 DSL
           $fixtureId = $input['fixture_id'];
 
-    // 构建 Elasticsearch 查询 DSL
-    $query = [
-        'size' => 0,
-        'query' => [
-            'term' => [
-                'fixture_id' => $fixtureId,
-            ],
-        ],
-        'aggs' => [
-            'group_by_market' => [
-                'terms' => [
-                    'field' => 'market_id',
-                    'size' => 10000, // 根据你的数据量适当调整
+        // 构建 Elasticsearch 查询 DSL
+        $query = [
+            'size' => 0,
+            'query' => [
+                'term' => [
+                    'fixture_id' => $fixtureId,
                 ],
-                'aggs' => [
-                    'group_by_base_line' => [
-                        'terms' => [
-                            'field' => 'base_line.keyword', // 使用 keyword 类型字段
-                            'size' => 10000, // 根据你的数据量适当调整
-                        ],
-                        'aggs' => [
-                            'min_price' => [
-                                'min' => [
-                                    'field' => 'price', // 使用新的 keyword 字段
-                                ],
-                            ]
+            ],
+            'aggs' => [
+                'group_by_market' => [
+                    'terms' => [
+                        'field' => 'market_id',
+                        'size' => 10000, // 根据你的数据量适当调整
+                    ],
+                    'aggs' => [
+                        'group_by_base_line' => [
+                            'terms' => [
+                                'field' => 'base_line.keyword', // 使用 keyword 类型字段
+                                'size' => 10000, // 根据你的数据量适当调整
+                            ],
+                            'aggs' => [
+                                'min_price' => [
+                                    'min' => [
+                                        'field' => 'price', // 使用新的 keyword 字段
+                                    ],
+                                ]
+                            ],
                         ],
                     ],
                 ],
             ],
-        ],
-    ];
+        ];
 
       // 构建 Basic Authentication 头部
       $username = 'devuser';
@@ -116,6 +116,30 @@ class TestController extends PcController {
       }
 
       dd($results);
-  }
+    }
 
+    public function error_404(Request $request) {
+
+
+        return view('errors.404',$this->data);
+
+    }
+    public function error_500(Request $request) {
+
+
+        return view('errors.500',$this->data);
+
+    }
+    public function error_ip(Request $request) {
+
+
+        return view('errors.500',$this->data);
+
+    }
+    public function maintain(Request $request) {
+
+
+        return view('errors.maintain',$this->data);
+
+    }
 }
