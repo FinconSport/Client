@@ -364,7 +364,7 @@
     function createFixtureCard(k, league_id, league_name, k3, v3, prevFixtureId = null) {
         let card = $('div[template="fixtureCardTemplate"]').clone()
         // 壘包 好壞球 只有 滾球 棒球有
-        if (sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
+        if( sport === 154914 && v3.status === 2 && v3.periods?.Bases !== undefined ) {
             card.find('[key="not-show-baseCon"]').hide()
             card.find('[key="show-baseCon"]').show()
         } else {
@@ -718,7 +718,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // bet data
                         renderBetArea(k, mainPriorityArr, v3, k3, card)

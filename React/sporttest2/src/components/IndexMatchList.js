@@ -22,7 +22,7 @@ class IndexMatchList extends React.Component {
 		super(props);
 		this.state = {
             menu_id: 0,
-			sport_id: 1
+			sport_id: window.sport
 		};
 	}
 
@@ -65,9 +65,9 @@ class IndexMatchList extends React.Component {
             }
         }
         // default sport
-        let itemData = res.data[rKey].items
-        let keys = Object.keys(itemData);
-        window.sport = keys.find(key => itemData[key].count > 0)
+        // let itemData = res.data[rKey].items
+        // let keys = Object.keys(itemData);
+        // window.sport = keys.find(key => itemData[key].count > 0)
 	}
 
     render() {

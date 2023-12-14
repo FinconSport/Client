@@ -413,7 +413,12 @@
             let timerStr = null
             if( v3.periods && v3.periods.period !== -1 ) {
                 // stage
-                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                if( sport === 48242 ) { // 籃球 大學聯賽 賽制不同
+                    timerStr = league_id == 4045 ? commonLangTrans.stageArr[sport][league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
+                } else {
+                    timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                }
+                
                 // exception baseball
                 if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                     // stage
@@ -796,7 +801,7 @@
                         }
 
                         // 單節選項 只有 滾球 籃球有
-                        sport === 48242 && v3.status === 2 && v3.periods && v3.periods.period !== 80 ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
+                        sport === 48242 && v3.status === 2 && v3.periods ? card.find('div[key="basketBallQuaterBet"]').show() : card.find('div[key="basketBallQuaterBet"]').hide()
 
                         // ready to start
                         if( v3.status === 9 ) time.html(langTrans.mainArea.readyToStart)
@@ -829,7 +834,13 @@
                             // stage
                             let timerStr = null
                             if( v3.periods && v3.periods.period !== -1 ) {
-                                timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                                if( sport === 48242 ) { // 籃球 大學聯賽 賽制不同
+                                    timerStr = v2.league_id == 4045 ? commonLangTrans.stageArr[sport][v2.league_id][v3.periods.period] : commonLangTrans.stageArr[sport]['common'][v3.periods.period]
+                                } else {
+                                    timerStr = commonLangTrans.stageArr[sport][v3.periods.period]
+                                }
+
+
                                 // exception baseball
                                 if( sport === 154914 && v3.periods?.Bases !== undefined ) {
                                     if( parseInt(v3.periods.period) < 10 ) {
@@ -858,19 +869,20 @@
                             // exception basketball
                             if( sport === 48242 ) {
                                 let card2 = card.find('[key="basketBallQuaterBet"]')
-                                let period = card.attr('period')?.toString()
+                                let period = card.attr('period')
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
-                                // 換節了 重新渲染單節投注區塊
-                                if( (v3?.periods?.period)?.toString() !== period ) {
-                                    card.attr('period', v3.periods.period)
-                                    if( stagePriorityArr ) {
+
+                                if( stagePriorityArr ) {
+                                    // 換節了 重新渲染單節投注區塊
+                                    if( v3?.periods?.period != period ) {
+                                        card.attr('period', v3.periods.period)
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
-                                    } else {
-                                        card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
+                                } else {
+                                    card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                 }
 
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
@@ -880,6 +892,7 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                                
                                 if( stagePriorityArr && !isNewGenerate ) renderBetArea(k, stagePriorityArr, v3, k3, card, 1)
                             }
                         }

@@ -254,7 +254,7 @@ class MatchContent extends React.Component {
 							{({ toggle, setCollapsibleElement }) => (
 								<>
 									<div style={MatchCardTitle} onClick={() => { this.toggle(k) }}>
-										{ v.league_name }({ Object.keys(v.list).length })
+										{ v.league_name }({ Object.values(v.list).filter(item => item.risk_status === 1).length })
 										{this.state.toggleStates[k] ? <IoIosArrowForward style={MatchCardTitleArrow} /> : <IoIosArrowDown style={MatchCardTitleArrow} />}
 									</div>
 									<div className='row m-0' ref={setCollapsibleElement}>
