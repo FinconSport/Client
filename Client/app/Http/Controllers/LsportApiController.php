@@ -1380,9 +1380,7 @@ class LsportApiController extends Controller {
                 
                 // 設定risk 
                 $this->riskOrderLock($fixture_id, $market_id);
-            }
-            // $is_risk_order: false
-            else {
+            } else { // $is_risk_order: false
                 if ($is_bet_delay == true) {
                     //////////////////////////////////////////
                     // order data
