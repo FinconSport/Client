@@ -873,17 +873,16 @@
                                 let stagePriorityArr = langTrans['sportBetData'][sport]['stagePriorityArr'][v3?.periods?.period]
                                 let isNewGenerate = false
 
-
-                                // 換節了 重新渲染單節投注區塊
-                                if( v3?.periods?.period != period ) {
-                                    card.attr('period', v3.periods.period)
-                                    if( stagePriorityArr ) {
+                                if( stagePriorityArr ) {
+                                    // 換節了 重新渲染單節投注區塊
+                                    if( v3?.periods?.period != period ) {
+                                        card.attr('period', v3.periods.period)
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
-                                    } else {
-                                        card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                     }
+                                } else {
+                                    card.find('div[key="basketBallQuaterBet"]').hide() // 其他賽事狀態
                                 }
 
                                 let home_team_info2 = card2.find('[key="homeTeamInfo2"]')
@@ -893,6 +892,7 @@
                                 home_team_info2.find('.teamSpan div').eq(1).html(timerStr)
                                 away_team_info2.find('.teamSpan div').eq(0).html(v3.away_team_name)
                                 away_team_info2.find('.teamSpan div').eq(1).html(timerStr)
+                                
                                 if( stagePriorityArr && !isNewGenerate ) renderBetArea(k, stagePriorityArr, v3, k3, card, 1)
                             }
                         }
