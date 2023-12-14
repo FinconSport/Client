@@ -849,7 +849,7 @@
         if( sport === 48242 ) {
             gameTitle = league_id == 4045 ? gameLangTrans.scoreBoard.gameTitle[sport][4045] : gameLangTrans.scoreBoard.gameTitle[sport]['common'];
         } else {
-            gameLangTrans.scoreBoard.gameTitle[sport];
+            gameTitle = gameLangTrans.scoreBoard.gameTitle[sport];
         }
 
         // Thead data game title
