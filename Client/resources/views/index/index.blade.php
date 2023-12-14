@@ -876,9 +876,10 @@
                                 console.log(period, v3?.periods?.period, stagePriorityArr)
 
                                 // 換節了 重新渲染單節投注區塊
-                                if( (v3?.periods?.period)?.toString() !== period ) {
+                                if( v3?.periods?.period != period ) {
                                     card.attr('period', v3.periods.period)
                                     if( stagePriorityArr ) {
+                                        console.log('createBetArea')
                                         card.find('.indexBetCardTable').eq(1).html('')
                                         createBetArea(k, stagePriorityArr, v3, k3, v2.league_name, 1, card)
                                         isNewGenerate = true
