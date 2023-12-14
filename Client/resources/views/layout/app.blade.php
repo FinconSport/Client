@@ -136,7 +136,6 @@
 		</div>
 	</div>
 
-	<!-- {{ dd($system_config) }} -->
 
 
     <!--  COMM JS Files   -->
