@@ -136,6 +136,9 @@
 		</div>
 	</div>
 
+	<!-- {{ dd($system_config) }} -->
+
+
     <!--  COMM JS Files   -->
 	<script src="{{ asset('js/jquery.min.js?v=' . $system_config['version']) }}"></script>
 	<script src="{{ asset('js/common.js?v=' . $system_config['version']) }}"></script>
@@ -143,6 +146,7 @@
     <script src="{{ asset('js/semantic.min.js?v=' . $system_config['version']) }}"></script>
 	<script src="{{ asset('js/pako.min.js?v=' . $system_config['version']) }}"></script><!-- 解壓縮 -->
 	<script>
+
 		const current_time = '{{ $current_time }}';
 		const version = '{{ $system_config["version"] }}';
 		const csrfToken = '{{ csrf_token() }}'
