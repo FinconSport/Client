@@ -789,13 +789,6 @@
                 $(".navigation-controls").addClass("d-none");
                 createScoreBoardTemplate(sport, data, [0, 1, 2, 3, 4, 5, 6]);
             }
-            
-            // for test and debug only
-            console.log(
-                scbLen +
-                (scbLen === 1 ? 'st' : scbLen === 2 ? 'nd' : scbLen === 3 ? 'rd' : 'th') +
-                (sport === 6046 ? ' Half' : (sport === 48242 || sport === 131506) ? ' Quarter' : (sport === 154914 || sport === 35232) ? ' Inning' : '')
-            );
 
         } else {
             $(".living-fixture-con").addClass("d-none");
