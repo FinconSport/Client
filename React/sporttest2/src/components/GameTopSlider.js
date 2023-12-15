@@ -115,30 +115,6 @@ class GameTopSlider extends React.Component {
 		})
 	}
 
-    // 文字太長變成跑馬燈
-    textOverFlow = () => {
-        $(`p[target="league"]`).each(function(){
-            if(this.clientHeight > 40){
-                $(this).hide()
-                $(this).next().show()
-            }
-        })
-
-        $(`p[target="teamName"]`).each(function(){
-            if(this.clientHeight > 24){
-                $(this).hide()
-                $(this).next().show()
-            }
-        })
-
-        $(`p[target="scbTeam"]`).each(function(){
-            if(this.clientHeight > 19){
-                $(this).hide()
-                $(this).next().show()
-            }
-        })
-    }
-
     prevSB = () => {
         if( this.state.scoreboardIndex -1 > 0 ) {
             this.setState({
@@ -155,52 +131,59 @@ class GameTopSlider extends React.Component {
         }
     }
 
-    componentDidMount() {
-        switch (parseInt(Cookies.get('sport', { path: '/' }))) {
-            case 154914:
-                this.setState({
-                    scColumnCount: 7
-                })
-                break;
-            case 48242:case 131506:
-                this.setState({
-                    scColumnCount: 5
-                })
-                break;
-            case 6046:
-                this.setState({
-                    scColumnCount: 3
-                })
-                break;
-            case 35232:
-                this.setState({
-                    scColumnCount: 4
-                })
-                break;
-            default:
-                break;
+    componentDidUpdate(prevProps) {
+		if (prevProps.data !== this.props.data) {
+            this.componentDidMount(1)
+		}
+	}
+
+
+    componentDidMount = ( isupdate = 0 ) => {
+        if( isupdate === 0 ) {
+            switch (parseInt(Cookies.get('sport', { path: '/' }))) {
+                case 154914:
+                    this.setState({
+                        scColumnCount: 7
+                    })
+                    break;
+                case 48242:case 131506:
+                    this.setState({
+                        scColumnCount: 5
+                    })
+                    break;
+                case 6046:
+                    this.setState({
+                        scColumnCount: 3
+                    })
+                    break;
+                case 35232:
+                    this.setState({
+                        scColumnCount: 4
+                    })
+                    break;
+                default:
+                    break;
+            }
         }
-        
-        if( !this.props.data?.data?.list?.scoreboard ) return
-        const data = this.props.data.data.list.scoreboard
+
+
+        if( !this.props.data?.list?.[this.props.fixtureId]?.scoreboard ) return
+        const data = this.props.data.list[this.props.fixtureId].scoreboard
         const scbLen = data[1].length - 1;
         switch (true) {
             case scbLen < 6:
-                // this.baseballShowStage = [0, 1, 2, 3, 4, 5, 6];
                 this.setState({
                     scoreboardIndex: 1,
                     scoreboardSliderCount: 1
                 })
             break;
             case scbLen >= 6 && scbLen <= 9:
-                // this.baseballShowStage = [0, 4, 5, 6, 7, 8, 9];
                 this.setState({
                     scoreboardIndex: 2,
                     scoreboardSliderCount: 2
                 })
             break;
             case scbLen > 9:
-                // this.baseballShowStage = [0, 7, 8, 9, 10, 11, 12];
                 this.setState({
                     scoreboardIndex: 3,
                     scoreboardSliderCount: 3
@@ -209,6 +192,7 @@ class GameTopSlider extends React.Component {
             default:
             break;
         }
+        
     } 
 
     refreshGame = () => {
@@ -354,10 +338,10 @@ class GameTopSlider extends React.Component {
                                                     scTitle.map((v, k) => {
                                                         return(
                                                             <th key={k}style={{
-                                                                    width: `${80 / this.state.scColumnCount}%`,
-                                                                    ...(sport === 154914 && this.baseballShowStage.indexOf(k) === -1
-                                                                    ? { display: 'none' }: null),}}
-                                                                >{v}</th>
+                                                                width: `${80 / this.state.scColumnCount}%`,
+                                                                ...(sport === 154914 && this.baseballShowStage.indexOf(k) === -1
+                                                                ? { display: 'none' }: null),}}
+                                                            >{v}</th>
                                                         )
                                                     })
                                                 }
