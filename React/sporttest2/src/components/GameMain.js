@@ -152,7 +152,9 @@ class GameMain extends React.Component {
                                     }
                                 </GameCat>
                                 <GameBetBody>
-                                    {Object.entries(data.list).sort((a, b) => a[1].priority - b[1].priority).map(([k, v]) => {
+                                    {
+                                    data?.list &&
+                                    Object.entries(data.list).sort((a, b) => a[1].priority - b[1].priority).map(([k, v]) => {
                                         let t = v.priority
                                         if ( Object.keys(v.list).length > 0 && (this.state.activeCat === 0 || GamePriorityArr[this.state.activeCat -1 ][0].indexOf(t) !== -1) ) {
                                             return (
