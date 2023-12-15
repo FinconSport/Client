@@ -205,18 +205,19 @@ class MatchContentCard extends React.Component {
             stageText = this.formatDateTime(v.start_time)
         }
 
+
         if ( v !== undefined && gameTitle && v.risk_status === 1 ){
             let hcapTeam = null
             if( v?.list && Object.keys(v.list).length > 0 ) {
                 let listVals = Object.values(v.list).find(e => e.priority === gameTitle[0][1])
-                let mainline = listVals?.main_line
+                let mainline = listVals?.base_main_line
                 let h = listVals?.list?.[mainline]
                 let a = listVals?.list?.[mainline]
                 if( h && a) {
                     h = h[0]?.line
                     a = a[1]?.line
                     if( h !== a ) {
-                        hcapTeam = h < 0 ? 1 : 2
+                        hcapTeam = h.indexOf('-') !== -1 ? 1 : 2
                     }
                 }
             }
@@ -376,9 +377,8 @@ class MatchContentCard extends React.Component {
                                                                             <div className='col-4' style={Padding01} key={k}>
                                                                                 <div style={SliderTitleDiv}>{ langText.MatchContent.game_priority[window.sport][k] }</div>
                                                                                 {
-                                                                                    tt && tt.list && tt.list?.[tt.main_line]?.length > 0 ? 
-                                                                                    Object.entries(tt.list[tt.main_line]).map(([r,s]) => {
-                                                                                        // s.line = '-0.25 (0-0)'
+                                                                                    tt && tt.list && tt.list?.[tt.base_main_line]?.length > 0 ? 
+                                                                                    Object.entries(tt.list[tt.base_main_line]).map(([r,s]) => {
                                                                                         return(
                                                                                             k === 201 || k === 202 ?
                                                                                             <SliderBrickHeight3 key={r} onClick={()=>this.getBetData(
