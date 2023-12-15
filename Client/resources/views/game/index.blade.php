@@ -428,6 +428,9 @@
                                     bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
                                     bet_item.find('.line').html(`${v3.line}`)
                                     break;
+                                case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
+                                    bet_item.find('.market_bet_name').html(`${v3.market_bet_name}`)
+                                    break;
                                 case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
                                 case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                                     if (v3.market_bet_name_en == 1) {
@@ -636,6 +639,8 @@
                 marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
                 marketBetRateTemp.find('.line').html(`${v3.line}`)
                 break;
+            case commonLangTrans.priorityArr.oddeven.indexOf(v.priority) !== -1:
+                marketBetRateTemp.find('.market_bet_name').html(`${v3.market_bet_name}`)
             case commonLangTrans.priorityArr.allwin.indexOf(v.priority) !== -1:
             case commonLangTrans.priorityArr.hcap.indexOf(v.priority) !== -1:
                 if (v3.market_bet_name_en == 1) {
