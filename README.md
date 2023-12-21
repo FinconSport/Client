@@ -11,4 +11,4 @@
 
 
 ## PC端
-[![賽事列表][https://github.com/ft-sport/Client/blob/main/demo/1.jpg?raw=true]
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/1.jpg?raw=true)
