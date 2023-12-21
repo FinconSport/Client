@@ -12,3 +12,8 @@
 
 ## PC端
 ![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/1.jpg?raw=true)
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/2.jpg?raw=true)
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/3.jpg?raw=true)
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/4.jpg?raw=true)
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/5.jpg?raw=true)
+![賽事列表](https://github.com/ft-sport/Client/blob/main/demo/6.jpg?raw=true)
