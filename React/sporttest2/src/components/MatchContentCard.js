@@ -190,18 +190,34 @@ class MatchContentCard extends React.Component {
 		const v = this.props.data
         const sport = parseInt(window.sport)
         const gameTitle = langText.MatchContentCard.gameTitle[window.sport]
+        var stageText = null
+        if( v.status === 2 && v?.periods?.period && v?.periods?.period !== -1 ) {
+            if( sport === 48242 ) {
+                stageText = this.props.league_id == 4045 ? langText.GameTopSlider.stageStr[sport][4045][v?.periods?.period] : langText.GameTopSlider.stageStr[sport].common[v?.periods?.period]
+            } else if( sport === 154914 ) {
+                stageText = langText.GameTopSlider.stageStr[sport][v.periods.period] + langText.GameTopSlider.baseballPeriod[v.periods.Turn]
+            } else {
+                stageText = langText.GameTopSlider.stageStr[sport][v?.periods?.period]
+            }
+        } else if( v.status === 9 ) {
+            stageText = langText.MatchContentCard.readyToStart
+        } else {
+            stageText = this.formatDateTime(v.start_time)
+        }
+
+
         if ( v !== undefined && gameTitle && v.risk_status === 1 ){
             let hcapTeam = null
             if( v?.list && Object.keys(v.list).length > 0 ) {
                 let listVals = Object.values(v.list).find(e => e.priority === gameTitle[0][1])
-                let mainline = listVals?.main_line
+                let mainline = listVals?.base_main_line
                 let h = listVals?.list?.[mainline]
                 let a = listVals?.list?.[mainline]
                 if( h && a) {
                     h = h[0]?.line
                     a = a[1]?.line
                     if( h !== a ) {
-                        hcapTeam = h < 0 ? 1 : 2
+                        hcapTeam = h.indexOf('-') !== -1 ? 1 : 2
                     }
                 }
             }
@@ -224,26 +240,7 @@ class MatchContentCard extends React.Component {
                                             </div>
                                             <div className='col-10 p-0'>
                                                 <p className='mb-0 mt-1'>
-                                                    {
-                                                        v.status === 1 || v?.periods?.period === -1 ?
-                                                        this.formatDateTime(v.start_time)
-                                                        :
-                                                        (
-                                                            v.status === 9 ? langText.MatchContentCard.readyToStart :
-                                                            (
-                                                                sport === 154914 && v?.periods?.period ? 
-                                                                langText.GameTopSlider.stageStr[sport][v.periods.period] + langText.GameTopSlider.baseballPeriod[v.periods.Turn]
-                                                                : 
-                                                                sport === 48242 ?
-                                                                this.props.league_id == 4045 ?
-                                                                langText.GameTopSlider.stageStr[sport][4045][v?.periods?.period]
-                                                                :
-                                                                langText.GameTopSlider.stageStr[sport].common[v?.periods?.period]
-                                                                :
-                                                                langText.GameTopSlider.stageStr[sport][v?.periods?.period] || this.formatDateTime(v.start_time)
-                                                            )
-                                                        )
-                                                    }
+                                                    { stageText }
                                                 </p>
                                             </div>
                                         </div>
@@ -380,9 +377,8 @@ class MatchContentCard extends React.Component {
                                                                             <div className='col-4' style={Padding01} key={k}>
                                                                                 <div style={SliderTitleDiv}>{ langText.MatchContent.game_priority[window.sport][k] }</div>
                                                                                 {
-                                                                                    tt && tt.list && tt.list?.[tt.main_line]?.length > 0 ? 
-                                                                                    Object.entries(tt.list[tt.main_line]).map(([r,s]) => {
-                                                                                        // s.line = '-0.25 (0-0)'
+                                                                                    tt && tt.list && tt.list?.[tt.base_main_line]?.length > 0 ? 
+                                                                                    Object.entries(tt.list[tt.base_main_line]).map(([r,s]) => {
                                                                                         return(
                                                                                             k === 201 || k === 202 ?
                                                                                             <SliderBrickHeight3 key={r} onClick={()=>this.getBetData(
