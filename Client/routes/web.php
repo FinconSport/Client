@@ -55,8 +55,6 @@ Route::get('/error/ip', 'App\Http\Controllers\TestController@error_ip');
 Route::get('/error/maintain', 'App\Http\Controllers\TestController@maintain');
 
 // TG通知用
-Route::get('/tg', 'App\Http\Controllers\TgBotController@index');
-Route::post('/tg', 'App\Http\Controllers\TgBotController@index');
 Route::get('/tg/RMQStep1', 'App\Http\Controllers\TgBotController@RMQStep1');
 
 Route::get('/tg/RMQStep2', 'App\Http\Controllers\TgBotController@RMQStep2');
@@ -67,8 +65,6 @@ Route::get('/tg/RMQStep3Error', 'App\Http\Controllers\TgBotController@RMQStep3Er
 
 Route::get('/tg/RMQStep4', 'App\Http\Controllers\TgBotController@RMQStep4');
 
-Route::get('/tg/bill', 'App\Http\Controllers\TgBotController@bill');
-Route::post('/tg/bill', 'App\Http\Controllers\TgBotController@bill');
 
 // Mobile
 Route::get('/mobile', 'App\Http\Controllers\MobileController@index');
