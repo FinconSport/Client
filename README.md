@@ -7,6 +7,7 @@
 
 如果有興趣 , 請聯絡我  
 Telegram : ＠fayitw
+
 煩請聯絡我時, 告知我你是在ft-sport/client 看到 , 不然我真不知道你是誰, 要做什麼
 
 
