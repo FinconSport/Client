@@ -1,0 +1,215 @@
+#orderContainer {
+    background-color: white;
+    border: 2px solid rgb(65, 91, 90);
+    border-radius: 5px;
+    overflow: auto;
+    color: rgb(65, 91, 90);
+    position: relative;
+}
+
+#orderContainer::-webkit-scrollbar {
+    width: 0px;
+}
+
+#tableContainer {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#tableContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+#orderContainer #noMoreData {
+    height: 3rem;
+    padding-top: 0.5rem;
+}
+
+.pageInfo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: initial;
+}
+
+
+/* datatable */
+#orderTable_paginate {
+    position: fixed;
+    bottom: 3rem;
+    left: 47.5%;
+}
+
+#orderTable td,
+#orderTable th {
+    border-left: 1px solid rgb(65, 91, 90);
+    border-right: 1px solid rgb(65, 91, 90);
+    padding: 0.5rem 0.7rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+#orderTable th:first-child,
+#orderTable td:first-child{
+    border-left: none!important;
+}
+
+#orderTable th:last-child,
+#orderTable td:last-child{
+    border-right: none!important;
+}
+
+#orderTable tbody{
+    border-bottom: 2px solid rgb(65, 91, 90);
+}
+
+#orderTable thead {
+    background: #c4d4d4;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.no-border-left{
+    border-left: none!important;
+}
+.no-border-top td,
+.no-border-top th{
+    border-top: none!important;
+}
+.no-border-right{
+    border-right: none!important;
+}
+.no-border-bottom td {
+    border-bottom: none!important;
+}
+#countTr td{
+    border: none!important;
+}
+
+#noDataTd {
+    height: 30rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgb(65, 91, 90);
+}
+
+#noDataTd i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.orderInfoIndex {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    background-color: rgb(65, 91, 90);
+    color: white;
+}
+
+#orderCountTotal {
+    width: 5rem; 
+    height: 2rem;
+    line-height: 2rem;
+    float: right;
+}
+
+table#orderTable {
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+#orderContainer {
+    margin-top: 1rem;
+}
+.orderData_betDataDetails {
+    position: relative;
+    padding: 2rem!important;
+}
+
+.betaDetcon {
+    display: block;
+    text-align: left;
+    padding: 0.5rem 0rem;
+}
+
+.orderData_expand{
+    display: table-row;
+}
+
+.hide-betaDetcon {
+    display: none;
+    transform: scaleY(0);
+    transition: display 0.3s, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.show-betaDetcon {
+    display: table-row;
+    transform: scaleY(1);
+}
+
+.order-toggleButton{
+    display: none;
+}
+
+.order-toggleButton.showbutton{
+    display: block;
+}
+
+.order-toggleButton {
+    background-color: transparent;
+    border-radius: 0px;
+    transition: all 0.5s ease 0s;
+    border: none;
+    padding: 0px;
+    color: red;
+    margin-left: 0.2rem;
+  }
+
+.search-main-container .stats-card {
+    height: 100%;
+    padding: 0% 2.5%;
+}
+
+.search-main-container .statistic-container {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    align-items: start;
+    /* grid-column-gap: 1%; */
+    justify-content: space-evenly;
+}
+
+.search-main-container .stats-container {
+    height: 100%;
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 2px solid #415b5a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-main-container .stats-container p{
+    text-align: end;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+}
+
+.search-main-container .stats-container span{
+   font-size: small;
+   font-weight: 600;
+}
+
+.orderData_betData_Event,
+.orderData_betData_BetWay,
+.orderData_betData_Result,
+.orderData_mOrder{
+    position: relative;
+}

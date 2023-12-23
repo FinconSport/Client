@@ -1,0 +1,317 @@
+.scoreboardCon {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    color: #fff;
+    padding: 0rem 2rem;
+    height: 178px;
+    display: flex;
+}
+
+.scoreboardCon p {
+    background-size: cover;
+    margin: 0px;
+    text-align: center;
+}
+
+.scoreboardCon p.start_time {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.1rem;
+}
+
+.earlyFixture-container p.league_name {
+    margin-bottom: 0.1rem
+}
+
+.scoreboardCon .earlyFixture-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+    padding: 2rem 2rem;
+    border-radius: 5px;
+    background: rgb(0 0 0 / 50%);
+    margin: auto;
+}
+
+.livingFixture-container.row {
+    width: 65%;
+    padding: 2rem 2rem 1.8rem 2rem;
+    border-radius: 5px;
+    background: rgb(0 0 0 / 50%);
+    margin: auto;
+}
+
+.livingFixture-container.row,
+.scoreboardCon .earlyFixture-container {
+    height: auto;
+}
+
+@media screen and (max-width:1227px) {
+    .livingFixture-container.row,
+    .scoreboardCon .earlyFixture-container,
+    .navigation-controls {
+        width: 87%!important;
+    }
+  }
+
+.bettingtype-container {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #415b5a;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.bettingtype-container .marketName {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #415b5a;
+}
+
+p.market_name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.bettingtype-container .marketBetRateContainer{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+
+.bettingtype-container .market-rate {
+    padding: 1rem;
+    border-right: 1px solid #415b5a;
+    border-bottom: 1px solid #415b5a;
+    position: inherit;
+    left: 1px;
+    bottom: -1px;
+    /* width: 50%;
+    flex-grow: 1;
+    justify-content: space-between;
+    text-align: center; */
+}
+
+div#bettingTypeContainer {
+    /* height: calc(100% - 18.5rem); */
+    overflow: auto;
+    padding-right: 0.5rem;
+}
+
+/* div#bettingTypeContainer::-webkit-scrollbar{
+    width: 0px;
+} */
+
+#scoreboardContainer {
+    position: relative;
+}
+
+#backIcon {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    z-index: 2;
+}
+
+#scoreboardContainer thead th{
+    padding: 0rem 0rem 0.5rem 0rem;
+    color: #ffffff;
+}
+
+#scoreboardContainer td,
+#scoreboardContainer div.textOverflowCon {
+    color: #ffffff;
+}
+
+#scoreboardContainer tbody tr:last-child th{
+    padding: 0rem 0rem 0rem 0rem;
+}
+
+#marketRateDataTemp.betItemDiv {
+    border-top: none;
+    border-right: none;
+    padding: 0rem;
+    height: auto;
+}
+
+.filterBtnContainer{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.filterBtnContainer button.filterBtn {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100px;
+    background: #415b5a;
+    color: white;
+    transition: all 0.2s linear;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-right: 0.7rem;
+}
+
+.filterBtnContainer button.filterBtn.active {
+    background: #ffffff;
+    color: #415b5a;
+}
+
+.setHeightDiv{
+    height: 2.5rem;
+    overflow: hidden;
+    vertical-align: middle;
+    display: contents;
+}
+
+.textOverflowCon {
+    height: 2.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.textOverFlowCon::-webkit-scrollbar{
+    width: 5px;
+}
+
+.textOverFlowCon::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+.market-rate.clickedBet {
+    background-color: #415b5a;
+}
+
+.market-rate.clickedBet .market_bet_name{
+    color: #ffffff;
+}
+
+.line {
+    font-weight: normal;
+    color: #ff7000;
+    margin-left: -0.5rem;
+    text-align: right;
+    min-width: 3rem;
+}
+.market_bet_name {
+    text-align: left;
+    color: black;
+    margin-right: 0.5rem;
+}
+
+.market-rate.clickedBet .market_bet_name,
+.market-rate.clickedBet .line,
+.market-rate.clickedBet .odd{
+    color: white!important
+}
+
+span.market_price.odd {
+    margin-right: 2rem;
+}
+
+.bettingtype-container .market-rate i {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.25rem;
+}
+#bettingTypeContainer {
+    height: calc(100% - 16.5rem);
+}
+
+.noDataContainer {
+    border: 2px solid #415b5a;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #415b5a;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+}
+
+.living-fixture-con,
+.early-fixture-con {
+    display: flex;
+}
+
+.living-fixture-con {
+    position: relative;
+}
+
+.navigation-controls {
+    height: 100%;
+    width: 65%;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.navigation-controls #prevBTN,
+.navigation-controls #nextBTN,
+.navigation-controls .pagination li{
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.navigation-controls #prevBTN,
+.navigation-controls #nextBTN{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: larger;
+}
+
+.navigation-controls #prevBTN.disabled-btn,
+.navigation-controls #nextBTN.disabled-btn{
+    opacity: 0;
+    cursor: auto;
+}
+
+.navigation-controls ul.pagination {
+    position: absolute;
+    bottom: 10px;
+    right: 30%;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+}
+
+.navigation-controls ul.pagination li {
+    font-size: 6px;
+    margin: 0rem 0.2rem;
+    opacity: 0.5;
+}
+
+.navigation-controls ul.pagination li.active {
+    opacity: 1;
+}
+
+.navigation-controls #nextBTN{
+    right: -2rem;
+}
+
+.navigation-controls #prevBTN {
+    right: 59%;
+}
