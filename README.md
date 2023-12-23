@@ -8,13 +8,13 @@
 如果有興趣 , 請聯絡我  
 Telegram : ＠fayitw
 
-煩請聯絡時, 告知你是在ft-sport/client 看到 , 不然我真不知道你是誰, 要做什麼
+煩請聯絡時, 告知你是在FinconSport/client 看到 , 不然我真不知道你是誰, 要做什麼
 
 
 ## 架構
 
-- PC端 , Boostrap     <--- Ft-sport/Client
-- Mobile , ReactJS    <--- Ft-sport/Client
+- PC端 , Boostrap     <--- FinconSport/Client
+- Mobile , ReactJS    <--- FinconSport/Client
 - 系統後台 , PHP
 - 商戶後台 , PHP
 - 主核心服務 , Golang
